@@ -1,3 +1,7 @@
+import Logo from "../Logo/Logo.jsx";
+
 export default function Header() {
-  return <p>Header</p>;
+  return <div>
+    <Logo/>
+  </div>;
 }
