@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
 import css from "./Logo.module.css";
-import logo from '../../assets/logo.svg'
+import logo from "../../assets/logo.svg";
+import icons from "../../assets/icons.svg";
 
 export default function Logo() {
   return (
-    <div className={css.logo}>
+    <div className={css.logoBox}>
       <img src={logo} alt="" />
-      <span>Assist Control</span>
+      <svg className={css.logoName} width={121} height={19}>
+        <use
+          href={`${icons}#icon-Assist-Control`}
+        ></use>
+      </svg>
     </div>
   );
 }
