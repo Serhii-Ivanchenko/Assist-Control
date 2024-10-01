@@ -1,0 +1,14 @@
+.statisticsCont {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.statisticsTitle {
+  display: flex;
+  justify-content: space-between;
+}
+.title {
+  font-family: Raleway;
+  font-size: 18px;
+  font-weight: 300;
+}

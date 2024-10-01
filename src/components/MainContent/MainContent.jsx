@@ -1,3 +1,10 @@
+import PageContent from "../PageContent/PageContent";
+import css from "./MainContent.module.css"
 export default function MainContent() {
-  return <p>Main Content</p>;
+  return (
+    <div>
+      <h2 className={css.title}>Відеоконтроль</h2>
+      <PageContent />
+    </div>
+  );
 }
