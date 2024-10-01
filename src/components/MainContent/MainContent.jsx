@@ -3,7 +3,7 @@ import css from "./MainContent.module.css"
 export default function MainContent() {
   return (
     <div>
-      <h2 className={css.title}>Відеоконтроль</h2>
+      <h1 className={css.title}>Відеоконтроль</h1>
       <PageContent />
     </div>
   );
