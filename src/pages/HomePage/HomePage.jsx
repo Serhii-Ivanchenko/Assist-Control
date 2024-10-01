@@ -1,3 +1,10 @@
+// import CurrentCarsList from "../../components/CurrentCarsList/CurrentCarsList";
+
 export default function HomePage() {
-    return <p>HomePage</p>
-};
+  return (
+    <div>
+      <p>HomePage</p>
+      {/* <CurrentCarsList /> */}
+    </div>
+  );
+}

@@ -1,0 +1,79 @@
+.wrapper {
+  display: flex;
+  width: 386px;
+  height: 74px;
+  gap: 8px;
+
+  background-color: #1a1a1a;
+  border: transparent;
+  border-radius: 5px;
+  padding: 5px;
+
+  position: relative;
+}
+
+.imgContainer {
+  display: flex;
+  width: 64px;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.carInfoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.carReg {
+  color: #fff;
+  font-family: Raleway;
+  font-size: 14px;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
+
+.carBrand {
+  color: #9e9e9e;
+  font-family: Raleway;
+  font-size: 12px;
+  font-weight: 400;
+
+  margin-top: 2px;
+}
+
+.carTimeStamp {
+  color: #fff;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 15px;
+  font-weight: 700;
+
+  margin-top: 9px;
+}
+
+.carStatus {
+  display: inline-flex;
+  align-items: flex-end;
+  margin-bottom: 5px;
+  margin-left: -4px;
+
+  color: #9e9e9e;
+  font-family: Raleway;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.carDetails {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  color: #fff;
+  font-family: Raleway;
+  font-size: 14px;
+  font-weight: 300;
+  text-decoration: none;
+}
