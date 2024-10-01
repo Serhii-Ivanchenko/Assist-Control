@@ -1,3 +1,10 @@
+import Header from "../../components/Header/Header.jsx";
+import MainContent from "../../components/MainContent/MainContent.jsx";
 export default function VideControlPage() {
-  return <div>Video Control</div>;
+  return (
+    <div>
+      <Header />
+      <MainContent />
+    </div>
+  );
 }
