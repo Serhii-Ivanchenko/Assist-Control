@@ -6,8 +6,8 @@ export default function LogoutModal() {
             <h3>Вихід</h3>
             <p>Ви дійсно бажаєте вийти?</p>
             <div className={css.btnBox}>
-            <button type="button">Вихід</button>
-            <button type="button">Відміна</button>
+            <button type="button" className={css.btn}>Вихід</button>
+            <button type="button" className={css.btn}>Відміна</button>
             </div>
         </div>
     )
