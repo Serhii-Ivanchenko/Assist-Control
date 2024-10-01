@@ -1,0 +1,17 @@
+.logoutBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 338px;
+    height: 150px;
+    background-color: #1A1A1A;
+    border-radius: 5px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btnBox{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
