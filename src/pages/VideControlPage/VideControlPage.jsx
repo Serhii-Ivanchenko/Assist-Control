@@ -1,3 +1,10 @@
+import Header from "../../components/Header/Header.jsx";
+
 export default function VideControlPage() {
-  return <div>Video Control</div>;
+  return (
+    <div>
+      <Header />
+      <p>Video Control</p>
+    </div>
+  );
 }
