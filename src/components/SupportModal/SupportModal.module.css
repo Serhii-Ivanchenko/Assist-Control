@@ -43,7 +43,7 @@
     position: absolute;
     top: 14px;
     right: 14px;
-    
+    cursor: pointer;
     /* transform: rotate(-45deg); */
 
 }
@@ -105,5 +105,6 @@
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+    cursor: pointer;
 }
 
