@@ -1,0 +1,35 @@
+.navItem {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 6px;
+    gap: 7px;
+
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: Raleway;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.navLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none; 
+    color: inherit;
+    gap: 7px;
+}
+
+.ellipse {
+    width: 28px;
+    height: 28px;
+    transition: filter 0.3s; 
+}
+
+.navLink.active .ellipse {
+    filter: brightness(0) invert(1);
+}
+
+.navLink.active {
+    color: white;
+}
