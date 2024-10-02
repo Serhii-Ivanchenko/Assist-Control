@@ -15,6 +15,7 @@ export default function SupportModal({ onClose }) {
         <textarea
           className={css.textarea}
           placeholder="Ваше повідомлення..."
+          // maxLength={200}
         ></textarea>
         <button type="button" className={css.supportBtn}>
           Надіслати
