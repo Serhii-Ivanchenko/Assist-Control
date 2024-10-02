@@ -1,0 +1,28 @@
+.statsList {
+  display: flex;
+  gap: 7px;
+  width: 100%;
+}
+.statsItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 136px;
+  height: 57px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: #1a1a1a;
+}
+.statsItem:first-child {
+  background-color: #3956cc;
+}
+.statsItemValue {
+  font-family: Raleway;
+  font-size: 20px;
+  font-weight: 700;
+}
+.statsItemTitle {
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 300;
+}

@@ -1,0 +1,13 @@
+.title {
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.videoControlMainContainer{
+}
+
+.mainContent{
+  display: flex;
+  margin-top: 8px;
+  gap: 21px;
+}
