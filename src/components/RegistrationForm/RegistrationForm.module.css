@@ -1,0 +1,120 @@
+.registrationForm {
+  padding: 98px 80px 62px 78px;
+  width: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.registrationHeader {
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.welcomeText {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+  color: #8d8d8d;
+  margin-bottom: 42px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  margin-bottom: 37px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.registrationlabel {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #e9e9e9;
+}
+
+.inputWithIconWrapper {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 14px;
+  color: #615f68;
+  fill: #615f68;
+  width: 10px;
+  height: 10px;
+}
+
+.eyeIconBtn {
+  position: absolute;
+  right: 12px;
+  width: 10px;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+.eyeIcon {
+  color: #615f68;
+  fill: #615f68;
+  width: 10px;
+  height: 10px;
+}
+
+.input {
+  background-color: #242525;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  color: #615f68;
+  padding-top: 12px;
+  padding-bottom: 9px;
+  padding-left: 32px;
+  width: 100%;
+}
+
+.errorMsg {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: red;
+}
+
+.submitButton {
+  background-color: #0096b7;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #e9e9e9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 8px;
+  border: none;
+}
+
+.bottomText {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #e9e9e9;
+}

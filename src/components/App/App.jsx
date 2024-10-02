@@ -5,7 +5,7 @@ export default function App() {
   return (
     <>
       <Layout>
-        <Header/>
+        <Header />
       </Layout>
     </>
   );
