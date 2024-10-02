@@ -1,0 +1,52 @@
+.userInfo {
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 5px;
+}
+
+.name {
+    font-size: 11px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.userDetails {
+    color: #797979;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.balance {
+    display: flex; 
+    align-items: center; 
+}
+
+.balanceText {
+    color: #797979;
+    font-size: 11px;
+    margin-right: 6px; 
+}
+
+.num {
+    color: #FFF;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.balanceButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    color: white;
+    width: 4px;
+    height: 5px; 
+}

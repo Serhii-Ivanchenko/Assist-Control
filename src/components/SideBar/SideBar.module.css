@@ -1,0 +1,16 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-left: 15px;
+  padding-bottom: 31px;
+}
+
+.topContainer {
+  flex: 0;
+}
+
+.bottomContainer {
+  margin-top: auto;
+
+}
