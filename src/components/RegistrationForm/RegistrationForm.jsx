@@ -8,7 +8,7 @@ import { IoKeyOutline } from "react-icons/io5";
 import { ImEye } from "react-icons/im";
 import { ImEyeBlocked } from "react-icons/im";
 import { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function RegistrationForm() {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -158,11 +158,11 @@ export default function RegistrationForm() {
           </Form>
         </Formik>
       </div>
-      <div>
-        <p className={css.bottomText}>
-          Already have an Account?
-          {/* <Link>Login</Link> */}
-        </p>
+      <div className={css.bottomTextWrapper}>
+        <p className={css.bottomText}>Вже маєте Аккаунт?</p>
+        <Link to="/login" className={css.bottomLink}>
+          Вхід
+        </Link>
       </div>
     </div>
   );
