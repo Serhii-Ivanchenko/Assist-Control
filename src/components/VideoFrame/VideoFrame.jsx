@@ -6,6 +6,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { VscZoomIn } from "react-icons/vsc";
 import { BsCameraVideoOffFill } from "react-icons/bs";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function SampleNextArrow(props) {
   console.log(props);
@@ -22,7 +24,7 @@ function SamplePrevArrow(props) {
 export default function VideoFrame() {
   const settings = {
     dots: true,
-    dotsClass: "dot",
+    dotsClass: "dots",
     infinite: false,
     arrows: true,
     lazyLoad: true,

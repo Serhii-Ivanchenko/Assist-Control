@@ -1,17 +1,18 @@
-
 .camera {
   width: 100%;
-  height: 100%;
-
-  display: flex;
+  height: 231px;
+  display: flex !important;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
+
 .cameraList {
   width: 350px;
   position: relative;
 }
+
 .zoomIcon {
   z-index: 1;
   position: absolute;
@@ -27,6 +28,7 @@
   opacity: 0.75;
   color: #fff;
 }
+
 .arrowNext,
 .arrowPrev {
   z-index: 1;
@@ -46,9 +48,58 @@
   display: block;
   padding: 0;
 }
+
 .arrowPrev {
   left: 10px;
 }
+
 .arrowNext {
   right: 10px;
+}
+
+:global(.dots) {
+  display: block;
+  padding: 0;
+  bottom: -25px;
+  width: 100%;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+
+:global(.dots li) {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+}
+
+:global(.dots li button) {
+  background: #4a4a4a;
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  padding: 5px;
+  cursor: pointer;
+  color: transparent;
+  border-radius: 50%;
+  outline: 0;
+  border: none;
+}
+
+:global(.dots li.slick-active button) {
+  background: #3956cc;
+}
+
+:global(.dots li button),
+:global(.arrowNext:before),
+:global(.arrowPrev:before) {
+  font-family: slick;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
