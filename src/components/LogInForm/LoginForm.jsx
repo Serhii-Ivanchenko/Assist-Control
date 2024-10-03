@@ -1,10 +1,11 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "../LogInForm/LoginForm.module.css";
-import { IoKeyOutline, IoPerson } from "react-icons/io5";
+import { IoKeyOutline } from "react-icons/io5";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { useState } from "react";
 import { LoginSchema } from "../../validationSchemas/loginSchema";
 import { Link } from "react-router-dom";
+import { TbMailFilled } from "react-icons/tb";
 
 export default function LoginForm() {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -19,7 +20,7 @@ export default function LoginForm() {
         <p className={css.loginText}>Welcome to Assist CONTROL</p>
         <Formik
           initialValues={{
-            name: "",
+            email: "",
             password: "",
           }}
           validationSchema={LoginSchema}
@@ -29,19 +30,20 @@ export default function LoginForm() {
           <Form>
             <div className={css.wrapper}>
               <div className={css.inputWrapper}>
-                <label htmlFor="name" className={css.loginLabel}>
-                  Ім’я*
+                <label htmlFor="email" className={css.loginLabel}>
+                  E-mail*
                 </label>
                 <div className={css.inputWithIconWrapper}>
-                  <IoPerson className={css.inputIcon} />
+                  <TbMailFilled className={css.inputIcon} />
                   <Field
-                    name="name"
+                    name="email"
+                    type="email"
                     className={css.input}
-                    placeholder="Артем Середенко"
+                    placeholder="mpdart2013@gmail.com"
                   />
                 </div>
                 <ErrorMessage
-                  name="name"
+                  name="email"
                   component="div"
                   className={css.errorMsg}
                 />
