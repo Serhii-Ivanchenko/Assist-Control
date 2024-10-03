@@ -1,0 +1,105 @@
+.camera {
+  width: 100%;
+  height: 231px;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.cameraList {
+  width: 350px;
+  position: relative;
+}
+
+.zoomIcon {
+  z-index: 1;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.arrowNext:before,
+.arrowPrev:before {
+  content: "";
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+  color: #fff;
+}
+
+.arrowNext,
+.arrowPrev {
+  z-index: 1;
+  font-size: 0;
+  line-height: 0;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  cursor: pointer;
+  border: none;
+  outline: 0;
+  background: 0 0;
+  position: absolute;
+  display: block;
+  padding: 0;
+}
+
+.arrowPrev {
+  left: 10px;
+}
+
+.arrowNext {
+  right: 10px;
+}
+
+:global(.dots) {
+  display: block;
+  padding: 0;
+  bottom: -25px;
+  width: 100%;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+
+:global(.dots li) {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+}
+
+:global(.dots li button) {
+  background: #4a4a4a;
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  padding: 5px;
+  cursor: pointer;
+  color: transparent;
+  border-radius: 50%;
+  outline: 0;
+  border: none;
+}
+
+:global(.dots li.slick-active button) {
+  background: #3956cc;
+}
+
+:global(.dots li button),
+:global(.arrowNext:before),
+:global(.arrowPrev:before) {
+  font-family: slick;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
