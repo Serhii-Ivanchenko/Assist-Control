@@ -97,7 +97,6 @@ img {
 button {
   padding: 0;
   box-shadow: none;
-  -webkit-appearance: button;
 }
 .dot {
   display: block;
