@@ -8,8 +8,13 @@
   text-align: center;
 }
 
+.cameraListCont {
+  border-radius: 5px;
+  width: 380px;
+  padding: 15px 20px 0 20px;
+  background: #1A1A1A;
+}
 .cameraList {
-  width: 350px;
   position: relative;
 }
 
