@@ -13,7 +13,7 @@ export const RegistrationSchema = Yup.object().shape({
     .required("Поле Email повинно бути заповнене"),
   phone: Yup.string()
     .matches(
-      /[+38][0-9]{10}$/,
+      /[+380][0-9]{9}$/,
       "Поле Телефон повинно відповідати формату +380123456789"
     )
     .required("Поле Телефон повинно бути заповнене"),
