@@ -1,43 +1,43 @@
 @font-face {
-  font-family: 'Raleway';
-  src: url('/src/assets/fonts/Raleway-Light.woff2') format('woff2'),
-    url('/src/assets/fonts/Raleway-Light.woff') format('woff');
+  font-family: "Raleway";
+  src: url("/src/assets/fonts/Raleway-Light.woff2") format("woff2"),
+    url("/src/assets/fonts/Raleway-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Raleway';
-  src: url('/src/assets/fonts/Raleway-Regular.woff2') format('woff2'),
-    url('/src/assets/fonts/Raleway-Regular.woff') format('woff');
+  font-family: "Raleway";
+  src: url("/src/assets/fonts/Raleway-Regular.woff2") format("woff2"),
+    url("/src/assets/fonts/Raleway-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Raleway';
-  src: url('/src/assets/fonts/Raleway-Medium.woff2') format('woff2'),
-    url('/src/assets/fonts/Raleway-Medium.woff') format('woff');
+  font-family: "Raleway";
+  src: url("/src/assets/fonts/Raleway-Medium.woff2") format("woff2"),
+    url("/src/assets/fonts/Raleway-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Raleway';
-  src: url('/src/assets/fonts/Raleway-SemiBold.woff2') format('woff2'),
-    url('/src/assets/fonts/Raleway-SemiBold.woff') format('woff');
+  font-family: "Raleway";
+  src: url("/src/assets/fonts/Raleway-SemiBold.woff2") format("woff2"),
+    url("/src/assets/fonts/Raleway-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Raleway';
-  src: url('/src/assets/fonts/Raleway-Bold.woff2') format('woff2'),
-    url('/src/assets/fonts/Raleway-Bold.woff') format('woff');
+  font-family: "Raleway";
+  src: url("/src/assets/fonts/Raleway-Bold.woff2") format("woff2"),
+    url("/src/assets/fonts/Raleway-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -96,4 +96,48 @@ img {
 
 button {
   padding: 0;
+  box-shadow: none;
+  -webkit-appearance: button;
+}
+.dot {
+  display: block;
+  padding: 0;
+  bottom: -25px;
+  width: 100%;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+.dot li {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+}
+.dot li button {
+  background: #4a4a4a;
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  padding: 5px;
+  cursor: pointer;
+  color: transparent;
+  border-radius: 50%;
+  outline: 0;
+  border: none;
+}
+.dot li.slick-active button {
+  background: #3956cc;
+}
+.dot li button,
+.arrowNext:before,
+.arrowPrev:before {
+  font-family: slick;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
