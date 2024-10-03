@@ -44,7 +44,7 @@ export default function RegistrationForm() {
                   <Field
                     name="name"
                     className={css.input}
-                    placeholder="Artem Seredenko"
+                    placeholder="Артем Середенко"
                   />
                 </div>
                 <ErrorMessage
@@ -81,7 +81,7 @@ export default function RegistrationForm() {
                   <Field
                     name="phone"
                     className={css.input}
-                    placeholder="+38555000"
+                    placeholder="+380123456789"
                   />
                 </div>
                 <ErrorMessage
