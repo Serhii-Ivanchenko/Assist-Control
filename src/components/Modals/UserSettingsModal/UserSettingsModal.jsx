@@ -7,7 +7,11 @@ import { useState } from "react";
 
 const Validation = Yup.object().shape({
     username: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Обов'язкове поле для заповнення"),
-    email: Yup.string().email("Введіть коректну пошту").required("Обов'язкове поле для заповнення"),
+    email: Yup.string().email("Введіть коректну пошту").required("Обов'язкове поле для заповнення")
+        .test('has-domain', 'Email має містити домен', (value) =>
+    {
+      return value && value.includes('@') && value.split('@')[1].includes('.');
+    }),
     phone: Yup.string().min(3, "Занадто коротке").max(50, "Занадто довге").required("Обов'язкове поле для заповнення"),
     company: Yup.string().min(2).max(50).required("Обов'язкове поле для заповнення")
 });
@@ -65,7 +69,12 @@ export default function UserSettingsModal() {
                     
                 <label htmlFor={companyFieldId}>Назва компанії</label>
                     <Field type='text' name='company' id={companyFieldId} className={css.input} placeholder="Введіть назву компанії..."/>
-                    <ErrorMessage name="company" component="span" className={css.errorMessage}/>
+                    <ErrorMessage name="company" component="span" className={css.errorMessage} />
+                    
+                    <div className={css.planBox}>
+                        <p className={css.currentPlan}>Поточний тарифний план</p>
+                        <button type="button" className={css.PremiumPlan}>Преміум</button>
+                    </div>
 
                     <div className={css.btnBox}>
                         <button type="submit" className={css.btnSave}>Зберегти</button>
