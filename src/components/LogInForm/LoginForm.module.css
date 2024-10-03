@@ -35,6 +35,7 @@
 }
 
 .inputWrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -82,6 +83,9 @@
   font-weight: 500;
   font-size: 11px;
   color: red;
+  position: absolute;
+  top: 100%;
+  left: 0;
 }
 
 .eyeIconBtn {
