@@ -1,3 +1,18 @@
+import styles from "./PremiumAd.module.css";
+import { FaCrown } from "react-icons/fa";
+
 export default function PremiumAd() {
-  return <p>Premium Ad Block</p>;
+  return (
+    <div className={styles.premiumContainer}>
+      <FaCrown className={styles.premiumIcon} />
+      <div className={styles.textBlock}>
+        <h1 className={styles.premiumTitle}>Преміум</h1>
+        <p className={styles.premiumDescription}>
+          Ще більше різних можливостей <br /> для Вас!
+        </p>
+      </div>
+
+      <button className={styles.premiumButton}>Перейти</button>
+    </div>
+  );
 }

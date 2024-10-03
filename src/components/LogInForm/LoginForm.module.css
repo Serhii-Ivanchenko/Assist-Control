@@ -1,0 +1,155 @@
+.loginForm {
+  padding: 98px 80px 62px 78px;
+  width: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.topSectionWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginHeader {
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.loginText {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+  color: #8d8d8d;
+  margin-bottom: 42px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  margin-bottom: 41px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.loginLabel {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #e9e9e9;
+}
+
+.inputWithIconWrapper {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 14px;
+  color: #615f68;
+  fill: #615f68;
+  width: 10px;
+  height: 10px;
+}
+
+.input {
+  background-color: #242525;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  color: #615f68;
+  padding-top: 12px;
+  padding-bottom: 9px;
+  padding-left: 32px;
+  width: 100%;
+}
+
+.errorMsg {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: red;
+}
+
+.eyeIconBtn {
+  position: absolute;
+  right: 12px;
+  width: 10px;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+.eyeIcon {
+  color: #615f68;
+  fill: #615f68;
+  width: 10px;
+  height: 10px;
+}
+
+.submitButton {
+  background-color: #0096b7;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #e9e9e9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 8px;
+  border: none;
+  margin-bottom: 27px;
+  cursor: pointer;
+}
+
+.loginBottomText {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+  color: #8d8d8d;
+  margin-bottom: 13px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.linkToRegister {
+  text-decoration: none;
+  width: 100%;
+  border: 1px solid #242525;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #e9e9e9;
+}
+
+.bottomTextWrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.bottomLink {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #0096b7;
+}

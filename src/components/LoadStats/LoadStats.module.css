@@ -1,0 +1,90 @@
+.loadStatsContainer {
+    width: 141px;
+    height: 91px;
+    border-radius: 5px;
+    background: #1A1A1A;
+    position: relative;
+}
+
+.ellipse {
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    width: 86px;
+    height: 61px;
+    /* background-color: radial-gradient(40.16% 40.16% at 50% 50%, rgba(57, 86, 204, 0.48) 0%, rgba(57, 86, 204, 0.00) 100%); */
+}
+
+
+.grid {
+    position: absolute;
+    top: -2px;
+    left: 40px;
+    width: 65px;
+    height: 43.5px;
+    transform: translateX(-50%);
+}
+
+.chart {
+    position: absolute;
+    top: 11px;
+    left: 36.2px;
+    width: 43.5px;
+    height: 15.519px;
+    transform: translateX(-50%);
+}
+
+.statsInfo {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 100%;
+    
+}
+
+.percentage {
+    display: flex;
+    align-items: flex-end;
+}
+
+.icon {
+    color: #3CBC81;
+    stroke-width: 1px;
+    stroke: #FFF;
+    padding: 1px;
+    font-size: 12px;
+}
+
+.description {
+    color: #575759;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    /* font-variant: small-caps; */
+}
+
+.num{
+    color: #FFF;
+    /* font-variant-numeric: lining-nums proportional-nums; */
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.symbol{
+    color: #717075;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;    
+}
+
+.iconBtn{
+    display: flex;
+    align-items: center;
+    background-color: #246D4D;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+}
