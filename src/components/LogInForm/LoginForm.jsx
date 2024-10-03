@@ -37,7 +37,7 @@ export default function LoginForm() {
                   <Field
                     name="name"
                     className={css.input}
-                    placeholder="Artem Seredenko"
+                    placeholder="Артем Середенко"
                   />
                 </div>
                 <ErrorMessage

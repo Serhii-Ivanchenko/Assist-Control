@@ -1,4 +1,5 @@
 .loginForm {
+  background-color: #151616;
   padding: 98px 80px 62px 78px;
   width: 460px;
   display: flex;
@@ -65,10 +66,12 @@
   background-color: #242525;
   border: none;
   font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-size: 10px;
-  color: #615f68;
-  padding-top: 12px;
+  font-weight: 400;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 1.18em;
+  color: #fff;
+  padding-top: 9px;
   padding-bottom: 9px;
   padding-left: 32px;
   width: 100%;

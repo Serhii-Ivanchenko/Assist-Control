@@ -1,6 +1,7 @@
 .loginPage {
   display: flex;
   border-radius: 60px;
+  overflow: hidden;
   width: 940px;
   height: 670px;
 }
