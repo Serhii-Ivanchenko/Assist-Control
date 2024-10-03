@@ -35,25 +35,27 @@ export default function VideoFrame() {
     prevArrow: <SamplePrevArrow />,
   };
   return (
-    <div className={css.cameraList}>
-      <div className={css.zoomIcon}>
-        <VscZoomIn size={20} />
+    <div className={css.cameraListCont}>
+      <div className={css.cameraList}>
+        <div className={css.zoomIcon}>
+          <VscZoomIn size={20} />
+        </div>
+        <Slider {...settings}>
+          <div className={css.camera}>
+            <img src={cameraView} alt="" />
+          </div>
+          <div className={css.camera}>
+            <img src={cameraView} alt="" />
+          </div>
+          <div className={css.camera}>
+            <img src={car} alt="" />
+          </div>
+          <div className={css.camera}>
+            <BsCameraVideoOffFill size={58} />
+            <h3>Немає сигналу</h3>
+          </div>
+        </Slider>
       </div>
-      <Slider {...settings}>
-        <div className={css.camera}>
-          <img src={cameraView} alt="" />
-        </div>
-        <div className={css.camera}>
-          <img src={cameraView} alt="" />
-        </div>
-        <div className={css.camera}>
-          <img src={car} alt="" />
-        </div>
-        <div className={css.camera}>
-          <BsCameraVideoOffFill size={58} />
-          <h3>Немає сигналу</h3>
-        </div>
-      </Slider>
     </div>
   );
 }
