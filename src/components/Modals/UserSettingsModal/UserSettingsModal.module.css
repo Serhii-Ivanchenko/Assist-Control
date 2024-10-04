@@ -1,4 +1,30 @@
-.formBox{
+.settingsBox{
+    width: 800px;
+    height: 600px;
+    border-radius: 10px;
+    background: #202020;
+    display: flex;
+}
+
+.closeBtn{
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    cursor: pointer;
+
+    width: 14px;
+    height: 14px;
+    stroke: #A4A4A4;
+}
+
+
+
+
+
+
+
+
+/* .formBox{
     display: flex;
     flex-direction: column;
     width: 338px;
@@ -39,7 +65,7 @@
     border: none;
 
     color: white;
-    /* font-family: Roboto; */
+    
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -48,7 +74,7 @@
 
 .input::placeholder{
     color: #615F68;
-     /* font-family: Roboto; */
+   
     font-size: 10px;
     font-style: normal;
     font-weight: 500;
@@ -141,4 +167,4 @@
     font-style: normal;
     font-weight: 300;
     line-height: normal;
-}
+} */
