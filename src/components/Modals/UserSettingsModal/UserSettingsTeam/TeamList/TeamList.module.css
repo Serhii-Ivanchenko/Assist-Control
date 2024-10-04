@@ -3,14 +3,50 @@
     height: fit-content;
     border-radius: 7px;
 
+    padding-left: 28px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 14px;
+
     background-color: #292929;
 
 }
 
-.teamListItem{
-    display: flex;
+.contentBox{
+width: 320px;
 
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+
+padding-top: 10px;
+padding-bottom: 12px;
 }
+
+.teamListItem:not(:last-child) .contentBox{
+border-bottom: solid 1px black;
+}
+
+
+.teamListItem{
+    height: 55px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 14px;
+/* 
+    padding-top: 10px;
+    padding-bottom: 12px; */
+   
+}
+
+/* .teamListItem:not(:last-child) {
+ border-bottom: solid 1px black;
+
+} */
 
 .memberPhoto{
     width: 32px;
@@ -59,4 +95,10 @@ margin-right: 13px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
+}
+
+.binIcon{
+    width: 8px;
+    height: 10px;
+    fill: #A1A1A1;  
 }

@@ -6,7 +6,16 @@
     display: flex;
 }
 
+.closeBtn{
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    cursor: pointer;
 
+    width: 14px;
+    height: 14px;
+    stroke: #A4A4A4;
+}
 
 
 
