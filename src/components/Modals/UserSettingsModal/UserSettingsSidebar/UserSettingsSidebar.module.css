@@ -31,6 +31,7 @@
     height: 38px;
     display: flex;
     align-items: center;
+    flex-direction: row;
     /* padding-left: 24px; */
 
     
@@ -52,6 +53,12 @@ flex-direction: column;
 
     text-decoration: none;
     padding-left: 24px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 11px;
+
 }
 
 .linkIsActive{
