@@ -1,6 +1,6 @@
 import UserSettingsSidebar from "./UserSettingsSidebar/UserSettingsSidebar";
 import css from './UserSettingsModal.module.css'
-import UserSettingAccount from "./UserSettingAccount/UserSettingAccount";
+import UserSettingAccount from "./UserSettingsAccount/UserSettingsAccount";
 import { TfiClose } from "react-icons/tfi";
 import TeamList from "./UserSettingsTeam/TeamList/TeamList";
 import UserSettingsTeam from "./UserSettingsTeam/UserSettingsTeam";
