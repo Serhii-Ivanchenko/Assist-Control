@@ -3,6 +3,7 @@
     height: 600px;
     border-radius: 10px;
     background: #202020;
+    display: flex;
 }
 
 

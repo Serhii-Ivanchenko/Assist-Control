@@ -1,0 +1,62 @@
+.teamList{
+    width: 385px;
+    height: fit-content;
+    border-radius: 7px;
+
+    background-color: #292929;
+
+}
+
+.teamListItem{
+    display: flex;
+
+}
+
+.memberPhoto{
+    width: 32px;
+    height: 35px;
+    border-radius: 35px;
+background-color: antiquewhite;
+
+margin-right: 13px;
+}
+
+.nameBox{
+    margin-right: 16px;
+}
+
+.memberName{
+    color: #FFF;
+    
+        font-family: Raleway;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+}
+
+.memberEmail{
+    color: #FFF;
+    
+        font-family: Raleway;
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+}
+
+.memberRole{
+    width: 100px;
+    height: 21px;
+    background-color: #4F4F4F;
+    outline: none;
+    border: none;
+
+    color: #FFF;
+    
+        font-family: Raleway;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+}

@@ -1,10 +1,18 @@
 import UserSettingsSidebar from "./UserSettingsSidebar/UserSettingsSidebar";
 import css from './UserSettingsModal.module.css'
+import UserSettingAccount from "./UserSettingAccount/UserSettingAccount";
+import { TfiClose } from "react-icons/tfi";
+import TeamList from "./UserSettingsTeam/TeamList/TeamList";
 
-export default function UserSettingsModal() {
+export default function UserSettingsModal({onClose}) {
     return (
-        <div className= {css.settingsBox}>
-            <UserSettingsSidebar/>
+        <div className={css.settingsBox}>
+           
+            <UserSettingsSidebar />
+            {/* <TfiClose onClick={onClose} /> */}
+            <UserSettingAccount />
+            
+            {/* <TeamList/> */}
         </div>
     )
 }
