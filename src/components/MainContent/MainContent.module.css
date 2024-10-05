@@ -2,3 +2,8 @@
   font-size: 26px;
   font-weight: 500;
 }
+
+.mainContainer{
+  display: flex;
+  gap: 10px;
+}

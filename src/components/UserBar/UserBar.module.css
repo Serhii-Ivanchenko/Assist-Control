@@ -1,15 +1,26 @@
-.btn {
-    width: 27px;
-    height: 27px;
+.userBarContainer {
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: 50%;
+    position: absolute;
+    top: 48px;
+    right: 10px;
+  }
+  
+  .btn {
+    background: transparent;
     border: none;
-    background-color: rgba(74, 74, 74, 1);
     cursor: pointer;
-}
+    transition: transform 0.2s;
+  }
+  
+  .btn:hover {
+    transform: scale(1.1); 
+  }
 
-.icon {
-    color: rgba(164, 164, 164, 1);
-}
+  .iconSettings{
+    stroke: white;
+    width: 13px;
+    height: 13px;
+  }
+
+  
