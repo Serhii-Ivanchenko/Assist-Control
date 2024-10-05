@@ -1,4 +1,52 @@
 .popover {
+    position: absolute;
+    top: 100%;
+    right: 1%;
     display: flex;
     flex-direction: column;
+    margin-top: 4px;
+    gap: 6px;
+    background-color: #4A4A4A;
+    padding: 6px;
+    border-radius: 6px;
+    color: rgba(164, 164, 164, 1);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.18em;
+    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.10);
+    z-index: 100;
+    overflow: hidden;
+    transform: translateY(-5px);
+    transition: max-height 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.popoverVisible {
+    max-height: 200px;
+    transform: translateY(0);
+}
+
+.hidden {
+    visibility: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.settings,
+.logout {
+    display: flex;
+    gap: 4px;
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    transition: color 250ms ease-in-out, transform 250ms ease-in-out;
+    transform-origin: left;
+}
+
+.settings:hover,
+.logout:hover {
+    color: #fff;
+    transform: scale(1.02);
 }
