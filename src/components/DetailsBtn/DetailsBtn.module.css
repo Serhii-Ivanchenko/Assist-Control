@@ -1,0 +1,32 @@
+.btnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px;
+  }
+  
+  .btn {
+    /* width: 100%;  */
+    width: 304px;
+    height: 55px;
+    border-radius: 5px;
+    background-color: #3956CC;
+
+    color: #FFF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: darken(var(--Blue, #3956CC), 10%);
+  }
+  
+  .btn:focus {
+    outline: none;
+  }
+  

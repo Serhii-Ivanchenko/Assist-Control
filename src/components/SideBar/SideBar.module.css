@@ -1,18 +1,29 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  /* height: 100vh; */
-  height:632px;
+  height: 632px;
   padding-bottom: 9px;
   margin-right: 21px;
   justify-content: space-between;
+  
+  
 }
 
-.topContainer {
+.topContainer, .bottomContainer {
   display: flex;
   flex-direction: column;
-  gap:20px;
+  gap: 20px;
+  position: relative;
 }
 
 .bottomContainer {
+  gap: 9px;
+}
+
+.userBar{
+  position: absolute;
+}
+
+.userInfo{
+  position: relative;
 }

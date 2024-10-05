@@ -4,8 +4,6 @@
     margin-bottom: 6px;
     gap: 7px;
 
-    font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway;
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
@@ -18,18 +16,52 @@
     text-decoration: none; 
     color: inherit;
     gap: 7px;
+    transition: color 0.3s, background-color 0.3s;
 }
 
-.ellipse {
+.iconContainer {
     width: 28px;
     height: 28px;
-    transition: filter 0.3s; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: #202020;
+    border-radius: 50%;
 }
 
-.navLink.active .ellipse {
-    filter: brightness(0) invert(1);
-}
-
-.navLink.active {
+.videoIcon, .iconCrm, .iconAvto, .iconSettinds {
+    transition: color 0.3s;
     color: white;
 }
+.videoIcon{
+    width: 14px;
+    height: 17px;
+}
+.iconCrm{
+    width: 16px;
+    height: 15px;
+    fill:  white;
+}
+.iconAvto{
+    width: 12px;
+    height: 12px;
+}
+.iconSettinds{
+    width: 12px;
+    height: 12px;
+}
+
+
+
+.navLink.active .iconContainer {
+    background-color: white;
+}
+
+.navLink.active .videoIcon, 
+.navLink.active .iconCrm, 
+.navLink.active .iconAvto, 
+.navLink.active .iconSettinds {
+    color: black;
+}
+

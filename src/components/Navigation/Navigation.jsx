@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import styles from './Navigation.module.css';
-import ellipseImage from '../../assets/images/ellipse_nav.png';
 import clsx from 'clsx';
+import { IoVideocamOutline } from "react-icons/io5";
+import { PiTableThin } from "react-icons/pi";
+import { IoCarSportSharp } from "react-icons/io5";
+import { GiSettingsKnobs } from "react-icons/gi";
 
 export default function Navigation() {
   return (
@@ -12,7 +15,9 @@ export default function Navigation() {
             to="/video-control" 
             className={({ isActive }) => clsx(styles.navLink, { [styles.active]: isActive })}
           >
-            <img src={ellipseImage} alt="Ellipse" className={styles.ellipse} />
+            <div className={styles.iconContainer}>
+            <IoVideocamOutline className={styles.videoIcon} />
+            </div>
             Відеоконтроль
           </NavLink>
         </li>
@@ -21,7 +26,9 @@ export default function Navigation() {
             to="/crm" 
             className={({ isActive }) => clsx(styles.navLink, { [styles.active]: isActive })}
           >
-            <img src={ellipseImage} alt="Ellipse" className={styles.ellipse} />
+            <div className={styles.iconContainer}>
+              <PiTableThin className={styles.iconCrm}/>
+            </div>
             CRM
           </NavLink>
         </li>
@@ -30,7 +37,9 @@ export default function Navigation() {
             to="/report" 
             className={({ isActive }) => clsx(styles.navLink, { [styles.active]: isActive })}
           >
-            <img src={ellipseImage} alt="Ellipse" className={styles.ellipse} />
+            <div className={styles.iconContainer}>
+              <IoCarSportSharp className={styles.iconAvto}/>
+            </div>
             Звіт по авто
           </NavLink>
         </li>
@@ -39,7 +48,9 @@ export default function Navigation() {
             to="/settings" 
             className={({ isActive }) => clsx(styles.navLink, { [styles.active]: isActive })}
           >
-            <img src={ellipseImage} alt="Ellipse" className={styles.ellipse} />
+            <div className={styles.iconContainer}>
+              <GiSettingsKnobs className={styles.iconSettinds}/>
+            </div>
             Налаштування
           </NavLink>
         </li>

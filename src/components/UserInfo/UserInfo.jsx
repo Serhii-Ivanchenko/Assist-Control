@@ -26,10 +26,9 @@ export default function UserInfo({ user }) {
         <p>ID: {userId}</p>
       </div>
       <div className={styles.balance}>
-        <span className={styles.balanceText}>
-          Баланс: <span className={styles.num}>{balance} грн</span>
-        </span>
+        <span className={styles.balanceText}>Баланс:</span>
         <button onClick={handleBalanceClick} className={styles.balanceButton}>
+          <span className={styles.num}>{balance} грн</span>
           <FaChevronRight className={styles.icon} />
         </button>
       </div>

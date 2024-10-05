@@ -1,0 +1,41 @@
+.logoutBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 338px;
+    height: 150px;
+    background-color: #1A1A1A;
+    border-radius: 5px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btnBox{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.btn{
+    width: 130px;
+    height: 30px;
+
+    border-radius: 5px;
+    background: var(--Blue, #3956CC);
+
+    border: none;
+
+    color: #FFF;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}

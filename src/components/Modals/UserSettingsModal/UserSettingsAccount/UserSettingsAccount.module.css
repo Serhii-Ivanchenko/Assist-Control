@@ -1,0 +1,121 @@
+.accountBox{
+    margin-top: 60px;
+    border-top: 1px solid #000;
+    width: 635px;
+    padding: 36px 47px 45px 43px;
+}
+
+.titles{
+    color: #FFF;
+    font-family: Raleway;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    margin-bottom: 16px;
+}
+
+.email{
+    width: 545px;
+    height: 43px;
+    
+    border-radius: 7px;
+    border: 1px solid #302F2F;
+    
+    background-color: #282828;
+    outline: none;
+
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-bottom: 34px;
+}
+
+.passwortChBtn{
+    width: 165px;
+    height: 43px;
+    margin-bottom: 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+
+    border-radius: 7px;
+    background-color: #3956CC;
+
+    color: #FFF;
+    font-family: Raleway;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.inputs{
+    width: 545px;
+    height: 43px;
+
+    border-radius: 7px;
+    border: 1px solid #302F2F;
+
+    background-color: #282828;
+    outline: none;
+    color: #FFF;
+
+    margin-bottom: 24px; 
+}
+
+.btnBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-left: auto;
+    margin-top: 10px;
+}
+
+.cancelBtn{
+    width: 81px;
+    height: 43px;
+
+    border-radius: 7px;
+    border: 1px solid #767676;
+    background-color: transparent;
+
+    color: #FFF;
+    font-family: Raleway;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.saveBtn{
+    width: 139px;
+    height: 43px;
+
+    border-radius: 7px;
+    background-color: #3956CC;
+
+    border: none;
+
+    color: #FFF;
+    font-family: Raleway;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
