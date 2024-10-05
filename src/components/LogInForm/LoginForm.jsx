@@ -79,17 +79,17 @@ export default function LoginForm() {
               </div>
             </div>
             <button type="submit" className={css.submitButton}>
-              Логін
+              Увійти
             </button>
           </Form>
         </Formik>
-        <p className={css.loginBottomText}>Немає Акаунту?</p>
+        {/* <p className={css.loginBottomText}>Немає Акаунту?</p>
         <Link to="/register" className={css.linkToRegister}>
           Зареєструватись
-        </Link>
+        </Link> */}
       </div>
       <div className={css.bottomTextWrapper}>
-        <p className={css.loginLabel}>Немає Акаунту?</p>
+        <p className={css.loginLabel}>Ще не маєте акаунт?</p>
         <Link to="/register" className={css.bottomLink}>
           Зареєструватись
         </Link>

@@ -124,7 +124,7 @@ export default function RegistrationForm() {
                   htmlFor="repeatPassword"
                   className={css.registrationlabel}
                 >
-                  Повторіть пароль*
+                  Підтвердження паролю*
                 </label>
                 <div className={css.inputWithIconWrapper}>
                   <IoKeyOutline className={css.inputIcon} />
@@ -161,7 +161,7 @@ export default function RegistrationForm() {
       <div className={css.bottomTextWrapper}>
         <p className={css.bottomText}>Вже маєте Аккаунт?</p>
         <Link to="/login" className={css.bottomLink}>
-          Вхід
+          Увійти
         </Link>
       </div>
     </div>
