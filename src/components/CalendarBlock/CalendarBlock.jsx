@@ -1,7 +1,7 @@
 import styles from './CalendarBlock.module.css';
 import DayCarsList from '../DayCarsList/DayCarsList';
 import DetailsBtn from '../DetailsBtn/DetailsBtn';
-import Calendar from '../Calendar/Calendar';
+import CalendarPagination from '../CalendarPagination/CalendarPagination.jsx'
 
 export default function CalendarBlock() {
   const carsData = [
@@ -16,7 +16,7 @@ export default function CalendarBlock() {
   return (
     <div className={styles.calendarContainer}>
       <div className={styles.topContainer}>
-        <Calendar />
+        <CalendarPagination />
         <DayCarsList carsData={carsData} />
       </div>
       {carsData.length > 3 && <DetailsBtn />}

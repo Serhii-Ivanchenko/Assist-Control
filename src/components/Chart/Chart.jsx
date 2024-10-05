@@ -1,5 +1,7 @@
-// import { useState } from "react";
-import {AreaChart,
+import { useState } from 'react';
+import PeriodSelector from '../PeriodSelector/PeriodSelector.jsx'
+import {
+  AreaChart,
     XAxis,
     YAxis,
     CartesianGrid,
@@ -7,7 +9,7 @@ import {AreaChart,
     Area,
     ResponsiveContainer
 } from 'recharts';
-import css from './LoadStatsChart.module.css'
+import css from './Chart.module.css'
 
 const CustomTooltip = ({ active, payload, label, coordinate }) => {
   if (active && payload && payload.length) {
@@ -45,64 +47,119 @@ fontStyle: 'normal',
 };
 
 
-let data = [
-  {
-    hour: '09.00',
+let data = [  {
+        date: '2024-09-19',
+       dateeng: '19/09/2024',
     value: 5,
   },
 
    {
-    hour: '10.00',
+       date: '2024-09-20',
+        dateeng: '20/09/2024',
     value: 6,
   },
    
     {
-    hour: '11.00',
+        date: '2024-09-21',
+         dateeng: '21/09/2024',
     value: 7,
   },
     
      {
-    hour: '12.00',
+         date: '2024-09-22',
+          dateeng: '22/09/2024',
     value: 7,
   },
      
       {
-    hour: '13.00',
+          date: '2024-09-23',
+           dateeng: '23/09/2024',
     value: 9,
   },
       
        {
-    hour: '14.00',
+           date: '2024-09-24',
+            dateeng: '24/09/2024',
+    value: 8,
+  },
+
+  {
+        date: '2024-09-25',
+       dateeng: '25/09/2024',
+    value: 5,
+  },
+
+   {
+       date: '2024-09-26',
+        dateeng: '26/09/2024',
+    value: 6,
+  },
+   
+    {
+        date: '2024-09-27',
+         dateeng: '27/09/2024',
+    value: 7,
+  },
+    
+     {
+         date: '2024-09-28',
+          dateeng: '28/09/2024',
+    value: 7,
+  },
+     
+      {
+          date: '2024-09-29',
+           dateeng: '29/09/2024',
+    value: 9,
+  },
+      
+       {
+           date: '2024-09-30',
+            dateeng: '30/09/2024',
     value: 8,
   },
        
         {
-    hour: '15.00',
+            date: '2024-10-01',
+             dateeng: '01/10/2024',
     value: 6,
   },
         
          {
-    hour: '16.00',
+             date: '2024-10-02',
+              dateeng: '02/10/2024',
     value: 6,
   },
           {
-    hour: '17.00',
+              date: '2024-10-03',
+               dateeng: '03/10/2024',
     value: 8,
   },
            {
-    hour: '18.00',
+               date: '2024-10-04',
+               dateeng: '04/10/2024',
     value: 9,
   },
 ]
 
 
-export default function LoadStatsChart() {
-// const [startIndex, setStartIndex] = useState(startDay);
-//     const [endIndex, setEndIndex] = useState(endDay);
-
-  //  const [activeIndex, setActiveIndex] = useState(null); // Для отслеживания наведения на точку
-
+export default function Chart() {
+const currentDate = new Date();
+const sevenDaysAgo = new Date(currentDate);
+  sevenDaysAgo.setDate(currentDate.getDate() - 7);
   
+ const [dateBegin, setDateBegin] = useState(currentDate);
+ const [dateEnd, setDateEnd] = useState(sevenDaysAgo);
+  let interval = data.length;
+  
+  const handleDataChangeBeg = (newData) => {
+    setDateBegin(newData);
+  };
+
+  const handleDataChangeEnd = (newData) => {
+    setDateEnd(newData);
+  };
+
   const customActiveDot = (props) => {
     const { cx, cy } = props;
 
@@ -111,70 +168,79 @@ export default function LoadStatsChart() {
         <circle
           cx={cx}
           cy={cy}
+         
            r={7} 
-          fill="none" // Прозрачный внутренний цвет
-          stroke="white" // Белая обводка
-          strokeWidth={1} // Толщина обводки 1 пиксель
+          fill="none" 
+          stroke="white" 
+          strokeWidth={1} 
         />
         <circle
           cx={cx}
           cy={cy}
           r={3} 
-          fill="#3956cc"
+          fill="#db8120"
           stroke="none"
         />
       </>
     );
   };
 
+ const yTickFormatter = (tick) => {
+    if ( tick >= 10) {
+      return '';
+    }
+    return tick;
+  };
     
-   return (<div className={css.containerloadstats}
-   >
-     <div className={css.titlebox}>
-     <p className={css.stattitle}>Завантаження сервісу</p>
-     <p className={css.statpercent}>112%</p>
-     </div>
+   return (<div className={css.containerchart}>
+     <p className={css.charttitle}>Машинозаїзди</p>
+     
         <div className={css.areabox}
            > 
 
-       <ResponsiveContainer height={126} width={290 } className={css.responseContainer }  >
+       <ResponsiveContainer height={220} width={280 } className={css.responseContainer }  >
                 <AreaChart data={data}
 
          > 
 
             <defs>
-          <linearGradient id="colorGradientzs" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#db8120" stopOpacity={1} />
-            <stop offset="100%" stopColor="#db8120" stopOpacity={0} />
+          <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#3956cc" stopOpacity={1} />
+            <stop offset="100%" stopColor="#3956cc" stopOpacity={0} />
           </linearGradient>
-           </defs>
-           
-     <defs>
+                   </defs>
+                   
+            <defs>
 <linearGradient id="linear" x1="136.5" y1="1.50024" x2="243" y2="1.99937" gradientUnits="userSpaceOnUse">
 <stop stopColor="#4A4A4A"/>
 <stop offset="1" stopColor="#4A4A4A" stopOpacity="0.25"/>
 </linearGradient>
 </defs>
 
-
            {/* <CartesianGrid strokeDasharray="3 3" />  */}
-           <CartesianGrid stroke="url(#linear)" strokeDasharray="0" vertical={false} horizontal={true}/>
+           <CartesianGrid stroke="url(#linear)" strokeDasharray="0" vertical={false}
+             horizontal={true}
+            />
 
-           <XAxis dataKey="hour" interval={8}
-             padding={{ right: 10 }}
-             tick={{ fontSize: 10 }}
+           <XAxis dataKey="dateeng" interval={interval}
+            //  padding={{ right: 10 }}
+             tick={{ fill: 'transparent'}}
             
            /> 
                     
            <YAxis
-             domain={[0, (dataMax) => dataMax ]}
-             
+            //  domain={[0, (dataMax) => dataMax + 1]}
+             domain={[0,10]}
              dataKey="value"
-              margin={{ topt: 10 }}
-              // tickCount={5}
+            //  padding={{ top: 10 }}
+             allowDataOverflow={true}
+            //  tickCount={10}
              tick={{ fill: 'transparent' }}
              axisLine={{ fill: 'transparent' }}  
-              
+                       tickCount={10} interval={0}
+              ticks={[0, 1, 2,3, 4,5, 6,7, 8,9,10]}
+            //  axisLine={false}
+  tickFormatter={yTickFormatter} 
             //  tickFormatter={(value) => (value / 1000).toFixed(1)}
                          width={1}
                         // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
@@ -187,11 +253,11 @@ export default function LoadStatsChart() {
                         <Area
           type="monotone"
           dataKey="value"
-                        stroke="#db8120"
+                        stroke="#3956cc"
                         strokeWidth={3}
-             fill="url(#colorGradientzs)" 
-           activeDot={customActiveDot}    
-          // activeDot={{  fill: "#3956cc", border: '7px'}} // Активная точка больше
+             fill="url(#colorGradient)" 
+          activeDot={customActiveDot}      
+        //   activeDot={{  fill: "#3956cc"}} // Активная точка больше
          
                 //  dot={{ r: 8, fill: '#fff', stroke: '#87D28D', strokeWidth: '4px' }} // Полностью закрашенные кружочки
         //   label={({ x, y, value }) => (
@@ -201,15 +267,6 @@ export default function LoadStatsChart() {
         //   )}        
 
           />
-{/* 
-                    <Brush
-          dataKey="name"
-          height={30}
-          stroke="#8884d8"
-          startIndex={startIndex}
-          endIndex={data.length - 1}
-          onChange={(indexRange) => setStartIndex(indexRange.startIndex)}
-        /> */}
        
                     
           {/* <Brush
@@ -226,7 +283,16 @@ export default function LoadStatsChart() {
           }}
         /> */}
 
-                </AreaChart> </ResponsiveContainer> </div> </div>);
+         </AreaChart> </ResponsiveContainer> </div>
+         
+     <PeriodSelector startDate={dateBegin} endDate={dateEnd}
+       onDateBegChange={handleDataChangeBeg} onDateEndChange={handleDataChangeEnd} />
+          </div>
+   
+   
+  
+   
+   );
 }
 
 ;

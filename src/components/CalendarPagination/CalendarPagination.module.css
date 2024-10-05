@@ -1,0 +1,57 @@
+.containerpagin {
+    /* width: 303px; */
+    /* min-width: 276px; */
+    height: 20px;
+
+}
+
+
+.boxpagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 120px;
+    height: 20px;
+    gap: 5px;
+}
+
+.namemonth {
+    color: #FFF;
+
+        font-family: Raleway;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+}
+
+
+.iconstep {
+    stroke-width: 2px;
+    stroke: #fff;
+    border: none;
+    width: 14px;
+    height: 14px;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+border-radius: 50%;
+background-color: #4a4a4a;
+}
+
+
+.arrowIcon {
+    width: 14px;
+    height: 14px;
+    stroke: #fff;
+}
+
+.pieIconWrapper {
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+
