@@ -1,4 +1,30 @@
-.formBox{
+.settingsBox{
+    width: 800px;
+    height: 600px;
+    border-radius: 10px;
+    background: #202020;
+    display: flex;
+}
+
+.closeBtn{
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    cursor: pointer;
+
+    width: 14px;
+    height: 14px;
+    stroke: #A4A4A4;
+}
+
+
+
+
+
+
+
+
+/* .formBox{
     display: flex;
     flex-direction: column;
     width: 338px;
@@ -38,12 +64,37 @@
     outline: none;
     border: none;
 
+    color: white;
+    
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.input::placeholder{
     color: #615F68;
-    /* font-family: Roboto; */
+   
     font-size: 10px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+
+.input:-webkit-autofill{
+    background-color: #242525 !important;
+    color: white !important;
+    box-shadow: 0 0 0px 1000px #242525 inset !important;
+    -webkit-text-fill-color: white !important;
+}
+
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+    background-color: #242525 !important;
+    color: white !important;
+    box-shadow: 0 0 0px 1000px #242525 inset !important;
+    -webkit-text-fill-color: white !important;
 }
 
 .errorMessage{
@@ -51,6 +102,33 @@
     font-size: 10px;
 }
 
+.planBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.currentPlan{
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: solid 1px white;
+    border-radius: 5px;
+}
+
+.PremiumPlan{
+    width: 150px;
+        height: 50px;
+        border: none;
+        border-radius: 5px;
+
+}
 
 .btnBox{
     display: flex;
@@ -89,4 +167,4 @@
     font-style: normal;
     font-weight: 300;
     line-height: normal;
-}
+} */
