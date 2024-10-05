@@ -5,9 +5,9 @@ export const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-export const setAuthHeader = (token) => {
+export const setAuthHeader = (api_key) => {
     //   axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  axiosInstance.defaults.headers.common["X-Api-Key"] = `${token}`;
+  axiosInstance.defaults.headers.common["X-Api-Key"] = `${api_key}`;
     
 };
 
