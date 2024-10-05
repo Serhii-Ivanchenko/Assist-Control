@@ -6,11 +6,26 @@ import { useState } from "react";
 import { LoginSchema } from "../../validationSchemas/loginSchema";
 import { Link } from "react-router-dom";
 import { TbMailFilled } from "react-icons/tb";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/auth/operations";
+import toast from "react-hot-toast";
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
+
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const onButtonEyeClick = () => {
     setIsPasswordShown(!isPasswordShown);
+  };
+
+  const handleSubmitLogin = (values, actions) => {
+    dispatch(logIn(values))
+      .unwrap()
+      .catch(() => {
+        toast.error("Щось сталося, спробуйте ще раз");
+      });
+
+    actions.resetForm();
   };
 
   return (
@@ -26,6 +41,7 @@ export default function LoginForm() {
           validationSchema={LoginSchema}
           validateOnChange={true}
           validateOnBlur={true}
+          onSubmit={handleSubmitLogin}
         >
           <Form>
             <div className={css.wrapper}>

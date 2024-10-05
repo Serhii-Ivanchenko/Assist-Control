@@ -1,6 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
-import { getTariffData, getUserData, logOut, refreshUser, updateUserAvatar, updateUserData } from "./operations.js";
+import {
+  getTariffData,
+  getUserData,
+  logIn,
+  logOut,
+  refreshUser,
+  register,
+  updateUserAvatar,
+  updateUserData,
+} from "./operations.js";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -17,6 +26,38 @@ const authSlice = createSlice({
   initialState: initialState.user,
   extraReducers: (builder) =>
     builder
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+        state.isLoggedIn = false;
+        state.error = null;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isLoggedIn = false;
+        state.apiKey = action.payload.api_key;
+        state.error = null;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isLoggedIn = false;
+        state.error = action.payload;
+      })
+      .addCase(logIn.pending, (state) => {
+        state.isLoading = true;
+        state.isLoggedIn = false;
+        state.error = null;
+      })
+      .addCase(logIn.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isLoggedIn = true;
+        state.apiKey = action.payload.api_key;
+        state.error = null;
+      })
+      .addCase(logIn.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isLoggedIn = false;
+        state.error = action.payload;
+      })
       .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, (state) => {
         return initialState.user;
