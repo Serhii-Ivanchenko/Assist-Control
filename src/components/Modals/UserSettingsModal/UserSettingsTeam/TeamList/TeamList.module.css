@@ -95,10 +95,12 @@ margin-right: 13px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
+        cursor: pointer;
 }
 
 .binIcon{
     width: 8px;
     height: 10px;
     fill: #A1A1A1;  
+    cursor: pointer;
 }

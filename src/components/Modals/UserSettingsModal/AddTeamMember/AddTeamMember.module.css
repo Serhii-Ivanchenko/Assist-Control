@@ -3,10 +3,21 @@
     height: 600px;
 
     border-radius: 10px;
-    border: solid 1px white;
+    /* border: solid 1px white; */
 
     background-color: #202020;
 
+}
+
+.closeBtn{
+    position: absolute;
+        top: 24px;
+        right: 24px;
+        cursor: pointer;
+    
+        width: 14px;
+        height: 14px;
+        stroke: #A4A4A4;
 }
 
 .contentBox{
@@ -68,6 +79,7 @@ border: 1px solid #302F2F;
 
 background-color: #282828;
 margin-bottom: 19px;
+margin-top: 12px;
 }
 
 .nameBox{
@@ -142,13 +154,13 @@ border: none;
 }
 
 .castomRadio{
-    width: 19px;
-    height: 19px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     position: relative;
     margin-right: 10px;
     background-color: #000;
-    
+    cursor: pointer;
 }
 
 .radioInput:checked + .castomRadio {
@@ -207,4 +219,8 @@ font-style: normal;
 font-weight: 400;
 line-height: var(--Label-Medium-Line-Height, 16px);
 width: 278px
+  }
+
+  .radioBox{
+    width: 37px;
   }

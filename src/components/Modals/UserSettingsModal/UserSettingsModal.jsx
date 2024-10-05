@@ -2,20 +2,22 @@ import UserSettingsSidebar from "./UserSettingsSidebar/UserSettingsSidebar";
 import css from './UserSettingsModal.module.css'
 import UserSettingAccount from "./UserSettingsAccount/UserSettingsAccount";
 import { TfiClose } from "react-icons/tfi";
-import TeamList from "./UserSettingsTeam/TeamList/TeamList";
 import UserSettingsTeam from "./UserSettingsTeam/UserSettingsTeam";
-import AddTeamMember from "./AddTeamMember/AddTeamMember";
+import { useState } from "react";
 
 export default function UserSettingsModal({onClose}) {
+const [page, setPage] = useState("profile")
+
+
     return (
         <div className={css.settingsBox}>
-           
-            <UserSettingsSidebar />
-            <TfiClose onClick={onClose} className={css.closeBtn} />
-            <UserSettingAccount />
-            {/* <UserSettingsTeam /> */}
-            {/* <AddTeamMember/> */}
-            
+             <TfiClose onClick={onClose} className={css.closeBtn} />
+            <UserSettingsSidebar  setPage={setPage} page={page}/>
+          {page === "profile" && ""}
+          {page === "account" && <UserSettingAccount />}
+          {page === "tariff" && ""}
+          {page === "team" && <UserSettingsTeam />}
+                        
         </div>
     )
 }
