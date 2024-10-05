@@ -1,9 +1,20 @@
-import carImg from "../../img/image 2.webp";
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import carImg from "../../assets/images/carListImg.webp";
+import CurrentCarModal from "../Modals/CurrentCarModal/CurrentCarModal";
 
 import styles from "./CurrentCarsItem.module.css";
 
 export default function CurrentCarsItem() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.imgContainer}>
@@ -14,8 +25,12 @@ export default function CurrentCarsItem() {
         <p className={styles.carBrand}>Opel Astra</p>
         <h4 className={styles.carTimeStamp}>2 дні 13:48:25</h4>
       </div>
-      <p className={styles.carStatus}>Статус автомобіля</p>
-      <NavLink className={styles.carDetails}>Деталі</NavLink>
+      <p className={styles.carStatus}>В ремонті</p>
+      <button className={styles.carDetails} onClick={handleModal}>
+        Деталі
+      </button>
+
+      {<CurrentCarModal isOpen={isModalOpen} onClose={closeModal} />}
     </div>
   );
 }

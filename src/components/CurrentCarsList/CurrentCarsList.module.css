@@ -1,0 +1,17 @@
+.wrapper {
+  width: 386px;
+  height: 199px;
+  margin-top: 12px;
+
+  overflow: scroll;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari та Opera */
+}
+
+.carsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
