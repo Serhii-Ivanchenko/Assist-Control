@@ -35,6 +35,8 @@
 
 .carNumber {
     color: #FFF;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: Raleway;
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
@@ -43,11 +45,15 @@
 }
 
 .auto {
-    color: #FFF;
+    color: #9E9E9E;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: Raleway;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.5px;
 }
 
 .timeInfo {

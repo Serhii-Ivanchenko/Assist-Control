@@ -1,22 +1,21 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import styles from './UserBar.module.css';
 import { FiSettings } from "react-icons/fi";
+import UserSettingsModal from '../Modals/UserSettingsModal/UserSettingsModal';
 
 export default function UserBar() {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const buttonRef = useRef(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const togglePopover = () => {
-      setIsPopoverOpen((prev) => !prev);
-    };
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
 
-    const closePopover = () => {
-      setIsPopoverOpen(false);
-    };
   return (
     <div className={styles.userBarContainer}>
-      <button className={styles.btn}><FiSettings className={styles.iconSettings} /></button>
-      {/* <button className={styles.btn}><FiLogOut  /></button> */}
+      <button className={styles.btn} onClick={toggleModal}>
+        <FiSettings className={styles.iconSettings} />
+      </button>
+      {isModalOpen && <UserSettingsModal onClose={toggleModal} />}
     </div>
   );
 }
