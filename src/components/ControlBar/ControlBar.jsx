@@ -28,6 +28,5 @@ const openModal = () => {
             <SupportModal/>
           </Modal>
 }
-    <UserBar/>
   </div>;
 }
