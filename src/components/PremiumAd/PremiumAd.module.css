@@ -20,6 +20,7 @@
   
   .textBlock {
     text-align: start;
+    margin-bottom: 8px;
   }
   
   .premiumTitle {
@@ -35,7 +36,6 @@
     font-style: normal;
     font-weight: 300;
     line-height: normal;
-    margin-bottom: 8px;
   }
   
   .premiumButton {

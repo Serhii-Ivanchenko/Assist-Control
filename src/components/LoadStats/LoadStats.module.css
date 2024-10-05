@@ -45,14 +45,7 @@
 .percentage {
     display: flex;
     align-items: flex-end;
-}
-
-.icon {
-    color: #3CBC81;
-    stroke-width: 1px;
-    stroke: #FFF;
-    padding: 1px;
-    font-size: 12px;
+    gap: 3px;
 }
 
 .description {
@@ -61,30 +54,41 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    /* font-variant: small-caps; */
 }
 
-.num{
+.num {
     color: #FFF;
-    /* font-variant-numeric: lining-nums proportional-nums; */
     font-size: 24px;
-    font-style: normal;
     font-weight: 600;
-    line-height: normal;
+    line-height: 1;
+    font-variant-numeric: lining-nums proportional-nums;
+
 }
-.symbol{
+
+.symbol {
     color: #717075;
     font-size: 16px;
-    font-style: normal;
+    font-family: Raleway;
     font-weight: 500;
-    line-height: normal;    
+    line-height: 1;
+    margin-bottom: 2px;
 }
 
-.iconBtn{
+.iconBtn {
     display: flex;
+    justify-content: center;
     align-items: center;
     background-color: #246D4D;
     border-radius: 50%;
-    width: 12px;
-    height: 12px;
+    width: 14px;  
+    height: 14px;
+    margin-bottom: 2px;
+}
+
+.icon {
+    color: #3CBC81;
+    stroke-width: 1px;
+    stroke-width: 2px;
+    stroke: #FFF;
+    font-size: 9px;
 }
