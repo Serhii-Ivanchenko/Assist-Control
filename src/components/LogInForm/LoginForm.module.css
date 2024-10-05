@@ -78,6 +78,11 @@
   width: 100%;
 }
 
+.input::placeholder {
+  font-size: 10px;
+  font-weight: 500;
+}
+
 .errorMsg {
   font-family: "Roboto", sans-serif;
   font-weight: 500;
