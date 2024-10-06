@@ -41,7 +41,8 @@ function SamplePrevArrow({ currentSlide, onClick }) {
 }
 
 export default function VideoFrame() {
-  const image = useRef();
+  let image = useRef();
+  let parentRef = useRef();
   const [isZoomed, setIsZoomed] = useState(false);
   useEffect(() => {
     if (!isZoomed) {
@@ -63,16 +64,14 @@ export default function VideoFrame() {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-  // Large image zoom modal
-  function CameraModal({ img, modalState }) {
+  function CameraModal({ img, modalState, someRef, parentRef }) {
+
     if (modalState === "UNLOADING") {
       handleZoomChange(false);
     }
     const handleClickOutImg = (event) => {
-      console.log(event);
-      console.log(image);
-      if (image.current && !image.current.contains(event.target)) {
-        handleZoomChange(false); // Закриваємо модалку, якщо клік був поза зображенням
+      if (!someRef.current && !parentRef.current.contains(event.target)) {
+        handleZoomChange(false);
       }
     };
     useEffect(() => {
@@ -86,26 +85,18 @@ export default function VideoFrame() {
       };
     }, [modalState]);
     return (
-      <>
-        <div className={css.zoomImgCont}>
-          <div className={css.zoomImg}>
-            <div className={css.onZoomIcon}>
-              <VscZoomOut
-                cursor={"pointer"}
-                size={40}
-                onClick={() => handleZoomChange(false)}
-              />
-            </div>
-            <div ref={image} className={css.img}>
-              <InnerImageZoom
-                src={img.props.src}
-                zoomType="click"
-                zoomScale={2}
-              />
-            </div>
+      <div className={css.zoomImg}>
+        <div ref={someRef} className={css.zoomImgCont}>
+          <div className={css.onZoomIcon}>
+            <VscZoomOut
+              cursor={"pointer"}
+              size={40}
+              onClick={() => handleZoomChange(false)}
+            />
           </div>
+          <InnerImageZoom src={img.props.src} zoomType="click" zoomScale={2} />
         </div>
-      </>
+      </div>
     );
   }
   return (
@@ -115,7 +106,7 @@ export default function VideoFrame() {
           <Slider {...settings}>
             {carArr.length ? (
               carArr.map(({ img, alt }) => (
-                <div key={alt} className={css.camera}>
+                <div ref={parentRef} key={alt} className={css.camera}>
                   <div className={css.zoomIcon}>
                     <VscZoomIn
                       cursor={"pointer"}
@@ -127,7 +118,14 @@ export default function VideoFrame() {
                     <Zoom
                       onZoomChange={handleZoomChange}
                       isZoomed={isZoomed}
-                      ZoomContent={CameraModal}
+                      ZoomContent={({ img, modalState }) => (
+                        <CameraModal
+                          modalState={modalState}
+                          img={img}
+                          someRef={image}
+                          parentRef={parentRef}
+                        />
+                      )}
                     >
                       <img src={img} alt={alt} />
                     </Zoom>
