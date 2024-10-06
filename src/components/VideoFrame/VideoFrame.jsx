@@ -14,7 +14,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const carArr = [
   {
@@ -41,6 +41,7 @@ function SamplePrevArrow({ currentSlide, onClick }) {
 }
 
 export default function VideoFrame() {
+  const image = useRef();
   const [isZoomed, setIsZoomed] = useState(false);
   useEffect(() => {
     if (!isZoomed) {
@@ -67,10 +68,26 @@ export default function VideoFrame() {
     if (modalState === "UNLOADING") {
       handleZoomChange(false);
     }
+    const handleClickOutImg = (event) => {
+      console.log(event);
+      if (image.current && !image.current.contains(event.target)) {
+        handleZoomChange(false); // Закриваємо модалку, якщо клік був поза зображенням
+      }
+    };
+    useEffect(() => {
+      if (modalState === "LOADING") {
+        document.addEventListener("mousedown", handleClickOutImg);
+      } else {
+        document.removeEventListener("mousedown", handleClickOutImg); // Видаляємо слухач події
+      }
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutImg); // При розмонтуванні видаляємо слухач
+      };
+    }, [modalState]);
     return (
       <>
         <div className={css.zoomImgCont}>
-          <div className={css.zoomImg}>
+          <div ref={image} className={css.zoomImg}>
             <div className={css.onZoomIcon}>
               <VscZoomOut
                 cursor={"pointer"}
