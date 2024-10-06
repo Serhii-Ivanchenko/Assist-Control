@@ -1,13 +1,13 @@
-.accountBox{
+.accountBox {
     margin-top: 60px;
     border-top: 1px solid #000;
     width: 635px;
     padding: 36px 47px 45px 43px;
 }
 
-.titles{
+.titles {
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -16,13 +16,13 @@
     margin-bottom: 16px;
 }
 
-.email{
+.email {
     width: 545px;
     height: 43px;
-    
+
     border-radius: 7px;
     border: 1px solid #302F2F;
-    
+
     background-color: #282828;
     outline: none;
 
@@ -38,7 +38,7 @@
     margin-bottom: 34px;
 }
 
-.passwortChBtn{
+.passwortChBtn {
     width: 165px;
     height: 43px;
     margin-bottom: 24px;
@@ -53,14 +53,14 @@
     background-color: #3956CC;
 
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
 }
 
-.inputs{
+.inputs {
     width: 545px;
     height: 43px;
 
@@ -71,10 +71,10 @@
     outline: none;
     color: #FFF;
 
-    margin-bottom: 24px; 
+    margin-bottom: 24px;
 }
 
-.btnBox{
+.btnBox {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -83,7 +83,7 @@
     margin-top: 10px;
 }
 
-.cancelBtn{
+.cancelBtn {
     width: 81px;
     height: 43px;
 
@@ -92,7 +92,7 @@
     background-color: transparent;
 
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -103,7 +103,7 @@
     align-items: center;
 }
 
-.saveBtn{
+.saveBtn {
     width: 139px;
     height: 43px;
 
@@ -113,7 +113,7 @@
     border: none;
 
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;

@@ -3,6 +3,7 @@
   gap: 7px;
   width: 100%;
 }
+
 .statsItem {
   display: flex;
   flex-direction: column;
@@ -13,14 +14,17 @@
   border-radius: 5px;
   background-color: #1a1a1a;
 }
+
 .statsItem:first-child {
   background-color: #3956cc;
 }
+
 .statsItemValue {
-  font-family: Raleway;
+  font-family: "Roboto", sans-serif;
   font-size: 20px;
   font-weight: 700;
 }
+
 .statsItemTitle {
   white-space: nowrap;
   font-size: 14px;

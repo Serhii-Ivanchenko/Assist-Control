@@ -1,4 +1,4 @@
-.addBox{
+.addBox {
     width: 400px;
     height: 600px;
 
@@ -9,17 +9,17 @@
 
 }
 
-.contentBox{
-  padding: 16px 25px 20px;  
+.contentBox {
+    padding: 16px 25px 20px;
 }
 
-.addForm{
+.addForm {
     display: flex;
     flex-direction: column;
-    
+
 }
 
-.addTitle{
+.addTitle {
     height: 60px;
     border-bottom: solid 1px #383838;
     padding-top: 19px;
@@ -27,61 +27,61 @@
 
     color: #FFF;
 
-font-family: Raleway;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.fieldName{
+.fieldName {
     color: #FFF;
 
-font-family: Raleway;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 
-margin-bottom: 12px;
+    margin-bottom: 12px;
 
 }
 
-.field{
-width: 161px;
-height: 43px;
+.field {
+    width: 161px;
+    height: 43px;
 
-border-radius: 7px;
-border: 1px solid #302F2F;
+    border-radius: 7px;
+    border: 1px solid #302F2F;
 
-background-color: #282828;
+    background-color: #282828;
 
-margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
-.fieldEmail{
-width: 350px;
-height: 43px;
+.fieldEmail {
+    width: 350px;
+    height: 43px;
 
-border-radius: 7px;
-border: 1px solid #302F2F;
+    border-radius: 7px;
+    border: 1px solid #302F2F;
 
-background-color: #282828;
-margin-bottom: 19px;
+    background-color: #282828;
+    margin-bottom: 19px;
 }
 
-.nameBox{
+.nameBox {
     display: flex;
     flex-direction: row;
     gap: 28px;
 }
 
-.name{
+.name {
     display: flex;
     flex-direction: column;
 }
 
-.btnBox{
+.btnBox {
     height: 63px;
     border-top: solid 1px #383838;
     width: 400px;
@@ -95,63 +95,63 @@ margin-bottom: 19px;
 
 }
 
-.cancelBtn{
- width: 75px;
-height: 27px;
-color: #FFF;
+.cancelBtn {
+    width: 75px;
+    height: 27px;
+    color: #FFF;
 
-border-radius: 4px;
-border: 1px solid #767676;
+    border-radius: 4px;
+    border: 1px solid #767676;
 
-font-family: Raleway;
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-cursor: pointer;
-background-color: transparent;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+    background-color: transparent;
 }
 
-.addBtn{
-cursor: pointer;
-width: 75px;
-height: 27px;
+.addBtn {
+    cursor: pointer;
+    width: 75px;
+    height: 27px;
 
-border-radius: 4px;
-background-color: #3956CC;
+    border-radius: 4px;
+    background-color: #3956CC;
 
-color: #FFF;
+    color: #FFF;
 
-font-family: Raleway;
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 
-border: none;
+    border: none;
 }
 
 /* Radio-button */
 
-.radioName{
+.radioName {
     display: flex;
 }
 
-.radioInput{
+.radioInput {
     display: none;
 }
 
-.castomRadio{
+.castomRadio {
     width: 19px;
     height: 19px;
     border-radius: 50%;
     position: relative;
     margin-right: 10px;
     background-color: #000;
-    
+
 }
 
-.radioInput:checked + .castomRadio {
+.radioInput:checked+.castomRadio {
     /* background-color: #007bff;
     border-color: #007bff;
     width: 15px;
@@ -161,10 +161,10 @@ border: none;
     background-color: transparent;
     border: solid 1px #007bff;
 
-    
-  }
 
-  .radioInput:checked + .castomRadio::after{
+}
+
+.radioInput:checked+.castomRadio::after {
     content: '';
     width: 15px;
     height: 15px;
@@ -178,33 +178,33 @@ border: none;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+}
 
-  .roleDescription{
+.roleDescription {
     display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 15px;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
 
-  }
+}
 
-  .title{
+.title {
     color: #FFF;
 
-font-family: Raleway;
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-  }
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
 
-  .text{
+.text {
     color: #FFF;
 
-font-family: Raleway;
-font-size: 12px;
-font-style: normal;
-font-weight: 400;
-line-height: var(--Label-Medium-Line-Height, 16px);
-width: 278px
-  }
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Label-Medium-Line-Height, 16px);
+    width: 278px
+}

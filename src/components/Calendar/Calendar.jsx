@@ -1,9 +1,7 @@
-
-
 // import { useState } from "react";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek"; // для начала недели с понедельника
-import css from './Calendar.module.css'
+import css from "./Calendar.module.css";
 
 dayjs.extend(isoWeek);
 
@@ -56,8 +54,7 @@ const Calendar = () => {
         ))}
       </div>
 
-     
-      <style >{`
+      <style>{`
         
         .calendar-day {
           text-align: center;
@@ -68,7 +65,7 @@ height: 18px;
 border-radius: 5px;
 
 font-variant-numeric: lining-nums proportional-nums;
-font-family: Raleway;
+font-family: "Roboto", sans-serif;
 font-size: 12px;
 font-style: normal;
 font-weight: 300;

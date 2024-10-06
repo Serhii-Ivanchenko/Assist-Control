@@ -39,7 +39,7 @@
     bottom: 10px;
     left: 10px;
     width: 100%;
-    
+
 }
 
 .percentage {
@@ -68,7 +68,7 @@
 .symbol {
     color: #717075;
     font-size: 16px;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-weight: 500;
     line-height: 1;
     margin-bottom: 2px;
@@ -80,7 +80,7 @@
     align-items: center;
     background-color: #246D4D;
     border-radius: 50%;
-    width: 14px;  
+    width: 14px;
     height: 14px;
     margin-bottom: 2px;
 }

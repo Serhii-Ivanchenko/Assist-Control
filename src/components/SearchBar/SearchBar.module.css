@@ -12,7 +12,7 @@
     padding: 7px 7px 7px 30px;
     color: rgba(255, 255, 255, 1);
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
@@ -22,7 +22,7 @@
 .input::placeholder {
     color: #858585;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 11px;
     font-style: normal;
     font-weight: 300;

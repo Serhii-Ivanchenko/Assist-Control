@@ -1,7 +1,7 @@
 .containercalendar {
-   margin-top: 20px;
-   width: 282px;
-   height: 125px;
+    margin-top: 20px;
+    width: 282px;
+    height: 125px;
 }
 
 .weekdays {
@@ -12,12 +12,12 @@
     text-align: center;
     color: #FFF;
     justify-content: center;
-        font-variant-numeric: lining-nums proportional-nums;
-        font-family: Raleway;
-        font-size: 13px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: normal;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
 }
 
 .calendargrid {

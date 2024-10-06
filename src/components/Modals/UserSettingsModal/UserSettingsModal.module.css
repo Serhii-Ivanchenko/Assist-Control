@@ -1,4 +1,4 @@
-.settingsBox{
+.settingsBox {
     width: 800px;
     height: 600px;
     border-radius: 10px;
@@ -6,7 +6,7 @@
     display: flex;
 }
 
-.closeBtn{
+.closeBtn {
     position: absolute;
     top: 24px;
     right: 24px;
@@ -147,7 +147,7 @@
 
     color: #FFF;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
@@ -162,7 +162,7 @@
 
     color: #FFF;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 300;

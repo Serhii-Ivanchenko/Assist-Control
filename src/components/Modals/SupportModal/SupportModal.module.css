@@ -1,5 +1,5 @@
-.icon{
-    fill:#202020;
+.icon {
+    fill: #202020;
     width: 338px;
     height: 579px;
 }
@@ -8,12 +8,13 @@
     position: relative;
 } */
 
-.supportBox{
+.supportBox {
     width: 338px;
     height: 579px;
     position: relative;
 }
-.contentBox{
+
+.contentBox {
     width: 333px;
     height: 395px;
     padding-top: 80px;
@@ -36,7 +37,7 @@
     left: 0;
 }
 
-.closeBtn{
+.closeBtn {
     fill: #A4A4A4;
     width: 26.5px;
     height: 26.5px;
@@ -48,19 +49,19 @@
 
 }
 
-.title{
+.title {
     color: #FFF;
-    
-        font-variant-numeric: lining-nums proportional-nums;
-        font-family: Raleway;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        /* font-variant: small-caps; */
+
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    /* font-variant: small-caps; */
 }
 
-.textarea{
+.textarea {
     width: 270px;
     height: 176px;
     border-radius: 5px;
@@ -75,7 +76,7 @@
 
     color: white;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 300;
@@ -84,10 +85,10 @@
 
 }
 
-.textarea::placeholder{
+.textarea::placeholder {
     color: #A4A4A4;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 300;
@@ -95,23 +96,24 @@
 }
 
 /* Якщо кількість тексту більша ніж textarea, то можна або застилізувати скролл, або просто обмежити кількість символів */
-.textarea::-webkit-scrollbar{
+.textarea::-webkit-scrollbar {
     width: 7px;
 }
 
-.textarea::-webkit-scrollbar-track{
+.textarea::-webkit-scrollbar-track {
     background-color: #A4A4A4;
     border-radius: 15px;
 }
 
-.textarea::-webkit-scrollbar-thumb{
+.textarea::-webkit-scrollbar-thumb {
     border-radius: 15px;
     background-color: #333;
     cursor: pointer;
 }
+
 /* Дизайн скроллу ^ */
 
-.supportBtn{
+.supportBtn {
     width: 150px;
     height: 30px;
     padding: 7px 42px;
@@ -127,11 +129,10 @@
 
     color: #FFF;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
     cursor: pointer;
 }
-
