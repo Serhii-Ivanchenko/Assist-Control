@@ -53,4 +53,4 @@ export const getCarsByMonth = createAsyncThunk(
   }
 );
 
-// Get car info
+// Get new cars

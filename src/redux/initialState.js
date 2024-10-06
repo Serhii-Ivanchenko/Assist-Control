@@ -46,6 +46,7 @@ export const initialState = {
     day: [],
     month: [],
     all: [],
+    newCars: [],
     date: null,
     isLoading: false,
     error: null,
