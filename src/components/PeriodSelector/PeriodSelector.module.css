@@ -1,0 +1,59 @@
+.containerperiodselector {
+   
+    width: 309px;
+    height: 40px;
+    background: #1a1a1a;
+    display:flex;
+    flex-direction: row;
+    gap: 5px;
+    padding: 10px 20px;
+   
+}
+
+.periodtitle{
+color: #9E9E9E;
+background: #1a1a1a;
+    /* font-variant-numeric: lining-nums proportional-nums; */
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-variant: small-caps;
+    align-items: center;
+    text-align: center;
+    padding-top: 2px;
+}
+
+.periodinput{
+    color: #9E9E9E;
+    background: #1a1a1a;
+        /* font-variant-numeric: lining-nums proportional-nums; */
+        font-family: Raleway;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        font-variant: small-caps;
+        width: 120px;
+        height: 20px;
+        border: none;
+        padding-right: 25px;
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+
+.datewrapper {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+}

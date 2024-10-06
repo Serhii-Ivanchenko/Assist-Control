@@ -9,11 +9,40 @@ import { ImEye } from "react-icons/im";
 import { ImEyeBlocked } from "react-icons/im";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { register } from "../../redux/auth/operations";
+import { useDispatch } from "react-redux";
 
 export default function RegistrationForm() {
+  const dispatch = useDispatch();
+
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const onButtonEyeClick = () => {
     setIsPasswordShown(!isPasswordShown);
+  };
+
+  const handleSubmitRegistration = (values, actions) => {
+    const { name, email, phone, password } = values;
+
+    const userData = {
+      name,
+      email,
+      phone_number: phone,
+      password,
+    };
+
+    dispatch(register(userData))
+      .unwrap()
+      .then(() => {
+        toast.success(
+          "Для завершення реєстрації потрібно підтвердити email адресу. Будь ласка, перевірте електронну пошту"
+        );
+      })
+      .catch(() => {
+        toast.error("Щось сталося, спробуйте ще раз");
+      });
+
+    actions.resetForm();
   };
 
   return (
@@ -32,6 +61,7 @@ export default function RegistrationForm() {
           validationSchema={RegistrationSchema}
           validateOnChange={true}
           validateOnBlur={true}
+          onSubmit={handleSubmitRegistration}
         >
           <Form>
             <div className={css.wrapper}>
@@ -124,7 +154,7 @@ export default function RegistrationForm() {
                   htmlFor="repeatPassword"
                   className={css.registrationlabel}
                 >
-                  Повторіть пароль*
+                  Підтвердження паролю*
                 </label>
                 <div className={css.inputWithIconWrapper}>
                   <IoKeyOutline className={css.inputIcon} />
@@ -161,7 +191,7 @@ export default function RegistrationForm() {
       <div className={css.bottomTextWrapper}>
         <p className={css.bottomText}>Вже маєте Аккаунт?</p>
         <Link to="/login" className={css.bottomLink}>
-          Вхід
+          Увійти
         </Link>
       </div>
     </div>

@@ -1,15 +1,31 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "../LogInForm/LoginForm.module.css";
-import { IoKeyOutline, IoPerson } from "react-icons/io5";
+import { IoKeyOutline } from "react-icons/io5";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { useState } from "react";
 import { LoginSchema } from "../../validationSchemas/loginSchema";
 import { Link } from "react-router-dom";
+import { TbMailFilled } from "react-icons/tb";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/auth/operations";
+import toast from "react-hot-toast";
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
+
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const onButtonEyeClick = () => {
     setIsPasswordShown(!isPasswordShown);
+  };
+
+  const handleSubmitLogin = (values, actions) => {
+    dispatch(logIn(values))
+      .unwrap()
+      .catch(() => {
+        toast.error("Щось сталося, спробуйте ще раз");
+      });
+
+    actions.resetForm();
   };
 
   return (
@@ -19,29 +35,31 @@ export default function LoginForm() {
         <p className={css.loginText}>Welcome to Assist CONTROL</p>
         <Formik
           initialValues={{
-            name: "",
+            email: "",
             password: "",
           }}
           validationSchema={LoginSchema}
           validateOnChange={true}
           validateOnBlur={true}
+          onSubmit={handleSubmitLogin}
         >
           <Form>
             <div className={css.wrapper}>
               <div className={css.inputWrapper}>
-                <label htmlFor="name" className={css.loginLabel}>
-                  Ім’я*
+                <label htmlFor="email" className={css.loginLabel}>
+                  E-mail*
                 </label>
                 <div className={css.inputWithIconWrapper}>
-                  <IoPerson className={css.inputIcon} />
+                  <TbMailFilled className={css.inputIcon} />
                   <Field
-                    name="name"
+                    name="email"
+                    type="email"
                     className={css.input}
-                    placeholder="Артем Середенко"
+                    placeholder="mpdart2013@gmail.com"
                   />
                 </div>
                 <ErrorMessage
-                  name="name"
+                  name="email"
                   component="div"
                   className={css.errorMsg}
                 />
@@ -77,17 +95,17 @@ export default function LoginForm() {
               </div>
             </div>
             <button type="submit" className={css.submitButton}>
-              Логін
+              Увійти
             </button>
           </Form>
         </Formik>
-        <p className={css.loginBottomText}>Немає Акаунту?</p>
+        {/* <p className={css.loginBottomText}>Немає Акаунту?</p>
         <Link to="/register" className={css.linkToRegister}>
           Зареєструватись
-        </Link>
+        </Link> */}
       </div>
       <div className={css.bottomTextWrapper}>
-        <p className={css.loginLabel}>Немає Акаунту?</p>
+        <p className={css.loginLabel}>Ще не маєте акаунт?</p>
         <Link to="/register" className={css.bottomLink}>
           Зареєструватись
         </Link>

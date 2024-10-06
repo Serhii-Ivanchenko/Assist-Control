@@ -1,27 +1,55 @@
 import Slider from "react-slick";
 import cameraView from "../../assets/images/cameraView.png";
 import car from "../../assets/images/car.png";
+import road from "../../assets/images/pexels-photo-1563355.jpeg";
 import css from "./VideoFrame.module.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { VscZoomIn } from "react-icons/vsc";
+import { VscZoomOut } from "react-icons/vsc";
 import { BsCameraVideoOffFill } from "react-icons/bs";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import InnerImageZoom from "react-inner-image-zoom";
+import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
+import { useEffect, useState } from "react";
 
-function SampleNextArrow(props) {
-  console.log(props);
-  const { currentSlide, slideCount, onClick } = props;
+const carArr = [
+  {
+    img: road,
+    alt: "road",
+  },
+  {
+    img: cameraView,
+    alt: "camera View",
+  },
+  {
+    img: car,
+    alt: "car",
+  },
+];
+function SampleNextArrow({ currentSlide, slideCount, onClick }) {
   if (currentSlide === slideCount - 1) return null;
   return <IoIosArrowForward className={css.arrowNext} onClick={onClick} />;
 }
 
-function SamplePrevArrow(props) {
-  const { currentSlide, onClick } = props;
+function SamplePrevArrow({ currentSlide, onClick }) {
   if (!currentSlide) return null;
   return <IoIosArrowBack className={css.arrowPrev} onClick={onClick} />;
 }
+
 export default function VideoFrame() {
+  const [isZoomed, setIsZoomed] = useState(false);
+  useEffect(() => {
+    if (!isZoomed) {
+      setIsZoomed(true);
+    }
+  }, [isZoomed]);
+  const handleZoomChange = (shouldZoom) => {
+    setIsZoomed(shouldZoom);
+  };
   const settings = {
     dots: true,
     dotsClass: "dots",
@@ -34,27 +62,69 @@ export default function VideoFrame() {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
+  // Large image zoom modal
+  function CameraModal({ img, modalState }) {
+    if (modalState === "UNLOADING") {
+      handleZoomChange(false);
+    }
+    return (
+      <>
+        <div className={css.zoomImgCont}>
+          <div className={css.zoomImg}>
+            <div className={css.onZoomIcon}>
+              <VscZoomOut
+                cursor={"pointer"}
+                size={40}
+                onClick={() => handleZoomChange(false)}
+              />
+            </div>
+            <InnerImageZoom
+              // ref={image}
+              src={img.props.src}
+              zoomType="click"
+              zoomScale={2}
+            />
+          </div>
+        </div>
+      </>
+    );
+  }
   return (
     <div className={css.cameraListCont}>
       <div className={css.cameraList}>
-        <div className={css.zoomIcon}>
-          <VscZoomIn size={20} />
+        <div className={css.cameraCont}>
+          <Slider {...settings}>
+            {carArr.length ? (
+              carArr.map(({ img, alt }) => (
+                <div key={alt} className={css.camera}>
+                  <div className={css.zoomIcon}>
+                    <VscZoomIn
+                      cursor={"pointer"}
+                      size={20}
+                      onClick={() => handleZoomChange(true)}
+                    />
+                  </div>
+                  {isZoomed ? (
+                    <Zoom
+                      onZoomChange={handleZoomChange}
+                      isZoomed={isZoomed}
+                      ZoomContent={CameraModal}
+                    >
+                      <img src={img} alt={alt} />
+                    </Zoom>
+                  ) : (
+                    <img src={img} alt={alt} />
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className={css.camera}>
+                <BsCameraVideoOffFill size={58} />
+                <h3>Немає сигналу</h3>
+              </div>
+            )}
+          </Slider>
         </div>
-        <Slider {...settings}>
-          <div className={css.camera}>
-            <img src={cameraView} alt="" />
-          </div>
-          <div className={css.camera}>
-            <img src={cameraView} alt="" />
-          </div>
-          <div className={css.camera}>
-            <img src={car} alt="" />
-          </div>
-          <div className={css.camera}>
-            <BsCameraVideoOffFill size={58} />
-            <h3>Немає сигналу</h3>
-          </div>
-        </Slider>
       </div>
     </div>
   );

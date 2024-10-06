@@ -6,7 +6,7 @@ export default function PremiumAd() {
     <div className={styles.premiumContainer}>
       <FaCrown className={styles.premiumIcon} />
       <div className={styles.textBlock}>
-        <h1 className={styles.premiumTitle}>Преміум</h1>
+        <h3 className={styles.premiumTitle}>Преміум</h3>
         <p className={styles.premiumDescription}>
           Ще більше різних можливостей <br /> для Вас!
         </p>

@@ -1,6 +1,13 @@
 .pageContent {
-  width: 704px;
+  width: 740px;
   background-color: #101010;
   border-radius: 5px;
   padding: 16px;
+}
+
+.pagegrid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 12px;
+    grid-row-gap: 12px;
 }

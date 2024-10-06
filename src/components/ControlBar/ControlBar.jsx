@@ -1,7 +1,6 @@
 import SearchBar from "../SearchBar/SearchBar.jsx";
 import Support from "../Support/Support.jsx";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher.jsx";
-import UserBar from "../UserBar/UserBar.jsx";
 import css from './ControlBar.module.css'
 
 export default function ControlBar() {
@@ -9,6 +8,5 @@ export default function ControlBar() {
     <SearchBar />
     <ThemeSwitcher />
     <Support />
-    <UserBar/>
   </div>;
 }
