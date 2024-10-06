@@ -22,12 +22,16 @@
     line-height: normal;
 
     margin-bottom: 18px;
+
+    cursor: default;
 }
 
 .text {
     width: 190px;
     height: 112px;
     margin-bottom: 18px;
+
+    cursor: default;
 
     color: #FFF;
     font-family: "Roboto", sans-serif;
@@ -55,4 +59,6 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+
+    cursor: pointer;
 }

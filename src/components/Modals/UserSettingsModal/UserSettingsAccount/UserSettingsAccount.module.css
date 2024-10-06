@@ -37,20 +37,29 @@
     font-weight: 400;
     line-height: normal;
     color:#FFF;
+   
+
+}
+
+.emailBox{
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 46px;
 
 }
 
 .warningMessage{
-    margin-bottom: 34px;
-
     color: #FF6363;
-    
-        font-size: 10px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        margin-left: 20px;
-        cursor:default;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    /* margin-left: 20px; */
+    cursor:default;
+    position: absolute;
+    left: 20px;
+    top: 105%;
 }
 
 .passwortChBtn {
