@@ -20,6 +20,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    cursor: default;
 }
 
 .sideBarNav {
@@ -31,6 +32,7 @@
     height: 38px;
     display: flex;
     align-items: center;
+    flex-direction: row;
     /* padding-left: 24px; */
 
 
@@ -53,6 +55,17 @@ flex-direction: column;
 
     text-decoration: none;
     padding-left: 24px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 11px;
+
+    height: 38px;
+    width: 165px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .linkIsActive {
@@ -73,5 +86,7 @@ flex-direction: column;
     align-items: center;
 
     background-color: #302F2F;
+    border: none;  
     border-right: solid 1px #004A9E;
+
 }

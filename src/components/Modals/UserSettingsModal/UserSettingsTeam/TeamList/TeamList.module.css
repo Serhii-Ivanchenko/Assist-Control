@@ -63,7 +63,6 @@
 
 .memberName {
     color: #FFF;
-
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -73,7 +72,6 @@
 
 .memberEmail {
     color: #FFF;
-
     font-family: "Roboto", sans-serif;
     font-size: 11px;
     font-style: normal;
@@ -100,5 +98,6 @@
 .binIcon {
     width: 8px;
     height: 10px;
-    fill: #A1A1A1;
+    fill: #A1A1A1;  
+    cursor: pointer;
 }

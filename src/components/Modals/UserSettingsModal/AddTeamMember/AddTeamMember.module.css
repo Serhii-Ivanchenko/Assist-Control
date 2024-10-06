@@ -3,14 +3,25 @@
     height: 600px;
 
     border-radius: 10px;
-    border: solid 1px white;
+    /* border: solid 1px white; */
 
     background-color: #202020;
 
 }
 
-.contentBox {
-    padding: 16px 25px 20px;
+.closeBtn{
+    position: absolute;
+        top: 24px;
+        right: 24px;
+        cursor: pointer;
+    
+        width: 14px;
+        height: 14px;
+        stroke: #A4A4A4;
+}
+
+.contentBox{
+  padding: 16px 25px 20px;  
 }
 
 .addForm {
@@ -26,7 +37,6 @@
     padding-left: 25px;
 
     color: #FFF;
-
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -36,7 +46,6 @@
 
 .fieldName {
     color: #FFF;
-
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -55,8 +64,25 @@
     border: 1px solid #302F2F;
 
     background-color: #282828;
+margin-bottom: 16px;
 
-    margin-bottom: 16px;
+color: #FFF;
+outline: none;
+}
+
+.field:-webkit-autofill {
+  background-color: #282828 !important;
+  color: white !important;
+  box-shadow: 0 0 0px 1000px #282828 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.field:-webkit-autofill:hover,
+.field:-webkit-autofill:focus {
+  background-color: #282828 !important;
+  color: white !important;
+  box-shadow: 0 0 0px 1000px #282828 inset !important;
+  -webkit-text-fill-color: white !important;
 }
 
 .fieldEmail {
@@ -65,12 +91,30 @@
 
     border-radius: 7px;
     border: 1px solid #302F2F;
+background-color: #282828;
+margin-bottom: 19px;
+margin-top: 12px;
 
-    background-color: #282828;
-    margin-bottom: 19px;
+color: #FFF;
 }
 
-.nameBox {
+.fieldEmail:-webkit-autofill {
+  background-color: #282828 !important;
+  color: white !important;
+  box-shadow: 0 0 0px 1000px #282828 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.fieldEmail:-webkit-autofill:hover,
+.fieldEmail:-webkit-autofill:focus {
+  background-color: #282828 !important;
+  color: white !important;
+  box-shadow: 0 0 0px 1000px #282828 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+
+.nameBox{
     display: flex;
     flex-direction: row;
     gap: 28px;
@@ -121,7 +165,6 @@
     background-color: #3956CC;
 
     color: #FFF;
-
     font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-style: normal;
@@ -141,14 +184,28 @@
     display: none;
 }
 
-.castomRadio {
-    width: 19px;
-    height: 19px;
+.castomRadio{
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     position: relative;
     margin-right: 10px;
-    background-color: #000;
+    background-color: transparent;
+    cursor: pointer;
+    border: solid 1px #000;
+}
 
+.castomRadio::after{
+  content: '';
+    width: 15px;
+    height: 15px;
+  background-color: #000;
+
+  border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .radioInput:checked+.castomRadio {
@@ -190,7 +247,6 @@
 
 .title {
     color: #FFF;
-
     font-family: "Roboto", sans-serif;
     font-size: 14px;
     font-style: normal;
@@ -201,10 +257,15 @@
 .text {
     color: #FFF;
 
-    font-family: "Roboto", sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: var(--Label-Medium-Line-Height, 16px);
-    width: 278px
-}
+font-family: "Roboto", sans-serif;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: var(--Label-Medium-Line-Height, 16px);
+width: 278px
+  }
+
+  .radioBox{
+    width: 37px;
+  }
+
