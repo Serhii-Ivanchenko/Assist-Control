@@ -4,6 +4,7 @@ import css from "./AddTeamMember.module.css"
 import * as Yup from "yup";
 import { ErrorMessage } from "formik";
 import { TfiClose } from "react-icons/tfi";
+import { HiUserAdd } from "react-icons/hi";
 
  const Validation = Yup.object().shape({
      name: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Обов'язкове поле для заповнення"),
@@ -39,12 +40,16 @@ export default function AddTeamMember({onClose}) {
 
     return (
         <div className={css.addBox}>
+
             <TfiClose onClick={onClose} className={css.closeBtn} />
+
+            <div className={css.contentBox}>
+
             <p className={css.addTitle}>Додати користувача</p>
             <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validation}>
                 <Form className={css.addForm}>
 
-                   <div className={css.contentBox}>
+                   
                    <div className={css.nameBox}>
                     <div className={css.name}>
                     <label htmlFor={nameFieldId} className={css.fieldName}>Ім&apos;я</label>
@@ -57,14 +62,19 @@ export default function AddTeamMember({onClose}) {
                                 <Field type="text" name="surname" id={surnameFieldId} className={css.field} />
                                 <ErrorMessage name="surname" component="span" className={css.errorMessage} />
                     </div>
-                    </div>
-                    
+                        </div>
+                        
+                    <div className={css.nameEmail}>
                     <label htmlFor={emailFieldId} className={css.fieldName}>Пошта</label>
                     <Field type="email" name="email" id={emailFieldId} className={css.fieldEmail}/>
-                    <ErrorMessage name="email" component="span" className={css.errorMessage} />
-                    <p className={css.fieldName}>Роль</p>
+                        <ErrorMessage name="email" component="span" className={css.errorMessageEmail} />
+                    </div>
 
-                    
+
+                        <p className={css.fieldName}>Роль</p>
+                        
+                        <div className={css.radioBtnBox}>
+
                     <label htmlFor={roleViewerFieldId} className={css.radioName}> 
                             <Field type="radio" name="role" value="viewer" id={roleViewerFieldId} className={css.radioInput} />
                             
@@ -90,13 +100,18 @@ export default function AddTeamMember({onClose}) {
                                 </div>
                         </label>
                         </div>
+                        
                     <div className={css.btnBox}>
                     <button type="button" className={css.cancelBtn} onClick={onClose}>Відміна</button>
-                    <button type="submit" className={css.addBtn}>Додати</button>
+                            <button type="submit" className={css.addBtn}>
+                                <HiUserAdd className={css.addIcon} />
+                                Додати
+                            </button>
                     </div>
 
                 </Form>
-            </Formik>
+                </Formik>
+            </div>
         </div>
     )
 }
