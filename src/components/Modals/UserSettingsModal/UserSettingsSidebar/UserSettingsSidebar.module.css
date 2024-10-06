@@ -15,7 +15,6 @@
 
 .title{
     color: #FFF;
-    font-family: Raleway;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -46,7 +45,6 @@ flex-direction: column;
 
 .sideBarNavItemLink{
     color: #FFF;
-    font-family: Raleway;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -69,7 +67,6 @@ flex-direction: column;
 
 .linkIsActive{
     color: #FFF;
-    font-family: Raleway;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
