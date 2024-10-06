@@ -1,17 +1,29 @@
-// import { useState } from "react";
+ import { useState } from "react";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek"; // для начала недели с понедельника
 import css from "./Calendar.module.css";
 
 dayjs.extend(isoWeek);
 
-const Calendar = () => {
+const dataMonth = [
+  { date: '2024-10-01', percent: 60 },
+  { date: '2024-10-02', percent: 85 },
+  { date: '2024-10-03', percent: 20 },
+  { date: '2024-10-04', percent: 90 },
+  { date: '2024-10-05', percent: 40 },
+  { date: '2024-10-06', percent: 70 },
+ 
+];
+
+export default function  Calendar () {
   let currentDate = dayjs();
   // const [currentDate, setCurrentDate] = useState(dayjs()); // Текущая дата
   const startOfMonth = currentDate.startOf("month"); // Начало месяца
   const endOfMonth = currentDate.endOf("month"); // Конец месяца
   const startOfCalendar = startOfMonth.isoWeekday(1); // Начинаем календарь с понедельника
   const endOfCalendar = endOfMonth.isoWeekday(7); // Заканчиваем неделю на воскресенье
+  const [selectedDate, setSelectedDate] = useState(dayjs());
+  
 
   // Генерируем массив дат для отображения в календаре
   const generateCalendarDates = () => {
@@ -26,10 +38,49 @@ const Calendar = () => {
     return dates;
   };
 
+  const addDataToDates = (calendarDates, dataMonth) => {
+    return calendarDates.map((date) => {
+      const dataMonthObj = dataMonth.find((data) => {
+        const dataDate = dayjs(data.date, "YYYY-MM-DD"); 
+        return dataDate.isSame(date, "day");
+      });
+      return {
+        date: date,
+        percent: dataMonthObj ? dataMonthObj.percent : null, 
+      };
+    });
+  };
+
   const calendarDates = generateCalendarDates();
+
+  const calendarWithPercent = addDataToDates(calendarDates, dataMonth);
+  console.log('sd',selectedDate);
 
   // const handlePrevMonth = () => setCurrentDate(currentDate.subtract(1, "month"));
   // const handleNextMonth = () => setCurrentDate(currentDate.add(1, "month"));
+
+const handleDateClick = (date) => {
+    if (!isDateDisabled(date)) {
+      setSelectedDate(date);
+    }
+  };
+
+  const getButtonColor = (percent) => {
+    if (percent >= 80) {
+      return '#DB8120'; 
+    } else if (percent >= 50) {
+      return '#A97742'; 
+    } else if (percent > 0) {
+      return '#755D45'; 
+    } else {
+      return '#4A4A4A'; 
+    }
+  };
+
+  const isDateDisabled = (date) => {
+    return date.isAfter(currentDate, 'day') || !date.isSame(currentDate, 'month');
+  };
+ 
 
   return (
     <div className={css.containercalendar}>
@@ -42,15 +93,24 @@ const Calendar = () => {
       </div>
 
       <div className={css.calendargrid}>
-        {calendarDates.map((date, index) => (
-          <div
+        {calendarWithPercent.map((item, index) => (
+          <button
             key={index}
-            className={`calendar-day ${
-              date.month() !== currentDate.month() ? "other-month" : ""
-            } ${date.isSame(dayjs(), "day") ? "today" : ""}`}
+            onClick={() => handleDateClick(item.date)}
+            disabled={isDateDisabled(item.date)}
+            style={{
+              backgroundColor: getButtonColor(item.percent),
+              border: item.date.isSame(selectedDate, 'day') ? ' 1px solid #fff' : '1px solid transparent',
+            }}
+           
+            className={`calendar-day  
+              ${item.date.date()>currentDate.date() ? "cursordefault" : ""} 
+              ${item.date.month() !== currentDate.month() ? "other-month" : ""} 
+              ${item.date.isSame(dayjs(), "day") ? "today" : ""}`
+            }
           >
-            {date.date()}
-          </div>
+            {item.date.date()}
+          </button>
         ))}
       </div>
 
@@ -60,20 +120,26 @@ const Calendar = () => {
           text-align: center;
           color: #FFF;
           width: 36px;
-          background-color: #A97742;
-height: 18px;
-border-radius: 5px;
-
-font-variant-numeric: lining-nums proportional-nums;
-font-family: "Roboto", sans-serif;
-font-size: 12px;
-font-style: normal;
-font-weight: 300;
-line-height: normal;
+          height: 18px;
+          border-radius: 5px;
+          cursor: pointer;
+          font-variant-numeric: lining-nums proportional-nums;
+          font-family: "Roboto", sans-serif;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 300;
+          line-height: normal;
+          border:none;
         }
+
+        .cursordefault{
+        cursor: default;
+         }
+
         .other-month {
           background-color: #4A4A4A;
           color: #4A4A4A;
+          cursor: default;
         }
         .today {
           border: 1px solid #fff;
@@ -83,4 +149,4 @@ line-height: normal;
   );
 };
 
-export default Calendar;
+
