@@ -19,24 +19,19 @@ const CustomTooltip = ({ active, payload, label, coordinate }) => {
       <div
         className="custom-tooltip"
         style={{
-            // backgroundColor: '#fff',
-            width: '70px',
-          // padding: '5px',
-          border: 'none',
-          // border: '1px solid #ccc',
-          position: 'absolute',
-           left: x, 
-          
-          top: y - 30, 
-            transform: 'translateX(-50%)',
-          fontfamily: "Raleway", 
+            // backgroundColor: '#fff', padding: '5px',border: '1px solid #ccc',
+        width: '70px',
+        border: 'none',
+        position: 'absolute',
+        left: x, 
+        top: y - 30, 
+        transform: 'translateX(-50%)',
+        fontfamily: "Roboto", 
         fontweight: '400',
         fontsize: '6px',
         fontvariant: 'smallCaps',
         color: '#9e9e9e',
-
-fontStyle: 'normal',
-
+        fontStyle: 'normal',
         }}
       >
         <p className={css.popuptitle} >{`${payload[0].value} автомобілів ${label}`}</p> 
@@ -148,8 +143,8 @@ const currentDate = new Date();
 const sevenDaysAgo = new Date(currentDate);
   sevenDaysAgo.setDate(currentDate.getDate() - 7);
   
- const [dateBegin, setDateBegin] = useState(currentDate);
- const [dateEnd, setDateEnd] = useState(sevenDaysAgo);
+ const [dateBegin, setDateBegin] = useState(sevenDaysAgo);
+ const [dateEnd, setDateEnd] = useState(currentDate);
   let interval = data.length;
   
   const handleDataChangeBeg = (newData) => {
@@ -157,7 +152,7 @@ const sevenDaysAgo = new Date(currentDate);
   };
 
   const handleDataChangeEnd = (newData) => {
-    setDateEnd(newData);
+    setDateEnd(newData) ;
   };
 
   const customActiveDot = (props) => {
@@ -191,6 +186,9 @@ const sevenDaysAgo = new Date(currentDate);
     }
     return tick;
   };
+
+  //  console.log('start', dateBegin)
+  //  console.log('end', dateEnd)
     
    return (<div className={css.containerchart}>
      <p className={css.charttitle}>Машинозаїзди</p>

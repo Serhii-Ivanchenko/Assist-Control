@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import dayjs from "dayjs";
 import css from './PeriodSelector.module.css'
 import DatePicker from 'react-datepicker';
 import { FaCalendar } from 'react-icons/fa';
@@ -9,20 +10,52 @@ export default function PeriodSelector({ startDate, endDate, onDateBegChange, on
     const [periodEndData, setPeriodEndData] = useState(endDate);
     const [isOpenBeg, setIsOpenBeg] = useState(false);
     const [isOpenEnd, setIsOpenEnd] = useState(false);
+    const currentDate = new Date();
+    const sevenDaysAgo = new Date(currentDate);
+   sevenDaysAgo.setDate(currentDate.getDate() - 7);
+  //   console.log('sd',startDate);
+  // console.log('psd',periodStartData);
+  // console.log('ed',endDate);
+  //   console.log('ped',periodEndData);
 
-    console.log(startDate);
-    console.log(periodStartData);
-
-  const handleInputChangeBeg = (e) => {
-    // const value = e.target.value;
-    setPeriodStartData(e);
-    onDateBegChange(e);
+  function  handleInputChangeBeg(e)  {
+    //  const value = e.target.value;
+    let dateNewBeg = dayjs(e);
+   let dateNewEnd = dayjs(periodEndData);
+     if (e.toISOString().substring(0, 10) > sevenDaysAgo.toISOString().substring(0, 10)) {
+       setPeriodStartData(sevenDaysAgo);
+       onDateBegChange(sevenDaysAgo);
+       setPeriodEndData(currentDate);
+       onDateEndChange(currentDate);
+     } else {
+       if  (dateNewEnd.diff(dateNewBeg, 'month', true) > 1) {
+         dateNewEnd = dateNewBeg.add(1, 'month');
+         setPeriodEndData(dateNewEnd.$d);
+         onDateEndChange(dateNewEnd.$d);
+  };
+      setPeriodStartData(e);
+      onDateBegChange(e);
+     }
   };
 
-const handleInputChangeEnd = (e) => {
-    // const value = e.target.value;
-    setPeriodEndData(e);
-    onDateEndChange(e);
+function handleInputChangeEnd (e)  {
+  // const value = e.target.value;
+  let dateNewBeg = dayjs(periodStartData);
+   let dateNewEnd = dayjs(e);
+  
+  if (dateNewEnd.diff(dateNewBeg, 'month', true) > 1) {
+    dateNewEnd = dateNewBeg.add(1, 'month') 
+  
+  };
+  if (dateNewEnd.$d.toISOString().substring(0, 10) > currentDate.toISOString().substring(0, 10) ) {
+    setPeriodEndData(currentDate);
+    onDateEndChange(currentDate);
+     } else {
+    setPeriodEndData(dateNewEnd.$d);
+    onDateEndChange(dateNewEnd.$d);
+   
+  };
+   return;
     };
     
 
