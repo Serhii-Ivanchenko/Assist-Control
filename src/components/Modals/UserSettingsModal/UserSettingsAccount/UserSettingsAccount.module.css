@@ -119,49 +119,7 @@
         -webkit-text-fill-color: white !important;
 }
 
-.inputSelect{
-     padding: 14px 20px;
-        width: 545px;
-        height: 43px;
-    
-        border-radius: 7px;
-        border: 1px solid #302F2F;
-    
-        background-color: #282828;
-        outline: none;
-        color: #FFF;
-    
-        margin-bottom: 24px;
-        cursor: pointer;
 
-        appearance: none;
-        /* padding-left: 14px; */
-       
-
-        color: #FFF;
-        
-            font-size: 12px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-            /* box-shadow: none; */
-            
-}
-
-.selectIcon {
-    position: absolute;
-    right: 10px;
-    top: 15px;
-    /* transform: translateY(-50%); */
-    pointer-events: none;
-    fill: #767676;
-    width: 20px;
-        height: 20px;
-}
-
-.selectWrapper{
-    position: relative;
-}
 
 .btnBox {
     display: flex;
@@ -211,8 +169,16 @@
     cursor: pointer;
 }
 
-.fi{
+/* .fi{
     width: 26px;
     height: 26px;
     border-radius: 50%;
+} */
+
+.icon{
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+       background-size: cover; 
 }
+

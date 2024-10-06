@@ -1,0 +1,83 @@
+.inputSelect {
+    padding: 14px 20px;
+    width: 545px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 7px;
+    border: 1px solid #302F2F;
+
+    background-color: #282828;
+    outline: none;
+    color: #FFF;
+
+    margin-bottom: 24px;
+    cursor: pointer;
+
+    appearance: none;
+    /* padding-left: 14px; */
+
+
+    color: #FFF;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    /* box-shadow: none; */
+
+}
+
+.options {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    right: 0;
+    border: 1px solid #302F2F;
+    border-radius: 5px;
+    background-color: #282828;
+    z-index: 1000;
+
+    font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    padding: 10px 20px;
+    
+}
+
+.option:not(:last-child){
+    border-bottom:solid 1px #302F2F;
+}
+
+.selectIcon {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    /* transform: translateY(-50%); */
+    pointer-events: none;
+    fill: #767676;
+    width: 20px;
+    height: 20px;
+}
+
+.selectWrapper {
+    position: relative;
+}
+
+.icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-size: cover;
+    margin-right: 12px;
+}
