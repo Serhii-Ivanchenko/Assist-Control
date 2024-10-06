@@ -1,5 +1,5 @@
-.teamBox {
-    margin-top: 60px;
+.teamBox{
+    margin-top: 59.5px;
     border-top: 1px solid #000;
     width: 635px;
     padding: 28px 29px 20px 17px;
@@ -15,7 +15,6 @@
 
 .title {
     color: #FFF;
-
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -31,7 +30,6 @@
     margin-bottom: 18px;
 
     color: #FFF;
-
     font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-style: normal;

@@ -1,8 +1,10 @@
-.accountBox {
-    margin-top: 60px;
+.accountBox{
+    margin-top: 59.5px;
     border-top: 1px solid #000;
     width: 635px;
-    padding: 36px 47px 45px 43px;
+    padding: 30px 47px 45px 43px;
+    display: flex;
+    flex-direction: column;
 }
 
 .titles {
@@ -19,7 +21,7 @@
 .email {
     width: 545px;
     height: 43px;
-
+    padding: 15px 20px;
     border-radius: 7px;
     border: 1px solid #302F2F;
 
@@ -28,20 +30,34 @@
 
     display: flex;
     align-items: center;
-    padding: 15px 20px;
+    /* padding-left: 20px; */
 
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    color:#FFF;
 
+}
+
+.warningMessage{
     margin-bottom: 34px;
+
+    color: #FF6363;
+    
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-left: 20px;
+        cursor:default;
 }
 
 .passwortChBtn {
     width: 165px;
     height: 43px;
     margin-bottom: 24px;
+    padding: 15px 37px;
 
     display: flex;
     justify-content: center;
@@ -58,6 +74,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
 }
 
 .inputs {
@@ -71,7 +88,70 @@
     outline: none;
     color: #FFF;
 
-    margin-bottom: 24px;
+    margin-bottom: 24px; 
+    /* padding-left: 15px; */
+    padding: 15px 20px;
+}
+
+.inputs:-webkit-autofill{
+    /* border: 1px solid #302F2F !important; */
+    background-color: #282828 !important;
+    color: white !important;
+    box-shadow: 0 0 0px 1000px #282828 inset !important;
+    -webkit-text-fill-color: white !important;
+}
+
+.inputs:-webkit-autofill:hover,
+.inputs:-webkit-autofill:focus{
+    /* border: 1px solid #302F2F !important; */
+        background-color: #282828 !important;
+        color: white !important;
+        box-shadow: 0 0 0px 1000px #282828 inset !important;
+        -webkit-text-fill-color: white !important;
+}
+
+.inputSelect{
+     padding: 14px 20px;
+        width: 545px;
+        height: 43px;
+    
+        border-radius: 7px;
+        border: 1px solid #302F2F;
+    
+        background-color: #282828;
+        outline: none;
+        color: #FFF;
+    
+        margin-bottom: 24px;
+        cursor: pointer;
+
+        appearance: none;
+        /* padding-left: 14px; */
+       
+
+        color: #FFF;
+        
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            /* box-shadow: none; */
+            
+}
+
+.selectIcon {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    /* transform: translateY(-50%); */
+    pointer-events: none;
+    fill: #767676;
+    width: 20px;
+        height: 20px;
+}
+
+.selectWrapper{
+    position: relative;
 }
 
 .btnBox {
@@ -101,6 +181,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .saveBtn {
@@ -118,4 +199,11 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
+}
+
+.fi{
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
 }
