@@ -1,8 +1,6 @@
 .wrapper {
   width: 386px;
   height: 199px;
-  margin-top: 12px;
-
   overflow: scroll;
 }
 
