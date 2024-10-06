@@ -91,7 +91,7 @@ export default function AddTeamMember({onClose}) {
                         </label>
                         </div>
                     <div className={css.btnBox}>
-                    <button type="button" className={css.cancelBtn}>Відміна</button>
+                    <button type="button" className={css.cancelBtn} onClick={onClose}>Відміна</button>
                     <button type="submit" className={css.addBtn}>Додати</button>
                     </div>
 

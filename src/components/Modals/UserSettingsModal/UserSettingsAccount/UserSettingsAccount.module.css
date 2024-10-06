@@ -138,6 +138,7 @@
             font-style: normal;
             font-weight: 400;
             line-height: normal;
+            /* box-shadow: none; */
             
 }
 
@@ -204,3 +205,8 @@
     cursor: pointer;
 }
 
+.fi{
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+}

@@ -38,7 +38,7 @@
 
     color: #FFF;
 
-font-family: Raleway;
+
 font-size: 16px;
 font-style: normal;
 font-weight: 600;
@@ -48,7 +48,7 @@ line-height: normal;
 .fieldName{
     color: #FFF;
 
-font-family: Raleway;
+
 font-size: 16px;
 font-style: normal;
 font-weight: 600;
@@ -68,6 +68,24 @@ border: 1px solid #302F2F;
 background-color: #282828;
 
 margin-bottom: 16px;
+
+color: #FFF;
+outline: none;
+}
+
+.field:-webkit-autofill {
+  background-color: #282828 !important;
+  color: white !important;
+  box-shadow: 0 0 0px 1000px #282828 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.field:-webkit-autofill:hover,
+.field:-webkit-autofill:focus {
+  background-color: #282828 !important;
+  color: white !important;
+  box-shadow: 0 0 0px 1000px #282828 inset !important;
+  -webkit-text-fill-color: white !important;
 }
 
 .fieldEmail{
@@ -80,7 +98,25 @@ border: 1px solid #302F2F;
 background-color: #282828;
 margin-bottom: 19px;
 margin-top: 12px;
+
+color: #FFF;
 }
+
+.fieldEmail:-webkit-autofill {
+  background-color: #282828 !important;
+  color: white !important;
+  box-shadow: 0 0 0px 1000px #282828 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.fieldEmail:-webkit-autofill:hover,
+.fieldEmail:-webkit-autofill:focus {
+  background-color: #282828 !important;
+  color: white !important;
+  box-shadow: 0 0 0px 1000px #282828 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
 
 .nameBox{
     display: flex;
@@ -115,7 +151,6 @@ color: #FFF;
 border-radius: 4px;
 border: 1px solid #767676;
 
-font-family: Raleway;
 font-size: 12px;
 font-style: normal;
 font-weight: 500;
@@ -134,7 +169,6 @@ background-color: #3956CC;
 
 color: #FFF;
 
-font-family: Raleway;
 font-size: 12px;
 font-style: normal;
 font-weight: 500;
@@ -159,8 +193,23 @@ border: none;
     border-radius: 50%;
     position: relative;
     margin-right: 10px;
-    background-color: #000;
+    background-color: transparent;
     cursor: pointer;
+    border: solid 1px #000;
+}
+
+.castomRadio::after{
+  content: '';
+    width: 15px;
+    height: 15px;
+  background-color: #000;
+
+  border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
 .radioInput:checked + .castomRadio {
@@ -203,7 +252,6 @@ border: none;
   .title{
     color: #FFF;
 
-font-family: Raleway;
 font-size: 14px;
 font-style: normal;
 font-weight: 600;
@@ -213,7 +261,6 @@ line-height: normal;
   .text{
     color: #FFF;
 
-font-family: Raleway;
 font-size: 12px;
 font-style: normal;
 font-weight: 400;

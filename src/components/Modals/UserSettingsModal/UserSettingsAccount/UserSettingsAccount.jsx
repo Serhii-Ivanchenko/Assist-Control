@@ -1,10 +1,64 @@
 import css from "./UserSettingsAccount.module.css";
 import { Formik, Field, Form } from "formik";
-import { IoIosArrowDown } from "react-icons/io";
+// import { IoIosArrowDown } from "react-icons/io";
 import { useId } from "react";
-
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 import * as Yup from "yup";
 import { ErrorMessage } from "formik";
+import { useField } from "formik";
+import Select from "react-select"
+
+const languages = [
+  { value: "ukr", label: <><span className="fi fi-ua"></span> Українська</> },
+  { value: "eng", label: <><span className="fi fi-gb"></span> English</> },
+];
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    boxShadow: 'none',
+    borderColor: '#ccc',
+    '&:hover': {
+      borderColor: '#999',
+    },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected ? '#f0f0f0' : '#fff',
+    color: state.isSelected ? '#000' : '#333',
+    padding: '10px',
+    display: 'flex',
+    alignItems: 'center', // Щоб прапорці вирівнювались з текстом
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    display: 'flex',
+    alignItems: 'center', // Вирівнювання для вибраної опції
+    color: '#333',
+  }),
+};
+
+const FormikSelect = ({ label, options, name }) => {
+  const [field, , helpers] = useField(name);
+  const { value } = field;
+  const { setValue } = helpers;
+
+  const handleChange = (selectedOption) => {
+    setValue(selectedOption.value);
+  };
+
+  return (
+    <div>
+      <label className={css.titles}>{label}</label>
+      <Select 
+        styles={customStyles}
+        options={options}
+        value={options.find(option => option.value === value)}
+        onChange={handleChange}
+      />
+    </div>
+  );
+};
 
 const initialValues = {
   company: '',
@@ -26,7 +80,7 @@ const handleSubmit = (values) => {
 	};
 
   const companyFieldId = useId();
-  const languagesFieldId = useId();
+  // const languagesFieldId = useId();
 
 
 
@@ -45,21 +99,30 @@ const handleSubmit = (values) => {
         <Field type="text" name="company" className={css.inputs} id={companyFieldId} />
         <ErrorMessage name="company" component="span" className={css.errorMessage} />
 
-        <label htmlFor={languagesFieldId} className={css.titles}>Мова</label>
+
+        <FormikSelect
+        // className={css.inputSelect}
+          
+            name="languages"
+            label="Мова"
+            options={languages}
+          />
+
+        {/* <label htmlFor={languagesFieldId} className={css.titles}>Мова</label>
         <div className={css.selectWrapper}>
       <Field as="select" name="languages" className={css.inputSelect} id={languagesFieldId}>
-        <option value="ukr">
+            <option value="ukr">
           Українська
         </option>
           <option value="eng">English</option>
       </Field>
           <IoIosArrowDown className={css.selectIcon} />
           <ErrorMessage name="languages" component="span" className={css.errorMessage} />
-        </div>
+        </div> */}
 
       <div className={css.btnBox}>
-        <button className={css.cancelBtn}>Відміна</button>
-        <button className={css.saveBtn}>Зберегти зміни</button>
+        <button type="button" className={css.cancelBtn}>Відміна</button>
+        <button type="submit" className={css.saveBtn}>Зберегти зміни</button>
       </div>
       </Form>
     </Formik>
