@@ -37,16 +37,9 @@
     align-items: center;
     flex-direction: row;
     gap: 14px;
-    /* 
-    padding-top: 10px;
-    padding-bottom: 12px; */
 
 }
 
-/* .teamListItem:not(:last-child) {
- border-bottom: solid 1px black;
-
-} */
 
 .memberPhoto {
     width: 32px;
@@ -93,6 +86,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    cursor: pointer;
 }
 
 .binIcon {
