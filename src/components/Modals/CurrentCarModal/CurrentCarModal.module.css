@@ -1,0 +1,277 @@
+/* .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.7);
+} */
+
+.modal {
+  /* position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001; */
+
+  display: flex;
+  text-align: center;
+
+  width: 300px;
+  height: auto;
+
+  padding: 14px 10px;
+  border-radius: 5px;
+
+  background-color: #202020;
+}
+
+.eclipseFrame {
+  position: absolute;
+  top: -40px;
+  left: -57px;
+  z-index: -1;
+
+  width: 169px;
+  height: 169px;
+  pointer-events: none;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+
+  border: transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.icon {
+  fill: #a4a4a4;
+
+  height: 20px;
+  width: 20px;
+}
+
+.currentCarContainer {
+  display: flex;
+  margin-bottom: 14px;
+}
+
+.currentCarImg {
+  width: 106px;
+  height: 86px;
+  border-radius: 5px;
+
+  transform: translate(-24px, -8px);
+}
+
+.nameContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin-left: -15px;
+}
+
+.carBrand {
+  color: #fff;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 18px;
+  font-weight: 700;
+
+  margin-bottom: 10px;
+}
+
+.carRegContainer {
+  position: absolute;
+  top: 65px;
+  left: 54px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  width: 217px;
+  height: 52px;
+
+  border-radius: 5px;
+  border: 3px solid #000;
+  background-color: #d9d9d9;
+}
+
+.carRegCountry {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 9px;
+
+  width: 19px;
+  height: 100%;
+
+  background-color: #00349a;
+}
+
+.carRegFlag {
+  width: 12px;
+  height: 8px;
+
+  margin-top: 8px;
+}
+
+.carRegNumber {
+  color: #000;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 34px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+.carRegCountry {
+  color: #fff;
+
+  font-family: Raleway;
+  font-size: 9px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+.carStatus {
+  color: #fff;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.carReg {
+  display: block;
+
+  width: 217px;
+  height: 52px;
+
+  margin: 0 35px 10px;
+}
+
+.vinCode {
+  color: #fff;
+
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  padding-top: 10px;
+  margin-bottom: 12px;
+  margin-left: 25px;
+}
+
+.vinNumber {
+  font-size: 14px;
+  font-weight: 300;
+
+  text-transform: uppercase;
+
+  margin-left: 17px;
+}
+
+.serviceInfo {
+  width: 280px;
+  height: 30px;
+
+  padding: 7px 25px;
+  margin-bottom: 12px;
+
+  border-radius: 5px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(57, 86, 204, 0.01) 0%,
+    #3956cc 50%,
+    rgba(57, 86, 204, 0.01) 100%
+  );
+}
+
+.serviceTime {
+  color: #fff;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.serviceDate {
+  color: #fff;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.radioGroup {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  justify-items: start;
+
+  padding: 0 35px;
+  margin: 28px 0 25px;
+}
+
+.radioGroup input {
+  margin: 0;
+  padding: 0;
+
+  width: auto;
+}
+
+.radioGroup label {
+  display: flex;
+  align-items: center;
+
+  color: #fff;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 11px;
+  font-weight: 300;
+}
+
+.radioGroup input[type="radio"] {
+  margin-right: 5px;
+}
+
+.submitBtn {
+  display: inline-block;
+  width: 150px;
+  height: 30px;
+
+  border: transparent;
+  border-radius: 5px;
+  background-color: #3956cc;
+
+  color: #fff;
+
+  font-family: Raleway;
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+}

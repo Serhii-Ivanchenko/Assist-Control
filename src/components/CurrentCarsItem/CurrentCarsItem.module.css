@@ -17,14 +17,10 @@
   width: 64px;
 }
 
-img {
-  display: block;
-  width: 100%;
-}
-
 .carInfoContainer {
   display: flex;
   flex-direction: column;
+  margin-top: 3px;
 }
 
 .carReg {
@@ -67,13 +63,23 @@ img {
 }
 
 .carDetails {
+  display: inline-block;
   position: absolute;
   top: 8px;
   right: 8px;
 
   color: #fff;
+  background-color: transparent;
+  border: none;
   font-family: Raleway;
   font-size: 14px;
   font-weight: 300;
-  text-decoration: none;
+
+  cursor: pointer;
+  transition: font-weight 0.3s ease, color 0.3s ease;
+}
+
+.carDetails:hover {
+  font-weight: 700;
+  color: #3956cc;
 }
