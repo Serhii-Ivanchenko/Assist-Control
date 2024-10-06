@@ -70,6 +70,7 @@ export default function VideoFrame() {
     }
     const handleClickOutImg = (event) => {
       console.log(event);
+      console.log(image);
       if (image.current && !image.current.contains(event.target)) {
         handleZoomChange(false); // Закриваємо модалку, якщо клік був поза зображенням
       }
@@ -87,7 +88,7 @@ export default function VideoFrame() {
     return (
       <>
         <div className={css.zoomImgCont}>
-          <div ref={image} className={css.zoomImg}>
+          <div className={css.zoomImg}>
             <div className={css.onZoomIcon}>
               <VscZoomOut
                 cursor={"pointer"}
@@ -95,12 +96,13 @@ export default function VideoFrame() {
                 onClick={() => handleZoomChange(false)}
               />
             </div>
-            <InnerImageZoom
-              // ref={image}
-              src={img.props.src}
-              zoomType="click"
-              zoomScale={2}
-            />
+            <div ref={image} className={css.img}>
+              <InnerImageZoom
+                src={img.props.src}
+                zoomType="click"
+                zoomScale={2}
+              />
+            </div>
           </div>
         </div>
       </>
