@@ -3,6 +3,7 @@ import carImg from "../../assets/images/carListImg.webp";
 import CurrentCarModal from "../Modals/CurrentCarModal/CurrentCarModal";
 
 import styles from "./CurrentCarsItem.module.css";
+import Modal from "../Modals/Modal/Modal.jsx";
 
 export default function CurrentCarsItem() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,7 +31,11 @@ export default function CurrentCarsItem() {
         Деталі
       </button>
 
-      {<CurrentCarModal isOpen={isModalOpen} onClose={closeModal} />}
+      {
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <CurrentCarModal onClose={closeModal} />
+        </Modal>
+      }
     </div>
   );
 }

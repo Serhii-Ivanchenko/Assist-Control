@@ -8,28 +8,28 @@ import eclipse from "../../../assets/modalicon/ellipse_33.webp";
 
 Modal.setAppElement("#root");
 
-function CurrentCarModal({ isOpen, onClose }) {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+function CurrentCarModal({ onClose }) {
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //   }
 
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isOpen]);
+  //   return () => {
+  //     document.body.style.overflow = "auto";
+  //   };
+  // }, [isOpen]);
 
   return (
-    <div>
-      <Modal
+    <div className={styles.modal}>
+      {/* <Modal
         isOpen={isOpen}
         onRequestClose={onClose}
         contentLabel="Current Car Modal"
         className={styles.modal}
         overlayClassName={styles.overlay}
-      >
+      > */}
         <div className={styles.modalContainer}>
           <img
             src={eclipse}
@@ -91,7 +91,7 @@ function CurrentCarModal({ isOpen, onClose }) {
             Підтвердити
           </button>
         </div>
-      </Modal>
+      {/* </Modal> */}
     </div>
   );
 }

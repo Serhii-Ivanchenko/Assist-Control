@@ -1,4 +1,4 @@
-.overlay {
+/* .overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,14 +8,14 @@
   height: 100%;
 
   background-color: rgba(0, 0, 0, 0.7);
-}
+} */
 
 .modal {
-  position: relative;
+  /* position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1001;
+  z-index: 1001; */
 
   display: flex;
   text-align: center;
