@@ -1,3 +1,15 @@
+import css from './CarStatsChart.module.css';
+import Chart from '../Chart/Chart.jsx'
+
 export default function CarStatsChart() {
-  return <p>Cars Stats Chart</p>;
+
+  
+    return (
+        <div className={css.containerstats}>
+            <Chart />
+        </div>
+  )
 }
+
+
+

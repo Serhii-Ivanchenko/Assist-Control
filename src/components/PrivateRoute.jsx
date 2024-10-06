@@ -7,12 +7,12 @@ export default function PrivateRoute({
   component: Component,
   // redirectTo = "/",
 }) {
-  // const { isLoggedIn, token } = useSelector(selectAuth);
+  // const { isLoggedIn, apiKey } = useSelector(selectAuth);
 
-  // if (!isLoggedIn && token) {
+  // if (!isLoggedIn && apiKey) {
   //   return <Loader/>;
   // }
-  // if (!isLoggedIn && !token) {
+  // if (!isLoggedIn && !apiKey) {
   //   return <Navigate to={redirectTo} />;
   // }
 

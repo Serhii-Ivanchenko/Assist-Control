@@ -1,0 +1,44 @@
+.containercalendar {
+   margin-top: 20px;
+   width: 282px;
+   height: 125px;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-left: 7px;
+    grid-column-gap: 3px;
+    text-align: center;
+    color: #FFF;
+    justify-content: center;
+        font-variant-numeric: lining-nums proportional-nums;
+        font-family: Raleway;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+}
+
+.calendargrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 4px;
+}
+
+.calendar-day {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.other-month {
+    background-color: #f0f0f0;
+    color: #999;
+}
+
+.today {
+    background-color: #4caf50;
+    color: white;
+}
