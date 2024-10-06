@@ -18,8 +18,8 @@ export default function VideControlPage() {
     <div className={styles.videoControlMainContainer}>
       <Header />
       <div className={styles.mainContent}>
-      <SideBar/>
-      <MainContent />
+        <SideBar />
+        <MainContent />
       </div>
     </div>
   );

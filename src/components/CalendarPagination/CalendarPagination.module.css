@@ -19,11 +19,11 @@
 .namemonth {
     color: #FFF;
 
-        font-family: Raleway;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: normal;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
 }
 
 
@@ -36,8 +36,8 @@
     text-align: center;
     align-items: center;
     cursor: pointer;
-border-radius: 50%;
-background-color: #4a4a4a;
+    border-radius: 50%;
+    background-color: #4a4a4a;
 }
 
 
@@ -52,6 +52,3 @@ background-color: #4a4a4a;
     text-align: center;
     cursor: pointer;
 }
-
-
-

@@ -14,7 +14,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const carArr = [
   {
@@ -41,6 +41,8 @@ function SamplePrevArrow({ currentSlide, onClick }) {
 }
 
 export default function VideoFrame() {
+  let image = useRef();
+  let parentRef = useRef();
   const [isZoomed, setIsZoomed] = useState(false);
   useEffect(() => {
     if (!isZoomed) {
@@ -62,31 +64,39 @@ export default function VideoFrame() {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-  // Large image zoom modal
-  function CameraModal({ img, modalState }) {
+  function CameraModal({ img, modalState, someRef, parentRef }) {
+
     if (modalState === "UNLOADING") {
       handleZoomChange(false);
     }
+    const handleClickOutImg = (event) => {
+      if (!someRef.current && !parentRef.current.contains(event.target)) {
+        handleZoomChange(false);
+      }
+    };
+    useEffect(() => {
+      if (modalState === "LOADING") {
+        document.addEventListener("mousedown", handleClickOutImg);
+      } else {
+        document.removeEventListener("mousedown", handleClickOutImg); // Видаляємо слухач події
+      }
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutImg); // При розмонтуванні видаляємо слухач
+      };
+    }, [modalState]);
     return (
-      <>
-        <div className={css.zoomImgCont}>
-          <div className={css.zoomImg}>
-            <div className={css.onZoomIcon}>
-              <VscZoomOut
-                cursor={"pointer"}
-                size={40}
-                onClick={() => handleZoomChange(false)}
-              />
-            </div>
-            <InnerImageZoom
-              // ref={image}
-              src={img.props.src}
-              zoomType="click"
-              zoomScale={2}
+      <div className={css.zoomImg}>
+        <div ref={someRef} className={css.zoomImgCont}>
+          <div className={css.onZoomIcon}>
+            <VscZoomOut
+              cursor={"pointer"}
+              size={40}
+              onClick={() => handleZoomChange(false)}
             />
           </div>
+          <InnerImageZoom src={img.props.src} zoomType="click" zoomScale={2} />
         </div>
-      </>
+      </div>
     );
   }
   return (
@@ -96,7 +106,7 @@ export default function VideoFrame() {
           <Slider {...settings}>
             {carArr.length ? (
               carArr.map(({ img, alt }) => (
-                <div key={alt} className={css.camera}>
+                <div ref={parentRef} key={alt} className={css.camera}>
                   <div className={css.zoomIcon}>
                     <VscZoomIn
                       cursor={"pointer"}
@@ -108,7 +118,14 @@ export default function VideoFrame() {
                     <Zoom
                       onZoomChange={handleZoomChange}
                       isZoomed={isZoomed}
-                      ZoomContent={CameraModal}
+                      ZoomContent={({ img, modalState }) => (
+                        <CameraModal
+                          modalState={modalState}
+                          img={img}
+                          someRef={image}
+                          parentRef={parentRef}
+                        />
+                      )}
                     >
                       <img src={img} alt={alt} />
                     </Zoom>

@@ -1,4 +1,4 @@
-.addBox{
+.addBox {
     width: 400px;
     height: 600px;
 
@@ -24,49 +24,46 @@
   padding: 16px 25px 20px;  
 }
 
-.addForm{
+.addForm {
     display: flex;
     flex-direction: column;
-    
+
 }
 
-.addTitle{
+.addTitle {
     height: 60px;
     border-bottom: solid 1px #383838;
     padding-top: 19px;
     padding-left: 25px;
 
     color: #FFF;
-
-
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.fieldName{
+.fieldName {
     color: #FFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 
-
-font-size: 16px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-
-margin-bottom: 12px;
+    margin-bottom: 12px;
 
 }
 
-.field{
-width: 161px;
-height: 43px;
+.field {
+    width: 161px;
+    height: 43px;
 
-border-radius: 7px;
-border: 1px solid #302F2F;
+    border-radius: 7px;
+    border: 1px solid #302F2F;
 
-background-color: #282828;
-
+    background-color: #282828;
 margin-bottom: 16px;
 
 color: #FFF;
@@ -88,13 +85,12 @@ outline: none;
   -webkit-text-fill-color: white !important;
 }
 
-.fieldEmail{
-width: 350px;
-height: 43px;
+.fieldEmail {
+    width: 350px;
+    height: 43px;
 
-border-radius: 7px;
-border: 1px solid #302F2F;
-
+    border-radius: 7px;
+    border: 1px solid #302F2F;
 background-color: #282828;
 margin-bottom: 19px;
 margin-top: 12px;
@@ -124,12 +120,12 @@ color: #FFF;
     gap: 28px;
 }
 
-.name{
+.name {
     display: flex;
     flex-direction: column;
 }
 
-.btnBox{
+.btnBox {
     height: 63px;
     border-top: solid 1px #383838;
     width: 400px;
@@ -143,47 +139,48 @@ color: #FFF;
 
 }
 
-.cancelBtn{
- width: 75px;
-height: 27px;
-color: #FFF;
+.cancelBtn {
+    width: 75px;
+    height: 27px;
+    color: #FFF;
 
-border-radius: 4px;
-border: 1px solid #767676;
+    border-radius: 4px;
+    border: 1px solid #767676;
 
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-cursor: pointer;
-background-color: transparent;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+    background-color: transparent;
 }
 
-.addBtn{
-cursor: pointer;
-width: 75px;
-height: 27px;
+.addBtn {
+    cursor: pointer;
+    width: 75px;
+    height: 27px;
 
-border-radius: 4px;
-background-color: #3956CC;
+    border-radius: 4px;
+    background-color: #3956CC;
 
-color: #FFF;
+    color: #FFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-
-border: none;
+    border: none;
 }
 
 /* Radio-button */
 
-.radioName{
+.radioName {
     display: flex;
 }
 
-.radioInput{
+.radioInput {
     display: none;
 }
 
@@ -209,10 +206,9 @@ border: none;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }
 
-.radioInput:checked + .castomRadio {
+.radioInput:checked+.castomRadio {
     /* background-color: #007bff;
     border-color: #007bff;
     width: 15px;
@@ -222,10 +218,10 @@ border: none;
     background-color: transparent;
     border: solid 1px #007bff;
 
-    
-  }
 
-  .radioInput:checked + .castomRadio::after{
+}
+
+.radioInput:checked+.castomRadio::after {
     content: '';
     width: 15px;
     height: 15px;
@@ -239,28 +235,29 @@ border: none;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+}
 
-  .roleDescription{
+.roleDescription {
     display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 15px;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
 
-  }
+}
 
-  .title{
+.title {
+    color: #FFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.text {
     color: #FFF;
 
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-  }
-
-  .text{
-    color: #FFF;
-
+font-family: "Roboto", sans-serif;
 font-size: 12px;
 font-style: normal;
 font-weight: 400;
@@ -271,3 +268,4 @@ width: 278px
   .radioBox{
     width: 37px;
   }
+
