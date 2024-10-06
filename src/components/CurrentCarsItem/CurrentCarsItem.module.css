@@ -17,11 +17,6 @@
   width: 64px;
 }
 
-img {
-  display: block;
-  width: 100%;
-}
-
 .carInfoContainer {
   display: flex;
   flex-direction: column;
@@ -84,8 +79,7 @@ img {
   transition: font-weight 0.3s ease, color 0.3s ease;
 }
 
-.carDetails:hover,
-.carDetails:focus {
+.carDetails:hover {
   font-weight: 700;
   color: #3956cc;
 }

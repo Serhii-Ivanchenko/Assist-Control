@@ -1,33 +1,50 @@
 .overlay {
   position: fixed;
-  width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal {
   position: relative;
-  width: 300px;
-  height: auto;
-  transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1001;
 
   display: flex;
   text-align: center;
+
+  width: 300px;
+  height: auto;
+
   padding: 14px 10px;
   border-radius: 5px;
+
   background-color: #202020;
+}
+
+.eclipseFrame {
+  position: absolute;
+  top: -40px;
+  left: -57px;
+  z-index: -1;
+
+  width: 169px;
+  height: 169px;
+  pointer-events: none;
 }
 
 .closeBtn {
   position: absolute;
   top: 8px;
   right: 8px;
+
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -39,6 +56,7 @@
 
 .icon {
   fill: #a4a4a4;
+
   height: 20px;
   width: 20px;
 }
@@ -49,20 +67,24 @@
 }
 
 .currentCarImg {
-  display: block;
-  width: auto;
+  width: 106px;
   height: 86px;
+  border-radius: 5px;
+
+  transform: translate(-24px, -8px);
 }
 
 .nameContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 10px;
+
+  margin-left: -15px;
 }
 
 .carBrand {
   color: #fff;
+
   font-variant-numeric: lining-nums proportional-nums;
   font-family: Raleway;
   font-size: 18px;
@@ -71,8 +93,66 @@
   margin-bottom: 10px;
 }
 
+.carRegContainer {
+  position: absolute;
+  top: 65px;
+  left: 54px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  width: 217px;
+  height: 52px;
+
+  border-radius: 5px;
+  border: 3px solid #000;
+  background-color: #d9d9d9;
+}
+
+.carRegCountry {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 9px;
+
+  width: 19px;
+  height: 100%;
+
+  background-color: #00349a;
+}
+
+.carRegFlag {
+  width: 12px;
+  height: 8px;
+
+  margin-top: 8px;
+}
+
+.carRegNumber {
+  color: #000;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: Raleway;
+  font-size: 34px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+.carRegCountry {
+  color: #fff;
+
+  font-family: Raleway;
+  font-size: 9px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
 .carStatus {
   color: #fff;
+
   font-variant-numeric: lining-nums proportional-nums;
   font-family: Raleway;
   font-size: 13px;
@@ -81,34 +161,44 @@
 
 .carReg {
   display: block;
+
   width: 217px;
   height: 52px;
+
   margin: 0 35px 10px;
 }
 
 .vinCode {
   color: #fff;
+
   font-family: Raleway;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  padding-top: 10px;
   margin-bottom: 12px;
 }
 
 .vinNumber {
   font-size: 14px;
   font-weight: 300;
+
   text-transform: uppercase;
+
   margin-left: 17px;
 }
 
 .serviceInfo {
   width: 280px;
   height: 30px;
+
   padding: 7px 25px;
   margin-bottom: 12px;
+
   border-radius: 5px;
+
   background: linear-gradient(
     90deg,
     rgba(57, 86, 204, 0.01) 0%,
@@ -148,13 +238,16 @@
 .radioGroup input {
   margin: 0;
   padding: 0;
+
   width: auto;
 }
 
 .radioGroup label {
   display: flex;
   align-items: center;
+
   color: #fff;
+
   font-variant-numeric: lining-nums proportional-nums;
   font-family: Raleway;
   font-size: 11px;
@@ -170,6 +263,7 @@
   width: 150px;
   height: 30px;
 
+  border: transparent;
   border-radius: 5px;
   background-color: #3956cc;
 
