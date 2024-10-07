@@ -1,8 +1,10 @@
 .pageContent {
   width: 740px;
+  height: 600px;
+  overflow: hidden;
   background-color: #101010;
   border-radius: 5px;
-  padding: 16px;
+  padding: 16px 16px 0 16px;
 }
 
 .pagegrid{

@@ -8,7 +8,7 @@ export default function CalendarBlock() {
     { number: "AХ5678БУ", model: "Skoda Superb", timeInfo: "Заїзд в інший день" },
     { number: "BC1234AA", model: "Toyota Camry", timeInfo: "Заїзд в той же день" },
     { number: "KI8765OP", model: "Honda Civic", timeInfo: "Заїзд в інший день" },
-    // { number: "LP4321QW", model: "BMW X5", timeInfo: "Заїзд в той же день" },
+    { number: "LP4321QW", model: "BMW X5", timeInfo: "Заїзд в той же день" },
   ];
 
   const maxVisibleCars = 3;
@@ -16,14 +16,16 @@ export default function CalendarBlock() {
 
   return (
     <div className={styles.calendarContainer}>
-      <div className={`${styles.topContainer} ${!hasDetailsButton ? styles.fullHeight : ''}`}>
+      <div
+        className={`${styles.topContainer} ${
+          !hasDetailsButton ? styles.fullHeight : ""
+        }`}
+      >
         <CalendarPagination />
-        <DayCarsList carsData={carsData} />
+        <DayCarsList carsData={carsData} hasDetailsButton={hasDetailsButton} />
       </div>
       {hasDetailsButton && (
-        <div className={styles.detailsButtonContainer}>
           <DetailsBtn />
-        </div>
       )}
     </div>
   );

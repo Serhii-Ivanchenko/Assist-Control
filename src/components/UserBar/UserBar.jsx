@@ -16,25 +16,6 @@ export default function UserBar() {
     setSettingsModalOpen(false);
   };
 
-  const handleClickOutside = useCallback((event) => {
-    if (
-      buttonRef.current &&
-      !buttonRef.current.contains(event.target)
-    ) {
-      closeSettingsModal();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isSettingsModalOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isSettingsModalOpen, handleClickOutside]);
-
   return (
     <div className={styles.userBarContainer}>
       <button className={styles.btn} onClick={openSettingsModal} ref={buttonRef}>
