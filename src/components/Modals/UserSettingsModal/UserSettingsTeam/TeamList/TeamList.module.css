@@ -87,6 +87,24 @@
     font-weight: 600;
     line-height: normal;
     cursor: pointer;
+    appearance: none;
+    padding-left: 5px;
+    
+}
+
+.selectBox{
+    position: relative;
+}
+
+.selectIcon {
+    position: absolute;
+    right: 5%;
+    top: 25%;
+    /* transform: translateY(-50%); */
+    pointer-events: none;
+    fill: #D2D2D2;
+    width: 15px;
+    height: 13px;
 }
 
 .binIcon {
