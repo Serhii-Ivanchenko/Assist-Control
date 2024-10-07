@@ -10,7 +10,7 @@ import { HiUserAdd } from "react-icons/hi";
      name: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Обов'язкове поле для заповнення"),
      surname: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Обов'язкове поле для заповнення"),
     email: Yup.string().email("Введіть коректну пошту").required("Обов'язкове поле для заповнення")
-        .test('has-domain', 'Email має містити домен', (value) =>
+        .test('has-domain', 'Email має містити ".com", ".net" і тд.', (value) =>
     {
       return value && value.includes('@') && value.split('@')[1].includes('.');
     })
@@ -53,20 +53,20 @@ export default function AddTeamMember({onClose}) {
                    <div className={css.nameBox}>
                     <div className={css.name}>
                     <label htmlFor={nameFieldId} className={css.fieldName}>Ім&apos;я</label>
-                                <Field type="text" name="name" id={nameFieldId} className={css.field} />
+                                <Field type="text" name="name" id={nameFieldId} className={css.field} placeholder="Введіть ім'я..."/>
                                 <ErrorMessage name="name" component="span" className={css.errorMessage} />
                     </div>
 
                      <div className={css.name}>
                     <label htmlFor={surnameFieldId} className={css.fieldName}>Прізвище</label>
-                                <Field type="text" name="surname" id={surnameFieldId} className={css.field} />
+                                <Field type="text" name="surname" id={surnameFieldId} className={css.field} placeholder="Введіть прізвище..."/>
                                 <ErrorMessage name="surname" component="span" className={css.errorMessage} />
                     </div>
                         </div>
                         
                     <div className={css.nameEmail}>
                     <label htmlFor={emailFieldId} className={css.fieldName}>Пошта</label>
-                    <Field type="email" name="email" id={emailFieldId} className={css.fieldEmail}/>
+                    <Field type="email" name="email" id={emailFieldId} className={css.fieldEmail} placeholder="Введіть пошту..."/>
                         <ErrorMessage name="email" component="span" className={css.errorMessageEmail} />
                     </div>
 
