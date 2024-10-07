@@ -1,5 +1,5 @@
 .teamBox{
-    margin-top: 60px;
+    margin-top: 59.5px;
     border-top: 1px solid #000;
     width: 635px;
     padding: 28px 29px 20px 17px;
@@ -13,35 +13,33 @@
     
 } */
 
-.title{
+.title {
     color: #FFF;
-    
-        font-family: Raleway;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 
-        margin-bottom: 18px;
+    margin-bottom: 18px;
 }
 
-.text{
+.text {
     width: 190px;
     height: 112px;
     margin-bottom: 18px;
 
     color: #FFF;
-    
-        font-family: Raleway;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: var(--Label-Medium-Line-Height, 16px);
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Label-Medium-Line-Height, 16px);
 
-    
+
 }
 
-.addBtn{
+.addBtn {
     width: 137px;
     height: 38px;
 
@@ -51,10 +49,10 @@
     background: #3956CC;
 
     color: #FFF;
-    
-        font-family: Raleway;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
+
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }

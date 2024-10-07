@@ -30,6 +30,7 @@
 }
 
 .inputWrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -93,11 +94,20 @@
   width: 100%;
 }
 
+.input::placeholder {
+  font-size: 10px;
+  font-weight: 500; 
+}
+
 .errorMsg {
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 11px;
   color: red;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  white-space: nowrap;
 }
 
 .submitButton {

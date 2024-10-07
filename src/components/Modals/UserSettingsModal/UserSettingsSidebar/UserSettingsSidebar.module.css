@@ -1,10 +1,10 @@
-.sideBarBox{
+.sideBarBox {
     width: 165px;
     height: inherit;
     border-right: solid 1px #000;
 }
 
-.titleBox{
+.titleBox {
     height: 60px;
     display: flex;
     justify-content: center;
@@ -13,28 +13,31 @@
     /* border-right: solid 1px #000; */
 }
 
-.title{
+.title {
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    cursor: default;
 }
 
-.sideBarNav{
+.sideBarNav {
     margin-top: 34px;
-    
+
 }
 
-.sideBarNavItem{
+.sideBarNavItem {
     height: 38px;
     display: flex;
     align-items: center;
+    flex-direction: row;
     /* padding-left: 24px; */
 
-    
+
 }
+
 /* 
 .sideBarNavList{
     display: flex;
@@ -42,9 +45,9 @@ justify-content: center;
 flex-direction: column;
 } */
 
-.sideBarNavItemLink{
+.sideBarNavItemLink {
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -52,17 +55,28 @@ flex-direction: column;
 
     text-decoration: none;
     padding-left: 24px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 11px;
+
+    height: 38px;
+    width: 165px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
-.linkIsActive{
+.linkIsActive {
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 
-    text-decoration: none; 
+    text-decoration: none;
 
     padding-left: 24px;
     width: 165px;
@@ -72,5 +86,7 @@ flex-direction: column;
     align-items: center;
 
     background-color: #302F2F;
+    border: none;  
     border-right: solid 1px #004A9E;
+
 }

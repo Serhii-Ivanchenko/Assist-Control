@@ -4,12 +4,14 @@
   gap: 16px;
   margin-bottom: 8px;
 }
+
 .statisticsTitle {
   display: flex;
   justify-content: space-between;
 }
+
 .title {
-  font-family: Raleway;
+  font-family: "Roboto", sans-serif;
   font-size: 18px;
   font-weight: 300;
 }

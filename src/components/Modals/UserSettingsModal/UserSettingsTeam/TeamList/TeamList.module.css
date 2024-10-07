@@ -1,4 +1,4 @@
-.teamList{
+.teamList {
     width: 385px;
     height: fit-content;
     border-radius: 7px;
@@ -12,24 +12,24 @@
 
 }
 
-.contentBox{
-width: 320px;
+.contentBox {
+    width: 320px;
 
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 
-padding-top: 10px;
-padding-bottom: 12px;
+    padding-top: 10px;
+    padding-bottom: 12px;
 }
 
-.teamListItem:not(:last-child) .contentBox{
-border-bottom: solid 1px black;
+.teamListItem:not(:last-child) .contentBox {
+    border-bottom: solid 1px black;
 }
 
 
-.teamListItem{
+.teamListItem {
     height: 55px;
 
     display: flex;
@@ -37,10 +37,10 @@ border-bottom: solid 1px black;
     align-items: center;
     flex-direction: row;
     gap: 14px;
-/* 
+    /* 
     padding-top: 10px;
     padding-bottom: 12px; */
-   
+
 }
 
 /* .teamListItem:not(:last-child) {
@@ -48,40 +48,38 @@ border-bottom: solid 1px black;
 
 } */
 
-.memberPhoto{
+.memberPhoto {
     width: 32px;
     height: 35px;
     border-radius: 35px;
-background-color: antiquewhite;
+    background-color: antiquewhite;
 
-margin-right: 13px;
+    margin-right: 13px;
 }
 
-.nameBox{
+.nameBox {
     margin-right: 16px;
 }
 
-.memberName{
+.memberName {
     color: #FFF;
-    
-        font-family: Raleway;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.memberEmail{
+.memberEmail {
     color: #FFF;
-    
-        font-family: Raleway;
-        font-size: 11px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: normal;
+    font-family: "Roboto", sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
 }
 
-.memberRole{
+.memberRole {
     width: 100px;
     height: 21px;
     background-color: #4F4F4F;
@@ -89,16 +87,17 @@ margin-right: 13px;
     border: none;
 
     color: #FFF;
-    
-        font-family: Raleway;
-        font-size: 10px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
+
+    font-family: "Roboto", sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.binIcon{
+.binIcon {
     width: 8px;
     height: 10px;
     fill: #A1A1A1;  
+    cursor: pointer;
 }

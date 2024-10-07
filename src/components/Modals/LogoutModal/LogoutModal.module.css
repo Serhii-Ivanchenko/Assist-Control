@@ -1,4 +1,4 @@
-.logoutBox{
+.logoutBox {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,13 +10,13 @@
     gap: 10px;
 }
 
-.btnBox{
+.btnBox {
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
 
-.btn{
+.btn {
     width: 130px;
     height: 30px;
 
@@ -27,7 +27,7 @@
 
     color: #FFF;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 300;

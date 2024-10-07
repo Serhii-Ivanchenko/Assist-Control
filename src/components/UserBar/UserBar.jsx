@@ -16,6 +16,7 @@ export default function UserBar() {
         <FiSettings className={styles.iconSettings} />
       </button>
       {isModalOpen && <UserSettingsModal onClose={toggleModal} />}
+      {/* <button className={styles.btn}><FiLogOut  /></button> */}
     </div>
   );
 }

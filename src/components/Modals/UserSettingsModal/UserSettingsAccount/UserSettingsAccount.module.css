@@ -1,13 +1,15 @@
 .accountBox{
-    margin-top: 60px;
+    margin-top: 59.5px;
     border-top: 1px solid #000;
     width: 635px;
-    padding: 36px 47px 45px 43px;
+    padding: 30px 47px 45px 43px;
+    display: flex;
+    flex-direction: column;
 }
 
-.titles{
+.titles {
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -16,32 +18,46 @@
     margin-bottom: 16px;
 }
 
-.email{
+.email {
     width: 545px;
     height: 43px;
-    
+    padding: 15px 20px;
     border-radius: 7px;
     border: 1px solid #302F2F;
-    
+
     background-color: #282828;
     outline: none;
 
     display: flex;
     align-items: center;
-    padding: 15px 20px;
+    /* padding-left: 20px; */
 
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    color:#FFF;
 
-    margin-bottom: 34px;
 }
 
-.passwortChBtn{
+.warningMessage{
+    margin-bottom: 34px;
+
+    color: #FF6363;
+    
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-left: 20px;
+        cursor:default;
+}
+
+.passwortChBtn {
     width: 165px;
     height: 43px;
     margin-bottom: 24px;
+    padding: 15px 37px;
 
     display: flex;
     justify-content: center;
@@ -53,14 +69,15 @@
     background-color: #3956CC;
 
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
 }
 
-.inputs{
+.inputs {
     width: 545px;
     height: 43px;
 
@@ -72,9 +89,72 @@
     color: #FFF;
 
     margin-bottom: 24px; 
+    /* padding-left: 15px; */
+    padding: 15px 20px;
 }
 
-.btnBox{
+.inputs:-webkit-autofill{
+    /* border: 1px solid #302F2F !important; */
+    background-color: #282828 !important;
+    color: white !important;
+    box-shadow: 0 0 0px 1000px #282828 inset !important;
+    -webkit-text-fill-color: white !important;
+}
+
+.inputs:-webkit-autofill:hover,
+.inputs:-webkit-autofill:focus{
+    /* border: 1px solid #302F2F !important; */
+        background-color: #282828 !important;
+        color: white !important;
+        box-shadow: 0 0 0px 1000px #282828 inset !important;
+        -webkit-text-fill-color: white !important;
+}
+
+.inputSelect{
+     padding: 14px 20px;
+        width: 545px;
+        height: 43px;
+    
+        border-radius: 7px;
+        border: 1px solid #302F2F;
+    
+        background-color: #282828;
+        outline: none;
+        color: #FFF;
+    
+        margin-bottom: 24px;
+        cursor: pointer;
+
+        appearance: none;
+        /* padding-left: 14px; */
+       
+
+        color: #FFF;
+        
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            /* box-shadow: none; */
+            
+}
+
+.selectIcon {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    /* transform: translateY(-50%); */
+    pointer-events: none;
+    fill: #767676;
+    width: 20px;
+        height: 20px;
+}
+
+.selectWrapper{
+    position: relative;
+}
+
+.btnBox {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -83,7 +163,7 @@
     margin-top: 10px;
 }
 
-.cancelBtn{
+.cancelBtn {
     width: 81px;
     height: 43px;
 
@@ -92,7 +172,7 @@
     background-color: transparent;
 
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -101,9 +181,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
-.saveBtn{
+.saveBtn {
     width: 139px;
     height: 43px;
 
@@ -113,9 +194,16 @@
     border: none;
 
     color: #FFF;
-    font-family: Raleway;
+    font-family: "Roboto", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
+}
+
+.fi{
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
 }
