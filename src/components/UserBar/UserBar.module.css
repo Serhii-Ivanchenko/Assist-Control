@@ -1,11 +1,11 @@
 .userBarContainer {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 48px;
-    right: 10px;
-  }
-  
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 48px;
+  right: 10px;
+}
+
   .btn {
     background: transparent;
     border: none;

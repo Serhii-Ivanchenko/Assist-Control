@@ -22,9 +22,6 @@
     transition: background-color 0.3s;
   }
   
-  .btn:hover {
-    background-color: darken(var(--Blue, #3956CC), 10%);
-  }
   
   .btn:focus {
     outline: none;

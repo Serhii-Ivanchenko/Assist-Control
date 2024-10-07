@@ -1,11 +1,15 @@
-.dayCarsListContainer{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    overflow: hidden;
-    height: 313px;
+.dayCarsListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+  margin-left: 1px;
 }
 
-.dayCarsListContainer > :nth-child(n+4) {
-    display: none;
+.dayCarsListContainer> :nth-child(n+4) {
+  display: none;
+}
+
+.withBtn> :nth-child(3) {
+  background: linear-gradient(0deg, #000 0%, #1A1A1A 66.5%);
 }

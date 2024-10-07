@@ -1,11 +1,26 @@
-/* .calendarContainer{
-    
-} */
-
-.topContainer{
-    padding: 16px 11px;
-    width: 304px;
-    height: 527px;
-    border-radius: 5px;
-    background: #101010;
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
 }
+
+.topContainer {
+  width: 304px;
+  display: flex;
+    flex-direction: column;
+    gap: 29px;
+height: 527px;
+  padding: 16px 11px 0 11px;
+  background: #101010;
+    border-radius: 5px;
+}
+
+.fullHeight {
+  height: 600px;
+  padding: 16px 11px;
+}
+/* 
+.detailsButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+} */
