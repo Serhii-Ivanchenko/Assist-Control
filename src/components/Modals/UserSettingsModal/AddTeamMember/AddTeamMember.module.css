@@ -1,73 +1,96 @@
 .addBox {
-    width: 400px;
-    height: 600px;
+  min-width: 454px;
+  max-width: 800px;
+  /* width: 800px; */
+  /* height: 600px; */
+  padding: 64px;
 
-    border-radius: 10px;
-    /* border: solid 1px white; */
+  border-radius: 10px;
 
-    background-color: #202020;
+  background-color: #202020;
 
 }
 
-.closeBtn{
-    position: absolute;
-        top: 24px;
-        right: 24px;
-        cursor: pointer;
-    
-        width: 14px;
-        height: 14px;
-        stroke: #A4A4A4;
+.closeBtn {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  cursor: pointer;
+
+  width: 18px;
+  height: 18px;
+  stroke: #4A4A4A;
 }
 
-.contentBox{
-  padding: 16px 25px 20px;  
+.contentBox {
+  display: flex;
+  flex-direction: column;
 }
 
 .addForm {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
 }
 
 .addTitle {
-    height: 60px;
-    border-bottom: solid 1px #383838;
-    padding-top: 19px;
-    padding-left: 25px;
+  color: #FFF;
+  font-family: "Roboto", sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 
-    color: #FFF;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  align-self: stretch;
+
+  margin-bottom: 65px;
 }
 
 .fieldName {
-    color: #FFF;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: #FFF;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
 
-    margin-bottom: 12px;
+  margin-bottom: 8px;
 
 }
 
 .field {
-    width: 161px;
-    height: 43px;
+  /* min-width: 280px; */
+  /* max-width: 326px; */
+  min-width: 326px;
+  max-height: 55px;
+  padding: 18px 20px;
 
-    border-radius: 7px;
-    border: 1px solid #302F2F;
+  display: flex;
+  align-items: center;
 
-    background-color: #282828;
-margin-bottom: 16px;
+  border-radius: 10px;
+  border: 1px solid #4A4A4A;
 
-color: #FFF;
-outline: none;
+  background-color: #282828;
+
+  margin-bottom: 24px;
+
+  color: #FFF;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  outline: none;
+}
+
+.field::placeholder{
+  color: var(--Button-grey, #4A4A4A);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .field:-webkit-autofill {
@@ -85,17 +108,59 @@ outline: none;
   -webkit-text-fill-color: white !important;
 }
 
+.errorMessage {
+  color: #FF6363;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: absolute;
+  top: 80%;
+  left: 10px;
+}
+
+.nameBox {
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
 .fieldEmail {
-    width: 350px;
-    height: 43px;
+  width: 100%;
+  max-height: 55px;
+  padding: 18px 20px;
 
-    border-radius: 7px;
-    border: 1px solid #302F2F;
-background-color: #282828;
-margin-bottom: 19px;
-margin-top: 12px;
+  border-radius: 10px;
+  border: 1px solid #4A4A4A;
 
-color: #FFF;
+  background-color: #282828;
+  margin-bottom: 48px;
+
+
+  color: #FFF;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  outline: none;
+}
+
+.fieldEmail::placeholder {
+  color: var(--Button-grey, #4A4A4A);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .fieldEmail:-webkit-autofill {
@@ -113,159 +178,185 @@ color: #FFF;
   -webkit-text-fill-color: white !important;
 }
 
+.errorMessageEmail{
+  color: #FF6363;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 
-.nameBox{
-    display: flex;
-    flex-direction: row;
-    gap: 28px;
+  position: absolute;
+  top: 66%;
+  left: 10px;
 }
 
-.name {
-    display: flex;
-    flex-direction: column;
+.nameEmail{
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
 }
+
+
+
 
 .btnBox {
-    height: 63px;
-    border-top: solid 1px #383838;
-    width: 400px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
 
-    display: flex;
-    flex-direction: row;
-    gap: 9px;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 25px;
+  margin-top: 40px;
 
 }
 
 .cancelBtn {
-    width: 75px;
-    height: 27px;
-    color: #FFF;
+  padding: 16px 48px;
+  color: #FFF;
 
-    border-radius: 4px;
-    border: 1px solid #767676;
+  border-radius: 6px;
+  border: 1px solid #4A4A4A;
 
-    font-family: "Roboto", sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    cursor: pointer;
-    background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  background-color: transparent;
 }
 
 .addBtn {
-    cursor: pointer;
-    width: 75px;
-    height: 27px;
+  cursor: pointer;
+  
+  padding: 16px 48px;
 
-    border-radius: 4px;
-    background-color: #3956CC;
+  border-radius: 6px;
+  background-color: #3956CC;
 
-    color: #FFF;
-    font-family: "Roboto", sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 
-    border: none;
+  color: #FFF;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  border: none;
+}
+
+.addIcon{
+  width: 18px;
+  height: 18px;
 }
 
 /* Radio-button */
 
 .radioName {
-    display: flex;
+  display: flex;
 }
 
 .radioInput {
-    display: none;
+  display: none;
 }
 
-.castomRadio{
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    position: relative;
-    margin-right: 10px;
-    background-color: transparent;
-    cursor: pointer;
-    border: solid 1px #000;
+.castomRadio {
+  min-width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  position: relative;
+  margin-right: 10px;
+  background-color: transparent;
+  cursor: pointer;
+  border: solid 1px #000;
+  margin-right: 15px;
+  padding: 4px;
+  
 }
 
-.castomRadio::after{
+.dot {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #000;
+}
+
+/* .castomRadio::after {
   content: '';
-    width: 15px;
-    height: 15px;
+  width: 15px;
+  height: 15px;
   background-color: #000;
 
   border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+} */
 
 .radioInput:checked+.castomRadio {
-    /* background-color: #007bff;
-    border-color: #007bff;
-    width: 15px;
-    height: 15px; */
-    width: 25px;
-    height: 25px;
-    background-color: transparent;
-    border: solid 1px #007bff;
+  min-width: 25px;
+  height: 25px;
+  background-color: transparent;
+  border: solid 1px #007bff;
 
 
 }
 
-.radioInput:checked+.castomRadio::after {
-    content: '';
-    width: 15px;
-    height: 15px;
-    background-color: #007bff;
-    /* width: 25px;
-    height: 25px;
-    background-color: transparent;
-    border: solid 1px #007bff; */
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.radioInput:checked+.castomRadio .dot {
+  background-color: #007bff;
+}
+
+.radioBtnBox{
+ display: flex;
+ gap: 24px;
+ flex-direction: column;
 }
 
 .roleDescription {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 
 }
 
+
+
 .title {
-    color: #FFF;
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: #FFF;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .text {
-    color: #FFF;
+  color: #FFF;
 
-font-family: "Roboto", sans-serif;
-font-size: 12px;
-font-style: normal;
-font-weight: 400;
-line-height: var(--Label-Medium-Line-Height, 16px);
-width: 278px
-  }
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 
-  .radioBox{
-    width: 37px;
-  }
+  width: 100%
+}
 
