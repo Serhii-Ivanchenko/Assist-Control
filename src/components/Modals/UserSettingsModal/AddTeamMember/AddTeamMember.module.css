@@ -279,9 +279,19 @@
   cursor: pointer;
   border: solid 1px #000;
   margin-right: 15px;
+  padding: 4px;
+  
 }
 
-.castomRadio::after {
+.dot {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #000;
+}
+
+/* .castomRadio::after {
   content: '';
   width: 15px;
   height: 15px;
@@ -293,7 +303,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-}
+} */
 
 .radioInput:checked+.castomRadio {
   min-width: 25px;
@@ -304,16 +314,8 @@
 
 }
 
-.radioInput:checked+.castomRadio::after {
-  content: '';
-  width: 15px;
-  height: 15px;
+.radioInput:checked+.castomRadio .dot {
   background-color: #007bff;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .radioBtnBox{
