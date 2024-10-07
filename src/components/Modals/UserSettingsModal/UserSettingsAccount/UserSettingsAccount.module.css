@@ -86,7 +86,7 @@
     cursor: pointer;
 }
 
-.inputs {
+.input {
     width: 545px;
     height: 43px;
 
@@ -101,15 +101,24 @@
     padding: 15px 20px;
 }
 
-.inputs:-webkit-autofill{
+.input::placeholder{
+    color: var(--Button-grey, #4A4A4A);
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.input:-webkit-autofill{
     background-color: #282828 !important;
     color: white !important;
     box-shadow: 0 0 0px 1000px #282828 inset !important;
     -webkit-text-fill-color: white !important;
 }
 
-.inputs:-webkit-autofill:hover,
-.inputs:-webkit-autofill:focus{
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus{
     background-color: #282828 !important;
     color: white !important;
     box-shadow: 0 0 0px 1000px #282828 inset !important;

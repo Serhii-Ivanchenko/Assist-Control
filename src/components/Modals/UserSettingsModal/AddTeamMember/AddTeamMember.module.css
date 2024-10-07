@@ -35,7 +35,7 @@
 
 .addTitle {
   color: #FFF;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 28px;
   font-style: normal;
   font-weight: 600;
@@ -48,7 +48,7 @@
 
 .fieldName {
   color: #FFF;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -75,13 +75,22 @@
   margin-bottom: 24px;
 
   color: #FFF;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 
   outline: none;
+}
+
+.field::placeholder{
+  color: var(--Button-grey, #4A4A4A);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .field:-webkit-autofill {
@@ -136,7 +145,7 @@
 
 
   color: #FFF;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -145,6 +154,14 @@
   outline: none;
 }
 
+.fieldEmail::placeholder {
+  color: var(--Button-grey, #4A4A4A);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 
 .fieldEmail:-webkit-autofill {
   background-color: #282828 !important;
@@ -205,7 +222,7 @@
   justify-content: center;
   align-items: center;
 
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -228,7 +245,7 @@
   gap: 10px;
 
   color: #FFF;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -310,7 +327,7 @@
   flex-direction: column;
   gap: 10px;
 
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -332,7 +349,7 @@
 .text {
   color: #FFF;
 
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

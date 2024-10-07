@@ -58,7 +58,7 @@ const handleSubmit = (values) => {
       <button className={css.passwortChBtn} type="button">Змінити пароль</button>
 
       <label htmlFor={companyFieldId} className={css.titles}>Назва компанії</label>
-        <Field type="text" name="company" className={css.inputs} id={companyFieldId} />
+        <Field type="text" name="company" className={css.input} id={companyFieldId} placeholder="Введіть назву компанії..."/>
         <ErrorMessage name="company" component="span" className={css.errorMessage} />
 
         <label htmlFor={languagesFieldId} className={css.titles}>Мова</label>
