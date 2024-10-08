@@ -1,11 +1,16 @@
 .accountBox{
-    margin-top: 59.5px;
-    border-top: 1px solid #000;
-    width: 635px;
-    padding: 30px 47px 45px 43px;
+    /* margin-top: 59.5px; */
+    /* border-top: 1px solid #000; */
+    width: 975px;
+    padding: 82px 42px;
     display: flex;
     flex-direction: column;
+  gap:50px;
 }
+
+/* .accountBox:last-child{
+      margin-bottom: 118px;
+} */
 
 .titles {
     color: #FFF;
@@ -45,7 +50,7 @@
     position: relative;
     display: flex;
     flex-direction: column; 
-    margin-bottom: 46px;
+    /* margin-bottom: 46px; */
 
 }
 
@@ -62,15 +67,21 @@
     top: 105%;
 }
 
+.passwordBox{
+    display: flex;
+    flex-direction: column;
+}
+
 .passwortChBtn {
-    width: 165px;
-    height: 43px;
-    margin-bottom: 24px;
-    padding: 15px 37px;
+   width: 203px;
+     /* height: 43px; */
+    /* margin-bottom: 24px; */
+    padding: 15px 30px;
 
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 
     border: none;
 
@@ -86,6 +97,11 @@
     cursor: pointer;
 }
 
+.companyBox{
+    display: flex;
+    flex-direction: column;
+}
+
 .input {
     width: 545px;
     height: 43px;
@@ -97,7 +113,7 @@
     outline: none;
     color: #FFF;
 
-    margin-bottom: 24px; 
+    /* margin-bottom: 24px;  */
     padding: 15px 20px;
 }
 
@@ -126,14 +142,21 @@
 }
 
 
+.languageBox{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 118px;
+}
+
+
 
 .btnBox {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    gap: 16px;
-    margin-left: auto;
-    margin-top: 10px;
+    gap: 15px;
+    /* margin-left: auto; */
+    /* margin-top: 10px; */
 }
 
 .cancelBtn {
@@ -172,6 +195,11 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     cursor: pointer;
 }
 

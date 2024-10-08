@@ -4,7 +4,7 @@ import css from "./AddTeamMember.module.css";
 import * as Yup from "yup";
 import { ErrorMessage } from "formik";
 import { TfiClose } from "react-icons/tfi";
-import { HiUserAdd } from "react-icons/hi";
+import { BsPersonPlusFill } from "react-icons/bs";
 
 const Validation = Yup.object().shape({
   name: Yup.string()
@@ -164,7 +164,7 @@ export default function AddTeamMember({ onClose }) {
                 Відміна
               </button>
               <button type="submit" className={css.addBtn}>
-                <HiUserAdd className={css.addIcon} />
+                <BsPersonPlusFill  className={css.addIcon} />
                 Додати
               </button>
             </div>

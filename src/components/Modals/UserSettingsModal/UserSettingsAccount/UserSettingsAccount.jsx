@@ -6,6 +6,8 @@ import * as Yup from "yup";
 import { ErrorMessage } from "formik";
 import { useState } from "react";
 import CustomSelect from "./CustomSelect/CustomSelect";
+import { BsFillKeyFill } from "react-icons/bs";
+import { BsSdCardFill } from "react-icons/bs";
 
 
 const initialValues = {
@@ -54,23 +56,27 @@ const handleSubmit = (values) => {
         {isVisible && (<span className={css.warningMessage}>для зміни пошти зверніться у технічу підтримку</span>)}
         </div>
 
+        <div className={css.passwordBox}>
       <label className={css.titles}>Пароль</label>
-      <button className={css.passwortChBtn} type="button">Змінити пароль</button>
+          <button className={css.passwortChBtn} type="button"> <BsFillKeyFill /> Змінити пароль</button>
+        </div>
 
+          <div className={css.companyBox}>
       <label htmlFor={companyFieldId} className={css.titles}>Назва компанії</label>
         <Field type="text" name="company" className={css.input} id={companyFieldId} placeholder="Введіть назву компанії..."/>
         <ErrorMessage name="company" component="span" className={css.errorMessage} />
+        </div>
 
+        <div className={css.languageBox}>
         <label htmlFor={languagesFieldId} className={css.titles}>Мова</label>
-
           <Field name="languages" id={languagesFieldId} component={CustomSelect} />
-          
+        </div>
           {/* <ErrorMessage name="languages" component="span" className={css.errorMessage} /> */}
 
 
       <div className={css.btnBox}>
         <button type="button" className={css.cancelBtn}>Відміна</button>
-        <button type="submit" className={css.saveBtn}>Зберегти зміни</button>
+        <button type="submit" className={css.saveBtn}> <BsSdCardFill /> Зберегти зміни</button>
       </div>
       </Form>
     </Formik>

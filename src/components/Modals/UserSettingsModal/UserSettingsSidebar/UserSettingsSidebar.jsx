@@ -1,10 +1,9 @@
 import css from "./UserSettingsSidebar.module.css"
 import clsx from "clsx";
-import { HiOutlineUser } from "react-icons/hi2";
-import { HiOutlineUsers } from "react-icons/hi2";
-import { CiSettings } from "react-icons/ci";
-import { FiCreditCard } from "react-icons/fi";
-
+import { BsPerson } from "react-icons/bs";
+import { BsPeople } from "react-icons/bs";
+import { BsGear } from "react-icons/bs";
+import { BsCreditCard2Back } from "react-icons/bs";
 
 
 
@@ -25,7 +24,7 @@ export default function UserSettingsSidebar({setPage, page}) {
                          className={clsx(css.sideBarNavItemLink, {
                                 [css.linkIsActive]: page === "profile"
                             })}>
-                                    <HiOutlineUser />
+                                    <BsPerson  />
                             <p>Профіль</p>
                        </button>
                        </li>
@@ -35,7 +34,7 @@ export default function UserSettingsSidebar({setPage, page}) {
                          className={clsx(css.sideBarNavItemLink, {
                                 [css.linkIsActive]: page === "account"
                             })}>
-                                    <CiSettings/>
+                                    <BsGear/>
                             <p>Акаунт</p>
                        </button>
                     </li>
@@ -45,7 +44,7 @@ export default function UserSettingsSidebar({setPage, page}) {
                          className={clsx(css.sideBarNavItemLink, {
                                 [css.linkIsActive]: page === "tariff"
                             })}>
-                                    <FiCreditCard />
+                                    <BsCreditCard2Back />
                             <p>Тариф</p>
                         </button>
                     </li>
@@ -55,7 +54,7 @@ export default function UserSettingsSidebar({setPage, page}) {
                          className={clsx(css.sideBarNavItemLink, {
                                 [css.linkIsActive]: page === "team"
                             })}>
-                                    <HiOutlineUsers/>
+                                    <BsPeople/>
                             <p>Команда</p>
                         </button>
                     </li>

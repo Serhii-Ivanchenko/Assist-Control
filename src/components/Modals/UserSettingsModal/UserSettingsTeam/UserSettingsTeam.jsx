@@ -3,6 +3,7 @@ import css from "./UserSettingsTeam.module.css"
 import Modal from "../../Modal/Modal"
 import AddTeamMember from "../AddTeamMember/AddTeamMember"
 import { useState } from "react";
+import { BsPersonPlusFill } from "react-icons/bs";
 
 export default function UserSettingsTeam() {
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ export default function UserSettingsTeam() {
                     <br />
                     <br/>
                     Вкажіть ім&apos;я та електронну адресу нового члена команди для завершення процесу.</p>
-                <button type="button" className={css.addBtn} onClick={openModal}>Додати користувача</button>
+                <button type="button" className={css.addBtn} onClick={openModal}> <BsPersonPlusFill /> Додати користувача</button>
                 {
           modalIsOpen && <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
             <AddTeamMember onClose={handleModalClose}/>
