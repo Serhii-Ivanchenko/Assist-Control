@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload, label, coordinate }) => {
           
           top: y - 30, 
             transform: 'translateX(-50%)',
-          fontfamily: "Raleway", 
+          fontfamily: "Roboto", 
         fontweight: '400',
         fontsize: '6px',
         fontvariant: 'smallCaps',

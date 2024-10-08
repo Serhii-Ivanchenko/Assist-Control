@@ -1,11 +1,12 @@
-.dayCarsListContainer{
+.dayCarsListContainer {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow: hidden;
-    height: 313px;
-}
-
-.dayCarsListContainer > :nth-child(n+4) {
+    overflow: auto;
+  
+  }
+  
+  .dayCarsListContainer > :nth-child(n+4) {
     display: none;
-}
+  }
+  
