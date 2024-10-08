@@ -1,11 +1,23 @@
 .appContainer {
-  /* background-color: lightgray; */
-  width: 1256px;
+  width: 1252px;
   /* height: 100vh; */
-  height: 726px;
+  height: 795px;
   padding-left: 16px;
   padding-right: 16px;
   padding-bottom: 23px;
+  padding-top: 69px;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media only screen and (min-width: 1920px) {
+  .appContainer {
+    width: 1820px;
+      /* height: 100vh; */
+      height: 1055px;
+      /* padding-left: 16px;
+      padding-right: 16px; */
+      /* padding-bottom: 23px; */
+      padding-top: 40px;
+  }
 }

@@ -2,9 +2,22 @@
   font-size: 26px;
   font-weight: 500;
   margin-bottom: 10px;
+  line-height: 1.19em;
 }
 
-.mainContainer{
+@media only screen and (min-width: 1920px) {
+  .title {
+    margin-bottom: 30px;
+  }
+}
+
+.mainContainer {
   display: flex;
   gap: 10px;
+}
+
+@media only screen and (min-width: 1920px) {
+  .mainContainer {
+    gap: 16px;
+  }
 }

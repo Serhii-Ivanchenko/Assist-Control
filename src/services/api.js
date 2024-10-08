@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const axiosInstance = axios.create({
   baseURL: "https://app.assist.cam",
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 export const setAuthHeader = (api_key) => {
