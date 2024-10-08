@@ -36,7 +36,6 @@
 .carNumber {
     color: #FFF;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Roboto;
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
@@ -47,7 +46,6 @@
 .auto {
     color: #9E9E9E;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Roboto;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
