@@ -2,8 +2,7 @@ import { BiSupport } from "react-icons/bi";
 import css from "./Support.module.css";
 import { useState } from "react";
 import Modal from "../Modals/Modal/Modal.jsx";
-// import SupportModal from "../Modals/SupportModal/SupportModal.jsx";
-import UserSettingsModal from "../Modals/UserSettingsModal/UserSettingsModal.jsx";
+import SupportModal from "../Modals/SupportModal/SupportModal.jsx";
 
 export default function Support() {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -23,7 +22,7 @@ export default function Support() {
       </button>
       {modalIsOpen && (
         <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-          <UserSettingsModal onClose={handleModalClose} />
+          <SupportModal onClose={handleModalClose} />
         </Modal>
       )}
     </>

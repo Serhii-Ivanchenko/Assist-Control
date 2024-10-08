@@ -27,7 +27,7 @@ const initialValues = {
   name: "",
   surname: "",
   email: "",
-  role: "admin",
+  role: "viewer",
 };
 
 export default function AddTeamMember({ onClose }) {
