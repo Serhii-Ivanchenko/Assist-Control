@@ -1,53 +1,57 @@
 .containerperiodselector {
 
-    width: 309px;
-    height: 40px;
+    /* width: 309px; */
+    /* height: 40px; */
     background: #1a1a1a;
     display: flex;
+    align-items: center;
     flex-direction: row;
-    gap: 5px;
-    padding: 10px 20px;
+    margin-top: 12px;
+    margin-left: -2px;
+    /* gap: 5px; */
+    /* padding: 10px 20px; */
 
 }
 
 .periodtitle {
     color: #9E9E9E;
-    background: #1a1a1a;
+    /* background: #1a1a1a; */
     /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
-    font-size: 14px;
+    font-size: 11px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     font-variant: small-caps;
     align-items: center;
     text-align: center;
-    padding-top: 3px;
+    /* padding-top: 3px; */
+    margin-right: 6px;
 }
 
 .periodinput {
     color: #9E9E9E;
-    background: #1a1a1a;
+    background: transparent;
     /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
-    font-size: 13px;
+    font-size: 11px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     font-variant: small-caps;
-    width: 120px;
-    height: 20px;
+    width: 99px;
+    height: 17px;
     border: none;
-    padding-right: 20px;
-    padding-top: 4px;
-    padding-left: 10px;
+    padding: 2px 24px 2px 9px;
 }
 
 .icon {
+    width: 14px;
+    height: 14px;
     position: absolute;
-    right: 10px;
+    right: 4px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-56%);
     color: #888;
     cursor: pointer;
     pointer-events: auto;
@@ -56,6 +60,13 @@
 
 .datewrapper {
     position: relative;
-    display: inline-block;
-    width: 120px;
+    /* display: inline-block; */
+    /* width: 120px; */
+    background-color: #202020;
+    border-radius: 10px;
+    margin-right: 44px;
+}
+
+.datewrapper:nth-last-child() {
+    margin-right: 0;
 }

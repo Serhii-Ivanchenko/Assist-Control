@@ -1,10 +1,10 @@
-
 .containerloadstats{
 border-radius: 5px;
     width: 310px;
     height: 191px;
+    padding: 5px 17px;
     background: #1a1a1a;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
@@ -15,10 +15,7 @@ border-radius: 5px;
         color: #fff;
         width: 191px;
         height: 21px;
-        
-          
-           
-
+        margin-bottom: 21px;
 }
 
 .statpercent{
@@ -27,29 +24,25 @@ border-radius: 5px;
         font-size: 18px;
         color: #db8120;
         width: 40px;
-        height: 21px;
-        
-          
+        height: 21px;        
 }
 
 .titlebox{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 310px;
+    /* width: 310px;
     
     padding-top: 9px;
     padding-left: 15px;
     padding-right: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 30px; */
     
 }
 
-.responseContainer{
-padding-left: 15px;
-padding-right: 15px;
+.areabox{
 width: 282px;
-height: 126px;
+height: 141px;
 }
 
 .popuptitle{

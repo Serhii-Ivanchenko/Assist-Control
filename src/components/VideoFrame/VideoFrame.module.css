@@ -12,6 +12,7 @@
 .cameraListCont {
   border-radius: 5px;
   width: 386px;
+  height: 270px;
   padding: 15px 20px 0 20px;
   background: #1a1a1a;
 }

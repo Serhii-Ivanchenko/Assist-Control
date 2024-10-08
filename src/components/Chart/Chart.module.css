@@ -1,10 +1,10 @@
 .containerchart {
-    border-radius: 5px;
+    /* border-radius: 5px;
     width: 310px;
     height: 270px;
-    background: #1a1a1a;
-    border: 1px solid #000;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background: #1a1a1a; */
+    /* border: 1px solid #000; */
+    /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); */
 }
 
 .charttitle {
@@ -12,26 +12,30 @@
     font-weight: 300;
     font-size: 18px;
     color: #fff;
-    width: 122px;
-    height: 21px;
-    margin-top: 9px;
-    margin-left: 18px;
     margin-bottom: 16px;
-
+    /* width: 122px;
+    height: 21px; */
+    /* margin-top: 9px;
+    margin-left: 18px;
+    margin-bottom: 16px; */
 }
 
 .areabox{
-   
-    width: 300px;
+    width: 272px;
     height: 184px;
 }
 
-
+/* 
 .responseContainer {
     padding-left: 15px;
     padding-right: 15px;
    
-}
+} */
+
+/* .rechartsWrapper{
+    height: 184px;
+
+} */
 
 .popuptitle {
     font-family: "Roboto", sans-serif;

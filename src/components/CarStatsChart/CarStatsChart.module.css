@@ -1,9 +1,8 @@
-.containercarstats {
+.containerstats {
     width: 310px;
     height: 270px;
     background: #1A1A1A;
     border-radius: 5px;
-    padding: 15px 20px 0 20px;
-    display: flex;
-    
+    padding: 9px 19px 11px;
+    /* display: flex; */
 }
