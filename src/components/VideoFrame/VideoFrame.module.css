@@ -11,7 +11,7 @@
 @media only screen and (min-width: 1920px) {
   .camera {
     height: 341px;
-    /* height: 100% !important; */
+    /* height: 100% !important; Якщо поставити зараз то малі картинкі будуть летіти на верх а не по центру як зараз */
   }
 }
 .cameraListCont {
