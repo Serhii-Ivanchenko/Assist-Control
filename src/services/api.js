@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: "http://109.87.131.1:7070",
+  baseURL: "https://app.assist.cam",
   withCredentials: true,
 });
 
