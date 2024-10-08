@@ -6,10 +6,15 @@
   border-radius: 5px;
   padding: 16px 16px 0 16px;
 }
-
-.pagegrid{
+@media only screen and (min-width: 1920px) {
+  .pageContent {
+    width: 1106px;
+    height: 900px;
+  }
+}
+.pagegrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 12px;
-    grid-row-gap: 12px;
+  grid-row-gap: 12px;
 }
