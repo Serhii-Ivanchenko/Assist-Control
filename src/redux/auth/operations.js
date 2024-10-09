@@ -145,3 +145,19 @@ export const refreshUser = createAsyncThunk(
     },
   }
 );
+
+// Google Authentication
+export const logInWithGoogle = createAsyncThunk(
+  "auth/logInWithGoogle",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post("/v1/authenticate_in_google/", data);
+      const { api_key, name, email } = response.data;
+      setAuthHeader(api_key);
+      localStorage.setItem("X-Api-Key", api_key);
+      return { api_key, name, email };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

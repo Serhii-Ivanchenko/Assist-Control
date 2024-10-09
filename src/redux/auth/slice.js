@@ -4,6 +4,7 @@ import {
   getTariffData,
   getUserData,
   logIn,
+  logInWithGoogle,
   logOut,
   refreshUser,
   register,
@@ -105,7 +106,14 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.isLoading = false;
         state.error = action.payload;
-      }),
+      })
+      .addCase(logInWithGoogle.pending, handlePending)
+      .addCase(logInWithGoogle.fulfilled, (state, action) => {
+        state.apiKey = action.payload.api_key;
+        state.userData.name = action.payload.name;
+        state.userData.email = action.payload.email;
+      })
+      .addCase(logInWithGoogle.rejected, handleRejected),
 });
 
 export default authSlice.reducer;

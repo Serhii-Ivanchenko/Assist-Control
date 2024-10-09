@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { register } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
+import GoogleBtn from "../GoogleBtn/GoogleBtn.jsx";
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
@@ -187,6 +188,10 @@ export default function RegistrationForm() {
             </button>
           </Form>
         </Formik>
+      </div>
+      <div className={css.googleWrapper}>
+        <p>або</p>
+        <GoogleBtn />
       </div>
       <div className={css.bottomTextWrapper}>
         <p className={css.bottomText}>Вже маєте Аккаунт?</p>
