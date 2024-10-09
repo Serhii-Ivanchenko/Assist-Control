@@ -5,30 +5,37 @@
     padding: 82px 42px;
     display: flex;
     flex-direction: column;
-  gap:50px;
+  
 }
 
 /* .accountBox:last-child{
       margin-bottom: 118px;
 } */
 
+/* .contentBox{
+    display: flex;
+    flex-direction: column;
+    gap:50px;
+    margin-bottom: 118px;
+} */
+
 .titles {
     color: #FFF;
     font-family: "Roboto", sans-serif;
-    font-size: 16px;
+    font-size:20px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
 
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .email {
-    width: 545px;
-    height: 43px;
-    padding: 15px 20px;
-    border-radius: 7px;
-    border: 1px solid #302F2F;
+    width: 100%;
+    /* height: 43px; */
+    padding: 18px 20px;
+    border-radius: 10px;
+    border: 1px solid #4A4A4A;
 
     background-color: #282828;
     outline: none;
@@ -37,11 +44,11 @@
     align-items: center;
     /* padding-left: 20px; */
 
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color:#FFF;
+    color:#C7C7C7;
    
 
 }
@@ -50,7 +57,7 @@
     position: relative;
     display: flex;
     flex-direction: column; 
-    /* margin-bottom: 46px; */
+    margin-bottom: 70px;
 
 }
 
@@ -70,10 +77,11 @@
 .passwordBox{
     display: flex;
     flex-direction: column;
+    margin-bottom: 50px;
 }
 
 .passwortChBtn {
-   width: 203px;
+   width:fit-content;
      /* height: 43px; */
     /* margin-bottom: 24px; */
     padding: 15px 30px;
@@ -85,36 +93,48 @@
 
     border: none;
 
-    border-radius: 7px;
+    border-radius: 8px;
     background-color: #3956CC;
 
     color: #FFF;
     font-family: "Roboto", sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
     cursor: pointer;
+}
+
+.iconKey{
+    fill: #C7C7C7;
 }
 
 .companyBox{
     display: flex;
     flex-direction: column;
+    margin-bottom: 50px;
 }
 
 .input {
-    width: 545px;
-    height: 43px;
+    width: 100%;
+    /* height: 43px; */
 
-    border-radius: 7px;
-    border: 1px solid #302F2F;
+    border-radius: 10px;
+    border: 1px solid #4A4A4A;
 
     background-color: #282828;
     outline: none;
-    color: #FFF;
+
+    color: #C7C7C7;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    
 
     /* margin-bottom: 24px;  */
-    padding: 15px 20px;
+    padding: 18px 20px;
 }
 
 .input::placeholder{
@@ -160,18 +180,19 @@
 }
 
 .cancelBtn {
-    width: 81px;
-    height: 43px;
+    width: fit-content;
+    /* height: 43px; */
+    padding: 15px 30px;
 
-    border-radius: 7px;
+    border-radius: 8px;
     border: 1px solid #767676;
     background-color: transparent;
 
     color: #FFF;
     font-family: "Roboto", sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
 
     display: flex;
@@ -181,19 +202,20 @@
 }
 
 .saveBtn {
-    width: 139px;
-    height: 43px;
+    width: fit-content;
+    /* height: 43px; */
+    padding: 15px 30px;
 
-    border-radius: 7px;
+    border-radius: 8px;
     background-color: #3956CC;
 
     border: none;
 
     color: #FFF;
     font-family: "Roboto", sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
 
     display: flex;

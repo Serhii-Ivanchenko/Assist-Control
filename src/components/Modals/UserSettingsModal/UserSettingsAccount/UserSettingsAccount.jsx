@@ -58,7 +58,7 @@ const handleSubmit = (values) => {
 
         <div className={css.passwordBox}>
       <label className={css.titles}>Пароль</label>
-          <button className={css.passwortChBtn} type="button"> <BsFillKeyFill /> Змінити пароль</button>
+          <button className={css.passwortChBtn} type="button"> <BsFillKeyFill className={css.iconKey} /> Змінити пароль</button>
         </div>
 
           <div className={css.companyBox}>
