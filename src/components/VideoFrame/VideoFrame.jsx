@@ -65,7 +65,6 @@ export default function VideoFrame() {
     prevArrow: <SamplePrevArrow />,
   };
   function CameraModal({ img, modalState, someRef, parentRef }) {
-
     if (modalState === "UNLOADING") {
       handleZoomChange(false);
     }
@@ -109,8 +108,8 @@ export default function VideoFrame() {
                 <div ref={parentRef} key={alt} className={css.camera}>
                   <div className={css.zoomIcon}>
                     <VscZoomIn
+                      style={{ width: "100%", height: "100%" }}
                       cursor={"pointer"}
-                      size={20}
                       onClick={() => handleZoomChange(true)}
                     />
                   </div>

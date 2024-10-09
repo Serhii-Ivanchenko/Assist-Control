@@ -10,7 +10,7 @@ export const register = createAsyncThunk(
   "auth/register",
   async (userData, thunkAPI) => {
     try {
-      const response = await axiosInstance.post("/v1/register", userData);
+      const response = await axiosInstance.post("/v1/register/", userData);
       setAuthHeader(response.data.api_key);
       return response.data;
     } catch (error) {
@@ -24,7 +24,7 @@ export const logIn = createAsyncThunk(
   "auth/login",
   async (userData, thunkAPI) => {
     try {
-      const response = await axiosInstance.post("/v1/authenticate", userData, {
+      const response = await axiosInstance.post("/v1/authenticate/", userData, {
         withCredentials: true,
       });
       setAuthHeader(response.data.api_key);
@@ -38,7 +38,7 @@ export const logIn = createAsyncThunk(
 //User logout
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    const response = await axiosInstance.post("/v1/logout");
+    const response = await axiosInstance.post("/v1/logout/");
     clearAuthHeader();
     return response.data;
   } catch (error) {
@@ -51,9 +51,9 @@ export const getUserData = createAsyncThunk(
   "auth/getUserData",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosInstance.get("/v1/user_info", {
+      const response = await axiosInstance.get("/v1/user_info/", {
         headers: {
-          "X-Api-Key": "XpzmRUY_",
+          "X-Api-Key": "YA7NxysJ",
         },
       });
       return response.data;
@@ -110,7 +110,7 @@ export const getTariffData = createAsyncThunk(
   "auth/getTariffInfo",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosInstance.get("/v1/plan_status");
+      const response = await axiosInstance.get("/v1/plan_status/");
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -128,7 +128,7 @@ export const refreshUser = createAsyncThunk(
 
       setAuthHeader(apiKey);
 
-      const response = await axiosInstance.get("/v1/user_info");
+      const response = await axiosInstance.get("/v1/user_info/");
 
       return response.data;
     } catch (error) {
