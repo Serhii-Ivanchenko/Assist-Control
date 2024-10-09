@@ -53,7 +53,7 @@ export const getUserData = createAsyncThunk(
     try {
       const response = await axiosInstance.get("/v1/user_info/", {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          "X-Api-Key": "lDhvsqB1",
         },
       });
       return response.data;

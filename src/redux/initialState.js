@@ -4,9 +4,9 @@ export const initialState = {
       id: null,
       name: null,
       email: null,
-      phoneNumber: null,
-      avatarUrl: null,
-      companyName: null,
+      phone_number: null,
+      avatar_url: null,
+      company_name: null,
       balance: null,
       tariff: {
         isActive: false,
@@ -15,7 +15,7 @@ export const initialState = {
         camsNumber: null,
         dueDate: null,
       },
-      sessionId: null,
+      session_id: null,
       role: null,
     },
     apiKey: null,
@@ -50,6 +50,7 @@ export const initialState = {
     date: null,
     isLoading: false,
     error: null,
+    loadPercent: null,
   },
 
   client: {

@@ -6,7 +6,11 @@ export const getAllCars = createAsyncThunk(
   "cars/getAllCars",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosInstance.get(`/v1/data/`);
+      const response = await axiosInstance.get(`/v1/data/`, {
+        headers: {
+          "X-Api-Key": "YA7NxysJ",
+        },
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -19,7 +23,11 @@ export const getCurrentCars = createAsyncThunk(
   "cars/getCurrentCars",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosInstance.get(`/data/current_cars/`);
+      const response = await axiosInstance.get(`/v1/current/cars/`, {
+        headers: {
+          "X-Api-Key": "YA7NxysJ",
+        },
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -32,7 +40,14 @@ export const getCarsByDate = createAsyncThunk(
   "cars/getCarsByDate",
   async (day, thunkAPI) => {
     try {
-      const response = await axiosInstance.get(`/data/${day}/current_cars/`);
+      const response = await axiosInstance.get(
+        `/v1/current/day/cars/?date=${day}/`,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -43,9 +58,17 @@ export const getCarsByDate = createAsyncThunk(
 // Get cars for particular month
 export const getCarsByMonth = createAsyncThunk(
   "cars/getCarsByMonth",
-  async (month, thunkAPI) => {
+  async (date, thunkAPI) => {
+    const { month, year } = date;
     try {
-      const response = await axiosInstance.get(`/data/${month}/current_cars/`);
+      const response = await axiosInstance.get(
+        `/v1/current/month/cars/?month=${month}&year=${year} `,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

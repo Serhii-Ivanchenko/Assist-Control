@@ -36,20 +36,20 @@ const carsSlice = createSlice({
       .addCase(getCurrentCars.pending, handlePending)
       .addCase(getCurrentCars.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.current = action.payload;
+        state.current = action.payload.cars;
       })
       .addCase(getCurrentCars.rejected, handleRejected)
       .addCase(getCarsByDate.pending, handlePending)
       .addCase(getCarsByDate.fulfilled, (state, action) => {
         state.isLoading = false;
         //   state.date = action.payload.date;
-        state.day = action.payload;
+        state.day = action.payload.cars;
       })
       .addCase(getCarsByDate.rejected, handleRejected)
       .addCase(getCarsByMonth.pending, handlePending)
       .addCase(getCarsByMonth.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.month = action.payload;
+        state.month = action.payload.cars;
       })
       .addCase(getCarsByMonth.rejected, handleRejected),
 });
