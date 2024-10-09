@@ -5,6 +5,13 @@
   margin-bottom: 8px;
 }
 
+@media only screen and (min-width: 1920px) {
+  .statisticsCont {
+    gap: 34px;
+    margin-bottom: 12px;
+  }
+}
+
 .statisticsTitle {
   display: flex;
   justify-content: space-between;
