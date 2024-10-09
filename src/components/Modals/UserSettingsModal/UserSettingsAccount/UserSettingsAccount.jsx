@@ -22,7 +22,7 @@ const Validation = Yup.object().shape({
  
 
 
-export default function UserSettingsAccount() {
+export default function UserSettingsAccount({onClose}) {
 const [isVisible, setIsVisible] = useState(false)
 
 
@@ -40,8 +40,6 @@ const handleSubmit = (values) => {
     setIsVisible((prev) => !prev);
   }
   
-  
-
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validation}>
@@ -51,9 +49,9 @@ const handleSubmit = (values) => {
         <div className={css.emailBox}>
         <label className={css.titles}>Пошта</label>
 
-            <Field className={css.email}  value="autoassist@gmail.com" onClick={handleToggleClick} readOnly/>
+            <Field className={css.email} name="email"  value="autoassist@gmail.com" onClick={handleToggleClick} readOnly/>
 
-        {isVisible && (<span className={css.warningMessage}>для зміни пошти зверніться у технічу підтримку</span>)}
+        {isVisible && (<span className={css.warningMessage}>для зміни пошти зверніться у технічну підтримку</span>)}
         </div>
 
         <div className={css.passwordBox}>
@@ -75,8 +73,8 @@ const handleSubmit = (values) => {
 
 
       <div className={css.btnBox}>
-        <button type="button" className={css.cancelBtn}>Відміна</button>
-        <button type="submit" className={css.saveBtn}> <BsSdCardFill /> Зберегти зміни</button>
+        <button type="button" className={css.cancelBtn} onClick={onClose}>Відміна</button>
+        <button type="submit" className={css.saveBtn} > <BsSdCardFill className={css.iconSave} /> Зберегти зміни</button>
       </div>
       </Form>
     </Formik>

@@ -1,34 +1,66 @@
 .sideBarBox {
-    width: 165px;
+    width: 250px;
     height: inherit;
     border-right: solid 1px #000;
+    padding-top: 20px;
+}
+
+@media only screen and (min-width: 1920px) {
+ .sideBarBox  {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 1279.9px){
+.sideBarBox {
+    width: 216px;
+    max-width: 300px;
+
+    }
+}
+
+@media only screen and (max-width: 767.9px){
+.sideBarBox {
+        display: none;
+    }
 }
 
 .titleBox {
-    height: 60px;
+    /* height: 60px; */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding: 10px 30px;
+    margin-bottom: 62px;
     /* border-bottom: solid 1px #000; */
 }
 
 .title {
     color: #FFF;
     font-family: "Roboto", sans-serif;
-    font-size: 16px;
+    font-size: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
     cursor: default;
 }
 
-.sideBarNav {
-    margin-top: 34px;
+@media only screen and (max-width: 1279.9px) {
+    .title {
+        font-size: 20px;
 
+    }
 }
 
+/* .sideBarNav {
+    margin-top: 34px;
+
+} */
+
 .sideBarNavItem {
-    height: 38px;
+    /* height: 38px; */
+/* padding: 10px 30px; */
+
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -40,21 +72,22 @@
 .sideBarNavItemLink {
     color: #FFF;
     font-family: "Roboto", sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: normal;
 
     text-decoration: none;
-    padding-left: 24px;
+    padding: 10px 30px;
 
     display: flex;
     align-items: center;
     flex-direction: row;
     gap: 11px;
-
-    height: 38px;
-    width: 165px;
+     
+     height: 50px;
+    /* height: 38px; */
+    /* width: 165px; */
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -63,16 +96,16 @@
 .linkIsActive {
     color: #FFF;
     font-family: "Roboto", sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: normal;
 
     text-decoration: none;
 
-    padding-left: 24px;
-    width: 165px;
-    height: 38px;
+    padding: 10px 30px;
+    width: 100%;
+    height: 50px;
 
     display: flex;
     align-items: center;

@@ -8,6 +8,12 @@
   
 }
 
+@media only screen and (min-width: 1920px) {
+  .accountBox {
+    width: 1057px;
+  }
+}
+
 /* .accountBox:last-child{
       margin-bottom: 118px;
 } */
@@ -63,11 +69,12 @@
 
 .warningMessage{
     color: #FF6363;
-    font-size: 10px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     /* margin-left: 20px; */
+
     cursor:default;
     position: absolute;
     left: 20px;
@@ -113,6 +120,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
+    position: relative;
 }
 
 .input {
@@ -159,6 +167,20 @@
     color: white !important;
     box-shadow: 0 0 0px 1000px #282828 inset !important;
     -webkit-text-fill-color: white !important;
+}
+
+.errorMessage{
+    color: #FF6363;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        /* margin-left: 20px; */
+    
+        cursor: default;
+        position: absolute;
+        left: 20px;
+        top: 100%;
 }
 
 
@@ -225,6 +247,9 @@
     cursor: pointer;
 }
 
+.iconSave{
+    fill: #C7C7C7;
+}
 
 /* .icon{
         width: 26px;

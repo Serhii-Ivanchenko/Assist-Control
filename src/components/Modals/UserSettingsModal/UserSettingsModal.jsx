@@ -14,7 +14,7 @@ const [page, setPage] = useState("profile")
              <TfiClose onClick={onClose} className={css.closeBtn} />
             <UserSettingsSidebar  setPage={setPage} page={page}/>
           {page === "profile" && ""}
-          {page === "account" && <UserSettingAccount />}
+          {page === "account" && <UserSettingAccount onClose={onClose}/>}
           {page === "tariff" && ""}
           {page === "team" && <UserSettingsTeam />}
                         
