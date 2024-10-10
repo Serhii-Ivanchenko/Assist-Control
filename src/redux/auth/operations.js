@@ -107,17 +107,17 @@ export const updateUserData = createAsyncThunk(
 
 //Get tariff info
 
-// export const getTariffData = createAsyncThunk(
-//   "auth/getTariffInfo",
-//   async (_, thunkAPI) => {
-//     try {
-//       const response = await axiosInstance.get("/v1/plan_status/");
-//       return response.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const getTariffData = createAsyncThunk(
+  "auth/getTariffInfo",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get("/v1/plan_status/");
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 // Refresh
 export const refreshUser = createAsyncThunk(
