@@ -92,7 +92,7 @@
 
   background-color: #282828;
 
-  margin-bottom: 24px;
+  /* margin-bottom: 24px; */
 
   color: #FFF;
   font-family: "Roboto", sans-serif;
@@ -107,6 +107,7 @@
 @media only screen and (max-width: 1289.9px) {
    .field{
     min-width: 294px;
+    /* margin-bottom: 0; */
   }
 }
 
@@ -143,6 +144,12 @@
   position: absolute;
   top: 80%;
   left: 10px;
+}
+
+@media only screen and (max-width: 767.9px) {
+   .errorMessage{
+    top: 100%;
+  }
 }
 
 .nameBox {
@@ -187,6 +194,8 @@
   outline: none;
 }
 
+
+
 .fieldEmail::placeholder {
   color: var(--Button-grey, #4A4A4A);
   font-family: "Roboto", sans-serif;
@@ -228,6 +237,7 @@
   flex-direction: column;
 
   position: relative;
+  margin-top: 24px;
 }
 
 
@@ -248,6 +258,7 @@
    .btnBox{
     flex-direction: column;
     justify-content: center;
+    margin-top: 23px;
   }
 }
 
