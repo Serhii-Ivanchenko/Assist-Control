@@ -1,6 +1,12 @@
-/* .userInfo {
-  
-} */
+.userInfo {
+  width: 113px;
+}
+
+@media only screen and (min-width: 1920px) {
+  .userInfo {
+      width: 169px;
+    }
+}
 
 .avatar {
     width: 44px;
@@ -8,18 +14,39 @@
     margin-bottom: 5px;
   }
   
+  @media only screen and (min-width: 1920px) {
+    .avatar {
+      width: 66px;
+      height: 66px;
+      margin-bottom: 7.5px;
+      }
+  }
+
   .name {
     font-size: 11px;
     font-weight: 400;
     margin-bottom: 5px;
   }
+
+  @media only screen and (min-width: 1920px) {
+    .name {
+      font-size: 14px;
+      margin-bottom: 11px;
+  }
+}
   
   .userDetails {
     color: #797979;
     font-size: 11px;
     margin-bottom: 10px;
   }
-  
+  @media only screen and (min-width: 1920px) {
+    .userDetails {
+      font-size: 16px;
+      margin-bottom: 16.4px;
+  }
+}
+
   .balance {
     display: flex;
     align-items: center;
@@ -30,12 +57,26 @@
     font-size: 11px;
     margin-right: 6px;
   }
+
+  @media only screen and (min-width: 1920px) {
+    .balanceText {
+      font-size: 14px;
+      margin-right: 17px;
+  }
+}
   
   .num {
     color: #fff;
     font-size: 12px;
     font-weight: 700;
   }
+
+  @media only screen and (min-width: 1920px) {
+    .num {
+      font-size: 17px;
+      margin-right: 24px;
+  }
+}
   
   .balanceButton {
     background-color: transparent;
@@ -50,4 +91,11 @@
     width: 4px;
     height: 5px;
   }
+
+  @media only screen and (min-width: 1920px) {
+    .icon {
+      width: 10px;
+      height: 10px;
+  }
+}
   

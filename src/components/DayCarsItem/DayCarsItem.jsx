@@ -1,7 +1,7 @@
 import styles from './DayCarsItem.module.css';
 import carImage from '../../assets/images/carsItem.png';
 
-export default function DayCarsItem() {
+export default function DayCarsItem({ carNumber, auto, timeInfo }) {
   return (
     <div className={styles.dayCarsItemContainer}>
       <div className={styles.carPhoto}>
@@ -9,10 +9,10 @@ export default function DayCarsItem() {
       </div>
       <div className={styles.carsInfo}>
         <div className={styles.aboutCars}>
-          <p className={styles.carNumber}>AХ5678БУ</p>
-          <p className={styles.auto}>Skoda Superb</p>
+          <p className={styles.carNumber}>{carNumber}</p>
+          <p className={styles.auto}>{auto}</p>
         </div>
-        <p className={styles.timeInfo}>Заїзд в інший день</p>
+        <p className={styles.timeInfo}>{timeInfo}</p>
       </div>
     </div>
   );

@@ -6,33 +6,29 @@
     position: relative;
 }
 
-.ellipse {
+@media only screen and (min-width: 1920px) {
+    .loadStatsContainer {
+        width: 210px;
+        height: 115px;
+        padding: 6.5px 6px 6.5px 14px;
+  }
+  }
+
+.statsChart{
     position: absolute;
     top: -10px;
     left: -5px;
     width: 86px;
     height: 61px;
-    /* background-color: radial-gradient(40.16% 40.16% at 50% 50%, rgba(57, 86, 204, 0.48) 0%, rgba(57, 86, 204, 0.00) 100%); */
 }
 
-
-.grid {
-    position: absolute;
-    top: -2px;
-    left: 40px;
-    width: 65px;
-    height: 43.5px;
-    transform: translateX(-50%);
+@media only screen and (min-width: 1920px) {
+    .statsChart {
+        top: 3px;
+        left: 6px;
+  }
 }
 
-.chart {
-    position: absolute;
-    top: 11px;
-    left: 36.2px;
-    width: 43.5px;
-    height: 15.519px;
-    transform: translateX(-50%);
-}
 
 .statsInfo {
     position: absolute;
@@ -45,7 +41,12 @@
 .percentage {
     display: flex;
     align-items: flex-end;
-    gap: 3px;
+}
+
+@media only screen and (min-width: 1920px) {
+    .percentage {
+        margin-bottom: 2px;
+  }
 }
 
 .description {
@@ -54,6 +55,12 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+@media only screen and (min-width: 1920px) {
+    .description {
+        font-size: 14px;
+  }
 }
 
 .num {

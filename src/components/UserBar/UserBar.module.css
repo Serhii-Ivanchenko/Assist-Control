@@ -6,6 +6,13 @@
   right: 10px;
 }
 
+@media only screen and (min-width: 1920px) {
+  .userBarContainer {
+    top: 75px;
+    right: 23px;
+}
+}
+
   .btn {
     background: transparent;
     border: none;
@@ -21,6 +28,13 @@
     stroke: white;
     width: 13px;
     height: 13px;
+  }
+
+  @media only screen and (min-width: 1920px) {
+    .iconSetting {
+      width: 20px;
+      height: 20px;
+  }
   }
 
   

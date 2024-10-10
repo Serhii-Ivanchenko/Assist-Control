@@ -5,7 +5,19 @@
     border-radius: 5px;
     background: #1A1A1A;
     padding: 6px 10px;
+    border-radius: 6px;
+
+    
 }
+
+@media only screen and (min-width: 1920px) {
+    .dayCarsItemContainer {
+        width: 454px;
+        height: 150px;
+        padding: 11px 20px;
+        border-radius: 6px;
+  }
+  }
 
 .carPhoto {
     display: flex;
@@ -21,12 +33,25 @@
     object-fit: cover;
 }
 
+@media only screen and (min-width: 1920px) {
+    .carPhoto img {
+        width: 150px;
+        height: 128px;
+  }
+  }
+
 .carsInfo {
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
     padding-left: 20px;
 }
+
+@media only screen and (min-width: 1920px) {
+    .carsInfo {
+        padding: 11px 30px;
+  }
+  }
 
 .aboutCars {
     display: flex;
@@ -40,8 +65,14 @@
     font-style: normal;
     font-weight: 300;
     line-height: normal;
-
 }
+
+@media only screen and (min-width: 1920px) {
+    .carNumber {
+        font-size: 20px;
+        font-weight: 600;
+  }
+  }
 
 .auto {
     color: #9E9E9E;
@@ -54,10 +85,24 @@
     letter-spacing: 0.5px;
 }
 
+@media only screen and (min-width: 1920px) {
+    .carNumber {
+        font-size: 14px;
+  }
+  }
+
 .timeInfo {
     font-size: 12px;
     color: #9E9E9E;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    font-variant-numeric: lining-nums proportional-nums;
+
 }
+
+@media only screen and (min-width: 1920px) {
+    .carNumber {
+        font-size: 15px;
+  }
+  }

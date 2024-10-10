@@ -7,13 +7,12 @@ export default function UserInfo({ user }) {
     console.log("Open transaction history modal");
   };
 
-  const avatarUrl = user?.avatar_url ? user.avatar_url : defaultAvatar;
-  const fullName = user
-    ? `${user.first_name} ${user.last_name}`
-    : "Ім'я користувача";
+  const avatarUrl = user?.avatar_url || defaultAvatar;
+  const fullName = user?.name || "Ім'я користувача";
+
   const companyName = user?.company_name || "Невідомо";
   const userId = user?.id || "Невідомо";
-  const balance = user?.balance || 0;
+  const balance = user && user.balance !== null ? user.balance : "0";
 
   return (
     <div className={styles.userInfo}>

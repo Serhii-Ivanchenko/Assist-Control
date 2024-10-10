@@ -11,16 +11,38 @@
     background: linear-gradient(43deg, #5763AD 2.76%, #4A5CA8 19.29%, #8D93BA 32.85%, #6073B5 52.83%, #6574B7 71.26%, #3B479B 97.24%);
 }
 
+@media only screen and (min-width: 1920px) {
+  .premiumContainer {
+    width: 210px;
+    height: 230px;
+    padding: 25px 20px;
+}
+}
+
 .premiumIcon {
     width: 12.5px;
     height: 11px;
     fill: #EBD534;
     margin-bottom: 5px;
   }
+
+  @media only screen and (min-width: 1920px) {
+    .premiumIcon {
+      width: 19px;
+      height: 16.5px;
+      margin-bottom: 8px;
+  }
+  }
   
   .textBlock {
     text-align: start;
     margin-bottom: 8px;
+  }
+
+  @media only screen and (min-width: 1920px) {
+    .textBlock {
+      margin-bottom: 18px;
+  }
   }
   
   .premiumTitle {
@@ -30,12 +52,26 @@
     line-height: normal;
     margin-bottom: 6px;
   }
+
+  @media only screen and (min-width: 1920px) {
+    .premiumTitle {
+      height: 32px;
+      margin-bottom: 9px;
+  }
+  }
   
   .premiumDescription {
     font-size: 11px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+  }
+
+  @media only screen and (min-width: 1920px) {
+    .premiumDescription {
+      font-size: 14px;
+      height: 59px;
+  }
   }
   
   .premiumButton {
@@ -44,7 +80,6 @@
     border-radius: 5px;
     padding: 6px 20px;
 
-    
     background: rgba(255, 255, 255, 0.54);
     color: white;
     font-size: 15px;
@@ -54,4 +89,16 @@
     
     border: none;
     cursor: pointer;
+  }
+
+  @media only screen and (min-width: 1920px) {
+    .premiumButton {
+      border-radius: 6px;
+      padding: 10px 20px;
+      width: 170px;
+      height: 39px;
+
+      font-size: 16px;
+      font-weight: 600;
+  }
   }
