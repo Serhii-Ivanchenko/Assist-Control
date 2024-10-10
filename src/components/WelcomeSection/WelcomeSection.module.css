@@ -1,16 +1,24 @@
-.welcomeSection {
-  background-image: url(../../assets/images/Car_1x.webp);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  width: 480px;
-  height: 670px;
-  padding-bottom: 65px;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center;
-  gap: 4px;
+@media only screen and (max-width: 1279.98px) {
+  .welcomeSection {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .welcomeSection {
+    background-image: url(../../assets/images/Car_1x.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 480px;
+    height: 670px;
+    padding-bottom: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 4px;
+  }
 }
 
 @media only screen and (min-resolution: 192dpi) {
@@ -19,16 +27,20 @@
   }
 }
 
-.welcomeHeader {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  color: #fff;
+@media only screen and (min-width: 1280px) {
+  .welcomeHeader {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+  }
 }
 
-.welcomeText {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-size: 12px;
-  color: #fff;
+@media only screen and (min-width: 1280px) {
+  .welcomeText {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    color: #fff;
+  }
 }

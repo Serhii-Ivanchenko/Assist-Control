@@ -1,7 +1,23 @@
 .registrationPage {
   display: flex;
-  border-radius: 60px;
   overflow: hidden;
-  width: 940px;
-  height: 670px;
+  width: 375px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+@media screen and (min-width: 768px) {
+  .registrationPage {
+    width: 767px;
+    padding-left: 121px;
+    padding-right: 121px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .registrationPage {
+    border-radius: 60px;
+    width: 940px;
+    height: 670px;
+  }
 }
