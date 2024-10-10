@@ -93,7 +93,9 @@ export default function LoginForm() {
                   className={css.errorMsg}
                 />
               </div>
-              <p className={css.forgotPasswordLink}>Забули пароль?</p>
+              <button type="button" className={css.forgotPasswordLink}>
+                Забули пароль?
+              </button>
             </div>
             <button type="submit" className={css.submitButton}>
               Увійти

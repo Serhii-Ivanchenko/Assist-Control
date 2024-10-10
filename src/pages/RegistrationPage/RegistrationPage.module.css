@@ -19,5 +19,7 @@
     border-radius: 60px;
     width: 940px;
     height: 670px;
+    padding-left: 0;
+    padding-right: 0;
   }
 }

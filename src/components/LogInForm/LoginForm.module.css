@@ -150,6 +150,13 @@
 }
 
 .forgotPasswordLink {
+  background-color: transparent;
+  border: none;
+  /* display: flex; */
+  /* flex-grow: 0;
+  width: auto; */
+  text-align: start;
+  cursor: pointer;
   color: #0096b7;
   font-size: 8px;
   font-style: normal;
