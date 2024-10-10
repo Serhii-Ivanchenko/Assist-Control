@@ -49,7 +49,7 @@ const handleSubmit = (values) => {
         <div className={css.emailBox}>
         <label className={css.titles}>Пошта</label>
 
-            <Field className={css.email} name="email"  value="autoassist@gmail.com" onClick={handleToggleClick} readOnly/>
+            <Field className={css.email} name="email"  value="zelensky.official@gmail.com" onClick={handleToggleClick} readOnly/>
 
         {isVisible && (<span className={css.warningMessage}>для зміни пошти зверніться у технічну підтримку</span>)}
         </div>
@@ -61,7 +61,7 @@ const handleSubmit = (values) => {
 
           <div className={css.companyBox}>
       <label htmlFor={companyFieldId} className={css.titles}>Назва компанії</label>
-        <Field type="text" name="company" className={css.input} id={companyFieldId} placeholder="Введіть назву компанії..."/>
+        <Field type="text" name="company" className={css.input} id={companyFieldId} placeholder="Avtoatmosfera"/>
         <ErrorMessage name="company" component="span" className={css.errorMessage} />
         </div>
 

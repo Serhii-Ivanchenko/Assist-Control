@@ -4,6 +4,7 @@ import { BsPerson } from "react-icons/bs";
 import { BsPeople } from "react-icons/bs";
 import { BsGear } from "react-icons/bs";
 import { BsCreditCard2Back } from "react-icons/bs";
+import { BsJustify } from "react-icons/bs";
 
 
 
@@ -11,7 +12,11 @@ import { BsCreditCard2Back } from "react-icons/bs";
 export default function UserSettingsSidebar({setPage, page}) {
     return (
         <div className={css.sideBarBox}>
+            <div className={css.iconBox}>
+                <BsJustify className={css.burgerMenu} />
+            </div>
 
+            <div className={css.contentBox}>
             <div className={css.titleBox}>
                 <h3 className={css.title}>Налаштування</h3>
             </div>
@@ -59,7 +64,9 @@ export default function UserSettingsSidebar({setPage, page}) {
                         </button>
                     </li>
                 </ul>
-            </nav>
+                </nav>
+            </div>
+
         </div>
     )
 }

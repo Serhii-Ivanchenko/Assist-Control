@@ -18,19 +18,25 @@
     font-weight: 400;
     line-height: normal;
 
+    cursor: pointer;    
+    appearance: none;
+
 
     /* margin-bottom: 24px; */
-    cursor: pointer;
+   
 
-    appearance: none;
     /* padding-left: 14px; */
 
-    font-size: 16px;
+    /* font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    line-height: normal; */
     /* box-shadow: none; */
-
+}
+@media only screen and (max-width: 767.9px) {
+   .inputSelect{
+    font-size: 14px;
+  }
 }
 
 .options {
@@ -72,7 +78,12 @@
     fill: #767676;
     width: 20px;
     height: 20px;
+    transition: transform 0.3s ease;
 }
+
+/* .selectIcon:hover{
+transform: translateY(-50%) rotate(180deg);
+} */
 
 .selectWrapper {
     position: relative;
