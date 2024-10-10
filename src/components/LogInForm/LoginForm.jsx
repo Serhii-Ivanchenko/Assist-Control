@@ -9,6 +9,7 @@ import { TbMailFilled } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import toast from "react-hot-toast";
+import GoogleBtn from "../GoogleBtn/GoogleBtn.jsx";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -103,6 +104,10 @@ export default function LoginForm() {
         <Link to="/register" className={css.linkToRegister}>
           Зареєструватись
         </Link> */}
+      </div>
+      <p className={css.bottomText}>Або увійдіть за допомогою</p>
+      <div className={css.googleWrapper}>
+        <GoogleBtn  />
       </div>
       <div className={css.bottomTextWrapper}>
         <p className={css.loginLabel}>Ще не маєте акаунт?</p>

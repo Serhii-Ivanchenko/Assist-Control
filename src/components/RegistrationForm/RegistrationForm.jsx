@@ -189,15 +189,15 @@ export default function RegistrationForm() {
           </Form>
         </Formik>
       </div>
-      <div className={css.googleWrapper}>
-        <p>або</p>
-        <GoogleBtn />
-      </div>
       <div className={css.bottomTextWrapper}>
         <p className={css.bottomText}>Вже маєте Аккаунт?</p>
         <Link to="/login" className={css.bottomLink}>
           Увійти
         </Link>
+        <p className={css.bottomText}>або</p>
+        <div className={css.googleWrapper}>
+          <GoogleBtn className={css.googleBtn} />
+        </div>
       </div>
     </div>
   );

@@ -4,7 +4,6 @@
   width: 460px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .topSectionWrapper {
@@ -164,4 +163,22 @@
   font-weight: 500;
   font-size: 11px;
   color: #0096b7;
+}
+
+.bottomText {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 13px;
+  color: #8D8D8D;
+  font-family: Roboto;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.12em;
+}
+
+.googleWrapper {
+  width: 301px;
+  height: 33px;
+  margin-bottom: 136px;
 }

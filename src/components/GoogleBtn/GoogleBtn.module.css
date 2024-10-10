@@ -1,27 +1,26 @@
 .icon_google {
-    margin-right: 8px;
-    font-size: 20px;
+    width: 22px;
+    height: 22px;
 }
 
 .google_btn {
-    font-weight: 700;
-    border: none;
+    border: 1px solid #242525;
     width: 100%;
-    border-radius: 30px;
-    height: 33px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
-    font-size: 11px;
+    gap: 4px;
+    color: #8D8D8D;
+    font-size: 10px;
     font-weight: 500;
-    line-height: 1em;
+    line-height: 1.2em;
     cursor: pointer;
-    background: #151616;
-    background-size: 300% auto;
-    transition: var(--transition-duration) var(--transition-timing-function);
+    background-color: transparent;
+    transition: border 250ms ease-in-out, color 250ms ease-in-out;
+}
 
-    &:hover {
-        background-position: 100% 0;
-    }
+.google_btn:hover {
+    border: 1px solid #ffffff;
+    color: #ffffff;
 }

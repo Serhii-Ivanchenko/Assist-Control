@@ -32,7 +32,7 @@ export default function GoogleBtn() {
   return (
     <button className={css.google_btn} onClick={handleGoogleLogin}>
       <FcGoogle className={css.icon_google} />
-      Увійти через Google
+      Sign in with Google
     </button>
   );
 }
