@@ -1,19 +1,35 @@
 import clsx from "clsx";
 import css from "./PeriodSwitcher.module.css";
 import { useRef } from "react";
-export default function PeriodSwitcher() {
+import { useDispatch } from "react-redux";
+import { getCarsByDate, getCarsByMonth } from "../../redux/cars/operations";
+export default function PeriodSwitcher({ changeCarsArr }) {
   const day = useRef();
   const month = useRef();
-  let dayClassName = clsx(css.statsBtn, css.activeBtn);
-  let monthClassName = clsx(css.statsBtn);
+  const today = new Date().toISOString().split("T")[0];
+  const activeClassName = clsx(css.statsBtn, css.activeBtn);
+  const noneActiveClassName = clsx(css.statsBtn);
 
-  const handleChoseDay = () => {
-    month.current.className = clsx(css.statsBtn);
-    day.current.className = clsx(css.statsBtn, css.activeBtn);
+  const dispatch = useDispatch();
+  const handleChoseDay = async () => {
+    if (day.current.className === activeClassName) return;
+    const {payload} = await dispatch(getCarsByDate(today));
+
+    changeCarsArr(payload.cars);
+    month.current.className = noneActiveClassName;
+    day.current.className = activeClassName;
   };
-  const handleChoseMonth = () => {
-    day.current.className = clsx(css.statsBtn);
-    month.current.className = clsx(css.statsBtn, css.activeBtn);
+  const handleChoseMonth = async () => {
+    if (month.current.className === activeClassName) return;
+    const { payload } = await dispatch(
+      getCarsByMonth({
+        month: new Date().getMonth(),
+        year: new Date().getFullYear(),
+      })
+    );
+    changeCarsArr(payload.cars);
+    day.current.className = noneActiveClassName;
+    month.current.className = activeClassName;
   };
   return (
     <div className={css.btnCont}>
@@ -21,7 +37,7 @@ export default function PeriodSwitcher() {
         <button
           ref={day}
           type="button"
-          className={dayClassName}
+          className={activeClassName}
           onClick={handleChoseDay}
         >
           День
@@ -30,7 +46,7 @@ export default function PeriodSwitcher() {
         <button
           ref={month}
           type="button"
-          className={monthClassName}
+          className={noneActiveClassName}
           onClick={handleChoseMonth}
         >
           Місяць
