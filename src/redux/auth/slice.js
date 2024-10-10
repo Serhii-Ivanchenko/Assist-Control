@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
 import {
-  getTariffData,
+  // getTariffData,
   getUserData,
   logIn,
   logOut,
@@ -85,17 +85,17 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateUserData.rejected, handleRejected)
-      .addCase(getTariffData.pending, handlePending)
-      .addCase(getTariffData.fulfilled, (state, action) => {
-        state.userData.tariff = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(getTariffData.rejected, handleRejected)
-      .addCase(refreshUser.pending, (state) => {
-        state.isRefreshing = true;
-        state.isLoading = true;
-        state.error = null;
-      })
+      // .addCase(getTariffData.pending, handlePending)
+      // .addCase(getTariffData.fulfilled, (state, action) => {
+      //   state.userData.tariff = action.payload;
+      //   state.isLoading = false;
+      // })
+      // .addCase(getTariffData.rejected, handleRejected)
+      // .addCase(refreshUser.pending, (state) => {
+      //   state.isRefreshing = true;
+      //   state.isLoading = true;
+      //   state.error = null;
+      // })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.userData = { ...state.userData, ...action.payload };
         state.isLoggedIn = true;

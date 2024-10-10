@@ -9,6 +9,8 @@
 @media screen and (min-width: 768px) {
   .loginPage {
     width: 767px;
+    padding-left: 121px;
+    padding-right: 121px;
   }
 }
 
