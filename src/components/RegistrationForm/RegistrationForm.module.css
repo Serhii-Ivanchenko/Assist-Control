@@ -1,10 +1,18 @@
 .registrationForm {
   background-color: #151616;
-  padding: 98px 80px 62px 78px;
-  width: 460px;
+  padding: 20px;
+  width: 275px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  border-radius: 8px;
+  /* justify-content: space-between; */
+}
+
+@media screen and (min-width: 1280px) {
+  .registrationForm {
+    padding: 98px 80px 62px 78px;
+    width: 460px;
+  }
 }
 
 .registrationHeader {
@@ -96,7 +104,7 @@
 
 .input::placeholder {
   font-size: 10px;
-  font-weight: 500; 
+  font-weight: 500;
 }
 
 .errorMsg {

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
 import {
-  getTariffData,
+  // getTariffData,
   getUserData,
   logIn,
   logOut,
@@ -50,8 +50,9 @@ const authSlice = createSlice({
       .addCase(logIn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.apiKey = action.payload.api_key;
+        // state.apiKey = action.payload.api_key;
         state.error = null;
+        console.log(action.payload.api_key);
       })
       .addCase(logIn.rejected, (state, action) => {
         state.isLoading = false;
@@ -84,17 +85,17 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateUserData.rejected, handleRejected)
-      .addCase(getTariffData.pending, handlePending)
-      .addCase(getTariffData.fulfilled, (state, action) => {
-        state.userData.tariff = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(getTariffData.rejected, handleRejected)
-      .addCase(refreshUser.pending, (state) => {
-        state.isRefreshing = true;
-        state.isLoading = true;
-        state.error = null;
-      })
+      // .addCase(getTariffData.pending, handlePending)
+      // .addCase(getTariffData.fulfilled, (state, action) => {
+      //   state.userData.tariff = action.payload;
+      //   state.isLoading = false;
+      // })
+      // .addCase(getTariffData.rejected, handleRejected)
+      // .addCase(refreshUser.pending, (state) => {
+      //   state.isRefreshing = true;
+      //   state.isLoading = true;
+      //   state.error = null;
+      // })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.userData = { ...state.userData, ...action.payload };
         state.isLoggedIn = true;
