@@ -1,4 +1,4 @@
-import { FaTrash } from "react-icons/fa6";
+import { BsTrash } from "react-icons/bs";
 import css from "./TeamList.module.css"
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -13,8 +13,8 @@ export default function TeamList() {
                 </div>
 
                 <div className={css.nameBox}>
-                <p className={css.memberName}>Name Surname</p>
-                    <p className={css.memberEmail}>email@gmail.com</p>
+                <p className={css.memberName}>Максим Коваленко</p>
+                    <p className={css.memberEmail}>maksim.kovalenko@example.com</p>
                 </div>
 
                  <div className={css.selectBox}>
@@ -27,7 +27,7 @@ export default function TeamList() {
                     </div>
                     
                 </div>
-                <FaTrash className={css.binIcon} />
+                <BsTrash  className={css.binIcon} />
             </li>
 
                <li className={css.teamListItem}>
@@ -51,7 +51,7 @@ export default function TeamList() {
                     </div>
 
                 </div>
-                <FaTrash className={css.binIcon} />
+                <BsTrash className={css.binIcon} />
             </li>
 
               <li className={css.teamListItem}>
@@ -73,7 +73,7 @@ export default function TeamList() {
                         <IoIosArrowDown className={css.selectIcon} />
                     </div>
                 </div>
-                <FaTrash className={css.binIcon} />
+                <BsTrash className={css.binIcon} />
             </li>
 
  <li className={css.teamListItem}>
@@ -97,7 +97,7 @@ export default function TeamList() {
                     </div>
 
                 </div>
-                <FaTrash className={css.binIcon} />
+                <BsTrash className={css.binIcon} />
             </li>
 
              <li className={css.teamListItem}>
@@ -121,7 +121,7 @@ export default function TeamList() {
                     </div>
                     
                 </div>
-                <FaTrash className={css.binIcon} />
+                <BsTrash className={css.binIcon} />
             </li>
 
              <li className={css.teamListItem}>
@@ -145,7 +145,7 @@ export default function TeamList() {
                     </div>
 
                 </div>
-                <FaTrash className={css.binIcon} />
+                <BsTrash className={css.binIcon} />
             </li>
         </ul>
     )

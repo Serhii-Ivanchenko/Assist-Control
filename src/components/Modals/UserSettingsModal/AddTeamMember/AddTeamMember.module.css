@@ -11,6 +11,20 @@
 
 }
 
+@media only screen and (max-width: 1279.9px) {
+   .addBox{
+    width: 736px;
+  }
+}
+
+@media only screen and (max-width: 767.9px) {
+  .addBox {
+    width: 350px;
+    padding: 64px 40px;
+    height: fit-content;
+  }
+}
+
 .closeBtn {
   position: absolute;
   top: 32px;
@@ -44,6 +58,12 @@
   align-self: stretch;
 
   margin-bottom: 65px;
+}
+
+@media only screen and (max-width: 767.9px) {
+  .addTitle {
+    font-size: 16px;
+  }
 }
 
 .fieldName {
@@ -82,6 +102,12 @@
   line-height: normal;
 
   outline: none;
+}
+
+@media only screen and (max-width: 1289.9px) {
+   .field{
+    min-width: 294px;
+  }
 }
 
 .field::placeholder{
@@ -124,6 +150,13 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
+}
+
+@media only screen and (max-width: 767.9px) {
+  .nameBox {
+    flex-direction: column;
+
+  }
 }
 
 .name {
@@ -209,6 +242,13 @@
 
   margin-top: 40px;
 
+}
+
+@media only screen and (max-width: 767.9px) {
+   .btnBox{
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .cancelBtn {
@@ -322,9 +362,11 @@
  display: flex;
  gap: 24px;
  flex-direction: column;
+ width: 100%;
 }
 
 .roleDescription {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;

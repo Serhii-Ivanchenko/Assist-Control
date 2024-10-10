@@ -1,61 +1,77 @@
 .teamBox{
-    margin-top: 59.5px;
-    border-top: 1px solid #000;
-    width: 635px;
-    padding: 28px 29px 20px 17px;
+    height: 850px;
+    padding: 125px 40px 0px 42px;
 
     display: flex;
     flex-direction: row;
-    gap: 14px;
+    gap: 20px;
 }
 
+@media only screen and (max-width: 1279.9px) {
+.teamBox {
+    padding-bottom: 37px;
+    flex-direction: column;
+  }
+}
 
 .title {
     color: #FFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    margin-bottom: 20px;
+
+    cursor: default;
+}
+
+.text {
+    /* width: 190px;
+    height: 112px; */
+    margin-bottom: 34px;
+
+    cursor: default;
+
+    color: #FFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height:120%;;
+
+
+}
+
+.addBtn {
+    width: fit-content;
+    padding: 12px 20px;
+    /* height: 38px; */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 8px;
+    background-color: #3956CC;
+
+    color: #FFF;
+
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
 
-    margin-bottom: 18px;
-
-    cursor: default;
-}
-
-.text {
-    width: 190px;
-    height: 112px;
-    margin-bottom: 18px;
-
-    cursor: default;
-
-    color: #FFF;
-    font-family: "Roboto", sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: var(--Label-Medium-Line-Height, 16px);
-
-
-}
-
-.addBtn {
-    width: 137px;
-    height: 38px;
-
-    border: none;
-
-    border-radius: 7px;
-    background: #3956CC;
-
-    color: #FFF;
-
-    font-family: "Roboto", sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-
     cursor: pointer;
+}
+
+@media only screen and (min-width: 1920px) {
+.addBtn {
+    padding: 15px 30px;
+  }
 }

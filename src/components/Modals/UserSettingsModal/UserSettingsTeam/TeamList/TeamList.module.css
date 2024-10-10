@@ -1,19 +1,25 @@
 .teamList {
-    width: 385px;
+    width: 100%;
     height: fit-content;
-    border-radius: 7px;
+    border-radius: 20px;
 
-    padding-left: 28px;
-    padding-right: 15px;
-    padding-top: 10px;
-    padding-bottom: 14px;
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-top: 33px;
+    padding-bottom: 33px;
 
-    background-color: #292929;
+    background-color: #302F2F;
+
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+
+    /* overflow-y: hidden; */
 
 }
 
 .contentBox {
-    width: 320px;
+    width:100%;
 
     display: flex;
     flex-direction: row;
@@ -24,16 +30,35 @@
     padding-bottom: 12px;
 }
 
-.teamListItem:not(:last-child) .contentBox {
-    border-bottom: solid 1px black;
+/* .nameEmailPhoto{
+    display: flex;
+    gap: 10px;
+} */
+
+@media only screen and (max-width: 1279.9px) {
+.teamList{
+    overflow-y: hidden;
 }
+
+.contentBox {
+    /* flex-direction: column; */
+  }
+
+}
+
+
+
+
+/* .teamListItem:not(:last-child) .contentBox {
+    border-bottom: solid 1px black;
+} */
 
 
 .teamListItem {
     height: 55px;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: row;
     gap: 14px;
@@ -42,39 +67,43 @@
 
 
 .memberPhoto {
-    width: 32px;
-    height: 35px;
-    border-radius: 35px;
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    border-radius: 50%;
     background-color: antiquewhite;
 
-    margin-right: 13px;
+    margin-right: 10px;
 }
 
 .nameBox {
-    margin-right: 16px;
+    margin-right: 13.5px;
+    width: 100%;
 }
 
 .memberName {
     color: #FFF;
     font-family: "Roboto", sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: normal;
 }
 
 .memberEmail {
-    color: #FFF;
+    color: #959595;
     font-family: "Roboto", sans-serif;
-    font-size: 11px;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 300;
+    font-weight: 400;
     line-height: normal;
 }
 
 .memberRole {
-    width: 100px;
-    height: 21px;
+    width: 200px;
+    padding: 10px;
+
+    /* height: 21px; */
     background-color: #4F4F4F;
     outline: none;
     border: none;
@@ -82,13 +111,14 @@
     color: #FFF;
 
     font-family: "Roboto", sans-serif;
-    font-size: 10px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
     cursor: pointer;
     appearance: none;
-    padding-left: 5px;
+    /* padding-left: 5px; */
     
 }
 
@@ -99,8 +129,8 @@
 .selectIcon {
     position: absolute;
     right: 5%;
-    top: 25%;
-    /* transform: translateY(-50%); */
+    top: 50%;
+    transform: translateY(-50%);
     pointer-events: none;
     fill: #D2D2D2;
     width: 15px;
@@ -108,8 +138,8 @@
 }
 
 .binIcon {
-    width: 8px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
     fill: #A1A1A1;  
     cursor: pointer;
 }
