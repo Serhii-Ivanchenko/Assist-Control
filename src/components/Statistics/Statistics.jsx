@@ -1,6 +1,6 @@
 import PeriodSwitcher from "../PeriodSwitcher/PeriodSwitcher";
 import StatsList from "../StatsList/StatsList";
-import css from "./Statistics.module.css"
+import css from "./Statistics.module.css";
 export default function Statistics() {
   return (
     <div className={css.statisticsCont}>
