@@ -93,16 +93,15 @@ export default function LoginForm() {
                   className={css.errorMsg}
                 />
               </div>
+              <p className={css.forgotPasswordLink}>Забули пароль?</p>
             </div>
             <button type="submit" className={css.submitButton}>
               Увійти
             </button>
           </Form>
         </Formik>
-        {/* <p className={css.loginBottomText}>Немає Акаунту?</p>
-        <Link to="/register" className={css.linkToRegister}>
-          Зареєструватись
-        </Link> */}
+        <p className={css.googleRegistrationText}>Або увійдіть за допомогою</p>
+        <div className={css.googleWrapper}>{/* <GoogleBtn /> */}</div>
       </div>
       <div className={css.bottomTextWrapper}>
         <p className={css.loginLabel}>Ще не маєте акаунт?</p>

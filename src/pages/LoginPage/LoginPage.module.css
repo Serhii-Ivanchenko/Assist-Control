@@ -1,7 +1,15 @@
 .loginPage {
   display: flex;
-  border-radius: 60px;
   overflow: hidden;
-  width: 940px;
-  height: 670px;
+  width: 375px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+@media screen and (min-width: 1280px) {
+  .loginPage {
+    border-radius: 60px;
+    width: 940px;
+    height: 670px;
+  }
 }

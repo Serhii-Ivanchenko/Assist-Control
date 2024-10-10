@@ -1,18 +1,19 @@
-.welcomeSection {
-  background-image: url(../../assets/images/Car_1x.webp);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  width: 480px;
-  height: 670px;
-  padding-bottom: 65px;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center;
-  gap: 4px;
+@media only screen and (min-width: 1279.98px) {
+  .welcomeSection {
+    background-image: url(../../assets/images/Car_1x.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 480px;
+    height: 670px;
+    padding-bottom: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 4px;
+  }
 }
-
 @media only screen and (max-width: 1279.98px) {
   .welcomeSection {
     display: none;
