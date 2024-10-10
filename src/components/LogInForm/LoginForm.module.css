@@ -7,6 +7,12 @@
   border-radius: 8px;
 }
 
+@media screen and (min-width: 768px) {
+  .loginForm {
+    width: 524px;
+  }
+}
+
 @media screen and (min-width: 1280px) {
   .loginForm {
     border-radius: 0;
@@ -24,6 +30,12 @@
   font-size: 24px;
   font-style: normal;
   margin-bottom: 4px;
+}
+
+@media screen and (min-width: 768px) {
+  .loginHeader {
+    font-weight: 700;
+  }
 }
 
 .loginText {
@@ -158,6 +170,12 @@
   background-color: transparent;
   outline: none;
   border: none;
+}
+
+@media screen and (min-width: 768px) {
+  .eyeIconBtn {
+    right: 10px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
