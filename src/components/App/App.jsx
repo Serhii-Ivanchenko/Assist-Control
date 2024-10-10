@@ -6,6 +6,7 @@ import PrivateRoute from "../PrivateRoute.jsx";
 import Loader from "../Loader/Loader.jsx";
 import { useSelector } from "react-redux";
 import { selectIsRefreshing } from "../../redux/auth/selectors.js";
+import { Toaster } from "react-hot-toast";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
@@ -30,61 +31,59 @@ export default function App() {
   return isRefreshing ? (
     <Loader />
   ) : (
-      <Layout>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route
-              path="/login"
-              element={
-                <RestrictedRoute
-                  redirectTo="/video-control"
-                  component={<LoginPage />}
-                />
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <RestrictedRoute
-                  redirectTo="/video-control"
-                  component={<RegistrationPage />}
-                />
-              }
-            />
-            <Route
-              path="/video-control"
-              element={
-                <PrivateRoute
-                  redirectTo="/login"
-                  component={<VideControlPage />}
-                />
-              }
-            />
-            <Route
-              path="/crm"
-              element={
-                <PrivateRoute redirectTo="/login" component={<CRMPage />} />
-              }
-            />
-            <Route
-              path="/report"
-              element={
-                <PrivateRoute redirectTo="/login" component={<ReportPage />} />
-              }
-            />
-            <Route
-              path="/settings"
-              element={
-                <PrivateRoute
-                  redirectTo="/login"
-                  component={<SettingsPage />}
-                />
-              }
-            />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
-      </Layout>
+    <Layout>
+      <Toaster position="top-right" reverseOrder={false} />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute
+                redirectTo="/video-control"
+                component={<LoginPage />}
+              />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/video-control"
+                component={<RegistrationPage />}
+              />
+            }
+          />
+          <Route
+            path="/video-control"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<VideControlPage />}
+              />
+            }
+          />
+          <Route
+            path="/crm"
+            element={
+              <PrivateRoute redirectTo="/login" component={<CRMPage />} />
+            }
+          />
+          <Route
+            path="/report"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ReportPage />} />
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <PrivateRoute redirectTo="/login" component={<SettingsPage />} />
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
+    </Layout>
   );
 }
