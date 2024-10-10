@@ -38,8 +38,12 @@ export default function RegistrationForm() {
           "Для завершення реєстрації потрібно підтвердити email адресу. Будь ласка, перевірте електронну пошту"
         );
       })
-      .catch(() => {
-        toast.error("Щось сталося, спробуйте ще раз");
+      .catch((err) => {
+        if (err === 400) {
+          toast.error("Користувач вже існує");
+        } else {
+          toast.error("Щось сталося, спробуйте ще раз");
+        }
       });
 
     actions.resetForm();

@@ -50,8 +50,9 @@ const authSlice = createSlice({
       .addCase(logIn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.apiKey = action.payload.api_key;
+        // state.apiKey = action.payload.api_key;
         state.error = null;
+        console.log(action.payload.api_key);
       })
       .addCase(logIn.rejected, (state, action) => {
         state.isLoading = false;

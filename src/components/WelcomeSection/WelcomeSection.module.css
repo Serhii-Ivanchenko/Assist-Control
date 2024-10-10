@@ -13,6 +13,12 @@
   gap: 4px;
 }
 
+@media only screen and (max-width: 1279.98px) {
+  .welcomeSection {
+    display: none;
+  }
+}
+
 @media only screen and (min-resolution: 192dpi) {
   .welcomeSection {
     background-image: url(../../assets/images/Car_2x.webp);

@@ -11,10 +11,10 @@ export const register = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await axiosInstance.post("/v1/register/", userData);
-      setAuthHeader(response.data.api_key);
+      // setAuthHeader(response.data.api_key);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.detail);
+      return thunkAPI.rejectWithValue(error.status);
     }
   }
 );
@@ -27,10 +27,11 @@ export const logIn = createAsyncThunk(
       const response = await axiosInstance.post("/v1/authenticate/", userData, {
         withCredentials: true,
       });
-      setAuthHeader(response.data.api_key);
-      return response.data;
+      // setAuthHeader(response.data.api_key);
+      // return response.data;
+      console.log(response.data);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.detail);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
