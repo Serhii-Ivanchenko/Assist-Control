@@ -198,6 +198,9 @@ export default function RegistrationForm() {
           Увійти
         </Link>
       </div>
+      <p className={css.orText}>або</p>
+      <p className={css.googleRegistrationText}>Або увійдіть за допомогою</p>
+      <div className={css.googleWrapper}>{/* <GoogleBtn /> */}</div>
     </div>
   );
 }
