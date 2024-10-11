@@ -17,14 +17,22 @@ export default function ValidateEmailPage() {
   //   }, [dispatch, apiKey])
   //     .unwrap()
   //     .then(navigate("/video-control"))
-  //     .catch((error) => {
+  //     .catch((error) => {if (error.status === 401) {
+  //   toast.error("Неправильний ключ або користувач не знайдений", {
+  //     position: "top-center",
+  //     style: {
+  //       background: "#242525",
+  //       color: "#FFFFFF",
+  //     },
+  //   });
+  // } else {
   //       toast.error("Щось сталося, спробуйте ще раз", {
   //         position: "top-center",
   //         style: {
   //           background: "#242525",
   //           color: "#FFFFFF",
   //         },
-  //       });
+  //       });}
   //     });
 
   return (

@@ -4,7 +4,6 @@ import {
   clearAuthHeader,
   axiosInstance,
 } from "../../services/api.js";
-import axios from "axios";
 
 //User registration
 export const register = createAsyncThunk(
@@ -14,7 +13,7 @@ export const register = createAsyncThunk(
       const response = await axiosInstance.post("/v1/register/", userData);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.status);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -24,16 +23,15 @@ export const validateEmail = createAsyncThunk(
   "auth/validateEmail",
   async (apiKey, thunkAPI) => {
     try {
-      const response = await axios.get("/v1/validate-email", {
+      const response = await axiosInstance.get("/v1/validate-email", {
         params: {
           api_key: apiKey,
         },
       });
-      console.log(response);
-      // setAuthHeader(response.data.api_key);
-      // return response.data;
+      setAuthHeader(response.data.api_key);
+      return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -44,9 +42,8 @@ export const logIn = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await axiosInstance.post("/v1/authenticate/", userData);
-      // setAuthHeader(response.data.api_key);
-      // return response.data;
-      console.log(response);
+      setAuthHeader(response.data.api_key);
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

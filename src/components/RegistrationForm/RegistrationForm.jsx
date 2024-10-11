@@ -47,7 +47,7 @@ export default function RegistrationForm() {
         );
       })
       .catch((err) => {
-        if (err === 400) {
+        if (err.status === 400) {
           toast.error("Користувач вже існує", {
             position: "top-center",
             style: {
