@@ -22,10 +22,7 @@ export default function PeriodSwitcher({ changeCarsArr }) {
   const handleChoseMonth = async () => {
     if (month.current.className === activeClassName) return;
     const { payload } = await dispatch(
-      getCarsByMonth({
-        month: new Date().getMonth() + 1,
-        year: new Date().getFullYear(),
-      })
+      getCarsByMonth(`${new Date().getFullYear()}-${new Date().getMonth() + 1}`)
     );
     changeCarsArr(payload.cars);
     day.current.className = noneActiveClassName;

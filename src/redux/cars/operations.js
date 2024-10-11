@@ -59,10 +59,9 @@ export const getCarsByDate = createAsyncThunk(
 export const getCarsByMonth = createAsyncThunk(
   "cars/getCarsByMonth",
   async (date, thunkAPI) => {
-    const { month, year } = date;
     try {
       const response = await axiosInstance.get(
-        `/v1/current/month/cars/?month=${month}&year=${year} `,
+        `/v1/current/month/cars/?date_str=${date} `,
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",

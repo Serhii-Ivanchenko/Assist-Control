@@ -41,6 +41,41 @@ function SamplePrevArrow({ currentSlide, onClick }) {
 }
 
 export default function VideoFrame() {
+  useEffect(() => {
+    const ws = new WebSocket("wss://37.27.221.244:7000/ws/video_feed");
+    const secondWs = new WebSocket("wss://37.27.221.244:8000/ws/video_feed");
+    ws.binaryType = "arraybuffer"; // Установлюємо тип даних для бінарних файлів
+    secondWs.binaryType = "arraybuffer";
+    ws.onopen = () => {
+      console.log("server was started");
+    };
+    ws.onmessage = (event) => {
+      console.log(event);
+    };
+    ws.onclose = () => {
+      console.log("Server is closed");
+    };
+    ws.onerror = () => {
+      console.log("Server has error");
+    };
+    secondWs.onopen = () => {
+      console.log("server was started");
+    };
+    secondWs.onmessage = (event) => {
+      console.log(event);
+    };
+    secondWs.onclose = () => {
+      console.log("Server is closed");
+    };
+    secondWs.onerror = () => {
+      console.log("Server has error");
+    };
+    return () => {
+      ws.close();
+      secondWs.close();
+    };
+  }, []);
+
   let image = useRef();
   let parentRef = useRef();
   const [isZoomed, setIsZoomed] = useState(false);
