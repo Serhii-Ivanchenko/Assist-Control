@@ -21,8 +21,15 @@ export default function LoginForm() {
   const handleSubmitLogin = (values, actions) => {
     dispatch(logIn(values))
       .unwrap()
-      .catch(() => {
-        toast.error("Щось сталося, спробуйте ще раз");
+      .catch((error) => {
+        console.log(error);
+        toast.error("Щось сталося, спробуйте ще раз", {
+          position: "top-center",
+          style: {
+            background: "#242525",
+            color: "#FFFFFF",
+          },
+        });
       });
 
     actions.resetForm();
