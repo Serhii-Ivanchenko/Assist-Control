@@ -28,7 +28,6 @@ export const validateEmail = createAsyncThunk(
           "X-Api-Key": api_key,
         },
       });
-      console.log("response during validation", response.data);
       setAuthHeader(response.data.api_key);
       return response.data;
     } catch (error) {

@@ -12,34 +12,18 @@ export default function ValidateEmailPage() {
   const navigate = useNavigate();
   const isLoading = useSelector(selectLoading);
 
-  //   useEffect(() => {
-  //     dispatch(validateEmail(apiKey));
-  //   }, [dispatch, apiKey])
-  //     .unwrap()
-  //     .then(navigate("/video-control"))
-  //     .catch((error) => {if (error.status === 401) {                       <==========================
-  //   toast.error("Неправильний ключ або користувач не знайдений", {
-  //     position: "top-center",
-  //     style: {
-  //       background: "#242525",
-  //       color: "#FFFFFF",
-  //     },
-  //   });
-  // } else {
-  //       toast.error("Щось сталося, спробуйте ще раз", {
-  //         position: "top-center",
-  //         style: {
-  //           background: "#242525",
-  //           color: "#FFFFFF",
-  //         },
-  //       });}                                                                  <========================
-  //     });
   useEffect(() => {
     dispatch(validateEmail(api_key))
       .unwrap()
       .then(
-        toast.success("Email validated")
-        // navigate("/video-control")
+        toast.success("Email validated. Welcome to Assist CONTROL", {
+          position: "top-center",
+          style: {
+            background: "#242525",
+            color: "#FFFFFF",
+          },
+        }),
+        navigate("/video-control")
       )
       .catch((error) => {
         toast.error("Щось сталося, спробуйте ще раз", {
@@ -50,7 +34,7 @@ export default function ValidateEmailPage() {
           },
         });
       });
-  }, [dispatch, api_key]);
+  }, [dispatch, api_key, navigate]);
 
   return (
     <div>
