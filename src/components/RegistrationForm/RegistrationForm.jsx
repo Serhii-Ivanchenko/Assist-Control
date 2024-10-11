@@ -35,14 +35,34 @@ export default function RegistrationForm() {
       .unwrap()
       .then(() => {
         toast.success(
-          "Для завершення реєстрації потрібно підтвердити email адресу. Будь ласка, перевірте електронну пошту"
+          "Для завершення реєстрації потрібно підтвердити email адресу. Будь ласка, перевірте електронну пошту",
+          {
+            position: "top-center",
+            duration: 30000,
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          }
         );
       })
       .catch((err) => {
         if (err === 400) {
-          toast.error("Користувач вже існує");
+          toast.error("Користувач вже існує", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
         } else {
-          toast.error("Щось сталося, спробуйте ще раз");
+          toast.error("Щось сталося, спробуйте ще раз", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
         }
       });
 

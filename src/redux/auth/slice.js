@@ -9,6 +9,7 @@ import {
   register,
   updateUserAvatar,
   updateUserData,
+  validateEmail,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -41,6 +42,19 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isLoggedIn = false;
         state.error = action.payload;
+      })
+      .addCase(validateEmail.pending, (state) => {
+        state.isLoading = true;
+        state.isLoggedIn = false;
+      })
+      .addCase(validateEmail.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isLoggedIn = true;
+      })
+      .addCase(validateEmail.rejected, (state, action) => {
+        state.isLoggedIn = false;
+        state.isLoading = false;
+        // state.error = action.payload;
       })
       .addCase(logIn.pending, (state) => {
         state.isLoading = true;
