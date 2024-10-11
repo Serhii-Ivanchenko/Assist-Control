@@ -1,25 +1,24 @@
 .loginPage {
   display: flex;
   overflow: hidden;
-  width: 375px;
-  padding-left: 50px;
-  padding-right: 50px;
+  border-radius: 60px;
+  width: 940px;
+  height: 670px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1279.98px) {
   .loginPage {
     width: 767px;
     padding-left: 121px;
     padding-right: 121px;
+    border-radius: 0;
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 767.98px) {
   .loginPage {
-    border-radius: 60px;
-    width: 940px;
-    height: 670px;
-    padding-left: 0;
-    padding-right: 0;
+    width: 375px;
+    padding-left: 50px;
+    padding-right: 50px;
   }
 }
