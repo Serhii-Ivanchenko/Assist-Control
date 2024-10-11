@@ -6,6 +6,6 @@
   font-variant: small-caps;
   color: #fff;
 }
-.statsBtn:active {
+.statsBtn.activeBtn {
   color: #3956cc;
 }
