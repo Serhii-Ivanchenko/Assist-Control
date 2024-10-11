@@ -20,6 +20,19 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-variant-numeric: lining-nums proportional-nums;
+
+  }
+
+  @media only screen and (min-width: 1920px) {
+    .btn {
+      width: 454px;
+      height: 70px;
+      padding: 20px 10px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+  }
   }
   
   
