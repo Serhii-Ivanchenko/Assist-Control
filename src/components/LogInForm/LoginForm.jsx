@@ -21,8 +21,33 @@ export default function LoginForm() {
   const handleSubmitLogin = (values, actions) => {
     dispatch(logIn(values))
       .unwrap()
-      .catch(() => {
-        toast.error("Щось сталося, спробуйте ще раз");
+      .then(() => {
+        toast.success("Welcome to Assist CONTROL", {
+          position: "top-center",
+          style: {
+            background: "#242525",
+            color: "#FFFFFF",
+          },
+        });
+      })
+      .catch((err) => {
+        if (err.status === 401) {
+          toast.error("Невірний логін або пароль", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
+        } else {
+          toast.error("Щось сталося, спробуйте ще раз", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
+        }
       });
 
     actions.resetForm();
