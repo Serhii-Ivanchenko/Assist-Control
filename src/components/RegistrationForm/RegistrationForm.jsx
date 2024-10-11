@@ -220,12 +220,9 @@ export default function RegistrationForm() {
         </Link>
         <p className={css.bottomText}>або</p>
         <div className={css.googleWrapper}>
-          <GoogleBtn className={css.googleBtn} />
+          <GoogleBtn />
         </div>
       </div>
-      <p className={css.orText}>або</p>
-      <p className={css.googleRegistrationText}>Або увійдіть за допомогою</p>
-      <div className={css.googleWrapper}>{/* <GoogleBtn /> */}</div>
     </div>
   );
 }

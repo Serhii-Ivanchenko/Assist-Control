@@ -128,12 +128,10 @@ export default function LoginForm() {
             </button>
           </Form>
         </Formik>
-{/*         <p className={css.googleRegistrationText}>Або увійдіть за допомогою</p>
-        <div className={css.googleWrapper}>{<GoogleBtn />}</div> */}
       </div>
       <p className={css.bottomText}>Або увійдіть за допомогою</p>
       <div className={css.googleWrapper}>
-        <GoogleBtn  />
+        <GoogleBtn />
       </div>
       <div className={css.bottomTextWrapper}>
         <p className={css.loginLabel}>Ще не маєте акаунт?</p>
