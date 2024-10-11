@@ -1,40 +1,25 @@
-import css from "./UserSettingsSidebar.module.css"
 import clsx from "clsx";
 import { BsPerson } from "react-icons/bs";
 import { BsPeople } from "react-icons/bs";
 import { BsGear } from "react-icons/bs";
 import { BsCreditCard2Back } from "react-icons/bs";
-import { BsJustify } from "react-icons/bs";
-// import { useState } from "react";
+// import { BsJustify } from "react-icons/bs";
+import css from "./MobileMenu.module.css"
+import { TfiClose } from "react-icons/tfi";
 
 
-
-
-export default function UserSettingsSidebar({ setPage, page, onOpen }) {
-    
-    // const [mobMenu, setOpenMobMenu] = useState(false);
-
-    // const openMobMenu = () => {
-    //     setOpenMobMenu(true)
-    // }
-
-
+export default function MobileMenu({page, setPage, onClose}) {
     return (
-        <div className={css.sideBarBox}>
-            <div className={css.iconBox}>
-                <BsJustify className={css.burgerMenu} onClick={onOpen}/>
-            </div>
-
-            <div className={css.contentBox}>
-            <div className={css.titleBox}>
-                <h3 className={css.title}>Налаштування</h3>
-            </div>
-
-            <nav className={css.sideBarNav}>
+        <div className={css.mobileMenu} >
+            <TfiClose onClick={onClose} className={css.closeBtn} />
+                <nav className={css.sideBarNav}>
                 <ul className={css.sideBarNavList}>
                     <li className={css.sideBarNavItem}>
                         <button type="button"
-                        onClick={() => setPage("profile")}  
+                            onClick={() => {
+                                setPage("profile");
+                                onClose();
+                            }}  
                          className={clsx(css.sideBarNavItemLink, {
                                 [css.linkIsActive]: page === "profile"
                             })}>
@@ -44,7 +29,10 @@ export default function UserSettingsSidebar({ setPage, page, onOpen }) {
                        </li>
                     <li className={css.sideBarNavItem}>
                     <button type="button"
-                        onClick={() => setPage("account")}  
+                            onClick={() => {
+                                setPage("account");
+                                onClose();  
+                            }}  
                          className={clsx(css.sideBarNavItemLink, {
                                 [css.linkIsActive]: page === "account"
                             })}>
@@ -54,7 +42,10 @@ export default function UserSettingsSidebar({ setPage, page, onOpen }) {
                     </li>
                     <li className={css.sideBarNavItem}>
                     <button type="button"
-                        onClick={() => setPage("tariff")}  
+                            onClick={() => {
+                                setPage("tariff");
+                                onClose();
+                            }}  
                          className={clsx(css.sideBarNavItemLink, {
                                 [css.linkIsActive]: page === "tariff"
                             })}>
@@ -64,7 +55,10 @@ export default function UserSettingsSidebar({ setPage, page, onOpen }) {
                     </li>
                     <li className={css.sideBarNavItem}>
                     <button 
-                        onClick={() => setPage("team")}  
+                            onClick={() => {
+                                setPage("team");
+                                onClose();
+                            }}  
                          className={clsx(css.sideBarNavItemLink, {
                                 [css.linkIsActive]: page === "team"
                             })}>
@@ -74,15 +68,7 @@ export default function UserSettingsSidebar({ setPage, page, onOpen }) {
                     </li>
                 </ul>
                 </nav>
+                
                 </div>
-
-            {/* Mobile Menu
-            {mobMenu && } */}
-
-            </div>
-            
-
-            
-       
     )
 }

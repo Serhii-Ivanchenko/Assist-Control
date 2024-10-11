@@ -1,7 +1,5 @@
-import { BsTrash } from "react-icons/bs";
 import css from "./TeamList.module.css"
-import { IoIosArrowDown } from "react-icons/io";
-
+import TeamListItem from "../TeamListItem/TeamListItem";
 
 export default function TeamList() {
     return (
@@ -22,173 +20,188 @@ export default function TeamList() {
 
                 <div className={css.selectAndBin}>
                  <div className={css.selectBox}>
-                <select id="role" name="role" className={css.memberRole}>
-                      <option value="owner">Власник</option>
-                    <option value="admin">Адміністратор</option>
-                    <option value="viewer">Перегляд</option>
-                        </select>
-                        <IoIosArrowDown className={css.selectIcon} />
+                <p className={css.memberRole}> Власник </p>
                     </div>
-                        <BsTrash className={css.binIcon} />
                         </div>
                         </div>
                 </div>
             </li>
 
-               <li className={css.teamListItem}>
-                <div className={css.contentBox}>
-                <div className={css.memberPhoto}>
-                    <img src="" alt="" />
-                    </div>
-                    
-                     <div className={css.container}>
-
-
-                <div className={css.nameBox}>
-                <p className={css.memberName}>Name Surname</p>
-                    <p className={css.memberEmail}>juliakharetonchuk@gmail.com</p>
-                    </div>
-                    
-                    <div className={css.selectAndBin}>
-                        
-               <div className={css.selectBox}>
-                <select id="role" name="role" className={css.memberRole}>
-                      <option value="owner">Власник</option>
-                    <option value="admin">Адміністратор</option>
-                    <option value="viewer">Перегляд</option>
-                        </select>
-                        <IoIosArrowDown className={css.selectIcon} />
-                    </div>
-
-               
-                        <BsTrash className={css.binIcon} />
-                        </div>
-                        </div>
-                </div>
+            <li>
+                <TeamListItem/>
             </li>
 
-              <li className={css.teamListItem}>
-                <div className={css.contentBox}>
-                <div className={css.memberPhoto}>
-                    <img src="" alt="" />
-                    </div>
-                    
-                     <div className={css.container}>
-
-
-                <div className={css.nameBox}>
-                <p className={css.memberName}>Name Surname</p>
-                    <p className={css.memberEmail}>email@gmail.com</p>
-                    </div>
-
-                <div className={css.selectAndBin}>
-                 <div className={css.selectBox}>
-                <select id="role" name="role" className={css.memberRole}>
-                      <option value="owner">Власник</option>
-                    <option value="admin">Адміністратор</option>
-                    <option value="viewer">Перегляд</option>
-                        </select>
-                        <IoIosArrowDown className={css.selectIcon} />
-                    </div>
-                
-                    <BsTrash className={css.binIcon} />
-                        </div>
-                        </div>
-                </div>
+             <li>
+                <TeamListItem/>
             </li>
 
- <li className={css.teamListItem}>
-                <div className={css.contentBox}>
-                <div className={css.memberPhoto}>
-                    <img src="" alt="" />
-                    </div>
-                    
-                    <div className={css.container}>
-
-                <div className={css.nameBox}>
-                <p className={css.memberName}>Name Surname</p>
-                    <p className={css.memberEmail}>email@gmail.com</p>
-                </div>
-
-                      <div className={css.selectAndBin}>
-                 <div className={css.selectBox}>
-                <select id="role" name="role" className={css.memberRole}>
-                      <option value="owner">Власник</option>
-                    <option value="admin">Адміністратор</option>
-                    <option value="viewer">Перегляд</option>
-                        </select>
-                        <IoIosArrowDown className={css.selectIcon} />
-                    </div>
-
-                
-                        <BsTrash className={css.binIcon} />
-                    </div>
-                    </div>
-                </div>
+             <li>
+                <TeamListItem/>
+            </li>
+             <li>
+                <TeamListItem/>
+            </li>
+             <li>
+                <TeamListItem/>
             </li>
 
-             <li className={css.teamListItem}>
-                <div className={css.contentBox}>
-                <div className={css.memberPhoto}>
-                    <img src="" alt="" />
-                    </div>
-                    
-                    <div className={css.container}>
-
-
-                <div className={css.nameBox}>
-                <p className={css.memberName}>Name Surname</p>
-                    <p className={css.memberEmail}>email@gmail.com</p>
-                    </div>
-                    
-                      <div className={css.selectAndBin}>
-
-                 <div className={css.selectBox}>
-                <select id="role" name="role" className={css.memberRole}>
-                      <option value="owner">Власник</option>
-                    <option value="admin">Адміністратор</option>
-                    <option value="viewer">Перегляд</option>
-                        </select>
-                        <IoIosArrowDown className={css.selectIcon} />
-                    </div>
-                    
-                
-                        <BsTrash className={css.binIcon} />
-                    </div>
-                    </div>
-                    </div>
-            </li>
-
-             <li className={css.teamListItem}>
-                <div className={css.contentBox}>
-                <div className={css.memberPhoto}>
-                    <img src="" alt="" />
-                    </div>
-                    
-                     <div className={css.container}>
-
-
-                <div className={css.nameBox}>
-                <p className={css.memberName}>Name Surname</p>
-                    <p className={css.memberEmail}>email@gmail.com</p>
-                </div>
-
-                      <div className={css.selectAndBin}>
-                <div className={css.selectBox}>
-                <select id="role" name="role" className={css.memberRole}>
-                      <option value="owner">Власник</option>
-                    <option value="admin">Адміністратор</option>
-                    <option value="viewer">Перегляд</option>
-                        </select>
-                        <IoIosArrowDown className={css.selectIcon} />
-                    </div>
-
-                
-                        <BsTrash className={css.binIcon} />
-                        </div>
-                        </div>
-                </div>
-            </li>
         </ul>
     )
 }
+
+
+
+//                <li className={css.teamListItem}>
+//                 <div className={css.contentBox}>
+//                 <div className={css.memberPhoto}>
+//                     <img src="" alt="" />
+//                     </div>
+                    
+//                      <div className={css.container}>
+
+
+//                 <div className={css.nameBox}>
+//                 <p className={css.memberName}>Name Surname</p>
+//                     <p className={css.memberEmail}>juliakharetonchuk@gmail.com</p>
+//                     </div>
+                    
+//                     <div className={css.selectAndBin}>
+                        
+//                <div className={css.selectBox}>
+//                 <select id="role" name="role" className={css.memberRole}>
+//                       <option value="owner">Власник</option>
+//                     <option value="admin" selected>Адміністратор</option>
+//                     <option value="viewer">Перегляд</option>
+//                         </select>
+//                         <IoIosArrowDown className={css.selectIcon} />
+//                     </div>
+
+               
+//                         <BsTrash className={css.binIcon} />
+//                         </div>
+//                         </div>
+//                 </div>
+//             </li>
+
+//               <li className={css.teamListItem}>
+//                 <div className={css.contentBox}>
+//                 <div className={css.memberPhoto}>
+//                     <img src="" alt="" />
+//                     </div>
+                    
+//                      <div className={css.container}>
+
+
+//                 <div className={css.nameBox}>
+//                 <p className={css.memberName}>Name Surname</p>
+//                     <p className={css.memberEmail}>email@gmail.com</p>
+//                     </div>
+
+//                 <div className={css.selectAndBin}>
+//                  <div className={css.selectBox}>
+//                 <select id="role" name="role" className={css.memberRole}>
+//                       <option value="owner">Власник</option>
+//                     <option value="admin" selected>Адміністратор</option>
+//                     <option value="viewer">Перегляд</option>
+//                         </select>
+//                         <IoIosArrowDown className={css.selectIcon} />
+//                     </div>
+                
+//                     <BsTrash className={css.binIcon} />
+//                         </div>
+//                         </div>
+//                 </div>
+//             </li>
+
+//  <li className={css.teamListItem}>
+//                 <div className={css.contentBox}>
+//                 <div className={css.memberPhoto}>
+//                     <img src="" alt="" />
+//                     </div>
+                    
+//                     <div className={css.container}>
+
+//                 <div className={css.nameBox}>
+//                 <p className={css.memberName}>Name Surname</p>
+//                     <p className={css.memberEmail}>email@gmail.com</p>
+//                 </div>
+
+//                       <div className={css.selectAndBin}>
+//                  <div className={css.selectBox}>
+//                 <select id="role" name="role" className={css.memberRole}>
+//                       <option value="owner">Власник</option>
+//                     <option value="admin">Адміністратор</option>
+//                     <option value="viewer" selected>Перегляд</option>
+//                         </select>
+//                         <IoIosArrowDown className={css.selectIcon} />
+//                     </div>
+
+                
+//                         <BsTrash className={css.binIcon} />
+//                     </div>
+//                     </div>
+//                 </div>
+//             </li>
+
+//              <li className={css.teamListItem}>
+//                 <div className={css.contentBox}>
+//                 <div className={css.memberPhoto}>
+//                     <img src="" alt="" />
+//                     </div>
+                    
+//                     <div className={css.container}>
+
+
+//                 <div className={css.nameBox}>
+//                 <p className={css.memberName}>Name Surname</p>
+//                     <p className={css.memberEmail}>email@gmail.com</p>
+//                     </div>
+                    
+//                       <div className={css.selectAndBin}>
+
+//                  <div className={css.selectBox}>
+//                 <select id="role" name="role" className={css.memberRole}>
+//                       <option value="owner">Власник</option>
+//                     <option value="admin">Адміністратор</option>
+//                     <option value="viewer" selected>Перегляд</option>
+//                         </select>
+//                         <IoIosArrowDown className={css.selectIcon} />
+//                     </div>
+                    
+                
+//                         <BsTrash className={css.binIcon} />
+//                     </div>
+//                     </div>
+//                     </div>
+//             </li>
+
+//              <li className={css.teamListItem}>
+//                 <div className={css.contentBox}>
+//                 <div className={css.memberPhoto}>
+//                     <img src="" alt="" />
+//                     </div>
+                    
+//                      <div className={css.container}>
+
+
+//                 <div className={css.nameBox}>
+//                 <p className={css.memberName}>Name Surname</p>
+//                     <p className={css.memberEmail}>email@gmail.com</p>
+//                 </div>
+
+//                       <div className={css.selectAndBin}>
+//                 <div className={css.selectBox}>
+//                 <select id="role" name="role" className={css.memberRole}>
+//                       <option value="owner">Власник</option>
+//                     <option value="admin">Адміністратор</option>
+//                     <option value="viewer" selected>Перегляд</option>
+//                         </select>
+//                         <IoIosArrowDown className={css.selectIcon} />
+//                     </div>
+
+                
+//                         <BsTrash className={css.binIcon} />
+//                         </div>
+//                         </div>
+//                 </div>
+//             </li>

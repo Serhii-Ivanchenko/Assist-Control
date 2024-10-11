@@ -93,3 +93,14 @@
     padding: 15px 30px;
   }
 }
+
+.closeBtn {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    cursor: pointer;
+
+    width: 18px;
+    height: 18px;
+    stroke: #4A4A4A;
+}

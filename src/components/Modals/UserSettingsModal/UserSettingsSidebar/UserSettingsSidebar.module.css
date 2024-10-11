@@ -145,3 +145,36 @@
     border-right: solid 2px #3956CC;
 
 }
+
+
+/* Mobile Menu */
+
+.mobileMenu{
+    position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+    
+        background-color: #1C1D20;
+    
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    
+        z-index: 6;
+        transform: translateX(100%);
+        transition: transform 400ms ease-in;
+}
+
+@media only screen and (min-width: 768px) {
+   .mobileMenu{
+    display: none;
+  }
+}
+
+.is-open {
+    transform: translateX(0);
+    visibility: visible;
+}
