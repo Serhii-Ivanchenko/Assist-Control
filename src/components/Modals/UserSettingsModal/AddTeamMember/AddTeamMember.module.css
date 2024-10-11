@@ -19,6 +19,7 @@
 
 @media only screen and (max-width: 767.9px) {
   .addBox {
+    min-width: 350px;
     width: 350px;
     padding: 64px 40px;
     height: fit-content;
@@ -413,3 +414,8 @@
   width: 100%
 }
 
+@media only screen and (max-width: 767.9px) {
+   .text{
+    font-size: 13px;
+  }
+}

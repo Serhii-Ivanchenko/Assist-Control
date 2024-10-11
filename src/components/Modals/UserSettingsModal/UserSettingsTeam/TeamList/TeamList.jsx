@@ -10,13 +10,17 @@ export default function TeamList() {
                 <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                     <img src="" alt="" />
-                </div>
+                    </div>
+                    
+                     <div className={css.container}>
+
 
                 <div className={css.nameBox}>
                 <p className={css.memberName}>Максим Коваленко</p>
                     <p className={css.memberEmail}>maksim.kovalenko@example.com</p>
                 </div>
 
+                <div className={css.selectAndBin}>
                  <div className={css.selectBox}>
                 <select id="role" name="role" className={css.memberRole}>
                       <option value="owner">Власник</option>
@@ -25,22 +29,28 @@ export default function TeamList() {
                         </select>
                         <IoIosArrowDown className={css.selectIcon} />
                     </div>
-                    
+                        <BsTrash className={css.binIcon} />
+                        </div>
+                        </div>
                 </div>
-                <BsTrash  className={css.binIcon} />
             </li>
 
                <li className={css.teamListItem}>
                 <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                     <img src="" alt="" />
-                </div>
+                    </div>
+                    
+                     <div className={css.container}>
+
 
                 <div className={css.nameBox}>
                 <p className={css.memberName}>Name Surname</p>
-                    <p className={css.memberEmail}>email@gmail.com</p>
-                </div>
-
+                    <p className={css.memberEmail}>juliakharetonchuk@gmail.com</p>
+                    </div>
+                    
+                    <div className={css.selectAndBin}>
+                        
                <div className={css.selectBox}>
                 <select id="role" name="role" className={css.memberRole}>
                       <option value="owner">Власник</option>
@@ -50,20 +60,28 @@ export default function TeamList() {
                         <IoIosArrowDown className={css.selectIcon} />
                     </div>
 
+               
+                        <BsTrash className={css.binIcon} />
+                        </div>
+                        </div>
                 </div>
-                <BsTrash className={css.binIcon} />
             </li>
 
               <li className={css.teamListItem}>
                 <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                     <img src="" alt="" />
-                </div>
+                    </div>
+                    
+                     <div className={css.container}>
+
 
                 <div className={css.nameBox}>
                 <p className={css.memberName}>Name Surname</p>
                     <p className={css.memberEmail}>email@gmail.com</p>
-                </div>
+                    </div>
+
+                <div className={css.selectAndBin}>
                  <div className={css.selectBox}>
                 <select id="role" name="role" className={css.memberRole}>
                       <option value="owner">Власник</option>
@@ -72,21 +90,27 @@ export default function TeamList() {
                         </select>
                         <IoIosArrowDown className={css.selectIcon} />
                     </div>
+                
+                    <BsTrash className={css.binIcon} />
+                        </div>
+                        </div>
                 </div>
-                <BsTrash className={css.binIcon} />
             </li>
 
  <li className={css.teamListItem}>
                 <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                     <img src="" alt="" />
-                </div>
+                    </div>
+                    
+                    <div className={css.container}>
 
                 <div className={css.nameBox}>
                 <p className={css.memberName}>Name Surname</p>
                     <p className={css.memberEmail}>email@gmail.com</p>
                 </div>
 
+                      <div className={css.selectAndBin}>
                  <div className={css.selectBox}>
                 <select id="role" name="role" className={css.memberRole}>
                       <option value="owner">Власник</option>
@@ -96,20 +120,28 @@ export default function TeamList() {
                         <IoIosArrowDown className={css.selectIcon} />
                     </div>
 
+                
+                        <BsTrash className={css.binIcon} />
+                    </div>
+                    </div>
                 </div>
-                <BsTrash className={css.binIcon} />
             </li>
 
              <li className={css.teamListItem}>
                 <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                     <img src="" alt="" />
-                </div>
+                    </div>
+                    
+                    <div className={css.container}>
+
 
                 <div className={css.nameBox}>
                 <p className={css.memberName}>Name Surname</p>
                     <p className={css.memberEmail}>email@gmail.com</p>
-                </div>
+                    </div>
+                    
+                      <div className={css.selectAndBin}>
 
                  <div className={css.selectBox}>
                 <select id="role" name="role" className={css.memberRole}>
@@ -120,21 +152,28 @@ export default function TeamList() {
                         <IoIosArrowDown className={css.selectIcon} />
                     </div>
                     
-                </div>
-                <BsTrash className={css.binIcon} />
+                
+                        <BsTrash className={css.binIcon} />
+                    </div>
+                    </div>
+                    </div>
             </li>
 
              <li className={css.teamListItem}>
                 <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                     <img src="" alt="" />
-                </div>
+                    </div>
+                    
+                     <div className={css.container}>
+
 
                 <div className={css.nameBox}>
                 <p className={css.memberName}>Name Surname</p>
                     <p className={css.memberEmail}>email@gmail.com</p>
                 </div>
 
+                      <div className={css.selectAndBin}>
                 <div className={css.selectBox}>
                 <select id="role" name="role" className={css.memberRole}>
                       <option value="owner">Власник</option>
@@ -144,8 +183,11 @@ export default function TeamList() {
                         <IoIosArrowDown className={css.selectIcon} />
                     </div>
 
+                
+                        <BsTrash className={css.binIcon} />
+                        </div>
+                        </div>
                 </div>
-                <BsTrash className={css.binIcon} />
             </li>
         </ul>
     )
