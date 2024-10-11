@@ -1,9 +1,24 @@
 .loginForm {
   background-color: #151616;
-  padding: 98px 80px 62px 78px;
-  width: 460px;
   display: flex;
   flex-direction: column;
+  border-radius: 0;
+  padding: 98px 77px 62px 79px;
+  width: 460px;
+}
+
+@media screen and (max-width: 1279.98px) {
+  .loginForm {
+    width: 524px;
+    padding: 20px;
+    border-radius: 8px;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .loginForm {
+    width: 371px;
+  }
 }
 
 .topSectionWrapper {
@@ -12,18 +27,31 @@
 }
 
 .loginHeader {
-  font-family: "Roboto", sans-serif;
   font-size: 24px;
-  color: #fff;
+  font-style: normal;
   margin-bottom: 4px;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 767.98px) {
+  .loginHeader {
+    font-weight: 400;
+  }
 }
 
 .loginText {
-  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 8px;
+  font-style: normal;
+  line-height: normal;
   color: #8d8d8d;
   margin-bottom: 42px;
+}
+
+@media screen and (max-width: 1279.98px) {
+  .loginText {
+    margin-bottom: 14px;
+  }
 }
 
 .wrapper {
@@ -33,6 +61,13 @@
   margin-bottom: 41px;
 }
 
+@media screen and (max-width: 1279.98px) {
+  .wrapper {
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+}
+
 .inputWrapper {
   position: relative;
   display: flex;
@@ -40,11 +75,18 @@
   gap: 6px;
 }
 
+@media screen and (max-width: 1279.98px) {
+  .inputWrapper {
+    gap: 12px;
+  }
+}
+
 .loginLabel {
-  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 11px;
   color: #e9e9e9;
+  font-style: normal;
+  line-height: normal;
 }
 
 .inputWithIconWrapper {
@@ -62,6 +104,12 @@
   height: 10px;
 }
 
+@media screen and (max-width: 1279.98px) {
+  .inputIcon {
+    left: 20px;
+  }
+}
+
 .input {
   background-color: #242525;
   border: none;
@@ -77,9 +125,19 @@
   width: 100%;
 }
 
+@media screen and (max-width: 1279.98px) {
+  .input {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 40px;
+  }
+}
+
 .input::placeholder {
   font-size: 10px;
   font-weight: 500;
+  font-style: normal;
+  line-height: normal;
 }
 
 .errorMsg {
@@ -90,6 +148,20 @@
   position: absolute;
   top: 100%;
   left: 0;
+}
+
+.forgotPasswordLink {
+  background-color: transparent;
+  border: none;
+  width: fit-content;
+  text-align: start;
+  cursor: pointer;
+  color: #0096b7;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration-line: underline;
 }
 
 .eyeIconBtn {
@@ -104,6 +176,18 @@
   background-color: transparent;
   outline: none;
   border: none;
+}
+
+@media screen and (max-width: 1279.98px) {
+  .eyeIconBtn {
+    right: 10px;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .eyeIconBtn {
+    right: 20px;
+  }
 }
 
 .eyeIcon {
@@ -125,32 +209,40 @@
   width: 100%;
   padding-top: 12px;
   padding-bottom: 8px;
-  border: none;
   margin-bottom: 27px;
+  border: none;
   cursor: pointer;
 }
 
-.loginBottomText {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-size: 8px;
-  color: #8d8d8d;
-  margin-bottom: 13px;
-  margin-right: auto;
-  margin-left: auto;
+@media screen and (max-width: 1279.98px) {
+  .submitButton {
+    padding-top: 8px;
+    margin-bottom: 12px;
+  }
 }
 
-.linkToRegister {
-  text-decoration: none;
-  width: 100%;
-  border: 1px solid #242525;
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-family: "Roboto", sans-serif;
+.googleRegistrationText {
+  color: #8d8d8d;
+  font-size: 8px;
+  font-style: normal;
   font-weight: 500;
-  font-size: 11px;
-  color: #e9e9e9;
+  line-height: normal;
+  text-align: center;
+  margin-bottom: 13px;
+}
+
+.googleWrapper {
+  width: 301px;
+  height: 33px;
+  margin-bottom: 136px;
+}
+
+@media screen and (max-width: 1279.98px) {
+  .googleWrapper {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 14px;
+  }
 }
 
 .bottomTextWrapper {
@@ -159,10 +251,11 @@
 }
 
 .bottomLink {
-  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 11px;
   color: #0096b7;
+  font-style: normal;
+  line-height: normal;
 }
 
 .bottomText {

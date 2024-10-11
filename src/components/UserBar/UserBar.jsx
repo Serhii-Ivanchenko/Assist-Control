@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef } from 'react';
 import styles from './UserBar.module.css';
 import { FiSettings } from "react-icons/fi";
 import UserSettingsModal from '../Modals/UserSettingsModal/UserSettingsModal';

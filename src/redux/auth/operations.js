@@ -11,10 +11,27 @@ export const register = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await axiosInstance.post("/v1/register/", userData);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Validate email
+export const validateEmail = createAsyncThunk(
+  "auth/validateEmail",
+  async (api_key, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get("/v1/validate-email/", {
+        headers: {
+          "X-Api-Key": api_key,
+        },
+      });
       setAuthHeader(response.data.api_key);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.detail);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -24,13 +41,11 @@ export const logIn = createAsyncThunk(
   "auth/login",
   async (userData, thunkAPI) => {
     try {
-      const response = await axiosInstance.post("/v1/authenticate/", userData, {
-        withCredentials: true,
-      });
+      const response = await axiosInstance.post("/v1/authenticate/", userData);
       setAuthHeader(response.data.api_key);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.detail);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -53,7 +68,7 @@ export const getUserData = createAsyncThunk(
     try {
       const response = await axiosInstance.get("/v1/user_info/", {
         headers: {
-          "X-Api-Key": "lDhvsqB1",
+          "X-Api-Key": "YA7NxysJ",
         },
       });
       return response.data;

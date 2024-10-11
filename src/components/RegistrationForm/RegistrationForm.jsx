@@ -36,11 +36,35 @@ export default function RegistrationForm() {
       .unwrap()
       .then(() => {
         toast.success(
-          "Для завершення реєстрації потрібно підтвердити email адресу. Будь ласка, перевірте електронну пошту"
+          "Для завершення реєстрації потрібно підтвердити email адресу. Будь ласка, перевірте електронну пошту",
+          {
+            position: "top-center",
+            duration: 30000,
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          }
         );
       })
-      .catch(() => {
-        toast.error("Щось сталося, спробуйте ще раз");
+      .catch((err) => {
+        if (err.status === 400) {
+          toast.error("Користувач вже існує", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
+        } else {
+          toast.error("Щось сталося, спробуйте ще раз", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
+        }
       });
 
     actions.resetForm();
@@ -199,6 +223,9 @@ export default function RegistrationForm() {
           <GoogleBtn className={css.googleBtn} />
         </div>
       </div>
+      <p className={css.orText}>або</p>
+      <p className={css.googleRegistrationText}>Або увійдіть за допомогою</p>
+      <div className={css.googleWrapper}>{/* <GoogleBtn /> */}</div>
     </div>
   );
 }

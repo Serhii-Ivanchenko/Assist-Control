@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
 import {
-  getTariffData,
+  // getTariffData,
   getUserData,
   logIn,
   logInWithGoogle,
@@ -10,6 +10,7 @@ import {
   register,
   updateUserAvatar,
   updateUserData,
+  validateEmail,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -35,12 +36,27 @@ const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-        state.apiKey = action.payload.api_key;
         state.error = null;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = false;
+        state.error = action.payload;
+      })
+      .addCase(validateEmail.pending, (state) => {
+        state.isLoading = true;
+        state.isLoggedIn = false;
+        state.error = null;
+      })
+      .addCase(validateEmail.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isLoggedIn = true;
+        state.error = null;
+        state.apiKey = action.payload.api_key;
+      })
+      .addCase(validateEmail.rejected, (state, action) => {
+        state.isLoggedIn = false;
+        state.isLoading = false;
         state.error = action.payload;
       })
       .addCase(logIn.pending, (state) => {
@@ -57,7 +73,7 @@ const authSlice = createSlice({
       .addCase(logIn.rejected, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-        state.error = action.payload;
+        state.error = action.payload.message;
       })
       .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, (state) => {
@@ -85,17 +101,17 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateUserData.rejected, handleRejected)
-      .addCase(getTariffData.pending, handlePending)
-      .addCase(getTariffData.fulfilled, (state, action) => {
-        state.userData.tariff = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(getTariffData.rejected, handleRejected)
-      .addCase(refreshUser.pending, (state) => {
-        state.isRefreshing = true;
-        state.isLoading = true;
-        state.error = null;
-      })
+      // .addCase(getTariffData.pending, handlePending)
+      // .addCase(getTariffData.fulfilled, (state, action) => {
+      //   state.userData.tariff = action.payload;
+      //   state.isLoading = false;
+      // })
+      // .addCase(getTariffData.rejected, handleRejected)
+      // .addCase(refreshUser.pending, (state) => {
+      //   state.isRefreshing = true;
+      //   state.isLoading = true;
+      //   state.error = null;
+      // })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.userData = { ...state.userData, ...action.payload };
         state.isLoggedIn = true;

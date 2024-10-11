@@ -7,6 +7,7 @@ import Loader from "../Loader/Loader.jsx";
 import { useSelector } from "react-redux";
 import { selectIsRefreshing } from "../../redux/auth/selectors.js";
 import { Toaster } from "react-hot-toast";
+import ValidateEmailPage from "../../pages/ValidateEmailPage/ValidateEmailPage.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
@@ -81,6 +82,17 @@ export default function App() {
               <PrivateRoute redirectTo="/login" component={<SettingsPage />} />
             }
           />
+
+          <Route
+            path="/validate-email/:api_key"
+            element={
+              <RestrictedRoute
+                redirectTo="/video-control"
+                component={<ValidateEmailPage />}
+              />
+            }
+          />
+
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
