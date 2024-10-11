@@ -84,7 +84,7 @@ export default function App() {
           />
 
           <Route
-            path="/validate-email/:apiKey"
+            path="/validate-email/:api_key"
             element={
               <RestrictedRoute
                 redirectTo="/video-control"
