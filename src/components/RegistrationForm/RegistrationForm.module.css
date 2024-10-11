@@ -184,8 +184,9 @@
 }
 .bottomTextWrapper {
   display: flex;
+  align-items: center;
   gap: 4px;
-  margin-top: 33px;
+  margin-top: 25px;
 }
 
 @media screen and (max-width: 1279.98px) {
@@ -244,4 +245,9 @@
   .orText {
     display: none;
   }
+}
+
+.googleWrapper {
+  width: 127px;
+    height: 29px;
 }

@@ -1,0 +1,26 @@
+.icon_google {
+    width: 22px;
+    height: 22px;
+}
+
+.google_btn {
+    border: 1px solid #242525;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: #8D8D8D;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.2em;
+    cursor: pointer;
+    background-color: transparent;
+    transition: border 250ms ease-in-out, color 250ms ease-in-out;
+}
+
+.google_btn:hover {
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}

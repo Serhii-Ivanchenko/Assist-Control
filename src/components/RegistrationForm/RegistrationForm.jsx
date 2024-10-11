@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { register } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
+import GoogleBtn from "../GoogleBtn/GoogleBtn.jsx";
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
@@ -217,6 +218,10 @@ export default function RegistrationForm() {
         <Link to="/login" className={css.bottomLink}>
           Увійти
         </Link>
+        <p className={css.bottomText}>або</p>
+        <div className={css.googleWrapper}>
+          <GoogleBtn className={css.googleBtn} />
+        </div>
       </div>
       <p className={css.orText}>або</p>
       <p className={css.googleRegistrationText}>Або увійдіть за допомогою</p>
