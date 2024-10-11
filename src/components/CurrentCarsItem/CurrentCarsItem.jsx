@@ -19,7 +19,7 @@ export default function CurrentCarsItem() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.imgContainer}>
-        <img src={carImg} alt="Car image" />
+        <img className={styles.carImg} src={carImg} alt="Car image" />
       </div>
       <div className={styles.carInfoContainer}>
         <h3 className={styles.carReg}>AХ5678БУ</h3>

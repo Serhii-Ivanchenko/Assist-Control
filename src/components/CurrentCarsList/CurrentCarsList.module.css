@@ -1,15 +1,28 @@
-.wrapper {
-  width: 386px;
-  /* height: 199px; */
-  overflow: scroll;
+@media screen and (max-width: 1280px) {
+  .wrapper {
+    width: 386px;
+    /* height: 199px; */
+    overflow: scroll;
+  }
+  .wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari та Opera */
+  }
+
+  .carsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 }
 
-.wrapper::-webkit-scrollbar {
-  display: none; /* Chrome, Safari та Opera */
-}
+@media screen and (max-width: 1920px) {
+  .wrapper {
+    width: 578px;
+  }
 
-.carsList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  .carsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 }
