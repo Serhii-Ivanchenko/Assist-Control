@@ -10,18 +10,18 @@ import toast from "react-hot-toast";
 export default function VideControlPage() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      await dispatch(getUserData())
-        .unwrap()
-        .then(() => {})
-        .catch(() => {
-          toast.error("Something went wrong. Please, try again");
-        });
-    };
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     await dispatch(getUserData())
+  //       .unwrap()
+  //       .then(() => {})
+  //       .catch(() => {
+  //         toast.error("Something went wrong. Please, try again");
+  //       });
+  //   };
 
-    fetchUserData();
-  }, [dispatch]);
+  //   fetchUserData();
+  // }, [dispatch]);
 
   return (
     <div className={styles.videoControlMainContainer}>

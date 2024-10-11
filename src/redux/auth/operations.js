@@ -4,7 +4,6 @@ import {
   clearAuthHeader,
   axiosInstance,
 } from "../../services/api.js";
-import axios from "axios";
 
 //User registration
 export const register = createAsyncThunk(
@@ -22,16 +21,16 @@ export const register = createAsyncThunk(
 // Validate email
 export const validateEmail = createAsyncThunk(
   "auth/validateEmail",
-  async (apiKey, thunkAPI) => {
+  async (api_key, thunkAPI) => {
     try {
-      const response = await axios.get("/v1/validate-email", {
-        params: {
-          api_key: apiKey,
+      const response = await axiosInstance.get("/v1/validate-email/", {
+        headers: {
+          "X-Api-Key": api_key,
         },
       });
-      console.log(response);
-      // setAuthHeader(response.data.api_key);
-      // return response.data;
+      console.log("response during validation", response.data);
+      setAuthHeader(response.data.api_key);
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

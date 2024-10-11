@@ -35,7 +35,7 @@ const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-        state.apiKey = action.payload.api_key;
+        // state.apiKey = action.payload.api_key;
         state.error = null;
       })
       .addCase(register.rejected, (state, action) => {
@@ -47,14 +47,15 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.isLoggedIn = false;
       })
-      .addCase(validateEmail.fulfilled, (state) => {
+      .addCase(validateEmail.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
+        state.apiKey = action.payload.api_key;
       })
       .addCase(validateEmail.rejected, (state, action) => {
         state.isLoggedIn = false;
         state.isLoading = false;
-        // state.error = action.payload;
+        state.error = action.payload;
       })
       .addCase(logIn.pending, (state) => {
         state.isLoading = true;
@@ -66,7 +67,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         // state.apiKey = action.payload.api_key;
         state.error = null;
-        console.log(action.payload.api_key);
+        // console.log(action.payload.api_key);
       })
       .addCase(logIn.rejected, (state, action) => {
         state.isLoading = false;
