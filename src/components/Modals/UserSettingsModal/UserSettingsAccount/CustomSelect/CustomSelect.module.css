@@ -5,6 +5,7 @@
 
     display: flex;
     align-items: center;
+    
 
     border-radius: 10px;
     border: 1px solid #4A4A4A;
@@ -70,20 +71,21 @@
 }
 
 .selectIcon {
-    position: absolute;
+    /* position: absolute;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
+    transform: translateY(-50%); */
+    /* pointer-events: none; */
     fill: #767676;
     width: 20px;
     height: 20px;
     transition: transform 0.3s ease;
+
+    margin-left: auto;
 }
 
-/* .selectIcon:hover{
-transform: translateY(-50%) rotate(180deg);
-} */
+.rotated {
+    transform: rotate(180deg);}
 
 .selectWrapper {
     position: relative;

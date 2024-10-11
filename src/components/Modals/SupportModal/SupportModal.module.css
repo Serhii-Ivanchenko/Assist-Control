@@ -95,7 +95,7 @@
     line-height: normal;
 }
 
-
+/* Дизайн скроллу */
 .textarea::-webkit-scrollbar {
     width: 8px;
 }
@@ -111,7 +111,7 @@
     cursor: pointer;
 }
 
-/* Дизайн скроллу ^ */
+
 
 .supportBtn {
     width: 150px;
