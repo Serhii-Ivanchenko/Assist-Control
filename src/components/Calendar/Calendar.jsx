@@ -148,5 +148,3 @@ const handleDateClick = (date) => {
     </div>
   );
 };
-
-
