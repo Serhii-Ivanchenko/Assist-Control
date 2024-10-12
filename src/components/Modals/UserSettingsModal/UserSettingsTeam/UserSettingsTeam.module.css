@@ -1,4 +1,4 @@
-.teamBox{
+.teamBox {
     height: 850px;
     padding: 125px 40px 0px 42px;
 
@@ -8,17 +8,23 @@
 }
 
 @media only screen and (max-width: 1279.9px) {
-.teamBox {
-    padding-bottom: 37px;
-    flex-direction: column;
-  }
+    .teamBox {
+        padding-bottom: 37px;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 1919.9px) {
+    .teamBox {
+        gap: 10px;
+    }
 }
 
 @media only screen and (max-width: 767.9px) {
-  .teamBox {
-    padding: 74px 40px 21px 26px;
-    gap: 60px;
-  }
+    .teamBox {
+        padding: 74px 40px 21px 26px;
+        gap: 60px;
+    }
 }
 
 .title {
@@ -34,8 +40,8 @@
     cursor: default;
 }
 
-@media only screen and (max-width: 767.9px){
-    .title{
+@media only screen and (max-width: 767.9px) {
+    .title {
         font-size: 16px;
     }
 }
@@ -53,11 +59,19 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height:120%;;
+    line-height: 120%;
+    ;
 }
 
-@media only screen and (max-width: 767.9px){
-    .text{
+@media only screen and (max-width: 1919.9px) {
+    .text {
+
+        width: 299px;
+    }
+}
+
+@media only screen and (max-width: 767.9px) {
+    .text {
         font-size: 14px;
         margin-bottom: 26px;
         width: 221px;
@@ -91,9 +105,9 @@
 }
 
 @media only screen and (min-width: 1920px) {
-.addBtn {
-    padding: 15px 30px;
-  }
+    .addBtn {
+        padding: 15px 30px;
+    }
 }
 
 .closeBtn {
