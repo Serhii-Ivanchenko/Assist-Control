@@ -59,10 +59,51 @@ export const getCarsByDate = createAsyncThunk(
 export const getCarsByMonth = createAsyncThunk(
   "cars/getCarsByMonth",
   async (date, thunkAPI) => {
-    const { month, year } = date;
+    // const { month, year } = date;
     try {
       const response = await axiosInstance.get(
-        `/v1/current/month/cars/?month=${month}&year=${year} `,
+        `/v1/current/month/cars/?date_str=${date}/`,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Get load in % for each day in a particular month
+export const getCalendarByMonth = createAsyncThunk(
+  "cars/getCalendarByMonth",
+  async (date, thunkAPI) => {
+    // const { month, year } = date;
+    try {
+      const response = await axiosInstance.get(
+        `/v1/get_monthly_load?date=${date}`,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Get amount of cars per hour 
+export const getCarsForHour = createAsyncThunk(
+  "cars/getCarsForHour",
+  async (day, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get(
+        `/v1/get_busyness?date=${day}`,
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",
