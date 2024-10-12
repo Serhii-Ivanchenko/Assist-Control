@@ -189,9 +189,8 @@ export default function Chart() {
 
       <div className={css.areabox}>
         <ResponsiveContainer
-          height={215}
-          width={272}
-          className={css.responseContainer}
+          
+          className={css.responsecontainer}
         >
           <AreaChart data={data}>
             <defs>

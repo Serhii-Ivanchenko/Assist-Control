@@ -5,6 +5,7 @@ import {
   getCarsByDate,
   getCarsByMonth,
   getCurrentCars,
+  getCarsForHour,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -23,7 +24,13 @@ const carsSlice = createSlice({
   reducers: {
     changeActualDate: (state, action) => {
       state.date = action.payload;
+        // state.loadPercent = action.payload.percent;
     },
+changeActualPercent: (state, action) => {
+      state.loadPercent = action.payload;
+        // state.loadPercent = action.payload.percent;
+    },
+   
   },
   extraReducers: (builder) =>
     builder
@@ -51,8 +58,17 @@ const carsSlice = createSlice({
         state.isLoading = false;
         state.month = action.payload.cars;
       })
-      .addCase(getCarsByMonth.rejected, handleRejected),
+      .addCase(getCarsByMonth.rejected, handleRejected)
+      .addCase(getCarsForHour.pending, handlePending)
+      .addCase(getCarsForHour.fulfilled, (state, action) => {
+        state.isLoading = false;
+        //   state.date = action.payload.date;
+        state.forHour = action.payload.hourly_car_count;
+      })
+      .addCase(getCarsForHour.rejected, handleRejected)
+  ,
 });
 
 export const { changeActualDate } = carsSlice.actions;
+export const { changeActualPercent } = carsSlice.actions;
 export default carsSlice.reducer;
