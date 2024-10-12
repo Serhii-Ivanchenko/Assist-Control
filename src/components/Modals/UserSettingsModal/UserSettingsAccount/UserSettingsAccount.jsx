@@ -8,6 +8,8 @@ import { useState } from "react";
 import CustomSelect from "./CustomSelect/CustomSelect";
 import { BsFillKeyFill } from "react-icons/bs";
 import { BsSdCardFill } from "react-icons/bs";
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser } from "../../../../redux/auth/selectors";
 
 
 const initialValues = {
@@ -23,8 +25,12 @@ const Validation = Yup.object().shape({
 
 
 export default function UserSettingsAccount({onClose}) {
-const [isVisible, setIsVisible] = useState(false)
-
+  const [isVisible, setIsVisible] = useState(false);
+  
+  const user = useSelector(selectUser);
+  console.log(user);
+  
+  const userEmail = user.email;
 
 const handleSubmit = (values) => {
 		console.log(values);
@@ -49,7 +55,7 @@ const handleSubmit = (values) => {
         <div className={css.emailBox}>
         <label className={css.titles}>Пошта</label>
 
-            <Field className={css.email} name="email"  value="zelensky.official@gmail.com" onClick={handleToggleClick} readOnly/>
+            <Field className={css.email} name="email"  value={userEmail} onClick={handleToggleClick} readOnly/>
 
         {isVisible && (<span className={css.warningMessage}>для зміни пошти зверніться у технічну підтримку</span>)}
         </div>
