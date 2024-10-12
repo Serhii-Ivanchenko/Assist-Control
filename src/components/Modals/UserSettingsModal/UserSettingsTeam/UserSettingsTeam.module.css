@@ -43,6 +43,7 @@
 .text {
     /* width: 190px;
     height: 112px; */
+    width: 347px;
     margin-bottom: 34px;
 
     cursor: default;
@@ -59,6 +60,7 @@
     .text{
         font-size: 14px;
         margin-bottom: 26px;
+        width: 221px;
     }
 }
 

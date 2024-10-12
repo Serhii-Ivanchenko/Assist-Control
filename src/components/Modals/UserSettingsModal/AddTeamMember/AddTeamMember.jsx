@@ -129,9 +129,9 @@ export default function AddTeamMember({ onClose }) {
                 <div className={css.roleDescription}>
                   <p className={css.title}> Перегляд</p>
                   <p className={css.text}>
-                    Перегляд: користувач може лише переглядати інформацію без
-                    можливості її змінювати, додавати або видаляти. Доступ
-                    обмежений тільки для ознайомлення з даними.
+                    користувач може лише переглядати інформацію без можливості
+                    її змінювати, додавати або видаляти. Доступ обмежений тільки
+                    для ознайомлення з даними.
                   </p>
                 </div>
               </label>
@@ -150,10 +150,17 @@ export default function AddTeamMember({ onClose }) {
                 <div className={css.roleDescription}>
                   <p className={css.title}>Адміністратор</p>
                   <p className={css.text}>
-                    Адміністратор: користувач має повний доступ до всіх функцій
-                    системи, включаючи керування налаштуваннями, редагування,
-                    створення та видалення даних,а також управління правами
-                    інших користувачів.
+                    користувач має повний доступ до всіх функцій системи,
+                    включаючи керування{" "}
+                    <span className={css.responsiveBr}>
+                      <br />
+                    </span>
+                    налаштуваннями, редагування, створення та видалення даних,а
+                    також{" "}
+                    <span className={css.responsiveBr2}>
+                      <br />
+                    </span>
+                    управління правами інших користувачів.
                   </p>
                 </div>
               </label>
@@ -164,7 +171,7 @@ export default function AddTeamMember({ onClose }) {
                 Відміна
               </button>
               <button type="submit" className={css.addBtn}>
-                <BsPersonPlusFill  className={css.addIcon} />
+                <BsPersonPlusFill className={css.addIcon} />
                 Додати
               </button>
             </div>
