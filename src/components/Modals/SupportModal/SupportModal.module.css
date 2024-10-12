@@ -95,23 +95,23 @@
     line-height: normal;
 }
 
-/* Якщо кількість тексту більша ніж textarea, то можна або застилізувати скролл, або просто обмежити кількість символів */
+/* Дизайн скроллу */
 .textarea::-webkit-scrollbar {
-    width: 7px;
+    width: 8px;
 }
 
 .textarea::-webkit-scrollbar-track {
-    background-color: #A4A4A4;
-    border-radius: 15px;
+    background-color: #1A1A1A;
+    border-radius: 4px;
 }
 
 .textarea::-webkit-scrollbar-thumb {
-    border-radius: 15px;
-    background-color: #333;
+    border-radius: 4px;
+    background-color: #4A4A4A;
     cursor: pointer;
 }
 
-/* Дизайн скроллу ^ */
+
 
 .supportBtn {
     width: 150px;

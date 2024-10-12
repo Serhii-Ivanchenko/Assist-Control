@@ -11,6 +11,21 @@
 
 }
 
+@media only screen and (max-width: 1279.9px) {
+  .addBox {
+    width: 736px;
+  }
+}
+
+@media only screen and (max-width: 767.9px) {
+  .addBox {
+    min-width: 350px;
+    width: 350px;
+    padding: 64px 40.5px 89px;
+    height: fit-content;
+  }
+}
+
 .closeBtn {
   position: absolute;
   top: 32px;
@@ -39,11 +54,18 @@
   font-size: 28px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.18em;
 
   align-self: stretch;
 
   margin-bottom: 65px;
+}
+
+@media only screen and (max-width: 767.9px) {
+  .addTitle {
+    font-size: 16px;
+    margin-bottom: 38px;
+  }
 }
 
 .fieldName {
@@ -52,9 +74,15 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-
+  line-height: 1.19em;
   margin-bottom: 8px;
 
+}
+
+@media only screen and (max-width: 767.9px) {
+  .fieldName {
+    font-size: 14px;
+  }
 }
 
 .field {
@@ -72,7 +100,7 @@
 
   background-color: #282828;
 
-  margin-bottom: 24px;
+  /* margin-bottom: 24px; */
 
   color: #FFF;
   font-family: "Roboto", sans-serif;
@@ -84,7 +112,23 @@
   outline: none;
 }
 
-.field::placeholder{
+@media only screen and (max-width: 1289.9px) {
+  .field {
+    min-width: 294px;
+    /* min-width: 100%; */
+    /* margin-bottom: 0; */
+  }
+}
+
+@media only screen and (max-width: 767.9px) {
+  .field {
+    /* min-width: 294px; */
+    min-width: 100%;
+    /* margin-bottom: 0; */
+  }
+}
+
+.field::placeholder {
   color: var(--Button-grey, #4A4A4A);
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -119,11 +163,24 @@
   left: 10px;
 }
 
+@media only screen and (max-width: 767.9px) {
+  .errorMessage {
+    top: 100%;
+  }
+}
+
 .nameBox {
   width: inherit;
   display: flex;
   flex-direction: row;
   gap: 20px;
+}
+
+@media only screen and (max-width: 767.9px) {
+  .nameBox {
+    flex-direction: column;
+gap: 24px;
+  }
 }
 
 .name {
@@ -154,6 +211,8 @@
   outline: none;
 }
 
+
+
 .fieldEmail::placeholder {
   color: var(--Button-grey, #4A4A4A);
   font-family: "Roboto", sans-serif;
@@ -178,7 +237,7 @@
   -webkit-text-fill-color: white !important;
 }
 
-.errorMessageEmail{
+.errorMessageEmail {
   color: #FF6363;
   font-size: 10px;
   font-style: normal;
@@ -190,11 +249,12 @@
   left: 10px;
 }
 
-.nameEmail{
+.nameEmail {
   display: flex;
   flex-direction: column;
 
   position: relative;
+  margin-top: 24px;
 }
 
 
@@ -211,7 +271,16 @@
 
 }
 
+@media only screen and (max-width: 767.9px) {
+  .btnBox {
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 23px;
+  }
+}
+
 .cancelBtn {
+  height: 51px;
   padding: 16px 48px;
   color: #FFF;
 
@@ -226,14 +295,23 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.19em;
   cursor: pointer;
   background-color: transparent;
 }
 
+@media (max-width: 767.9px) {
+  .cancelBtn {
+    height: 48px;
+    font-size: 14px;
+    line-height: 1.14em;
+  }
+}
+
 .addBtn {
+  height: 51px;
   cursor: pointer;
-  
+
   padding: 16px 48px;
 
   border-radius: 6px;
@@ -249,12 +327,20 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.19em;
 
   border: none;
 }
 
-.addIcon{
+@media (max-width: 767.9px) {
+  .addBtn {
+    height: 50px;
+    font-size: 14px;
+    line-height: 1.14em;
+  }
+}
+
+.addIcon {
   width: 18px;
   height: 18px;
 }
@@ -280,7 +366,7 @@
   border: solid 1px #000;
   margin-right: 15px;
   padding: 4px;
-  
+
 }
 
 .dot {
@@ -318,16 +404,18 @@
   background-color: #007bff;
 }
 
-.radioBtnBox{
- display: flex;
- gap: 24px;
- flex-direction: column;
+.radioBtnBox {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+  width: 100%;
 }
 
 .roleDescription {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -341,11 +429,16 @@
 
 .title {
   color: #FFF;
-
-  font-size: 14px;
+  padding-top: 4px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.19em;
+}
+@media only screen and (max-width: 767.9px) {
+  .title {
+    font-size: 14px;
+  }
 }
 
 .text {
@@ -360,3 +453,21 @@
   width: 100%
 }
 
+@media only screen and (max-width: 767.9px) {
+  .text {
+    font-size: 13px;
+  }
+}
+@media (max-width: 767.9px) {
+  .responsiveBr {
+    display: none;
+  }
+}
+.responsiveBr2 {
+  display: none;
+}
+@media (max-width: 767.9px) {
+  .responsiveBr2 {
+    display: inline;
+  }
+}

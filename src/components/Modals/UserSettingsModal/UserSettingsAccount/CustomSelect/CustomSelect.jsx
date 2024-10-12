@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ErrorMessage } from "formik";
 import { IoIosArrowDown } from "react-icons/io";
+import clsx from "clsx";
 import css from "./CustomSelect.module.css"
 
 const languages = [
@@ -22,7 +23,7 @@ export default function CustomSelect({ field, form }) {
       <div className={css.inputSelect} onClick={() => setIsOpen((prev) => !prev)}>
         <span className={`fi ${languages.find(lang => lang.value === field.value)?.flag} ${css.icon}`} />
         {languages.find(lang => lang.value === field.value)?.label}
-              <IoIosArrowDown className={css.selectIcon} />
+              <IoIosArrowDown className={clsx(css.selectIcon, { [css.rotated]: isOpen })} />
       </div>
       {isOpen && (
         <div className={css.options}>
