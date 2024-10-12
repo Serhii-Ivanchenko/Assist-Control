@@ -16,3 +16,5 @@ export const selectPercent = (state) => state.cars.loadPercent;
 
 export const selectCarsForHour = (state) => state.cars.forHour;
 
+export const selectQueryMonth = (state) => state.cars.queryMonth;
+

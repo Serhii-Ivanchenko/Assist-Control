@@ -2,15 +2,16 @@
     margin-top: 20px;
     width: 282px;
     height: 125px;
-   
+
 }
 
 @media only screen and (min-width: 1920px) {
     .containercalendar {
-            margin-top: 30px;
-            width: 422px;
-            height: 206px;
-        }}
+        margin-top: 30px;
+        width: 422px;
+        height: 188px;
+    }
+}
 
 .weekdays {
     display: grid;
@@ -31,12 +32,14 @@
 }
 
 @media only screen and (min-width: 1920px) {
-    .weekdays { font-size: 14px; 
-     height: 24px;
-     margin-bottom: 3px;
-    margin-left: 11px;
-    /* width: 24px; */ 
-grid-column-gap: 5px;}
+    .weekdays {
+        font-size: 16px;
+        height: 24px;
+        margin-bottom: 3px;
+        margin-left: 11px;
+        /* width: 24px; */
+        grid-column-gap: 5px;
+    }
 }
 
 .calendargrid {
@@ -48,9 +51,9 @@ grid-column-gap: 5px;}
 
 @media only screen and (min-width: 1920px) {
     .calendargrid {
-        /* grid-column-gap: 6px; */
-         grid-row-gap: 6px; 
-       
+        grid-column-gap: 7.5px;
+        grid-row-gap: 6px;
+
     }
 }
 

@@ -90,7 +90,7 @@ const options = {
     }, [dispatch, calendarMonth ]);
 
     let isCurrentMonth = currentMonth === calendarMonth ? true : false;
-   console.log(carMonthData)
+  //  console.log(carMonthData)
   
 //   let endDay = isCurrentMonth && currentDay > 7 ? currentDay - 1 : 6;
 //   let startDay = isCurrentMonth && currentDay > 7 ? currentDay - 6 : 0;

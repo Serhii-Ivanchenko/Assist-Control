@@ -57,7 +57,7 @@ export default function Calendar() {
   const calendarDates = generateCalendarDates();
 
   const calendarWithPercent = addDataToDates(calendarDates, dataMonth);
-  console.log('sd',selectedDate);
+  // console.log('sd',selectedDate);
 
   // const handlePrevMonth = () => setCurrentDate(currentDate.subtract(1, "month"));
   // const handleNextMonth = () => setCurrentDate(currentDate.add(1, "month"));
@@ -142,7 +142,7 @@ const handleDateClick = (data,selectdate, percent) => {
         .calendar-day {
         width: 54px;
           height: 27px;
-          font-size: 12px; }}
+          font-size: 16px; }}
 
         .cursordefault{
         cursor: default;

@@ -44,14 +44,16 @@ export const initialState = {
     },
     current: [],
     day: [],
-    month: {},
+    month: [],
     all: [],
     newCars: [],
     forHour: {},
+    monthlyLoad: {},
     date: null,
     isLoading: false,
     error: null,
     loadPercent: null,
+    queryMonth: null,
   },
 
   client: {

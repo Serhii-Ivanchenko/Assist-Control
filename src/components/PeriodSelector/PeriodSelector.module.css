@@ -37,8 +37,7 @@
 @media only screen and (min-width: 1920px) {
     .periodtitle {
     font-size: 14px;
-    margin-right: 15px;
-    margin-left: 10px;
+    margin-right: 10px;
     } }
 
 .periodinput {
@@ -61,7 +60,7 @@
 @media only screen and (min-width: 1920px) {
     .periodinput {
         font-size: 14px;
-        width: 150px;
+        width: 147px;
         height: 20px;
         border: none;
         padding: 2px 24px 2px 9px;
@@ -93,7 +92,7 @@
     /* width: 120px; */
     background-color: #202020;
     border-radius: 10px;
-    margin-right: 44px;
+    margin-right: 65px;
 }
 
 .datewrapper:nth-last-child() {

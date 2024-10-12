@@ -9,7 +9,7 @@
 
 @media only screen and (min-width: 1920px) {
     .containerstats {
-            width: 465px;
+            width: 462px;
             height: 405px;
-            padding-bottom: 20px;
+            padding: 14px 29px 0 25px;
     }}

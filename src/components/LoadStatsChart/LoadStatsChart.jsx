@@ -125,7 +125,6 @@ export default function LoadStatsChart() {
     );
   };
 
-
  useEffect(() => {
      
      const fetchCarsForHour = async () => {
@@ -136,9 +135,6 @@ export default function LoadStatsChart() {
 
      fetchCarsForHour();
    }, [dispatch, actualDate, actualPercent ]);
-
-console.log()
-
 
   return (
     <div className={css.containerloadstats}>
