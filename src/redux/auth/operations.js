@@ -13,7 +13,7 @@ export const register = createAsyncThunk(
       const response = await axiosInstance.post("/v1/register/", userData);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -31,7 +31,7 @@ export const validateEmail = createAsyncThunk(
       setAuthHeader(response.data.api_key);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -45,7 +45,7 @@ export const logIn = createAsyncThunk(
       setAuthHeader(response.data.api_key);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
