@@ -1,12 +1,11 @@
 .containerperiodselector {
-
     /* width: 309px; */
     /* height: 40px; */
     background: #1a1a1a;
     display: flex;
     align-items: center;
     flex-direction: row;
-     margin-top: -23px; 
+    margin-top: -23px;
     /* margin-left: -2px; */
     /* margin-bottom: 15px; */
     /* gap: 5px; */
@@ -14,9 +13,11 @@
 
 }
 
- @media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1920px) {
     .containerperiodselector {
-    margin-top: -15px;}} 
+        margin-top: -15px;
+    }
+}
 
 .periodtitle {
     color: #9E9E9E;
@@ -36,9 +37,10 @@
 
 @media only screen and (min-width: 1920px) {
     .periodtitle {
-    font-size: 14px;
-    margin-right: 10px;
-    } }
+        font-size: 14px;
+        margin-right: 10px;
+    }
+}
 
 .periodinput {
     color: #9E9E9E;
@@ -81,10 +83,11 @@
 }
 
 @media only screen and (min-width: 1920px) {
-.icon {
+    .icon {
         width: 18px;
         height: 18px;
-}}
+    }
+}
 
 .datewrapper {
     position: relative;

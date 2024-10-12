@@ -6,6 +6,7 @@
   border-radius: 5px;
   padding: 16px 16px 0 16px;
 }
+
 @media only screen and (min-width: 1920px) {
   .pageContent {
     width: 1106px;
@@ -13,6 +14,7 @@
     padding: 24px 26px 0 26px;
   }
 }
+
 .pagegrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -21,6 +23,8 @@
 }
 
 @media only screen and (min-width: 1920px) {
-.pagegrid { grid-column-gap: 19px;
-  grid-row-gap: 19px;
-}}
+  .pagegrid {
+    grid-column-gap: 19px;
+    grid-row-gap: 19px;
+  }
+}

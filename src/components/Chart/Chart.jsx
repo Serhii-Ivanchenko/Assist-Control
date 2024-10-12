@@ -188,10 +188,7 @@ export default function Chart() {
       <p className={css.charttitle}>Машинозаїзди</p>
 
       <div className={css.areabox}>
-        <ResponsiveContainer
-          
-          className={css.responsecontainer}
-        >
+        <ResponsiveContainer className={css.responsecontainer}>
           <AreaChart data={data}>
             <defs>
               <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
