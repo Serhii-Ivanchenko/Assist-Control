@@ -117,4 +117,43 @@ export const getCarsForHour = createAsyncThunk(
   }
 );
 
+export const getPercentForHour = createAsyncThunk(
+  "cars/getPercentForHour",
+  async (day, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get(
+        `/v1/get_load_day?date=${day}`,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getNewCarsRange = createAsyncThunk(
+  "cars/getNewCarsRange",
+  async (date, thunkAPI) => {
+     const { dateBeginStr, dateEndStr } = date;
+    try {
+      const response = await axiosInstance.get(
+        `/v1/get_new_cars_range?start_date=${dateBeginStr}&end_date=${dateEndStr}`,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 // Get new cars

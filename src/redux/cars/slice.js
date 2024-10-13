@@ -7,6 +7,8 @@ import {
   getCurrentCars,
   getCarsForHour,
   getCalendarByMonth,
+  getNewCarsRange,
+  getPercentForHour,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -66,15 +68,28 @@ const carsSlice = createSlice({
       .addCase(getCarsForHour.fulfilled, (state, action) => {
         state.isLoading = false;
         //   state.date = action.payload.date;
-        state.forHour = action.payload.hourly_car_count;
+        state.forHours = action.payload.hourly_car_count;
+        state.workHours = action.payload.working_hours;
       })
       .addCase(getCarsForHour.rejected, handleRejected)
+      .addCase(getPercentForHour.pending, handlePending)
+      .addCase(getPercentForHour.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.loadPercent = action.payload;
+      })
+      .addCase(getPercentForHour.rejected, handleRejected)
       .addCase(getCalendarByMonth.pending, handlePending)
       .addCase(getCalendarByMonth.fulfilled, (state, action) => {
         state.isLoading = false;
         state.monthlyLoad = action.payload;
       })
-      .addCase(getCalendarByMonth.rejected, handleRejected),
+      .addCase(getCalendarByMonth.rejected, handleRejected)
+      .addCase(getNewCarsRange.pending, handlePending)
+      .addCase(getNewCarsRange.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.newCars = action.payload;
+      })
+      .addCase(getNewCarsRange.rejected, handleRejected),
 });
 
 export const { changeActualDate } = carsSlice.actions;

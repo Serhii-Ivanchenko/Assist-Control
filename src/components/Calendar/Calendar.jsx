@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState  } from "react";
 import { useDispatch } from "react-redux";
 import { changeActualDate , changeActualPercent } from '../../redux/cars/slice.js'
 import dayjs from "dayjs";
@@ -7,25 +7,27 @@ import css from "./Calendar.module.css";
 
 dayjs.extend(isoWeek);
 
-const dataMonth = [
-  { date: '2024-10-01', percent: 60 },
-  { date: '2024-10-02', percent: 85 },
-  { date: '2024-10-03', percent: 20 },
-  { date: '2024-10-04', percent: 90 },
-  { date: '2024-10-05', percent: 40 },
-  { date: '2024-10-06', percent: 70 },
+//  const dataMonth = [
+//   { date: '2024-10-01', percent: 60 },
+//    { date: '2024-10-02', percent: 85 },
+//    { date: '2024-10-03', percent: 20 },
+//    { date: '2024-10-04', percent: 90 },
+//    { date: '2024-10-05', percent: 40 },
+//    { date: '2024-10-06', percent: 70 },
  
-];
+//  ];
 
-export default function Calendar() {
+export default function Calendar({ queryMonth,dataMonth }) {
   let currentDate = dayjs();
+  let queryMonthDayjs = dayjs(queryMonth);
   const dispatch = useDispatch();
   // const [currentDate, setCurrentDate] = useState(dayjs()); // Текущая дата
-  const startOfMonth = currentDate.startOf("month"); // Начало месяца
-  const endOfMonth = currentDate.endOf("month"); // Конец месяца
+  const startOfMonth = dayjs(queryMonth).startOf("month"); // Начало месяца
+  const endOfMonth = dayjs(queryMonth).endOf("month"); // Конец месяца
   const startOfCalendar = startOfMonth.isoWeekday(1); // Начинаем календарь с понедельника
   const endOfCalendar = endOfMonth.isoWeekday(7); // Заканчиваем неделю на воскресенье
   const [selectedDate, setSelectedDate] = useState(dayjs());
+  
   
 
   // Генерируем массив дат для отображения в календаре
@@ -54,18 +56,14 @@ export default function Calendar() {
     });
   };
 
-  const calendarDates = generateCalendarDates();
+   const calendarDates = generateCalendarDates();
 
-  const calendarWithPercent = addDataToDates(calendarDates, dataMonth);
-  // console.log('sd',selectedDate);
-
-  // const handlePrevMonth = () => setCurrentDate(currentDate.subtract(1, "month"));
-  // const handleNextMonth = () => setCurrentDate(currentDate.add(1, "month"));
+   const calendarWithPercent = addDataToDates(calendarDates, dataMonth);
 
 const handleDateClick = (data,selectdate, percent) => {
     if (!isDateDisabled(data.date)) {
       setSelectedDate(selectdate);
-      console.log('data',selectdate);
+    
       dispatch(changeActualDate(selectdate))
       dispatch(changeActualPercent( percent ));
     }
@@ -84,7 +82,7 @@ const handleDateClick = (data,selectdate, percent) => {
   };
 
   const isDateDisabled = (date) => {
-    return date.isAfter(currentDate, 'day') || !date.isSame(currentDate, 'month');
+    return date.isAfter(currentDate, 'day') || date.isAfter(currentDate, 'month') || !date.isSame(queryMonthDayjs, 'month');
   };
  
 
@@ -111,8 +109,8 @@ const handleDateClick = (data,selectdate, percent) => {
            
             className={`calendar-day  
               ${item.date.date()>currentDate.date() ? "cursordefault" : ""} 
-              ${item.date.month() !== currentDate.month() ? "other-month" : ""} 
-              ${item.date.isSame(dayjs(), "day") ? "today" : ""}`
+              ${item.date.month() !== queryMonthDayjs.month() ? "other-month" : ""} 
+              ${item.date.isSame(selectedDate, "day") ? "today" : ""}`
             }
           >
             {item.date.date()}

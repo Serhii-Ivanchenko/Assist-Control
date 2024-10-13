@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector , useDispatch} from "react-redux";
-import { selectPercent, selectDate } from '../../redux/cars/selectors.js'
-import { getCarsForHour } from '../../redux/cars/operations.js'
+import { selectPercent, selectDate, selectWorkHours, selectCarsForHours } from '../../redux/cars/selectors.js'
+import { getCarsForHour, getPercentForHour } from '../../redux/cars/operations.js'
 import {
   AreaChart,
   XAxis,
@@ -48,60 +48,64 @@ const CustomTooltip = ({ active, payload, label, coordinate }) => {
   return null;
 };
 
-let data = [
-  {
-    hour: "09.00",
-    value: 5,
-  },
+// let data = [
+//   {
+//     hour: "09.00",
+//     value: 5,
+//   },
 
-  {
-    hour: "10.00",
-    value: 6,
-  },
+//   {
+//     hour: "10.00",
+//     value: 6,
+//   },
 
-  {
-    hour: "11.00",
-    value: 7,
-  },
+//   {
+//     hour: "11.00",
+//     value: 7,
+//   },
 
-  {
-    hour: "12.00",
-    value: 7,
-  },
+//   {
+//     hour: "12.00",
+//     value: 7,
+//   },
 
-  {
-    hour: "13.00",
-    value: 9,
-  },
+//   {
+//     hour: "13.00",
+//     value: 9,
+//   },
 
-  {
-    hour: "14.00",
-    value: 8,
-  },
+//   {
+//     hour: "14.00",
+//     value: 8,
+//   },
 
-  {
-    hour: "15.00",
-    value: 6,
-  },
+//   {
+//     hour: "15.00",
+//     value: 6,
+//   },
 
-  {
-    hour: "16.00",
-    value: 6,
-  },
-  {
-    hour: "17.00",
-    value: 8,
-  },
-  {
-    hour: "18.00",
-    value: 9,
-  },
-];
+//   {
+//     hour: "16.00",
+//     value: 6,
+//   },
+//   {
+//     hour: "17.00",
+//     value: 8,
+//   },
+//   {
+//     hour: "18.00",
+//     value: 9,
+//   },
+// ];
 
 export default function LoadStatsChart() {
   const actualPercent = useSelector(selectPercent);
   const actualDate = useSelector(selectDate);
+  const carsForHours = useSelector(selectCarsForHours);
+  const workHours = useSelector(selectWorkHours)
   const dispatch = useDispatch();
+ 
+  const firstDate = new Date().toISOString().substring(0, 10)
   // const [startIndex, setStartIndex] = useState(startDay);
   //     const [endIndex, setEndIndex] = useState(endDay);
 
@@ -125,6 +129,16 @@ export default function LoadStatsChart() {
     );
   };
 
+  if (actualPercent === null ) {
+   const fetchPercentForHour = async () => {
+       await Promise.all([
+         dispatch(getPercentForHour(firstDate)),
+       ]);
+     };
+
+     fetchPercentForHour();
+}
+
  useEffect(() => {
      
      const fetchCarsForHour = async () => {
@@ -134,13 +148,22 @@ export default function LoadStatsChart() {
      };
 
      fetchCarsForHour();
-   }, [dispatch, actualDate, actualPercent ]);
+   }, [dispatch, actualDate ]);
+  
+ const arrdata = Object.entries(carsForHours).map(([hour, value]) => ({
+  hour,
+  value
+}));
 
+const filteredData = arrdata.filter(item => item.hour >= workHours.start && item.hour <= workHours.end);
+ const data= filteredData.map(el => ({ ...el, hour: el.hour+'.00'}));
+  // console.log(data);
+  
   return (
     <div className={css.containerloadstats}>
       <div className={css.titlebox}>
         <p className={css.stattitle}>Завантаження сервісу</p>
-        <p className={css.statpercent}>112%</p>
+        <p className={css.statpercent}>{actualPercent}%</p>
       </div>
       <div className={css.areabox}>
         <ResponsiveContainer
