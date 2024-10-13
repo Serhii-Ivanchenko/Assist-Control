@@ -28,8 +28,8 @@ export default function UserSettingsAccount({onClose}) {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
 
-//   const state = useSelector((state) => state); // Виводить увесь стан
-// console.log("Redux State:", state);
+  const state = useSelector((state) => state); // Виводить увесь стан
+console.log("Redux State:", state);
   
   const user = useSelector(selectUser);
   console.log("data", user);
