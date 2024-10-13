@@ -8,6 +8,12 @@ border-radius: 5px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
+@media only screen and (min-width: 1920px) {
+    .containerloadstats {
+        width: 464px;
+            height: 287px;
+            padding: 8px 25px;}}
+
 .stattitle {
     font-family: "Roboto", sans-serif;
         font-weight: 300;
@@ -17,6 +23,12 @@ border-radius: 5px;
         height: 21px;
         margin-bottom: 21px;
 }
+
+@media only screen and (min-width: 1920px) {
+    .stattitle {
+        width: 284px;
+            height: 63px;
+            margin-bottom: 0px;}}
 
 .statpercent{
     font-family: "Roboto", sans-serif;
@@ -40,9 +52,17 @@ border-radius: 5px;
     
 }
 
-.areabox{
-width: 282px;
-height: 141px;
+
+.areabox {
+    width: 282px;
+    height: 141px;
+}
+
+@media only screen and (min-width: 1920px) {
+    .areabox {
+        width: 422px;
+        height: 199px;
+    }
 }
 
 .popuptitle{

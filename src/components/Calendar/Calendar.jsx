@@ -1,4 +1,6 @@
- import { useState } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { changeActualDate , changeActualPercent } from '../../redux/cars/slice.js'
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek"; // для начала недели с понедельника
 import css from "./Calendar.module.css";
@@ -15,8 +17,9 @@ const dataMonth = [
  
 ];
 
-export default function  Calendar () {
+export default function Calendar() {
   let currentDate = dayjs();
+  const dispatch = useDispatch();
   // const [currentDate, setCurrentDate] = useState(dayjs()); // Текущая дата
   const startOfMonth = currentDate.startOf("month"); // Начало месяца
   const endOfMonth = currentDate.endOf("month"); // Конец месяца
@@ -54,14 +57,17 @@ export default function  Calendar () {
   const calendarDates = generateCalendarDates();
 
   const calendarWithPercent = addDataToDates(calendarDates, dataMonth);
-  console.log('sd',selectedDate);
+  // console.log('sd',selectedDate);
 
   // const handlePrevMonth = () => setCurrentDate(currentDate.subtract(1, "month"));
   // const handleNextMonth = () => setCurrentDate(currentDate.add(1, "month"));
 
-const handleDateClick = (date) => {
-    if (!isDateDisabled(date)) {
-      setSelectedDate(date);
+const handleDateClick = (data,selectdate, percent) => {
+    if (!isDateDisabled(data.date)) {
+      setSelectedDate(selectdate);
+      console.log('data',selectdate);
+      dispatch(changeActualDate(selectdate))
+      dispatch(changeActualPercent( percent ));
     }
   };
 
@@ -96,7 +102,7 @@ const handleDateClick = (date) => {
         {calendarWithPercent.map((item, index) => (
           <button
             key={index}
-            onClick={() => handleDateClick(item.date)}
+            onClick={() => handleDateClick(item, item.date.format('YYYY-MM-DD'), item.percent)}
             disabled={isDateDisabled(item.date)}
             style={{
               backgroundColor: getButtonColor(item.percent),
@@ -132,6 +138,12 @@ const handleDateClick = (date) => {
           border:none;
         }
 
+        @media only screen and (min-width: 1920px) {
+        .calendar-day {
+        width: 54px;
+          height: 27px;
+          font-size: 16px; }}
+
         .cursordefault{
         cursor: default;
          }
@@ -148,5 +160,3 @@ const handleDateClick = (date) => {
     </div>
   );
 };
-
-

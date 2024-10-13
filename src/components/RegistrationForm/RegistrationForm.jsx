@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { register } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
+import GoogleBtn from "../GoogleBtn/GoogleBtn.jsx";
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
@@ -35,14 +36,34 @@ export default function RegistrationForm() {
       .unwrap()
       .then(() => {
         toast.success(
-          "Для завершення реєстрації потрібно підтвердити email адресу. Будь ласка, перевірте електронну пошту"
+          "Для завершення реєстрації потрібно підтвердити email адресу. Будь ласка, перевірте електронну пошту",
+          {
+            position: "top-center",
+            duration: 30000,
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          }
         );
       })
       .catch((err) => {
-        if (err === 400) {
-          toast.error("Користувач вже існує");
+        if (err.status === 400) {
+          toast.error("Користувач вже існує", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
         } else {
-          toast.error("Щось сталося, спробуйте ще раз");
+          toast.error("Щось сталося, спробуйте ще раз", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
         }
       });
 
@@ -197,6 +218,10 @@ export default function RegistrationForm() {
         <Link to="/login" className={css.bottomLink}>
           Увійти
         </Link>
+        <p className={css.bottomText}>або</p>
+        <div className={css.googleWrapper}>
+          <GoogleBtn />
+        </div>
       </div>
     </div>
   );

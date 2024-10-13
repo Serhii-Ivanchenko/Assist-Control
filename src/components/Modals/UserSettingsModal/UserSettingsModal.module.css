@@ -1,9 +1,28 @@
 .settingsBox {
-    width: 800px;
-    height: 600px;
+    width: 1226px;
+    /* max-width: 1450px; */
+    height: 850px;
     border-radius: 10px;
     background: #202020;
     display: flex;
+}
+@media only screen and (min-width: 1920px) {
+.settingsBox{
+width: 1357px;
+/* max-width: 1450px; */
+  }
+}
+
+@media only screen and (max-width: 1279.9px) {
+.settingsBox{
+    width: 736px;
+  }
+}
+
+@media only screen and (max-width: 767.9px) {
+.settingsBox{
+    width: 353px;
+  }
 }
 
 .closeBtn {

@@ -1,13 +1,14 @@
-// import { useDispatch, useSelector } from "react-redux";
-// import { useEffect } from "react";
-// import {getMonthWaterByMonth} from "../../../redux/water/operations.js";
-// import {selectMonthWaterItems,selectDate, selectTotalValue,} from "../../../redux/water/selectors.js";
+ import { useDispatch, useSelector } from "react-redux";
+ import { useEffect } from "react";
+ import {getCalendarByMonth} from "../../redux/cars/operations.js";
+ import {selectMonthCars,selectDate, } from "../../redux/cars/selectors.js";
 // import {selectUser} from '../../../redux/user/selectors.js'
 import css from './CalendarPagination.module.css';
 import { FiChevronLeft } from "react-icons/fi";
 import { FiChevronRight } from "react-icons/fi";
 import { useState } from 'react';
 import Calendar from '../../components/Calendar/Calendar.jsx'
+import { changeActualDate } from "../../redux/cars/slice.js";
 
  
 
@@ -25,22 +26,23 @@ function addMonths(date, months) {
 
 
 export default function CalendarPagination() {
-// const dispatch = useDispatch();
-//   const waterMonthData = useSelector(selectMonthWaterItems);
-//   const waterSelectDate = useSelector(selectDate);
+const dispatch = useDispatch();
+  const carMonthData = useSelector(selectMonthCars);
+  const currentMonth = new Date().toISOString().substring(0, 7);
+  const currentDate = new Date().toISOString().substring(0, 10);
+ const carSelectDate = useSelector(selectDate) ;
 //   const userData = useSelector(selectUser); 
 //   const totalByDate = useSelector(selectTotalValue);
   //  const isLoadingTracker = useSelector(selectLoadingTracker);
-  // const currentMonth = new Date().toISOString().substring(0, 7);
-  // const currentDay = new Date().getDate();
+  if (carSelectDate === null) { dispatch(changeActualDate(currentDate)) };
+   const currentDay = new Date().getDate();
 //   const waterDailyNorm = userData.dailyNorm * 1000;
   //  let startday = 0;
   //  let endday = 6;
 
- 
 
   const [queryMonth, setQueryMonth] = useState(new Date());
-  // const [ isCalendar, setIsCalendar ] = useState(true);
+  //  const [ isCalendar, setIsCalendar ] = useState(true);
 
    const handleClickRight = () => {
     setQueryMonth(addMonths(queryMonth,1))
@@ -61,27 +63,34 @@ export default function CalendarPagination() {
  
 const options = {
   month: 'long',
-//   year: 'numeric'
-};
+   year: 'numeric'
+  };
+  
+  
 
-  let strMonth = literaFirst(queryMonth.toLocaleString("ua-UA", options));
-  // let calendarMonth = queryMonth.toISOString().substring(0, 7);
+  let strMonth = literaFirst(queryMonth.toLocaleString("uk-UA", options));
+  let calendarMonth = queryMonth.toISOString().substring(0, 7);
+  let actualYear = queryMonth.getFullYear();
+  let actualMonth = queryMonth.getMonth() + 1;
   
 //   let actualDateTotal = waterSelectDate + String(totalByDate);
 
-  // useEffect(() => {
+   useEffect(() => {
      
-  //    const fetchWaterData = async () => {
-  //      await Promise.all([
-  //        dispatch(getMonthWaterByMonth(calendarMonth)),
-  //      ]);
-  //    };
+      const fetchCalendarData = async () => {
+        await Promise.all([
+          dispatch(getCalendarByMonth(calendarMonth)),
+        ]);
+      };
 
-  //    fetchWaterData();
-  //  }, [dispatch, calendarMonth, waterDailyNorm, actualDateTotal ]);
+     fetchCalendarData();
+     
 
-  //  let isCurrentMonth = currentMonth === calendarMonth ? true : false;
-  
+
+    }, [dispatch, calendarMonth ]);
+
+    let isCurrentMonth = currentMonth === calendarMonth ? true : false;
+  //  console.log(carMonthData)
   
 //   let endDay = isCurrentMonth && currentDay > 7 ? currentDay - 1 : 6;
 //   let startDay = isCurrentMonth && currentDay > 7 ? currentDay - 6 : 0;
@@ -104,7 +113,7 @@ const options = {
             <button
               className={css.iconstep}
               onClick={handleClickRight}
-              // disabled={isCurrentMonth}
+               disabled={isCurrentMonth}
               style={{ cursor: "default" }}
             >              
               <FiChevronRight className={css.arrowIcon} />

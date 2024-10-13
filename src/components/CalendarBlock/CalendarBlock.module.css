@@ -1,23 +1,52 @@
 .calendarContainer {
   display: flex;
   flex-direction: column;
+  width: 304px;
+}
+
+@media only screen and (min-width: 1920px) {
+  .calendarContainer {
+    width: 454px;
+
+}
 }
 
 .topContainer {
-  width: 304px;
   display: flex;
-    flex-direction: column;
-    gap: 29px;
-height: 527px;
+  flex-direction: column;
+  gap: 29px;
+  height: 527px;
   padding: 16px 11px 0 11px;
-  background: #101010;
-    border-radius: 5px;
+  border-radius: 5px;
 }
+
+@media only screen and (min-width: 1920px) {
+  .topContainer {
+    height: 801px;
+}
+}
+
+@media only screen and (min-width: 1920px) {
+.topContainer {
+  width: 454px;
+  height: 820px;
+  padding: 17px 11px 17px 11px;
+  padding-left: 17px;
+  padding-right: 17px;
+} }
 
 .fullHeight {
   height: 600px;
   padding: 16px 11px;
 }
+
+@media only screen and (min-width: 1920px) {
+  .fullHeight {
+    height: 900px;
+    padding: 0;
+}
+}
+
 /* 
 .detailsButtonContainer {
   display: flex;
