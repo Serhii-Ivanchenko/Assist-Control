@@ -1,0 +1,15 @@
+.btn {
+    width: 27px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(74, 74, 74, 1);
+    cursor: pointer;
+}
+
+.icon {
+    color: rgba(164, 164, 164, 1);
+}

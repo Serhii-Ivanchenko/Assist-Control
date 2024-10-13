@@ -1,6 +1,7 @@
 import myIcon from "../../../assets/icons.svg"
 import css from "./SupportModal.module.css"
-import { TfiClose } from "react-icons/tfi";
+// import { TfiClose } from "react-icons/tfi";
+import { BsXLg } from "react-icons/bs";
 
 export default function SupportModal({ onClose }) {
   return (
@@ -10,7 +11,7 @@ export default function SupportModal({ onClose }) {
       </svg>
 
       <div className={css.contentBox}>
-        <TfiClose className={css.closeBtn} onClick={onClose} />
+        <BsXLg className={css.closeBtn} onClick={onClose} />
         <p className={css.title}>Технічна підтримка</p>
         <textarea
           className={css.textarea}
