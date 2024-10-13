@@ -9,7 +9,6 @@ export default function StatsList({ cars }) {
     new: 0,
   };
   const [valueOfCars, setValueOfCars] = useState(initValue);
-  console.log(cars);
   
   useEffect(() => {
     const handleAddItem = () => {
@@ -17,7 +16,6 @@ export default function StatsList({ cars }) {
       for (let i = 0; i < cars.length; i++) {
         const car = cars[i];
 
-        console.log(car.status);
         obj = {
           ...obj,
           all: obj.all + 1,
