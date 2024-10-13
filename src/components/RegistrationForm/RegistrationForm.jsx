@@ -213,12 +213,15 @@ export default function RegistrationForm() {
           </Form>
         </Formik>
       </div>
-      <div className={css.bottomTextWrapper}>
-        <p className={css.bottomText}>Вже маєте Аккаунт?</p>
-        <Link to="/login" className={css.bottomLink}>
-          Увійти
-        </Link>
-        <p className={css.bottomText}>або</p>
+      <div className={css.bottomSectionWrapper}>
+        <div className={css.bottomTextWrapper}>
+          <p className={css.bottomText}>Вже маєте Аккаунт?</p>
+          <Link to="/login" className={css.bottomLink}>
+            Увійти
+          </Link>
+        </div>
+        <p className={css.bottomTextOr}>або</p>
+        <p className={css.bottomSectionText}>Або увійдіть за допомогою</p>
         <div className={css.googleWrapper}>
           <GoogleBtn />
         </div>
