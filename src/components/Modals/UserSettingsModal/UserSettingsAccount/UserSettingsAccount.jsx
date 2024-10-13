@@ -10,12 +10,12 @@ import { BsFillKeyFill } from "react-icons/bs";
 import { BsSdCardFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../../../redux/auth/selectors";
+import { updateUserData } from "../../../../redux/auth/operations";
+// import { getUserData } from "../../../../redux/auth/operations";
+// import { useEffect } from "react";
 
 
-const initialValues = {
-  company: '',
-  languages:'ukr',
-}
+
 
 const Validation = Yup.object().shape({
   company: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
@@ -26,15 +26,29 @@ const Validation = Yup.object().shape({
 
 export default function UserSettingsAccount({onClose}) {
   const [isVisible, setIsVisible] = useState(false);
+  const dispatch = useDispatch();
+
+//   const state = useSelector((state) => state); // Виводить увесь стан
+// console.log("Redux State:", state);
   
   const user = useSelector(selectUser);
-  console.log(user);
+  console.log("data", user);
+  const userEmail = user.email || "";
+  const userCompany = user.company_name || ""
   
-  const userEmail = user.email;
+  
+  const initialValues = {
+  company: userCompany,
+  languages:'ukr',
+}
 
-const handleSubmit = (values) => {
+
+  const handleSubmit = (values, actions) => {
+
 		console.log(values);
-		// actions.resetForm();
+  // actions.resetForm();
+  dispatch(updateUserData(values)).unwrap();
+  actions.setSubmitting(false);
 	};
 
   const companyFieldId = useId();
@@ -55,7 +69,7 @@ const handleSubmit = (values) => {
         <div className={css.emailBox}>
         <label className={css.titles}>Пошта</label>
 
-            <Field className={css.email} name="email"  value={userEmail} onClick={handleToggleClick} readOnly/>
+            <Field className={css.email} name="email"  value={userEmail } onClick={handleToggleClick} readOnly/>
 
         {isVisible && (<span className={css.warningMessage}>для зміни пошти зверніться у технічну підтримку</span>)}
         </div>
@@ -67,7 +81,12 @@ const handleSubmit = (values) => {
 
           <div className={css.companyBox}>
       <label htmlFor={companyFieldId} className={css.titles}>Назва компанії</label>
-        <Field type="text" name="company" className={css.input} id={companyFieldId} placeholder="Avtoatmosfera"/>
+          <Field type="text"
+            name="company"
+            className={css.input}
+            id={companyFieldId}
+            placeholder="Avtoatmosfera"
+          />
         <ErrorMessage name="company" component="span" className={css.errorMessage} />
         </div>
 
