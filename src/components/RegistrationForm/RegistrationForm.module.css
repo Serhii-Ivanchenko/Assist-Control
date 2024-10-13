@@ -237,6 +237,7 @@
 
 @media screen and (max-width: 1279.98px) {
   .bottomSectionText {
+    display: block;
     color: #8d8d8d;
     font-size: 8px;
     font-style: normal;
