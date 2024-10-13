@@ -34,7 +34,7 @@ export default function UserSettingsAccount({onClose}) {
   const user = useSelector(selectUser);
   console.log("data", user);
   const userEmail = user.email || "";
-  const userCompany = user.company_name || ""
+  const userCompany = user.company_name || "";
   
   
   const initialValues = {
@@ -43,12 +43,25 @@ export default function UserSettingsAccount({onClose}) {
 }
 
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
+    const dataToUpdate = {
+      company_name: values.company,
+    }
+    console.log(values);
+    try {
+      await dispatch(updateUserData(dataToUpdate)).unwrap();
+      actions.resetForm(); // Скидає форму після успішного відправлення
+      console.log(actions)
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    } finally {
+      actions.setSubmitting(false); // Завжди виконується
+    }
 
-		console.log(values);
+
   // actions.resetForm();
-  dispatch(updateUserData(values)).unwrap();
-  actions.setSubmitting(false);
+  // dispatch(updateUserData(values)).unwrap();
+  // actions.setSubmitting(false);
 	};
 
   const companyFieldId = useId();

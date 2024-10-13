@@ -66,11 +66,7 @@ export const getUserData = createAsyncThunk(
   "auth/getUserData",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosInstance.get("/v1/user_info/", {
-        headers: {
-          "X-Api-Key": "YA7NxysJ",
-        },
-      });
+      const response = await axiosInstance.get("/v1/user_info/");
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
