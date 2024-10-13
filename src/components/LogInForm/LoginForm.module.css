@@ -17,7 +17,7 @@
 
 @media screen and (max-width: 767.98px) {
   .loginForm {
-    width: 371px;
+    width: 275px;
   }
 }
 
@@ -232,7 +232,6 @@
 }
 
 .googleWrapper {
-  width: 301px;
   height: 33px;
   margin-bottom: 136px;
 }
@@ -261,16 +260,10 @@
 .bottomText {
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 13px;
-  color: #8D8D8D;
+  margin-bottom: 12px;
+  color: #8d8d8d;
   font-size: 8px;
   font-style: normal;
   font-weight: 500;
   line-height: 1.12em;
-}
-
-.googleWrapper {
-  width: 301px;
-  height: 33px;
-  margin-bottom: 136px;
 }
