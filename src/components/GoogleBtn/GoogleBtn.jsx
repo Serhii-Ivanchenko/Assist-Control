@@ -18,7 +18,6 @@ export default function GoogleBtn() {
       const token = credential.accessToken;
       const userInfo = result.user;
       const { email, displayName } = userInfo;
-      console.log("userInfo", userInfo);
 
       if (token) {
         await dispatch(logInWithGoogle({ token, email, displayName })).unwrap();

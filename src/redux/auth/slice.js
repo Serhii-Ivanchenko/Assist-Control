@@ -134,6 +134,8 @@ const authSlice = createSlice({
         state.apiKey = action.payload.api_key;
         state.userData.name = action.payload.name;
         state.userData.email = action.payload.email;
+        state.isLoggedIn = true;
+        // state.isRefreshing = false;
       })
       .addCase(logInWithGoogle.rejected, handleRejected),
 });
