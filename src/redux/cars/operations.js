@@ -117,6 +117,7 @@ export const getCarsForHour = createAsyncThunk(
   }
 );
 
+// Get load in % for one particular day
 export const getPercentForHour = createAsyncThunk(
   "cars/getPercentForHour",
   async (day, thunkAPI) => {
@@ -136,6 +137,7 @@ export const getPercentForHour = createAsyncThunk(
   }
 );
 
+// Get new cars in range of two particular dates
 export const getNewCarsRange = createAsyncThunk(
   "cars/getNewCarsRange",
   async (date, thunkAPI) => {

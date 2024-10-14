@@ -1,6 +1,9 @@
-import { useState  } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeActualDate , changeActualPercent } from '../../redux/cars/slice.js'
+import {
+  changeActualDate,
+  changeActualPercent,
+} from "../../redux/cars/slice.js";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek"; // для начала недели с понедельника
 import css from "./Calendar.module.css";
@@ -14,10 +17,10 @@ dayjs.extend(isoWeek);
 //    { date: '2024-10-04', percent: 90 },
 //    { date: '2024-10-05', percent: 40 },
 //    { date: '2024-10-06', percent: 70 },
- 
+
 //  ];
 
-export default function Calendar({ queryMonth,dataMonth }) {
+export default function Calendar({ queryMonth, dataMonth }) {
   let currentDate = dayjs();
   let queryMonthDayjs = dayjs(queryMonth);
   const dispatch = useDispatch();
@@ -27,8 +30,6 @@ export default function Calendar({ queryMonth,dataMonth }) {
   const startOfCalendar = startOfMonth.isoWeekday(1); // Начинаем календарь с понедельника
   const endOfCalendar = endOfMonth.isoWeekday(7); // Заканчиваем неделю на воскресенье
   const [selectedDate, setSelectedDate] = useState(dayjs());
-  
-  
 
   // Генерируем массив дат для отображения в календаре
   const generateCalendarDates = () => {
@@ -46,45 +47,48 @@ export default function Calendar({ queryMonth,dataMonth }) {
   const addDataToDates = (calendarDates, dataMonth) => {
     return calendarDates.map((date) => {
       const dataMonthObj = dataMonth.find((data) => {
-        const dataDate = dayjs(data.date, "YYYY-MM-DD"); 
+        const dataDate = dayjs(data.date, "YYYY-MM-DD");
         return dataDate.isSame(date, "day");
       });
       return {
         date: date,
-        percent: dataMonthObj ? dataMonthObj.percent : null, 
+        percent: dataMonthObj ? dataMonthObj.percent : null,
       };
     });
   };
 
-   const calendarDates = generateCalendarDates();
+  const calendarDates = generateCalendarDates();
 
-   const calendarWithPercent = addDataToDates(calendarDates, dataMonth);
+  const calendarWithPercent = addDataToDates(calendarDates, dataMonth);
 
-const handleDateClick = (data,selectdate, percent) => {
+  const handleDateClick = (data, selectdate, percent) => {
     if (!isDateDisabled(data.date)) {
       setSelectedDate(selectdate);
-    
-      dispatch(changeActualDate(selectdate))
-      dispatch(changeActualPercent( percent ));
+
+      dispatch(changeActualDate(selectdate));
+      dispatch(changeActualPercent(percent));
     }
   };
 
   const getButtonColor = (percent) => {
     if (percent >= 80) {
-      return '#DB8120'; 
+      return "#DB8120";
     } else if (percent >= 50) {
-      return '#A97742'; 
+      return "#A97742";
     } else if (percent > 0) {
-      return '#755D45'; 
+      return "#755D45";
     } else {
-      return '#4A4A4A'; 
+      return "#4A4A4A";
     }
   };
 
   const isDateDisabled = (date) => {
-    return date.isAfter(currentDate, 'day') || date.isAfter(currentDate, 'month') || !date.isSame(queryMonthDayjs, 'month');
+    return (
+      date.isAfter(currentDate, "day") ||
+      date.isAfter(currentDate, "month") ||
+      !date.isSame(queryMonthDayjs, "month")
+    );
   };
- 
 
   return (
     <div className={css.containercalendar}>
@@ -100,18 +104,28 @@ const handleDateClick = (data,selectdate, percent) => {
         {calendarWithPercent.map((item, index) => (
           <button
             key={index}
-            onClick={() => handleDateClick(item, item.date.format('YYYY-MM-DD'), item.percent)}
+            onClick={() =>
+              handleDateClick(
+                item,
+                item.date.format("YYYY-MM-DD"),
+                item.percent
+              )
+            }
             disabled={isDateDisabled(item.date)}
             style={{
               backgroundColor: getButtonColor(item.percent),
-              border: item.date.isSame(selectedDate, 'day') ? ' 1px solid #fff' : '1px solid transparent',
+              border: item.date.isSame(selectedDate, "day")
+                ? " 1px solid #fff"
+                : "1px solid transparent",
             }}
-           
             className={`calendar-day  
-              ${item.date.date()>currentDate.date() ? "cursordefault" : ""} 
-              ${item.date.month() !== queryMonthDayjs.month() ? "other-month" : ""} 
-              ${item.date.isSame(selectedDate, "day") ? "today" : ""}`
-            }
+              ${item.date.date() > currentDate.date() ? "cursordefault" : ""} 
+              ${
+                item.date.month() !== queryMonthDayjs.month()
+                  ? "other-month"
+                  : ""
+              } 
+              ${item.date.isSame(selectedDate, "day") ? "today" : ""}`}
           >
             {item.date.date()}
           </button>
@@ -157,4 +171,4 @@ const handleDateClick = (data,selectdate, percent) => {
       `}</style>
     </div>
   );
-};
+}
