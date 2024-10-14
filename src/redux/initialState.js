@@ -1,5 +1,5 @@
 export const initialState = {
-  user: {
+  auth: {
     userData: {
       id: null,
       name: null,

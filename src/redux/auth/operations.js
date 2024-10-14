@@ -43,6 +43,7 @@ export const logIn = createAsyncThunk(
     try {
       const response = await axiosInstance.post("/v1/authenticate/", userData);
       setAuthHeader(response.data.api_key);
+      localStorage.setItem("X-Api-Key", response.data.api_key);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -55,6 +56,7 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     const response = await axiosInstance.get("/v1/logout/");
     clearAuthHeader();
+    localStorage.removeItem("X-Api-Key");
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.status);
@@ -120,7 +122,6 @@ export const updateUserData = createAsyncThunk(
 );
 
 //Get tariff info
-
 export const getTariffData = createAsyncThunk(
   "auth/getTariffInfo",
   async (_, thunkAPI) => {
@@ -138,35 +139,60 @@ export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
     try {
-      const reduxState = thunkAPI.getState();
-      const apiKey = reduxState.user.apiKey;
+      const apiKey = localStorage.getItem("X-Api-Key"); // Беремо токен з localStorage
 
-      setAuthHeader(apiKey);
+      if (!apiKey) {
+        return thunkAPI.rejectWithValue("Token not found");
+      }
+
+      setAuthHeader(apiKey); // Встановлюємо токен у заголовок
 
       const response = await axiosInstance.get("/v1/user_info/");
-
-      return response.data;
+      return { ...response.data, api_key: apiKey };
     } catch (error) {
       clearAuthHeader();
-      console.error("Error refreshing user:", error);
+      localStorage.removeItem("X-Api-Key"); // Видаляємо токен при помилці
       return thunkAPI.rejectWithValue(error.response.status);
     }
-  },
-  {
-    condition: (_, thunkAPI) => {
-      const reduxState = thunkAPI.getState();
-      const savedToken = reduxState.user.token;
-      return savedToken !== null;
-    },
   }
 );
+
+// export const refreshUser = createAsyncThunk(
+//   "auth/refresh",
+//   async (_, thunkAPI) => {
+//     try {
+//       const reduxState = thunkAPI.getState();
+//       const apiKey = reduxState.user.apiKey;
+
+//       setAuthHeader(apiKey);
+
+//       const response = await axiosInstance.get("/v1/user_info/");
+
+//       return response.data;
+//     } catch (error) {
+//       clearAuthHeader();
+//       console.error("Error refreshing user:", error);
+//       return thunkAPI.rejectWithValue(error.response.status);
+//     }
+//   },
+//   {
+//     condition: (_, thunkAPI) => {
+//       const reduxState = thunkAPI.getState();
+//       const savedToken = reduxState.user.token;
+//       return savedToken !== null;
+//     },
+//   }
+// );
 
 // Google Authentication
 export const logInWithGoogle = createAsyncThunk(
   "auth/logInWithGoogle",
   async (data, thunkAPI) => {
     try {
-      const response = await axiosInstance.post("/v1/authenticate_in_google/", data);
+      const response = await axiosInstance.post(
+        "/v1/authenticate_in_google/",
+        data
+      );
       const { api_key, name, email } = response.data;
       setAuthHeader(api_key);
       localStorage.setItem("X-Api-Key", api_key);
