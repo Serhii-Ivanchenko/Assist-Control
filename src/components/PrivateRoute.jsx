@@ -1,20 +1,25 @@
-// import { useSelector } from "react-redux";
-// import { selectAuth } from "../redux/user/selectors";
-// import { Navigate } from "react-router-dom";
-// import Loader from "./Loader/Loader.jsx";
+import { useSelector } from "react-redux";
+import { selectAuth } from "../redux/auth/selectors.js";
+import { Navigate } from "react-router-dom";
+import Loader from "./Loader/Loader.jsx";
 
 export default function PrivateRoute({
   component: Component,
-  // redirectTo = "/",
+  redirectTo = "/",
 }) {
-  // const { isLoggedIn, apiKey } = useSelector(selectAuth);
+  const { isLoggedIn, apiKey, isRefreshing } = useSelector(selectAuth);
 
-  // if (!isLoggedIn && apiKey) {
-  //   return <Loader/>;
-  // }
-  // if (!isLoggedIn && !apiKey) {
-  //   return <Navigate to={redirectTo} />;
-  // }
+  if (isRefreshing) {
+    return <Loader />;
+  }
+
+  if (!isLoggedIn && !apiKey) {
+    return <Navigate to={redirectTo} />;
+  }
+
+  if (!isLoggedIn && apiKey) {
+    return <Navigate to="/login" />;
+  }
 
   return Component;
 }

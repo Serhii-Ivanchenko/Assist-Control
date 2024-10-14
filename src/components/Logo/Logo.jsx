@@ -6,7 +6,7 @@ export default function Logo() {
   return (
     <div className={css.logoBox}>
       <img src={logo} alt="" />
-      <svg className={css.logoName} width={121} height={19}>
+      <svg className={css.logoName} >
         <use
           href={`${icons}#icon-Assist-Control`}
         ></use>
