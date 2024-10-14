@@ -1,4 +1,7 @@
-// import { useState } from "react";
+import { useEffect } from "react";
+import { useSelector , useDispatch} from "react-redux";
+import { selectPercent, selectDate } from '../../redux/cars/selectors.js'
+import { getCarsForHour } from '../../redux/cars/operations.js'
 import {
   AreaChart,
   XAxis,
@@ -96,6 +99,9 @@ let data = [
 ];
 
 export default function LoadStatsChart() {
+  const actualPercent = useSelector(selectPercent);
+  const actualDate = useSelector(selectDate);
+  const dispatch = useDispatch();
   // const [startIndex, setStartIndex] = useState(startDay);
   //     const [endIndex, setEndIndex] = useState(endDay);
 
@@ -118,6 +124,17 @@ export default function LoadStatsChart() {
       </>
     );
   };
+
+ useEffect(() => {
+     
+     const fetchCarsForHour = async () => {
+       await Promise.all([
+         dispatch(getCarsForHour(actualDate)),
+       ]);
+     };
+
+     fetchCarsForHour();
+   }, [dispatch, actualDate, actualPercent ]);
 
   return (
     <div className={css.containerloadstats}>

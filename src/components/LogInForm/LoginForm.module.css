@@ -1,23 +1,23 @@
 .loginForm {
   background-color: #151616;
-  padding: 20px;
-  width: 371px;
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
+  border-radius: 0;
+  padding: 98px 77px 62px 79px;
+  width: 460px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1279.98px) {
   .loginForm {
     width: 524px;
+    padding: 20px;
+    border-radius: 8px;
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 767.98px) {
   .loginForm {
-    border-radius: 0;
-    padding: 98px 80px 62px 78px;
-    width: 460px;
+    width: 371px;
   }
 }
 
@@ -30,11 +30,12 @@
   font-size: 24px;
   font-style: normal;
   margin-bottom: 4px;
+  font-weight: 700;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 767.98px) {
   .loginHeader {
-    font-weight: 700;
+    font-weight: 400;
   }
 }
 
@@ -44,26 +45,26 @@
   font-style: normal;
   line-height: normal;
   color: #8d8d8d;
-  margin-bottom: 14px;
+  margin-bottom: 42px;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 1279.98px) {
   .loginText {
-    margin-bottom: 42px;
+    margin-bottom: 14px;
   }
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-bottom: 14px;
+  gap: 17px;
+  margin-bottom: 41px;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 1279.98px) {
   .wrapper {
-    gap: 17px;
-    margin-bottom: 41px;
+    gap: 14px;
+    margin-bottom: 14px;
   }
 }
 
@@ -71,12 +72,12 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 1279.98px) {
   .inputWrapper {
-    gap: 6px;
+    gap: 12px;
   }
 }
 
@@ -96,16 +97,16 @@
 
 .inputIcon {
   position: absolute;
-  left: 20px;
+  left: 14px;
   color: #615f68;
   fill: #615f68;
   width: 10px;
   height: 10px;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 1279.98px) {
   .inputIcon {
-    left: 14px;
+    left: 20px;
   }
 }
 
@@ -118,17 +119,17 @@
   font-style: normal;
   line-height: 1.18em;
   color: #fff;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 40px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 32px;
   width: 100%;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 1279.98px) {
   .input {
-    padding-top: 9px;
-    padding-bottom: 9px;
-    padding-left: 32px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 40px;
   }
 }
 
@@ -165,7 +166,7 @@
 
 .eyeIconBtn {
   position: absolute;
-  right: 20px;
+  right: 12px;
   width: 10px;
   height: 10px;
   display: flex;
@@ -177,15 +178,15 @@
   border: none;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1279.98px) {
   .eyeIconBtn {
     right: 10px;
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 767.98px) {
   .eyeIconBtn {
-    right: 12px;
+    right: 20px;
   }
 }
 
@@ -206,18 +207,17 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-top: 8px;
+  padding-top: 12px;
   padding-bottom: 8px;
+  margin-bottom: 27px;
   border: none;
-  margin-bottom: 12px;
   cursor: pointer;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 1279.98px) {
   .submitButton {
-    padding-top: 12px;
-    padding-bottom: 8px;
-    margin-bottom: 27px;
+    padding-top: 8px;
+    margin-bottom: 12px;
   }
 }
 
@@ -228,20 +228,20 @@
   font-weight: 500;
   line-height: normal;
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 13px;
 }
 
 .googleWrapper {
-  width: 100%;
-  height: 30px;
-  margin-bottom: 14px;
+  width: 301px;
+  height: 33px;
+  margin-bottom: 136px;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 1279.98px) {
   .googleWrapper {
-    width: 301px;
-    height: 33px;
-    margin-bottom: 136px;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 14px;
   }
 }
 
@@ -256,4 +256,21 @@
   color: #0096b7;
   font-style: normal;
   line-height: normal;
+}
+
+.bottomText {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 13px;
+  color: #8D8D8D;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.12em;
+}
+
+.googleWrapper {
+  width: 301px;
+  height: 33px;
+  margin-bottom: 136px;
 }

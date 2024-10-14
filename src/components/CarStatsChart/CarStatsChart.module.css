@@ -6,3 +6,10 @@
     padding: 9px 19px 11px;
     /* display: flex; */
 }
+
+@media only screen and (min-width: 1920px) {
+    .containerstats {
+            width: 462px;
+            height: 405px;
+            padding: 14px 29px 0 25px;
+    }}

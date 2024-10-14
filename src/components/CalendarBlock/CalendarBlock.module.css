@@ -26,6 +26,15 @@
 }
 }
 
+@media only screen and (min-width: 1920px) {
+.topContainer {
+  width: 454px;
+  height: 820px;
+  padding: 17px 11px 17px 11px;
+  padding-left: 17px;
+  padding-right: 17px;
+} }
+
 .fullHeight {
   height: 600px;
   padding: 16px 11px;
@@ -37,6 +46,7 @@
     padding: 0;
 }
 }
+
 /* 
 .detailsButtonContainer {
   display: flex;

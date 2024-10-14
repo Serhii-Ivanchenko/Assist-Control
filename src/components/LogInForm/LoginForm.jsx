@@ -9,6 +9,7 @@ import { TbMailFilled } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import toast from "react-hot-toast";
+import GoogleBtn from "../GoogleBtn/GoogleBtn.jsx";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -21,8 +22,33 @@ export default function LoginForm() {
   const handleSubmitLogin = (values, actions) => {
     dispatch(logIn(values))
       .unwrap()
-      .catch(() => {
-        toast.error("Щось сталося, спробуйте ще раз");
+      .then(() => {
+        toast.success("Welcome to Assist CONTROL", {
+          position: "top-center",
+          style: {
+            background: "#242525",
+            color: "#FFFFFF",
+          },
+        });
+      })
+      .catch((err) => {
+        if (err.status === 401) {
+          toast.error("Невірний логін або пароль", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
+        } else {
+          toast.error("Щось сталося, спробуйте ще раз", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
+        }
       });
 
     actions.resetForm();
@@ -102,8 +128,10 @@ export default function LoginForm() {
             </button>
           </Form>
         </Formik>
-        <p className={css.googleRegistrationText}>Або увійдіть за допомогою</p>
-        <div className={css.googleWrapper}>{/* <GoogleBtn /> */}</div>
+      </div>
+      <p className={css.bottomText}>Або увійдіть за допомогою</p>
+      <div className={css.googleWrapper}>
+        <GoogleBtn />
       </div>
       <div className={css.bottomTextWrapper}>
         <p className={css.loginLabel}>Ще не маєте акаунт?</p>

@@ -5,6 +5,8 @@ import {
   getCarsByDate,
   getCarsByMonth,
   getCurrentCars,
+  getCarsForHour,
+  getCalendarByMonth,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -23,6 +25,14 @@ const carsSlice = createSlice({
   reducers: {
     changeActualDate: (state, action) => {
       state.date = action.payload;
+      // state.loadPercent = action.payload.percent;
+    },
+    changeActualPercent: (state, action) => {
+      state.loadPercent = action.payload;
+      // state.loadPercent = action.payload.percent;
+    },
+    setQueryMonth: (state, action) => {
+      state.queryMonth = action.payload;
     },
   },
   extraReducers: (builder) =>
@@ -51,8 +61,24 @@ const carsSlice = createSlice({
         state.isLoading = false;
         state.month = action.payload.cars;
       })
-      .addCase(getCarsByMonth.rejected, handleRejected),
+      .addCase(getCarsByMonth.rejected, handleRejected)
+      .addCase(getCarsForHour.pending, handlePending)
+      .addCase(getCarsForHour.fulfilled, (state, action) => {
+        state.isLoading = false;
+        //   state.date = action.payload.date;
+        state.forHour = action.payload.hourly_car_count;
+      })
+      .addCase(getCarsForHour.rejected, handleRejected)
+      .addCase(getCalendarByMonth.pending, handlePending)
+      .addCase(getCalendarByMonth.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.monthlyLoad = action.payload;
+      })
+      .addCase(getCalendarByMonth.rejected, handleRejected),
 });
 
 export const { changeActualDate } = carsSlice.actions;
+export const { changeActualPercent } = carsSlice.actions;
+export const { setQueryMonth } = carsSlice.actions;
+
 export default carsSlice.reducer;

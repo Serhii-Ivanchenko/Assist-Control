@@ -1,22 +1,33 @@
 import UserSettingsSidebar from "./UserSettingsSidebar/UserSettingsSidebar";
 import css from './UserSettingsModal.module.css'
 import UserSettingAccount from "./UserSettingsAccount/UserSettingsAccount";
-import { TfiClose } from "react-icons/tfi";
+// import { TfiClose } from "react-icons/tfi";
 import UserSettingsTeam from "./UserSettingsTeam/UserSettingsTeam";
+import MobileMenu from "./MobileMenu/MobileMenu";
 import { useState } from "react";
 
 export default function UserSettingsModal({onClose}) {
-const [page, setPage] = useState("profile")
+  const [page, setPage] = useState("profile")
+  const [mobMenu, setMobmenu] = useState(false)
+  
+  const openMobMenu = () => {
+    setMobmenu(true)
+  }
+
+  const closeMobMenu = () => {
+    setMobmenu(false)
+  }
 
 
     return (
         <div className={css.settingsBox}>
-             <TfiClose onClick={onClose} className={css.closeBtn} />
-            <UserSettingsSidebar  setPage={setPage} page={page}/>
+             {/* <TfiClose onClick={onClose} className={css.closeBtn} /> */}
+        <UserSettingsSidebar setPage={setPage} page={page} onOpen={openMobMenu} onClose={onClose} />
+        {mobMenu && <MobileMenu setPage={setPage} page={page} onClose={closeMobMenu} />}
           {page === "profile" && ""}
-          {page === "account" && <UserSettingAccount />}
+          {page === "account" && <UserSettingAccount onClose={onClose}/>}
           {page === "tariff" && ""}
-          {page === "team" && <UserSettingsTeam />}
+          {page === "team" && <UserSettingsTeam  onClose={onClose}/>}
                         
         </div>
     )
