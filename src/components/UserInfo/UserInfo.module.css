@@ -9,19 +9,25 @@
 }
 
 .avatar {
-    width: 44px;
-    height: 44px;
-    margin-bottom: 5px;
-  }
-  
-  @media only screen and (min-width: 1920px) {
-    .avatar {
-      width: 66px;
-      height: 66px;
-      margin-bottom: 7.5px;
-      }
-  }
+  width: 44px;
+  height: 44px;
+  margin-bottom: 5px;
+}
 
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+}
+
+@media only screen and (min-width: 1920px) {
+  .avatar {
+    width: 66px;
+    height: 66px;
+    margin-bottom: 7.5px;
+  }
+}
   .name {
     font-size: 11px;
     font-weight: 400;

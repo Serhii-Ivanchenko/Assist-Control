@@ -4,8 +4,9 @@ import DayCarsList from '../DayCarsList/DayCarsList';
 import DetailsBtn from '../DetailsBtn/DetailsBtn';
 import CalendarPagination from '../CalendarPagination/CalendarPagination.jsx';
 import { getCarsByDate} from '../../redux/cars/operations.js';
-import { selectDayCars, selectLoading, selectError, selectDate } from '../../redux/cars/selectors.js';
+import { selectDayCars, selectLoading, selectDate } from '../../redux/cars/selectors.js';
 import styles from './CalendarBlock.module.css';
+import toast from 'react-hot-toast';
 
 export default function CalendarBlock() {
   const dispatch = useDispatch();
@@ -13,11 +14,16 @@ export default function CalendarBlock() {
   const carsData = useSelector(selectDayCars);
   const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectLoading);
-  const error = useSelector(selectError);
 
   useEffect(() => {
     if (selectedDate) {
-      dispatch(getCarsByDate(selectedDate));
+      dispatch(getCarsByDate(selectedDate))
+        .unwrap()
+        .then(() => {
+        })
+        .catch(() => {
+          toast.error("Щось пішло не так. Будь ласка, спробуйте ще раз.");
+        });
     }
   }, [dispatch, selectedDate]);
 
@@ -33,7 +39,6 @@ export default function CalendarBlock() {
       >
         <CalendarPagination />
         {isLoading && <p>Loading cars...</p>}
-        {error && <p>Error: {error}</p>}
         <DayCarsList carsData={carsData} hasDetailsButton={hasDetailsButton} />
       </div>
       {hasDetailsButton && (

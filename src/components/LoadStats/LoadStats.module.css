@@ -1,4 +1,7 @@
 .loadStatsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     width: 141px;
     height: 91px;
     border-radius: 5px;
@@ -34,8 +37,6 @@
     position: absolute;
     bottom: 10px;
     left: 10px;
-    width: 100%;
-
 }
 
 .percentage {
@@ -60,6 +61,7 @@
 @media only screen and (min-width: 1920px) {
     .description {
         font-size: 14px;
+        width: fit-content;
   }
 }
 
