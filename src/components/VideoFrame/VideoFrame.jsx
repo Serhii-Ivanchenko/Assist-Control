@@ -41,9 +41,58 @@ function SamplePrevArrow({ currentSlide, onClick }) {
 }
 
 export default function VideoFrame() {
+  const [videoImgSrc, setVideoImgSrc] = useState(null);
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    const ws = new WebSocket("wss://cam.assist.cam/camera2/ws/video_feed");
+    ws.binaryType = "arraybuffer"; // Установлюємо тип даних для бінарних файлів
+    ws.onopen = (e) => {
+      console.log("server was started", e);
+    };
+    ws.onmessage = (event) => {
+      const arrayBuffer = event.data;
+      const img = new Image();
+      const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
+
+      img.src = URL.createObjectURL(blob);
+      setVideoImgSrc(img.src);
+
+      // img.onload = () => {
+      //   const canvas = canvasRef.current;
+      //   const ctx = canvas.getContext("2d");
+      //   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      // }; 
+    };
+    ws.onclose = () => {
+      ws.close();
+      console.log("Server is closed");
+    };
+    ws.onerror = () => {
+      ws.close();
+      console.log("Server has error");
+    };
+    // const secondWs = new WebSocket(
+    //   "wss://cam.assist.cam/camera2/ws/video_feed"
+    // );
+    // secondWs.binaryType = "arraybuffer";
+    // secondWs.onopen = () => {
+    //   console.log("server was started");
+    // };
+    // secondWs.onmessage = (event) => {
+    //   console.log("event", event);
+    // };
+    // secondWs.onclose = () => {
+    //   console.log("Server is closed");
+    // };
+    // secondWs.onerror = () => {
+    //   console.log("Server has error");
+    // };
+  }, []);
+
   let image = useRef();
   let parentRef = useRef();
   const [isZoomed, setIsZoomed] = useState(false);
+
   useEffect(() => {
     if (!isZoomed) {
       setIsZoomed(true);
@@ -64,6 +113,7 @@ export default function VideoFrame() {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
+
   function CameraModal({ img, modalState, someRef, parentRef }) {
     if (modalState === "UNLOADING") {
       handleZoomChange(false);
@@ -73,6 +123,7 @@ export default function VideoFrame() {
         handleZoomChange(false);
       }
     };
+
     useEffect(() => {
       if (modalState === "LOADING") {
         document.addEventListener("mousedown", handleClickOutImg);
@@ -83,6 +134,7 @@ export default function VideoFrame() {
         document.removeEventListener("mousedown", handleClickOutImg); // При розмонтуванні видаляємо слухач
       };
     }, [modalState]);
+
     return (
       <div className={css.zoomImg}>
         <div ref={someRef} className={css.zoomImgCont}>
@@ -126,7 +178,13 @@ export default function VideoFrame() {
                         />
                       )}
                     >
-                      <img src={img} alt={alt} />
+                      <img ref={canvasRef} src={videoImgSrc} alt={alt} />
+                      {/* <canvas
+                        ref={canvasRef}
+                        width="400"
+                        height="200"
+                        alt={alt}
+                      /> */}
                     </Zoom>
                   ) : (
                     <img src={img} alt={alt} />
