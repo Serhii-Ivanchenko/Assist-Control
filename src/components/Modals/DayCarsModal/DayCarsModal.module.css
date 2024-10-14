@@ -1,4 +1,4 @@
-.containerCarModal{
+.containerCarModal {
     display: flex;
     flex-direction: column;
     width: 800px;
@@ -17,25 +17,25 @@
     flex-direction: column;
     width: 100%;
     flex-grow: 1;
-  }
-  
-  .scrollableContent {
+}
+
+.scrollableContent {
     max-height: 616px;
     overflow-y: auto;
     /* padding-right: 10px; */
-  }
+}
 
 .switch {
     font-size: 17px;
-    position: relative;
+    /* position: relative; */
     display: inline-block;
     width: 50px;
     height: 27px;
     cursor: pointer;
 
-    position: absolute;
-    top: 12px;
-    left: 30px;
+        position: absolute;
+            top: 12px;
+            left: 30px;
 }
 
 .switch input {
@@ -88,7 +88,7 @@
     z-index: 2;
 }
 
-.iconClose{
+.iconClose {
     color: #4A4A4A;
     width: 100%;
     height: 100%;
@@ -110,7 +110,6 @@
 }
 
 
-.iconLeft svg,
 .iconRight svg {
     animation: rotate 15s linear infinite;
 }
@@ -124,6 +123,10 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+.iconLeft svg {
+    animation: tilt 5s linear infinite;
 }
 
 @keyframes tilt {
@@ -158,6 +161,8 @@
 }
 
 .active {
-    color: #00ff00; /* Вибери колір, який буде помітним */
-    transition: color 0.3s ease; /* Додає плавний перехід */
+    color: #00ff00;
+    /* Вибери колір, який буде помітним */
+    transition: color 0.3s ease;
+    /* Додає плавний перехід */
 }
