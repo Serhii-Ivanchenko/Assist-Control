@@ -12,6 +12,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../../../redux/auth/selectors";
 import { updateUserData } from "../../../../redux/auth/operations";
 import { getUserData } from "../../../../redux/auth/operations";
+import Modal from "../../Modal/Modal";
+import ChangePasswordModal from "./ChangePasswordModal/ChangePasswordModal";
+import toast from "react-hot-toast";
 // import { useEffect } from "react";
 
 
@@ -26,7 +29,18 @@ const Validation = Yup.object().shape({
 
 export default function UserSettingsAccount({onClose}) {
   const [isVisible, setIsVisible] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
   const dispatch = useDispatch();
+
+  const openModal = () => {
+      console.log("Opening modal");
+      setIsOpen(true);
+        };
+        
+        const handleModalClose = () => {
+      setIsOpen(false);
+    };
 
 //   const state = useSelector((state) => state); // Виводить увесь стан
 // console.log("Redux State:", state);
@@ -67,6 +81,17 @@ export default function UserSettingsAccount({onClose}) {
       await dispatch(updateUserData(dataToUpdate)).unwrap();
       actions.resetForm({ values }); // Скидає форму після успішного відправлення
       dispatch(getUserData());
+      toast.success(
+      "Дані успішно збережено)",
+{
+            position: "top-right",
+            duration: 3000,
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          }
+      )
     } catch (error) {
       console.error("Error updating user data:", error);
     } finally {
@@ -104,7 +129,10 @@ export default function UserSettingsAccount({onClose}) {
 
         <div className={css.passwordBox}>
       <label className={css.titles}>Пароль</label>
-          <button className={css.passwortChBtn} type="button"> <BsFillKeyFill className={css.iconKey} /> Змінити пароль</button>
+          <button className={css.passwortChBtn} type="button"onClick={openModal}> <BsFillKeyFill className={css.iconKey} /> Змінити пароль</button>
+          {modalIsOpen && <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+            <ChangePasswordModal onClose={handleModalClose } />
+          </Modal>}
         </div>
 
           <div className={css.companyBox}>
