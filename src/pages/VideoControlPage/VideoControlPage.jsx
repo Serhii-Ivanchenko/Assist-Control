@@ -2,12 +2,12 @@ import { useDispatch } from "react-redux";
 import Header from "../../components/Header/Header.jsx";
 import MainContent from "../../components/MainContent/MainContent.jsx";
 import SideBar from "../../components/SideBar/SideBar.jsx";
-import styles from "./VideControlPage.module.css";
+import styles from "./VideoControlPage.module.css";
 import { useEffect } from "react";
 import { getUserData } from "../../redux/auth/operations.js";
 import toast from "react-hot-toast";
 
-export default function VideControlPage() {
+export default function VideoControlPage() {
   const dispatch = useDispatch();
 
   // useEffect(() => {

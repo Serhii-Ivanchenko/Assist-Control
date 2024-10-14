@@ -2,18 +2,30 @@ import { BsXLg } from "react-icons/bs";
 import css from "./LogoutModal.module.css";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../redux/auth/operations.js";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function LogoutModal({ onClose }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogOut = async () => {
-    try {
-      await dispatch(logOut()).unwrap();
+      await dispatch(logOut())
+        .unwrap()
+        .then(() => {
+          navigate("/");
+        })
+        .catch(() => {
+          toast.error("Щось сталося, спробуйте ще раз", {
+            position: "top-center",
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          });
+        });
       onClose();
-    } catch (error) {
-      console.error("Log out failed:", error);
     }
-  };
 
   return (
     <div className={css.logoutBox}>

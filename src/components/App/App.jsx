@@ -1,21 +1,22 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "../Layout/Layout.jsx";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import RestrictedRoute from "../RestrictedRoute.jsx";
 import PrivateRoute from "../PrivateRoute.jsx";
 import Loader from "../Loader/Loader.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "../../redux/auth/selectors.js";
 import { Toaster } from "react-hot-toast";
 import ValidateEmailPage from "../../pages/ValidateEmailPage/ValidateEmailPage.jsx";
+import { refreshUser } from "../../redux/auth/operations.js";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
 const RegistrationPage = lazy(() =>
   import("../../pages/RegistrationPage/RegistrationPage.jsx")
 );
-const VideControlPage = lazy(() =>
-  import("../../pages/VideControlPage/VideControlPage.jsx")
+const VideoControlPage = lazy(() =>
+  import("../../pages/VideoControlPage/VideoControlPage.jsx")
 );
 const CRMPage = lazy(() => import("../../pages/CRMPage/CRMPage.jsx"));
 const ReportPage = lazy(() => import("../../pages/ReportPage/ReportPage.jsx"));
@@ -27,7 +28,12 @@ const NotFoundPage = lazy(() =>
 );
 
 export default function App() {
+  const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+
+   useEffect(() => {
+     dispatch(refreshUser());
+   }, [dispatch]);
 
   return isRefreshing ? (
     <Loader />
@@ -60,7 +66,7 @@ export default function App() {
             element={
               <PrivateRoute
                 redirectTo="/login"
-                component={<VideControlPage />}
+                component={<VideoControlPage />}
               />
             }
           />
