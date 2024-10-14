@@ -3,20 +3,19 @@ import css from "./StatsList.module.css";
 export default function StatsList({ cars }) {
   const initValue = {
     all: 0,
-    done: 0,
+    complete: 0,
     repair: 0,
     check_repair: 0,
     new: 0,
   };
   const [valueOfCars, setValueOfCars] = useState(initValue);
-
+  
   useEffect(() => {
     const handleAddItem = () => {
       let obj = initValue;
       for (let i = 0; i < cars.length; i++) {
         const car = cars[i];
 
-        console.log(car.status);
         obj = {
           ...obj,
           all: obj.all + 1,
@@ -35,7 +34,7 @@ export default function StatsList({ cars }) {
         <p className={css.statsItemTitle}>Всього</p>
       </li>
       <li className={css.statsItem}>
-        <p className={css.statsItemValue}>{valueOfCars.done}</p>
+        <p className={css.statsItemValue}>{valueOfCars.complete}</p>
         <p className={css.statsItemTitle}>Готово</p>
       </li>
       <li className={css.statsItem}>
