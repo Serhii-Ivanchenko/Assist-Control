@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import DayCarsList from '../DayCarsList/DayCarsList';
 import DetailsBtn from '../DetailsBtn/DetailsBtn';
 import CalendarPagination from '../CalendarPagination/CalendarPagination.jsx';
@@ -7,9 +7,12 @@ import { getCarsByDate} from '../../redux/cars/operations.js';
 import { selectDayCars, selectLoading, selectDate } from '../../redux/cars/selectors.js';
 import styles from './CalendarBlock.module.css';
 import toast from 'react-hot-toast';
+import Modal from '../Modals/Modal/Modal.jsx';
+import DayCarsModal from '../Modals/DayCarsModal/DayCarsModal.jsx';
 
 export default function CalendarBlock() {
   const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const carsData = useSelector(selectDayCars);
   const selectedDate = useSelector(selectDate);
@@ -30,6 +33,18 @@ export default function CalendarBlock() {
   const maxVisibleCars = 3;
   const hasDetailsButton = carsData.length > maxVisibleCars;
 
+  const handleDetailsBtnClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  console.log("isModalOpen:", isModalOpen); 
+  console.log("carsData:", carsData);
+
+
   return (
     <div className={styles.calendarContainer}>
       <div
@@ -39,11 +54,20 @@ export default function CalendarBlock() {
       >
         <CalendarPagination />
         {isLoading && <p>Loading cars...</p>}
-        <DayCarsList carsData={carsData} hasDetailsButton={hasDetailsButton} />
+        <DayCarsList carsData={carsData} hasDetailsButton={hasDetailsButton} isModal={isModalOpen}/>
       </div>
-      {hasDetailsButton && (
-          <DetailsBtn />
+      <DetailsBtn onClick={handleDetailsBtnClick} />
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <DayCarsModal carsData={carsData} onClose={handleCloseModal} />
+      </Modal>
+
+
+      {/* {hasDetailsButton && (
+        <DetailsBtn onClick={handleDetailsBtnClick} />
       )}
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <DayCarsModal carsData={carsData} onClose={handleCloseModal} isModal={isModalOpen}/>
+      </Modal> */}
     </div>
   );
 }

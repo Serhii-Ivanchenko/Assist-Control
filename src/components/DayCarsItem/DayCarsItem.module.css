@@ -5,9 +5,7 @@
     border-radius: 5px;
     background: #1A1A1A;
     padding: 6px 10px;
-    border-radius: 6px;
-
-    
+    border-radius: 5px;
 }
 
 @media only screen and (min-width: 1920px) {
@@ -18,27 +16,37 @@
         border-radius: 6px;
   }
   }
+  
+  .modalDayCarsItemContainer{
+    display: flex;
+    width: 130px;
+    min-width: 130px;
+    padding: 8px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 
 .carPhoto {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 0 0 110px;
 }
+
+@media only screen and (min-width: 1920px) {
+    .carPhoto {
+        flex: 0 0 150px;
+    }
+}
+
 
 .carPhoto img {
     width: 100%; 
     height: 100%;
-    /* width: 110px;
-    height: 94px; */
     object-fit: cover;
 }
 
-@media only screen and (min-width: 1920px) {
-    .carPhoto img {
-        width: 150px;
-        height: 128px;
-  }
-  }
 
 .carsInfo {
     display: flex;
@@ -86,7 +94,7 @@
 }
 
 @media only screen and (min-width: 1920px) {
-    .carNumber {
+    .auto {
         font-size: 14px;
   }
   }
@@ -102,7 +110,8 @@
 }
 
 @media only screen and (min-width: 1920px) {
-    .carNumber {
+    .timeInfo {
         font-size: 15px;
   }
   }
+
