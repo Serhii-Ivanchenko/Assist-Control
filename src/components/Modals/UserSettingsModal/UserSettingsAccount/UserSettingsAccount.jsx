@@ -11,7 +11,7 @@ import { BsSdCardFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../../../redux/auth/selectors";
 import { updateUserData } from "../../../../redux/auth/operations";
-// import { getUserData } from "../../../../redux/auth/operations";
+import { getUserData } from "../../../../redux/auth/operations";
 // import { useEffect } from "react";
 
 
@@ -28,8 +28,8 @@ export default function UserSettingsAccount({onClose}) {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
 
-  const state = useSelector((state) => state); // Виводить увесь стан
-console.log("Redux State:", state);
+//   const state = useSelector((state) => state); // Виводить увесь стан
+// console.log("Redux State:", state);
   
   const user = useSelector(selectUser);
   console.log("data", user);
@@ -44,14 +44,29 @@ console.log("Redux State:", state);
 
 
   const handleSubmit = async (values, actions) => {
-    const dataToUpdate = {
-      company_name: values.company,
+    const dataToUpdate = {};
+
+  if (values.company !== user.company_name) {
+    dataToUpdate.company_name = values.company;
+  }
+
+  // if (values.languages !== 'ukr') {
+  //   dataToUpdate.language = values.languages;
+  // }
+
+  // Якщо немає змін, не відправляємо запит на сервер
+  if (Object.keys(dataToUpdate).length === 0) {
+    console.log("No changes to update");
+    actions.setSubmitting(false);
+    return;
     }
-    console.log(values);
+    
+    console.log("Data to update:", dataToUpdate);
+
     try {
       await dispatch(updateUserData(dataToUpdate)).unwrap();
-      actions.resetForm(); // Скидає форму після успішного відправлення
-      console.log(actions)
+      actions.resetForm({ values }); // Скидає форму після успішного відправлення
+      dispatch(getUserData());
     } catch (error) {
       console.error("Error updating user data:", error);
     } finally {
