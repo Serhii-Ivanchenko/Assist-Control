@@ -1,68 +1,64 @@
-@media screen and (min-width: 1280px) and (max-width: 1919px) {
-  .wrapper {
-    display: flex;
-    width: 386px;
-    height: 74px;
-    gap: 8px;
+.wrapper {
+  display: flex;
+  width: 386px;
+  height: 74px;
+  gap: 8px;
 
-    background-color: #1a1a1a;
-    border: transparent;
-    border-radius: 5px;
-    padding: 5px;
+  background-color: #1a1a1a;
+  border: transparent;
+  border-radius: 5px;
+  padding: 5px;
 
-    position: relative;
-  }
+  position: relative;
+}
 
-  .imgContainer {
-    display: flex;
-    width: 64px;
-  }
+.imgContainer {
+  display: flex;
+  width: 64px;
+}
 
-  .carInfoContainer {
-    display: flex;
-    flex-direction: column;
-    margin-top: 3px;
-  }
+.carInfoContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3px;
+}
 
-  .carReg {
-    color: #fff;
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-    font-variant-numeric: tabular-nums;
-  }
+.carReg {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
 
-  .carBrand {
-    color: #9e9e9e;
-    font-family: "Roboto", sans-serif;
-    font-size: 12px;
-    font-weight: 400;
+.carBrand {
+  color: #9e9e9e;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
 
-    margin-top: 2px;
-  }
+  margin-top: 2px;
+}
 
-  .carTimeStamp {
-    color: #fff;
-    font-variant-numeric: lining-nums proportional-nums;
-    font-family: "Roboto", sans-serif;
-    font-size: 15px;
-    font-weight: 700;
+.carTimeStamp {
+  color: #fff;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
 
-    margin-top: 9px;
-  }
+  margin-top: 9px;
+}
 
-  .carStatus {
-    display: inline-flex;
-    position: static;
-    align-items: flex-end;
-    margin-bottom: 5px;
-    margin-left: -4px;
+.carStatus {
+  display: inline-flex;
+  align-items: flex-end;
+  margin-bottom: 5px;
 
-    color: #9e9e9e;
-    font-family: "Roboto", sans-serif;
-    font-size: 10px;
-    font-weight: 400;
-  }
+  color: #9e9e9e;
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
 }
 
 .carDetails {

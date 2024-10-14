@@ -1,23 +1,25 @@
-@media screen and (min-width: 1280px) and (max-width: 1919px) {
-  .wrapper {
-    width: 386px;
-    /* height: 199px; */
-    overflow: scroll;
-  }
-  .wrapper::-webkit-scrollbar {
-    display: none; /* Chrome, Safari та Opera */
-  }
+.wrapper {
+  width: 386px;
+  /* висота потрібна для відображення скролу списку поточних машин */
+  height: 199px;
+  overflow: scroll;
+}
+.wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari та Opera */
+}
 
-  .carsList {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+.carsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 @media screen and (min-width: 1920px) {
   .wrapper {
     width: 578px;
+    /* висота потрібна для відображення скролу списку поточних машин */
+    height: 296px;
+    overflow: scroll;
   }
 
   .carsList {
