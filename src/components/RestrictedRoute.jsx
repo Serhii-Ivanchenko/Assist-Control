@@ -1,13 +1,17 @@
-// import { useSelector } from "react-redux";
-// import { selectIsLoggedIn } from "../redux/user/selectors";
-// import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectAuth } from "../redux/auth/selectors.js";
+import { Navigate } from "react-router-dom";
+import Loader from "./Loader/Loader.jsx";
 
 export default function RestrictedRoute({
   component: Component,
-  // redirectTo = "/",
+  redirectTo = "/",
 }) {
-  // const isLoggedIn = useSelector(selectIsLoggedIn);
+  const { isLoggedIn, isRefreshing } = useSelector(selectAuth);
 
-  // return isLoggedIn ? <Navigate to={redirectTo} /> :
-    return Component;
+   if (isRefreshing) {
+     return <Loader />; // Показуємо лоадер під час перевірки
+   }
+
+  return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
 }

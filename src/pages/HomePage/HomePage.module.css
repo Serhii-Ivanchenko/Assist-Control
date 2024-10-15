@@ -1,0 +1,50 @@
+.homePageContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    background-image: url(../../assets/images/Car_1x.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    margin: 0;
+}
+
+@media only screen and (min-resolution: 192dpi) {
+    .homePageContainer {
+        background-image: url(../../assets/images/Car_2x.webp);
+    }
+}
+
+.link {
+    width: 600px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-bottom: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #0096b7;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #e9e9e9;
+    text-decoration: none;
+
+    border: none;
+    cursor: pointer;
+
+    transition: transform 250ms ease-in-out, background-color 250ms ease-in-out;
+}
+
+.link:hover {
+    background-color: #0040b7;
+    transform: scale(1.05);
+}

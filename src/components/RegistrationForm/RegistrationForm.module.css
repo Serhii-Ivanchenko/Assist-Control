@@ -182,20 +182,33 @@
     padding-bottom: 8px;
   }
 }
-.bottomTextWrapper {
+.bottomSectionWrapper {
   display: flex;
-  align-items: center;
   gap: 4px;
   margin-top: 25px;
+  align-items: center;
+}
+
+@media screen and (max-width: 1279.98px) {
+  .bottomSectionWrapper {
+    margin-top: 14px;
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.bottomTextWrapper {
+  display: flex;
+  gap: 4px;
 }
 
 @media screen and (max-width: 1279.98px) {
   .bottomTextWrapper {
-    margin-top: 14px;
     margin-bottom: 14px;
     justify-content: center;
   }
 }
+
 .bottomText {
   font-weight: 500;
   font-size: 11px;
@@ -204,20 +217,27 @@
   line-height: normal;
 }
 
-.bottomLink {
+.bottomTextOr {
   font-weight: 500;
   font-size: 11px;
-  color: #0096b7;
+  color: #e9e9e9;
   font-style: normal;
   line-height: normal;
 }
 
-.googleRegistrationText {
+@media screen and (max-width: 1279.98px) {
+  .bottomTextOr {
+    display: none;
+  }
+}
+
+.bottomSectionText {
   display: none;
 }
 
 @media screen and (max-width: 1279.98px) {
-  .googleRegistrationText {
+  .bottomSectionText {
+    display: block;
     color: #8d8d8d;
     font-size: 8px;
     font-style: normal;
@@ -228,9 +248,12 @@
   }
 }
 
-.googleWrapper {
-  width: 127px;
-  height: 29px;
+.bottomLink {
+  font-weight: 500;
+  font-size: 11px;
+  color: #0096b7;
+  font-style: normal;
+  line-height: normal;
 }
 
 .orText {
@@ -249,5 +272,12 @@
 
 .googleWrapper {
   width: 127px;
-    height: 29px;
+  height: 29px;
+}
+
+@media screen and (max-width: 1279.98px) {
+  .googleWrapper {
+    width: 100%;
+    height: 30px;
+  }
 }

@@ -25,7 +25,7 @@ const handleRejected = (state, action) => {
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: initialState.user,
+  initialState: initialState.auth,
   extraReducers: (builder) =>
     builder
       .addCase(register.pending, (state) => {
@@ -77,7 +77,7 @@ const authSlice = createSlice({
       })
       .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, (state) => {
-        return initialState.user;
+        return { ...initialState.auth, isLoggedIn: false };
       })
       .addCase(logOut.rejected, handleRejected)
       .addCase(getUserData.pending, handlePending)
@@ -115,8 +115,14 @@ const authSlice = createSlice({
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.userData = { ...state.userData, ...action.payload };
         state.isLoggedIn = true;
-        state.isRefreshing = false;
+        state.isRefreshing = false; // Зупиняємо рефреш
+        state.apiKey = action.payload.api_key; // Переконуємося, що ключ оновився
       })
+      // .addCase(refreshUser.fulfilled, (state, action) => {
+      //   state.userData = { ...state.userData, ...action.payload };
+      //   state.isLoggedIn = true;
+      //   state.isRefreshing = false;
+      // })
       .addCase(refreshUser.rejected, (state, action) => {
         state.apiKey = null;
         state.isRefreshing = false;
