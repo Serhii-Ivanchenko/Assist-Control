@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {selectDate} from "../../redux/cars/selectors.js";
 import {
   changeActualDate,
   changeActualPercent,
@@ -10,26 +11,18 @@ import css from "./Calendar.module.css";
 
 dayjs.extend(isoWeek);
 
-//  const dataMonth = [
-//   { date: '2024-10-01', percent: 60 },
-//    { date: '2024-10-02', percent: 85 },
-//    { date: '2024-10-03', percent: 20 },
-//    { date: '2024-10-04', percent: 90 },
-//    { date: '2024-10-05', percent: 40 },
-//    { date: '2024-10-06', percent: 70 },
-
-//  ];
 
 export default function Calendar({ queryMonth, dataMonth }) {
   let currentDate = dayjs();
   let queryMonthDayjs = dayjs(queryMonth);
   const dispatch = useDispatch();
+  const carSelectDate = useSelector(selectDate);
   // const [currentDate, setCurrentDate] = useState(dayjs()); // Текущая дата
   const startOfMonth = dayjs(queryMonth).startOf("month"); // Начало месяца
   const endOfMonth = dayjs(queryMonth).endOf("month"); // Конец месяца
   const startOfCalendar = startOfMonth.isoWeekday(1); // Начинаем календарь с понедельника
   const endOfCalendar = endOfMonth.isoWeekday(7); // Заканчиваем неделю на воскресенье
-  const [selectedDate, setSelectedDate] = useState(dayjs());
+  const [selectedDate, setSelectedDate] = useState(dayjs(carSelectDate));
 
   // Генерируем массив дат для отображения в календаре
   const generateCalendarDates = () => {
@@ -63,7 +56,7 @@ export default function Calendar({ queryMonth, dataMonth }) {
 
   const handleDateClick = (data, selectdate, percent) => {
     if (!isDateDisabled(data.date)) {
-      setSelectedDate(selectdate);
+      setSelectedDate(data.date);
 
       dispatch(changeActualDate(selectdate));
       dispatch(changeActualPercent(percent));

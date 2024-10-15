@@ -24,4 +24,8 @@ export const selectWorkHours = (state) => state.cars.workHours;
 
 export const selectNewCars = (state) => state.cars.newCars;
 
+export const selectLoadingForCalendar = (state) => state.cars.isLoadingForCalendar;
+
+export const selectLoadingCarsByDay = (state) => state.cars.isLoadingCarsByDay;
+
 

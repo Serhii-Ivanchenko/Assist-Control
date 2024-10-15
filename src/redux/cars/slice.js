@@ -21,6 +21,7 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+
 const carsSlice = createSlice({
   name: "cars",
   initialState: initialState.cars,
@@ -51,13 +52,19 @@ const carsSlice = createSlice({
         state.current = action.payload.cars;
       })
       .addCase(getCurrentCars.rejected, handleRejected)
-      .addCase(getCarsByDate.pending, handlePending)
+      .addCase(getCarsByDate.pending, (state) => {
+        state.isLoadingCarsByDay = true;
+        state.error = null;
+      })
       .addCase(getCarsByDate.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingCarsByDay = false;
         //   state.date = action.payload.date;
         state.day = action.payload.cars;
       })
-      .addCase(getCarsByDate.rejected, handleRejected)
+      .addCase(getCarsByDate.rejected,(state, action) => {
+       state.isLoadingCarsByDay = false;
+       state.error = action.payload;
+      } )
       .addCase(getCarsByMonth.pending, handlePending)
       .addCase(getCarsByMonth.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -78,12 +85,18 @@ const carsSlice = createSlice({
         state.loadPercent = action.payload;
       })
       .addCase(getPercentForHour.rejected, handleRejected)
-      .addCase(getCalendarByMonth.pending, handlePending)
+      .addCase(getCalendarByMonth.pending, (state) => {
+        state.isLoadingForCalendar = true;
+        state.error = null;
+      })
       .addCase(getCalendarByMonth.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingForCalendar = false;
         state.monthlyLoad = action.payload;
       })
-      .addCase(getCalendarByMonth.rejected, handleRejected)
+      .addCase(getCalendarByMonth.rejected,  (state, action) => {
+       state.isLoadingForCalendar = false;
+       state.error = action.payload;
+      })
       .addCase(getNewCarsRange.pending, handlePending)
       .addCase(getNewCarsRange.fulfilled, (state, action) => {
         state.isLoading = false;

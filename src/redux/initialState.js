@@ -55,6 +55,8 @@ export const initialState = {
     loadPercent: null,
     queryMonth: null,
     workHours: {},
+    isLoadingForCalendar: false,
+    isLoadingCarsByDay: false,
   },
 
   client: {
