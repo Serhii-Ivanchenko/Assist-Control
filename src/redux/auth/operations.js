@@ -63,6 +63,53 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   }
 });
 
+// Send reset email
+export const sendRestEmail = createAsyncThunk(
+  "auth/sendResetEmail",
+  async (userEmail, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(
+        "/v1/send-reset-email/",
+        {},
+        {
+          params: {
+            email: userEmail,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Reset Password with email
+export const resetPasswordWithEmail = createAsyncThunk(
+  "auth/resetPasswordWithEmail",
+  async (newPassword, api_key, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(
+        "/v1/change_password_with_mail",
+        {
+          headers: {
+            "X-Api-Key": api_key,
+          },
+        },
+        {
+          params: {
+            new_password: newPassword,
+          },
+        }
+      );
+      console.log(response);
+      // return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 //Get user data
 export const getUserData = createAsyncThunk(
   "auth/getUserData",

@@ -8,6 +8,7 @@ import {
   logOut,
   refreshUser,
   register,
+  resetPasswordWithEmail,
   updateUserAvatar,
   updateUserData,
   validateEmail,
@@ -135,7 +136,25 @@ const authSlice = createSlice({
         state.userData.name = action.payload.name;
         state.userData.email = action.payload.email;
       })
-      .addCase(logInWithGoogle.rejected, handleRejected),
+      .addCase(logInWithGoogle.rejected, handleRejected)
+      .addCase(resetPasswordWithEmail.pending, (state) => {
+        state.isLoading = true;
+        state.isLoggedIn = false;
+        state.error = null;
+      })
+      .addCase(resetPasswordWithEmail.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.isLoading = false;
+        state.isLoggedIn = true;
+        state.error = null;
+      })
+      .addCase(resetPasswordWithEmail.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isLoggedIn = false;
+        console.log(action);
+
+        // state.error = action.payload.message;
+      }),
 });
 
 export default authSlice.reducer;

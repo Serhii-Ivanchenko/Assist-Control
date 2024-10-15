@@ -9,6 +9,7 @@ import { selectIsRefreshing } from "../../redux/auth/selectors.js";
 import { Toaster } from "react-hot-toast";
 import ValidateEmailPage from "../../pages/ValidateEmailPage/ValidateEmailPage.jsx";
 import { refreshUser } from "../../redux/auth/operations.js";
+import ChangePasswordWithEmailPage from "../../pages/ChangePasswordWithEmailPage/ChangePasswordWithEmailPage.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
@@ -31,9 +32,9 @@ export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
 
-   useEffect(() => {
-     dispatch(refreshUser());
-   }, [dispatch]);
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
 
   return isRefreshing ? (
     <Loader />
@@ -95,6 +96,16 @@ export default function App() {
               <RestrictedRoute
                 redirectTo="/video-control"
                 component={<ValidateEmailPage />}
+              />
+            }
+          />
+
+          <Route
+            path="/reset-password/:api_key"
+            element={
+              <RestrictedRoute
+                redirectTo="/video-control"
+                component={<ChangePasswordWithEmailPage />}
               />
             }
           />
