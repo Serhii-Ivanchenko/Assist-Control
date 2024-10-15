@@ -23,9 +23,9 @@ export default function UserSettingsModal({onClose}) {
   }
 
   
-   useEffect(() => {
-    dispatch(getUserData());
-  }, [dispatch]);
+  //  useEffect(() => {
+  //   dispatch(getUserData());
+  // }, [dispatch]);
   
 
 
