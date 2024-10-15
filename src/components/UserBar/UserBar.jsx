@@ -18,8 +18,13 @@ export default function UserBar() {
 
   return (
     <div className={styles.userBarContainer}>
-      <button className={styles.btn} onClick={openSettingsModal} ref={buttonRef}>
+      <button
+        className={styles.btn}
+        onClick={openSettingsModal}
+        ref={buttonRef}
+      >
         <FiSettings className={styles.iconSettings} />
+        <span className={styles.tooltipContent}>Налаштування</span>
       </button>
 
       {isSettingsModalOpen && (
