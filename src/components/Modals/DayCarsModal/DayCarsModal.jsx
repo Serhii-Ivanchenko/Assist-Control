@@ -8,18 +8,17 @@ import {
   selectDayCars,
   selectLoading,
 } from "../../../redux/cars/selectors";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getCarsByDate } from "../../../redux/cars/operations";
 import toast from "react-hot-toast";
 import DayCarsList from "../../DayCarsList/DayCarsList";
 import Loader from "../../Loader/Loader";
 
-export default function DayCarsModal({ onClose }) {
+export default function DayCarsModal({ onClose, isModal, viewMode, onViewModeChange }) {
   const dispatch = useDispatch();
   const carsData = useSelector(selectDayCars);
   const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectLoading);
-  const [viewMode, setViewMode] = useState("grid");
 
   useEffect(() => {
     if (selectedDate) {
@@ -38,9 +37,13 @@ export default function DayCarsModal({ onClose }) {
         <div className={styles.switch}>
           <input
             type="checkbox"
-            className="input"
-            checked={viewMode === "grid"}
-            onChange={() => setViewMode(viewMode === "list" ? "grid" : "list")}
+            className={styles.input}
+            checked={viewMode === "list"}
+            onChange={() => {
+              const newMode = viewMode === "grid" ? "list" : "grid";
+              console.log(`Switching to: ${newMode}`);
+              onViewModeChange(newMode);
+            }}
           />
           <span className={styles.slider}></span>
           <FiGrid
@@ -60,8 +63,14 @@ export default function DayCarsModal({ onClose }) {
       </div>
 
       <div className={styles.content}>
-        {isLoading && <Loader/>}
-        <DayCarsList carsData={carsData} viewMode={viewMode} />
+        {isLoading && <Loader />}
+        <div className={styles.scrollableContent}>
+          <DayCarsList
+            carsData={carsData}
+            viewMode={viewMode}
+            isModal={isModal}
+          />
+        </div>
       </div>
     </div>
   );

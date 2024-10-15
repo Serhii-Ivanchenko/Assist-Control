@@ -30,9 +30,8 @@
 .topContainer {
   width: 454px;
   height: 820px;
-  padding: 17px 11px 17px 11px;
-  padding-left: 17px;
-  padding-right: 17px;
+  padding: 0;
+ 
 } }
 
 .fullHeight {

@@ -3,9 +3,6 @@ import carImage from '../../assets/images/carsItem.png';
 import clsx from 'clsx';
 
 export default function DayCarsItem({ carNumber, auto, timeInfo, photoUrl, isModal }) {
-  console.log("isModal:", isModal);
-  console.log("props:", { carNumber, auto, timeInfo, photoUrl, isModal });
-
 
   const defaultCarImage = carImage;
   const carPhoto = photoUrl ? photoUrl : defaultCarImage;
@@ -20,7 +17,7 @@ export default function DayCarsItem({ carNumber, auto, timeInfo, photoUrl, isMod
       <div className={clsx(styles.carPhoto, isModal && styles.modalCarPhoto)}>
         <img src={carPhoto} alt="Фото автомобіля" />
       </div>
-      <div className={styles.carsInfo}>
+      <div className={clsx(styles.carsInfo, isModal && styles.modalcarsInfo)}>
         <div className={styles.aboutCars}>
           <p className={styles.carNumber}>
             {carNumber}

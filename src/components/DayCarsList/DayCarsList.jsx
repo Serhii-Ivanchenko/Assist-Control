@@ -1,20 +1,23 @@
 import DayCarsItem from "../DayCarsItem/DayCarsItem.jsx";
 import styles from './DayCarsList.module.css';
+import clsx from 'clsx';
 
-export default function DayCarsList({ carsData, hasDetailsButton, isModal  }) {
-  console.log("isModal in DayCarsList:", isModal);
-  console.log("props:", { carsData, hasDetailsButton, isModal });
+export default function DayCarsList({ carsData, hasDetailsButton, isModal, viewMode = "grid" }) {
 
+  console.log(`Current view mode in DayCarsList: ${viewMode}`);
 
   const maxVisibleCars = 3;
+  const visibleCars = isModal ? carsData : carsData.slice(0, maxVisibleCars);
 
   return (
     <div
-      className={`${styles.dayCarsListContainer} ${
-        hasDetailsButton ? styles.withBtn : ""
-      }`}
+      className={clsx(
+        isModal ? styles.modaldayCarsListContainer : styles.dayCarsListContainer,
+        hasDetailsButton && !isModal && styles.withBtn,
+        viewMode === "grid" ? styles.modaldayCarsListContainer : styles.listView
+      )}
     >
-      {carsData.slice(0, maxVisibleCars).map((car) => (
+      {visibleCars.map((car) => (
         <DayCarsItem
           key={car.id}
           carNumber={car.plate}
@@ -22,6 +25,7 @@ export default function DayCarsList({ carsData, hasDetailsButton, isModal  }) {
           timeInfo={`Дата заїзду: ${new Date(car.date_s).toLocaleTimeString()}`}
           photoUrl={car.photo_url}
           isModal={isModal} 
+          viewMode={viewMode}
         />
       ))}
     </div>

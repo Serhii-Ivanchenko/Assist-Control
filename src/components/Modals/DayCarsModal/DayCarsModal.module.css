@@ -12,6 +12,19 @@
     background-color: #101010;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex-grow: 1;
+  }
+  
+  .scrollableContent {
+    max-height: 616px;
+    overflow-y: auto;
+    /* padding-right: 10px; */
+  }
+
 .switch {
     font-size: 17px;
     position: relative;
@@ -55,7 +68,7 @@
     transition: .4s;
 }
 
-.iconLeft {
+.iconRight {
     color: #A4A4A4;
     position: absolute;
     top: 5px;
@@ -65,7 +78,7 @@
     height: 16px;
 }
 
-.iconRight {
+.iconLeft {
     color: #A4A4A4;
     position: absolute;
     top: 5px;
@@ -96,8 +109,9 @@
     cursor: pointer;
 }
 
-/* .switch:hover */
-.iconLeft svg {
+
+.iconLeft svg,
+.iconRight svg {
     animation: rotate 15s linear infinite;
 }
 
@@ -110,11 +124,6 @@
     100% {
         transform: rotate(360deg);
     }
-}
-
-/* .switch:hover */
-.iconRight svg {
-    animation: tilt 5s linear infinite;
 }
 
 @keyframes tilt {
@@ -148,3 +157,7 @@
     transform: translateX(22px);
 }
 
+.active {
+    color: #00ff00; /* Вибери колір, який буде помітним */
+    transition: color 0.3s ease; /* Додає плавний перехід */
+}
