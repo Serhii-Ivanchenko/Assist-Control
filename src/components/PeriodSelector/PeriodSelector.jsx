@@ -17,10 +17,7 @@ export default function PeriodSelector({
   const currentDate = new Date();
   const sevenDaysAgo = new Date(currentDate);
   sevenDaysAgo.setDate(currentDate.getDate() - 7);
-  //   console.log('sd',startDate);
-  // console.log('psd',periodStartData);
-  // console.log('ed',endDate);
-  //   console.log('ped',periodEndData);
+  
 
   function handleInputChangeBeg(e) {
     //  const value = e.target.value;
@@ -52,17 +49,26 @@ export default function PeriodSelector({
 
     if (dateNewEnd.diff(dateNewBeg, "month", true) > 1) {
       dateNewEnd = dateNewBeg.add(1, "month");
+    
+    };
+
+ if (dateNewEnd.diff(dateNewBeg, "day", true) < 7) {
+      dateNewEnd = dateNewBeg.add(7, "day"); 
     }
+
     if (
       dateNewEnd.$d.toISOString().substring(0, 10) >
       currentDate.toISOString().substring(0, 10)
     ) {
       setPeriodEndData(currentDate);
       onDateEndChange(currentDate);
-    } else {
+      return;
+    };
+    
+   
       setPeriodEndData(dateNewEnd.$d);
       onDateEndChange(dateNewEnd.$d);
-    }
+   
     return;
   }
 
@@ -107,17 +113,5 @@ export default function PeriodSelector({
     </div>
   );
 
-  // return (
-  //     <div className={css.containerperiodselector}>
-  //         <p className={css.periodtitle}>З</p>
-  //         <input type="date" name="datebegin" className={css.periodInput}
-  //             value={periodStartData}
-  //             onChange={handleInputChangeBeg} />
-  //         <p className={css.periodtitle}>По</p>
-  //         <input type="date" name="dateend" className={css.periodInput}
-  //             value={periodEndData}
-  //             onChange={handleInputChangeEnd} />
-  //     </div>
-
-  // );
+  
 }

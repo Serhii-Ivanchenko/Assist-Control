@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector , useDispatch} from "react-redux";
 import { selectPercent, selectDate, selectWorkHours, selectCarsForHours } from '../../redux/cars/selectors.js'
 import { getCarsForHour, getPercentForHour } from '../../redux/cars/operations.js'
+// import { changeActualDate } from "../../redux/cars/slice.js";
 import {
   AreaChart,
   XAxis,
@@ -48,64 +49,21 @@ const CustomTooltip = ({ active, payload, label, coordinate }) => {
   return null;
 };
 
-// let data = [
-//   {
-//     hour: "09.00",
-//     value: 5,
-//   },
 
-//   {
-//     hour: "10.00",
-//     value: 6,
-//   },
-
-//   {
-//     hour: "11.00",
-//     value: 7,
-//   },
-
-//   {
-//     hour: "12.00",
-//     value: 7,
-//   },
-
-//   {
-//     hour: "13.00",
-//     value: 9,
-//   },
-
-//   {
-//     hour: "14.00",
-//     value: 8,
-//   },
-
-//   {
-//     hour: "15.00",
-//     value: 6,
-//   },
-
-//   {
-//     hour: "16.00",
-//     value: 6,
-//   },
-//   {
-//     hour: "17.00",
-//     value: 8,
-//   },
-//   {
-//     hour: "18.00",
-//     value: 9,
-//   },
-// ];
 
 export default function LoadStatsChart() {
   const actualPercent = useSelector(selectPercent);
-  const actualDate = useSelector(selectDate);
+  let actualDate = useSelector(selectDate);
   const carsForHours = useSelector(selectCarsForHours);
   const workHours = useSelector(selectWorkHours)
   const dispatch = useDispatch();
  
-  const firstDate = new Date().toISOString().substring(0, 10)
+  const currentDate = new Date().toISOString().substring(0, 10);
+
+
+ if (actualDate === null) {
+    actualDate=currentDate;
+   }
   // const [startIndex, setStartIndex] = useState(startDay);
   //     const [endIndex, setEndIndex] = useState(endDay);
 
@@ -132,7 +90,7 @@ export default function LoadStatsChart() {
   if (actualPercent === null ) {
    const fetchPercentForHour = async () => {
        await Promise.all([
-         dispatch(getPercentForHour(firstDate)),
+         dispatch(getPercentForHour(currentDate)),
        ]);
      };
 

@@ -32,6 +32,7 @@
     align-items: center;
     text-align: center;
     /* padding-top: 3px; */
+    margin-left:3px;
     margin-right: 6px;
 }
 
@@ -95,8 +96,11 @@
     /* width: 120px; */
     background-color: #202020;
     border-radius: 10px;
-    margin-right: 65px;
+    margin-right: 35px;
 }
+
+@media only screen and (min-width: 1920px) {
+    .datewrapper { margin-right: 60px }}
 
 .datewrapper:nth-last-child() {
     margin-right: 0;
