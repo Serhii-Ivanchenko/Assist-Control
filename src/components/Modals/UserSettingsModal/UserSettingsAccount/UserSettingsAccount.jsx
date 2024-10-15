@@ -8,12 +8,17 @@ import { useState } from "react";
 import CustomSelect from "./CustomSelect/CustomSelect";
 import { BsFillKeyFill } from "react-icons/bs";
 import { BsSdCardFill } from "react-icons/bs";
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser } from "../../../../redux/auth/selectors";
+import { updateUserData } from "../../../../redux/auth/operations";
+import { getUserData } from "../../../../redux/auth/operations";
+import Modal from "../../Modal/Modal";
+import ChangePasswordModal from "./ChangePasswordModal/ChangePasswordModal";
+import toast from "react-hot-toast";
+// import { useEffect } from "react";
 
 
-const initialValues = {
-  company: '',
-  languages:'ukr',
-}
+
 
 const Validation = Yup.object().shape({
   company: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
@@ -23,12 +28,80 @@ const Validation = Yup.object().shape({
 
 
 export default function UserSettingsAccount({onClose}) {
-const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const openModal = () => {
+      console.log("Opening modal");
+      setIsOpen(true);
+        };
+        
+        const handleModalClose = () => {
+      setIsOpen(false);
+    };
+
+//   const state = useSelector((state) => state); // Виводить увесь стан
+// console.log("Redux State:", state);
+  
+  const user = useSelector(selectUser);
+  console.log("data", user);
+  const userEmail = user.email || "";
+  const userCompany = user.company_name || "";
+  
+  
+  const initialValues = {
+  company: userCompany,
+  languages:'ukr',
+}
 
 
-const handleSubmit = (values) => {
-		console.log(values);
-		// actions.resetForm();
+  const handleSubmit = async (values, actions) => {
+    const dataToUpdate = {};
+
+  if (values.company !== user.company_name) {
+    dataToUpdate.company_name = values.company;
+  }
+
+  // if (values.languages !== 'ukr') {
+  //   dataToUpdate.language = values.languages;
+  // }
+
+  // Якщо немає змін, не відправляємо запит на сервер
+  if (Object.keys(dataToUpdate).length === 0) {
+    console.log("No changes to update");
+    actions.setSubmitting(false);
+    return;
+    }
+    
+    console.log("Data to update:", dataToUpdate);
+
+    try {
+      await dispatch(updateUserData(dataToUpdate)).unwrap();
+      actions.resetForm({ values }); // Скидає форму після успішного відправлення
+      dispatch(getUserData());
+      toast.success(
+      "Дані успішно збережено)",
+{
+            position: "top-right",
+            duration: 3000,
+            style: {
+              background: "#242525",
+              color: "#FFFFFF",
+            },
+          }
+      )
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    } finally {
+      actions.setSubmitting(false); // Завжди виконується
+    }
+
+
+  // actions.resetForm();
+  // dispatch(updateUserData(values)).unwrap();
+  // actions.setSubmitting(false);
 	};
 
   const companyFieldId = useId();
@@ -49,19 +122,27 @@ const handleSubmit = (values) => {
         <div className={css.emailBox}>
         <label className={css.titles}>Пошта</label>
 
-            <Field className={css.email} name="email"  value="zelensky.official@gmail.com" onClick={handleToggleClick} readOnly/>
+            <Field className={css.email} name="email"  value={userEmail } onClick={handleToggleClick} readOnly/>
 
         {isVisible && (<span className={css.warningMessage}>для зміни пошти зверніться у технічну підтримку</span>)}
         </div>
 
         <div className={css.passwordBox}>
       <label className={css.titles}>Пароль</label>
-          <button className={css.passwortChBtn} type="button"> <BsFillKeyFill className={css.iconKey} /> Змінити пароль</button>
+          <button className={css.passwortChBtn} type="button"onClick={openModal}> <BsFillKeyFill className={css.iconKey} /> Змінити пароль</button>
+          {modalIsOpen && <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+            <ChangePasswordModal onClose={handleModalClose } />
+          </Modal>}
         </div>
 
           <div className={css.companyBox}>
       <label htmlFor={companyFieldId} className={css.titles}>Назва компанії</label>
-        <Field type="text" name="company" className={css.input} id={companyFieldId} placeholder="Avtoatmosfera"/>
+          <Field type="text"
+            name="company"
+            className={css.input}
+            id={companyFieldId}
+            placeholder="Avtoatmosfera"
+          />
         <ErrorMessage name="company" component="span" className={css.errorMessage} />
         </div>
 
