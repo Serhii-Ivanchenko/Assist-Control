@@ -4,10 +4,9 @@ import Modal from "../../Modal/Modal"
 import AddTeamMember from "../AddTeamMember/AddTeamMember"
 import { useState } from "react";
 import { BsPersonPlusFill } from "react-icons/bs";
-import { TfiClose } from "react-icons/tfi";
 
 
-export default function UserSettingsTeam({onClose}) {
+export default function UserSettingsTeam() {
     const [modalIsOpen, setIsOpen] = useState(false);
 
     
@@ -21,7 +20,6 @@ export default function UserSettingsTeam({onClose}) {
   
     return (
       <div className={css.teamBox}>
-         <TfiClose onClick={onClose} className={css.closeBtn} />
             <div className={css.contentBox}>
                 <p className={css.title}>Команда</p>
                 <p className={css.text}>Додайте нового користувача до команди, надавши йому права доступу.

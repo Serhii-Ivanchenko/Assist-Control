@@ -7,7 +7,17 @@ import { ImEyeBlocked } from "react-icons/im";
 import { useDispatch } from "react-redux";
 import { changePassword } from "../../../../../redux/auth/operations";
 import toast from "react-hot-toast";
+import * as Yup from "yup";
 
+const Validation = Yup.object().shape({
+  
+  oldPassword: Yup.string()
+    .min(8, "Пароль повиннен бути не коротше за 8 символів")
+    .required("Поле 'Старий пароль' повинно бути заповнене"),
+  newPassword: Yup.string()
+    .min(8, "Пароль повиннен бути не коротше за 8 символів")
+    .required("Поле 'Новий пароль' повинно бути заповнене"),
+});
 
 export default function ChangePasswordModal({onClose}) {
 
@@ -23,24 +33,37 @@ export default function ChangePasswordModal({onClose}) {
         newPassword: "",
     }
 
-    const handleSubmit = async (values) => {
+    const handleSubmit = async (values, actions) => {
         const { oldPassword, newPassword } = values;
         try{
-        await dispatch(changePassword({ new_password: newPassword, old_password: oldPassword}));
-         toast.success(
-      "Пароль успішно змінено)",
-{
-            position: "top-right",
-            duration: 3000,
-            style: {
-              background: "#242525",
-              color: "#FFFFFF",
-            },
-          }
-            ),
-             onClose()
+        await dispatch(changePassword({ new_password: newPassword, old_password: oldPassword})).unwrap();
+          toast.success(
+            "Пароль успішно змінено :)",
+            {
+              position: "top-right",
+              duration: 5000,
+              style: {
+                background: "#242525",
+                color: "#FFFFFF",
+              },
+            }
+          );
+              onClose()
         } catch (error) {
-             console.error("Error changing password:", error.response.data);
+          
+          console.error("Error changing password:", error);
+          toast.error(
+             "Упс, щось пішло не так :( Спробуйте ще",
+            {
+              position: "top-right",
+              duration: 5000,
+              style: {
+                background: "#242525",
+                color: "#FFFFFF",
+              },
+            }
+          );
+         actions.resetForm()
         }
     }
 
@@ -49,8 +72,8 @@ export default function ChangePasswordModal({onClose}) {
 
     return (
         <div>
-            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                <Form>
+            <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validation}>
+                <Form className={css.changePasswordForm}>
                     <div className={css.inputWrapper}>
                 <label htmlFor={oldPasswordId} className={css.registrationlabel}>
                   Старий пароль
@@ -80,7 +103,8 @@ export default function ChangePasswordModal({onClose}) {
                   component="div"
                   className={css.errorMsg}
                 />
-              </div>
+            </div>
+            
               <div className={css.inputWrapper}>
                 <label
                   htmlFor={newPasswordId}
@@ -113,9 +137,12 @@ export default function ChangePasswordModal({onClose}) {
                   component="div"
                   className={css.errorMsg}
                 />
-                    </div>
-                <button type="submit">Change</button>
-                <button type="button" onClick={onClose}>Close</button>
+            </div>
+
+            <div className={css.btnBox}>
+                <button type="submit" className={css.btnSave}>Змінити</button>
+              <button type="button" onClick={onClose} className={css.btnClose}>Відміна</button>
+            </div>
                 </Form>
             </Formik>
         </div>

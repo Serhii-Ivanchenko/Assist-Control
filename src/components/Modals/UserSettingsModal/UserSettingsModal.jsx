@@ -1,18 +1,19 @@
 import UserSettingsSidebar from "./UserSettingsSidebar/UserSettingsSidebar";
 import css from './UserSettingsModal.module.css'
 import UserSettingAccount from "./UserSettingsAccount/UserSettingsAccount";
-// import { TfiClose } from "react-icons/tfi";
+import { TfiClose } from "react-icons/tfi";
 import UserSettingsTeam from "./UserSettingsTeam/UserSettingsTeam";
 import MobileMenu from "./MobileMenu/MobileMenu";
 import { useState } from "react";
-import { useEffect} from "react";
-import { getUserData } from "../../../redux/auth/operations";
-import { useDispatch } from "react-redux";
+import UserSettingsProfile from "./UserSettingsProfile/UserSettingsProfile";
+// import { useEffect} from "react";
+// import { getUserData } from "../../../redux/auth/operations";
+// import { useDispatch } from "react-redux";
 
 export default function UserSettingsModal({onClose}) {
   const [page, setPage] = useState("profile")
   const [mobMenu, setMobmenu] = useState(false)
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   
   const openMobMenu = () => {
     setMobmenu(true)
@@ -31,13 +32,13 @@ export default function UserSettingsModal({onClose}) {
 
     return (
         <div className={css.settingsBox}>
-             {/* <TfiClose onClick={onClose} className={css.closeBtn} /> */}
+             <TfiClose onClick={onClose} className={css.closeBtn} />
         <UserSettingsSidebar setPage={setPage} page={page} onOpen={openMobMenu} onClose={onClose} />
         {mobMenu && <MobileMenu setPage={setPage} page={page} onClose={closeMobMenu} />}
-          {page === "profile" && ""}
+          {page === "profile" && <UserSettingsProfile/>}
           {page === "account" && <UserSettingAccount onClose={onClose}/>}
           {page === "tariff" && ""}
-          {page === "team" && <UserSettingsTeam  onClose={onClose}/>}
+          {page === "team" && <UserSettingsTeam />}
                         
         </div>
     )

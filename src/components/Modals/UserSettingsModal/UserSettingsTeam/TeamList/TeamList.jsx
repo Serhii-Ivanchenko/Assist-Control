@@ -48,7 +48,7 @@ export default function TeamList() {
              <li>
                 <TeamListItem/>
             </li>
-             <li>
+             <li> 
                 <TeamListItem/>
             </li>
              <li>

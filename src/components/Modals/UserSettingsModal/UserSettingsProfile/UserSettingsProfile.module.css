@@ -1,0 +1,69 @@
+.formBox{
+    width: 975px;
+    padding: 82px 42px;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.input{
+    width: 420px;
+    padding: 18px 20px;
+
+    border-radius: 10px;
+    border: 1px solid var(--Button-grey, #4A4A4A);
+    background-color: var(--Grey-Input, #282828);
+
+    margin-bottom: 12px;
+    margin-top: 8px;
+}
+
+.inputs{
+    display: flex;
+    align-items: center;
+    gap: 51px;
+}
+
+.firstColumn{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.secondColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputLable{
+    color: var(--Color, #FFF);
+        font-family: "Roboto", sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+}
+
+.photoBox{
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+
+    border-radius: 120px;
+
+    background-color: bisque;
+}
+
+.photo{
+    width: 120px;
+        height: 120px;
+        flex-shrink: 0;
+    
+        border-radius: 120px;
+}
+
+.photoField{
+    display: none;
+    
+}
