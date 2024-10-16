@@ -8,6 +8,7 @@ import {
   logOut,
   refreshUser,
   register,
+  resetPasswordWithEmail,
   updateUserAvatar,
   updateUserData,
   validateEmail,
@@ -32,49 +33,40 @@ const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.isLoading = true;
         state.isLoggedIn = false;
-        state.error = null;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-        state.error = null;
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(register.rejected, (state) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-        state.error = action.payload;
       })
       .addCase(validateEmail.pending, (state) => {
         state.isLoading = true;
         state.isLoggedIn = false;
-        state.error = null;
       })
       .addCase(validateEmail.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.error = null;
         state.apiKey = action.payload.api_key;
       })
-      .addCase(validateEmail.rejected, (state, action) => {
+      .addCase(validateEmail.rejected, (state) => {
         state.isLoggedIn = false;
         state.isLoading = false;
-        state.error = action.payload;
       })
       .addCase(logIn.pending, (state) => {
         state.isLoading = true;
         state.isLoggedIn = false;
-        state.error = null;
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
         state.apiKey = action.payload.api_key;
-        state.error = null;
       })
-      .addCase(logIn.rejected, (state, action) => {
+      .addCase(logIn.rejected, (state) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-        state.error = action.payload.message;
       })
       .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, (state) => {
@@ -139,6 +131,18 @@ const authSlice = createSlice({
         // state.isRefreshing = false;
       })
       .addCase(logInWithGoogle.rejected, handleRejected)
+      .addCase(resetPasswordWithEmail.pending, (state) => {
+        state.isLoading = true;
+        state.isLoggedIn = false;
+      })
+      .addCase(resetPasswordWithEmail.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isLoggedIn = false;
+      })
+      .addCase(resetPasswordWithEmail.rejected, (state) => {
+        state.isLoading = false;
+        state.isLoggedIn = false;
+      }),
       .addCase(changePassword.pending, handlePending)
       .addCase(changePassword.rejected, handleRejected)
       .addCase(changePassword.fulfilled, (state, action) => {

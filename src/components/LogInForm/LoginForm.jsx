@@ -10,8 +10,20 @@ import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import toast from "react-hot-toast";
 import GoogleBtn from "../GoogleBtn/GoogleBtn.jsx";
+import SendResetEmailForm from "../SendResetEmailForm/SendResetEmailForm.jsx";
+import Modal from "../Modals/Modal/Modal.jsx";
 
 export default function LoginForm() {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsOpen(false);
+  };
+
   const dispatch = useDispatch();
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -119,7 +131,11 @@ export default function LoginForm() {
                   className={css.errorMsg}
                 />
               </div>
-              <button type="button" className={css.forgotPasswordLink}>
+              <button
+                type="button"
+                className={css.forgotPasswordLink}
+                onClick={openModal}
+              >
                 Забули пароль?
               </button>
             </div>
@@ -139,6 +155,11 @@ export default function LoginForm() {
           Зареєструватись
         </Link>
       </div>
+      {modalIsOpen && (
+        <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+          <SendResetEmailForm onClose={handleModalClose} />
+        </Modal>
+      )}
     </div>
   );
 }
