@@ -17,7 +17,7 @@ import DayCarsModal from "../Modals/DayCarsModal/DayCarsModal.jsx";
 export default function CalendarBlock() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [viewMode, setViewMode] = useState("grid");
+  // const [viewMode, setViewMode] = useState("grid");
 
   const carsData = useSelector(selectDayCars);
   const selectedDate = useSelector(selectDate);
@@ -34,8 +34,8 @@ export default function CalendarBlock() {
     }
   }, [dispatch, selectedDate]);
 
-  const maxVisibleCars = 3;
-  const hasDetailsButton = carsData.length > maxVisibleCars;
+  // const maxVisibleCars = 3;
+  // const hasDetailsButton = carsData.length > maxVisibleCars;
 
   const handleDetailsBtnClick = () => {
     setIsModalOpen(true);
@@ -45,10 +45,10 @@ export default function CalendarBlock() {
     setIsModalOpen(false);
   };
 
-  const handleViewModeChange = (newMode) => {
-    setViewMode(newMode);
-    console.log(`View mode changed to: ${newMode}`); 
-  };
+  // const handleViewModeChange = (newMode) => {
+  //   setViewMode(newMode);
+  //   console.log(`View mode changed to: ${newMode}`); 
+  // };
 
   return (
     <div className={styles.calendarContainer}>
@@ -71,8 +71,8 @@ export default function CalendarBlock() {
           carsData={carsData}
           isModal={true}
           onClose={handleCloseModal}
-          viewMode={viewMode}
-          onViewModeChange={handleViewModeChange}
+          // viewMode={viewMode}
+          // onViewModeChange={handleViewModeChange}
         />
       </Modal>
     </div>

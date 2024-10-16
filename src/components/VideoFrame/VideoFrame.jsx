@@ -43,51 +43,51 @@ function SamplePrevArrow({ currentSlide, onClick }) {
 export default function VideoFrame() {
   const [videoImgSrc, setVideoImgSrc] = useState(null);
   const canvasRef = useRef(null);
-  useEffect(() => {
-    const ws = new WebSocket("wss://cam.assist.cam/camera2/ws/video_feed");
-    ws.binaryType = "arraybuffer"; // Установлюємо тип даних для бінарних файлів
-    ws.onopen = (e) => {
-      console.log("server was started", e);
-    };
-    ws.onmessage = (event) => {
-      const arrayBuffer = event.data;
-      const img = new Image();
-      const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
+  // useEffect(() => {
+  //   const ws = new WebSocket("wss://cam.assist.cam/camera2/ws/video_feed");
+  //   ws.binaryType = "arraybuffer"; // Установлюємо тип даних для бінарних файлів
+  //   ws.onopen = (e) => {
+  //     console.log("server was started", e);
+  //   };
+  //   ws.onmessage = (event) => {
+  //     const arrayBuffer = event.data;
+  //     const img = new Image();
+  //     const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
 
-      img.src = URL.createObjectURL(blob);
-      setVideoImgSrc(img.src);
+  //     img.src = URL.createObjectURL(blob);
+  //     setVideoImgSrc(img.src);
 
-      // img.onload = () => {
-      //   const canvas = canvasRef.current;
-      //   const ctx = canvas.getContext("2d");
-      //   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      // }; 
-    };
-    ws.onclose = () => {
-      ws.close();
-      console.log("Server is closed");
-    };
-    ws.onerror = () => {
-      ws.close();
-      console.log("Server has error");
-    };
-    // const secondWs = new WebSocket(
-    //   "wss://cam.assist.cam/camera2/ws/video_feed"
-    // );
-    // secondWs.binaryType = "arraybuffer";
-    // secondWs.onopen = () => {
-    //   console.log("server was started");
-    // };
-    // secondWs.onmessage = (event) => {
-    //   console.log("event", event);
-    // };
-    // secondWs.onclose = () => {
-    //   console.log("Server is closed");
-    // };
-    // secondWs.onerror = () => {
-    //   console.log("Server has error");
-    // };
-  }, []);
+  //     // img.onload = () => {
+  //     //   const canvas = canvasRef.current;
+  //     //   const ctx = canvas.getContext("2d");
+  //     //   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  //     // }; 
+  //   };
+  //   ws.onclose = () => {
+  //     ws.close();
+  //     console.log("Server is closed");
+  //   };
+  //   ws.onerror = () => {
+  //     ws.close();
+  //     console.log("Server has error");
+  //   };
+  //   // const secondWs = new WebSocket(
+  //   //   "wss://cam.assist.cam/camera2/ws/video_feed"
+  //   // );
+  //   // secondWs.binaryType = "arraybuffer";
+  //   // secondWs.onopen = () => {
+  //   //   console.log("server was started");
+  //   // };
+  //   // secondWs.onmessage = (event) => {
+  //   //   console.log("event", event);
+  //   // };
+  //   // secondWs.onclose = () => {
+  //   //   console.log("Server is closed");
+  //   // };
+  //   // secondWs.onerror = () => {
+  //   //   console.log("Server has error");
+  //   // };
+  // }, []);
 
   let image = useRef();
   let parentRef = useRef();
