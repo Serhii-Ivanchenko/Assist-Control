@@ -1,9 +1,15 @@
+.loginPageWrapper {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
 .loginPage {
   display: flex;
   overflow: hidden;
   border-radius: 60px;
-  width: 940px;
-  height: 670px;
+  width: 896px;
+  height: 684px;
 }
 
 @media screen and (max-width: 1279.98px) {

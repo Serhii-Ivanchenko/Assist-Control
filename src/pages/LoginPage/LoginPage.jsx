@@ -11,9 +11,11 @@ export default function LoginPage() {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className={css.loginPage}>
-      <WelcomeSection />
-      <LoginForm />
+    <div className={css.loginPageWrapper}>
+      <div className={css.loginPage}>
+        <WelcomeSection />
+        <LoginForm />
+      </div>
     </div>
   );
 }
