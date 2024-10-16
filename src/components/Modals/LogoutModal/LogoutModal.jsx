@@ -13,7 +13,7 @@ export default function LogoutModal({ onClose }) {
       await dispatch(logOut())
         .unwrap()
         .then(() => {
-          navigate("/");
+          navigate("/login");
         })
         .catch(() => {
           toast.error("Щось сталося, спробуйте ще раз", {
