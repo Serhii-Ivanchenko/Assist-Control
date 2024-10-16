@@ -142,7 +142,7 @@ const authSlice = createSlice({
       .addCase(resetPasswordWithEmail.rejected, (state) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-      }),
+      })
       .addCase(changePassword.pending, handlePending)
       .addCase(changePassword.rejected, handleRejected)
       .addCase(changePassword.fulfilled, (state, action) => {
