@@ -12,6 +12,7 @@ import {
   updateUserAvatar,
   updateUserData,
   validateEmail,
+  changePassword,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -126,6 +127,8 @@ const authSlice = createSlice({
         state.apiKey = action.payload.api_key;
         state.userData.name = action.payload.name;
         state.userData.email = action.payload.email;
+        state.isLoggedIn = true;
+        // state.isRefreshing = false;
       })
       .addCase(logInWithGoogle.rejected, handleRejected)
       .addCase(resetPasswordWithEmail.pending, (state) => {
@@ -140,6 +143,13 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isLoggedIn = false;
       }),
+      .addCase(changePassword.pending, handlePending)
+      .addCase(changePassword.rejected, handleRejected)
+      .addCase(changePassword.fulfilled, (state, action) => {
+        // state.newPassword = action.payload.new_password;
+        state.isLoading = false;
+        state.error = null;
+  })
 });
 
 export default authSlice.reducer;

@@ -240,3 +240,18 @@ export const logInWithGoogle = createAsyncThunk(
     }
   }
 );
+
+// Change password
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async ({old_password, new_password}, thunkAPI) => {
+    try {
+      const response = await axiosInstance.put("/v1/change_password/",null, {
+        params: { old_password, new_password }
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+)

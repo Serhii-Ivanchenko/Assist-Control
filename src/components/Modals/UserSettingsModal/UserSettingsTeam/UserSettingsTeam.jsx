@@ -17,7 +17,8 @@ export default function UserSettingsTeam({onClose}) {
         
         const handleModalClose = () => {
       setIsOpen(false);
-    };
+  };
+  
     return (
       <div className={css.teamBox}>
          <TfiClose onClick={onClose} className={css.closeBtn} />

@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getNewCarsRange } from "../../redux/cars/operations.js";
+import { selectNewCars } from "../../redux/cars/selectors.js";
 import PeriodSelector from "../PeriodSelector/PeriodSelector.jsx";
 import {
   AreaChart,
@@ -35,117 +38,27 @@ const CustomTooltip = ({ active, payload, label, coordinate }) => {
       >
         <p
           className={css.popuptitle}
-        >{`${payload[0].value} автомобілів ${label}`}</p>
+        >{`${payload[0].count} автомобілів ${label}`}</p>
       </div>
     );
   }
   return null;
 };
 
-let data = [
-  {
-    date: "2024-09-19",
-    dateeng: "19/09/2024",
-    value: 5,
-  },
 
-  {
-    date: "2024-09-20",
-    dateeng: "20/09/2024",
-    value: 6,
-  },
-
-  {
-    date: "2024-09-21",
-    dateeng: "21/09/2024",
-    value: 7,
-  },
-
-  {
-    date: "2024-09-22",
-    dateeng: "22/09/2024",
-    value: 7,
-  },
-
-  {
-    date: "2024-09-23",
-    dateeng: "23/09/2024",
-    value: 9,
-  },
-
-  {
-    date: "2024-09-24",
-    dateeng: "24/09/2024",
-    value: 8,
-  },
-
-  {
-    date: "2024-09-25",
-    dateeng: "25/09/2024",
-    value: 5,
-  },
-
-  {
-    date: "2024-09-26",
-    dateeng: "26/09/2024",
-    value: 6,
-  },
-
-  {
-    date: "2024-09-27",
-    dateeng: "27/09/2024",
-    value: 7,
-  },
-
-  {
-    date: "2024-09-28",
-    dateeng: "28/09/2024",
-    value: 7,
-  },
-
-  {
-    date: "2024-09-29",
-    dateeng: "29/09/2024",
-    value: 9,
-  },
-
-  {
-    date: "2024-09-30",
-    dateeng: "30/09/2024",
-    value: 8,
-  },
-
-  {
-    date: "2024-10-01",
-    dateeng: "01/10/2024",
-    value: 6,
-  },
-
-  {
-    date: "2024-10-02",
-    dateeng: "02/10/2024",
-    value: 6,
-  },
-  {
-    date: "2024-10-03",
-    dateeng: "03/10/2024",
-    value: 8,
-  },
-  {
-    date: "2024-10-04",
-    dateeng: "04/10/2024",
-    value: 9,
-  },
-];
 
 export default function Chart() {
+  const dispatch = useDispatch();
+  const newCarsData = useSelector(selectNewCars);
   const currentDate = new Date();
   const sevenDaysAgo = new Date(currentDate);
   sevenDaysAgo.setDate(currentDate.getDate() - 7);
 
   const [dateBegin, setDateBegin] = useState(sevenDaysAgo);
   const [dateEnd, setDateEnd] = useState(currentDate);
-  let interval = data.length;
+  let dateBeginStr = dateBegin.toISOString().substring(0, 10);
+  let dateEndStr= dateEnd.toISOString().substring(0, 10);
+  
 
   const handleDataChangeBeg = (newData) => {
     setDateBegin(newData);
@@ -180,9 +93,28 @@ export default function Chart() {
     return tick;
   };
 
-  //  console.log('start', dateBegin)
-  //  console.log('end', dateEnd)
+ useEffect(() => {
+     
+   const fetchNewCarsData = async () => {
+     await Promise.all([
+       dispatch(getNewCarsRange({dateBeginStr, dateEndStr})),
+        ]);
+      };
 
+     fetchNewCarsData();
+     
+
+    }, [dispatch, dateBeginStr, dateEndStr ]);
+
+       let data =
+  newCarsData.map(el => ({
+    ...el, 
+    dateeng: el.date.substring(8, 10) + '/' + el.date.substring(5, 7) + '/' + el.date.substring(0, 4),
+  }));
+
+    // console.log('date',data)
+  //  console.log('end', dateEnd)
+ let interval = data.length;
   return (
     <div className={css.containerchart}>
       <p className={css.charttitle}>Машинозаїзди</p>
@@ -229,7 +161,7 @@ export default function Chart() {
             <YAxis
               //  domain={[0, (dataMax) => dataMax + 1]}
               domain={[0, 10]}
-              dataKey="value"
+              dataKey="count"
               //  padding={{ top: 10 }}
               allowDataOverflow={true}
               //  tickCount={10}
@@ -250,7 +182,7 @@ export default function Chart() {
 
             <Area
               type="monotone"
-              dataKey="value"
+              dataKey="count"
               stroke="#3956cc"
               strokeWidth={3}
               fill="url(#colorGradient)"

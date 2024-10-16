@@ -1,9 +1,9 @@
 .wrapper {
   width: 386px;
-  /* height: 199px; */
+  /* висота потрібна для відображення скролу списку поточних машин */
+  height: 199px;
   overflow: scroll;
 }
-
 .wrapper::-webkit-scrollbar {
   display: none; /* Chrome, Safari та Opera */
 }
@@ -12,4 +12,19 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+@media screen and (min-width: 1920px) {
+  .wrapper {
+    width: 578px;
+    /* висота потрібна для відображення скролу списку поточних машин */
+    height: 296px;
+    overflow: scroll;
+  }
+
+  .carsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 }

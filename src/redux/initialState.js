@@ -47,13 +47,16 @@ export const initialState = {
     month: [],
     all: [],
     newCars: [],
-    forHour: {},
+    forHours: {},
     monthlyLoad: {},
     date: null,
     isLoading: false,
     error: null,
     loadPercent: null,
     queryMonth: null,
+    workHours: {},
+    isLoadingForCalendar: false,
+    isLoadingCarsByDay: false,
   },
 
   client: {

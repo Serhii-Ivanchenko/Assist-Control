@@ -16,7 +16,7 @@ export default function LogOut() {
   };
 
   return (
-    <>
+    <div className={css.tooltip}>
       <button className={css.btn} onClick={openModal}>
         <BsBoxArrowRight className={css.icon} />
       </button>
@@ -25,6 +25,7 @@ export default function LogOut() {
           <LogoutModal onClose={handleModalClose} />
         </Modal>
       )}
-    </>
+      <span className={css.tooltipContent}>Вийти</span>
+    </div>
   );
 }
