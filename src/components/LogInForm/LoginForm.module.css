@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
   border-radius: 0;
-  padding: 98px 77px 62px 79px;
-  width: 460px;
+  padding: 68px 72px;
+  width: 448px;
 }
 
 @media screen and (max-width: 1279.98px) {
@@ -27,10 +27,11 @@
 }
 
 .loginHeader {
-  font-size: 24px;
+  font-size: 32px;
   font-style: normal;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
   font-weight: 700;
+  line-height: normal;
 }
 
 @media screen and (max-width: 767.98px) {
@@ -41,11 +42,11 @@
 
 .loginText {
   font-weight: 500;
-  font-size: 8px;
+  font-size: 14px;
   font-style: normal;
   line-height: normal;
   color: #8d8d8d;
-  margin-bottom: 42px;
+  margin-bottom: 64px;
 }
 
 @media screen and (max-width: 1279.98px) {
@@ -57,14 +58,12 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 17px;
-  margin-bottom: 41px;
+  gap: 35px;
 }
 
 @media screen and (max-width: 1279.98px) {
   .wrapper {
     gap: 14px;
-    margin-bottom: 14px;
   }
 }
 
@@ -72,21 +71,21 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-
-@media screen and (max-width: 1279.98px) {
-  .inputWrapper {
-    gap: 12px;
-  }
+  gap: 12px;
 }
 
 .loginLabel {
   font-weight: 500;
-  font-size: 11px;
+  font-size: 14px;
   color: #e9e9e9;
   font-style: normal;
   line-height: normal;
+}
+
+@media screen and (max-width: 1279.98px) {
+  .loginLabel {
+    font-size: 11px;
+  }
 }
 
 .inputWithIconWrapper {
@@ -97,7 +96,7 @@
 
 .inputIcon {
   position: absolute;
-  left: 14px;
+  left: 16px;
   color: #615f68;
   fill: #615f68;
   width: 10px;
@@ -119,9 +118,9 @@
   font-style: normal;
   line-height: 1.18em;
   color: #fff;
-  padding-top: 9px;
-  padding-bottom: 9px;
-  padding-left: 32px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 36px;
   width: 100%;
 }
 
@@ -134,7 +133,7 @@
 }
 
 .input::placeholder {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 500;
   font-style: normal;
   line-height: normal;
@@ -157,11 +156,13 @@
   text-align: start;
   cursor: pointer;
   color: #0096b7;
-  font-size: 8px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   text-decoration-line: underline;
+  margin-top: 14px;
+  margin-bottom: 14px;
 }
 
 .eyeIconBtn {
@@ -201,15 +202,15 @@
   background-color: #0096b7;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
-  font-size: 11px;
+  font-size: 16px;
   color: #e9e9e9;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-top: 12px;
-  padding-bottom: 8px;
-  margin-bottom: 27px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 18px;
   border: none;
   cursor: pointer;
 }
@@ -221,25 +222,14 @@
   }
 }
 
-.googleRegistrationText {
-  color: #8d8d8d;
-  font-size: 8px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  text-align: center;
-  margin-bottom: 13px;
-}
-
 .googleWrapper {
-  height: 33px;
-  margin-bottom: 136px;
+  height: 30px;
+  margin-bottom: 70px;
 }
 
 @media screen and (max-width: 1279.98px) {
   .googleWrapper {
     width: 100%;
-    height: 30px;
     margin-bottom: 14px;
   }
 }
@@ -247,6 +237,14 @@
 .bottomTextWrapper {
   display: flex;
   gap: 4px;
+}
+
+.linkToRegisterText {
+  color: #e9e9e9;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .bottomLink {
@@ -260,9 +258,9 @@
 .bottomText {
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
   color: #8d8d8d;
-  font-size: 8px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
   line-height: 1.12em;

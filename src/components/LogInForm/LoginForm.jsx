@@ -131,14 +131,21 @@ export default function LoginForm() {
                   className={css.errorMsg}
                 />
               </div>
-              <button
+              {/* <button
                 type="button"
                 className={css.forgotPasswordLink}
                 onClick={openModal}
               >
                 Забули пароль?
-              </button>
+              </button> */}
             </div>
+            <button
+              type="button"
+              className={css.forgotPasswordLink}
+              onClick={openModal}
+            >
+              Забули пароль?
+            </button>
             <button type="submit" className={css.submitButton}>
               Увійти
             </button>
@@ -150,7 +157,7 @@ export default function LoginForm() {
         <GoogleBtn />
       </div>
       <div className={css.bottomTextWrapper}>
-        <p className={css.loginLabel}>Ще не маєте акаунт?</p>
+        <p className={css.linkToRegisterText}>Ще не маєте акаунт?</p>
         <Link to="/register" className={css.bottomLink}>
           Зареєструватись
         </Link>
