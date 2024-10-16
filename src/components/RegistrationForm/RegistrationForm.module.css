@@ -84,8 +84,8 @@
   left: 16px;
   color: #615f68;
   fill: #615f68;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 @media screen and (max-width: 1279.98px) {
@@ -125,9 +125,9 @@
   background-color: #242525;
   border: none;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 14px;
   font-style: normal;
-  line-height: 1.18em;
+  line-height: 1.142em;
   color: #fff;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -165,14 +165,14 @@
   font-weight: 500;
   font-size: 16px;
   color: #e9e9e9;
-  line-height: normal;
+  line-height: 1.19em;
   font-style: normal;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-top: 12px;
-  padding-bottom: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border: none;
   cursor: pointer;
 }
@@ -215,7 +215,7 @@
   font-size: 11px;
   color: #e9e9e9;
   font-style: normal;
-  line-height: normal;
+  line-height: 1.18em;
   white-space: nowrap;
 }
 
@@ -224,7 +224,7 @@
   font-size: 11px;
   color: #e9e9e9;
   font-style: normal;
-  line-height: normal;
+  line-height: 1.18em;
 }
 
 @media screen and (max-width: 1279.98px) {
@@ -255,7 +255,7 @@
   font-size: 11px;
   color: #0096b7;
   font-style: normal;
-  line-height: normal;
+  line-height: 1.18;
 }
 
 .googleWrapper {
