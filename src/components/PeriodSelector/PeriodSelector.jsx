@@ -36,7 +36,13 @@ export default function PeriodSelector({
         dateNewEnd = dateNewBeg.add(1, "month");
         setPeriodEndData(dateNewEnd.$d);
         onDateEndChange(dateNewEnd.$d);
-      }
+      };
+if (dateNewEnd.diff(dateNewBeg, "day", true) < 7)
+{
+        dateNewEnd = dateNewBeg.add(7, "day");
+        setPeriodEndData(dateNewEnd.$d);
+        onDateEndChange(dateNewEnd.$d);
+      };
       setPeriodStartData(e);
       onDateBegChange(e);
     }
@@ -106,6 +112,7 @@ export default function PeriodSelector({
           dateFormat="dd/MM/yyyy"
           open={isOpenEnd}
           onClickOutside={() => setIsOpenEnd(false)}
+          popperClassName={css.datepickerdropdown}
           //  placeholderText="Click to select a date"
         />
         <FaCalendar className={css.icon} onClick={handleIconClickEnd} />
