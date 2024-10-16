@@ -1,21 +1,31 @@
 import css from "./TeamList.module.css"
 import TeamListItem from "../TeamListItem/TeamListItem";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../../../redux/auth/selectors";
+
 
 export default function TeamList() {
+
+    const user = useSelector(selectUser);
+    const userName = user.name;
+    const userEmail = user.email;
+    const userPhoto = user.avatar_url;
+
+
     return (
         <ul className={css.teamList}>
             <li className={css.teamListItem}>
                 <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
-                    <img src="" alt="" />
+                        <img src={userPhoto} alt={`${userName}'s photo`} className={css.particularMemberPhoto } />
                     </div>
                     
                      <div className={css.container}>
 
 
                 <div className={css.nameBox}>
-                <p className={css.memberName}>Максим Коваленко</p>
-                    <p className={css.memberEmail}>maksim.kovalenko@example.com</p>
+                            <p className={css.memberName}>{userName}</p>
+                            <p className={css.memberEmail}>{userEmail }</p>
                 </div>
 
                 <div className={css.selectAndBin}>

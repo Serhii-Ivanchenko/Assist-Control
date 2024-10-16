@@ -5,10 +5,14 @@ import UserSettingAccount from "./UserSettingsAccount/UserSettingsAccount";
 import UserSettingsTeam from "./UserSettingsTeam/UserSettingsTeam";
 import MobileMenu from "./MobileMenu/MobileMenu";
 import { useState } from "react";
+import { useEffect} from "react";
+import { getUserData } from "../../../redux/auth/operations";
+import { useDispatch } from "react-redux";
 
 export default function UserSettingsModal({onClose}) {
   const [page, setPage] = useState("profile")
   const [mobMenu, setMobmenu] = useState(false)
+  const dispatch = useDispatch()
   
   const openMobMenu = () => {
     setMobmenu(true)
@@ -17,6 +21,12 @@ export default function UserSettingsModal({onClose}) {
   const closeMobMenu = () => {
     setMobmenu(false)
   }
+
+  
+  //  useEffect(() => {
+  //   dispatch(getUserData());
+  // }, [dispatch]);
+  
 
 
     return (
