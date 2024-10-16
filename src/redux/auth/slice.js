@@ -32,49 +32,40 @@ const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.isLoading = true;
         state.isLoggedIn = false;
-        state.error = null;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-        state.error = null;
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(register.rejected, (state) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-        state.error = action.payload;
       })
       .addCase(validateEmail.pending, (state) => {
         state.isLoading = true;
         state.isLoggedIn = false;
-        state.error = null;
       })
       .addCase(validateEmail.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
-        state.error = null;
         state.apiKey = action.payload.api_key;
       })
-      .addCase(validateEmail.rejected, (state, action) => {
+      .addCase(validateEmail.rejected, (state) => {
         state.isLoggedIn = false;
         state.isLoading = false;
-        state.error = action.payload;
       })
       .addCase(logIn.pending, (state) => {
         state.isLoading = true;
         state.isLoggedIn = false;
-        state.error = null;
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLoggedIn = true;
         state.apiKey = action.payload.api_key;
-        state.error = null;
       })
-      .addCase(logIn.rejected, (state, action) => {
+      .addCase(logIn.rejected, (state) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-        state.error = action.payload.message;
       })
       .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, (state) => {
@@ -140,20 +131,14 @@ const authSlice = createSlice({
       .addCase(resetPasswordWithEmail.pending, (state) => {
         state.isLoading = true;
         state.isLoggedIn = false;
-        state.error = null;
       })
-      .addCase(resetPasswordWithEmail.fulfilled, (state, action) => {
-        console.log(action.payload);
-        state.isLoading = false;
-        state.isLoggedIn = true;
-        state.error = null;
-      })
-      .addCase(resetPasswordWithEmail.rejected, (state, action) => {
+      .addCase(resetPasswordWithEmail.fulfilled, (state) => {
         state.isLoading = false;
         state.isLoggedIn = false;
-        console.log(action);
-
-        // state.error = action.payload.message;
+      })
+      .addCase(resetPasswordWithEmail.rejected, (state) => {
+        state.isLoading = false;
+        state.isLoggedIn = false;
       }),
 });
 

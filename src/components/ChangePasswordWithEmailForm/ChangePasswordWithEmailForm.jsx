@@ -23,17 +23,17 @@ export default function ChangePasswordWithEmailForm() {
   const handleSubmitChangePasswordWithEmail = (values, actions) => {
     const { password } = values;
 
-    dispatch(resetPasswordWithEmail(password, api_key))
+    dispatch(resetPasswordWithEmail({ api_key, password }))
       .unwrap()
       .then(() => {
-        toast.success("Welcome to Assist CONTROL", {
+        toast.success("Пароль успішно змінено", {
           position: "top-center",
           style: {
             background: "#242525",
             color: "#FFFFFF",
           },
         }),
-          navigate("/video-control");
+          navigate("/login");
       })
       .catch((error) => {
         console.log(error);

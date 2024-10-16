@@ -102,12 +102,7 @@ export default function App() {
 
           <Route
             path="/reset-password/:api_key"
-            element={
-              <RestrictedRoute
-                redirectTo="/video-control"
-                component={<ChangePasswordWithEmailPage />}
-              />
-            }
+            element={<ChangePasswordWithEmailPage />}
           />
 
           <Route path="*" element={<NotFoundPage />} />

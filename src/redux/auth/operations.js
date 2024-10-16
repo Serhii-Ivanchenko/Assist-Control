@@ -87,19 +87,18 @@ export const sendRestEmail = createAsyncThunk(
 // Reset Password with email
 export const resetPasswordWithEmail = createAsyncThunk(
   "auth/resetPasswordWithEmail",
-  async ({ newPassword, api_key }, thunkAPI) => {
+  async ({ api_key, password }, thunkAPI) => {
     try {
       const response = await axiosInstance.post(
         "/v1/change_password_with_mail/",
-        { new_password: newPassword },
+        { new_password: password },
         {
           headers: {
             "X-Api-Key": api_key,
           },
         }
       );
-      console.log(response);
-      // return response.data;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
