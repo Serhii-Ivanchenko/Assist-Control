@@ -14,7 +14,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 const carArr = [
   {
@@ -43,51 +43,51 @@ function SamplePrevArrow({ currentSlide, onClick }) {
 export default function VideoFrame() {
   const [videoImgSrc, setVideoImgSrc] = useState(null);
   const canvasRef = useRef(null);
-  // useEffect(() => {
-  //   const ws = new WebSocket("wss://cam.assist.cam/camera2/ws/video_feed");
-  //   ws.binaryType = "arraybuffer"; // Установлюємо тип даних для бінарних файлів
-  //   ws.onopen = (e) => {
-  //     console.log("server was started", e);
-  //   };
-  //   ws.onmessage = (event) => {
-  //     const arrayBuffer = event.data;
-  //     const img = new Image();
-  //     const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
+  useEffect(() => {
+    const ws = new WebSocket("wss://cam.assist.cam/camera2/ws/video_feed");
+    ws.binaryType = "arraybuffer"; // Установлюємо тип даних для бінарних файлів
+    ws.onopen = (e) => {
+      console.log("server was started", e);
+    };
+    ws.onmessage = (event) => {
+      const arrayBuffer = event.data;
+      const img = new Image();
+      const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
 
-  //     img.src = URL.createObjectURL(blob);
-  //     setVideoImgSrc(img.src);
+      img.src = URL.createObjectURL(blob);
+      setVideoImgSrc(img.src);
 
-  //     // img.onload = () => {
-  //     //   const canvas = canvasRef.current;
-  //     //   const ctx = canvas.getContext("2d");
-  //     //   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  //     // }; 
-  //   };
-  //   ws.onclose = () => {
-  //     ws.close();
-  //     console.log("Server is closed");
-  //   };
-  //   ws.onerror = () => {
-  //     ws.close();
-  //     console.log("Server has error");
-  //   };
-  //   // const secondWs = new WebSocket(
-  //   //   "wss://cam.assist.cam/camera2/ws/video_feed"
-  //   // );
-  //   // secondWs.binaryType = "arraybuffer";
-  //   // secondWs.onopen = () => {
-  //   //   console.log("server was started");
-  //   // };
-  //   // secondWs.onmessage = (event) => {
-  //   //   console.log("event", event);
-  //   // };
-  //   // secondWs.onclose = () => {
-  //   //   console.log("Server is closed");
-  //   // };
-  //   // secondWs.onerror = () => {
-  //   //   console.log("Server has error");
-  //   // };
-  // }, []);
+      img.onload = () => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      }; 
+    };
+    ws.onclose = () => {
+      ws.close();
+      console.log("Server is closed");
+    };
+    ws.onerror = () => {
+      ws.close();
+      console.log("Server has error");
+    };
+    const secondWs = new WebSocket(
+      "wss://cam.assist.cam/camera2/ws/video_feed"
+    );
+    secondWs.binaryType = "arraybuffer";
+    secondWs.onopen = () => {
+      console.log("server was started");
+    };
+    secondWs.onmessage = (event) => {
+      console.log("event", event);
+    };
+    secondWs.onclose = () => {
+      console.log("Server is closed");
+    };
+    secondWs.onerror = () => {
+      console.log("Server has error");
+    };
+  }, []);
 
   let image = useRef();
   let parentRef = useRef();
@@ -118,11 +118,11 @@ export default function VideoFrame() {
     if (modalState === "UNLOADING") {
       handleZoomChange(false);
     }
-    const handleClickOutImg = (event) => {
+    const handleClickOutImg = useCallback((event) => {
       if (!someRef.current && !parentRef.current.contains(event.target)) {
-        handleZoomChange(false);
+        setIsZoomed(false);
       }
-    };
+    }, [someRef, parentRef]);
 
     useEffect(() => {
       if (modalState === "LOADING") {
@@ -133,7 +133,7 @@ export default function VideoFrame() {
       return () => {
         document.removeEventListener("mousedown", handleClickOutImg); // При розмонтуванні видаляємо слухач
       };
-    }, [modalState]);
+    }, [modalState,handleClickOutImg]);
 
     return (
       <div className={css.zoomImg}>

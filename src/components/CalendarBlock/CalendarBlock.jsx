@@ -17,7 +17,6 @@ import DayCarsModal from "../Modals/DayCarsModal/DayCarsModal.jsx";
 export default function CalendarBlock() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [viewMode, setViewMode] = useState("grid");
 
   const carsData = useSelector(selectDayCars);
   const selectedDate = useSelector(selectDate);
@@ -34,8 +33,6 @@ export default function CalendarBlock() {
     }
   }, [dispatch, selectedDate]);
 
-  // const maxVisibleCars = 3;
-  // const hasDetailsButton = carsData.length > maxVisibleCars;
 
   const handleDetailsBtnClick = () => {
     setIsModalOpen(true);
@@ -45,34 +42,20 @@ export default function CalendarBlock() {
     setIsModalOpen(false);
   };
 
-  // const handleViewModeChange = (newMode) => {
-  //   setViewMode(newMode);
-  //   console.log(`View mode changed to: ${newMode}`); 
-  // };
 
   return (
     <div className={styles.calendarContainer}>
-      <div
-        className={`${styles.topContainer} ${
-          !hasDetailsButton ? styles.fullHeight : ""
-        }`}
-      >
+      <div className={styles.topContainer}>
         <CalendarPagination />
         {isLoading && <p>Завантаження інформації...</p>}
-        <DayCarsList
-          carsData={carsData}
-          hasDetailsButton={hasDetailsButton}
-          isModal={false}
-        />
+        <DayCarsList carsData={carsData} isModal={false} />
       </div>
-      {hasDetailsButton && <DetailsBtn onClick={handleDetailsBtnClick} />}
+      <DetailsBtn onClick={handleDetailsBtnClick} />
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <DayCarsModal
           carsData={carsData}
           isModal={true}
           onClose={handleCloseModal}
-          // viewMode={viewMode}
-          // onViewModeChange={handleViewModeChange}
         />
       </Modal>
     </div>

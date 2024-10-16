@@ -2,41 +2,21 @@ import styles from "./DayCarsModal.module.css";
 import { FiGrid } from "react-icons/fi";
 import { BsListUl } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectDate,
-  selectDayCars,
-  selectLoading,
-} from "../../../redux/cars/selectors";
-import { useEffect, useState } from "react";
-import { getCarsByDate } from "../../../redux/cars/operations";
-import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { selectLoading } from "../../../redux/cars/selectors";
+import { useState } from "react";
 import DayCarsList from "../../DayCarsList/DayCarsList";
 import Loader from "../../Loader/Loader";
 
 export default function DayCarsModal({ onClose, isModal, carsData }) {
-  // const dispatch = useDispatch();
-  // const carsData = useSelector(selectDayCars);
-  // const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectLoading);
 
   const [viewMode, setViewMode] = useState("grid");
 
   const handleViewModeChange = (newMode) => {
-    setViewMode(newMode);
-    console.log(`View mode changed to: ${newMode}`);
+    setViewMode(newMode)
   };
 
-  // useEffect(() => {
-  //   if (selectedDate) {
-  //     dispatch(getCarsByDate(selectedDate))
-  //       .unwrap()
-  //       .then(() => {})
-  //       .catch(() => {
-  //         toast.error("Щось пішло не так. Будь ласка, спробуйте ще раз.");
-  //       });
-  //   }
-  // }, [dispatch, selectedDate]);
 
   return (
     <div className={styles.containerCarModal}>
@@ -58,7 +38,6 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
             checked={viewMode === "list"}
             onChange={() => {
               const newMode = viewMode === "grid" ? "list" : "grid";
-              // console.log(`Switching to: ${newMode}`);
               handleViewModeChange(newMode);
             }}
           />

@@ -4,8 +4,6 @@ import clsx from 'clsx';
 
 export default function DayCarsList({ carsData, hasDetailsButton, isModal, viewMode = "grid" }) {
 
-  console.log(`Current view mode in DayCarsList: ${viewMode}`);
-
   const maxVisibleCars = 3;
   const visibleCars = isModal ? carsData : carsData.slice(0, maxVisibleCars);
 
