@@ -97,19 +97,16 @@ export const getCalendarByMonth = createAsyncThunk(
   }
 );
 
-// Get amount of cars per hour 
+// Get amount of cars per hour
 export const getCarsForHour = createAsyncThunk(
   "cars/getCarsForHour",
   async (day, thunkAPI) => {
     try {
-      const response = await axiosInstance.get(
-        `/v1/get_busyness?date=${day}`,
-        {
-          headers: {
-            "X-Api-Key": "YA7NxysJ",
-          },
-        }
-      );
+      const response = await axiosInstance.get(`/v1/get_busyness?date=${day}`, {
+        headers: {
+          "X-Api-Key": "YA7NxysJ",
+        },
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -122,14 +119,11 @@ export const getPercentForHour = createAsyncThunk(
   "cars/getPercentForHour",
   async (day, thunkAPI) => {
     try {
-      const response = await axiosInstance.get(
-        `/v1/get_load_day?date=${day}`,
-        {
-          headers: {
-            "X-Api-Key": "YA7NxysJ",
-          },
-        }
-      );
+      const response = await axiosInstance.get(`/v1/get_load_day?date=${day}`, {
+        headers: {
+          "X-Api-Key": "YA7NxysJ",
+        },
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -141,7 +135,7 @@ export const getPercentForHour = createAsyncThunk(
 export const getNewCarsRange = createAsyncThunk(
   "cars/getNewCarsRange",
   async (date, thunkAPI) => {
-     const { dateBeginStr, dateEndStr } = date;
+    const { dateBeginStr, dateEndStr } = date;
     try {
       const response = await axiosInstance.get(
         `/v1/get_new_cars_range?start_date=${dateBeginStr}&end_date=${dateEndStr}`,
@@ -159,3 +153,24 @@ export const getNewCarsRange = createAsyncThunk(
 );
 
 // Get new cars
+
+// Change car status
+export const changeCarStatus = createAsyncThunk(
+  "cars/changeCarStatus",
+  async ({ carId, status }, thunkAPI) => {
+    try {
+      const response = await axiosInstance.post(`/v1/edit_status`, null, {
+        params: {
+          car_id: carId,
+          status,
+        },
+        headers: {
+          "X-Api-Key": "YA7NxysJ",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
