@@ -14,9 +14,42 @@
     border-radius: 10px;
     border: 1px solid var(--Button-grey, #4A4A4A);
     background-color: var(--Grey-Input, #282828);
+    outline: none;
 
     margin-bottom: 12px;
     margin-top: 8px;
+
+    color: var(--White, var(--Color, #FFF));
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.input::placeholder{
+    color: var(--Button-grey, #4A4A4A);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.inputBox{
+    position: relative;
+}
+
+.errorMessage{
+    color: #FF6363;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        /* margin-left: 20px; */
+    
+        cursor: default;
+        position: absolute;
+        left: 20px;
+        top: 90%;
 }
 
 .inputs{
@@ -66,4 +99,85 @@
 .photoField{
     display: none;
     
+}
+
+.changePhotoBtn{
+    width: fit-content;
+    padding: 15px 30px;
+
+    border: none;
+    border-radius: 8px;
+    background-color: var(--Blue, #3956CC);
+
+    color: var(--Color, #FFF);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.addPhotoBox{
+    display: flex;
+    gap: 60px;
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+.btnBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 48px;
+}
+
+.cancelBtn {
+    width: fit-content;
+    /* height: 43px; */
+    padding: 15px 30px;
+
+    border-radius: 8px;
+    border: 1px solid #767676;
+    background-color: transparent;
+
+    color: #FFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.saveBtn {
+    width: fit-content;
+    /* height: 43px; */
+    padding: 15px 30px;
+
+    border-radius: 8px;
+    background-color: #3956CC;
+
+    border: none;
+
+    color: #FFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.iconSave {
+    fill: #C7C7C7;
 }
