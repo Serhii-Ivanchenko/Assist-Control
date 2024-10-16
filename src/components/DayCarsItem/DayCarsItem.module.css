@@ -1,19 +1,17 @@
 .dayCarsItemContainer {
     display: flex;
-    width: 280px;
-    height: 100px;
-    border-radius: 5px;
-    background: #1A1A1A;
-    padding: 6px 10px;
-    border-radius: 5px;
+    flex-direction: row;
+    width: 454px;
+    height: 220px;
+    padding: 20px 30px;
+    border-radius: 8px;
+    border: 1px solid  #222;
+    background: #202020;
 }
-
 @media only screen and (min-width: 1920px) {
     .dayCarsItemContainer {
-        width: 454px;
-        height: 150px;
-        padding: 11px 20px;
-        border-radius: 6px;
+        padding: 20px 30px;
+       
   }
   }
   
@@ -26,7 +24,95 @@
     align-items: flex-start;
     gap: 12px;
     border-radius: 4px;
+  }
 
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+  .title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    width: 137px;
+    height: 24px;
+    padding-left: 8px;
+    margin-bottom: 8px;
+
+    border-radius: 6px;
+    border: 1px solid  #994CA5;
+  }
+
+  .nameTitle{
+    color:#994CA5;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+    font-variant: small-caps;
+  }
+
+  .infoCard{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 11px;
+
+  }
+
+  .textName, .textTel, .nameCar {
+    margin-left: 6px;
+  }
+
+  .vinNum{
+    display: block;
+    text-align: center;
+    width: auto;
+    height: 22px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    background:  #455158;
+
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .textName{
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .textTel{
+    color:  #959595;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .nameCar{
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .btnContainer{
+    display: flex;
+    text-align: center;
+    gap: 15px;
+    margin-top: auto; 
+   
+  }
+
+  .btnSave{
+    background-color: transparent;
   }
 
 .carPhoto {
