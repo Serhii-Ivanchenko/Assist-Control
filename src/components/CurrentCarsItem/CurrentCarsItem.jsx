@@ -1,30 +1,18 @@
+import { HiOutlineHashtag } from "react-icons/hi";
+import { BsWrench, BsCalendar2CheckFill } from "react-icons/bs";
+import { FaCircleCheck } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentCars } from "../../redux/cars/operations.js";
 import { selectCurrentCars } from "../../redux/cars/selectors.js";
-
+import { calculateTimeInService } from "../../utils/calculateTimeInService.js";
+import { getStatusDetails } from "../../utils/getStatusDetails.js";
+import clsx from "clsx";
 import carImg from "../../assets/images/carListImg.webp";
 import CurrentCarModal from "../Modals/CurrentCarModal/CurrentCarModal";
 import Modal from "../Modals/Modal/Modal.jsx";
-
 import styles from "./CurrentCarsItem.module.css";
 import toast from "react-hot-toast";
-
-const calculateTimeInService = (date_s, date_e) => {
-  const startDate = new Date(date_s);
-  const endDate = new Date(date_e);
-  const differenceInMilliseconds = endDate - startDate;
-
-  const days = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(
-    (differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  );
-  const minutes = Math.floor(
-    (differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60)
-  );
-
-  return `${days} днів ${hours} годин ${minutes} хвилин`;
-};
 
 export default function CurrentCarsItem() {
   const dispatch = useDispatch();
@@ -35,7 +23,10 @@ export default function CurrentCarsItem() {
 
   useEffect(() => {
     dispatch(getCurrentCars()).catch((error) => {
-      toast.error("Error fetching current cars", error.message);
+      toast.error(
+        "Помилка при завантаженні поточних автомобілів",
+        error.message
+      );
     });
   }, [dispatch]);
 
@@ -49,36 +40,76 @@ export default function CurrentCarsItem() {
     setSelectedCar(null);
   };
 
+  const handleStatusChange = () => {
+    dispatch(getCurrentCars());
+  };
+
   return (
     <>
-      {currentCars?.map((car) => (
-        <div className={styles.wrapper} key={car.id}>
-          <div className={styles.imgContainer}>
-            <img className={styles.carImg} src={carImg} alt="Car image" />
-          </div>
-          <div className={styles.carInfoContainer}>
-            <h3 className={styles.carReg}>{car.plate}</h3>
-            <p className={styles.carBrand}>{car.auto || "Марка не вказана"}</p>
-            <h4 className={styles.carTimeStamp}>
-              {" "}
-              {calculateTimeInService(car.date_s, car.date_e)}
-            </h4>
-          </div>
-          <p className={styles.carStatus}>{car.status}</p>
-          <button
-            className={styles.carDetails}
-            onClick={() => handleModal(car)}
-          >
-            Деталі
-          </button>
+      {currentCars?.map((car) => {
+        let icon;
+        switch (car.status) {
+          case "new":
+            icon = <HiOutlineHashtag stroke="#246D4D" fill="#246D4D" />;
+            break;
+          case "repair":
+            icon = <BsWrench stroke="#246D4D" fill="#246D4D" />;
+            break;
+          case "check_repair":
+            icon = <BsCalendar2CheckFill stroke="#246D4D" fill="#246D4D" />;
+            break;
+          case "complete":
+            icon = <FaCircleCheck stroke="#246D4D" fill="#246D4D" />;
+            break;
+          default:
+            icon = null;
+        }
 
-          {isModalOpen && (
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
-              <CurrentCarModal car={selectedCar} onClose={closeModal} />
-            </Modal>
-          )}
-        </div>
-      ))}
+        const { label, className } = getStatusDetails(car.status, icon);
+
+        return (
+          <div className={clsx(styles.wrapper, className)} key={car.id}>
+            <div className={styles.imgContainer}>
+              <img
+                className={styles.carImg}
+                src={car.photo_url || carImg}
+                alt="Car image"
+              />
+            </div>
+            <div className={styles.carInfoContainer}>
+              <h3 className={styles.carReg}>{car.plate}</h3>
+              <p className={styles.carBrand}>
+                {car.auto || "Марку не визначено"}
+              </p>
+              <h4 className={styles.carTimeStamp}>
+                {calculateTimeInService(car.date_s, car.date_e)}
+              </h4>
+            </div>
+            <div className={styles.detailsContainer}>
+              <button
+                className={styles.carDetails}
+                onClick={() => handleModal(car)}
+              >
+                Деталі
+              </button>
+              <p className={clsx(styles.carStatus, className)}>
+                {icon} {label}
+              </p>
+            </div>
+
+            {isModalOpen && (
+              <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <CurrentCarModal
+                  car={selectedCar}
+                  status={selectedCar?.status}
+                  onClose={closeModal}
+                  onStatusChange={handleStatusChange}
+                />
+              </Modal>
+            )}
+          </div>
+        );
+      })}
     </>
   );
 }

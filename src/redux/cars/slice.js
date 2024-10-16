@@ -9,6 +9,7 @@ import {
   getCalendarByMonth,
   getNewCarsRange,
   getPercentForHour,
+  changeCarStatus,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -20,7 +21,6 @@ const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
 };
-
 
 const carsSlice = createSlice({
   name: "cars",
@@ -61,10 +61,10 @@ const carsSlice = createSlice({
         //   state.date = action.payload.date;
         state.day = action.payload.cars;
       })
-      .addCase(getCarsByDate.rejected,(state, action) => {
-       state.isLoadingCarsByDay = false;
-       state.error = action.payload;
-      } )
+      .addCase(getCarsByDate.rejected, (state, action) => {
+        state.isLoadingCarsByDay = false;
+        state.error = action.payload;
+      })
       .addCase(getCarsByMonth.pending, handlePending)
       .addCase(getCarsByMonth.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -93,16 +93,26 @@ const carsSlice = createSlice({
         state.isLoadingForCalendar = false;
         state.monthlyLoad = action.payload;
       })
-      .addCase(getCalendarByMonth.rejected,  (state, action) => {
-       state.isLoadingForCalendar = false;
-       state.error = action.payload;
+      .addCase(getCalendarByMonth.rejected, (state, action) => {
+        state.isLoadingForCalendar = false;
+        state.error = action.payload;
       })
       .addCase(getNewCarsRange.pending, handlePending)
       .addCase(getNewCarsRange.fulfilled, (state, action) => {
         state.isLoading = false;
         state.newCars = action.payload;
       })
-      .addCase(getNewCarsRange.rejected, handleRejected),
+      .addCase(getNewCarsRange.rejected, handleRejected)
+      .addCase(changeCarStatus.pending, handlePending)
+      .addCase(changeCarStatus.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const { carId, newStatus } = action.payload;
+        const carIndex = state.current.findIndex((car) => car.id === carId);
+        if (carIndex !== -1) {
+          state.current[carIndex].status = newStatus;
+        }
+      })
+      .addCase(changeCarStatus.rejected, handleRejected),
 });
 
 export const { changeActualDate } = carsSlice.actions;
