@@ -3,6 +3,7 @@ import css from "./UserSettingsProfile.module.css";
 import { useId } from "react";
 import * as Yup from "yup";
 import { BsSdCardFill } from "react-icons/bs";
+// import PhoneSelect from "./PhoneSelect/PhoneSelect";
 
 const Validation = Yup.object().shape({
     username: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Обов'язкове поле для заповнення"),
@@ -62,7 +63,7 @@ export default function UserSettingsProfile({onClose}) {
                             
                     <div className={css.inputBox}>
                     <label htmlFor={phoneFieldId} className={css.inputLable}>Номер телефону</label>
-                     <Field type='tel' name='phone' id={phoneFieldId} className={css.input} placeholder="Введіть свій номер телефону..."/>
+                     <Field type='tel' name='phone' id={phoneFieldId} className={css.input}  placeholder="Введіть свій номер телефону..."/>
                     <ErrorMessage name="phone" component="span" className={css.errorMessage} />
                     </div>
 

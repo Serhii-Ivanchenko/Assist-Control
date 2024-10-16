@@ -1,0 +1,87 @@
+/* 
+container {
+    width: 420px;
+    margin-bottom: 12px;
+    margin-top: 8px;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    background-color: #282828;
+    border: 1px solid #4A4A4A;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    padding: 0 10px;
+}
+
+.input {
+    background-color: #282828;
+    color: #fff;
+    border: 1px solid #4A4A4A;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+}
+
+.customButton {
+    display: flex;
+    align-items: center;
+}
+
+.dialCode {
+    margin-left: 8px;
+    color: #fff;
+}
+ */
+
+
+
+/* .container{
+    width: 420px;
+        padding: 18px 20px;
+    
+        border-radius: 10px;
+        border: 1px solid var(--Button-grey, #4A4A4A);
+        background-color: var(--Grey-Input, #282828);
+        outline: none;
+    
+        margin-bottom: 12px;
+        margin-top: 8px;
+    
+        color: var(--White, var(--Color, #FFF));
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+}
+
+.input{
+        background-color: #282828;
+        padding: 18px 20px;
+}
+
+.btn{
+    background-color: #282828;
+    border: 1px solid #4A4A4A;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+
+    appearance: none;
+} */
+
+/* .btn .selected-flag {
+    display: flex;
+    align-items: center;
+}
+
+/* Додаємо код країни поруч з прапором */
+/* .react-tel-input .selected-flag .iti-flag {
+    margin-right: 8px;
+}
+
+.react-tel-input .selected-flag:after {
+    content: attr(data-dial-code);
+    margin-left: 8px;
+    font-size: 14px;
+    color: #fff;
+} */ 

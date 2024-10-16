@@ -6,6 +6,7 @@ import UserSettingsTeam from "./UserSettingsTeam/UserSettingsTeam";
 import MobileMenu from "./MobileMenu/MobileMenu";
 import { useState } from "react";
 import UserSettingsProfile from "./UserSettingsProfile/UserSettingsProfile";
+import UserSettingsTariff from "./UserSettingsTariff/UserSettingsTariff";
 // import { useEffect} from "react";
 // import { getUserData } from "../../../redux/auth/operations";
 // import { useDispatch } from "react-redux";
@@ -37,7 +38,7 @@ export default function UserSettingsModal({onClose}) {
         {mobMenu && <MobileMenu setPage={setPage} page={page} onClose={closeMobMenu} />}
           {page === "profile" && <UserSettingsProfile/>}
           {page === "account" && <UserSettingAccount onClose={onClose}/>}
-          {page === "tariff" && ""}
+          {page === "tariff" && <UserSettingsTariff/>}
           {page === "team" && <UserSettingsTeam />}
                         
         </div>
