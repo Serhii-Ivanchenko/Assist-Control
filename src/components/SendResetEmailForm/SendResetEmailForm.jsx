@@ -62,7 +62,7 @@ export default function SendResetEmailForm({ onClose }) {
         validateOnBlur={true}
         onSubmit={handleSubmitSendResetEmail}
       >
-        <Form className={css.form}>
+        <Form>
           <div className={css.inputWrapper}>
             <label htmlFor="email" className={css.label}>
               E-mail*
@@ -82,14 +82,16 @@ export default function SendResetEmailForm({ onClose }) {
               className={css.errorMsg}
             />
           </div>
-          <button type="submit" className={css.button}>
-            Відправити
-          </button>
+          <div className={css.btnWrapper}>
+            <button type="submit" className={css.button}>
+              Відправити
+            </button>
+            <button type="button" className={css.button} onClick={onClose}>
+              Закрити
+            </button>
+          </div>
         </Form>
       </Formik>
-      <button type="button" className={css.button} onClick={onClose}>
-        Закрити
-      </button>
     </div>
   );
 }
