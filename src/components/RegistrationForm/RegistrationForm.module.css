@@ -1,7 +1,7 @@
 .registrationForm {
   background-color: #151616;
-  padding: 98px 80px 54px 79px;
-  width: 460px;
+  padding: 41px 72px 37px 72px;
+  width: 448px;
   display: flex;
   flex-direction: column;
 }
@@ -21,16 +21,21 @@
 }
 
 .registrationHeader {
-  font-size: 24px;
+  font-size: 32px;
   color: #fff;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 .welcomeText {
   font-weight: 500;
-  font-size: 8px;
+  font-size: 14px;
   color: #8d8d8d;
-  margin-bottom: 42px;
+  font-style: normal;
+  line-height: normal;
+  margin-bottom: 44px;
 }
 
 @media screen and (max-width: 1279.98px) {
@@ -42,8 +47,8 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 17px;
-  margin-bottom: 17px;
+  gap: 8px;
+  margin-bottom: 40px;
 }
 
 @media screen and (max-width: 1279.98px) {
@@ -57,18 +62,12 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-
-@media screen and (max-width: 1279.98px) {
-  .inputWrapper {
-    gap: 12px;
-  }
+  gap: 12px;
 }
 
 .registrationlabel {
   font-weight: 500;
-  font-size: 11px;
+  font-size: 14px;
   color: #e9e9e9;
   font-style: normal;
   line-height: normal;
@@ -82,7 +81,7 @@
 
 .inputIcon {
   position: absolute;
-  left: 14px;
+  left: 16px;
   color: #615f68;
   fill: #615f68;
   width: 10px;
@@ -126,13 +125,13 @@
   background-color: #242525;
   border: none;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 14px;
   font-style: normal;
-  line-height: 1.18em;
+  line-height: 1.142em;
   color: #fff;
-  padding-top: 12px;
-  padding-bottom: 9px;
-  padding-left: 32px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 34px;
   width: 100%;
 }
 
@@ -145,7 +144,7 @@
 }
 
 .input::placeholder {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -164,14 +163,16 @@
   background-color: #0096b7;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
-  font-size: 11px;
+  font-size: 16px;
   color: #e9e9e9;
+  line-height: 1.19em;
+  font-style: normal;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-top: 12px;
-  padding-bottom: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border: none;
   cursor: pointer;
 }
@@ -184,8 +185,8 @@
 }
 .bottomSectionWrapper {
   display: flex;
-  gap: 4px;
-  margin-top: 25px;
+  gap: 8px;
+  margin-top: 20px;
   align-items: center;
 }
 
@@ -199,7 +200,7 @@
 
 .bottomTextWrapper {
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 
 @media screen and (max-width: 1279.98px) {
@@ -214,7 +215,8 @@
   font-size: 11px;
   color: #e9e9e9;
   font-style: normal;
-  line-height: normal;
+  line-height: 1.18em;
+  white-space: nowrap;
 }
 
 .bottomTextOr {
@@ -222,7 +224,7 @@
   font-size: 11px;
   color: #e9e9e9;
   font-style: normal;
-  line-height: normal;
+  line-height: 1.18em;
 }
 
 @media screen and (max-width: 1279.98px) {
@@ -253,26 +255,12 @@
   font-size: 11px;
   color: #0096b7;
   font-style: normal;
-  line-height: normal;
-}
-
-.orText {
-  color: #e9e9e9;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-@media screen and (max-width: 1279.98px) {
-  .orText {
-    display: none;
-  }
+  line-height: 1.18;
 }
 
 .googleWrapper {
-  width: 127px;
-  height: 29px;
+  width: 129px;
+  height: 38px;
 }
 
 @media screen and (max-width: 1279.98px) {

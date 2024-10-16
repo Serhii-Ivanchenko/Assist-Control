@@ -11,9 +11,11 @@ export default function RegistrationPage() {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className={css.registrationPage}>
-      <WelcomeSection />
-      <RegistrationForm />
+    <div className={css.registrationPageWrapper}>
+      <div className={css.registrationPage}>
+        <WelcomeSection />
+        <RegistrationForm />
+      </div>
     </div>
   );
 }
