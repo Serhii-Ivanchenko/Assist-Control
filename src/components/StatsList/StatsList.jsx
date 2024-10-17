@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
 import css from "./StatsList.module.css";
+
+const initValue = {
+  all: 0,
+  complete: 0,
+  repair: 0,
+  repair_view: 0,
+  new: 0,
+};
 export default function StatsList({ cars }) {
-  const initValue = {
-    all: 0,
-    complete: 0,
-    repair: 0,
-    check_repair: 0,
-    new: 0,
-  };
   const [valueOfCars, setValueOfCars] = useState(initValue);
-  
   useEffect(() => {
-    const handleAddItem = () => {
-      let obj = initValue;
-      for (let i = 0; i < cars.length; i++) {
-        const car = cars[i];
-
-        obj = {
-          ...obj,
-          all: obj.all + 1,
-          [car.status]: ++valueOfCars[car.status],
-        };
-      }
-
-      setValueOfCars(obj);
-    };
-    handleAddItem();
+    let obj = { ...initValue }; // Початковий стан має бути копією initValue
+    cars.forEach((item) => {
+      obj = {
+        ...obj,
+        all: obj.all + 1,
+        [item.status]: (obj[item.status] || 0) + 1, // Додаємо кількість для кожного статусу
+      };
+    });
+    setValueOfCars(obj);
   }, [cars]);
   return (
     <ul className={css.statsList}>
@@ -42,7 +36,7 @@ export default function StatsList({ cars }) {
         <p className={css.statsItemTitle}>У ремонті</p>
       </li>
       <li className={css.statsItem}>
-        <p className={css.statsItemValue}>{valueOfCars.check_repair}</p>
+        <p className={css.statsItemValue}>{valueOfCars.repair_view}</p>
         <p className={css.statsItemTitle}>На діагностиці</p>
       </li>
       <li className={css.statsItem}>
