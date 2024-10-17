@@ -17,7 +17,6 @@ export default function PeriodSelector({
   const currentDate = new Date();
   const sevenDaysAgo = new Date(currentDate);
   sevenDaysAgo.setDate(currentDate.getDate() - 7);
-  
 
   function handleInputChangeBeg(e) {
     //  const value = e.target.value;
@@ -36,13 +35,12 @@ export default function PeriodSelector({
         dateNewEnd = dateNewBeg.add(1, "month");
         setPeriodEndData(dateNewEnd.$d);
         onDateEndChange(dateNewEnd.$d);
-      };
-if (dateNewEnd.diff(dateNewBeg, "day", true) < 7)
-{
+      }
+      if (dateNewEnd.diff(dateNewBeg, "day", true) < 7) {
         dateNewEnd = dateNewBeg.add(7, "day");
         setPeriodEndData(dateNewEnd.$d);
         onDateEndChange(dateNewEnd.$d);
-      };
+      }
       setPeriodStartData(e);
       onDateBegChange(e);
     }
@@ -55,11 +53,10 @@ if (dateNewEnd.diff(dateNewBeg, "day", true) < 7)
 
     if (dateNewEnd.diff(dateNewBeg, "month", true) > 1) {
       dateNewEnd = dateNewBeg.add(1, "month");
-    
-    };
+    }
 
- if (dateNewEnd.diff(dateNewBeg, "day", true) < 7) {
-      dateNewEnd = dateNewBeg.add(7, "day"); 
+    if (dateNewEnd.diff(dateNewBeg, "day", true) < 7) {
+      dateNewEnd = dateNewBeg.add(7, "day");
     }
 
     if (
@@ -69,12 +66,11 @@ if (dateNewEnd.diff(dateNewBeg, "day", true) < 7)
       setPeriodEndData(currentDate);
       onDateEndChange(currentDate);
       return;
-    };
-    
-   
-      setPeriodEndData(dateNewEnd.$d);
-      onDateEndChange(dateNewEnd.$d);
-   
+    }
+
+    setPeriodEndData(dateNewEnd.$d);
+    onDateEndChange(dateNewEnd.$d);
+
     return;
   }
 
@@ -93,11 +89,13 @@ if (dateNewEnd.diff(dateNewBeg, "day", true) < 7)
         <DatePicker
           className={css.periodinput}
           selected={periodStartData}
-          onChange={(date) => handleInputChangeBeg(date)}
+          onChange={(date) => {
+            handleInputChangeBeg(date), setIsOpenBeg(false)
+          }}
           dateFormat="dd/MM/yyyy"
           open={isOpenBeg}
           onClickOutside={() => setIsOpenBeg(false)}
-
+          popperClassName={css.leftdatepickerdropdown}
           //  placeholderText="Click to select a date"
         />
         <FaCalendar className={css.icon} onClick={handleIconClickBeg} />
@@ -108,7 +106,7 @@ if (dateNewEnd.diff(dateNewBeg, "day", true) < 7)
         <DatePicker
           className={css.periodinput}
           selected={periodEndData}
-          onChange={(date) => handleInputChangeEnd(date)}
+          onChange={(date) => {handleInputChangeEnd(date), setIsOpenEnd(false);}}
           dateFormat="dd/MM/yyyy"
           open={isOpenEnd}
           onClickOutside={() => setIsOpenEnd(false)}
@@ -119,6 +117,4 @@ if (dateNewEnd.diff(dateNewBeg, "day", true) < 7)
       </div>
     </div>
   );
-
-  
 }
