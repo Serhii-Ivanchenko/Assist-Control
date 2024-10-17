@@ -1,21 +1,24 @@
 import clsx from "clsx";
 import css from "./PeriodSwitcher.module.css";
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
-import { getCarsByDate, getCarsByMonth } from "../../redux/cars/operations";
+import { useDispatch, useSelector } from "react-redux";
+// import { getCarsByDate, getCarsByMonth } from "../../redux/cars/operations";
+import { selectDayCars } from "../../redux/cars/selectors";
+import { useEffect } from "react";
+import { getCarsByMonth } from "../../redux/cars/operations";
 export default function PeriodSwitcher({ changeCarsArr }) {
   const day = useRef();
   const month = useRef();
-  const today = new Date().toISOString().split("T")[0];
   const activeClassName = clsx(css.statsBtn, css.activeBtn);
   const noneActiveClassName = clsx(css.statsBtn);
-
+  const dayCars = useSelector(selectDayCars);
   const dispatch = useDispatch();
-  const handleChoseDay = async () => {
+  useEffect(() => {
+    changeCarsArr(dayCars);
+  }, [dayCars]);
+  const handleChoseDay = () => {
     if (day.current.className === activeClassName) return;
-    const { payload } = await dispatch(getCarsByDate(today));
-
-    changeCarsArr(payload.cars);
+    changeCarsArr(dayCars);
     month.current.className = noneActiveClassName;
     day.current.className = activeClassName;
   };
@@ -28,6 +31,7 @@ export default function PeriodSwitcher({ changeCarsArr }) {
     day.current.className = noneActiveClassName;
     month.current.className = activeClassName;
   };
+
   return (
     <div className={css.btnCont}>
       <p>
