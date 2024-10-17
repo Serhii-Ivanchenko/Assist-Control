@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 import { useEffect, useRef, useState } from "react";
+import Loader from "../Loader/Loader";
 
 function SampleNextArrow({ currentSlide, slideCount, onClick }) {
   if (currentSlide === slideCount - 1) return null;
@@ -196,8 +197,7 @@ export default function VideoFrame() {
               ))
             ) : (
               <div className={css.camera}>
-                <BsCameraVideoOffFill size={58} />
-                <h3>Немає сигналу</h3>
+                <Loader />
               </div>
             )}
           </Slider>
