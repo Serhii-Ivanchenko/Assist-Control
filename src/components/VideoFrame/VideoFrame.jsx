@@ -14,7 +14,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const carArr = [
   {
@@ -57,11 +57,11 @@ export default function VideoFrame() {
       img.src = URL.createObjectURL(blob);
       setVideoImgSrc(img.src);
 
-      img.onload = () => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      }; 
+      // img.onload = () => {
+      //   const canvas = canvasRef.current;
+      //   const ctx = canvas.getContext("2d");
+      //   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      // }; 
     };
     ws.onclose = () => {
       ws.close();
@@ -71,22 +71,22 @@ export default function VideoFrame() {
       ws.close();
       console.log("Server has error");
     };
-    const secondWs = new WebSocket(
-      "wss://cam.assist.cam/camera2/ws/video_feed"
-    );
-    secondWs.binaryType = "arraybuffer";
-    secondWs.onopen = () => {
-      console.log("server was started");
-    };
-    secondWs.onmessage = (event) => {
-      console.log("event", event);
-    };
-    secondWs.onclose = () => {
-      console.log("Server is closed");
-    };
-    secondWs.onerror = () => {
-      console.log("Server has error");
-    };
+    // const secondWs = new WebSocket(
+    //   "wss://cam.assist.cam/camera2/ws/video_feed"
+    // );
+    // secondWs.binaryType = "arraybuffer";
+    // secondWs.onopen = () => {
+    //   console.log("server was started");
+    // };
+    // secondWs.onmessage = (event) => {
+    //   console.log("event", event);
+    // };
+    // secondWs.onclose = () => {
+    //   console.log("Server is closed");
+    // };
+    // secondWs.onerror = () => {
+    //   console.log("Server has error");
+    // };
   }, []);
 
   let image = useRef();
@@ -118,11 +118,11 @@ export default function VideoFrame() {
     if (modalState === "UNLOADING") {
       handleZoomChange(false);
     }
-    const handleClickOutImg = useCallback((event) => {
+    const handleClickOutImg = (event) => {
       if (!someRef.current && !parentRef.current.contains(event.target)) {
-        setIsZoomed(false);
+        handleZoomChange(false);
       }
-    }, [someRef, parentRef]);
+    };
 
     useEffect(() => {
       if (modalState === "LOADING") {
@@ -133,7 +133,7 @@ export default function VideoFrame() {
       return () => {
         document.removeEventListener("mousedown", handleClickOutImg); // При розмонтуванні видаляємо слухач
       };
-    }, [modalState,handleClickOutImg]);
+    }, [modalState]);
 
     return (
       <div className={css.zoomImg}>
