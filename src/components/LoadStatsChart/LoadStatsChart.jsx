@@ -14,6 +14,17 @@ import {
 } from "recharts";
 import css from "./LoadStatsChart.module.css";
 
+const stringAvto = (data) => {
+  let datastring = '';
+  const arrAvto = ['автомобілів', 'автомобіль', 'автомобіля', 'автомобіля', 'автомобіля', 'автомобілів', 'автомобілів',
+    'автомобілів', 'автомобілів', 'автомобілів'];
+  datastring = arrAvto[data % 10];
+   if (data>=11 && data<=20) {
+     datastring = 'автомобілів';
+  };
+  return datastring;
+  };
+
 const CustomTooltip = ({ active, payload, label, coordinate }) => {
   if (active && payload && payload.length) {
     const { x, y } = coordinate;
@@ -42,7 +53,7 @@ const CustomTooltip = ({ active, payload, label, coordinate }) => {
       >
         <p
           className={css.popuptitle}
-        >{`${payload[0].value} автомобілів ${label}`}</p>
+        >{`${payload[0].value} ${stringAvto(payload[0].value)} ${label}`}</p>
       </div>
     );
   }
@@ -114,8 +125,9 @@ export default function LoadStatsChart() {
 }));
 
 const filteredData = arrdata.filter(item => item.hour >= workHours.start && item.hour <= workHours.end);
- const data= filteredData.map(el => ({ ...el, hour: el.hour+'.00'}));
-  // console.log(data);
+  const data = filteredData.map(el => ({ ...el, hour: el.hour + '.00' }));
+  const interval= workHours.end-workHours.start-1;
+  //  console.log(workHours.end, workHours.start, interval);
   
   return (
     <div className={css.containerloadstats}>
@@ -161,7 +173,7 @@ const filteredData = arrdata.filter(item => item.hour >= workHours.start && item
 
             <XAxis
               dataKey="hour"
-              interval={8}
+              interval={interval}
               padding={{ right: 10 }}
               tick={{ fontSize: 10 }}
             />
@@ -174,7 +186,7 @@ const filteredData = arrdata.filter(item => item.hour >= workHours.start && item
               tick={{ fill: "transparent" }}
               axisLine={{ fill: "transparent" }}
               //  tickFormatter={(value) => (value / 1000).toFixed(1)}
-              width={1}
+              width={5}
               // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
               //  ticks={[0, 2, 4, 6, 8, 10]}
             />
