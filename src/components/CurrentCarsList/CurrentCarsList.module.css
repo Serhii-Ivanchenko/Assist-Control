@@ -1,13 +1,30 @@
+* {
+  scrollbar-color: none;
+}
+
 .wrapper {
   width: 386px;
   /* висота потрібна для відображення скролу списку поточних машин */
   height: 199px;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
 }
 .wrapper::-webkit-scrollbar {
-  display: none; /* Chrome, Safari та Opera */
+  width: 8px;
 }
 
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: #1a1a1a;
+  border-radius: 4px;
+}
+
+.wrapper::-webkit-scrollbar-track {
+  width: 8px;
+  height: 54px;
+  background-color: #4a4a4a;
+  border-radius: 4px;
+}
 .carsList {
   display: flex;
   flex-direction: column;
@@ -20,6 +37,12 @@
     /* висота потрібна для відображення скролу списку поточних машин */
     height: 296px;
     overflow: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+  }
+
+  .wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari та Opera */
   }
 
   .carsList {

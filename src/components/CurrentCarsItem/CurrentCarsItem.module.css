@@ -7,7 +7,7 @@
   background-color: #1a1a1a;
   border: transparent;
   border-radius: 6px;
-  padding: 5px;
+  padding: 5px 20px 5px 5px;
 
   position: relative;
 }
@@ -200,4 +200,5 @@
     font-size: 16px;
     font-weight: 300;
     text-decoration: underline;
-  }}
+  }
+}
