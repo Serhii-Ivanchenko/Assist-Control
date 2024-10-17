@@ -2,3 +2,9 @@
     display: flex;
     gap: 6px;
 }
+
+@media only screen and (min-width: 1920px) {
+  .wrapper {
+    gap: 0;
+  }
+}

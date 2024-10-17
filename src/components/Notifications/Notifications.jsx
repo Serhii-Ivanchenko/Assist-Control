@@ -1,10 +1,10 @@
-import { BiSupport } from "react-icons/bi";
-import css from "./Support.module.css";
 import { useState } from "react";
+import css from "./Notifications.module.css";
 import Modal from "../Modals/Modal/Modal.jsx";
-import SupportModal from "../Modals/SupportModal/SupportModal.jsx";
+import { BsBellFill } from "react-icons/bs";
+import NotificationsModal from "../Modals/NotificationsModal/NotificationsModal.jsx";
 
-export default function Support() {
+export default function Notifications() {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -18,14 +18,14 @@ export default function Support() {
   return (
     <div className={css.tooltip}>
       <button className={css.btn} onClick={openModal}>
-        <BiSupport className={css.icon} />
+        <BsBellFill className={css.icon} />
       </button>
       {modalIsOpen && (
         <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-          <SupportModal onClose={handleModalClose} />
+          <NotificationsModal onClose={handleModalClose} />
         </Modal>
       )}
-      <span className={css.tooltipContent}>Архів</span>
+      <span className={css.tooltipContent}>Сповіщення</span>
     </div>
   );
 }
