@@ -17,7 +17,7 @@ import { selectDayCars } from "../../redux/cars/selectors.js";
 import { AiFillStar, AiOutlineCheckCircle } from "react-icons/ai";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
-import calculateTimeInService from '../../utils/calculateTimeInService.js';
+import {calculateTimeInService} from '../../utils/calculateTimeInService.js'
 
 export default function DayCarsItem({
   carNumber,
