@@ -25,8 +25,8 @@ function SamplePrevArrow({ currentSlide, onClick }) {
 
 export default function VideoFrame() {
   const [videoImgSrc, setVideoImgSrc] = useState([]);
-  console.log(videoImgSrc);
-  const camersLink = [
+  // console.log(videoImgSrc);
+  const cameraLink = [
     {
       index: "1",
       cameraLink: "wss://cam.assist.cam/camera1/ws/video_feed",
@@ -38,52 +38,130 @@ export default function VideoFrame() {
       alt: "camera2",
     },
   ];
-  const handleChangeCamers = (src, url) => {
-    if (!videoImgSrc.length) setVideoImgSrc([...videoImgSrc, { src, url }]);
-    const currenCamera = videoImgSrc.find((item) => item.url === url);
+  // const handleChangeCamera = (src, url) => {
+  //   if (!videoImgSrc.length) setVideoImgSrc([...videoImgSrc, { src, url }]);
+  //   const currenCamera = videoImgSrc.find((item) => item.url === url);
 
-    if (currenCamera) {
-      const arr = videoImgSrc.map((item) => {
-        if (item.url === url) {
-          item.src = src;
-        }
-        return item;
-      });
-      setVideoImgSrc(arr);
-    } else {
-      setVideoImgSrc(videoImgSrc.push({ src, url }));
-    }
-  };
-  useEffect(() => {
-    let ws;
-    camersLink.map(({ cameraLink }) => {
-      ws = new WebSocket(cameraLink);
-      ws.binaryType = "arraybuffer"; // Установлюємо тип даних для бінарних файлів
-      ws.CONNECTING
-      ws.onopen = (e) => {
-        console.log("server was started", e);
-      };
-      ws.onmessage = (event) => {
-        const arrayBuffer = event.data;
-        const img = new Image();
-        const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
-        img.src = URL.createObjectURL(blob);
-        handleChangeCamers(img.src, event.currentTarget.url);
-        setIsZoomed(true);
-      };
-      ws.onclose = () => {
-        ws.close();
-        console.log("Server is closed");
-      };
-      ws.onerror = () => {
-        ws.close();
-        console.log("Server has error");
-      };
+  //   if (currenCamera) {
+  //     const arr = videoImgSrc.map((item) => {
+  //       if (item.url === url) {
+  //         item.src = src;
+  //       }
+  //       return item;
+  //     });
+  //     setVideoImgSrc(arr);
+  //   } else {
+  //     setVideoImgSrc(videoImgSrc.push({ src, url }));
+  //   }
+  // };
+
+  const handleChangeCamera = (src, url) => {
+    setVideoImgSrc((prev) => {
+      // Перевіряємо, чи є вже елемент з таким URL
+      const currentCamera = prev.find((item) => item.url === url);
+
+      if (currentCamera) {
+        // Якщо камера знайдена, оновлюємо її src
+        return prev.map((item) => (item.url === url ? { ...item, src } : item));
+      } else {
+        // Якщо камери з таким URL ще немає, додаємо нову
+        return [...prev, { src, url }];
+      }
     });
-    return () => {
-      ws.close();
-    };
-  }, []);
+  };
+
+  // useEffect(() => {
+  //   let ws;
+  //   cameraLink.map(({ cameraLink }) => {
+  //     ws = new WebSocket(cameraLink);
+  //     ws.binaryType = "arraybuffer"; // Установлюємо тип даних для бінарних файлів
+  //     ws.CONNECTING;
+  //     ws.onopen = (e) => {
+  //       console.log("server was started", e);
+  //     };
+  //     ws.onmessage = (event) => {
+  //       const arrayBuffer = event.data;
+  //       const img = new Image();
+  //       const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
+  //       img.src = URL.createObjectURL(blob);
+  //       handleChangeCamera(img.src, event.currentTarget.url);
+  //       setIsZoomed(true);
+  //     };
+  //     ws.onclose = () => {
+  //       ws.close();
+  //       console.log("Server is closed");
+  //     };
+  //     ws.onerror = () => {
+  //       ws.close();
+  //       console.log("Server has error");
+  //     };
+  //   });
+  //   return () => {
+  //     ws.close();
+  //   };
+  // }, []);
+
+  const MAX_RECONNECT_ATTEMPTS = 5;
+  const RECONNECT_INTERVAL = 3000;
+  const reconnectAttempts = useRef({});
+
+const connectWebSocket = (camera) => {
+  const { cameraLink, index } = camera;
+  let ws = new WebSocket(cameraLink);
+  ws.binaryType = "arraybuffer"; // Приймаємо бінарні дані (зображення)
+
+  ws.onopen = () => {
+    console.log(`Connected to camera ${index}`);
+    reconnectAttempts.current[cameraLink] = 0; // Скидаємо лічильник спроб
+  };
+
+  ws.onmessage = (event) => {
+    const arrayBuffer = event.data;
+    const img = new Image();
+    const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
+    img.src = URL.createObjectURL(blob);
+    handleChangeCamera(img.src, cameraLink);
+    setIsZoomed(true);
+  };
+
+  ws.onclose = (e) => {
+    console.warn(`Connection closed for camera ${index}`, e);
+    attemptReconnect(camera); // Пробуємо перепідключитися
+  };
+
+  ws.onerror = (e) => {
+    console.error(`WebSocket error for camera ${index}`, e);
+    ws.close(); // Закриваємо з'єднання у разі помилки
+  };
+
+  return ws;
+};
+
+const attemptReconnect = (camera) => {
+  const { cameraLink } = camera;
+  const attempts = reconnectAttempts.current[cameraLink] || 0;
+
+  if (attempts < MAX_RECONNECT_ATTEMPTS) {
+    console.log(
+      `Attempting to reconnect to ${cameraLink}... (${attempts + 1})`
+    );
+    reconnectAttempts.current[cameraLink] = attempts + 1;
+
+    setTimeout(() => {
+      connectWebSocket(camera); // Повторюємо підключення
+    }, RECONNECT_INTERVAL);
+  } else {
+    console.error(`Max reconnect attempts reached for ${cameraLink}`);
+  }
+};
+
+useEffect(() => {
+  const sockets = cameraLink.map(connectWebSocket);
+
+  return () => {
+    sockets.forEach((ws) => ws.close()); // Закриваємо всі WebSocket при розмонтуванні
+  };
+}, []);
 
   const image = useRef();
   const parentRef = useRef();
