@@ -2,7 +2,6 @@ import Slider from "react-slick";
 import css from "./VideoFrame.module.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import { BsCameraVideoOffFill } from "react-icons/bs";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import "slick-carousel/slick/slick.css";
