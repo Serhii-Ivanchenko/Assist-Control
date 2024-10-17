@@ -1,4 +1,4 @@
-.containerCarModal{
+.containerCarModal {
     display: flex;
     flex-direction: column;
     width: 800px;
@@ -12,17 +12,30 @@
     background-color: #101010;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.scrollableContent {
+    max-height: 616px;
+    overflow-y: auto;
+    /* padding-right: 10px; */
+}
+
 .switch {
     font-size: 17px;
-    position: relative;
+    /* position: relative; */
     display: inline-block;
     width: 50px;
     height: 27px;
     cursor: pointer;
 
-    position: absolute;
-    top: 12px;
-    left: 30px;
+        position: absolute;
+            top: 12px;
+            left: 30px;
 }
 
 .switch input {
@@ -55,7 +68,7 @@
     transition: .4s;
 }
 
-.iconLeft {
+.iconRight {
     color: #A4A4A4;
     position: absolute;
     top: 5px;
@@ -65,7 +78,7 @@
     height: 16px;
 }
 
-.iconRight {
+.iconLeft {
     color: #A4A4A4;
     position: absolute;
     top: 5px;
@@ -75,7 +88,7 @@
     z-index: 2;
 }
 
-.iconClose{
+.iconClose {
     color: #4A4A4A;
     width: 100%;
     height: 100%;
@@ -96,8 +109,8 @@
     cursor: pointer;
 }
 
-/* .switch:hover */
-.iconLeft svg {
+
+.iconRight svg {
     animation: rotate 15s linear infinite;
 }
 
@@ -112,8 +125,7 @@
     }
 }
 
-/* .switch:hover */
-.iconRight svg {
+.iconLeft svg {
     animation: tilt 5s linear infinite;
 }
 
@@ -148,3 +160,9 @@
     transform: translateX(22px);
 }
 
+.active {
+    color: #00ff00;
+    /* Вибери колір, який буде помітним */
+    transition: color 0.3s ease;
+    /* Додає плавний перехід */
+}

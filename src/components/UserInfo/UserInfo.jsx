@@ -1,8 +1,14 @@
 import styles from "./UserInfo.module.css";
 import defaultAvatar from "../../assets/images/avatar_default.png";
 import { FaChevronRight } from "react-icons/fa";
+import { selectUser } from "../../redux/auth/selectors";
+import { useSelector } from "react-redux";
 
-export default function UserInfo({ user }) {
+export default function UserInfo() {
+  const user = useSelector(selectUser);
+
+  console.log("User data:", user);
+
   const handleBalanceClick = () => {
     console.log("Open transaction history modal");
   };
