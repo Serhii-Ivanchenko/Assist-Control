@@ -14,6 +14,18 @@ import {
 } from "recharts";
 import css from "./Chart.module.css";
 
+
+const stringAvto = (data) => {
+  let datastring = '';
+  const arrAvto = ['автомобілів', 'автомобіль', 'автомобіля', 'автомобіля', 'автомобіля', 'автомобілів', 'автомобілів',
+    'автомобілів', 'автомобілів', 'автомобілів'];
+  datastring = arrAvto[data % 10];
+   if (data>=11 && data<=20) {
+     datastring = 'автомобілів';
+  };
+  return datastring;
+  };
+
 const CustomTooltip = ({ active, payload, label, coordinate }) => {
   if (active && payload && payload.length) {
     const { x, y } = coordinate;
@@ -38,7 +50,7 @@ const CustomTooltip = ({ active, payload, label, coordinate }) => {
       >
         <p
           className={css.popuptitle}
-        >{`${payload[0].count} автомобілів ${label}`}</p>
+        >{`${payload[0].value} ${stringAvto(payload[0].value)}  ${label}`}</p>
       </div>
     );
   }
