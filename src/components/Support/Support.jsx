@@ -25,7 +25,7 @@ export default function Support() {
           <SupportModal onClose={handleModalClose} />
         </Modal>
       )}
-      <span className={css.tooltipContent}>Архів</span>
+      <span className={css.tooltipContent}>Підтримка</span>
     </div>
   );
 }

@@ -4,3 +4,9 @@
     padding-top: 16px;
     padding-bottom: 11px;
 }
+
+@media only screen and (min-width: 1920px) {
+.header {
+    padding: 0;
+  }
+}

@@ -25,7 +25,7 @@ export default function Archive() {
           <ArchiveModal onClose={handleModalClose} />
         </Modal>
       )}
-      <span className={css.tooltipContent}>Підтримка</span>
+      <span className={css.tooltipContent}>Архів</span>
     </div>
   );
 }
