@@ -16,7 +16,7 @@ export default function Support() {
   };
 
   return (
-    <>
+    <div className={css.tooltip}>
       <button className={css.btn} onClick={openModal}>
         <BiSupport className={css.icon} />
       </button>
@@ -25,6 +25,7 @@ export default function Support() {
           <SupportModal onClose={handleModalClose} />
         </Modal>
       )}
-    </>
+      <span className={css.tooltipContent}>Підтримка</span>
+    </div>
   );
 }

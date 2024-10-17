@@ -12,9 +12,9 @@
   justify-content: center;
   gap: 4px;
   color: #8d8d8d;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
-  line-height: 1.2em;
+  line-height: 1.18em;
   cursor: pointer;
   background-color: transparent;
   transition: border 250ms ease-in-out, color 250ms ease-in-out;
