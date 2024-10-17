@@ -33,18 +33,6 @@
   position: relative;
 }
 
-.zoomIcon {
-  z-index: 1;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  width: 20px;
-}
-@media only screen and (min-width: 1920px) {
-  .zoomIcon {
-    width: 30px;
-  }
-}
 .arrowNext:before,
 .arrowPrev:before {
   content: "";
@@ -151,11 +139,5 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-.onZoomIcon {
-  top: 10px;
-  right: 10px;
-  z-index: 100;
-  position: absolute;
-  color: #fff;
+  cursor: zoom-out;
 }
