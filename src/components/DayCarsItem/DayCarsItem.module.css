@@ -16,6 +16,15 @@
        
   }
   } */
+  
+  .modalDayCarsItemContainer{
+    display: flex;
+    width: 416px;
+    height: 200px;
+    padding: 10px 21px 10px 30px;
+    gap: 12px;
+    border-radius: 8px;
+  }
 
 .modalDayCarsItemContainer {
   display: flex;
@@ -204,6 +213,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+  /* width: 80px; */
 }
 
 .rating {
@@ -232,6 +242,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 96px;
 }
 
 .carRegContainer {

@@ -68,10 +68,15 @@ export default function DayCarsItem({
       <div
         className={clsx(styles.title)}
         style={{
-          borderColor: statusClass.includes('completed') ? '#246D4D' : 
-                       statusClass.includes('new') ? '#EBD534' : 
-                       statusClass.includes('repair') ? '#994CA5' : 
-                       statusClass.includes('checkRepair') ? '#3956CC' : '#000', // Колір рамки
+          borderColor: statusClass.includes("completed")
+            ? "#246D4D"
+            : statusClass.includes("new")
+            ? "#EBD534"
+            : statusClass.includes("repair")
+            ? "#994CA5"
+            : statusClass.includes("checkRepair")
+            ? "#3956CC"
+            : "#000",
           borderWidth: "1px",
           borderStyle: "solid",
         }}
@@ -93,22 +98,40 @@ export default function DayCarsItem({
       const startDate = new Date(date_s);
       const differenceInMilliseconds = completeDate - startDate;
 
-      const hours = Math.floor((differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
+      const hours = Math.floor(
+        (differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor(
+        (differenceInMilliseconds % (1000 * 60)) / 1000
+      );
 
       return (
         <p className={styles.time}>
-          {`${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`}
+          {`${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+            2,
+            "0"
+          )}:${String(seconds).padStart(2, "0")}`}
         </p>
       );
     } else {
-      return <p className={styles.time}>{calculateTimeInService(date_s, new Date().toISOString())}</p>;
+      return (
+        <p className={styles.time}>
+          {calculateTimeInService(date_s, new Date().toISOString())}
+        </p>
+      );
     }
   };
 
   return (
-    <div className={clsx(styles.dayCarsItemContainer, isModal && styles.modalDayCarsItemContainer)}>
+    <div
+      className={clsx(
+        styles.dayCarsItemContainer,
+        isModal && styles.modalDayCarsItemContainer
+      )}
+    >
       <div className={styles.userInfo}>
         {renderStatus(status, complete_d)}
         <div className={styles.infoCard}>
@@ -126,7 +149,9 @@ export default function DayCarsItem({
           </div>
         </div>
         <div className={styles.infoVin}>
-          <span className={styles.vinNum}>{vin ? vin : "VIN-XXXXXXXXXXXX"}</span>
+          <span className={styles.vinNum}>
+            {vin ? vin : "VIN-XXXXXXXXXXXX"}
+          </span>
         </div>
         <div className={styles.btnContainer}>
           <button className={styles.btnDetail}>
@@ -159,10 +184,16 @@ export default function DayCarsItem({
           </div>
           <div className={styles.carRegContainer}>
             <div className={styles.carRegCountrys}>
-              <img className={styles.carRegFlag} src={flag} alt="Car registration country flag" />
+              <img
+                className={styles.carRegFlag}
+                src={flag}
+                alt="Car registration country flag"
+              />
               <p className={styles.carRegCountry}>ua</p>
             </div>
-            <p className={styles.carNumber}>{carNumber ? carNumber : "хххххх"}</p>
+            <p className={styles.carNumber}>
+              {carNumber ? carNumber : "хххххх"}
+            </p>
           </div>
           <div className={styles.mileInfo}>
             <SlSpeedometer size={13} color="#A1FFC5" />
