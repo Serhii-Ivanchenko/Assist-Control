@@ -1,17 +1,29 @@
+.calendarWrapper {
+    padding: 33px 16px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    border-radius: 5px;
+    background-color: #101010;
+}
+
 .containerpagin {
     display: flex;
     flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 280px;
+    justify-content: space-between;
+    align-items: center;
+    width: 280px;
     /* width: 303px; */
     /* min-width: 276px; */
     /* height: 20px; */
 
 }
+
 @media only screen and (min-width: 1920px) {
     .containerpagin {
-        width: 420px; }}
+        width: 420px;
+    }
+}
 
 .boxpagination {
     display: flex;

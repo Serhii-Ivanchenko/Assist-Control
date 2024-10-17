@@ -38,23 +38,23 @@ export default function DayCarsItem({
     let statusClass = "";
 
     if (complete_d) {
-      icon = <AiOutlineCheckCircle color="#4CAF50" size={16} />;
+      icon = <AiOutlineCheckCircle color="#4CAF50" size={24} />;
       statusText = "завершено";
       statusClass = styles.completed;
     } else {
       switch (status) {
         case "new":
-          icon = <HiOutlineHashtag color="#246D4D" size={16} />;
+          icon = <HiOutlineHashtag color="#246D4D" size={24} />;
           statusText = "нова";
           statusClass = styles.new;
           break;
         case "repair":
-          icon = <BsWrench color="#246D4D" />;
+          icon = <BsWrench color="#246D4D" size={16} />;
           statusText = "ремонт";
           statusClass = styles.repair;
           break;
         case "check_repair":
-          icon = <BsLayerBackward color="#246D4D" size={16} />;
+          icon = <BsLayerBackward color="#246D4D" size={24} />;
           statusText = "діагностика";
           statusClass = styles.checkRepair;
           break;
@@ -110,7 +110,7 @@ export default function DayCarsItem({
   return (
     <div className={clsx(styles.dayCarsItemContainer, isModal && styles.modalDayCarsItemContainer)}>
       <div className={styles.userInfo}>
-        <div className={styles.title}>{renderStatus(status, complete_d)}</div>
+        {renderStatus(status, complete_d)}
         <div className={styles.infoCard}>
           <div className={styles.infoName}>
             <BsPersonFill size={13} color="#617651" />
@@ -132,9 +132,9 @@ export default function DayCarsItem({
           <button className={styles.btnDetail}>
             <p className={styles.btnDetailText}>Деталі</p>
           </button>
-          <button className={styles.btnSave}>
+          {/* <button className={styles.btnSave}>
             <BsLayerBackward size={16} />
-          </button>
+          </button> */}
         </div>
       </div>
       <div className={styles.carsInfo}>

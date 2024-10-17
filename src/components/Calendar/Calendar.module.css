@@ -1,15 +1,16 @@
 .containercalendar {
     margin-top: 20px;
     width: 282px;
-    height: 125px;
-
+    min-height: 125px;
+    height: auto;
 }
 
 @media only screen and (min-width: 1920px) {
     .containercalendar {
         margin-top: 30px;
         width: 422px;
-        height: 188px;
+        min-height: 188px;
+        height: auto;
     }
 }
 
