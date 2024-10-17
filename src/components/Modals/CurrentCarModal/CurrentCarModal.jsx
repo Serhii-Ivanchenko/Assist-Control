@@ -19,7 +19,7 @@ import { changeCarStatus } from "../../../redux/cars/operations";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 
 function CurrentCarModal({ onClose, car, status }) {
   const dispatch = useDispatch();

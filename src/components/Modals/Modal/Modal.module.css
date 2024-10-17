@@ -13,26 +13,10 @@
     outline: none;
     max-height: 100vh;
 }
-/* 
-.isSettingsModalOpen {
-    margin-top: 80px;
-} */
 
 .modal::-webkit-scrollbar {
     display: none;
 }
-
-/* @media only screen and (min-width: 768px) {
-  .modal {
-    margin-top: 64px;
-  }
-} */
-
-/* @media only screen and (min-width: 768px) {
-    .isSettingsModalOpen {
-        margin-top: 64px;
-    }
-} */
 
 .overlay {
     position: fixed;

@@ -1,13 +1,11 @@
 import ReactModal from "react-modal";
 import css from "./Modal.module.css";
 import { useEffect } from "react";
-import clsx from "clsx";
 
 export default function Modal({
   isOpen,
   onClose,
   children,
-  isSettingsModalOpen,
 }) {
   useEffect(() => {
     return () => {
@@ -17,10 +15,7 @@ export default function Modal({
 
   return (
     <ReactModal
-      className={clsx(
-        css.modal,
-        isSettingsModalOpen && css.isSettingsModalOpen
-      )}
+      className={css.modal}
       overlayClassName={css.overlay}
       isOpen={isOpen}
       shouldCloseOnEsc={true}

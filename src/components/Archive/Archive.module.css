@@ -18,6 +18,12 @@
     position: relative;
 }
 
+@media only screen and (min-width: 1920px) {
+    .tooltip {
+        margin-right: 10px;
+    }
+}
+
 .tooltip .tooltipContent::after {
     content: " ";
     position: absolute;
@@ -38,7 +44,7 @@
     padding: 0.375rem 0.75rem;
     position: absolute;
     z-index: 1;
-    left: -50%;
+    left: -80%;
     top: 135%;
 }
 
