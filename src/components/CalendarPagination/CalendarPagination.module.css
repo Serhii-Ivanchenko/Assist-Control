@@ -1,10 +1,17 @@
 .containerpagin {
+    display: flex;
+    flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 280px;
     /* width: 303px; */
     /* min-width: 276px; */
     /* height: 20px; */
 
 }
-
+@media only screen and (min-width: 1920px) {
+    .containerpagin {
+        width: 420px; }}
 
 .boxpagination {
     display: flex;

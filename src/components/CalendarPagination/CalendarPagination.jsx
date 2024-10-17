@@ -4,7 +4,7 @@ import { getCalendarByMonth } from "../../redux/cars/operations.js";
 import {
   selectMonthlyLoad,
   selectDate,
-  selectLoading,
+  selectLoadingForCalendar,
 } from "../../redux/cars/selectors.js";
 
 import css from "./CalendarPagination.module.css";
@@ -32,7 +32,7 @@ export default function CalendarPagination() {
   const currentMonth = new Date().toISOString().substring(0, 7);
   const currentDate = new Date().toISOString().substring(0, 10);
   const carSelectDate = useSelector(selectDate);
-  const isLoading = useSelector(selectLoading);
+  const isLoadingForCalendar = useSelector(selectLoadingForCalendar);
   // const actualPercent = useSelector(selectPercent);
 
   if (carSelectDate === null) {
@@ -91,6 +91,7 @@ export default function CalendarPagination() {
   //         ...el, day: el.date.substring(8, 10).replace(/^0+/, ''),  }));
 
   return (
+    <div>
     <div className={css.containerpagin}>
       <div className={css.boxpagination}>
         <button className={css.iconstep} onClick={handleClickLeft}>
@@ -106,9 +107,11 @@ export default function CalendarPagination() {
         >
           <FiChevronRight className={css.arrowIcon} />
         </button>
-      </div>
 
-      {isLoading ? (
+      </div>
+<p className={css.namemonth}> {carSelectDate} </p>
+        </div>
+      {isLoadingForCalendar ? (
         <Loader />
       ) : (
         <Calendar dataMonth={monthData} queryMonth={queryMonth} />
