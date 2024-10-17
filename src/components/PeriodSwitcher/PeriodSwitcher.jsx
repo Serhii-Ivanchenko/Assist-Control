@@ -3,30 +3,38 @@ import css from "./PeriodSwitcher.module.css";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { getCarsByDate, getCarsByMonth } from "../../redux/cars/operations";
-import { selectDayCars } from "../../redux/cars/selectors";
+import { selectDate, selectDayCars } from "../../redux/cars/selectors";
 import { useEffect } from "react";
 import { getCarsByMonth } from "../../redux/cars/operations";
+import { useState } from "react";
 export default function PeriodSwitcher({ changeCarsArr }) {
+  const [daySelected, setDaySelected] = useState(false);
   const day = useRef();
   const month = useRef();
   const activeClassName = clsx(css.statsBtn, css.activeBtn);
   const noneActiveClassName = clsx(css.statsBtn);
   const dayCars = useSelector(selectDayCars);
+  const date = useSelector(selectDate);
+  const selectedMonth = `${date.split("-")[0]}-${date.split("-")[1]}`;
+  console.log('====================================');
+  console.log(dayCars);
+  console.log('====================================');
   const dispatch = useDispatch();
   useEffect(() => {
     changeCarsArr(dayCars);
-  }, [dayCars]);
+    handleChoseDay();
+  }, [date, dayCars]);
   const handleChoseDay = () => {
-    if (day.current.className === activeClassName) return;
-    changeCarsArr(dayCars);
-    month.current.className = noneActiveClassName;
-    day.current.className = activeClassName;
+    if (!daySelected || date !== new Date().toISOString().split("T")[0]) {
+      month.current.className = noneActiveClassName;
+      day.current.className = activeClassName;
+      changeCarsArr(dayCars);
+      setDaySelected(true);
+    }
   };
   const handleChoseMonth = async () => {
     if (month.current.className === activeClassName) return;
-    const { payload } = await dispatch(
-      getCarsByMonth(`${new Date().getFullYear()}-${new Date().getMonth() + 1}`)
-    );
+    const { payload } = await dispatch(getCarsByMonth(selectedMonth));
     changeCarsArr(payload.cars);
     day.current.className = noneActiveClassName;
     month.current.className = activeClassName;
