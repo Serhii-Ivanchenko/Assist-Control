@@ -2,21 +2,19 @@ import styles from "./DayCarsItem.module.css";
 import carImage from "../../assets/images/carsItem.png";
 import clsx from "clsx";
 import {
-  BsWrench,
   BsPencil,
   BsPersonFill,
   BsTelephoneOutboundFill,
-  BsLayerBackward,
   BsStopwatch,
 } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
-import { HiOutlineHashtag } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { selectDayCars } from "../../redux/cars/selectors.js";
-import { AiFillStar, AiOutlineCheckCircle } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
-import { calculateTimeInService } from "../../utils/calculateTimeInService.js";
+import { renderTime } from "../../utils/renderTime.js";
+import renderStatus from "../../utils/renderStatus.jsx";
 
 export default function DayCarsItem({
   carNumber,
@@ -31,99 +29,8 @@ export default function DayCarsItem({
 }) {
   const carsData = useSelector(selectDayCars);
   const car = carsData.find((car) => car.carNumber === carNumber);
-
-  const renderStatus = (status, complete_d) => {
-    let icon;
-    let statusText;
-    let statusClass = "";
-
-    if (complete_d) {
-      icon = <AiOutlineCheckCircle color="#4CAF50" size={24} />;
-      statusText = "завершено";
-      statusClass = styles.completed;
-    } else {
-      switch (status) {
-        case "new":
-          icon = <HiOutlineHashtag color="#246D4D" size={24} />;
-          statusText = "нова";
-          statusClass = styles.new;
-          break;
-        case "repair":
-          icon = <BsWrench color="#246D4D" size={16} />;
-          statusText = "ремонт";
-          statusClass = styles.repair;
-          break;
-        case "check_repair":
-          icon = <BsLayerBackward color="#246D4D" size={24} />;
-          statusText = "діагностика";
-          statusClass = styles.checkRepair;
-          break;
-        default:
-          icon = null;
-          statusText = "Невідомий статус";
-      }
-    }
-
-    return (
-      <div
-        className={clsx(styles.title)}
-        style={{
-          borderColor: statusClass.includes("completed")
-            ? "#246D4D"
-            : statusClass.includes("new")
-            ? "#EBD534"
-            : statusClass.includes("repair")
-            ? "#994CA5"
-            : statusClass.includes("checkRepair")
-            ? "#3956CC"
-            : "#000",
-          borderWidth: "1px",
-          borderStyle: "solid",
-        }}
-      >
-        {icon}
-        <span className={clsx(styles.statusText, statusClass)}>
-          {statusText}
-        </span>
-      </div>
-    );
-  };
-
   const defaultCarImage = carImage;
   const carPhoto = photoUrl || defaultCarImage;
-
-  const renderTime = () => {
-    if (complete_d) {
-      const completeDate = new Date(complete_d);
-      const startDate = new Date(date_s);
-      const differenceInMilliseconds = completeDate - startDate;
-
-      const hours = Math.floor(
-        (differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor(
-        (differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const seconds = Math.floor(
-        (differenceInMilliseconds % (1000 * 60)) / 1000
-      );
-
-      return (
-        <p className={styles.time}>
-          {`${String(hours).padStart(2, "0")}:${String(minutes).padStart(
-            2,
-            "0"
-          )}:${String(seconds).padStart(2, "0")}`}
-        </p>
-      );
-    } else {
-      return (
-        <p className={styles.time}>
-          {calculateTimeInService(date_s, new Date().toISOString())}
-        </p>
-      );
-    }
-  };
 
   return (
     <div
@@ -133,14 +40,14 @@ export default function DayCarsItem({
       )}
     >
       <div className={styles.userInfo}>
-        {renderStatus(status, complete_d)}
+      <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>
           <div className={styles.infoName}>
-            <BsPersonFill size={13} color="#617651" />
+            <BsPersonFill className={styles.iconHuman} color="#617651" />
             <span className={styles.textName}>Іван Петренко</span>
           </div>
           <div className={styles.infoTel}>
-            <BsTelephoneOutboundFill size={13} color="#006D95" />
+            <BsTelephoneOutboundFill className={styles.iconTel} color="#006D95" />
             <span className={styles.textTel}>0733291217</span>
           </div>
           <div className={styles.infoCar}>
@@ -150,7 +57,7 @@ export default function DayCarsItem({
         </div>
         <div className={styles.infoVin}>
           <span className={styles.vinNum}>
-            {vin ? vin : "VIN-XXXXXXXXXXXX"}
+            {vin ? vin : "VIN-XXXXXXXXXXX"}
           </span>
         </div>
         <div className={styles.btnContainer}>
@@ -201,7 +108,7 @@ export default function DayCarsItem({
           </div>
           <div className={styles.timeWork}>
             <BsStopwatch size={13} color="#D5ACF3" />
-            <p className={styles.time}>{renderTime()}</p>
+            <p className={styles.time}>{renderTime(complete_d, date_s)}</p>
           </div>
           <div className={styles.totalPay}>
             <p className={styles.total}>₴ 6,613.83 </p>
