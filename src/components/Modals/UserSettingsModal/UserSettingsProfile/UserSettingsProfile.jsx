@@ -40,7 +40,8 @@ export default function UserSettingsProfile({ onClose }) {
     const userPhoto = user.avatar_url || "";
 
 
-        const [avatar, setAvatar] = useState(userPhoto)
+    const [avatar, setAvatar] = useState(userPhoto)
+    // console.log("Current avatar URL:", avatar);
 
 
 
@@ -78,9 +79,12 @@ export default function UserSettingsProfile({ onClose }) {
         const file = event.currentTarget.files[0];
         if (file) {
             setFieldValue("photo", URL.createObjectURL(file));
-            setAvatar( URL.createObjectURL(file));
              try {
-            await dispatch(updateUserAvatar(file)).unwrap();
+                 const response = await dispatch(updateUserAvatar(file)).unwrap();
+                  console.log("Server response:", response);
+                 const newAvatarUrl = response.avatar_url;
+                 setAvatar(newAvatarUrl);
+                 
             // Отримання оновлених даних користувача
             dispatch(getUserData());
             toast.success("Аватар успішно оновлено :)", {
@@ -105,6 +109,8 @@ export default function UserSettingsProfile({ onClose }) {
     }
          
     };
+
+    console.log("Response from server:", updateUserAvatar);
 
     const toggleDropdown = (index) => {
       setActiveDropdown(activeDropdown === index ? null : index);
