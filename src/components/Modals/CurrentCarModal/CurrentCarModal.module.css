@@ -12,10 +12,16 @@
   background-color: #202020;
 }
 
+.iconClose {
+  width: 26px;
+  height: 26px;
+  fill: #4a4a4a;
+}
+
 .closeBtn {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 20px;
+  right: 20px;
 
   display: inline-block;
   width: 20px;
@@ -53,6 +59,8 @@
   font-family: "Roboto", sans-serif;
   font-size: 24px;
   font-weight: 600;
+
+  margin-bottom: 6px;
 }
 
 .carRegContainer {
@@ -111,10 +119,12 @@
 }
 
 .carStatus {
-  font-variant-numeric: lining-nums proportional-nums;
+  display: flex;
+  align-items: center;
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   font-weight: 600;
+  line-height: 1.15em;
   border: transparent;
 }
 
@@ -196,6 +206,12 @@
   padding: 0;
 
   width: auto;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .radioGroup label {
