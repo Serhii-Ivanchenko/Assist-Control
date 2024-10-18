@@ -5,8 +5,10 @@ import toast from "react-hot-toast";
 import clsx from "clsx";
 
 import { HiOutlineHashtag } from "react-icons/hi";
-import { BsWrench, BsCalendar2CheckFill } from "react-icons/bs";
+import { BsWrench } from "react-icons/bs";
 import { FaCircleCheck } from "react-icons/fa6";
+import { BsEyeFill } from "react-icons/bs";
+import { BsUiChecksGrid } from "react-icons/bs";
 
 import { getCurrentCars } from "../../redux/cars/operations.js";
 import { selectCurrentCars } from "../../redux/cars/selectors.js";
@@ -45,7 +47,7 @@ export default function CurrentCarsItem() {
   };
 
   const handleStatusChange = () => {
-    dispatch(getCurrentCars()); //
+    dispatch(getCurrentCars());
   };
 
   // Мемоізація іконки в залежності від статусу
@@ -56,10 +58,15 @@ export default function CurrentCarsItem() {
           return <HiOutlineHashtag stroke="#246D4D" fill="#246D4D" />;
         case "repair":
           return <BsWrench stroke="#246D4D" fill="#246D4D" />;
-        case "check_repair":
-          return <BsCalendar2CheckFill stroke="#246D4D" fill="#246D4D" />;
+        // case "check_repair":
+        //   return <BsCalendar2CheckFill stroke="#246D4D" fill="#246D4D" />;
         case "complete":
           return <FaCircleCheck stroke="#246D4D" fill="#246D4D" />;
+        case "diagnostic":
+          return <BsUiChecksGrid stroke="#246D4D" fill="#246D4D" />;
+        case "view_repair":
+          return <BsEyeFill stroke="#246D4D" fill="#246D4D" />;
+
         default:
           return null;
       }
@@ -77,8 +84,12 @@ export default function CurrentCarsItem() {
           <div className={styles.imgContainer}>
             <img
               className={styles.carImg}
-              src={car.photo_url || absentAutoImg}
+              src={car?.photo_url || absentAutoImg}
               alt="Car image"
+              onError={(e) => {
+                e.target.onerror = null; // щоб уникнути зациклення події onError
+                e.target.src = absentAutoImg; // замінюємо поломаний URL на заглушку
+              }}
             />
           </div>
           <div className={styles.carInfoContainer}>

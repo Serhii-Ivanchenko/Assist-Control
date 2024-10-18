@@ -36,6 +36,10 @@
   color: #246d4d;
 }
 
+.viewRepairStatus {
+  color: #db8120;
+}
+
 .imgContainer {
   display: flex;
   width: 64px;

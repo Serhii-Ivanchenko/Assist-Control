@@ -14,7 +14,7 @@ export const getStatusDetails = (status, icon) => {
         label: "ремонт",
         className: styles.repairStatus,
       };
-    case "check_repair":
+    case "diagnostic":
       return {
         icon,
         label: "діагностика",
@@ -25,6 +25,12 @@ export const getStatusDetails = (status, icon) => {
         icon,
         label: "завершено",
         className: styles.completeStatus,
+      };
+    case "view_repair":
+      return {
+        icon,
+        label: "огляд пр",
+        className: styles.viewRepairStatus,
       };
     default:
       return {

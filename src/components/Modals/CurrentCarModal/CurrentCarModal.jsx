@@ -12,8 +12,8 @@ import absentAutoImg from "../../../assets/images/absentAutoImg.webp";
 import flag from "../../../assets/images/flagUa.webp";
 import CustomRadioBtn from "../../CustomRadioBtn/CustomRadioBtn";
 
-import { HiOutlineHashtag } from "react-icons/hi";
 import { BsWrench, BsCalendar2CheckFill } from "react-icons/bs";
+import { HiOutlineHashtag } from "react-icons/hi";
 import { FaCircleCheck } from "react-icons/fa6";
 import { MdOutlineTimer } from "react-icons/md";
 import { BsUiChecksGrid } from "react-icons/bs";
@@ -103,7 +103,7 @@ function CurrentCarModal({ onClose, car, status }) {
         <div className={styles.serviceInfo}>
           <p className={styles.serviceTime}>
             {<MdOutlineTimer className={styles.icon} />}
-            {calculateTimeInService(car.date_s, car.date_e)}
+            {calculateTimeInService(car.date_s)}
           </p>
         </div>
         <div className={styles.radioGroup}>
@@ -111,12 +111,12 @@ function CurrentCarModal({ onClose, car, status }) {
             <input
               type="radio"
               name="carStatus"
-              value="new"
-              checked={selectedStatus === "new"}
+              value="diagnostic"
+              checked={selectedStatus === "diagnostic"}
               onChange={handleStatusChange}
               className={styles.radioInput}
             />
-            <CustomRadioBtn isChecked={selectedStatus === "new"} />
+            <CustomRadioBtn isChecked={selectedStatus === "diagnostic"} />
             {<BsUiChecksGrid className={styles.iconRadio} />}
             Діагностика
           </label>
@@ -124,12 +124,12 @@ function CurrentCarModal({ onClose, car, status }) {
             <input
               type="radio"
               name="carStatus"
-              value="check_repair"
-              checked={selectedStatus === "check_repair"}
+              value="view_repair"
+              checked={selectedStatus === "view_repair"}
               onChange={handleStatusChange}
               className={styles.radioInput}
             />
-            <CustomRadioBtn isChecked={selectedStatus === "check_repair"} />
+            <CustomRadioBtn isChecked={selectedStatus === "view_repair"} />
             {<BsEyeFill className={styles.iconRadio} />}
             Огляд ПР
           </label>
