@@ -4,7 +4,7 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
 import { BsChevronDown } from "react-icons/bs";
 
-export default function UserSettingsTariff() {
+export default function UserSettingsTariff({onClose}) {
     const [isActive, setIsActive] = useState(null);
     const [activeDropdown, setActiveDropdown] = useState(null);
     
@@ -164,7 +164,7 @@ export default function UserSettingsTariff() {
             </div>
 
             <div className={css.btnBox}>
-                <button type="button" className={css.btnCancel}>Відміна</button>
+                <button type="button" className={css.btnCancel} onClick={onClose}>Відміна</button>
             </div>
         </div>
     )

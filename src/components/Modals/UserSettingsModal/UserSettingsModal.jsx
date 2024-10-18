@@ -36,9 +36,9 @@ export default function UserSettingsModal({onClose}) {
              <TfiClose onClick={onClose} className={css.closeBtn} />
         <UserSettingsSidebar setPage={setPage} page={page} onOpen={openMobMenu} onClose={onClose} />
         {mobMenu && <MobileMenu setPage={setPage} page={page} onClose={closeMobMenu} />}
-          {page === "profile" && <UserSettingsProfile/>}
+          {page === "profile" && <UserSettingsProfile onClose={onClose}/>}
           {page === "account" && <UserSettingAccount onClose={onClose}/>}
-          {page === "tariff" && <UserSettingsTariff/>}
+          {page === "tariff" && <UserSettingsTariff onClose={onClose}/>}
           {page === "team" && <UserSettingsTeam />}
                         
         </div>

@@ -228,4 +228,6 @@ justify-content: flex-end;
     font-weight: 600;
     line-height: normal;
     margin-top: auto;
+
+    cursor: pointer;
 }
