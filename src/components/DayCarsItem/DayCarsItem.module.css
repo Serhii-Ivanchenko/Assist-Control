@@ -47,12 +47,40 @@
   }
 
   .statusText{
-    
-    color:#994CA5;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
     line-height: normal;
     font-variant: small-caps;
+  }
+
+  .statusText {
+    font-weight: 600;
+    line-height: normal;
+    font-variant: small-caps;
+  }
+  
+  .completed {
+    font-size: 16px;
+    color: #246D4D;
+  }
+  
+  .new {
+    font-size: 20px;
+    color: #EBD534;
+  }
+  
+  .repair {
+    font-size: 20px;
+    color: #994CA5;
+  }
+  
+  .checkRepair {
+    font-size: 16px;
+    color: #3956CC;
+  }
+
+  .statusTextLarge {
+    font-size: 20px;
   }
 
   .infoCard{
@@ -70,7 +98,7 @@
   .vinNum{
     display: block;
     text-align: center;
-    width: auto;
+    width: 161px;
     height: 22px;
     padding: 3px 10px;
     border-radius: 6px;
@@ -98,7 +126,7 @@
 
   .nameCar{
     color: #FFF;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     line-height: normal;
   }
