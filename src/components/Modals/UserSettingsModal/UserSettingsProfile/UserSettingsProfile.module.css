@@ -1,0 +1,224 @@
+.formBox{
+    width: 975px;
+    padding: 40px 42px 45px 42px;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.input{
+    width: 420px;
+    padding: 18px 20px;
+
+    border-radius: 10px;
+    border: 1px solid var(--Button-grey, #4A4A4A);
+    background-color: var(--Grey-Input, #282828);
+    outline: none;
+
+    
+    margin-top: 8px;
+
+    /* color: var(--White, var(--Color, #FFF)); */
+    color: var(--Button-grey, #4A4A4A);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.inputs .inputBox:not(:last-child) {
+    margin-bottom: 24px;
+    /* Add your desired margin here */
+}
+
+.input::placeholder{
+    color: var(--Button-grey, #4A4A4A);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.inputSelect{
+    appearance: none;
+}
+
+.btnArrowSelect{
+    position: absolute;
+        right: 20px;
+        top: 60%;
+        /* transform: translateY(-50%); */
+        fill: white;
+        width: 20px;
+        height: 20px;
+        fill: #C7C7C7;
+        pointer-events: none;
+    }
+    
+.rotated {
+        transform: rotate(180deg);
+    }
+
+.inputName{
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.inputBox{
+    position: relative;
+}
+
+.errorMessage{
+    color: #FF6363;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        /* margin-left: 20px; */
+    
+        cursor: default;
+        position: absolute;
+        left: 20px;
+        top: 90%;
+}
+
+.inputs{
+    display: flex;
+    align-items: flex-start;
+    gap: 51px;
+}
+
+.firstColumn{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.secondColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputLable{
+    color: var(--Color, #FFF);
+        font-family: "Roboto", sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+}
+
+.photoBox{
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+
+    border-radius: 120px;
+
+    background-color: bisque;
+}
+
+.photo{
+    width: 120px;
+        height: 120px;
+        flex-shrink: 0;
+    
+        border-radius: 120px;
+}
+
+ .photoField{
+    display: none;
+     
+} 
+
+.changePhotoBtn{
+    width: fit-content;
+    padding: 15px 30px;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    border: none;
+    border-radius: 8px;
+    background-color: var(--Blue, #3956CC);
+
+    color: var(--Color, #FFF);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.btnPlus{
+    width: 20px;
+    height: 20px;
+    fill: #C7C7C7;
+}
+
+.addPhotoBox{
+    display: flex;
+    gap: 60px;
+    align-items: center;
+
+    margin-bottom: 40px;
+}
+
+.btnBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 17px;
+}
+
+.cancelBtn {
+    width: fit-content;
+    /* height: 43px; */
+    padding: 15px 30px;
+
+    border-radius: 8px;
+    border: 1px solid #767676;
+    background-color: transparent;
+
+    color: #FFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.saveBtn {
+    width: fit-content;
+    /* height: 43px; */
+    padding: 15px 30px;
+
+    border-radius: 8px;
+    background-color: #3956CC;
+
+    border: none;
+
+    color: #FFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.iconSave {
+    fill: #C7C7C7;
+}

@@ -79,13 +79,13 @@ export default function UserSettingsAccount({onClose}) {
 
     try {
       await dispatch(updateUserData(dataToUpdate)).unwrap();
-      actions.resetForm({ values }); // Скидає форму після успішного відправлення
+      actions.resetForm({ values });
       dispatch(getUserData());
       toast.success(
-      "Дані успішно збережено)",
+      "Дані успішно збережено :)",
 {
             position: "top-right",
-            duration: 3000,
+            duration: 5000,
             style: {
               background: "#242525",
               color: "#FFFFFF",
