@@ -5,41 +5,42 @@
   justify-content: space-between;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .sidebar {
     height: 961px;
 
-}
+  }
 }
 
-.topContainer, .bottomContainer {
+.topContainer,
+.bottomContainer {
   display: flex;
   flex-direction: column;
   gap: 20px;
   position: relative;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .topContainer {
     gap: 56px;
 
-}
+  }
 }
 
 .bottomContainer {
   gap: 9px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .bottomContainer {
     gap: 48px;
-}
+  }
 }
 
-.userBar{
+.userBar {
   position: absolute;
 }
 
-.userInfo{
+.userInfo {
   position: relative;
 }

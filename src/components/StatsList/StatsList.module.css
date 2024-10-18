@@ -3,11 +3,13 @@
   gap: 7px;
   width: 100%;
 }
-@media only screen and (min-width: 1920px) {
+
+@media only screen and (min-width: 1850px) {
   .statsList {
     gap: 10px;
   }
 }
+
 .statsItem {
   display: flex;
   flex-direction: column;
@@ -18,13 +20,15 @@
   border-radius: 5px;
   background-color: #1a1a1a;
 }
-@media only screen and (min-width: 1920px) {
+
+@media only screen and (min-width: 1850px) {
   .statsItem {
     width: 204px;
     height: 86px;
     justify-content: center;
   }
 }
+
 .statsItem:first-child {
   background-color: #3956cc;
 }

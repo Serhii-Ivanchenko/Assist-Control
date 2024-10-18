@@ -5,7 +5,7 @@
   margin-bottom: 8px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .statisticsCont {
     gap: 34px;
     margin-bottom: 12px;

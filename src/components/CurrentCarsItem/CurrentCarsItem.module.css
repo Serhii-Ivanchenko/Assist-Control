@@ -132,7 +132,7 @@
   color: #3956cc;
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1850px) {
   .wrapper {
     display: flex;
     width: 556px;

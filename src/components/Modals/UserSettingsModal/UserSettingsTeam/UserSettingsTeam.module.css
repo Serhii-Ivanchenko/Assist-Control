@@ -14,7 +14,7 @@
     }
 }
 
-@media only screen and (max-width: 1919.9px) {
+@media only screen and (max-width: 1849.98px) {
     .teamBox {
         gap: 10px;
     }
@@ -63,7 +63,7 @@
     ;
 }
 
-@media only screen and (max-width: 1919.9px) {
+@media only screen and (max-width: 1849.98px) {
     .text {
 
         width: 299px;
@@ -104,7 +104,7 @@
     cursor: pointer;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .addBtn {
         padding: 15px 30px;
     }

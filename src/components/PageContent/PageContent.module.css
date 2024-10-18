@@ -7,7 +7,7 @@
   padding: 16px 16px 0 16px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .pageContent {
     width: 1106px;
     height: 900px;
@@ -22,7 +22,7 @@
   grid-row-gap: 12px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .pagegrid {
     grid-column-gap: 19px;
     grid-row-gap: 19px;

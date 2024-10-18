@@ -13,7 +13,7 @@
 
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .containerperiodselector {
         margin-top: -15px;
     }
@@ -36,7 +36,7 @@
     margin-right: 6px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .periodtitle {
         font-size: 14px;
         margin-right: 10px;
@@ -60,7 +60,7 @@
 }
 
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .periodinput {
         font-size: 14px;
         width: 147px;
@@ -83,7 +83,7 @@
     pointer-events: auto;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .icon {
         width: 18px;
         height: 18px;
@@ -99,7 +99,7 @@
     margin-right: 35px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .datewrapper {
         margin-right: 60px
     }
@@ -115,11 +115,12 @@
 
 .datepickerdropdown {
     margin-left: -40px;
-   
+
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .datepickerdropdown {
-            margin-left: 0px;
-    
-        }}
+        margin-left: 0px;
+
+    }
+}
