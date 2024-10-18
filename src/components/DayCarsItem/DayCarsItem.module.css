@@ -18,13 +18,11 @@
   
   .modalDayCarsItemContainer{
     display: flex;
-    width: 130px;
-    height: 184px;
-    padding: 8px 12px;
-    flex-direction: column;
-    align-items: flex-start;
+    width: 416px;
+    height: 200px;
+    padding: 10px 21px 10px 30px;
     gap: 12px;
-    border-radius: 4px;
+    border-radius: 8px;
   }
 
   .userInfo {
@@ -202,6 +200,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+  /* width: 80px; */
 }
 
 .carBtnNumber{
@@ -225,6 +224,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 96px;
 }
 
 .carRegContainer{
