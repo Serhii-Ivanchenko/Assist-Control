@@ -6,10 +6,32 @@
   margin-left: 1px;
 }
 
+.modaldayCarsListContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .dayCarsListContainer> :nth-child(n+4) {
   display: none;
 }
 
 .withBtn> :nth-child(3) {
   background: linear-gradient(0deg, #000 0%, #1A1A1A 66.5%);
+}
+
+.listView {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.listView > * {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  background-color: #1A1A1A;
+  border-radius: 4px;
 }

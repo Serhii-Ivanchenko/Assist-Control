@@ -2,6 +2,8 @@
   display: flex;
   align-content: center;
   justify-content: center;
+  height: 100vh;
+  flex-wrap: wrap;
 }
 
 .loginPage {
@@ -9,7 +11,7 @@
   overflow: hidden;
   border-radius: 60px;
   width: 896px;
-  height: 684px;
+  height: 678px;
 }
 
 @media screen and (max-width: 1279.98px) {

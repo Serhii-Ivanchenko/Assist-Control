@@ -91,7 +91,7 @@ export default function CalendarPagination() {
   //         ...el, day: el.date.substring(8, 10).replace(/^0+/, ''),  }));
 
   return (
-    <div>
+    <div className={css.calendarWrapper}>
     <div className={css.containerpagin}>
       <div className={css.boxpagination}>
         <button className={css.iconstep} onClick={handleClickLeft}>

@@ -1,13 +1,13 @@
 .wrapper {
   display: flex;
-  width: 386px;
+  width: 366px;
   height: 74px;
   gap: 8px;
 
   background-color: #1a1a1a;
   border: transparent;
   border-radius: 6px;
-  padding: 5px;
+  padding: 5px 8px 5px 5px;
 
   position: relative;
 }
@@ -135,7 +135,7 @@
 @media screen and (min-width: 1920px) {
   .wrapper {
     display: flex;
-    width: 576px;
+    width: 556px;
     height: 105px;
     padding: 3px 5px;
 
@@ -200,4 +200,5 @@
     font-size: 16px;
     font-weight: 300;
     text-decoration: underline;
-  }}
+  }
+}

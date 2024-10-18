@@ -4,8 +4,8 @@
   height: 795px;
   padding-left: 16px;
   padding-right: 16px;
-  padding-bottom: 23px;
-  padding-top: 69px;
+  padding-bottom: 20px;
+  padding-top: 4px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -18,6 +18,6 @@
       /* padding-left: 16px;
       padding-right: 16px; */
       /* padding-bottom: 23px; */
-      padding-top: 40px;
+      padding-top: 20px;
   }
 }

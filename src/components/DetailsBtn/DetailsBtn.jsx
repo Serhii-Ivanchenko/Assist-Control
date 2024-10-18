@@ -4,7 +4,7 @@ export default function DetailsBtn({ onClick }) {
   return (
     <div className={styles.btnContainer}>
       <button className={styles.btn} onClick={onClick}>
-        Детальна інформація
+      Детальна інформація
       </button>
     </div>
   );
