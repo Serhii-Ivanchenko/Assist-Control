@@ -1,6 +1,6 @@
 .sideBarBox {
     width: 250px;
-    height: inherit;
+    height: 850px;
     border-right: solid 1px #000;
     padding-top: 20px;
 }
@@ -146,10 +146,42 @@
 
 }
 
+.balanceBox{
+/* display: block; */
+/* flex-direction: column; */
+/* justify-cotennt: flex-end; */
+margin-top: 410px;
+padding-left: 29px;
+}
+
+.balance{
+    color: var(--Text-grey, #959595);
+        font-variant-numeric: lining-nums proportional-nums;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        font-variant: small-caps;
+}
+
+.amount{
+    color: var(--White, #FFF);
+        font-variant-numeric: lining-nums proportional-nums;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        font-variant: small-caps;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+}
+
 
 /* Mobile Menu */
 
-.mobileMenu{
+/* .mobileMenu{
     position: fixed;
         top: 0;
         right: 0;
@@ -177,4 +209,5 @@
 .is-open {
     transform: translateX(0);
     visibility: visible;
-}
+} */
+

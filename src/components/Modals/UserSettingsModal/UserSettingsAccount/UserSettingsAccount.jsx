@@ -79,7 +79,7 @@ export default function UserSettingsAccount({onClose}) {
 
     try {
       await dispatch(updateUserData(dataToUpdate)).unwrap();
-      actions.resetForm({ values }); // Скидає форму після успішного відправлення
+      actions.resetForm({ values });
       dispatch(getUserData());
       toast.success(
       "Дані успішно збережено :)",
