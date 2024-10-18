@@ -28,6 +28,7 @@ const Validation = Yup.object().shape({
 export default function UserSettingsProfile({ onClose }) {
     const fileInputRef = useRef(null);
     const [activeDropdown, setActiveDropdown] = useState(null);
+    
 
     const dispatch = useDispatch();
 
@@ -39,7 +40,7 @@ export default function UserSettingsProfile({ onClose }) {
     const userPhoto = user.avatar_url || "";
 
 
-        const [avatar, setAvatar] = useState(null)
+        const [avatar, setAvatar] = useState(userPhoto)
 
 
 
@@ -55,7 +56,7 @@ export default function UserSettingsProfile({ onClose }) {
 
 
     const initialValues = {
-        photo: userPhoto,
+        // photo: userPhoto,
         username: userName,
         phone: userPhone,
         country: "Ukraine",
@@ -73,13 +74,35 @@ export default function UserSettingsProfile({ onClose }) {
         }
     };
 
-     const handleFileChange = (event, setFieldValue) => {
+     const handleFileChange = async (event, setFieldValue) => {
         const file = event.currentTarget.files[0];
         if (file) {
             setFieldValue("photo", URL.createObjectURL(file));
             setAvatar( URL.createObjectURL(file));
-            dispatch(updateUserAvatar(file)).unwrap()
-         }
+             try {
+            await dispatch(updateUserAvatar(file)).unwrap();
+            // Отримання оновлених даних користувача
+            dispatch(getUserData());
+            toast.success("Аватар успішно оновлено :)", {
+                position: "top-right",
+                duration: 5000,
+                style: {
+                    background: "#242525",
+                    color: "#FFFFFF",
+                },
+            });
+        } catch (error) {
+            console.error("Помилка при оновленні аватара:", error);
+            toast.error("Не вдалося оновити аватар :(", {
+                position: "top-right",
+                duration: 5000,
+                style: {
+                    background: "#242525",
+                    color: "#FFFFFF",
+                },
+            });
+        }
+    }
          
     };
 
