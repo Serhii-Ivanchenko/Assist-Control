@@ -6,12 +6,15 @@
   width: 386px;
   /* висота потрібна для відображення скролу списку поточних машин */
   height: 191px;
+  padding-top: 5px;
+  padding-left: 5px;
   background-color: #1a1a1a;
   border-radius: 5px;
   overflow-y: scroll;
   overflow-x: hidden;
   -ms-overflow-style: none;
 }
+
 .wrapper::-webkit-scrollbar {
   width: 8px;
 }
@@ -45,7 +48,9 @@
   .wrapper {
     width: 578px;
     /* висота потрібна для відображення скролу списку поточних машин */
-    height: 296px;
+    height: 286px;
+    padding-top: 7px;
+    padding-left: 7px;
     /* overflow: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none; */
@@ -59,6 +64,5 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 5px;
   }
 }
