@@ -10,7 +10,7 @@ import PhoneSelect from "./PhoneSelect/PhoneSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../../../redux/auth/selectors";
 import toast from "react-hot-toast";
-import { updateUserData } from "../../../../redux/auth/operations";
+import { updateUserAvatar, updateUserData } from "../../../../redux/auth/operations";
 import { getUserData } from "../../../../redux/auth/operations";
 
 
@@ -39,6 +39,9 @@ export default function UserSettingsProfile({ onClose }) {
     const userPhoto = user.avatar_url || "";
 
 
+        const [avatar, setAvatar] = useState(null)
+
+
 
     const nameFieldId = useId();
     const phoneFieldId = useId();
@@ -63,7 +66,8 @@ export default function UserSettingsProfile({ onClose }) {
         index: "", 
     }
 
-     const handleChangePhoto = () => {
+    const handleChangePhoto = () => {      
+
         if (fileInputRef.current) {
             fileInputRef.current.click();
         }
@@ -73,7 +77,10 @@ export default function UserSettingsProfile({ onClose }) {
         const file = event.currentTarget.files[0];
         if (file) {
             setFieldValue("photo", URL.createObjectURL(file));
-        }
+            setAvatar( URL.createObjectURL(file));
+            dispatch(updateUserAvatar(file)).unwrap()
+         }
+         
     };
 
     const toggleDropdown = (index) => {
@@ -131,9 +138,9 @@ export default function UserSettingsProfile({ onClose }) {
 
                         <div className={css.addPhotoBox} >
                             <div className={css.photoBox}>
-                                <img src={userPhoto} alt="User's avatar" className={css.photo} />
+                                <img src={avatar} alt="User's avatar" className={css.photo} />
                             </div>
-                            <Field type='file' name='photo' className={css.photoField}
+                            <input type='file' name='photo' className={css.photoField}
                                 ref={fileInputRef}
                             onChange={(event) => handleFileChange(event, setFieldValue)}
                             />

@@ -59,9 +59,11 @@ background-color: var(--Calendar-fill, #302F2F);
 }
 
 .tariffCategory{
+    height: 680px;
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
 
     border-radius: 6px;
@@ -72,7 +74,7 @@ background-color: var(--Calendar-fill, #302F2F);
 .tariffCategoryIsActive{
     display: flex;
         flex-direction: column;
-        justify-content: center;
+        /* justify-content: center; */
         align-items: center;
     
         border-radius: 6px;
@@ -184,6 +186,7 @@ background-color: var(--Calendar-fill, #302F2F);
 
         /* margin-top: 19px; */
         margin-bottom: 30px;
+        cursor: pointer;
 }
 
 .selectBox{
