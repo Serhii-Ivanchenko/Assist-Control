@@ -2,14 +2,20 @@ import { useState } from "react";
 import css from "./UserSettingsTariff.module.css"
 import { BsCheckCircleFill } from "react-icons/bs";
 import { BsFillXCircleFill } from "react-icons/bs";
+import { BsChevronDown } from "react-icons/bs";
 
 export default function UserSettingsTariff() {
-    // const [isActive, setIsActive] = useState(false);
+    const [isActive, setIsActive] = useState(null);
+    const [activeDropdown, setActiveDropdown] = useState(null);
+    
 
-    // const handleClickActive = () => {
-    //     setIsActive(true)
-    // }
+    const handleClickActive = (index) => {
+        setIsActive(index);
+    }
 
+    const toggleDropdown = (index) => {
+      setActiveDropdown(activeDropdown === index ? null : index);
+    };
 
     return (
         <div className={css.tariffContainer}>
@@ -28,7 +34,8 @@ export default function UserSettingsTariff() {
                 </ul>
             </div>
 
-            <div className={css.tariffCategory}>
+                <div className={`${css.tariffCategory} ${isActive === 0 ? css.tariffCategoryIsActive : ''}`}
+                    onClick={() => handleClickActive(0)}>
                 <p className={css.tariffName}>Trial</p>
                 <ul className={css.list}>
                     <li className={css.listItem}>
@@ -53,12 +60,18 @@ export default function UserSettingsTariff() {
                         <span className=""><BsCheckCircleFill className={css.iconTick}/></span>
                     </li>
                 </ul>
-                    <p className={css.period}>14 днів безкоштовно</p>
+                    <p className={`${css.period} ${css.periodTrial}`}>14 днів безкоштовно</p>
                     
-                    <button type="button" className={css.btnBuy}>Придбати</button>
+                    {isActive === 0 && (
+        <button type="button" className={ css.btnBuyIsActive}>
+            Придбати
+        </button>
+                    )}
+                    
             </div>
 
-            <div className={css.tariffCategory}>
+                <div className={`${css.tariffCategory} ${isActive === 1 ? css.tariffCategoryIsActive : ''}`}
+                    onClick={() => handleClickActive(1)}>
                 <p className={css.tariffName}>Basic</p>
                 <ul className={css.list}>
                     <li className={css.listItem}>
@@ -82,16 +95,30 @@ export default function UserSettingsTariff() {
                     <li className={css.listItem}>
                         <span className=""><BsFillXCircleFill className={css.iconCross}/></span>
                     </li>
-                </ul>
-                    <p className={css.period}>3 місяці</p>
+                    </ul>
+                    
+                    <div className={css.selectBox}>
+                    <select id="period" name="period" className={`${css.period} ${css.periodSelect}`} onClick={() => toggleDropdown(0)}>
+                        <option value='three'>3 місяці</option>
+                        <option value='nine'>9 місяців</option>
+                        <option value='year'>12 місяців</option>
+                        </select>
+                    <BsChevronDown className={`${css.arrowSelect} ${activeDropdown === 0 ? css.rotated : ''}`}  />
+                    </div>
+
                     <p className={css.price}>45$</p>
 
 
-                    <button type="button" className={css.btnBuy}>Придбати</button>
+                    {isActive === 1 && (
+        <button type="button" className={ css.btnBuyIsActive}>
+            Придбати
+        </button>
+                    )}
 
             </div>
 
-            <div className={css.tariffCategory}>
+                <div className={`${css.tariffCategory} ${isActive === 2 ? css.tariffCategoryIsActive : ''}`}
+                    onClick={() => handleClickActive(2)}>
                 <p className={css.tariffName}>Pro</p>
                 <ul className={css.list}>
                     <li className={css.listItem}>
@@ -115,14 +142,30 @@ export default function UserSettingsTariff() {
                     <li className={css.listItem}>
                         <span className=""><BsCheckCircleFill className={css.iconTick}/></span>
                     </li>
-                </ul>
-                    <p className={css.period}>3 місяці</p>
+                    </ul>
+                    
+                    <div className={css.selectBox}>
+                    <select id="period" name="period" className={`${css.period} ${css.periodSelect}`} onClick={() => toggleDropdown(1)}>
+                        <option value='three'>3 місяці</option>
+                        <option value='nine'>9 місяців</option>
+                        <option value='year'>12 місяців</option>
+                        </select>
+                    <BsChevronDown className={`${css.arrowSelect} ${activeDropdown === 1 ? css.rotated : ''}`} />
+                    </div>
+
                     <p className={css.price}>150$</p>
                     
-                    <button type="button" className={css.btnBuy}>Придбати</button>
+                     {isActive === 2 && (
+        <button type="button" className={ css.btnBuyIsActive}>
+            Придбати
+        </button>
+                    )}
             </div>
-             </div>
+            </div>
 
+            <div className={css.btnBox}>
+                <button type="button" className={css.btnCancel}>Відміна</button>
+            </div>
         </div>
     )
 }

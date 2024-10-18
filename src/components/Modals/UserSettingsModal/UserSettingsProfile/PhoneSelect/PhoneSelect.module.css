@@ -1,3 +1,106 @@
+
+.phoneInputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.codeButton {
+    width: 129px;
+    background-color: #4A4A4A;
+    /* border: 1px solid #4A4A4A; */
+    padding: 18px 20px;
+    cursor: pointer;
+    border-radius: 10px 0px 0px 10px;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    color: var(--Icon-Gray, #C7C7C7);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+}
+
+.phoneInput {
+    border-radius: 0px 10px 10px 0px;
+    border: 1px solid #4A4A4A;
+    padding: 18px 20px;
+    flex: 1;
+    background-color: #282828;
+    outline: none;
+
+    color: var(--Button-grey, #4A4A4A);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+}
+
+.phoneInput::placeholder{
+    color: var(--Button-grey, #4A4A4A);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #282828;
+    border: 1px solid #4A4A4A;
+    border-radius: 10px;
+    z-index: 10;
+    width: 100%;
+    
+}
+
+.countryOption {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+
+    &:hover {
+        background-color: #4A4A4A;
+        border-radius: 10px;
+    }
+}
+
+.btnArrowSelect {
+    width: 20px;
+    height: 20px;
+    fill: #C7C7C7;
+    pointer-events: none;
+}
+
+.rotated {
+    transform: rotate(180deg);
+}
+
+.icon{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-size: cover;
+display: flex;
+flex-shrink: 0;
+}
+
+
+
+
+
+
+
+
+
+
 /* 
 container {
     width: 420px;
