@@ -57,7 +57,6 @@ export default function UserSettingsProfile({ onClose }) {
 
 
     const initialValues = {
-        // photo: userPhoto,
         username: userName,
         phone: userPhone,
         country: "Ukraine",
@@ -75,15 +74,16 @@ export default function UserSettingsProfile({ onClose }) {
         }
     };
 
-     const handleFileChange = async (event, setFieldValue) => {
+     const handleFileChange = async (event) => {
         const file = event.currentTarget.files[0];
         if (file) {
-            setFieldValue("photo", URL.createObjectURL(file));
+           const  newAvatarUrl = URL.createObjectURL(file); // Створіть URL
+            setAvatar(newAvatarUrl); // Оновіть локальний стан
              try {
                  const response = await dispatch(updateUserAvatar(file)).unwrap();
                   console.log("Server response:", response);
-                 const newAvatarUrl = response.avatar_url;
-                 setAvatar(newAvatarUrl);
+                //  const newAvatarUrl = response.avatar_url;
+                //  setAvatar(newAvatarUrl);
                  
             // Отримання оновлених даних користувача
             dispatch(getUserData());
@@ -96,7 +96,7 @@ export default function UserSettingsProfile({ onClose }) {
                 },
             });
         } catch (error) {
-            console.error("Помилка при оновленні аватара:", error);
+            console.error("Помилка при оновленні аватара", error);
             toast.error("Не вдалося оновити аватар :(", {
                 position: "top-right",
                 duration: 5000,
@@ -110,7 +110,7 @@ export default function UserSettingsProfile({ onClose }) {
          
     };
 
-    console.log("Response from server:", updateUserAvatar);
+    
 
     const toggleDropdown = (index) => {
       setActiveDropdown(activeDropdown === index ? null : index);
@@ -171,7 +171,7 @@ export default function UserSettingsProfile({ onClose }) {
                             </div>
                             <input type='file' name='photo' className={css.photoField}
                                 ref={fileInputRef}
-                            onChange={(event) => handleFileChange(event, setFieldValue)}
+                            onChange={handleFileChange}
                             />
                             <button type="button" className={css.changePhotoBtn} onClick={handleChangePhoto}> <HiPlus className={css.btnPlus} />Змінити аватар</button>
                         </div>
