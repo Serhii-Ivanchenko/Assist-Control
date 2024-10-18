@@ -7,6 +7,13 @@
 
 }
 
+@media only screen and (min-width: 1920px) {
+    .tariffContainer {
+        width: 1056px;
+        padding: 40px 70px 45px 70px;
+    }
+}
+
 
 .title{
     color: var(--Color, #FFF);
