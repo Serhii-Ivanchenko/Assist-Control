@@ -6,10 +6,34 @@
 
   background-color: #1a1a1a;
   border: transparent;
-  border-radius: 5px;
+  border-radius: 6px;
   padding: 5px;
 
   position: relative;
+}
+
+.newStatus {
+  stroke: #246d4d;
+  border: 1px solid #ebd534;
+  color: #ebd534;
+}
+
+.repairStatus {
+  fill: #246d4d;
+  border: 1px solid #994ca5;
+  color: #994ca5;
+}
+
+.checkRepairStatus {
+  fill: #246d4d;
+  border: 1px solid #3956cc;
+  color: #3956cc;
+}
+
+.completeStatus {
+  fill: #246d4d;
+  border: 1px solid #246d4d;
+  color: #246d4d;
 }
 
 .imgContainer {
@@ -28,7 +52,6 @@
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 300;
-  font-variant-numeric: tabular-nums;
 }
 
 .carBrand {
@@ -50,22 +73,47 @@
   margin-top: 9px;
 }
 
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-left: auto;
+  align-items: flex-end;
+}
+
 .carStatus {
+  display: inline-flex;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+
+  border: transparent;
+
   display: inline-flex;
   align-items: flex-end;
   margin-bottom: 5px;
+  gap: 3px;
+}
 
-  color: #9e9e9e;
-  font-family: "Roboto", sans-serif;
-  font-size: 10px;
-  font-weight: 400;
+.newStatus .carStatus {
+  color: #ebd534;
+}
+
+.repairStatus .carStatus {
+  color: #994ca5;
+}
+
+.checkRepairStatus .carStatus {
+  color: #3956cc;
+}
+
+.completeStatus .carStatus {
+  color: #246d4d;
 }
 
 .carDetails {
-  display: inline-block;
-  position: absolute;
-  top: 8px;
-  right: 8px;
+  display: inline-flex;
 
   color: #fff;
   background-color: transparent;
@@ -76,6 +124,7 @@
 
   cursor: pointer;
   transition: font-weight 0.3s ease, color 0.3s ease;
+  text-decoration: underline;
 }
 
 .carDetails:hover {
@@ -87,7 +136,8 @@
   .wrapper {
     display: flex;
     width: 576px;
-    height: 112px;
+    height: 105px;
+    padding: 3px 5px;
 
     background-color: #1a1a1a;
 
@@ -98,26 +148,44 @@
 
   .imgContainer {
     display: flex;
-    width: 100px;
+    width: 94px;
+    height: 97px;
   }
 
   .carInfoContainer {
-    margin-top: 10px;
-    margin-bottom: 14px;
+    margin-top: 7px;
+    margin-bottom: 9px;
   }
 
   .carReg {
     font-size: 16px;
+    line-height: 1.1875em;
   }
 
   .carBrand {
     font-size: 16px;
+    margin-top: 1px;
   }
 
   .carTimeStamp {
-    position: absolute;
-    bottom: 14px;
     margin-top: 24px;
+  }
+
+  .carStatus {
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    text-transform: uppercase;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.15em;
+
+    border: transparent;
+    margin-bottom: 5px;
   }
 
   .carDetails {
@@ -126,13 +194,10 @@
     top: 11px;
     right: 22px;
 
+    color: #fff;
+    text-align: right;
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
-  }
-
-  .carStatus {
-    display: inline-block;
-    position: absolute;
-    bottom: 12px;
-    right: 14px;
-  }
-}
+    font-weight: 300;
+    text-decoration: underline;
+  }}

@@ -108,3 +108,18 @@
 .datewrapper:last-child {
     margin-right: 0;
 }
+
+.leftdatepickerdropdown {
+    margin-left: 30px;
+}
+
+.datepickerdropdown {
+    margin-left: -40px;
+   
+}
+
+@media only screen and (min-width: 1920px) {
+    .datepickerdropdown {
+            margin-left: 0px;
+    
+        }}

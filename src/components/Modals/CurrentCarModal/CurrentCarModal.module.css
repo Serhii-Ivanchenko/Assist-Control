@@ -1,43 +1,15 @@
-/* .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-
-  width: 100%;
-  height: 100%;
-
-  background-color: rgba(0, 0, 0, 0.7);
-} */
-
 .modal {
-  /* position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1001; */
-
   display: flex;
   text-align: center;
+  justify-content: center;
 
-  width: 300px;
+  width: 500px;
   height: auto;
 
-  padding: 14px 10px;
-  border-radius: 5px;
+  padding: 40px 0;
+  border-radius: 6px;
 
   background-color: #202020;
-}
-
-.eclipseFrame {
-  position: absolute;
-  top: -40px;
-  left: -57px;
-  z-index: -1;
-
-  width: 169px;
-  height: 169px;
-  pointer-events: none;
 }
 
 .closeBtn {
@@ -54,24 +26,16 @@
   cursor: pointer;
 }
 
-.icon {
-  fill: #a4a4a4;
-
-  height: 20px;
-  width: 20px;
-}
-
 .currentCarContainer {
   display: flex;
-  margin-bottom: 14px;
+  margin-left: 39px;
+  margin-bottom: 50px;
 }
 
 .currentCarImg {
-  width: 106px;
-  height: 86px;
-  border-radius: 5px;
+  width: 146px;
+  height: 120px;
   object-fit: cover;
-  transform: translate(-24px, -8px);
 }
 
 .nameContainer {
@@ -79,7 +43,7 @@
   flex-direction: column;
   align-items: flex-start;
 
-  margin-left: -15px;
+  margin-left: 34px;
 }
 
 .carBrand {
@@ -87,17 +51,11 @@
 
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-
-  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 .carRegContainer {
-  position: absolute;
-  top: 65px;
-  left: 54px;
-
   display: flex;
   align-items: center;
   gap: 6px;
@@ -108,6 +66,8 @@
   border-radius: 5px;
   border: 3px solid #000;
   background-color: #d9d9d9;
+
+  margin-top: 14px;
 }
 
 .carRegCountry {
@@ -151,12 +111,11 @@
 }
 
 .carStatus {
-  color: #fff;
-
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
-  font-size: 13px;
-  font-weight: 300;
+  font-size: 20px;
+  font-weight: 600;
+  border: transparent;
 }
 
 .carReg {
@@ -172,18 +131,15 @@
   color: #fff;
 
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  font-size: 20px;
+  font-weight: 300;
 
   padding-top: 10px;
-  margin-bottom: 12px;
-  margin-left: 25px;
+  margin-bottom: 50px;
 }
 
 .vinNumber {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 300;
 
   text-transform: uppercase;
@@ -192,26 +148,27 @@
 }
 
 .serviceInfo {
-  width: 280px;
-  height: 30px;
+  width: 500px;
+  height: 53px;
+  background-color: #264346;
+  text-align: center;
+  padding: 16px 0;
+  margin-bottom: 50px;
+}
 
-  padding: 7px 25px;
-  margin-bottom: 12px;
-
-  border-radius: 5px;
-
-  background: linear-gradient(90deg,
-      rgba(57, 86, 204, 0.01) 0%,
-      #3956cc 50%,
-      rgba(57, 86, 204, 0.01) 100%);
+.icon {
+  margin-right: 16px;
+  fill: #d5acf3;
 }
 
 .serviceTime {
+  display: inline-flex;
+  align-items: center;
   color: #fff;
 
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 300;
 }
 
@@ -227,7 +184,7 @@
 .radioGroup {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 30px;
   justify-items: start;
 
   padding: 0 35px;
@@ -242,28 +199,59 @@
 }
 
 .radioGroup label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-
-  color: #fff;
 
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
-  font-size: 11px;
-  font-weight: 300;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.iconRadio {
+  width: 16px;
+  fill: #246d4d;
+  margin-right: 7px;
+}
+
+.radioNew {
+  color: #3956cc;
+}
+
+.radioRepair {
+  color: #994ca5;
+}
+
+.radioCheckRepair {
+  color: #db8120;
+}
+
+.radioComplete {
+  color: #246d4d;
 }
 
 .radioGroup input[type="radio"] {
-  margin-right: 5px;
+  margin-right: 10px;
+}
+
+.iconSubmit {
+  width: 16px;
+  height: auto;
 }
 
 .submitBtn {
-  display: inline-block;
-  width: 150px;
-  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+
+  width: auto;
+  height: auto;
 
   border: transparent;
-  border-radius: 5px;
+  border-radius: 6px;
   background-color: #3956cc;
 
   color: #fff;
