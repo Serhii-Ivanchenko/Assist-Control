@@ -12,10 +12,16 @@
   background-color: #202020;
 }
 
+.iconClose {
+  width: 20px;
+  height: 20px;
+  fill: #4a4a4a;
+}
+
 .closeBtn {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 20px;
+  right: 20px;
 
   display: inline-block;
   width: 20px;
@@ -53,6 +59,8 @@
   font-family: "Roboto", sans-serif;
   font-size: 24px;
   font-weight: 600;
+
+  margin-bottom: 6px;
 }
 
 .carRegContainer {
@@ -196,6 +204,12 @@
   padding: 0;
 
   width: auto;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .radioGroup label {
