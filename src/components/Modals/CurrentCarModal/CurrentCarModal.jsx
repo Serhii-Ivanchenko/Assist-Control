@@ -17,7 +17,7 @@ import { HiOutlineHashtag } from "react-icons/hi";
 import { FaCircleCheck } from "react-icons/fa6";
 import { MdOutlineTimer } from "react-icons/md";
 import { BsUiChecksGrid } from "react-icons/bs";
-import { BsEyeFill } from "react-icons/bs";
+import { BsEyeFill, BsCheckCircleFill } from "react-icons/bs";
 import { IoMdCheckmark } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 
@@ -27,23 +27,46 @@ function CurrentCarModal({ onClose, car, status }) {
   const dispatch = useDispatch();
   const [selectedStatus, setSelectedStatus] = useState(status);
 
-  let icon;
-  switch (car.status) {
-    case "new":
-      icon = <HiOutlineHashtag stroke="#246D4D" fill="#246D4D" />;
-      break;
-    case "repair":
-      icon = <BsWrench stroke="#246D4D" fill="#246D4D" />;
-      break;
-    case "check_repair":
-      icon = <BsCalendar2CheckFill stroke="#246D4D" fill="#246D4D" />;
-      break;
-    case "complete":
-      icon = <FaCircleCheck stroke="#246D4D" fill="#246D4D" />;
-      break;
-    default:
-      icon = null;
-  }
+  // let icon;
+  // switch (car.status) {
+  //   case "new":
+  //     icon = <HiOutlineHashtag stroke="#246D4D" fill="#246D4D" />;
+  //     break;
+  //   case "repair":
+  //     icon = <BsWrench stroke="#246D4D" fill="#246D4D" />;
+  //     break;
+  //   // case "check_repair":
+  //   //   icon = <BsCalendar2CheckFill stroke="#246D4D" fill="#246D4D" />;
+  //   //   break;
+  //   case "complete":
+  //     icon = <BsCheckCircleFill stroke="#246D4D" fill="#246D4D" />;
+  //     break;
+  //   case "diagnostic":
+  //     return <BsUiChecksGrid stroke="#246D4D" fill="#246D4D" />;
+  //   case "view_repair":
+  //     return <BsEyeFill stroke="#246D4D" fill="#246D4D" />;
+  //   default:
+  //     icon = null;
+  // }
+  // Функція для отримання іконки відповідно до статусу
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case "new":
+        return <HiOutlineHashtag stroke="#246D4D" fill="#246D4D" />;
+      case "repair":
+        return <BsWrench stroke="#246D4D" fill="#246D4D" />;
+      case "complete":
+        return <BsCheckCircleFill stroke="#246D4D" fill="#246D4D" />;
+      case "diagnostic":
+        return <BsUiChecksGrid stroke="#246D4D" fill="#246D4D" />;
+      case "view_repair":
+        return <BsEyeFill stroke="#246D4D" fill="#246D4D" />;
+      default:
+        return null;
+    }
+  };
+
+  const icon = getStatusIcon(selectedStatus); // Динамічне оновлення іконки
   const { label, className } = getStatusDetails(selectedStatus);
 
   const handleStatusChange = (e) => {
@@ -155,7 +178,7 @@ function CurrentCarModal({ onClose, car, status }) {
               className={styles.radioInput}
             />
             <CustomRadioBtn isChecked={selectedStatus === "complete"} />
-            {<FaCircleCheck className={styles.iconRadio} />}
+            {<BsCheckCircleFill className={styles.iconRadio} />}
             Завершено
           </label>
         </div>

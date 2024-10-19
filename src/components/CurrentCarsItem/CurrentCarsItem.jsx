@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { HiOutlineHashtag } from "react-icons/hi";
 import { BsWrench } from "react-icons/bs";
 import { FaCircleCheck } from "react-icons/fa6";
-import { BsEyeFill } from "react-icons/bs";
+import { BsEyeFill, BsCheckCircleFill } from "react-icons/bs";
 import { BsUiChecksGrid } from "react-icons/bs";
 
 import { getCurrentCars } from "../../redux/cars/operations.js";
@@ -46,9 +46,9 @@ export default function CurrentCarsItem() {
     setSelectedCar(null);
   };
 
-  // const handleStatusChange = () => {
-  //   dispatch(getCurrentCars());
-  // };
+  const handleStatusChange = () => {
+    dispatch(getCurrentCars());
+  };
 
   // Мемоізація іконки в залежності від статусу
   const getStatusIcon = useMemo(() => {
@@ -61,7 +61,7 @@ export default function CurrentCarsItem() {
         // case "check_repair":
         //   return <BsCalendar2CheckFill stroke="#246D4D" fill="#246D4D" />;
         case "complete":
-          return <FaCircleCheck stroke="#246D4D" fill="#246D4D" />;
+          return <BsCheckCircleFill stroke="#246D4D" fill="#246D4D" />;
         case "diagnostic":
           return <BsUiChecksGrid stroke="#246D4D" fill="#246D4D" />;
         case "view_repair":
@@ -126,7 +126,7 @@ export default function CurrentCarsItem() {
             car={selectedCar}
             status={selectedCar?.status}
             onClose={closeModal}
-            // onStatusChange={handleStatusChange}
+            onStatusChange={handleStatusChange}
           />
         </Modal>
       )}
