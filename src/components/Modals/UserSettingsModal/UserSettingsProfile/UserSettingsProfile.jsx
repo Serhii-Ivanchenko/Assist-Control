@@ -5,13 +5,14 @@ import * as Yup from "yup";
 import { BsSdCardFill } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
 import { useRef, useState, useEffect } from "react";
-import { BsChevronDown } from "react-icons/bs";
+import { BsFillCaretDownFill } from "react-icons/bs";
 import PhoneSelect from "./PhoneSelect/PhoneSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../../../redux/auth/selectors";
 import toast from "react-hot-toast";
 import { updateUserAvatar, updateUserData } from "../../../../redux/auth/operations";
 import { getUserData } from "../../../../redux/auth/operations";
+
  
 
 
@@ -69,6 +70,10 @@ export default function UserSettingsProfile({ onClose }) {
         index: "", 
     }
 
+    const [phone, setPhone] = useState(initialValues.phone);
+
+
+
     const handleChangePhoto = () => {      
 
         if (fileInputRef.current) {
@@ -77,26 +82,14 @@ export default function UserSettingsProfile({ onClose }) {
     };
 
     const handleFileChange = async (event) => {
-         
-    //      const newAvatar = e.target.files[0];
-    // setAvatar(URL.createObjectURL(newAvatar));
-
-    // dispatch(updateUserAvatar(newAvatar))
-    //   .unwrap()
-    //   .then(() => {
-    //     toast.success("Avatar updated!");
-    //   })
-    //   .catch(() => {
-    //     // setAvatar(photo);
-    //     toast.error("Avatar wasn`t updated,please try again");
-    //   });
-        const file = event.currentTarget.files[0];
+        
+    const file = event.currentTarget.files[0];
         if (file) {
-           const  newAvatarUrl = URL.createObjectURL(file); // Створіть URL
-            // setAvatar(newAvatarUrl); // Оновіть локальний стан
+           const  newAvatarUrl = URL.createObjectURL(file); 
+            setAvatar(newAvatarUrl); 
              try {
                  const response = await dispatch(updateUserAvatar(file)).unwrap();
-                 setAvatar(userPhoto)
+                 console.log(response);
                  dispatch(getUserData());
             //       if (response.avatar_url) {
             //     setAvatar(response.avatar_url); // Update with the URL from the server response
@@ -146,6 +139,7 @@ export default function UserSettingsProfile({ onClose }) {
     };
 
 
+
     const handleSubmit = async (values, actions) => {
         console.log(values);
         
@@ -153,11 +147,35 @@ export default function UserSettingsProfile({ onClose }) {
 
   if (values.username !== user.name) {
     dataToUpdate.name = values.username;
-  }
+        }
 
-  if (values.country !== 'Ukraine') {
-    dataToUpdate.country = values.country;
-  }
+//   if (values.country !== 'Ukraine') {
+//     dataToUpdate.country = values.country;
+//         }
+        
+        if (values.phone !== user.phone_number) {
+    dataToUpdate.phone_number = values.phone;
+        }
+        
+    //     if (values.adress !== user.adress) {
+    // dataToUpdate.adress = values.adress;
+    //     }
+
+        if (values.section !== user.first_page) {
+    dataToUpdate.first_page = values.section;
+        }
+
+        if (values.timeZone !== user.timeZone) {
+    dataToUpdate.timeZone = values.timeZone;
+        }
+        
+    //     if (values.city !== user.city) {
+    // dataToUpdate.city = values.city;
+    //     }
+        
+    //     if (values.index !== user.index) {
+    // d ataToUpdate.index = values.index;}
+ 
 
   // Якщо немає змін, не відправляємо запит на сервер
   if (Object.keys(dataToUpdate).length === 0) {
@@ -194,11 +212,15 @@ export default function UserSettingsProfile({ onClose }) {
 
     return (
         <div className={css.contentBox}>
+            
+            
+            
+
             <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validation}>
                     <Form className={css.formBox}>
 
                         <div className={css.addPhotoBox} >
-                            <div className={css.photoBox}>
+                        <div className={css.photoBox}>
                                 <img src={avatar} alt="User's avatar" className={css.photo} />
                             </div>
                             <input type='file' name='photo' className={css.photoField}
@@ -207,8 +229,7 @@ export default function UserSettingsProfile({ onClose }) {
                             />
                             <button type="button" className={css.changePhotoBtn} onClick={handleChangePhoto}> <HiPlus className={css.btnPlus} />Змінити аватар</button>
                         </div>
-                
-                    
+                  
 
                         <div className={css.inputBox}>
                             <label htmlFor={nameFieldId} className={css.inputLable}>ПІБ</label>
@@ -220,7 +241,7 @@ export default function UserSettingsProfile({ onClose }) {
                             <div className={css.firstColumn}>
                                 <div className={css.inputBox}>
                                     <label htmlFor={phoneFieldId} className={css.inputLable}>Телефон</label>
-                                    <Field type='tel' name='phone' id={phoneFieldId} className={css.input} component={PhoneSelect} placeholder="Введіть свій номер телефону..." />
+                                    <Field type='tel' name='phone' id={phoneFieldId} className={css.input} value={phone} onChange={(value) => setPhone(value)} component={PhoneSelect} placeholder="Введіть свій номер телефону..." />
                                     <ErrorMessage name="phone" component="span" className={css.errorMessage} />
                                 </div>
 
@@ -230,7 +251,7 @@ export default function UserSettingsProfile({ onClose }) {
                                         <option value="Ukraine">Україна</option>
                                         <option value="UK">The UK</option>
                                     </Field>
-                                    <BsChevronDown className={`${css.btnArrowSelect} ${activeDropdown === 0 ? css.rotated : ''}`} />
+                                    <BsFillCaretDownFill  className={`${css.btnArrowSelect} ${activeDropdown === 0 ? css.rotated : ''}`} />
                                 </div>
                     
                                 <div className={css.inputBox}>
@@ -248,7 +269,7 @@ export default function UserSettingsProfile({ onClose }) {
                                         <option value="carReport">Звіт по авто</option>
                                         <option value="Settings">Налаштування</option>
                                     </Field>
-                                    <BsChevronDown className={`${css.btnArrowSelect} ${activeDropdown === 1 ? css.rotated : ''}`} />
+                                    <BsFillCaretDownFill  className={`${css.btnArrowSelect} ${activeDropdown === 1 ? css.rotated : ''}`} />
                                 </div>
                             
                             </div>
@@ -262,7 +283,7 @@ export default function UserSettingsProfile({ onClose }) {
                                         <option value="kyiv">(UTC +03:00) Київ</option>
                                         <option value="london">(GTM +01:00) London</option>
                                     </Field>
-                                    <BsChevronDown className={`${css.btnArrowSelect} ${activeDropdown === 2 ? css.rotated : ''}`} />
+                                    <BsFillCaretDownFill  className={`${css.btnArrowSelect} ${activeDropdown === 2 ? css.rotated : ''}`} />
                                 </div>
 
                                 <div className={css.inputBox}>

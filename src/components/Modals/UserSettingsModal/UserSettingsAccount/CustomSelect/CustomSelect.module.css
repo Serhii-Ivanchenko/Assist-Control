@@ -10,10 +10,10 @@
     border-radius: 10px;
     border: 1px solid #4A4A4A;
 
-    background-color: #282828;
+    background-color: #2D3038;
     outline: none;
 
-    color: #C7C7C7;
+    color: #D8E1FF;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -47,7 +47,7 @@
     right: 0;
     border: 1px solid #302F2F;
     border-radius: 5px;
-    background-color: #282828;
+    background-color: #2D3038;
     z-index: 1000;
 
     font-size: 12px;

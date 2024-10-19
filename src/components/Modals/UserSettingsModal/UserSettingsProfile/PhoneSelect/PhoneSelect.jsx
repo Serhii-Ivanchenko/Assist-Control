@@ -1,18 +1,23 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import css from "./PhoneSelect.module.css"
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+// import { useSelector } from 'react-redux';
+// import { selectUser } from '../../../../../redux/auth/selectors';
 
 
 
-export default function PhoneSelect() {
-    const [phone, setPhone] = useState('');
+
+export default function PhoneSelect({ value, onChange }) {
+    
+    // const user = useSelector(selectUser)
+
 
     return (
        <PhoneInput
             country={'ua'}
-            value={phone}
-            onChange={(value) => setPhone(value)}
+            value={value}
+            onChange={onChange}
             placeholder="1234567"
             containerClass={css.container}
             buttonClass={css.button}
@@ -31,15 +36,16 @@ export default function PhoneSelect() {
             buttonStyle={{
                 display: 'flex',
                 alignItems: 'center',
-                backgroundColor: '#282828',
+                backgroundColor: '#242D43',
                 borderColor: '#4A4A4A',
                 borderRadius: '10px 0 0 10px',
                 paddingLeft: '10px',
                 paddingRight: '10px',
+                // width: '100px',
             }}
             inputStyle={{
-                backgroundColor: '#282828',
-                color: '#fff',
+                backgroundColor: '#2D3038',
+                color: '#D8E1FF',
                 borderColor: '#4A4A4A',
                 borderLeft: 'none',
                 borderRadius: '10px',
