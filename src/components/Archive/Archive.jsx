@@ -3,6 +3,7 @@ import css from "./Archive.module.css";
 import Modal from "../Modals/Modal/Modal.jsx";
 import ArchiveModal from "../Modals/ArchiveModal/ArchiveModal.jsx";
 import { BsArchive } from "react-icons/bs";
+import PaymentTopUpAccountModal from "../Modals/PaymentTopUpAccountModal/PaymentTopUpAccountModal.jsx";
 
 export default function Archive() {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function Archive() {
       </button>
       {modalIsOpen && (
         <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-          <ArchiveModal onClose={handleModalClose} />
+          <PaymentTopUpAccountModal onClose={handleModalClose} />
         </Modal>
       )}
       <span className={css.tooltipContent}>Архів</span>
