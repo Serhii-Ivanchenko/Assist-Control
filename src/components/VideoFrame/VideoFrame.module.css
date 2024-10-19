@@ -8,7 +8,7 @@
   align-items: center;
   text-align: center;
 }
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .camera {
     height: 341px;
     margin-bottom: 10px;
@@ -20,13 +20,13 @@
   width: 386px;
   height: 270px;
   padding: 15px 20px 0 20px;
-  background: #1a1a1a;
+  background: #23252C;
 }
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .cameraListCont {
     width: 576px;
     height: 405px;
-    padding: 22px 29px 0 29px;
+    padding: 21px 21px 0 21px;
   }
 }
 .cameraList {
@@ -44,6 +44,9 @@
 
 .arrowNext,
 .arrowPrev {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
   font-size: 0;
   line-height: 0;
@@ -57,14 +60,15 @@
   background: 0 0;
   position: absolute;
   display: block;
-  padding: 0;
+  padding: 2px;
+  border-radius: 32px;
+  background: rgba(81, 85, 98, 0.25);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  transition: background 200ms ease-in-out;
 }
-@media only screen and (min-width: 1920px) {
-  .arrowNext,
-  .arrowPrev {
-    width: 46px;
-    height: 46px;
-  }
+.arrowNext:hover,
+.arrowPrev:hover {
+  background: #515562;
 }
 .arrowPrev {
   left: 10px;
@@ -93,7 +97,7 @@
   padding: 0;
   cursor: pointer;
 }
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   :global(.dots li) {
     margin: 0 8px;
   }
@@ -112,7 +116,7 @@
   outline: 0;
   border: none;
 }
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   :global(.dots li button) {
     width: 17px;
     height: 15px;
