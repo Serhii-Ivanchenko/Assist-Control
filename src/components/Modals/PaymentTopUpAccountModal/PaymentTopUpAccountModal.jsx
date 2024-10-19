@@ -14,8 +14,9 @@ import logoMono from "../../../assets/images/PaymentIcons/plata-by-mono-24 1.png
 import logoMono2x from "../../../assets/images/PaymentIcons/plata-by-mono-24 2x.png";
 import logoCrypto from "../../../assets/images/PaymentIcons/logo-crypto 1.png";
 import logoCrypto2x from "../../../assets/images/PaymentIcons/logo-crypto 2x.png";
+import { BsXLg } from "react-icons/bs";
 
-export default function PaymentTopUpAccountModal() {
+export default function PaymentTopUpAccountModal({ onClose }) {
   const handleSubmit = (values, actions) => {
     console.log(values);
     actions.resetForm();
@@ -23,12 +24,7 @@ export default function PaymentTopUpAccountModal() {
 
   return (
     <div className={css.paymentModal}>
-      <button type="button" className={css.closeBtn}>
-        <IoCloseSharp
-          className={css.closeIcon}
-          // onClick={onClose}
-        />
-      </button>
+        <BsXLg className={css.closeIcon} onClick={onClose} />
       <h3 className={css.paymentModalHeader}>Поповнити рахунок</h3>
       <p className={css.paymentModalText}>
         Для поповнення рахунку в сервісі AutoAssist вкажіть суму до оплати.
