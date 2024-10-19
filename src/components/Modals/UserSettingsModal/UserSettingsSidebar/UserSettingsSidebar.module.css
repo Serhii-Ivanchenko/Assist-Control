@@ -162,6 +162,8 @@ padding-left: 29px;
         font-weight: 400;
         line-height: normal;
         font-variant: small-caps;
+
+        margin-bottom: 3px;
 }
 
 .amount{
@@ -176,6 +178,9 @@ padding-left: 29px;
         display: flex;
         align-items: center;
         gap: 10px;
+
+        background: transparent;
+        border: none;
 }
 
 

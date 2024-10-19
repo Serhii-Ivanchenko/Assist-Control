@@ -76,7 +76,7 @@
     position: relative;
     display: flex;
     flex-direction: column; 
-    margin-bottom: 70px;
+    margin-bottom: 48px;
 
 }
 
@@ -113,7 +113,7 @@
 .passwordBox{
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
+    margin-bottom: 24px;
 }
 
 .passwortChBtn {
@@ -157,7 +157,7 @@
 .companyBox{
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
+    margin-bottom: 24px;
     position: relative;
 }
 
@@ -239,8 +239,11 @@
 .languageBox{
     display: flex;
     flex-direction: column;
-    margin-bottom: 118px;
+    /* margin-bottom: 118px; */
+    margin-bottom: 24px;
 }
+
+
 
 @media only screen and (max-width: 767.9px){
     .languageBox{
@@ -248,7 +251,11 @@
     }
 }
 
-
+.currencyBox{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 80px;
+}
 
 .btnBox {
     display: flex;

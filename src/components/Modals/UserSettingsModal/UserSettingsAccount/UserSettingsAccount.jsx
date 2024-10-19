@@ -15,6 +15,7 @@ import { getUserData } from "../../../../redux/auth/operations";
 import Modal from "../../Modal/Modal";
 import ChangePasswordModal from "./ChangePasswordModal/ChangePasswordModal";
 import toast from "react-hot-toast";
+import CurrencySelect from "./CurrencySelect/CurrencySelect.jsx";
 // import { useEffect } from "react";
 
 
@@ -53,7 +54,8 @@ export default function UserSettingsAccount({onClose}) {
   
   const initialValues = {
   company: userCompany,
-  languages:'ukr',
+  languages: 'ukr',
+  currency: 'UAH',
 }
 
 
@@ -106,6 +108,8 @@ export default function UserSettingsAccount({onClose}) {
 
   const companyFieldId = useId();
   const languagesFieldId = useId();
+  const currencyFieldId = useId();
+
 
 
 
@@ -152,6 +156,10 @@ export default function UserSettingsAccount({onClose}) {
         </div>
           {/* <ErrorMessage name="languages" component="span" className={css.errorMessage} /> */}
 
+        <div className={css.currencyBox}>
+        <label htmlFor={currencyFieldId} className={css.titles}>Валюта</label>
+          <Field name="currency" id={currencyFieldId} component={CurrencySelect} />
+        </div>
 
       <div className={css.btnBox}>
         <button type="button" className={css.cancelBtn} onClick={onClose}>Відміна</button>

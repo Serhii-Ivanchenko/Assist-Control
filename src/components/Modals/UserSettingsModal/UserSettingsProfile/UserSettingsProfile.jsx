@@ -4,7 +4,7 @@ import { useId } from "react";
 import * as Yup from "yup";
 import { BsSdCardFill } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import PhoneSelect from "./PhoneSelect/PhoneSelect";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import { selectUser } from "../../../../redux/auth/selectors";
 import toast from "react-hot-toast";
 import { updateUserAvatar, updateUserData } from "../../../../redux/auth/operations";
 import { getUserData } from "../../../../redux/auth/operations";
+ 
 
 
 
@@ -28,6 +29,8 @@ const Validation = Yup.object().shape({
 export default function UserSettingsProfile({ onClose }) {
     const fileInputRef = useRef(null);
     const [activeDropdown, setActiveDropdown] = useState(null);
+   
+
     
 
     const dispatch = useDispatch();
@@ -40,9 +43,8 @@ export default function UserSettingsProfile({ onClose }) {
     const userPhoto = user.avatar_url || "";
 
 
-    const [avatar, setAvatar] = useState(userPhoto)
-    // console.log("Current avatar URL:", avatar);
-
+     const [avatar, setAvatar] = useState(userPhoto)
+    console.log("Current avatar URL:", avatar);
 
 
     const nameFieldId = useId();
@@ -74,19 +76,37 @@ export default function UserSettingsProfile({ onClose }) {
         }
     };
 
-     const handleFileChange = async (event) => {
+    const handleFileChange = async (event) => {
+         
+    //      const newAvatar = e.target.files[0];
+    // setAvatar(URL.createObjectURL(newAvatar));
+
+    // dispatch(updateUserAvatar(newAvatar))
+    //   .unwrap()
+    //   .then(() => {
+    //     toast.success("Avatar updated!");
+    //   })
+    //   .catch(() => {
+    //     // setAvatar(photo);
+    //     toast.error("Avatar wasn`t updated,please try again");
+    //   });
         const file = event.currentTarget.files[0];
         if (file) {
            const  newAvatarUrl = URL.createObjectURL(file); // Створіть URL
-            setAvatar(newAvatarUrl); // Оновіть локальний стан
+            // setAvatar(newAvatarUrl); // Оновіть локальний стан
              try {
                  const response = await dispatch(updateUserAvatar(file)).unwrap();
+                 setAvatar(userPhoto)
+                 dispatch(getUserData());
+            //       if (response.avatar_url) {
+            //     setAvatar(response.avatar_url); // Update with the URL from the server response
+            // }
                   console.log("Server response:", response);
                 //  const newAvatarUrl = response.avatar_url;
                 //  setAvatar(newAvatarUrl);
                  
             // Отримання оновлених даних користувача
-            dispatch(getUserData());
+            
             toast.success("Аватар успішно оновлено :)", {
                 position: "top-right",
                 duration: 5000,
@@ -110,17 +130,29 @@ export default function UserSettingsProfile({ onClose }) {
          
     };
 
+    useEffect(() => {
+    // Clean up the previous avatar URL when it changes or the component unmounts
+    return () => {
+        if (avatar) {
+            URL.revokeObjectURL(avatar);
+        }
+    };
+}, [avatar]);
+
     
 
     const toggleDropdown = (index) => {
       setActiveDropdown(activeDropdown === index ? null : index);
     };
 
+
     const handleSubmit = async (values, actions) => {
+        console.log(values);
+        
     const dataToUpdate = {};
 
-  if (values.name !== user.name) {
-    dataToUpdate.name = values.name;
+  if (values.username !== user.name) {
+    dataToUpdate.name = values.username;
   }
 
   if (values.country !== 'Ukraine') {
@@ -136,7 +168,8 @@ export default function UserSettingsProfile({ onClose }) {
     
     console.log("Data to update:", dataToUpdate);
 
-    try {
+        try {
+        console.log("Data to update before dispatch:", dataToUpdate);
       await dispatch(updateUserData(dataToUpdate)).unwrap();
       actions.resetForm({ values });
       dispatch(getUserData());
@@ -162,7 +195,6 @@ export default function UserSettingsProfile({ onClose }) {
     return (
         <div className={css.contentBox}>
             <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validation}>
-                {({ setFieldValue }) => (
                     <Form className={css.formBox}>
 
                         <div className={css.addPhotoBox} >
@@ -256,7 +288,6 @@ export default function UserSettingsProfile({ onClose }) {
                     
                     
                     </Form>
-                )}
             </Formik>
 
         </div>
