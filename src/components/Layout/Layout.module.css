@@ -14,10 +14,10 @@
   .appContainer {
     width: 1850px;
       /* height: 100vh; */
-      height: 1055px;
-      padding-left: 15px;
-      padding-right: 15px;
-      /* padding-bottom: 23px; */
-      padding-top: 20px;
+      height: 1080px;
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-bottom: 34px;
+      padding-top: 15px;
   }
 }
