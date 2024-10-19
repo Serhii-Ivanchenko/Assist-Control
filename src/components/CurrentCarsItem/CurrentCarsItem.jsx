@@ -46,9 +46,9 @@ export default function CurrentCarsItem() {
     setSelectedCar(null);
   };
 
-  const handleStatusChange = () => {
-    dispatch(getCurrentCars());
-  };
+  // const handleStatusChange = () => {
+  //   dispatch(getCurrentCars());
+  // };
 
   // Мемоізація іконки в залежності від статусу
   const getStatusIcon = useMemo(() => {
@@ -126,7 +126,7 @@ export default function CurrentCarsItem() {
             car={selectedCar}
             status={selectedCar?.status}
             onClose={closeModal}
-            onStatusChange={handleStatusChange}
+            // onStatusChange={handleStatusChange}
           />
         </Modal>
       )}
