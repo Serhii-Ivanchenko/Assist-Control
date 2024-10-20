@@ -7,9 +7,16 @@
 
 }
 
+@media only screen and (min-width: 1920px) {
+    .tariffContainer {
+        width: 1056px;
+        padding: 40px 70px 45px 70px;
+    }
+}
+
 
 .title{
-    color: var(--Color, #FFF);
+    color:  #FFF;
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -41,7 +48,7 @@ justify-content: center;
 }
 
 .nameListItem:nth-child(odd){
-background-color: var(--Calendar-fill, #302F2F);
+background-color:  #2D3038;
 }
 
 .listItem{
@@ -55,7 +62,7 @@ justify-content: center;
 }
 
 .listItem:nth-child(odd){
-background-color: var(--Calendar-fill, #302F2F);
+background-color:  #2D3038;
 }
 
 .tariffCategory{
@@ -78,11 +85,11 @@ background-color: var(--Calendar-fill, #302F2F);
         align-items: center;
     
         border-radius: 6px;
-        border: 2px solid var(--Blue, #3956CC);
+        border: 2px solid #3956CC;
 }
 
 .tariffName{
-    color: var(--Color, #FFF);
+    color: #FFF;
         font-size: 20px;
         font-style: normal;
         font-weight: 600;
@@ -110,13 +117,13 @@ background-color: var(--Calendar-fill, #302F2F);
     padding: 12px 16px;
 
     border-radius: 6px;
-    border: 1px solid var(--Button-grey, #4A4A4A);
+    border: 1px solid #4A4A4A;
 
-    background-color: #202020;
+    background-color: #23252C;
 
     /* margin-top: 10px; */
 
-    color: var(--White, var(--Color, ));
+    color: #FFF;
         font-variant-numeric: lining-nums proportional-nums;
         font-size: 14px;
         font-style: normal;
@@ -140,7 +147,7 @@ background-color: var(--Calendar-fill, #302F2F);
 }
 
 .price{
-    color: var(--White, var(--Color, #FFF));
+    color:  #FFF;
         font-variant-numeric: lining-nums proportional-nums;
         font-size: 20px;
         font-style: normal;
@@ -174,9 +181,9 @@ background-color: var(--Calendar-fill, #302F2F);
 
     border: none;
     border-radius: 6px;
-    background: var(--Blue, #3956CC);
+    background:  #3956CC;
 
-    color: var(--White, var(--Color, #FFF));
+    color: #FFF;
         font-variant-numeric: lining-nums proportional-nums;
         font-size: 16px;
         font-style: normal;
@@ -187,6 +194,14 @@ background-color: var(--Calendar-fill, #302F2F);
         /* margin-top: 19px; */
         margin-bottom: 30px;
         cursor: pointer;
+}
+
+.btnBuyIsActive:hover {
+    background-color: #1C2E78;
+}
+
+.btnBuyIsActive:active {
+    background-color: #171D35;
 }
 
 .selectBox{
@@ -222,10 +237,10 @@ justify-content: flex-end;
     align-items: center;
 
     border-radius: 8px;
-    border: 1px solid var(--Button-grey, #4A4A4A);
+    border: 1px solid  #4A4A4A;
     background-color: transparent;
 
-    color: var(--Color, #FFF);
+    color:  #FFF;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;

@@ -140,7 +140,7 @@
     display: flex;
     align-items: center;
 
-    background-color: #302F2F;
+    background-color: #2D3038;
     border: none;  
     border-right: solid 2px #3956CC;
 
@@ -155,17 +155,19 @@ padding-left: 29px;
 }
 
 .balance{
-    color: var(--Text-grey, #959595);
+    color:  #959595;
         font-variant-numeric: lining-nums proportional-nums;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         font-variant: small-caps;
+
+        margin-bottom: 3px;
 }
 
 .amount{
-    color: var(--White, #FFF);
+    color:#FFF;
         font-variant-numeric: lining-nums proportional-nums;
         font-size: 14px;
         font-style: normal;
@@ -176,6 +178,9 @@ padding-left: 29px;
         display: flex;
         align-items: center;
         gap: 10px;
+
+        background: transparent;
+        border: none;
 }
 
 
