@@ -81,7 +81,7 @@
 .buttomSectionWrapper {
   width: 626px;
   height: 422px;
-  padding: 20px;
+  padding: 32.5px 20px 20px 20px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -91,6 +91,7 @@
 
 .fieldWrapper {
   display: flex;
+  align-items: center;
 }
 
 .label {
@@ -133,7 +134,7 @@
 }
 
 .btnWrapper {
-  margin-top: 10px;
+  margin-top: 12.5px;
   display: flex;
   gap: 27px;
   align-items: center;
