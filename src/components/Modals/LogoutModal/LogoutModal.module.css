@@ -21,11 +21,11 @@
     height: 30px;
 
     border-radius: 5px;
-    background: var(--Blue, #3956CC);
+    background: var(--Blue, var(--blue));
 
     border: none;
 
-    color: #FFF;
+    color: var(--white);
     font-variant-numeric: lining-nums proportional-nums;
     font-family: "Roboto", sans-serif;
     font-size: 14px;
@@ -41,7 +41,7 @@
 }
 
 .closeBtn {
-    fill: #A4A4A4;
+    fill: var(--input-stroke);
     width: 18px;
     height: 18px;
     position: absolute;

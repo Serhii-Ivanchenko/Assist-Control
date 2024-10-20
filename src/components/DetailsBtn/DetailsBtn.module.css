@@ -1,12 +1,12 @@
 .btn {
   display: flex;
   justify-content: center;
-  align-items: center; 
-  width: 304px; 
-  height: 55px; 
+  align-items: center;
+  width: 304px;
+  height: 55px;
   border-radius: 5px;
-  background-color: #3956CC;
-  color: #FFF;
+  background-color: var(--blue);
+  color: var(--white);
   font-size: 14px;
   font-style: normal;
   font-weight: 300;
@@ -14,19 +14,19 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   padding: 0 10px;
 }
 
 .iconAvto {
-  margin-left: 8px; 
+  margin-left: 8px;
 }
 
 @media only screen and (min-width: 1850px) {
   .btn {
-    width: 454px; 
-    height: 70px; 
+    width: 454px;
+    height: 70px;
     border-radius: 6px;
     font-size: 16px;
     font-weight: 600;

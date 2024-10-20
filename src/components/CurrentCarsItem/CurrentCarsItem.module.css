@@ -13,31 +13,31 @@
 }
 
 .newStatus {
-  stroke: #246d4d;
-  border: 1px solid #ebd534;
-  color: #ebd534;
+  stroke: var(--light-gray);
+  border: 1px solid var(--status-new);
+  color: var(--status-new);
 }
 
 .repairStatus {
-  fill: #246d4d;
-  border: 1px solid #994ca5;
-  color: #994ca5;
+  fill: var(--light-gray);
+  border: 1px solid var(--status-repair);
+  color: var(--status-repair);
 }
 
 .checkRepairStatus {
-  fill: #246d4d;
-  border: 1px solid #3956cc;
-  color: #3956cc;
+  fill: var(--light-gray);
+  border: 1px solid var(--status-diag);
+  color: var(--status-diag);
 }
 
 .completeStatus {
-  fill: #246d4d;
-  border: 1px solid #246d4d;
-  color: #246d4d;
+  fill: var(--light-gray);
+  border: 1px solid var(--status-complete);
+  color: var(--status-complete);
 }
 
 .viewRepairStatus {
-  color: #db8120;
+  color: var(--orange);
 }
 
 .imgContainer {
@@ -52,14 +52,14 @@
 }
 
 .carReg {
-  color: #fff;
+  color: var(--white);
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 300;
 }
 
 .carBrand {
-  color: #9e9e9e;
+  color: var(--light-gray);
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -68,7 +68,7 @@
 }
 
 .carTimeStamp {
-  color: #fff;
+  color: var(--white);
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
   font-size: 15px;
@@ -101,25 +101,25 @@
 }
 
 .newStatus .carStatus {
-  color: #ebd534;
+  color: var(--status-new);
 }
 
 .repairStatus .carStatus {
-  color: #994ca5;
+  color: var(--status-repair);
 }
 
 .checkRepairStatus .carStatus {
-  color: #3956cc;
+  color: var(--status-diag);
 }
 
 .completeStatus .carStatus {
-  color: #246d4d;
+  color: var(--status-complete);
 }
 
 .carDetails {
   display: inline-flex;
 
-  color: #fff;
+  color: var(--white);
   background-color: transparent;
   border: none;
   font-family: "Roboto", sans-serif;
@@ -133,7 +133,7 @@
 
 .carDetails:hover {
   font-weight: 700;
-  color: #3956cc;
+  color: var(--blue);
 }
 
 @media screen and (min-width: 1850px) {
@@ -198,7 +198,7 @@
     top: 11px;
     right: 22px;
 
-    color: #fff;
+    color: var(--white);
     text-align: right;
     font-family: "Roboto", sans-serif;
     font-size: 16px;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {selectDate} from "../../redux/cars/selectors.js";
+import { selectDate } from "../../redux/cars/selectors.js";
 import {
   changeActualDate,
   changeActualPercent,
@@ -10,7 +10,6 @@ import isoWeek from "dayjs/plugin/isoWeek"; // для начала недели 
 import css from "./Calendar.module.css";
 
 dayjs.extend(isoWeek);
-
 
 export default function Calendar({ queryMonth, dataMonth }) {
   let currentDate = dayjs();
@@ -65,13 +64,13 @@ export default function Calendar({ queryMonth, dataMonth }) {
 
   const getButtonColor = (percent) => {
     if (percent >= 80) {
-      return "#DB8120";
+      return "var(--orange)";
     } else if (percent >= 50) {
-      return "#A97742";
+      return "var(--mid-orange)";
     } else if (percent > 0) {
-      return "#755D45";
+      return "var( --dark-orange)";
     } else {
-      return "#4A4A4A";
+      return "var(--input-stroke)";
     }
   };
 
@@ -108,7 +107,7 @@ export default function Calendar({ queryMonth, dataMonth }) {
             style={{
               backgroundColor: getButtonColor(item.percent),
               border: item.date.isSame(selectedDate, "day")
-                ? " 4px solid #fff"
+                ? " 4px solid var(--white)"
                 : "1px solid transparent",
             }}
             className={`calendar-day  
@@ -129,7 +128,7 @@ export default function Calendar({ queryMonth, dataMonth }) {
         
         .calendar-day {
           text-align: center;
-          color: #FFF;
+          color: var(--white);
           width: 36px;
           height: 18px;
           border-radius: 5px;
@@ -154,12 +153,12 @@ export default function Calendar({ queryMonth, dataMonth }) {
          }
 
         .other-month {
-          background-color: #4A4A4A;
-          color: #4A4A4A;
+          background-color: var(--input-stroke);
+          color: var(--input-stroke);
           cursor: default;
         }
         .today {
-          border: 4px solid #fff;
+          border: 4px solid var(--white);
         }
       `}</style>
     </div>

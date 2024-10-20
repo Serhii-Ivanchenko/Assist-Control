@@ -30,7 +30,7 @@ export default function ChangePasswordWithEmailForm() {
           position: "top-center",
           style: {
             background: "var(--bg-input)",
-            color: "#FFFFFF",
+            color: "var(--white)FFF",
           },
         }),
           navigate("/login");
@@ -42,7 +42,7 @@ export default function ChangePasswordWithEmailForm() {
           position: "top-center",
           style: {
             background: "var(--bg-input)",
-            color: "#FFFFFF",
+            color: "var(--white)FFF",
           },
         });
       });

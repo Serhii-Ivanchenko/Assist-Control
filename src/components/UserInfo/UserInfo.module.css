@@ -43,7 +43,7 @@
 }
 
 .userDetails {
-  color: #797979;
+  color: var(--text-gray);
   font-size: 11px;
   margin-bottom: 10px;
 }
@@ -61,7 +61,7 @@
 }
 
 .balanceText {
-  color: #797979;
+  color: var(--text-gray);
   font-size: 11px;
   margin-right: 6px;
 }
@@ -74,7 +74,7 @@
 }
 
 .num {
-  color: #fff;
+  color: var(--white);
   font-size: 12px;
   font-weight: 700;
 }

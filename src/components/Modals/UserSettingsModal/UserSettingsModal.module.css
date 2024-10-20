@@ -34,7 +34,7 @@
 
     width: 14px;
     height: 14px;
-    stroke: #A4A4A4;
+    stroke: var(--input-stroke);
 }
 
 
@@ -93,7 +93,7 @@
 }
 
 .input::placeholder{
-    color: #615F68;
+    color: var(--icon-gray);
    
     font-size: 10px;
     font-style: normal;
@@ -161,11 +161,11 @@
 .btnSave{
     width: 100px;
     height: 35px;
-    background-color: #3956CC;
+    background-color: var(--blue);
     border: none;
     border-radius: 5px;
 
-    color: #FFF;
+    color: var(--white);
     font-variant-numeric: lining-nums proportional-nums;
     font-family: "Roboto", sans-serif;
     font-size: 14px;
@@ -176,11 +176,11 @@
 
 .btnCancel{
     width: 100px;
-    background-color: #3956CC;
+    background-color: var(--blue);
     border: none;
     border-radius: 5px;
 
-    color: #FFF;
+    color: var(--white);
     font-variant-numeric: lining-nums proportional-nums;
     font-family: "Roboto", sans-serif;
     font-size: 14px;

@@ -28,8 +28,8 @@ export default function PhoneSelect({ value, onChange }) {
       buttonStyle={{
         display: "flex",
         alignItems: "center",
-        backgroundColor: "#242D43",
-        borderColor: "#4A4A4A",
+        backgroundColor: "var(--drop-menu)",
+        borderColor: "var(--input-stroke)",
         borderRadius: "10px 0 0 10px",
         paddingLeft: "10px",
         paddingRight: "10px",
@@ -37,8 +37,8 @@ export default function PhoneSelect({ value, onChange }) {
       }}
       inputStyle={{
         backgroundColor: "var(--bg-input)",
-        color: "#D8E1FF",
-        borderColor: "#4A4A4A",
+        color: "var(--light-gray)",
+        borderColor: "var(--input-stroke)",
         borderLeft: "none",
         borderRadius: "10px",
         paddingLeft: "70px",

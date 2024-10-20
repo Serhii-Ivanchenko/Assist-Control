@@ -8,12 +8,12 @@
 
 
     border-radius: 10px;
-    border: 1px solid #4A4A4A;
+    border: 1px solid var(--input-stroke);
 
     background-color: var(--bg-input);
     outline: none;
 
-    color: #D8E1FF;
+    color: var(--light-gray);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;

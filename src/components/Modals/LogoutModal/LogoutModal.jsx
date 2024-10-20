@@ -20,7 +20,7 @@ export default function LogoutModal({ onClose }) {
           position: "top-center",
           style: {
             background: "var(--bg-input)",
-            color: "#FFFFFF",
+            color: "var(--white)FFF",
           },
         });
       });

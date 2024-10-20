@@ -19,15 +19,15 @@
     padding: 18px 20px;
 
     border-radius: 10px;
-    border: 1px solid #4A4A4A;
+    border: 1px solid var(--input-stroke);
     background-color: var(--bg-input);
     outline: none;
 
 
     margin-top: 8px;
 
-    /* color: var(--White, var(--Color, #FFF)); */
-    color: #D8E1FF;
+    /* color: var(--White, var(--Color, var(--white))); */
+    color: var(--light-gray);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -40,7 +40,7 @@
 }
 
 .input::placeholder {
-    color: #767B88;
+    color: var(--input-text);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -59,7 +59,7 @@
     fill: white;
     width: 20px;
     height: 20px;
-    fill: #C7C7C7;
+    fill: var(--icon-gray);
     pointer-events: none;
 }
 
@@ -77,7 +77,7 @@
 }
 
 .errorMessage {
-    color: #FF6363;
+    color: var(--red);
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
@@ -108,7 +108,7 @@
 }
 
 .inputLable {
-    color: #FFF;
+    color: var(--white);
     font-family: "Roboto", sans-serif;
     font-size: 20px;
     font-style: normal;
@@ -150,9 +150,9 @@
 
     border: none;
     border-radius: 8px;
-    background-color: #3956CC;
+    background-color: var(--blue);
 
-    color: #FFF;
+    color: var(--white);
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -161,17 +161,17 @@
 }
 
 .changePhotoBtn:hover {
-    background-color: #1C2E78;
+    background-color: var(--blue-btn-hover);
 }
 
 .changePhotoBtn:active {
-    background-color: #171D35;
+    background-color: var(--blue-btn-inactive);
 }
 
 .btnPlus {
     width: 20px;
     height: 20px;
-    fill: #C7C7C7;
+    fill: var(--icon-gray);
 }
 
 .addPhotoBox {
@@ -196,10 +196,10 @@
     padding: 15px 30px;
 
     border-radius: 8px;
-    border: 1px solid #D8E1FF;
+    border: 1px solid var(--light-gray);
     background-color: transparent;
 
-    color: #FFF;
+    color: var(--white);
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -218,11 +218,11 @@
     padding: 15px 30px;
 
     border-radius: 8px;
-    background-color: #3956CC;
+    background-color: var(--blue);
 
     border: none;
 
-    color: #FFF;
+    color: var(--white);
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -237,13 +237,13 @@
 }
 
 .saveBtn:hover {
-    background-color: #1C2E78;
+    background-color: var(--blue-btn-hover);
 }
 
 .saveBtn:active {
-    background-color: #171D35;
+    background-color: var(--blue-btn-inactive);
 }
 
 .iconSave {
-    fill: #C7C7C7;
+    fill: var(--icon-gray);
 }

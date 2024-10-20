@@ -3,7 +3,7 @@
     width: 310px;
     height: 270px;
     background: var(--bg-secondary); */
-    /* border: 1px solid #000; */
+    /* border: 1px solid var(--black); */
     /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); */
 }
 
@@ -11,7 +11,7 @@
     font-family: "Roboto", sans-serif;
     font-weight: 300;
     font-size: 18px;
-    color: #fff;
+    color: var(--white);
     margin-bottom: 16px;
     /* width: 122px;
     height: 21px; */

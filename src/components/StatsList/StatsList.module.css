@@ -30,7 +30,7 @@
 }
 
 .statsItem:first-child {
-  background-color: #3956cc;
+  background-color: var(--blue);
 }
 
 .statsItemValue {

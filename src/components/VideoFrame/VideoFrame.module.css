@@ -43,7 +43,7 @@
   font-size: 20px;
   line-height: 1;
   opacity: 0.75;
-  color: #fff;
+  color: var(--white);
 }
 
 .arrowNext,
@@ -66,14 +66,14 @@
   display: block;
   padding: 2px;
   border-radius: 32px;
-  background: #51556240;
+  background: var(--main-gray)40;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   transition: background 200ms ease-in-out;
 }
 
 .arrowNext:hover,
 .arrowPrev:hover {
-  background: #515562;
+  background: var(--main-gray);
 }
 
 .arrowPrev {
@@ -111,7 +111,7 @@
 }
 
 :global(.dots li button) {
-  background: #4a4a4a;
+  background: var(--input-stroke);
   font-size: 0;
   line-height: 0;
   display: block;
@@ -133,7 +133,7 @@
 }
 
 :global(.dots li.slick-active button) {
-  background: #3956cc;
+  background: var(--blue);
 }
 
 :global(.dots li button),

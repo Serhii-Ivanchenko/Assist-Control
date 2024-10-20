@@ -9,13 +9,13 @@
   padding: 40px 0;
   border-radius: 6px;
 
-  background-color: #202020;
+  background-color: var(--bg);
 }
 
 .iconClose {
   width: 26px;
   height: 26px;
-  fill: #4a4a4a;
+  fill: var(--input-stroke);
 }
 
 .closeBtn {
@@ -53,7 +53,7 @@
 }
 
 .carBrand {
-  color: #fff;
+  color: var(--white);
 
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
@@ -72,7 +72,7 @@
   height: 52px;
 
   border-radius: 5px;
-  border: 3px solid #000;
+  border: 3px solid var(--black);
   background-color: #d9d9d9;
 
   margin-top: 14px;
@@ -98,7 +98,7 @@
 }
 
 .carRegNumber {
-  color: #000;
+  color: var(--black);
 
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
@@ -109,7 +109,7 @@
 }
 
 .carRegCountry {
-  color: #fff;
+  color: var(--white);
 
   font-family: "Roboto", sans-serif;
   font-size: 9px;
@@ -139,7 +139,7 @@
 }
 
 .vinCode {
-  color: #fff;
+  color: var(--white);
 
   font-family: "Roboto", sans-serif;
   font-size: 20px;
@@ -175,7 +175,7 @@
 .serviceTime {
   display: inline-flex;
   align-items: center;
-  color: #fff;
+  color: var(--white);
 
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
@@ -184,7 +184,7 @@
 }
 
 .serviceDate {
-  color: #fff;
+  color: var(--white);
 
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
@@ -228,12 +228,12 @@
 
 .iconRadio {
   width: 16px;
-  fill: #246d4d;
+  fill: var(--light-gray);
   margin-right: 7px;
 }
 
 .radioNew {
-  color: #3956cc;
+  color: var(--blue);
 }
 
 .radioRepair {
@@ -241,11 +241,11 @@
 }
 
 .radioCheckRepair {
-  color: #db8120;
+  color: var(--orange);
 }
 
 .radioComplete {
-  color: #246d4d;
+  color: var(--light-gray);
 }
 
 .radioGroup input[type="radio"] {
@@ -269,9 +269,9 @@
 
   border: transparent;
   border-radius: 6px;
-  background-color: #3956cc;
+  background-color: var(--blue);
 
-  color: #fff;
+  color: var(--white);
 
   font-family: "Roboto", sans-serif;
   font-size: 14px;

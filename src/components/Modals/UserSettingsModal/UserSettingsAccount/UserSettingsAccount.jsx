@@ -81,7 +81,7 @@ export default function UserSettingsAccount({ onClose }) {
         duration: 5000,
         style: {
           background: "var(--bg-input)",
-          color: "#FFFFFF",
+          color: "var(--white)FFF",
         },
       });
     } catch (error) {

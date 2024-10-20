@@ -16,7 +16,7 @@
 
 
 .title {
-    color: #FFF;
+    color: var(--white);
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -89,11 +89,11 @@
     align-items: center;
 
     border-radius: 6px;
-    border: 2px solid #3956CC;
+    border: 2px solid var(--blue);
 }
 
 .tariffName {
-    color: #FFF;
+    color: var(--white);
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
@@ -121,13 +121,13 @@
     padding: 12px 16px;
 
     border-radius: 6px;
-    border: 1px solid #4A4A4A;
+    border: 1px solid var(--input-stroke);
 
     background-color: var(--bg-secondary);
 
     /* margin-top: 10px; */
 
-    color: #FFF;
+    color: var(--white);
     font-variant-numeric: lining-nums proportional-nums;
     font-size: 14px;
     font-style: normal;
@@ -151,7 +151,7 @@
 }
 
 .price {
-    color: #FFF;
+    color: var(--white);
     font-variant-numeric: lining-nums proportional-nums;
     font-size: 20px;
     font-style: normal;
@@ -168,7 +168,7 @@
     height: 24px;
     flex-shrink: 0;
 
-    fill: #008000;
+    fill: var(--green);
 }
 
 .iconCross {
@@ -176,7 +176,7 @@
     height: 24px;
     flex-shrink: 0;
 
-    fill: #D54E4F;
+    fill: var(--red);
 }
 
 
@@ -185,9 +185,9 @@
 
     border: none;
     border-radius: 6px;
-    background: #3956CC;
+    background: var(--blue);
 
-    color: #FFF;
+    color: var(--white);
     font-variant-numeric: lining-nums proportional-nums;
     font-size: 16px;
     font-style: normal;
@@ -201,11 +201,11 @@
 }
 
 .btnBuyIsActive:hover {
-    background-color: #1C2E78;
+    background-color: var(--blue-btn-hover);
 }
 
 .btnBuyIsActive:active {
-    background-color: #171D35;
+    background-color: var(--blue-btn-inactive);
 }
 
 .selectBox {
@@ -221,7 +221,7 @@
     fill: white;
     width: 12px;
     height: 12px;
-    fill: #C7C7C7;
+    fill: var(--icon-gray);
     pointer-events: none;
 }
 
@@ -241,10 +241,10 @@
     align-items: center;
 
     border-radius: 8px;
-    border: 1px solid #4A4A4A;
+    border: 1px solid var(--input-stroke);
     background-color: transparent;
 
-    color: #FFF;
+    color: var(--white);
     font-size: 16px;
     font-style: normal;
     font-weight: 600;

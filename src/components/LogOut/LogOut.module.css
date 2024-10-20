@@ -11,7 +11,7 @@
 }
 
 .icon {
-    color: #C7C7C7;
+    color: var(--icon-gray);
 }
 
 .tooltip {
