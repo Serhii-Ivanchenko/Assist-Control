@@ -10,22 +10,22 @@ export default function LogoutModal({ onClose }) {
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
-      await dispatch(logOut())
-        .unwrap()
-        .then(() => {
-          navigate("/login");
-        })
-        .catch(() => {
-          toast.error("Щось сталося, спробуйте ще раз", {
-            position: "top-center",
-            style: {
-              background: "#242525",
-              color: "#FFFFFF",
-            },
-          });
+    await dispatch(logOut())
+      .unwrap()
+      .then(() => {
+        navigate("/login");
+      })
+      .catch(() => {
+        toast.error("Щось сталося, спробуйте ще раз", {
+          position: "top-center",
+          style: {
+            background: "var(--bg-input)",
+            color: "#FFFFFF",
+          },
         });
-      onClose();
-    }
+      });
+    onClose();
+  };
 
   return (
     <div className={css.logoutBox}>

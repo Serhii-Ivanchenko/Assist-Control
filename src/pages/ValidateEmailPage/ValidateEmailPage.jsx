@@ -19,7 +19,7 @@ export default function ValidateEmailPage() {
         toast.success("Email validated. Welcome to Assist CONTROL", {
           position: "top-center",
           style: {
-            background: "#242525",
+            background: "var(--bg-input)",
             color: "#FFFFFF",
           },
         }),
@@ -29,7 +29,7 @@ export default function ValidateEmailPage() {
         toast.error("Щось сталося, спробуйте ще раз", {
           position: "top-center",
           style: {
-            background: "#242525",
+            background: "var(--bg-input)",
             color: "#FFFFFF",
           },
         });

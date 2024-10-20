@@ -7,7 +7,7 @@
   max-height: 295px;
   padding: 8px;
   border-radius: 8px;
-  background: #23252C;
+  background: var(--bg-secondary);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   align-items: center;
 }
@@ -38,7 +38,7 @@
   display: flex;
   justify-content: space-between;
   padding: 8px;
-  background-color: #1A1A1A;
+  background-color: var(--bg-secondary);
   border-radius: 4px;
 }
 

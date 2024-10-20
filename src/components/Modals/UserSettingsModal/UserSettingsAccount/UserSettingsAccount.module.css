@@ -1,21 +1,21 @@
-.accountBox{
+.accountBox {
     /* margin-top: 59.5px; */
     /* border-top: 1px solid #000; */
     width: 975px;
     padding: 82px 42px;
     display: flex;
     flex-direction: column;
-  
+
 }
 
 @media only screen and (min-width: 1850px) {
-  .accountBox {
-    width: 1057px;
-  }
+    .accountBox {
+        width: 1057px;
+    }
 }
 
-@media only screen and (max-width: 767.9px){
-    .accountBox{
+@media only screen and (max-width: 767.9px) {
+    .accountBox {
         width: 290px;
     }
 }
@@ -34,7 +34,7 @@
 .titles {
     color: #FFF;
     font-family: "Roboto", sans-serif;
-    font-size:20px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -44,7 +44,7 @@
 
 @media only screen and (max-width: 767.9px) {
     .titles {
-    font-size: 14px;
+        font-size: 14px;
     }
 }
 
@@ -55,7 +55,7 @@
     border-radius: 10px;
     border: 1px solid #4A4A4A;
 
-    background-color: #2D3038;
+    background-color: var(--bg-input);
     outline: none;
 
     display: flex;
@@ -66,22 +66,22 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color:#D8E1FF;
+    color: #D8E1FF;
 }
 
 
 
 
-.emailBox{
+.emailBox {
     position: relative;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     margin-bottom: 48px;
 
 }
 
 
-.warningMessage{
+.warningMessage {
     color: #FF6363;
     font-size: 14px;
     font-style: normal;
@@ -89,36 +89,36 @@
     line-height: normal;
     /* margin-left: 20px; */
 
-    cursor:default;
+    cursor: default;
     position: absolute;
     left: 20px;
     top: 105%;
 }
 
-@media only screen and (max-width: 767.9px){
-    .email{
+@media only screen and (max-width: 767.9px) {
+    .email {
         font-size: 12px;
     }
 
-    .emailBox{
+    .emailBox {
         margin-bottom: 50px;
     }
 
-    .warningMessage{
+    .warningMessage {
         font-size: 8px;
         left: 30px;
     }
 }
 
-.passwordBox{
+.passwordBox {
     display: flex;
     flex-direction: column;
     margin-bottom: 24px;
 }
 
 .passwortChBtn {
-   width:fit-content;
-     /* height: 43px; */
+    width: fit-content;
+    /* height: 43px; */
     /* margin-bottom: 24px; */
     padding: 15px 30px;
 
@@ -149,20 +149,21 @@
     background-color: #171D35;
 }
 
-.iconKey{
+.iconKey {
     fill: #C7C7C7;
 }
 
-@media only screen and (max-width: 767.9px){
-    .passwordBox{
+@media only screen and (max-width: 767.9px) {
+    .passwordBox {
         margin-bottom: 24px;
     }
-    .passwortChBtn{
-     font-size: 12px;
+
+    .passwortChBtn {
+        font-size: 12px;
     }
 }
 
-.companyBox{
+.companyBox {
     display: flex;
     flex-direction: column;
     margin-bottom: 24px;
@@ -176,7 +177,7 @@
     border-radius: 10px;
     border: 1px solid #4A4A4A;
 
-    background-color: #2D3038;
+    background-color: var(--bg-input);
     outline: none;
 
     color: #D8E1FF;
@@ -185,13 +186,13 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    
+
 
     /* margin-bottom: 24px;  */
     padding: 18px 20px;
 }
 
-.input::placeholder{
+.input::placeholder {
     color: #767B88;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
@@ -200,51 +201,51 @@
     line-height: normal;
 }
 
-.input:-webkit-autofill{
-    background-color: #2D3038 !important;
+.input:-webkit-autofill {
+    background-color: var(--bg-input) !important;
     color: white !important;
     box-shadow: 0 0 0px 1000px #282828 inset !important;
     -webkit-text-fill-color: white !important;
 }
 
 .input:-webkit-autofill:hover,
-.input:-webkit-autofill:focus{
-    background-color: #2D3038 !important;
+.input:-webkit-autofill:focus {
+    background-color: var(--bg-input) !important;
     color: white !important;
     box-shadow: 0 0 0px 1000px #282828 inset !important;
     -webkit-text-fill-color: white !important;
 }
 
-.errorMessage{
+.errorMessage {
     color: #FF6363;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        /* margin-left: 20px; */
-    
-        cursor: default;
-        position: absolute;
-        left: 20px;
-        top: 100%;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    /* margin-left: 20px; */
+
+    cursor: default;
+    position: absolute;
+    left: 20px;
+    top: 100%;
 }
 
-@media only screen and (max-width: 767.9px){
-    .companyBox{
+@media only screen and (max-width: 767.9px) {
+    .companyBox {
         margin-bottom: 24px;
     }
 
-    .input{
+    .input {
         font-size: 13px;
     }
 
-    .input::placeholder{
+    .input::placeholder {
         font-size: 13px;
     }
 }
 
 
-.languageBox{
+.languageBox {
     display: flex;
     flex-direction: column;
     /* margin-bottom: 118px; */
@@ -253,13 +254,13 @@
 
 
 
-@media only screen and (max-width: 767.9px){
-    .languageBox{
+@media only screen and (max-width: 767.9px) {
+    .languageBox {
         margin-bottom: 43px;
     }
 }
 
-.currencyBox{
+.currencyBox {
     display: flex;
     flex-direction: column;
     margin-bottom: 80px;
@@ -328,21 +329,21 @@
     background-color: #171D35;
 }
 
-.iconSave{
+.iconSave {
     fill: #C7C7C7;
 }
 
-@media only screen and (max-width: 767.9px){
-    .btnBox{
+@media only screen and (max-width: 767.9px) {
+    .btnBox {
         justify-content: flex-start;
         flex-direction: column;
     }
 
-    .cancelBtn{
+    .cancelBtn {
         font-size: 12px;
     }
 
-    .saveBtn{
+    .saveBtn {
         font-size: 12px;
     }
 }
@@ -353,4 +354,3 @@
         border-radius: 50%;
        background-size: cover; 
 } */
-

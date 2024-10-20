@@ -7,7 +7,7 @@
 
   border-radius: 10px;
 
-  background-color: #23252C;
+  background-color: var(--bg-secondary);
 
 }
 
@@ -98,7 +98,7 @@
   border-radius: 10px;
   border: 1px solid #4A4A4A;
 
-  background-color: #2D3038;
+  background-color: var(--bg-input);
 
   /* margin-bottom: 24px; */
 
@@ -138,17 +138,17 @@
 }
 
 .field:-webkit-autofill {
-  background-color: #2D3038 !important;
+  background-color: var(--bg-input) !important;
   color: white !important;
-  box-shadow: 0 0 0px 1000px #2D3038 inset !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
   -webkit-text-fill-color: white !important;
 }
 
 .field:-webkit-autofill:hover,
 .field:-webkit-autofill:focus {
-  background-color: #2D3038 !important;
+  background-color: var(--bg-input) !important;
   color: white !important;
-  box-shadow: 0 0 0px 1000px #2D3038 inset !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
   -webkit-text-fill-color: white !important;
 }
 
@@ -179,7 +179,7 @@
 @media only screen and (max-width: 767.9px) {
   .nameBox {
     flex-direction: column;
-gap: 24px;
+    gap: 24px;
   }
 }
 
@@ -197,7 +197,7 @@ gap: 24px;
   border-radius: 10px;
   border: 1px solid #4A4A4A;
 
-  background-color: #2D3038;
+  background-color: var(--bg-input);
   margin-bottom: 48px;
 
 
@@ -214,7 +214,7 @@ gap: 24px;
 
 
 .fieldEmail::placeholder {
-  color:  #767B88;
+  color: #767B88;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -223,17 +223,17 @@ gap: 24px;
 }
 
 .fieldEmail:-webkit-autofill {
-  background-color: #2D3038 !important;
+  background-color: var(--bg-input) !important;
   color: white !important;
-  box-shadow: 0 0 0px 1000px #2D3038 inset !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
   -webkit-text-fill-color: white !important;
 }
 
 .fieldEmail:-webkit-autofill:hover,
 .fieldEmail:-webkit-autofill:focus {
-  background-color: #2D3038 !important;
+  background-color: var(--bg-input) !important;
   color: white !important;
-  box-shadow: 0 0 0px 1000px #2D3038 inset !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
   -webkit-text-fill-color: white !important;
 }
 
@@ -443,6 +443,7 @@ gap: 24px;
   font-weight: 600;
   line-height: 1.19em;
 }
+
 @media only screen and (max-width: 767.9px) {
   .title {
     font-size: 14px;
@@ -466,14 +467,17 @@ gap: 24px;
     font-size: 13px;
   }
 }
+
 @media (max-width: 767.9px) {
   .responsiveBr {
     display: none;
   }
 }
+
 .responsiveBr2 {
   display: none;
 }
+
 @media (max-width: 767.9px) {
   .responsiveBr2 {
     display: inline;

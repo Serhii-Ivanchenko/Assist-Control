@@ -10,7 +10,7 @@
     border-radius: 10px;
     border: 1px solid #4A4A4A;
 
-    background-color: #2D3038;
+    background-color: var(--bg-input);
     outline: none;
 
     color: #D8E1FF;
@@ -48,7 +48,7 @@
     right: 0;
     border: 1px solid #302F2F;
     border-radius: 5px;
-    background-color: #2D3038;
+    background-color: var(--bg-input);
     z-index: 1000;
 
     font-size: 12px;

@@ -2,7 +2,7 @@
     /* border-radius: 5px;
     width: 310px;
     height: 270px;
-    background: #1a1a1a; */
+    background: var(--bg-secondary); */
     /* border: 1px solid #000; */
     /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); */
 }

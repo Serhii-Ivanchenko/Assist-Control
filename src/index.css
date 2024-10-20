@@ -19,7 +19,7 @@
   --black: #000000;
   --light-gray: #D8E1FF;
   --main-gray: #515562;
-  --dark-grey: #101010;
+  --dark-grey: var(--bg-secondary);
   --green: #008000;
   --blue: #3956CC;
   --play-btn-triangle: #00A3FF;
@@ -115,8 +115,8 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  color: #ffffff;
-  background-color: #000000;
+  color: var(--white);
+  background-color: var(--bg);
   overflow-x: hidden;
 }
 

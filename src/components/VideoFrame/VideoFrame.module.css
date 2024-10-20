@@ -22,7 +22,7 @@
   width: 386px;
   height: 270px;
   padding: 15px 20px 0 20px;
-  background: #23252C;
+  background: var(--bg-secondary);
 }
 
 @media only screen and (min-width: 1850px) {
@@ -145,7 +145,7 @@
 }
 
 [data-rmiz-modal-overlay="visible"] {
-  background-color: #101010ea !important;
+  background-color: var(--bg-secondary)ea !important;
 }
 
 .zoomImg {

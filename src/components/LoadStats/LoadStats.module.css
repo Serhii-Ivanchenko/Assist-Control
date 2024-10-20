@@ -5,7 +5,7 @@
     width: 141px;
     height: 91px;
     border-radius: 5px;
-    background: #1A1A1A;
+    background: var(--bg-secondary);
     position: relative;
 }
 
@@ -14,10 +14,10 @@
         width: 210px;
         height: 115px;
         padding: 6.5px 6px 6.5px 14px;
-  }
-  }
+    }
+}
 
-.statsChart{
+.statsChart {
     position: absolute;
     top: -10px;
     left: -5px;
@@ -29,7 +29,7 @@
     .statsChart {
         top: 3px;
         left: 6px;
-  }
+    }
 }
 
 
@@ -47,7 +47,7 @@
 @media only screen and (min-width: 1850px) {
     .percentage {
         margin-bottom: 2px;
-  }
+    }
 }
 
 .description {
@@ -62,7 +62,7 @@
     .description {
         font-size: 14px;
         width: fit-content;
-  }
+    }
 }
 
 .num {

@@ -1,9 +1,9 @@
-.containerloadstats{
-border-radius: 5px;
+.containerloadstats {
+    border-radius: 5px;
     width: 310px;
     height: 191px;
     padding: 5px 17px;
-    background: #1a1a1a;
+    background: var(--bg-secondary);
     /* border: 1px solid #000; */
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
@@ -11,35 +11,39 @@ border-radius: 5px;
 @media only screen and (min-width: 1850px) {
     .containerloadstats {
         width: 464px;
-            height: 287px;
-            padding: 8px 25px;}}
+        height: 287px;
+        padding: 8px 25px;
+    }
+}
 
 .stattitle {
     font-family: "Roboto", sans-serif;
-        font-weight: 300;
-        font-size: 18px;
-        color: #fff;
-        width: 191px;
-        height: 21px;
-        margin-bottom: 21px;
+    font-weight: 300;
+    font-size: 18px;
+    color: #fff;
+    width: 191px;
+    height: 21px;
+    margin-bottom: 21px;
 }
 
 @media only screen and (min-width: 1850px) {
     .stattitle {
         width: 284px;
-            height: 63px;
-            margin-bottom: 0px;}}
-
-.statpercent{
-    font-family: "Roboto", sans-serif;
-        font-weight: 500;
-        font-size: 18px;
-        color: #db8120;
-        width: 40px;
-        height: 21px;        
+        height: 63px;
+        margin-bottom: 0px;
+    }
 }
 
-.titlebox{
+.statpercent {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #db8120;
+    width: 40px;
+    height: 21px;
+}
+
+.titlebox {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -49,7 +53,7 @@ border-radius: 5px;
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 30px; */
-    
+
 }
 
 
@@ -65,10 +69,10 @@ border-radius: 5px;
     }
 }
 
-.popuptitle{
+.popuptitle {
     font-family: "Roboto", sans-serif;
-        font-weight: 400;
-        font-size: 10px;
-        font-variant: small-caps;
-        color: #9e9e9e;
+    font-weight: 400;
+    font-size: 10px;
+    font-variant: small-caps;
+    color: #9e9e9e;
 }

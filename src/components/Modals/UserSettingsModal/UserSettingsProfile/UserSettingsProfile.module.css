@@ -20,7 +20,7 @@
 
     border-radius: 10px;
     border: 1px solid #4A4A4A;
-    background-color: #2D3038;
+    background-color: var(--bg-input);
     outline: none;
 
 

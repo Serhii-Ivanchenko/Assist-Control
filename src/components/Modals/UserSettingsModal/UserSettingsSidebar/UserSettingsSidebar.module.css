@@ -141,7 +141,7 @@
     display: flex;
     align-items: center;
 
-    background-color: #2D3038;
+    background-color: var(--bg-input);
     border: none;
     border-right: solid 2px #3956CC;
 

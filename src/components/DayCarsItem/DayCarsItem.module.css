@@ -7,7 +7,7 @@
   padding: 15px 13px 13px 11px;
 
   border-radius: 8px;
-  background: #2D3038;
+  background: var(--bg-input);
 
 
 }
@@ -450,7 +450,7 @@
 }
 
 .carNumber {
-  color: #101010;
+  color: var(--bg-secondary);
   font-size: 16px;
   font-weight: 600;
   line-height: normal;

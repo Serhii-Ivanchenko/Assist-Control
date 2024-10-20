@@ -39,7 +39,7 @@
 }
 
 .nameListItem:nth-child(odd) {
-    background-color: #2D3038;
+    background-color: var(--bg-input);
 }
 
 .listItem {
@@ -52,7 +52,7 @@
 }
 
 .listItem:nth-child(odd) {
-    background-color: #2D3038;
+    background-color: var(--bg-input);
 }
 
 .listItem {
@@ -123,7 +123,7 @@
     border-radius: 6px;
     border: 1px solid #4A4A4A;
 
-    background-color: #23252C;
+    background-color: var(--bg-secondary);
 
     /* margin-top: 10px; */
 

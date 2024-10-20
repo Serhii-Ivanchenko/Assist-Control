@@ -3,6 +3,7 @@
   gap: 7px;
   width: 100%;
 }
+
 @media only screen and (min-width: 1850px) {
   .statsList {
     gap: 8px;
@@ -17,8 +18,9 @@
   height: 57px;
   padding: 8px 16px;
   border-radius: 5px;
-  background-color: #23252C;
+  background-color: var(--bg-secondary);
 }
+
 @media only screen and (min-width: 1850px) {
   .statsItem {
     width: 204px;

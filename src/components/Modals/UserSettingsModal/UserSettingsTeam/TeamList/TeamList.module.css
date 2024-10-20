@@ -8,7 +8,7 @@
     padding-top: 33px;
     padding-bottom: 33px;
 
-    background-color: #2D3038;
+    background-color: var(--bg-input);
 
     display: flex;
     flex-direction: column;

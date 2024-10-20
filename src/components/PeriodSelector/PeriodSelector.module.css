@@ -1,7 +1,7 @@
 .containerperiodselector {
     /* width: 309px; */
     /* height: 40px; */
-    background: #1a1a1a;
+    background: var(--bg-secondary);
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -21,7 +21,7 @@
 
 .periodtitle {
     color: #9E9E9E;
-    /* background: #1a1a1a; */
+    /* background: var(--bg-secondary); */
     /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
     font-size: 11px;
