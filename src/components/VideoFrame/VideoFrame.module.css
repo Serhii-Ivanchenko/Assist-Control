@@ -8,6 +8,7 @@
   align-items: center;
   text-align: center;
 }
+
 @media only screen and (min-width: 1850px) {
   .camera {
     height: 341px;
@@ -15,6 +16,7 @@
     /* height: 100% !important; Якщо поставити зараз то малі картинкі будуть летіти на верх а не по центру як зараз */
   }
 }
+
 .cameraListCont {
   border-radius: 5px;
   width: 386px;
@@ -22,13 +24,15 @@
   padding: 15px 20px 0 20px;
   background: #23252C;
 }
+
 @media only screen and (min-width: 1850px) {
   .cameraListCont {
     width: 576px;
     height: 405px;
-    padding: 21px 21px 0 21px;
+    padding: 20px 29px 0 29px;
   }
 }
+
 .cameraList {
   position: relative;
 }
@@ -62,14 +66,16 @@
   display: block;
   padding: 2px;
   border-radius: 32px;
-  background: rgba(81, 85, 98, 0.25);
+  background: #51556240;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   transition: background 200ms ease-in-out;
 }
+
 .arrowNext:hover,
 .arrowPrev:hover {
   background: #515562;
 }
+
 .arrowPrev {
   left: 10px;
 }
@@ -97,11 +103,13 @@
   padding: 0;
   cursor: pointer;
 }
+
 @media only screen and (min-width: 1850px) {
   :global(.dots li) {
     margin: 0 8px;
   }
 }
+
 :global(.dots li button) {
   background: #4a4a4a;
   font-size: 0;
@@ -116,6 +124,7 @@
   outline: 0;
   border: none;
 }
+
 @media only screen and (min-width: 1850px) {
   :global(.dots li button) {
     width: 17px;
@@ -134,9 +143,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 [data-rmiz-modal-overlay="visible"] {
   background-color: #101010ea !important;
 }
+
 .zoomImg {
   position: absolute;
   margin: 0 auto;

@@ -6,7 +6,7 @@ export default function StatsList({ cars }) {
     all: 0,
     complete: 0,
     repair: 0,
-    view_repair: 0,
+    diagnostic: 0,
     new: 0,
   };
   const [valueOfCars, setValueOfCars] = useState(initValue);
@@ -36,7 +36,7 @@ export default function StatsList({ cars }) {
         <p className={css.statsItemTitle}>У ремонті</p>
       </li>
       <li className={css.statsItem}>
-        <p className={css.statsItemValue}>{valueOfCars.view_repair}</p>
+        <p className={css.statsItemValue}>{valueOfCars.diagnostic}</p>
         <p className={css.statsItemTitle}>На діагностиці</p>
       </li>
       <li className={css.statsItem}>
