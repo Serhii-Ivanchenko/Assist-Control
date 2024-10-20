@@ -37,12 +37,19 @@
   --last-service-mileage-text: #A97742;
   --visit-date-bg: #28232A;
   --visit-date-bg: #D54E4F;
+  --stats-all: #465D9B;
+
+  /* statuses */
   --status-new: #EBD534;
   --status-diag: #6B84FF;
   --status-repair: #B25BC2;
   --status-complete: #53C178;
   --status-check-repair: ;
-  --stats-all: #465D9B;
+  --glow-repair: #D926E9;
+  --glow-diag: #265DE9;
+  --glow-complete: #71E926;
+  --glow-new: #E9D226;
+
 
   /* calendar */
   --calendar-gray: #4A4A4A;
@@ -51,17 +58,17 @@
   --orange: #DB8120;
 
   /* gradients */
-  --border-gradient-new: linear-gradient(29deg, #F5DD23 16%, #2B2C2C 30%, #23252C 66%, #DBC624 82%);
-  --border-gradient-diag: linear-gradient(29deg, #3956CC 16%, #2B2C2C 30%, #23252C 66%, #3956CC 82%);
-  --border-gradient-repair: linear-gradient(29deg, #994CA5 16%, #2B2C2C 30%, #23252C 66%, #994CA5 82%);
-  --border-gradient-complete: linear-gradient(29deg, ##246D4D 16%, #2B2C2C 30%, #23252C 66%, ##246D4D 82%);
+  --border-gradient-new: linear-gradient(45deg, #F5DD23 10%, #2B2C2C 16%, #23252C 85%, #DBC624 90%);
+  --border-gradient-diag: linear-gradient(45deg, #3956CC 10%, #2B2C2C 16%, #23252C 85%, #3956CC 90%);
+  --border-gradient-repair: linear-gradient(45deg, #994CA5 10%, #2B2C2C 16%, #23252C 85%, #994CA5 90%);
+  --border-gradient-complete: linear-gradient(45deg, ##246D4D 10%, #2B2C2C 16%, #23252C 85%, ##246D4D 90%);
 
   --status-gradient-new: linear-gradient(90deg, #95A54C4D 0%, #E9D92600 100%);
   --status-gradient-diag: linear-gradient(90deg, #4154B04D 0%, #2654E900 100%);
   --status-gradient-repair: linear-gradient(90deg, #994CA54D 0%, #AB26E900 100%);
   --status-gradient-complete: linear-gradient(90deg, #4CA54C4D 0%, #3DE92600 100%);
 
-  --master-gradient-diag: linear-gradient(90deg, #2670E94D 0%, #2670E900 100%);
+  --master-gradient-diag: linear-gradient(90deg, #4154B04D 0%, #2654E900 100%);
   --master-gradient-repair: linear-gradient(90deg, #994CA54D 0%, #AB26E900 100%);
 }
 
