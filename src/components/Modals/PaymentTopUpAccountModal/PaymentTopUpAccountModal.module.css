@@ -1,0 +1,169 @@
+.paymentModal {
+  position: relative;
+  width: 780px;
+  height: 384px;
+  border-radius: 12px;
+  background: #1f2123;
+  padding: 30px 26px;
+}
+
+.closeIcon {
+  fill: #A4A4A4;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.paymentModalHeader {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.17em;
+  margin-bottom: 10px;
+}
+
+.paymentModalText {
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+  margin-bottom: 38px;
+}
+
+.form {
+  padding: 40px 0;
+  border-radius: 6px 6px 0 0;
+  background: #2f3b41;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.sumText {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input {
+  width: 84px;
+  height: 36px;
+  border-radius: 6px 0px 0px 6px;
+  border: 1px solid #c7c7c7;
+  background-color: #3c4148;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-left: 10px;
+}
+
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.currencyWrapper {
+  display: flex;
+  width: 126px;
+  height: 36px;
+  position: relative;
+}
+
+.currency {
+  width: 42px;
+  height: 36px;
+  border-radius: 0px 6px 6px 0px;
+  border: 1px solid #c7c7c7;
+  background-color: #5e6e8d;
+  border-left: none;
+  padding-top: 8px;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: #98bcff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  text-decoration: underline;
+}
+
+.errorMsg {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: red;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  white-space: nowrap;
+}
+
+.btn {
+  width: 170px;
+  height: 36px;
+  padding: 10px 0;
+  border-radius: 6px;
+  background: #008000;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.paymentCards {
+  height: 64px;
+  background: #d5dde1;
+  padding: 20px 40px;
+  border-radius: 0 0 6px 6px;
+  display: flex;
+  justify-content: space-between;
+  /* gap: 38px; */
+}
+
+.logoMasterCard {
+  width: 39px;
+  height: 24px;
+}
+
+.logoVisa {
+  width: 58px;
+  height: 24px;
+}
+
+.logoPayPal {
+  width: 99px;
+  height: 24px;
+}
+
+.logoPrivat {
+  width: 78px;
+  height: 24px;
+}
+
+.logoMono {
+  width: 115px;
+  height: 24px;
+}
+
+.logoCrypto {
+  width: 69px;
+  height: 24px;
+}

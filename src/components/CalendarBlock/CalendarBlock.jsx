@@ -8,7 +8,7 @@ import CalendarPagination from "../CalendarPagination/CalendarPagination.jsx";
 import { getCarsByDate } from "../../redux/cars/operations.js";
 import {
   selectDayCars,
-  selectLoading,
+  selectLoadingCarsByDay,
   selectDate,
 } from "../../redux/cars/selectors.js";
 import styles from "./CalendarBlock.module.css";
@@ -22,8 +22,7 @@ export default function CalendarBlock() {
 
   const carsData = useSelector(selectDayCars);
   const selectedDate = useSelector(selectDate);
-  const isLoading = useSelector(selectLoading);
-
+  const isLoadingCarsByDay = useSelector(selectLoadingCarsByDay);
 
   const handleDetailsBtnClick = () => {
     setIsModalOpen(true);
@@ -48,7 +47,7 @@ export default function CalendarBlock() {
     <div className={styles.calendarContainer}>
       <div className={styles.topContainer}>
         <CalendarPagination />
-        {isLoading && <p>Завантаження інформації...</p>}
+        {isLoadingCarsByDay && <p>Завантаження інформації...</p>}
         <DayCarsList carsData={carsData} isModal={false} />
       </div>
       <DetailsBtn onClick={handleDetailsBtnClick} />

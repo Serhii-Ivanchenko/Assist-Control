@@ -3,12 +3,11 @@
     flex-direction: column;
     width: 1360px;
     height: 850px;
-    padding: 60px 28px 4px 28px;
+    padding: 60px 28px 22px 28px;
     align-items: flex-start;
     align-content: flex-start;
     gap: 12px;
     position: relative;
-
     background-color: #101010;
 }
 
@@ -17,13 +16,35 @@
     flex-direction: column;
     width: 100%;
     flex-grow: 1;
+    overflow: hidden;
+    
 }
 
 .scrollableContent {
     max-height: 850px;
-    overflow-y: auto;
-    /* padding-right: 10px; */
+    overflow-y: auto; 
+    scrollbar-width: thin;
+    scrollbar-color: #4A4A4A #202020;
+  
 }
+
+.scrollableContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar-thumb {
+    background-color: #4A4A4A; 
+    border-radius: 10px;
+}
+
+.scrollableContent::-webkit-scrollbar-track {
+    background: #202020;
+}
+
+.scrollableContent::-webkit-scrollbar-button {
+    display: none;
+}
+
 
 .switch {
     font-size: 17px;
