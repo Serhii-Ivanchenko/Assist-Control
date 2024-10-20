@@ -18,10 +18,10 @@
     align-items: center;
 
     color: var(--Icon-Gray, #C7C7C7);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .phoneInput {
@@ -33,18 +33,18 @@
     outline: none;
 
     color: var(--Button-grey, #4A4A4A);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
-.phoneInput::placeholder{
+.phoneInput::placeholder {
     color: var(--Button-grey, #4A4A4A);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .dropdown {
@@ -56,7 +56,7 @@
     border-radius: 10px;
     z-index: 10;
     width: 100%;
-    
+
 }
 
 .countryOption {
@@ -82,7 +82,7 @@
     transform: rotate(180deg);
 }
 
-.icon{
+.icon {
     width: 20px;
     height: 20px;
     border-radius: 50%;

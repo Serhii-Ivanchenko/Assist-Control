@@ -1,17 +1,13 @@
 .pageContent {
   width: 740px;
-  height: 600px;
+  /* height: 600px; */
   overflow: hidden;
-  background-color: #101010;
-  border-radius: 5px;
-  padding: 16px 16px 0 16px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .pageContent {
-    width: 1106px;
-    height: 900px;
-    padding: 24px 26px 0 26px;
+    width: 1052px;
+    /* height: 900px; */
   }
 }
 
@@ -22,9 +18,9 @@
   grid-row-gap: 12px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .pagegrid {
-    grid-column-gap: 19px;
-    grid-row-gap: 19px;
+    grid-column-gap: 14px;
+    grid-row-gap: 14px;
   }
 }

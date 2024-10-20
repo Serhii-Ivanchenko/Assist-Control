@@ -18,7 +18,7 @@
     position: relative;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .tooltip {
         margin-right: 9px;
     }

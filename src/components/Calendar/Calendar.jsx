@@ -143,7 +143,7 @@ export default function Calendar({ queryMonth, dataMonth }) {
           border:none;
         }
 
-        @media only screen and (min-width: 1920px) {
+        @media only screen and (min-width: 1850px) {
         .calendar-day {
         width: 54px;
           height: 27px;
