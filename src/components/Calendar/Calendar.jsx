@@ -159,7 +159,7 @@ export default function Calendar({ queryMonth, dataMonth }) {
           cursor: default;
         }
         .today {
-          border: 1px solid #fff;
+          border: 4px solid #fff;
         }
       `}</style>
     </div>
