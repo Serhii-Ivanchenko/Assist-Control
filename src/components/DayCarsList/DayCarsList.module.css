@@ -9,14 +9,14 @@
   border-radius: 8px;
   background: #23252C;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  align-items: center; 
+  align-items: center;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .dayCarsListContainer {
-  width: 460px;
-  max-height: 500px;
-  padding: 20px 42px 13px 20px;
+    width: 460px;
+    max-height: 500px;
+    padding: 20px 42px 13px 20px;
   }
 }
 
@@ -34,7 +34,7 @@
   gap: 12px;
 }
 
-.listView > * {
+.listView>* {
   display: flex;
   justify-content: space-between;
   padding: 8px;
@@ -57,7 +57,7 @@
 }
 
 .item {
-  width: 100%; 
+  width: 100%;
   max-width: 398px;
   border-radius: 8px;
   border: 2px solid var #3956CC;

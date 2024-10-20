@@ -7,7 +7,7 @@
 
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .tariffContainer {
         width: 1056px;
         padding: 40px 70px 45px 70px;
@@ -15,8 +15,8 @@
 }
 
 
-.title{
-    color:  #FFF;
+.title {
+    color: #FFF;
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -38,12 +38,12 @@
     justify-content: center;
 }
 
-.nameListItem:nth-child(odd){
-background-color:  #2D3038;
+.nameListItem:nth-child(odd) {
+    background-color: #2D3038;
 }
 
-.listItem{
-display: flex;
+.listItem {
+    display: flex;
     width: 220px;
     height: 60px;
     padding: 10px 20px;
@@ -51,8 +51,8 @@ display: flex;
     gap: 10px;
 }
 
-.listItem:nth-child(odd){
-background-color:  #2D3038;
+.listItem:nth-child(odd) {
+    background-color: #2D3038;
 }
 
 .listItem {
@@ -84,20 +84,20 @@ background-color:  #2D3038;
 
 .tariffCategoryIsActive {
     display: flex;
-        flex-direction: column;
-        /* justify-content: center; */
-        align-items: center;
-    
-        border-radius: 6px;
-        border: 2px solid #3956CC;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+
+    border-radius: 6px;
+    border: 2px solid #3956CC;
 }
 
-.tariffName{
+.tariffName {
     color: #FFF;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 
     height: 60px;
     display: flex;
@@ -128,12 +128,12 @@ background-color:  #2D3038;
     /* margin-top: 10px; */
 
     color: #FFF;
-        font-variant-numeric: lining-nums proportional-nums;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        font-variant: small-caps;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-variant: small-caps;
 
     appearance: none;
     outline: none;
@@ -150,14 +150,14 @@ background-color:  #2D3038;
 
 }
 
-.price{
-    color:  #FFF;
-        font-variant-numeric: lining-nums proportional-nums;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        font-variant: small-caps;
+.price {
+    color: #FFF;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-variant: small-caps;
 
     margin-top: 28.5px;
     margin-bottom: 18.5px;
@@ -185,15 +185,15 @@ background-color:  #2D3038;
 
     border: none;
     border-radius: 6px;
-    background:  #3956CC;
+    background: #3956CC;
 
     color: #FFF;
-        font-variant-numeric: lining-nums proportional-nums;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        font-variant: small-caps;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    font-variant: small-caps;
 
     /* margin-top: 19px; */
     margin-bottom: 30px;
@@ -208,7 +208,7 @@ background-color:  #2D3038;
     background-color: #171D35;
 }
 
-.selectBox{
+.selectBox {
     position: relative;
     margin-top: 10px;
 }
@@ -241,10 +241,10 @@ background-color:  #2D3038;
     align-items: center;
 
     border-radius: 8px;
-    border: 1px solid  #4A4A4A;
+    border: 1px solid #4A4A4A;
     background-color: transparent;
 
-    color:  #FFF;
+    color: #FFF;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;

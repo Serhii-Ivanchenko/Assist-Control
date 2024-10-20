@@ -8,10 +8,10 @@
     gap: 20px;
 }
 
-@media only screen and (min-width: 1920px) {
-  .teamBox {
-    width: 1056px;
-  }
+@media only screen and (min-width: 1850px) {
+    .teamBox {
+        width: 1056px;
+    }
 }
 
 @media only screen and (max-width: 1279.9px) {
@@ -119,7 +119,7 @@
     background-color: #171D35;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .addBtn {
         padding: 15px 30px;
     }
