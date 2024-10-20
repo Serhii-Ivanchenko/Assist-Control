@@ -170,11 +170,11 @@
 }
 
 .input:checked+.slider {
-    background-color: rgba(32, 32, 32, 1);
+    background-color: var(--bg-input);
 }
 
 .input:focus+.slider {
-    box-shadow: 0 0 1px rgba(32, 32, 32, 1);
+    box-shadow: 0 0 1px var(--bg-input);
 }
 
 .input:checked+.slider:before {
