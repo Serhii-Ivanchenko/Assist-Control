@@ -1,9 +1,10 @@
 .loginPageWrapper {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  height: 100vh;
-  flex-wrap: wrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
 }
 
 .loginPage {
