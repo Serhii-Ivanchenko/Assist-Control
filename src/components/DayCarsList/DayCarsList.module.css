@@ -2,24 +2,30 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow: hidden;
-  margin-left: 1px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 295px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #23252C;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  align-items: center; 
 }
 
-.modaldayCarsListContainer{
+@media only screen and (min-width: 1920px) {
+  .dayCarsListContainer {
+  width: 460px;
+  max-height: 500px;
+  padding: 20px 42px 13px 20px;
+  }
+}
+
+.modaldayCarsListContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
-}
-
-.dayCarsListContainer> :nth-child(n+4) {
-  display: none;
-}
-
-.withBtn> :nth-child(3) {
-  background: linear-gradient(0deg, #000 0%, #1A1A1A 66.5%);
 }
 
 .listView {
@@ -34,4 +40,26 @@
   padding: 8px;
   background-color: #1A1A1A;
   border-radius: 4px;
+}
+
+.dayCarsListContainer::-webkit-scrollbar {
+  width: 8px;
+  background: #515562;
+}
+
+.dayCarsListContainer::-webkit-scrollbar-thumb {
+  background-color: #515562;
+  border-radius: 4px;
+}
+
+.dayCarsListContainer::-webkit-scrollbar-track {
+  background-color: #17181C;
+}
+
+.item {
+  width: 100%; 
+  max-width: 398px;
+  border-radius: 8px;
+  border: 2px solid var #3956CC;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
