@@ -1,3 +1,17 @@
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import clsx from "clsx";
+import toast from "react-hot-toast";
+
+import { calculateTimeInService } from "../../../utils/calculateTimeInService";
+import { getStatusDetails } from "../../../utils/getStatusDetails";
+import { changeCarStatus } from "../../../redux/cars/operations";
+import { getCurrentCars } from "../../../redux/cars/operations";
+
+import absentAutoImg from "../../../assets/images/absentAutoImg.webp";
+import flag from "../../../assets/images/flagUa.webp";
+import CustomRadioBtn from "../../CustomRadioBtn/CustomRadioBtn";
+
 import { HiOutlineHashtag } from "react-icons/hi";
 import { BsWrench, BsCalendar2CheckFill } from "react-icons/bs";
 import { FaCircleCheck } from "react-icons/fa6";
@@ -5,21 +19,9 @@ import { MdOutlineTimer } from "react-icons/md";
 import { BsUiChecksGrid } from "react-icons/bs";
 import { BsEyeFill } from "react-icons/bs";
 import { IoMdCheckmark } from "react-icons/io";
-
-import Modal from "react-modal";
-import currentCar from "../../../assets/images/carListImg.webp";
-import flag from "../../../assets/images/flagUa.webp";
 import { IoMdClose } from "react-icons/io";
+
 import styles from "./CurrentCarModal.module.css";
-import { calculateTimeInService } from "../../../utils/calculateTimeInService";
-import { getStatusDetails } from "../../../utils/getStatusDetails";
-import clsx from "clsx";
-
-import { changeCarStatus } from "../../../redux/cars/operations";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-
-// Modal.setAppElement("#root");
 
 function CurrentCarModal({ onClose, car, status }) {
   const dispatch = useDispatch();
@@ -42,14 +44,20 @@ function CurrentCarModal({ onClose, car, status }) {
     default:
       icon = null;
   }
-  const { label, className } = getStatusDetails(car.status, icon);
+  const { label, className } = getStatusDetails(selectedStatus);
 
   const handleStatusChange = (e) => {
     setSelectedStatus(e.target.value);
   };
 
   const handleSubmit = () => {
-    dispatch(changeCarStatus({ carId: car.id, status: selectedStatus }));
+    dispatch(changeCarStatus({ carId: car.id, status: selectedStatus }))
+      .then(() => {
+        dispatch(getCurrentCars());
+      })
+      .catch((error) => {
+        toast.error("Помилка при оновленні статусу автомобіля", error.message);
+      });
     onClose();
   };
 
@@ -58,7 +66,7 @@ function CurrentCarModal({ onClose, car, status }) {
       <div className={styles.modalContainer}>
         <div className={styles.currentCarContainer}>
           <img
-            src={car.photo_url || currentCar}
+            src={car.photo_url || absentAutoImg}
             className={styles.currentCarImg}
             alt="Current car image"
           />
@@ -83,7 +91,7 @@ function CurrentCarModal({ onClose, car, status }) {
           </div>
         </div>
         <button className={styles.closeBtn} type="button" onClick={onClose}>
-          <IoMdClose className={styles.icon} />
+          <IoMdClose className={styles.iconClose} />
         </button>
 
         <p className={styles.vinCode}>
@@ -106,7 +114,9 @@ function CurrentCarModal({ onClose, car, status }) {
               value="new"
               checked={selectedStatus === "new"}
               onChange={handleStatusChange}
+              className={styles.radioInput}
             />
+            <CustomRadioBtn isChecked={selectedStatus === "new"} />
             {<BsUiChecksGrid className={styles.iconRadio} />}
             Діагностика
           </label>
@@ -117,7 +127,9 @@ function CurrentCarModal({ onClose, car, status }) {
               value="check_repair"
               checked={selectedStatus === "check_repair"}
               onChange={handleStatusChange}
+              className={styles.radioInput}
             />
+            <CustomRadioBtn isChecked={selectedStatus === "check_repair"} />
             {<BsEyeFill className={styles.iconRadio} />}
             Огляд ПР
           </label>
@@ -128,7 +140,9 @@ function CurrentCarModal({ onClose, car, status }) {
               value="repair"
               checked={selectedStatus === "repair"}
               onChange={handleStatusChange}
+              className={styles.radioInput}
             />
+            <CustomRadioBtn isChecked={selectedStatus === "repair"} />
             {<BsWrench className={styles.iconRadio} />} В ремонті
           </label>
           <label className={styles.radioComplete}>
@@ -138,7 +152,9 @@ function CurrentCarModal({ onClose, car, status }) {
               value="complete"
               checked={selectedStatus === "complete"}
               onChange={handleStatusChange}
+              className={styles.radioInput}
             />
+            <CustomRadioBtn isChecked={selectedStatus === "complete"} />
             {<FaCircleCheck className={styles.iconRadio} />}
             Завершено
           </label>

@@ -4,11 +4,11 @@ import styles from "./CurrentCarsList.module.css";
 export default function CurrentCarsList() {
   return (
     <div className={styles.wrapper}>
-      <ul className={styles.carsList}>
-        <CurrentCarsItem />
-        <CurrentCarsItem />
-        <CurrentCarsItem />
-      </ul>
+      <div className={styles.container}>
+        <ul className={styles.carsList}>
+          <CurrentCarsItem />
+        </ul>
+      </div>
     </div>
   );
 }

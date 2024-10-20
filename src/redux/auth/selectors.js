@@ -12,5 +12,3 @@ export const selectApiKey = (state) => state.auth.apiKey;
 
 export const selectError = (state) => state.auth.error;
 
-export const selectNewPassword = (state) => state.auth.newPassword;
-
