@@ -1,11 +1,12 @@
 // import { useState } from 'react';
-import css from "./PhoneSelect.module.css";
+import "./PhoneSelect.css";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 // import { useSelector } from 'react-redux';
 // import { selectUser } from '../../../../../redux/auth/selectors';
 
 export default function PhoneSelect({ value, onChange }) {
+// const [hover, setHover] = useState(false)
   // const user = useSelector(selectUser)
 
   return (
@@ -14,26 +15,24 @@ export default function PhoneSelect({ value, onChange }) {
       value={value}
       onChange={onChange}
       placeholder="1234567"
-      containerClass={css.container}
-      buttonClass={css.button}
-      inputClass={css.input}
-      dropdownClass={css.dropdown}
+      // containerClass={css.container}
+      // buttonClass={css.button}
+      // inputClass={css.input}
+      // dropdownClass={css.dropdown}
       // enableAreaCodes={true}
       // disableDropdown={false}
       containerStyle={{
         display: "flex",
         marginTop: "8px",
-        // marginBottom: '12px',
       }}
       buttonStyle={{
         display: "flex",
         alignItems: "center",
-        backgroundColor: "var(--drop-menu)",
+        backgroundColor:"var(--drop-menu)",
         borderColor: "var(--input-stroke)",
         borderRadius: "10px 0 0 10px",
         paddingLeft: "10px",
         paddingRight: "10px",
-        // width: '100px',
       }}
       inputStyle={{
         backgroundColor: "var(--bg-input)",
@@ -48,12 +47,10 @@ export default function PhoneSelect({ value, onChange }) {
         height: "56px",
         width: "420px",
       }}
-      // renderString={(selected) => (
-      //     <div className={css.customButton}>
-      //         <span className={`flag ${selected.iso2}`} />
-      //         <span className={css.dialCode}>+{selected.dialCode}</span>
-      //     </div>
-      // )}
+      dropdownStyle={{
+        backgroundColor: "var(--bg-input)",
+        marginTop: '8px',
+      }}
     />
   );
 }

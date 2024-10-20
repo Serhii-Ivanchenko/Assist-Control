@@ -1,3 +1,48 @@
+
+
+
+.react-tel-input .flag-dropdown.open .selected-flag {
+    background-color: transparent !important;
+}
+
+.react-tel-input .selected-flag {
+    background-color: transparent !important;
+}
+
+.react-tel-input .selected-flag:hover {
+    background-color: transparent !important;
+}
+
+
+
+.react-tel-input .country-list .country.highlight{
+    background-color: var(--bg-secondary) !important;
+}
+
+.react-tel-input .country-list .country:hover {
+    background-color: var(--bg-secondary) !important;
+}
+
+.react-tel-input .country-list{
+    top:100%;
+    left: 0;
+
+    border-radius: 10px !important;
+}
+
+.react-tel-input .country-list::-webkit-scrollbar{
+width: 15px;
+}
+
+.react-tel-input .country-list::-webkit-scrollbar-thumb {
+background-color: var(--bg-secondary);
+border-radius: 3px;
+}
+
+
+
+
+
 /* .phoneInputContainer {
     position: relative;
     display: flex;
