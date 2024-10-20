@@ -6,6 +6,8 @@ import { BsGear } from "react-icons/bs";
 import { BsCreditCard2Back } from "react-icons/bs";
 import { BsJustify } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../../redux/auth/selectors";
 // import { useState } from "react";
 
 
@@ -18,6 +20,9 @@ export default function UserSettingsSidebar({ setPage, page, onOpen }) {
     // const openMobMenu = () => {
     //     setOpenMobMenu(true)
     // }
+
+    const user = useSelector(selectUser);
+    const userBalance = user.balance || "0";
 
 
     return (
@@ -77,7 +82,7 @@ export default function UserSettingsSidebar({ setPage, page, onOpen }) {
                 </nav>
                 <div className={css.balanceBox}>
                 <p className={css.balance}>Баланс:</p>
-                <p className={css.amount}>123.38 грн <BsChevronRight /></p>
+                <button type="button" className={css.amount}>{userBalance} грн <BsChevronRight /></button>
             </div>
 
             

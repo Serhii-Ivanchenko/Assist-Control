@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { ErrorMessage } from "formik";
 import { TfiClose } from "react-icons/tfi";
 import { BsPersonPlusFill } from "react-icons/bs";
+// import CustomRadioBtn from "../../../CustomRadioBtn/CustomRadioBtn";
 
 const Validation = Yup.object().shape({
   name: Yup.string()
@@ -125,6 +126,7 @@ export default function AddTeamMember({ onClose }) {
                 <span className={css.castomRadio}>
                   <span className={css.dot}></span>
                 </span>
+                {/* <CustomRadioBtn/> */}
 
                 <div className={css.roleDescription}>
                   <p className={css.title}> Перегляд</p>
@@ -144,9 +146,14 @@ export default function AddTeamMember({ onClose }) {
                   id={roleAdminFieldId}
                   className={css.radioInput}
                 />
+
                 <span className={css.castomRadio}>
                   <span className={css.dot}></span>
                 </span>
+                {/* <CustomRadioBtn /> */}
+                
+
+
                 <div className={css.roleDescription}>
                   <p className={css.title}>Адміністратор</p>
                   <p className={css.text}>

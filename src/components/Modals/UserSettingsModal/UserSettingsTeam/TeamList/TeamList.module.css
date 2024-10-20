@@ -8,7 +8,7 @@
     padding-top: 33px;
     padding-bottom: 33px;
 
-    background-color: #302F2F;
+    background-color: #2D3038;
 
     display: flex;
     flex-direction: column;
@@ -25,49 +25,49 @@
     justify-content: space-between;
 }
 
- 
-.container{
+
+.container {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-@media only screen and (min-width: 1920px) {
-.container {
-    gap: 27px;
-  }
+@media only screen and (min-width: 1850px) {
+    .container {
+        gap: 27px;
+    }
 }
 
 
 @media only screen and (max-width: 1279.9px) {
-.teamList{
-    overflow-y: auto;
-    padding: 24px 30px;
-    padding-left: 50px;
-    
-    gap: 18px;
-    max-height: 423px;
-}
+    .teamList {
+        overflow-y: auto;
+        padding: 24px 30px;
+        padding-left: 50px;
 
-.contentBox {
-    align-items: flex-start;
-  }
+        gap: 18px;
+        max-height: 423px;
+    }
 
-  .container{
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
+    .contentBox {
+        align-items: flex-start;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
 }
 
 @media only screen and (max-width: 767.9px) {
-   .teamList{
-    background-color: transparent;
-    padding: 0;
-    max-height: 100%;
-    border-radius: 0;
-    gap: 30px;
-  }
+    .teamList {
+        background-color: transparent;
+        padding: 0;
+        max-height: 100%;
+        border-radius: 0;
+        gap: 30px;
+    }
 }
 
 
@@ -92,21 +92,21 @@
     background-color: antiquewhite;
 
     margin-right: 10px;
-    
+
 }
 
-.particularMemberPhoto{
+.particularMemberPhoto {
     overflow: hidden;
     width: 50px;
-        min-width: 50px;
-        height: 50px;
-        border-radius: 50%;
+    min-width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 @media only screen and (max-width: 767.9px) {
-   .memberPhoto{
-    display: none;
-  }
+    .memberPhoto {
+        display: none;
+    }
 }
 
 .nameBox {
@@ -123,8 +123,8 @@
     line-height: normal;
 }
 
-@media only screen and (max-width: 767.9px){
-    .memberName{
+@media only screen and (max-width: 767.9px) {
+    .memberName {
         font-size: 15px;
     }
 }
@@ -138,8 +138,8 @@
     line-height: normal;
 }
 
-@media only screen and (max-width: 767.9px){
-    .memberEmail{
+@media only screen and (max-width: 767.9px) {
+    .memberEmail {
         font-size: 14px;
     }
 }
@@ -159,28 +159,28 @@
     line-height: normal;
 
     cursor: default;
-    
+
 }
 
-@media only screen and (max-width: 767.9px){
-    .memberRole{
+@media only screen and (max-width: 767.9px) {
+    .memberRole {
         font-size: 14px;
     }
 }
 
-.selectBox{
+.selectBox {
     position: relative;
 }
 
 
 .binIcon {
-  display: none;
+    display: none;
 
 }
 
-.selectAndBin{
-    display:flex;
+.selectAndBin {
+    display: flex;
     gap: 19px;
     align-items: center;
-    
+
 }

@@ -1,11 +1,11 @@
 .inputSelect {
     padding: 18px 20px;
-    width:100%;
+    width: 100%;
     /* height: 43px; */
 
     display: flex;
     align-items: center;
-    
+
 
     border-radius: 10px;
     border: 1px solid #4A4A4A;
@@ -19,12 +19,12 @@
     font-weight: 400;
     line-height: normal;
 
-    cursor: pointer;    
+    cursor: pointer;
     appearance: none;
 
 
     /* margin-bottom: 24px; */
-   
+
 
     /* padding-left: 14px; */
 
@@ -34,10 +34,11 @@
     line-height: normal; */
     /* box-shadow: none; */
 }
+
 @media only screen and (max-width: 767.9px) {
-   .inputSelect{
-    font-size: 14px;
-  }
+    .inputSelect {
+        font-size: 14px;
+    }
 }
 
 .options {
@@ -63,11 +64,11 @@
     padding: 10px;
     cursor: pointer;
     padding: 10px 20px;
-    
+
 }
 
-.option:not(:last-child){
-    border-bottom:solid 1px #302F2F;
+.option:not(:last-child) {
+    border-bottom: solid 1px #302F2F;
 }
 
 .selectIcon {
@@ -85,7 +86,8 @@
 }
 
 .rotated {
-    transform: rotate(180deg);}
+    transform: rotate(180deg);
+}
 
 .selectWrapper {
     position: relative;

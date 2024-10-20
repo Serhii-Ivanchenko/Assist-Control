@@ -8,7 +8,7 @@
   
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .accountBox {
     width: 1057px;
   }
@@ -55,7 +55,7 @@
     border-radius: 10px;
     border: 1px solid #4A4A4A;
 
-    background-color: #282828;
+    background-color: #2D3038;
     outline: none;
 
     display: flex;
@@ -66,7 +66,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color:#C7C7C7;
+    color:#D8E1FF;
 }
 
 
@@ -76,7 +76,7 @@
     position: relative;
     display: flex;
     flex-direction: column; 
-    margin-bottom: 70px;
+    margin-bottom: 48px;
 
 }
 
@@ -113,7 +113,7 @@
 .passwordBox{
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
+    margin-bottom: 24px;
 }
 
 .passwortChBtn {
@@ -141,6 +141,14 @@
     cursor: pointer;
 }
 
+.passwortChBtn:hover {
+    background-color: #1C2E78;
+}
+
+.passwortChBtn:active {
+    background-color: #171D35;
+}
+
 .iconKey{
     fill: #C7C7C7;
 }
@@ -157,7 +165,7 @@
 .companyBox{
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
+    margin-bottom: 24px;
     position: relative;
 }
 
@@ -168,10 +176,10 @@
     border-radius: 10px;
     border: 1px solid #4A4A4A;
 
-    background-color: #282828;
+    background-color: #2D3038;
     outline: none;
 
-    color: #C7C7C7;
+    color: #D8E1FF;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -184,7 +192,7 @@
 }
 
 .input::placeholder{
-    color: var(--Button-grey, #4A4A4A);
+    color: #767B88;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -193,7 +201,7 @@
 }
 
 .input:-webkit-autofill{
-    background-color: #282828 !important;
+    background-color: #2D3038 !important;
     color: white !important;
     box-shadow: 0 0 0px 1000px #282828 inset !important;
     -webkit-text-fill-color: white !important;
@@ -201,7 +209,7 @@
 
 .input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus{
-    background-color: #282828 !important;
+    background-color: #2D3038 !important;
     color: white !important;
     box-shadow: 0 0 0px 1000px #282828 inset !important;
     -webkit-text-fill-color: white !important;
@@ -239,8 +247,11 @@
 .languageBox{
     display: flex;
     flex-direction: column;
-    margin-bottom: 118px;
+    /* margin-bottom: 118px; */
+    margin-bottom: 24px;
 }
+
+
 
 @media only screen and (max-width: 767.9px){
     .languageBox{
@@ -248,7 +259,11 @@
     }
 }
 
-
+.currencyBox{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 80px;
+}
 
 .btnBox {
     display: flex;
@@ -303,6 +318,14 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
+}
+
+.saveBtn:hover {
+    background-color: #1C2E78;
+}
+
+.saveBtn:active {
+    background-color: #171D35;
 }
 
 .iconSave{

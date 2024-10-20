@@ -44,7 +44,7 @@
   gap: 12px;
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1850px) {
   .wrapper {
     width: 578px;
     /* висота потрібна для відображення скролу списку поточних машин */

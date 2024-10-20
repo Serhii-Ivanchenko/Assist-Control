@@ -1,4 +1,4 @@
-.formBox{
+.formBox {
     width: 975px;
     padding: 40px 42px 45px 42px;
 
@@ -7,20 +7,27 @@
 
 }
 
-.input{
+@media only screen and (min-width: 1850px) {
+    .formBox {
+        width: 1056px;
+        padding: 40px 83px 45px 83px;
+    }
+}
+
+.input {
     width: 420px;
     padding: 18px 20px;
 
     border-radius: 10px;
-    border: 1px solid var(--Button-grey, #4A4A4A);
-    background-color: var(--Grey-Input, #282828);
+    border: 1px solid #4A4A4A;
+    background-color: #2D3038;
     outline: none;
 
-    
+
     margin-top: 8px;
 
     /* color: var(--White, var(--Color, #FFF)); */
-    color: var(--Button-grey, #4A4A4A);
+    color: #D8E1FF;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -32,84 +39,84 @@
     /* Add your desired margin here */
 }
 
-.input::placeholder{
-    color: var(--Button-grey, #4A4A4A);
+.input::placeholder {
+    color: #767B88;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
-.inputSelect{
+.inputSelect {
     appearance: none;
 }
 
-.btnArrowSelect{
+.btnArrowSelect {
     position: absolute;
-        right: 20px;
-        top: 60%;
-        /* transform: translateY(-50%); */
-        fill: white;
-        width: 20px;
-        height: 20px;
-        fill: #C7C7C7;
-        pointer-events: none;
-    }
-    
-.rotated {
-        transform: rotate(180deg);
-    }
+    right: 20px;
+    top: 60%;
+    /* transform: translateY(-50%); */
+    fill: white;
+    width: 20px;
+    height: 20px;
+    fill: #C7C7C7;
+    pointer-events: none;
+}
 
-.inputName{
+.rotated {
+    transform: rotate(180deg);
+}
+
+.inputName {
     width: 100%;
     margin-bottom: 24px;
 }
 
-.inputBox{
+.inputBox {
     position: relative;
 }
 
-.errorMessage{
+.errorMessage {
     color: #FF6363;
-        font-size: 10px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        /* margin-left: 20px; */
-    
-        cursor: default;
-        position: absolute;
-        left: 20px;
-        top: 90%;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    /* margin-left: 20px; */
+
+    cursor: default;
+    position: absolute;
+    left: 20px;
+    top: 90%;
 }
 
-.inputs{
+.inputs {
     display: flex;
     align-items: flex-start;
     gap: 51px;
 }
 
-.firstColumn{
+.firstColumn {
     display: flex;
     flex-direction: column;
 
 }
 
-.secondColumn{
+.secondColumn {
     display: flex;
     flex-direction: column;
 }
 
-.inputLable{
-    color: var(--Color, #FFF);
-        font-family: "Roboto", sans-serif;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
+.inputLable {
+    color: #FFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.photoBox{
+/* .photoBox{
     width: 120px;
     height: 120px;
     flex-shrink: 0;
@@ -117,22 +124,23 @@
     border-radius: 120px;
 
     background-color: bisque;
+} */
+
+.photo {
+    width: 126px;
+    height: 126px;
+    flex-shrink: 0;
+    border-radius: 8px;
+
+    /* border-radius: 120px; */
 }
 
-.photo{
-    width: 120px;
-        height: 120px;
-        flex-shrink: 0;
-    
-        border-radius: 120px;
-}
-
- .photoField{
+.photoField {
     display: none;
-     
-} 
 
-.changePhotoBtn{
+}
+
+.changePhotoBtn {
     width: fit-content;
     padding: 15px 30px;
 
@@ -142,22 +150,31 @@
 
     border: none;
     border-radius: 8px;
-    background-color: var(--Blue, #3956CC);
+    background-color: #3956CC;
 
-    color: var(--Color, #FFF);
+    color: #FFF;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    cursor: pointer;
 }
 
-.btnPlus{
+.changePhotoBtn:hover {
+    background-color: #1C2E78;
+}
+
+.changePhotoBtn:active {
+    background-color: #171D35;
+}
+
+.btnPlus {
     width: 20px;
     height: 20px;
     fill: #C7C7C7;
 }
 
-.addPhotoBox{
+.addPhotoBox {
     display: flex;
     gap: 60px;
     align-items: center;
@@ -179,7 +196,7 @@
     padding: 15px 30px;
 
     border-radius: 8px;
-    border: 1px solid #767676;
+    border: 1px solid #D8E1FF;
     background-color: transparent;
 
     color: #FFF;
@@ -217,6 +234,14 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
+}
+
+.saveBtn:hover {
+    background-color: #1C2E78;
+}
+
+.saveBtn:active {
+    background-color: #171D35;
 }
 
 .iconSave {

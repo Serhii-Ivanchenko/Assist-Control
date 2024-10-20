@@ -9,7 +9,7 @@
     position: relative;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .loadStatsContainer {
         width: 210px;
         height: 115px;
@@ -25,7 +25,7 @@
     height: 61px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .statsChart {
         top: 3px;
         left: 6px;
@@ -44,7 +44,7 @@
     align-items: flex-end;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .percentage {
         margin-bottom: 2px;
   }
@@ -58,7 +58,7 @@
     line-height: normal;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .description {
         font-size: 14px;
         width: fit-content;
