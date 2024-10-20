@@ -2,7 +2,6 @@ import styles from "./DayCarsItem.module.css";
 import carImage from "../../assets/images/carsItem.png";
 import clsx from "clsx";
 import {
-  BsPencil,
   BsPersonFill,
   BsTelephoneOutboundFill,
   BsStopwatch,
@@ -40,14 +39,17 @@ export default function DayCarsItem({
       )}
     >
       <div className={styles.userInfo}>
-      <div>{renderStatus(status, complete_d, styles)}</div>
+        <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>
           <div className={styles.infoName}>
             <BsPersonFill className={styles.iconHuman} color="#617651" />
             <span className={styles.textName}>Іван Петренко</span>
           </div>
           <div className={styles.infoTel}>
-            <BsTelephoneOutboundFill className={styles.iconTel} color="#006D95" />
+            <BsTelephoneOutboundFill
+              className={styles.iconTel}
+              color="#006D95"
+            />
             <span className={styles.textTel}>0733291217</span>
           </div>
           <div className={styles.infoCar}>
@@ -56,9 +58,7 @@ export default function DayCarsItem({
           </div>
         </div>
         <div className={styles.infoVin}>
-          <span className={styles.vinNum}>
-            {vin ? vin : "VIN-XXXXXXXXXXX"}
-          </span>
+          <span className={styles.vinNum}>{vin ? vin : "VIN-XXXXXXXXXXX"}</span>
         </div>
         <div className={styles.btnContainer}>
           <button className={styles.btnDetail}>
@@ -78,9 +78,6 @@ export default function DayCarsItem({
             <AiFillStar color="#F5A623" />
             <AiFillStar color="#FFF" />
           </div>
-          <button className={styles.carBtnNumber}>
-            <BsPencil size={13} color="#C7C7C7" />
-          </button>
           <div className={styles.prevCoast}>
             <p className={styles.money}>₴ 2,200.00</p>
           </div>
