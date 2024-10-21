@@ -35,11 +35,11 @@ export default function UserSettingsProfile({ onClose }) {
   const userName = user.name || "";
   const userPhone = user.phone_number || "";
   const userDefaultPage = user.first_page || "";
-  const userTimeZone = user.timeZone || "";
+  const userTimeZone = user.time_zone || "";
   const userPhoto = user.avatar_url || "";
 
   const [avatar, setAvatar] = useState(userPhoto);
-  console.log("Current avatar URL:", avatar);
+  // console.log("Current avatar URL:", avatar);
 
   const nameFieldId = useId();
   const phoneFieldId = useId();
@@ -56,12 +56,12 @@ export default function UserSettingsProfile({ onClose }) {
     country: "Ukraine",
     adress: "",
     section: userDefaultPage,
-    timeZome: userTimeZone,
+    timeZone: userTimeZone,
     city: "",
     index: "",
   };
 
-  const [phone, setPhone] = useState(initialValues.phone);
+  // const [phone, setPhone] = useState(initialValues.phone);
 
   const handleChangePhoto = () => {
     if (fileInputRef.current) {
@@ -76,7 +76,8 @@ export default function UserSettingsProfile({ onClose }) {
       setAvatar(newAvatarUrl);
       try {
         const response = await dispatch(updateUserAvatar(file)).unwrap();
-        console.log(response);
+        // console.log(response);
+        setAvatar(response.data.update_photo)
         dispatch(getUserData());
         //       if (response.avatar_url) {
         //     setAvatar(response.avatar_url); // Update with the URL from the server response
@@ -122,13 +123,19 @@ export default function UserSettingsProfile({ onClose }) {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
 
+  const handleBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setActiveDropdown(null);
+    }
+  };
+
   const handleSubmit = async (values, actions) => {
     console.log(values);
 
     const dataToUpdate = {};
 
-    if (values.username !== user.name) {
-      dataToUpdate.name = values.username;
+    if (values.username !== user.first_name) {
+      dataToUpdate.first_name = values.username;
     }
 
     //   if (values.country !== 'Ukraine') {
@@ -147,8 +154,8 @@ export default function UserSettingsProfile({ onClose }) {
       dataToUpdate.first_page = values.section;
     }
 
-    if (values.timeZone !== user.timeZone) {
-      dataToUpdate.timeZone = values.timeZone;
+    if (values.time_zone !== user.timeZone) {
+      dataToUpdate.timeZone = values.time_zone;
     }
 
     //     if (values.city !== user.city) {
@@ -188,12 +195,13 @@ export default function UserSettingsProfile({ onClose }) {
   };
 
   return (
-    <div className={css.contentBox} ref={selectRef}>
+    <div className={css.contentBox} ref={selectRef} onBlur={handleBlur}>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={Validation}
       >
+        {({ setFieldValue }) => (
         <Form className={css.formBox}>
           <div className={css.addPhotoBox}>
             <div className={css.photoBox}>
@@ -246,8 +254,8 @@ export default function UserSettingsProfile({ onClose }) {
                   name="phone"
                   id={phoneFieldId}
                   className={css.input}
-                  value={phone}
-                  onChange={(value) => setPhone(value)}
+                  // value={userPhone}
+                  onChange={(value, form) => form.setFieldValue("phone", value)}
                   component={PhoneSelect}
                   placeholder="Введіть свій номер телефону..."
                 />
@@ -335,8 +343,8 @@ export default function UserSettingsProfile({ onClose }) {
                   onClick={() => toggleDropdown(2)}
                 >
                   {/* <option value="default">За замовченням</option> */}
-                  <option value="kyiv">(UTC +03:00) Київ</option>
-                  <option value="london">(GTM +01:00) London</option>
+                  <option value="Europe/Kyiv">(UTC +03:00) Київ</option>
+                  <option value="Europe/London">(GTM +01:00) London</option>
                 </Field>
                 <BsFillCaretDownFill
                   className={`${css.btnArrowSelect} ${
@@ -392,7 +400,8 @@ export default function UserSettingsProfile({ onClose }) {
               <BsSdCardFill className={css.iconSave} /> Зберегти зміни
             </button>
           </div>
-        </Form>
+          </Form>
+            )}
       </Formik>
     </div>
   );
