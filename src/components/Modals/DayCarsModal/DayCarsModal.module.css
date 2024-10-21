@@ -1,8 +1,8 @@
 .containerCarModal {
     display: flex;
     flex-direction: column;
-    width: 1360px;
-    height: 850px;
+    width: 800px;
+    height: 616px;
     padding: 60px 28px 22px 28px;
     align-items: flex-start;
     align-content: flex-start;
@@ -10,6 +10,13 @@
     position: relative;
     background-color: var(--bg-secondary);
 }
+
+@media only screen and (min-width: 1850px) {
+    .containerCarModal {
+        width: 1360px;
+        height: 850px;
+    }
+  }
 
 .content {
     display: flex;
@@ -21,12 +28,18 @@
 }
 
 .scrollableContent {
-    max-height: 850px;
+    flex-grow: 1;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--input-stroke) var(--bg);
-
 }
+
+@media only screen and (min-width: 1850px) {
+    .containerCarModal {
+        max-height: 850px;
+    }
+  }
+
 
 .scrollableContent::-webkit-scrollbar {
     width: 8px;
@@ -44,6 +57,7 @@
 .scrollableContent::-webkit-scrollbar-button {
     display: none;
 }
+
 
 
 .switch {
@@ -71,7 +85,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--bg);
+    background-color: var(--bg-input);
     transition: .4s;
     border-radius: 30px;
 }
@@ -90,7 +104,7 @@
 }
 
 .iconRight {
-    color: var(--input-stroke);
+    color: var(--icon-gray);
     position: absolute;
     top: 5px;
     left: 28px;
@@ -100,7 +114,7 @@
 }
 
 .iconLeft {
-    color: var(--input-stroke);
+    color: var(--icon-gray);
     position: absolute;
     top: 5px;
     left: 6px;

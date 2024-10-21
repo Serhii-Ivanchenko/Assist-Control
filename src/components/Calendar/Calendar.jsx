@@ -106,9 +106,9 @@ export default function Calendar({ queryMonth, dataMonth }) {
             disabled={isDateDisabled(item.date)}
             style={{
               backgroundColor: getButtonColor(item.percent),
-              border: item.date.isSame(selectedDate, "day")
-                ? " 4px solid var(--white)"
-                : "1px solid transparent",
+              // border: item.date.isSame(selectedDate, "day")
+              //   ? " 1px solid var(--white)"
+              //   : "1px solid transparent",
             }}
             className={`calendar-day  
               ${item.date.date() > currentDate.date() ? "cursordefault" : ""} 
@@ -140,6 +140,7 @@ export default function Calendar({ queryMonth, dataMonth }) {
           font-weight: 300;
           line-height: normal;
           border:none;
+          position: relative;
         }
 
         @media only screen and (min-width: 1850px) {
@@ -158,8 +159,22 @@ export default function Calendar({ queryMonth, dataMonth }) {
           cursor: default;
         }
         .today {
-          border: 4px solid var(--white);
+           border: 1px solid var(--white);
+           z-index: 1;
         }
+.today::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 3px solid var(--white);
+    border-radius: 5px;
+    pointer-events: none;
+     z-index: -1;
+}
+
       `}</style>
     </div>
   );

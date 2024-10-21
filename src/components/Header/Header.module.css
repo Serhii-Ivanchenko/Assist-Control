@@ -1,5 +1,6 @@
 .header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     padding-top: 16px;
     padding-bottom: 11px;
@@ -7,6 +8,12 @@
 
 @media only screen and (min-width: 1850px) {
 .header {
-    padding: 0;
+    padding: 10px 0;
   }
+}
+
+.leftSideWrapper{
+  display: flex;
+  align-items: center;
+  gap: 27px;
 }
