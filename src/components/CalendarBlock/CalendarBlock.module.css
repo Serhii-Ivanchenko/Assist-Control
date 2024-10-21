@@ -7,13 +7,19 @@
 
 @media only screen and (min-width: 1850px) {
   .calendarContainer {
-    width: 454px;
-
+    width: 460px;
 }
 }
 
 .topContainer {
   display: flex;
   flex-direction: column;
-  gap: 17px;
+  gap: 14px;
+}
+
+@media only screen and (min-width: 1850px) {
+  .topContainer {
+    max-height: 883px;
+
+  }
 }
