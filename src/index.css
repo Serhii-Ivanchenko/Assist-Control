@@ -1,76 +1,131 @@
 :root {
   /* backgrounds */
-  --bg: #17181C;
-  --bg-secondary: #23252C;
-  --bg-input: #2D3038;
-  --player-secondary-bg: #4E505F;
-  --current-mileage-bg: #1D2523;
+  --bg: #17181c;
+  --bg-secondary: #23252c;
+  --bg-input: #2d3038;
+  --player-secondary-bg: #4e505f;
+  --current-mileage-bg: #1d2523;
 
   /* btns colors */
   --green-btn-normal: #008000;
   --green-btn-hover: #005900;
   --green-btn-inactive: #002500;
-  --blue-btn-normal: #3956CC;
-  --blue-btn-hover: #1C2E78;
-  --blue-btn-inactive: #171D35;
+  --blue-btn-normal: #3956cc;
+  --blue-btn-hover: #1c2e78;
+  --blue-btn-inactive: #171d35;
 
   /* other elements or text colors */
   --white: #fff;
   --black: #000000;
-  --light-gray: #D8E1FF;
+  --light-gray: #d8e1ff;
   --main-gray: #515562;
-  --dark-gray: #23252C;
+  --dark-gray: #23252c;
   --text-gray: #959595;
   --green: #008000;
-  --blue: #3956CC;
-  --play-btn-triangle: #00A3FF;
-  --red: #D54E4F;
-  --mint: #A1FFC5;
-  --icon-gray: #C7C7C7;
-  --star-orange: #F9B068;
-  --star-white: #FFF8F1;
-  --client: #70AB87;
-  --input-stroke: #4A4A4A;
-  --input-text: #767B88;
-  --drop-menu: #242D43;
-  --current-mileage-text: #43A48D;
-  --last-service-mileage-bg: #25211D;
-  --last-service-mileage-text: #A97742;
-  --visit-date-bg: #28232A;
-  --visit-date-bg: #D54E4F;
-  --stats-all: #465D9B;
+  --blue: #3956cc;
+  --play-btn-triangle: #00a3ff;
+  --red: #d54e4f;
+  --mint: #a1ffc5;
+  --icon-gray: #c7c7c7;
+  --star-orange: #f9b068;
+  --star-white: #fff8f1;
+  --client: #70ab87;
+  --input-stroke: #4a4a4a;
+  --input-text: #767b88;
+  --drop-menu: #242d43;
+  --current-mileage-text: #43a48d;
+  --last-service-mileage-bg: #25211d;
+  --last-service-mileage-text: #a97742;
+  --visit-date-bg: #28232a;
+  --visit-date-bg: #d54e4f;
+  --stats-all: #465d9b;
 
   /* statuses */
-  --status-new: #EBD534;
-  --status-diag: #6B84FF;
-  --status-repair: #B25BC2;
-  --status-complete: #53C178;
+  --status-new: #ebd534;
+  --status-diag: #6b84ff;
+  --status-repair: #b25bc2;
+  --status-complete: #53c178;
   --status-check-repair: ;
-  --glow-repair: #D926E9;
-  --glow-diag: #265DE9;
-  --glow-complete: #71E926;
-  --glow-new: #E9D226;
-
+  --glow-repair: #d926e9;
+  --glow-diag: #265de9;
+  --glow-complete: #71e926;
+  --glow-new: #e9d226;
 
   /* calendar */
-  --calendar-gray: #4A4A4A;
-  --dark-orange: #755D45;
-  --mid-orange: #A97742;
-  --orange: #DB8120;
+  --calendar-gray: #4a4a4a;
+  --dark-orange: #755d45;
+  --mid-orange: #a97742;
+  --orange: #db8120;
 
   /* gradients */
-  --border-gradient-new: linear-gradient(45deg, #F5DD23 10%, #2B2C2C 16%, #23252C 85%, #DBC624 90%);
-  --border-gradient-diag: linear-gradient(45deg, #3956CC 10%, #2B2C2C 16%, #23252C 85%, #3956CC 90%);
-  --border-gradient-repair: linear-gradient(45deg, #994CA5 10%, #2B2C2C 16%, #23252C 85%, #994CA5 90%);
-  --border-gradient-complete: linear-gradient(45deg, ##246D4D 10%, #2B2C2C 16%, #23252C 85%, ##246D4D 90%);
+  --border-gradient-new: linear-gradient(
+    45deg,
+    #f5dd23 10%,
+    #2b2c2c 16%,
+    #23252c 85%,
+    #dbc624 90%
+  );
+  --border-gradient-diag: linear-gradient(
+    45deg,
+    #3956cc 10%,
+    #2b2c2c 16%,
+    #23252c 85%,
+    #3956cc 90%
+  );
+  --border-gradient-repair: linear-gradient(
+    45deg,
+    #994ca5 10%,
+    #2b2c2c 16%,
+    #23252c 85%,
+    #994ca5 90%
+  );
+  --border-gradient-complete: linear-gradient(
+    45deg,
+    ##246d4d 10%,
+    #2b2c2c 16%,
+    #23252c 85%,
+    ##246d4d 90%
+  );
 
-  --status-gradient-new: linear-gradient(90deg, #95A54C4D 0%, #E9D92600 100%);
-  --status-gradient-diag: linear-gradient(90deg, #4154B04D 0%, #2654E900 100%);
-  --status-gradient-repair: linear-gradient(90deg, #994CA54D 0%, #AB26E900 100%);
-  --status-gradient-complete: linear-gradient(90deg, #4CA54C4D 0%, #3DE92600 100%);
+  --status-gradient-new: linear-gradient(270deg, #95a54c4d 0%, #e9d92600 100%);
+  --status-gradient-diag: linear-gradient(270deg, #4154b04d 0%, #2654e900 100%);
+  --status-gradient-repair: linear-gradient(
+    270deg,
+    #994ca54d 0%,
+    #ab26e900 100%
+  );
+  --status-gradient-complete: linear-gradient(
+    270deg,
+    #4ca54c4d 0%,
+    #3de92600 100%
+  );
 
-  --master-gradient-diag: linear-gradient(90deg, #4154B04D 0%, #2654E900 100%);
-  --master-gradient-repair: linear-gradient(90deg, #994CA54D 0%, #AB26E900 100%);
+  --master-gradient-diag: linear-gradient(90deg, #4154b04d 0%, #2654e900 100%);
+  --master-gradient-repair: linear-gradient(
+    90deg,
+    #994ca54d 0%,
+    #ab26e900 100%
+  );
+  --current-status-gradient-new: linear-gradient(
+    270deg,
+    #95a54c4d 0%,
+    #e9d92600 100%
+  );
+  --current-status-gradient-diag: linear-gradient(
+    270deg,
+    #4154b04d 0%,
+    #2654e900 100%
+  );
+  --current-status-gradient-repair: linear-gradient(
+    270deg,
+    #994ca54d 0%,
+    #ab26e900 100%
+  );
+  --current-status-gradient-complete: linear-gradient(
+    270deg,
+    #4ca54c4d 0%,
+    #3de92600 100%
+  );
 }
 
 @font-face {
