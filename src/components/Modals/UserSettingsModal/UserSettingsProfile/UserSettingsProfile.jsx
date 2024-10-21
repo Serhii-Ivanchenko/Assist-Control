@@ -27,6 +27,7 @@ const Validation = Yup.object().shape({
 export default function UserSettingsProfile({ onClose }) {
   const fileInputRef = useRef(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const selectRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -187,7 +188,7 @@ export default function UserSettingsProfile({ onClose }) {
   };
 
   return (
-    <div className={css.contentBox}>
+    <div className={css.contentBox} ref={selectRef}>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}

@@ -8,18 +8,32 @@ import { BsJustify } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../../redux/auth/selectors";
-// import { useState } from "react";
+import { useState } from "react";
+import Modal from "../../Modal/Modal";
+import PaymentTopUpAccountModal from "../../PaymentTopUpAccountModal/PaymentTopUpAccountModal"
 
 
 
 
 export default function UserSettingsSidebar({ setPage, page, onOpen }) {
+
     
     // const [mobMenu, setOpenMobMenu] = useState(false);
 
     // const openMobMenu = () => {
     //     setOpenMobMenu(true)
     // }
+
+     const [modalIsOpen, setIsOpen] = useState(false);
+
+    
+    const openModal = () => {
+      setIsOpen(true);
+        };
+        
+        const handleModalClose = () => {
+      setIsOpen(false);
+  };
 
     const user = useSelector(selectUser);
     const userBalance = user.balance || "0";
@@ -82,7 +96,12 @@ export default function UserSettingsSidebar({ setPage, page, onOpen }) {
                 </nav>
                 <div className={css.balanceBox}>
                 <p className={css.balance}>Баланс:</p>
-                <button type="button" className={css.amount}>{userBalance} грн <BsChevronRight /></button>
+                    <button type="button" className={css.amount} onClick={openModal}>{userBalance} грн <BsChevronRight /></button>
+                    {
+          modalIsOpen && <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+            <PaymentTopUpAccountModal onClose={handleModalClose}/>
+          </Modal>
+          }
             </div>
 
             
