@@ -1,11 +1,12 @@
 import { Field, Form, Formik } from "formik";
 import css from "../PaymentDetailsModal/PaymentDetailsModal.module.css";
+import CustomRadioBtn from "../../CustomRadioBtn/CustomRadioBtn.jsx";
 import privat24Icon from "../../../assets/images/PaymentIcons/pm-25 1.png";
 import plataByMono from "../../../assets/images/PaymentIcons/plataByMono.png";
+import infoIcon from "../../../assets/images/PaymentIcons/infoIcon.png";
+import { BsFillInfoCircleFill } from "react-icons/bs";
 import { BsXLg } from "react-icons/bs";
 import { BsCreditCard2Back } from "react-icons/bs";
-import { BsRecord2 } from "react-icons/bs";
-import { BsRecord } from "react-icons/bs";
 import { BsHandbag } from "react-icons/bs";
 import { BsReceipt } from "react-icons/bs";
 import { BsCurrencyBitcoin } from "react-icons/bs";
@@ -47,11 +48,9 @@ export default function PaymentDatailsModal({ onClose, sumToPay }) {
         {({ values }) => (
           <Form className={css.buttomSectionWrapper}>
             <div className={css.fieldWrapper}>
-              {values.picked === "Банківська картка, PayPal" ? (
-                <BsRecord2 className={css.checkedIcon} />
-              ) : (
-                <BsRecord className={css.checkedIcon} />
-              )}
+              <CustomRadioBtn
+                isChecked={values.picked === "Банківська картка, PayPal"}
+              />
               <BsCreditCard2Back className={css.icon} />
               <Field
                 type="radio"
@@ -63,13 +62,22 @@ export default function PaymentDatailsModal({ onClose, sumToPay }) {
               <label htmlFor="payPal" className={css.label}>
                 Банківська картка, PayPal
               </label>
+              <div className={css.tooltip}>
+                <BsFillInfoCircleFill className={css.infoIcon} />
+                <div className={css.tooltipContent}>
+                  <img src={infoIcon} className={css.infoNotification} />
+                  <p className={css.infoText}>
+                    При оплаті цим способом можлива конвертація валют.
+                  </p>
+                </div>
+              </div>
             </div>
             <div className={css.fieldWrapper}>
-              {values.picked === "Банківська картка (грн.), Приват24" ? (
-                <BsRecord2 className={css.checkedIcon} />
-              ) : (
-                <BsRecord className={css.checkedIcon} />
-              )}
+              <CustomRadioBtn
+                isChecked={
+                  values.picked === "Банківська картка (грн.), Приват24"
+                }
+              />
               <img
                 src={privat24Icon}
                 alt="Логотип Приват 24"
@@ -87,11 +95,9 @@ export default function PaymentDatailsModal({ onClose, sumToPay }) {
               </label>
             </div>
             <div className={css.fieldWrapper}>
-              {values.picked === "Онлайн-оплата карткою (грн.)" ? (
-                <BsRecord2 className={css.checkedIcon} />
-              ) : (
-                <BsRecord className={css.checkedIcon} />
-              )}
+              <CustomRadioBtn
+                isChecked={values.picked === "Онлайн-оплата карткою (грн.)"}
+              />
               <img
                 src={plataByMono}
                 alt="Логотип Моно банка"
@@ -109,11 +115,11 @@ export default function PaymentDatailsModal({ onClose, sumToPay }) {
               </label>
             </div>
             <div className={css.fieldWrapper}>
-              {values.picked === "Рахунок на оплату для юридичних осіб" ? (
-                <BsRecord2 className={css.checkedIcon} />
-              ) : (
-                <BsRecord className={css.checkedIcon} />
-              )}
+              <CustomRadioBtn
+                isChecked={
+                  values.picked === "Рахунок на оплату для юридичних осіб"
+                }
+              />
               <BsHandbag className={css.icon} />
               <Field
                 type="radio"
@@ -127,11 +133,11 @@ export default function PaymentDatailsModal({ onClose, sumToPay }) {
               </label>
             </div>
             <div className={css.fieldWrapper}>
-              {values.picked === "Квитанція банку для фізичних осіб" ? (
-                <BsRecord2 className={css.checkedIcon} />
-              ) : (
-                <BsRecord className={css.checkedIcon} />
-              )}
+              <CustomRadioBtn
+                isChecked={
+                  values.picked === "Квитанція банку для фізичних осіб"
+                }
+              />
               <BsReceipt className={css.icon} />
               <Field
                 type="radio"
@@ -145,11 +151,11 @@ export default function PaymentDatailsModal({ onClose, sumToPay }) {
               </label>
             </div>
             <div className={css.fieldWrapper}>
-              {values.picked === "Криптовалюта (BTC, ETH, USDT та ін.)" ? (
-                <BsRecord2 className={css.checkedIcon} />
-              ) : (
-                <BsRecord className={css.checkedIcon} />
-              )}
+              <CustomRadioBtn
+                isChecked={
+                  values.picked === "Криптовалюта (BTC, ETH, USDT та ін.)"
+                }
+              />
               <BsCurrencyBitcoin className={css.icon} />
               <Field
                 type="radio"
