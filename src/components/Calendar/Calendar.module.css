@@ -59,9 +59,27 @@
 }
 
 .calendar-day {
-    padding: 10px;
-    /* border: 1px solid #ccc; */
     text-align: center;
+    color: var(--white);
+    width: 36px;
+    height: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    border: none;
+}
+
+@media only screen and (min-width: 1850px) {
+    .calendar-day {
+        width: 54px;
+        height: 27px;
+        font-size: 16px;
+    }
 }
 
 
@@ -73,4 +91,20 @@
 .today {
     background-color: #4caf50;
     color: white;
+}
+
+.today::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    /* Смещение наружу для создания внешней рамки */
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 4px solid #3498db;
+    /* Цвет и ширина внешней рамки */
+    border-radius: 3px;
+    /* Повторяет закругления кнопки, если нужно */
+    pointer-events: none;
+    /* Чтобы внешняя рамка не мешала кликам */
 }
