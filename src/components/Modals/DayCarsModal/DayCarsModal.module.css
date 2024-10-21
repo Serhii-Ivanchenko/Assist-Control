@@ -85,7 +85,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--bg-input);
+    background-color: var(--bg);
     transition: .4s;
     border-radius: 30px;
 }
@@ -184,7 +184,7 @@
 }
 
 .input:checked+.slider {
-    background-color: var(--bg-input);
+    background-color: var(--bg);
 }
 
 .input:focus+.slider {

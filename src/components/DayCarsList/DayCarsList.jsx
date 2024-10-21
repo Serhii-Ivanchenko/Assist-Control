@@ -20,6 +20,7 @@ export default function DayCarsList({ carsData, isModal, viewMode = "grid" }) {
         const CarItemComponent = viewMode === "list" ? DayCarsItemLine : DayCarsItem;
 
         return (
+          
           <CarItemComponent
             className={styles.item}
             key={car.id}

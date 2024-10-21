@@ -14,6 +14,8 @@ import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
 import { renderTime } from "../../utils/renderTime.js";
 import renderStatus from "../../utils/renderStatus.jsx";
+import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
+
 
 export default function DayCarsItem({
   carNumber,
@@ -31,12 +33,15 @@ export default function DayCarsItem({
 
   const carPhoto = photoUrl || absentAutoImg;
 
+ 
+
   return (
     <div
       className={clsx(
         styles.dayCarsItemContainer,
         isModal && styles.modalDayCarsItemContainer
       )}
+      style={getBackgroundStyle(status)} 
     >
       <div className={styles.userInfo}>
         <div>{renderStatus(status, complete_d, styles)}</div>

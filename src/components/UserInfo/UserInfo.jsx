@@ -3,14 +3,20 @@ import defaultAvatar from "../../assets/images/avatar_default.png";
 import { FaChevronRight } from "react-icons/fa";
 import { selectUser } from "../../redux/auth/selectors";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import Modal from "../Modals/Modal/Modal.jsx";
+import PaymentTopUpAccountModal from "../Modals/PaymentTopUpAccountModal/PaymentTopUpAccountModal.jsx";
 
 export default function UserInfo() {
   const user = useSelector(selectUser);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
-  console.log("User data:", user);
+  const openModal = () => {
+    setIsOpen(true);
+  };
 
-  const handleBalanceClick = () => {
-    console.log("Open transaction history modal");
+  const handleModalClose = () => {
+    setIsOpen(false);
   };
 
   const avatarUrl = user?.avatar_url || defaultAvatar;
@@ -32,10 +38,17 @@ export default function UserInfo() {
       </div>
       <div className={styles.balance}>
         <span className={styles.balanceText}>Баланс:</span>
-        <button onClick={handleBalanceClick} className={styles.balanceButton}>
+        <button onClick={openModal} className={styles.balanceButton}>
           <span className={styles.num}>{balance} грн</span>
           <FaChevronRight className={styles.icon} />
         </button>
+
+       
+        {modalIsOpen && (
+          <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+            <PaymentTopUpAccountModal onClose={handleModalClose} />
+          </Modal>
+        )}
       </div>
     </div>
   );
