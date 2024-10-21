@@ -38,7 +38,7 @@ export default function LoginForm() {
         toast.success("Welcome to Assist CONTROL", {
           position: "top-center",
           style: {
-            background: "#242525",
+            background: "var(--bg-input)",
             color: "#FFFFFF",
           },
         });
@@ -48,7 +48,7 @@ export default function LoginForm() {
           toast.error("Невірний логін або пароль", {
             position: "top-center",
             style: {
-              background: "#242525",
+              background: "var(--bg-input)",
               color: "#FFFFFF",
             },
           });
@@ -56,7 +56,7 @@ export default function LoginForm() {
           toast.error("Щось сталося, спробуйте ще раз", {
             position: "top-center",
             style: {
-              background: "#242525",
+              background: "var(--bg-input)",
               color: "#FFFFFF",
             },
           });

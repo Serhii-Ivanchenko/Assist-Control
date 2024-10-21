@@ -93,7 +93,7 @@ export default function LoadStatsChart() {
           stroke="white" // Белая обводка
           strokeWidth={1} // Толщина обводки 1 пиксель
         />
-        <circle cx={cx} cy={cy} r={3} fill="#3956cc" stroke="none" />
+        <circle cx={cx} cy={cy} r={3} fill="#00A3FF" stroke="none" />
       </>
     );
   };
@@ -125,8 +125,8 @@ export default function LoadStatsChart() {
 }));
 
 const filteredData = arrdata.filter(item => item.hour >= workHours.start && item.hour <= workHours.end);
-  const data = filteredData.map(el => ({ ...el, hour: el.hour + '.00' }));
-  const interval= workHours.end-workHours.start-1;
+   const data = filteredData.map(el => ({ ...el, hour: el.hour + '.00' }));
+  // const interval= workHours.end-workHours.start-1;
   //  console.log(workHours.end, workHours.start, interval);
   
   return (
@@ -173,25 +173,30 @@ const filteredData = arrdata.filter(item => item.hour >= workHours.start && item
 
             <XAxis
               dataKey="hour"
-              interval={interval}
+              interval={0}
               padding={{ right: 10 }}
               tick={{ fontSize: 10 }}
+               tickFormatter={(value) => (value.slice(0,-3) )}
             />
 
             <YAxis
               domain={[0, (dataMax) => dataMax]}
               dataKey="value"
               margin={{ topt: 10 }}
-              // tickCount={5}
-              tick={{ fill: "transparent" }}
+               interval={0}
+              //  tickCount={12}
+              // tick={{ fill: "transparent" }}
               axisLine={{ fill: "transparent" }}
               //  tickFormatter={(value) => (value / 1000).toFixed(1)}
-              width={5}
+              width={20}
               // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
-              //  ticks={[0, 2, 4, 6, 8, 10]}
+                ticks={[0,1,2,3,4,5,6,7,8,9,10,11,12]}
             />
 
-            <Tooltip content={<CustomTooltip />} />
+             <Tooltip content={<CustomTooltip />} /> 
+            {/* <Tooltip contentStyle={{ backgroundColor: '#fff', border: '1px solid #ccc' }} */}
+            
+            {/* /> */}
 
             <Area
               type="monotone"

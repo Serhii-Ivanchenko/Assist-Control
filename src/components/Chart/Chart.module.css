@@ -2,7 +2,7 @@
     /* border-radius: 5px;
     width: 310px;
     height: 270px;
-    background: #1a1a1a; */
+    background: var(--bg-secondary); */
     /* border: 1px solid #000; */
     /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); */
 }
@@ -20,7 +20,7 @@
     margin-bottom: 16px; */
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .charttitle {
 
         margin-bottom: 24px;
@@ -32,7 +32,7 @@
     height: 220px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .areabox {
         width: 405px;
         height: 325px;
@@ -48,7 +48,7 @@
 
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .responsecontainer {
         /* padding-left: 15px;
         padding-right: 15px; */

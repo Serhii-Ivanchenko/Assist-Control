@@ -4,7 +4,7 @@
   height: 74px;
   gap: 8px;
 
-  background-color: #1a1a1a;
+  background-color: var(--bg-secondary);
   border: transparent;
   border-radius: 6px;
   padding: 5px 8px 5px 5px;
@@ -136,14 +136,14 @@
   color: #3956cc;
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1850px) {
   .wrapper {
     display: flex;
     width: 556px;
     height: 105px;
     padding: 3px 5px;
 
-    background-color: #1a1a1a;
+    background-color: var(--bg-secondary);
 
     gap: 16px;
 

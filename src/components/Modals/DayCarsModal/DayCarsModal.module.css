@@ -8,7 +8,7 @@
     align-content: flex-start;
     gap: 12px;
     position: relative;
-    background-color: #101010;
+    background-color: var(--bg-secondary);
 }
 
 .content {
@@ -17,15 +17,15 @@
     width: 100%;
     flex-grow: 1;
     overflow: hidden;
-    
+
 }
 
 .scrollableContent {
     max-height: 850px;
-    overflow-y: auto; 
+    overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #4A4A4A #202020;
-  
+
 }
 
 .scrollableContent::-webkit-scrollbar {
@@ -33,7 +33,7 @@
 }
 
 .scrollableContent::-webkit-scrollbar-thumb {
-    background-color: #4A4A4A; 
+    background-color: #4A4A4A;
     border-radius: 10px;
 }
 
@@ -54,9 +54,9 @@
     height: 27px;
     cursor: pointer;
 
-        position: absolute;
-            top: 12px;
-            left: 30px;
+    position: absolute;
+    top: 12px;
+    left: 30px;
 }
 
 .switch input {
@@ -170,11 +170,11 @@
 }
 
 .input:checked+.slider {
-    background-color: rgba(32, 32, 32, 1);
+    background-color: var(--bg-input);
 }
 
 .input:focus+.slider {
-    box-shadow: 0 0 1px rgba(32, 32, 32, 1);
+    box-shadow: 0 0 1px var(--bg-input);
 }
 
 .input:checked+.slider:before {

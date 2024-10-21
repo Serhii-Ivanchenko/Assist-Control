@@ -4,7 +4,7 @@
     align-items: center;
     width: 338px;
     height: 150px;
-    background-color: #1A1A1A;
+    background-color: var(--bg-secondary);
     border-radius: 5px;
     flex-direction: column;
     gap: 10px;

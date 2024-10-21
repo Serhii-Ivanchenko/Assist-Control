@@ -22,7 +22,7 @@ export default function SendResetEmailForm({ onClose }) {
             position: "top-center",
             duration: 30000,
             style: {
-              background: "#242525",
+              background: "var(--bg-input)",
               color: "#FFFFFF",
             },
           }
@@ -33,7 +33,7 @@ export default function SendResetEmailForm({ onClose }) {
         toast.error("Щось сталося, спробуйте ще раз", {
           position: "top-center",
           style: {
-            background: "#242525",
+            background: "var(--bg-input)",
             color: "#FFFFFF",
           },
         });

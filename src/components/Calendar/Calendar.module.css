@@ -5,7 +5,7 @@
     height: auto;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .containercalendar {
         margin-top: 30px;
         width: 422px;
@@ -32,7 +32,7 @@
     line-height: normal;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .weekdays {
         font-size: 16px;
         height: 24px;
@@ -50,7 +50,7 @@
     grid-row-gap: 4px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
     .calendargrid {
         grid-column-gap: 7.4px;
         grid-row-gap: 6px;
@@ -60,7 +60,7 @@
 
 .calendar-day {
     padding: 10px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     text-align: center;
 }
 

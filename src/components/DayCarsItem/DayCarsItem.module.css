@@ -5,29 +5,29 @@
   width: 285px;
   height: 157px;
   padding: 15px 13px 13px 11px;
-  
+
   border-radius: 8px;
-  background:  #2D3038;
+  background: var(--bg-input);
 
-  
-  }
 
-@media only screen and (min-width: 1920px) {
-    .dayCarsItemContainer {
-      width: 398px;
-      height: 200px;
-      padding: 10px 18px;
-  }
-  }
-  
-  .modalDayCarsItemContainer{
-    display: flex;
+}
+
+@media only screen and (min-width: 1850px) {
+  .dayCarsItemContainer {
     width: 398px;
     height: 200px;
     padding: 10px 18px;
-    gap: 12px;
-    border-radius: 8px;
   }
+}
+
+.modalDayCarsItemContainer {
+  display: flex;
+  width: 398px;
+  height: 200px;
+  padding: 10px 18px;
+  gap: 12px;
+  border-radius: 8px;
+}
 
 
 .userInfo {
@@ -49,11 +49,11 @@
   border-radius: 6px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .title {
     width: 137px;
     height: 24px;
-}
+  }
 }
 
 .statusText {
@@ -68,10 +68,10 @@
 
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .statusText {
     font-size: 20px;
-}
+  }
 }
 
 .completed {
@@ -79,7 +79,7 @@
   color: #246D4D;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .completed {
     font-size: 16px;
   }
@@ -90,7 +90,7 @@
   color: #EBD534;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .new {
     font-size: 20px;
   }
@@ -101,7 +101,7 @@
   color: #994CA5;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .repair {
     font-size: 20px;
   }
@@ -112,32 +112,32 @@
   color: #3956CC;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .checkRepair {
     font-size: 16px;
   }
 }
 
 .icon {
-  width: 12px; 
+  width: 12px;
   height: 12px;
-  transition: width 0.3s, height 0.3s; 
+  transition: width 0.3s, height 0.3s;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .icon {
     font-size: 16px;
   }
 }
 
-.iconHuman{
-  width: 13px; 
+.iconHuman {
+  width: 13px;
   height: 13px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .iconHuman {
-    width: 16px; 
+    width: 16px;
     height: 16px;
   }
 }
@@ -150,7 +150,7 @@
   margin-bottom: 7px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .infoCard {
     gap: 6px;
     margin-bottom: 11px;
@@ -178,7 +178,7 @@
   line-height: normal;
 }
 
-.infoVin{
+.infoVin {
   display: flex;
   text-align: center;
   margin-bottom: 5px;
@@ -187,7 +187,7 @@
 }
 
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .vinNum {
     font-size: 14px;
     width: 161px;
@@ -204,7 +204,7 @@
   line-height: normal;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .textName {
     font-size: 16px;
   }
@@ -217,18 +217,18 @@
   line-height: normal;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .textTel {
     font-size: 14px;
   }
 }
 
-.iconTel{
+.iconTel {
   width: 10px;
   height: 10px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .iconTel {
     width: 12px;
     height: 12px;
@@ -243,7 +243,7 @@
   text-wrap: nowrap;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .nameCar {
     font-size: 14px;
   }
@@ -256,8 +256,8 @@
   margin-top: 5px
 }
 
-@media only screen and (min-width: 1920px) {
-  .btnContainer  {
+@media only screen and (min-width: 1850px) {
+  .btnContainer {
     margin-top: auto;
   }
 }
@@ -284,8 +284,8 @@
   cursor: pointer;
 }
 
-@media only screen and (min-width: 1920px) {
-  .btnDetail  {
+@media only screen and (min-width: 1850px) {
+  .btnDetail {
     width: 58px;
     height: 24px;
   }
@@ -298,8 +298,8 @@
   line-height: normal;
 }
 
-@media only screen and (min-width: 1920px) {
-  .btnDetailText  {
+@media only screen and (min-width: 1850px) {
+  .btnDetailText {
     font-size: 12px;
 
   }
@@ -315,10 +315,10 @@
 }
 
 
-@media only screen and (min-width: 1920px) {
-    .carPhoto {
-      margin-bottom: 12px;
-    }
+@media only screen and (min-width: 1850px) {
+  .carPhoto {
+    margin-bottom: 12px;
+  }
 }
 
 
@@ -359,9 +359,9 @@
   display: none;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .money {
-    display:flex;
+    display: flex;
     color: #246D4D;
     font-size: 14px;
     font-weight: 600;
@@ -377,7 +377,7 @@
   width: 96px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .carInfoRight {
     align-items: start;
 
@@ -392,21 +392,21 @@
   width: 96px;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .rating {
-justify-content: end;  
-  position: static; 
-        top: auto; 
-        left: auto; 
-}
+    justify-content: end;
+    position: static;
+    top: auto;
+    left: auto;
+  }
 }
 
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .rating {
     display: flex;
     flex-wrap: nowrap;
-}
+  }
 }
 
 .carRegContainer {
@@ -422,10 +422,10 @@ justify-content: end;
 }
 
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   carRegContainer {
     margin-bottom: 12px;
-}
+  }
 }
 
 
@@ -450,7 +450,7 @@ justify-content: end;
 }
 
 .carNumber {
-  color: #101010;
+  color: var(--bg-secondary);
   font-size: 16px;
   font-weight: 600;
   line-height: normal;
@@ -466,12 +466,13 @@ justify-content: end;
   display: none
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
+
   .mileInfo,
-.timeWork {
-  display: flex;
-  gap: 7px;
-  align-items: center;
+  .timeWork {
+    display: flex;
+    gap: 7px;
+    align-items: center;
   }
 }
 
@@ -507,7 +508,7 @@ justify-content: end;
   line-height: normal;
 }
 
-@media only screen and (min-width: 1920px) {
+@media only screen and (min-width: 1850px) {
   .total {
     font-size: 16px;
     margin-top: 12px;

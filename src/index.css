@@ -1,3 +1,77 @@
+:root {
+  /* backgrounds */
+  --bg: #17181C;
+  --bg-secondary: #23252C;
+  --bg-input: #2D3038;
+  --player-secondary-bg: #4E505F;
+  --current-mileage-bg: #1D2523;
+
+  /* btns colors */
+  --green-btn-normal: #008000;
+  --green-btn-hover: #005900;
+  --green-btn-inactive: #002500;
+  --blue-btn-normal: #3956CC;
+  --blue-btn-hover: #1C2E78;
+  --blue-btn-inactive: #171D35;
+
+  /* other elements or text colors */
+  --white: #fff;
+  --black: #000000;
+  --light-gray: #D8E1FF;
+  --main-gray: #515562;
+  --dark-grey: var(--bg-secondary);
+  --green: #008000;
+  --blue: #3956CC;
+  --play-btn-triangle: #00A3FF;
+  --red: #D54E4F;
+  --mint: #A1FFC5;
+  --icon-gray: #C7C7C7;
+  --star-orange: #F9B068;
+  --star-white: #FFF8F1;
+  --client: #70AB87;
+  --input-stroke: #4A4A4A;
+  --input-text: #767B88;
+  --drop-menu: #242D43;
+  --current-mileage-text: #43A48D;
+  --last-service-mileage-bg: #25211D;
+  --last-service-mileage-text: #A97742;
+  --visit-date-bg: #28232A;
+  --visit-date-bg: #D54E4F;
+  --stats-all: #465D9B;
+
+  /* statuses */
+  --status-new: #EBD534;
+  --status-diag: #6B84FF;
+  --status-repair: #B25BC2;
+  --status-complete: #53C178;
+  --status-check-repair: ;
+  --glow-repair: #D926E9;
+  --glow-diag: #265DE9;
+  --glow-complete: #71E926;
+  --glow-new: #E9D226;
+
+
+  /* calendar */
+  --calendar-gray: #4A4A4A;
+  --dark-orange: #755D45;
+  --mid-orange: #A97742;
+  --orange: #DB8120;
+
+  /* gradients */
+  --border-gradient-new: linear-gradient(45deg, #F5DD23 10%, #2B2C2C 16%, #23252C 85%, #DBC624 90%);
+  --border-gradient-diag: linear-gradient(45deg, #3956CC 10%, #2B2C2C 16%, #23252C 85%, #3956CC 90%);
+  --border-gradient-repair: linear-gradient(45deg, #994CA5 10%, #2B2C2C 16%, #23252C 85%, #994CA5 90%);
+  --border-gradient-complete: linear-gradient(45deg, ##246D4D 10%, #2B2C2C 16%, #23252C 85%, ##246D4D 90%);
+
+  --status-gradient-new: linear-gradient(90deg, #95A54C4D 0%, #E9D92600 100%);
+  --status-gradient-diag: linear-gradient(90deg, #4154B04D 0%, #2654E900 100%);
+  --status-gradient-repair: linear-gradient(90deg, #994CA54D 0%, #AB26E900 100%);
+  --status-gradient-complete: linear-gradient(90deg, #4CA54C4D 0%, #3DE92600 100%);
+
+  --master-gradient-diag: linear-gradient(90deg, #4154B04D 0%, #2654E900 100%);
+  --master-gradient-repair: linear-gradient(90deg, #994CA54D 0%, #AB26E900 100%);
+}
+
 @font-face {
   font-family: "Roboto", sans-serif;
   src: url("/src/assets/fonts/Robotolight.woff2") format("woff2"),
@@ -41,8 +115,8 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
-  color: #ffffff;
-  background-color: #000000;
+  color: var(--white);
+  background-color: var(--bg);
   overflow-x: hidden;
 }
 
@@ -89,4 +163,3 @@ button {
   padding: 0;
   box-shadow: none;
 }
-

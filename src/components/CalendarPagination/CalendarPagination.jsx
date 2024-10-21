@@ -109,7 +109,7 @@ export default function CalendarPagination() {
         </button>
 
       </div>
-<p className={css.namemonth}> {carSelectDate} </p>
+{/* <p className={css.namemonth}> {carSelectDate} </p> */}
         </div>
       {isLoadingForCalendar ? (
         <Loader />

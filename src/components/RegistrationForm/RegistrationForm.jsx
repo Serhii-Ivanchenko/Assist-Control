@@ -41,7 +41,7 @@ export default function RegistrationForm() {
             position: "top-center",
             duration: 30000,
             style: {
-              background: "#242525",
+              background: "var(--bg-input)",
               color: "#FFFFFF",
             },
           }
@@ -52,7 +52,7 @@ export default function RegistrationForm() {
           toast.error("Користувач вже існує", {
             position: "top-center",
             style: {
-              background: "#242525",
+              background: "var(--bg-input)",
               color: "#FFFFFF",
             },
           });
@@ -60,7 +60,7 @@ export default function RegistrationForm() {
           toast.error("Щось сталося, спробуйте ще раз", {
             position: "top-center",
             style: {
-              background: "#242525",
+              background: "var(--bg-input)",
               color: "#FFFFFF",
             },
           });

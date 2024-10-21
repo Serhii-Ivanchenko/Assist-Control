@@ -1,5 +1,5 @@
 
-.phoneInputContainer {
+/* .phoneInputContainer {
     position: relative;
     display: flex;
     align-items: center;
@@ -9,7 +9,6 @@
 .codeButton {
     width: 129px;
     background-color: #4A4A4A;
-    /* border: 1px solid #4A4A4A; */
     padding: 18px 20px;
     cursor: pointer;
     border-radius: 10px 0px 0px 10px;
@@ -19,10 +18,10 @@
     align-items: center;
 
     color: var(--Icon-Gray, #C7C7C7);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .phoneInput {
@@ -34,18 +33,18 @@
     outline: none;
 
     color: var(--Button-grey, #4A4A4A);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
-.phoneInput::placeholder{
+.phoneInput::placeholder {
     color: var(--Button-grey, #4A4A4A);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .dropdown {
@@ -57,7 +56,7 @@
     border-radius: 10px;
     z-index: 10;
     width: 100%;
-    
+
 }
 
 .countryOption {
@@ -83,14 +82,14 @@
     transform: rotate(180deg);
 }
 
-.icon{
+.icon {
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background-size: cover;
 display: flex;
 flex-shrink: 0;
-}
+} */
 
 
 
@@ -101,14 +100,9 @@ flex-shrink: 0;
 
 
 
-/* 
-container {
-    width: 420px;
-    margin-bottom: 12px;
-    margin-top: 8px;
-}
 
-.button {
+
+/* .button {
     display: flex;
     align-items: center;
     background-color: #282828;
@@ -118,34 +112,38 @@ container {
     padding: 0 10px;
 }
 
-.input {
+.button:hover{
+    color: #282828;
+} */
+
+/* .input {
     background-color: #282828;
     color: #fff;
     border: 1px solid #4A4A4A;
     border-left: none;
     border-radius: 0 10px 10px 0;
-}
+} */
 
-.customButton {
+ /* .customButton {
     display: flex;
     align-items: center;
-}
+} 
 
 .dialCode {
     margin-left: 8px;
-    color: #fff;
-}
- */
+    color: #fff; } */
+
+
 
 
 
 /* .container{
-    width: 420px;
+       width: 420px;
         padding: 18px 20px;
     
         border-radius: 10px;
         border: 1px solid var(--Button-grey, #4A4A4A);
-        background-color: var(--Grey-Input, #282828);
+        background-color: transparent;
         outline: none;
     
         margin-bottom: 12px;
@@ -156,9 +154,9 @@ container {
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-}
+} */
 
-.input{
+/* .input{
         background-color: #282828;
         padding: 18px 20px;
 }
@@ -170,15 +168,15 @@ container {
     border-radius: 10px 0 0 10px;
 
     appearance: none;
-} */
+}
 
-/* .btn .selected-flag {
+.btn .selected-flag {
     display: flex;
     align-items: center;
 }
 
-/* Додаємо код країни поруч з прапором */
-/* .react-tel-input .selected-flag .iti-flag {
+/* Додаємо код країни поруч з прапором 
+.react-tel-input .selected-flag .iti-flag {
     margin-right: 8px;
 }
 
@@ -186,5 +184,5 @@ container {
     content: attr(data-dial-code);
     margin-left: 8px;
     font-size: 14px;
-    color: #fff;
-} */ 
+    color: #fff; 
+} */

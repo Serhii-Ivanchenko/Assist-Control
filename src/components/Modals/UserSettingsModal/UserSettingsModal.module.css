@@ -3,26 +3,27 @@
     /* max-width: 1450px; */
     height: 850px;
     border-radius: 10px;
-    background: #202020;
+    background: var(--bg-secondary);
     display: flex;
 }
-@media only screen and (min-width: 1920px) {
-.settingsBox{
-width: 1357px;
-/* max-width: 1450px; */
-  }
+
+@media only screen and (min-width: 1850px) {
+    .settingsBox {
+        width: 1357px;
+        /* max-width: 1450px; */
+    }
 }
 
 @media only screen and (max-width: 1279.9px) {
-.settingsBox{
-    width: 736px;
-  }
+    .settingsBox {
+        width: 736px;
+    }
 }
 
 @media only screen and (max-width: 767.9px) {
-.settingsBox{
-    width: 353px;
-  }
+    .settingsBox {
+        width: 353px;
+    }
 }
 
 .closeBtn {
@@ -48,7 +49,7 @@ width: 1357px;
     flex-direction: column;
     width: 338px;
     height: 600px;
-    background-color: #1A1A1A;
+    background-color: var(--bg-secondary);
     border-radius: 5px;
     padding: 20px;
     gap: 10px;
@@ -79,7 +80,7 @@ width: 1357px;
 
 .input{
     height: 33px;
-    background-color: #242525;
+    background-color: var(--bg-input);
     outline: none;
     border: none;
 
@@ -102,17 +103,17 @@ width: 1357px;
 
 
 .input:-webkit-autofill{
-    background-color: #242525 !important;
+    background-color: var(--bg-input) !important;
     color: white !important;
-    box-shadow: 0 0 0px 1000px #242525 inset !important;
+    box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
     -webkit-text-fill-color: white !important;
 }
 
 .input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus {
-    background-color: #242525 !important;
+    background-color: var(--bg-input) !important;
     color: white !important;
-    box-shadow: 0 0 0px 1000px #242525 inset !important;
+    box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
     -webkit-text-fill-color: white !important;
 }
 

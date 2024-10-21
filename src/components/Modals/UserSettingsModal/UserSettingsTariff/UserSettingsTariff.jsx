@@ -5,13 +5,13 @@ import { BsFillXCircleFill } from "react-icons/bs";
 import { BsChevronDown } from "react-icons/bs";
 
 export default function UserSettingsTariff({onClose}) {
-    const [isActive, setIsActive] = useState(null);
+    // const [isActive, setIsActive] = useState(null);
     const [activeDropdown, setActiveDropdown] = useState(null);
     
 
-    const handleClickActive = (index) => {
-        setIsActive(index);
-    }
+    // const handleClickActive = (index) => {
+    //     setIsActive(index);
+    // }
 
     const toggleDropdown = (index) => {
       setActiveDropdown(activeDropdown === index ? null : index);
@@ -34,8 +34,7 @@ export default function UserSettingsTariff({onClose}) {
                 </ul>
             </div>
 
-                <div className={`${css.tariffCategory} ${isActive === 0 ? css.tariffCategoryIsActive : ''}`}
-                    onClick={() => handleClickActive(0)}>
+                <div className={css.tariffCategory}>
                 <p className={css.tariffName}>Trial</p>
                 <ul className={css.list}>
                     <li className={css.listItem}>
@@ -62,16 +61,15 @@ export default function UserSettingsTariff({onClose}) {
                 </ul>
                     <p className={`${css.period} ${css.periodTrial}`}>14 днів безкоштовно</p>
                     
-                    {isActive === 0 && (
+                    {/* {isActive === 0 && (
         <button type="button" className={ css.btnBuyIsActive}>
             Придбати
         </button>
-                    )}
+                    )} */}
                     
             </div>
 
-                <div className={`${css.tariffCategory} ${isActive === 1 ? css.tariffCategoryIsActive : ''}`}
-                    onClick={() => handleClickActive(1)}>
+                <div className={css.tariffCategoryIsActive}>
                 <p className={css.tariffName}>Basic</p>
                 <ul className={css.list}>
                     <li className={css.listItem}>
@@ -109,16 +107,15 @@ export default function UserSettingsTariff({onClose}) {
                     <p className={css.price}>45$</p>
 
 
-                    {isActive === 1 && (
+                    
         <button type="button" className={ css.btnBuyIsActive}>
             Придбати
         </button>
-                    )}
+                    
 
             </div>
 
-                <div className={`${css.tariffCategory} ${isActive === 2 ? css.tariffCategoryIsActive : ''}`}
-                    onClick={() => handleClickActive(2)}>
+                <div className={css.tariffCategory}>
                 <p className={css.tariffName}>Pro</p>
                 <ul className={css.list}>
                     <li className={css.listItem}>
@@ -155,11 +152,11 @@ export default function UserSettingsTariff({onClose}) {
 
                     <p className={css.price}>150$</p>
                     
-                     {isActive === 2 && (
+                     
         <button type="button" className={ css.btnBuyIsActive}>
             Придбати
         </button>
-                    )}
+                    
             </div>
             </div>
 

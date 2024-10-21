@@ -108,7 +108,7 @@ export default function Calendar({ queryMonth, dataMonth }) {
             style={{
               backgroundColor: getButtonColor(item.percent),
               border: item.date.isSame(selectedDate, "day")
-                ? " 1px solid #fff"
+                ? " 4px solid #fff"
                 : "1px solid transparent",
             }}
             className={`calendar-day  
@@ -143,7 +143,7 @@ export default function Calendar({ queryMonth, dataMonth }) {
           border:none;
         }
 
-        @media only screen and (min-width: 1920px) {
+        @media only screen and (min-width: 1850px) {
         .calendar-day {
         width: 54px;
           height: 27px;
@@ -159,7 +159,7 @@ export default function Calendar({ queryMonth, dataMonth }) {
           cursor: default;
         }
         .today {
-          border: 1px solid #fff;
+          border: 4px solid #fff;
         }
       `}</style>
     </div>

@@ -8,27 +8,31 @@
   align-items: center;
   text-align: center;
 }
-@media only screen and (min-width: 1920px) {
+
+@media only screen and (min-width: 1850px) {
   .camera {
     height: 341px;
     margin-bottom: 10px;
     /* height: 100% !important; Якщо поставити зараз то малі картинкі будуть летіти на верх а не по центру як зараз */
   }
 }
+
 .cameraListCont {
   border-radius: 5px;
   width: 386px;
   height: 270px;
   padding: 15px 20px 0 20px;
-  background: #1a1a1a;
+  background: var(--bg-secondary);
 }
-@media only screen and (min-width: 1920px) {
+
+@media only screen and (min-width: 1850px) {
   .cameraListCont {
     width: 576px;
     height: 405px;
-    padding: 22px 29px 0 29px;
+    padding: 20px 29px 0 29px;
   }
 }
+
 .cameraList {
   position: relative;
 }
@@ -44,6 +48,9 @@
 
 .arrowNext,
 .arrowPrev {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
   font-size: 0;
   line-height: 0;
@@ -57,15 +64,18 @@
   background: 0 0;
   position: absolute;
   display: block;
-  padding: 0;
+  padding: 2px;
+  border-radius: 32px;
+  background: #51556240;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  transition: background 200ms ease-in-out;
 }
-@media only screen and (min-width: 1920px) {
-  .arrowNext,
-  .arrowPrev {
-    width: 46px;
-    height: 46px;
-  }
+
+.arrowNext:hover,
+.arrowPrev:hover {
+  background: #515562;
 }
+
 .arrowPrev {
   left: 10px;
 }
@@ -93,11 +103,13 @@
   padding: 0;
   cursor: pointer;
 }
-@media only screen and (min-width: 1920px) {
+
+@media only screen and (min-width: 1850px) {
   :global(.dots li) {
     margin: 0 8px;
   }
 }
+
 :global(.dots li button) {
   background: #4a4a4a;
   font-size: 0;
@@ -112,7 +124,8 @@
   outline: 0;
   border: none;
 }
-@media only screen and (min-width: 1920px) {
+
+@media only screen and (min-width: 1850px) {
   :global(.dots li button) {
     width: 17px;
     height: 15px;
@@ -130,9 +143,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 [data-rmiz-modal-overlay="visible"] {
-  background-color: #101010ea !important;
+  background-color: var(--bg-secondary)ea !important;
 }
+
 .zoomImg {
   position: absolute;
   margin: 0 auto;
