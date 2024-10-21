@@ -9,7 +9,6 @@
   border-radius: 8px;
   background: var(--bg-input);
 
-
 }
 
 @media only screen and (min-width: 1850px) {
@@ -22,11 +21,21 @@
 
 .modalDayCarsItemContainer {
   display: flex;
-  width: 398px;
-  height: 200px;
+  width: 285px;
+  height: 157px;
   padding: 10px 18px;
   gap: 12px;
   border-radius: 8px;
+}
+
+@media only screen and (min-width: 1850px) {
+  .modalDayCarsItemContainer {
+    width: 416px;
+    height: 200px;
+    padding: 10px 18px;
+    gap: 12px;
+    border-radius: 8px;
+  }
 }
 
 
@@ -166,9 +175,8 @@
 }
 
 .vinNum {
-  width: 100px;
   height: auto;
-  padding: 2px;
+  padding: 3px 5px;
   border-radius: 6px;
   background: var(--main-gray);
 
@@ -182,15 +190,12 @@
   display: flex;
   text-align: center;
   margin-bottom: 5px;
-
-
 }
 
 
 @media only screen and (min-width: 1850px) {
   .vinNum {
     font-size: 14px;
-    width: 161px;
     height: 22px;
     padding: 3px 10px;
 
@@ -239,13 +244,16 @@
   color: var(--white);
   font-size: 12px;
   font-weight: 400;
-  line-height: normal;
-  text-wrap: nowrap;
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  max-width: 120px;
 }
 
 @media only screen and (min-width: 1850px) {
   .nameCar {
     font-size: 14px;
+    max-width: 134px;
   }
 }
 
@@ -341,9 +349,14 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  /* width: 80px; */
+  
 }
 
+@media only screen and (min-width: 1850px) {
+  .carInfoLeft {
+    width: 80px;
+  }
+}
 
 /* .carBtnNumber {
   background-color: transparent;
@@ -518,5 +531,4 @@
 
 .totalPay {
   margin-top: auto;
-
 }

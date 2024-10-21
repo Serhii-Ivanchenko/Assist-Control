@@ -1,14 +1,18 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  height: 641px;
-  justify-content: space-between;
+  /* width: 230px; */
+  /* height: 641px; */
+  /* justify-content: space-between; */
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  padding: 20px 30px;
 }
 
 @media only screen and (min-width: 1850px) {
   .sidebar {
-    height: 961px;
-
+    width: 230px;
+    height: 967px;
   }
 }
 
@@ -16,14 +20,12 @@
 .bottomContainer {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   position: relative;
 }
 
 @media only screen and (min-width: 1850px) {
   .topContainer {
-    gap: 56px;
-
+    margin-bottom: 60px;
   }
 }
 
@@ -33,7 +35,7 @@
 
 @media only screen and (min-width: 1850px) {
   .bottomContainer {
-    gap: 48px;
+    gap: 20px;
   }
 }
 
@@ -41,6 +43,14 @@
   position: absolute;
 }
 
+/* @media only screen and (min-width: 1850px) {
+  .userBar {
+    margin-bottom: 60px;
+  }
+} */
+
 .userInfo {
   position: relative;
+  margin-bottom: 60px;
+
 }

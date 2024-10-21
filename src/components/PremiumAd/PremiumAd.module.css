@@ -13,7 +13,7 @@
 
 @media only screen and (min-width: 1850px) {
   .premiumContainer {
-    width: 210px;
+    width: 170px;
     height: 230px;
     padding: 25px 20px;
   }
@@ -95,7 +95,7 @@
   .premiumButton {
     border-radius: 6px;
     padding: 10px 20px;
-    width: 170px;
+    width: 130px;
     height: 39px;
 
     font-size: 16px;
