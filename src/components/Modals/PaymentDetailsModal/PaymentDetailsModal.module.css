@@ -4,7 +4,7 @@
   width: 688px;
   padding: 30px 31px;
   border-radius: 12px;
-  background-color: #1f2123;
+  background-color: var(--dark-gray);
 }
 
 .closeIcon {
@@ -33,7 +33,7 @@
   height: 159px;
   padding: 20px;
   border-radius: 12px;
-  background-color: #2f3b41;
+  background-color: var(--bg-input);
   margin-bottom: 20px;
 }
 
@@ -85,7 +85,7 @@
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  background-color: #212729;
+  background-color: var(--bg-input);
   gap: 30px;
 }
 
@@ -160,17 +160,11 @@
   margin-left: 16px;
 }
 
-.tooltip .tooltipContent::after {
-  content: " ";
-  position: absolute;
-}
-
 .tooltip .tooltipContent {
   width: 132px;
   height: 32px;
   visibility: hidden;
   position: absolute;
-  z-index: 1;
   left: -500%;
   top: -170%;
 }
