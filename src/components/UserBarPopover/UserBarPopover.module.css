@@ -6,7 +6,7 @@
     flex-direction: column;
     margin-top: 4px;
     gap: 6px;
-    background-color: #4A4A4A;
+    background-color: var(--input-stroke);
     padding: 6px;
     border-radius: 6px;
     color: rgba(164, 164, 164, 1);
@@ -47,6 +47,6 @@
 
 .settings:hover,
 .logout:hover {
-    color: #fff;
+    color: var(--white);
     transform: scale(1.02);
 }

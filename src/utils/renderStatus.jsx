@@ -11,17 +11,32 @@ const renderStatus = (status, complete_d, styles) => {
   if (status === "new" || status === "repair" || status === "check_repair") {
     switch (status) {
       case "new":
-        icon = <HiOutlineHashtag className={clsx(styles.icon, statusClass)} color="#246D4D" />;
+        icon = (
+          <HiOutlineHashtag
+            className={clsx(styles.icon, statusClass)}
+            color="var(--light-gray)"
+          />
+        );
         statusText = "нова";
         statusClass = styles.new;
         break;
       case "repair":
-        icon = <BsWrench className={clsx(styles.icon, statusClass)} color="#246D4D" />;
+        icon = (
+          <BsWrench
+            className={clsx(styles.icon, statusClass)}
+            color="var(--light-gray)"
+          />
+        );
         statusText = "ремонт";
         statusClass = styles.repair;
         break;
       case "check_repair":
-        icon = <BsLayerBackward className={clsx(styles.icon, statusClass)} color="#246D4D" />;
+        icon = (
+          <BsLayerBackward
+            className={clsx(styles.icon, statusClass)}
+            color="var(--light-gray)"
+          />
+        );
         statusText = "діагностика";
         statusClass = styles.checkRepair;
         break;
@@ -30,7 +45,12 @@ const renderStatus = (status, complete_d, styles) => {
         statusText = "Невідомий статус";
     }
   } else if (status === "complete" || complete_d) {
-    icon = <AiOutlineCheckCircle className={clsx(styles.icon, statusClass)} color="#4CAF50" />;
+    icon = (
+      <AiOutlineCheckCircle
+        className={clsx(styles.icon, statusClass)}
+        color="#4CAF50"
+      />
+    );
     statusText = "завершено";
     statusClass = styles.completed;
   } else {
@@ -43,14 +63,14 @@ const renderStatus = (status, complete_d, styles) => {
       className={clsx(styles.title)}
       style={{
         borderColor: statusClass.includes("completed")
-          ? "#246D4D"
+          ? "var(--light-gray)"
           : statusClass.includes("new")
-          ? "#EBD534"
+          ? "var(--status-new)"
           : statusClass.includes("repair")
           ? "#994CA5"
           : statusClass.includes("checkRepair")
-          ? "#3956CC"
-          : "#000",
+          ? "var(--blue)"
+          : "var(--black)",
         borderWidth: "1px",
         borderStyle: "solid",
       }}

@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewCarsRange } from "../../redux/cars/operations.js";
 import { selectNewCars } from "../../redux/cars/selectors.js";
@@ -14,17 +14,26 @@ import {
 } from "recharts";
 import css from "./Chart.module.css";
 
-
 const stringAvto = (data) => {
-  let datastring = '';
-  const arrAvto = ['автомобілів', 'автомобіль', 'автомобіля', 'автомобіля', 'автомобіля', 'автомобілів', 'автомобілів',
-    'автомобілів', 'автомобілів', 'автомобілів'];
+  let datastring = "";
+  const arrAvto = [
+    "автомобілів",
+    "автомобіль",
+    "автомобіля",
+    "автомобіля",
+    "автомобіля",
+    "автомобілів",
+    "автомобілів",
+    "автомобілів",
+    "автомобілів",
+    "автомобілів",
+  ];
   datastring = arrAvto[data % 10];
-   if (data>=11 && data<=20) {
-     datastring = 'автомобілів';
-  };
+  if (data >= 11 && data <= 20) {
+    datastring = "автомобілів";
+  }
   return datastring;
-  };
+};
 
 const CustomTooltip = ({ active, payload, label, coordinate }) => {
   if (active && payload && payload.length) {
@@ -34,7 +43,7 @@ const CustomTooltip = ({ active, payload, label, coordinate }) => {
       <div
         className="custom-tooltip"
         style={{
-          // backgroundColor: '#fff', padding: '5px',border: '1px solid #ccc',
+          // backgroundColor: 'var(--white)', padding: '5px',border: '1px solid #ccc',
           width: "70px",
           border: "none",
           position: "absolute",
@@ -48,16 +57,14 @@ const CustomTooltip = ({ active, payload, label, coordinate }) => {
           fontStyle: "normal",
         }}
       >
-        <p
-          className={css.popuptitle}
-        >{`${payload[0].value} ${stringAvto(payload[0].value)}  ${label}`}</p>
+        <p className={css.popuptitle}>{`${payload[0].value} ${stringAvto(
+          payload[0].value
+        )}  ${label}`}</p>
       </div>
     );
   }
   return null;
 };
-
-
 
 export default function Chart() {
   const dispatch = useDispatch();
@@ -69,8 +76,7 @@ export default function Chart() {
   const [dateBegin, setDateBegin] = useState(sevenDaysAgo);
   const [dateEnd, setDateEnd] = useState(currentDate);
   let dateBeginStr = dateBegin.toISOString().substring(0, 10);
-  let dateEndStr= dateEnd.toISOString().substring(0, 10);
-  
+  let dateEndStr = dateEnd.toISOString().substring(0, 10);
 
   const handleDataChangeBeg = (newData) => {
     setDateBegin(newData);
@@ -93,7 +99,7 @@ export default function Chart() {
           stroke="white"
           strokeWidth={1}
         />
-        <circle cx={cx} cy={cy} r={3} fill="#db8120" stroke="none" />
+        <circle cx={cx} cy={cy} r={3} fill="var(--orange)" stroke="none" />
       </>
     );
   };
@@ -105,28 +111,29 @@ export default function Chart() {
     return tick;
   };
 
- useEffect(() => {
-     
-   const fetchNewCarsData = async () => {
-     await Promise.all([
-       dispatch(getNewCarsRange({dateBeginStr, dateEndStr})),
-        ]);
-      };
+  useEffect(() => {
+    const fetchNewCarsData = async () => {
+      await Promise.all([
+        dispatch(getNewCarsRange({ dateBeginStr, dateEndStr })),
+      ]);
+    };
 
-     fetchNewCarsData();
-     
+    fetchNewCarsData();
+  }, [dispatch, dateBeginStr, dateEndStr]);
 
-    }, [dispatch, dateBeginStr, dateEndStr ]);
-
-       let data =
-  newCarsData.map(el => ({
-    ...el, 
-    dateeng: el.date.substring(8, 10) + '/' + el.date.substring(5, 7) + '/' + el.date.substring(0, 4),
+  let data = newCarsData.map((el) => ({
+    ...el,
+    dateeng:
+      el.date.substring(8, 10) +
+      "/" +
+      el.date.substring(5, 7) +
+      "/" +
+      el.date.substring(0, 4),
   }));
 
-    // console.log('date',data)
+  // console.log('date',data)
   //  console.log('end', dateEnd)
- let interval = data.length;
+  let interval = data.length;
   return (
     <div className={css.containerchart}>
       <p className={css.charttitle}>Машинозаїзди</p>
@@ -136,8 +143,8 @@ export default function Chart() {
           <AreaChart data={data}>
             <defs>
               <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#3956cc" stopOpacity={1} />
-                <stop offset="100%" stopColor="#3956cc" stopOpacity={0} />
+                <stop offset="0%" stopColor="var(--blue)" stopOpacity={1} />
+                <stop offset="100%" stopColor="var(--blue)" stopOpacity={0} />
               </linearGradient>
             </defs>
 
@@ -150,8 +157,12 @@ export default function Chart() {
                 y2="1.99937"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A4A4A" />
-                <stop offset="1" stopColor="#4A4A4A" stopOpacity="0.25" />
+                <stop stopColor="var(--input-stroke)" />
+                <stop
+                  offset="1"
+                  stopColor="var(--input-stroke)"
+                  stopOpacity="0.25"
+                />
               </linearGradient>
             </defs>
 
@@ -195,13 +206,13 @@ export default function Chart() {
             <Area
               type="monotone"
               dataKey="count"
-              stroke="#3956cc"
+              stroke="var(--blue)"
               strokeWidth={3}
               fill="url(#colorGradient)"
               activeDot={customActiveDot}
-              //   activeDot={{  fill: "#3956cc"}} // Активная точка больше
+              //   activeDot={{  fill: "var(--blue)"}} // Активная точка больше
 
-              //  dot={{ r: 8, fill: '#fff', stroke: '#87D28D', strokeWidth: '4px' }} // Полностью закрашенные кружочки
+              //  dot={{ r: 8, fill: 'var(--white)', stroke: '#87D28D', strokeWidth: '4px' }} // Полностью закрашенные кружочки
               //   label={({ x, y, value }) => (
               //     <text x={x} y={y - 10} fill="#000" textAnchor="middle">
               //       {`${value} ml`} {/* Добавляем "ml" к значению */}

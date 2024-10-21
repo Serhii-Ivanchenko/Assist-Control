@@ -94,7 +94,7 @@
     position: relative;
     /* display: inline-block; */
     /* width: 120px; */
-    background-color: #202020;
+    background-color: var(--bg);
     border-radius: 10px;
     margin-right: 35px;
 }

@@ -20,8 +20,8 @@
 }
 
 .wrapper::-webkit-scrollbar-thumb {
-  background-color: #4a4a4a;
-  border: 1px solid #4a4a4a;
+  background-color: var(--input-stroke);
+  border: 1px solid var(--input-stroke);
   border-radius: 4px;
 }
 
@@ -29,7 +29,7 @@
   width: 8px;
   height: 54px;
   background-color: var(--bg-secondary);
-  border: 0.5px solid #4a4a4a;
+  border: 0.5px solid var(--input-stroke);
   border-radius: 4px;
 }
 

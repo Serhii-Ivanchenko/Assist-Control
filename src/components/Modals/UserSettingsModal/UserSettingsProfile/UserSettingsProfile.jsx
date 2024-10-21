@@ -91,7 +91,7 @@ export default function UserSettingsProfile({ onClose }) {
           duration: 5000,
           style: {
             background: "var(--bg-input)",
-            color: "#FFFFFF",
+            color: "var(--white)FFF",
           },
         });
       } catch (error) {
@@ -101,7 +101,7 @@ export default function UserSettingsProfile({ onClose }) {
           duration: 5000,
           style: {
             background: "var(--bg-input)",
-            color: "#FFFFFF",
+            color: "var(--white)FFF",
           },
         });
       }
@@ -176,7 +176,7 @@ export default function UserSettingsProfile({ onClose }) {
         duration: 5000,
         style: {
           background: "var(--bg-input)",
-          color: "#FFFFFF",
+          color: "var(--white)FFF",
         },
       });
     } catch (error) {

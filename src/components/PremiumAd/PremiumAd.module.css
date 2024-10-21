@@ -22,7 +22,7 @@
 .premiumIcon {
   width: 12.5px;
   height: 11px;
-  fill: #EBD534;
+  fill: var(--status-new);
   margin-bottom: 5px;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .premiumTitle {
-  color: #FFF;
+  color: var(--white);
   font-size: 18px;
   font-weight: 600;
   line-height: normal;

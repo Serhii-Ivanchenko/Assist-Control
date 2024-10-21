@@ -66,7 +66,7 @@
 }
 
 .num {
-    color: #FFF;
+    color: var(--white);
     font-size: 24px;
     font-weight: 600;
     line-height: 1;
@@ -87,7 +87,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #246D4D;
+    background-color: var(--light-gray);
     border-radius: 50%;
     width: 14px;
     height: 14px;
@@ -98,6 +98,6 @@
     color: #3CBC81;
     stroke-width: 1px;
     stroke-width: 2px;
-    stroke: #FFF;
+    stroke: var(--white);
     font-size: 9px;
 }

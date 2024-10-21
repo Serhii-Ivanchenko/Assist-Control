@@ -1,7 +1,6 @@
 import { Oval } from "react-loader-spinner";
 import css from "./Loader.module.css";
 
-
 export default function Loader() {
   return (
     <div className={css.loader}>
@@ -9,8 +8,8 @@ export default function Loader() {
         visible={true}
         height="80"
         width="80"
-        color="#DB8120"
-        secondaryColor="#4A4A4A"
+        color="var(--orange)"
+        secondaryColor="var(--input-stroke)"
         ariaLabel="oval-loading"
         wrapperStyle={{}}
         wrapperClass=""

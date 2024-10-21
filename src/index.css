@@ -19,7 +19,8 @@
   --black: #000000;
   --light-gray: #D8E1FF;
   --main-gray: #515562;
-  --dark-grey: var(--bg-secondary);
+  --dark-gray: #23252C;
+  --text-gray: #959595;
   --green: #008000;
   --blue: #3956CC;
   --play-btn-triangle: #00A3FF;

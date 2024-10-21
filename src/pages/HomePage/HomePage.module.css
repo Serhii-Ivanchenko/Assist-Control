@@ -31,11 +31,11 @@
     align-items: center;
     justify-content: center;
 
-    background-color: #0096b7;
+    background-color: var(--play-btn-triangle);
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: 20px;
-    color: #e9e9e9;
+    color: var(--white);
     text-decoration: none;
 
     border: none;

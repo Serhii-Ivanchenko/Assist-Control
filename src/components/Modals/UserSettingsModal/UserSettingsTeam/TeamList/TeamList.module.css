@@ -115,7 +115,7 @@
 }
 
 .memberName {
-    color: #FFF;
+    color: var(--white);
     font-family: "Roboto", sans-serif;
     font-size: 20px;
     font-style: normal;
@@ -130,7 +130,7 @@
 }
 
 .memberEmail {
-    color: #959595;
+    color: var(--text-gray);
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -150,7 +150,7 @@
 
     background-color: #4F4F4F;
 
-    color: #FFF;
+    color: var(--white);
 
     font-family: "Roboto", sans-serif;
     font-size: 16px;

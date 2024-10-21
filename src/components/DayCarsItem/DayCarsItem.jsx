@@ -72,11 +72,11 @@ export default function DayCarsItem({
       <div className={styles.carsInfo}>
         <div className={styles.carInfoLeft}>
           <div className={styles.rating}>
-            <AiFillStar color="#F5A623" />
-            <AiFillStar color="#F5A623" />
-            <AiFillStar color="#F5A623" />
-            <AiFillStar color="#F5A623" />
-            <AiFillStar color="#FFF" />
+            <AiFillStar color="var(--star-orange)" />
+            <AiFillStar color="var(--star-orange)" />
+            <AiFillStar color="var(--star-orange)" />
+            <AiFillStar color="var(--star-orange)" />
+            <AiFillStar color="var(--star-white)" />
           </div>
           <div className={styles.prevCoast}>
             <p className={styles.money}>₴ 2,200.00</p>
@@ -100,7 +100,7 @@ export default function DayCarsItem({
             </p>
           </div>
           <div className={styles.mileInfo}>
-            <SlSpeedometer size={13} color="#A1FFC5" />
+            <SlSpeedometer size={13} color="var(--mint)" />
             <p className={styles.mileage}>{mileage ? mileage : "хххххх"}</p>
           </div>
           <div className={styles.timeWork}>

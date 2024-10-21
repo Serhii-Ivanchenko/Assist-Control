@@ -35,7 +35,7 @@
 }
 
 .title {
-    color: #FFF;
+    color: var(--white);
     font-family: "Roboto", sans-serif;
     font-size: 20px;
     font-style: normal;
@@ -61,7 +61,7 @@
 
     cursor: default;
 
-    color: #FFF;
+    color: var(--white);
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -98,9 +98,9 @@
     border: none;
 
     border-radius: 8px;
-    background-color: #3956CC;
+    background-color: var(--blue);
 
-    color: #FFF;
+    color: var(--white);
 
     font-family: "Roboto", sans-serif;
     font-size: 16px;
@@ -112,11 +112,11 @@
 }
 
 .addBtn:hover {
-    background-color: #1C2E78;
+    background-color: var(--blue-btn-hover);
 }
 
 .addBtn:active {
-    background-color: #171D35;
+    background-color: var(--blue-btn-inactive);
 }
 
 @media only screen and (min-width: 1850px) {
@@ -133,5 +133,5 @@
 
     width: 18px;
     height: 18px;
-    stroke: #4A4A4A;
+    stroke: var(--input-stroke);
 }

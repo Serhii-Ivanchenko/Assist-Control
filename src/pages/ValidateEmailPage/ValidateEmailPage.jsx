@@ -20,7 +20,7 @@ export default function ValidateEmailPage() {
           position: "top-center",
           style: {
             background: "var(--bg-input)",
-            color: "#FFFFFF",
+            color: "var(--white)FFF",
           },
         }),
         navigate("/video-control")
@@ -30,7 +30,7 @@ export default function ValidateEmailPage() {
           position: "top-center",
           style: {
             background: "var(--bg-input)",
-            color: "#FFFFFF",
+            color: "var(--white)FFF",
           },
         });
       });

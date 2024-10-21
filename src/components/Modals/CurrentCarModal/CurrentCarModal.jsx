@@ -30,21 +30,21 @@ function CurrentCarModal({ onClose, car, status }) {
   // let icon;
   // switch (car.status) {
   //   case "new":
-  //     icon = <HiOutlineHashtag stroke="#246D4D" fill="#246D4D" />;
+  //     icon = <HiOutlineHashtag stroke="var(--light-gray)" fill="var(--light-gray)" />;
   //     break;
   //   case "repair":
-  //     icon = <BsWrench stroke="#246D4D" fill="#246D4D" />;
+  //     icon = <BsWrench stroke="var(--light-gray)" fill="var(--light-gray)" />;
   //     break;
   //   // case "check_repair":
-  //   //   icon = <BsCalendar2CheckFill stroke="#246D4D" fill="#246D4D" />;
+  //   //   icon = <BsCalendar2CheckFill stroke="var(--light-gray)" fill="var(--light-gray)" />;
   //   //   break;
   //   case "complete":
-  //     icon = <BsCheckCircleFill stroke="#246D4D" fill="#246D4D" />;
+  //     icon = <BsCheckCircleFill stroke="var(--light-gray)" fill="var(--light-gray)" />;
   //     break;
   //   case "diagnostic":
-  //     return <BsUiChecksGrid stroke="#246D4D" fill="#246D4D" />;
+  //     return <BsUiChecksGrid stroke="var(--light-gray)" fill="var(--light-gray)" />;
   //   case "view_repair":
-  //     return <BsEyeFill stroke="#246D4D" fill="#246D4D" />;
+  //     return <BsEyeFill stroke="var(--light-gray)" fill="var(--light-gray)" />;
   //   default:
   //     icon = null;
   // }
@@ -52,15 +52,29 @@ function CurrentCarModal({ onClose, car, status }) {
   const getStatusIcon = (status) => {
     switch (status) {
       case "new":
-        return <HiOutlineHashtag stroke="#246D4D" fill="#246D4D" />;
+        return (
+          <HiOutlineHashtag
+            stroke="var(--light-gray)"
+            fill="var(--light-gray)"
+          />
+        );
       case "repair":
-        return <BsWrench stroke="#246D4D" fill="#246D4D" />;
+        return <BsWrench stroke="var(--light-gray)" fill="var(--light-gray)" />;
       case "complete":
-        return <BsCheckCircleFill stroke="#246D4D" fill="#246D4D" />;
+        return (
+          <BsCheckCircleFill
+            stroke="var(--light-gray)"
+            fill="var(--light-gray)"
+          />
+        );
       case "diagnostic":
-        return <BsUiChecksGrid stroke="#246D4D" fill="#246D4D" />;
+        return (
+          <BsUiChecksGrid stroke="var(--light-gray)" fill="var(--light-gray)" />
+        );
       case "view_repair":
-        return <BsEyeFill stroke="#246D4D" fill="#246D4D" />;
+        return (
+          <BsEyeFill stroke="var(--light-gray)" fill="var(--light-gray)" />
+        );
       default:
         return null;
     }

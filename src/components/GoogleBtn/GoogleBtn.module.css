@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
-  color: #8d8d8d;
+  color: var(--input-text);
   font-size: 11px;
   font-weight: 500;
   line-height: 1.18em;
@@ -27,6 +27,6 @@
 }
 
 .google_btn:hover {
-  border: 1px solid #ffffff;
-  color: #ffffff;
+  border: 1px solid var(--white)fff;
+  color: var(--white)fff;
 }

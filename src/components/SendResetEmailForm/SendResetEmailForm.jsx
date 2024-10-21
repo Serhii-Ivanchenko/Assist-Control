@@ -23,7 +23,7 @@ export default function SendResetEmailForm({ onClose }) {
             duration: 30000,
             style: {
               background: "var(--bg-input)",
-              color: "#FFFFFF",
+              color: "var(--white)FFF",
             },
           }
         );
@@ -34,7 +34,7 @@ export default function SendResetEmailForm({ onClose }) {
           position: "top-center",
           style: {
             background: "var(--bg-input)",
-            color: "#FFFFFF",
+            color: "var(--white)FFF",
           },
         });
       });
