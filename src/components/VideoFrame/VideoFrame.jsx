@@ -24,7 +24,7 @@ function SamplePrevArrow({ currentSlide, onClick }) {
 export default function VideoFrame() {
   const [videoImgSrc, setVideoImgSrc] = useState([]);
   useEffect(() => {
-    const numrebOfCamers = 6;
+    const numrebOfCamers = 3;
     for (let i = 1; i <= numrebOfCamers; i++) {
       const objWithIndex = { index: i };
       setVideoImgSrc((prev) => [...prev, objWithIndex]);
@@ -72,21 +72,6 @@ export default function VideoFrame() {
     });
   };
 
-  // const handleChangeCamera = (src, url) => {
-  //   setVideoImgSrc((prev) => {
-  //     // Перевіряємо, чи є вже елемент з таким URL
-  //     const currentCamera = prev.find((item) => item.url === url);
-
-  //     if (currentCamera) {
-  //       // Якщо камера знайдена, оновлюємо її src
-  //       return prev.map((item) => (item.url === url ? { ...item, src } : item));
-  //     } else {
-  //       // Якщо камери з таким URL ще немає, додаємо нову
-  //       return [...prev, { src, url }];
-  //     }
-  //   });
-  // };
-
   const MAX_RECONNECT_ATTEMPTS = 5;
   const RECONNECT_INTERVAL = 3000;
   const reconnectAttempts = useRef({});
@@ -122,37 +107,6 @@ export default function VideoFrame() {
 
     return ws;
   };
-  // const connectWebSocket = (camera) => {
-  //   const { cameraLink, index } = camera;
-  //   let ws = new WebSocket(cameraLink);
-  //   ws.binaryType = "arraybuffer"; // Приймаємо бінарні дані (зображення)
-
-  //   ws.onopen = () => {
-  //     console.log(`Connected to camera ${index}`);
-  //     reconnectAttempts.current[cameraLink] = 0; // Скидаємо лічильник спроб
-  //   };
-
-  //   ws.onmessage = (event) => {
-  //     const arrayBuffer = event.data;
-  //     const img = new Image();
-  //     const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
-  //     img.src = URL.createObjectURL(blob);
-  //     handleChangeCamera(img.src, cameraLink);
-  //     setIsZoomed(true);
-  //   };
-
-  //   ws.onclose = (e) => {
-  //     console.warn(`Connection closed for camera ${index}`, e);
-  //     attemptReconnect(camera); // Пробуємо перепідключитися
-  //   };
-
-  //   ws.onerror = (e) => {
-  //     console.error(`WebSocket error for camera ${index}`, e);
-  //     ws.close(); // Закриваємо з'єднання у разі помилки
-  //   };
-
-  //   return ws;
-  // };
 
   const attemptReconnect = (camera) => {
     const { url, index } = camera;
