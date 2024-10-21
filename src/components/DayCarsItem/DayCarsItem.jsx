@@ -1,5 +1,5 @@
 import styles from "./DayCarsItem.module.css";
-import carImage from "../../assets/images/carsItem.png";
+import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import clsx from "clsx";
 import {
   BsPersonFill,
@@ -28,8 +28,8 @@ export default function DayCarsItem({
 }) {
   const carsData = useSelector(selectDayCars);
   const car = carsData.find((car) => car.carNumber === carNumber);
-  const defaultCarImage = carImage;
-  const carPhoto = photoUrl || defaultCarImage;
+
+  const carPhoto = photoUrl || absentAutoImg;
 
   return (
     <div
@@ -84,7 +84,15 @@ export default function DayCarsItem({
         </div>
         <div className={styles.carInfoRight}>
           <div className={styles.carPhoto}>
-            <img src={carPhoto} alt="Фото автомобіля" />
+          <img
+              className={styles.carImg}
+              src={carPhoto}
+              alt="Car image"
+              onError={(e) => {
+                e.target.onerror = null; 
+                e.target.src = absentAutoImg; 
+              }}
+            />
           </div>
           <div className={styles.carRegContainer}>
             <div className={styles.carRegCountrys}>

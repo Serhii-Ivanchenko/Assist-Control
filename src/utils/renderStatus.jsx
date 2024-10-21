@@ -3,64 +3,69 @@ import { HiOutlineHashtag } from "react-icons/hi";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import clsx from "clsx";
 
-const renderStatus = (status, complete_d, styles) => {
+const renderStatus = (status, complete_d, styles = {}) => {
   let icon;
   let statusText;
   let statusClass = "";
 
-  if (status === "new" || status === "repair" || status === "check_repair") {
-    switch (status) {
-      case "new":
-        icon = (
-          <HiOutlineHashtag
-            className={clsx(styles.icon, statusClass)}
-            color="var(--light-gray)"
-          />
-        );
-        statusText = "нова";
-        statusClass = styles.new;
-        break;
-      case "repair":
-        icon = (
-          <BsWrench
-            className={clsx(styles.icon, statusClass)}
-            color="var(--light-gray)"
-          />
-        );
-        statusText = "ремонт";
-        statusClass = styles.repair;
-        break;
-      case "check_repair":
-        icon = (
-          <BsLayerBackward
-            className={clsx(styles.icon, statusClass)}
-            color="var(--light-gray)"
-          />
-        );
-        statusText = "діагностика";
-        statusClass = styles.checkRepair;
-        break;
-      default:
-        icon = null;
-        statusText = "Невідомий статус";
-    }
+  
+  if (status === "new") {
+    statusClass = styles.new || ""; 
+    statusText = "нова";
+  } else if (status === "repair") {
+    statusClass = styles.repair || "";
+    statusText = "ремонт";
+  } else if (status === "check_repair") {
+    statusClass = styles.checkRepair || "";
+    statusText = "діагностика";
   } else if (status === "complete" || complete_d) {
-    icon = (
-      <AiOutlineCheckCircle
-        className={clsx(styles.icon, statusClass)}
-        color="#4CAF50"
-      />
-    );
+    statusClass = styles.completed || "";
     statusText = "завершено";
-    statusClass = styles.completed;
   } else {
-    icon = null;
     statusText = "Невідомий статус";
+  }
+
+  switch (status) {
+    case "new":
+      icon = (
+        <HiOutlineHashtag
+          className={clsx(styles.icon, statusClass)}
+          color="var(--light-gray)"
+        />
+      );
+      break;
+    case "repair":
+      icon = (
+        <BsWrench
+          className={clsx(styles.icon, statusClass)}
+          color="var(--light-gray)"
+        />
+      );
+      break;
+    case "check_repair":
+      icon = (
+        <BsLayerBackward
+          className={clsx(styles.icon, statusClass)}
+          color="var(--light-gray)"
+        />
+      );
+      break;
+    case "complete":
+    case complete_d:
+      icon = (
+        <AiOutlineCheckCircle
+          className={clsx(styles.icon, statusClass)}
+          color="#4CAF50"
+        />
+      );
+      break;
+    default:
+      icon = null;
   }
 
   return (
     <div
-      className={clsx(styles.title)}
+      className={clsx(styles.title || "")}
       style={{
         borderColor: statusClass.includes("completed")
           ? "var(--light-gray)"
@@ -76,7 +81,9 @@ const renderStatus = (status, complete_d, styles) => {
       }}
     >
       {icon}
-      <span className={clsx(styles.statusText, statusClass)}>{statusText}</span>
+      <span className={clsx(styles.statusText || "", statusClass)}>
+        {statusText}
+      </span>
     </div>
   );
 };

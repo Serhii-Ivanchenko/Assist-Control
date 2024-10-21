@@ -31,6 +31,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
+  padding: 0;
 }
 
 @media only screen and (min-width: 1850px) {
@@ -38,20 +39,6 @@
     width: 1304px;
     max-height: 768px;
   }
-}
-
-.listView {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.listView>* {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px;
-  background-color: var(--bg-secondary);
-  border-radius: 4px;
 }
 
 /* .scrollableContent {
