@@ -1,7 +1,6 @@
 import Slider from "react-slick";
 import css from "./VideoFrame.module.css";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import "slick-carousel/slick/slick.css";
@@ -9,7 +8,10 @@ import "slick-carousel/slick/slick-theme.css";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 import { useEffect, useRef, useState } from "react";
 import Loader from "../Loader/Loader";
-import { BsFillCameraVideoOffFill } from "react-icons/bs";
+import {
+  BsFillCameraVideoOffFill,
+  BsArrowCounterclockwise,
+} from "react-icons/bs";
 
 function SampleNextArrow({ currentSlide, slideCount, onClick }) {
   if (currentSlide === slideCount - 1) return null;
@@ -111,9 +113,6 @@ export default function VideoFrame() {
   const attemptReconnect = (camera) => {
     const { url, index } = camera;
     const attempts = reconnectAttempts.current[url] || 0;
-    console.log("====================================");
-    console.log(url);
-    console.log("====================================");
     if (attempts > MAX_RECONNECT_ATTEMPTS) {
       // attempts < MAX_RECONNECT_ATTEMPTS <-- Поміняти назад
 
@@ -223,6 +222,7 @@ export default function VideoFrame() {
                   <BsFillCameraVideoOffFill size={60} />
                   <p>Something was wrong please refresh camera</p>
                   <button
+                    className={css.refreshBtn}
                     onClick={() => {
                       setVideoImgSrc((prev) =>
                         prev.map((item) => {
@@ -236,7 +236,7 @@ export default function VideoFrame() {
                       connectWebSocket({ url, index });
                     }}
                   >
-                    Refresh
+                    <BsArrowCounterclockwise /> Refresh
                   </button>
                 </div>
               ) : (
