@@ -38,6 +38,16 @@
     justify-content: center;
 }
 
+.nameListItem{
+    display: flex;
+        width: 220px;
+        height: 60px;
+        padding: 10px 20px;
+        align-items: center;
+        gap: 10px;
+        justify-content: flex-start;
+}
+
 .nameListItem:nth-child(odd) {
     background-color: var(--bg-input);
 }
@@ -65,9 +75,9 @@
     justify-content: center;
 }
 
-.listItem:nth-child(odd) {
+/* .listItem:nth-child(odd) {
     background-color: var(--Calendar-fill, #302F2F);
-}
+} */
 
 .tariffCategory {
     height: 680px;
@@ -186,6 +196,7 @@
     border: none;
     border-radius: 6px;
     background: var(--blue);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
     color: var(--white);
     font-variant-numeric: lining-nums proportional-nums;
@@ -218,7 +229,7 @@
     left: 16px;
     top: 15px;
     /* transform: translateY(-50%); */
-    fill: white;
+    /* fill: white; */
     width: 12px;
     height: 12px;
     fill: var(--icon-gray);

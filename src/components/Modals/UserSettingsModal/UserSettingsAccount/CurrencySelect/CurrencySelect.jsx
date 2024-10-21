@@ -7,7 +7,7 @@ import css from "./CurrencySelect.module.css"
 const currency = [
   { value: "UAH", label: "UAH ₴", flag: "fi-ua" },
   { value: "USD", label: "USD $", flag: "fi-us" },
-  { value: "EUR", label: "EUR €", flag: "fi-gb" },
+  { value: "EUR", label: "EUR €", flag: "fi-eu" },
   
 ];
 
