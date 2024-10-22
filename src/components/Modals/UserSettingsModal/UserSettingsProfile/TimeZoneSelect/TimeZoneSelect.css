@@ -50,27 +50,21 @@ box-shadow: none !important;
 }
 
 .custom-select__menu-list {
-    max-height: 200px;
-    /* Ensure it matches the JS setting */
-    overflow-y: auto;
-    /* Enable vertical scrolling */
+    max-height: 200px !important;
+    overflow-y: auto !important;
 }
 
 .custom-select__menu-list::-webkit-scrollbar {
-    width: 8px;
-    /* Width of the scrollbar */
+    width: 8px !important;
 }
 
 .custom-select__menu-list::-webkit-scrollbar-thumb {
-    background-color: var(--bg);
-    /* Color of the scrollbar thumb */
-    border-radius: 4px;
-    /* Round edges of the thumb */
+    background-color: var(--bg) !important;
+    border-radius: 4px !important;
 }
 
 .custom-select__menu-list::-webkit-scrollbar-track {
-    background: var(--bg-input);
-    /* Background of the scrollbar track */
+    background: var(--bg-input) !important;
 }
 
 /* .custom-select__menu-list::-webkit-scrollbar{
