@@ -10,11 +10,14 @@ import PhoneSelect from "./PhoneSelect/PhoneSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../../../redux/auth/selectors";
 import toast from "react-hot-toast";
+import defaultAvatar from "../../../../assets/images/avatar_default.png";
+
 import {
   updateUserAvatar,
   updateUserData,
 } from "../../../../redux/auth/operations";
 import { getUserData } from "../../../../redux/auth/operations";
+import TimeZoneSelect from "./TimeZoneSelect/TimeZoneSelect";
 
 const Validation = Yup.object().shape({
   username: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
@@ -36,10 +39,12 @@ export default function UserSettingsProfile({ onClose }) {
   const userPhone = user.phone_number || "";
   const userDefaultPage = user.first_page || "";
   const userTimeZone = user.time_zone || "";
-  const userPhoto = user.avatar_url || "";
+  const userPhoto = user?.avatar_url || defaultAvatar;
 
+
+// const defaultAvatar = "../../../../assets/modalicon/Ellipse 4- icon.png"
   const [avatar, setAvatar] = useState(userPhoto);
-  // console.log("Current avatar URL:", avatar);
+  console.log("Current avatar URL:", avatar);
 
   const nameFieldId = useId();
   const phoneFieldId = useId();
@@ -61,7 +66,6 @@ export default function UserSettingsProfile({ onClose }) {
     index: "",
   };
 
-  // const [phone, setPhone] = useState(initialValues.phone);
 
   const handleChangePhoto = () => {
     if (fileInputRef.current) {
@@ -77,7 +81,7 @@ export default function UserSettingsProfile({ onClose }) {
       try {
         const response = await dispatch(updateUserAvatar(file)).unwrap();
         // console.log(response);
-        setAvatar(response.data.update_photo)
+        setAvatar(newAvatarUrl)
         dispatch(getUserData());
         //       if (response.avatar_url) {
         //     setAvatar(response.avatar_url); // Update with the URL from the server response
@@ -134,7 +138,7 @@ export default function UserSettingsProfile({ onClose }) {
 
     const dataToUpdate = {};
 
-    if (values.username !== user.first_name) {
+    if (values.username !== user.name) {
       dataToUpdate.first_name = values.username;
     }
 
@@ -154,8 +158,8 @@ export default function UserSettingsProfile({ onClose }) {
       dataToUpdate.first_page = values.section;
     }
 
-    if (values.time_zone !== user.timeZone) {
-      dataToUpdate.timeZone = values.time_zone;
+    if (values.timeZone !== user.time_zone) {
+      dataToUpdate.time_zone = values.timeZone;
     }
 
     //     if (values.city !== user.city) {
@@ -201,11 +205,16 @@ export default function UserSettingsProfile({ onClose }) {
         onSubmit={handleSubmit}
         validationSchema={Validation}
       >
-        {({ setFieldValue }) => (
+        {/* {({ setFieldValue }) => ( */}
         <Form className={css.formBox}>
           <div className={css.addPhotoBox}>
             <div className={css.photoBox}>
-              <img src={avatar} alt="User's avatar" className={css.photo} />
+              <img src={avatar || defaultAvatar} alt="User's avatar" className={css.photo}
+  //               onError={(e) => {
+  //   e.target.onerror = null; 
+  //   e.target.src = defaultAvatar; 
+              // }}
+              />
             </div>
             <input
               type="file"
@@ -254,8 +263,6 @@ export default function UserSettingsProfile({ onClose }) {
                   name="phone"
                   id={phoneFieldId}
                   className={css.input}
-                  // value={userPhone}
-                  onChange={(value, form) => form.setFieldValue("phone", value)}
                   component={PhoneSelect}
                   placeholder="Введіть свій номер телефону..."
                 />
@@ -341,11 +348,13 @@ export default function UserSettingsProfile({ onClose }) {
                   id={timeZoneFieldId}
                   className={`${css.input} ${css.inputSelect}`}
                   onClick={() => toggleDropdown(2)}
-                >
-                  {/* <option value="default">За замовченням</option> */}
-                  <option value="Europe/Kyiv">(UTC +03:00) Київ</option>
-                  <option value="Europe/London">(GTM +01:00) London</option>
-                </Field>
+                  component={TimeZoneSelect}
+                 />
+                  {/* <option value="default">За замовченням</option> *
+                  {/* <option value="Europe/Kyiv">(UTC +03:00) Київ</option>
+                  <option value="Europe/London">(GTM +01:00) London</option> 
+                   </Field> */}
+                 
                 <BsFillCaretDownFill
                   className={`${css.btnArrowSelect} ${
                     activeDropdown === 2 ? css.rotated : ""
@@ -401,7 +410,7 @@ export default function UserSettingsProfile({ onClose }) {
             </button>
           </div>
           </Form>
-            )}
+            {/* )} */}
       </Formik>
     </div>
   );

@@ -34,6 +34,7 @@
     "react-router-dom": "^6.26.2",
     "react-select": "^5.8.1",
     "react-slick": "^0.30.2",
+    "react-timezone-select": "^3.2.8",
     "recharts": "^2.13.0",
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",

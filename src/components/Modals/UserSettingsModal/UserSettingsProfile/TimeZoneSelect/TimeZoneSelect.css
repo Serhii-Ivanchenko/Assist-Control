@@ -1,0 +1,48 @@
+.css-tj5bde-Svg{
+    display:none !important;
+}
+
+.css-13cymwt-control{
+width: 420px !important;
+height: 56px !important;
+
+padding: 18px 20px;
+background-color: var(--bg-input) !important;
+border-radius: 10px !important;
+border: 1px solid var(--input-stroke) !important;
+margin-top: 8px !important;
+
+}
+
+.css-19bb58m{
+    padding: 0 !important;
+    margin: 0 !important ;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--input-text);
+}
+
+.css-1wy0on6{
+    display: none !important;
+}
+
+.css-t3ipsp-control{
+width: 420px !important;
+    height: 56px !important;
+
+    padding: 18px 20px;
+    background-color: var(--bg-input) !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--input-stroke) !important;
+    margin-top: 8px;
+}
+
+.css-t3ipsp-control:hover{
+    border-color: none !important;
+}
+
+.css-nmdq5-menu{
+    background-color: var(--bg-input);
+}

@@ -9,7 +9,12 @@ import { BsFillCaretDownFill } from "react-icons/bs";
 // import { useSelector } from 'react-redux';
 // import { selectUser } from '../../../../../redux/auth/selectors';
 
-export default function PhoneSelect({ value, onChange }) {
+export default function PhoneSelect({ field, form, ...props }) {
+
+   const handleChange = (value) => {
+    form.setFieldValue(field.name, value);
+  };
+
 // const [hover, setHover] = useState(false)
   // const user = useSelector(selectUser)
   // const [activeDropdown, setActiveDropdown] = useState(false);
@@ -52,9 +57,9 @@ export default function PhoneSelect({ value, onChange }) {
     <div className="phoneBox">
     <PhoneInput
       country={"ua"}
-        value={value}
+        value={field.value}
         isValid={true}
-      onChange={onChange}
+      onChange={handleChange}
       placeholder="1234567"
       // containerClass={css.container}
       // buttonClass={css.button}
