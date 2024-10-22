@@ -10,6 +10,7 @@
   /* height: 48px; */
   padding: 8px;
   align-items: center;
+  justify-content: space-between;
 }
 @media only screen and (min-width: 1850px) {
   .carLineContainer {
@@ -39,7 +40,6 @@
   align-items: center;
   width: 36px;
   height: 32px;
-  margin-right: 8px;
 }
 
 .carPhoto img {
@@ -247,8 +247,14 @@
     border-radius: 6px;
     background: var(--main-gray);
     padding: 3px 10px;
-    width: 200px;
+    width: 180px;
   }
+}
+
+.vinNum{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .totalPay {
@@ -271,11 +277,18 @@
   }
 }
 
-.leftContainer,
+
 .rightContainer{
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: none;
+}
+
+@media only screen and (min-width: 1850px) {
+  .leftContainer,
+  .rightContainer{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 }
 
 .mileInfo{

@@ -1,5 +1,7 @@
 import { BsWrench, BsUiChecksGrid, BsExclamationCircle } from "react-icons/bs";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+import { AiFillCheckCircle } from "react-icons/ai";
+import { PiEyeFill } from "react-icons/pi";
+
 import clsx from "clsx";
 
 const renderStatus = (status, complete_d, styles = {}) => {
@@ -14,23 +16,28 @@ const renderStatus = (status, complete_d, styles = {}) => {
     statusClass = styles.new || "";
     statusText = "нова";
     background = "var(--status-gradient-new)";
-    borderColor = "#F5DD23"; // колір для "new"
+    borderColor = "var(--glow-new)";
   } else if (status === "repair") {
     statusClass = styles.repair || "";
     statusText = "ремонт";
     background = "var(--status-gradient-repair)";
-    borderColor = "#CF25C4"; // колір для "repair"
+    borderColor = "var(--glow-repair)"; 
   } else if (status === "check_repair") {
     statusClass = styles.checkRepair || "";
     statusText = "діагностика";
     background = "var(--status-gradient-diag)";
-    borderColor = "#256FCF"; // колір для "check_repair"
+    borderColor = "var(--glow-diag)"; 
+  } else if (status === "view_repair") {
+    statusClass = styles.viewRepair || "";
+    statusText = "огляд пр";
+    background = "var(--status-gradient-view-repair)";
+    borderColor = "var(--glow-view-repair)"; 
   } else if (status === "complete" || complete_d) {
     statusClass = styles.completed || "";
     statusText = "завершено";
     background = "var(--status-gradient-complete)";
-    borderColor = "#41CF25"; // колір для "complete"
-  } else {
+    borderColor = "var(--glow-complete)";
+  }  else {
     statusText = "уточнення";
   }
 
@@ -39,6 +46,14 @@ const renderStatus = (status, complete_d, styles = {}) => {
     case "new":
       icon = (
         <BsExclamationCircle 
+          className={clsx(styles.icon, statusClass)}
+          color="var(--light-gray)"
+        />
+      );
+      break;
+      case "view_repair":
+      icon = (
+        <PiEyeFill 
           className={clsx(styles.icon, statusClass)}
           color="var(--light-gray)"
         />
@@ -63,8 +78,9 @@ const renderStatus = (status, complete_d, styles = {}) => {
     case "complete":
     case complete_d:
       icon = (
-        <AiOutlineCheckCircle
+        <AiFillCheckCircle
           className={clsx(styles.icon, statusClass, styles.iconComplete)}
+          color="var(--light-gray)"
         />
       );
       break;
@@ -74,15 +90,16 @@ const renderStatus = (status, complete_d, styles = {}) => {
 
   return (
     <div
-      className={clsx(styles.title || "")}
+      className={clsx(styles.title, statusClass)}
       style={{
         borderRadius: "5px",
-        borderLeft: `1px solid ${borderColor}`, 
+        borderLeft: `2px solid ${borderColor}`,
         background: background,
+        "--glow-color": borderColor,
       }}
     >
       {icon}
-      <span className={clsx(styles.statusText || "", statusClass)}>
+      <span className={clsx(styles.statusText, statusClass)}>
         {statusText}
       </span>
     </div>

@@ -87,11 +87,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--light-gray);
+    background-color: #246d4d;
     border-radius: 50%;
     width: 14px;
     height: 14px;
     margin-bottom: 2px;
+    margin-left: 2px;
 }
 
 .icon {
