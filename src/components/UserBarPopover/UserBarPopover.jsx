@@ -26,7 +26,7 @@ export default function UserBarPopover({ isVisible, onClose, buttonRef }) {
   };
 
   const handleClickOutside = (event) => {
-    if (    
+    if (
       popoverRef.current &&
       !popoverRef.current.contains(event.target) &&
       buttonRef.current &&

@@ -65,7 +65,7 @@ export default function AddTeamMember({ onClose }) {
                   name="name"
                   id={nameFieldId}
                   className={css.field}
-                  placeholder="Введіть ім'я..."
+                  placeholder="Володимиp"
                 />
                 <ErrorMessage
                   name="name"
@@ -83,7 +83,7 @@ export default function AddTeamMember({ onClose }) {
                   name="surname"
                   id={surnameFieldId}
                   className={css.field}
-                  placeholder="Введіть прізвище..."
+                  placeholder="Зеленський"
                 />
                 <ErrorMessage
                   name="surname"
@@ -102,7 +102,7 @@ export default function AddTeamMember({ onClose }) {
                 name="email"
                 id={emailFieldId}
                 className={css.fieldEmail}
-                placeholder="Введіть пошту..."
+                placeholder="zelensky.official@gmail.com"
               />
               <ErrorMessage
                 name="email"
