@@ -10,11 +10,14 @@ import PhoneSelect from "./PhoneSelect/PhoneSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../../../redux/auth/selectors";
 import toast from "react-hot-toast";
+import defaultAvatar from "../../../../assets/images/avatar_default.png";
+
 import {
   updateUserAvatar,
   updateUserData,
 } from "../../../../redux/auth/operations";
 import { getUserData } from "../../../../redux/auth/operations";
+import TimeZoneSelect from "./TimeZoneSelect/TimeZoneSelect";
 
 const Validation = Yup.object().shape({
   username: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
@@ -27,6 +30,7 @@ const Validation = Yup.object().shape({
 export default function UserSettingsProfile({ onClose }) {
   const fileInputRef = useRef(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const selectRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -34,9 +38,11 @@ export default function UserSettingsProfile({ onClose }) {
   const userName = user.name || "";
   const userPhone = user.phone_number || "";
   const userDefaultPage = user.first_page || "";
-  const userTimeZone = user.timeZone || "";
-  const userPhoto = user.avatar_url || "";
+  const userTimeZone = user.time_zone || "";
+  const userPhoto = user?.avatar_url || defaultAvatar;
 
+
+// const defaultAvatar = "../../../../assets/modalicon/Ellipse 4- icon.png"
   const [avatar, setAvatar] = useState(userPhoto);
   console.log("Current avatar URL:", avatar);
 
@@ -55,12 +61,11 @@ export default function UserSettingsProfile({ onClose }) {
     country: "Ukraine",
     adress: "",
     section: userDefaultPage,
-    timeZome: userTimeZone,
+    timeZone: userTimeZone,
     city: "",
     index: "",
   };
 
-  const [phone, setPhone] = useState(initialValues.phone);
 
   const handleChangePhoto = () => {
     if (fileInputRef.current) {
@@ -75,7 +80,8 @@ export default function UserSettingsProfile({ onClose }) {
       setAvatar(newAvatarUrl);
       try {
         const response = await dispatch(updateUserAvatar(file)).unwrap();
-        console.log(response);
+        // console.log(response);
+        setAvatar(newAvatarUrl)
         dispatch(getUserData());
         //       if (response.avatar_url) {
         //     setAvatar(response.avatar_url); // Update with the URL from the server response
@@ -121,13 +127,19 @@ export default function UserSettingsProfile({ onClose }) {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
 
+  const handleBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setActiveDropdown(null);
+    }
+  };
+
   const handleSubmit = async (values, actions) => {
     console.log(values);
 
     const dataToUpdate = {};
 
     if (values.username !== user.name) {
-      dataToUpdate.name = values.username;
+      dataToUpdate.first_name = values.username;
     }
 
     //   if (values.country !== 'Ukraine') {
@@ -146,8 +158,8 @@ export default function UserSettingsProfile({ onClose }) {
       dataToUpdate.first_page = values.section;
     }
 
-    if (values.timeZone !== user.timeZone) {
-      dataToUpdate.timeZone = values.timeZone;
+    if (values.timeZone !== user.time_zone) {
+      dataToUpdate.time_zone = values.timeZone;
     }
 
     //     if (values.city !== user.city) {
@@ -187,16 +199,22 @@ export default function UserSettingsProfile({ onClose }) {
   };
 
   return (
-    <div className={css.contentBox}>
+    <div className={css.contentBox} ref={selectRef} onBlur={handleBlur}>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={Validation}
       >
+        {/* {({ setFieldValue }) => ( */}
         <Form className={css.formBox}>
           <div className={css.addPhotoBox}>
             <div className={css.photoBox}>
-              <img src={avatar} alt="User's avatar" className={css.photo} />
+              <img src={avatar || defaultAvatar} alt="User's avatar" className={css.photo}
+  //               onError={(e) => {
+  //   e.target.onerror = null; 
+  //   e.target.src = defaultAvatar; 
+              // }}
+              />
             </div>
             <input
               type="file"
@@ -245,8 +263,6 @@ export default function UserSettingsProfile({ onClose }) {
                   name="phone"
                   id={phoneFieldId}
                   className={css.input}
-                  value={phone}
-                  onChange={(value) => setPhone(value)}
                   component={PhoneSelect}
                   placeholder="Введіть свій номер телефону..."
                 />
@@ -332,11 +348,13 @@ export default function UserSettingsProfile({ onClose }) {
                   id={timeZoneFieldId}
                   className={`${css.input} ${css.inputSelect}`}
                   onClick={() => toggleDropdown(2)}
-                >
-                  {/* <option value="default">За замовченням</option> */}
-                  <option value="kyiv">(UTC +03:00) Київ</option>
-                  <option value="london">(GTM +01:00) London</option>
-                </Field>
+                  component={TimeZoneSelect}
+                 />
+                  {/* <option value="default">За замовченням</option> *
+                  {/* <option value="Europe/Kyiv">(UTC +03:00) Київ</option>
+                  <option value="Europe/London">(GTM +01:00) London</option> 
+                   </Field> */}
+                 
                 <BsFillCaretDownFill
                   className={`${css.btnArrowSelect} ${
                     activeDropdown === 2 ? css.rotated : ""
@@ -391,7 +409,8 @@ export default function UserSettingsProfile({ onClose }) {
               <BsSdCardFill className={css.iconSave} /> Зберегти зміни
             </button>
           </div>
-        </Form>
+          </Form>
+            {/* )} */}
       </Formik>
     </div>
   );
