@@ -1,5 +1,4 @@
-import { BsWrench, BsLayerBackward } from "react-icons/bs";
-import { HiOutlineHashtag } from "react-icons/hi";
+import { BsWrench, BsUiChecksGrid, BsExclamationCircle } from "react-icons/bs";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import clsx from "clsx";
 
@@ -7,28 +6,39 @@ const renderStatus = (status, complete_d, styles = {}) => {
   let icon;
   let statusText;
   let statusClass = "";
+  let background;
+  let borderColor;
 
-  
+  // Визначення фону та кольору рамки
   if (status === "new") {
-    statusClass = styles.new || ""; 
+    statusClass = styles.new || "";
     statusText = "нова";
+    background = "var(--status-gradient-new)";
+    borderColor = "#F5DD23"; // колір для "new"
   } else if (status === "repair") {
     statusClass = styles.repair || "";
     statusText = "ремонт";
+    background = "var(--status-gradient-repair)";
+    borderColor = "#CF25C4"; // колір для "repair"
   } else if (status === "check_repair") {
     statusClass = styles.checkRepair || "";
     statusText = "діагностика";
+    background = "var(--status-gradient-diag)";
+    borderColor = "#256FCF"; // колір для "check_repair"
   } else if (status === "complete" || complete_d) {
     statusClass = styles.completed || "";
     statusText = "завершено";
+    background = "var(--status-gradient-complete)";
+    borderColor = "#41CF25"; // колір для "complete"
   } else {
-    statusText = "Невідомий статус";
+    statusText = "уточнення";
   }
 
+  // Визначення іконки
   switch (status) {
     case "new":
       icon = (
-        <HiOutlineHashtag
+        <BsExclamationCircle 
           className={clsx(styles.icon, statusClass)}
           color="var(--light-gray)"
         />
@@ -44,7 +54,7 @@ const renderStatus = (status, complete_d, styles = {}) => {
       break;
     case "check_repair":
       icon = (
-        <BsLayerBackward
+        <BsUiChecksGrid
           className={clsx(styles.icon, statusClass)}
           color="var(--light-gray)"
         />
@@ -54,8 +64,7 @@ const renderStatus = (status, complete_d, styles = {}) => {
     case complete_d:
       icon = (
         <AiOutlineCheckCircle
-          className={clsx(styles.icon, statusClass)}
-          color="#4CAF50"
+          className={clsx(styles.icon, statusClass, styles.iconComplete)}
         />
       );
       break;
@@ -67,17 +76,9 @@ const renderStatus = (status, complete_d, styles = {}) => {
     <div
       className={clsx(styles.title || "")}
       style={{
-        borderColor: statusClass.includes("completed")
-          ? "var(--light-gray)"
-          : statusClass.includes("new")
-          ? "var(--status-new)"
-          : statusClass.includes("repair")
-          ? "#994CA5"
-          : statusClass.includes("checkRepair")
-          ? "var(--blue)"
-          : "var(--black)",
-        borderWidth: "1px",
-        borderStyle: "solid",
+        borderRadius: "5px",
+        borderLeft: `1px solid ${borderColor}`, 
+        background: background,
       }}
     >
       {icon}
