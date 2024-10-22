@@ -1,6 +1,9 @@
 import styles from "./DayCarsItem.module.css";
+import Modal from "../Modals/Modal/Modal.jsx";
+import DetailedClientInfo from "../DetailedClientInfo/DetailedClientInfo.jsx";
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import clsx from "clsx";
+import { useState } from "react";
 import {
   BsPersonFill,
   BsTelephoneOutboundFill,
@@ -14,6 +17,8 @@ import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
 import { renderTime } from "../../utils/renderTime.js";
 import renderStatus from "../../utils/renderStatus.jsx";
+import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
+
 
 export default function DayCarsItem({
   carNumber,
@@ -25,11 +30,26 @@ export default function DayCarsItem({
   status,
   complete_d,
   date_s,
+  client,
 }) {
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsOpen(false);
+  };
+
+
   const carsData = useSelector(selectDayCars);
   const car = carsData.find((car) => car.carNumber === carNumber);
 
   const carPhoto = photoUrl || absentAutoImg;
+
+ 
 
   return (
     <div
@@ -37,20 +57,21 @@ export default function DayCarsItem({
         styles.dayCarsItemContainer,
         isModal && styles.modalDayCarsItemContainer
       )}
+      style={getBackgroundStyle(status)} 
     >
       <div className={styles.userInfo}>
         <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>
           <div className={styles.infoName}>
             <BsPersonFill className={styles.iconHuman} color="#617651" />
-            <span className={styles.textName}>Іван Петренко</span>
+            <span className={styles.textName}>{client ? client.name : "Гість"}</span>
           </div>
           <div className={styles.infoTel}>
             <BsTelephoneOutboundFill
               className={styles.iconTel}
               color="#006D95"
             />
-            <span className={styles.textTel}>0733291217</span>
+            <span className={styles.textTel}>{client ? client.phone : "ххх-ххххххх"}</span>
           </div>
           <div className={styles.infoCar}>
             <IoCarSportSharp size={13} color="#A97878" />
@@ -61,12 +82,17 @@ export default function DayCarsItem({
           <span className={styles.vinNum}>{vin ? vin : "VIN-XXXXXXXXXXX"}</span>
         </div>
         <div className={styles.btnContainer}>
-          <button className={styles.btnDetail}>
+          <button className={styles.btnDetail} onClick={openModal}>
             <p className={styles.btnDetailText}>Деталі</p>
           </button>
           {/* <button className={styles.btnSave}>
             <BsLayerBackward size={16} />
           </button> */}
+          {modalIsOpen && (
+          <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+            <DetailedClientInfo onClose={handleModalClose} />
+          </Modal>
+        )}
         </div>
       </div>
       <div className={styles.carsInfo}>

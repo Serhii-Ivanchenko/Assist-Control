@@ -5,14 +5,14 @@
     width: 141px;
     height: 91px;
     border-radius: 5px;
-    background: var(--bg-secondary);
+    background: var(--bg);
     position: relative;
 }
 
 @media only screen and (min-width: 1850px) {
     .loadStatsContainer {
-        width: 210px;
-        height: 115px;
+        width: 170px;
+        height: 135px;
         padding: 6.5px 6px 6.5px 14px;
     }
 }
@@ -87,11 +87,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--light-gray);
+    background-color: #246d4d;
     border-radius: 50%;
     width: 14px;
     height: 14px;
     margin-bottom: 2px;
+    margin-left: 2px;
 }
 
 .icon {

@@ -11,7 +11,7 @@ export default function LoadStats() {
         <div className={styles.percentage}>
           <span className={styles.num}>117</span><span className={styles.symbol}>%</span>
           <div className={styles.iconBtn}>
-          <FiArrowUpRight className={styles.icon} />
+          <FiArrowUpRight className={styles.icon} color='#3CBC81' />
           </div>
         </div>
         <p className={styles.description}>Завантаження сервісу</p>

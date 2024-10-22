@@ -14,9 +14,8 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
   const [viewMode, setViewMode] = useState("grid");
 
   const handleViewModeChange = (newMode) => {
-    setViewMode(newMode)
+    setViewMode(newMode);
   };
-
 
   return (
     <div className={styles.containerCarModal}>
@@ -48,17 +47,19 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
           <MdClose className={styles.iconClose} />
         </button>
       </div>
-
-      <div className={styles.content}>
-        {isLoading && <Loader />}
-        <div className={styles.scrollableContent}>
-          <DayCarsList
-            carsData={carsData}
-            viewMode={viewMode}
-            isModal={isModal}
-          />
-        </div>
-      </div>
+      {/* <div className={styles.content}> */}
+      {/* <div className={styles.scrollableContent}> */}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <DayCarsList
+          carsData={carsData}
+          viewMode={viewMode}
+          isModal={isModal}
+        />
+      )}
     </div>
+    //   </div>
+    // </div>
   );
 }

@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import clsx from "clsx";
 
-import { HiOutlineHashtag } from "react-icons/hi";
+import { BsExclamationCircle } from "react-icons/bs";
 import { BsWrench } from "react-icons/bs";
-import { FaCircleCheck } from "react-icons/fa6";
 import { BsEyeFill, BsCheckCircleFill } from "react-icons/bs";
 import { BsUiChecksGrid } from "react-icons/bs";
 
@@ -56,7 +55,7 @@ export default function CurrentCarsItem() {
       switch (status) {
         case "new":
           return (
-            <HiOutlineHashtag
+            <BsExclamationCircle
               stroke="var(--light-gray)"
               fill="var(--light-gray)"
             />
@@ -65,8 +64,6 @@ export default function CurrentCarsItem() {
           return (
             <BsWrench stroke="var(--light-gray)" fill="var(--light-gray)" />
           );
-        // case "check_repair":
-        //   return <BsCalendar2CheckFill stroke="var(--light-gray)" fill="var(--light-gray)" />;
         case "complete":
           return (
             <BsCheckCircleFill
@@ -106,16 +103,16 @@ export default function CurrentCarsItem() {
               src={car?.photo_url || absentAutoImg}
               alt="Car image"
               onError={(e) => {
-                e.target.onerror = null; // щоб уникнути зациклення події onError
-                e.target.src = absentAutoImg; // замінюємо поломаний URL на заглушку
+                e.target.onerror = null;
+                e.target.src = absentAutoImg;
               }}
             />
           </div>
           <div className={styles.carInfoContainer}>
-            <h3 className={styles.carReg}>{car.plate}</h3>
             <p className={styles.carBrand}>
               {car.auto || "Марку не визначено"}
             </p>
+            <h3 className={styles.carReg}>{car.plate}</h3>
             <h4 className={styles.carTimeStamp}>
               {calculateTimeInService(car.date_s)}
             </h4>
@@ -127,9 +124,11 @@ export default function CurrentCarsItem() {
             >
               Деталі
             </button>
-            <p className={clsx(styles.carStatus, className)}>
-              {icon} {label}
-            </p>
+            <div className={styles.statusContainer}>
+              <p className={clsx(styles.carStatus, className)}>
+                {icon} {label}
+              </p>
+            </div>
           </div>
         </div>
       );

@@ -3,22 +3,20 @@
     flex-direction: column;
     width: 800px;
     height: 616px;
-    padding: 60px 28px 22px 28px;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 12px;
+    padding: 60px 0 4px;
     position: relative;
     background-color: var(--bg-secondary);
+    overflow: hidden;
 }
 
 @media only screen and (min-width: 1850px) {
     .containerCarModal {
         width: 1360px;
-        height: 850px;
+        height: 800px;
     }
   }
 
-.content {
+/* .content {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -32,16 +30,16 @@
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--input-stroke) var(--bg);
-}
-
+} */
+/* 
 @media only screen and (min-width: 1850px) {
     .containerCarModal {
         max-height: 850px;
     }
-  }
+  } */
 
 
-.scrollableContent::-webkit-scrollbar {
+/* .scrollableContent::-webkit-scrollbar {
     width: 8px;
 }
 
@@ -56,9 +54,7 @@
 
 .scrollableContent::-webkit-scrollbar-button {
     display: none;
-}
-
-
+} */
 
 .switch {
     font-size: 17px;
@@ -85,7 +81,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--bg-input);
+    background-color: var(--bg);
     transition: .4s;
     border-radius: 30px;
 }
@@ -184,7 +180,7 @@
 }
 
 .input:checked+.slider {
-    background-color: var(--bg-input);
+    background-color: var(--bg);
 }
 
 .input:focus+.slider {
