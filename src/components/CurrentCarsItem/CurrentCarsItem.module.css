@@ -14,7 +14,7 @@
 
 .newStatus {
   stroke: var(--light-gray);
-  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+  background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
     var(--border-gradient-new) border-box;
   border: 2px solid transparent;
   color: var(--status-new);
@@ -22,7 +22,7 @@
 
 .repairStatus {
   fill: var(--light-gray);
-  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+  background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
     var(--border-gradient-repair) border-box;
   border: 2px solid transparent;
   color: var(--status-repair);
@@ -30,7 +30,7 @@
 
 .checkRepairStatus {
   fill: var(--light-gray);
-  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+  background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
     var(--border-gradient-diag) border-box;
   border: 2px solid transparent;
   color: var(--status-diag);
@@ -38,7 +38,7 @@
 
 .completeStatus {
   fill: var(--light-gray);
-  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+  background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
     var(--border-gradient-complete) border-box;
   border: 2px solid transparent;
   color: var(--status-complete);
@@ -188,12 +188,12 @@
     display: flex;
     width: 521px;
     height: auto;
-    padding: 10px 20px;
+    padding: 8px 18px;
 
     background: var(--bg-input);
     border: transparent;
     border-radius: 6px;
-    padding: 5px 8px 5px 5px;
+    /* padding: 5px 8px 5px 5px; */
 
     gap: 18px;
 
@@ -205,6 +205,8 @@
     display: flex;
     width: 101px;
     height: 104px;
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   .carReg {
@@ -269,36 +271,36 @@
   }
 
   .newStatus {
-    padding: 10px 20px;
+    padding: 8px 18px;
     stroke: var(--light-gray);
-    background: linear-gradient(#2d3038, #2d3038) padding-box,
+    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-new) border-box;
     border: 2px solid transparent;
     color: var(--status-new);
   }
 
   .repairStatus {
-    padding: 10px 20px;
+    padding: 8px 18px;
     fill: var(--light-gray);
-    background: linear-gradient(#2d3038, #2d3038) padding-box,
+    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-repair) border-box;
     border: 2px solid transparent;
     color: var(--status-repair);
   }
 
   .checkRepairStatus {
-    padding: 10px 20px;
+    padding: 8px 18px;
     fill: var(--light-gray);
-    background: linear-gradient(#2d3038, #2d3038) padding-box,
+    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-diag) border-box;
     border: 2px solid transparent;
     color: var(--status-diag);
   }
 
   .completeStatus {
-    padding: 10px 20px;
+    padding: 8px 18px;
     fill: var(--light-gray);
-    background: linear-gradient(#2d3038, #2d3038) padding-box,
+    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-complete) border-box;
     border: 2px solid transparent;
     color: var(--status-complete);
