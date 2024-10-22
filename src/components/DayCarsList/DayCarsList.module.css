@@ -8,46 +8,61 @@
   /* margin-bottom: 14px; */
 }
 
-.scrollWrapper{
-  overflow-y: auto;
+.scrollWrapper {
+  overflow-y: scroll;
   overflow-x: hidden;
   -ms-overflow-style: none;
   max-height: 295px;
-
 }
 
-.carsList{
+.carsList {
   display: flex;
   flex-direction: column;
   gap: 10px;
 
 }
 
+.scrollWrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollWrapper::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+}
+
+.scrollWrapper::-webkit-scrollbar-track {
+  background-color: var(--bg);
+  border-radius: 4px;
+}
+
 @media only screen and (min-width: 1850px) {
   .dayCarsListContainer {
     width: 460px;
-    max-height: 602px;
-    padding: 20px 42px 13px 20px;
+    height: 602px;
+    padding: 20px 16px 13px 20px;
     margin-bottom: 14px;
   }
 
-  .scrollWrapper{
-    width: 430px;
+  .scrollWrapper {
+    width: 424px;
     max-height: 568px;
+    padding-right: 26px;
   }
-  .carsList{
+
+  .carsList {
     gap: 14px;
   }
 }
 
-.modaldayCarsListContainer {
+/* .modaldayCarsListContainer {
   max-height: 534px;
   width: 744px;
   padding: 0;
   box-shadow: none;
-}
+} */
 
-.modalCarsList{
+.modalCarsList {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -55,20 +70,22 @@
   gap: 12px;
 }
 
-.modalscrollWrapper{
+/* .modalscrollWrapper {
   max-height: 568px;
-}
+} */
 
 @media only screen and (min-width: 1850px) {
   .modaldayCarsListContainer {
-    width: 1304px;
-    max-height: 768px;
+    width: 1360px;
+    height: 740px;
+    padding: 0 20px 20px 20px;
+    box-shadow: none;
+    margin-bottom: 0;
   }
 
-  .modalscrollWrapper{
-    width: 1304px;
-    max-height: 768px;
+  .modalscrollWrapper {
+    width: 1320px;
+    max-height: 720px;
   }
-  
+
 }
-
