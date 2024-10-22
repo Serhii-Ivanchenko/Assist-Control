@@ -1,8 +1,8 @@
-.css-tj5bde-Svg{
+.custom-select__Svg{
     display:none !important;
 }
 
-.css-13cymwt-control{
+.custom-select__control{
 width: 420px !important;
 height: 56px !important;
 
@@ -11,7 +11,7 @@ background-color: var(--bg-input) !important;
 border-radius: 10px !important;
 border: 1px solid var(--input-stroke) !important;
 margin-top: 8px !important;
-
+color: var(--input-text);
 }
 
 .css-19bb58m{
@@ -21,14 +21,14 @@ margin-top: 8px !important;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color: var(--input-text);
+    
 }
 
 .css-1wy0on6{
     display: none !important;
 }
 
-.css-t3ipsp-control{
+.custom-select__control{
 width: 420px !important;
     height: 56px !important;
 
@@ -37,12 +37,67 @@ width: 420px !important;
     border-radius: 10px !important;
     border: 1px solid var(--input-stroke) !important;
     margin-top: 8px;
+    box-shadow: none !important;
 }
 
-.css-t3ipsp-control:hover{
-    border-color: none !important;
+.custom-select__control:hover{
+   outline: none !important;
+box-shadow: none !important;
 }
 
-.css-nmdq5-menu{
-    background-color: var(--bg-input);
+.custom-select__menu{
+    background-color: var(--bg-input) !important;
+}
+
+.custom-select__menu-list {
+    max-height: 200px;
+    /* Ensure it matches the JS setting */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+}
+
+.custom-select__menu-list::-webkit-scrollbar {
+    width: 8px;
+    /* Width of the scrollbar */
+}
+
+.custom-select__menu-list::-webkit-scrollbar-thumb {
+    background-color: var(--bg);
+    /* Color of the scrollbar thumb */
+    border-radius: 4px;
+    /* Round edges of the thumb */
+}
+
+.custom-select__menu-list::-webkit-scrollbar-track {
+    background: var(--bg-input);
+    /* Background of the scrollbar track */
+}
+
+/* .custom-select__menu-list::-webkit-scrollbar{
+  width: 8px;  
+}
+
+.custom-select__menu-list::-webkit-scrollbar-thumb{
+    
+    background-color: var(--bg);
+} */
+
+/* .custom-select__menu {
+    background-color: black;
+} */
+
+.custom-select__single-value{
+   margin: 0 !important;
+width: 350px !important;
+}
+
+.custom-select__value-container{
+    padding: 0 !important;
+width: 350px !important;
+}
+
+.custom-select__input-container{
+  color:  var(--input-text);
+  margin: 0 !important;
+  padding: 0 !important;
 }
