@@ -22,56 +22,49 @@ import {
 } from "recharts";
 import css from "./LoadStatsChart.module.css";
 
-const stringAvto = (data) => {
-  let datastring = "";
-  const arrAvto = [
-    "автомобілів",
-    "автомобіль",
-    "автомобіля",
-    "автомобіля",
-    "автомобіля",
-    "автомобілів",
-    "автомобілів",
-    "автомобілів",
-    "автомобілів",
-    "автомобілів",
-  ];
-  datastring = arrAvto[data % 10];
-  if (data >= 11 && data <= 20) {
-    datastring = "автомобілів";
-  }
-  return datastring;
-};
 
-const CustomTooltip = ({ active, payload, label, coordinate }) => {
+
+const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
   if (active && payload && payload.length) {
     const { x, y } = coordinate;
-
+    const tooltipWidth = 23; 
+    const tooltipHeight = 34;
+    let leftPosition = x+30;
+    let topPosition = y - 35;
+    
+    if (x + tooltipWidth  > viewBox.width) {
+    leftPosition = viewBox.width - tooltipWidth+30 ; // Смещаем тултип влево
+  }
+if (y - tooltipHeight / 2 < 0) {
+    topPosition = -35; // Смещаем тултип вниз
+  }
     return (
       <div
-        className="custom-tooltip"
-        style={{
-          // backgroundColor: 'var(--white)',
-          width: "70px",
-          // padding: '5px',
-          border: "none",
-          // border: '1px solid #ccc',
-          position: "absolute",
-          left: x,
+        className={css.customtooltip}
+         style={{
+        //   backgroundColor: "var(--light-gray)",
+        //   width: "51px",
+        //   padding: '5px',
+        //   padding: '2px' '4px',
+        //   // border: "none",
+        //   borderRadius: '6px',
+         
+        //   border: '1px solid #ccc',
+           position: "absolute",
+            left: `${leftPosition}px`,
+        //   // right: x20,
+           top: `${topPosition}px`,
+        //   transform: "translateX(-50%)",
+        //   fontweight: "400",
+        //   fontsize: "6px",
+        //   fontvariant: "smallCaps",
+        //   // color: "var(--light-gray)",
 
-          top: y - 30,
-          transform: "translateX(-50%)",
-          fontweight: "400",
-          fontsize: "6px",
-          fontvariant: "smallCaps",
-          color: "#9e9e9e",
-
-          fontStyle: "normal",
-        }}
+        //   fontStyle: "normal",
+         }}
       >
-        <p className={css.popuptitle}>{`${payload[0].value} ${stringAvto(
-          payload[0].value
-        )} ${label}`}</p>
+        <p className={css.popuptitle}>{`${label}`}</p>
+        <p className={css.popupavto}>Авто <span className={css.kolavto}>{`${payload[0].value} `}</span></p>
       </div>
     );
   }
@@ -103,15 +96,15 @@ export default function LoadStatsChart() {
         <circle
           cx={cx}
           cy={cy}
-          r={7}
+          r={10}
           fill="none" // Прозрачный внутренний цвет
-          stroke="white" // Белая обводка
+          stroke='var(--white)' // Белая обводка
           strokeWidth={1} // Толщина обводки 1 пиксель
         />
         <circle
           cx={cx}
           cy={cy}
-          r={3}
+          r={4}
           fill="var(--play-btn-triangle)"
           stroke="none"
         />
@@ -188,9 +181,10 @@ export default function LoadStatsChart() {
             {/* <CartesianGrid strokeDasharray="3 3" />  */}
             <CartesianGrid
               stroke="url(#linear)"
-              strokeDasharray="0"
+              strokeDasharray="3,3"
               vertical={false}
               horizontal={true}
+              
             />
 
             <XAxis
@@ -205,12 +199,13 @@ export default function LoadStatsChart() {
               domain={[0, (dataMax) => dataMax]}
               dataKey="value"
               margin={{ topt: 10 }}
+              tick={{ fontSize: 10 }}
               interval={0}
               //  tickCount={12}
               // tick={{ fill: "transparent" }}
               axisLine={{ fill: "transparent" }}
               //  tickFormatter={(value) => (value / 1000).toFixed(1)}
-              width={20}
+              width={15}
               // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
               ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
             />
