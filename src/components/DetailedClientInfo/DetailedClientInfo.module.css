@@ -1,0 +1,21 @@
+.detailedClientInfoWrapper {
+  display: flex;
+  gap: 7px;
+  width: 1380px;
+  height: 848px;
+  background-color: var(--dark-gray);
+  border-radius: 12px;
+  padding: 28px 22px 0px 50px;
+}
+.closeIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 18px;
+  height: 18px;
+  fill: var(--input-stroke);
+}
+
+.closeIcon:hover {
+  cursor: pointer;
+}

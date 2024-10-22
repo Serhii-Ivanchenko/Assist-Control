@@ -1,0 +1,126 @@
+.callHistory {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style: circle !important;
+  list-style-type: circle !important;
+}
+
+/* Хедер першого акардіона */
+.listItem {
+  width: 640px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  padding: 0px 20px;
+  border-radius: 6px;
+  background-color: #2d3138;
+}
+/* .listItem::before {
+  position: relative;
+  left: -12px;
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-color: var(--dark-gray);
+  border-radius: 50%;
+  border: 2px solid var(--blue);
+}
+.listItem::after {
+  position: absolute;
+  content: "";
+  left: -12px;
+  width: 9px;
+  height: 9px;
+  background-color: var(--blue);
+  transform: translateX(85%);
+  border-radius: 50%;
+} */
+/* .listItem > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+} */
+.kilometersWrapper,
+.dateWrapper {
+  display: flex;
+  align-items: center;
+}
+.kilometersWrapper {
+  gap: 10px;
+}
+.dateWrapper {
+  gap: 20px;
+}
+.numberOfKilometers,
+.kilometersDriven,
+.date {
+  font-weight: 600;
+  display: flex;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 24px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.numberOfKilometers {
+  color: var(--current-mileage-text);
+  background: #43a48d14;
+}
+.kilometersDriven {
+  color: var(--last-service-mileage-text);
+  background: #a4704314;
+}
+.date {
+  color: var(--red);
+  background: #c38ce614;
+}
+.unActiveDialogBtn {
+  border: none;
+  background: none;
+  transition: transform 200ms ease-in-out;
+}
+.activeDialogBtn {
+  background-color: none;
+  transform: rotate(180deg);
+}
+
+/* Тіло першого акардіона */
+.bodyAccardionWrapper {
+  margin-top: 20px;
+}
+.btnDownloadsWrapper {
+  display: flex;
+  gap: 27px;
+}
+.btnDownloadsItem {
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+  display: flex;
+  padding: 10px 16px;
+  align-items: center;
+  gap: 19px;
+  border-radius: 6px;
+  background: #313540;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.downloadBtn {
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  gap: 7px;
+  color: var(--icon-gray);
+  border-radius: 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+.downloadBtn > span {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
