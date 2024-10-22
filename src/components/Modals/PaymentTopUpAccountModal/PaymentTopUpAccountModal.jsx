@@ -13,8 +13,8 @@ import logoPrivat from "../../../assets/images/PaymentIcons/logo-privat 1.png";
 import logoPrivat2x from "../../../assets/images/PaymentIcons/logo-privat 2x.png";
 import logoMono from "../../../assets/images/PaymentIcons/plata-by-mono-24 1.png";
 import logoMono2x from "../../../assets/images/PaymentIcons/plata-by-mono-24 2x.png";
-import logoCrypto from "../../../assets/images/PaymentIcons/logo-crypto 1.png";
-import logoCrypto2x from "../../../assets/images/PaymentIcons/logo-crypto 2x.png";
+import logoCrypto from "../../../assets/images/PaymentIcons/logo-crypto1.png";
+import logoCrypto2x from "../../../assets/images/PaymentIcons/logo-crypto2x.png";
 import { BsXLg } from "react-icons/bs";
 import { useState } from "react";
 

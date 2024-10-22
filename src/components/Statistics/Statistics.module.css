@@ -7,18 +7,20 @@
 
 @media only screen and (min-width: 1850px) {
   .statisticsCont {
-    gap: 34px;
-    margin-bottom: 14px;
+    gap: 14px;
+    margin-bottom: 16px;
   }
 }
 
 .statisticsTitle {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .title {
   font-family: "Roboto", sans-serif;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 300;
+  line-height: 1.083em;
 }
