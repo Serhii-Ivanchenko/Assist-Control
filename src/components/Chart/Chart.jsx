@@ -4,8 +4,9 @@ import { getNewCarsRange } from "../../redux/cars/operations.js";
 import { selectNewCars } from "../../redux/cars/selectors.js";
 import PeriodSelector from "../PeriodSelector/PeriodSelector.jsx";
 import {
-  AreaChart,
-  XAxis,
+  AreaChart, BarChart,
+  Bar,ReferenceLine,
+  XAxis, Legend,
   YAxis,
   CartesianGrid,
   Tooltip,
@@ -14,52 +15,73 @@ import {
 } from "recharts";
 import css from "./Chart.module.css";
 
-const stringAvto = (data) => {
-  let datastring = "";
-  const arrAvto = [
-    "автомобілів",
-    "автомобіль",
-    "автомобіля",
-    "автомобіля",
-    "автомобіля",
-    "автомобілів",
-    "автомобілів",
-    "автомобілів",
-    "автомобілів",
-    "автомобілів",
-  ];
-  datastring = arrAvto[data % 10];
-  if (data >= 11 && data <= 20) {
-    datastring = "автомобілів";
-  }
-  return datastring;
-};
+const data = [
+  { dateeng: '25/09', kolall: 6, kolnew: 3 },
+  { dateeng: '26/09', kolall: 5, kolnew: 3 },
+  { dateeng: '27/09', kolall: 2, kolnew: 1 },
+  { dateeng: '28/09', kolall: 5, kolnew: 4 },
+  { dateeng: '29/09', kolall: 8, kolnew: 5 },
+  { dateeng: '30/09', kolall: 10, kolnew: 7 },
+  { dateeng: '01/10', kolall: 10, kolnew: 6 },
+  { dateeng: '02/10', kolall: 9, kolnew: 4 },
+  { dateeng: '03/10', kolall: 7, kolnew: 3 },
+  { dateeng: '04/10', kolall: 5, kolnew: 2 },
+  // { dateeng: '05/10', kolall: 10, kolnew: 6 },
+  // { dateeng: '06/10', kolall: 9, kolnew: 4 },
+  // { dateeng: '07/10', kolall: 7, kolnew: 3 },
+  // { dateeng: '08/10', kolall: 5, kolnew: 2 },
+  // { dateeng: '09/10', kolall: 6, kolnew: 3 },
+  // { dateeng: '10/10', kolall: 5, kolnew: 3 },
+  // { dateeng: '11/10', kolall: 2, kolnew: 1 },
+  // { dateeng: '12/10', kolall: 5, kolnew: 4 },
+  // { dateeng: '13/10', kolall: 8, kolnew: 5 },
+  // { dateeng: '14/10', kolall: 10, kolnew: 7 },
+  // { dateeng: '15/10', kolall: 10, kolnew: 6 },
+  // { dateeng: '16/10', kolall: 9, kolnew: 4 },
+  // { dateeng: '17/10', kolall: 7, kolnew: 3 },
+  // { dateeng: '18/10', kolall: 5, kolnew: 2 },
+  // { dateeng: '19/10', kolall: 10, kolnew: 6 },
+  // { dateeng: '20/10', kolall: 9, kolnew: 4 },
+  // { dateeng: '21/10', kolall: 7, kolnew: 3 },
+  // { dateeng: '22/10', kolall: 5, kolnew: 2 }, 
+  // { dateeng: '23/10', kolall: 7, kolnew: 3 },
+  // { dateeng: '24/10', kolall: 5, kolnew: 2 }, 
+]
 
-const CustomTooltip = ({ active, payload, label, coordinate }) => {
+
+const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
   if (active && payload && payload.length) {
     const { x, y } = coordinate;
-
+    const tooltipWidth = 23; 
+    const tooltipHeight = 34;
+    let leftPosition = x+30;
+    let topPosition = y - 35;
+    
+    if (x + tooltipWidth  > viewBox.width) {
+    leftPosition = viewBox.width - tooltipWidth+30 ; // Смещаем тултип влево
+  }
+if (y - tooltipHeight / 2 < 0) {
+    topPosition = -35; // Смещаем тултип вниз
+  }
     return (
       <div
-        className="custom-tooltip"
-        style={{
-          // backgroundColor: 'var(--white)', padding: '5px',border: '1px solid #ccc',
-          width: "70px",
-          border: "none",
+        className={css.customtooltip}
+         style={{
           position: "absolute",
-          left: x,
-          top: y - 30,
-          transform: "translateX(-50%)",
-          fontweight: "400",
-          fontsize: "6px",
-          fontvariant: "smallCaps",
-          color: "#9e9e9e",
-          fontStyle: "normal",
-        }}
+          left: `${leftPosition}px`,
+          top: `${topPosition}px`,
+      
+         }}
       >
-        <p className={css.popuptitle}>{`${payload[0].value} ${stringAvto(
-          payload[0].value
-        )}  ${label}`}</p>
+        <p className={css.popuptitle}>{`${label}`}</p>
+        <div className={css.chartflex}>
+          <p className={css.popupavto}>All </p>
+          <p className={css.kolall}>{`${payload[0].value} `}</p>
+        </div>
+         <div className={css.chartflex}>
+          <p className={css.popupavto}>New </p>
+          <p className={css.kolnew}>{`${payload[1].value} `}</p>
+     </div>
       </div>
     );
   }
@@ -86,30 +108,31 @@ export default function Chart() {
     setDateEnd(newData);
   };
 
-  const customActiveDot = (props) => {
-    const { cx, cy } = props;
+  // const customActiveDot = (props) => {
+  //   const { cx, cy } = props;
 
-    return (
-      <>
-        <circle
-          cx={cx}
-          cy={cy}
-          r={7}
-          fill="none"
-          stroke="white"
-          strokeWidth={1}
-        />
-        <circle cx={cx} cy={cy} r={3} fill="var(--orange)" stroke="none" />
-      </>
-    );
-  };
+  //   return (
+  //     <>
+  //       <circle
+  //         cx={cx}
+  //         cy={cy}
+  //         r={7}
+  //         fill="none"
+  //         stroke="white"
+  //         strokeWidth={1}
+  //       />
+  //       <circle cx={cx} cy={cy} r={3} fill="var(--orange)" stroke="none" />
+  //     </>
+  //   );
+  // };
 
-  const yTickFormatter = (tick) => {
-    if (tick >= 10) {
-      return "";
-    }
-    return tick;
-  };
+
+  // const yTickFormatter = (tick) => {
+  //   if (tick >= 10) {
+  //     return "";
+  //   }
+  //   return tick;
+  // };
 
   useEffect(() => {
     const fetchNewCarsData = async () => {
@@ -121,7 +144,7 @@ export default function Chart() {
     fetchNewCarsData();
   }, [dispatch, dateBeginStr, dateEndStr]);
 
-  let data = newCarsData.map((el) => ({
+  let dataarr = newCarsData.map((el) => ({
     ...el,
     dateeng:
       el.date.substring(8, 10) +
@@ -133,14 +156,16 @@ export default function Chart() {
 
   // console.log('date',data)
   //  console.log('end', dateEnd)
-  let interval = data.length;
+  // let interval = data.length;
   return (
     <div className={css.containerchart}>
+      <div className={css.charttitlebox}>
       <p className={css.charttitle}>Машинозаїзди</p>
-
+        <p className={css.charttitleavto}>Авто:<span className={css.titlekolvo} >30</span></p>
+      </div>
       <div className={css.areabox}>
-        <ResponsiveContainer className={css.responsecontainer}>
-          <AreaChart data={data}>
+         <ResponsiveContainer className={css.responsecontainer}>
+          <BarChart data={data}>
             <defs>
               <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="var(--blue)" stopOpacity={1} />
@@ -169,56 +194,71 @@ export default function Chart() {
             {/* <CartesianGrid strokeDasharray="3 3" />  */}
             <CartesianGrid
               stroke="url(#linear)"
-              strokeDasharray="0"
+              strokeDasharray="3,3"
               vertical={false}
               horizontal={true}
             />
 
             <XAxis
               dataKey="dateeng"
-              interval={interval}
+              interval={0}
               //  padding={{ right: 10 }}
-              tick={{ fill: "transparent" }}
+              tick={{ fontSize: 10 }}
+              // tick={{ fill: 'transparent' }}
+              //  angle={-45} textAnchor="end"
             />
 
             <YAxis
-              //  domain={[0, (dataMax) => dataMax + 1]}
-              domain={[0, 10]}
-              dataKey="count"
+              domain={[0, (dataMax) => dataMax + 1]}
+              // domain={[0, 11]}
+              // dataKey="count"
               //  padding={{ top: 10 }}
               allowDataOverflow={true}
               //  tickCount={10}
-              tick={{ fill: "transparent" }}
+              tick={{ fontSize: 10 }}
               axisLine={{ fill: "transparent" }}
-              tickCount={10}
+              // tickCount={12}
               interval={0}
-              ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+              ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
               //  axisLine={false}
-              tickFormatter={yTickFormatter}
+              // tickFormatter={yTickFormatter}
               //  tickFormatter={(value) => (value / 1000).toFixed(1)}
-              width={1}
+              width={10}
+              
               // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
               //  ticks={[0, 2, 4, 6, 8, 10]}
             />
 
-            <Tooltip content={<CustomTooltip />} />
-
-            <Area
+            <Tooltip content={<CustomTooltip />}
+            cursor={{fill:'rgb(107, 132, 255, 0.2)'}}/>
+            <Bar dataKey="kolall"
+              fill='var(--blue-btn-normal)'
+              radius={[7, 7, 0, 0]}
+             cursor="pointer"
+             
+            />
+            <Bar dataKey="kolnew"
+              fill="var(--play-btn-triangle)"
+              radius={[7, 7, 0, 0]}
+              cursor="pointer"
+              />
+            {/* <Area
               type="monotone"
               dataKey="count"
               stroke="var(--blue)"
               strokeWidth={3}
               fill="url(#colorGradient)"
-              activeDot={customActiveDot}
+              activeDot={customActiveDot} 
               //   activeDot={{  fill: "var(--blue)"}} // Активная точка больше
 
               //  dot={{ r: 8, fill: 'var(--white)', stroke: '#87D28D', strokeWidth: '4px' }} // Полностью закрашенные кружочки
               //   label={({ x, y, value }) => (
               //     <text x={x} y={y - 10} fill="#000" textAnchor="middle">
-              //       {`${value} ml`} {/* Добавляем "ml" к значению */}
+              //       {`${value} ml`} {/* Добавляем "ml" к значению 
               //     </text>
               //   )}
-            />
+        // />*/}
+       
 
             {/* <Brush
                         dataKey="day"
@@ -233,9 +273,9 @@ export default function Chart() {
             setEndIndex(indexRange.endIndex);
           }}
         /> */}
-          </AreaChart>{" "}
+          </BarChart>{" "}
         </ResponsiveContainer>{" "}
-      </div>
+      </div> 
 
       <PeriodSelector
         startDate={dateBegin}
