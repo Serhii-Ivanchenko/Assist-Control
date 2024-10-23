@@ -41,8 +41,6 @@ export default function UserSettingsProfile({ onClose }) {
   const userTimeZone = user.time_zone || "";
   const userPhoto = user?.avatar_url || defaultAvatar;
 
-
-// const defaultAvatar = "../../../../assets/modalicon/Ellipse 4- icon.png"
   const [avatar, setAvatar] = useState(userPhoto);
   console.log("Current avatar URL:", avatar);
 
@@ -66,7 +64,6 @@ export default function UserSettingsProfile({ onClose }) {
     index: "",
   };
 
-
   const handleChangePhoto = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -76,17 +73,18 @@ export default function UserSettingsProfile({ onClose }) {
   const handleFileChange = async (event) => {
     const file = event.currentTarget.files[0];
     if (file) {
-      // const newAvatarUrl = URL.createObjectURL(file);
-      // setAvatar(newAvatarUrl);
+      const newAvatarUrl = URL.createObjectURL(file);
+      setAvatar(newAvatarUrl);
       try {
-        const response = await dispatch(updateUserAvatar(file)).unwrap();
+        // const response =
+        await dispatch(updateUserAvatar(file)).unwrap();
         // console.log(response);
-        setAvatar(response.avatar_url)
-        dispatch(getUserData());
+        // setAvatar(response.avatar_url)
+        // dispatch(getUserData());
         //       if (response.avatar_url) {
         //     setAvatar(response.avatar_url); // Update with the URL from the server response
         // }
-        console.log("Server response:", response);
+        // console.log("Server response:", response);
         //  const newAvatarUrl = response.avatar_url;
         //  setAvatar(newAvatarUrl);
 
@@ -101,6 +99,7 @@ export default function UserSettingsProfile({ onClose }) {
           },
         });
       } catch (error) {
+        setAvatar(userPhoto);
         console.error("Помилка при оновленні аватара", error);
         toast.error("Не вдалося оновити аватар :(", {
           position: "top-right",
@@ -114,14 +113,14 @@ export default function UserSettingsProfile({ onClose }) {
     }
   };
 
-  useEffect(() => {
-    // Clean up the previous avatar URL when it changes or the component unmounts
-    return () => {
-      if (avatar) {
-        URL.revokeObjectURL(avatar);
-      }
-    };
-  }, [avatar]);
+  // useEffect(() => {
+  //   // Clean up the previous avatar URL when it changes or the component unmounts
+  //   return () => {
+  //     if (avatar) {
+  //       URL.revokeObjectURL(avatar);
+  //     }
+  //   };
+  // }, [avatar]);
 
   const toggleDropdown = (index) => {
     setActiveDropdown(activeDropdown === index ? null : index);
@@ -209,11 +208,14 @@ export default function UserSettingsProfile({ onClose }) {
         <Form className={css.formBox}>
           <div className={css.addPhotoBox}>
             <div className={css.photoBox}>
-              <img src={avatar || URL.createObjectURL(defaultAvatar)} alt="User's avatar" className={css.photo}
-  //               onError={(e) => {)
-  //   e.target.onerror = null; 
-  //   e.target.src = defaultAvatar; 
-              // }}
+              <img
+                src={avatar}
+                alt="User's avatar"
+                className={css.photo}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = defaultAvatar;
+                }}
               />
             </div>
             <input
@@ -349,12 +351,12 @@ export default function UserSettingsProfile({ onClose }) {
                   className={`${css.input} ${css.inputSelect}`}
                   onClick={() => toggleDropdown(2)}
                   component={TimeZoneSelect}
-                 />
-                  {/* <option value="default">За замовченням</option> *
+                />
+                {/* <option value="default">За замовченням</option> *
                   {/* <option value="Europe/Kyiv">(UTC +03:00) Київ</option>
                   <option value="Europe/London">(GTM +01:00) London</option> 
                    </Field> */}
-                 
+
                 <BsFillCaretDownFill
                   className={`${css.btnArrowSelect} ${
                     activeDropdown === 2 ? css.rotated : ""
@@ -409,8 +411,8 @@ export default function UserSettingsProfile({ onClose }) {
               <BsSdCardFill className={css.iconSave} /> Зберегти зміни
             </button>
           </div>
-          </Form>
-            {/* )} */}
+        </Form>
+        {/* )} */}
       </Formik>
     </div>
   );
