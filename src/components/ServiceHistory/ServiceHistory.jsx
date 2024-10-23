@@ -3,8 +3,12 @@ import {
   BsCalendar2Week,
   BsCaretDownFill,
   BsDownload,
+  BsPlayFill,
+  BsChevronDown,
+  BsFilter,
   // BsRecordCircle,
 } from "react-icons/bs";
+import { GiSoundWaves } from "react-icons/gi";
 import css from "./ServiceHistory.module.css";
 import { useState } from "react";
 import clsx from "clsx";
@@ -15,14 +19,49 @@ import {
   AccordionItemHeading,
   AccordionItemPanel,
 } from "react-accessible-accordion";
+import userAvater from "../../assets/images/ava.png";
+import TranscriptionMessage from "./TranscriptionMessage/TranscriptionMessage";
 
 export default function ServiceHistory() {
   const [showDialogModal, setShowDialogModal] = useState(false);
+  const [transcription, setTranscription] = useState(false);
   const toogleDialogModal = () => setShowDialogModal(!showDialogModal);
+  const messanges = [
+    {
+      orClientMsg: true,
+      time: "00:00",
+      message:
+        "Доброго дня, ще раз заставлю. Скажіть, будь ласка, якщо я щось відвіду, я вам дзвоню, у мене нашовання блок АБС. Може хтось подивитися, це він чи не він?",
+    },
+    {
+      orClientMsg: false,
+      time: "00:15",
+      message:
+        "Можемо тільки з наступної середи, тому що електрик у нас відпустив.",
+    },
+    {
+      orClientMsg: true,
+      time: "00:00",
+      message:
+        "Доброго дня, ще раз заставлю. Скажіть, будь ласка, якщо я щось відвіду, я вам дзвоню, у мене нашовання блок АБС. Може хтось подивитися, це він чи не він?",
+    },
+    {
+      orClientMsg: false,
+      time: "00:15",
+      message:
+        "Можемо тільки з наступної середи, тому що електрик у нас відпустив.",
+    },
+    {
+      orClientMsg: true,
+      time: "00:00",
+      message:
+        "Доброго дня, ще раз заставлю. Скажіть, будь ласка, якщо я щось відвіду, я вам дзвоню, у мене нашовання блок АБС. Може хтось подивитися, це він чи не він?",
+    },
+  ];
   return (
     <div>
       <h3>Історія обслуговування</h3>
-      
+
       <Accordion allowMultipleExpanded="true" allowZeroExpanded="true">
         <AccordionItem>
           <AccordionItemHeading>
@@ -78,9 +117,69 @@ export default function ServiceHistory() {
                   </button>
                 </div>
               </div>
+              <ul className={css.secondAcordionList}>
+                <li className={css.secondAcordionWrapper}>
+                  <AccordionItem>
+                    <div className={css.secondAcordion}>
+                      <div className={css.callRecordWrapper}>
+                        <img src={userAvater} alt="" />
+                        <div className={css.callRecord}>
+                          <div>
+                            <BsPlayFill
+                              size={24}
+                              fill="var(--play-btn-triangle)"
+                            />
+                          </div>
+                          <GiSoundWaves size={80} />
+                          <p>1:26</p>
+                        </div>
+                      </div>
+                      <AccordionItemHeading>
+                        <AccordionItemButton>
+                          <button
+                            className={css.transcriptionToggleBtn}
+                            onClick={() => setTranscription((prev) => !prev)}
+                          >
+                            <p>Aa</p>
+                            <BsChevronDown
+                              className={clsx(
+                                css.transcriptionIcon,
+                                transcription
+                                  ? css.activeTranscriptionIcon
+                                  : null
+                              )}
+                              strokeWidth={3}
+                              size={14}
+                            />
+                          </button>
+                        </AccordionItemButton>
+                      </AccordionItemHeading>
+                    </div>
+                    <AccordionItemPanel>
+                      <div className={css.secondAcordionBody}>
+                        <button className={css.transcriptionImportantBtn}>
+                          <BsFilter />
+                          <p>Головне</p>
+                        </button>
+                        <ul className={css.messages}>
+                          {messanges.map(({ orClientMsg, time, message }) => (
+                            <TranscriptionMessage
+                              key={Math.random()}
+                              orClientMsg={orClientMsg}
+                              time={time}
+                              message={message}
+                            />
+                          ))}
+                        </ul>
+                      </div>
+                    </AccordionItemPanel>
+                  </AccordionItem>
+                </li>
+              </ul>
             </div>
           </AccordionItemPanel>
         </AccordionItem>
+        
       </Accordion>
     </div>
   );

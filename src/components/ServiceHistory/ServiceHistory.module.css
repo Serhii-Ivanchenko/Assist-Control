@@ -16,34 +16,10 @@
   gap: 10px;
   height: 50px;
   padding: 0px 20px;
+  cursor: pointer;
   border-radius: 6px;
   background-color: #2d3138;
 }
-/* .listItem::before {
-  position: relative;
-  left: -12px;
-  content: "";
-  width: 24px;
-  height: 24px;
-  background-color: var(--dark-gray);
-  border-radius: 50%;
-  border: 2px solid var(--blue);
-}
-.listItem::after {
-  position: absolute;
-  content: "";
-  left: -12px;
-  width: 9px;
-  height: 9px;
-  background-color: var(--blue);
-  transform: translateX(85%);
-  border-radius: 50%;
-} */
-/* .listItem > div {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-} */
 .kilometersWrapper,
 .dateWrapper {
   display: flex;
@@ -102,7 +78,7 @@
   display: flex;
   padding: 10px 16px;
   align-items: center;
-  gap: 19px;
+  gap: 18px;
   border-radius: 6px;
   background: #313540;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -112,7 +88,7 @@
   display: flex;
   align-items: center;
   padding: 4px 6px;
-  gap: 7px;
+  gap: 5px;
   color: var(--icon-gray);
   border-radius: 6px;
   background: var(--bg-input);
@@ -123,4 +99,120 @@
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
+}
+
+/* Хедер другого акардіона */
+
+.secondAcordionList {
+  display: flex;
+  justify-content: flex-end;
+}
+.secondAcordionWrapper {
+  margin-top: 20px;
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  width: 430px;
+  border-radius: 12px;
+  background: #31353e;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.secondAcordion {
+  display: flex;
+  min-height: 90px;
+  align-items: center;
+  gap: 19px;
+  flex-shrink: 0;
+}
+.callRecordWrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.callRecord {
+  display: flex;
+  padding: 15px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  width: 252px;
+  height: 70px;
+  border-radius: 0px 10px 10px 10px;
+  background-color: var(--player-secondary-bg);
+}
+.callRecord > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  gap: 10px;
+  border-radius: 20px;
+  background: var(--white, #fff);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.callRecord > p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.transcriptionToggleBtn {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  background: var(--player-secondary-bg);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.transcriptionToggleBtn > p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Тіло другого акардіона */
+
+.secondAcordionBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 11px 34px 10px 21px;
+  border-radius: 12px;
+  background: #2c2d31;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.transcriptionImportantBtn {
+  display: flex;
+  gap: 5px;
+  padding: 2px 6px;
+  color: var(--white);
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  background-color: var(--player-secondary-bg);
+}
+.transcriptionImportantBtn > p {
+  font-size: 14px;
+  font-weight: 300;
+}
+.transcriptionIcon {
+  transition: transform 200ms ease-in-out;
+}
+.activeTranscriptionIcon {
+  transform: rotate(180deg);
+}
+.messages {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 100%;
 }
