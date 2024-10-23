@@ -1,0 +1,194 @@
+.paymentDatailsModal {
+  position: relative;
+  height: 719px;
+  width: 688px;
+  padding: 30px 31px;
+  border-radius: 12px;
+  background-color: var(--dark-gray);
+}
+
+.closeIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 18px;
+  height: 18px;
+  fill: var(--input-stroke);
+}
+
+.closeIcon:hover {
+  cursor: pointer;
+}
+
+.modalHeader {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 30px;
+}
+
+.topSectionWrapper {
+  width: 626px;
+  height: 159px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: var(--bg-input);
+  margin-bottom: 20px;
+}
+
+.firstSectionWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 17px;
+}
+
+.productName {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.balance {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.sum {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.secondSectionWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  align-items: center;
+}
+
+.thirdSectionWrapper {
+  display: flex;
+  gap: 27px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.buttomSectionWrapper {
+  width: 626px;
+  height: 422px;
+  padding: 32.5px 20px 20px 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-input);
+  gap: 30px;
+}
+
+.fieldWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  fill: var(--icon-gray);
+  margin-left: 6px;
+}
+
+.monoLogo {
+  width: 96px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.paymentMethod {
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.btnWrapper {
+  margin-top: 12.5px;
+  display: flex;
+  gap: 27px;
+  align-items: center;
+}
+
+.btn {
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--green);
+  box-shadow: 0px 4px 4px 0px #00000040;
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.btn:hover {
+  background-color: var(--green-btn-hover);
+  box-shadow: 0px 2px 2px 0px #00000040;
+}
+
+.tooltip {
+  position: relative;
+  margin-left: 16px;
+}
+
+.tooltip .tooltipContent {
+  width: 132px;
+  height: 32px;
+  visibility: hidden;
+  position: absolute;
+  left: -500%;
+  top: -170%;
+}
+
+.tooltip:hover .tooltipContent {
+  visibility: visible;
+}
+
+.infoIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.infoNotification {
+  position: relative;
+}
+
+.infoText {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  color: #101010;
+  text-align: center;
+  font-size: 8px;
+  font-style: normal;
+  line-height: normal;
+}

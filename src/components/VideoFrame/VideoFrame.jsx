@@ -1,7 +1,6 @@
 import Slider from "react-slick";
 import css from "./VideoFrame.module.css";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import "slick-carousel/slick/slick.css";
@@ -9,6 +8,10 @@ import "slick-carousel/slick/slick-theme.css";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 import { useEffect, useRef, useState } from "react";
 import Loader from "../Loader/Loader";
+import {
+  BsFillCameraVideoOffFill,
+  BsArrowCounterclockwise,
+} from "react-icons/bs";
 
 function SampleNextArrow({ currentSlide, slideCount, onClick }) {
   if (currentSlide === slideCount - 1) return null;
@@ -22,30 +25,51 @@ function SamplePrevArrow({ currentSlide, onClick }) {
 
 export default function VideoFrame() {
   const [videoImgSrc, setVideoImgSrc] = useState([]);
+  useEffect(() => {
+    const numrebOfCamers = 3;
+    for (let i = 1; i <= numrebOfCamers; i++) {
+      const objWithIndex = { index: i };
+      setVideoImgSrc((prev) => [...prev, objWithIndex]);
+    }
+    return () => setVideoImgSrc([]);
+  }, []);
   const cameraLink = [
     {
       index: "1",
-      cameraLink: "wss://cam.assist.cam/camera1/ws/video_feed",
+      url: "wss://cam.assist.cam/camera1/ws/video_feed",
       alt: "camera1",
     },
     {
       index: "2",
-      cameraLink: "wss://cam.assist.cam/camera2/ws/video_feed",
+      url: "wss://cam.assist.cam/camera2/ws/video_feed",
       alt: "camera2",
     },
   ];
 
-  const handleChangeCamera = (src, url) => {
+  const handleChangeCamera = (src, url, index, err) => {
     setVideoImgSrc((prev) => {
-      // Перевіряємо, чи є вже елемент з таким URL
-      const currentCamera = prev.find((item) => item.url === url);
+      // Перевіряємо, чи є вже елемент з таким index
+      const currentCamera = prev.find(
+        (item) => Number(item.index) === Number(index)
+      );
+      if (err) {
+        return prev.map((item) => {
+          return item.index === currentCamera.index
+            ? { ...currentCamera, url, err }
+            : item;
+        });
+      }
 
-      if (currentCamera) {
-        // Якщо камера знайдена, оновлюємо її src
-        return prev.map((item) => (item.url === url ? { ...item, src } : item));
+      if (currentCamera.src) {
+        return prev.map((item) =>
+          item.index === currentCamera.index ? { ...item, src } : item
+        );
       } else {
-        // Якщо камери з таким URL ще немає, додаємо нову
-        return [...prev, { src, url }];
+        return prev.map((item) =>
+          item.index === currentCamera.index
+            ? { ...currentCamera, src, url }
+            : item
+        );
       }
     });
   };
@@ -55,13 +79,13 @@ export default function VideoFrame() {
   const reconnectAttempts = useRef({});
 
   const connectWebSocket = (camera) => {
-    const { cameraLink, index } = camera;
-    let ws = new WebSocket(cameraLink);
+    const { url, index } = camera;
+    let ws = new WebSocket(url);
     ws.binaryType = "arraybuffer"; // Приймаємо бінарні дані (зображення)
 
     ws.onopen = () => {
       console.log(`Connected to camera ${index}`);
-      reconnectAttempts.current[cameraLink] = 0; // Скидаємо лічильник спроб
+      reconnectAttempts.current[url] = 0; // Скидаємо лічильник спроб
     };
 
     ws.onmessage = (event) => {
@@ -69,7 +93,7 @@ export default function VideoFrame() {
       const img = new Image();
       const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
       img.src = URL.createObjectURL(blob);
-      handleChangeCamera(img.src, cameraLink);
+      handleChangeCamera(img.src, url, index);
       setIsZoomed(true);
     };
 
@@ -87,20 +111,20 @@ export default function VideoFrame() {
   };
 
   const attemptReconnect = (camera) => {
-    const { cameraLink } = camera;
-    const attempts = reconnectAttempts.current[cameraLink] || 0;
+    const { url, index } = camera;
+    const attempts = reconnectAttempts.current[url] || 0;
+    if (attempts > MAX_RECONNECT_ATTEMPTS) {
+      // attempts < MAX_RECONNECT_ATTEMPTS <-- Поміняти назад
 
-    if (attempts < MAX_RECONNECT_ATTEMPTS) {
-      console.log(
-        `Attempting to reconnect to ${cameraLink}... (${attempts + 1})`
-      );
-      reconnectAttempts.current[cameraLink] = attempts + 1;
+      console.log(`Attempting to reconnect to ${url}... (${attempts + 1})`);
+      reconnectAttempts.current[url] = attempts + 1;
 
       setTimeout(() => {
         connectWebSocket(camera); // Повторюємо підключення
       }, RECONNECT_INTERVAL);
     } else {
-      console.error(`Max reconnect attempts reached for ${cameraLink}`);
+      console.error(`Max reconnect attempts reached for ${url}`);
+      handleChangeCamera(false, url, index, true);
     }
   };
 
@@ -171,9 +195,9 @@ export default function VideoFrame() {
       <div className={css.cameraList}>
         <div className={css.cameraCont}>
           <Slider {...settings}>
-            {videoImgSrc.length ? (
-              videoImgSrc.map(({ src }) => (
-                <div ref={parentRef} key={src} className={css.camera}>
+            {videoImgSrc.map(({ src, url, index, err }) =>
+              src ? (
+                <div ref={parentRef} key={index} className={css.camera}>
                   {isZoomed ? (
                     <Zoom
                       onZoomChange={handleZoomChange}
@@ -193,11 +217,33 @@ export default function VideoFrame() {
                     <img src={src} alt={src} />
                   )}
                 </div>
-              ))
-            ) : (
-              <div className={css.camera}>
-                <Loader />
-              </div>
+              ) : err ? (
+                <div key={index} className={css.camera}>
+                  <BsFillCameraVideoOffFill size={60} />
+                  <p>Something was wrong please refresh camera</p>
+                  <button
+                    className={css.refreshBtn}
+                    onClick={() => {
+                      setVideoImgSrc((prev) =>
+                        prev.map((item) => {
+                          if (item.index === Number(index)) {
+                            return { index };
+                          } else {
+                            return item;
+                          }
+                        })
+                      );
+                      connectWebSocket({ url, index });
+                    }}
+                  >
+                    <BsArrowCounterclockwise /> Refresh
+                  </button>
+                </div>
+              ) : (
+                <div key={index} className={css.camera}>
+                  <Loader />
+                </div>
+              )
             )}
           </Slider>
         </div>
