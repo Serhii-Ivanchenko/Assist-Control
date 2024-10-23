@@ -1,0 +1,14 @@
+.CRMMainContainer {}
+
+.mainContent {
+    display: flex;
+    margin-top: 8px;
+    gap: 14px;
+}
+
+@media only screen and (min-width: 1850px) {
+    .mainContent {
+        margin-top: 13px;
+        gap: 14px;
+    }
+}

@@ -1,0 +1,7 @@
+.appointmentBlockContainer {
+    width: 1529px;
+    height: 367px;
+    display: flex;
+    gap: 14px;
+    padding-bottom: 15px;
+}

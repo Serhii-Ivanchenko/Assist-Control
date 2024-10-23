@@ -76,12 +76,12 @@ export default function UserSettingsProfile({ onClose }) {
   const handleFileChange = async (event) => {
     const file = event.currentTarget.files[0];
     if (file) {
-      const newAvatarUrl = URL.createObjectURL(file);
-      setAvatar(newAvatarUrl);
+      // const newAvatarUrl = URL.createObjectURL(file);
+      // setAvatar(newAvatarUrl);
       try {
         const response = await dispatch(updateUserAvatar(file)).unwrap();
         // console.log(response);
-        setAvatar(newAvatarUrl)
+        setAvatar(response.avatar_url)
         dispatch(getUserData());
         //       if (response.avatar_url) {
         //     setAvatar(response.avatar_url); // Update with the URL from the server response
@@ -209,8 +209,8 @@ export default function UserSettingsProfile({ onClose }) {
         <Form className={css.formBox}>
           <div className={css.addPhotoBox}>
             <div className={css.photoBox}>
-              <img src={avatar || defaultAvatar} alt="User's avatar" className={css.photo}
-  //               onError={(e) => {
+              <img src={avatar || URL.createObjectURL(defaultAvatar)} alt="User's avatar" className={css.photo}
+  //               onError={(e) => {)
   //   e.target.onerror = null; 
   //   e.target.src = defaultAvatar; 
               // }}
