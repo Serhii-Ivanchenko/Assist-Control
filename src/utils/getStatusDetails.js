@@ -1,6 +1,4 @@
-import styles from "../components/CurrentCarsItem/CurrentCarsItem.module.css";
-
-export const getStatusDetails = (status, icon) => {
+export const getStatusDetails = (styles, status, icon) => {
   switch (status) {
     case "new":
       return {
