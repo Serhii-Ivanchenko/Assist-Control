@@ -45,7 +45,7 @@
   --status-diag: #6b84ff;
   --status-repair: #b25bc2;
   --status-complete: #53c178;
-  --status-check-repair: ;
+  --status-view-repair: #E76767 ;
   --glow-repair: #d926e9;
   --glow-diag: #265de9;
   --glow-complete: #71e926;
@@ -62,7 +62,7 @@
   --border-gradient-new: linear-gradient(45deg, #f5dd23 10%, #2b2c2c 16%, #23252c 85%, #dbc624 90%);
   --border-gradient-diag: linear-gradient(45deg, #3956cc 10%, #2b2c2c 16%, #23252c 85%, #3956cc 90%);
   --border-gradient-repair: linear-gradient(45deg, #994ca5 10%, #2b2c2c 16%, #23252c 85%, #994ca5 90%);
-  --border-gradient-complete: linear-gradient(45deg, ##246d4d 10%, #2b2c2c 16%, #23252c 85%, ##246d4d 90%);
+  --border-gradient-complete: linear-gradient(45deg, #246d4d 10%, #2b2c2c 16%, #23252c 85%, #246d4d 90%);
 
   --status-gradient-new: linear-gradient(90deg, #95a54c4d 0%, #e9d92600 100%);
   --status-gradient-diag: linear-gradient(90deg, #4154b04d 0%, #2654e900 100%);

@@ -15,7 +15,7 @@ export default function DayCarsItemLine({
   auto,
   vin,
   date_s,
-  
+  client,
 }) {
   const carPhoto = photoUrl || absentAutoImg;
 
@@ -34,7 +34,7 @@ export default function DayCarsItemLine({
         />
       </div>
       <div className={styles.infoName}>
-        <span className={styles.textName}>Іван Петренко</span>
+        <span className={styles.textName}>{client ? client.name : "Гість"}</span>
       </div>
       </div>
       

@@ -19,7 +19,6 @@ export default function CalendarBlock() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   const carsData = useSelector(selectDayCars);
   const selectedDate = useSelector(selectDate);
   const isLoadingCarsByDay = useSelector(selectLoadingCarsByDay);
@@ -51,13 +50,15 @@ export default function CalendarBlock() {
         <DayCarsList carsData={carsData} isModal={false} />
       </div>
       <DetailsBtn onClick={handleDetailsBtnClick} />
+      {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <DayCarsModal
-          carsData={carsData}
-          isModal={true}
-          onClose={handleCloseModal}
-        />
-      </Modal>
+          <DayCarsModal
+            carsData={carsData}
+            isModal={true}
+            onClose={handleCloseModal}
+          />
+        </Modal>
+      )}
     </div>
   );
 }
