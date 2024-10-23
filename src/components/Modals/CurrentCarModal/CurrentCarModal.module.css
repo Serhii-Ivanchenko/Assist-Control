@@ -298,7 +298,7 @@
   position: relative;
 }
 
-label::after {
+.inputWrapper::after {
   content: "";
   position: absolute;
   left: 32px;
@@ -307,14 +307,14 @@ label::after {
   height: 100%;
   filter: blur(5px);
   border-radius: 0 5px 5px 0;
-  background: transparent;
+  /* background: transparent; */
 }
 
-.checkRepairStatus::after {
+/* .checkRepairStatus::after {
   background: var(--glow-diag);
-}
+} */
 
-.completeStatus .radioWrapper::after {
+/* .completeStatus .radioWrapper::after {
   background: var(--glow-complete);
 }
 .repairStatus .radioWrapper::after {
@@ -323,7 +323,7 @@ label::after {
 
 .viewRepairStatus .radioWrapper::after {
   background: var(--glow-view-repair);
-}
+}  */
 
 .radioGroup input {
   margin: 0;
@@ -341,7 +341,15 @@ label::after {
 .radioGroup label {
   display: inline-flex;
   align-items: center;
-  font-variant-numeric: lining-nums proportional-nums;
+  cursor: pointer;
+}
+
+.inputWrapper {
+  height: 32px;
+  padding: 1px 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -349,13 +357,13 @@ label::after {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
   padding: 0 6px;
-  cursor: pointer;
+  text-wrap: nowrap;
 }
 
 .iconRadio {
   width: 16px;
   fill: var(--light-gray);
-  margin-right: 7px;
+  /* margin-right: 7px; */
 }
 
 .radioNew {

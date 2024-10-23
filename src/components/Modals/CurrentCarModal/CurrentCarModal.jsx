@@ -141,62 +141,74 @@ function CurrentCarModal({ onClose, car, status }) {
         </div>
         <div className={styles.radioGroup}>
           <div className={styles.radioWrapper}>
-            <CustomRadioBtn isChecked={selectedStatus === "diagnostic"} />
-            <label className={styles.checkRepairStatus}>
-              <input
-                type="radio"
-                name="carStatus"
-                value="diagnostic"
-                checked={selectedStatus === "diagnostic"}
-                onChange={handleStatusChange}
-                className={styles.radioInput}
-              />
-              {<BsUiChecksGrid className={styles.iconRadio} />}
-              Діагностика
+            <label>
+              <CustomRadioBtn isChecked={selectedStatus === "diagnostic"} />
+              <div
+                className={clsx(styles.inputWrapper, styles.checkRepairStatus)}
+              >
+                <input
+                  type="radio"
+                  name="carStatus"
+                  value="diagnostic"
+                  checked={selectedStatus === "diagnostic"}
+                  onChange={handleStatusChange}
+                  className={styles.radioInput}
+                />
+                {<BsUiChecksGrid className={styles.iconRadio} />}
+                Діагностика
+              </div>
             </label>
           </div>
           <div className={styles.radioWrapper}>
-            <CustomRadioBtn isChecked={selectedStatus === "view_repair"} />
-            <label className={styles.viewRepairStatus}>
-              <input
-                type="radio"
-                name="carStatus"
-                value="view_repair"
-                checked={selectedStatus === "view_repair"}
-                onChange={handleStatusChange}
-                className={styles.radioInput}
-              />
-              {<BsEyeFill className={styles.iconRadio} />}
-              Огляд ПР
+            <label>
+              <CustomRadioBtn isChecked={selectedStatus === "repair"} />
+              <div className={clsx(styles.inputWrapper, styles.repairStatus)}>
+                <input
+                  type="radio"
+                  name="carStatus"
+                  value="repair"
+                  checked={selectedStatus === "repair"}
+                  onChange={handleStatusChange}
+                  className={styles.radioInput}
+                />
+                {<BsWrench className={styles.iconRadio} />} Ремонт
+              </div>
             </label>
           </div>
           <div className={styles.radioWrapper}>
-            <CustomRadioBtn isChecked={selectedStatus === "repair"} />
-            <label className={styles.repairStatus}>
-              <input
-                type="radio"
-                name="carStatus"
-                value="repair"
-                checked={selectedStatus === "repair"}
-                onChange={handleStatusChange}
-                className={styles.radioInput}
-              />
-              {<BsWrench className={styles.iconRadio} />} В ремонті
+            <label>
+              <CustomRadioBtn isChecked={selectedStatus === "complete"} />
+              <div className={clsx(styles.inputWrapper, styles.completeStatus)}>
+                <input
+                  type="radio"
+                  name="carStatus"
+                  value="complete"
+                  checked={selectedStatus === "complete"}
+                  onChange={handleStatusChange}
+                  className={styles.radioInput}
+                />
+                {<BsCheckCircleFill className={styles.iconRadio} />}
+                Завершено
+              </div>
             </label>
           </div>
           <div className={styles.radioWrapper}>
-            <CustomRadioBtn isChecked={selectedStatus === "complete"} />
-            <label className={styles.completeStatus}>
-              <input
-                type="radio"
-                name="carStatus"
-                value="complete"
-                checked={selectedStatus === "complete"}
-                onChange={handleStatusChange}
-                className={styles.radioInput}
-              />
-              {<BsCheckCircleFill className={styles.iconRadio} />}
-              Завершено
+            <label>
+              <CustomRadioBtn isChecked={selectedStatus === "view_repair"} />
+              <div
+                className={clsx(styles.inputWrapper, styles.viewRepairStatus)}
+              >
+                <input
+                  type="radio"
+                  name="carStatus"
+                  value="view_repair"
+                  checked={selectedStatus === "view_repair"}
+                  onChange={handleStatusChange}
+                  className={styles.radioInput}
+                />
+                {<BsEyeFill className={styles.iconRadio} />}
+                Огляд ПР
+              </div>
             </label>
           </div>
         </div>
