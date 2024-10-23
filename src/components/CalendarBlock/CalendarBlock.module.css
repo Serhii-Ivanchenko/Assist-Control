@@ -8,7 +8,7 @@
 @media only screen and (min-width: 1850px) {
   .calendarContainer {
     width: 460px;
-}
+  }
 }
 
 .topContainer {
@@ -20,6 +20,6 @@
 @media only screen and (min-width: 1850px) {
   .topContainer {
     max-height: 883px;
-
+    overflow: hidden;
   }
 }
