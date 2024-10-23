@@ -3,10 +3,10 @@
   text-align: center;
   justify-content: center;
 
-  width: 500px;
+  width: 506px;
   height: auto;
 
-  padding: 40px 0;
+  padding: 40px 30px;
   border-radius: 6px;
 
   background-color: var(--bg);
@@ -21,7 +21,7 @@
 .closeBtn {
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: 18px;
 
   display: inline-block;
   width: 20px;
@@ -34,48 +34,81 @@
 
 .currentCarContainer {
   display: flex;
-  margin-left: 39px;
-  margin-bottom: 50px;
+  width: 446px;
+  margin: auto;
+  justify-content: center;
+  gap: 27px;
+  margin-bottom: 40px;
 }
 
 .currentCarImg {
-  width: 146px;
-  height: 120px;
-  object-fit: cover;
+  width: 194px;
+  height: 204px;
+  border-radius: 6px;
 }
 
 .nameContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
-  margin-left: 34px;
 }
 
 .carBrand {
   color: var(--white);
+  text-align: start;
 
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
   font-size: 24px;
   font-weight: 600;
 
-  margin-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.vinContainer {
+  display: flex;
+  width: 210px;
+  height: 46px;
+  padding: 6px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  background: #373941;
+  margin-top: 25px;
+  margin-left: 15px;
+}
+
+.vinCode {
+  color: var(--white);
+
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.vinNumber {
+  font-size: 14px;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+.copyIcon {
+  cursor: pointer;
 }
 
 .carRegContainer {
   display: flex;
   align-items: center;
-  gap: 6px;
-
-  width: 217px;
-  height: 52px;
-
-  border-radius: 5px;
-  border: 3px solid var(--black);
+  gap: 12px;
+  width: 210px;
+  height: 46px;
+  border-radius: 6px;
   background-color: #d9d9d9;
-
-  margin-top: 14px;
+  margin-top: 20px;
+  margin-left: 15px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .carRegCountry {
@@ -88,6 +121,7 @@
   height: 100%;
 
   background-color: #00349a;
+  border-radius: 6px 0 0 6px;
 }
 
 .carRegFlag {
@@ -102,8 +136,8 @@
 
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
-  font-size: 34px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 400;
 
   text-transform: uppercase;
 }
@@ -119,14 +153,85 @@
 }
 
 .carStatus {
-  display: flex;
-  align-items: center;
-  gap: 7px;
+  width: auto;
+  height: 26px;
+  padding: 1px 6px;
+  text-transform: uppercase;
   font-family: "Roboto", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.15em;
+  font-size: 15px;
+  font-weight: 500;
   border: transparent;
+  border-radius: 5px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  position: relative;
+}
+
+.carStatus::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  filter: blur(5px);
+  border-radius: 0 5px 5px 0;
+}
+
+.newStatus {
+  color: var(--status-new);
+  background: var(--status-gradient-new);
+  border-left: 1px solid var(--glow-new);
+  border-right: transparent;
+}
+
+.newStatus::after {
+  background: var(--glow-new);
+}
+
+.repairStatus {
+  color: var(--status-repair);
+  background: var(--status-gradient-repair);
+  border-left: 1px solid var(--glow-repair);
+  border-right: transparent;
+}
+
+.repairStatus::after {
+  background: var(--glow-repair);
+}
+
+.checkRepairStatus {
+  color: var(--status-diag);
+  background: var(--status-gradient-diag);
+  border-left: 1px solid var(--glow-diag);
+  border-right: transparent;
+}
+
+.checkRepairStatus::after {
+  background: var(--glow-diag);
+}
+
+.completeStatus,
+.viewRepairStatus {
+  color: var(--status-complete);
+  background: var(--status-gradient-complete);
+  border-left: 1px solid var(--glow-complete);
+  border-right: transparent;
+}
+
+.completeStatus::after,
+.viewRepairStatus::after {
+  background: var(--glow-complete);
+}
+
+.viewRepairStatus {
+  color: var(--status-complete);
+  background: var(--status-gradient-complete);
+  border-left: 1px solid var(--glow-complete);
+  border-right: transparent;
 }
 
 .carReg {
@@ -138,33 +243,16 @@
   margin: 0 35px 10px;
 }
 
-.vinCode {
-  color: var(--white);
-
-  font-family: "Roboto", sans-serif;
-  font-size: 20px;
-  font-weight: 300;
-
-  padding-top: 10px;
-  margin-bottom: 50px;
-}
-
-.vinNumber {
-  font-size: 20px;
-  font-weight: 300;
-
-  text-transform: uppercase;
-
-  margin-left: 17px;
-}
-
 .serviceInfo {
-  width: 500px;
+  margin: auto;
+  width: 446px;
   height: 53px;
-  background-color: #264346;
+  background-color: var(--bg-input);
   text-align: center;
-  padding: 16px 0;
-  margin-bottom: 50px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
 }
 
 .icon {
@@ -195,11 +283,40 @@
 .radioGroup {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+  gap: 33px 72px;
   justify-items: start;
 
   padding: 0 35px;
-  margin: 28px 0 25px;
+  margin: 40px 0;
+}
+
+.radioWrapper {
+  display: flex;
+  height: 32px;
+  position: relative;
+}
+
+label::after {
+  content: "";
+  position: absolute;
+  left: 32px;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  filter: blur(5px);
+  border-radius: 0 5px 5px 0;
+  background: transparent;
+}
+
+.checkRepairStatus::after {
+  background: var(--glow-diag);
+}
+
+.completeStatus .radioWrapper::after {
+  background: var(--glow-complete);
+}
+.repairStatus .radioWrapper::after {
+  background: var(--glow-repair);
 }
 
 .radioGroup input {
@@ -218,12 +335,14 @@
 .radioGroup label {
   display: inline-flex;
   align-items: center;
-
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   text-transform: uppercase;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  padding: 0 6px;
 }
 
 .iconRadio {

@@ -307,7 +307,7 @@
   }
 
   .viewRepairStatus {
-    color: var(--orange);
+    color: var(--status-complete);
   }
 
   .newStatus .carStatus {
