@@ -12,14 +12,14 @@ import absentAutoImg from "../../../assets/images/absentAutoImg.webp";
 import flag from "../../../assets/images/flagUa.webp";
 import CustomRadioBtn from "../../CustomRadioBtn/CustomRadioBtn";
 
-import { BsWrench, BsCalendar2CheckFill } from "react-icons/bs";
-import { HiOutlineHashtag } from "react-icons/hi";
-import { FaCircleCheck } from "react-icons/fa6";
+import { BsWrench } from "react-icons/bs";
+import { BsExclamationCircle } from "react-icons/bs";
 import { MdOutlineTimer } from "react-icons/md";
 import { BsUiChecksGrid } from "react-icons/bs";
 import { BsEyeFill, BsCheckCircleFill } from "react-icons/bs";
 import { IoMdCheckmark } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
+import { BsFiles } from "react-icons/bs";
 
 import styles from "./CurrentCarModal.module.css";
 
@@ -27,35 +27,14 @@ function CurrentCarModal({ onClose, car, status }) {
   const dispatch = useDispatch();
   const [selectedStatus, setSelectedStatus] = useState(status);
 
-  // let icon;
-  // switch (car.status) {
-  //   case "new":
-  //     icon = <HiOutlineHashtag stroke="var(--light-gray)" fill="var(--light-gray)" />;
-  //     break;
-  //   case "repair":
-  //     icon = <BsWrench stroke="var(--light-gray)" fill="var(--light-gray)" />;
-  //     break;
-  //   // case "check_repair":
-  //   //   icon = <BsCalendar2CheckFill stroke="var(--light-gray)" fill="var(--light-gray)" />;
-  //   //   break;
-  //   case "complete":
-  //     icon = <BsCheckCircleFill stroke="var(--light-gray)" fill="var(--light-gray)" />;
-  //     break;
-  //   case "diagnostic":
-  //     return <BsUiChecksGrid stroke="var(--light-gray)" fill="var(--light-gray)" />;
-  //   case "view_repair":
-  //     return <BsEyeFill stroke="var(--light-gray)" fill="var(--light-gray)" />;
-  //   default:
-  //     icon = null;
-  // }
-  // Функція для отримання іконки відповідно до статусу
   const getStatusIcon = (status) => {
     switch (status) {
       case "new":
         return (
-          <HiOutlineHashtag
+          <BsExclamationCircle
             stroke="var(--light-gray)"
             fill="var(--light-gray)"
+            width="10px"
           />
         );
       case "repair":
@@ -80,11 +59,22 @@ function CurrentCarModal({ onClose, car, status }) {
     }
   };
 
-  const icon = getStatusIcon(selectedStatus); // Динамічне оновлення іконки
-  const { label, className } = getStatusDetails(selectedStatus);
+  const icon = getStatusIcon(selectedStatus);
+  const { label, className } = getStatusDetails(styles, selectedStatus);
 
   const handleStatusChange = (e) => {
     setSelectedStatus(e.target.value);
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        toast.success("Текст скопійовано");
+      })
+      .catch((err) => {
+        toast.error("Не вдалося скопіювати текст:", err);
+      });
   };
 
   const handleSubmit = () => {
@@ -111,9 +101,22 @@ function CurrentCarModal({ onClose, car, status }) {
             <h3 className={styles.carBrand}>
               {car.auto || "Марку не визначено"}
             </h3>
-            <p className={clsx(styles.carStatus, className)}>
-              {icon} {label}
-            </p>
+            <div className={styles.statusContainer}>
+              <p className={clsx(styles.carStatus, className)}>
+                {icon} {label}
+              </p>
+            </div>
+            <div className={styles.vinContainer}>
+              <p className={styles.vinCode}>
+                <span className={styles.vinNumber}>
+                  {car.vin || "VIN не визначено"}
+                </span>
+              </p>
+              <BsFiles
+                className={styles.copyIcon}
+                onClick={() => copyToClipboard(car.vin || "VIN не визначено")}
+              />
+            </div>
             <div className={styles.carRegContainer}>
               <div className={styles.carRegCountry}>
                 <img
@@ -130,13 +133,6 @@ function CurrentCarModal({ onClose, car, status }) {
         <button className={styles.closeBtn} type="button" onClick={onClose}>
           <IoMdClose className={styles.iconClose} />
         </button>
-
-        <p className={styles.vinCode}>
-          VIN:{" "}
-          <span className={styles.vinNumber}>
-            {car.vin || "VIN не визначено"}
-          </span>
-        </p>
         <div className={styles.serviceInfo}>
           <p className={styles.serviceTime}>
             {<MdOutlineTimer className={styles.icon} />}
@@ -144,57 +140,77 @@ function CurrentCarModal({ onClose, car, status }) {
           </p>
         </div>
         <div className={styles.radioGroup}>
-          <label className={styles.radioNew}>
-            <input
-              type="radio"
-              name="carStatus"
-              value="diagnostic"
-              checked={selectedStatus === "diagnostic"}
-              onChange={handleStatusChange}
-              className={styles.radioInput}
-            />
-            <CustomRadioBtn isChecked={selectedStatus === "diagnostic"} />
-            {<BsUiChecksGrid className={styles.iconRadio} />}
-            Діагностика
-          </label>
-          <label className={styles.radioCheckRepair}>
-            <input
-              type="radio"
-              name="carStatus"
-              value="view_repair"
-              checked={selectedStatus === "view_repair"}
-              onChange={handleStatusChange}
-              className={styles.radioInput}
-            />
-            <CustomRadioBtn isChecked={selectedStatus === "view_repair"} />
-            {<BsEyeFill className={styles.iconRadio} />}
-            Огляд ПР
-          </label>
-          <label className={styles.radioRepair}>
-            <input
-              type="radio"
-              name="carStatus"
-              value="repair"
-              checked={selectedStatus === "repair"}
-              onChange={handleStatusChange}
-              className={styles.radioInput}
-            />
-            <CustomRadioBtn isChecked={selectedStatus === "repair"} />
-            {<BsWrench className={styles.iconRadio} />} В ремонті
-          </label>
-          <label className={styles.radioComplete}>
-            <input
-              type="radio"
-              name="carStatus"
-              value="complete"
-              checked={selectedStatus === "complete"}
-              onChange={handleStatusChange}
-              className={styles.radioInput}
-            />
-            <CustomRadioBtn isChecked={selectedStatus === "complete"} />
-            {<BsCheckCircleFill className={styles.iconRadio} />}
-            Завершено
-          </label>
+          <div className={styles.radioWrapper}>
+            <label>
+              <CustomRadioBtn isChecked={selectedStatus === "diagnostic"} />
+              <div
+                className={clsx(styles.inputWrapper, styles.checkRepairStatus)}
+              >
+                <input
+                  type="radio"
+                  name="carStatus"
+                  value="diagnostic"
+                  checked={selectedStatus === "diagnostic"}
+                  onChange={handleStatusChange}
+                  className={styles.radioInput}
+                />
+                {<BsUiChecksGrid className={styles.iconRadio} />}
+                Діагностика
+              </div>
+            </label>
+          </div>
+          <div className={styles.radioWrapper}>
+            <label>
+              <CustomRadioBtn isChecked={selectedStatus === "repair"} />
+              <div className={clsx(styles.inputWrapper, styles.repairStatus)}>
+                <input
+                  type="radio"
+                  name="carStatus"
+                  value="repair"
+                  checked={selectedStatus === "repair"}
+                  onChange={handleStatusChange}
+                  className={styles.radioInput}
+                />
+                {<BsWrench className={styles.iconRadio} />} Ремонт
+              </div>
+            </label>
+          </div>
+          <div className={styles.radioWrapper}>
+            <label>
+              <CustomRadioBtn isChecked={selectedStatus === "complete"} />
+              <div className={clsx(styles.inputWrapper, styles.completeStatus)}>
+                <input
+                  type="radio"
+                  name="carStatus"
+                  value="complete"
+                  checked={selectedStatus === "complete"}
+                  onChange={handleStatusChange}
+                  className={styles.radioInput}
+                />
+                {<BsCheckCircleFill className={styles.iconRadio} />}
+                Завершено
+              </div>
+            </label>
+          </div>
+          <div className={styles.radioWrapper}>
+            <label>
+              <CustomRadioBtn isChecked={selectedStatus === "view_repair"} />
+              <div
+                className={clsx(styles.inputWrapper, styles.viewRepairStatus)}
+              >
+                <input
+                  type="radio"
+                  name="carStatus"
+                  value="view_repair"
+                  checked={selectedStatus === "view_repair"}
+                  onChange={handleStatusChange}
+                  className={styles.radioInput}
+                />
+                {<BsEyeFill className={styles.iconRadio} />}
+                Огляд ПР
+              </div>
+            </label>
+          </div>
         </div>
         <button
           className={styles.submitBtn}
