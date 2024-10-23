@@ -307,7 +307,7 @@
   }
 
   .viewRepairStatus {
-    color: var(--status-complete);
+    color: var(--orange);
   }
 
   .newStatus .carStatus {
@@ -335,6 +335,13 @@
     color: var(--current-status-complete);
     background: var(--status-gradient-complete);
     border-right: 1px solid var(--glow-complete);
+    border-left: transparent;
+  }
+
+  .viewRepairStatus .carStatus {
+    color: var(--current-status-complete);
+    background: var(--status-gradient-view-repair);
+    border-right: 1px solid var(--glow-view-repair);
     border-left: transparent;
   }
 

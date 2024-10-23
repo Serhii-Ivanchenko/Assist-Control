@@ -214,24 +214,26 @@
   background: var(--glow-diag);
 }
 
-.completeStatus,
-.viewRepairStatus {
+.completeStatus {
   color: var(--status-complete);
   background: var(--status-gradient-complete);
   border-left: 1px solid var(--glow-complete);
   border-right: transparent;
 }
 
-.completeStatus::after,
-.viewRepairStatus::after {
+.completeStatus::after {
   background: var(--glow-complete);
 }
 
 .viewRepairStatus {
-  color: var(--status-complete);
-  background: var(--status-gradient-complete);
-  border-left: 1px solid var(--glow-complete);
+  color: var(--current-status-complete);
+  background: var(--status-gradient-view-repair);
+  border-left: 1px solid var(--glow-view-repair);
   border-right: transparent;
+}
+
+.viewRepairStatus::after {
+  background: var(--glow-view-repair);
 }
 
 .carReg {
@@ -319,6 +321,10 @@ label::after {
   background: var(--glow-repair);
 }
 
+.viewRepairStatus .radioWrapper::after {
+  background: var(--glow-view-repair);
+}
+
 .radioGroup input {
   margin: 0;
   padding: 0;
@@ -343,6 +349,7 @@ label::after {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
   padding: 0 6px;
+  cursor: pointer;
 }
 
 .iconRadio {

@@ -157,7 +157,7 @@ function CurrentCarModal({ onClose, car, status }) {
           </div>
           <div className={styles.radioWrapper}>
             <CustomRadioBtn isChecked={selectedStatus === "view_repair"} />
-            <label className={styles.completeStatus}>
+            <label className={styles.viewRepairStatus}>
               <input
                 type="radio"
                 name="carStatus"
