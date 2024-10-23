@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import Header from "../../components/Header/Header.jsx";
 import MainContent from "../../components/MainContent/MainContent.jsx";
 import SideBar from "../../components/SideBar/SideBar.jsx";
-import styles from "./VideoControlPage.module.css";
+import css from "./VideoControlPage.module.css";
 import { useEffect } from "react";
 import { getUserData } from "../../redux/auth/operations.js";
 import toast from "react-hot-toast";
@@ -24,9 +24,9 @@ export default function VideoControlPage() {
   }, [dispatch]);
 
   return (
-    <div className={styles.videoControlMainContainer}>
+    <div className={css.videoControlMainContainer}>
       <Header />
-      <div className={styles.mainContent}>
+      <div className={css.mainContent}>
         <SideBar />
         <MainContent />
       </div>
