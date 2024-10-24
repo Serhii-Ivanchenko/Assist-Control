@@ -6,14 +6,25 @@ import { posts } from "../../Modals/ServiceBookingModal/constants.js";
 import { mechanics } from "../../Modals/ServiceBookingModal/constants.js";
 import { timeToChoose } from "../../Modals/ServiceBookingModal/constants.js";
 import { BsFillCameraFill } from "react-icons/bs";
+import { BsXLg } from "react-icons/bs";
+import { BsFillCaretDownFill } from "react-icons/bs";
 import { FaCheck } from "react-icons/fa";
 import SelectDate from "./SelectDate/SelectDate";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-export default function ServiceBookingModal() {
+export default function ServiceBookingModal({ onClose }) {
   const handleSubmit = (values, actions) => {
     console.log(values);
     actions.resetForm();
+  };
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownPostOpen, setIsDropdownPostOpen] = useState(false);
+  const [isDropdownMechanicOpen, setIsDropdownMechanicOpen] = useState(false);
+  const selectRef = useRef(null);
+
+  const toggleDropdown = (status, changeStatus) => {
+    changeStatus(!status);
   };
 
   const currentDate = new Date(Date.now());
@@ -30,6 +41,7 @@ export default function ServiceBookingModal() {
 
   return (
     <div className={css.serviceBookingModal}>
+      <BsXLg className={css.closeIcon} onClick={onClose} />
       <h3 className={css.header}>Створення запису на {pickedDate}</h3>
       <Formik
         initialValues={{
@@ -76,12 +88,15 @@ export default function ServiceBookingModal() {
               />
             </div>
             <div className={css.wrapper}>
-              <div className={css.inputWrapper}>
+              <div className={css.inputWrapper} ref={selectRef}>
                 <Field
                   as="select"
-                  className={css.input}
+                  className={css.inputSelect}
                   type="text"
                   name="service"
+                  onClick={() =>
+                    toggleDropdown(isDropdownOpen, setIsDropdownOpen)
+                  }
                 >
                   <option value="" disabled hidden>
                     Послуга
@@ -94,6 +109,11 @@ export default function ServiceBookingModal() {
                     );
                   })}
                 </Field>
+                <BsFillCaretDownFill
+                  className={`${css.btnArrowSelect} ${
+                    isDropdownOpen ? css.rotated : ""
+                  }`}
+                />
                 <ErrorMessage
                   name="service"
                   component="div"
@@ -128,12 +148,15 @@ export default function ServiceBookingModal() {
               />
             </div>
             <div className={css.bottomRightSectionWrapper}>
-              <div className={css.inputWrapper}>
+              <div className={css.inputWrapper} ref={selectRef}>
                 <Field
                   as="select"
-                  className={css.input}
+                  className={css.inputSelect}
                   type="text"
                   name="post"
+                  onClick={() =>
+                    toggleDropdown(isDropdownPostOpen, setIsDropdownPostOpen)
+                  }
                 >
                   <option value="" disabled hidden>
                     ПОСТ
@@ -146,18 +169,29 @@ export default function ServiceBookingModal() {
                     );
                   })}
                 </Field>
+                <BsFillCaretDownFill
+                  className={`${css.btnArrowSelect} ${
+                    isDropdownPostOpen ? css.rotated : ""
+                  }`}
+                />
                 <ErrorMessage
                   name="post"
                   component="div"
                   className={css.errorMsg}
                 />
               </div>
-              <div className={css.inputWrapper}>
+              <div className={css.inputWrapper} ref={selectRef}>
                 <Field
                   as="select"
-                  className={css.input}
+                  className={css.inputSelect}
                   type="text"
                   name="mechanic"
+                  onClick={() =>
+                    toggleDropdown(
+                      isDropdownMechanicOpen,
+                      setIsDropdownMechanicOpen
+                    )
+                  }
                 >
                   <option value="" disabled hidden>
                     Оберіть механіка
@@ -170,6 +204,11 @@ export default function ServiceBookingModal() {
                     );
                   })}
                 </Field>
+                <BsFillCaretDownFill
+                  className={`${css.btnArrowSelect} ${
+                    isDropdownMechanicOpen ? css.rotated : ""
+                  }`}
+                />
                 <ErrorMessage
                   name="mechanic"
                   component="div"
@@ -243,7 +282,7 @@ export default function ServiceBookingModal() {
               </div>
             </div>
             <div className={css.btnWrapper}>
-              <button type="button" className={css.closeBtn}>
+              <button type="button" className={css.closeBtn} onClick={onClose}>
                 Закрити
               </button>
               <button type="submit" className={css.submitBtn}>
