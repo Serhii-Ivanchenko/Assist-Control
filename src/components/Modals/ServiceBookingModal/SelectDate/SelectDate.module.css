@@ -1,0 +1,22 @@
+.wrapper {
+  text-align: end;
+}
+
+.customInput {
+  height: 24px;
+  background-color: transparent;
+  color: var(--white);
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+}
+
+.chooseDate {
+  color: var(--light-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
