@@ -8,6 +8,9 @@ import { BsFiles } from "react-icons/bs";
 import { BsTelephoneOutboundFill } from "react-icons/bs";
 import { IoIosAt } from "react-icons/io";
 import { IoCarSport } from "react-icons/io5";
+import { BsCalendarCheck } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
+import { BsPlusCircleDotted } from "react-icons/bs";
 
 
 
@@ -93,38 +96,71 @@ export default function ClientInfo() {
             </div>
 
             
+
+            
             <ul className={css.carInfo}>
                 <li className={css.carCard}>
 
+                    <div className={css.mainContent}>
+                        
                     <div className={css.photoAndMainCarInfo}>
                         
                         <img src="" alt="Car's Image" className={css.carImage} />
 
                         <div className={css.mainCarInfo}>
-                    <p className={css.carName}>HONDA CIVIC</p>
-                    <p className={css.carYear}>2001 </p>
+                            <div className={css.carNameBox}>
+                                <IoCarSport className={css.carIcon} />
+                                <p className={css.carName}>HONDA CIVIC</p>
+                            </div>
+
+                            <div className={css.carYearBox}>
+                                <BsCalendarCheck className={css.yearIcon} />                               
+                                <p className={css.carYear}>2001 </p>
+                            </div>
                         </div>
 
                     </div>
 
-                    <ul>
-                        <li className="">
-                            <p>
+                    <div className={css.carCategoryBox}>
+                    <ul className={css.carCategory}>
+                        <li className={css.carCategoryItem}>
+                            <p className={css.categoryVin}>
                                 <span className={css.inBold}>VIN</span>
                                 <span className={css.number}>Number</span>
-                                <div>
-                                    <p>VW8795218794H46J</p>
-                                    <button type="button"><BsFiles /></button>
-                                </div>
+                               
                             </p>
                         </li>
-                        <li className="">
-                             <p>
+                        <li className={css.carCategoryItem}>
+                             <p className={css.categoryCar}>
                                 <span className={css.inBold}>CAR</span>
                                 <span className={css.number}>Number</span>
                             </p>
                         </li>
-                    </ul>
+                        </ul>
+
+                        <ul className={css.carNumbers}>
+                            <li className={css.carNumbersItem}>
+                                    <p>VW8795218794H46J</p>
+                                    <button type="button" className={css.contactsBtn}><BsFiles className={css.copyIcon}/></button>
+                               
+                            </li>
+                            <li className={css.carNumbersItem}>
+                                <div className={css.carPlate}>
+                                    <p className="">CA 6864 CO</p>
+                                </div>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    
+                    <div className={css.btnBox}>
+                       <BsTrash className={css.deleteBtn}/>
+                        <button type="button" className={css.addCarBtn}>
+                            <BsPlusCircleDotted className={css.plus} />
+                            <IoCarSport className={css.addCarIcon} />
+                        </button>
+                    </div>
+                  
                 </li>
             </ul>
     </div>

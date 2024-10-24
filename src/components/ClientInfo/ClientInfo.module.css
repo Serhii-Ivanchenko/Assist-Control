@@ -3,6 +3,11 @@
     padding-right: 40px;
 }
 
+.carCard{
+    display: flex;
+    justify-content: space-between;
+}
+
 .title{
     color: var(--white);
     font-size: 24px;
@@ -266,6 +271,13 @@
     margin-bottom: 20px;
 }
 
+.carNameBox{
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 12px;
+}
+
 .carName{
     color: var(--white);
     font-size: 24px;
@@ -274,10 +286,127 @@
     line-height: normal;
 }
 
+.carIcon{
+    width: 30px;
+    height: 20px;
+    fill:var(--icon-gray);
+}
+
+.carYearBox{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
 .carYear{
     color:var(--white);
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.yearIcon{
+    width: 20px;
+    height: 20px;
+    fill: var(--icon-gray);
+}
+
+.carCategoryBox{
+    display: flex;
+    gap: 67px;
+}
+
+.carCategory{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.carCategoryItem{
+    height: 46px;
+    display: flex;
+    align-items: center;
+}
+
+.carNumbers{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.carNumbersItem{
+    height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 6px 16px;
+
+    border-radius: 6px;
+    background-color: #373941;
+}
+
+.categoryVin{
+    display: flex;
+    gap: 9px;
+}
+
+.categoryCar{
+    display: flex;
+    gap: 4px;
+}
+
+.inBold{
+    color:var(--white);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.number{
+    color: var(--white);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.btnBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.addCarBtn{
+    border: none;
+    display: flex;
+    gap: 6px;
+    padding: 4px 6px;
+    align-items: center;
+
+    border-radius: 6px;
+    background-color: var(--green-btn-normal);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.plus{
+    width: 18px;
+    height: 18px;
+    fill: var(--white);
+}
+
+.addCarIcon{
+    fill: var(--icon-gray);
+    width: 18px;
+    height: 18px;
+}
+
+.deleteBtn{
+    width: 18px;
+    height: 18px;
+    fill: var(--icon-gray);
 }
