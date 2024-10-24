@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-     margin-top: -13px; 
+    margin-top: -13px;
     /* margin-left: -2px; */
     /* margin-bottom: 15px; */
     /* gap: 5px; */
@@ -15,7 +15,8 @@
 
 @media only screen and (min-width: 1850px) {
     .containerperiodselector {
-         margin-top: -3px; 
+        margin-top: -3px;
+        height: 34px;
     }
 }
 
@@ -32,15 +33,15 @@
     align-items: center;
     text-align: center;
     /* padding-top: 3px; */
-   margin-left: 11px;
+    margin-left: 11px;
     margin-right: 6px;
 }
 
 @media only screen and (min-width: 1850px) {
     .periodtitle {
-        font-size: 14px;
-        margin-left: 16px;
-        margin-right: 10px;
+        font-size: 15px;
+        margin-left: 15px;
+        margin-right: 8px;
     }
 }
 
@@ -68,8 +69,8 @@
         height: 34px;
         border: none;
         padding: 4px 8px 4px 8px;
-        line-height: 26px;
-        margin-top: -3px;
+        /* line-height: 26px; */
+        /* margin-top: -3px; */
     }
 }
 
@@ -77,8 +78,8 @@
 .icon {
     width: 14px;
     height: 14px;
-     position: absolute; 
-     right: 8px; 
+    position: absolute;
+    right: 8px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--Icon-Gray);
@@ -97,11 +98,12 @@
 }
 
 .datewrapper {
-     position: relative; 
+    position: relative;
     /* display: inline-block; */
     /* width: 120px; */
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: var(--bg-input);
     border-radius: 10px;
     margin-right: 28px;
@@ -112,9 +114,9 @@
         margin-right: 20px;
         border-radius: 44px;
         width: 163px;
-            padding: 4px 8px;
-            height: 34px;
-            margin-top: -5px;
+        padding: 4px 8px;
+        height: 34px;
+        /* margin-top: -5px; */
     }
 }
 

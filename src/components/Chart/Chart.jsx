@@ -161,7 +161,7 @@ export default function Chart() {
     <div className={css.containerchart}>
       <div className={css.charttitlebox}>
       <p className={css.charttitle}>Машинозаїзди</p>
-        <p className={css.charttitleavto}>Авто:<span className={css.titlekolvo} >30</span></p>
+        <p className={css.charttitleavto}>За період:<span className={css.titlekolvo} >30</span></p>
       </div>
       <div className={css.areabox}>
          <ResponsiveContainer className={css.responsecontainer}>
@@ -223,7 +223,7 @@ export default function Chart() {
               //  axisLine={false}
               // tickFormatter={yTickFormatter}
               //  tickFormatter={(value) => (value / 1000).toFixed(1)}
-              width={10}
+              width={13}
               
               // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
               //  ticks={[0, 2, 4, 6, 8, 10]}

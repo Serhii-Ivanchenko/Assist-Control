@@ -8,54 +8,58 @@
 }
 
 @media only screen and (min-width: 1850px) {
-    .containerchart {
-   
-    }}
+    .containerchart {}
+}
 
-        .charttitlebox {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            width: 280px;
-            height: 28px;
-        }
-        
+.charttitlebox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 280px;
+    height: 28px;
+}
 
-    @media only screen and (min-width: 1850px) {
-     .charttitlebox {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-width: 430px;
-height: 28px;
-                }}
-
-     .charttitleavto {
-        font-size: 14px;
-        color: var(--white);        
-        }
-
-     @media only screen and (min-width: 1850px) {
-         .charttitleavto {
-            font-size: 14px;
-                color: var(--white);
-              
-         }}
-
-    .titlekolvo {
-      font-size: 18px;
-      color: var(--play-btn-triangle);
-      margin-left: 13px;
-      }
 
 @media only screen and (min-width: 1850px) {
-        .titlekolvo {
-font-size: 24px;
-color: var(--play-btn-triangle);
-margin-left: 13px;
-        }}
+    .charttitlebox {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 430px;
+        height: 28px;
+    }
+}
+
+.charttitleavto {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+@media only screen and (min-width: 1850px) {
+    .charttitleavto {
+        font-size: 14px;
+        color: var(--white);
+
+    }
+}
+
+.titlekolvo {
+    font-size: 18px;
+    color: var(--play-btn-triangle);
+}
+
+@media only screen and (min-width: 1850px) {
+    .titlekolvo {
+        font-size: 24px;
+        color: var(--play-btn-triangle);
+    }
+}
 
 
 .charttitle {
@@ -73,7 +77,7 @@ margin-left: 13px;
 
 @media only screen and (min-width: 1850px) {
     .charttitle {
-font-size: 24px;
+        font-size: 24px;
         /* margin-bottom: 24px; */
     }
 }
@@ -105,7 +109,7 @@ font-size: 24px;
     .responsecontainer {
         /* padding-left: 15px;
         padding-right: 15px; */
-        height: 325x;
+        height: 325px;
         width: 430px
     }
 }
@@ -114,25 +118,25 @@ font-size: 24px;
     height: 184px;
 
 } */
-.popuptitle{
- font-size: 13px;
- font-variant: small-caps;
- color: var(--blue-btn-inactive);
- text-align: center;
+.popuptitle {
+    font-size: 13px;
+    font-variant: small-caps;
+    color: var(--blue-btn-inactive);
+    text-align: center;
 }
 
-.popupavto{
-font-size: 10px;
-color: var(--blue-btn-inactive);
-padding-top: 3px;
-height: 15px;
+.popupavto {
+    font-size: 10px;
+    color: var(--blue-btn-inactive);
+    padding-top: 3px;
+    height: 15px;
 }
 
-.kolall{
+.kolall {
     font-size: 16px;
     font-weight: 600;
-   text-align: end;
-        color: var(--blue-btn-normal);
+    text-align: end;
+    color: var(--blue-btn-normal);
 }
 
 .kolnew {
@@ -163,7 +167,7 @@ height: 15px;
     font-style: normal;
 }
 
-.chartflex{
+.chartflex {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
