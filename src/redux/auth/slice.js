@@ -81,7 +81,7 @@ const authSlice = createSlice({
       .addCase(getUserData.rejected, handleRejected)
       .addCase(updateUserAvatar.pending, handlePending)
       .addCase(updateUserAvatar.fulfilled, (state, action) => {
-        state.userData.avatarUrl = action.payload.avatar_url;
+        state.userData.avatar_url = action.payload.url;
         state.isLoading = false;
       })
       .addCase(updateUserAvatar.rejected, handleRejected)

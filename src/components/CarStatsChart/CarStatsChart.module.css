@@ -3,7 +3,7 @@
     height: 270px;
     background: var(--bg-secondary);
     border-radius: 5px;
-    padding: 9px 19px 11px;
+    padding: 9px 13px 11px;
     /* display: flex; */
 }
 
@@ -11,6 +11,6 @@
     .containerstats {
         width: 462px;
         height: 405px;
-        padding: 14px 29px 0 25px;
+        padding: 13px 18px 0 14px;
     }
 }

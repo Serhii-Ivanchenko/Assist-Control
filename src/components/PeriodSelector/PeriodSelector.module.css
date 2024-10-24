@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    margin-top: -23px;
+    margin-top: -13px;
     /* margin-left: -2px; */
     /* margin-bottom: 15px; */
     /* gap: 5px; */
@@ -15,12 +15,13 @@
 
 @media only screen and (min-width: 1850px) {
     .containerperiodselector {
-        margin-top: -15px;
+        margin-top: -3px;
+        height: 34px;
     }
 }
 
 .periodtitle {
-    color: #9E9E9E;
+    color: var(--Icon-Gray);
     /* background: var(--bg-secondary); */
     /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
@@ -32,19 +33,20 @@
     align-items: center;
     text-align: center;
     /* padding-top: 3px; */
-    margin-left: 3px;
+    margin-left: 11px;
     margin-right: 6px;
 }
 
 @media only screen and (min-width: 1850px) {
     .periodtitle {
-        font-size: 14px;
-        margin-right: 10px;
+        font-size: 15px;
+        margin-left: 15px;
+        margin-right: 8px;
     }
 }
 
 .periodinput {
-    color: #9E9E9E;
+    color: var(--Icon-Gray);
     background: transparent;
     /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
@@ -63,10 +65,12 @@
 @media only screen and (min-width: 1850px) {
     .periodinput {
         font-size: 14px;
-        width: 147px;
-        height: 20px;
+        width: 163px;
+        height: 34px;
         border: none;
-        padding: 2px 24px 2px 9px;
+        padding: 4px 8px 4px 8px;
+        /* line-height: 26px; */
+        /* margin-top: -3px; */
     }
 }
 
@@ -75,18 +79,21 @@
     width: 14px;
     height: 14px;
     position: absolute;
-    right: 4px;
+    right: 8px;
     top: 50%;
-    transform: translateY(-56%);
-    color: #888;
+    transform: translateY(-50%);
+    color: var(--Icon-Gray);
     cursor: pointer;
     pointer-events: auto;
 }
 
 @media only screen and (min-width: 1850px) {
     .icon {
-        width: 18px;
-        height: 18px;
+        width: 26px;
+        height: 26px;
+        padding: 6px;
+        border-radius: 46px;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
 }
 
@@ -94,14 +101,22 @@
     position: relative;
     /* display: inline-block; */
     /* width: 120px; */
-    background-color: var(--bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-input);
     border-radius: 10px;
-    margin-right: 35px;
+    margin-right: 28px;
 }
 
 @media only screen and (min-width: 1850px) {
     .datewrapper {
-        margin-right: 60px
+        margin-right: 20px;
+        border-radius: 44px;
+        width: 163px;
+        padding: 4px 8px;
+        height: 34px;
+        /* margin-top: -5px; */
     }
 }
 

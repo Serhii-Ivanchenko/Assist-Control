@@ -1,0 +1,227 @@
+.serviceBookingModal {
+  width: 660px;
+  padding: 28px 34px;
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
+}
+
+.header {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 42px;
+}
+
+.form {
+  display: flex;
+  gap: 16px;
+}
+
+.rightSectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 76px;
+  justify-content: flex-start;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  width: 288px;
+  height: 46px;
+  border-radius: 6px;
+  border: 1px solid var(--input-stroke);
+  background-color: var(--bg-input);
+  padding-left: 20px;
+  color: var(--light-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.input::placeholder {
+  color: var(--input-text);
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.errorMsg {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: red;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  white-space: nowrap;
+}
+
+/* select option[disabled] {
+  color: var(--input-text);
+} */
+
+.bottomRightSectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-top: 35px;
+}
+
+.leftSectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: flex-start;
+}
+
+.addFileWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2px;
+  width: 288px;
+  height: 46px;
+}
+
+.inputFile {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.iconCamera {
+  width: 24px;
+  height: 24px;
+}
+
+.label {
+  color: var(--input-text);
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.textArea {
+  width: 288px;
+  height: 111px;
+  padding: 15px 0 15px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+  resize: none;
+  color: var(--light-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.textArea::placeholder {
+  color: var(--input-text);
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* .disabled {
+  color: var(--input-text);
+  background-color: #f0f0f0;
+} */
+
+.timeWrapper {
+  width: 285px;
+  height: 129px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+.timeBtn {
+  width: 69px;
+  height: 39px;
+  border-radius: 6px;
+  background: var(--main-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: --white;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.closeBtn {
+  width: 95px;
+  height: 36px;
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--light-gray);
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.submitBtn {
+  display: flex;
+  gap: 10px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: var(--green-btn-normal);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+.submitBtn:hover {
+  background-color: var(--green-btn-hover);
+}
+
+.submitBtnIcon {
+  width: 13px;
+  height: 10px;
+  stroke: var(--white);
+}

@@ -113,9 +113,7 @@ export default function VideoFrame() {
   const attemptReconnect = (camera) => {
     const { url, index } = camera;
     const attempts = reconnectAttempts.current[url] || 0;
-    if (attempts > MAX_RECONNECT_ATTEMPTS) {
-      // attempts < MAX_RECONNECT_ATTEMPTS <-- Поміняти назад
-
+    if (attempts < MAX_RECONNECT_ATTEMPTS) {
       console.log(`Attempting to reconnect to ${url}... (${attempts + 1})`);
       reconnectAttempts.current[url] = attempts + 1;
 

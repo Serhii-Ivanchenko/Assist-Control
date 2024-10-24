@@ -2,7 +2,7 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import css from "./PeriodSelector.module.css";
 import DatePicker from "react-datepicker";
-import { FaCalendar } from "react-icons/fa";
+import { BsCalendar2Week } from "react-icons/bs";
 import "react-datepicker/dist/react-datepicker.css";
 export default function PeriodSelector({
   startDate,
@@ -98,7 +98,7 @@ export default function PeriodSelector({
           popperClassName={css.leftdatepickerdropdown}
           //  placeholderText="Click to select a date"
         />
-        <FaCalendar className={css.icon} onClick={handleIconClickBeg} />
+        <BsCalendar2Week className={css.icon} onClick={handleIconClickBeg} />
       </div>
       <p className={css.periodtitle}>По</p>
 
@@ -113,7 +113,7 @@ export default function PeriodSelector({
           popperClassName={css.datepickerdropdown}
           //  placeholderText="Click to select a date"
         />
-        <FaCalendar className={css.icon} onClick={handleIconClickEnd} />
+        <BsCalendar2Week className={css.icon} onClick={handleIconClickEnd} />
       </div>
     </div>
   );
