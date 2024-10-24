@@ -42,25 +42,11 @@ if (y - tooltipHeight / 2 < 0) {
       <div
         className={css.customtooltip}
          style={{
-        //   backgroundColor: "var(--light-gray)",
-        //   width: "51px",
-        //   padding: '5px',
-        //   padding: '2px' '4px',
-        //   // border: "none",
-        //   borderRadius: '6px',
-         
-        //   border: '1px solid #ccc',
+        
            position: "absolute",
             left: `${leftPosition}px`,
-        //   // right: x20,
            top: `${topPosition}px`,
-        //   transform: "translateX(-50%)",
-        //   fontweight: "400",
-        //   fontsize: "6px",
-        //   fontvariant: "smallCaps",
-        //   // color: "var(--light-gray)",
-
-        //   fontStyle: "normal",
+        
          }}
       >
         <p className={css.popuptitle}>{`${label}`}</p>
@@ -77,6 +63,8 @@ export default function LoadStatsChart() {
   const carsForHours = useSelector(selectCarsForHours);
   const workHours = useSelector(selectWorkHours);
   const dispatch = useDispatch();
+
+ 
 
   const currentDate = new Date().toISOString().substring(0, 10);
 
@@ -221,6 +209,7 @@ export default function LoadStatsChart() {
               stroke="var(--orange)"
               strokeWidth={3}
               fill="url(#colorGradientzs)"
+              cursor="pointer"
               activeDot={customActiveDot}
               // activeDot={{  fill: "var(--blue)", border: '7px'}} // Активная точка больше
 
