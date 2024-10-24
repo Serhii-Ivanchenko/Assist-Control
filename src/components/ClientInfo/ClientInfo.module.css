@@ -1,3 +1,283 @@
 .clientInfoBox{
     width: 567px;
+    padding-right: 40px;
+}
+
+.title{
+    color: var(--white);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    margin-bottom: 52px;
+}
+
+.clientImg{
+    width: 126px;
+    height: 126px; 
+
+    border-radius: 8px;
+
+    border: solid 1px #fff;
+}
+
+.infoBox{
+    display: flex;
+
+    margin-bottom: 34px;
+}
+
+.photoAndMainInfo{
+    display: flex;
+    align-items: flex-end;
+    gap: 23px;
+
+    margin-right: 66px;
+}
+
+.mainInfo{
+    /* display: flex; */
+}
+
+.serviceBook{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    gap: 19px;
+
+    border-radius: 6px;
+    background-color: #313540 ;
+
+    margin-top: 26px;
+}
+
+.sbText{
+    color:var(--white);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.sbBtn{
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 4px 6px;
+
+    border-radius: 6px;
+    background: var(--bg-input);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+
+    color: var(--icon-gray);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.downloadIcon{
+    fill: var(--icon-gray);
+    width: 16px;
+    height: 16px;
+}
+
+.dateOfBirth{
+    color: var(--text-gray);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-top: 3px;
+}
+
+.clientName{
+    color: var(--white);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.moneyBox{
+    display: flex;
+    align-items: center;
+    height: 20px;
+    gap: 9px;
+}
+
+.dollarIcon{
+    fill: var(--green-btn-normal);
+    width: 20px;
+    height: 20px;
+}
+
+.moneyAmount{
+    color:var(--white);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.contactsBox{
+    display: flex;
+    align-items: center;
+    gap: 60px;
+
+    padding-bottom: 38px;
+    margin-bottom: 38px;
+
+    border-bottom: dashed 2px #373941 ;
+
+}
+
+/* .contactsList{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contactsListItem{
+    display: flex;
+} */
+
+.categoryList{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contactsInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.categoryListItem{
+    height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.contactsInfoItem{
+    height: 46px;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    background-color: #373941;
+    gap: 28px;
+    width: fit-content;
+}
+
+.contactsInput{
+    background-color: transparent;
+    outline: none;
+    border: none;
+
+    color: var(--white);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.contactsBtn{
+    border: none;
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+    background: var(--bg-input);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.phoneCallIcon{
+    fill:var(--green-btn-normal);
+    width: 18px;
+    height: 18px;
+}
+
+.atIcon{
+    fill: var(--icon-gray);
+    width: 25px;
+    height: 25px;
+}
+
+.copyIcon{
+    fill: var(--icon-gray);
+    width: 18px;
+    height: 18px;
+}
+
+.planeIcon{
+    fill: var(--icon-gray);
+    width: 22px;
+    height: 23px;
+}
+
+.contactsBtnBox{
+    display: flex;
+    gap: 4px;
+}
+
+.category{
+    color: var(--white);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.categoryIcon{
+    fill:var(--icon-gray);
+    width: 18px;
+    height: 18px;
+}
+
+
+
+.carImage{
+    width: 126px;
+    height: 126px;
+
+    border-radius: 8px;
+    border: solid 1px #fff;
+}
+
+.photoAndMainCarInfo{
+    display: flex;
+    gap: 23px;
+
+    margin-bottom: 20px;
+}
+
+.carName{
+    color: var(--white);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.carYear{
+    color:var(--white);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
