@@ -59,63 +59,18 @@ export default function ServiceBookingModal({ onClose }) {
         onSubmit={handleSubmit}
         validationSchema={ServiceBookingSchema}
       >
-        <Form className={css.form}>
-          <div className={css.rightSectionWrapper}>
-            <div className={css.inputWrapper}>
-              <Field
-                className={css.input}
-                type="text"
-                name="carNumber"
-                placeholder="AX 2945 OP"
-              />
-              <ErrorMessage
-                name="carNumber"
-                component="div"
-                className={css.errorMsg}
-              />
-            </div>
-            <div className={css.inputWrapper}>
-              <Field
-                className={css.input}
-                type="text"
-                name="vin"
-                placeholder="VIN"
-              />
-              <ErrorMessage
-                name="vin"
-                component="div"
-                className={css.errorMsg}
-              />
-            </div>
-            <div className={css.wrapper}>
-              <div className={css.inputWrapper} ref={selectRef}>
+        {({ values }) => (
+          <Form className={css.form}>
+            <div className={css.rightSectionWrapper}>
+              <div className={css.inputWrapper}>
                 <Field
-                  as="select"
-                  className={css.inputSelect}
+                  className={css.input}
                   type="text"
-                  name="service"
-                  onClick={() =>
-                    toggleDropdown(isDropdownOpen, setIsDropdownOpen)
-                  }
-                >
-                  <option value="" disabled hidden>
-                    Послуга
-                  </option>
-                  {services.map((service, index) => {
-                    return (
-                      <option key={index} value={service}>
-                        {service}
-                      </option>
-                    );
-                  })}
-                </Field>
-                <BsFillCaretDownFill
-                  className={`${css.btnArrowSelect} ${
-                    isDropdownOpen ? css.rotated : ""
-                  }`}
+                  name="carNumber"
+                  placeholder="AX 2945 OP"
                 />
                 <ErrorMessage
-                  name="service"
+                  name="carNumber"
                   component="div"
                   className={css.errorMsg}
                 />
@@ -124,174 +79,237 @@ export default function ServiceBookingModal({ onClose }) {
                 <Field
                   className={css.input}
                   type="text"
-                  name="prepayment"
-                  placeholder="Передплата"
+                  name="vin"
+                  placeholder="VIN"
                 />
                 <ErrorMessage
-                  name="prepayment"
+                  name="vin"
                   component="div"
                   className={css.errorMsg}
                 />
               </div>
-            </div>
-            <div className={css.inputWrapper}>
-              <Field
-                className={css.input}
-                type="text"
-                name="phoneNumber"
-                placeholder="Телефон"
-              />
-              <ErrorMessage
-                name="phoneNumber"
-                component="div"
-                className={css.errorMsg}
-              />
-            </div>
-            <div className={css.bottomRightSectionWrapper}>
-              <div className={css.inputWrapper} ref={selectRef}>
+              <div className={css.wrapper}>
+                <div className={css.inputWrapper} ref={selectRef}>
+                  <Field
+                    as="select"
+                    className={
+                      values.service === ""
+                        ? `${css.placeholder}`
+                        : `${css.inputSelect}`
+                    }
+                    type="text"
+                    name="service"
+                    onClick={() =>
+                      toggleDropdown(isDropdownOpen, setIsDropdownOpen)
+                    }
+                  >
+                    <option value="" disabled hidden>
+                      Послуга
+                    </option>
+                    {services.map((service, index) => {
+                      return (
+                        <option key={index} value={service}>
+                          {service}
+                        </option>
+                      );
+                    })}
+                  </Field>
+                  <BsFillCaretDownFill
+                    className={`${css.btnArrowSelect} ${
+                      isDropdownOpen ? css.rotated : ""
+                    }`}
+                  />
+                  <ErrorMessage
+                    name="service"
+                    component="div"
+                    className={css.errorMsg}
+                  />
+                </div>
+                <div className={css.inputWrapper}>
+                  <Field
+                    className={css.input}
+                    type="text"
+                    name="prepayment"
+                    placeholder="Передплата"
+                  />
+                  <ErrorMessage
+                    name="prepayment"
+                    component="div"
+                    className={css.errorMsg}
+                  />
+                </div>
+              </div>
+              <div className={css.inputWrapper}>
                 <Field
-                  as="select"
-                  className={css.inputSelect}
+                  className={css.input}
                   type="text"
-                  name="post"
-                  onClick={() =>
-                    toggleDropdown(isDropdownPostOpen, setIsDropdownPostOpen)
-                  }
-                >
-                  <option value="" disabled hidden>
-                    ПОСТ
-                  </option>
-                  {posts.map((post, index) => {
+                  name="phoneNumber"
+                  placeholder="Телефон"
+                />
+                <ErrorMessage
+                  name="phoneNumber"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
+              <div className={css.bottomRightSectionWrapper}>
+                <div className={css.inputWrapper} ref={selectRef}>
+                  <Field
+                    as="select"
+                    className={
+                      values.post === ""
+                        ? `${css.placeholder}`
+                        : `${css.inputSelect}`
+                    }
+                    type="text"
+                    name="post"
+                    onClick={() =>
+                      toggleDropdown(isDropdownPostOpen, setIsDropdownPostOpen)
+                    }
+                  >
+                    <option value="" disabled hidden>
+                      ПОСТ
+                    </option>
+                    {posts.map((post, index) => {
+                      return (
+                        <option key={index} value={post}>
+                          {post}
+                        </option>
+                      );
+                    })}
+                  </Field>
+                  <BsFillCaretDownFill
+                    className={`${css.btnArrowSelect} ${
+                      isDropdownPostOpen ? css.rotated : ""
+                    }`}
+                  />
+                  <ErrorMessage
+                    name="post"
+                    component="div"
+                    className={css.errorMsg}
+                  />
+                </div>
+                <div className={css.inputWrapper} ref={selectRef}>
+                  <Field
+                    as="select"
+                    className={
+                      values.mechanic === ""
+                        ? `${css.placeholder}`
+                        : `${css.inputSelect}`
+                    }
+                    type="text"
+                    name="mechanic"
+                    onClick={() =>
+                      toggleDropdown(
+                        isDropdownMechanicOpen,
+                        setIsDropdownMechanicOpen
+                      )
+                    }
+                  >
+                    <option value="" disabled hidden>
+                      Оберіть механіка
+                    </option>
+                    {mechanics.map((mechanic, index) => {
+                      return (
+                        <option key={index} value={mechanic}>
+                          {mechanic}
+                        </option>
+                      );
+                    })}
+                  </Field>
+                  <BsFillCaretDownFill
+                    className={`${css.btnArrowSelect} ${
+                      isDropdownMechanicOpen ? css.rotated : ""
+                    }`}
+                  />
+                  <ErrorMessage
+                    name="mechanic"
+                    component="div"
+                    className={css.errorMsg}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={css.leftSectionWrapper}>
+              <div className={css.inputWrapper}>
+                <Field
+                  className={css.input}
+                  type="text"
+                  name="carModel"
+                  placeholder="Марка і модель автомобіля"
+                />
+                <ErrorMessage
+                  name="carModel"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
+              <div className={css.addFileWrapper}>
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  className={css.inputFile}
+                />
+                <BsFillCameraFill className={css.iconCamera} />
+                <label htmlFor="file" className={css.label}>
+                  + Додати фото техпаспорта
+                </label>
+              </div>
+              <Field
+                as="textarea"
+                name="textarea"
+                className={css.textArea}
+                placeholder="Примітка"
+              />
+              <div className={css.inputWrapper}>
+                <Field
+                  className={css.input}
+                  type="text"
+                  name="clientName"
+                  placeholder="ПІБ"
+                />
+                <ErrorMessage
+                  name="clientName"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
+              <div className={css.calendar}>
+                <SelectDate newDate={setNewDate} />
+                <div className={css.timeWrapper}>
+                  {timeToChoose.map((time, index) => {
                     return (
-                      <option key={index} value={post}>
-                        {post}
-                      </option>
+                      <button
+                        type="button"
+                        className={css.timeBtn}
+                        key={index}
+                        onClick={() => {
+                          console.log(time);
+                        }}
+                      >
+                        {time}
+                      </button>
                     );
                   })}
-                </Field>
-                <BsFillCaretDownFill
-                  className={`${css.btnArrowSelect} ${
-                    isDropdownPostOpen ? css.rotated : ""
-                  }`}
-                />
-                <ErrorMessage
-                  name="post"
-                  component="div"
-                  className={css.errorMsg}
-                />
+                </div>
               </div>
-              <div className={css.inputWrapper} ref={selectRef}>
-                <Field
-                  as="select"
-                  className={css.inputSelect}
-                  type="text"
-                  name="mechanic"
-                  onClick={() =>
-                    toggleDropdown(
-                      isDropdownMechanicOpen,
-                      setIsDropdownMechanicOpen
-                    )
-                  }
+              <div className={css.btnWrapper}>
+                <button
+                  type="button"
+                  className={css.closeBtn}
+                  onClick={onClose}
                 >
-                  <option value="" disabled hidden>
-                    Оберіть механіка
-                  </option>
-                  {mechanics.map((mechanic, index) => {
-                    return (
-                      <option key={index} value={mechanic}>
-                        {mechanic}
-                      </option>
-                    );
-                  })}
-                </Field>
-                <BsFillCaretDownFill
-                  className={`${css.btnArrowSelect} ${
-                    isDropdownMechanicOpen ? css.rotated : ""
-                  }`}
-                />
-                <ErrorMessage
-                  name="mechanic"
-                  component="div"
-                  className={css.errorMsg}
-                />
+                  Закрити
+                </button>
+                <button type="submit" className={css.submitBtn}>
+                  <FaCheck className={css.submitBtnIcon} />
+                  Зберегти
+                </button>
               </div>
             </div>
-          </div>
-          <div className={css.leftSectionWrapper}>
-            <div className={css.inputWrapper}>
-              <Field
-                className={css.input}
-                type="text"
-                name="carModel"
-                placeholder="Марка і модель автомобіля"
-              />
-              <ErrorMessage
-                name="carModel"
-                component="div"
-                className={css.errorMsg}
-              />
-            </div>
-            <div className={css.addFileWrapper}>
-              <input
-                type="file"
-                name="file"
-                id="file"
-                className={css.inputFile}
-              />
-              <BsFillCameraFill className={css.iconCamera} />
-              <label htmlFor="file" className={css.label}>
-                + Додати фото техпаспорта
-              </label>
-            </div>
-            <Field
-              as="textarea"
-              name="textarea"
-              className={css.textArea}
-              placeholder="Примітка"
-            />
-            <div className={css.inputWrapper}>
-              <Field
-                className={css.input}
-                type="text"
-                name="clientName"
-                placeholder="ПІБ"
-              />
-              <ErrorMessage
-                name="clientName"
-                component="div"
-                className={css.errorMsg}
-              />
-            </div>
-            <div className={css.calendar}>
-              <SelectDate newDate={setNewDate} />
-              <div className={css.timeWrapper}>
-                {timeToChoose.map((time, index) => {
-                  return (
-                    <button
-                      type="button"
-                      className={css.timeBtn}
-                      key={index}
-                      onClick={() => {
-                        console.log(time);
-                      }}
-                    >
-                      {time}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-            <div className={css.btnWrapper}>
-              <button type="button" className={css.closeBtn} onClick={onClose}>
-                Закрити
-              </button>
-              <button type="submit" className={css.submitBtn}>
-                <FaCheck className={css.submitBtnIcon} />
-                Зберегти
-              </button>
-            </div>
-          </div>
-        </Form>
+          </Form>
+        )}
       </Formik>
     </div>
   );

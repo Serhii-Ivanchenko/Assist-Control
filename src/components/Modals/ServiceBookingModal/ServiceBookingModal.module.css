@@ -103,6 +103,29 @@
   appearance: none;
 }
 
+.placeholder {
+  width: 288px;
+  height: 46px;
+  border-radius: 6px;
+  border: 1px solid var(--input-stroke);
+  background-color: var(--bg-input);
+  padding-left: 20px;
+  color: var(--input-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  appearance: none;
+}
+
+option {
+  color: var(--light-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .errorMsg {
   font-family: "Roboto", sans-serif;
   font-weight: 500;
