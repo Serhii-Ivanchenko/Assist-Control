@@ -93,7 +93,7 @@ export default function CurrentCarsItem() {
   const renderedCars = useMemo(() => {
     return currentCars?.map((car) => {
       const icon = getStatusIcon(car.status);
-      const { label, className } = getStatusDetails(car.status, icon);
+      const { label, className } = getStatusDetails(styles, car.status, icon);
 
       return (
         <div className={clsx(styles.wrapper, className)} key={car.id}>
