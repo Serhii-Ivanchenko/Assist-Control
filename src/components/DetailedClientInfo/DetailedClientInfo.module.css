@@ -1,12 +1,13 @@
 .detailedClientInfoWrapper {
   display: flex;
   gap: 7px;
-  width: 1380px;
+  width: 1360px;
   height: 848px;
-  background-color: var(--dark-gray);
+  background-color: var(--bg-secondary);
   border-radius: 12px;
-  padding: 28px 22px 0px 50px;
+  padding: 28px 22px 11px 50px;
 }
+
 .closeIcon {
   position: absolute;
   top: 20px;

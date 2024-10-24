@@ -4,7 +4,9 @@
   --bg-secondary: #23252c;
   --bg-input: #2d3038;
   --player-secondary-bg: #4e505f;
-  --current-mileage-bg: #1d2523;
+  --current-mileage-bg: #43A48D14;
+  --last-service-mileage-bg: #a4704314;
+  --visit-date-bg: #C38CE614;
 
   /* btns colors */
   --green-btn-normal: #008000;
@@ -34,10 +36,7 @@
   --input-text: #767b88;
   --drop-menu: #242d43;
   --current-mileage-text: #43a48d;
-  --last-service-mileage-bg: #25211d;
   --last-service-mileage-text: #a97742;
-  --visit-date-bg: #28232a;
-  --visit-date-bg: #d54e4f;
   --stats-all: #465d9b;
 
   /* statuses */

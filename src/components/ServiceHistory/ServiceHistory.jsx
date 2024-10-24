@@ -26,7 +26,7 @@ export default function ServiceHistory() {
   const [showDialogModal, setShowDialogModal] = useState(false);
   const [transcription, setTranscription] = useState(false);
   const toogleDialogModal = () => setShowDialogModal(!showDialogModal);
-  const messanges = [
+  const messages = [
     {
       orClientMsg: true,
       time: "00:00",
@@ -162,7 +162,7 @@ export default function ServiceHistory() {
                           <p>Головне</p>
                         </button>
                         <ul className={css.messages}>
-                          {messanges.map(({ orClientMsg, time, message }) => (
+                          {messages.map(({ orClientMsg, time, message }) => (
                             <TranscriptionMessage
                               key={Math.random()}
                               orClientMsg={orClientMsg}

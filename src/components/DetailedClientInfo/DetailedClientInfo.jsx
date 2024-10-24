@@ -6,7 +6,7 @@ import { BsXLg } from "react-icons/bs";
 export default function DetailedClientInfo({ onClose }) {
   return (
     <div className={css.detailedClientInfoWrapper}>
-      <BsXLg className={css.closeIcon} onClick={() => onClose} />
+      <BsXLg className={css.closeIcon} onClick={onClose} />
       <ClientInfo />
       <ServiceHistory />
     </div>
