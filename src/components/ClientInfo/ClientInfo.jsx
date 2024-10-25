@@ -11,6 +11,10 @@ import { IoCarSport } from "react-icons/io5";
 import { BsCalendarCheck } from "react-icons/bs";
 import { BsTrash } from "react-icons/bs";
 import { BsPlusCircleDotted } from "react-icons/bs";
+import { IoStarSharp } from "react-icons/io5";
+import flag from "../../assets/images/flagUa.webp";
+
+
 
 
 
@@ -30,7 +34,14 @@ export default function ClientInfo() {
                 <div className={css.photoAndMainInfo}>
                 <img src="" alt="Client's Photo" className={css.clientImg} />
 
-                <div className={css.mainInfo}>
+            <div className={css.mainInfo}>
+            <div className={css.rating}>
+            <IoStarSharp color="var(--star-orange)" size={18}/>
+            <IoStarSharp color="var(--star-orange)" size={18}/>
+            <IoStarSharp color="var(--star-orange)" size={18}/>
+            <IoStarSharp color="var(--star-orange)" size={18}/>
+            <IoStarSharp color="var(--star-white)" size={18}/>
+          </div>
                 <p className={css.clientName}>Іван Петренко</p>
                 <p className={css.dateOfBirth}>12 Трав, 1987 (37р.)</p>
                 <div className={css.serviceBook}>
@@ -109,7 +120,7 @@ export default function ClientInfo() {
 
                         <div className={css.mainCarInfo}>
                             <div className={css.carNameBox}>
-                                <IoCarSport className={css.carIcon} />
+                                <IoCarSport className={css.carIcon} size={30} />
                                 <p className={css.carName}>HONDA CIVIC</p>
                             </div>
 
@@ -140,14 +151,23 @@ export default function ClientInfo() {
 
                         <ul className={css.carNumbers}>
                             <li className={css.carNumbersItem}>
-                                    <p>VW8795218794H46J</p>
+                                    <p className={css.vin}>VW8795218794H46J</p>
                                     <button type="button" className={css.contactsBtn}><BsFiles className={css.copyIcon}/></button>
                                
                             </li>
-                            <li className={css.carNumbersItem}>
-                                <div className={css.carPlate}>
-                                    <p className="">CA 6864 CO</p>
-                                </div>
+                            <li className={`${css.carNumbersItem} ${css.car}`}>
+                                    <div className={css.carRegContainer}>                                    
+                                        <div className={css.carRegCountry}>
+                                            <img
+                                                className={css.carRegFlag}
+                                                src={flag}
+                                                alt="Car registration country flag"
+                                            />                                           
+                                            <p className={css.carRegCountry}>ua</p>                                      
+                                        </div>                                  
+                                        <p className={css.carRegNumber}>CA 6864 CO</p>                                    
+                                    </div>
+                                    
                             </li>
                         </ul>
                         </div>
@@ -157,7 +177,7 @@ export default function ClientInfo() {
                        <BsTrash className={css.deleteBtn}/>
                         <button type="button" className={css.addCarBtn}>
                             <BsPlusCircleDotted className={css.plus} />
-                            <IoCarSport className={css.addCarIcon} />
+                            <IoCarSport className={css.carIcon} size={20}/>
                         </button>
                     </div>
                   
