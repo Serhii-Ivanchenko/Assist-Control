@@ -216,6 +216,8 @@
     background: var(--bg-input);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
+    cursor: pointer;
+
 }
 
 .phoneCallIcon{
@@ -224,13 +226,17 @@
     height: 18px;
 }
 
-.atIcon{
+.iconColor{
+    fill: var(--icon-gray);
+}
+
+/* .atIcon{
     fill: var(--icon-gray);
     width: 25px;
     height: 25px;
-}
+} */
 
-.copyIcon{
+/* .copyIcon{
     fill: var(--icon-gray);
     width: 18px;
     height: 18px;
@@ -240,6 +246,13 @@
     fill: var(--icon-gray);
     width: 22px;
     height: 23px;
+} */
+.contactsBtn:active .phoneCallIcon {
+    fill: #28232A;
+}
+
+.contactsBtn:active .iconColor {
+    fill: #28232A;
 }
 
 .contactsBtnBox{
@@ -435,6 +448,12 @@ margin-bottom: 12px;
     border-radius: 6px;
     background-color: var(--green-btn-normal);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
+}
+
+.addCarBtn:hover{
+    background-color: var(--green-btn-hover);
 }
 
 .plus{
@@ -448,6 +467,7 @@ margin-bottom: 12px;
     width: 18px;
     height: 18px;
     fill: var(--icon-gray);
+    cursor: pointer;
 }
 
 .carReg {

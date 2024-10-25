@@ -80,7 +80,7 @@ export default function ClientInfo() {
                     <li className={css.contactsInfoItem}>
                         <p className={css.contactsInput}>+38 073 329 12 17</p> 
                         <button type="button" className={css.contactsBtn}>
-                            <BsTelephoneOutboundFill className={css.phoneCallIcon} />
+                            <BsTelephoneOutboundFill className={css.phoneCallIcon}/>
                         </button>
                     </li>
 
@@ -88,10 +88,10 @@ export default function ClientInfo() {
                         <p className={css.contactsInput}>ivan.petrenko@gmail.com</p> 
                         <div className={css.contactsBtnBox}>
                             <button type="button" className={css.contactsBtn}>
-                                <IoIosAt className={css.atIcon} />
+                                <IoIosAt className={css.iconColor} size={25}/>
                             </button>
                             <button type="button" className={css.contactsBtn}>
-                                <BsFiles className={css.copyIcon} />
+                                <BsFiles className={css.iconColor} size={18}/>
                             </button>
                         </div>
                     </li>
@@ -99,7 +99,7 @@ export default function ClientInfo() {
                     <li className={css.contactsInfoItem}>
                         <p className={css.contactsInput}>ivan.petrenko</p> 
                         <button type="button" className={css.contactsBtn}>
-                            <PiTelegramLogoLight className={css.planeIcon} />
+                            <PiTelegramLogoLight className={css.iconColor} size={22} />
                         </button>
                     </li>
                </ul>
@@ -152,7 +152,7 @@ export default function ClientInfo() {
                         <ul className={css.carNumbers}>
                             <li className={css.carNumbersItem}>
                                     <p className={css.vin}>VW8795218794H46J</p>
-                                    <button type="button" className={css.contactsBtn}><BsFiles className={css.copyIcon}/></button>
+                                    <button type="button" className={css.contactsBtn}><BsFiles className={css.iconColor} size={18}/></button>
                                
                             </li>
                             <li className={`${css.carNumbersItem} ${css.car}`}>
