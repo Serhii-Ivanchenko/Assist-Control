@@ -17,8 +17,8 @@ import Calendar from "../../components/Calendar/Calendar.jsx";
 import { changeActualDate } from "../../redux/cars/slice.js";
 import Loader from "../Loader/Loader.jsx";
 import CreateAppointmentBtn from "../CreateAppointmentBtn/CreateAppointmentBtn.jsx";
-import ServiceBookingModal from '../Modals/ServiceBookingModal/ServiceBookingModal.jsx'
-import Modal from '../Modals/Modal/Modal.jsx'
+import ServiceBookingModal from "../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
+import Modal from "../Modals/Modal/Modal.jsx";
 
 function addMonths(date, months) {
   let result = new Date(date);
@@ -33,7 +33,7 @@ function addMonths(date, months) {
 
 export default function CalendarPagination({ isCrm }) {
   const css = isCrm ? csscrm : cssvideo;
- 
+
   const dispatch = useDispatch();
   const monthlyLoadData = useSelector(selectMonthlyLoad);
   const currentMonth = new Date().toISOString().substring(0, 7);
@@ -90,7 +90,12 @@ export default function CalendarPagination({ isCrm }) {
   }, [dispatch, calendarMonth]);
 
   let isCurrentMonth = currentMonth === calendarMonth ? true : false;
-  let crmSelectDate = carSelectDate.substring(8, 10) + '.' + carSelectDate.substring(5, 7) + '.' + carSelectDate.substring(2, 4);
+  let crmSelectDate =
+    carSelectDate.substring(8, 10) +
+    "." +
+    carSelectDate.substring(5, 7) +
+    "." +
+    carSelectDate.substring(2, 4);
   const monthData = Object.entries(monthlyLoadData).map(([date, percent]) => ({
     date,
     percent,
@@ -108,41 +113,42 @@ export default function CalendarPagination({ isCrm }) {
 
   return (
     <div className={css.calendarWrapper}>
-    <div className={css.containerpagin}>
-      <div className={css.boxpagination}>
-        <button className={css.iconstep} onClick={handleClickLeft}>
-          <FiChevronLeft className={css.arrowIcon} />
-        </button>
-        <p className={css.namemonth}> {strMonth} </p>
+      <div className={css.containerpagin}>
+        <div className={css.boxpagination}>
+          <button className={css.iconstep} onClick={handleClickLeft}>
+            <FiChevronLeft className={css.arrowIcon} />
+          </button>
+          <p className={css.namemonth}> {strMonth} </p>
 
-        <button
-          className={css.iconstep}
-          onClick={handleClickRight}
-          disabled={isCurrentMonth}
-          style={{ cursor: "default" }}
-        >
-          <FiChevronRight className={css.arrowIcon} />
-        </button>
-
-      </div>
-        {isCrm && (<div className={css.crmblock}>
-          <p className={css.datemont}> {crmSelectDate} </p>
-          <CreateAppointmentBtn onClick={handleAppointmentBtnClick} />
-           {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-          <ServiceBookingModal
-            // carsData={carsData}
-            // isModal={true}
-            // onClose={handleCloseModal}
-          />
-        </Modal>
-      )}
-        </div>)}
+          <button
+            className={css.iconstep}
+            onClick={handleClickRight}
+            disabled={isCurrentMonth}
+            style={{ cursor: "default" }}
+          >
+            <FiChevronRight className={css.arrowIcon} />
+          </button>
         </div>
+        {isCrm && (
+          <div className={css.crmblock}>
+            <p className={css.datemont}> {crmSelectDate} </p>
+            <CreateAppointmentBtn onClick={handleAppointmentBtnClick} />
+            {isModalOpen && (
+              <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+                <ServiceBookingModal
+                  // carsData={carsData}
+                  // isModal={true}
+                  onClose={handleCloseModal}
+                />
+              </Modal>
+            )}
+          </div>
+        )}
+      </div>
       {isLoadingForCalendar ? (
         <Loader />
       ) : (
-          <Calendar dataMonth={monthData} queryMonth={queryMonth} isCrm={isCrm} />
+        <Calendar dataMonth={monthData} queryMonth={queryMonth} isCrm={isCrm} />
       )}
     </div>
   );
