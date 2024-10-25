@@ -265,7 +265,7 @@
 
 
 .carInfo{
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 567px;
 }
 
