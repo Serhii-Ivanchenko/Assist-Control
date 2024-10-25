@@ -228,13 +228,14 @@ option {
   border: transparent;
 }
 
-.timeBtn:hover {
-  border: 6px solid var(--green-btn-normal);
-}
-
 .timeBtnFree {
   background: var(--main-gray);
   color: var(--white);
+}
+
+.timeBtnFree:hover {
+  border: 6px solid var(--green-btn-normal);
+  cursor: pointer;
 }
 
 .timeBtnChosen {
@@ -245,6 +246,10 @@ option {
 .timeBtnDisabled {
   background: var(--bg-input);
   color: var(--input-stroke);
+}
+
+.timeBtnDisabled:hover {
+  cursor: not-allowed;
 }
 
 .btnWrapper {
