@@ -1,5 +1,5 @@
 .calendarWrapper {
-    padding: 20px 20px 20px 20px; 
+    /* padding: 20px 20px 20px 20px; */
     display: flex;
     flex-direction: column;
     height: auto;
@@ -21,7 +21,7 @@
 
 @media only screen and (min-width: 1850px) {
     .containerpagin {
-        width: 420px;
+        width: 408px;
     }
 }
 
@@ -37,7 +37,7 @@
 
 @media only screen and (min-width: 1850px) {
     .boxpagination {
-        width: 200px;
+        width: 170px;
         height: 19px;
         gap: 5px;
     }
@@ -47,9 +47,19 @@
     color: var(--white);
 
     font-family: "Roboto", sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 300;
+}
+
+.crmblock{
+    display: flex;
+    flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        /* gap: 10px; */
+        width: 217px;
+        height: 26px;
 }
 
 
