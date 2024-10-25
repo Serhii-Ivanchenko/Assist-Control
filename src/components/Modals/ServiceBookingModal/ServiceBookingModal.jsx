@@ -1,5 +1,6 @@
 import css from "../ServiceBookingModal/ServiceBookingModal.module.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import clsx from "clsx";
 import { ServiceBookingSchema } from "../../../validationSchemas/ServiceBookingSchema.js";
 import { services } from "../../Modals/ServiceBookingModal/constants.js";
 import { posts } from "../../Modals/ServiceBookingModal/constants.js";
@@ -18,6 +19,13 @@ export default function ServiceBookingModal({ onClose }) {
     actions.resetForm();
   };
 
+  const [timeIsChosen, setTimeIsChosen] = useState(null);
+
+  const onTimeBtnClick = (item, index) => {
+    console.log(item.time);
+    setTimeIsChosen(index);
+  };
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownPostOpen, setIsDropdownPostOpen] = useState(false);
   const [isDropdownMechanicOpen, setIsDropdownMechanicOpen] = useState(false);
@@ -25,6 +33,22 @@ export default function ServiceBookingModal({ onClose }) {
 
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
+  };
+
+  const handlePostBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsDropdownPostOpen(false);
+    }
+  };
+  const handleBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsDropdownOpen(false);
+    }
+  };
+  const handleMechanicBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsDropdownMechanicOpen(false);
+    }
   };
 
   const currentDate = new Date(Date.now());
@@ -89,7 +113,11 @@ export default function ServiceBookingModal({ onClose }) {
                 />
               </div>
               <div className={css.wrapper}>
-                <div className={css.inputWrapper} ref={selectRef}>
+                <div
+                  className={css.inputWrapper}
+                  ref={selectRef}
+                  onBlur={handleBlur}
+                >
                   <Field
                     as="select"
                     className={
@@ -153,7 +181,11 @@ export default function ServiceBookingModal({ onClose }) {
                 />
               </div>
               <div className={css.bottomRightSectionWrapper}>
-                <div className={css.inputWrapper} ref={selectRef}>
+                <div
+                  className={css.inputWrapper}
+                  ref={selectRef}
+                  onBlur={handlePostBlur}
+                >
                   <Field
                     as="select"
                     className={
@@ -189,7 +221,11 @@ export default function ServiceBookingModal({ onClose }) {
                     className={css.errorMsg}
                   />
                 </div>
-                <div className={css.inputWrapper} ref={selectRef}>
+                <div
+                  className={css.inputWrapper}
+                  ref={selectRef}
+                  onBlur={handleMechanicBlur}
+                >
                   <Field
                     as="select"
                     className={
@@ -278,17 +314,24 @@ export default function ServiceBookingModal({ onClose }) {
               <div className={css.calendar}>
                 <SelectDate newDate={setNewDate} />
                 <div className={css.timeWrapper}>
-                  {timeToChoose.map((time, index) => {
+                  {timeToChoose.map((item, index) => {
                     return (
                       <button
                         type="button"
-                        className={css.timeBtn}
+                        className={clsx(
+                          css.timeBtn,
+                          item.isFree ? css.timeBtnFree : css.timeBtnDisabled,
+                          timeIsChosen === index
+                            ? css.timeBtnChosen
+                            : css.timeBtnFree
+                        )}
                         key={index}
                         onClick={() => {
-                          console.log(time);
+                          console.log(item.time);
+                          onTimeBtnClick(item, index);
                         }}
                       >
-                        {time}
+                        {item.time}
                       </button>
                     );
                   })}

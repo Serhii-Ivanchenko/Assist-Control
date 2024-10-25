@@ -218,16 +218,33 @@ option {
   width: 69px;
   height: 39px;
   border-radius: 6px;
-  background: var(--main-gray);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--white);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 1.1875em;
   border: transparent;
+}
+
+.timeBtn:hover {
+  border: 6px solid var(--green-btn-normal);
+}
+
+.timeBtnFree {
+  background: var(--main-gray);
+  color: var(--white);
+}
+
+.timeBtnChosen {
+  background: var(--green-btn-normal);
+  color: var(--white);
+}
+
+.timeBtnDisabled {
+  background: var(--bg-input);
+  color: var(--input-stroke);
 }
 
 .btnWrapper {
