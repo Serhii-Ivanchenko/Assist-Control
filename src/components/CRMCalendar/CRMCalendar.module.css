@@ -1,0 +1,7 @@
+.crmCalendarContainer {
+    width: 430px;
+    height: 307px;
+    padding: 20px 11px;
+    border-radius: 12px;
+        background: var(--bg-secondary);
+}

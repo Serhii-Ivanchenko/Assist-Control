@@ -76,7 +76,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 7px;
 
     padding: 4px 6px;
 
@@ -113,7 +113,7 @@
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
-    line-height: normal;
+    line-height: 1.1875em;
 
     margin-top: 3px;
 }
