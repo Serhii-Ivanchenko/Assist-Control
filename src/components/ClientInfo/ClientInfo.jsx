@@ -13,10 +13,7 @@ import { BsTrash } from "react-icons/bs";
 import { BsPlusCircleDotted } from "react-icons/bs";
 import { IoStarSharp } from "react-icons/io5";
 import flag from "../../assets/images/flagUa.webp";
-
-
-
-
+import toast from "react-hot-toast";
 
 
 
@@ -27,10 +24,30 @@ export default function ClientInfo() {
 
     const handleCopyEmail = () => {
         navigator.clipboard.writeText('ivan.petrenko@gmail.com')
+            .then(()=>{
+            toast.success("Пошта успішно скопійована :)", {
+        position: "top-right",
+        duration: 5000,
+        style: {
+          background: "var(--bg-input)",
+          color: "var(--white)FFF",
+        },
+      });
+            })
     }
 
     const handleCopyVin = () => {
         navigator.clipboard.writeText('VW8795218794H46J')
+        .then(()=>{
+            toast.success("VIN-код успішно скопійований :)", {
+        position: "top-right",
+        duration: 5000,
+        style: {
+          background: "var(--bg-input)",
+          color: "var(--white)FFF",
+        },
+      });
+            })
     }
     
     return (
@@ -86,18 +103,22 @@ export default function ClientInfo() {
 
                <ul className={css.contactsInfo}>
                     <li className={css.contactsInfoItem}>
-                        <p className={css.contactsInput}>+38 073 329 12 17</p> 
-                        <button type="button" className={css.contactsBtn}>
+                        <p className={css.contactsInput}>+38 073 329 12 17</p>  
+                        <a href="tel:+38 073 329 12 17">
+                        <button type="button" className={css.contactsBtn}>          
                             <BsTelephoneOutboundFill className={css.phoneCallIcon}/>
-                        </button>
+                            </button>
+                        </a>
                     </li>
 
                     <li className={css.contactsInfoItem}>
                         <p className={css.contactsInput}>ivan.petrenko@gmail.com</p> 
                         <div className={css.contactsBtnBox}>
-                            <button type="button" className={css.contactsBtn}>
+                            <a href="mailto:ivan.petrenko@gmail.com" target="_blank">
+                            <button type="button" className={css.contactsBtn}>           
                                 <IoIosAt className={css.iconColor} size={25}/>
-                            </button>
+                                </button>
+                            </a>
                             <button type="button" className={css.contactsBtn} onClick={handleCopyEmail}>
                                 <BsFiles className={css.iconColor} size={18}/>
                             </button>
@@ -105,10 +126,12 @@ export default function ClientInfo() {
                     </li>
 
                     <li className={css.contactsInfoItem}>
-                        <p className={css.contactsInput}>ivan.petrenko</p> 
+                        <p className={css.contactsInput}>ivan.petrenko</p>
+                        <a href="http://t.me/ivan.petrenko" target="_blank">
                         <button type="button" className={css.contactsBtn}>
                             <PiTelegramLogoLight className={css.iconColor} size={22} />
-                        </button>
+                            </button>
+                        </a>
                     </li>
                </ul>
 
