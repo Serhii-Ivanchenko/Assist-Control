@@ -1,19 +1,54 @@
 import css from "../ServiceBookingModal/ServiceBookingModal.module.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import clsx from "clsx";
 import { ServiceBookingSchema } from "../../../validationSchemas/ServiceBookingSchema.js";
 import { services } from "../../Modals/ServiceBookingModal/constants.js";
 import { posts } from "../../Modals/ServiceBookingModal/constants.js";
 import { mechanics } from "../../Modals/ServiceBookingModal/constants.js";
 import { timeToChoose } from "../../Modals/ServiceBookingModal/constants.js";
 import { BsFillCameraFill } from "react-icons/bs";
+import { BsXLg } from "react-icons/bs";
+import { BsFillCaretDownFill } from "react-icons/bs";
 import { FaCheck } from "react-icons/fa";
 import SelectDate from "./SelectDate/SelectDate";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-export default function ServiceBookingModal() {
+export default function ServiceBookingModal({ onClose }) {
   const handleSubmit = (values, actions) => {
     console.log(values);
     actions.resetForm();
+  };
+
+  const [timeIsChosen, setTimeIsChosen] = useState(null);
+
+  const onTimeBtnClick = (item, index) => {
+    console.log(item.time);
+    setTimeIsChosen(index);
+  };
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownPostOpen, setIsDropdownPostOpen] = useState(false);
+  const [isDropdownMechanicOpen, setIsDropdownMechanicOpen] = useState(false);
+  const selectRef = useRef(null);
+
+  const toggleDropdown = (status, changeStatus) => {
+    changeStatus(!status);
+  };
+
+  const handlePostBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsDropdownPostOpen(false);
+    }
+  };
+  const handleBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsDropdownOpen(false);
+    }
+  };
+  const handleMechanicBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsDropdownMechanicOpen(false);
+    }
   };
 
   const currentDate = new Date(Date.now());
@@ -30,6 +65,7 @@ export default function ServiceBookingModal() {
 
   return (
     <div className={css.serviceBookingModal}>
+      <BsXLg className={css.closeIcon} onClick={onClose} />
       <h3 className={css.header}>Створення запису на {pickedDate}</h3>
       <Formik
         initialValues={{
@@ -47,212 +83,276 @@ export default function ServiceBookingModal() {
         onSubmit={handleSubmit}
         validationSchema={ServiceBookingSchema}
       >
-        <Form className={css.form}>
-          <div className={css.rightSectionWrapper}>
-            <div className={css.inputWrapper}>
-              <Field
-                className={css.input}
-                type="text"
-                name="carNumber"
-                placeholder="AX 2945 OP"
-              />
-              <ErrorMessage
-                name="carNumber"
-                component="div"
-                className={css.errorMsg}
-              />
-            </div>
-            <div className={css.inputWrapper}>
-              <Field
-                className={css.input}
-                type="text"
-                name="vin"
-                placeholder="VIN"
-              />
-              <ErrorMessage
-                name="vin"
-                component="div"
-                className={css.errorMsg}
-              />
-            </div>
-            <div className={css.wrapper}>
+        {({ values }) => (
+          <Form className={css.form}>
+            <div className={css.rightSectionWrapper}>
               <div className={css.inputWrapper}>
                 <Field
-                  as="select"
                   className={css.input}
                   type="text"
-                  name="service"
+                  name="carNumber"
+                  placeholder="AX 2945 OP"
+                />
+                <ErrorMessage
+                  name="carNumber"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
+              <div className={css.inputWrapper}>
+                <Field
+                  className={css.input}
+                  type="text"
+                  name="vin"
+                  placeholder="VIN"
+                />
+                <ErrorMessage
+                  name="vin"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
+              <div className={css.wrapper}>
+                <div
+                  className={css.inputWrapper}
+                  ref={selectRef}
+                  onBlur={handleBlur}
                 >
-                  <option value="" disabled hidden>
-                    Послуга
-                  </option>
-                  {services.map((service, index) => {
+                  <Field
+                    as="select"
+                    className={
+                      values.service === ""
+                        ? `${css.placeholder}`
+                        : `${css.inputSelect}`
+                    }
+                    type="text"
+                    name="service"
+                    onClick={() =>
+                      toggleDropdown(isDropdownOpen, setIsDropdownOpen)
+                    }
+                  >
+                    <option value="" disabled hidden>
+                      Послуга
+                    </option>
+                    {services.map((service, index) => {
+                      return (
+                        <option key={index} value={service}>
+                          {service}
+                        </option>
+                      );
+                    })}
+                  </Field>
+                  <BsFillCaretDownFill
+                    className={`${css.btnArrowSelect} ${
+                      isDropdownOpen ? css.rotated : ""
+                    }`}
+                  />
+                  <ErrorMessage
+                    name="service"
+                    component="div"
+                    className={css.errorMsg}
+                  />
+                </div>
+                <div className={css.inputWrapper}>
+                  <Field
+                    className={css.input}
+                    type="text"
+                    name="prepayment"
+                    placeholder="Передплата"
+                  />
+                  <ErrorMessage
+                    name="prepayment"
+                    component="div"
+                    className={css.errorMsg}
+                  />
+                </div>
+              </div>
+              <div className={css.inputWrapper}>
+                <Field
+                  className={css.input}
+                  type="text"
+                  name="phoneNumber"
+                  placeholder="Телефон"
+                />
+                <ErrorMessage
+                  name="phoneNumber"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
+              <div className={css.bottomRightSectionWrapper}>
+                <div
+                  className={css.inputWrapper}
+                  ref={selectRef}
+                  onBlur={handlePostBlur}
+                >
+                  <Field
+                    as="select"
+                    className={
+                      values.post === ""
+                        ? `${css.placeholder}`
+                        : `${css.inputSelect}`
+                    }
+                    type="text"
+                    name="post"
+                    onClick={() =>
+                      toggleDropdown(isDropdownPostOpen, setIsDropdownPostOpen)
+                    }
+                  >
+                    <option value="" disabled hidden>
+                      ПОСТ
+                    </option>
+                    {posts.map((post, index) => {
+                      return (
+                        <option key={index} value={post}>
+                          {post}
+                        </option>
+                      );
+                    })}
+                  </Field>
+                  <BsFillCaretDownFill
+                    className={`${css.btnArrowSelect} ${
+                      isDropdownPostOpen ? css.rotated : ""
+                    }`}
+                  />
+                  <ErrorMessage
+                    name="post"
+                    component="div"
+                    className={css.errorMsg}
+                  />
+                </div>
+                <div
+                  className={css.inputWrapper}
+                  ref={selectRef}
+                  onBlur={handleMechanicBlur}
+                >
+                  <Field
+                    as="select"
+                    className={
+                      values.mechanic === ""
+                        ? `${css.placeholder}`
+                        : `${css.inputSelect}`
+                    }
+                    type="text"
+                    name="mechanic"
+                    onClick={() =>
+                      toggleDropdown(
+                        isDropdownMechanicOpen,
+                        setIsDropdownMechanicOpen
+                      )
+                    }
+                  >
+                    <option value="" disabled hidden>
+                      Оберіть механіка
+                    </option>
+                    {mechanics.map((mechanic, index) => {
+                      return (
+                        <option key={index} value={mechanic}>
+                          {mechanic}
+                        </option>
+                      );
+                    })}
+                  </Field>
+                  <BsFillCaretDownFill
+                    className={`${css.btnArrowSelect} ${
+                      isDropdownMechanicOpen ? css.rotated : ""
+                    }`}
+                  />
+                  <ErrorMessage
+                    name="mechanic"
+                    component="div"
+                    className={css.errorMsg}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={css.leftSectionWrapper}>
+              <div className={css.inputWrapper}>
+                <Field
+                  className={css.input}
+                  type="text"
+                  name="carModel"
+                  placeholder="Марка і модель автомобіля"
+                />
+                <ErrorMessage
+                  name="carModel"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
+              <div className={css.addFileWrapper}>
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  className={css.inputFile}
+                />
+                <BsFillCameraFill className={css.iconCamera} />
+                <label htmlFor="file" className={css.label}>
+                  + Додати фото техпаспорта
+                </label>
+              </div>
+              <Field
+                as="textarea"
+                name="textarea"
+                className={css.textArea}
+                placeholder="Примітка"
+              />
+              <div className={css.inputWrapper}>
+                <Field
+                  className={css.input}
+                  type="text"
+                  name="clientName"
+                  placeholder="ПІБ"
+                />
+                <ErrorMessage
+                  name="clientName"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
+              <div className={css.calendar}>
+                <SelectDate newDate={setNewDate} />
+                <div className={css.timeWrapper}>
+                  {timeToChoose.map((item, index) => {
                     return (
-                      <option key={index} value={service}>
-                        {service}
-                      </option>
+                      <button
+                        type="button"
+                        className={clsx(
+                          css.timeBtn,
+                          item.isFree ? css.timeBtnFree : css.timeBtnDisabled,
+                          timeIsChosen === index
+                            ? css.timeBtnChosen
+                            : css.timeBtnFree
+                        )}
+                        key={index}
+                        onClick={() => {
+                          console.log(item.time);
+                          onTimeBtnClick(item, index);
+                        }}
+                      >
+                        {item.time}
+                      </button>
                     );
                   })}
-                </Field>
-                <ErrorMessage
-                  name="service"
-                  component="div"
-                  className={css.errorMsg}
-                />
+                </div>
               </div>
-              <div className={css.inputWrapper}>
-                <Field
-                  className={css.input}
-                  type="text"
-                  name="prepayment"
-                  placeholder="Передплата"
-                />
-                <ErrorMessage
-                  name="prepayment"
-                  component="div"
-                  className={css.errorMsg}
-                />
-              </div>
-            </div>
-            <div className={css.inputWrapper}>
-              <Field
-                className={css.input}
-                type="text"
-                name="phoneNumber"
-                placeholder="Телефон"
-              />
-              <ErrorMessage
-                name="phoneNumber"
-                component="div"
-                className={css.errorMsg}
-              />
-            </div>
-            <div className={css.bottomRightSectionWrapper}>
-              <div className={css.inputWrapper}>
-                <Field
-                  as="select"
-                  className={css.input}
-                  type="text"
-                  name="post"
+              <div className={css.btnWrapper}>
+                <button
+                  type="button"
+                  className={css.closeBtn}
+                  onClick={onClose}
                 >
-                  <option value="" disabled hidden>
-                    ПОСТ
-                  </option>
-                  {posts.map((post, index) => {
-                    return (
-                      <option key={index} value={post}>
-                        {post}
-                      </option>
-                    );
-                  })}
-                </Field>
-                <ErrorMessage
-                  name="post"
-                  component="div"
-                  className={css.errorMsg}
-                />
-              </div>
-              <div className={css.inputWrapper}>
-                <Field
-                  as="select"
-                  className={css.input}
-                  type="text"
-                  name="mechanic"
-                >
-                  <option value="" disabled hidden>
-                    Оберіть механіка
-                  </option>
-                  {mechanics.map((mechanic, index) => {
-                    return (
-                      <option key={index} value={mechanic}>
-                        {mechanic}
-                      </option>
-                    );
-                  })}
-                </Field>
-                <ErrorMessage
-                  name="mechanic"
-                  component="div"
-                  className={css.errorMsg}
-                />
+                  Закрити
+                </button>
+                <button type="submit" className={css.submitBtn}>
+                  <FaCheck className={css.submitBtnIcon} />
+                  Зберегти
+                </button>
               </div>
             </div>
-          </div>
-          <div className={css.leftSectionWrapper}>
-            <div className={css.inputWrapper}>
-              <Field
-                className={css.input}
-                type="text"
-                name="carModel"
-                placeholder="Марка і модель автомобіля"
-              />
-              <ErrorMessage
-                name="carModel"
-                component="div"
-                className={css.errorMsg}
-              />
-            </div>
-            <div className={css.addFileWrapper}>
-              <input
-                type="file"
-                name="file"
-                id="file"
-                className={css.inputFile}
-              />
-              <BsFillCameraFill className={css.iconCamera} />
-              <label htmlFor="file" className={css.label}>
-                + Додати фото техпаспорта
-              </label>
-            </div>
-            <Field
-              as="textarea"
-              name="textarea"
-              className={css.textArea}
-              placeholder="Примітка"
-            />
-            <div className={css.inputWrapper}>
-              <Field
-                className={css.input}
-                type="text"
-                name="clientName"
-                placeholder="ПІБ"
-              />
-              <ErrorMessage
-                name="clientName"
-                component="div"
-                className={css.errorMsg}
-              />
-            </div>
-            <div className={css.calendar}>
-              <SelectDate newDate={setNewDate} />
-              <div className={css.timeWrapper}>
-                {timeToChoose.map((time, index) => {
-                  return (
-                    <button
-                      type="button"
-                      className={css.timeBtn}
-                      key={index}
-                      onClick={() => {
-                        console.log(time);
-                      }}
-                    >
-                      {time}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-            <div className={css.btnWrapper}>
-              <button type="button" className={css.closeBtn}>
-                Закрити
-              </button>
-              <button type="submit" className={css.submitBtn}>
-                <FaCheck className={css.submitBtnIcon} />
-                Зберегти
-              </button>
-            </div>
-          </div>
-        </Form>
+          </Form>
+        )}
       </Formik>
     </div>
   );

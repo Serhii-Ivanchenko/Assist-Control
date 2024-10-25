@@ -11,16 +11,16 @@ export const posts = ["Пост 1", "Пост 2", "Пост 3", "Пост 4"];
 export const mechanics = ["Механік 1", "Механік 2", "Механік 3", "Механік 4"];
 
 export const timeToChoose = [
-  "09:00",
-  "10:00",
-  "11:00",
-  "12:00",
-  "13:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-  "18:00",
-  "19:00",
-  "20:00",
+  { time: "09:00", isFree: true },
+  { time: "10:00", isFree: true },
+  { time: "11:00", isFree: false },
+  { time: "12:00", isFree: false },
+  { time: "13:00", isFree: true },
+  { time: "14:00", isFree: true },
+  { time: "15:00", isFree: false },
+  { time: "16:00", isFree: true },
+  { time: "17:00", isFree: false },
+  { time: "18:00", isFree: true },
+  { time: "19:00", isFree: true },
+  { time: "20:00", isFree: true },
 ];
