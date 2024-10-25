@@ -58,7 +58,7 @@
     gap: 19px;
 
     border-radius: 6px;
-    background-color: #313540 ;
+    background-color: var(--download-pdf-btn-bg) ;
 
     margin-top: 26px;
 }
@@ -147,7 +147,7 @@
     padding-bottom: 38px;
     margin-bottom: 38px;
 
-    border-bottom: dashed 2px #373941 ;
+    border-bottom: dashed 2px var(--contacts-info-bg) ;
 
 }
 
@@ -186,7 +186,7 @@
     display: flex;
     align-items: center;
     border-radius: 6px;
-    background-color: #373941;
+    background-color: var(--contacts-info-bg);
     gap: 28px;
     width: fit-content;
 }
@@ -294,7 +294,7 @@
 
 .carInfo::-webkit-scrollbar-thumb{
     border-radius: 4px;
-    background-color: #4E505F;
+    background-color: var(--player-secondary-bg);
 }
 .carInfo::-webkit-scrollbar-track{
     border-radius: 4px;
@@ -395,7 +395,7 @@ margin-bottom: 12px;
     padding: 6px 16px;
 
     border-radius: 6px;
-    background-color: #373941;
+    background-color: var(--contacts-info-bg);
 }
 
 .car{
