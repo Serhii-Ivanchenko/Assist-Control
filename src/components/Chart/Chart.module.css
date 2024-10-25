@@ -84,14 +84,14 @@
 
 .areabox {
     width: 287px;
-    height: 220px;
+    height: 207px;
     margin-left: -5px;
 }
 
 @media only screen and (min-width: 1850px) {
     .areabox {
         width: 430px;
-        height: 325px;
+        height: 315px;
         margin-left: 0;
     }
 }
@@ -100,7 +100,7 @@
 .responsecontainer {
     /* padding-left: 15px;
     padding-right: 15px; */
-    height: 215px;
+    height: 207px;
     width: 272px;
 
 }
@@ -109,7 +109,7 @@
     .responsecontainer {
         /* padding-left: 15px;
         padding-right: 15px; */
-        height: 325px;
+        height: 315px;
         width: 430px
     }
 }

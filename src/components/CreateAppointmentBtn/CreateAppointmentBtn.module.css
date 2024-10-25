@@ -1,0 +1,42 @@
+.btnContainer{
+padding: 3px 10px;
+}
+
+.btn{
+display: flex;
+    width: 147px;
+    height: 26px;
+    /* padding: 3px 10px; */
+    justify-content: center;
+    align-items: center;
+     gap: 4px; 
+    border-radius: 6px;
+    background: var(--green);
+    color: var(--white);
+    font-size: 14px;
+   padding-bottom: 2px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        font-variant: small-caps;
+}
+
+.iconPlus {
+display: flex;
+    width: 14px;
+    height: 14px;
+     padding: 2px; 
+    align-items: center;
+    background: var(--white);
+   
+
+   
+}
+
+.icon{
+    color: var(--green);
+        background: var(--white);
+        width: 10px;
+        height: 10px;
+        stroke-width: 2;
+    }

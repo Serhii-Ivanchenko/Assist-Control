@@ -4,13 +4,12 @@ import { getNewCarsRange } from "../../redux/cars/operations.js";
 import { selectNewCars } from "../../redux/cars/selectors.js";
 import PeriodSelector from "../PeriodSelector/PeriodSelector.jsx";
 import {
-  AreaChart, BarChart,
-  Bar,ReferenceLine,
-  XAxis, Legend,
+   BarChart,
+  Bar,
+  XAxis, 
   YAxis,
   CartesianGrid,
   Tooltip,
-  Area,
   ResponsiveContainer,
 } from "recharts";
 import css from "./Chart.module.css";
@@ -205,7 +204,7 @@ export default function Chart() {
               //  padding={{ right: 10 }}
               tick={{ fontSize: 10 }}
               // tick={{ fill: 'transparent' }}
-              //  angle={-45} textAnchor="end"
+                angle={-45} textAnchor="end"
             />
 
             <YAxis

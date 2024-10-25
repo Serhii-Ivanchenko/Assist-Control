@@ -7,13 +7,18 @@ import {
   selectLoadingForCalendar,
 } from "../../redux/cars/selectors.js";
 
-import css from "./CalendarPagination.module.css";
+import cssvideo from "./CalendarPagination.module.css";
+import csscrm from "./CalendarPaginationCrm.module.css";
 import { FiChevronLeft } from "react-icons/fi";
 import { FiChevronRight } from "react-icons/fi";
 import { useState } from "react";
 import Calendar from "../../components/Calendar/Calendar.jsx";
+
 import { changeActualDate } from "../../redux/cars/slice.js";
 import Loader from "../Loader/Loader.jsx";
+import CreateAppointmentBtn from "../CreateAppointmentBtn/CreateAppointmentBtn.jsx";
+import ServiceBookingModal from '../Modals/ServiceBookingModal/ServiceBookingModal.jsx'
+import Modal from '../Modals/Modal/Modal.jsx'
 
 function addMonths(date, months) {
   let result = new Date(date);
@@ -26,7 +31,9 @@ function addMonths(date, months) {
   return result;
 }
 
-export default function CalendarPagination() {
+export default function CalendarPagination({ isCrm }) {
+  const css = isCrm ? csscrm : cssvideo;
+ 
   const dispatch = useDispatch();
   const monthlyLoadData = useSelector(selectMonthlyLoad);
   const currentMonth = new Date().toISOString().substring(0, 7);
@@ -41,6 +48,7 @@ export default function CalendarPagination() {
   //  const currentDay = new Date().getDate();
 
   const [queryMonth, setQueryMonth] = useState(new Date());
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClickRight = () => {
     setQueryMonth(addMonths(queryMonth, 1));
@@ -48,6 +56,14 @@ export default function CalendarPagination() {
 
   const handleClickLeft = () => {
     setQueryMonth(addMonths(queryMonth, -1));
+  };
+
+  const handleAppointmentBtnClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   function literaFirst(str) {
@@ -74,7 +90,7 @@ export default function CalendarPagination() {
   }, [dispatch, calendarMonth]);
 
   let isCurrentMonth = currentMonth === calendarMonth ? true : false;
-
+  let crmSelectDate = carSelectDate.substring(8, 10) + '.' + carSelectDate.substring(5, 7) + '.' + carSelectDate.substring(2, 4);
   const monthData = Object.entries(monthlyLoadData).map(([date, percent]) => ({
     date,
     percent,
@@ -109,12 +125,24 @@ export default function CalendarPagination() {
         </button>
 
       </div>
-{/* <p className={css.namemonth}> {carSelectDate} </p> */}
+        {isCrm && (<div className={css.crmblock}>
+          <p className={css.datemont}> {crmSelectDate} </p>
+          <CreateAppointmentBtn onClick={handleAppointmentBtnClick} />
+           {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <ServiceBookingModal
+            // carsData={carsData}
+            // isModal={true}
+            // onClose={handleCloseModal}
+          />
+        </Modal>
+      )}
+        </div>)}
         </div>
       {isLoadingForCalendar ? (
         <Loader />
       ) : (
-        <Calendar dataMonth={monthData} queryMonth={queryMonth} />
+          <Calendar dataMonth={monthData} queryMonth={queryMonth} isCrm={isCrm} />
       )}
     </div>
   );
