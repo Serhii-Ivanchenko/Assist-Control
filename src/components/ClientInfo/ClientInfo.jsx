@@ -24,6 +24,14 @@ import flag from "../../assets/images/flagUa.webp";
 
 
 export default function ClientInfo() {
+
+    const handleCopyEmail = () => {
+        navigator.clipboard.writeText('ivan.petrenko@gmail.com')
+    }
+
+    const handleCopyVin = () => {
+        navigator.clipboard.writeText('VW8795218794H46J')
+    }
     
     return (
         <div className={css.clientInfoBox}>
@@ -90,7 +98,7 @@ export default function ClientInfo() {
                             <button type="button" className={css.contactsBtn}>
                                 <IoIosAt className={css.iconColor} size={25}/>
                             </button>
-                            <button type="button" className={css.contactsBtn}>
+                            <button type="button" className={css.contactsBtn} onClick={handleCopyEmail}>
                                 <BsFiles className={css.iconColor} size={18}/>
                             </button>
                         </div>
@@ -152,7 +160,9 @@ export default function ClientInfo() {
                         <ul className={css.carNumbers}>
                             <li className={css.carNumbersItem}>
                                     <p className={css.vin}>VW8795218794H46J</p>
-                                    <button type="button" className={css.contactsBtn}><BsFiles className={css.iconColor} size={18}/></button>
+                                    <button type="button" className={css.contactsBtn} onClick={handleCopyVin}>
+                                        <BsFiles className={css.iconColor} size={18} />
+                                    </button>
                                
                             </li>
                             <li className={`${css.carNumbersItem} ${css.car}`}>
