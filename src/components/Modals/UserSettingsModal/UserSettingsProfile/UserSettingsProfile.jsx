@@ -40,6 +40,10 @@ export default function UserSettingsProfile({ onClose }) {
   const userDefaultPage = user.first_page || "";
   const userTimeZone = user.time_zone || "";
   const userPhoto = user?.avatar_url || defaultAvatar;
+  const userCountry = user.country;
+  const userCity = user.city;
+  const userIndex = user.post_index;
+  const userAddress = user.address;
 
   const [avatar, setAvatar] = useState(userPhoto);
   console.log("Current avatar URL:", avatar);
@@ -56,12 +60,12 @@ export default function UserSettingsProfile({ onClose }) {
   const initialValues = {
     username: userName,
     phone: userPhone,
-    country: "Ukraine",
-    adress: "",
+    country: userCountry,
+    adress: userAddress,
     section: userDefaultPage,
     timeZone: userTimeZone,
-    city: "",
-    index: "",
+    city: userCity,
+    index: userIndex,
   };
 
   const handleChangePhoto = () => {
@@ -141,17 +145,17 @@ export default function UserSettingsProfile({ onClose }) {
       dataToUpdate.first_name = values.username;
     }
 
-    //   if (values.country !== 'Ukraine') {
-    //     dataToUpdate.country = values.country;
-    //         }
+      if (values.country !== user.country) {
+        dataToUpdate.country = values.country;
+            }
 
     if (values.phone !== user.phone_number) {
       dataToUpdate.phone_number = values.phone;
     }
 
-    //     if (values.adress !== user.adress) {
-    // dataToUpdate.adress = values.adress;
-    //     }
+        if (values.adress !== user.address) {
+    dataToUpdate.address = values.adress;
+        }
 
     if (values.section !== user.first_page) {
       dataToUpdate.first_page = values.section;
@@ -161,12 +165,12 @@ export default function UserSettingsProfile({ onClose }) {
       dataToUpdate.time_zone = values.timeZone;
     }
 
-    //     if (values.city !== user.city) {
-    // dataToUpdate.city = values.city;
-    //     }
+        if (values.city !== user.city) {
+    dataToUpdate.city = values.city;
+        }
 
-    //     if (values.index !== user.index) {
-    // d ataToUpdate.index = values.index;}
+        if (values.index !== user.post_index) {
+    dataToUpdate.index = values.index;}
 
     // Якщо немає змін, не відправляємо запит на сервер
     if (Object.keys(dataToUpdate).length === 0) {
