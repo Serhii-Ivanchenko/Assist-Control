@@ -60,7 +60,7 @@ export default function ServiceHistory() {
   ];
   return (
     <div>
-      <h3>Історія обслуговування</h3>
+      <h3 className={css.title}>Історія обслуговування</h3>
 
       <Accordion allowMultipleExpanded="true" allowZeroExpanded="true">
         <AccordionItem>
@@ -98,21 +98,21 @@ export default function ServiceHistory() {
                 <div className={css.btnDownloadsItem}>
                   <p>Ремонт</p>
                   <button className={css.downloadBtn}>
-                    <BsDownload />
+                    <BsDownload stroke="var(--download-pdf-btn-bg)" />
                     <p>.pdf</p>
                   </button>
                 </div>
                 <div className={css.btnDownloadsItem}>
                   <p>Діагностика</p>
                   <button className={css.downloadBtn}>
-                    <BsDownload />
+                    <BsDownload stroke="var(--download-pdf-btn-bg)" />
                     <p>.pdf</p>
                   </button>
                 </div>
                 <div className={css.btnDownloadsItem}>
                   <p>Рекомендації</p>
                   <button className={css.downloadBtn}>
-                    <BsDownload />
+                    <BsDownload stroke="var(--download-pdf-btn-bg)" />
                     <p>.pdf</p>
                   </button>
                 </div>
@@ -156,21 +156,23 @@ export default function ServiceHistory() {
                       </AccordionItemHeading>
                     </div>
                     <AccordionItemPanel>
-                      <div className={css.secondAcordionBody}>
-                        <button className={css.transcriptionImportantBtn}>
-                          <BsFilter />
-                          <p>Головне</p>
-                        </button>
-                        <ul className={css.messages}>
-                          {messages.map(({ orClientMsg, time, message }) => (
-                            <TranscriptionMessage
-                              key={Math.random()}
-                              orClientMsg={orClientMsg}
-                              time={time}
-                              message={message}
-                            />
-                          ))}
-                        </ul>
+                      <div className={css.scrollBarWrapper}>
+                        <div className={css.secondAcordionBody}>
+                          <button className={css.transcriptionImportantBtn}>
+                            <BsFilter />
+                            <p>Головне</p>
+                          </button>
+                          <ul className={css.messages}>
+                            {messages.map(({ orClientMsg, time, message }) => (
+                              <TranscriptionMessage
+                                key={Math.random()}
+                                orClientMsg={orClientMsg}
+                                time={time}
+                                message={message}
+                              />
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </AccordionItemPanel>
                   </AccordionItem>
@@ -179,7 +181,6 @@ export default function ServiceHistory() {
             </div>
           </AccordionItemPanel>
         </AccordionItem>
-        
       </Accordion>
     </div>
   );

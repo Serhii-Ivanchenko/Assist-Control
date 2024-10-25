@@ -1,3 +1,6 @@
+.title {
+  margin-bottom: 18px;
+}
 .callHistory {
   position: relative;
   display: flex;
@@ -72,7 +75,7 @@
   gap: 27px;
 }
 .btnDownloadsItem {
-  font-size:16px;
+  font-size: 16px;
   font-weight: 600;
   font-style: normal;
   line-height: 1.1875em;
@@ -81,7 +84,7 @@
   align-items: center;
   gap: 19px;
   border-radius: 6px;
-  background: #313540;
+  background: var(--download-pdf-btn-bg);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -113,9 +116,10 @@
 .secondAcordionWrapper {
   margin-top: 20px;
   padding: 10px 12.5px;
-  max-height: 400px;
+  /* max-height: 400px;
   overflow-y: scroll;
-  scrollbar-width: thin;
+  -ms-overflow-style: none;
+  scrollbar-width: thin; */
   width: 430px;
   border-radius: 12px;
   background: #31353e;
@@ -134,7 +138,10 @@
   justify-content: center;
   align-items: center;
 }
-
+.callRecordWrapper > img {
+  width: 48px;
+  height: 48px;
+}
 .callRecord {
   display: flex;
   padding: 15px 20px;
@@ -183,16 +190,35 @@
 
 /* Тіло другого акардіона */
 
-.secondAcordionBody {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 11px 34px 10px 21px;
+.scrollBarWrapper {
+  padding: 11px 10px 10px 21px;
   border-radius: 12px;
   background: #2c2d31;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-
+.secondAcordionBody {
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  align-items: flex-end;
+  border-radius: 12px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+.secondAcordionBody::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+}
+.secondAcordionBody::-webkit-scrollbar-thumb {
+  background: var(--player-secondary-bg);
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+}
+.secondAcordionBody::-webkit-scrollbar-track {
+  background: #202020;
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+}
 .transcriptionImportantBtn {
   display: flex;
   gap: 5px;
