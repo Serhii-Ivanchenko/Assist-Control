@@ -19,11 +19,17 @@ export default function ServiceBookingModal({ onClose }) {
     actions.resetForm();
   };
 
-  const [timeIsChosen, setTimeIsChosen] = useState(null);
+  const [timeIsChosen, setTimeIsChosen] = useState([]);
 
   const onTimeBtnClick = (item, index) => {
+    if (!item.isFree) return;
+
     console.log(item.time);
-    setTimeIsChosen(index);
+    setTimeIsChosen((prevChosenButtons) =>
+      prevChosenButtons.includes(index)
+        ? prevChosenButtons.filter((i) => i !== index)
+        : [...prevChosenButtons, index]
+    );
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -321,15 +327,13 @@ export default function ServiceBookingModal({ onClose }) {
                         className={clsx(
                           css.timeBtn,
                           item.isFree ? css.timeBtnFree : css.timeBtnDisabled,
-                          timeIsChosen === index
-                            ? css.timeBtnChosen
-                            : css.timeBtnFree
+                          timeIsChosen.includes(index) && css.timeBtnChosen
                         )}
                         key={index}
                         onClick={() => {
-                          console.log(item.time);
                           onTimeBtnClick(item, index);
                         }}
+                        disabled={!item.isFree}
                       >
                         {item.time}
                       </button>
