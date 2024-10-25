@@ -43,7 +43,7 @@
     align-items: flex-end;
     gap: 23px;
 
-    margin-right: 66px;
+    margin-right: 57px;
 }
 
 .mainInfo{
@@ -278,6 +278,10 @@
 
 
 .carInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    height: 265px;
     overflow-y: auto;
     width: 567px;
 }
@@ -299,6 +303,8 @@
 
 .carCard{
 width: 527px;
+height: 265px;
+padding-bottom: 5px;
 }
 
 .carImage{
@@ -311,7 +317,7 @@ width: 527px;
 
 .photoAndMainCarInfo{
     display: flex;
-    gap: 23px;
+    gap: 29px;
 
     margin-bottom: 20px;
 }

@@ -215,6 +215,82 @@ export default function ClientInfo() {
                     </div>
                   
                 </li>
+
+
+                 <li className={css.carCard}>
+
+                    <div className={css.mainContent}>
+                        
+                    <div className={css.photoAndMainCarInfo}>
+                        
+                        <img src="" alt="Car's Image" className={css.carImage} />
+
+                        <div className={css.mainCarInfo}>
+                            <div className={css.carNameBox}>
+                                <IoCarSport className={css.carIcon} size={30} />
+                                <p className={css.carName}>HONDA CIVIC</p>
+                            </div>
+
+                            <div className={css.carYearBox}>
+                                <BsCalendarCheck className={css.yearIcon} />                               
+                                <p className={css.carYear}>2001 </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className={css.carCategoryBox}>
+                    <ul className={css.carCategory}>
+                        <li className={css.carCategoryItem}>
+                            <p className={css.categoryVin}>
+                                <span className={css.inBold}>VIN</span>
+                                <span className={css.number}>Number</span>
+                               
+                            </p>
+                        </li>
+                        <li className={css.carCategoryItem}>
+                             <p className={css.categoryCar}>
+                                <span className={css.inBold}>CAR</span>
+                                <span className={css.number}>Number</span>
+                            </p>
+                        </li>
+                        </ul>
+
+                        <ul className={css.carNumbers}>
+                            <li className={css.carNumbersItem}>
+                                    <p className={css.vin}>VW8795218794H46J</p>
+                                    <button type="button" className={css.contactsBtn} onClick={handleCopyVin}>
+                                        <BsFiles className={css.iconColor} size={18} />
+                                    </button>
+                               
+                            </li>
+                            <li className={`${css.carNumbersItem} ${css.car}`}>
+                                    <div className={css.carRegContainer}>                                    
+                                        <div className={css.carRegCountry}>
+                                            <img
+                                                className={css.carRegFlag}
+                                                src={flag}
+                                                alt="Car registration country flag"
+                                            />                                           
+                                            <p className={css.carRegCountry}>ua</p>                                      
+                                        </div>                                  
+                                        <p className={css.carRegNumber}>CA 6864 CO</p>                                    
+                                    </div>
+                                    
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    
+                    <div className={css.btnBox}>
+                       <BsTrash className={css.deleteBtn}/>
+                        <button type="button" className={css.addCarBtn}>
+                            <BsPlusCircleDotted className={css.plus} />
+                            <IoCarSport className={css.carIcon} size={20}/>
+                        </button>
+                    </div>
+                  
+                </li>
             </ul>
     </div>
 
