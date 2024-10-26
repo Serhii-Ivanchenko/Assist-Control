@@ -129,7 +129,7 @@ export default function ClientInfo() {
 
                     <li className={css.contactsInfoItem}>
                         <p className={css.contactsInput}>ivan.petrenko</p>
-                        <a href="http://t.me/ivan.petrenko" target="_blank">
+                        <a href="https://t.me/ivan.petrenko" target="_blank">
                         <button type="button" className={css.contactsBtn}>
                             <PiTelegramLogoLight className={css.iconColor} size={22} />
                             </button>
