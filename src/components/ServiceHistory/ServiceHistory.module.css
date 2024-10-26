@@ -1,247 +1,31 @@
 .title {
+  margin-left: 44px;
   margin-bottom: 18px;
 }
-.callHistory {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  list-style: circle !important;
-  list-style-type: circle !important;
-}
-
 /* Хедер першого акардіона */
-.listItem {
-  width: 640px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  height: 50px;
-  padding: 0px 20px;
-  cursor: pointer;
-  border-radius: 6px;
-  background-color: #2d3138;
-}
-.kilometersWrapper,
-.dateWrapper {
-  display: flex;
-  align-items: center;
-}
-.kilometersWrapper {
-  gap: 10px;
-}
-.dateWrapper {
-  gap: 20px;
-}
-.numberOfKilometers,
-.kilometersDriven,
-.date {
-  font-weight: 600;
-  display: flex;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 24px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-.numberOfKilometers {
-  color: var(--current-mileage-text);
-  background: var(--current-mileage-bg);
-}
-.kilometersDriven {
-  color: var(--last-service-mileage-text);
-  background: var(--last-service-mileage-bg);
-}
-.date {
-  color: var(--red);
-  background: var(--visit-date-bg);
-}
-.unActiveDialogBtn {
-  border: none;
-  background: none;
-  transition: transform 200ms ease-in-out;
-}
-.activeDialogBtn {
-  background-color: none;
-  transform: rotate(180deg);
-}
-
-/* Тіло першого акардіона */
-.bodyAccardionWrapper {
-  margin-top: 20px;
-}
-.btnDownloadsWrapper {
-  display: flex;
-  gap: 27px;
-}
-.btnDownloadsItem {
-  font-size: 16px;
-  font-weight: 600;
-  font-style: normal;
-  line-height: 1.1875em;
-  display: flex;
-  padding: 10px 16px;
-  align-items: center;
-  gap: 19px;
-  border-radius: 6px;
-  background: var(--download-pdf-btn-bg);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.downloadBtn {
-  width: 60px;
-  display: flex;
-  align-items: center;
-  padding: 4px 6px;
-  gap: 7px;
-  color: var(--icon-gray);
-  border-radius: 6px;
-  background: var(--bg-input);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border: none;
-}
-.downloadBtn > p {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: normal;
-}
-
-/* Хедер другого акардіона */
-
-.secondAcordionList {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-.secondAcordionWrapper {
-  margin-top: 20px;
-  padding: 10px 12.5px;
-  /* max-height: 400px;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: thin; */
-  width: 430px;
-  border-radius: 12px;
-  background: #31353e;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-.secondAcordion {
-  display: flex;
-  min-height: 90px;
-  align-items: center;
-  gap: 19px;
-  flex-shrink: 0;
-}
-.callRecordWrapper {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-}
-.callRecordWrapper > img {
-  width: 48px;
-  height: 48px;
-}
-.callRecord {
-  display: flex;
-  padding: 15px 20px;
-  justify-content: center;
-  align-items: center;
-  gap: 26px;
-  width: 252px;
-  height: 70px;
-  border-radius: 0px 10px 10px 10px;
-  background-color: var(--player-secondary-bg);
-}
-.callRecord > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  gap: 10px;
-  border-radius: 20px;
-  background: var(--white, #fff);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.callRecord > p {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.transcriptionToggleBtn {
-  display: flex;
-  padding: 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  color: var(--white);
-  border: none;
-  border-radius: 12px;
-  background: var(--player-secondary-bg);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-.transcriptionToggleBtn > p {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-/* Тіло другого акардіона */
-
-.scrollBarWrapper {
-  padding: 11px 10px 10px 21px;
-  border-radius: 12px;
-  background: #2c2d31;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-.secondAcordionBody {
-  display: flex;
-  flex-direction: column;
-  padding-right: 16px;
-  align-items: flex-end;
-  border-radius: 12px;
-  max-height: 400px;
-  overflow-y: scroll;
-}
-.secondAcordionBody::-webkit-scrollbar {
-  width: 8px;
-  border-radius: 4px;
-}
-.secondAcordionBody::-webkit-scrollbar-thumb {
-  background: var(--player-secondary-bg);
-  border-radius: 4px;
-  padding: 5px 0 5px 0;
-}
-.secondAcordionBody::-webkit-scrollbar-track {
-  background: #202020;
-  border-radius: 4px;
-  padding: 5px 0 5px 0;
-}
-.transcriptionImportantBtn {
-  display: flex;
-  gap: 5px;
-  padding: 2px 6px;
-  color: var(--white);
-  border-radius: 6px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border: none;
-  background-color: var(--player-secondary-bg);
-}
-.transcriptionImportantBtn > p {
-  font-size: 14px;
-  font-weight: 300;
-}
-.transcriptionIcon {
-  transition: transform 200ms ease-in-out;
-}
-.activeTranscriptionIcon {
-  transform: rotate(180deg);
-}
-.messages {
+.listOfAccardion {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  width: 100%;
+  padding-right: 23px;
+  /* height: 760px; */
+  height: 100%;
+  max-height: 760px;
+  overflow-y: scroll;
+}
+.addScrollBar {
+}
+.listOfAccardion::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+}
+.listOfAccardion::-webkit-scrollbar-thumb {
+  background: var(--player-secondary-bg);
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+}
+.listOfAccardion::-webkit-scrollbar-track {
+  background: #202020;
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
 }
