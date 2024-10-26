@@ -43,7 +43,7 @@
     align-items: flex-end;
     gap: 23px;
 
-    margin-right: 66px;
+    margin-right: 57px;
 }
 
 .mainInfo{
@@ -58,7 +58,7 @@
     gap: 19px;
 
     border-radius: 6px;
-    background-color: #313540 ;
+    background-color: var(--download-pdf-btn-bg) ;
 
     margin-top: 26px;
 }
@@ -147,7 +147,7 @@
     padding-bottom: 38px;
     margin-bottom: 38px;
 
-    border-bottom: dashed 2px #373941 ;
+    border-bottom: dashed 2px var(--contacts-info-bg) ;
 
 }
 
@@ -186,7 +186,7 @@
     display: flex;
     align-items: center;
     border-radius: 6px;
-    background-color: #373941;
+    background-color: var(--contacts-info-bg);
     gap: 28px;
     width: fit-content;
 }
@@ -278,7 +278,11 @@
 
 
 .carInfo{
-    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    height: 265px;
+    overflow-y: auto;
     width: 567px;
 }
 
@@ -290,7 +294,7 @@
 
 .carInfo::-webkit-scrollbar-thumb{
     border-radius: 4px;
-    background-color: #4E505F;
+    background-color: var(--player-secondary-bg);
 }
 .carInfo::-webkit-scrollbar-track{
     border-radius: 4px;
@@ -299,6 +303,8 @@
 
 .carCard{
 width: 527px;
+height: 265px;
+padding-bottom: 5px;
 }
 
 .carImage{
@@ -311,7 +317,7 @@ width: 527px;
 
 .photoAndMainCarInfo{
     display: flex;
-    gap: 23px;
+    gap: 29px;
 
     margin-bottom: 20px;
 }
@@ -389,7 +395,7 @@ margin-bottom: 12px;
     padding: 6px 16px;
 
     border-radius: 6px;
-    background-color: #373941;
+    background-color: var(--contacts-info-bg);
 }
 
 .car{
@@ -439,6 +445,10 @@ margin-bottom: 12px;
 }
 
 .addCarBtn{
+    display: none;
+}
+
+.carCard:last-child .addCarBtn{
     border: none;
     display: flex;
     gap: 6px;
@@ -452,7 +462,7 @@ margin-bottom: 12px;
     cursor: pointer;
 }
 
-.addCarBtn:hover{
+.carCard:last-child .addCarBtn:hover{
     background-color: var(--green-btn-hover);
 }
 
