@@ -445,6 +445,10 @@ margin-bottom: 12px;
 }
 
 .addCarBtn{
+    display: none;
+}
+
+.carCard:last-child .addCarBtn{
     border: none;
     display: flex;
     gap: 6px;
@@ -458,7 +462,7 @@ margin-bottom: 12px;
     cursor: pointer;
 }
 
-.addCarBtn:hover{
+.carCard:last-child .addCarBtn:hover{
     background-color: var(--green-btn-hover);
 }
 

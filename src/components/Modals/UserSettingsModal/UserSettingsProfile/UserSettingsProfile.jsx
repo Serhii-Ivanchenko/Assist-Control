@@ -4,7 +4,7 @@ import { useId } from "react";
 import * as Yup from "yup";
 import { BsSdCardFill } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState} from "react";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import PhoneSelect from "./PhoneSelect/PhoneSelect";
 import { useDispatch, useSelector } from "react-redux";
@@ -126,9 +126,9 @@ export default function UserSettingsProfile({ onClose }) {
   //   };
   // }, [avatar]);
 
-  const toggleDropdown = (index) => {
-    setActiveDropdown(activeDropdown === index ? null : index);
-  };
+  // const toggleDropdown = (index) => {
+  //   setActiveDropdown(activeDropdown === index ? null : index);
+  // };
 
   const handleBlur = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
@@ -288,7 +288,7 @@ export default function UserSettingsProfile({ onClose }) {
                   name="country"
                   id={countryFieldId}
                   className={`${css.input} ${css.inputSelect}`}
-                  onClick={() => toggleDropdown(0)}
+                  // onClick={() => toggleDropdown(0)}
                 >
                   <option value="Ukraine">Україна</option>
                   <option value="UK">The UK</option>
@@ -327,7 +327,7 @@ export default function UserSettingsProfile({ onClose }) {
                   name="section"
                   id={sectionFieldId}
                   className={`${css.input} ${css.inputSelect}`}
-                  onClick={() => toggleDropdown(1)}
+                  // onClick={() => toggleDropdown(1)}
                 >
                   <option value="default">За замовченням</option>
                   <option value="v-c">Відеоконтроль</option>
@@ -353,7 +353,7 @@ export default function UserSettingsProfile({ onClose }) {
                   name="timeZone"
                   id={timeZoneFieldId}
                   className={`${css.input} ${css.inputSelect}`}
-                  onClick={() => toggleDropdown(2)}
+                  // onClick={() => toggleDropdown(2)}
                   component={TimeZoneSelect}
                 />
                 {/* <option value="default">За замовченням</option> *

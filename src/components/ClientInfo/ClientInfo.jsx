@@ -70,11 +70,13 @@ export default function ClientInfo() {
                 <p className={css.clientName}>Іван Петренко</p>
                 <p className={css.dateOfBirth}>12 Трав, 1987 (37р.)</p>
                 <div className={css.serviceBook}>
-                    <p className={css.sbText}>Сервісна книга</p>
-                    <button className={css.sbBtn}>
-                        <BsDownload className={css.downloadIcon} />
-                        .pdf
-                    </button>                   
+                            <p className={css.sbText}>Сервісна книга</p>
+                            <a href="" download="">
+                              <button className={css.sbBtn}>
+                              <BsDownload className={css.downloadIcon} />
+                               .pdf
+                            </button>
+                            </a>                  
                     </div>
                 </div>
 </div>
