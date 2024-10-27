@@ -5,6 +5,7 @@ import {
   axiosInstance,
 } from "../../services/api.js";
 
+
 //User registration
 export const register = createAsyncThunk(
   "auth/register",
@@ -194,33 +195,6 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
-
-// export const refreshUser = createAsyncThunk(
-//   "auth/refresh",
-//   async (_, thunkAPI) => {
-//     try {
-//       const reduxState = thunkAPI.getState();
-//       const apiKey = reduxState.user.apiKey;
-
-//       setAuthHeader(apiKey);
-
-//       const response = await axiosInstance.get("/v1/user_info/");
-
-//       return response.data;
-//     } catch (error) {
-//       clearAuthHeader();
-//       console.error("Error refreshing user:", error);
-//       return thunkAPI.rejectWithValue(error.response.status);
-//     }
-//   },
-//   {
-//     condition: (_, thunkAPI) => {
-//       const reduxState = thunkAPI.getState();
-//       const savedToken = reduxState.user.token;
-//       return savedToken !== null;
-//     },
-//   }
-// );
 
 // Google Authentication
 export const logInWithGoogle = createAsyncThunk(

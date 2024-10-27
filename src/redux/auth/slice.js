@@ -28,6 +28,11 @@ const handleRejected = (state, action) => {
 const authSlice = createSlice({
   name: "auth",
   initialState: initialState.auth,
+  reducers: {
+    setSelectedServiceId: (state, action) => {
+      state.userData.selectedServiceId = action.payload;
+    }
+  },
   extraReducers: (builder) =>
     builder
       .addCase(register.pending, (state) => {
@@ -151,5 +156,7 @@ const authSlice = createSlice({
         state.error = null;
   })
 });
+
+export const { setSelectedServiceId } = authSlice.actions;
 
 export default authSlice.reducer;
