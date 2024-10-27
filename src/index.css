@@ -15,6 +15,9 @@
   --blue-btn-normal: #3956cc;
   --blue-btn-hover: #1c2e78;
   --blue-btn-inactive: #171d35;
+  --play-btn-triangle: #00a3ff;
+  --download-pdf-btn-bg: #313540;
+
 
   /* other elements or text colors */
   --white: #fff;
@@ -25,7 +28,6 @@
   --text-gray: #959595;
   --green: #008000;
   --blue: #3956cc;
-  --play-btn-triangle: #00a3ff;
   --red: #d54e4f;
   --mint: #a1ffc5;
   --icon-gray: #c7c7c7;
@@ -38,13 +40,14 @@
   --current-mileage-text: #43a48d;
   --last-service-mileage-text: #a97742;
   --stats-all: #465d9b;
+  --contacts-info-bg:#373941;
 
   /* statuses */
   --status-new: #ebd534;
   --status-diag: #6b84ff;
   --status-repair: #b25bc2;
   --status-complete: #53c178;
-  --status-view-repair: #E76767 ;
+  --status-view-repair: #E76767;
   --glow-repair: #d926e9;
   --glow-diag: #265de9;
   --glow-complete: #71e926;

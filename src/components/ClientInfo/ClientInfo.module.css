@@ -1,0 +1,532 @@
+.clientInfoBox{
+    width: 567px;
+    padding-right: 40px;
+}
+
+.carCard{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title{
+    color: var(--white);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    margin-bottom: 52px;
+}
+
+.clientImg{
+    width: 126px;
+    height: 126px; 
+
+    border-radius: 8px;
+
+    border: solid 1px #fff;
+}
+
+.infoBox{
+    display: flex;
+
+    margin-bottom: 34px;
+}
+
+.rating{
+    display: flex;
+    gap: 2px;
+}
+
+.photoAndMainInfo{
+    display: flex;
+    align-items: flex-end;
+    gap: 23px;
+
+    margin-right: 66px;
+}
+
+.mainInfo{
+    /* display: flex; */
+}
+
+.serviceBook{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    gap: 19px;
+
+    border-radius: 6px;
+    background-color: #313540 ;
+
+    margin-top: 26px;
+}
+
+.sbText{
+    color:var(--white);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.sbBtn{
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 4px 6px;
+
+    border-radius: 6px;
+    background: var(--bg-input);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+
+    color: var(--icon-gray);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.downloadIcon{
+    fill: var(--icon-gray);
+    width: 16px;
+    height: 16px;
+}
+
+.dateOfBirth{
+    color: var(--text-gray);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-top: 3px;
+}
+
+.clientName{
+    color: var(--white);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.1875em;
+
+    margin-top: 3px;
+}
+
+.moneyBox{
+    display: flex;
+    align-items: center;
+    height: 82px;
+    gap: 9px;
+}
+
+.dollarIcon{
+    fill: var(--green-btn-normal);
+    width: 20px;
+    height: 20px;
+}
+
+.moneyAmount{
+    color:var(--white);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.contactsBox{
+    display: flex;
+    align-items: center;
+    gap: 60px;
+
+    padding-bottom: 38px;
+    margin-bottom: 38px;
+
+    border-bottom: dashed 2px #373941 ;
+
+}
+
+/* .contactsList{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contactsListItem{
+    display: flex;
+} */
+
+.categoryList{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contactsInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.categoryListItem{
+    height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.contactsInfoItem{
+    height: 46px;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    background-color: #373941;
+    gap: 28px;
+    width: fit-content;
+}
+
+.contactsInput{
+    background-color: transparent;
+    outline: none;
+    border: none;
+
+    color: var(--white);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.contactsBtn{
+    border: none;
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+    background: var(--bg-input);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
+
+}
+
+.phoneCallIcon{
+    fill:var(--green-btn-normal);
+    width: 18px;
+    height: 18px;
+}
+
+.iconColor{
+    fill: var(--icon-gray);
+}
+
+/* .atIcon{
+    fill: var(--icon-gray);
+    width: 25px;
+    height: 25px;
+} */
+
+/* .copyIcon{
+    fill: var(--icon-gray);
+    width: 18px;
+    height: 18px;
+}
+
+.planeIcon{
+    fill: var(--icon-gray);
+    width: 22px;
+    height: 23px;
+} */
+.contactsBtn:active .phoneCallIcon {
+    fill: #28232A;
+}
+
+.contactsBtn:active .iconColor {
+    fill: #28232A;
+}
+
+.contactsBtnBox{
+    display: flex;
+    gap: 4px;
+}
+
+.category{
+    color: var(--white);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.categoryIcon{
+    fill:var(--icon-gray);
+    width: 18px;
+    height: 18px;
+}
+
+
+
+
+.carInfo{
+    overflow-y: scroll;
+    width: 567px;
+}
+
+.carInfo::-webkit-scrollbar{
+    width: 8px;
+    border-radius: 4px;
+    margin-left: 20px;
+}
+
+.carInfo::-webkit-scrollbar-thumb{
+    border-radius: 4px;
+    background-color: #4E505F;
+}
+.carInfo::-webkit-scrollbar-track{
+    border-radius: 4px;
+        background-color: #202020;
+}
+
+.carCard{
+width: 527px;
+}
+
+.carImage{
+    width: 126px;
+    height: 126px;
+
+    border-radius: 8px;
+    border: solid 1px #fff;
+}
+
+.photoAndMainCarInfo{
+    display: flex;
+    gap: 23px;
+
+    margin-bottom: 20px;
+}
+
+.carNameBox{
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 12px;
+}
+
+.carName{
+    color: var(--white);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.carIcon{
+    fill:var(--icon-gray);
+}
+
+.carYearBox{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.carYear{
+    color:var(--white);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.yearIcon{
+    width: 20px;
+    height: 20px;
+    fill: var(--icon-gray);
+}
+
+.carCategoryBox{
+    display: flex;
+    gap: 67px;
+}
+
+.carCategory{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.carCategoryItem{
+    height: 46px;
+    display: flex;
+    align-items: center;
+}
+
+.carNumbers{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.carNumbersItem{
+    height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 210px;
+
+    padding: 6px 16px;
+
+    border-radius: 6px;
+    background-color: #373941;
+}
+
+.car{
+    background-color: transparent;
+    padding: 0;
+}
+
+.vin{
+    color: var(--white);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.categoryVin{
+    display: flex;
+    gap: 9px;
+}
+
+.categoryCar{
+    display: flex;
+    gap: 4px;
+}
+
+.inBold{
+    color:var(--white);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.number{
+    color: var(--white);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.btnBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.addCarBtn{
+    border: none;
+    display: flex;
+    gap: 6px;
+    padding: 4px 6px;
+    align-items: center;
+
+    border-radius: 6px;
+    background-color: var(--green-btn-normal);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
+}
+
+.addCarBtn:hover{
+    background-color: var(--green-btn-hover);
+}
+
+.plus{
+    width: 18px;
+    height: 18px;
+    fill: var(--white);
+}
+
+
+.deleteBtn{
+    width: 18px;
+    height: 18px;
+    fill: var(--icon-gray);
+    cursor: pointer;
+}
+
+.carReg {
+    display: block;
+
+    width: 217px;
+    height: 52px;
+
+    margin: 0 35px 10px;
+}
+
+.carRegContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 210px;
+    height: 46px;
+    border-radius: 6px;
+    background-color: #d9d9d9;
+    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+}
+
+.carRegCountry {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 9px;
+
+    width: 19px;
+    height: 100%;
+
+    background-color: #00349a;
+    border-radius: 6px 0 0 6px;
+}
+
+.carRegFlag {
+    width: 12px;
+    height: 8px;
+
+    margin-top: 8px;
+}
+
+.carRegNumber {
+    color: var(--black);
+
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+
+    text-transform: uppercase;
+}
+
+.carRegCountry {
+    color: var(--white);
+
+    font-family: "Roboto", sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+}
