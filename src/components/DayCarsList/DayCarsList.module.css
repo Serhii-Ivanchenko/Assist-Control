@@ -89,3 +89,18 @@
   }
 
 }
+
+/* Стилі для crmBlock головного контейнеру списику  */
+
+.crmBlockDayCarsListContainer {
+  background-color: transparent;
+  box-shadow: none;
+  width: 370px;
+  padding: 0;
+  
+}
+
+.noScroll {
+  overflow-y: visible;
+  max-height: none;
+}

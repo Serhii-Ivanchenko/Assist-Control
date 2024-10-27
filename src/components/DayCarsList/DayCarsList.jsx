@@ -3,22 +3,26 @@ import DayCarsItemLine from "../DayCarsItemLine/DayCarsItemLine.jsx";
 import styles from './DayCarsList.module.css';
 import clsx from 'clsx';
 
-export default function DayCarsList({ carsData, isModal, viewMode = "grid" }) {
+export default function DayCarsList({ carsData, isModal, viewMode = "grid", isCRMBlock }) {
   const visibleCars = carsData; 
 
   if (visibleCars.length === 0) return null;
 
   return (
     <div
+    className={clsx(
+      styles.dayCarsListContainer,  
+      isModal && styles.modaldayCarsListContainer,
+      isCRMBlock && styles.crmBlockDayCarsListContainer
+    )}
+  >
+    <div 
       className={clsx(
-        styles.dayCarsListContainer,  
-        isModal && styles.modaldayCarsListContainer, 
+        styles.scrollWrapper, 
+        isModal && styles.modalscrollWrapper,
+        isCRMBlock && styles.noScroll
       )}
     >
-      <div className={clsx(
-            styles.scrollWrapper, 
-            isModal && styles.modalscrollWrapper
-          )}>
         <ul 
           className={clsx(
             styles.carsList, 
@@ -43,7 +47,9 @@ export default function DayCarsList({ carsData, isModal, viewMode = "grid" }) {
                 photoUrl={car.photo_url}
                 isModal={isModal} 
                 viewMode={viewMode}
+                isCRMBlock={isCRMBlock}
                 client={car.client}
+                
               />
             );
           })}
