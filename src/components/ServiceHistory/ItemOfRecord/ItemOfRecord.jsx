@@ -30,11 +30,7 @@ export default function ItemOfRecord({ item, messages }) {
   return (
     <li key={item.totalkilometrs} className={css.itemOfAccardion}>
       <div className={css.itemOfMarking}>
-        <BsRecordCircle
-          className={css.circle}
-          size={24}
-          fill="var(--blue-btn-normal)"
-        />
+        <BsRecordCircle className={css.circle} />
         <div className={css.line}></div>
       </div>
       <AccordionItem>
