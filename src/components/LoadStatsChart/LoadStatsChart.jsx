@@ -101,7 +101,7 @@ export default function LoadStatsChart() {
 
   useEffect(() => {
     if (!selectedServiceId) {
-      console.warn("Service ID is not available yet. Skipping fetch.");
+      // console.warn("Service ID is not available yet. Skipping fetch.");
       return;
     }
 

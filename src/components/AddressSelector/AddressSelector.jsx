@@ -8,8 +8,18 @@ import { setSelectedServiceId } from "../../redux/auth/slice.js";
 export default function AddressSelector() {
   const dispatch = useDispatch();
 
-  const userData = useSelector(selectUser);
-  const services = userData?.services || []; 
+  // const userData = useSelector(selectUser);
+  // const services = userData?.services || [];
+  const services = [
+    {
+      id: 1,
+      service_name: "AvtoAtmosfera Cherkasy",
+    },
+    {
+      id: 2,
+      service_name: "GCAR Kyiv",
+    },
+  ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const selectRef = useRef(null);
@@ -22,12 +32,6 @@ export default function AddressSelector() {
       setIsDropdownOpen(false);
     }
   };
-
-  // useEffect(() => {
-  //   if (services.length > 0) {
-  //     dispatch(setSelectedServiceId(services[0].id)); 
-  //   }
-  // }, [services, dispatch]);
 
   const handleSelectService = (event) => {
     const selectedServiceId = event.target.value;
