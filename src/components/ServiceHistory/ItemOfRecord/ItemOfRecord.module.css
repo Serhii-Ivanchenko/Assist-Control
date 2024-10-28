@@ -1,0 +1,322 @@
+.itemOfAccardion {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.itemOfMarking {
+  padding-top: 13px;
+}
+
+.circle {
+  margin-bottom: 1px;
+  fill: var(--blue-btn-normal);
+  width: 24px;
+  height: 24px;
+}
+
+.line {
+  width: 1px;
+  height: 100%;
+  background: var(--bg-input);
+  margin: auto;
+}
+
+.itemOfAccardion:last-of-type .line {
+  width: 0;
+  height: 0;
+  background: none;
+}
+
+.itemIcon {
+  background-color: var(--bg-secondary);
+}
+
+.listItemWrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.listItem {
+  width: 640px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  padding: 0px 20px;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #2d3138;
+}
+
+.kilometersWrapper,
+.dateWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.kilometersWrapper {
+  gap: 10px;
+}
+
+.dateWrapper {
+  gap: 20px;
+}
+
+.numberOfKilometers,
+.kilometersDriven,
+.date {
+  font-weight: 600;
+  display: flex;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 24px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.numberOfKilometers {
+  color: var(--current-mileage-text);
+  background: var(--current-mileage-bg);
+}
+
+.kilometersDriven {
+  color: var(--last-service-mileage-text);
+  background: var(--last-service-mileage-bg);
+}
+
+.date {
+  color: var(--red);
+  background: var(--visit-date-bg);
+}
+
+.unActiveDialogBtn {
+  border: none;
+  background: none;
+  transition: transform 200ms ease-in-out;
+}
+
+.activeDialogBtn {
+  background-color: none;
+  transform: rotate(180deg);
+}
+
+/* Тіло першого акардіона */
+.bodyAccardionWrapper {
+  margin-top: 20px;
+}
+
+.btnDownloadsWrapper {
+  display: flex;
+  gap: 24px;
+}
+
+.btnDownloadsItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 19px;
+  border-radius: 6px;
+  background: var(--download-pdf-btn-bg);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.1875em;
+}
+
+.downloadBtn {
+  /* width: 60px; */
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  gap: 7px;
+  color: var(--icon-gray);
+  cursor: pointer;
+  border-radius: 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+
+.downloadBtn>p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+.apealModalWrapper {
+  display: flex;
+  width: 389px;
+  padding: 13px 19px 22px 19px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+.apealModalWrapper > p {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px;
+  border-radius: 0px 12px 12px 12px;
+  background: var(--player-secondary-bg);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.closeIcon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1px;
+  color: var(--input-stroke);
+  cursor: pointer;
+}
+
+/* Хедер другого акардіона */
+
+.secondAcordionList {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.secondAcordionWrapper {
+  padding: 10px 12.5px;
+  width: 410px;
+  border-radius: 12px;
+  background: #31353e;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.secondAcordion {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  flex-shrink: 0;
+}
+
+.callRecordWrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.callRecordWrapper>img {
+  width: 48px;
+  height: 48px;
+}
+
+.callRecord {
+  display: flex;
+  padding: 15px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  width: 252px;
+  height: 70px;
+  border-radius: 0px 10px 10px 10px;
+  background-color: var(--player-secondary-bg);
+}
+
+.callRecord>div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  gap: 10px;
+  border-radius: 20px;
+  background: var(--white, #fff);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.callRecord>p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.transcriptionToggleBtn {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  background: var(--player-secondary-bg);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.transcriptionToggleBtn>p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Тіло другого акардіона */
+
+.scrollBarWrapper {
+  padding: 11px 10px 10px 21px;
+  border-radius: 12px;
+  background: #2c2d31;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.secondAcordionBody {
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  align-items: flex-end;
+  border-radius: 12px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.secondAcordionBody::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+}
+
+.secondAcordionBody::-webkit-scrollbar-thumb {
+  background: var(--player-secondary-bg);
+  border-radius: 4px;
+}
+
+.secondAcordionBody::-webkit-scrollbar-track {
+  background: #202020;
+  border-radius: 4px;
+}
+
+.transcriptionImportantBtn {
+  display: flex;
+  gap: 5px;
+  padding: 2px 6px;
+  color: var(--white);
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  background-color: var(--player-secondary-bg);
+}
+
+.transcriptionImportantBtn>p {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.transcriptionIcon {
+  transition: transform 200ms ease-in-out;
+}
+
+.activeTranscriptionIcon {
+  transform: rotate(180deg);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 100%;
+}

@@ -28,6 +28,11 @@ const handleRejected = (state, action) => {
 const authSlice = createSlice({
   name: "auth",
   initialState: initialState.auth,
+  reducers: {
+    setSelectedServiceId: (state, action) => {
+      state.userData.selectedServiceId = action.payload;
+    }
+  },
   extraReducers: (builder) =>
     builder
       .addCase(register.pending, (state) => {
@@ -75,7 +80,10 @@ const authSlice = createSlice({
       .addCase(logOut.rejected, handleRejected)
       .addCase(getUserData.pending, handlePending)
       .addCase(getUserData.fulfilled, (state, action) => {
-        state.userData = action.payload;
+        state.userData = {
+          ...state.userData, // Зберігаємо поточні значення
+          ...action.payload, // Додаємо нові дані
+        };
         state.isLoading = false;
       })
       .addCase(getUserData.rejected, handleRejected)
@@ -151,5 +159,7 @@ const authSlice = createSlice({
         state.error = null;
   })
 });
+
+export const { setSelectedServiceId } = authSlice.actions;
 
 export default authSlice.reducer;

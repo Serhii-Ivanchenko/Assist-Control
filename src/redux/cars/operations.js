@@ -5,10 +5,13 @@ import { axiosInstance } from "../../services/api.js";
 export const getAllCars = createAsyncThunk(
   "cars/getAllCars",
   async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId; 
     try {
       const response = await axiosInstance.get(`/v1/data/`, {
         headers: {
           "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
         },
       });
       return response.data;
@@ -22,10 +25,13 @@ export const getAllCars = createAsyncThunk(
 export const getCurrentCars = createAsyncThunk(
   "cars/getCurrentCars",
   async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId; 
     try {
       const response = await axiosInstance.get(`/v1/current/cars/`, {
         headers: {
           "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
         },
       });
       return response.data;
@@ -39,12 +45,15 @@ export const getCurrentCars = createAsyncThunk(
 export const getCarsByDate = createAsyncThunk(
   "cars/getCarsByDate",
   async (day, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId; 
     try {
       const response = await axiosInstance.get(
         `/v1/current/day/cars/?date=${day}`,
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
           },
         }
       );
@@ -59,6 +68,8 @@ export const getCarsByDate = createAsyncThunk(
 export const getCarsByMonth = createAsyncThunk(
   "cars/getCarsByMonth",
   async (date, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId; 
     // const { month, year } = date;
     try {
       const response = await axiosInstance.get(
@@ -66,6 +77,7 @@ export const getCarsByMonth = createAsyncThunk(
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
           },
         }
       );
@@ -80,6 +92,8 @@ export const getCarsByMonth = createAsyncThunk(
 export const getCalendarByMonth = createAsyncThunk(
   "cars/getCalendarByMonth",
   async (date, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId; 
     // const { month, year } = date;
     try {
       const response = await axiosInstance.get(
@@ -87,6 +101,7 @@ export const getCalendarByMonth = createAsyncThunk(
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
           },
         }
       );
@@ -101,10 +116,13 @@ export const getCalendarByMonth = createAsyncThunk(
 export const getCarsForHour = createAsyncThunk(
   "cars/getCarsForHour",
   async (day, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId; 
     try {
       const response = await axiosInstance.get(`/v1/get_busyness?date=${day}`, {
         headers: {
           "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
         },
       });
       return response.data;
@@ -118,10 +136,13 @@ export const getCarsForHour = createAsyncThunk(
 export const getPercentForHour = createAsyncThunk(
   "cars/getPercentForHour",
   async (day, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId; 
     try {
       const response = await axiosInstance.get(`/v1/get_load_day?date=${day}`, {
         headers: {
           "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
         },
       });
       return response.data;
@@ -135,6 +156,8 @@ export const getPercentForHour = createAsyncThunk(
 export const getNewCarsRange = createAsyncThunk(
   "cars/getNewCarsRange",
   async (date, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId; 
     const { dateBeginStr, dateEndStr } = date;
     try {
       const response = await axiosInstance.get(
@@ -142,6 +165,7 @@ export const getNewCarsRange = createAsyncThunk(
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
           },
         }
       );
@@ -158,6 +182,8 @@ export const getNewCarsRange = createAsyncThunk(
 export const changeCarStatus = createAsyncThunk(
   "cars/changeCarStatus",
   async ({ carId, status }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId; 
     try {
       const response = await axiosInstance.post(`/v1/edit_status`, null, {
         params: {
@@ -166,6 +192,7 @@ export const changeCarStatus = createAsyncThunk(
         },
         headers: {
           "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
         },
       });
       return response.data;

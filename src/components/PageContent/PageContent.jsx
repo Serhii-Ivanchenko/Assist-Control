@@ -9,12 +9,12 @@ import { getCarsByDate } from "../../redux/cars/operations.js";
 import { useDispatch } from "react-redux";
 
 export default function PageContent() {
-  const dispatch = useDispatch();
-  const today = new Date().toISOString().split("T")[0];
-  useEffect(() => {
-    const initChecksCars = async () => await dispatch(getCarsByDate(today));
-    initChecksCars();
-  });
+  // const dispatch = useDispatch();
+  // const today = new Date().toISOString().split("T")[0];
+  // useEffect(() => {
+  //   const initChecksCars = async () => await dispatch(getCarsByDate(today));
+  //   initChecksCars();
+  // });
   return (
     <div className={css.pageContent}>
       <Statistics />

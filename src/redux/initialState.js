@@ -16,8 +16,10 @@ export const initialState = {
       country: null,
       city: null,
       address: null,
-      index: null,
+      post_index: null,
       balance: null,
+      services: [],
+      selectedServiceId: 1,
       tariff: {
         isActive: false,
         tariffName: "Demo",

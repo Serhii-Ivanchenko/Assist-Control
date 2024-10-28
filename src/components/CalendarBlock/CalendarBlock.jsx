@@ -13,6 +13,7 @@ import {
 } from "../../redux/cars/selectors.js";
 import styles from "./CalendarBlock.module.css";
 import toast from "react-hot-toast";
+import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 
 export default function CalendarBlock() {
   const dispatch = useDispatch();
@@ -23,6 +24,8 @@ export default function CalendarBlock() {
   const selectedDate = useSelector(selectDate);
   const isLoadingCarsByDay = useSelector(selectLoadingCarsByDay);
 
+  const selectedServiceId = useSelector(selectSelectedServiceId); // необхідно для коректної роботи вибору сервісів
+
   const handleDetailsBtnClick = () => {
     setIsModalOpen(true);
   };
@@ -32,20 +35,27 @@ export default function CalendarBlock() {
   };
 
   useEffect(() => {
-    if (selectedDate) {
-      dispatch(getCarsByDate(selectedDate))
-        .unwrap()
-        .then(() => {})
-        .catch(() => {
-          toast.error("Щось пішло не так. Будь ласка, спробуйте ще раз.");
-        });
+    if (!selectedServiceId) {
+      console.warn("Service ID is not available yet. Skipping fetch.");
+      return;
     }
-  }, [dispatch, selectedDate]);
+
+    if (!selectedDate) {
+      console.warn("Date is not selected. Skipping fetch.");
+      return;
+    }
+
+    dispatch(getCarsByDate(selectedDate))
+      .unwrap()
+      .catch(() => {
+        toast.error("Щось пішло не так. Будь ласка, спробуйте ще раз.");
+      });
+  }, [dispatch, selectedDate, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
 
   return (
     <div className={styles.calendarContainer}>
       <div className={styles.topContainer}>
-        <CalendarPagination isCrm={false}/>
+        <CalendarPagination isCrm={false} />
         {isLoadingCarsByDay && <p>Завантаження інформації...</p>}
         <DayCarsList carsData={carsData} isModal={false} />
       </div>

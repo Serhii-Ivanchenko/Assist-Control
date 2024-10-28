@@ -12,3 +12,5 @@ export const selectApiKey = (state) => state.auth.apiKey;
 
 export const selectError = (state) => state.auth.error;
 
+export const selectSelectedServiceId = (state) => state.auth.userData.selectedServiceId;
+

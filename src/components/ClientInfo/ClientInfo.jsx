@@ -70,11 +70,13 @@ export default function ClientInfo() {
                 <p className={css.clientName}>Іван Петренко</p>
                 <p className={css.dateOfBirth}>12 Трав, 1987 (37р.)</p>
                 <div className={css.serviceBook}>
-                    <p className={css.sbText}>Сервісна книга</p>
-                    <button className={css.sbBtn}>
-                        <BsDownload className={css.downloadIcon} />
-                        .pdf
-                    </button>                   
+                            <p className={css.sbText}>Сервісна книга</p>
+                            <a href="" download="">
+                              <button className={css.sbBtn}>
+                              <BsDownload className={css.downloadIcon} />
+                               .pdf
+                            </button>
+                            </a>                  
                     </div>
                 </div>
 </div>
@@ -127,7 +129,7 @@ export default function ClientInfo() {
 
                     <li className={css.contactsInfoItem}>
                         <p className={css.contactsInput}>ivan.petrenko</p>
-                        <a href="http://t.me/ivan.petrenko" target="_blank">
+                        <a href="https://t.me/ivan.petrenko" target="_blank">
                         <button type="button" className={css.contactsBtn}>
                             <PiTelegramLogoLight className={css.iconColor} size={22} />
                             </button>
@@ -142,6 +144,82 @@ export default function ClientInfo() {
             
             <ul className={css.carInfo}>
                 <li className={css.carCard}>
+
+                    <div className={css.mainContent}>
+                        
+                    <div className={css.photoAndMainCarInfo}>
+                        
+                        <img src="" alt="Car's Image" className={css.carImage} />
+
+                        <div className={css.mainCarInfo}>
+                            <div className={css.carNameBox}>
+                                <IoCarSport className={css.carIcon} size={30} />
+                                <p className={css.carName}>HONDA CIVIC</p>
+                            </div>
+
+                            <div className={css.carYearBox}>
+                                <BsCalendarCheck className={css.yearIcon} />                               
+                                <p className={css.carYear}>2001 </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className={css.carCategoryBox}>
+                    <ul className={css.carCategory}>
+                        <li className={css.carCategoryItem}>
+                            <p className={css.categoryVin}>
+                                <span className={css.inBold}>VIN</span>
+                                <span className={css.number}>Number</span>
+                               
+                            </p>
+                        </li>
+                        <li className={css.carCategoryItem}>
+                             <p className={css.categoryCar}>
+                                <span className={css.inBold}>CAR</span>
+                                <span className={css.number}>Number</span>
+                            </p>
+                        </li>
+                        </ul>
+
+                        <ul className={css.carNumbers}>
+                            <li className={css.carNumbersItem}>
+                                    <p className={css.vin}>VW8795218794H46J</p>
+                                    <button type="button" className={css.contactsBtn} onClick={handleCopyVin}>
+                                        <BsFiles className={css.iconColor} size={18} />
+                                    </button>
+                               
+                            </li>
+                            <li className={`${css.carNumbersItem} ${css.car}`}>
+                                    <div className={css.carRegContainer}>                                    
+                                        <div className={css.carRegCountry}>
+                                            <img
+                                                className={css.carRegFlag}
+                                                src={flag}
+                                                alt="Car registration country flag"
+                                            />                                           
+                                            <p className={css.carRegCountry}>ua</p>                                      
+                                        </div>                                  
+                                        <p className={css.carRegNumber}>CA 6864 CO</p>                                    
+                                    </div>
+                                    
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    
+                    <div className={css.btnBox}>
+                       <BsTrash className={css.deleteBtn}/>
+                        <button type="button" className={css.addCarBtn}>
+                            <BsPlusCircleDotted className={css.plus} />
+                            <IoCarSport className={css.carIcon} size={20}/>
+                        </button>
+                    </div>
+                  
+                </li>
+
+
+                 <li className={css.carCard}>
 
                     <div className={css.mainContent}>
                         
