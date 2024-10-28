@@ -6,6 +6,9 @@
 .grid {
     display: flex;
     flex-direction: row;
+    max-height: calc(1080px - 13px); 
+    overflow-y: auto;
+    padding-bottom: 13px;
     /* justify-content: space-between; */
 }
 
