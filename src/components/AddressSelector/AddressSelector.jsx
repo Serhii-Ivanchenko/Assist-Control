@@ -1,8 +1,26 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import css from "./AddressSelector.module.css";
 import { BsFillCaretDownFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors.js";
+import { setSelectedServiceId } from "../../redux/auth/slice.js";
 
 export default function AddressSelector() {
+  const dispatch = useDispatch();
+
+  // const userData = useSelector(selectUser);
+  // const services = userData?.services || [];
+  const services = [
+    {
+      id: 1,
+      service_name: "AvtoAtmosfera Cherkasy",
+    },
+    {
+      id: 2,
+      service_name: "GCAR Kyiv",
+    },
+  ];
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const selectRef = useRef(null);
 
@@ -15,6 +33,11 @@ export default function AddressSelector() {
     }
   };
 
+  const handleSelectService = (event) => {
+    const selectedServiceId = event.target.value;
+    dispatch(setSelectedServiceId(selectedServiceId));
+  };
+
   return (
     <div className={css.selectBox} ref={selectRef} onBlur={handleBlur}>
       <select
@@ -22,10 +45,13 @@ export default function AddressSelector() {
         name="address"
         className={css.select}
         onClick={toggleDropdown}
+        onChange={handleSelectService}
       >
-        <option value="address1">Івано-франківськ вул. Івана Франка</option>
-        <option value="address2">Адреса №2</option>
-        <option value="address2">Адреса №3</option>
+        {services.map((service) => (
+          <option key={service.id} value={service.id}>
+            {service.service_name}
+          </option>
+        ))}
       </select>
       <BsFillCaretDownFill
         className={`${css.btnArrowSelect} ${isDropdownOpen ? css.rotated : ""}`}
