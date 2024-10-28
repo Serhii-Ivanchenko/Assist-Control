@@ -29,6 +29,7 @@ export default function DayCarsItem({
   isModal,
   status,
   complete_d,
+  isCRMBlock,
   date_s,
   client,
 }) {
@@ -50,15 +51,16 @@ export default function DayCarsItem({
   const carPhoto = photoUrl || absentAutoImg;
 
  
-
   return (
     <div
-      className={clsx(
-        styles.dayCarsItemContainer,
-        isModal && styles.modalDayCarsItemContainer
-      )}
-      style={getBackgroundStyle(status)} 
-    >
+    className={clsx(
+      styles.dayCarsItemContainer,
+      isModal && styles.modalDayCarsItemContainer,
+      isCRMBlock && styles.crmBlockDayCarsItemContainer
+    )}
+    style={getBackgroundStyle(status)}
+
+  >
       <div className={styles.userInfo}>
         <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>

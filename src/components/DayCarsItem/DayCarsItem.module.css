@@ -553,3 +553,10 @@
 .iconWrapper{
   position: relative;
 }
+
+/* Стилі для crmBlock головного контейнеру елементу  */
+
+.crmBlockDayCarsItemContainer{
+  width: 365px;
+  height: 200px;
+}

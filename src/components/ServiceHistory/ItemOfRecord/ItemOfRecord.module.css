@@ -3,32 +3,42 @@
   justify-content: space-between;
   gap: 20px;
 }
+
 .itemOfMarking {
   padding-top: 13px;
 }
+
 .circle {
   margin-bottom: 1px;
+  fill: var(--blue-btn-normal);
+  width: 24px;
+  height: 24px;
 }
+
 .line {
   width: 1px;
   height: 100%;
   background: var(--bg-input);
   margin: auto;
 }
+
 .itemOfAccardion:last-of-type .line {
   width: 0;
   height: 0;
   background: none;
 }
+
 .itemIcon {
   background-color: var(--bg-secondary);
 }
+
 .listItemWrapper {
   display: flex;
   gap: 20px;
   align-items: center;
   justify-content: flex-end;
 }
+
 .listItem {
   width: 640px;
   display: flex;
@@ -41,17 +51,21 @@
   border-radius: 6px;
   background-color: #2d3138;
 }
+
 .kilometersWrapper,
 .dateWrapper {
   display: flex;
   align-items: center;
 }
+
 .kilometersWrapper {
   gap: 10px;
 }
+
 .dateWrapper {
   gap: 20px;
 }
+
 .numberOfKilometers,
 .kilometersDriven,
 .date {
@@ -62,23 +76,28 @@
   border-radius: 24px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
 .numberOfKilometers {
   color: var(--current-mileage-text);
   background: var(--current-mileage-bg);
 }
+
 .kilometersDriven {
   color: var(--last-service-mileage-text);
   background: var(--last-service-mileage-bg);
 }
+
 .date {
   color: var(--red);
   background: var(--visit-date-bg);
 }
+
 .unActiveDialogBtn {
   border: none;
   background: none;
   transition: transform 200ms ease-in-out;
 }
+
 .activeDialogBtn {
   background-color: none;
   transform: rotate(180deg);
@@ -88,10 +107,12 @@
 .bodyAccardionWrapper {
   margin-top: 20px;
 }
+
 .btnDownloadsWrapper {
   display: flex;
   gap: 24px;
 }
+
 .btnDownloadsItem {
   display: flex;
   align-items: center;
@@ -119,7 +140,8 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border: none;
 }
-.downloadBtn > p {
+
+.downloadBtn>p {
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
@@ -158,6 +180,7 @@
   justify-content: space-between;
   align-items: flex-start;
 }
+
 .secondAcordionWrapper {
   padding: 10px 12.5px;
   width: 410px;
@@ -165,22 +188,26 @@
   background: #31353e;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
 .secondAcordion {
   display: flex;
   align-items: center;
   gap: 19px;
   flex-shrink: 0;
 }
+
 .callRecordWrapper {
   display: flex;
   gap: 20px;
   justify-content: center;
   align-items: center;
 }
-.callRecordWrapper > img {
+
+.callRecordWrapper>img {
   width: 48px;
   height: 48px;
 }
+
 .callRecord {
   display: flex;
   padding: 15px 20px;
@@ -192,7 +219,8 @@
   border-radius: 0px 10px 10px 10px;
   background-color: var(--player-secondary-bg);
 }
-.callRecord > div {
+
+.callRecord>div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -204,7 +232,7 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.callRecord > p {
+.callRecord>p {
   font-size: 16px;
   font-weight: 600;
 }
@@ -222,7 +250,8 @@
   background: var(--player-secondary-bg);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-.transcriptionToggleBtn > p {
+
+.transcriptionToggleBtn>p {
   font-size: 16px;
   font-weight: 600;
 }
@@ -235,6 +264,7 @@
   background: #2c2d31;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
 .secondAcordionBody {
   display: flex;
   flex-direction: column;
@@ -244,18 +274,22 @@
   max-height: 400px;
   overflow-y: scroll;
 }
+
 .secondAcordionBody::-webkit-scrollbar {
   width: 8px;
   border-radius: 4px;
 }
+
 .secondAcordionBody::-webkit-scrollbar-thumb {
   background: var(--player-secondary-bg);
   border-radius: 4px;
 }
+
 .secondAcordionBody::-webkit-scrollbar-track {
   background: #202020;
   border-radius: 4px;
 }
+
 .transcriptionImportantBtn {
   display: flex;
   gap: 5px;
@@ -266,16 +300,20 @@
   border: none;
   background-color: var(--player-secondary-bg);
 }
-.transcriptionImportantBtn > p {
+
+.transcriptionImportantBtn>p {
   font-size: 14px;
   font-weight: 300;
 }
+
 .transcriptionIcon {
   transition: transform 200ms ease-in-out;
 }
+
 .activeTranscriptionIcon {
   transform: rotate(180deg);
 }
+
 .messages {
   display: flex;
   flex-direction: column;
