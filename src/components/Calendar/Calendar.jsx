@@ -13,7 +13,7 @@ import csscrm from "./CalendarCrm.module.css";
 dayjs.extend(isoWeek);
 
 export default function Calendar({ queryMonth, dataMonth, isCrm }) {
-   const css = isCrm ? csscrm : cssvideo;
+  const css = isCrm ? csscrm : cssvideo;
   let currentDate = dayjs();
   let queryMonthDayjs = dayjs(queryMonth);
   const dispatch = useDispatch();
@@ -113,12 +113,13 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
               //   : "1px solid transparent",
             }}
             className={`calendar-day  
-              ${  isCrm ? 'crm-width'  : "" } 
+              ${isCrm ? "crm-width" : ""} 
              ${item.date.date() > currentDate.date() ? "cursordefault" : ""} 
               ${
                 item.date.month() !== queryMonthDayjs.month()
                   ? "other-month"
-                  : "" } 
+                  : ""
+              } 
               ${item.date.isSame(selectedDate, "day") ? "today" : ""}`}
           >
             {item.date.date()}

@@ -80,7 +80,10 @@ const authSlice = createSlice({
       .addCase(logOut.rejected, handleRejected)
       .addCase(getUserData.pending, handlePending)
       .addCase(getUserData.fulfilled, (state, action) => {
-        state.userData = action.payload;
+        state.userData = {
+          ...state.userData, // Зберігаємо поточні значення
+          ...action.payload, // Додаємо нові дані
+        };
         state.isLoading = false;
       })
       .addCase(getUserData.rejected, handleRejected)
