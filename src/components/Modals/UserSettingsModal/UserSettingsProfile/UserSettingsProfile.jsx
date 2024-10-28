@@ -40,10 +40,10 @@ export default function UserSettingsProfile({ onClose }) {
   const userDefaultPage = user.first_page || "";
   const userTimeZone = user.time_zone || "";
   const userPhoto = user?.avatar_url || defaultAvatar;
-  const userCountry = user.country;
-  const userCity = user.city;
-  const userIndex = user.post_index;
-  const userAddress = user.address;
+  const userCountry = user.country || "";
+  const userCity = user.city || "";
+  const userIndex = user.post_index || "";
+  const userAddress = user.address || "";
 
   const [avatar, setAvatar] = useState(userPhoto);
   console.log("Current avatar URL:", avatar);
