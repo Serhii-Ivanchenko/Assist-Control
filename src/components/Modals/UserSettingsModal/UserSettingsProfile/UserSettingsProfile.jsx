@@ -254,7 +254,7 @@ export default function UserSettingsProfile({ onClose }) {
             <ErrorMessage
               name="username"
               component="span"
-              className={css.errorMessage}
+              className={`${css.errorMessage} ${css.errorMessageName}`}
             />
           </div>
 
