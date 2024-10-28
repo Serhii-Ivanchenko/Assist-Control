@@ -6,11 +6,13 @@
 .grid {
     display: flex;
     flex-direction: row;
-    max-height: calc(1080px - 13px); 
+    max-height: 566px; 
     overflow-y: auto;
     padding-bottom: 13px;
     /* justify-content: space-between; */
+    
 }
+
 
 .column {
     display: flex;
@@ -38,12 +40,12 @@
   }
 
 .firstStatus {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="368" height="61" viewBox="0 0 370 61" fill="none"><path d="M0 0.253906H359.64L370 30.5079L359.64 60.7618H0V0.253906Z" fill="%2323252C"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="368" height="61" viewBox="0 0 371 61" fill="none"><path d="M0 0.253906H359.64L370 30.5079L359.64 60.7618H0V0.253906Z" fill="%2323252C"/></svg>');
     border-left: 3px solid var(--status-new);
 }
 
 .column:not(:first-child) .statusHeader {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="368" height="61" viewBox="0 0 370 61" fill="none"><path d="M0 0.253906H359.863L370 30.5079L359.863 60.7618H0L7.96477 30.5079L0 0.253906Z" fill="%2323252C"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="368" height="61" viewBox="0 0 371 61" fill="none"><path d="M0 0.253906H359.863L370 30.5079L359.863 60.7618H0L7.96477 30.5079L0 0.253906Z" fill="%2323252C"/></svg>');
 }
 
 
