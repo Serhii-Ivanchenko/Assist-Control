@@ -13,6 +13,15 @@
     
 }
 
+.grid::-webkit-scrollbar {
+    width: 8px;
+}
+.grid::-webkit-scrollbar-track {
+    background: var(--dark-gray);
+}
+.grid::-webkit-scrollbar-thumb {
+    background: var(--main-gray);
+}
 
 .column {
     display: flex;
