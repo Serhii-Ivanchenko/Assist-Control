@@ -8,6 +8,7 @@ import {
   BsFilter,
   BsRecordCircle,
   BsSearch,
+  BsXLg,
 } from "react-icons/bs";
 import { GiSoundWaves } from "react-icons/gi";
 import {
@@ -20,11 +21,14 @@ import userAvater from "../../../assets/images/ava.png";
 import TranscriptionMessage from "../TranscriptionMessage/TranscriptionMessage";
 import css from "./ItemOfRecord.module.css";
 import { useState } from "react";
+import Modal from "../../Modals/Modal/Modal.jsx";
 import clsx from "clsx";
 
 export default function ItemOfRecord({ item, messages }) {
+  const [apealModal, setApealModal] = useState(false);
   const [showDialogModal, setShowDialogModal] = useState(false);
   const [transcription, setTranscription] = useState(false);
+  const toogleApealModal = () => setApealModal(!apealModal);
   const toogleTranscription = () => setTranscription(!transcription);
   const toogleDialogModal = () => setShowDialogModal(!showDialogModal);
   return (
@@ -94,9 +98,29 @@ export default function ItemOfRecord({ item, messages }) {
               <div className={css.secondAcordionList}>
                 <div className={css.btnDownloadsItem}>
                   <p>Звернення</p>
-                  <button className={css.downloadBtn}>
+                  <button
+                    className={css.downloadBtn}
+                    onClick={() => toogleApealModal()}
+                  >
                     <BsSearch />
                   </button>
+                  <Modal isOpen={apealModal} onClose={toogleApealModal}>
+                    <div className={css.apealModalWrapper}>
+                      <BsXLg
+                        className={css.closeIcon}
+                        onClick={() => toogleApealModal()}
+                      />
+                      <p>
+                        Привіт! Мене звати [Ім`я], і я хочу записатися на ремонт
+                        свого автомобіля. У мене [марка і модель авто], і після
+                        нещодавньої аварії потрібен огляд і ремонт кузова,
+                        зокрема вирівнювання геометрії та заміна пошкоджених
+                        деталей. Також цікавить діагностика стану автомобіля
+                        після ремонту. Чи є у вас вільні дати на цьому тижні,
+                        щоб я міг під`їхати на оцінку? Дякую!
+                      </p>
+                    </div>
+                  </Modal>
                 </div>
                 <div className={css.secondAcordionWrapper}>
                   <AccordionItem>
