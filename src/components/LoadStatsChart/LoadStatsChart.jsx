@@ -21,36 +21,35 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import css from "./LoadStatsChart.module.css";
-
-
+import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 
 const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
   if (active && payload && payload.length) {
     const { x, y } = coordinate;
-    const tooltipWidth = 23; 
+    const tooltipWidth = 23;
     const tooltipHeight = 34;
-    let leftPosition = x+30;
+    let leftPosition = x + 30;
     let topPosition = y - 35;
-    
-    if (x + tooltipWidth  > viewBox.width) {
-    leftPosition = viewBox.width - tooltipWidth+30 ; // Смещаем тултип влево
-  }
-if (y - tooltipHeight / 2 < 0) {
-    topPosition = -35; // Смещаем тултип вниз
-  }
+
+    if (x + tooltipWidth > viewBox.width) {
+      leftPosition = viewBox.width - tooltipWidth + 30; // Смещаем тултип влево
+    }
+    if (y - tooltipHeight / 2 < 0) {
+      topPosition = -35; // Смещаем тултип вниз
+    }
     return (
       <div
         className={css.customtooltip}
-         style={{
-        
-           position: "absolute",
-            left: `${leftPosition}px`,
-           top: `${topPosition}px`,
-        
-         }}
+        style={{
+          position: "absolute",
+          left: `${leftPosition}px`,
+          top: `${topPosition}px`,
+        }}
       >
         <p className={css.popuptitle}>{`${label}`}</p>
-        <p className={css.popupavto}>Авто <span className={css.kolavto}>{`${payload[0].value} `}</span></p>
+        <p className={css.popupavto}>
+          Авто <span className={css.kolavto}>{`${payload[0].value} `}</span>
+        </p>
       </div>
     );
   }
@@ -64,7 +63,7 @@ export default function LoadStatsChart() {
   const workHours = useSelector(selectWorkHours);
   const dispatch = useDispatch();
 
- 
+  const selectedServiceId = useSelector(selectSelectedServiceId); // необхідно для коректної роботи вибору сервісів
 
   const currentDate = new Date().toISOString().substring(0, 10);
 
@@ -86,7 +85,7 @@ export default function LoadStatsChart() {
           cy={cy}
           r={10}
           fill="none" // Прозрачный внутренний цвет
-          stroke='var(--white)' // Белая обводка
+          stroke="var(--white)" // Белая обводка
           strokeWidth={1} // Толщина обводки 1 пиксель
         />
         <circle
@@ -100,21 +99,22 @@ export default function LoadStatsChart() {
     );
   };
 
-  if (actualPercent === null) {
-    const fetchPercentForHour = async () => {
-      await Promise.all([dispatch(getPercentForHour(currentDate))]);
-    };
-
-    fetchPercentForHour();
-  }
-
   useEffect(() => {
+    if (!selectedServiceId) {
+      console.warn("Service ID is not available yet. Skipping fetch.");
+      return;
+    }
+
+    if (actualPercent === null) {
+      dispatch(getPercentForHour(currentDate));
+    }
+
     const fetchCarsForHour = async () => {
-      await Promise.all([dispatch(getCarsForHour(actualDate))]);
+      await dispatch(getCarsForHour(actualDate));
     };
 
     fetchCarsForHour();
-  }, [dispatch, actualDate]);
+  }, [actualPercent, currentDate, actualDate, dispatch, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
 
   const arrdata = Object.entries(carsForHours).map(([hour, value]) => ({
     hour,
@@ -172,7 +172,6 @@ export default function LoadStatsChart() {
               strokeDasharray="3,3"
               vertical={false}
               horizontal={true}
-              
             />
 
             <XAxis

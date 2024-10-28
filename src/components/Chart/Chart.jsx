@@ -13,6 +13,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import css from "./Chart.module.css";
+import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 
 const data = [
   { dateeng: '25/09', kolall: 6, kolnew: 3 },
@@ -99,6 +100,8 @@ export default function Chart() {
   let dateBeginStr = dateBegin.toISOString().substring(0, 10);
   let dateEndStr = dateEnd.toISOString().substring(0, 10);
 
+  const selectedServiceId = useSelector(selectSelectedServiceId); // необхідно для коректної роботи вибору сервісів
+
   const handleDataChangeBeg = (newData) => {
     setDateBegin(newData);
   };
@@ -125,7 +128,6 @@ export default function Chart() {
   //   );
   // };
 
-
   // const yTickFormatter = (tick) => {
   //   if (tick >= 10) {
   //     return "";
@@ -133,15 +135,28 @@ export default function Chart() {
   //   return tick;
   // };
 
+  // useEffect(() => {
+  //   const fetchNewCarsData = async () => {
+  //     await Promise.all([
+  //       dispatch(getNewCarsRange({ dateBeginStr, dateEndStr })),
+  //     ]);
+  //   };
+
+  //   fetchNewCarsData();
+  // }, [dispatch, dateBeginStr, dateEndStr]);
+
   useEffect(() => {
     const fetchNewCarsData = async () => {
-      await Promise.all([
-        dispatch(getNewCarsRange({ dateBeginStr, dateEndStr })),
-      ]);
+      if (!selectedServiceId) {
+        console.warn("Service ID is not available yet. Skipping fetch.");
+        return;
+      }
+
+      await dispatch(getNewCarsRange({ dateBeginStr, dateEndStr }));
     };
 
     fetchNewCarsData();
-  }, [dispatch, dateBeginStr, dateEndStr]);
+  }, [dispatch, dateBeginStr, dateEndStr, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
 
   let dataarr = newCarsData.map((el) => ({
     ...el,
@@ -159,11 +174,13 @@ export default function Chart() {
   return (
     <div className={css.containerchart}>
       <div className={css.charttitlebox}>
-      <p className={css.charttitle}>Машинозаїзди</p>
-        <p className={css.charttitleavto}>За період:<span className={css.titlekolvo} >30</span></p>
+        <p className={css.charttitle}>Машинозаїзди</p>
+        <p className={css.charttitleavto}>
+          За період:<span className={css.titlekolvo}>30</span>
+        </p>
       </div>
       <div className={css.areabox}>
-         <ResponsiveContainer className={css.responsecontainer}>
+        <ResponsiveContainer className={css.responsecontainer}>
           <BarChart data={data}>
             <defs>
               <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
@@ -204,7 +221,8 @@ export default function Chart() {
               //  padding={{ right: 10 }}
               tick={{ fontSize: 10 }}
               // tick={{ fill: 'transparent' }}
-                angle={-45} textAnchor="end"
+              angle={-45}
+              textAnchor="end"
             />
 
             <YAxis
@@ -223,24 +241,27 @@ export default function Chart() {
               // tickFormatter={yTickFormatter}
               //  tickFormatter={(value) => (value / 1000).toFixed(1)}
               width={13}
-              
+
               // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
               //  ticks={[0, 2, 4, 6, 8, 10]}
             />
 
-            <Tooltip content={<CustomTooltip />}
-            cursor={{fill:'rgb(107, 132, 255, 0.2)'}}/>
-            <Bar dataKey="kolall"
-              fill='var(--blue-btn-normal)'
-              radius={[7, 7, 0, 0]}
-             cursor="pointer"
-             
+            <Tooltip
+              content={<CustomTooltip />}
+              cursor={{ fill: "rgb(107, 132, 255, 0.2)" }}
             />
-            <Bar dataKey="kolnew"
+            <Bar
+              dataKey="kolall"
+              fill="var(--blue-btn-normal)"
+              radius={[7, 7, 0, 0]}
+              cursor="pointer"
+            />
+            <Bar
+              dataKey="kolnew"
               fill="var(--play-btn-triangle)"
               radius={[7, 7, 0, 0]}
               cursor="pointer"
-              />
+            />
             {/* <Area
               type="monotone"
               dataKey="count"
@@ -257,7 +278,6 @@ export default function Chart() {
               //     </text>
               //   )}
         // />*/}
-       
 
             {/* <Brush
                         dataKey="day"
@@ -274,7 +294,7 @@ export default function Chart() {
         /> */}
           </BarChart>{" "}
         </ResponsiveContainer>{" "}
-      </div> 
+      </div>
 
       <PeriodSelector
         startDate={dateBegin}

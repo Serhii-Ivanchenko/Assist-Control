@@ -18,22 +18,32 @@ import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import CurrentCarModal from "../Modals/CurrentCarModal/CurrentCarModal";
 import Modal from "../Modals/Modal/Modal.jsx";
 import styles from "./CurrentCarsItem.module.css";
+import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 
 export default function CurrentCarsItem() {
   const dispatch = useDispatch();
   const currentCars = useSelector(selectCurrentCars);
 
+  const selectedServiceId = useSelector(selectSelectedServiceId); // необхідно для коректної роботи вибору сервісів
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCar, setSelectedCar] = useState(null);
 
   useEffect(() => {
-    dispatch(getCurrentCars()).catch((error) => {
-      toast.error(
-        "Помилка при завантаженні поточних автомобілів",
-        error.message
-      );
-    });
-  }, [dispatch]);
+    if (!selectedServiceId) {
+      console.warn("Service ID is not available yet. Skipping fetch.");
+      return;
+    }
+
+    dispatch(getCurrentCars())
+      .unwrap()
+      .catch((error) => {
+        toast.error(
+          "Помилка при завантаженні поточних автомобілів",
+          error.message
+        );
+      });
+  }, [dispatch, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
 
   const handleModal = (car) => {
     setSelectedCar(car);

@@ -19,6 +19,7 @@ import Loader from "../Loader/Loader.jsx";
 import CreateAppointmentBtn from "../CreateAppointmentBtn/CreateAppointmentBtn.jsx";
 import ServiceBookingModal from "../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
 import Modal from "../Modals/Modal/Modal.jsx";
+import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 
 function addMonths(date, months) {
   let result = new Date(date);
@@ -41,6 +42,8 @@ export default function CalendarPagination({ isCrm }) {
   const carSelectDate = useSelector(selectDate);
   const isLoadingForCalendar = useSelector(selectLoadingForCalendar);
   // const actualPercent = useSelector(selectPercent);
+
+  const selectedServiceId = useSelector(selectSelectedServiceId); // необхідно для коректної роботи вибору сервісів
 
   if (carSelectDate === null) {
     dispatch(changeActualDate(currentDate));
@@ -81,13 +84,26 @@ export default function CalendarPagination({ isCrm }) {
   );
   let calendarMonth = queryMonth.toISOString().substring(0, 7);
 
+  // useEffect(() => {
+  //   const fetchCalendarData = async () => {
+  //     await Promise.all([dispatch(getCalendarByMonth(calendarMonth))]);
+  //   };
+
+  //   fetchCalendarData();
+  // }, [dispatch, calendarMonth]);
+
   useEffect(() => {
     const fetchCalendarData = async () => {
-      await Promise.all([dispatch(getCalendarByMonth(calendarMonth))]);
+      if (!selectedServiceId) {
+        console.warn("Service ID is not available yet. Skipping fetch.");
+        return;
+      }
+
+      await dispatch(getCalendarByMonth(calendarMonth));
     };
 
     fetchCalendarData();
-  }, [dispatch, calendarMonth]);
+  }, [dispatch, calendarMonth, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
 
   let isCurrentMonth = currentMonth === calendarMonth ? true : false;
   let crmSelectDate =
