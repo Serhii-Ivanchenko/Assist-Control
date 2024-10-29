@@ -8,6 +8,8 @@ import {
   BsPersonFill,
   BsTelephoneOutboundFill,
   BsStopwatch,
+  BsLayerBackward,
+  BsPlusLg,
 } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
@@ -86,9 +88,18 @@ export default function DayCarsItem({
           <button className={styles.btnDetail} onClick={openModal}>
             <p className={styles.btnDetailText}>Деталі</p>
           </button>
-          {/* <button className={styles.btnSave}>
-            <BsLayerBackward size={16} />
-          </button> */}
+          {isCRMBlock && status === "new" && (
+            <div className={styles.btnPlus}>
+              <button className={styles.plus}>
+                <BsPlusLg />
+              </button>
+            </div>
+          )}
+          {isCRMBlock && status === "new" && (
+            <button className={styles.btnSave}>
+              <BsLayerBackward size={16} />
+            </button>
+          )}
           {modalIsOpen && (
             <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
               <DetailedClientInfo onClose={handleModalClose} />

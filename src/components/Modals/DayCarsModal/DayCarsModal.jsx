@@ -1,4 +1,5 @@
 import styles from "./DayCarsModal.module.css";
+import DayCarsFilter from "../../DayCarsFilter/DayCarsFilter";
 import { FiGrid } from "react-icons/fi";
 import { BsListUl } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
@@ -10,11 +11,15 @@ import Loader from "../../Loader/Loader";
 
 export default function DayCarsModal({ onClose, isModal, carsData }) {
   const isLoading = useSelector(selectLoading);
-
   const [viewMode, setViewMode] = useState("grid");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleViewModeChange = (newMode) => {
     setViewMode(newMode);
+  };
+
+  const handleSearch = (term) => {
+    setSearchTerm(term); // Оновлюємо searchTerm
   };
 
   return (
@@ -42,13 +47,13 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
           />
           <span className={styles.slider}></span>
         </label>
-
+        <div className={styles.search}>
+          <DayCarsFilter value={searchTerm} onChange={handleSearch} /> {/* Передаємо searchTerm та handleSearch */}
+        </div>
         <button className={styles.closeButton} onClick={onClose}>
           <MdClose className={styles.iconClose} />
         </button>
       </div>
-      {/* <div className={styles.content}> */}
-      {/* <div className={styles.scrollableContent}> */}
       {isLoading ? (
         <Loader />
       ) : (
@@ -56,10 +61,9 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
           carsData={carsData}
           viewMode={viewMode}
           isModal={isModal}
+          searchTerm={searchTerm} // Передаємо searchTerm
         />
       )}
     </div>
-    //   </div>
-    // </div>
   );
 }
