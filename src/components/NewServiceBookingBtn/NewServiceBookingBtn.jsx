@@ -1,7 +1,7 @@
 import { useState } from "react";
 import css from "./NewServiceBookingBtn.module.css";
 import Modal from "../Modals/Modal/Modal.jsx";
-import { BsPlus, BsPlusSquareFill } from "react-icons/bs";
+import { BsPlusLg } from "react-icons/bs";
 import ServiceBookingModal from "../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
 
 export default function NewServiceBookingBtn() {
@@ -19,7 +19,7 @@ export default function NewServiceBookingBtn() {
     <div className={css.tooltip}>
       <button className={css.btn} onClick={openModal}>
         {/* <BsPlusSquareFill className={css.icon} /> */}
-        <BsPlus className={css.icon} />
+        <BsPlusLg className={css.icon} />
       </button>
       {modalIsOpen && (
         <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
