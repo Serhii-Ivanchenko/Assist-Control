@@ -6,12 +6,20 @@
     justify-content: center;
     border-radius: 50%;
     border: none;
-    background-color: var(--main-gray);
+    background-color: var(--green);
     cursor: pointer;
 }
 
 .icon {
-    color: var(--light-gray);
+    display: flex;
+    width: 14px;
+    height: 14px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    color: var(--green);
+    background-color: var(--white);
+    stroke-width: 2px;
 }
 
 .tooltip {
@@ -20,11 +28,12 @@
 
 @media only screen and (min-width: 1850px) {
     .tooltip {
-        margin-right: 9px;
+        margin-right: 10px;
     }
 }
 
-/* .tooltip .tooltipContent::after {
+/* 
+.tooltip .tooltipContent::after {
     content: " ";
     position: absolute;
     top: -45%;

@@ -9,7 +9,7 @@
     background-color: var(--input-stroke);
     padding: 6px;
     border-radius: 6px;
-    color: rgba(164, 164, 164, 1);
+    color: var(--light-gray);
     font-size: 13px;
     font-style: normal;
     font-weight: 400;

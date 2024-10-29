@@ -61,7 +61,7 @@ export const initialState = {
     newCars: [],
     forHours: {},
     monthlyLoad: {},
-    date: null,
+    date: new Date().toISOString().substring(0, 10),
     isLoading: false,
     error: null,
     loadPercent: null,
