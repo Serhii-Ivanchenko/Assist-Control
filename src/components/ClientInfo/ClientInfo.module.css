@@ -3,10 +3,7 @@
     padding-right: 40px;
 }
 
-.carCard{
-    display: flex;
-    justify-content: space-between;
-}
+
 
 .title{
     color: var(--white);
@@ -120,7 +117,7 @@
 
 .moneyBox{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     height: 82px;
     gap: 9px;
 }
@@ -226,6 +223,10 @@
     height: 18px;
 }
 
+.clock{
+    fill: var(--red);
+}
+
 .iconColor{
     fill: var(--icon-gray);
 }
@@ -257,7 +258,7 @@
 
 .contactsBtnBox{
     display: flex;
-    gap: 4px;
+    gap: 10px;
 }
 
 .category{
@@ -277,13 +278,16 @@
 
 
 
+
+
 .carInfo{
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    height: 265px;
+    gap: 30px;
+    height: 268px;
     overflow-y: auto;
     width: 567px;
+    /* position: relative; */
 }
 
 .carInfo::-webkit-scrollbar{
@@ -301,18 +305,28 @@
         background-color: #202020;
 }
 
-.carCard{
-width: 527px;
-height: 265px;
-padding-bottom: 5px;
+.carCard {
+    width: 527px;
+    display: flex;
+    /* justify-content: space-between; */
+    /* border: 1px solid rgba(0, 0, 0, 0.25); */
+/* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);   */
+
+    /* border-radius: 8px; */
 }
+
+.carCard:not(:last-child){
+    border-bottom: dashed 2px var(--contacts-info-bg);
+    padding-bottom: 12px;
+}
+
 
 .carImage{
     width: 126px;
     height: 126px;
 
     border-radius: 8px;
-    border: solid 1px #fff;
+    /* border: solid 1px #fff; */
 }
 
 .photoAndMainCarInfo{
@@ -437,32 +451,42 @@ margin-bottom: 12px;
     line-height: normal;
 }
 
-.btnBox{
+/* .btnBox{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+} */
+
+/* .addCarBtn{
+    display: none;
+} */
+
+.carListAndAddBtn{
+    position: relative;
 }
 
 .addCarBtn{
-    display: none;
-}
-
-.carCard:last-child .addCarBtn{
     border: none;
     display: flex;
     gap: 6px;
     padding: 4px 6px;
     align-items: center;
+    height: fit-content;
 
     border-radius: 6px;
     background-color: var(--green-btn-normal);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
     cursor: pointer;
+     position: absolute;
+     bottom: 0;
+     right: 0;
+
+    
 }
 
-.carCard:last-child .addCarBtn:hover{
+.addCarBtn:hover{
     background-color: var(--green-btn-hover);
 }
 
@@ -470,6 +494,10 @@ margin-bottom: 12px;
     width: 18px;
     height: 18px;
     fill: var(--white);
+}
+
+.mainContent{
+    margin-right: 78px;
 }
 
 
