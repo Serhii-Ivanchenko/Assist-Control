@@ -1,10 +1,10 @@
 import { useState } from "react";
-import css from "./Archive.module.css";
+import css from "./NewServiceBookingBtn.module.css";
 import Modal from "../Modals/Modal/Modal.jsx";
-import ArchiveModal from "../Modals/ArchiveModal/ArchiveModal.jsx";
-import { BsArchive } from "react-icons/bs";
+import { BsPlus, BsPlusSquareFill } from "react-icons/bs";
+import ServiceBookingModal from "../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
 
-export default function Archive() {
+export default function NewServiceBookingBtn() {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -18,14 +18,15 @@ export default function Archive() {
   return (
     <div className={css.tooltip}>
       <button className={css.btn} onClick={openModal}>
-        <BsArchive className={css.icon} />
+        {/* <BsPlusSquareFill className={css.icon} /> */}
+        <BsPlus className={css.icon} />
       </button>
       {modalIsOpen && (
         <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-          <ArchiveModal onClose={handleModalClose} />
+          <ServiceBookingModal onClose={handleModalClose} />
         </Modal>
       )}
-      <span className={css.tooltipContent}>Архів</span>
+      <span className={css.tooltipContent}>Створити запис</span>
     </div>
   );
 }

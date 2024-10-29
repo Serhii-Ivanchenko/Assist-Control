@@ -118,7 +118,7 @@
         margin-right: 12px;
     }
 }
-
+/* 
 .tooltip .tooltipContent::after {
     content: " ";
     position: absolute;
@@ -127,7 +127,7 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent rgba(74, 74, 74, 1) transparent;
-}
+} */
 
 .tooltip .tooltipContent {
     font-size: 10px;

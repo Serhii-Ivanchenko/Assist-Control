@@ -18,7 +18,7 @@
     position: relative;
 }
 
-.tooltip .tooltipContent::after {
+/* .tooltip .tooltipContent::after {
     content: " ";
     position: absolute;
     top: -45%;
@@ -26,7 +26,7 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent rgba(74, 74, 74, 1) transparent;
-}
+} */
 
 .tooltip .tooltipContent {
     font-size: 10px;

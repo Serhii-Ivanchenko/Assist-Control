@@ -45,9 +45,14 @@ export default function CalendarPagination({ isCrm }) {
 
   const selectedServiceId = useSelector(selectSelectedServiceId); // необхідно для коректної роботи вибору сервісів
 
-  if (carSelectDate === null) {
-    dispatch(changeActualDate(currentDate));
-  }
+  // if (carSelectDate === null) {
+  //   dispatch(changeActualDate(currentDate));
+  // }
+  useEffect(() => {
+    if (carSelectDate === null) {
+      dispatch(changeActualDate(currentDate));
+    }
+  }, [carSelectDate, dispatch, currentDate]);
   //  const currentDay = new Date().getDate();
 
   const [queryMonth, setQueryMonth] = useState(new Date());
@@ -84,14 +89,6 @@ export default function CalendarPagination({ isCrm }) {
   );
   let calendarMonth = queryMonth.toISOString().substring(0, 7);
 
-  // useEffect(() => {
-  //   const fetchCalendarData = async () => {
-  //     await Promise.all([dispatch(getCalendarByMonth(calendarMonth))]);
-  //   };
-
-  //   fetchCalendarData();
-  // }, [dispatch, calendarMonth]);
-
   useEffect(() => {
     const fetchCalendarData = async () => {
       if (!selectedServiceId) {
@@ -106,12 +103,15 @@ export default function CalendarPagination({ isCrm }) {
   }, [dispatch, calendarMonth, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
 
   let isCurrentMonth = currentMonth === calendarMonth ? true : false;
-  let crmSelectDate =
-    carSelectDate.substring(8, 10) +
-    "." +
-    carSelectDate.substring(5, 7) +
-    "." +
-    carSelectDate.substring(2, 4);
+  
+  let crmSelectDate = carSelectDate
+    ? carSelectDate.substring(8, 10) +
+      "." +
+      carSelectDate.substring(5, 7) +
+      "." +
+      carSelectDate.substring(2, 4)
+    : "";
+
   const monthData = Object.entries(monthlyLoadData).map(([date, percent]) => ({
     date,
     percent,
