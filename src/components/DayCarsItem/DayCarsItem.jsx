@@ -19,7 +19,6 @@ import { renderTime } from "../../utils/renderTime.js";
 import renderStatus from "../../utils/renderStatus.jsx";
 import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 
-
 export default function DayCarsItem({
   carNumber,
   auto,
@@ -33,7 +32,6 @@ export default function DayCarsItem({
   date_s,
   client,
 }) {
-
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -44,43 +42,44 @@ export default function DayCarsItem({
     setIsOpen(false);
   };
 
-
   const carsData = useSelector(selectDayCars);
   const car = carsData.find((car) => car.carNumber === carNumber);
 
   const carPhoto = photoUrl || absentAutoImg;
 
- 
   return (
     <div
-    className={clsx(
-      styles.dayCarsItemContainer,
-      isModal && styles.modalDayCarsItemContainer,
-      isCRMBlock && styles.crmBlockDayCarsItemContainer
-    )}
-    style={getBackgroundStyle(status)}
-
-  >
+      className={clsx(
+        styles.dayCarsItemContainer,
+        isModal && styles.modalDayCarsItemContainer,
+        isCRMBlock && styles.crmBlockDayCarsItemContainer
+      )}
+      style={getBackgroundStyle(status)}
+    >
       <div className={styles.userInfo}>
         <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>
           <div className={styles.infoName}>
             <BsPersonFill className={styles.iconHuman} color="#617651" />
-            <span className={styles.textName}>{client ? client.name : "Гість"}</span>
+            <span className={styles.textName}>
+              {client ? client.name : "Гість"}
+            </span>
           </div>
           <div className={styles.infoTel}>
             <BsTelephoneOutboundFill
               className={styles.iconTel}
               color="#006D95"
             />
-            <span className={styles.textTel}>{client ? client.phone : "ххх-ххххххх"}</span>
+            <span className={styles.textTel}>
+              {client ? client.phone : "ххх-ххххххх"}
+            </span>
           </div>
           <div className={styles.infoCar}>
             <IoCarSportSharp size={13} color="#A97878" />
             <span className={styles.nameCar}>{auto}</span>
           </div>
         </div>
-        <div className={styles.infoVin}>
+        <div className={clsx(styles.infoVin, isCRMBlock && styles.crmInfoVin)}>
           <span className={styles.vinNum}>{vin ? vin : "VIN-XXXXXXXXXXX"}</span>
         </div>
         <div className={styles.btnContainer}>
@@ -91,15 +90,15 @@ export default function DayCarsItem({
             <BsLayerBackward size={16} />
           </button> */}
           {modalIsOpen && (
-          <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-            <DetailedClientInfo onClose={handleModalClose} />
-          </Modal>
-        )}
+            <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+              <DetailedClientInfo onClose={handleModalClose} />
+            </Modal>
+          )}
         </div>
       </div>
-      <div className={styles.carsInfo}>
+      <div className={clsx(styles.carsInfo, isCRMBlock && styles.crmcarsInfo)}>
         <div className={styles.carInfoLeft}>
-          <div className={styles.rating}>
+          <div className={clsx(styles.rating, isCRMBlock && styles.crmRating)}>
             <AiFillStar color="var(--star-orange)" />
             <AiFillStar color="var(--star-orange)" />
             <AiFillStar color="var(--star-orange)" />
@@ -112,13 +111,13 @@ export default function DayCarsItem({
         </div>
         <div className={styles.carInfoRight}>
           <div className={styles.carPhoto}>
-          <img
+            <img
               className={styles.carImg}
               src={carPhoto}
               alt="Car image"
               onError={(e) => {
-                e.target.onerror = null; 
-                e.target.src = absentAutoImg; 
+                e.target.onerror = null;
+                e.target.src = absentAutoImg;
               }}
             />
           </div>

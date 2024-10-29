@@ -190,10 +190,6 @@
 }
 
 .vinNum {
-  height: auto;
-  padding: 3px 5px;
-  border-radius: 6px;
-  background: var(--main-gray);
 
   color: var(--white);
   font-size: 10px;
@@ -205,15 +201,22 @@
   display: flex;
   text-align: center;
   margin-bottom: 5px;
+
+  height: auto;
+  padding: 3px 5px;
+  border-radius: 6px;
+  background: var(--main-gray);
 }
 
 
 @media only screen and (min-width: 1850px) {
   .vinNum {
     font-size: 14px;
-    height: 22px;
-    padding: 3px 10px;
+  }
 
+  .infoVin{
+    padding: 3px 10px;
+    height: 22px;
   }
 }
 
@@ -559,4 +562,18 @@
 .crmBlockDayCarsItemContainer{
   width: 365px;
   height: 200px;
+  padding: 10px 12px;
+}
+
+.crmInfoVin {
+  width: 161px;
+}
+
+.crmRating {
+  width: 78px;
+  height: 11px;
+}
+
+.crmcarsInfo{
+  margin-left: -10px;
 }

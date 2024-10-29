@@ -100,7 +100,8 @@
   
 }
 
-.noScroll {
-  overflow-y: visible;
-  max-height: none;
+.crmCarList{
+  gap: 16px;
+  width: 365px;
+  height: 200px;
 }
