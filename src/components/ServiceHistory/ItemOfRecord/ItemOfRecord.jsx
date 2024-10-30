@@ -74,7 +74,7 @@ export default function ItemOfRecord({ item, messages }) {
                   )}
                   onClick={() => toogleDialogModal()}
                 >
-                  <BsCaretDownFill color="var(--icon-gray)" />
+                  <BsCaretDownFill className={css.dialogBtnIcon} />
                 </button>
               </div>
             </div>

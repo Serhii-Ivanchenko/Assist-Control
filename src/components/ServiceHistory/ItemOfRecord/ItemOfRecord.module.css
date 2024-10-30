@@ -103,6 +103,11 @@
   background-color: none;
   transform: rotate(180deg);
 }
+.dialogBtnIcon {
+  color: var(--icon-gray);
+  display: flex;
+  cursor: pointer;
+}
 /* Тіло першого акардіона */
 
 :global(.MuiAccordionSummary-content) {
@@ -110,7 +115,7 @@
 }
 :global(.MuiPaper-root::before) {
   display: none;
-} 
+}
 .bodyAccardionWrapper {
   margin-top: 20px;
 }
