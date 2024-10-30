@@ -35,8 +35,8 @@ export default function ItemOfRecord({ item, messages }) {
         <div className={css.line}></div>
       </div>
       <Accordion
+        defaultExpanded={item.index === "1"}
         disableGutters={true}
-        classes={{}}
         sx={{
           background: "none",
           color: "inherit",

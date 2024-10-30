@@ -63,14 +63,16 @@ export default function ServiceHistory() {
       time: "16:08",
     },
     {
-      index: "2",
+      index: "4",
       totalkilometrs: "246747",
       newkilometrs: "9272",
       date: "16.06.2024",
       time: "16:08",
     },
   ];
-  const sortedArr = recordRace.sort((a,b) => a.totalkilometrs > b.totalkilometrs ? -1 : 1 );
+  const sortedArr = recordRace.sort((a, b) =>
+    a.totalkilometrs > b.totalkilometrs ? -1 : 1
+  );
   return (
     <div>
       <h3 className={css.title}>Історія обслуговування</h3>
