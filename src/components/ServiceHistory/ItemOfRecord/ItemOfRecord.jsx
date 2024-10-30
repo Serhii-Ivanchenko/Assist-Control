@@ -49,8 +49,6 @@ export default function ItemOfRecord({ item, messages }) {
             background: "none",
             color: "inherit",
             padding: "0",
-            margin: "0",
-            border: "0",
             WebkitBoxShadow: "none",
           }}
         >
@@ -87,8 +85,6 @@ export default function ItemOfRecord({ item, messages }) {
             background: "none",
             color: "inherit",
             padding: "0",
-            margin: "0",
-            border: "0",
             WebkitBoxShadow: "none",
           }}
         >

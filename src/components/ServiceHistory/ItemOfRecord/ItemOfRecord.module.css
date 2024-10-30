@@ -108,6 +108,9 @@
 :global(.MuiAccordionSummary-content) {
   margin: 0 !important;
 }
+:global(.MuiPaper-root::before) {
+  display: none;
+} 
 .bodyAccardionWrapper {
   margin-top: 20px;
 }
