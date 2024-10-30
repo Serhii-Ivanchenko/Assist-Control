@@ -11,12 +11,9 @@ import {
   BsXLg,
 } from "react-icons/bs";
 import { GiSoundWaves } from "react-icons/gi";
-import {
-  AccordionItem,
-  AccordionItemButton,
-  AccordionItemHeading,
-  AccordionItemPanel,
-} from "react-accessible-accordion";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 import userAvater from "../../../assets/images/ava.png";
 import TranscriptionMessage from "../TranscriptionMessage/TranscriptionMessage";
 import css from "./ItemOfRecord.module.css";
@@ -37,39 +34,64 @@ export default function ItemOfRecord({ item, messages }) {
         <BsRecordCircle className={css.circle} />
         <div className={css.line}></div>
       </div>
-      <AccordionItem>
-        <AccordionItemHeading>
-          <AccordionItemButton>
-            <div className={css.listItemWrapper}>
-              <div className={css.listItem} onClick={() => toogleDialogModal()}>
-                <div className={css.kilometersWrapper}>
-                  <div className={css.numberOfKilometers}>
-                    <SlSpeedometer /> <p>{item.totalkilometrs}</p>
-                  </div>
-                  <div className={css.kilometersDriven}>
-                    <SlSpeedometer /> <p>{item.newkilometrs}</p>
-                  </div>
+      <Accordion
+        disableGutters={true}
+        classes={{}}
+        sx={{
+          background: "none",
+          color: "inherit",
+          WebkitBoxShadow: "none",
+        }}
+      >
+        <AccordionSummary
+          aria-controls="panel1a-content"
+          sx={{
+            background: "none",
+            color: "inherit",
+            padding: "0",
+            margin: "0",
+            border: "0",
+            WebkitBoxShadow: "none",
+          }}
+        >
+          <div className={css.listItemWrapper}>
+            <div className={css.listItem} onClick={() => toogleDialogModal()}>
+              <div className={css.kilometersWrapper}>
+                <div className={css.numberOfKilometers}>
+                  <SlSpeedometer /> <p>{item.totalkilometrs}</p>
                 </div>
-                <div className={css.dateWrapper}>
-                  <div className={css.date}>
-                    <BsCalendar2Week /> <p>{item.date}</p>
-                    <p>{item.time}</p>
-                  </div>
-                  <button
-                    className={clsx(
-                      css.unActiveDialogBtn,
-                      showDialogModal ? css.activeDialogBtn : null
-                    )}
-                    onClick={() => toogleDialogModal()}
-                  >
-                    <BsCaretDownFill color="var(--icon-gray)" />
-                  </button>
+                <div className={css.kilometersDriven}>
+                  <SlSpeedometer /> <p>{item.newkilometrs}</p>
                 </div>
               </div>
+              <div className={css.dateWrapper}>
+                <div className={css.date}>
+                  <BsCalendar2Week /> <p>{item.date}</p>
+                  <p>{item.time}</p>
+                </div>
+                <button
+                  className={clsx(
+                    css.unActiveDialogBtn,
+                    showDialogModal ? css.activeDialogBtn : null
+                  )}
+                  onClick={() => toogleDialogModal()}
+                >
+                  <BsCaretDownFill color="var(--icon-gray)" />
+                </button>
+              </div>
             </div>
-          </AccordionItemButton>
-        </AccordionItemHeading>
-        <AccordionItemPanel>
+          </div>
+        </AccordionSummary>
+        <AccordionDetails
+          sx={{
+            background: "none",
+            color: "inherit",
+            padding: "0",
+            margin: "0",
+            border: "0",
+            WebkitBoxShadow: "none",
+          }}
+        >
           {
             <div className={css.bodyAccardionWrapper}>
               <div className={css.btnDownloadsWrapper}>
@@ -123,7 +145,14 @@ export default function ItemOfRecord({ item, messages }) {
                   </Modal>
                 </div>
                 <div className={css.secondAcordionWrapper}>
-                  <AccordionItem>
+                  <Accordion
+                    disableGutters={true}
+                    sx={{
+                      background: "none",
+                      color: "inherit",
+                      WebkitBoxShadow: "none",
+                    }}
+                  >
                     <div className={css.secondAcordion}>
                       <div className={css.callRecordWrapper}>
                         <img src={userAvater} alt="" />
@@ -138,28 +167,32 @@ export default function ItemOfRecord({ item, messages }) {
                           <p>1:26</p>
                         </div>
                       </div>
-                      <AccordionItemHeading>
-                        <AccordionItemButton>
-                          <button
-                            className={css.transcriptionToggleBtn}
-                            onClick={() => toogleTranscription()}
-                          >
-                            <p>Aa</p>
-                            <BsChevronDown
-                              className={clsx(
-                                css.transcriptionIcon,
-                                transcription
-                                  ? css.activeTranscriptionIcon
-                                  : null
-                              )}
-                              strokeWidth={3}
-                              size={14}
-                            />
-                          </button>
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
+                      <AccordionSummary
+                        sx={{
+                          padding: "0",
+                        }}
+                      >
+                        <button
+                          className={css.transcriptionToggleBtn}
+                          onClick={() => toogleTranscription()}
+                        >
+                          <p>Aa</p>
+                          <BsChevronDown
+                            className={clsx(
+                              css.transcriptionIcon,
+                              transcription ? css.activeTranscriptionIcon : null
+                            )}
+                            strokeWidth={3}
+                            size={14}
+                          />
+                        </button>
+                      </AccordionSummary>
                     </div>
-                    <AccordionItemPanel>
+                    <AccordionDetails
+                      sx={{
+                        padding: "0",
+                      }}
+                    >
                       <div className={css.scrollBarWrapper}>
                         <div className={css.secondAcordionBody}>
                           <button className={css.transcriptionImportantBtn}>
@@ -178,14 +211,14 @@ export default function ItemOfRecord({ item, messages }) {
                           </ul>
                         </div>
                       </div>
-                    </AccordionItemPanel>
-                  </AccordionItem>
+                    </AccordionDetails>
+                  </Accordion>
                 </div>
               </div>
             </div>
           }
-        </AccordionItemPanel>
-      </AccordionItem>
+        </AccordionDetails>
+      </Accordion>
     </li>
   );
 }
