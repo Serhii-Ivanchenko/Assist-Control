@@ -44,12 +44,8 @@ export default function ItemOfRecord({ item, messages }) {
         }}
       >
         <AccordionSummary
-          aria-controls="panel1a-content"
           sx={{
-            background: "none",
-            color: "inherit",
             padding: "0",
-            WebkitBoxShadow: "none",
           }}
         >
           <div className={css.listItemWrapper}>
@@ -82,10 +78,7 @@ export default function ItemOfRecord({ item, messages }) {
         </AccordionSummary>
         <AccordionDetails
           sx={{
-            background: "none",
-            color: "inherit",
             padding: "0",
-            WebkitBoxShadow: "none",
           }}
         >
           {
