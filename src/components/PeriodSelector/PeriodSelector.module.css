@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-     /* margin-top: -13px;  */
+    /* margin-top: -13px;  */
     /* margin-left: -2px; */
     /* margin-bottom: 15px; */
     /* gap: 5px; */
@@ -15,7 +15,7 @@
 
 @media only screen and (min-width: 1850px) {
     .containerperiodselector {
-         margin-top: 5px; 
+        margin-top: 5px;
         height: 34px;
     }
 }
@@ -74,26 +74,42 @@
     }
 }
 
-
-.icon {
+.calendarBtn {
     width: 14px;
     height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
+
     right: 8px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--Icon-Gray);
     cursor: pointer;
     pointer-events: auto;
+    background-color: var(--bg-input);
+    border-radius: 50%;
+    border-color: transparent;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.icon {
+    width: 12px;
+    height: 12px;
+    color: var(--light-gray);
 }
 
 @media only screen and (min-width: 1850px) {
-    .icon {
+    .calendarBtn {
         width: 26px;
         height: 26px;
-        padding: 6px;
-        border-radius: 46px;
+
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    .icon {
+        width: 14px;
+        height: 14px;
     }
 }
 
@@ -125,7 +141,7 @@
 }
 
 .leftdatepickerdropdown {
-    margin-left: 30px;
+    /* margin-left: 30px; */
 }
 
 .datepickerdropdown {
@@ -135,7 +151,7 @@
 
 @media only screen and (min-width: 1850px) {
     .datepickerdropdown {
-        margin-left: 0px;
+        margin-left: -23px;
 
     }
 }
