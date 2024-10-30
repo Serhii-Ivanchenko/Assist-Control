@@ -43,7 +43,7 @@
     line-height: normal;
 }
 
-.connectionSelect{
+/* .connectionSelect{
     width: 100%;
     display: flex;
     padding: 10px 10px 10px 16px;
@@ -63,7 +63,8 @@
     line-height: normal;
 
     appearance: none;
-}
+} */
+
 .input{
 display: flex;
     padding: 6px 10px;
@@ -74,6 +75,14 @@ display: flex;
 
     border-radius: 12px;
     background-color: var(--bg-input);
+}
+
+.inputDate{
+    width: 144px;
+}
+
+.inputTime{
+    width: 100px;
 }
 
 .date{
