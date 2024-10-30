@@ -48,6 +48,15 @@
   object-fit: cover;
 }
 
+@media only screen and (min-width: 1850px) {
+  .infoName {
+    width: 90px;
+    overflow: hidden;
+    white-space: nowrap; 
+  }
+}
+
+
 .textName {
   color: var(--white);
   font-size: 16px;

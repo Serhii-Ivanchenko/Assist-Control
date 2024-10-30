@@ -101,8 +101,13 @@
 }
 
 .navLink.active .videoIcon,
-.navLink.active .iconCrm,
 .navLink.active .iconAvto,
 .navLink.active .iconSettinds {
     color: black;
+}
+
+.navLink.active .iconCrm{
+    fill: black;
+    stroke: black;
+    stroke-width: 5px;
 }

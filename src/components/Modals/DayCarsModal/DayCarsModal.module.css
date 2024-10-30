@@ -58,7 +58,6 @@
 
 .switch {
     font-size: 17px;
-    /* position: relative; */
     display: inline-block;
     width: 50px;
     height: 27px;
@@ -193,4 +192,11 @@
 
 .active {
     transition: color 0.3s ease;
+}
+
+.search {
+    position: absolute; 
+    top: 26px;
+    left: 96px; 
+    transform: translateY(-50%); 
 }
