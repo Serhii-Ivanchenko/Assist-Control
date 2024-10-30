@@ -64,7 +64,7 @@ export default function ItemOfRecord({ item, messages }) {
               </div>
               <div className={css.dateWrapper}>
                 <div className={css.date}>
-                  <BsCalendar2Week /> <p>{item.date}</p>
+                  <BsCalendar2Week size={18} /> <p>{item.date}</p>
                   <p>{item.time}</p>
                 </div>
                 <button
@@ -155,7 +155,7 @@ export default function ItemOfRecord({ item, messages }) {
                         <div className={css.callRecord}>
                           <div>
                             <BsPlayFill
-                              size={24}
+                              size={26}
                               fill="var(--play-btn-triangle)"
                             />
                           </div>
