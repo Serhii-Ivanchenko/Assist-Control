@@ -3,11 +3,16 @@ import css from "./NotificationModal.module.css"
 import { BsAlarm } from "react-icons/bs";
 import { BsCaretDownFill } from "react-icons/bs";
 import { BsFillTelephoneOutboundFill } from "react-icons/bs";
+import { BsCalendar2Week } from "react-icons/bs";
+import { BsWatch } from "react-icons/bs";
+import { BsXLg } from "react-icons/bs";
+
+
 
 
 // import { newDate } from "react-datepicker/dist/date_utils"
 
-export default function NotificationModal() {
+export default function NotificationModal({onClose}) {
 
     const initialValues = {
         date: new Date(),
@@ -16,6 +21,7 @@ export default function NotificationModal() {
         
     return (
         <div className={css.notificationBox}> 
+            <BsXLg onClick={onClose} className={css.crossBtn }/>
             <p className={css.title}>Обрати дату</p>
             <Formik initialValues={initialValues} onSubmit={() => { }}>
                 <Form className={css.notifForm}>
@@ -31,12 +37,22 @@ export default function NotificationModal() {
                     <div className={css.dateAndTimeBox}> 
                         <div className={css.inputBox}>
                             <label htmlFor="" className={css.label}>Дата</label>
-                            <Field type="date" name="date" className={css.date } />
+
+                            <div className={css.input}>
+                            <Field type="date" name="date" className={`${css.date} ${css.dateDate}`} />
+                        <button type="button" className={css.dateBtn}><BsCalendar2Week className={css.iconBtn}  size={18}/>
+                                </button>
+                            </div>
                         </div>
 
                         <div className={css.inputBox}>                          
-                            <label htmlFor="" className={css.label}>Час</label>                           
-                            <Field type="time" name="time" className={css.date }/>
+                            <label htmlFor="" className={css.label}>Час</label>
+                            
+                            <div className={css.input}>                       
+                            <Field type="time" name="time" className={css.date} />
+                            <button type="button"  className={css.dateBtn}><BsWatch className={css.iconBtn} size={18}/>
+                                </button>
+                                </div>
                         </div>
                     </div>
 
@@ -46,7 +62,7 @@ export default function NotificationModal() {
                     </div>
                     
             <div className={css.btnBox}>
-                <button type="button" className={css.closeBtn}>Закрити</button>
+                <button type="button" className={css.closeBtn} onClick={onClose}>Закрити</button>
                 <button type="submit" className={css.createBtn}> <BsAlarm size={18}/>
 Створити нагадування</button>
                     </div>
