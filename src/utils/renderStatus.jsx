@@ -22,7 +22,7 @@ const renderStatus = (status, complete_d, styles = {}) => {
     statusText = "ремонт";
     background = "var(--status-gradient-repair)";
     borderColor = "var(--glow-repair)"; 
-  } else if (status === "check_repair") {
+  } else if (status === "diagnostic") {
     statusClass = styles.checkRepair || "";
     statusText = "діагностика";
     background = "var(--status-gradient-diag)";
@@ -67,7 +67,7 @@ const renderStatus = (status, complete_d, styles = {}) => {
         />
       );
       break;
-    case "check_repair":
+    case "diagnostic":
       icon = (
         <BsUiChecksGrid
           className={clsx(styles.icon, statusClass)}
