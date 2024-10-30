@@ -4,20 +4,20 @@
 
 @media only screen and (min-width: 1850px) {
     .inputWrapper {
-        margin-right: 6px;
+        /* margin-right: 6px; */
     }
 }
 
 .input {
     width: 188px;
     height: 27px;
-    flex-shrink: 0;
+    /* flex-shrink: 0; */
     background-color: var(--bg-input);
     border: none;
     border-radius: 13px;
-    padding: 7px 7px 7px 30px;
-    color: rgba(255, 255, 255, 1);
-    font-variant-numeric: lining-nums proportional-nums;
+    padding: 7px 7px 7px 45px;
+    color: var(--white);
+    /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
     font-size: 13px;
     font-style: normal;
@@ -26,14 +26,14 @@
 }
 
 .input::placeholder {
-    color: #858585;
-    font-variant-numeric: lining-nums proportional-nums;
+    color: var(--text-gray);
+    /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
     line-height: 1.18em;
-    padding: 5px 30px 5px 17px;
+    /* padding: 5px 30px 5px 17px; */
 }
 
 .button {
@@ -45,7 +45,7 @@
     height: 24px;
     border-radius: 50%;
     border: none;
-    background-color: rgba(74, 74, 74, 1);
+    background-color: var(--main-gray);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,5 +54,5 @@
 
 .icon {
     flex-shrink: 0;
-    color: rgba(255, 255, 255, 1)
+    color: var(--white);
 }

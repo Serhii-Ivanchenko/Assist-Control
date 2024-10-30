@@ -5,7 +5,7 @@ export default function DetailsBtn({ onClick }) {
   return (
     <div className={styles.btnContainer}>
       <button className={styles.btn} onClick={onClick}>
-        Авто у роботі
+        Авто в роботі
         <IoCarSportSharp className={styles.iconAvto} />
       </button>
     </div>
