@@ -72,12 +72,17 @@
 .date {
   font-weight: 600;
   display: flex;
+  align-items: center;
   gap: 10px;
   padding: 10px 14px;
   border-radius: 24px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-
+.numberOfKilometers > div,
+.kilometersDriven > div,
+.date > div {
+  height: 16px;
+}
 .numberOfKilometers {
   color: var(--current-mileage-text);
   background: var(--current-mileage-bg);
@@ -122,6 +127,7 @@
 
 .btnDownloadsWrapper {
   display: flex;
+  justify-content: space-between;
   gap: 24px;
 }
 
@@ -195,7 +201,7 @@
 
 .secondAcordionWrapper {
   padding: 10px 12.5px;
-  width: 410px;
+  width: 430px;
   border-radius: 12px;
   background: #31353e;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
