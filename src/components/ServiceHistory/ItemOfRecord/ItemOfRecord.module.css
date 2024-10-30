@@ -28,7 +28,8 @@
   background: none;
 }
 
-.itemIcon {
+.itemIcon,
+.MuiAccordion-region {
   background-color: var(--bg-secondary);
 }
 
@@ -102,8 +103,19 @@
   background-color: none;
   transform: rotate(180deg);
 }
-
+.dialogBtnIcon {
+  color: var(--icon-gray);
+  display: flex;
+  cursor: pointer;
+}
 /* Тіло першого акардіона */
+
+:global(.MuiAccordionSummary-content) {
+  margin: 0 !important;
+}
+:global(.MuiPaper-root::before) {
+  display: none;
+}
 .bodyAccardionWrapper {
   margin-top: 20px;
 }
@@ -141,7 +153,7 @@
   border: none;
 }
 
-.downloadBtn>p {
+.downloadBtn > p {
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
@@ -203,7 +215,7 @@
   align-items: center;
 }
 
-.callRecordWrapper>img {
+.callRecordWrapper > img {
   width: 48px;
   height: 48px;
 }
@@ -220,7 +232,7 @@
   background-color: var(--player-secondary-bg);
 }
 
-.callRecord>div {
+.callRecord > div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -232,7 +244,7 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.callRecord>p {
+.callRecord > p {
   font-size: 16px;
   font-weight: 600;
 }
@@ -251,7 +263,7 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.transcriptionToggleBtn>p {
+.transcriptionToggleBtn > p {
   font-size: 16px;
   font-weight: 600;
 }
@@ -260,6 +272,7 @@
 
 .scrollBarWrapper {
   padding: 11px 10px 10px 21px;
+  margin-top: 10px;
   border-radius: 12px;
   background: #2c2d31;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -301,7 +314,7 @@
   background-color: var(--player-secondary-bg);
 }
 
-.transcriptionImportantBtn>p {
+.transcriptionImportantBtn > p {
   font-size: 14px;
   font-weight: 300;
 }

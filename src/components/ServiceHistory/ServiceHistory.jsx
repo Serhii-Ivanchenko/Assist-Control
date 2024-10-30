@@ -1,4 +1,3 @@
-import { Accordion } from "react-accessible-accordion";
 import css from "./ServiceHistory.module.css";
 import ItemOfRecord from "./ItemOfRecord/ItemOfRecord";
 
@@ -67,7 +66,6 @@ export default function ServiceHistory() {
   return (
     <div>
       <h3 className={css.title}>Історія обслуговування</h3>
-      <Accordion allowMultipleExpanded="true" allowZeroExpanded="true">
         <div className={css.recordsListWrapper}>
           <ul className={css.listOfAccardion}>
             {recordRace.map((item) => (
@@ -75,7 +73,6 @@ export default function ServiceHistory() {
             ))}
           </ul>
         </div>
-      </Accordion>
     </div>
   );
 }
