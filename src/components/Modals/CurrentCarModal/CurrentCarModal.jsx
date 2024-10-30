@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
@@ -6,7 +6,8 @@ import toast from "react-hot-toast";
 import { calculateTimeInService } from "../../../utils/calculateTimeInService";
 import { getStatusDetails } from "../../../utils/getStatusDetails";
 import { changeCarStatus } from "../../../redux/cars/operations";
-import { getCurrentCars } from "../../../redux/cars/operations";
+import { getCurrentCars, getCarsByDate } from "../../../redux/cars/operations";
+import {selectDate} from '../../../redux/cars/selectors.js'
 
 import absentAutoImg from "../../../assets/images/absentAutoImg.webp";
 import flag from "../../../assets/images/flagUa.webp";
@@ -26,6 +27,7 @@ import styles from "./CurrentCarModal.module.css";
 function CurrentCarModal({ onClose, car, status }) {
   const dispatch = useDispatch();
   const [selectedStatus, setSelectedStatus] = useState(status);
+  const currentDate = useSelector(selectDate);
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -81,6 +83,7 @@ function CurrentCarModal({ onClose, car, status }) {
     dispatch(changeCarStatus({ carId: car.id, status: selectedStatus }))
       .then(() => {
         dispatch(getCurrentCars());
+        dispatch(getCarsByDate(currentDate));
       })
       .catch((error) => {
         toast.error("Помилка при оновленні статусу автомобіля", error.message);
