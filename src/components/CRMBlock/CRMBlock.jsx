@@ -9,16 +9,16 @@ import toast from 'react-hot-toast';
 
 const statusMapping = {
     new: 'Нова',
+    diagnostic: 'Діагностика',
     repair: 'Ремонт',
-    check_repair: 'Діагностика',
     complete: 'Завершено',
 };
 
 const getSvgIcon = (index) => {
     const svgData = [
         null,
-        { fill: "#994CA5" },
         { fill: "var(--blue)" },
+        { fill: "#994CA5" },
         { fill: "#246D4D" }
     ];
 
@@ -78,12 +78,10 @@ export default function CRMBlock() {
 
                     return (
                         <div key={status} className={css.column}>
-                            <div className={css.carListBlock}>
-                                <DayCarsList 
+                            <DayCarsList 
                                     carsData={filteredCars} 
                                     isCRMBlock
                                 />
-                            </div>
                         </div>
                     );
                 })}

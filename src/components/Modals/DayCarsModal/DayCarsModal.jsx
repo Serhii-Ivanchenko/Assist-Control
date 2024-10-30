@@ -14,6 +14,7 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
   const [viewMode, setViewMode] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
 
+
   const handleViewModeChange = (newMode) => {
     setViewMode(newMode);
   };
@@ -22,19 +23,26 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
     setSearchTerm(term); // Оновлюємо searchTerm
   };
 
+  const filteredCars = () => {
+    if (!searchTerm) return carsData; // Повертаємо всі автомобілі, якщо searchTerm порожній
+  
+    const lowerCaseSearchTerm = searchTerm.toLowerCase(); // Перетворюємо searchTerm в нижній регістр
+  
+    return carsData.filter(car => {
+      const { plate, auto } = car; // Передбачається, що car має поля plate і auto
+      return plate.toLowerCase().includes(lowerCaseSearchTerm) || auto.toLowerCase().includes(lowerCaseSearchTerm); // Перетворюємо plate і auto в нижній регістр
+    });
+  };
+
   return (
     <div className={styles.containerCarModal}>
       <div className={styles.header}>
         <label className={styles.switch}>
           <FiGrid
-            className={`${styles.iconLeft} ${
-              viewMode === "grid" ? styles.active : ""
-            }`}
+            className={`${styles.iconLeft} ${viewMode === "grid" ? styles.active : ""}`}
           />
           <BsListUl
-            className={`${styles.iconRight} ${
-              viewMode === "list" ? styles.active : ""
-            }`}
+            className={`${styles.iconRight} ${viewMode === "list" ? styles.active : ""}`}
           />
           <input
             type="checkbox"
@@ -48,7 +56,7 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
           <span className={styles.slider}></span>
         </label>
         <div className={styles.search}>
-          <DayCarsFilter value={searchTerm} onChange={handleSearch} /> {/* Передаємо searchTerm та handleSearch */}
+          <DayCarsFilter value={searchTerm} onChange={handleSearch} />
         </div>
         <button className={styles.closeButton} onClick={onClose}>
           <MdClose className={styles.iconClose} />
@@ -58,10 +66,10 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
         <Loader />
       ) : (
         <DayCarsList
-          carsData={carsData}
+          carsData={filteredCars()} // Передаємо відфільтровані автомобілі
           viewMode={viewMode}
           isModal={isModal}
-          searchTerm={searchTerm} // Передаємо searchTerm
+          searchTerm={searchTerm}
         />
       )}
     </div>
