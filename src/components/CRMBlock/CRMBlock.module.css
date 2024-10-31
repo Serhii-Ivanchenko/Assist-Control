@@ -24,10 +24,12 @@
 
 .columnsContainer::-webkit-scrollbar-track {
     background: var(--dark-gray);
+    border-radius: 4px;
 }
 
 .columnsContainer::-webkit-scrollbar-thumb {
     background: var(--main-gray);
+    border-radius: 4px;
 }
 
 .headerColumn {
@@ -67,11 +69,6 @@
     width: 365px;
 }
 
-.carListBlock {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
 
 .carCount {
     margin-left: auto;

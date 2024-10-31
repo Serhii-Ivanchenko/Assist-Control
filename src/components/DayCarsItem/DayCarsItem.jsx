@@ -1,5 +1,6 @@
 import styles from "./DayCarsItem.module.css";
 import Modal from "../Modals/Modal/Modal.jsx";
+import ServiceBookingModal from "../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
 import DetailedClientInfo from "../DetailedClientInfo/DetailedClientInfo.jsx";
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import clsx from "clsx";
@@ -34,14 +35,23 @@ export default function DayCarsItem({
   date_s,
   client,
 }) {
+
+  
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] = useState(false);
 
   const openModal = () => {
     setIsOpen(true);
   };
 
+  const openServiceBookingModal = () => {
+    setServiceBookingModalIsOpen(true);
+  };
+
   const handleModalClose = () => {
     setIsOpen(false);
+    setServiceBookingModalIsOpen(false);
+
   };
 
   const carsData = useSelector(selectDayCars);
@@ -89,7 +99,7 @@ export default function DayCarsItem({
             <p className={styles.btnDetailText}>Деталі</p>
           </button>
           {isCRMBlock && status === "new" && (
-            <div className={styles.btnPlus}>
+            <div className={styles.btnPlus} onClick={openServiceBookingModal}>
               <button className={styles.plus}>
                 <BsPlusLg />
               </button>
@@ -105,9 +115,17 @@ export default function DayCarsItem({
               <DetailedClientInfo onClose={handleModalClose} />
             </Modal>
           )}
+          {serviceBookingModalIsOpen && (
+            <Modal isOpen={serviceBookingModalIsOpen} onClose={handleModalClose}>
+              <ServiceBookingModal onClose={handleModalClose} />
+            </Modal>
+          )}
         </div>
       </div>
-      <div className={clsx(styles.carsInfo, isCRMBlock && styles.crmcarsInfo)}>
+      <div className={clsx(styles.carsInfo, {
+        [styles.crmcarsInfo]: isCRMBlock,
+        [styles.modalCarsInfo]: isModal 
+})}>
         <div className={styles.carInfoLeft}>
           <div className={clsx(styles.rating, isCRMBlock && styles.crmRating)}>
             <AiFillStar color="var(--star-orange)" />

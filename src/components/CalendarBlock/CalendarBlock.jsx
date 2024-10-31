@@ -18,21 +18,11 @@ import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 export default function CalendarBlock() {
   const dispatch = useDispatch();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const carsData = useSelector(selectDayCars);
   const selectedDate = useSelector(selectDate);
   const isLoadingCarsByDay = useSelector(selectLoadingCarsByDay);
 
   const selectedServiceId = useSelector(selectSelectedServiceId); // необхідно для коректної роботи вибору сервісів
-
-  const handleDetailsBtnClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
 
   useEffect(() => {
     if (!selectedServiceId) {
@@ -59,16 +49,7 @@ export default function CalendarBlock() {
         {isLoadingCarsByDay && <p>Завантаження інформації...</p>}
         <DayCarsList carsData={carsData} isModal={false} />
       </div>
-      <DetailsBtn onClick={handleDetailsBtnClick} />
-      {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-          <DayCarsModal
-            carsData={carsData}
-            isModal={true}
-            onClose={handleCloseModal}
-          />
-        </Modal>
-      )}
+      <DetailsBtn carsData={carsData} />
     </div>
   );
 }

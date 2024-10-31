@@ -5,7 +5,7 @@ export const getBackgroundStyle = (status) => {
           background:
             "linear-gradient(#2D3038, #2D3038) padding-box, var(--border-gradient-new) border-box",
         };
-      case "check_repair":
+      case "diagnostic":
         return {
           background:
             "linear-gradient(#2D3038, #2D3038) padding-box, var(--border-gradient-diag) border-box",
