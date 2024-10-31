@@ -5,7 +5,7 @@ import { BsListUl } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { selectLoading } from "../../../redux/cars/selectors";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import DayCarsList from "../../DayCarsList/DayCarsList";
 import Loader from "../../Loader/Loader";
 
