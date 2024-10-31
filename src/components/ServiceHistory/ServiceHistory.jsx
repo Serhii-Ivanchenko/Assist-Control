@@ -78,9 +78,16 @@ export default function ServiceHistory() {
       <h3 className={css.title}>Історія обслуговування</h3>
       <div className={css.recordsListWrapper}>
         <ul className={css.listOfAccardion}>
-          {sortedArr.map((item) => (
-            <ItemOfRecord key={item.index} item={item} messages={messages} />
-          ))}
+          {sortedArr.map((item, index) => {
+            return (
+              <ItemOfRecord
+                key={item.index}
+                item={item}
+                messages={messages}
+                isExpanded={index === 0}
+              />
+            );
+          })}
         </ul>
       </div>
     </div>

@@ -21,7 +21,7 @@ import { useState } from "react";
 import Modal from "../../Modals/Modal/Modal.jsx";
 import clsx from "clsx";
 
-export default function ItemOfRecord({ item, messages }) {
+export default function ItemOfRecord({ item, messages, isExpanded }) {
   const [apealModal, setApealModal] = useState(false);
   const [showDialogModal, setShowDialogModal] = useState(false);
   const [transcription, setTranscription] = useState(false);
@@ -35,7 +35,7 @@ export default function ItemOfRecord({ item, messages }) {
         <div className={css.line}></div>
       </div>
       <Accordion
-        defaultExpanded={item.index === "1"}
+        defaultExpanded={isExpanded}
         disableGutters={true}
         sx={{
           background: "none",
