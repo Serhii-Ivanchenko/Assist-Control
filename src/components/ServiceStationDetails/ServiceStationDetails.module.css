@@ -1,0 +1,28 @@
+.serviceDetailsWrapper {
+  position: relative;
+  width: 995px;
+  height: 898px;
+  border-radius: 12px;
+  background-color: var(--bg-input);
+  margin-left: 14px;
+}
+
+.serviceDetailsWrapper::before {
+  content: "";
+  position: absolute;
+  top: 62px;
+  left: -14px;
+  width: 14px;
+  height: 154px;
+  background-color: var(--bg-input);
+}
+
+.decoration {
+  width: 686px;
+  height: 663px;
+  flex-shrink: 0;
+  border-radius: 686px;
+  opacity: 0.28;
+  background: rgba(184, 112, 81, 0.35);
+  filter: blur(200px);
+}
