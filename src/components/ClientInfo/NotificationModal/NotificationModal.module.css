@@ -77,13 +77,13 @@ display: flex;
     background-color: var(--bg-input);
 }
 
-.inputDate{
+/* .inputDate{
     width: 144px;
 }
 
 .inputTime{
     width: 100px;
-}
+} */
 
 .date{
     /* display: flex;
@@ -109,6 +109,10 @@ display: flex;
 
 .dateDate{
     width: 110px;
+}
+
+.dateTime{
+    width: 60px;
 }
 
 .date::-webkit-calendar-picker-indicator{

@@ -23,12 +23,19 @@ import { useRef } from "react";
 export default function NotificationModal({ onClose }) {
     
     const datepickerRef = useRef(null);
+    const timepickerRef = useRef(null);
     // const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
     
 
      const handleDateButtonClick = () => {
-    if (datepickerRef.current) {
+    if (datepickerRef.current && datepickerRef.current.setOpen) {
       datepickerRef.current.setOpen(true);
+    }
+    };
+    
+     const handleTimeButtonClick = () => {
+    if (timepickerRef.current && timepickerRef.current.setOpen) {
+      timepickerRef.current.setOpen(true);
     }
   };
 
@@ -41,7 +48,8 @@ export default function NotificationModal({ onClose }) {
 
     const handleSubmit = (values, actions) => {
         console.log(values);
-        actions.resetForm;
+        actions.resetForm();
+        onClose()
     }
         
         
@@ -88,19 +96,20 @@ export default function NotificationModal({ onClose }) {
                                 <div className={css.input}>
                                     <DatePicker
                                         name="time"
-                                        className={css.date}
+                                        className={`${css.date} ${css.dateTime}`}
                                          selected={values.time}
                                         onChange={(time) => setFieldValue("time", time)}
                                         showTimeSelect
                                         showTimeSelectOnly
                                         timeIntervals={15}
-                                        dateFormat="hh:mm"
+                                         timeFormat="HH:mm" 
+                                        dateFormat="HH:mm"
                                         showTimeCaption={false}
-                                        ref={datepickerRef}
+                                        ref={timepickerRef}
                                         />
                                     <button type="button"
                                         className={css.dateBtn}
-                                        onClick={handleDateButtonClick}
+                                        onClick={handleTimeButtonClick}
                                     >
                                         <BsWatch className={css.iconBtn} size={18} />
                                     </button>
