@@ -38,7 +38,6 @@ export default function DayCarsList({ carsData, isModal, viewMode = "grid", isCR
         isCRMBlock && styles.crmBlockDayCarsListContainer
       )}
     >
-      {/* Рендеринг scrollWrapper тільки якщо isCRMBlock відсутній */}
       {!isCRMBlock && (
         <div className={clsx(styles.scrollWrapper, isModal && styles.modalscrollWrapper)}>
           <ul className={clsx(styles.carsList, isModal && styles.modalCarsList)}>
@@ -46,8 +45,6 @@ export default function DayCarsList({ carsData, isModal, viewMode = "grid", isCR
           </ul>
         </div>
       )}
-
-      {/* Якщо isCRMBlock, просто рендеримо список */}
       {isCRMBlock && (
         <ul className={clsx(styles.carsList, isModal && styles.modalCarsList)}>
           {visibleCars.map(renderCarItem)}
