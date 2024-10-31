@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styles from "./DetailsBtn.module.css";
 import { IoCarSportSharp } from "react-icons/io5";
-import Modal from "../Modals/Modal/Modal.jsx";
-import DayCarsModal from "../Modals/DayCarsModal/DayCarsModal.jsx";
+import Modal from "../../components/Modals/Modal/Modal.jsx";
+import DayCarsModal from "../../components/Modals/DayCarsModal/DayCarsModal.jsx";
 
-export default function DetailsBtn({carsData}) {
-const [isModalOpen, setIsModalOpen] = useState(false);
+export default function DetailsBtn({ carsData }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDetailsBtnClick = () => {
     setIsModalOpen(true);

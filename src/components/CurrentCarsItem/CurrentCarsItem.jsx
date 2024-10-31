@@ -16,6 +16,7 @@ import { getStatusDetails } from "../../utils/getStatusDetails.js";
 
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import CurrentCarModal from "../Modals/CurrentCarModal/CurrentCarModal";
+import StatusBtn from "../../shared/StatusBtn/StatusBtn.jsx";
 import Modal from "../Modals/Modal/Modal.jsx";
 import styles from "./CurrentCarsItem.module.css";
 import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
@@ -44,11 +45,6 @@ export default function CurrentCarsItem() {
         );
       });
   }, [dispatch, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
-
-  const handleModal = (car) => {
-    setSelectedCar(car);
-    setIsModalOpen(true);
-  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -128,12 +124,12 @@ export default function CurrentCarsItem() {
             </h4>
           </div>
           <div className={styles.detailsContainer}>
-            <button
-              className={styles.carDetails}
-              onClick={() => handleModal(car)}
-            >
-              Деталі
-            </button>
+            <StatusBtn
+              car={car}
+              setIsModalOpen={setIsModalOpen}
+              setSelectedCar={setSelectedCar}
+            />
+            {/* тут буде імпорт кнопки деталей від Валі */}
             <div className={styles.statusContainer}>
               <p className={clsx(styles.carStatus, className)}>
                 {icon} {label}
