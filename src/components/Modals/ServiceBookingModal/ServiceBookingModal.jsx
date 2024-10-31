@@ -12,23 +12,23 @@ import { BsFillCaretDownFill } from "react-icons/bs";
 import { FaCheck } from "react-icons/fa";
 import SelectDate from "./SelectDate/SelectDate";
 import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { createRecord } from "../../../redux/cars/operations.js";
+import toast from "react-hot-toast";
 
 export default function ServiceBookingModal({ onClose }) {
-  const handleSubmit = (values, actions) => {
-    console.log(values);
-    actions.resetForm();
-  };
+  const dispatch = useDispatch();
 
-  const [timeIsChosen, setTimeIsChosen] = useState([]);
+  const [chosenTime, setChosenTime] = useState([]);
 
-  const onTimeBtnClick = (item, index) => {
+  const onTimeBtnClick = (item) => {
     if (!item.isFree) return;
 
     console.log(item.time);
-    setTimeIsChosen((prevChosenButtons) =>
-      prevChosenButtons.includes(index)
-        ? prevChosenButtons.filter((i) => i !== index)
-        : [...prevChosenButtons, index]
+    setChosenTime((prevChosenButtons) =>
+      prevChosenButtons.includes(item.time)
+        ? prevChosenButtons.filter((i) => i !== item.time)
+        : [...prevChosenButtons, item.time]
     );
   };
 
@@ -61,12 +61,44 @@ export default function ServiceBookingModal({ onClose }) {
   const day = currentDate.getDate();
   const month = currentDate.getMonth() + 1;
   const year = currentDate.getFullYear();
-  const formattedDate = `${day} ${month} ${year}`;
+  const formattedDate = `${day}.${month}.${year}`;
 
   const [pickedDate, setPickedDate] = useState(formattedDate);
 
   const setNewDate = (date) => {
     setPickedDate(date);
+  };
+
+  const dateToPass = new Date(pickedDate.split(".").reverse().join("-"))
+    .toISOString()
+    .split("T")[0];
+
+  const startHour = chosenTime[0];
+  const finishHour = chosenTime[chosenTime.length - 1];
+
+  const handleSubmit = (values, actions) => {
+    const recordData = {
+      ...values,
+      service_id: values.service_id ? Number(values.service_id) : null,
+      prepayment: values.prepayment ? Number(values.prepayment) : null,
+      position: values.position ? Number(values.position) : null,
+      appointment_date: dateToPass,
+      hours_from: startHour,
+      hours_to: finishHour,
+      mechanic_id: 0,
+    };
+
+    dispatch(createRecord(recordData))
+      .unwrap()
+      .then(() => {
+        toast.success("Запис успішно створено");
+      })
+      .catch(() => {
+        toast.error("Щось пішло не так. Спробуйте ще раз!");
+      });
+    setChosenTime([]);
+    actions.resetForm();
+    onClose();
   };
 
   return (
@@ -75,16 +107,16 @@ export default function ServiceBookingModal({ onClose }) {
       <h3 className={css.header}>Створення запису на {pickedDate}</h3>
       <Formik
         initialValues={{
-          carNumber: "",
+          car_number: "",
           vin: "",
           service: "",
           prepayment: "",
-          phoneNumber: "",
-          post: "",
+          phone_number: "",
+          position: "",
           mechanic: "",
-          carModel: "",
-          textarea: "",
-          clientName: "",
+          make_model: "",
+          note: "",
+          name: "",
         }}
         onSubmit={handleSubmit}
         validationSchema={ServiceBookingSchema}
@@ -96,11 +128,11 @@ export default function ServiceBookingModal({ onClose }) {
                 <Field
                   className={css.input}
                   type="text"
-                  name="carNumber"
+                  name="car_number"
                   placeholder="AX 2945 OP"
                 />
                 <ErrorMessage
-                  name="carNumber"
+                  name="car_number"
                   component="div"
                   className={css.errorMsg}
                 />
@@ -177,11 +209,11 @@ export default function ServiceBookingModal({ onClose }) {
                 <Field
                   className={css.input}
                   type="text"
-                  name="phoneNumber"
+                  name="phone_number"
                   placeholder="Телефон"
                 />
                 <ErrorMessage
-                  name="phoneNumber"
+                  name="phone_number"
                   component="div"
                   className={css.errorMsg}
                 />
@@ -195,12 +227,12 @@ export default function ServiceBookingModal({ onClose }) {
                   <Field
                     as="select"
                     className={
-                      values.post === ""
+                      values.position === ""
                         ? `${css.placeholder}`
                         : `${css.inputSelect}`
                     }
                     type="text"
-                    name="post"
+                    name="position"
                     onClick={() =>
                       toggleDropdown(isDropdownPostOpen, setIsDropdownPostOpen)
                     }
@@ -208,10 +240,10 @@ export default function ServiceBookingModal({ onClose }) {
                     <option value="" disabled hidden>
                       ПОСТ
                     </option>
-                    {posts.map((post, index) => {
+                    {posts.map((position, index) => {
                       return (
-                        <option key={index} value={post}>
-                          {post}
+                        <option key={index} value={position}>
+                          {position}
                         </option>
                       );
                     })}
@@ -222,7 +254,7 @@ export default function ServiceBookingModal({ onClose }) {
                     }`}
                   />
                   <ErrorMessage
-                    name="post"
+                    name="position"
                     component="div"
                     className={css.errorMsg}
                   />
@@ -277,11 +309,11 @@ export default function ServiceBookingModal({ onClose }) {
                 <Field
                   className={css.input}
                   type="text"
-                  name="carModel"
+                  name="make_model"
                   placeholder="Марка і модель автомобіля"
                 />
                 <ErrorMessage
-                  name="carModel"
+                  name="make_model"
                   component="div"
                   className={css.errorMsg}
                 />
@@ -300,7 +332,7 @@ export default function ServiceBookingModal({ onClose }) {
               </div>
               <Field
                 as="textarea"
-                name="textarea"
+                name="note"
                 className={css.textArea}
                 placeholder="Примітка"
               />
@@ -308,11 +340,11 @@ export default function ServiceBookingModal({ onClose }) {
                 <Field
                   className={css.input}
                   type="text"
-                  name="clientName"
+                  name="name"
                   placeholder="ПІБ"
                 />
                 <ErrorMessage
-                  name="clientName"
+                  name="name"
                   component="div"
                   className={css.errorMsg}
                 />
@@ -327,11 +359,11 @@ export default function ServiceBookingModal({ onClose }) {
                         className={clsx(
                           css.timeBtn,
                           item.isFree ? css.timeBtnFree : css.timeBtnDisabled,
-                          timeIsChosen.includes(index) && css.timeBtnChosen
+                          chosenTime.includes(item.time) && css.timeBtnChosen
                         )}
                         key={index}
                         onClick={() => {
-                          onTimeBtnClick(item, index);
+                          onTimeBtnClick(item);
                         }}
                         disabled={!item.isFree}
                       >

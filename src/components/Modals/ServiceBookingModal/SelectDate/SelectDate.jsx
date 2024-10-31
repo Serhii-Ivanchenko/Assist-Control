@@ -6,7 +6,12 @@ import { BsCalendar2Week } from "react-icons/bs";
 
 export default function SelectDate({ newDate }) {
   const CustomInput = forwardRef(({ onClick }, ref) => (
-    <button className={css.customInput} onClick={onClick} ref={ref}>
+    <button
+      type="button"
+      className={css.customInput}
+      onClick={onClick}
+      ref={ref}
+    >
       <BsCalendar2Week />
       Обрати дату
     </button>
