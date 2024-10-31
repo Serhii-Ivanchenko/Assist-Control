@@ -47,7 +47,10 @@ export default function NotificationModal({ onClose }) {
     }
 
     const handleSubmit = (values, actions) => {
-        console.log(values);
+        const timeOnly = values.time ? values.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : null;
+        const dateOnly = values.date ? values.date.toLocaleDateString("en-GB") : null;
+        const submittedValues = { ...values, time: timeOnly, date: dateOnly };
+        console.log(submittedValues);
         actions.resetForm();
         onClose()
     }
