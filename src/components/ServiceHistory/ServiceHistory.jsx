@@ -43,36 +43,46 @@ export default function ServiceHistory() {
   const recordRace = [
     {
       index: "1",
-      totalkilometrs: "246741",
+      totalkilometrs: "246750",
       newkilometrs: "9272",
-      date: "14.06.2024",
-      time: "16:08",
-    },
-    {
-      index: "2",
-      totalkilometrs: "246742",
-      newkilometrs: "9272",
-      date: "14.06.2024",
+      date: "19.06.2024",
       time: "16:08",
     },
     {
       index: "3",
-      totalkilometrs: "246743",
+      totalkilometrs: "246749",
       newkilometrs: "9272",
-      date: "14.06.2024",
+      date: "18.06.2024",
+      time: "16:08",
+    },
+    {
+      index: "2",
+      totalkilometrs: "246748",
+      newkilometrs: "9272",
+      date: "17.06.2024",
+      time: "16:08",
+    },
+    {
+      index: "4",
+      totalkilometrs: "246747",
+      newkilometrs: "9272",
+      date: "16.06.2024",
       time: "16:08",
     },
   ];
+  const sortedArr = recordRace.sort((a, b) =>
+    a.totalkilometrs > b.totalkilometrs ? -1 : 1
+  );
   return (
     <div>
       <h3 className={css.title}>Історія обслуговування</h3>
-        <div className={css.recordsListWrapper}>
-          <ul className={css.listOfAccardion}>
-            {recordRace.map((item) => (
-              <ItemOfRecord key={item.index} item={item} messages={messages} />
-            ))}
-          </ul>
-        </div>
+      <div className={css.recordsListWrapper}>
+        <ul className={css.listOfAccardion}>
+          {sortedArr.map((item) => (
+            <ItemOfRecord key={item.index} item={item} messages={messages} />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

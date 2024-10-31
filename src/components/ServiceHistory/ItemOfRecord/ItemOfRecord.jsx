@@ -35,8 +35,8 @@ export default function ItemOfRecord({ item, messages }) {
         <div className={css.line}></div>
       </div>
       <Accordion
+        defaultExpanded={item.index === "1"}
         disableGutters={true}
-        classes={{}}
         sx={{
           background: "none",
           color: "inherit",
@@ -52,16 +52,18 @@ export default function ItemOfRecord({ item, messages }) {
             <div className={css.listItem} onClick={() => toogleDialogModal()}>
               <div className={css.kilometersWrapper}>
                 <div className={css.numberOfKilometers}>
-                  <SlSpeedometer /> <p>{item.totalkilometrs}</p>
+                  <SlSpeedometer /> <div>{item.totalkilometrs}</div>
                 </div>
                 <div className={css.kilometersDriven}>
-                  <SlSpeedometer /> <p>{item.newkilometrs}</p>
+                  <SlSpeedometer /> <div>{item.newkilometrs}</div>
                 </div>
               </div>
               <div className={css.dateWrapper}>
                 <div className={css.date}>
-                  <BsCalendar2Week size={18} /> <p>{item.date}</p>
-                  <p>{item.time}</p>
+
+                  <BsCalendar2Week /> <div>{item.date}</div>
+                  <div>{item.time}</div>
+
                 </div>
                 <button
                   className={clsx(
