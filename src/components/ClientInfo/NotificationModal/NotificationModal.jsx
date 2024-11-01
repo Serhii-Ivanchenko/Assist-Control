@@ -1,4 +1,4 @@
-import { Field, Formik, Form } from "formik"
+import { Field, Formik, Form, ErrorMessage } from "formik"
 import css from "./NotificationModal.module.css"
 import { BsAlarm } from "react-icons/bs";
 import { BsCalendar2Week } from "react-icons/bs";
@@ -15,10 +15,10 @@ import * as Yup from "yup";
 
 
 const Validation = Yup.object().shape({
-  connection: Yup.string().required(),
-  date: Yup.string().required(),
-  time: Yup.string().required(),
-  comment: Yup.string().required(),
+  connection: Yup.string().required("Заповніть це поле"),
+  date: Yup.string().required("Заповніть це поле"),
+  time: Yup.string().required("Заповніть це поле"),
+  comment: Yup.string().required("Заповніть це поле"),
 });
 
 
@@ -75,6 +75,7 @@ export default function NotificationModal({ onClose }) {
 
                         <div className={css.selectBox}>
                             <Field as="select" name="connection" className={css.connectionSelect} component={ConnectionSelect} />
+                            <ErrorMessage component="span" name="connection" className={css.errorMessage} />
                         </div>
                     
                     
@@ -101,6 +102,8 @@ export default function NotificationModal({ onClose }) {
                                         <BsCalendar2Week className={css.iconBtn} size={18} />
                                     </button>
                                 </div>
+                            <ErrorMessage component="span" name="date" className={css.errorMessage} />
+
                             </div>
 
                             <div className={css.inputBox}>
@@ -130,12 +133,16 @@ export default function NotificationModal({ onClose }) {
                                         <BsWatch className={css.iconBtn} size={18} />
                                     </button>
                                 </div>
+                            <ErrorMessage component="span" name="time" className={css.errorMessage} />
+
                             </div>
                         </div>
 
                         <div className={css.inputBox}>
                             <label htmlFor={commentId} className={css.label}>Коментар</label>
-                            <Field as="textarea" name="comment" className={css.textarea} id={commentId } />
+                            <Field as="textarea" name="comment" className={css.textarea} id={commentId} />
+                            <ErrorMessage component="span" name="comment" className={css.errorMessage} />
+                            
                         </div>
                     
                         <div className={css.btnBox}>

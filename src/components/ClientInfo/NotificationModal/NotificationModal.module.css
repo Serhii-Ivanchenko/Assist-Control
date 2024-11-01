@@ -25,6 +25,8 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+
+    position: relative;
 }
 
 .crossBtn{
@@ -213,4 +215,18 @@ display: flex;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.errorMessage{
+    color: var(--red);
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        /* margin-left: 20px; */
+    
+        cursor: default;
+        position: absolute;
+        left: 20px;
+        top: 100%;
 }
