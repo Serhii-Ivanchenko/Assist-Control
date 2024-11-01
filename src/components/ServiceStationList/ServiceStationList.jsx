@@ -1,5 +1,8 @@
 import { useState } from "react";
 import ServiceStationItem from "../ServiceStationItem/ServiceStationItemItem";
+import ServiceStationDetails from "../ServiceStationDetails/ServiceStationDetails";
+import { BsPlusCircleDotted } from "react-icons/bs";
+import { BsHouseFill } from "react-icons/bs";
 import styles from "./ServiceStationList.module.css";
 
 function ServiceStationList() {
@@ -22,16 +25,28 @@ function ServiceStationList() {
 
   return (
     <div className={styles.wrapper}>
-      {stations.map((station) => (
-        <ServiceStationItem
-          className={styles.serviceStationItem}
-          key={station.id}
-          id={station.id}
-          name={station.name}
-          isOpen={activeStationId === station.id}
-          onToggle={() => handleToggle(station.id)}
-        />
-      ))}
+      <div className={styles.leftContainer}>
+        {stations.map((station) => (
+          <div key={station.id} className={styles.serviceStationWrapper}>
+            <ServiceStationItem
+              className={styles.serviceStationItem}
+              id={station.id}
+              name={station.name}
+              isOpen={activeStationId === station.id}
+              onToggle={() => handleToggle(station.id)}
+            />
+            {activeStationId === station.id && (
+              <div className={styles.rightContainer}>
+                <ServiceStationDetails stationId={activeStationId} />
+              </div>
+            )}
+          </div>
+        ))}
+        <button className={styles.addBtn}>
+          <BsPlusCircleDotted className={styles.icon} />
+          <BsHouseFill className={styles.icon} />
+        </button>
+      </div>
     </div>
   );
 }

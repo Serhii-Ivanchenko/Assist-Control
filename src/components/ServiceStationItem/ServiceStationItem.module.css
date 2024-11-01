@@ -88,6 +88,18 @@
   font-weight: 600;
 }
 
+.mainIcon {
+  fill: var(--light-gray);
+}
+
+.keyIcon {
+  fill: var(--light-gray);
+}
+
+.arrowIcon {
+  fill: var(--icon-gray);
+}
+
 .subscribeStatus {
   display: inline-flex;
   padding: 6px 15px;

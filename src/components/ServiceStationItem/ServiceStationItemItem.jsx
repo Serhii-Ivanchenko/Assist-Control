@@ -9,7 +9,6 @@ import {
 } from "react-icons/bs";
 
 import styles from "./ServiceStationItem.module.css";
-import ServiceStationDetails from "../ServiceStationDetails/ServiceStationDetails";
 import { useState } from "react";
 
 function ServiceStationItem({ name, isOpen, onToggle }) {
@@ -48,14 +47,14 @@ function ServiceStationItem({ name, isOpen, onToggle }) {
                   handleEditToggle();
                 }}
               >
-                <BsPencil />
+                <BsPencil className={styles.mainIcon} />
               </button>
             </div>
             <div className={styles.infoContainer}>
               <ul className={styles.infoList}>
                 <li className={styles.infoItem}>
                   <p className={styles.infoKey}>
-                    <BsEnvelope /> Email
+                    <BsEnvelope className={styles.keyIcon} /> Email
                   </p>
                   {isEdit ? (
                     <input
@@ -71,7 +70,7 @@ function ServiceStationItem({ name, isOpen, onToggle }) {
                 </li>
                 <li className={styles.infoItem}>
                   <p className={styles.infoKey}>
-                    <BsGeoAlt /> Адреса
+                    <BsGeoAlt className={styles.keyIcon} /> Адреса
                   </p>
                   {isEdit ? (
                     <input
@@ -87,15 +86,17 @@ function ServiceStationItem({ name, isOpen, onToggle }) {
                 </li>
                 <li className={styles.infoItem}>
                   <p className={styles.infoKey}>
-                    <BsCreditCard2Back /> Статус підписки:
+                    <BsCreditCard2Back className={styles.keyIcon} /> Статус
+                    підписки:
                   </p>
                   <div className={styles.subscribeStatus}>
+                    <BsCreditCard2Back />
                     {info.subscriptionStatus}
                   </div>
                 </li>
                 <li className={styles.infoItem}>
                   <p className={styles.infoKey}>
-                    <BsPeople /> Співробітники
+                    <BsPeople className={styles.keyIcon} /> Співробітники
                   </p>
                   {isEdit ? (
                     <input
@@ -111,7 +112,7 @@ function ServiceStationItem({ name, isOpen, onToggle }) {
                 </li>
                 <li className={styles.infoItem}>
                   <p className={styles.infoKey}>
-                    <BsCalendarWeek /> Дійсний до:
+                    <BsCalendarWeek className={styles.keyIcon} /> Дійсний до:
                   </p>
                   {isEdit ? (
                     <input
@@ -128,7 +129,6 @@ function ServiceStationItem({ name, isOpen, onToggle }) {
               </ul>
             </div>
           </div>
-          <ServiceStationDetails />
         </div>
       ) : (
         <div className={styles.closedServiceWrapper} onClick={onToggle}>
@@ -141,7 +141,7 @@ function ServiceStationItem({ name, isOpen, onToggle }) {
                 handleEditToggle();
               }}
             >
-              <BsPencil />
+              <BsPencil className={styles.mainIcon} />
             </button>
           </div>
           <div className={styles.closedServiceInfo}>
@@ -154,7 +154,7 @@ function ServiceStationItem({ name, isOpen, onToggle }) {
                 onToggle;
               }}
             >
-              <BsCaretDownFill />
+              <BsCaretDownFill className={styles.arrowIcon} />
             </div>
           </div>
         </div>

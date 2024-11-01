@@ -1,9 +1,9 @@
 import styles from "./ServiceStationDetails.module.css";
 
-function ServiceStationDetails() {
+function ServiceStationDetails({ stationId }) {
   return (
     <div className={styles.serviceDetailsWrapper}>
-      Налаштування робочого графіка:
+      Налаштування робочого графіка:{stationId}
       <div className={styles.decoration}></div>
     </div>
   );
