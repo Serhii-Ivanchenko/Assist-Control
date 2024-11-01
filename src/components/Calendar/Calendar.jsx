@@ -65,7 +65,11 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
   };
 
   const getButtonColor = (percent) => {
-    if (percent >= 80) {
+    if (percent >= 150) {
+      return "#DB3020";
+    } else if (percent >= 130) {
+      return "#DB4C20";
+    } else if (percent >= 80) {
       return "var(--orange)";
     } else if (percent >= 50) {
       return "var(--mid-orange)";
