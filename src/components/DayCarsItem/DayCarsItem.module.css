@@ -34,7 +34,7 @@
 
 @media only screen and (min-width: 1850px) {
   .modalDayCarsItemContainer {
-    width: 398px;
+    width: 380px;
     height: 200px;
     padding: 10px 18px;
     gap: 12px;
@@ -200,6 +200,7 @@
 .infoVin {
   display: flex;
   text-align: center;
+  justify-content: center;
   margin-bottom: 5px;
 
   height: auto;
@@ -217,6 +218,7 @@
   .infoVin{
     padding: 3px 10px;
     height: 22px;
+    width: 161px;
   }
 }
 
@@ -288,14 +290,6 @@
   }
 }
 
-.btnSave {
-  border: none;
-  outline: none;
-  background: none;
-  cursor: pointer;
-  color: var(--icon-gray);
-}
-
 .btnDetail {
   display: flex;
   padding: 5px 10px;
@@ -361,6 +355,7 @@
   display: flex;
   gap: 11px;
 }
+
 
 .carInfoLeft {
   display: flex;
@@ -482,7 +477,7 @@
 
 .carNumber {
   color: var(--bg-secondary);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   line-height: normal;
   text-transform: uppercase;
@@ -574,6 +569,56 @@
   height: 11px;
 }
 
-.crmcarsInfo{
+.crmcarsInfo,
+.modalCarsInfo{
   margin-left: -10px;
+}
+
+.btnPlus{
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--green);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.plus{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 13px;
+      height: 13px;
+      border-radius: 3px;
+      border: none;
+      color: var(--green);
+       cursor: pointer;
+      background-color: var(--white);
+      padding: 2px;
+}
+
+.plus svg {
+  width: 10px;
+  height: 10px;
+  font-weight: bold;
+  stroke-width: 2;
+}
+
+.btnSave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--icon-gray);
+
+  border-radius: 3px;
+  background: var(--CRM-modal-InputBG, #2D3038);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 24px;
+  height: 24px;
+  padding: 4px;
 }

@@ -9,8 +9,8 @@ import toast from 'react-hot-toast';
 
 const statusMapping = {
     new: 'Нова',
+    diagnostic: 'Діагностика',
     repair: 'Ремонт',
-    check_repair: 'Діагностика',
     complete: 'Завершено',
 };
 
@@ -53,26 +53,35 @@ export default function CRMBlock() {
 
     return (
         <div className={css.container}>
-            <div className={css.grid}>
+            <div className={css.headersContainer}>
                 {Object.entries(statusMapping).map(([status, label], index) => {
-                    const filteredCars = filterCarsByStatus(carsData, status); 
+                    const filteredCars = filterCarsByStatus(carsData, status);
                     const carCount = filteredCars.length;
 
                     return (
-                        <div key={status} className={css.column}>
+                        <div key={status} className={css.headerColumn}>
                             <h3 
                                 className={clsx(css.statusHeader, { [css.firstStatus]: index === 0 })} 
                             >
                                 {getSvgIcon(index)}
                                 {label}
-                                <span className={css.carCount}> {carCount}</span>
+                                <span className={css.carCount}>{carCount}</span> 
                             </h3>
-                            <div className={css.carListBlock}>
-                                <DayCarsList 
+                        </div>
+                    );
+                })}
+            </div>
+
+            <div className={css.columnsContainer}>
+                {Object.entries(statusMapping).map(([status]) => {
+                    const filteredCars = filterCarsByStatus(carsData, status);
+
+                    return (
+                        <div key={status} className={css.column}>
+                            <DayCarsList 
                                     carsData={filteredCars} 
                                     isCRMBlock
                                 />
-                            </div>
                         </div>
                     );
                 })}

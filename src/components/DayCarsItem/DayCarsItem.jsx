@@ -1,5 +1,6 @@
 import styles from "./DayCarsItem.module.css";
 import Modal from "../Modals/Modal/Modal.jsx";
+import ServiceBookingModal from "../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
 import DetailedClientInfo from "../DetailedClientInfo/DetailedClientInfo.jsx";
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import clsx from "clsx";
@@ -8,6 +9,8 @@ import {
   BsPersonFill,
   BsTelephoneOutboundFill,
   BsStopwatch,
+  BsLayerBackward,
+  BsPlusLg,
 } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
@@ -32,14 +35,23 @@ export default function DayCarsItem({
   date_s,
   client,
 }) {
+
+  
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] = useState(false);
 
   const openModal = () => {
     setIsOpen(true);
   };
 
+  const openServiceBookingModal = () => {
+    setServiceBookingModalIsOpen(true);
+  };
+
   const handleModalClose = () => {
     setIsOpen(false);
+    setServiceBookingModalIsOpen(false);
+
   };
 
   const carsData = useSelector(selectDayCars);
@@ -86,17 +98,34 @@ export default function DayCarsItem({
           <button className={styles.btnDetail} onClick={openModal}>
             <p className={styles.btnDetailText}>Деталі</p>
           </button>
-          {/* <button className={styles.btnSave}>
-            <BsLayerBackward size={16} />
-          </button> */}
+          {isCRMBlock && status === "new" && (
+            <div className={styles.btnPlus} onClick={openServiceBookingModal}>
+              <button className={styles.plus}>
+                <BsPlusLg />
+              </button>
+            </div>
+          )}
+          {isCRMBlock && status === "new" && (
+            <button className={styles.btnSave}>
+              <BsLayerBackward size={16} />
+            </button>
+          )}
           {modalIsOpen && (
             <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
               <DetailedClientInfo onClose={handleModalClose} />
             </Modal>
           )}
+          {serviceBookingModalIsOpen && (
+            <Modal isOpen={serviceBookingModalIsOpen} onClose={handleModalClose}>
+              <ServiceBookingModal onClose={handleModalClose} />
+            </Modal>
+          )}
         </div>
       </div>
-      <div className={clsx(styles.carsInfo, isCRMBlock && styles.crmcarsInfo)}>
+      <div className={clsx(styles.carsInfo, {
+        [styles.crmcarsInfo]: isCRMBlock,
+        [styles.modalCarsInfo]: isModal 
+})}>
         <div className={styles.carInfoLeft}>
           <div className={clsx(styles.rating, isCRMBlock && styles.crmRating)}>
             <AiFillStar color="var(--star-orange)" />

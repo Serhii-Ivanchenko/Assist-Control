@@ -84,6 +84,10 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
     );
   };
 
+  if (carSelectDate !== selectedDate) {
+    setSelectedDate(carSelectDate)
+  };
+
   return (
     <div className={css.containercalendar}>
       <div className={css.weekdays}>

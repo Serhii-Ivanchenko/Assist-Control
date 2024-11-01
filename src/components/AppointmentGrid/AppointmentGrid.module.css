@@ -1,0 +1,38 @@
+.schedulegrid {
+    display: grid;
+    grid-template-columns: auto repeat(10, 1fr);
+    /* Колонки для дат */
+    grid-template-rows: auto repeat(4, 1fr);
+    /* Строки для постов */
+    gap: 10px;
+    width:1097px;
+}
+
+.gridheader {
+    grid-row: 1;
+    /* grid-column: 2 / 12; */
+    /* Первая строка для заголовков дат */
+    background-color: #ccc;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.gridpost {
+    grid-column: 1;
+/* grid-row: 2 / 6; */
+    /* Первая колонка для заголовков постов */
+    background-color: #eaeaea;
+    padding: 10px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.griditem {
+    padding: 5px;
+    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

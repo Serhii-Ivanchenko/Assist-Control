@@ -6,7 +6,7 @@ export const getAllCars = createAsyncThunk(
   "cars/getAllCars",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId; 
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(`/v1/data/`, {
         headers: {
@@ -26,7 +26,7 @@ export const getCurrentCars = createAsyncThunk(
   "cars/getCurrentCars",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId; 
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(`/v1/current/cars/`, {
         headers: {
@@ -46,7 +46,7 @@ export const getCarsByDate = createAsyncThunk(
   "cars/getCarsByDate",
   async (day, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId; 
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
         `/v1/current/day/cars/?date=${day}`,
@@ -69,7 +69,7 @@ export const getCarsByMonth = createAsyncThunk(
   "cars/getCarsByMonth",
   async (date, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId; 
+    const serviceId = state.auth.userData.selectedServiceId;
     // const { month, year } = date;
     try {
       const response = await axiosInstance.get(
@@ -93,7 +93,7 @@ export const getCalendarByMonth = createAsyncThunk(
   "cars/getCalendarByMonth",
   async (date, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId; 
+    const serviceId = state.auth.userData.selectedServiceId;
     // const { month, year } = date;
     try {
       const response = await axiosInstance.get(
@@ -117,7 +117,7 @@ export const getCarsForHour = createAsyncThunk(
   "cars/getCarsForHour",
   async (day, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId; 
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(`/v1/get_busyness?date=${day}`, {
         headers: {
@@ -137,7 +137,7 @@ export const getPercentForHour = createAsyncThunk(
   "cars/getPercentForHour",
   async (day, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId; 
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(`/v1/get_load_day?date=${day}`, {
         headers: {
@@ -157,7 +157,7 @@ export const getNewCarsRange = createAsyncThunk(
   "cars/getNewCarsRange",
   async (date, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId; 
+    const serviceId = state.auth.userData.selectedServiceId;
     const { dateBeginStr, dateEndStr } = date;
     try {
       const response = await axiosInstance.get(
@@ -183,7 +183,7 @@ export const changeCarStatus = createAsyncThunk(
   "cars/changeCarStatus",
   async ({ carId, status }, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId; 
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.post(`/v1/edit_status`, null, {
         params: {
@@ -195,6 +195,30 @@ export const changeCarStatus = createAsyncThunk(
           "company-id": serviceId,
         },
       });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+//Create record
+export const createRecord = createAsyncThunk(
+  "cars/createRecord",
+  async (recordData, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.post(
+        `/crm/create_record/`,
+        recordData,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
