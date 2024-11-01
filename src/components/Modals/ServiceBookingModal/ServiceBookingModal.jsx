@@ -20,6 +20,10 @@ export default function ServiceBookingModal({ onClose }) {
   const dispatch = useDispatch();
 
   const [chosenTime, setChosenTime] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownPostOpen, setIsDropdownPostOpen] = useState(false);
+  const [isDropdownMechanicOpen, setIsDropdownMechanicOpen] = useState(false);
+  const selectRef = useRef(null);
 
   const onTimeBtnClick = (item) => {
     if (!item.isFree) return;
@@ -31,11 +35,6 @@ export default function ServiceBookingModal({ onClose }) {
         : [...prevChosenButtons, item.time]
     );
   };
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDropdownPostOpen, setIsDropdownPostOpen] = useState(false);
-  const [isDropdownMechanicOpen, setIsDropdownMechanicOpen] = useState(false);
-  const selectRef = useRef(null);
 
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
@@ -120,6 +119,8 @@ export default function ServiceBookingModal({ onClose }) {
         }}
         onSubmit={handleSubmit}
         validationSchema={ServiceBookingSchema}
+        validateOnChange={true}
+        validateOnBlur
       >
         {({ values }) => (
           <Form className={css.form}>

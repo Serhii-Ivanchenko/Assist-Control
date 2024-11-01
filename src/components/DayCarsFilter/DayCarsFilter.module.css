@@ -56,3 +56,12 @@
     flex-shrink: 0;
     color: var(--white);
 }
+
+.errorMsg {
+    position: absolute;
+    text-wrap: nowrap;
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 5px;
+}
