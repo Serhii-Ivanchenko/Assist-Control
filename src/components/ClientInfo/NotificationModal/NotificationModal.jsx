@@ -44,7 +44,11 @@ export default function NotificationModal({ onClose }) {
     const initialValues = {
         date: new Date(),
         connection: "call",
-        time: new Date(),
+        time:(() => {
+        const date = new Date();  
+        date.setHours(9, 0, 0, 0);
+        return date;
+    })(),
         comment:""
     }
 
