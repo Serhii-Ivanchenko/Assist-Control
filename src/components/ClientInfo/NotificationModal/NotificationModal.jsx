@@ -7,10 +7,11 @@ import { BsXLg } from "react-icons/bs";
 import ConnectionSelect from "./ConnectionSelect/ConnectionSelect";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { useRef } from "react";
+// import { useRef } from "react";
 import "./NotificationModal.css"
 import { useId } from "react";
 import * as Yup from "yup";
+import { useState } from "react";
 
 
 
@@ -25,21 +26,28 @@ const Validation = Yup.object().shape({
 
 export default function NotificationModal({ onClose }) {
     
-    const datepickerRef = useRef(null);
-    const timepickerRef = useRef(null);
+const [isDateOpen, setDateOpen] = useState(false);
+  const [isTimeOpen, setTimeOpen] = useState(false);
+
+  const handleDateButtonClick = () => setDateOpen((prev) => !prev);
+  const handleTimeButtonClick = () => setTimeOpen((prev) => !prev);
     
 
-     const handleDateButtonClick = () => {
-    if (datepickerRef.current && datepickerRef.current.setOpen) {
-      datepickerRef.current.setOpen(true);
-    }
-    };
+//     const datepickerRef = useRef(null);
+//     const timepickerRef = useRef(null);
     
-     const handleTimeButtonClick = () => {
-    if (timepickerRef.current && timepickerRef.current.setOpen) {
-      timepickerRef.current.setOpen(true);
-    }
-  };
+
+//      const handleDateButtonClick = () => {
+//     if (datepickerRef.current && datepickerRef.current.setOpen) {
+//       datepickerRef.current.setOpen(true);
+//     }
+//     };
+    
+//      const handleTimeButtonClick = () => {
+//     if (timepickerRef.current && timepickerRef.current.setOpen) {
+//       timepickerRef.current.setOpen(true);
+//     }
+//   };
 
     const initialValues = {
         date: new Date(),
@@ -95,8 +103,13 @@ export default function NotificationModal({ onClose }) {
                                         className={`${css.date} ${css.dateDate}`}
                                         dateFormat="dd/MM/yy"
                                         minDate={new Date()}
-                                        ref={datepickerRef}
-                                        onKeyDown={(e) => e.preventDefault()}
+                                        // ref={datepickerRef}
+                                        // onKeyDown={(e) => e.preventDefault()}
+                                        open={isDateOpen} 
+                                        onClickOutside={() => setDateOpen(false)} 
+                                        onSelect={() => setDateOpen(false)} 
+                                        toggleCalendarOnIconClick
+                                        readOnly
                                     />
                                     <button
                                         type="button"
@@ -126,8 +139,12 @@ export default function NotificationModal({ onClose }) {
                                          timeFormat="H:mm" 
                                         dateFormat="H:mm"
                                         showTimeCaption={false}
-                                        ref={timepickerRef}
-                                        onKeyDown={(e) => e.preventDefault()}
+                                        // ref={timepickerRef}
+                                        // onKeyDown={(e) => e.preventDefault()}
+                                         open={isTimeOpen} 
+                                        onClickOutside={() => setTimeOpen(false)} 
+                                        onSelect={() => setTimeOpen(false)} 
+                                        readOnly
 
                                         />
                                     <button type="button"

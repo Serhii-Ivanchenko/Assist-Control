@@ -1,11 +1,11 @@
-.clientInfoBox{
+.clientInfoBox {
     width: 567px;
     padding-right: 40px;
 }
 
 
 
-.title{
+.title {
     color: var(--white);
     font-size: 24px;
     font-style: normal;
@@ -15,39 +15,39 @@
     margin-bottom: 52px;
 }
 
-.clientImg{
+.clientImg {
     width: 126px;
-    height: 126px; 
+    height: 126px;
 
     border-radius: 8px;
 
-    border: solid 1px #fff;
+    /* border: solid 1px #fff; */
 }
 
-.infoBox{
+.infoBox {
     display: flex;
 
     margin-bottom: 34px;
 }
 
-.rating{
+.rating {
     display: flex;
     gap: 2px;
 }
 
-.photoAndMainInfo{
+.photoAndMainInfo {
     display: flex;
     align-items: flex-end;
     gap: 23px;
 
-    margin-right: 29px;
+    /* margin-right: 29px; */
 }
 
-.mainInfo{
-    /* display: flex; */
+.mainInfo {
+    width: 376px;
 }
 
-.serviceBook{
+.serviceBook {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,20 +55,21 @@
     gap: 19px;
 
     border-radius: 6px;
-    background-color: var(--download-pdf-btn-bg) ;
+    background-color: var(--download-pdf-btn-bg);
 
     margin-top: 26px;
+    width: fit-content;
 }
 
-.sbText{
-    color:var(--white);
+.sbText {
+    color: var(--white);
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
 }
 
-.sbBtn{
+.sbBtn {
     border: none;
     display: flex;
     align-items: center;
@@ -89,13 +90,13 @@
     line-height: normal;
 }
 
-.downloadIcon{
+.downloadIcon {
     fill: var(--icon-gray);
     width: 16px;
     height: 16px;
 }
 
-.dateOfBirth{
+.dateOfBirth {
     color: var(--text-gray);
     font-size: 15px;
     font-style: normal;
@@ -105,37 +106,38 @@
     margin-top: 3px;
 }
 
-.clientName{
+.clientName {
     color: var(--white);
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
     line-height: 1.1875em;
+    white-space: nowrap;
 
 }
 
-.moneyBox{
+.moneyBox {
     display: flex;
     align-items: flex-start;
-    height: 82px;
+    /* height: 82px; */
     gap: 9px;
 }
 
-.dollarIcon{
+.dollarIcon {
     fill: var(--green-btn-normal);
     width: 20px;
     height: 20px;
 }
 
-.moneyAmount{
-    color:var(--white);
+.moneyAmount {
+    color: var(--white);
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
 }
 
-.contactsBox{
+.contactsBox {
     display: flex;
     align-items: center;
     gap: 60px;
@@ -143,7 +145,7 @@
     padding-bottom: 38px;
     margin-bottom: 38px;
 
-    border-bottom: dashed 2px var(--contacts-info-bg) ;
+    border-bottom: dashed 2px var(--contacts-info-bg);
 
 }
 
@@ -157,26 +159,26 @@
     display: flex;
 } */
 
-.categoryList{
+.categoryList {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.contactsInfo{
+.contactsInfo {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.categoryListItem{
+.categoryListItem {
     height: 46px;
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
-.contactsInfoItem{
+.contactsInfoItem {
     height: 46px;
     padding: 6px 16px;
     display: flex;
@@ -187,7 +189,7 @@
     width: fit-content;
 }
 
-.contactsInput{
+.contactsInput {
     background-color: transparent;
     outline: none;
     border: none;
@@ -199,7 +201,7 @@
     line-height: normal;
 }
 
-.contactsBtn{
+.contactsBtn {
     border: none;
     width: 34px;
     height: 34px;
@@ -216,17 +218,17 @@
 
 }
 
-.phoneCallIcon{
-    fill:var(--green-btn-normal);
+.phoneCallIcon {
+    fill: var(--green-btn-normal);
     width: 18px;
     height: 18px;
 }
 
-.clock{
+.clock {
     fill: var(--red);
 }
 
-.iconColor{
+.iconColor {
     fill: var(--icon-gray);
 }
 
@@ -255,12 +257,12 @@
     fill: #28232A;
 }
 
-.contactsBtnBox{
+.contactsBtnBox {
     display: flex;
     gap: 10px;
 }
 
-.category{
+.category {
     color: var(--white);
     font-size: 15px;
     font-style: normal;
@@ -268,20 +270,20 @@
     line-height: normal;
 }
 
-.categoryIcon{
-    fill:var(--icon-gray);
+.categoryIcon {
+    fill: var(--icon-gray);
     width: 18px;
     height: 18px;
 }
 
-.nameAndEditBox{
+.nameAndEditBox {
     display: flex;
     align-items: center;
     gap: 9px;
     margin-top: 3px;
 }
 
-.editBtn{
+.editBtn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -294,8 +296,13 @@
     cursor: pointer;
 }
 
-.pencilIcon{
+.pencilIcon {
     fill: var(--light-gray);
+}
+
+.ratingAndMoney {
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -303,7 +310,11 @@
 
 
 
-.carInfo{
+
+
+
+
+.carInfo {
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -313,38 +324,39 @@
     /* position: relative; */
 }
 
-.carInfo::-webkit-scrollbar{
+.carInfo::-webkit-scrollbar {
     width: 8px;
     border-radius: 4px;
     margin-left: 20px;
 }
 
-.carInfo::-webkit-scrollbar-thumb{
+.carInfo::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: var(--player-secondary-bg);
 }
-.carInfo::-webkit-scrollbar-track{
+
+.carInfo::-webkit-scrollbar-track {
     border-radius: 4px;
-        background-color: #202020;
+    background-color: #202020;
 }
 
 .carCard {
-    width: 527px;
+    width: 471px;
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     /* border: 1px solid rgba(0, 0, 0, 0.25); */
-/* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);   */
+    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);   */
 
     /* border-radius: 8px; */
 }
 
-.carCard:not(:last-child){
+.carCard:not(:last-child) {
     border-bottom: dashed 2px var(--contacts-info-bg);
     padding-bottom: 12px;
 }
 
 
-.carImage{
+.carImage {
     width: 126px;
     height: 126px;
 
@@ -352,21 +364,21 @@
     /* border: solid 1px #fff; */
 }
 
-.photoAndMainCarInfo{
+.photoAndMainCarInfo {
     display: flex;
     gap: 29px;
 
     margin-bottom: 20px;
 }
 
-.carNameBox{
-display: flex;
-align-items: center;
-gap: 10px;
-margin-bottom: 12px;
+.carNameBox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
 }
 
-.carName{
+.carName {
     color: var(--white);
     font-size: 24px;
     font-style: normal;
@@ -374,55 +386,55 @@ margin-bottom: 12px;
     line-height: normal;
 }
 
-.carIcon{
-    fill:var(--icon-gray);
+.carIcon {
+    fill: var(--icon-gray);
 }
 
-.carYearBox{
+.carYearBox {
     display: flex;
     align-items: center;
     gap: 10px;
 
 }
 
-.carYear{
-    color:var(--white);
+.carYear {
+    color: var(--white);
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
-.yearIcon{
+.yearIcon {
     width: 20px;
     height: 20px;
     fill: var(--icon-gray);
 }
 
-.carCategoryBox{
+.carCategoryBox {
     display: flex;
     gap: 67px;
 }
 
-.carCategory{
+.carCategory {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.carCategoryItem{
+.carCategoryItem {
     height: 46px;
     display: flex;
     align-items: center;
 }
 
-.carNumbers{
+.carNumbers {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.carNumbersItem{
+.carNumbersItem {
     height: 46px;
     display: flex;
     align-items: center;
@@ -435,12 +447,12 @@ margin-bottom: 12px;
     background-color: var(--contacts-info-bg);
 }
 
-.car{
+.car {
     background-color: transparent;
     padding: 0;
 }
 
-.vin{
+.vin {
     color: var(--white);
     font-size: 14px;
     font-style: normal;
@@ -448,25 +460,25 @@ margin-bottom: 12px;
     line-height: normal;
 }
 
-.categoryVin{
+.categoryVin {
     display: flex;
     gap: 9px;
 }
 
-.categoryCar{
+.categoryCar {
     display: flex;
     gap: 4px;
 }
 
-.inBold{
-    color:var(--white);
+.inBold {
+    color: var(--white);
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
 }
 
-.number{
+.number {
     color: var(--white);
     font-size: 15px;
     font-style: normal;
@@ -485,11 +497,11 @@ margin-bottom: 12px;
     display: none;
 } */
 
-.carListAndAddBtn{
+.carListAndAddBtn {
     position: relative;
 }
 
-.addCarBtn{
+.addCarBtn {
     border: none;
     display: flex;
     gap: 6px;
@@ -502,29 +514,29 @@ margin-bottom: 12px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
     cursor: pointer;
-     position: absolute;
-     bottom: 0;
-     right: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 
-    
+
 }
 
-.addCarBtn:hover{
+.addCarBtn:hover {
     background-color: var(--green-btn-hover);
 }
 
-.plus{
+.plus {
     width: 18px;
     height: 18px;
     fill: var(--white);
 }
 
-.mainContent{
+/* .mainContent{
     margin-right: 78px;
-}
+} */
 
 
-.deleteBtn{
+.deleteBtn {
     width: 18px;
     height: 18px;
     fill: var(--icon-gray);
