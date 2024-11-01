@@ -324,6 +324,10 @@
     margin-top: 36px;
   }
 
+  .archiveIcon {
+    fill: var(--light-gray);
+  }
+
   .carDetails {
     display: inline-flex;
     padding: 5px 10px;

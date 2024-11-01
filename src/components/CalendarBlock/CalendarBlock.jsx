@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import DayCarsList from "../DayCarsList/DayCarsList";
-import DetailsBtn from "../../shared/DetailsBtn/DetailsBtn.jsx";
+import DetailsBtn from "../sharedComponents/DetailsBtn/DetailsBtn.jsx";
 import Modal from "../Modals/Modal/Modal.jsx";
 import DayCarsModal from "../Modals/DayCarsModal/DayCarsModal.jsx";
 import CalendarPagination from "../CalendarPagination/CalendarPagination.jsx";

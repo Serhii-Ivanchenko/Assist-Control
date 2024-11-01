@@ -443,6 +443,11 @@
   cursor: pointer;
 }
 
+.iconArchive {
+  width: 20px;
+  height: 20px;
+  fill: var(--light-gray);
+}
 .archiveBtn:hover,
 .archiveBtn:focus {
   background-color: var(--dark-gray);

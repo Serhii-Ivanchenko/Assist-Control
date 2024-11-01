@@ -218,7 +218,7 @@ function CurrentCarModal({ onClose, car, status }) {
         </div>
         <div className={styles.btnContainer}>
           <button className={styles.archiveBtn}>
-            <BsLayerBackward />В архів
+            <BsLayerBackward className={styles.iconArchive} />В архів
           </button>
           <button
             className={styles.submitBtn}
