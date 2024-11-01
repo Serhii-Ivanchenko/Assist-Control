@@ -4,13 +4,18 @@ import { BsCaretDownFill } from "react-icons/bs";
 import clsx from "clsx";
 import css from "./ConnectionSelect.module.css"
 import { BsFillTelephoneOutboundFill } from "react-icons/bs";
-import { BsFillPenFill } from "react-icons/bs";
+// import { BsFillPenFill } from "react-icons/bs";
+import { BsEnvelope } from "react-icons/bs";
+import { PiTelegramLogoLight } from "react-icons/pi";
+
 
 
 
 const connection = [
     { value: "call", label: "Передзвонити", icon: <BsFillTelephoneOutboundFill size={18} className={css.phoneIcon } />},
-  { value: "message", label: "Повідомлення", icon:<BsFillPenFill size={18} className={css.penIcon }/> },
+  { value: "email", label: "Написати листа", icon: <BsEnvelope size={18} className={css.envelopeIcon} /> },
+  { value: "tg", label: "Зв'язатись в Телеграм", icon:<PiTelegramLogoLight size={18} className={css.tgIcon }/> },
+  
 ];
 
 export default function ConnectionSelect({ field, form }) {

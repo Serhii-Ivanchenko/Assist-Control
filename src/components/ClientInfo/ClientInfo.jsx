@@ -19,6 +19,8 @@ import absentAutoImg from "../../assets/images/absentAutoImg.webp"
 import { useState } from "react";
 import Modal from "../Modals/Modal/Modal";
 import NotificationModal from "./NotificationModal/NotificationModal";
+import { BsPencil } from "react-icons/bs";
+
 
 
 
@@ -27,6 +29,32 @@ import NotificationModal from "./NotificationModal/NotificationModal";
 
 export default function ClientInfo() {
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [phoneNum, setPhoneNum] = useState('+38 073 329 12 17');
+    const [email, setEmail] = useState('ivan.petrenko@gmail.com');
+    const [tg, setTg] = useState('ivan.petrenko');
+
+
+    const handleChangePN = (e) => {
+        setPhoneNum(e.target.value)
+    }
+
+    const handleChangeEmail = (e) => { 
+        setEmail(e.target.value)
+    }
+
+    const handleChangeTg = (e) => { 
+        setTg(e.target.value)
+
+    }
+
+
+
+    
+
+    const handleEditing = () => {
+        setIsEditing(!isEditing)
+    }
 
     
     const openModal = () => {
@@ -83,8 +111,13 @@ export default function ClientInfo() {
             <IoStarSharp color="var(--star-orange)" size={18}/>
             <IoStarSharp color="var(--star-orange)" size={18}/>
             <IoStarSharp color="var(--star-white)" size={18}/>
-          </div>
-                <p className={css.clientName}>Іван Петренко</p>
+                        </div>
+                        
+                        <div className={css.nameAndEditBox}>
+                            <p className={css.clientName}>Іван Петренко</p>
+                            <button type="button" className={css.editBtn} onClick={handleEditing}><BsPencil size={16} className={css.pencilIcon} /></button>
+                        </div>
+                        
                 <p className={css.dateOfBirth}>12 Трав, 1987 (37р.)</p>
                 <div className={css.serviceBook}>
                             <p className={css.sbText}>Сервісна книга</p>
@@ -122,7 +155,8 @@ export default function ClientInfo() {
 
                <ul className={css.contactsInfo}>
                     <li className={css.contactsInfoItem}>
-                        <p className={css.contactsInput}>+38 073 329 12 17</p>
+                        {isEditing ? (<input type="text" value={phoneNum}  onChange={handleChangePN} className={css.contactsInput}/>) : (
+                            <p className={css.contactsInput} >{phoneNum }</p>)}
                         <div className={css.contactsBtnBox}>
                         <a href="tel:+38 073 329 12 17">
                         <button type="button" className={css.contactsBtn}>          
@@ -139,7 +173,8 @@ export default function ClientInfo() {
                     </li>
 
                     <li className={css.contactsInfoItem}>
-                        <p className={css.contactsInput}>ivan.petrenko@gmail.com</p> 
+                        {isEditing ? (<input type="text" value={email} onChange={handleChangeEmail} className={css.contactsInput}/>) : (
+                            <p className={css.contactsInput}>{ email}</p>)}
                         <div className={css.contactsBtnBox}>
                             <a href="mailto:ivan.petrenko@gmail.com" target="_blank">
                             <button type="button" className={css.contactsBtn}>           
@@ -153,7 +188,8 @@ export default function ClientInfo() {
                     </li>
 
                     <li className={css.contactsInfoItem}>
-                        <p className={css.contactsInput}>ivan.petrenko</p>
+                        {isEditing ? (<input type="text" value={tg} onChange={handleChangeTg} className={css.contactsInput}/>) : (
+                            <p className={css.contactsInput}>{ tg }</p>)}
                         <a href="https://t.me/ivan.petrenko" target="_blank">
                         <button type="button" className={css.contactsBtn}>
                             <PiTelegramLogoLight className={css.iconColor} size={22} />

@@ -70,7 +70,7 @@ display: flex;
     padding: 6px 10px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    /* gap: 10px; */
     align-self: stretch;
 
     border-radius: 12px;
@@ -104,11 +104,12 @@ display: flex;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: default;
 
 }
 
 .dateDate{
-    width: 110px;
+    width: 90px;
 }
 
 .dateTime{
@@ -128,6 +129,7 @@ display: flex;
     display: flex;
     padding: 6px;
     align-items: center;
+    cursor: pointer;
     /* gap: 10px; */
 }
 

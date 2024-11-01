@@ -40,7 +40,7 @@
     align-items: flex-end;
     gap: 23px;
 
-    margin-right: 57px;
+    margin-right: 29px;
 }
 
 .mainInfo{
@@ -112,7 +112,6 @@
     font-weight: 600;
     line-height: 1.1875em;
 
-    margin-top: 3px;
 }
 
 .moneyBox{
@@ -273,6 +272,30 @@
     fill:var(--icon-gray);
     width: 18px;
     height: 18px;
+}
+
+.nameAndEditBox{
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 3px;
+}
+
+.editBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+
+    border-radius: 6px;
+    background: var(--bg-input);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+    cursor: pointer;
+}
+
+.pencilIcon{
+    fill: var(--light-gray);
 }
 
 

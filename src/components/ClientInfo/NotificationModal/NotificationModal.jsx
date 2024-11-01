@@ -12,7 +12,7 @@ import DatePicker from "react-datepicker";
 import { useRef } from "react";
 // import TimePicker from "react-time-picker";
 // import { useState } from "react";
- 
+ import "./NotificationModal.css"
 
 
 
@@ -48,7 +48,7 @@ export default function NotificationModal({ onClose }) {
 
     const handleSubmit = (values, actions) => {
         const timeOnly = values.time ? values.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : null;
-        const dateOnly = values.date ? values.date.toLocaleDateString("en-GB") : null;
+        const dateOnly = values.date ? values.date.toLocaleDateString("en-CA") : null;
         const submittedValues = { ...values, time: timeOnly, date: dateOnly };
         console.log(submittedValues);
         actions.resetForm();
@@ -80,6 +80,7 @@ export default function NotificationModal({ onClose }) {
                                         name="date"
                                         className={`${css.date} ${css.dateDate}`}
                                         dateFormat="dd/MM/yy"
+                                        minDate={new Date()}
                                         ref={datepickerRef}
                                         onKeyDown={(e) => e.preventDefault()}
                                     />
@@ -105,10 +106,12 @@ export default function NotificationModal({ onClose }) {
                                         showTimeSelect
                                         showTimeSelectOnly
                                         timeIntervals={15}
-                                         timeFormat="HH:mm" 
-                                        dateFormat="HH:mm"
+                                         timeFormat="H:mm" 
+                                        dateFormat="H:mm"
                                         showTimeCaption={false}
                                         ref={timepickerRef}
+                                        onKeyDown={(e) => e.preventDefault()}
+
                                         />
                                     <button type="button"
                                         className={css.dateBtn}
