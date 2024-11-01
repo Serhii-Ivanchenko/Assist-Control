@@ -1,8 +1,6 @@
 import { Field, Formik, Form } from "formik"
 import css from "./NotificationModal.module.css"
 import { BsAlarm } from "react-icons/bs";
-// import { BsCaretDownFill } from "react-icons/bs";
-// import { BsFillTelephoneOutboundFill } from "react-icons/bs";
 import { BsCalendar2Week } from "react-icons/bs";
 import { BsWatch } from "react-icons/bs";
 import { BsXLg } from "react-icons/bs";
@@ -10,21 +8,25 @@ import ConnectionSelect from "./ConnectionSelect/ConnectionSelect";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { useRef } from "react";
-// import TimePicker from "react-time-picker";
-// import { useState } from "react";
- import "./NotificationModal.css"
+import "./NotificationModal.css"
+import { useId } from "react";
+import * as Yup from "yup";
 
 
 
+const Validation = Yup.object().shape({
+  connection: Yup.string().required(),
+  date: Yup.string().required(),
+  time: Yup.string().required(),
+  comment: Yup.string().required(),
+});
 
 
-// import { newDate } from "react-datepicker/dist/date_utils"
 
 export default function NotificationModal({ onClose }) {
     
     const datepickerRef = useRef(null);
     const timepickerRef = useRef(null);
-    // const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
     
 
      const handleDateButtonClick = () => {
@@ -54,6 +56,12 @@ export default function NotificationModal({ onClose }) {
         actions.resetForm();
         onClose()
     }
+
+
+    const dateId = useId();
+    const timeId = useId();
+    const commentId = useId();
+
         
         
     return (
@@ -61,7 +69,7 @@ export default function NotificationModal({ onClose }) {
             <BsXLg onClick={onClose} className={css.crossBtn }/>
             <p className={css.title}>Обрати дату</p>
 
-            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+            <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={Validation}>
                 { ({values, setFieldValue}) => (
                     <Form className={css.notifForm}>
 
@@ -72,9 +80,10 @@ export default function NotificationModal({ onClose }) {
                     
                         <div className={css.dateAndTimeBox}>
                             <div className={css.inputBox}>
-                                <label htmlFor="" className={css.label}>Дата</label>
+                                <label htmlFor={dateId} className={css.label}>Дата</label>
                                 <div className={css.input}>
                                     <DatePicker
+                                        id={dateId}
                                         selected={values.date}
                                         onChange={(date) => setFieldValue("date", date)}
                                         name="date"
@@ -95,10 +104,11 @@ export default function NotificationModal({ onClose }) {
                             </div>
 
                             <div className={css.inputBox}>
-                                <label htmlFor="" className={css.label}>Час</label>
+                                <label htmlFor={timeId} className={css.label}>Час</label>
                             
                                 <div className={css.input}>
                                     <DatePicker
+                                        id={timeId}
                                         name="time"
                                         className={`${css.date} ${css.dateTime}`}
                                          selected={values.time}
@@ -124,8 +134,8 @@ export default function NotificationModal({ onClose }) {
                         </div>
 
                         <div className={css.inputBox}>
-                            <label htmlFor="" className={css.label}>Коментар</label>
-                            <Field as="textarea" name="comment" className={css.textarea} />
+                            <label htmlFor={commentId} className={css.label}>Коментар</label>
+                            <Field as="textarea" name="comment" className={css.textarea} id={commentId } />
                         </div>
                     
                         <div className={css.btnBox}>
