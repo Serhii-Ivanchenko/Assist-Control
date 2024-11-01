@@ -7,7 +7,7 @@
   height: auto;
 
   padding: 40px 30px;
-  border-radius: 6px;
+  border-radius: 12px;
 
   background-color: var(--bg);
 }
@@ -386,9 +386,11 @@
   margin-right: 10px;
 }
 
-.iconSubmit {
-  width: 16px;
-  height: auto;
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
 }
 
 .submitBtn {
@@ -408,7 +410,45 @@
   color: var(--white);
 
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 500;
   cursor: pointer;
+}
+
+.submitBtn:hover,
+.submitBtn:focus {
+  background-color: var(--blue-btn-hover);
+}
+
+.archiveBtn {
+  display: flex;
+  width: auto;
+  height: auto;
+
+  padding: 10px 20px;
+  gap: 10px;
+
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+  color: var(--white);
+  border: 1px solid var(--main-gray);
+  border-radius: 6px;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.iconArchive {
+  width: 20px;
+  height: 20px;
+  fill: var(--light-gray);
+}
+.archiveBtn:hover,
+.archiveBtn:focus {
+  background-color: var(--dark-gray);
 }
