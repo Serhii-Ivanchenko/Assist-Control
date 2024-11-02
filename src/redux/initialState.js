@@ -71,6 +71,17 @@ export const initialState = {
     isLoadingCarsByDay: false,
   },
 
+  crm: {
+    serviceData: {
+      mechanics: [],
+      posts: [],
+    },
+    records: [],
+    visits: [],
+    isLoading: false,
+    error: null,
+  },
+
   client: {
     name: null,
     phone: null,
