@@ -20,6 +20,8 @@ import { useState } from "react";
 import Modal from "../Modals/Modal/Modal";
 import NotificationModal from "./NotificationModal/NotificationModal";
 import { BsPencil } from "react-icons/bs";
+import avatar_default from "../../assets/images/avatar_default.png"
+
 
 
 
@@ -96,15 +98,17 @@ export default function ClientInfo() {
     
     
     return (
-        <div className={css.clientInfoBox}>
+         <div className={css.clientInfoBox}>
             <p className={css.title}>Інформація про клієнта та автомобіль</p>
             
             <div className={css.infoBox}>
                 
                 <div className={css.photoAndMainInfo}>
-                <img src="" alt="Client's Photo" className={css.clientImg} />
+                <img src={avatar_default} alt="Client's Photo" className={css.clientImg} />
 
-            <div className={css.mainInfo}>
+                    <div className={css.mainInfo}>
+                        
+                        <div className={css.ratingAndMoney}>
             <div className={css.rating}>
             <IoStarSharp color="var(--star-orange)" size={18}/>
             <IoStarSharp color="var(--star-orange)" size={18}/>
@@ -112,6 +116,11 @@ export default function ClientInfo() {
             <IoStarSharp color="var(--star-orange)" size={18}/>
             <IoStarSharp color="var(--star-white)" size={18}/>
                         </div>
+                    <div className={css.moneyBox}>
+                    <AiOutlineDollar className={css.dollarIcon } />
+                    <p className={css.moneyAmount}>₴12 482</p>
+                            </div>
+                            </div>
                         
                         <div className={css.nameAndEditBox}>
                             <p className={css.clientName}>Іван Петренко</p>
@@ -130,13 +139,12 @@ export default function ClientInfo() {
                     </div>
                 </div>
 </div>
-                <div className={css.moneyBox}>
-                    <AiOutlineDollar className={css.dollarIcon } />
-                    <p className={css.moneyAmount}>₴12 482</p>
-                </div>
+                
             </div>
             
-            
+
+
+
             <div className={css.contactsBox}>
                 <ul className={css.categoryList}>
                     <li className={css.categoryListItem}>
@@ -158,7 +166,7 @@ export default function ClientInfo() {
                         {isEditing ? (<input type="text" value={phoneNum}  onChange={handleChangePN} className={css.contactsInput}/>) : (
                             <p className={css.contactsInput} >{phoneNum }</p>)}
                         <div className={css.contactsBtnBox}>
-                        <a href="tel:+38 073 329 12 17">
+                        <a href={`tel:${phoneNum}`}>
                         <button type="button" className={css.contactsBtn}>          
                             <BsTelephoneOutboundFill className={css.phoneCallIcon}/>
                             </button>
@@ -176,7 +184,7 @@ export default function ClientInfo() {
                         {isEditing ? (<input type="text" value={email} onChange={handleChangeEmail} className={css.contactsInput}/>) : (
                             <p className={css.contactsInput}>{ email}</p>)}
                         <div className={css.contactsBtnBox}>
-                            <a href="mailto:ivan.petrenko@gmail.com" target="_blank">
+                            <a href={`mailto:${email}`} target="_blank">
                             <button type="button" className={css.contactsBtn}>           
                                 <IoIosAt className={css.iconColor} size={25}/>
                                 </button>
@@ -190,7 +198,7 @@ export default function ClientInfo() {
                     <li className={css.contactsInfoItem}>
                         {isEditing ? (<input type="text" value={tg} onChange={handleChangeTg} className={css.contactsInput}/>) : (
                             <p className={css.contactsInput}>{ tg }</p>)}
-                        <a href="https://t.me/ivan.petrenko" target="_blank">
+                        <a href={`https://t.me/${tg}`} target="_blank">
                         <button type="button" className={css.contactsBtn}>
                             <PiTelegramLogoLight className={css.iconColor} size={22} />
                             </button>
@@ -199,6 +207,7 @@ export default function ClientInfo() {
                </ul>
 
             </div>
+
 
             
 

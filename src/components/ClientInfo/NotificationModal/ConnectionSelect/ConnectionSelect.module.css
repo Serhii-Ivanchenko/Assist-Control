@@ -53,8 +53,24 @@
 
 }
 
+.option:hover{
+    background-color: var(--bg-secondary);
+}
+
+
 .option:not(:last-child) {
     border-bottom: dashed 1px var(--input-stroke);
+    
+}
+
+.option:last-child{
+    border-bottom-left-radius:12px ;
+    border-bottom-right-radius: 12px;
+}
+
+.option:first-child{
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
 .selectIcon {
