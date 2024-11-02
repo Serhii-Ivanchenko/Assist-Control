@@ -5,6 +5,6 @@ import css from './AppointmentBlock.module.css'
 export default function AppointmentBlock() {
     return <div className={css.appointmentBlockContainer}>
         <CRMCalendar />
-        {/* <AppointmentTable/> */}
+         <AppointmentTable/> 
     </div>
 };

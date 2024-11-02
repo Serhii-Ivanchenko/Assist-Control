@@ -144,9 +144,11 @@ useEffect(() => {
       // +"/" +
       // el.date.substring(0, 4),
   }));
-
+  let interval = 0;
   const getMaxValue = (data) => Math.max(...data.map((d) => d.total_count));
   const maxY = getMaxValue(data);
+  if (maxY > 15) { interval = 4 }
+  else { interval = 0 };
   
   const sumNewCars = data.reduce((acc, current) => {
     return acc + current.new_for_day;
@@ -225,7 +227,7 @@ useEffect(() => {
               tick={{ fontSize: 10 }}
               axisLine={{ fill: "transparent" }}
               tickCount={maxY + 1}
-              interval={0}
+              interval={interval}
               // ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
               //  axisLine={false}
               // tickFormatter={yTickFormatter}
