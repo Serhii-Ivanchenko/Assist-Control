@@ -1,9 +1,0 @@
-.decoration {
-  width: 686px;
-  height: 663px;
-  flex-shrink: 0;
-  border-radius: 686px;
-  opacity: 0.28;
-  background: rgba(184, 112, 81, 0.35);
-  filter: blur(200px);
-}

@@ -29,7 +29,6 @@ function ServiceStationList() {
         {stations.map((station) => (
           <div key={station.id} className={styles.serviceStationWrapper}>
             <ServiceStationItem
-              className={styles.serviceStationItem}
               id={station.id}
               name={station.name}
               isOpen={activeStationId === station.id}
@@ -42,11 +41,12 @@ function ServiceStationList() {
             )}
           </div>
         ))}
-        <button className={styles.addBtn}>
+       
+      </div>
+       <button className={styles.addBtn}>
           <BsPlusCircleDotted className={styles.icon} />
           <BsHouseFill className={styles.icon} />
         </button>
-      </div>
     </div>
   );
 }

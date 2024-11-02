@@ -1,8 +1,8 @@
 .wrapper {
   display: flex;
-  height: 898px;
+  justify-content: space-between;
+  height: 921px;
   flex-direction: column;
-  gap: 14px;
 }
 
 .leftContainer {
@@ -13,8 +13,8 @@
 }
 
 .addBtn {
-  position: absolute;
-  top: 989px;
+  /* position: absolute;
+  top: 989px; */
   display: inline-flex;
   width: 518px;
   padding: 12px 125px;
@@ -42,7 +42,7 @@
   top: 0;
   left: 100%;
   width: 995px;
-  height: 925px;
+  height: 921px;
   border-radius: 12px;
   background-color: var(--bg-input);
   margin-left: 14px;
