@@ -21,7 +21,6 @@ export default function VideoControlPage() {
           const serviceId = userData.services?.[0]?.id;
 
           if (serviceId) {
-
             dispatch(setSelectedServiceId(serviceId));
           }
         })
