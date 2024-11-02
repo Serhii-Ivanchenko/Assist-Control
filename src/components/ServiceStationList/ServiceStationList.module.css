@@ -1,0 +1,60 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 921px;
+  flex-direction: column;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 14px;
+}
+
+.addBtn {
+  /* position: absolute;
+  top: 989px; */
+  display: inline-flex;
+  width: 518px;
+  padding: 12px 125px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  background-color: var(--blue-btn-normal);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  border: transparent;
+  cursor: pointer;
+}
+
+.icon {
+  fill: var(--icon-gray);
+}
+
+.serviceStationWrapper {
+  position: relative;
+}
+
+.rightContainer {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 995px;
+  height: 921px;
+  border-radius: 12px;
+  background-color: var(--bg-input);
+  margin-left: 14px;
+  z-index: 1;
+}
+
+.rightContainer::before {
+  content: "";
+  position: absolute;
+  top: 62px;
+  left: -14px;
+  width: 14px;
+  height: 154px;
+  background-color: var(--bg-input);
+}

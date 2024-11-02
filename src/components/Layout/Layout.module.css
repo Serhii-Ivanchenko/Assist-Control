@@ -14,8 +14,8 @@
 
 @media only screen and (min-width: 1850px) {
   .appContainer {
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
     max-width: 1920px;
     height: 100vh;
     min-height: 1080px;

@@ -1,0 +1,7 @@
+.mainTitle {
+  margin: 6px 0 12px;
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+}

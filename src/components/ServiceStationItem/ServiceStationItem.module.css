@@ -1,0 +1,146 @@
+.generalContainer {
+  display: flex;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.serviceWrapper {
+  display: flex;
+  width: 518px;
+  height: 298px;
+  padding: 20px 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 21px;
+  border-radius: 12px;
+
+  background-color: var(--bg-input);
+  color: var(--white);
+}
+
+.serviceContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+align-items: center;
+  width: 100%;
+}
+
+.serviceTitle {
+  color: var(--White);
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.editBtn {
+  display: inline-block;
+  border: none;
+  background-color: var(--bg-input);
+
+  color: var(--white);
+
+  width: 34px;
+  height: 34px;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 50px;
+}
+
+.infoKey {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  gap: 6px;
+}
+
+.infoKey p {
+color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.infoValue {
+  display: inline-flex;
+  color: var(--White);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.1875em;
+}
+
+.mainIcon {
+  fill: var(--light-gray);
+}
+
+.keyIcon {
+  fill: var(--light-gray);
+}
+
+.arrowIcon {
+  fill: var(--icon-gray);
+}
+
+.subscribeStatus {
+  display: inline-flex;
+  padding: 6px 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  border-radius: 24px;
+  background: rgba(67, 164, 141, 0.08);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  color: #43a48d;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.1875em;
+}
+
+.closedServiceWrapper {
+  display: flex;
+  width: 518px;
+  padding: 10px 20px;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--bg-input);
+  color: var(--white);
+  border-radius: 12px;
+}
+
+.closedServiceContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.closedServiceInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+}
