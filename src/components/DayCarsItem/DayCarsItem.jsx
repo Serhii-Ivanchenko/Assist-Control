@@ -84,7 +84,7 @@ export default function DayCarsItem({
           </div>
         </div>
         <div className={clsx(styles.infoVin, isCRMBlock && styles.crmInfoVin)}>
-          <span className={styles.vinNum}>{vin ? vin : "VIN не визначено"}</span>
+          <span className={styles.vinNum}>{vin ? vin : "VIN не вказано"}</span>
         </div>
         <div className={styles.btnContainer}>
           {!isCRMBlock && <StatusBtn car={car}/>}
