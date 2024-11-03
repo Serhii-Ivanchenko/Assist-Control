@@ -1,9 +1,9 @@
 .carDetails {
-  display: inline-flex;
+  display: flex;
   padding: 5px 10px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  height: 24px;
 
   color: var(--white);
   background-color: var(--green-btn-normal);
@@ -13,7 +13,8 @@
 
   font-family: "Roboto", sans-serif;
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 600;
+  line-height: 1.17em;
 
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;

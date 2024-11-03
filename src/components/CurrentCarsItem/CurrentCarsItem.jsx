@@ -17,6 +17,7 @@ import { getStatusDetails } from "../../utils/getStatusDetails.js";
 
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
+import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
 import styles from "./CurrentCarsItem.module.css";
 
 export default function CurrentCarsItem() {
@@ -108,8 +109,10 @@ export default function CurrentCarsItem() {
             </h4>
           </div>
           <div className={styles.detailsContainer}>
-            <StatusBtn car={car} />
-            {/* тут буде імпорт кнопки деталей від Валі */}
+            <div className={styles.btnContainer}>
+              <StatusBtn car={car} />
+              <CarDetailButton />
+            </div>
             <div className={styles.statusContainer}>
               <p className={clsx(styles.carStatus, className)}>
                 {icon} {label}

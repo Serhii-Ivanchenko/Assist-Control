@@ -70,8 +70,10 @@
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-weight: 400;
-
-  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* margin-top: 2px; */
 }
 
 .carTimeStamp {
@@ -193,7 +195,7 @@
   .carBrand {
     text-transform: uppercase;
     font-size: 16px;
-    margin-top: 1px;
+    /* margin-top: 1px; */
   }
 
   .carTimeStamp {
@@ -351,5 +353,12 @@
 
   .carDetails:hover {
     background-color: var(--blue-btn-hover);
+  }
+
+  .btnContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 4px;
   }
 }
