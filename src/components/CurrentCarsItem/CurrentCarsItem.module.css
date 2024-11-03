@@ -70,8 +70,10 @@
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-weight: 400;
-
-  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* margin-top: 2px; */
 }
 
 .carTimeStamp {
@@ -163,7 +165,7 @@
     display: flex;
     width: 521px;
     height: auto;
-    padding: 10px 20px;
+    padding: 8px 18px;
 
     background: var(--bg-input);
     border: transparent;
@@ -193,7 +195,7 @@
   .carBrand {
     text-transform: uppercase;
     font-size: 16px;
-    margin-top: 1px;
+    /* margin-top: 1px; */
   }
 
   .carTimeStamp {
@@ -246,7 +248,7 @@
   }
 
   .newStatus {
-    padding: 10px 20px;
+    padding: 8px 18px;
     stroke: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-new) border-box;
@@ -255,7 +257,7 @@
   }
 
   .repairStatus {
-    padding: 10px 20px;
+    padding: 8px 18px;
     fill: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-repair) border-box;
@@ -264,7 +266,7 @@
   }
 
   .checkRepairStatus {
-    padding: 10px 20px;
+    padding: 8px 18px;
     fill: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-diag) border-box;
@@ -273,7 +275,7 @@
   }
 
   .completeStatus {
-    padding: 10px 20px;
+    padding: 8px 18px;
     fill: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-complete) border-box;
