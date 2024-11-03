@@ -20,7 +20,9 @@ import flag from "../../assets/images/flagUa.webp";
 import { renderTime } from "../../utils/renderTime.js";
 import renderStatus from "../../utils/renderStatus.jsx";
 import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
-import CarDetailButton from "../CarDetailButton/CarDetailButton.jsx";
+import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
+import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
+import PaymentBtn from "../sharedComponents/PaymentBtn/PaymentBtn.jsx";
 
 export default function DayCarsItem({
   carNumber,
@@ -35,9 +37,8 @@ export default function DayCarsItem({
   date_s,
   client,
 }) {
-
-  
-  const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] = useState(false);
+  const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
+    useState(false);
 
   const openServiceBookingModal = () => {
     setServiceBookingModalIsOpen(true);
@@ -87,7 +88,9 @@ export default function DayCarsItem({
           <span className={styles.vinNum}>{vin ? vin : "VIN-XXXXXXXXXXX"}</span>
         </div>
         <div className={styles.btnContainer}>
-        <CarDetailButton />
+          {!isCRMBlock && <StatusBtn />}
+          <CarDetailButton />
+          {isCRMBlock && (status === "repair" || status === "diagnostic" || status === "complete") && <PaymentBtn />}
           {isCRMBlock && status === "new" && (
             <div className={styles.btnPlus} onClick={openServiceBookingModal}>
               <button className={styles.plus}>
@@ -95,23 +98,28 @@ export default function DayCarsItem({
               </button>
             </div>
           )}
-          {isCRMBlock && status === "new" && (
+          {isCRMBlock && (status === "new" || status === "complete") && (
             <button className={styles.btnSave}>
               <BsLayerBackward size={16} />
             </button>
           )}
-      
+
           {serviceBookingModalIsOpen && (
-            <Modal isOpen={serviceBookingModalIsOpen} onClose={handleModalClose}>
+            <Modal
+              isOpen={serviceBookingModalIsOpen}
+              onClose={handleModalClose}
+            >
               <ServiceBookingModal onClose={handleModalClose} />
             </Modal>
           )}
         </div>
       </div>
-      <div className={clsx(styles.carsInfo, {
-        [styles.crmcarsInfo]: isCRMBlock,
-        [styles.modalCarsInfo]: isModal 
-})}>
+      <div
+        className={clsx(styles.carsInfo, {
+          [styles.crmcarsInfo]: isCRMBlock,
+          [styles.modalCarsInfo]: isModal,
+        })}
+      >
         <div className={styles.carInfoLeft}>
           <div className={clsx(styles.rating, isCRMBlock && styles.crmRating)}>
             <AiFillStar color="var(--star-orange)" />

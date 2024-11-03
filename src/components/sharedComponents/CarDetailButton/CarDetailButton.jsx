@@ -1,5 +1,5 @@
-import Modal from '../Modals/Modal/Modal'; 
-import DetailedClientInfo from '../DetailedClientInfo/DetailedClientInfo'; 
+import Modal from '../../Modals/Modal/Modal'; 
+import DetailedClientInfo from '../../DetailedClientInfo/DetailedClientInfo'; 
 import { useState } from 'react';
 import styles from './CarDetailButton.module.css';
 
