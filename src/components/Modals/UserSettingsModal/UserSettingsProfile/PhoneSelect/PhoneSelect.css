@@ -43,12 +43,12 @@ overflow: hidden;
 }
 
 .react-tel-input .country-list::-webkit-scrollbar-track {
-    background-color: var(--dark-gray);
+    /* background-color: var(--dark-gray); */
     border-radius: 4px;
 }
 
 .react-tel-input .country-list::-webkit-scrollbar-thumb {
-background-color: var(--main-gray);
+background-color: var(--bg);
 border-radius: 4px;
 }
 
