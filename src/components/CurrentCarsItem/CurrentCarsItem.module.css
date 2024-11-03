@@ -163,7 +163,7 @@
     display: flex;
     width: 521px;
     height: auto;
-    padding: 8px 18px;
+    padding: 10px 20px;
 
     background: var(--bg-input);
     border: transparent;
@@ -246,7 +246,7 @@
   }
 
   .newStatus {
-    padding: 8px 18px;
+    padding: 10px 20px;
     stroke: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-new) border-box;
@@ -255,7 +255,7 @@
   }
 
   .repairStatus {
-    padding: 8px 18px;
+    padding: 10px 20px;
     fill: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-repair) border-box;
@@ -264,7 +264,7 @@
   }
 
   .checkRepairStatus {
-    padding: 8px 18px;
+    padding: 10px 20px;
     fill: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-diag) border-box;
@@ -273,7 +273,7 @@
   }
 
   .completeStatus {
-    padding: 8px 18px;
+    padding: 10px 20px;
     fill: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-complete) border-box;
@@ -351,5 +351,12 @@
 
   .carDetails:hover {
     background-color: var(--blue-btn-hover);
+  }
+
+  .btnContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 4px;
   }
 }
