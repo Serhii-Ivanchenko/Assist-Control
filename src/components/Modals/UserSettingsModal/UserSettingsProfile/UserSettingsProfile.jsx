@@ -42,7 +42,7 @@ export default function UserSettingsProfile({ onClose }) {
   const userPhoto = user?.avatar_url || defaultAvatar;
   const userCountry = user.country || "";
   const userCity = user.city || "";
-  const userIndex = user.post_index || "";
+  const userIndex = user.post_code || "";
   const userAddress = user.address || "";
 
   const [avatar, setAvatar] = useState(userPhoto);
@@ -169,8 +169,8 @@ export default function UserSettingsProfile({ onClose }) {
     dataToUpdate.city = values.city;
         }
 
-        if (values.index !== user.post_index) {
-    dataToUpdate.index = values.index;}
+        if (values.index !== user.post_code) {
+    dataToUpdate.post_code = values.index;}
 
     // Якщо немає змін, не відправляємо запит на сервер
     if (Object.keys(dataToUpdate).length === 0) {

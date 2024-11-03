@@ -7,7 +7,7 @@ import { calculateTimeInService } from "../../../utils/calculateTimeInService";
 import { getStatusDetails } from "../../../utils/getStatusDetails";
 import { changeCarStatus } from "../../../redux/cars/operations";
 import { getCurrentCars, getCarsByDate } from "../../../redux/cars/operations";
-import {selectDate} from '../../../redux/cars/selectors.js'
+import { selectDate } from "../../../redux/cars/selectors.js";
 
 import absentAutoImg from "../../../assets/images/absentAutoImg.webp";
 import flag from "../../../assets/images/flagUa.webp";
@@ -21,6 +21,7 @@ import { BsEyeFill, BsCheckCircleFill } from "react-icons/bs";
 import { IoMdCheckmark } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { BsFiles } from "react-icons/bs";
+import { BsLayerBackward } from "react-icons/bs";
 
 import styles from "./CurrentCarModal.module.css";
 
@@ -215,14 +216,19 @@ function CurrentCarModal({ onClose, car, status }) {
             </label>
           </div>
         </div>
-        <button
-          className={styles.submitBtn}
-          type="submit"
-          onClick={handleSubmit}
-        >
-          {<IoMdCheckmark className={styles.iconSubmit} />}
-          Підтвердити
-        </button>
+        <div className={styles.btnContainer}>
+          <button className={styles.archiveBtn}>
+            <BsLayerBackward className={styles.iconArchive} />В архів
+          </button>
+          <button
+            className={styles.submitBtn}
+            type="submit"
+            onClick={handleSubmit}
+          >
+            {<IoMdCheckmark className={styles.iconSubmit} />}
+            Підтвердити
+          </button>
+        </div>
       </div>
     </div>
   );

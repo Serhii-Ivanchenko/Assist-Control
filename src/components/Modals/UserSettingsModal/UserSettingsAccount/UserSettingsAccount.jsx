@@ -45,11 +45,13 @@ export default function UserSettingsAccount({ onClose }) {
   console.log("data", user);
   const userEmail = user.email || "";
   const userCompany = user.company_name || "";
+  const userLanguage = user.language;
+  const userCurrency = user.currency;
 
   const initialValues = {
     company: userCompany,
-    languages: "ukr",
-    currency: "UAH",
+    languages: userLanguage || "ukr",
+    currency: userCurrency || "UAH",
   };
 
   const handleSubmit = async (values, actions) => {
@@ -59,9 +61,13 @@ export default function UserSettingsAccount({ onClose }) {
       dataToUpdate.company_name = values.company;
     }
 
-    // if (values.languages !== 'ukr') {
-    //   dataToUpdate.language = values.languages;
-    // }
+    if (values.languages !== user.language) {
+      dataToUpdate.language = values.languages;
+    }
+
+    if (values.currency !== user.currency) {
+      dataToUpdate.currency = values.currency;
+    }
 
     // Якщо немає змін, не відправляємо запит на сервер
     if (Object.keys(dataToUpdate).length === 0) {

@@ -11,15 +11,37 @@ import { BsXLg } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import { FaCheck } from "react-icons/fa";
 import SelectDate from "./SelectDate/SelectDate";
-import { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { createRecord } from "../../../redux/cars/operations.js";
+import { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createRecord,
+  getMechsAndPosts,
+} from "../../../redux/crm/operations.js";
 import toast from "react-hot-toast";
+import { selectServiceData } from "../../../redux/crm/selectors.js";
+import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
 
 export default function ServiceBookingModal({ onClose }) {
   const dispatch = useDispatch();
 
   const [chosenTime, setChosenTime] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownPostOpen, setIsDropdownPostOpen] = useState(false);
+  const [isDropdownMechanicOpen, setIsDropdownMechanicOpen] = useState(false);
+  const selectRef = useRef(null);
+
+  const selectedServiceId = useSelector(selectSelectedServiceId);
+  const serviceData = useSelector(selectServiceData); // дані про сервіс: пости та механіки
+  useEffect(() => {
+    const fetchServiceData = () => {
+      if (!selectedServiceId) {
+        return;
+      }
+      dispatch(getMechsAndPosts());
+      console.log("selectServiceData", serviceData);
+    };
+    fetchServiceData();
+  }, [dispatch, selectedServiceId]); // Отримуємо дані про пости і механіків при рендері модалки
 
   const onTimeBtnClick = (item) => {
     if (!item.isFree) return;
@@ -31,11 +53,6 @@ export default function ServiceBookingModal({ onClose }) {
         : [...prevChosenButtons, item.time]
     );
   };
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDropdownPostOpen, setIsDropdownPostOpen] = useState(false);
-  const [isDropdownMechanicOpen, setIsDropdownMechanicOpen] = useState(false);
-  const selectRef = useRef(null);
 
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
@@ -58,8 +75,8 @@ export default function ServiceBookingModal({ onClose }) {
   };
 
   const currentDate = new Date(Date.now());
-  const day = currentDate.getDate();
-  const month = currentDate.getMonth() + 1;
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
   const year = currentDate.getFullYear();
   const formattedDate = `${day}.${month}.${year}`;
 
@@ -69,9 +86,7 @@ export default function ServiceBookingModal({ onClose }) {
     setPickedDate(date);
   };
 
-  const dateToPass = new Date(pickedDate.split(".").reverse().join("-"))
-    .toISOString()
-    .split("T")[0];
+  const dateToPass = pickedDate.split(".").reverse().join("-");
 
   const startHour = chosenTime[0];
   const finishHour = chosenTime[chosenTime.length - 1];
@@ -120,6 +135,8 @@ export default function ServiceBookingModal({ onClose }) {
         }}
         onSubmit={handleSubmit}
         validationSchema={ServiceBookingSchema}
+        validateOnChange={true}
+        validateOnBlur
       >
         {({ values }) => (
           <Form className={css.form}>

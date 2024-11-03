@@ -202,26 +202,3 @@ export const changeCarStatus = createAsyncThunk(
   }
 );
 
-//Create record
-export const createRecord = createAsyncThunk(
-  "cars/createRecord",
-  async (recordData, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
-    try {
-      const response = await axiosInstance.post(
-        `/crm/create_record/`,
-        recordData,
-        {
-          headers: {
-            "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);

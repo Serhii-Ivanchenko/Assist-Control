@@ -13,23 +13,34 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
   const isLoading = useSelector(selectLoading);
   const [viewMode, setViewMode] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [inputError, setInputError] = useState("");
 
   const handleViewModeChange = (newMode) => {
     setViewMode(newMode);
   };
 
   const handleSearch = (term) => {
-    setSearchTerm(term);
+    // Перевірка на латинські літери та цифри
+    if (/^[a-zA-Z0-9]*$/.test(term)) {
+      setSearchTerm(term); // Оновлюємо searchTerm тільки якщо введення коректне
+      setInputError(""); // Очищаємо повідомлення про помилку
+    } else {
+      setInputError("Вводьте лише латинські літери та цифри");
+      setSearchTerm(term); // Оновлюємо searchTerm, навіть якщо введення некоректне
+    }
   };
 
   const filteredCars = () => {
-    if (!searchTerm) return carsData; 
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-  
-    return carsData.filter(car => {
-      const { plate, auto } = car;
-      return plate.toLowerCase().includes(lowerCaseSearchTerm) || auto.toLowerCase().includes(lowerCaseSearchTerm); 
+    if (!searchTerm) return carsData; // Повертаємо всі автомобілі, якщо searchTerm порожній
+
+    const lowerCaseSearchTerm = searchTerm.toLowerCase(); // Перетворюємо searchTerm в нижній регістр
+
+    return carsData.filter((car) => {
+      const { plate, auto } = car; // Передбачається, що car має поля plate і auto
+      return (
+        plate.toLowerCase().includes(lowerCaseSearchTerm) ||
+        auto.toLowerCase().includes(lowerCaseSearchTerm)
+      ); // Перетворюємо plate і auto в нижній регістр
     });
   };
 
@@ -38,10 +49,14 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
       <div className={styles.header}>
         <label className={styles.switch}>
           <FiGrid
-            className={`${styles.iconLeft} ${viewMode === "grid" ? styles.active : ""}`}
+            className={`${styles.iconLeft} ${
+              viewMode === "grid" ? styles.active : ""
+            }`}
           />
           <BsListUl
-            className={`${styles.iconRight} ${viewMode === "list" ? styles.active : ""}`}
+            className={`${styles.iconRight} ${
+              viewMode === "list" ? styles.active : ""
+            }`}
           />
           <input
             type="checkbox"
@@ -55,7 +70,11 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
           <span className={styles.slider}></span>
         </label>
         <div className={styles.search}>
-          <DayCarsFilter value={searchTerm} onChange={handleSearch} />
+          <DayCarsFilter
+            value={searchTerm}
+            onChange={handleSearch}
+            error={inputError}
+          />
         </div>
         <button className={styles.closeButton} onClick={onClose}>
           <MdClose className={styles.iconClose} />
