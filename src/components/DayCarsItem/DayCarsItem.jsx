@@ -90,13 +90,14 @@ export default function DayCarsItem({
         <div className={styles.btnContainer}>
           {!isCRMBlock && <StatusBtn />}
           <CarDetailButton />
-          {isCRMBlock && (status === "repair" || status === "diagnostic" || status === "complete") && <PaymentBtn />}
+          {isCRMBlock &&
+            (status === "repair" ||
+              status === "diagnostic" ||
+              status === "complete") && <PaymentBtn />}
           {isCRMBlock && status === "new" && (
-            <div className={styles.btnPlus} onClick={openServiceBookingModal}>
-              <button className={styles.plus}>
-                <BsPlusLg />
-              </button>
-            </div>
+            <button className={styles.plus} onClick={openServiceBookingModal}>
+              <BsPlusLg className={styles.iconPlus} />
+            </button>
           )}
           {isCRMBlock && (status === "new" || status === "complete") && (
             <button className={styles.btnSave}>

@@ -17,7 +17,7 @@ const PaymentBtn = () => {
   };
 
   return (
-    <div className={styles.btnContainer}>
+    <>
       <button className={styles.btnPay} onClick={openModal}>
       <HiOutlineCurrencyDollar size={16}/>
       </button>
@@ -26,7 +26,7 @@ const PaymentBtn = () => {
           <PaymentDatailsModal onClose={handleModalClose} />
         </Modal>
       )}
-    </div>
+    </>
   );
 };
 

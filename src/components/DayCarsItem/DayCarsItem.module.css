@@ -541,41 +541,34 @@
   margin-left: -10px;
 }
 
-.btnPlus{
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  background: var(--green-btn-normal);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
 .plus{
+    width: 24px;
+      height: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 13px;
-      height: 13px;
-      border-radius: 3px;
+      border-radius: 6px;
       border: none;
-      color: var(--green-btn-normal);
-       cursor: pointer;
-      background-color: var(--white);
-      padding: 2px;
+      background-color: var(--green);
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
 }
 
-.btnPlus:hover{
+.iconPlus {
+      display: flex;
+        width: 14px;
+        height: 14px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
+        color: var(--green);
+        background-color: var(--white);
+        stroke-width: 2px;
+}
+
+.plus:hover{
   background: var(--green-btn-hover);
 
-}
-
-.plus svg {
-  width: 10px;
-  height: 10px;
-  font-weight: bold;
-  stroke-width: 2;
 }
 
 .btnSave {

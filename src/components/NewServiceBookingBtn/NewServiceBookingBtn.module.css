@@ -10,6 +10,10 @@
     cursor: pointer;
 }
 
+.btn:hover {
+    background-color: var(--green-btn-hover);
+}
+
 .icon {
     display: flex;
     width: 14px;
