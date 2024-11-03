@@ -2,6 +2,6 @@
 width: 1097px;
 height: 352px;
 border-radius: 12px;
-background: var(--bg-secondary);
+ background: var(--bg-secondary); 
 padding: 13px;
 }
