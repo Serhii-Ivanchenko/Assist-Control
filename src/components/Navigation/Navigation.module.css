@@ -1,7 +1,19 @@
+.navList {
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+@media only screen and (min-width: 1850px) {
+.navList {
+        gap: 9px;
+    }
+}
+
 .navItem {
     display: flex;
     align-items: center;
-    margin-bottom: 6px;
+    /* margin-bottom: 6px; */
 
     font-size: 11px;
     font-weight: 400;
@@ -14,7 +26,7 @@
     .navItem {
         font-size: 16px;
         gap: 11.5px;
-        margin-bottom: 9px;
+        /* margin-bottom: 9px; */
     }
 }
 

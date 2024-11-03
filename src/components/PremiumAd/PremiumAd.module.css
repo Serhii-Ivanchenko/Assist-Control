@@ -1,11 +1,12 @@
 .premiumContainer {
   width: 141px;
-  height: 154px;
-  padding: 18px;
-  padding-bottom: 16px;
+  /* height: 154px; */
+  /* padding: 18px;
+  padding-bottom: 16px; */
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   border-radius: 5px;
   background: linear-gradient(43deg, #5763AD 2.76%, #4A5CA8 19.29%, #8D93BA 32.85%, #6073B5 52.83%, #6574B7 71.26%, #3B479B 97.24%);
@@ -14,10 +15,20 @@
 @media only screen and (min-width: 1850px) {
   .premiumContainer {
     width: 170px;
-    height: 230px;
-    padding: 25px 20px;
+    flex: 1 0 183px;
+    max-height: 230px;
+    /* padding: 25px 20px; */
+    padding-top: clamp(16px, calc(16px + (9 * ((100vh - 900px) / 180))), 25px);
+      padding-bottom: clamp(16px, calc(16px + (9 * ((100vh - 900px) / 180))), 25px);
+      padding-left: 20px;
+      padding-right: 20px;
   }
 }
+
+/* .wrapper {
+  margin-top: auto;
+  margin-bottom: auto;
+} */
 
 .premiumIcon {
   width: 12.5px;
@@ -36,12 +47,12 @@
 
 .textBlock {
   text-align: start;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
 }
 
 @media only screen and (min-width: 1850px) {
   .textBlock {
-    margin-bottom: 18px;
+    /* margin-bottom: 18px; */
   }
 }
 
@@ -50,13 +61,13 @@
   font-size: 18px;
   font-weight: 600;
   line-height: normal;
-  margin-bottom: 6px;
+  /* margin-bottom: 6px; */
 }
 
 @media only screen and (min-width: 1850px) {
   .premiumTitle {
     height: 32px;
-    margin-bottom: 9px;
+    /* margin-bottom: 9px; */
   }
 }
 
@@ -76,9 +87,15 @@
 
 .premiumButton {
   width: 105px;
-  height: 30px;
+  /* height: 30px; */
+  height: clamp(27px, calc(27px + (3 * ((100vh - 900px) / 180))), 30px);
   border-radius: 5px;
-  padding: 6px 20px;
+  /* padding: 6px 20px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex: 1 0 ; */
+  /* max-height: 30px; */
 
   background: rgba(255, 255, 255, 0.54);
   color: white;
@@ -94,9 +111,11 @@
 @media only screen and (min-width: 1850px) {
   .premiumButton {
     border-radius: 6px;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     width: 130px;
-    height: 39px;
+    /* height: 39px; */
+    /* max-height: 39px; */
+    height: clamp(27px, calc(27px + (12 * ((100vh - 900px) / 180))), 39px);
 
     font-size: 16px;
     font-weight: 600;
