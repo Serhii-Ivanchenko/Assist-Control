@@ -1,0 +1,40 @@
+.btnDetail {
+    display: flex;
+    padding: 5px 10px;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 22px;
+  
+    border-radius: 6px;
+    background-color: var(--blue-btn-normal);
+    border: none;
+    cursor: pointer;
+  }
+
+
+  @media only screen and (min-width: 1850px) {
+    .btnDetail {
+      width: 58px;
+      height: 24px;
+    }
+  }
+
+  .btnDetail:hover{
+    background-color: var(--blue-btn-hover);
+
+  }
+
+  .btnDetailText {
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  @media only screen and (min-width: 1850px) {
+    .btnDetailText {
+      font-size: 12px;
+  
+    }
+  }

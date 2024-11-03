@@ -84,10 +84,10 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
         <Loader />
       ) : (
         <DayCarsList
-          carsData={filteredCars()} // Передаємо відфільтровані автомобілі
+          carsData={filteredCars()}
           viewMode={viewMode}
           isModal={isModal}
-          searchTerm={searchTerm}
+          // searchTerm={searchTerm}
         />
       )}
     </div>
