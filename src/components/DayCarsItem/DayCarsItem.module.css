@@ -290,7 +290,7 @@
   }
 }
 
-.btnDetail {
+/* .btnDetail {
   display: flex;
   padding: 5px 10px;
   justify-content: center;
@@ -309,9 +309,9 @@
     width: 58px;
     height: 24px;
   }
-}
+} */
 
-.btnDetailText {
+/* .btnDetailText {
   color: var(--white);
   font-size: 10px;
   font-weight: 600;
@@ -323,7 +323,7 @@
     font-size: 12px;
 
   }
-}
+} */
 
 .carPhoto {
   display: flex;

@@ -20,17 +20,16 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
   };
 
   const handleSearch = (term) => {
-    setSearchTerm(term); // Оновлюємо searchTerm
+    setSearchTerm(term);
   };
 
   const filteredCars = () => {
-    if (!searchTerm) return carsData; // Повертаємо всі автомобілі, якщо searchTerm порожній
-  
-    const lowerCaseSearchTerm = searchTerm.toLowerCase(); // Перетворюємо searchTerm в нижній регістр
+    if (!searchTerm) return carsData; 
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
   
     return carsData.filter(car => {
-      const { plate, auto } = car; // Передбачається, що car має поля plate і auto
-      return plate.toLowerCase().includes(lowerCaseSearchTerm) || auto.toLowerCase().includes(lowerCaseSearchTerm); // Перетворюємо plate і auto в нижній регістр
+      const { plate, auto } = car;
+      return plate.toLowerCase().includes(lowerCaseSearchTerm) || auto.toLowerCase().includes(lowerCaseSearchTerm); 
     });
   };
 
@@ -66,10 +65,10 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
         <Loader />
       ) : (
         <DayCarsList
-          carsData={filteredCars()} // Передаємо відфільтровані автомобілі
+          carsData={filteredCars()}
           viewMode={viewMode}
           isModal={isModal}
-          searchTerm={searchTerm}
+          // searchTerm={searchTerm}
         />
       )}
     </div>
