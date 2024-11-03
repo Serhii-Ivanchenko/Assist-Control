@@ -12,8 +12,6 @@ import {
   BsPlusLg,
 } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
-import { useSelector } from "react-redux";
-import { selectDayCars } from "../../redux/cars/selectors.js";
 import { AiFillStar } from "react-icons/ai";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
@@ -25,20 +23,11 @@ import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
 import PaymentBtn from "../sharedComponents/PaymentBtn/PaymentBtn.jsx";
 
 export default function DayCarsItem({
-  carNumber,
-  auto,
-  photoUrl,
-  vin,
-  mileage,
+  car,
   isModal,
-  status,
-  complete_d,
   isCRMBlock,
-  date_s,
-  client,
 }) {
-  const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
-    useState(false);
+  const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] = useState(false);
 
   const openServiceBookingModal = () => {
     setServiceBookingModalIsOpen(true);
@@ -47,8 +36,18 @@ export default function DayCarsItem({
   const handleModalClose = () => {
     setServiceBookingModalIsOpen(false);
   };
-  const carsData = useSelector(selectDayCars);
-  const car = carsData.find((car) => car.carNumber === carNumber);
+
+  const {
+    auto,
+    photo_url: photoUrl,
+    vin,
+    mileage,
+    status,
+    complete_d,
+    date_s,
+    client,
+    plate: carNumber,
+  } = car;
 
   const carPhoto = photoUrl || absentAutoImg;
 
@@ -85,10 +84,10 @@ export default function DayCarsItem({
           </div>
         </div>
         <div className={clsx(styles.infoVin, isCRMBlock && styles.crmInfoVin)}>
-          <span className={styles.vinNum}>{vin ? vin : "VIN-XXXXXXXXXXX"}</span>
+          <span className={styles.vinNum}>{vin ? vin : "VIN не вказано"}</span>
         </div>
         <div className={styles.btnContainer}>
-          {!isCRMBlock && <StatusBtn />}
+          {!isCRMBlock && <StatusBtn car={car}/>}
           <CarDetailButton />
           {isCRMBlock &&
             (status === "repair" ||
@@ -171,7 +170,6 @@ export default function DayCarsItem({
           </div>
         </div>
       </div>
-      {car && renderStatus(car.status, car.complete_d)}
     </div>
   );
 }

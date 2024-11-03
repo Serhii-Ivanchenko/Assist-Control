@@ -1,10 +1,10 @@
 import DayCarsItem from "../DayCarsItem/DayCarsItem.jsx";
-import DayCarsItemLine from "../DayCarsItemLine/DayCarsItemLine.jsx"; 
+import DayCarsItemLine from "../DayCarsItemLine/DayCarsItemLine.jsx";
 import styles from './DayCarsList.module.css';
 import clsx from 'clsx';
 
 export default function DayCarsList({ carsData, isModal, viewMode = "grid", isCRMBlock }) {
-  const visibleCars = carsData; 
+  const visibleCars = carsData;
 
   if (visibleCars.length === 0) return null;
 
@@ -12,21 +12,11 @@ export default function DayCarsList({ carsData, isModal, viewMode = "grid", isCR
 
   const renderCarItem = (car) => (
     <CarItemComponent
-      className={styles.item}
       key={car.id}
-      status={car.status}
-      complete_d={car.complete_d}
-      date_s={car.date_s}
-      vin={car.vin}
-      carNumber={car.plate}
-      mileage={car.mileage}
-      auto={car.auto}
-      timeInfo={`Дата заїзду: ${new Date(car.date_s).toLocaleTimeString()}`}
-      photoUrl={car.photo_url}
-      isModal={isModal} 
+      car={car} // Передаємо весь об'єкт car
+      isModal={isModal}
       viewMode={viewMode}
       isCRMBlock={isCRMBlock}
-      client={car.client}
     />
   );
 
