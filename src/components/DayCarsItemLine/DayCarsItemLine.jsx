@@ -11,7 +11,7 @@ export default function DayCarsItemLine({ car }) {
     photoUrl,
     complete_d,
     status,
-    carNumber,
+    plate,
     mileage,
     auto,
     vin,
@@ -19,6 +19,8 @@ export default function DayCarsItemLine({ car }) {
     client,
   } = car; // Деструктуризація пропсів car
 
+  console.log('car', car);
+  
   const carPhoto = photoUrl || absentAutoImg;
 
   return (
@@ -43,13 +45,13 @@ export default function DayCarsItemLine({ car }) {
       <div className={styles.status}>
         {renderStatus(status, complete_d, styles)}
       </div>
-      <p className={styles.carNumber}>{carNumber || "хххххх"}</p>
+      <p className={styles.plate}>{plate || "хххххх"}</p>
       <div className={styles.infoCar}>
         <IoCarSportSharp size={13} color="#A97878" />
         <span className={styles.nameCar}>{auto}</span>
       </div>
       <div className={styles.infoVin}>
-        <span className={styles.vinNum}>{vin || "VIN не визначено"}</span>
+        <span className={styles.vinNum}>{vin || "VIN не вказано"}</span>
       </div>
       <div className={styles.mileInfo}>
         <SlSpeedometer size={13} color="var(--mint)" />

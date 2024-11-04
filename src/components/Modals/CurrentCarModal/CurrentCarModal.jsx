@@ -100,6 +100,10 @@ function CurrentCarModal({ onClose, car, status }) {
             src={car.photo_url || absentAutoImg}
             className={styles.currentCarImg}
             alt="Current car image"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = absentAutoImg;
+            }}
           />
           <div className={styles.nameContainer}>
             <h3 className={styles.carBrand}>

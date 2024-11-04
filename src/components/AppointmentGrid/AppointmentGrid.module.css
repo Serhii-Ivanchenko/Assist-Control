@@ -2,25 +2,79 @@
     display: grid;
     grid-template-columns: 100px repeat(10, 1fr);
     /* Колонки для дат */
-    grid-template-rows:  65px;
+    grid-template-rows:  65px repeat(65px);
 
     row-gap: 10px;
     width: 1049px;
     height: 325px;
-     position: relative;
+
+    overflow-y: scroll;
+        overflow-x: hidden;
+        -ms-overflow-style: none;
+     /* position: relative;
     overflow: hidden; 
     overflow-y: auto;
         /* Включаем вертикальную прокрутку */
         max-height: 325px;
-    /* background: repeating-linear-gradient(to bottom,
+     /* background: repeating-linear-gradient(to bottom, 
                 var(--bg-secondary),
                 linear-gradient(90deg, #23252C, #3E414F, #23252C) 65px
               
-            ); */
+            );  */
+        background-image:
+                repeating-linear-gradient(0deg,
+                    /* Чередование полос сверху вниз */
+                    transparent,
+                    /* Прозрачная область для градиента первой полосы */
+                    transparent 66px,
+                    /* Высота первой градиентной полосы */
+                    var(--bg-secondary) 66px,
+                    /* Начало однотонной полосы */
+                    var(--bg-secondary) 132px
+                    /* Конец однотонной полосы */
+                ),
+                repeating-linear-gradient(90deg,
+                    /* Горизонтальный градиент */
+                    #23252C,
+                    /* Начало градиента */
+                    #3E414F 50%,
+                    /* Средний цвет градиента */
+                    #23252C 100%
+                    /* Конец градиента */
+                );
+
+    /* Чередование высоты полос */
+    background-size: 100% 132px, 100% 66px;
+}
+
+.schedulegrid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.schedulegrid::-webkit-scrollbar-thumb {
+    /* background-color: var(--main-gray); */
+    border-radius: 4px;
+}
+
+.schedulegrid::-webkit-scrollbar-track {
+    /* background-color: var(--bg); */
+    border-radius: 4px;
+}
+
+.scrollgrid {
+    width:1071px;
+    /*головний контенер, який обгортає скролбар*/
+    height: 325px;
+    display: flex;
+    padding: 13px 20px 13px 13px;
+    /*падінг для відступу від контейнера до скрола*/
+    background: var(--bg-secondary);
+    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 12px; */
 }
 
 /* Чередующаяся подложка */
-.rowBackground {
+/* .rowBackground {
     grid-column: 2 / -1;
     
     grid-row: 2/-1;
@@ -30,30 +84,30 @@
     right: 0;
     bottom: 0;
     z-index: 0;
-} 
+}  */
 
-.rowBackground.odd {
-    /* background: llinear-gradient(90deg, #23252C 0%, #3E414F 50%, #23252C 100%); */
-    background: rgb(62, 66, 79,0.5);
-   
-}
+/* .rowBackground.odd {
+    background: linear-gradient(90deg, #23252C 0%, #3E414F 50%, #23252C 100%); 
+    
+ } 
 
 .rowBackground.even {
 background: var(--bg-secondary);
-}
-/* Стили для элементов грида */
+} */
+
 .gridheader {
     grid-row: 1;
     /* grid-column: 2 / 12; */
     /* Первая строка для заголовков дат */
     background-color: var(--bg-secondary);
     margin-left: -15px;
-    padding-top: 15px;
-    padding-bottom: 10px;
+    padding-top: 13px;
+    padding-bottom: 8px;
     text-align: left;
-    font-weight: bold;
+    align-content: center;
+    /* font-weight: bold; */
     white-space: pre-wrap;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .gridheader:first-child {
@@ -67,9 +121,9 @@ background: var(--bg-secondary);
     background: var(--bg-secondary);
     padding: 10px;
     height: 55px;
-    font-weight: bold;
+  
     text-align: left;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .griditem {
@@ -80,8 +134,8 @@ background: var(--bg-secondary);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-         position: relative; 
-    z-index: 1;
+         /* position: relative; 
+    z-index: 1; */
    
 }
 
@@ -109,4 +163,17 @@ background: var(--bg-secondary);
     padding: 1px 6px;
     border-radius: 5px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    position:relative;
 }
+
+ .mechanicinfo::before {
+     content: "";
+     position: absolute;
+     left: -1px;
+     top: 0;
+     width: 4px;
+     height: 100%;
+     filter: blur(5px);
+     border-radius: 0 5px 5px 0;
+    z-index: 1;
+ }

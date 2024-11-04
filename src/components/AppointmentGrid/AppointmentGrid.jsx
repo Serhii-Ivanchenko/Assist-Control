@@ -6,6 +6,7 @@ const workTypeColors = {
    repair: "var(--status-gradient-repair)",
    viewRepair: "var(--status-gradient-view-repair)",
    completed: "var(--status-gradient-complete)",
+   empty: "transparent",
 };
  
 const workTypeBorder = {
@@ -49,22 +50,25 @@ const AppointmentGrid = ({ data }) => {
       {data.workItems.map((item, index) => {
         // const startHour = new Date(item.startTime).getHours();
         // const endHour = new Date(item.endTime).getHours();
-        const gridColumn = `${item.start_time + 1-8} / ${item.end_time + 1-8}`;
+        const gridColumn = `${item.stage_start + 1-8} / ${item.stage_end + 2-8}`;
         return (
+
+
           <div
             key={index}
                 className={css.griditem}
             style={{
               gridColumn: gridColumn,
-              gridRow: item.postIndex + 1, // Смещаем на 2, чтобы учесть строки заголовков
+              gridRow: item.post_id + 1, // Смещаем на 2, чтобы учесть строки заголовков
               background:  workTypeColors[item.workType] || '#333',
             }}
           >
-            <p className={css.plateinfo} style={{background:'var(--bg-secondary)',}} >{item.plate}</p>
-            <p className={css.mechanicinfo} style={{
+             {item.workType !== 'empty' && <p className={css.plateinfo} style={{ background: 'var(--bg-secondary)', }} >{item.plate}</p>}
+             {item.workType !== 'empty' && <p  style={{
               background: workTypeColors[item.workType] || '#333',
               borderLeft: `1px solid ${workTypeBorder[item.workType] }`,
- }}>{item.mechanic}</p>
+              }}  className={css.mechanicinfo} >{item.mechanic}</p>
+           }
           </div>
         );
       })}

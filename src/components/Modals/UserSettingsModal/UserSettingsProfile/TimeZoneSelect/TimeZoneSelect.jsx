@@ -10,15 +10,15 @@ export default function TimeZoneSelect({ field, form, onClick,...props}) {
         control: (provided) => ({
       ...provided,
       // Додаємо колір тексту для інпуту
-      color: "var(--input-text)", // Задайте свій колір тут
+      color: "var(--input-text)", 
     }),
         singleValue: (provided) => ({
             ...provided,
-            color: "var(--input-text)", // Колір тексту вибраного елемента
+            color: "var(--input-text)", 
         }),
          input: (provided) => ({
       ...provided,
-      color: "var(--input-text)", // Колір тексту при введенні
+      color: "var(--input-text)", 
     }),
     }
 

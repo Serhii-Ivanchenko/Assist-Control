@@ -80,6 +80,7 @@ export default function DayCarsItem({
                 onClick={() => copyToClipboard(vin || "VIN не визначено")}
               />
             </div>
+
         <div className={styles.btnContainer}>
           <StatusBtn car={car}/>
           <CarDetailButton />
