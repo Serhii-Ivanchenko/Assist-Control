@@ -5,7 +5,6 @@
   border-radius: 12px;
   background: var(--bg-secondary);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  /* margin-bottom: 14px; */
 }
 
 .scrollWrapper {
@@ -24,6 +23,7 @@
 
 .scrollWrapper::-webkit-scrollbar {
   width: 8px;
+  max-height: 200px;
 }
 
 .scrollWrapper::-webkit-scrollbar-thumb {
@@ -39,20 +39,20 @@
 @media only screen and (min-width: 1850px) {
   .dayCarsListContainer {
     width: 460px;
-    flex: 1 0 447px;
-    max-height: 602px;
-    /* height: clamp(447px, 90vh, 602px); */
-    /* padding: 20px 16px 13px 20px; */
-    margin-bottom: 14px;
+    /* flex: 1 0 447px;
+    max-height: 602px; */
+    height: clamp(447px, 90vh, 602px);
     padding-top: clamp(15px, calc(15px + (5 * ((100vh - 900px) / 180))), 20px);
-    padding-bottom: clamp(15px, calc(15px + (5 * ((100vh - 900px) / 180))), 20px);
+    padding-bottom: clamp(14px, calc(18px - (4 * ((100vh - 900px) / 180))), 18px);
     padding-left: 20px;
     padding-right: 20px;
-    /* overflow: hidden; */
+    overflow: hidden;
   }
 
   .scrollWrapper {
     width: 424px;
+    height: 100%;
+    min-height: 414px;
     max-height: 568px;
     padding-right: 26px;
   }
