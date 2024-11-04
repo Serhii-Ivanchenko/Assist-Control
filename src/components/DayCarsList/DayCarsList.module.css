@@ -1,8 +1,8 @@
 .dayCarsListContainer {
   width: 303px;
-  padding: 8px;
+  /* padding: 8px; */
 
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--bg-secondary);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   /* margin-bottom: 14px; */
@@ -39,9 +39,16 @@
 @media only screen and (min-width: 1850px) {
   .dayCarsListContainer {
     width: 460px;
-    height: 602px;
-    padding: 20px 16px 13px 20px;
+    flex: 1 0 447px;
+    max-height: 602px;
+    /* height: clamp(447px, 90vh, 602px); */
+    /* padding: 20px 16px 13px 20px; */
     margin-bottom: 14px;
+    padding-top: clamp(15px, calc(15px + (5 * ((100vh - 900px) / 180))), 20px);
+    padding-bottom: clamp(15px, calc(15px + (5 * ((100vh - 900px) / 180))), 20px);
+    padding-left: 20px;
+    padding-right: 20px;
+    /* overflow: hidden; */
   }
 
   .scrollWrapper {
@@ -97,10 +104,10 @@
   box-shadow: none;
   width: 365px;
   padding: 0;
-  
+
 }
 
-.crmCarList{
+.crmCarList {
   gap: 16px;
   width: 365px;
   height: 200px;
