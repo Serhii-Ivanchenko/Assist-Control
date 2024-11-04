@@ -20,11 +20,21 @@
   color: var(--white);
 }
 
+.serviceWrapper::after {
+  content: "";
+  position: absolute;
+  top: 62px;
+  right: -14px;
+  width: 14px;
+  height: 154px;
+  background-color: var(--bg-input);
+}
+
 .serviceContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-align-items: center;
+  align-items: center;
   width: 100%;
 }
 
@@ -72,7 +82,7 @@ align-items: center;
 }
 
 .infoKey p {
-color: #fff;
+  color: #fff;
   font-family: "Roboto", sans-serif;
   font-size: 15px;
   font-style: normal;
