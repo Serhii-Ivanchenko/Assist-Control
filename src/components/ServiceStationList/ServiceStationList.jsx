@@ -1,27 +1,33 @@
-import { useState } from "react";
+import { useEffect, useMemo } from "react";
 import ServiceStationItem from "../ServiceStationItem/ServiceStationItemItem";
-import ServiceStationDetails from "../ServiceStationDetails/ServiceStationDetails";
 import { BsPlusCircleDotted } from "react-icons/bs";
 import { BsHouseFill } from "react-icons/bs";
 import styles from "./ServiceStationList.module.css";
 
-function ServiceStationList() {
-  const [activeStationId, setActiveStationId] = useState(null);
+function ServiceStationList({ activeStationId, setActiveStationId }) {
+  const stations = useMemo(
+    () => [
+      {
+        id: 1,
+        name: "AvtoAtmosfera Cherkasy",
+      },
+      {
+        id: 2,
+        name: "GCAR Kyiv",
+      },
+    ],
+    []
+  );
+
+  useEffect(() => {
+    if (stations.length > 0 && activeStationId === null) {
+      setActiveStationId(stations[0].id);
+    }
+  }, [stations, activeStationId, setActiveStationId]);
 
   const handleToggle = (id) => {
     setActiveStationId((prevId) => (prevId === id ? null : id));
   };
-
-  const stations = [
-    {
-      id: 1,
-      name: "AvtoAtmosfera Cherkasy",
-    },
-    {
-      id: 2,
-      name: "GCAR Kyiv",
-    },
-  ];
 
   return (
     <div className={styles.wrapper}>
@@ -34,19 +40,13 @@ function ServiceStationList() {
               isOpen={activeStationId === station.id}
               onToggle={() => handleToggle(station.id)}
             />
-            {activeStationId === station.id && (
-              <div className={styles.rightContainer}>
-                <ServiceStationDetails stationId={activeStationId} />
-              </div>
-            )}
           </div>
         ))}
-       
       </div>
-       <button className={styles.addBtn}>
-          <BsPlusCircleDotted className={styles.icon} />
-          <BsHouseFill className={styles.icon} />
-        </button>
+      <button className={styles.addBtn}>
+        <BsPlusCircleDotted className={styles.icon} />
+        <BsHouseFill className={styles.icon} />
+      </button>
     </div>
   );
 }
