@@ -1,7 +1,7 @@
 import styles from "./DayCarsModal.module.css";
 import DayCarsFilter from "../../DayCarsFilter/DayCarsFilter";
 import { FiGrid } from "react-icons/fi";
-import { BsListUl } from "react-icons/bs";
+import { BsListUl, BsSortUp } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { selectLoading } from "../../../redux/cars/selectors";
@@ -47,39 +47,46 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
   return (
     <div className={styles.containerCarModal}>
       <div className={styles.header}>
-        <label className={styles.switch}>
-          <FiGrid
-            className={`${styles.iconLeft} ${
-              viewMode === "grid" ? styles.active : ""
-            }`}
-          />
-          <BsListUl
-            className={`${styles.iconRight} ${
-              viewMode === "list" ? styles.active : ""
-            }`}
-          />
-          <input
-            type="checkbox"
-            className={styles.input}
-            checked={viewMode === "list"}
-            onChange={() => {
-              const newMode = viewMode === "grid" ? "list" : "grid";
-              handleViewModeChange(newMode);
-            }}
-          />
-          <span className={styles.slider}></span>
-        </label>
-        <div className={styles.search}>
-          <DayCarsFilter
-            value={searchTerm}
-            onChange={handleSearch}
-            error={inputError}
-          />
+        <div className={styles.leftHeader}>
+          <label className={styles.switch}>
+            <FiGrid
+              className={`${styles.iconLeft} ${
+                viewMode === "grid" ? styles.active : ""
+              }`}
+            />
+            <BsListUl
+              className={`${styles.iconRight} ${
+                viewMode === "list" ? styles.active : ""
+              }`}
+            />
+            <input
+              type="checkbox"
+              className={styles.input}
+              checked={viewMode === "list"}
+              onChange={() => {
+                const newMode = viewMode === "grid" ? "list" : "grid";
+                handleViewModeChange(newMode);
+              }}
+            />
+            <span className={styles.slider}></span>
+          </label>
+          <div className={styles.search}>
+            <DayCarsFilter
+              value={searchTerm}
+              onChange={handleSearch}
+              error={inputError}
+            />
+          </div>
+          <div className={styles.filterContainer}>
+            <button className={styles.filter}>
+              <BsSortUp />
+            </button>
+          </div>
         </div>
-        <button className={styles.closeButton} onClick={onClose}>
-          <MdClose className={styles.iconClose} />
-        </button>
       </div>
+      <button className={styles.closeButton} onClick={onClose}>
+        <MdClose className={styles.iconClose} />
+      </button>
       {isLoading ? (
         <Loader />
       ) : (
