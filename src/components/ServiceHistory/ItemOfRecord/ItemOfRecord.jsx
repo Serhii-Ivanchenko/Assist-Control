@@ -118,7 +118,7 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                 style={
                   item.appeal && recordInfo === "appeal"
                     ? { cursor: "pointer", outline: "1px solid #fff" }
-                    : item.appeal
+                    : !item.appeal
                     ? null
                     : { cursor: "pointer" }
                 }
