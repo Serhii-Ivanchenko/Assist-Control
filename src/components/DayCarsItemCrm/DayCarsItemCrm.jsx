@@ -9,7 +9,7 @@ import {
   BsStopwatch,
   BsLayerBackward,
   BsPlusLg,
-  BsFiles
+  BsFiles,
 } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { AiFillStar } from "react-icons/ai";
@@ -76,17 +76,15 @@ export default function DayCarsItemCrm({ car }) {
           </div>
         </div>
         <div className={styles.vinContainer}>
-              <p className={styles.vinCode}>
-                <span className={styles.vinNumber}>
-                  {vin || "VIN не визначено"}
-                </span>
-              </p>
-              <BsFiles
-                className={styles.copyIcon}
-                size={13}
-                onClick={() => copyToClipboard(vin || "VIN не визначено")}
-              />
-            </div>
+          <p className={styles.vinCode}>
+            <span className={styles.vinNumber}>{vin || "VIN не вказано"}</span>
+          </p>
+          <BsFiles
+            className={styles.copyIcon}
+            size={13}
+            onClick={() => copyToClipboard(vin || "VIN не вказано")}
+          />
+        </div>
         <div className={styles.btnContainer}>
           <CarDetailButton />
           {(status === "repair" ||
@@ -116,11 +114,11 @@ export default function DayCarsItemCrm({ car }) {
       <div className={styles.crmcarsInfo}>
         <div className={styles.carInfoLeft}>
           <div className={styles.crmRating}>
-            <AiFillStar color="var(--star-orange)" size={13}/>
-            <AiFillStar color="var(--star-orange)" size={13}/>
-            <AiFillStar color="var(--star-orange)" size={13}/>
-            <AiFillStar color="var(--star-orange)" size={13}/>
-            <AiFillStar color="var(--star-white)" size={13}/>
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-white)" size={14.5} />
           </div>
           <div className={styles.prevCoast}>
             <p className={styles.money}>₴ 2,200.00</p>

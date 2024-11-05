@@ -5,7 +5,7 @@ import {
   BsPersonFill,
   BsTelephoneOutboundFill,
   BsStopwatch,
-  BsFiles
+  BsFiles,
 } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { AiFillStar } from "react-icons/ai";
@@ -18,11 +18,7 @@ import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton
 import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
 
-export default function DayCarsItem({
-  car,
-  isModal,
-}) {
-
+export default function DayCarsItem({ car, isModal }) {
   const {
     auto,
     photo_url: photoUrl,
@@ -69,34 +65,29 @@ export default function DayCarsItem({
           </div>
         </div>
         <div className={styles.vinContainer}>
-              <p className={styles.vinCode}>
-                <span className={styles.vinNumber}>
-                  {vin || "VIN не визначено"}
-                </span>
-              </p>
-              <BsFiles
-                className={styles.copyIcon}
-                size={13}
-                onClick={() => copyToClipboard(vin || "VIN не визначено")}
-              />
-            </div>
+          <p className={styles.vinCode}>
+           {vin || "VIN не вказано"}
+          </p>
+          <BsFiles
+            className={styles.copyIcon}
+            size={13}
+            onClick={() => copyToClipboard(vin || "VIN не вказано")}
+          />
+        </div>
 
         <div className={styles.btnContainer}>
-          <StatusBtn car={car}/>
+          <StatusBtn car={car} />
           <CarDetailButton />
-
         </div>
       </div>
-      <div
-        className={clsx(styles.carsInfo, isModal && styles.modalCarsInfo)}
-      >
+      <div className={clsx(styles.carsInfo, isModal && styles.modalCarsInfo)}>
         <div className={styles.carInfoLeft}>
           <div className={styles.rating}>
-            <AiFillStar color="var(--star-orange)" size={13}/>
-            <AiFillStar color="var(--star-orange)" size={13}/>
-            <AiFillStar color="var(--star-orange)" size={13}/>
-            <AiFillStar color="var(--star-orange)" size={13}/>
-            <AiFillStar color="var(--star-white)" size={13}/>
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-white)" size={14.5} />
           </div>
           <div className={styles.prevCoast}>
             <p className={styles.money}>₴ 2,200.00</p>
