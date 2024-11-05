@@ -39,6 +39,7 @@ function ServiceStationList({ activeStationId, setActiveStationId }) {
               name={station.name}
               isOpen={activeStationId === station.id}
               onToggle={() => handleToggle(station.id)}
+              isActive={activeStationId === station.id}
             />
           </div>
         ))}

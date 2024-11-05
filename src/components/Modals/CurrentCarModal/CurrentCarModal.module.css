@@ -94,8 +94,22 @@
   text-transform: uppercase;
 }
 
+.copyBtn {
+  display: flex;
+  width: 34px;
+  height: 34px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: transparent;
+  border-radius: 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
 .copyIcon {
   cursor: pointer;
+  color: var(--light-gray);
 }
 
 .carRegContainer {
@@ -226,7 +240,7 @@
 }
 
 .viewRepairStatus {
-  color: var(--current-status-complete);
+  color: var(--status-view-repair);
   background: var(--status-gradient-view-repair);
   border-left: 1px solid var(--glow-view-repair);
   border-right: transparent;
