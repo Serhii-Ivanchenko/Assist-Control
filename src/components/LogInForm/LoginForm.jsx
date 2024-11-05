@@ -4,17 +4,23 @@ import { IoKeyOutline } from "react-icons/io5";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { useState } from "react";
 import { LoginSchema } from "../../validationSchemas/loginSchema";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TbMailFilled } from "react-icons/tb";
-import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/operations";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData, logIn } from "../../redux/auth/operations";
 import toast from "react-hot-toast";
 import GoogleBtn from "../GoogleBtn/GoogleBtn.jsx";
 import SendResetEmailForm from "../SendResetEmailForm/SendResetEmailForm.jsx";
 import Modal from "../Modals/Modal/Modal.jsx";
+import { selectUser } from "../../redux/auth/selectors.js";
+import firstPage from "../../utils/firstPage.js";
 
 export default function LoginForm() {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const userData = useSelector(selectUser);
+
+  const renderPage = firstPage(userData);
 
   const openModal = () => {
     setIsOpen(true);
@@ -42,6 +48,8 @@ export default function LoginForm() {
             color: "var(--white)FFF",
           },
         });
+        dispatch(getUserData());
+        navigate({ renderPage });
       })
       .catch((err) => {
         if (err.status === 401) {

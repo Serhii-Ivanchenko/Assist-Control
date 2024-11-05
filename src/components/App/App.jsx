@@ -1,19 +1,21 @@
-import { redirect, Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Layout from "../Layout/Layout.jsx";
 import { lazy, Suspense, useEffect, useState } from "react";
 import RestrictedRoute from "../RestrictedRoute.jsx";
 import PrivateRoute from "../PrivateRoute.jsx";
 import Loader from "../Loader/Loader.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsRefreshing, selectUser } from "../../redux/auth/selectors.js";
+import {
+  selectIsLoggedIn,
+  selectIsRefreshing,
+  selectUser,
+} from "../../redux/auth/selectors.js";
 import { Toaster } from "react-hot-toast";
 import ValidateEmailPage from "../../pages/ValidateEmailPage/ValidateEmailPage.jsx";
 import { refreshUser } from "../../redux/auth/operations.js";
 import ChangePasswordWithEmailPage from "../../pages/ChangePasswordWithEmailPage/ChangePasswordWithEmailPage.jsx";
-import { getUserData } from "../../redux/auth/operations.js";
-import { setSelectedServiceId } from "../../redux/auth/slice.js";
-import toast from "react-hot-toast";
 import { Navigate } from "react-router-dom";
+import firstPage from "../../utils/firstPage.js";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
@@ -32,112 +34,50 @@ const NotFoundPage = lazy(() =>
   import("../../pages/NotFoundPage/NotFoundPage.jsx")
 );
 
-
-
 export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
 
   useEffect(() => {
-    dispatch(refreshUser());
+    const refreshUserData = async () => {
+      await dispatch(refreshUser());
+      setIsAuthChecked(true);
+    };
+    refreshUserData();
   }, [dispatch]);
 
- 
-  
- const [loadingUserData, setLoadingUserData] = useState(true)
   const userData = useSelector(selectUser);
-  // const userFirstPage = userData.first_page;
-  
+  const renderPage = firstPage(userData);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try{
-      const userData = await dispatch(getUserData()).unwrap()
-       
-          const serviceId = userData.services?.[0]?.id;
-
-          if (serviceId) {
-            dispatch(setSelectedServiceId(serviceId));
-          }
-        }catch(error) {
-      toast.error("Something went wrong. Please, try again");
-    }finally{
-        setLoadingUserData(false)
-      }
-    };
-
-    if (!userData) { 
-      fetchUserData();
-    } else {
-      setLoadingUserData(false);
-  };
-  }, [dispatch, userData]);
-
-  // useEffect(() => {
-  //  const fetchUserData = async () => {
-     
-  //       await dispatch(getUserData()).unwrap();
-      
-  //  };
-   
-//  if (!userData) { 
-//       fetchUserData();
-//     } else {
-//       setLoadingUserData(false);
-//   }
-//   }, [dispatch, userData]);
-
- 
-  
- 
-  const firstPage = () => {
-    const userFirstPage = userData.first_page;
-      console.log("firstPage", userFirstPage);
-
-    switch (userFirstPage) {
-      case "crm":
-        return "/crm";
-      case "carReport":
-        return "/report";
-      case "Settings":
-        return"/settings";
-      case "v-c":
-        return "/video-control";
-      case "default":
-       default:
-         return "/video-control";
-      
-
-    }
-  };
-  
- 
-// if (userData) {
-//     return <Navigate to={firstPage()} replace />;
-//   }
-
-
-  return (isRefreshing || loadingUserData) ?(
+  return isRefreshing || !isAuthChecked ? (
     <Loader />
   ) : (
     <Layout>
       <Toaster position="top-right" reverseOrder={false} />
       <Suspense fallback={<Loader />}>
         <Routes>
-            <Route path="/" element={userData ? <Navigate to={firstPage()} replace /> : <HomePage />} />
+          <Route
+            path="/"
+            element={
+              isLoggedIn ? <Navigate to={renderPage} replace /> : <HomePage />
+            }
+          />
           <Route
             path="/login"
             element={
               <RestrictedRoute
-                redirectTo={firstPage()}
-                component={<LoginPage />} />
+                redirectTo={renderPage}
+                component={<LoginPage />}
+              />
             }
           />
           <Route
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo={firstPage()}
+                redirectTo={renderPage}
                 component={<RegistrationPage />}
               />
             }
