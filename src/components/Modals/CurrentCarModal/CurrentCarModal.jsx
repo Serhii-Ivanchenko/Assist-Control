@@ -117,12 +117,12 @@ function CurrentCarModal({ onClose, car, status }) {
             <div className={styles.vinContainer}>
               <p className={styles.vinCode}>
                 <span className={styles.vinNumber}>
-                  {car.vin || "VIN не визначено"}
+                  {car.vin || "VIN не вказано"}
                 </span>
               </p>
               <BsFiles
                 className={styles.copyIcon}
-                onClick={() => copyToClipboard(car.vin || "VIN не визначено")}
+                onClick={() => copyToClipboard(car.vin || "VIN не вказано")}
               />
             </div>
             <div className={styles.carRegContainer}>
