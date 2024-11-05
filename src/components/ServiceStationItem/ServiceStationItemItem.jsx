@@ -159,9 +159,6 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
         <div className={styles.closedServiceWrapper} onClick={onToggle}>
           <div className={styles.closedServiceContainer}>
             <h3 className={styles.serviceTitle}>{name}</h3>
-            <button className={styles.editBtn}>
-              <BsPencil className={styles.mainIcon} disabled />
-            </button>
           </div>
           <div className={styles.closedServiceInfo}>
             <div className={styles.subscribeStatus}>
