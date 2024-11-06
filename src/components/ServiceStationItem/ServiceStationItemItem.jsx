@@ -9,34 +9,63 @@ import {
 } from "react-icons/bs";
 
 import styles from "./ServiceStationItem.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function ServiceStationItem({ name, isOpen, onToggle }) {
+function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
   const [isEdit, setIsEdit] = useState(false);
-  const [info, setInfo] = useState({
-    email: "atmosfera-che@gmail.com",
-    address: "бул. Івана Кркача 54",
-    subscriptionStatus: "PRO",
-    employees: "8",
-    validUntil: "22.10.2025",
+  const [info, setInfo] = useState(() => {
+    const savedInfo = localStorage.getItem(name);
+    return savedInfo
+      ? JSON.parse(savedInfo)
+      : {
+          stationName: name,
+          email: "atmosfera-che@gmail.com",
+          address: "бул. Івана Кркача 54",
+          subscriptionStatus: "PRO",
+          employees: "8",
+          validUntil: "22.10.2025",
+        };
   });
 
+  useEffect(() => {
+    if (!isActive) {
+      setIsEdit(false);
+    }
+  }, [isActive]);
+
+  useEffect(() => {
+    localStorage.setItem(name, JSON.stringify(info));
+  }, [info, name]);
+
   const handleEditToggle = () => {
-    setIsEdit(!isEdit);
+    setIsEdit((prev) => !prev);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setInfo((prev) => ({ ...prev, [name]: value }));
+    setInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
   };
 
   return (
     <div className={styles.generalContainer}>
       {isOpen ? (
-        // <div className={styles.wrapper} onClick={onToggle}>
-        <div className={styles.serviceWrapper} onClick={onToggle}>
+        <div
+          className={styles.serviceWrapper}
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className={styles.serviceContainer}>
-            <h3 className={styles.serviceTitle}>{name}</h3>
+            {isEdit ? (
+              <input
+                type="text"
+                name="stationName"
+                value={info.stationName}
+                onChange={handleInputChange}
+                className={styles.infoValueInput}
+              />
+            ) : (
+              <h3 className={styles.serviceTitle}>{name}</h3>
+            )}
+
             <button
               className={styles.editBtn}
               onClick={(e) => {
@@ -127,19 +156,9 @@ function ServiceStationItem({ name, isOpen, onToggle }) {
           </ul>
         </div>
       ) : (
-        // </div>
         <div className={styles.closedServiceWrapper} onClick={onToggle}>
           <div className={styles.closedServiceContainer}>
             <h3 className={styles.serviceTitle}>{name}</h3>
-            <button
-              className={styles.editBtn}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleEditToggle();
-              }}
-            >
-              <BsPencil className={styles.mainIcon} />
-            </button>
           </div>
           <div className={styles.closedServiceInfo}>
             <div className={styles.subscribeStatus}>
@@ -149,8 +168,8 @@ function ServiceStationItem({ name, isOpen, onToggle }) {
             <BsCaretDownFill
               className={styles.arrowIcon}
               onClick={(e) => {
-                e.stopPropagation;
-                onToggle;
+                e.stopPropagation();
+                onToggle();
               }}
             />
           </div>
