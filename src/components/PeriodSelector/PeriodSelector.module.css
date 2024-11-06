@@ -16,14 +16,14 @@
 @media only screen and (min-width: 1850px) {
     .containerperiodselector {
         margin-top: 5px;
-        height: 34px;
+        margin-top: clamp(3px, calc(3px + (2 * ((100vh - 900px) / 180))), 5px);
+        height: clamp(20px, calc(20px + (14 * ((100vh - 900px) / 180))), 34px);
     }
 }
 
 .periodtitle {
     color: var(--Icon-Gray);
     /* background: var(--bg-secondary); */
-    /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
     font-size: 11px;
     font-style: normal;
@@ -48,7 +48,6 @@
 .periodinput {
     color: var(--Icon-Gray);
     background: transparent;
-    /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
     font-size: 11px;
     font-style: normal;
@@ -66,7 +65,7 @@
     .periodinput {
         font-size: 14px;
         width: 163px;
-        height: 34px;
+        height: clamp(20px, calc(20px + (14 * ((100vh - 900px) / 180))), 34px);
         border: none;
         padding: 4px 8px 4px 8px;
         /* line-height: 26px; */
@@ -101,8 +100,8 @@
 
 @media only screen and (min-width: 1850px) {
     .calendarBtn {
-        width: 26px;
-        height: 26px;
+        width: clamp(18px, calc(18px + (8 * ((100vh - 900px) / 180))), 26px);
+        height: clamp(18px, calc(18px + (8 * ((100vh - 900px) / 180))), 26px);
 
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
@@ -131,7 +130,7 @@
         border-radius: 44px;
         width: 163px;
         padding: 4px 8px;
-        height: 34px;
+        height: clamp(20px, calc(20px + (14 * ((100vh - 900px) / 180))), 34px);
         /* margin-top: -5px; */
     }
 }
