@@ -112,6 +112,7 @@ function CurrentCarModal({ onClose, car, status }) {
               </p>
               <button className={styles.copyBtn}>
                 <BsFiles
+                  size={18}
                   className={styles.copyIcon}
                   onClick={() => copyToClipboard(car.vin || "VIN не вказано")}
                 />

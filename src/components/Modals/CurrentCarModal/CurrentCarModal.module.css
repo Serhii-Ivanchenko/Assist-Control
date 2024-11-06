@@ -109,7 +109,7 @@
 
 .copyIcon {
   cursor: pointer;
-  color: var(--light-gray);
+  color: var(--icon-gray);
 }
 
 .carRegContainer {

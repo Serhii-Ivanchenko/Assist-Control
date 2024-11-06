@@ -60,85 +60,25 @@
   --orange: #db8120;
 
   /* gradients */
-  --border-gradient-new: linear-gradient(
-    45deg,
-    #f5dd23 10%,
-    #2b2c2c 16%,
-    #23252c 85%,
-    #dbc624 90%
-  );
-  --border-gradient-diag: linear-gradient(
-    45deg,
-    #3956cc 10%,
-    #2b2c2c 16%,
-    #23252c 85%,
-    #3956cc 90%
-  );
-  --border-gradient-repair: linear-gradient(
-    45deg,
-    #994ca5 10%,
-    #2b2c2c 16%,
-    #23252c 85%,
-    #994ca5 90%
-  );
-  --border-gradient-complete: linear-gradient(
-    45deg,
-    #246d4d 10%,
-    #2b2c2c 16%,
-    #23252c 85%,
-    #246d4d 90%
-  );
+  --border-gradient-new: linear-gradient(45deg, #f5dd23 10%, #2b2c2c 16%, #23252c 85%, #dbc624 90%);
+  --border-gradient-diag: linear-gradient(45deg, #3956cc 10%, #2b2c2c 16%, #23252c 85%, #3956cc 90%);
+  --border-gradient-repair: linear-gradient(45deg, #994ca5 10%, #2b2c2c 16%, #23252c 85%, #994ca5 90%);
+  --border-gradient-complete: linear-gradient(45deg, #246d4d 10%, #2b2c2c 16%, #23252c 85%, #246d4d 90%);
 
   --status-gradient-new: linear-gradient(90deg, #95a54c4d 0%, #e9d92600 100%);
   --status-gradient-diag: linear-gradient(90deg, #4154b04d 0%, #2654e900 100%);
-  --status-gradient-repair: linear-gradient(
-    90deg,
-    #994ca54d 0%,
-    #ab26e900 100%
-  );
-  --status-gradient-complete: linear-gradient(
-    90deg,
-    #4ca54c4d 0%,
-    #3de92600 100%
-  );
-  --status-gradient-view-repair: linear-gradient(
-    90deg,
-    #a54f4c4d 0%,
-    #e9362600 100%
-  );
+  --status-gradient-repair: linear-gradient(90deg, #994ca54d 0%, #ab26e900 100%);
+  --status-gradient-complete: linear-gradient(90deg, #4ca54c4d 0%, #3de92600 100%);
+  --status-gradient-view-repair: linear-gradient(90deg, #a54f4c4d 0%, #e9362600 100%);
 
   --master-gradient-diag: linear-gradient(90deg, #4154b04d 0%, #2654e900 100%);
-  --master-gradient-repair: linear-gradient(
-    90deg,
-    #994ca54d 0%,
-    #ab26e900 100%
-  );
+  --master-gradient-repair: linear-gradient(90deg, #994ca54d 0%, #ab26e900 100%);
 
-  --current-status-gradient-new: linear-gradient(
-    270deg,
-    #95a54c4d 0%,
-    #e9d92600 100%
-  );
-  --current-status-gradient-diag: linear-gradient(
-    270deg,
-    #4154b04d 0%,
-    #2654e900 100%
-  );
-  --current-status-gradient-repair: linear-gradient(
-    270deg,
-    #994ca54d 0%,
-    #ab26e900 100%
-  );
-  --current-status-gradient-complete: linear-gradient(
-    270deg,
-    #4ca54c4d 0%,
-    #3de92600 100%
-  );
-  --current-status-gradient-view-repair: linear-gradient(
-    270deg,
-    #a54f4c4d 0%,
-    #e9362600 100%
-  );
+  --current-status-gradient-new: linear-gradient(270deg, #95a54c4d 0%, #e9d92600 100%);
+  --current-status-gradient-diag: linear-gradient(270deg, #4154b04d 0%, #2654e900 100%);
+  --current-status-gradient-repair: linear-gradient(270deg, #994ca54d 0%, #ab26e900 100%);
+  --current-status-gradient-complete: linear-gradient(270deg, #4ca54c4d 0%, #3de92600 100%);
+  --current-status-gradient-view-repair: linear-gradient(270deg, #a54f4c4d 0%, #e9362600 100%);
 }
 
 @font-face {
