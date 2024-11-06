@@ -1,7 +1,8 @@
 import styles from "./DayCarsModal.module.css";
 import DayCarsFilter from "../../DayCarsFilter/DayCarsFilter";
 import { FiGrid } from "react-icons/fi";
-import { BsListUl, BsSortUp } from "react-icons/bs";
+import { BsListUl, BsSortUp, BsDownload } from "react-icons/bs";
+import { GiSettingsKnobs } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { selectLoading } from "../../../redux/cars/selectors";
@@ -79,9 +80,29 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
           </div>
           <div className={styles.filterContainer}>
             <button className={styles.filter}>
-              <BsSortUp />
+              <BsSortUp size={18} />
             </button>
           </div>
+        </div>
+        <div className={styles.rightHeader}>
+        <div className={styles.dateRangeContainer}>
+    <label htmlFor="startDate" className={styles.label}>З </label>
+    <input type="date" id="startDate" className={styles.dateInput} />
+    
+    <label htmlFor="endDate" className={styles.label}>По </label>
+    <input type="date" id="endDate" className={styles.dateInput} />
+</div>
+          <div className={styles.btnPdfContainer}>
+            <button className={styles.btnPdf}>
+            <BsDownload  size={16} color="#C7C7C7"/>
+            <span className={styles.btnPdfText}>
+              .pdf
+            </span>
+            </button>
+          </div>
+          <button className={styles.btnSettings}>
+            <GiSettingsKnobs className={styles.iconSettings} />
+          </button>
         </div>
       </div>
       <button className={styles.closeButton} onClick={onClose}>
@@ -94,7 +115,6 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
           carsData={filteredCars()}
           viewMode={viewMode}
           isModal={isModal}
-          // searchTerm={searchTerm}
         />
       )}
     </div>

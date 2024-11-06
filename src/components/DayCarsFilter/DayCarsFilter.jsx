@@ -9,7 +9,7 @@ export default function DayCarsFilter({ value, onChange, error }) {
   return (
     <div className={css.inputWrapper}>
       <input
-        className={css.input}
+        className={css.inputFilter}
         type="text"
         name="searchInput"
         id="searchInput"

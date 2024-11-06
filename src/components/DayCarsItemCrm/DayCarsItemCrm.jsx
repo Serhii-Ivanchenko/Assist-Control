@@ -79,11 +79,12 @@ export default function DayCarsItemCrm({ car }) {
           <p className={styles.vinCode}>
             <span className={styles.vinNumber}>{vin || "VIN не вказано"}</span>
           </p>
-          <BsFiles
-            className={styles.copyIcon}
-            size={13}
-            onClick={() => copyToClipboard(vin || "VIN не вказано")}
-          />
+          <button
+            className={styles.copyButton}
+            onClick={() => copyToClipboard(vin ? vin : "VIN не вказано")}
+          >
+            <BsFiles size={13} />
+          </button>
         </div>
         <div className={styles.btnContainer}>
           <CarDetailButton />

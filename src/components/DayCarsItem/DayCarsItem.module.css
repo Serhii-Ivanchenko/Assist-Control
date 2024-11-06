@@ -206,15 +206,27 @@
   color: var(--white);
   font-size: 10px;
 
-    max-width: 150px;
+    max-width: 134px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.copyIcon {
+.copyButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 21px;
+  border-radius: 6px;
+  color:  var(--icon-gray);
+  background: var(--main-gray);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);      border: none;
+  border-radius: 4px;
   cursor: pointer;
+  margin-left: auto;    
 }
+
 
 
 @media only screen and (min-width: 1850px) {
@@ -531,15 +543,3 @@
   position: relative;
 }
 
-.btnCopy{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 21px;
-  height: 21px;
-  background-color: transparent;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 10px;
-}
