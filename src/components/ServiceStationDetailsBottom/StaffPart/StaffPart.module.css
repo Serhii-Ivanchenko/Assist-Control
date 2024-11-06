@@ -97,8 +97,21 @@
 
 .power{
     fill: var(--green-btn-normal);
+    width: 18px;
+    height: 18px;
 }
 
 .powerDisabled{
     fill: var(--red);
+}
+
+.icons{
+    fill: var(--light-gray);
+    width: 18px;
+    height: 18px;
+}
+
+.iconBtn{
+    background-color: transparent;
+    border: none;
 }

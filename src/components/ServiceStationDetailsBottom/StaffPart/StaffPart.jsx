@@ -14,15 +14,24 @@ import clsx from "clsx";
 
 export default function StaffPart() {
 
-     const [isEditing, setIsEditing] = useState(false);
-    const [memberName, setMemberName] = useState("Максим Коваленко")
-    const [memberEmail, setMemberEmail] = useState("maksim.kovalenko@example.com")
-    const [memberRole, setMemberRole] = useState("Власник")
+    //  const [isEditing, setIsEditing] = useState(false);
+    // const [memberName, setMemberName] = useState("Максим Коваленко")
+    // const [memberEmail, setMemberEmail] = useState("maksim.kovalenko@example.com")
+    // const [memberRole, setMemberRole] = useState("Власник")
     const [modalIsOpen, setIsOpen] = useState(false);
-    const [disabled, setDisabled] = useState(false);
+    // const [disabled, setDisabled] = useState(false);
+    const [members, setMembers] = useState([
+        {name:"Максим Коваленко", email:"maksim.kovalenko@example.com", role:"Власник", isEditing:false, isDisabled: false},
+        {name:"Максим Коваленко", email:"maksim.kovalenko@example.com", role:"Власник", isEditing:false, isDisabled: false },
+        {name:"Максим Коваленко", email:"maksim.kovalenko@example.com", role:"Власник", isEditing:false, isDisabled: false},
+        {name:"Максим Коваленко", email:"maksim.kovalenko@example.com", role:"Власник", isEditing:false, isDisabled: false},
+        {name:"Максим Коваленко", email:"maksim.kovalenko@example.com", role:"Власник", isEditing:false, isDisabled: false},
+        
+    ])
 
-    const toDisable = () => {
-        setDisabled (!disabled)
+
+    const toDisable = (index) => {
+        setMembers(members.map((member, i) => i === index ? { ...member, isDisabled: !member.isDisabled } : member));
     }
 
     const openModal = () => {
@@ -34,27 +43,31 @@ export default function StaffPart() {
   };
 
 
-    const handleChangeMN = (e) => {
-        setMemberName(e.target.value)
+    const handleChangeMN = (index, newName) => {
+        setMembers(members.map((member, i) => i === index ? { ...member, name: newName } : member));
     }
 
-     const handleChangeME = (e) => {
-        setMemberEmail(e.target.value)
+     const handleChangeME = (index, newEmail) => {
+         setMembers(members.map((member, i) => i === index ? { ...member, email: newEmail } : member));
     }
 
-     const handleChangeMR = (e) => {
-        setMemberRole(e.target.value)
+     const handleChangeMR = (index, newRole) => {
+         setMembers(members.map((member, i) => i === index ? { ...member, role: newRole } : member));
     }
 
-    const handleEditing = () => {
-        setIsEditing(!isEditing)
+    const handleEditing = (index) => {
+        setMembers(members.map((member, i) => i === index ? { ...member, isEditing: !member.isEditing } : member));
     }
 
+    const deleteMember = (index)=>{
+        setMembers((prevMembers) => prevMembers.filter((_,i) => i !== index))
+    }
 
     return (
         <div>
             <ul className={css.teamList}>
-                <li className={css.teamListItem}>
+                {members.map((member, index) =>(
+                <li key={index} className={css.teamListItem}>
 
                     <div className={css.contentBox}>
                         
@@ -63,101 +76,42 @@ export default function StaffPart() {
                         </div>
     
                         
-                            {isEditing ? (<div className={css.nameBox}>
-                                <input type="text" value={memberName} onChange={handleChangeMN}/>
-                                <input type="text" value={memberEmail} onChange={handleChangeME}/>
+                            {member.isEditing ? (<div className={css.nameBox}>
+                                <input type="text" value={member.name} onChange={(e)=>handleChangeMN(index, e.target.value)}/>
+                                <input type="text" value={member.email} onChange={(e)=>handleChangeME(index, e.target.value)}/>
                             </div>)
                                 : (  <div className={css.nameBox}>
-                                <p className={css.memberName}>{ memberName}</p>
-                                    <p className= {css.memberEmail} > {memberEmail}</p>
+                                <p className={css.memberName}>{ member.name}</p>
+                                    <p className= {css.memberEmail} > {member.email}</p>
                         </div> )}
                         </div>
                     
 
-                    {isEditing ? (<select onChange={handleChangeMR} className={css.select}>
+                    {member.isEditing ? (<select onChange={(e)=>handleChangeMR(index, e.target.value)} className={css.select}>
                         <option value="Власник">Власник</option>
                         <option value="Перегляд">Перегляд</option>
                         <option value="Адміністратор">Адміністратор</option>
-</select>): (<p className={css.memberRole}> {memberRole} </p>)}
+</select>): (<p className={css.memberRole}> {member.role} </p>)}
                        
                     
 
                     <div className={css.iconsBox}>
-                        {isEditing ? <RiSave3Fill onClick={handleEditing}/>:<BsPencil onClick={handleEditing}/>}
-                        <BsTrash />
-                        <BsPower onClick={toDisable} className={clsx(css.power, {[css.powerDisabled]: disabled})} />
+        
+                           <button type="button" className={css.iconBtn} onClick={()=>handleEditing(index)}>
+                             {member.isEditing ?  <RiSave3Fill className={css.icons} /> : <BsPencil className={css.icons}/>  }
+                                                       
+                        </button>
+                        <button type="button" className={css.iconBtn} onClick={()=>deleteMember(index)}>
+                            <BsTrash className={css.icons} />
+                        </button>
+                        <button type="button" onClick={()=>toDisable(index)} className={css.iconBtn}>
+                            <BsPower  className={clsx(css.power, { [css.powerDisabled]: member.isDisabled })}/>
+                        </button>
+
                     </div>
                 </li>
-                
-                 {/* <li className={css.teamListItem}>
-
-                    <div className={css.contentBox}>
-                        
-                        <div className={css.memberPhoto}>                        
-                            <img src={avatar} alt={`user's photo`} className={css.particularMemberPhoto} />                           
-                        </div>
-    
-                        
-                            {isEditing ? (<div className={css.nameBox}>
-                                <input type="text" value={memberName} onChange={handleChangeMN}/>
-                                <input type="text" value={memberEmail} onChange={handleChangeME}/>
-                            </div>)
-                                : (  <div className={css.nameBox}>
-                                <p className={css.memberName}>{ memberName}</p>
-                                    <p className= {css.memberEmail} > {memberEmail}</p>
-                        </div> )}
-                        </div>
-                    
-
-                    {isEditing ? (<select onChange={handleChangeMR} className={css.select}>
-                        <option value="Власник">Власник</option>
-                        <option value="Перегляд">Перегляд</option>
-                        <option value="Адміністратор">Адміністратор</option>
-</select>): (<p className={css.memberRole}> {memberRole} </p>)}
-                       
-                    
-
-                    <div className={css.iconsBox}>
-                        <BsPencil onClick={handleEditing}/>
-                        <BsTrash />
-                        <BsPower />
-                    </div>
-                </li>
-                
-                 <li className={css.teamListItem}>
-
-                    <div className={css.contentBox}>
-                        
-                        <div className={css.memberPhoto}>                        
-                            <img src={avatar} alt={`user's photo`} className={css.particularMemberPhoto} />                           
-                        </div>
-    
-                        
-                            {isEditing ? (<div className={css.nameBox}>
-                                <input type="text" value={memberName} onChange={handleChangeMN}/>
-                                <input type="text" value={memberEmail} onChange={handleChangeME}/>
-                            </div>)
-                                : (  <div className={css.nameBox}>
-                                <p className={css.memberName}>{ memberName}</p>
-                                    <p className= {css.memberEmail} > {memberEmail}</p>
-                        </div> )}
-                        </div>
-                    
-
-                    {isEditing ? (<select onChange={handleChangeMR} className={css.select}>
-                        <option value="Власник">Власник</option>
-                        <option value="Перегляд">Перегляд</option>
-                        <option value="Адміністратор">Адміністратор</option>
-</select>): (<p className={css.memberRole}> {memberRole} </p>)}
-                       
-                    
-
-                    <div className={css.iconsBox}>
-                        <BsPencil onClick={handleEditing}/>
-                        <BsTrash />
-                        <BsPower />
-                    </div>
-            </li> */}
+                ))}
+                 
             </ul>
             <button type="button" className={css.addBtn} onClick={openModal}><BiSolidPlusSquare />Додати користувача</button>
             {modalIsOpen && <Modal isOpen={modalIsOpen} onClose={handleModalClose}>

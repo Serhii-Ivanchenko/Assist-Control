@@ -5,6 +5,8 @@ import { BsTrash } from "react-icons/bs";
 import { BsPower } from "react-icons/bs";
 import { BiSolidPlusSquare } from "react-icons/bi";
 import clsx from "clsx";
+import { RiSave3Fill } from "react-icons/ri";
+
 
 
 
@@ -12,62 +14,67 @@ import clsx from "clsx";
 
 
 export default function StationPart() {
-    const [isEditing, setIsEditing] = useState(false);
-    const [postName, setPostName] = useState("ПОСТ 1");
-    const [disabled, setDisabled] = useState(false);
+    const [posts, setPosts] = useState([
+        { name: "ПОСТ 1", isEditing: false, isDisabled: false },
+        { name: "ПОСТ 2", isEditing: false, isDisabled: false },
+        { name: "ПОСТ 3", isEditing: false, isDisabled: false },
+        { name: "ПОСТ 4", isEditing: false, isDisabled: false }]);
+    const [newPost, setNewPost] = useState("");
 
     const toDisable = (index) => {
-        setDisabled (disabled === index ? null : index)
+        setPosts(posts.map((post, i) => i === index ? { ...post, isDisabled: !post.isDisabled } : post));
     }
 
-    const handleChangePN = (e) => {
-        setPostName(e.target.value)
+
+    const handleChangePN = (newName, index) => {
+        setPosts(posts.map((post, i) => i === index ? { ...post, name: newName } : post));
     }
 
-    const handleEditing = () => {
-        setIsEditing(!isEditing)
+    const handleEditing = (index) => {
+        setPosts(posts.map((post, i) => i === index ? { ...post, isEditing: !post.isEditing } : post));
+    }
+
+    const handleAddPost = () => {
+        if (newPost.trim()) {
+            setPosts([...posts, { name: newPost, isEditing: false, isDisabled: false }]);
+            setNewPost("");
+        }
+    }
+
+    const deletePost = (index)=>{
+        setPosts((prevPosts) => prevPosts.filter((_,i) => i !== index))
     }
 
     return (
         <div>
             <p className={css.title}>Назва поста</p>
             <ul className={css.postList} >
-                <li className={css.postListItem}>
-                    {isEditing ? (<input value={postName} onChange={handleChangePN} className={css.inputForPostName } />) : (<p>{postName}</p>)}
+                {posts.map((post, index) => (
+                <li key={index} className={css.postListItem}>
+                        {post.isEditing ?
+                            (<input value={post.name}
+                                onChange={(e) => handleChangePN(e.target.value, index )}
+                                className={css.inputForPostName} />)
+                            : (<p>{post.name}</p>)}
                     <div className={css.iconsBox}>
-                        <BsPencil onClick={handleEditing}/>
-                        <BsTrash />
-                        <BsPower onClick={() => toDisable(0)} className={clsx(css.power, {[css.powerDisabled]: disabled === 0})}/>
+                        <button type="button" className={css.iconBtn} onClick={()=>handleEditing(index)}>
+                            {post.isEditing ?  <RiSave3Fill className={css.icons} /> : <BsPencil className={css.icons}/>  }
+                                                       
+                        </button>
+                        <button type="button" className={css.iconBtn} onClick={()=>deletePost(index)}>
+                            <BsTrash className={css.icons} />
+                        </button>
+                        <button type="button" onClick={()=>toDisable(index)} className={css.iconBtn}>
+                            <BsPower  className={clsx(css.power, { [css.powerDisabled]: post.isDisabled })}/>
+                        </button>
                     </div>
-                </li>
-                <li className={css.postListItem}>
-                    <p>ПОСТ 2</p>
-                    <div className={css.iconsBox}>
-                        <BsPencil/>
-                        <BsTrash />
-                        <BsPower onClick={() => toDisable(1)} className={clsx(css.power, {[css.powerDisabled]: disabled === 1})}/>
-                    </div>
-                </li>
-                <li className={css.postListItem}>
-                    <p>ПОСТ 3</p>
-                    <div className={css.iconsBox}>
-                        <BsPencil />
-                        <BsTrash />
-                        <BsPower onClick={()=>toDisable(2)} className={clsx(css.power, {[css.powerDisabled]: disabled === 2})}/>
-                    </div>
-                </li>
-                <li className={css.postListItem}>
-                    <p>ПОСТ 4</p>
-                    <div className={css.iconsBox}>
-                        <BsPencil />
-                        <BsTrash />
-                        <BsPower onClick={() => toDisable(3)} className={clsx(css.power, {[css.powerDisabled]: disabled === 3})}/>
-                    </div>
-                </li>
+                    </li>
+                ))}
+
             </ul>
             <div className={css.addBox}>
-                <input placeholder="Додати новий пост..." className={css.addInput} />
-                <button type="button" className={css.addBtn}>
+                <input placeholder="Додати новий пост..." className={css.addInput} value={newPost} onChange={(e)=>setNewPost(e.target.value)}/>
+                <button type="button" className={css.addBtn} onClick={handleAddPost}>
                     <BiSolidPlusSquare />
                     Додати
                 </button>
