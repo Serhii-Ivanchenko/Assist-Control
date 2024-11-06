@@ -23,8 +23,8 @@ const Validation = Yup.object().shape({
   username: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
   phone: Yup.string().min(3, "Занадто коротке").max(50, "Занадто довге"),
   adress: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
-  city: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
-  index: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
+  city: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").nullable(),
+  index: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").nullable(),
 });
 
 export default function UserSettingsProfile({ onClose }) {
@@ -141,36 +141,42 @@ export default function UserSettingsProfile({ onClose }) {
 
     const dataToUpdate = {};
 
-    if (values.username !== user.name) {
+    if (values.username && values.username !== user.name) {
       dataToUpdate.first_name = values.username;
     }
 
-      if (values.country !== user.country) {
+      if (values.country && values.country !== user.country) {
         dataToUpdate.country = values.country;
             }
 
-    if (values.phone !== user.phone_number) {
+    if (values.phone && values.phone !== user.phone_number) {
       dataToUpdate.phone_number = values.phone;
     }
 
-        if (values.adress !== user.address) {
+        if (values.adress && values.adress !== user.address) {
     dataToUpdate.address = values.adress;
         }
 
-    if (values.section !== user.first_page) {
+    if (values.section && values.section !== user.first_page) {
       dataToUpdate.first_page = values.section;
     }
 
-    if (values.timeZone !== user.time_zone) {
+    if (values.timeZone && values.timeZone !== user.time_zone) {
       dataToUpdate.time_zone = values.timeZone;
     }
 
-        if (values.city !== user.city) {
+        if (values.city && values.city !== user.city) {
     dataToUpdate.city = values.city;
         }
 
-        if (values.index !== user.post_code) {
-    dataToUpdate.post_code = values.index;}
+        if ( values.index && values.index !== user.post_code) {
+          dataToUpdate.post_code = values.index;
+    }
+    
+    // Видаляємо порожні або `null` значення з `dataToUpdate`
+  // Object.keys(dataToUpdate).forEach(
+  //   (key) => (dataToUpdate[key] === null || dataToUpdate[key] === "") && delete dataToUpdate[key]
+  // )
 
     // Якщо немає змін, не відправляємо запит на сервер
     if (Object.keys(dataToUpdate).length === 0) {
@@ -196,6 +202,14 @@ export default function UserSettingsProfile({ onClose }) {
       });
     } catch (error) {
       console.error("Error updating user data:", error);
+       toast.error("Не вдалося оновити дані :(", {
+          position: "top-right",
+          duration: 5000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
     } finally {
       actions.setSubmitting(false); // Завжди виконується
     }

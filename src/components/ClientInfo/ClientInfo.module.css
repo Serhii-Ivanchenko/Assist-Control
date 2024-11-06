@@ -299,6 +299,19 @@
     cursor: pointer;
 }
 
+.btnSave{
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+    
+        border-radius: 6px;
+        background: var(--green-btn-normal);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border: none;
+        cursor: pointer;
+}
+
 .pencilIcon {
     fill: var(--light-gray);
 }

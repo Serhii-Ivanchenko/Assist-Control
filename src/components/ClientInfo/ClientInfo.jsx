@@ -21,6 +21,7 @@ import Modal from "../Modals/Modal/Modal";
 import NotificationModal from "./NotificationModal/NotificationModal";
 import { BsPencil } from "react-icons/bs";
 import avatar_default from "../../assets/images/avatar_default.png"
+import { RiSave3Fill } from "react-icons/ri";
 
 
 
@@ -124,7 +125,14 @@ export default function ClientInfo() {
                         
                         <div className={css.nameAndEditBox}>
                             <p className={css.clientName}>Іван Петренко</p>
-                            <button type="button" className={css.editBtn} onClick={handleEditing}><BsPencil size={16} className={css.pencilIcon} /></button>
+                            {isEditing ?
+                                <button type="button" className={css.btnSave} onClick={handleEditing} >                                   
+                                    <RiSave3Fill  className={css.pencilIcon}/>
+                            </button> :
+                            <button type="button" className={css.editBtn} onClick={handleEditing}>
+                                <BsPencil size={16} className={css.pencilIcon} />
+                                </button>
+                            }
                         </div>
                         
                 <p className={css.dateOfBirth}>12 Трав, 1987 (37р.)</p>
