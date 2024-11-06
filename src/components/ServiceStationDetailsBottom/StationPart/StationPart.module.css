@@ -77,3 +77,23 @@ background-color: var(--blue-btn-hover);
 .addBtn:active{
 background-color: var(--blue-btn-inactive);
 }
+
+.power{
+    fill:var(--green-btn-normal);
+}
+
+.powerDisabled{
+    fill: var(--red);
+}
+
+.inputForPostName{
+    background-color: transparent;
+    outline: none;
+    border: none;
+
+    color: var(--white);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+}

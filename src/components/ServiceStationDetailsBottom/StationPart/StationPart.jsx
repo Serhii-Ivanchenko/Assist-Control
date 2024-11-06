@@ -4,6 +4,7 @@ import { BsPencil } from "react-icons/bs";
 import { BsTrash } from "react-icons/bs";
 import { BsPower } from "react-icons/bs";
 import { BiSolidPlusSquare } from "react-icons/bi";
+import clsx from "clsx";
 
 
 
@@ -12,7 +13,12 @@ import { BiSolidPlusSquare } from "react-icons/bi";
 
 export default function StationPart() {
     const [isEditing, setIsEditing] = useState(false);
-    const [postName, setPostName] = useState("ПОСТ 1")
+    const [postName, setPostName] = useState("ПОСТ 1");
+    const [disabled, setDisabled] = useState(false);
+
+    const toDisable = (index) => {
+        setDisabled (disabled === index ? null : index)
+    }
 
     const handleChangePN = (e) => {
         setPostName(e.target.value)
@@ -27,11 +33,11 @@ export default function StationPart() {
             <p className={css.title}>Назва поста</p>
             <ul className={css.postList} >
                 <li className={css.postListItem}>
-                    {isEditing ? (<input value={postName} onChange={handleChangePN} />) : (<p>{postName}</p>)}
+                    {isEditing ? (<input value={postName} onChange={handleChangePN} className={css.inputForPostName } />) : (<p>{postName}</p>)}
                     <div className={css.iconsBox}>
                         <BsPencil onClick={handleEditing}/>
                         <BsTrash />
-                        <BsPower />
+                        <BsPower onClick={() => toDisable(0)} className={clsx(css.power, {[css.powerDisabled]: disabled === 0})}/>
                     </div>
                 </li>
                 <li className={css.postListItem}>
@@ -39,7 +45,7 @@ export default function StationPart() {
                     <div className={css.iconsBox}>
                         <BsPencil/>
                         <BsTrash />
-                        <BsPower />
+                        <BsPower onClick={() => toDisable(1)} className={clsx(css.power, {[css.powerDisabled]: disabled === 1})}/>
                     </div>
                 </li>
                 <li className={css.postListItem}>
@@ -47,7 +53,7 @@ export default function StationPart() {
                     <div className={css.iconsBox}>
                         <BsPencil />
                         <BsTrash />
-                        <BsPower />
+                        <BsPower onClick={()=>toDisable(2)} className={clsx(css.power, {[css.powerDisabled]: disabled === 2})}/>
                     </div>
                 </li>
                 <li className={css.postListItem}>
@@ -55,7 +61,7 @@ export default function StationPart() {
                     <div className={css.iconsBox}>
                         <BsPencil />
                         <BsTrash />
-                        <BsPower />
+                        <BsPower onClick={() => toDisable(3)} className={clsx(css.power, {[css.powerDisabled]: disabled === 3})}/>
                     </div>
                 </li>
             </ul>

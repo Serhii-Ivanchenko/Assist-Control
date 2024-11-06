@@ -1,3 +1,11 @@
+.teamList{
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    margin-bottom: 20px;
+}
+
 .teamListItem{
     display: flex;
      padding: 10px 0px;
@@ -66,4 +74,31 @@
 
         border-radius: 6px;
             background: var(--main-gray);
+}
+
+.addBtn{
+    display: flex;
+    gap: 10px;
+    padding: 6px 10px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+
+    border-radius: 6px;
+    background: var(--blue-btn-normal);
+
+    color: var(--white);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+}
+
+.power{
+    fill: var(--green-btn-normal);
+}
+
+.powerDisabled{
+    fill: var(--red);
 }
