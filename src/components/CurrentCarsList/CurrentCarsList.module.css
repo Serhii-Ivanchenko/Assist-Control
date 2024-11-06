@@ -1,6 +1,6 @@
 .wrapper {
   width: 386px;
-  height: 191px;
+  max-height: 191px;
   background: var(--bg-secondary);
   border-radius: 5px;
   overflow-y: scroll;
@@ -10,6 +10,7 @@
 
 .wrapper::-webkit-scrollbar {
   width: 8px;
+  max-height: 200px;
 }
 
 .wrapper::-webkit-scrollbar-thumb {
@@ -24,19 +25,30 @@
 
 @media screen and (min-width: 1850px) {
   .scrollWrapper {
-    width: 576px; /*головний контенер, який обгортає скролбар*/
-    height: 409px;
+    width: 576px;
+    /*головний контенер, який обгортає скролбар*/
+    /* height: 409px; */
     display: flex;
-    padding: 16px 10px 16px 20px; /*падінг для відступу від контейнера до скрола*/
+    height: clamp(323px, 35vh, 409px);
+    padding-top: clamp(14px, calc(14px + (2 * ((100vh - 900px) / 180))), 16px);
+    padding-bottom: clamp(11px, calc(11px + (5 * ((100vh - 900px) / 180))), 16px);
+    padding-left: 20px;
+    padding-right: 10px;
+    /* padding: 16px 10px 16px 20px; //падінг для відступу від контейнера до скрола */
     background: var(--bg-secondary);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
+    overflow: hidden;
   }
 
   .wrapper {
-    width: 546px; /*менший контейнер, на який вішається скрол*/
-    height: auto;
-    padding-right: 17px; /*падінг для відступу скролбара*/
+    width: 546px;
+    /*менший контейнер, на який вішається скрол*/
+    height: 100%;
+    min-height: 297px;
+    max-height: 381px;
+    padding-right: 17px;
+    /*падінг для відступу скролбара*/
   }
 
   .carsList {
