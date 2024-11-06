@@ -1,31 +1,7 @@
-import { SlSpeedometer } from "react-icons/sl";
-import {
-  BsCalendar2Week,
-  BsCaretDownFill,
-  BsDownload,
-  BsPlayFill,
-  BsChevronDown,
-  BsFilter,
-  // BsRecordCircle,
-} from "react-icons/bs";
-import { GiSoundWaves } from "react-icons/gi";
 import css from "./ServiceHistory.module.css";
-import { useState } from "react";
-import clsx from "clsx";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemButton,
-  AccordionItemHeading,
-  AccordionItemPanel,
-} from "react-accessible-accordion";
-import userAvater from "../../assets/images/ava.png";
-import TranscriptionMessage from "./TranscriptionMessage/TranscriptionMessage";
+import ItemOfRecord from "./ItemOfRecord/ItemOfRecord";
 
 export default function ServiceHistory() {
-  const [showDialogModal, setShowDialogModal] = useState(false);
-  const [transcription, setTranscription] = useState(false);
-  const toogleDialogModal = () => setShowDialogModal(!showDialogModal);
   const messages = [
     {
       orClientMsg: true,
@@ -57,130 +33,83 @@ export default function ServiceHistory() {
       message:
         "Доброго дня, ще раз заставлю. Скажіть, будь ласка, якщо я щось відвіду, я вам дзвоню, у мене нашовання блок АБС. Може хтось подивитися, це він чи не він?",
     },
+    {
+      orClientMsg: false,
+      time: "00:15",
+      message:
+        "Можемо тільки з наступної середи, тому що електрик у нас відпустив.",
+    },
   ];
+  const recordRace = [
+    {
+      index: "1",
+      totalkilometrs: "246750",
+      newkilometrs: "9272",
+      date: "19.06.2024",
+      time: "16:08",
+      appeal: {
+        client:
+          "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене [марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
+        menager:
+          "Привіт! Мене звати [Ім'я], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
+      },
+      diagnostic: {
+        message:
+          "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
+      },
+    },
+    {
+      index: "3",
+      totalkilometrs: "246749",
+      newkilometrs: "9272",
+      date: "18.06.2024",
+      time: "16:08",
+    },
+    {
+      index: "2",
+      totalkilometrs: "246748",
+      newkilometrs: "9272",
+      date: "17.06.2024",
+      time: "16:08",
+    },
+    {
+      index: "4",
+      totalkilometrs: "246747",
+      newkilometrs: "9272",
+      date: "16.06.2024",
+      time: "16:08",
+      appeal: {
+        client:
+          "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене [марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
+        menager:
+          "Привіт! Мене звати [Ім'я], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
+      },
+      diagnostic: {
+        message:
+          "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
+      },
+    },
+  ];
+  const sortedArr = recordRace.sort((a, b) =>
+    a.totalkilometrs > b.totalkilometrs ? -1 : 1
+  );
   return (
     <div>
-      <h3>Історія обслуговування</h3>
-
-      <Accordion allowMultipleExpanded="true" allowZeroExpanded="true">
-        <AccordionItem>
-          <AccordionItemHeading>
-            <AccordionItemButton>
-              <div className={css.listItem} onClick={() => toogleDialogModal()}>
-                <div className={css.kilometersWrapper}>
-                  <div className={css.numberOfKilometers}>
-                    <SlSpeedometer /> <p>246742</p>
-                  </div>
-                  <div className={css.kilometersDriven}>
-                    <SlSpeedometer /> <p>9272</p>
-                  </div>
-                </div>
-                <div className={css.dateWrapper}>
-                  <div className={css.date}>
-                    <BsCalendar2Week /> <p>14.06.2024</p> <p>16:08</p>
-                  </div>
-                  <button
-                    className={clsx(
-                      css.unActiveDialogBtn,
-                      showDialogModal ? css.activeDialogBtn : null
-                    )}
-                    onClick={() => toogleDialogModal()}
-                  >
-                    <BsCaretDownFill color="var(--icon-gray)" />
-                  </button>
-                </div>
-              </div>
-            </AccordionItemButton>
-          </AccordionItemHeading>
-          <AccordionItemPanel>
-            <div className={css.bodyAccardionWrapper}>
-              <div className={css.btnDownloadsWrapper}>
-                <div className={css.btnDownloadsItem}>
-                  <p>Ремонт</p>
-                  <button className={css.downloadBtn}>
-                    <BsDownload />
-                    <p>.pdf</p>
-                  </button>
-                </div>
-                <div className={css.btnDownloadsItem}>
-                  <p>Діагностика</p>
-                  <button className={css.downloadBtn}>
-                    <BsDownload />
-                    <p>.pdf</p>
-                  </button>
-                </div>
-                <div className={css.btnDownloadsItem}>
-                  <p>Рекомендації</p>
-                  <button className={css.downloadBtn}>
-                    <BsDownload />
-                    <p>.pdf</p>
-                  </button>
-                </div>
-              </div>
-              <ul className={css.secondAcordionList}>
-                <li className={css.secondAcordionWrapper}>
-                  <AccordionItem>
-                    <div className={css.secondAcordion}>
-                      <div className={css.callRecordWrapper}>
-                        <img src={userAvater} alt="" />
-                        <div className={css.callRecord}>
-                          <div>
-                            <BsPlayFill
-                              size={24}
-                              fill="var(--play-btn-triangle)"
-                            />
-                          </div>
-                          <GiSoundWaves size={80} />
-                          <p>1:26</p>
-                        </div>
-                      </div>
-                      <AccordionItemHeading>
-                        <AccordionItemButton>
-                          <button
-                            className={css.transcriptionToggleBtn}
-                            onClick={() => setTranscription((prev) => !prev)}
-                          >
-                            <p>Aa</p>
-                            <BsChevronDown
-                              className={clsx(
-                                css.transcriptionIcon,
-                                transcription
-                                  ? css.activeTranscriptionIcon
-                                  : null
-                              )}
-                              strokeWidth={3}
-                              size={14}
-                            />
-                          </button>
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                    </div>
-                    <AccordionItemPanel>
-                      <div className={css.secondAcordionBody}>
-                        <button className={css.transcriptionImportantBtn}>
-                          <BsFilter />
-                          <p>Головне</p>
-                        </button>
-                        <ul className={css.messages}>
-                          {messages.map(({ orClientMsg, time, message }) => (
-                            <TranscriptionMessage
-                              key={Math.random()}
-                              orClientMsg={orClientMsg}
-                              time={time}
-                              message={message}
-                            />
-                          ))}
-                        </ul>
-                      </div>
-                    </AccordionItemPanel>
-                  </AccordionItem>
-                </li>
-              </ul>
-            </div>
-          </AccordionItemPanel>
-        </AccordionItem>
-        
-      </Accordion>
+      <h3 className={css.title}>Історія обслуговування</h3>
+      <div className={css.recordsListWrapper}>
+        <ul className={css.listOfAccardion}>
+          {sortedArr.map((item, index) => {
+            return (
+              <ItemOfRecord
+                key={item.index}
+                item={item}
+                messages={messages}
+                isExpanded={index === 0}
+              />
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }

@@ -44,7 +44,7 @@
     height: 24px;
     border-radius: 50%;
     border: none;
-    background-color: rgba(74, 74, 74, 1);
+    background-color: var(--main-gray);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,5 +53,5 @@
 
 .icon {
     flex-shrink: 0;
-    color: rgba(255, 255, 255, 1)
+    color: var(--white);
 }

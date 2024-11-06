@@ -1,52 +1,21 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewCarsRange } from "../../redux/cars/operations.js";
-import { selectNewCars } from "../../redux/cars/selectors.js";
+import { selectNewCars, selectDate, } from "../../redux/cars/selectors.js";
 import PeriodSelector from "../PeriodSelector/PeriodSelector.jsx";
+import { changeActualDate } from "../../redux/cars/slice.js";
 import {
-  AreaChart, BarChart,
-  Bar,ReferenceLine,
-  XAxis, Legend,
+   BarChart,
+  Bar,
+  XAxis, 
   YAxis,
   CartesianGrid,
   Tooltip,
-  Area,
   ResponsiveContainer,
 } from "recharts";
 import css from "./Chart.module.css";
+import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 
-const data = [
-  { dateeng: '25/09', kolall: 6, kolnew: 3 },
-  { dateeng: '26/09', kolall: 5, kolnew: 3 },
-  { dateeng: '27/09', kolall: 2, kolnew: 1 },
-  { dateeng: '28/09', kolall: 5, kolnew: 4 },
-  { dateeng: '29/09', kolall: 8, kolnew: 5 },
-  { dateeng: '30/09', kolall: 10, kolnew: 7 },
-  { dateeng: '01/10', kolall: 10, kolnew: 6 },
-  { dateeng: '02/10', kolall: 9, kolnew: 4 },
-  { dateeng: '03/10', kolall: 7, kolnew: 3 },
-  { dateeng: '04/10', kolall: 5, kolnew: 2 },
-  // { dateeng: '05/10', kolall: 10, kolnew: 6 },
-  // { dateeng: '06/10', kolall: 9, kolnew: 4 },
-  // { dateeng: '07/10', kolall: 7, kolnew: 3 },
-  // { dateeng: '08/10', kolall: 5, kolnew: 2 },
-  // { dateeng: '09/10', kolall: 6, kolnew: 3 },
-  // { dateeng: '10/10', kolall: 5, kolnew: 3 },
-  // { dateeng: '11/10', kolall: 2, kolnew: 1 },
-  // { dateeng: '12/10', kolall: 5, kolnew: 4 },
-  // { dateeng: '13/10', kolall: 8, kolnew: 5 },
-  // { dateeng: '14/10', kolall: 10, kolnew: 7 },
-  // { dateeng: '15/10', kolall: 10, kolnew: 6 },
-  // { dateeng: '16/10', kolall: 9, kolnew: 4 },
-  // { dateeng: '17/10', kolall: 7, kolnew: 3 },
-  // { dateeng: '18/10', kolall: 5, kolnew: 2 },
-  // { dateeng: '19/10', kolall: 10, kolnew: 6 },
-  // { dateeng: '20/10', kolall: 9, kolnew: 4 },
-  // { dateeng: '21/10', kolall: 7, kolnew: 3 },
-  // { dateeng: '22/10', kolall: 5, kolnew: 2 }, 
-  // { dateeng: '23/10', kolall: 7, kolnew: 3 },
-  // { dateeng: '24/10', kolall: 5, kolnew: 2 }, 
-]
 
 
 const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
@@ -89,6 +58,8 @@ if (y - tooltipHeight / 2 < 0) {
 };
 
 export default function Chart() {
+  const carSelectDate = useSelector(selectDate);
+  const currentDay = new Date().toISOString().substring(0, 10);
   const dispatch = useDispatch();
   const newCarsData = useSelector(selectNewCars);
   const currentDate = new Date();
@@ -99,6 +70,14 @@ export default function Chart() {
   const [dateEnd, setDateEnd] = useState(currentDate);
   let dateBeginStr = dateBegin.toISOString().substring(0, 10);
   let dateEndStr = dateEnd.toISOString().substring(0, 10);
+
+  const selectedServiceId = useSelector(selectSelectedServiceId); // необхідно для коректної роботи вибору сервісів
+
+useEffect(() => {
+    if (carSelectDate === null) {
+      dispatch(changeActualDate(currentDay));
+    }
+  }, [carSelectDate, dispatch, currentDay]);
 
   const handleDataChangeBeg = (newData) => {
     setDateBegin(newData);
@@ -126,7 +105,6 @@ export default function Chart() {
   //   );
   // };
 
-
   // const yTickFormatter = (tick) => {
   //   if (tick >= 10) {
   //     return "";
@@ -134,25 +112,52 @@ export default function Chart() {
   //   return tick;
   // };
 
+  // useEffect(() => {
+  //   const fetchNewCarsData = async () => {
+  //     await Promise.all([
+  //       dispatch(getNewCarsRange({ dateBeginStr, dateEndStr })),
+  //     ]);
+  //   };
+
+  //   fetchNewCarsData();
+  // }, [dispatch, dateBeginStr, dateEndStr]);
+
   useEffect(() => {
     const fetchNewCarsData = async () => {
-      await Promise.all([
-        dispatch(getNewCarsRange({ dateBeginStr, dateEndStr })),
-      ]);
+      if (!selectedServiceId) {
+        // console.warn("Service ID is not available yet. Skipping fetch.");
+        return;
+      }
+
+      await dispatch(getNewCarsRange({ dateBeginStr, dateEndStr }));
     };
 
     fetchNewCarsData();
-  }, [dispatch, dateBeginStr, dateEndStr]);
+  }, [dispatch, dateBeginStr, dateEndStr, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
 
-  let dataarr = newCarsData.map((el) => ({
+  let data = newCarsData.map((el) => ({
     ...el,
     dateeng:
       el.date.substring(8, 10) +
       "/" +
-      el.date.substring(5, 7) +
-      "/" +
-      el.date.substring(0, 4),
+       el.date.substring(5, 7) 
+      // +"/" +
+      // el.date.substring(0, 4),
   }));
+  let interval = 0;
+  const getMaxValue = (data) => Math.max(...data.map((d) => d.total_count));
+  const maxY = getMaxValue(data);
+  if (maxY > 15) { interval = 4 }
+  else { interval = 0 };
+  
+  const sumNewCars = data.reduce((acc, current) => {
+    return acc + current.new_for_day;
+  }, 0);
+  
+  const handleClick = (data) => {
+        dispatch(changeActualDate(data.date));
+    };
+  
 
   // console.log('date',data)
   //  console.log('end', dateEnd)
@@ -160,11 +165,13 @@ export default function Chart() {
   return (
     <div className={css.containerchart}>
       <div className={css.charttitlebox}>
-      <p className={css.charttitle}>Машинозаїзди</p>
-        <p className={css.charttitleavto}>За період:<span className={css.titlekolvo} >30</span></p>
+        <p className={css.charttitle}>Машинозаїзди</p>
+        <p className={css.charttitleavto}>
+          За період:<span className={css.titlekolvo}>{sumNewCars}</span>
+        </p>
       </div>
       <div className={css.areabox}>
-         <ResponsiveContainer className={css.responsecontainer}>
+        <ResponsiveContainer className={css.responsecontainer}>
           <BarChart data={data}>
             <defs>
               <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
@@ -205,11 +212,13 @@ export default function Chart() {
               //  padding={{ right: 10 }}
               tick={{ fontSize: 10 }}
               // tick={{ fill: 'transparent' }}
-              //  angle={-45} textAnchor="end"
+              angle={-45}
+              textAnchor="end"
             />
 
             <YAxis
-              domain={[0, (dataMax) => dataMax + 1]}
+              // domain={[0, (dataMax) => dataMax + 1]}
+              domain={[0, maxY]}
               // domain={[0, 11]}
               // dataKey="count"
               //  padding={{ top: 10 }}
@@ -217,31 +226,36 @@ export default function Chart() {
               //  tickCount={10}
               tick={{ fontSize: 10 }}
               axisLine={{ fill: "transparent" }}
-              // tickCount={12}
-              interval={0}
-              ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
+              tickCount={maxY + 1}
+              interval={interval}
+              // ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
               //  axisLine={false}
               // tickFormatter={yTickFormatter}
               //  tickFormatter={(value) => (value / 1000).toFixed(1)}
               width={13}
-              
+
               // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
               //  ticks={[0, 2, 4, 6, 8, 10]}
             />
 
-            <Tooltip content={<CustomTooltip />}
-            cursor={{fill:'rgb(107, 132, 255, 0.2)'}}/>
-            <Bar dataKey="kolall"
-              fill='var(--blue-btn-normal)'
-              radius={[7, 7, 0, 0]}
-             cursor="pointer"
-             
+            <Tooltip
+              content={<CustomTooltip />}
+              cursor={{ fill: "rgb(107, 132, 255, 0.2)" }}
             />
-            <Bar dataKey="kolnew"
+            <Bar
+              dataKey="total_count"
+              fill="var(--blue-btn-normal)"
+              radius={[7, 7, 0, 0]}
+              cursor="pointer"
+              onClick={handleClick}
+            />
+            <Bar
+              dataKey="new_for_day"
               fill="var(--play-btn-triangle)"
               radius={[7, 7, 0, 0]}
               cursor="pointer"
-              />
+              onClick={handleClick}
+            />
             {/* <Area
               type="monotone"
               dataKey="count"
@@ -258,7 +272,6 @@ export default function Chart() {
               //     </text>
               //   )}
         // />*/}
-       
 
             {/* <Brush
                         dataKey="day"
@@ -275,7 +288,7 @@ export default function Chart() {
         /> */}
           </BarChart>{" "}
         </ResponsiveContainer>{" "}
-      </div> 
+      </div>
 
       <PeriodSelector
         startDate={dateBegin}

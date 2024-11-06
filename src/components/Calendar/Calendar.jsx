@@ -7,11 +7,13 @@ import {
 } from "../../redux/cars/slice.js";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek"; // для начала недели с понедельника
-import css from "./Calendar.module.css";
+import cssvideo from "./Calendar.module.css";
+import csscrm from "./CalendarCrm.module.css";
 
 dayjs.extend(isoWeek);
 
-export default function Calendar({ queryMonth, dataMonth }) {
+export default function Calendar({ queryMonth, dataMonth, isCrm }) {
+  const css = isCrm ? csscrm : cssvideo;
   let currentDate = dayjs();
   let queryMonthDayjs = dayjs(queryMonth);
   const dispatch = useDispatch();
@@ -63,7 +65,11 @@ export default function Calendar({ queryMonth, dataMonth }) {
   };
 
   const getButtonColor = (percent) => {
-    if (percent >= 80) {
+    if (percent >= 150) {
+      return "#DB3020";
+    } else if (percent >= 130) {
+      return "#DB4C20";
+    } else if (percent >= 80) {
       return "var(--orange)";
     } else if (percent >= 50) {
       return "var(--mid-orange)";
@@ -82,11 +88,15 @@ export default function Calendar({ queryMonth, dataMonth }) {
     );
   };
 
+  if (carSelectDate !== selectedDate) {
+    setSelectedDate(carSelectDate)
+  };
+
   return (
     <div className={css.containercalendar}>
       <div className={css.weekdays}>
         {["пн", "вт", "ср", "чт", "пт", "сб", "вс"].map((day) => (
-          <div className={css.weekdays} key={day}>
+          <div className={css.weekdaysday} key={day}>
             {day}
           </div>
         ))}
@@ -111,7 +121,8 @@ export default function Calendar({ queryMonth, dataMonth }) {
               //   : "1px solid transparent",
             }}
             className={`calendar-day  
-              ${item.date.date() > currentDate.date() ? "cursordefault" : ""} 
+              ${isCrm ? "crm-width" : ""} 
+             ${item.date.date() > currentDate.date() ? "cursordefault" : ""} 
               ${
                 item.date.month() !== queryMonthDayjs.month()
                   ? "other-month"
@@ -126,7 +137,7 @@ export default function Calendar({ queryMonth, dataMonth }) {
 
       <style>{`
         
-        .calendar-day {
+         .calendar-day {
           text-align: center;
           color: var(--white);
           width: 36px;
@@ -148,6 +159,8 @@ export default function Calendar({ queryMonth, dataMonth }) {
         width: 54px;
           height: 27px;
           font-size: 16px; }}
+
+          .crm-width { width: 52px;}
 
         .cursordefault{
         cursor: default;

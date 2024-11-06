@@ -33,12 +33,12 @@
     left: 2px;
     top: 1px;
     z-index: 1;
-    background-color: rgba(74, 74, 74, 0.4);
+    background-color: var(--main-gray);
     transition: .4s;
 }
 
 .sun {
-    color: rgba(164, 164, 164, 1);
+    color: var(--light-gray);
     position: absolute;
     top: 5px;
     left: 28px;
@@ -48,7 +48,7 @@
 }
 
 .moon {
-    color: rgba(164, 164, 164, 1);
+    color: #A4A4A4;
     position: absolute;
     top: 5px;
     left: 6px;
@@ -119,6 +119,7 @@
     }
 }
 
+/* 
 .tooltip .tooltipContent::after {
     content: " ";
     position: absolute;
@@ -126,15 +127,15 @@
     left: 43%;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent transparent rgba(74, 74, 74, 1) transparent;
-}
+    border-color: transparent transparent var(--main-gray) transparent;
+} */
 
 .tooltip .tooltipContent {
     font-size: 10px;
     text-wrap: nowrap;
     visibility: hidden;
-    background: rgba(74, 74, 74, 1);
-    color: rgba(164, 164, 164, 1);
+    background: var(--main-gray);
+    color: var(--light-gray);
     text-align: center;
     border-radius: 0.375rem;
     padding: 0.375rem 0.75rem;

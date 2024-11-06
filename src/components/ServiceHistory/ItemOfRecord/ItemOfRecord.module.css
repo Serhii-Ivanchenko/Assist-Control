@@ -1,0 +1,370 @@
+.itemOfAccardion {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.itemOfMarking {
+  padding-top: 13px;
+}
+
+.circle {
+  margin-bottom: 1px;
+  fill: var(--blue-btn-normal);
+  width: 24px;
+  height: 24px;
+}
+
+.line {
+  width: 1px;
+  height: 100%;
+  background: var(--bg-input);
+  margin: auto;
+}
+
+.itemOfAccardion:last-of-type .line {
+  width: 0;
+  height: 0;
+  background: none;
+}
+
+.itemIcon,
+.MuiAccordion-region {
+  background-color: var(--bg-secondary);
+}
+
+.listItemWrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.listItem {
+  width: 640px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  padding: 0px 20px;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #2d3138;
+}
+
+.kilometersWrapper,
+.dateWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.kilometersWrapper {
+  gap: 10px;
+}
+
+.dateWrapper {
+  gap: 20px;
+}
+
+.numberOfKilometers,
+.kilometersDriven,
+.date {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 24px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.numberOfKilometers > div,
+.kilometersDriven > div,
+.date > div {
+  height: 16px;
+}
+.numberOfKilometers {
+  color: var(--current-mileage-text);
+  background: var(--current-mileage-bg);
+}
+
+.kilometersDriven {
+  color: var(--last-service-mileage-text);
+  background: var(--last-service-mileage-bg);
+}
+
+.date {
+  color: var(--red);
+  background: var(--visit-date-bg);
+}
+
+.unActiveDialogBtn {
+  border: none;
+  background: none;
+  transition: transform 200ms ease-in-out;
+}
+
+.activeDialogBtn {
+  background-color: none;
+  transform: rotate(180deg);
+}
+.dialogBtnIcon {
+  color: var(--icon-gray);
+  display: flex;
+  cursor: pointer;
+}
+/* Тіло першого акардіона */
+:global(.MuiAccordionSummary-root) {
+  min-height: 0px !important;
+}
+:global(.MuiAccordionSummary-content) {
+  margin: 0 !important;
+  display: block !important;
+}
+:global(.MuiPaper-root::before) {
+  display: none;
+}
+.bodyAccardionWrapper {
+  margin-top: 20px;
+}
+
+.btnDownloadsWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 9px 14px;
+  border-radius: 6px;
+  background-color: var(--bg-input);
+  z-index: 5;
+}
+
+.btnDownloadsItem {
+  height: 41px;
+
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  /* cursor: pointer; */
+  color: #fff;
+  border-radius: 6px;
+  background: var(--download-pdf-btn-bg);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  line-height: 1.1875em;
+  border: none;
+}
+.downloadBtn {
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  gap: 7px;
+  color: var(--icon-gray);
+  border-radius: 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+}
+.btnBg {
+  background: var(--green-btn-normal);
+}
+.RecordBtnInfoWrapper {
+  border-radius: 6px;
+  background: var(--bg-input);
+  /* height: auto; */
+  transform: translateY(0%);
+}
+.openRecordBtnInfoWrapper {
+  display: flex;
+  /* height:; */
+  padding: 15px 14px 32px 14px;
+  margin-top: 14px;
+  animation: open 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.closeRecordBtnInfoWrapper {
+  /* display: none; */
+  height: 0px;
+  margin-top: 0;
+  padding: 0;
+  animation: close 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+@keyframes open {
+  0% {
+    opacity: 0%;
+    height: 0px;
+    transform: translateY(-50%);
+  }
+  
+  100% {
+    /* height: 0%; */
+    height: auto;
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+@keyframes close {
+  0% {
+    opacity: 1;
+    height: auto;
+    transform: translateY(0%);
+  }
+  100% {
+    margin-top: 0;
+    padding: 0;
+    transform: translateY(-50%);
+    height: 0px;
+    opacity: 0;
+  }
+}
+
+/* Хедер другого акардіона */
+
+.secondAcordionList {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.secondAcordionWrapper {
+  padding: 10px 12.5px;
+  width: 430px;
+  border-radius: 12px;
+  background: #31353e;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.secondAcordion {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  flex-shrink: 0;
+}
+
+.callRecordWrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.callRecordWrapper > img {
+  width: 48px;
+  height: 48px;
+}
+
+.callRecord {
+  display: flex;
+  padding: 15px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  width: 252px;
+  height: 70px;
+  border-radius: 0px 10px 10px 10px;
+  background-color: var(--player-secondary-bg);
+}
+
+.callRecord > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  gap: 10px;
+  border-radius: 20px;
+  background: var(--white, #fff);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.callRecord > p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.transcriptionToggleBtn {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  background: var(--player-secondary-bg);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.transcriptionToggleBtn > p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Тіло другого акардіона */
+
+.scrollBarWrapper {
+  padding: 11px 10px 10px 21px;
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #2c2d31;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.secondAcordionBody {
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  align-items: flex-end;
+  border-radius: 12px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.secondAcordionBody::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+}
+
+.secondAcordionBody::-webkit-scrollbar-thumb {
+  background: var(--player-secondary-bg);
+  border-radius: 4px;
+}
+
+.secondAcordionBody::-webkit-scrollbar-track {
+  background: #202020;
+  border-radius: 4px;
+}
+
+.transcriptionImportantBtn {
+  display: flex;
+  gap: 5px;
+  padding: 2px 6px;
+  color: var(--white);
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  background-color: var(--player-secondary-bg);
+}
+
+.transcriptionImportantBtn > p {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.transcriptionIcon {
+  transition: transform 200ms ease-in-out;
+}
+
+.activeTranscriptionIcon {
+  transform: rotate(180deg);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 100%;
+}

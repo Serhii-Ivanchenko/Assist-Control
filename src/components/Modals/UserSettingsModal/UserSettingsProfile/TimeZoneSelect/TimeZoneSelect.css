@@ -47,15 +47,21 @@ box-shadow: none !important;
 
 .custom-select__menu{
     background-color: var(--bg-input) !important;
+    border-radius: 12px !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .custom-select__menu-list {
     max-height: 200px !important;
     overflow-y: auto !important;
+    border-radius: 12px !important;
 }
 
 .custom-select__menu-list::-webkit-scrollbar {
     width: 8px !important;
+    height: 190px;
+
 }
 
 .custom-select__menu-list::-webkit-scrollbar-thumb {
@@ -65,6 +71,9 @@ box-shadow: none !important;
 
 .custom-select__menu-list::-webkit-scrollbar-track {
     background: var(--bg-input) !important;
+    /* border-radius: 12px !important; */
+border-top-right-radius: 12px;
+border-bottom-right-radius: 12px;
 }
 
 /* .custom-select__menu-list::-webkit-scrollbar{

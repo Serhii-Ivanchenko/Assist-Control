@@ -3,7 +3,6 @@ import css from "./Archive.module.css";
 import Modal from "../Modals/Modal/Modal.jsx";
 import ArchiveModal from "../Modals/ArchiveModal/ArchiveModal.jsx";
 import { BsArchive } from "react-icons/bs";
-import ServiceBookingModal from "../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
 
 export default function Archive() {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -23,7 +22,7 @@ export default function Archive() {
       </button>
       {modalIsOpen && (
         <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-          <ServiceBookingModal onClose={handleModalClose} />
+          <ArchiveModal onClose={handleModalClose} />
         </Modal>
       )}
       <span className={css.tooltipContent}>Архів</span>

@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.mainTitle {
+  margin: 6px 0 12px;
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.rightContainer {
+  width: 995px;
+  height: 921px;
+  border-radius: 12px;
+  background-color: var(--bg-input);
+  margin-left: 14px;
+  z-index: 1;
+}

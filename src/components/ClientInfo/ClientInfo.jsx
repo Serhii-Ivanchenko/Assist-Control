@@ -14,6 +14,15 @@ import { BsPlusCircleDotted } from "react-icons/bs";
 import { IoStarSharp } from "react-icons/io5";
 import flag from "../../assets/images/flagUa.webp";
 import toast from "react-hot-toast";
+import { BsAlarm } from "react-icons/bs";
+import absentAutoImg from "../../assets/images/absentAutoImg.webp"
+import { useState } from "react";
+import Modal from "../Modals/Modal/Modal";
+import NotificationModal from "./NotificationModal/NotificationModal";
+import { BsPencil } from "react-icons/bs";
+import avatar_default from "../../assets/images/avatar_default.png"
+
+
 
 
 
@@ -21,6 +30,42 @@ import toast from "react-hot-toast";
 
 
 export default function ClientInfo() {
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [phoneNum, setPhoneNum] = useState('+38 073 329 12 17');
+    const [email, setEmail] = useState('ivan.petrenko@gmail.com');
+    const [tg, setTg] = useState('ivan.petrenko');
+
+
+    const handleChangePN = (e) => {
+        setPhoneNum(e.target.value)
+    }
+
+    const handleChangeEmail = (e) => { 
+        setEmail(e.target.value)
+    }
+
+    const handleChangeTg = (e) => { 
+        setTg(e.target.value)
+
+    }
+
+
+
+    
+
+    const handleEditing = () => {
+        setIsEditing(!isEditing)
+    }
+
+    
+    const openModal = () => {
+      setIsOpen(true);
+        };
+        
+        const handleModalClose = () => {
+      setIsOpen(false);
+  };
 
     const handleCopyEmail = () => {
         navigator.clipboard.writeText('ivan.petrenko@gmail.com')
@@ -49,42 +94,57 @@ export default function ClientInfo() {
       });
             })
     }
+
+    
     
     return (
-        <div className={css.clientInfoBox}>
+         <div className={css.clientInfoBox}>
             <p className={css.title}>Інформація про клієнта та автомобіль</p>
             
             <div className={css.infoBox}>
                 
                 <div className={css.photoAndMainInfo}>
-                <img src="" alt="Client's Photo" className={css.clientImg} />
+                <img src={avatar_default} alt="Client's Photo" className={css.clientImg} />
 
-            <div className={css.mainInfo}>
+                    <div className={css.mainInfo}>
+                        
+                        <div className={css.ratingAndMoney}>
             <div className={css.rating}>
             <IoStarSharp color="var(--star-orange)" size={18}/>
             <IoStarSharp color="var(--star-orange)" size={18}/>
             <IoStarSharp color="var(--star-orange)" size={18}/>
             <IoStarSharp color="var(--star-orange)" size={18}/>
             <IoStarSharp color="var(--star-white)" size={18}/>
-          </div>
-                <p className={css.clientName}>Іван Петренко</p>
+                        </div>
+                    <div className={css.moneyBox}>
+                    <AiOutlineDollar className={css.dollarIcon } />
+                    <p className={css.moneyAmount}>₴12 482</p>
+                            </div>
+                            </div>
+                        
+                        <div className={css.nameAndEditBox}>
+                            <p className={css.clientName}>Іван Петренко</p>
+                            <button type="button" className={css.editBtn} onClick={handleEditing}><BsPencil size={16} className={css.pencilIcon} /></button>
+                        </div>
+                        
                 <p className={css.dateOfBirth}>12 Трав, 1987 (37р.)</p>
                 <div className={css.serviceBook}>
-                    <p className={css.sbText}>Сервісна книга</p>
-                    <button className={css.sbBtn}>
-                        <BsDownload className={css.downloadIcon} />
-                        .pdf
-                    </button>                   
+                            <p className={css.sbText}>Сервісна книга</p>
+                            <a href="" download="">
+                              <button className={css.sbBtn}>
+                              <BsDownload className={css.downloadIcon} />
+                               .pdf
+                            </button>
+                            </a>                  
                     </div>
                 </div>
 </div>
-                <div className={css.moneyBox}>
-                    <AiOutlineDollar className={css.dollarIcon } />
-                    <p className={css.moneyAmount}>₴12 482</p>
-                </div>
+                
             </div>
             
-            
+
+
+
             <div className={css.contactsBox}>
                 <ul className={css.categoryList}>
                     <li className={css.categoryListItem}>
@@ -103,18 +163,28 @@ export default function ClientInfo() {
 
                <ul className={css.contactsInfo}>
                     <li className={css.contactsInfoItem}>
-                        <p className={css.contactsInput}>+38 073 329 12 17</p>  
-                        <a href="tel:+38 073 329 12 17">
+                        {isEditing ? (<input type="text" value={phoneNum}  onChange={handleChangePN} className={css.contactsInput}/>) : (
+                            <p className={css.contactsInput} >{phoneNum }</p>)}
+                        <div className={css.contactsBtnBox}>
+                        <a href={`tel:${phoneNum}`}>
                         <button type="button" className={css.contactsBtn}>          
                             <BsTelephoneOutboundFill className={css.phoneCallIcon}/>
                             </button>
                         </a>
+                        <button type="button" className={css.contactsBtn} onClick={openModal}>
+                            <BsAlarm className={css.clock}  size={18}/>                            
+                            </button>
+                            {modalIsOpen && <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+                                <NotificationModal onClose={handleModalClose}/>
+</Modal>}
+                        </div>
                     </li>
 
                     <li className={css.contactsInfoItem}>
-                        <p className={css.contactsInput}>ivan.petrenko@gmail.com</p> 
+                        {isEditing ? (<input type="text" value={email} onChange={handleChangeEmail} className={css.contactsInput}/>) : (
+                            <p className={css.contactsInput}>{ email}</p>)}
                         <div className={css.contactsBtnBox}>
-                            <a href="mailto:ivan.petrenko@gmail.com" target="_blank">
+                            <a href={`mailto:${email}`} target="_blank">
                             <button type="button" className={css.contactsBtn}>           
                                 <IoIosAt className={css.iconColor} size={25}/>
                                 </button>
@@ -126,8 +196,9 @@ export default function ClientInfo() {
                     </li>
 
                     <li className={css.contactsInfoItem}>
-                        <p className={css.contactsInput}>ivan.petrenko</p>
-                        <a href="http://t.me/ivan.petrenko" target="_blank">
+                        {isEditing ? (<input type="text" value={tg} onChange={handleChangeTg} className={css.contactsInput}/>) : (
+                            <p className={css.contactsInput}>{ tg }</p>)}
+                        <a href={`https://t.me/${tg}`} target="_blank">
                         <button type="button" className={css.contactsBtn}>
                             <PiTelegramLogoLight className={css.iconColor} size={22} />
                             </button>
@@ -137,9 +208,10 @@ export default function ClientInfo() {
 
             </div>
 
-            
 
             
+
+            <div className={css.carListAndAddBtn}>
             <ul className={css.carInfo}>
                 <li className={css.carCard}>
 
@@ -147,7 +219,7 @@ export default function ClientInfo() {
                         
                     <div className={css.photoAndMainCarInfo}>
                         
-                        <img src="" alt="Car's Image" className={css.carImage} />
+                        <img src={absentAutoImg} alt="Car's Image" className={css.carImage} />
 
                         <div className={css.mainCarInfo}>
                             <div className={css.carNameBox}>
@@ -206,16 +278,94 @@ export default function ClientInfo() {
                         </div>
                     </div>
                     
-                    <div className={css.btnBox}>
+                    {/* <div className={css.btnBox}> */}
                        <BsTrash className={css.deleteBtn}/>
-                        <button type="button" className={css.addCarBtn}>
+                        {/* <button type="button" className={css.addCarBtn}>
                             <BsPlusCircleDotted className={css.plus} />
                             <IoCarSport className={css.carIcon} size={20}/>
-                        </button>
+                        {/* </button> 
+                    </div> */}
+                  
+                </li>
+
+
+                 <li className={css.carCard}>
+
+                    <div className={css.mainContent}>
+                        
+                    <div className={css.photoAndMainCarInfo}>
+                        
+                        <img src={absentAutoImg} alt="Car's Image" className={css.carImage} />
+
+                        <div className={css.mainCarInfo}>
+                            <div className={css.carNameBox}>
+                                <IoCarSport className={css.carIcon} size={30} />
+                                <p className={css.carName}>HONDA CIVIC</p>
+                            </div>
+
+                            <div className={css.carYearBox}>
+                                <BsCalendarCheck className={css.yearIcon} />                               
+                                <p className={css.carYear}>2001 </p>
+                            </div>
+                        </div>
+
                     </div>
+
+                    <div className={css.carCategoryBox}>
+                    <ul className={css.carCategory}>
+                        <li className={css.carCategoryItem}>
+                            <p className={css.categoryVin}>
+                                <span className={css.inBold}>VIN</span>
+                                <span className={css.number}>Number</span>
+                               
+                            </p>
+                        </li>
+                        <li className={css.carCategoryItem}>
+                             <p className={css.categoryCar}>
+                                <span className={css.inBold}>CAR</span>
+                                <span className={css.number}>Number</span>
+                            </p>
+                        </li>
+                        </ul>
+
+                        <ul className={css.carNumbers}>
+                            <li className={css.carNumbersItem}>
+                                    <p className={css.vin}>VW8795218794H46J</p>
+                                    <button type="button" className={css.contactsBtn} onClick={handleCopyVin}>
+                                        <BsFiles className={css.iconColor} size={18} />
+                                    </button>
+                               
+                            </li>
+                            <li className={`${css.carNumbersItem} ${css.car}`}>
+                                    <div className={css.carRegContainer}>                                    
+                                        <div className={css.carRegCountry}>
+                                            <img
+                                                className={css.carRegFlag}
+                                                src={flag}
+                                                alt="Car registration country flag"
+                                            />                                           
+                                            <p className={css.carRegCountry}>ua</p>                                      
+                                        </div>                                  
+                                        <p className={css.carRegNumber}>CA 6864 CO</p>                                    
+                                    </div>
+                                    
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    
+                    {/* <div className={css.btnBox}> */}
+                       <BsTrash className={css.deleteBtn}/>
+                        
+                    {/* </div> */}
                   
                 </li>
             </ul>
+            <button type="button" className={css.addCarBtn}>
+                            <BsPlusCircleDotted className={css.plus} />
+                            <IoCarSport className={css.carIcon} size={20}/>
+                </button>
+            </div>
     </div>
 
     )

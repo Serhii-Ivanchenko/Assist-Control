@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { useState, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import clsx from "clsx";
@@ -11,45 +11,37 @@ import { BsUiChecksGrid } from "react-icons/bs";
 
 import { getCurrentCars } from "../../redux/cars/operations.js";
 import { selectCurrentCars } from "../../redux/cars/selectors.js";
+import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 import { calculateTimeInService } from "../../utils/calculateTimeInService.js";
 import { getStatusDetails } from "../../utils/getStatusDetails.js";
 
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
-import CurrentCarModal from "../Modals/CurrentCarModal/CurrentCarModal";
-import Modal from "../Modals/Modal/Modal.jsx";
+import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
+import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
 import styles from "./CurrentCarsItem.module.css";
 
 export default function CurrentCarsItem() {
   const dispatch = useDispatch();
   const currentCars = useSelector(selectCurrentCars);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCar, setSelectedCar] = useState(null);
+  const selectedServiceId = useSelector(selectSelectedServiceId);
 
   useEffect(() => {
-    dispatch(getCurrentCars()).catch((error) => {
-      toast.error(
-        "Помилка при завантаженні поточних автомобілів",
-        error.message
-      );
-    });
-  }, [dispatch]);
+    if (!selectedServiceId) {
+      // console.warn("Service ID is not available yet. Skipping fetch.");
+      return;
+    }
 
-  const handleModal = (car) => {
-    setSelectedCar(car);
-    setIsModalOpen(true);
-  };
+    dispatch(getCurrentCars())
+      .unwrap()
+      .catch((error) => {
+        toast.error(
+          "Помилка при завантаженні поточних автомобілів",
+          error.message
+        );
+      });
+  }, [dispatch, selectedServiceId]);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedCar(null);
-  };
-
-  const handleStatusChange = () => {
-    dispatch(getCurrentCars());
-  };
-
-  // Мемоізація іконки в залежності від статусу
   const getStatusIcon = useMemo(() => {
     return (status) => {
       switch (status) {
@@ -89,7 +81,6 @@ export default function CurrentCarsItem() {
     };
   }, []);
 
-  // Мемоізація списку автомобілів для уникнення зайвих обчислень
   const renderedCars = useMemo(() => {
     return currentCars?.map((car) => {
       const icon = getStatusIcon(car.status);
@@ -118,12 +109,10 @@ export default function CurrentCarsItem() {
             </h4>
           </div>
           <div className={styles.detailsContainer}>
-            <button
-              className={styles.carDetails}
-              onClick={() => handleModal(car)}
-            >
-              Деталі
-            </button>
+            <div className={styles.btnContainer}>
+              <StatusBtn car={car} />
+              <CarDetailButton />
+            </div>
             <div className={styles.statusContainer}>
               <p className={clsx(styles.carStatus, className)}>
                 {icon} {label}
@@ -135,19 +124,5 @@ export default function CurrentCarsItem() {
     });
   }, [currentCars, getStatusIcon]);
 
-  return (
-    <>
-      {renderedCars}
-      {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <CurrentCarModal
-            car={selectedCar}
-            status={selectedCar?.status}
-            onClose={closeModal}
-            onStatusChange={handleStatusChange}
-          />
-        </Modal>
-      )}
-    </>
-  );
+  return <>{renderedCars}</>;
 }

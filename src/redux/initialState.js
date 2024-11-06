@@ -16,8 +16,10 @@ export const initialState = {
       country: null,
       city: null,
       address: null,
-      index: null,
+      post_index: null,
       balance: null,
+      services: [],
+      selectedServiceId: 1,
       tariff: {
         isActive: false,
         tariffName: "Demo",
@@ -59,7 +61,7 @@ export const initialState = {
     newCars: [],
     forHours: {},
     monthlyLoad: {},
-    date: null,
+    date: new Date().toISOString().substring(0, 10),
     isLoading: false,
     error: null,
     loadPercent: null,
@@ -67,6 +69,17 @@ export const initialState = {
     workHours: {},
     isLoadingForCalendar: false,
     isLoadingCarsByDay: false,
+  },
+
+  crm: {
+    serviceData: {
+      mechanics: [],
+      posts: [],
+    },
+    records: [],
+    visits: [],
+    isLoading: false,
+    error: null,
   },
 
   client: {

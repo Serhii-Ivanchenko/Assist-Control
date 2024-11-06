@@ -1,55 +1,37 @@
 import styles from "./DayCarsItem.module.css";
-import Modal from "../Modals/Modal/Modal.jsx";
-import DetailedClientInfo from "../DetailedClientInfo/DetailedClientInfo.jsx";
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import clsx from "clsx";
-import { useState } from "react";
 import {
   BsPersonFill,
   BsTelephoneOutboundFill,
   BsStopwatch,
+  BsFiles,
 } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
-import { useSelector } from "react-redux";
-import { selectDayCars } from "../../redux/cars/selectors.js";
 import { AiFillStar } from "react-icons/ai";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
 import { renderTime } from "../../utils/renderTime.js";
 import renderStatus from "../../utils/renderStatus.jsx";
 import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
+import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
+import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
+import { copyToClipboard } from "../../utils/copy.js";
 
-
-export default function DayCarsItem({
-  carNumber,
-  auto,
-  photoUrl,
-  vin,
-  mileage,
-  isModal,
-  status,
-  complete_d,
-  date_s,
-  client,
-}) {
-
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsOpen(false);
-  };
-
-
-  const carsData = useSelector(selectDayCars);
-  const car = carsData.find((car) => car.carNumber === carNumber);
+export default function DayCarsItem({ car, isModal }) {
+  const {
+    auto,
+    photo_url: photoUrl,
+    vin,
+    mileage,
+    status,
+    complete_d,
+    date_s,
+    client,
+    plate: carNumber,
+  } = car;
 
   const carPhoto = photoUrl || absentAutoImg;
-
- 
 
   return (
     <div
@@ -57,52 +39,55 @@ export default function DayCarsItem({
         styles.dayCarsItemContainer,
         isModal && styles.modalDayCarsItemContainer
       )}
-      style={getBackgroundStyle(status)} 
+      style={getBackgroundStyle(status)}
     >
       <div className={styles.userInfo}>
         <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>
           <div className={styles.infoName}>
             <BsPersonFill className={styles.iconHuman} color="#617651" />
-            <span className={styles.textName}>{client ? client.name : "Гість"}</span>
+            <span className={styles.textName}>
+              {client ? client.name : "Гість"}
+            </span>
           </div>
           <div className={styles.infoTel}>
             <BsTelephoneOutboundFill
               className={styles.iconTel}
               color="#006D95"
             />
-            <span className={styles.textTel}>{client ? client.phone : "ххх-ххххххх"}</span>
+            <span className={styles.textTel}>
+              {client ? client.phone : "ххх-ххххххх"}
+            </span>
           </div>
           <div className={styles.infoCar}>
             <IoCarSportSharp size={13} color="#A97878" />
             <span className={styles.nameCar}>{auto}</span>
           </div>
         </div>
-        <div className={styles.infoVin}>
-          <span className={styles.vinNum}>{vin ? vin : "VIN-XXXXXXXXXXX"}</span>
+        <div className={styles.vinContainer}>
+          <p className={styles.vinCode}>
+           {vin || "VIN не вказано"}
+          </p>
+          <BsFiles
+            className={styles.copyIcon}
+            size={13}
+            onClick={() => copyToClipboard(vin || "VIN не вказано")}
+          />
         </div>
+
         <div className={styles.btnContainer}>
-          <button className={styles.btnDetail} onClick={openModal}>
-            <p className={styles.btnDetailText}>Деталі</p>
-          </button>
-          {/* <button className={styles.btnSave}>
-            <BsLayerBackward size={16} />
-          </button> */}
-          {modalIsOpen && (
-          <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-            <DetailedClientInfo onClose={handleModalClose} />
-          </Modal>
-        )}
+          <StatusBtn car={car} />
+          <CarDetailButton />
         </div>
       </div>
-      <div className={styles.carsInfo}>
+      <div className={clsx(styles.carsInfo, isModal && styles.modalCarsInfo)}>
         <div className={styles.carInfoLeft}>
           <div className={styles.rating}>
-            <AiFillStar color="var(--star-orange)" />
-            <AiFillStar color="var(--star-orange)" />
-            <AiFillStar color="var(--star-orange)" />
-            <AiFillStar color="var(--star-orange)" />
-            <AiFillStar color="var(--star-white)" />
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-orange)" size={14.5} />
+            <AiFillStar color="var(--star-white)" size={14.5} />
           </div>
           <div className={styles.prevCoast}>
             <p className={styles.money}>₴ 2,200.00</p>
@@ -110,13 +95,13 @@ export default function DayCarsItem({
         </div>
         <div className={styles.carInfoRight}>
           <div className={styles.carPhoto}>
-          <img
+            <img
               className={styles.carImg}
               src={carPhoto}
               alt="Car image"
               onError={(e) => {
-                e.target.onerror = null; 
-                e.target.src = absentAutoImg; 
+                e.target.onerror = null;
+                e.target.src = absentAutoImg;
               }}
             />
           </div>
@@ -146,7 +131,6 @@ export default function DayCarsItem({
           </div>
         </div>
       </div>
-      {car && renderStatus(car.status, car.complete_d)}
     </div>
   );
 }

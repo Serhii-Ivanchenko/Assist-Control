@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
@@ -6,11 +6,13 @@ import toast from "react-hot-toast";
 import { calculateTimeInService } from "../../../utils/calculateTimeInService";
 import { getStatusDetails } from "../../../utils/getStatusDetails";
 import { changeCarStatus } from "../../../redux/cars/operations";
-import { getCurrentCars } from "../../../redux/cars/operations";
+import { getCurrentCars, getCarsByDate } from "../../../redux/cars/operations";
+import { selectDate } from "../../../redux/cars/selectors.js";
 
 import absentAutoImg from "../../../assets/images/absentAutoImg.webp";
 import flag from "../../../assets/images/flagUa.webp";
 import CustomRadioBtn from "../../CustomRadioBtn/CustomRadioBtn";
+import { copyToClipboard } from "../../../utils/copy.js";
 
 import { BsWrench } from "react-icons/bs";
 import { BsExclamationCircle } from "react-icons/bs";
@@ -20,12 +22,14 @@ import { BsEyeFill, BsCheckCircleFill } from "react-icons/bs";
 import { IoMdCheckmark } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { BsFiles } from "react-icons/bs";
+import { BsLayerBackward } from "react-icons/bs";
 
 import styles from "./CurrentCarModal.module.css";
 
 function CurrentCarModal({ onClose, car, status }) {
   const dispatch = useDispatch();
   const [selectedStatus, setSelectedStatus] = useState(status);
+  const currentDate = useSelector(selectDate);
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -66,21 +70,11 @@ function CurrentCarModal({ onClose, car, status }) {
     setSelectedStatus(e.target.value);
   };
 
-  const copyToClipboard = (text) => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        toast.success("Текст скопійовано");
-      })
-      .catch((err) => {
-        toast.error("Не вдалося скопіювати текст:", err);
-      });
-  };
-
   const handleSubmit = () => {
     dispatch(changeCarStatus({ carId: car.id, status: selectedStatus }))
       .then(() => {
         dispatch(getCurrentCars());
+        dispatch(getCarsByDate(currentDate));
       })
       .catch((error) => {
         toast.error("Помилка при оновленні статусу автомобіля", error.message);
@@ -96,6 +90,10 @@ function CurrentCarModal({ onClose, car, status }) {
             src={car.photo_url || absentAutoImg}
             className={styles.currentCarImg}
             alt="Current car image"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = absentAutoImg;
+            }}
           />
           <div className={styles.nameContainer}>
             <h3 className={styles.carBrand}>
@@ -109,13 +107,16 @@ function CurrentCarModal({ onClose, car, status }) {
             <div className={styles.vinContainer}>
               <p className={styles.vinCode}>
                 <span className={styles.vinNumber}>
-                  {car.vin || "VIN не визначено"}
+                  {car.vin || "VIN не вказано"}
                 </span>
               </p>
-              <BsFiles
-                className={styles.copyIcon}
-                onClick={() => copyToClipboard(car.vin || "VIN не визначено")}
-              />
+              <button className={styles.copyBtn}>
+                <BsFiles
+                  size={18}
+                  className={styles.copyIcon}
+                  onClick={() => copyToClipboard(car.vin || "VIN не вказано")}
+                />
+              </button>
             </div>
             <div className={styles.carRegContainer}>
               <div className={styles.carRegCountry}>
@@ -212,14 +213,19 @@ function CurrentCarModal({ onClose, car, status }) {
             </label>
           </div>
         </div>
-        <button
-          className={styles.submitBtn}
-          type="submit"
-          onClick={handleSubmit}
-        >
-          {<IoMdCheckmark className={styles.iconSubmit} />}
-          Підтвердити
-        </button>
+        <div className={styles.btnContainer}>
+          <button className={styles.archiveBtn}>
+            <BsLayerBackward className={styles.iconArchive} />В архів
+          </button>
+          <button
+            className={styles.submitBtn}
+            type="submit"
+            onClick={handleSubmit}
+          >
+            {<IoMdCheckmark className={styles.iconSubmit} />}
+            Підтвердити
+          </button>
+        </div>
       </div>
     </div>
   );

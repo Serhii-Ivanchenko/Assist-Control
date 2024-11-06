@@ -10,10 +10,10 @@
 
 .closeIcon {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 18px;
-  height: 18px;
+  top: 25px;
+  right: 25px;
+  width: 24px;
+  height: 24px;
   fill: var(--input-stroke);
 }
 

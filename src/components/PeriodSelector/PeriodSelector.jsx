@@ -97,8 +97,12 @@ export default function PeriodSelector({
           onClickOutside={() => setIsOpenBeg(false)}
           popperClassName={css.leftdatepickerdropdown}
           //  placeholderText="Click to select a date"
+          onKeyDown={(e) => e.preventDefault()}
+          
         />
-        <BsCalendar2Week className={css.icon} onClick={handleIconClickBeg} />
+        <button className={css.calendarBtn}>
+          <BsCalendar2Week className={css.icon} onClick={handleIconClickBeg} />
+        </button>
       </div>
       <p className={css.periodtitle}>По</p>
 
@@ -113,7 +117,9 @@ export default function PeriodSelector({
           popperClassName={css.datepickerdropdown}
           //  placeholderText="Click to select a date"
         />
+         <button className={css.calendarBtn}>
         <BsCalendar2Week className={css.icon} onClick={handleIconClickEnd} />
+         </button>
       </div>
     </div>
   );

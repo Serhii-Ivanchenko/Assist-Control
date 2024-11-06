@@ -1,0 +1,44 @@
+.recordBtnInfoWrapper {
+  width: 100%;
+}
+.infoBtnWrapper {
+  display: flex;
+  gap: 23px;
+}
+.infoBtn {
+  color: var(--white);
+  border: none;
+  background: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.clientMsg,
+.wrapperOfComent {
+  padding: 10px;
+  border-radius: 0px 12px 12px 12px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.clientMsg {
+  background: var(--player-secondary-bg);
+}
+.wrapperOfComent {
+  background: var(--blue-btn-normal);
+}
+.sparePartsTable {
+  width: 100%;
+  text-align: center;
+  border-radius: 8px 8px 0px 0px;
+  background: var(--main-gray);
+  outline: 1px solid #d8e1ff40;
+}
+th {
+  padding: 0;
+}

@@ -70,8 +70,10 @@
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-weight: 400;
-
-  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* margin-top: 2px; */
 }
 
 .carTimeStamp {
@@ -158,31 +160,9 @@
   background: var(--glow-complete);
 }
 
-.carDetails {
-  display: inline-flex;
-  padding: 5px 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  color: var(--white);
-  background-color: var(--blue-btn-normal);
-  border: none;
-  border-radius: 6px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-  font-family: "Roboto", sans-serif;
-  font-size: 14px;
-  font-weight: 300;
-
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.viewRepairStatus .carStatus::after {
+  background: var(--glow-view-repair);
 }
-
-.carDetails:hover {
-  background-color: var(--blue-btn-hover);
-}
-
 @media screen and (min-width: 1850px) {
   .wrapper {
     display: flex;
@@ -192,7 +172,7 @@
 
     background: var(--bg-input);
     border: transparent;
-    border-radius: 6px;
+    border-radius: 12px;
     /* padding: 5px 8px 5px 5px; */
 
     gap: 18px;
@@ -218,7 +198,7 @@
   .carBrand {
     text-transform: uppercase;
     font-size: 16px;
-    margin-top: 1px;
+    /* margin-top: 1px; */
   }
 
   .carTimeStamp {
@@ -307,6 +287,11 @@
   }
 
   .viewRepairStatus {
+    padding: 8px 18px;
+    fill: var(--light-gray);
+    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
+      var(--status-gradient-view-repair) border-box;
+    border: 2px solid transparent;
     color: var(--orange);
   }
 
@@ -339,14 +324,18 @@
   }
 
   .viewRepairStatus .carStatus {
-    color: var(--current-status-complete);
-    background: var(--status-gradient-view-repair);
+    color: var(--status-view-repair);
+    background: var(--current-status-gradient-view-repair);
     border-right: 1px solid var(--glow-view-repair);
     border-left: transparent;
   }
 
   .carTimeStamp {
     margin-top: 36px;
+  }
+
+  .archiveIcon {
+    fill: var(--light-gray);
   }
 
   .carDetails {
@@ -372,5 +361,12 @@
 
   .carDetails:hover {
     background-color: var(--blue-btn-hover);
+  }
+
+  .btnContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 4px;
   }
 }

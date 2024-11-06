@@ -17,7 +17,7 @@ export default function PeriodSwitcher({ changeCarsArr }) {
   const noneActiveClassName = clsx(css.statsBtn);
 
   const dayCars = useSelector(selectDayCars);
-  const date = useSelector(selectDate);
+  const date = useSelector(selectDate) || "";
   const selectedMonth = `${date.split("-")[0]}-${date.split("-")[1]}`;
 
   const dispatch = useDispatch();
