@@ -190,62 +190,68 @@ export default function VideoFrame() {
   }
   return (
     <div className={css.cameraListCont}>
-      <div className={css.cameraList}>
-        <div className={css.cameraCont}>
-          <Slider {...settings}>
-            {videoImgSrc.map(({ src, url, index, err }) =>
-              src ? (
-                <div ref={parentRef} key={index} className={css.camera}>
-                  {isZoomed ? (
-                    <Zoom
-                      onZoomChange={handleZoomChange}
-                      isZoomed={isZoomed}
-                      ZoomContent={({ img, modalState }) => (
-                        <CameraModal
-                          modalState={modalState}
-                          img={img}
-                          someRef={image}
-                          parentRef={parentRef}
-                        />
-                      )}
-                    >
-                      <img ref={smallCamera} src={src} alt={src} />
-                    </Zoom>
-                  ) : (
-                    <img src={src} alt={src} />
+      {/* <div className={css.cameraList}> */}
+      {/* <div className={css.cameraCont}> */}
+      <Slider {...settings}>
+        {videoImgSrc.map(({ src, url, index, err }) =>
+          src ? (
+            <div ref={parentRef} key={index} className={css.camera}>
+              {isZoomed ? (
+                <Zoom
+                  className={css.zoom}
+                  onZoomChange={handleZoomChange}
+                  isZoomed={isZoomed}
+                  ZoomContent={({ img, modalState }) => (
+                    <CameraModal
+                      modalState={modalState}
+                      img={img}
+                      someRef={image}
+                      parentRef={parentRef}
+                    />
                   )}
-                </div>
-              ) : err ? (
-                <div key={index} className={css.camera}>
-                  <BsFillCameraVideoOffFill size={60} />
-                  <p>Something was wrong please refresh camera</p>
-                  <button
-                    className={css.refreshBtn}
-                    onClick={() => {
-                      setVideoImgSrc((prev) =>
-                        prev.map((item) => {
-                          if (item.index === Number(index)) {
-                            return { index };
-                          } else {
-                            return item;
-                          }
-                        })
-                      );
-                      connectWebSocket({ url, index });
-                    }}
-                  >
-                    <BsArrowCounterclockwise /> Refresh
-                  </button>
-                </div>
+                >
+                  <img
+                    ref={smallCamera}
+                    className={css.smallCameraImg}
+                    src={src}
+                    alt={src}
+                  />
+                </Zoom>
               ) : (
-                <div key={index} className={css.camera}>
-                  <Loader />
-                </div>
-              )
-            )}
-          </Slider>
-        </div>
-      </div>
+                <img src={src} alt={src} />
+              )}
+            </div>
+          ) : err ? (
+            <div key={index} className={`${css.camera} ${css.centeredContent}`}>
+              <BsFillCameraVideoOffFill size={60} />
+              <p>Something was wrong please refresh camera</p>
+              <button
+                className={css.refreshBtn}
+                onClick={() => {
+                  setVideoImgSrc((prev) =>
+                    prev.map((item) => {
+                      if (item.index === Number(index)) {
+                        return { index };
+                      } else {
+                        return item;
+                      }
+                    })
+                  );
+                  connectWebSocket({ url, index });
+                }}
+              >
+                <BsArrowCounterclockwise /> Refresh
+              </button>
+            </div>
+          ) : (
+            <div key={index} className={`${css.camera} ${css.centeredContent}`}>
+              <Loader />
+            </div>
+          )
+        )}
+      </Slider>
+      {/* </div> */}
+      {/* </div> */}
     </div>
   );
 }

@@ -26,15 +26,12 @@
 @media screen and (min-width: 1850px) {
   .scrollWrapper {
     width: 576px;
-    /*головний контенер, який обгортає скролбар*/
-    /* height: 409px; */
     display: flex;
-    height: clamp(323px, 35vh, 409px);
+    height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 409px);
     padding-top: clamp(14px, calc(14px + (2 * ((100vh - 900px) / 180))), 16px);
     padding-bottom: clamp(11px, calc(11px + (5 * ((100vh - 900px) / 180))), 16px);
     padding-left: 20px;
     padding-right: 10px;
-    /* padding: 16px 10px 16px 20px; //падінг для відступу від контейнера до скрола */
     background: var(--bg-secondary);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border-radius: 12px;

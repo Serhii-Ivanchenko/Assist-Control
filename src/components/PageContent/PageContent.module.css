@@ -22,8 +22,6 @@
   .pagegrid {
     grid-column-gap: 14px;
     grid-row-gap: 14px;
-    height: clamp(665px, 70vh, 828px);
-    /* max-height: 828px;
-    overflow: hidden; */
+    height: clamp(665px, calc(665px + (163 * ((100vh - 900px) / 180))), 828px);
   }
 }

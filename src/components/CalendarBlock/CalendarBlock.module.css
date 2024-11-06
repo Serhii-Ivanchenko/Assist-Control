@@ -8,7 +8,7 @@
 @media only screen and (min-width: 1850px) {
   .calendarContainer {
     width: 460px;
-        height: clamp(804px, 90vh, 967px);
+    height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
   }
 }
 

@@ -39,9 +39,7 @@
 @media only screen and (min-width: 1850px) {
   .dayCarsListContainer {
     width: 460px;
-    /* flex: 1 0 447px;
-    max-height: 602px; */
-    height: clamp(447px, 90vh, 602px);
+    height: clamp(447px, calc(447px + (155 * ((100vh - 900px) / 180))), 602px);
     padding-top: clamp(15px, calc(15px + (5 * ((100vh - 900px) / 180))), 20px);
     padding-bottom: clamp(14px, calc(18px - (4 * ((100vh - 900px) / 180))), 18px);
     padding-left: 20px;
