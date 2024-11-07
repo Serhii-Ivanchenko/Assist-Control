@@ -29,7 +29,11 @@ export default function StatusFilterCars({ onStatusChange }) {
     <div className={styles.statysFilter}>
       <button className={styles.filterButton} onClick={toggleDropdown}>
         <p className={styles.statusFilterText}>Статус</p>
-        {isOpen ? <TiArrowSortedUp size={20} color="#C7C7C7" /> : <TiArrowSortedDown size={20} color="#C7C7C7" />}
+        {isOpen ? (
+          <TiArrowSortedUp size={20} color="var(--icon-gray)" />
+        ) : (
+          <TiArrowSortedDown size={20} color="var(--icon-gray)" />
+        )}
       </button>
       {isOpen && (
         <ul className={styles.dropdownList}>

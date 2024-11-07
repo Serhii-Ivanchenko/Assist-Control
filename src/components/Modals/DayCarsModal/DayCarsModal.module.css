@@ -216,12 +216,6 @@
 .active {
     transition: color 0.3s ease;
 }
-
-
-.filterContainer {
-    display: flex;
-    justify-content: center; 
-  }
   
   .filter {
     display: flex;

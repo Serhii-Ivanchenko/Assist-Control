@@ -12,31 +12,37 @@ import Loader from "../../Loader/Loader";
 import CalendarInModalCar from "../../CalendarInModalCar/CalendarInModalCar";
 import StatusFilterCars from "../../StatusFilterCars/StatusFilterCars";
 
-export default function DayCarsModal({ onClose, isModal, carsData, selectedDate }) {
+export default function DayCarsModal({
+  onClose,
+  isModal,
+  carsData,
+  selectedDate,
+}) {
   const isLoading = useSelector(selectLoading);
   const [viewMode, setViewMode] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [inputError, setInputError] = useState("");
-  const [startDate, setStartDate] = useState(null);  // Початково null
-  const [endDate, setEndDate] = useState(null);  // Початково null
+  const [startDate, setStartDate] = useState(null); // Початково null
+  const [endDate, setEndDate] = useState(null); // Початково null
   const [filteredCarsData, setFilteredCarsData] = useState(carsData);
   const [selectedStatus, setSelectedStatus] = useState("all");
-  
 
   useEffect(() => {
     let filteredData = carsData;
 
     // Фільтрація за статусом
     if (selectedStatus !== "all") {
-      filteredData = filteredData.filter((car) => car.status === selectedStatus);
+      filteredData = filteredData.filter(
+        (car) => car.status === selectedStatus
+      );
     }
 
     // Фільтрація за датами
     if (startDate && endDate) {
       const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
       filteredData = filteredData.filter((car) => {
-        const carStartDate = clearTime(new Date(car.date_s)); 
-        const carEndDate = clearTime(new Date(car.date_e)); 
+        const carStartDate = clearTime(new Date(car.date_s));
+        const carEndDate = clearTime(new Date(car.date_e));
         return carStartDate <= endDate && carEndDate >= startDate;
       });
     }
@@ -88,8 +94,16 @@ export default function DayCarsModal({ onClose, isModal, carsData, selectedDate 
       <div className={styles.header}>
         <div className={styles.leftHeader}>
           <label className={styles.switch}>
-            <FiGrid className={`${styles.iconLeft} ${viewMode === "grid" ? styles.active : ""}`} />
-            <BsListUl className={`${styles.iconRight} ${viewMode === "list" ? styles.active : ""}`} />
+            <FiGrid
+              className={`${styles.iconLeft} ${
+                viewMode === "grid" ? styles.active : ""
+              }`}
+            />
+            <BsListUl
+              className={`${styles.iconRight} ${
+                viewMode === "list" ? styles.active : ""
+              }`}
+            />
             <input
               type="checkbox"
               className={styles.input}
@@ -102,16 +116,18 @@ export default function DayCarsModal({ onClose, isModal, carsData, selectedDate 
             <span className={styles.slider}></span>
           </label>
           <div className={styles.search}>
-            <DayCarsFilter value={searchTerm} onChange={handleSearch} error={inputError} />
+            <DayCarsFilter
+              value={searchTerm}
+              onChange={handleSearch}
+              error={inputError}
+            />
           </div>
-          <div className={styles.filterContainer}>
-            <button className={styles.filter}>
-              <BsSortUp size={18} />
-            </button>
-          </div>
+          <button className={styles.filter}>
+            <BsSortUp size={18} />
+          </button>
         </div>
         <div className={styles.rightHeader}>
-          <StatusFilterCars onStatusChange={handleStatusChange}/>
+          <StatusFilterCars onStatusChange={handleStatusChange} />
           <CalendarInModalCar
             selectedDate={selectedDate}
             startDate={startDate}
@@ -121,7 +137,7 @@ export default function DayCarsModal({ onClose, isModal, carsData, selectedDate 
           />
           <div className={styles.btnPdfContainer}>
             <button className={styles.btnPdf}>
-              <BsDownload size={16} color="#C7C7C7" />
+              <BsDownload size={16} color="var(--icon-gray)" />
               <span className={styles.btnPdfText}>.pdf</span>
             </button>
           </div>
@@ -136,7 +152,11 @@ export default function DayCarsModal({ onClose, isModal, carsData, selectedDate 
       {isLoading ? (
         <Loader />
       ) : (
-        <DayCarsList carsData={filteredCars()} viewMode={viewMode} isModal={isModal} />
+        <DayCarsList
+          carsData={filteredCars()}
+          viewMode={viewMode}
+          isModal={isModal}
+        />
       )}
     </div>
   );
