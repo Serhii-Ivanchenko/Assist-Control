@@ -26,7 +26,7 @@ import clsx from "clsx";
 import RecordBtnInfo from "../RecordBtnInfo/RecordBtnInfo";
 
 export default function ItemOfRecord({ item, messages, isExpanded }) {
-  const [showDialogModal, setShowDialogModal] = useState(false);
+  const [showDialogModal, setShowDialogModal] = useState(isExpanded);
 
   const [transcription, setTranscription] = useState(false);
 
