@@ -160,6 +160,9 @@
   background: var(--glow-complete);
 }
 
+.viewRepairStatus .carStatus::after {
+  background: var(--glow-view-repair);
+}
 @media screen and (min-width: 1850px) {
   .wrapper {
     display: flex;
@@ -284,6 +287,11 @@
   }
 
   .viewRepairStatus {
+    padding: 8px 18px;
+    fill: var(--light-gray);
+    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
+      var(--status-gradient-view-repair) border-box;
+    border: 2px solid transparent;
     color: var(--orange);
   }
 
@@ -316,8 +324,8 @@
   }
 
   .viewRepairStatus .carStatus {
-    color: var(--current-status-complete);
-    background: var(--status-gradient-view-repair);
+    color: var(--status-view-repair);
+    background: var(--current-status-gradient-view-repair);
     border-right: 1px solid var(--glow-view-repair);
     border-left: transparent;
   }
