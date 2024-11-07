@@ -19,6 +19,11 @@
 
 .datePaginationBtn:disabled {
   cursor: not-allowed;
+  background-color: rgba(81, 85, 98, 0.1);
+}
+
+.datePaginationBtn:disabled .btnIcon {
+  color: var(--main-gray);
 }
 
 .btnIcon {
