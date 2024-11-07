@@ -30,6 +30,7 @@
 
 .clientMsg,
 .wrapperOfComent {
+  text-wrap: balance;
   font-size: 16px;
   padding: 10px;
   border-radius: 0px 12px 12px 12px;
@@ -43,34 +44,28 @@
 .wrapperOfComent {
   background: var(--blue-btn-normal);
 }
-
-.sparePartsTable {
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-  border-radius: 20px 8px 100px 0px;
+:global(.MuiTableContainer-root) {
+  border-radius: 0px !important;
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  background-color: var(--bg-input) !important;
+  border: 1px solid var(--light-gray-table) !important;
 }
-
-.sparePartsTable>thead {
-  padding: 6px 34px 6px 16px;
+:global(.MuiTableHead-root > .MuiTableRow-root) {
+  background: var(--main-gray) !important;
 }
-
-.sparePartsTable>thead>tr {
-  background: var(--main-gray);
-  border: 1px solid var(--light-gray-table);
+:global(
+    .MuiTableHead-root > .MuiTableRow-root > .MuiTableCell-root:first-child
+  ) {
+  padding: 6px 0 6px 10px !important;
+  text-align: left !important;
 }
-
-.sparePartsTable>thead>tr>th:first {
-  border-top-left-radius: 8px;
-}
-
-th,
-td {
-  /* var(--light-gray-table) */
-  outline: 1px solid #fff;
-  padding: 6px 0px 6px 0px;
-}
-
-th {
-  padding: 0;
+:global(.MuiTableCell-root) {
+  color: var(--white) !important;
+  outline: var(--light-gray-table) !important;
+  border: 1px solid var(--light-gray-table) !important;
+  padding: 6px 0 6px 0 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
 }

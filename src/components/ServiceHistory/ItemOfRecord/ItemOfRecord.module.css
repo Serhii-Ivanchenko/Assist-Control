@@ -101,7 +101,7 @@
 .unActiveDialogBtn {
   border: none;
   background: none;
-  transition: transform 200ms ease-in-out;
+  transition: transform 200ms cubic-bezier(0.42, 0.69, 1, 1.04);
 }
 
 .activeDialogBtn {
@@ -169,7 +169,31 @@
 .RecordBtnInfoWrapper {
   border-radius: 6px;
   background: var(--bg-input);
-  /* height: auto; */
+  overflow: hidden;
+  max-height: 0px;
+  opacity: 0;
+  transform: translateY(0%);
+  transition: opacity 300ms cubic-bezier(0.42, 0.69, 1, 1.04), max-height 300ms cubic-bezier(0.42, 0.69, 1, 1.04),
+    padding 300ms cubic-bezier(0.42, 0.69, 1, 1.04), margin-top 300ms cubic-bezier(0.42, 0.69, 1, 1.04);
+}
+
+.openRecordBtnInfoWrapper {
+  /* display: flex; */
+  max-height: 500px;
+  opacity: 1;
+  padding: 15px 14px 32px 14px;
+  margin-top: 14px;
+}
+
+.closeRecordBtnInfoWrapper {
+  max-height: 0px;
+  opacity: 0;
+  padding: 0;
+  margin-top: 0;
+}
+/* .RecordBtnInfoWrapper {
+  border-radius: 6px;
+  background: var(--bg-input);
   transform: translateY(0%);
 }
 .openRecordBtnInfoWrapper {
@@ -179,7 +203,6 @@
   animation: open 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .closeRecordBtnInfoWrapper {
-  /* display: none; */
   height: 0px;
   margin-top: 0;
   padding: 0;
@@ -191,9 +214,8 @@
     height: 0px;
     transform: translateY(-50%);
   }
-  
+
   100% {
-    /* height: 0%; */
     height: auto;
     opacity: 1;
     transform: translateY(0%);
@@ -212,7 +234,7 @@
     height: 0px;
     opacity: 0;
   }
-}
+} */
 
 /* Хедер другого акардіона */
 
@@ -350,7 +372,7 @@
 }
 
 .transcriptionIcon {
-  transition: transform 200ms ease-in-out;
+  transition: transform 200ms cubic-bezier(0.42, 0.69, 1, 1.04);
 }
 
 .activeTranscriptionIcon {
