@@ -77,169 +77,25 @@ export default function RecordBtnInfo({ recordInfo, item }) {
           </div>
           {diagnostic === "spareParts" && (
             <div className={css.sparePartsTableWrapper}>
-              <TableContainer
-                sx={{
-                  borderRadius: "0px",
-                  borderTopLeftRadius: "8px",
-                  borderTopRightRadius: "8px",
-                  backgroundColor: "var(--bg-input)",
-                  border: "1px solid var(--light-gray-table)",
-                  borderBottom: "none",
-                }}
-                component={Paper}
-              >
-                <Table sx={{}}>
+              <TableContainer component={Paper}>
+                <Table>
                   <TableHead>
-                    <TableRow
-                      sx={{
-                        background: "var(--main-gray)",
-                      }}
-                    >
-                      <TableCell
-                        sx={{
-                          color: "var(--white)",
-                          outline: "var(--light-gray-table)",
-                          borderTopLeftRadius: "8px",
-                          padding: "6px 0 6px 10px",
-                          border: "none",
-                          borderRight: "1px solid var(--light-gray-table)",
-                          fontSize: "16px",
-                          fontWeight: "600",
-                        }}
-                        align="left"
-                      >
-                        №
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "var(--white)",
-                          outline: "var(--light-gray-table)",
-                          border: "none",
-                          borderRight: "1px solid var(--light-gray-table)",
-                          padding: "6px 0 6px 0",
-                          fontSize: "16px",
-                          fontWeight: "600",
-                        }}
-                        align="center"
-                      >
-                        Назва
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "var(--white)",
-                          outline: "var(--light-gray-table)",
-                          border: "none",
-                          borderRight: "1px solid var(--light-gray-table)",
-                          padding: "6px 0 6px 0",
-                          fontSize: "16px",
-                          fontWeight: "600",
-                        }}
-                        align="center"
-                      >
-                        Номер
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "var(--white)",
-                          outline: "var(--light-gray-table)",
-                          border: "none",
-                          borderRight: "1px solid var(--light-gray-table)",
-                          padding: "6px 0 6px 0",
-                          fontSize: "16px",
-                          fontWeight: "600",
-                        }}
-                        align="center"
-                      >
-                        Стан
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          color: "var(--white)",
-                          outline: "var(--light-gray-table)",
-                          border: "none",
-                          padding: "6px 0 6px 0",
-                          borderTopRightRadius: "8px",
-                          fontSize: "16px",
-                          fontWeight: "600",
-                        }}
-                        align="center"
-                      >
-                        Рекомендація
-                      </TableCell>
+                    <TableRow>
+                      <TableCell>№</TableCell>
+                      <TableCell>Назва</TableCell>
+                      <TableCell>Номер</TableCell>
+                      <TableCell>Стан</TableCell>
+                      <TableCell>Рекомендація</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {item.diagnostic.spareParts.map((item) => (
                       <TableRow key={`${Math.random()}`}>
-                        <TableCell
-                          sx={{
-                            fontSize: "16px",
-                            color: "var(--white)",
-                            outline: "var(--light-gray-table)",
-                            border: "none",
-                            borderRight: "1px solid var(--light-gray-table)",
-                            borderBottom: "1px solid var(--light-gray-table)",
-                            padding: "6px 0 6px 15px",
-                          }}
-                          align="left"
-                        >
-                          {item.id}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: "16px",
-                            color: "var(--white)",
-                            outline: "var(--light-gray-table)",
-                            border: "none",
-                            borderRight: "1px solid var(--light-gray-table)",
-                            borderBottom: "1px solid var(--light-gray-table)",
-                            padding: "6px 0 6px 0",
-                          }}
-                          align="center"
-                        >
-                          {item.name}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: "16px",
-                            color: "var(--white)",
-                            outline: "var(--light-gray-table)",
-                            border: "none",
-                            borderRight: "1px solid var(--light-gray-table)",
-                            borderBottom: "1px solid var(--light-gray-table)",
-                            padding: "6px 0 6px 0",
-                          }}
-                          align="center"
-                        >
-                          {item.number}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: "16px",
-                            color: "var(--white)",
-                            outline: "var(--light-gray-table)",
-                            border: "none",
-                            borderRight: "1px solid var(--light-gray-table)",
-                            borderBottom: "1px solid var(--light-gray-table)",
-                            padding: "6px 0 6px 0",
-                          }}
-                          align="center"
-                        >
-                          {item.state}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: "16px",
-                            color: "var(--white)",
-                            outline: "var(--light-gray-table)",
-                            border: "none",
-                            borderBottom: "1px solid var(--light-gray-table)",
-                            padding: "6px 0 6px 0",
-                          }}
-                          align="center"
-                        >
-                          {item.recomendation}
-                        </TableCell>
+                        <TableCell>{item.id}</TableCell>
+                        <TableCell>{item.name}</TableCell>
+                        <TableCell>{item.number}</TableCell>
+                        <TableCell>{item.state}</TableCell>
+                        <TableCell>{item.recomendation}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

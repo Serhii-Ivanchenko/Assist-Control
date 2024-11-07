@@ -47,10 +47,6 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
       setRecordInfo(value);
     } else {
       setRecordInfo("");
-      // const timeout = setTimeout(() => {
-      //   setIsRecordInfoOpen(false);
-      // }, 300);
-      // clearTimeout(timeout);
     }
   };
   const handleSetRecordInfo = (string) =>
