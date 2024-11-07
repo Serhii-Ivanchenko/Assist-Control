@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
-import { createRecord, getAllRecords, getMechsAndPosts, getPlannedVisits, getRecordsFromDate } from "./operations.js";
+import {
+  createRecord,
+  getAllRecords,
+  getMechsAndPosts,
+  getPlannedVisits,
+  getRecordsFromDate,
+} from "./operations.js";
 
 const handlePending = (state) => {
   state.isLoading = true;

@@ -89,8 +89,6 @@ export const getMechsAndPosts = createAsyncThunk(
           },
         }
       );
-      console.log("response data", response.data);
-
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

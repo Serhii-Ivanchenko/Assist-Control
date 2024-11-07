@@ -6,10 +6,6 @@ export const services = [
   "Послуга 5",
 ];
 
-export const posts = ["Пост 1", "Пост 2", "Пост 3", "Пост 4"];
-
-export const mechanics = ["Механік 1", "Механік 2", "Механік 3", "Механік 4"];
-
 export const timeToChoose = [
   { time: "09:00", isFree: true },
   { time: "10:00", isFree: true },
