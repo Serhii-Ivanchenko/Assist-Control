@@ -64,6 +64,7 @@
 
 .inputSelect {
     appearance: none;
+    cursor: pointer;
 }
 
 .btnArrowSelect {
