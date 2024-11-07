@@ -75,6 +75,7 @@
 
 .rightHeader{
     display: flex;
+    align-items: center;
     gap: 20px;
 }
 
@@ -275,35 +276,4 @@
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
-}
-
-
-.dateInput{
-    border-radius: 44px;
-    background: var(--bg-input);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: normal;
-    width: 163px;
-    padding: 4px 8px;
-    border: none;
-    color: var(--icon-gray);
-}
-
-.dateRangeContainer input:nth-of-type(1) {
-    margin-right: 32px; 
-}
-
-
-.dateRangeContainer {
-    display: flex;
-    align-items: center;
-}
-
-.label{
-    color: var(--icon-gray);
-    font-size: 15px;
-    font-weight: 400;
-    line-height: normal;
-    margin-right: 5px;
 }
