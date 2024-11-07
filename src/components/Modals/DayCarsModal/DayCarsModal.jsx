@@ -1,46 +1,91 @@
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectLoading } from "../../../redux/cars/selectors";
 import styles from "./DayCarsModal.module.css";
 import DayCarsFilter from "../../DayCarsFilter/DayCarsFilter";
 import { FiGrid } from "react-icons/fi";
-import { BsListUl, BsSortUp } from "react-icons/bs";
+import { BsListUl, BsSortUp, BsDownload } from "react-icons/bs";
+import { GiSettingsKnobs } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
-import { useSelector } from "react-redux";
-import { selectLoading } from "../../../redux/cars/selectors";
-import { useState } from "react";
 import DayCarsList from "../../DayCarsList/DayCarsList";
 import Loader from "../../Loader/Loader";
+import CalendarInModalCar from "../../CalendarInModalCar/CalendarInModalCar";
+import StatusFilterCars from "../../StatusFilterCars/StatusFilterCars";
 
-export default function DayCarsModal({ onClose, isModal, carsData }) {
+export default function DayCarsModal({
+  onClose,
+  isModal,
+  carsData,
+  selectedDate,
+}) {
   const isLoading = useSelector(selectLoading);
   const [viewMode, setViewMode] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [inputError, setInputError] = useState("");
+  const [startDate, setStartDate] = useState(null); // Початково null
+  const [endDate, setEndDate] = useState(null); // Початково null
+  const [filteredCarsData, setFilteredCarsData] = useState(carsData);
+  const [selectedStatus, setSelectedStatus] = useState("all");
+
+  useEffect(() => {
+    let filteredData = carsData;
+
+    // Фільтрація за статусом
+    if (selectedStatus !== "all") {
+      filteredData = filteredData.filter(
+        (car) => car.status === selectedStatus
+      );
+    }
+
+    // Фільтрація за датами
+    if (startDate && endDate) {
+      const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
+      filteredData = filteredData.filter((car) => {
+        const carStartDate = clearTime(new Date(car.date_s));
+        const carEndDate = clearTime(new Date(car.date_e));
+        return carStartDate <= endDate && carEndDate >= startDate;
+      });
+    }
+
+    setFilteredCarsData(filteredData);
+  }, [selectedStatus, startDate, endDate, carsData]);
+
+  const handleStatusChange = (status) => {
+    setSelectedStatus(status);
+  };
+
+  const handleDateBegChange = (date) => {
+    setStartDate(date);
+  };
+
+  const handleDateEndChange = (date) => {
+    setEndDate(date);
+  };
 
   const handleViewModeChange = (newMode) => {
     setViewMode(newMode);
   };
 
   const handleSearch = (term) => {
-    // Перевірка на латинські літери та цифри
     if (/^[a-zA-Z0-9]*$/.test(term)) {
-      setSearchTerm(term); // Оновлюємо searchTerm тільки якщо введення коректне
-      setInputError(""); // Очищаємо повідомлення про помилку
+      setSearchTerm(term);
+      setInputError("");
     } else {
       setInputError("Вводьте лише латинські літери та цифри");
-      setSearchTerm(term); // Оновлюємо searchTerm, навіть якщо введення некоректне
+      setSearchTerm(term);
     }
   };
 
   const filteredCars = () => {
-    if (!searchTerm) return carsData; // Повертаємо всі автомобілі, якщо searchTerm порожній
+    if (!searchTerm) return filteredCarsData;
 
-    const lowerCaseSearchTerm = searchTerm.toLowerCase(); // Перетворюємо searchTerm в нижній регістр
-
-    return carsData.filter((car) => {
-      const { plate, auto } = car; // Передбачається, що car має поля plate і auto
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return filteredCarsData.filter((car) => {
+      const { plate, auto } = car;
       return (
         plate.toLowerCase().includes(lowerCaseSearchTerm) ||
         auto.toLowerCase().includes(lowerCaseSearchTerm)
-      ); // Перетворюємо plate і auto в нижній регістр
+      );
     });
   };
 
@@ -77,11 +122,28 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
               error={inputError}
             />
           </div>
-          <div className={styles.filterContainer}>
-            <button className={styles.filter}>
-              <BsSortUp />
+          <button className={styles.filter}>
+            <BsSortUp size={18} />
+          </button>
+        </div>
+        <div className={styles.rightHeader}>
+          <StatusFilterCars onStatusChange={handleStatusChange} />
+          <CalendarInModalCar
+            selectedDate={selectedDate}
+            startDate={startDate}
+            endDate={endDate}
+            onDateBegChange={handleDateBegChange}
+            onDateEndChange={handleDateEndChange}
+          />
+          <div className={styles.btnPdfContainer}>
+            <button className={styles.btnPdf}>
+              <BsDownload size={16} color="var(--icon-gray)" />
+              <span className={styles.btnPdfText}>.pdf</span>
             </button>
           </div>
+          <button className={styles.btnSettings}>
+            <GiSettingsKnobs className={styles.iconSettings} />
+          </button>
         </div>
       </div>
       <button className={styles.closeButton} onClick={onClose}>
@@ -94,7 +156,6 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
           carsData={filteredCars()}
           viewMode={viewMode}
           isModal={isModal}
-          // searchTerm={searchTerm}
         />
       )}
     </div>

@@ -49,7 +49,7 @@ export default function CalendarBlock() {
         {isLoadingCarsByDay && <p>Завантаження інформації...</p>}
         <DayCarsList carsData={carsData} isModal={false} />
       </div>
-      <DetailsBtn carsData={carsData} />
+      <DetailsBtn carsData={carsData} selectedDate={selectedDate}/>
     </div>
   );
 }
