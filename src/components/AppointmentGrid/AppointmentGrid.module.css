@@ -1,99 +1,73 @@
+
+
 .schedulegrid {
     display: grid;
     grid-template-columns: 100px repeat(10, 1fr);
     /* Колонки для дат */
     grid-template-rows:  65px repeat(65px);
 
-    row-gap: 10px;
+      /* row-gap: 10px;   */
     width: 1049px;
-    height: 325px;
 
-    overflow-y: scroll;
-        overflow-x: hidden;
-        -ms-overflow-style: none;
-     /* position: relative;
-    overflow: hidden; 
-    overflow-y: auto;
-        /* Включаем вертикальную прокрутку */
-        max-height: 325px;
-     /* background: repeating-linear-gradient(to bottom, 
-                var(--bg-secondary),
-                linear-gradient(90deg, #23252C, #3E414F, #23252C) 65px
-              
-            );  */
-        background-image:
+position: relative;
+        overflow-y: auto; 
+        overflow-x: hidden; 
+        max-height: 325px;   
+    background: var(--bg-secondary);
+        /* background-image:
                 repeating-linear-gradient(0deg,
-                    /* Чередование полос сверху вниз */
                     transparent,
-                    /* Прозрачная область для градиента первой полосы */
                     transparent 66px,
-                    /* Высота первой градиентной полосы */
                     var(--bg-secondary) 66px,
-                    /* Начало однотонной полосы */
-                    var(--bg-secondary) 132px
-                    /* Конец однотонной полосы */
+                    var(--bg-secondary) 132px   
                 ),
-                repeating-linear-gradient(90deg,
-                    /* Горизонтальный градиент */
-                    #23252C,
-                    /* Начало градиента */
-                    #3E414F 50%,
-                    /* Средний цвет градиента */
-                    #23252C 100%
-                    /* Конец градиента */
-                );
+                repeating-linear-gradient(90deg,    
+                    #23252C,   
+                    #3E414F 50%,   
+                    #23252C 100%    
+                ); */
 
-    /* Чередование высоты полос */
-    background-size: 100% 132px, 100% 66px;
+    
+    /* background-size: 100% 132px, 100% 66px; */
 }
 
-.schedulegrid::-webkit-scrollbar {
+ .schedulegrid::-webkit-scrollbar {
     width: 8px;
 }
 
 .schedulegrid::-webkit-scrollbar-thumb {
-    /* background-color: var(--main-gray); */
+     background-color: var(--main-gray); 
     border-radius: 4px;
 }
 
 .schedulegrid::-webkit-scrollbar-track {
-    /* background-color: var(--bg); */
+     background-color: var(--bg); 
     border-radius: 4px;
-}
+} 
 
-.scrollgrid {
-    width:1071px;
-    /*головний контенер, який обгортає скролбар*/
-    height: 325px;
-    display: flex;
-    padding: 13px 20px 13px 13px;
-    /*падінг для відступу від контейнера до скрола*/
-    background: var(--bg-secondary);
-    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 12px; */
-}
 
 /* Чередующаяся подложка */
-/* .rowBackground {
+ .rowBackground {
     grid-column: 2 / -1;
     
-    grid-row: 2/-1;
-    position: absolute;
+    /* grid-row: 2/-1; */
+    height: 65px;
+    /* position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0; */
     z-index: 0;
-}  */
+}  
 
-/* .rowBackground.odd {
+ .rowBackground.odd {
     background: linear-gradient(90deg, #23252C 0%, #3E414F 50%, #23252C 100%); 
     
  } 
 
 .rowBackground.even {
 background: var(--bg-secondary);
-} */
+} 
 
 .gridheader {
     grid-row: 1;
@@ -107,11 +81,16 @@ background: var(--bg-secondary);
     align-content: center;
     /* font-weight: bold; */
     white-space: pre-wrap;
-    /* z-index: 1; */
+    height: 65px;
+    position: sticky;
+        top: 0;
+     z-index: 2; 
 }
 
 .gridheader:first-child {
     margin-left: 10px;
+    width: 75px;
+    white-space: pre-wrap;
 }
 
 .gridpost {
@@ -123,7 +102,7 @@ background: var(--bg-secondary);
     height: 55px;
   
     text-align: left;
-    /* z-index: 1; */
+     z-index: 1; 
 }
 
 .griditem {
@@ -134,8 +113,9 @@ background: var(--bg-secondary);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-         /* position: relative; 
-    z-index: 1; */
+          /* position: relative;  */
+          margin-top: 4px;
+    z-index: 1; 
    
 }
 
@@ -163,10 +143,10 @@ background: var(--bg-secondary);
     padding: 1px 6px;
     border-radius: 5px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    position:relative;
+    /* position:relative; */
 }
 
- .mechanicinfo::before {
+  .mechanicinfo::before {
      content: "";
      position: absolute;
      left: -1px;
@@ -176,4 +156,12 @@ background: var(--bg-secondary);
      filter: blur(5px);
      border-radius: 0 5px 5px 0;
     z-index: 1;
+ } 
+
+ .currenttimeline {
+     position: absolute;
+     width: 1px;
+    height: 325px;
+     background: linear-gradient(0deg,#23252C 0%, #8B8B8B 20%, #566596 50%, #8E8E8E 80%, #23252C 100%);;
+     z-index: 3;
  }
