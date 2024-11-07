@@ -1,6 +1,6 @@
 import { useState } from "react"
 import css from "./StationPart.module.css"
-import { BsPencil } from "react-icons/bs";
+import { BsPencil, BsPlusLg } from "react-icons/bs";
 import { BsTrash } from "react-icons/bs";
 import { BsPower } from "react-icons/bs";
 import { BiSolidPlusSquare } from "react-icons/bi";
@@ -46,39 +46,78 @@ export default function StationPart() {
     }
 
     return (
-        <div>
-            <p className={css.title}>Назва поста</p>
-            <ul className={css.postList} >
-                {posts.map((post, index) => (
-                <li key={index} className={css.postListItem}>
-                        {post.isEditing ?
-                            (<input value={post.name}
-                                onChange={(e) => handleChangePN(e.target.value, index )}
-                                className={css.inputForPostName} />)
-                            : (<p>{post.name}</p>)}
-                    <div className={css.iconsBox}>
-                        <button type="button" className={css.iconBtn} onClick={()=>handleEditing(index)}>
-                            {post.isEditing ?  <RiSave3Fill className={css.icons} /> : <BsPencil className={css.icons}/>  }
-                                                       
-                        </button>
-                        <button type="button" className={css.iconBtn} onClick={()=>deletePost(index)}>
-                            <BsTrash className={css.icons} />
-                        </button>
-                        <button type="button" onClick={()=>toDisable(index)} className={css.iconBtn}>
-                            <BsPower  className={clsx(css.power, { [css.powerDisabled]: post.isDisabled })}/>
-                        </button>
-                    </div>
-                    </li>
-                ))}
-
-            </ul>
-            <div className={css.addBox}>
-                <input placeholder="Додати новий пост..." className={css.addInput} value={newPost} onChange={(e)=>setNewPost(e.target.value)}/>
-                <button type="button" className={css.addBtn} onClick={handleAddPost}>
-                    <BiSolidPlusSquare />
-                    Додати
-                </button>
-            </div>
-    </div>
-)
+      <div>
+        <p className={css.title}>Назва поста</p>
+        <ul className={css.postList}>
+          {posts.map((post, index) => (
+            <li key={index} className={css.postListItem}>
+              {post.isEditing ? (
+                <input
+                  value={post.name}
+                  onChange={(e) => handleChangePN(e.target.value, index)}
+                  className={css.inputForPostName}
+                />
+              ) : (
+                <p className={css.postName}>{post.name}</p>
+              )}
+              <div className={css.iconsBox}>
+                {/* <button
+                  type="button"
+                  className={css.iconBtn}
+                  onClick={() => handleEditing(index)}
+                > */}
+                {post.isEditing ? (
+                  <RiSave3Fill
+                    className={css.icons}
+                    onClick={() => handleEditing(index)}
+                  />
+                ) : (
+                  <BsPencil
+                    className={css.icons}
+                    onClick={() => handleEditing(index)}
+                  />
+                )}
+                {/* </button> */}
+                {/* <button
+                  type="button"
+                  className={css.iconBtn}
+                  onClick={() => deletePost(index)}
+                > */}
+                <BsTrash
+                  className={css.icons}
+                  onClick={() => deletePost(index)}
+                />
+                {/* </button> */}
+                {/* <button
+                  type="button"
+                  onClick={() => toDisable(index)}
+                  className={css.iconBtn}
+                > */}
+                <BsPower
+                  className={clsx(css.power, {
+                    [css.powerDisabled]: post.isDisabled,
+                  })}
+                  onClick={() => toDisable(index)}
+                />
+                {/* </button> */}
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className={css.addBox}>
+          <input
+            placeholder="Додати новий пост..."
+            className={css.addInput}
+            value={newPost}
+            onChange={(e) => setNewPost(e.target.value)}
+          />
+          <button type="button" className={css.addBtn} onClick={handleAddPost}>
+            <span className={css.plus}>
+              <BsPlusLg className={css.iconPlus} />
+            </span>
+            Додати
+          </button>
+        </div>
+      </div>
+    );
 }
