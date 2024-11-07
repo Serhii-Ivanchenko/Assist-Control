@@ -83,7 +83,7 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                   borderTopLeftRadius: "8px",
                   borderTopRightRadius: "8px",
                   backgroundColor: "var(--bg-input)",
-                  border: "1px solid #d8e1ff40",
+                  border: "1px solid var(--light-gray-table)",
                   borderBottom: "none",
                 }}
                 component={Paper}
@@ -98,11 +98,11 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                       <TableCell
                         sx={{
                           color: "var(--white)",
-                          outline: "#d8e1ff40",
+                          outline: "var(--light-gray-table)",
                           borderTopLeftRadius: "8px",
                           padding: "6px 0 6px 10px",
                           border: "none",
-                          borderRight: "1px solid #d8e1ff40",
+                          borderRight: "1px solid var(--light-gray-table)",
                           fontSize: "16px",
                           fontWeight: "600",
                         }}
@@ -113,9 +113,9 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                       <TableCell
                         sx={{
                           color: "var(--white)",
-                          outline: "#d8e1ff40",
+                          outline: "var(--light-gray-table)",
                           border: "none",
-                          borderRight: "1px solid #d8e1ff40",
+                          borderRight: "1px solid var(--light-gray-table)",
                           padding: "6px 0 6px 0",
                           fontSize: "16px",
                           fontWeight: "600",
@@ -127,9 +127,9 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                       <TableCell
                         sx={{
                           color: "var(--white)",
-                          outline: "#d8e1ff40",
+                          outline: "var(--light-gray-table)",
                           border: "none",
-                          borderRight: "1px solid #d8e1ff40",
+                          borderRight: "1px solid var(--light-gray-table)",
                           padding: "6px 0 6px 0",
                           fontSize: "16px",
                           fontWeight: "600",
@@ -141,9 +141,9 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                       <TableCell
                         sx={{
                           color: "var(--white)",
-                          outline: "#d8e1ff40",
+                          outline: "var(--light-gray-table)",
                           border: "none",
-                          borderRight: "1px solid #d8e1ff40",
+                          borderRight: "1px solid var(--light-gray-table)",
                           padding: "6px 0 6px 0",
                           fontSize: "16px",
                           fontWeight: "600",
@@ -155,7 +155,7 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                       <TableCell
                         sx={{
                           color: "var(--white)",
-                          outline: "#d8e1ff40",
+                          outline: "var(--light-gray-table)",
                           border: "none",
                           padding: "6px 0 6px 0",
                           borderTopRightRadius: "8px",
@@ -175,10 +175,10 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                           sx={{
                             fontSize: "16px",
                             color: "var(--white)",
-                            outline: "#d8e1ff40",
+                            outline: "var(--light-gray-table)",
                             border: "none",
-                            borderRight: "1px solid #d8e1ff40",
-                            borderBottom: "1px solid #d8e1ff40",
+                            borderRight: "1px solid var(--light-gray-table)",
+                            borderBottom: "1px solid var(--light-gray-table)",
                             padding: "6px 0 6px 15px",
                           }}
                           align="left"
@@ -189,10 +189,10 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                           sx={{
                             fontSize: "16px",
                             color: "var(--white)",
-                            outline: "#d8e1ff40",
+                            outline: "var(--light-gray-table)",
                             border: "none",
-                            borderRight: "1px solid #d8e1ff40",
-                            borderBottom: "1px solid #d8e1ff40",
+                            borderRight: "1px solid var(--light-gray-table)",
+                            borderBottom: "1px solid var(--light-gray-table)",
                             padding: "6px 0 6px 0",
                           }}
                           align="center"
@@ -203,10 +203,10 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                           sx={{
                             fontSize: "16px",
                             color: "var(--white)",
-                            outline: "#d8e1ff40",
+                            outline: "var(--light-gray-table)",
                             border: "none",
-                            borderRight: "1px solid #d8e1ff40",
-                            borderBottom: "1px solid #d8e1ff40",
+                            borderRight: "1px solid var(--light-gray-table)",
+                            borderBottom: "1px solid var(--light-gray-table)",
                             padding: "6px 0 6px 0",
                           }}
                           align="center"
@@ -217,10 +217,10 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                           sx={{
                             fontSize: "16px",
                             color: "var(--white)",
-                            outline: "#d8e1ff40",
+                            outline: "var(--light-gray-table)",
                             border: "none",
-                            borderRight: "1px solid #d8e1ff40",
-                            borderBottom: "1px solid #d8e1ff40",
+                            borderRight: "1px solid var(--light-gray-table)",
+                            borderBottom: "1px solid var(--light-gray-table)",
                             padding: "6px 0 6px 0",
                           }}
                           align="center"
@@ -231,9 +231,9 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                           sx={{
                             fontSize: "16px",
                             color: "var(--white)",
-                            outline: "#d8e1ff40",
+                            outline: "var(--light-gray-table)",
                             border: "none",
-                            borderBottom: "1px solid #d8e1ff40",
+                            borderBottom: "1px solid var(--light-gray-table)",
                             padding: "6px 0 6px 0",
                           }}
                           align="center"
