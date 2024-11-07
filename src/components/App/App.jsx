@@ -1,15 +1,21 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "../Layout/Layout.jsx";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import RestrictedRoute from "../RestrictedRoute.jsx";
 import PrivateRoute from "../PrivateRoute.jsx";
 import Loader from "../Loader/Loader.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsRefreshing } from "../../redux/auth/selectors.js";
+import {
+  selectIsLoggedIn,
+  selectIsRefreshing,
+  selectUser,
+} from "../../redux/auth/selectors.js";
 import { Toaster } from "react-hot-toast";
 import ValidateEmailPage from "../../pages/ValidateEmailPage/ValidateEmailPage.jsx";
 import { refreshUser } from "../../redux/auth/operations.js";
 import ChangePasswordWithEmailPage from "../../pages/ChangePasswordWithEmailPage/ChangePasswordWithEmailPage.jsx";
+import { Navigate } from "react-router-dom";
+import firstPage from "../../utils/firstPage.js";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
@@ -31,24 +37,38 @@ const NotFoundPage = lazy(() =>
 export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
 
   useEffect(() => {
-    dispatch(refreshUser());
+    const refreshUserData = async () => {
+      await dispatch(refreshUser());
+      setIsAuthChecked(true);
+    };
+    refreshUserData();
   }, [dispatch]);
 
-  return isRefreshing ? (
+  const userData = useSelector(selectUser);
+  const renderPage = firstPage(userData);
+
+  return isRefreshing || !isAuthChecked ? (
     <Loader />
   ) : (
     <Layout>
       <Toaster position="top-right" reverseOrder={false} />
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={
+              isLoggedIn ? <Navigate to={renderPage} replace /> : <HomePage />
+            }
+          />
           <Route
             path="/login"
             element={
               <RestrictedRoute
-                redirectTo="/video-control"
+                redirectTo={renderPage}
                 component={<LoginPage />}
               />
             }
@@ -57,7 +77,7 @@ export default function App() {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo="/video-control"
+                redirectTo={renderPage}
                 component={<RegistrationPage />}
               />
             }

@@ -3,13 +3,18 @@ import css from "./GoogleBtn.module.css";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../services/firebaseConfig.js";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logInWithGoogle } from "../../redux/auth/operations.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData, logInWithGoogle } from "../../redux/auth/operations.js";
 import toast from "react-hot-toast";
+import { selectUser } from "../../redux/auth/selectors.js";
+import firstPage from "../../utils/firstPage.js";
 
 export default function GoogleBtn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userData = useSelector(selectUser);
+
+  const renderPage = firstPage(userData);
 
   const handleGoogleLogin = async () => {
     try {
@@ -20,9 +25,13 @@ export default function GoogleBtn() {
       const { email, displayName } = userInfo;
 
       if (token) {
-        await dispatch(logInWithGoogle({ token, email, displayName })).unwrap();
-        toast.success("Авторизація успішна!");
-        navigate("/video-control");
+        await dispatch(logInWithGoogle({ token, email, displayName }))
+          .unwrap()
+          .then(() => {
+            toast.success("Авторизація успішна!");
+            dispatch(getUserData());
+            navigate({ renderPage });
+          });
       }
     } catch (error) {
       toast.error("Щось пішло не так! Будь ласка, спробуйте ще раз!");

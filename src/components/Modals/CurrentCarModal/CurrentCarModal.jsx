@@ -12,6 +12,7 @@ import { selectDate } from "../../../redux/cars/selectors.js";
 import absentAutoImg from "../../../assets/images/absentAutoImg.webp";
 import flag from "../../../assets/images/flagUa.webp";
 import CustomRadioBtn from "../../CustomRadioBtn/CustomRadioBtn";
+import { copyToClipboard } from "../../../utils/copy.js";
 
 import { BsWrench } from "react-icons/bs";
 import { BsExclamationCircle } from "react-icons/bs";
@@ -69,17 +70,6 @@ function CurrentCarModal({ onClose, car, status }) {
     setSelectedStatus(e.target.value);
   };
 
-  const copyToClipboard = (text) => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        toast.success("Текст скопійовано");
-      })
-      .catch((err) => {
-        toast.error("Не вдалося скопіювати текст:", err);
-      });
-  };
-
   const handleSubmit = () => {
     dispatch(changeCarStatus({ carId: car.id, status: selectedStatus }))
       .then(() => {
@@ -120,10 +110,13 @@ function CurrentCarModal({ onClose, car, status }) {
                   {car.vin || "VIN не вказано"}
                 </span>
               </p>
-              <BsFiles
-                className={styles.copyIcon}
-                onClick={() => copyToClipboard(car.vin || "VIN не вказано")}
-              />
+              <button className={styles.copyBtn}>
+                <BsFiles
+                  size={18}
+                  className={styles.copyIcon}
+                  onClick={() => copyToClipboard(car.vin || "VIN не вказано")}
+                />
+              </button>
             </div>
             <div className={styles.carRegContainer}>
               <div className={styles.carRegCountry}>
