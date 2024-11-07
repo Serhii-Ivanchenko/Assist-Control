@@ -4,7 +4,7 @@ import { useId } from "react";
 import * as Yup from "yup";
 import { BsSdCardFill } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
-import { useRef, useState} from "react";
+import { useRef, useState } from "react";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import PhoneSelect from "./PhoneSelect/PhoneSelect";
 import { useDispatch, useSelector } from "react-redux";
@@ -203,14 +203,14 @@ export default function UserSettingsProfile({ onClose }) {
       });
     } catch (error) {
       console.error("Error updating user data:", error);
-       toast.error("Не вдалося оновити дані :(", {
-          position: "top-right",
-          duration: 5000,
-          style: {
-            background: "var(--bg-input)",
-            color: "var(--white)FFF",
-          },
-        });
+      toast.error("Не вдалося оновити дані :(", {
+        position: "top-right",
+        duration: 5000,
+        style: {
+          background: "var(--bg-input)",
+          color: "var(--white)FFF",
+        },
+      });
     } finally {
       actions.setSubmitting(false); // Завжди виконується
     }
