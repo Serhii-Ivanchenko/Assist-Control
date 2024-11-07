@@ -1,40 +1,52 @@
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectLoading } from "../../../redux/cars/selectors";
 import styles from "./DayCarsModal.module.css";
 import DayCarsFilter from "../../DayCarsFilter/DayCarsFilter";
 import { FiGrid } from "react-icons/fi";
 import { BsListUl, BsSortUp, BsDownload } from "react-icons/bs";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
-import { useSelector } from "react-redux";
-import { selectLoading } from "../../../redux/cars/selectors";
-import { useState, useEffect } from "react";
 import DayCarsList from "../../DayCarsList/DayCarsList";
 import Loader from "../../Loader/Loader";
 import CalendarInModalCar from "../../CalendarInModalCar/CalendarInModalCar";
+import StatusFilterCars from "../../StatusFilterCars/StatusFilterCars";
 
 export default function DayCarsModal({ onClose, isModal, carsData, selectedDate }) {
   const isLoading = useSelector(selectLoading);
   const [viewMode, setViewMode] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [inputError, setInputError] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [filteredCarsData, setFilteredCarsData] = useState([]);
+  const [startDate, setStartDate] = useState(null);  // Початково null
+  const [endDate, setEndDate] = useState(null);  // Початково null
+  const [filteredCarsData, setFilteredCarsData] = useState(carsData);
+  const [selectedStatus, setSelectedStatus] = useState("all");
+  
 
-  // Оновлення фільтрованих даних при зміні діапазону дат
   useEffect(() => {
-    // Функція для обнулення часу в даті
-    const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
-  
-    const filteredData = carsData.filter((car) => {
-      const carStartDate = clearTime(new Date(car.date_s)); // Початок періоду машини
-      const carEndDate = clearTime(new Date(car.date_e)); // Кінець періоду машини
-  
-      // Перевірка, чи хоча б частина періоду машини знаходиться в межах діапазону
-      return (carStartDate <= endDate && carEndDate >= startDate);
-    });
-  
+    let filteredData = carsData;
+
+    // Фільтрація за статусом
+    if (selectedStatus !== "all") {
+      filteredData = filteredData.filter((car) => car.status === selectedStatus);
+    }
+
+    // Фільтрація за датами
+    if (startDate && endDate) {
+      const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
+      filteredData = filteredData.filter((car) => {
+        const carStartDate = clearTime(new Date(car.date_s)); 
+        const carEndDate = clearTime(new Date(car.date_e)); 
+        return carStartDate <= endDate && carEndDate >= startDate;
+      });
+    }
+
     setFilteredCarsData(filteredData);
-  }, [startDate, endDate, carsData]);
+  }, [selectedStatus, startDate, endDate, carsData]);
+
+  const handleStatusChange = (status) => {
+    setSelectedStatus(status);
+  };
 
   const handleDateBegChange = (date) => {
     setStartDate(date);
@@ -99,6 +111,7 @@ export default function DayCarsModal({ onClose, isModal, carsData, selectedDate 
           </div>
         </div>
         <div className={styles.rightHeader}>
+          <StatusFilterCars onStatusChange={handleStatusChange}/>
           <CalendarInModalCar
             selectedDate={selectedDate}
             startDate={startDate}

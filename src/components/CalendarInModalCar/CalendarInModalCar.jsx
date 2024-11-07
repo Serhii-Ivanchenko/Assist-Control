@@ -1,34 +1,27 @@
 import { useState } from "react";
-import css from "./CalendarInModalCar.module.css"; // створіть новий файл стилів або скопіюйте з попереднього
+import css from "./CalendarInModalCar.module.css";
 import DatePicker from "react-datepicker";
 import { BsCalendar2Week } from "react-icons/bs";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function CalendarInModalCar({ startDate, endDate, onDateBegChange, onDateEndChange }) {
-  const [periodStartData, setPeriodStartData] = useState(startDate);
-  const [periodEndData, setPeriodEndData] = useState(endDate);
+  const [periodStartData, setPeriodStartData] = useState(startDate || null);  // Початкове значення null
+  const [periodEndData, setPeriodEndData] = useState(endDate || null);  // Початкове значення null
   const [isOpenBeg, setIsOpenBeg] = useState(false);
   const [isOpenEnd, setIsOpenEnd] = useState(false);
 
-  // Логіка для зміни початкової дати
   function handleInputChangeBeg(date) {
     setPeriodStartData(date);
     onDateBegChange(date);
   }
 
-  // Логіка для зміни кінцевої дати
   function handleInputChangeEnd(date) {
     setPeriodEndData(date);
     onDateEndChange(date);
   }
 
-  const handleIconClickBeg = () => {
-    setIsOpenBeg((prev) => !prev);
-  };
-  
-  const handleIconClickEnd = () => {
-    setIsOpenEnd((prev) => !prev);
-  };
+  const handleIconClickBeg = () => setIsOpenBeg((prev) => !prev);
+  const handleIconClickEnd = () => setIsOpenEnd((prev) => !prev);
 
   return (
     <div className={css.containerperiodselector}>

@@ -79,6 +79,10 @@
     gap: 20px;
 }
 
+.rightHeader > :nth-child(2) {
+    margin-left: 47px;
+}
+
 .iconClose {
     color: var(--input-stroke);
     width: 100%;
