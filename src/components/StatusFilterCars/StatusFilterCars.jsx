@@ -5,6 +5,7 @@ import renderStatus from "../../utils/renderStatus.jsx";
 
 export default function StatusFilterCars({ onStatusChange }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState("Статус");
   
 
   const toggleDropdown = () => {
@@ -14,21 +15,26 @@ export default function StatusFilterCars({ onStatusChange }) {
 
   const statuses = [
     { status: "all", label: "всі авто" },
-    { status: "diagnostic", label: "діагностика" },
-    { status: "repair", label: "земонт" },
-    { status: "view_repair", label: "огляд пр" },
-    { status: "complete", label: "завершено" },
+    { status: "diagnostic", label: "Діагностика" },
+    { status: "repair", label: "Ремонт" },
+    { status: "view_repair", label: "Огляд ПР" },
+    { status: "complete", label: "Завершено" },
   ];
 
   const handleStatusSelect = (status) => {
-    onStatusChange(status); // Оновлюємо статус в батьківському компоненті
-    setIsOpen(false); // Закриваємо випадаючий список
+    const selectedStatusObj = statuses.find((s) => s.status === status);
+    if (selectedStatusObj) {
+      setSelectedStatus(selectedStatusObj.label);
+    }
+    onStatusChange(status);
+    setIsOpen(false);
   };
 
+  
   return (
     <div className={styles.statysFilter}>
       <button className={styles.filterButton} onClick={toggleDropdown}>
-        <p className={styles.statusFilterText}>Статус</p>
+      <p className={styles.statusFilterText}>{selectedStatus}</p>
         {isOpen ? (
           <TiArrowSortedUp size={20} color="var(--icon-gray)" />
         ) : (
