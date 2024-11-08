@@ -139,13 +139,6 @@ export default function LoginForm() {
                   className={css.errorMsg}
                 />
               </div>
-              {/* <button
-                type="button"
-                className={css.forgotPasswordLink}
-                onClick={openModal}
-              >
-                Забули пароль?
-              </button> */}
             </div>
             <button
               type="button"

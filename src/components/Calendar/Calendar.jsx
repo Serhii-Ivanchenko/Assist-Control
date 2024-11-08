@@ -81,11 +81,20 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
   };
 
   const isDateDisabled = (date) => {
-    return (
-      date.isAfter(currentDate, "day") ||
-      date.isAfter(currentDate, "month") ||
-      !date.isSame(queryMonthDayjs, "month")
-    );
+    if (!isCrm) {
+      return (
+        date.isAfter(currentDate, "day") ||
+        date.isAfter(currentDate, "month") ||
+        !date.isSame(queryMonthDayjs, "month")
+      );
+    }
+    else {
+ return (
+       
+        !date.isSame(queryMonthDayjs, "month")
+      );
+
+    }
   };
 
   if (carSelectDate !== selectedDate) {
@@ -122,7 +131,7 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
             }}
             className={`calendar-day  
               ${isCrm ? "crm-width" : ""} 
-             ${item.date.date() > currentDate.date() ? "cursordefault" : ""} 
+             ${!isCrm && item.date.date() > currentDate.date() ? "cursordefault" : ""} 
               ${
                 item.date.month() !== queryMonthDayjs.month()
                   ? "other-month"

@@ -1,7 +1,7 @@
 import { BsWrench, BsUiChecksGrid, BsExclamationCircle } from "react-icons/bs";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { PiEyeFill } from "react-icons/pi";
-
+import { IoCarSportSharp } from "react-icons/io5";
 import clsx from "clsx";
 
 const renderStatus = (status, complete_d, styles = {}) => {
@@ -11,8 +11,18 @@ const renderStatus = (status, complete_d, styles = {}) => {
   let background;
   let borderColor;
 
-  // Визначення фону та кольору рамки
-  if (status === "new") {
+  if (status === "all") {
+    statusClass = styles.all || "";
+    statusText = "всі авто";
+    background = "var(--status-gradient-all)";
+    borderColor = "var(--glow-all)";
+    icon = (
+      <IoCarSportSharp 
+        className={clsx(styles.icon, statusClass)}
+        color="var(--light-gray)"
+      />
+    );
+  } else if (status === "new") {
     statusClass = styles.new || "";
     statusText = "нова";
     background = "var(--status-gradient-new)";
@@ -37,55 +47,56 @@ const renderStatus = (status, complete_d, styles = {}) => {
     statusText = "завершено";
     background = "var(--status-gradient-complete)";
     borderColor = "var(--glow-complete)";
-  }  else {
+  } else {
     statusText = "уточнення";
   }
 
-  // Визначення іконки
-  switch (status) {
-    case "new":
-      icon = (
-        <BsExclamationCircle 
-          className={clsx(styles.icon, statusClass)}
-          color="var(--light-gray)"
-        />
-      );
-      break;
+  if (!icon) {
+    switch (status) {
+      case "new":
+        icon = (
+          <BsExclamationCircle 
+            className={clsx(styles.icon, statusClass)}
+            color="var(--light-gray)"
+          />
+        );
+        break;
       case "view_repair":
-      icon = (
-        <PiEyeFill 
-          className={clsx(styles.icon, statusClass)}
-          color="var(--light-gray)"
-        />
-      );
-      break;
-    case "repair":
-      icon = (
-        <BsWrench
-          className={clsx(styles.icon, statusClass)}
-          color="var(--light-gray)"
-        />
-      );
-      break;
-    case "diagnostic":
-      icon = (
-        <BsUiChecksGrid
-          className={clsx(styles.icon, statusClass)}
-          color="var(--light-gray)"
-        />
-      );
-      break;
-    case "complete":
-    case complete_d:
-      icon = (
-        <AiFillCheckCircle
-          className={clsx(styles.icon, statusClass, styles.iconComplete)}
-          color="var(--light-gray)"
-        />
-      );
-      break;
-    default:
-      icon = null;
+        icon = (
+          <PiEyeFill 
+            className={clsx(styles.icon, statusClass)}
+            color="var(--light-gray)"
+          />
+        );
+        break;
+      case "repair":
+        icon = (
+          <BsWrench
+            className={clsx(styles.icon, statusClass)}
+            color="var(--light-gray)"
+          />
+        );
+        break;
+      case "diagnostic":
+        icon = (
+          <BsUiChecksGrid
+            className={clsx(styles.icon, statusClass)}
+            color="var(--light-gray)"
+          />
+        );
+        break;
+      case "complete":
+      case complete_d:
+        icon = (
+          <AiFillCheckCircle
+            className={clsx(styles.icon, statusClass, styles.iconComplete)}
+            color="var(--light-gray)"
+          />
+        );
+        break;
+      default:
+        icon = null;
+    }
   }
 
   return (

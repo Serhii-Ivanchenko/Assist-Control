@@ -3,8 +3,6 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import clsx from "clsx";
 import { ServiceBookingSchema } from "../../../validationSchemas/ServiceBookingSchema.js";
 import { services } from "../../Modals/ServiceBookingModal/constants.js";
-import { posts } from "../../Modals/ServiceBookingModal/constants.js";
-import { mechanics } from "../../Modals/ServiceBookingModal/constants.js";
 import { timeToChoose } from "../../Modals/ServiceBookingModal/constants.js";
 import { BsFillCameraFill } from "react-icons/bs";
 import { BsXLg } from "react-icons/bs";
@@ -31,14 +29,18 @@ export default function ServiceBookingModal({ onClose }) {
   const selectRef = useRef(null);
 
   const selectedServiceId = useSelector(selectSelectedServiceId);
-  const serviceData = useSelector(selectServiceData); // дані про сервіс: пости та механіки
+  const { mechanics, posts } = useSelector(selectServiceData);
+  const mechanicsList = mechanics.map((mechanic) => mechanic.full_name);
+  const postsList = posts.map((post) => post.name_post); // дані про сервіс: пости та механіки
+
+  const Schema = ServiceBookingSchema(mechanicsList, postsList);
+
   useEffect(() => {
     const fetchServiceData = () => {
       if (!selectedServiceId) {
         return;
       }
       dispatch(getMechsAndPosts());
-      console.log("selectServiceData", serviceData);
     };
     fetchServiceData();
   }, [dispatch, selectedServiceId]); // Отримуємо дані про пости і механіків при рендері модалки
@@ -134,13 +136,26 @@ export default function ServiceBookingModal({ onClose }) {
           name: "",
         }}
         onSubmit={handleSubmit}
-        validationSchema={ServiceBookingSchema}
+        validationSchema={Schema}
         validateOnChange={true}
         validateOnBlur
       >
         {({ values }) => (
           <Form className={css.form}>
             <div className={css.rightSectionWrapper}>
+              <div className={css.inputWrapper}>
+                <Field
+                  className={css.input}
+                  type="text"
+                  name="phone_number"
+                  placeholder="Телефон"
+                />
+                <ErrorMessage
+                  name="phone_number"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
               <div className={css.inputWrapper}>
                 <Field
                   className={css.input}
@@ -222,19 +237,6 @@ export default function ServiceBookingModal({ onClose }) {
                   />
                 </div>
               </div>
-              <div className={css.inputWrapper}>
-                <Field
-                  className={css.input}
-                  type="text"
-                  name="phone_number"
-                  placeholder="Телефон"
-                />
-                <ErrorMessage
-                  name="phone_number"
-                  component="div"
-                  className={css.errorMsg}
-                />
-              </div>
               <div className={css.bottomRightSectionWrapper}>
                 <div
                   className={css.inputWrapper}
@@ -257,10 +259,13 @@ export default function ServiceBookingModal({ onClose }) {
                     <option value="" disabled hidden>
                       ПОСТ
                     </option>
-                    {posts.map((position, index) => {
+                    {posts.map((position) => {
                       return (
-                        <option key={index} value={position}>
-                          {position}
+                        <option
+                          key={position.id_post}
+                          value={position.name_post}
+                        >
+                          {position.name_post}
                         </option>
                       );
                     })}
@@ -300,10 +305,10 @@ export default function ServiceBookingModal({ onClose }) {
                     <option value="" disabled hidden>
                       Оберіть механіка
                     </option>
-                    {mechanics.map((mechanic, index) => {
+                    {mechanics.map((mechanic) => {
                       return (
-                        <option key={index} value={mechanic}>
-                          {mechanic}
+                        <option key={mechanic.id} value={mechanic.full_name}>
+                          {mechanic.full_name}
                         </option>
                       );
                     })}
@@ -322,6 +327,19 @@ export default function ServiceBookingModal({ onClose }) {
               </div>
             </div>
             <div className={css.leftSectionWrapper}>
+              <div className={css.inputWrapper}>
+                <Field
+                  className={css.input}
+                  type="text"
+                  name="name"
+                  placeholder="ПІБ"
+                />
+                <ErrorMessage
+                  name="name"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
               <div className={css.inputWrapper}>
                 <Field
                   className={css.input}
@@ -353,19 +371,6 @@ export default function ServiceBookingModal({ onClose }) {
                 className={css.textArea}
                 placeholder="Примітка"
               />
-              <div className={css.inputWrapper}>
-                <Field
-                  className={css.input}
-                  type="text"
-                  name="name"
-                  placeholder="ПІБ"
-                />
-                <ErrorMessage
-                  name="name"
-                  component="div"
-                  className={css.errorMsg}
-                />
-              </div>
               <div className={css.calendar}>
                 <SelectDate newDate={setNewDate} />
                 <div className={css.timeWrapper}>

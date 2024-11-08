@@ -1,5 +1,7 @@
 import css from './AppointmentGrid.module.css';
 
+import  { useEffect, useState } from 'react';
+
 const workTypeColors = {
    new: "var(--status-gradient-new)",
   checkRepair: "var(--status-gradient-diag)",
@@ -18,19 +20,66 @@ const workTypeBorder = {
  };
 
 const AppointmentGrid = ({ data }) => {
+
+  const [linePosition, setLinePosition] = useState(null);
+//    const gridRef = useRef(null);
+//   const [gridHeight, setGridHeight] = useState(0);
+
+
+// useEffect(() => {
+//     if (gridRef.current) {
+//       // Установить высоту сетки на основании полной высоты элемента
+//       setGridHeight(gridRef.current.scrollHeight);
+//     }
+//   }, [data]);
+
+
+  useEffect(() => {
+    const updateCurrentTimeLine = () => {
+      const startHour = 9; // Начало рабочего дня
+      const endHour = 18; // Конец рабочего дня
+      const now = new Date();
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+
+      // Проверка, чтобы полоса не отображалась вне рабочего времени
+      if (currentHour < startHour || currentHour >= endHour) {
+        setLinePosition(null);
+        return;
+      }
+
+      // Рассчитываем позицию полосы в процентах
+      const totalMinutes = (endHour - startHour) * 60;
+      const minutesSinceStart = (currentHour - startHour) * 60 + currentMinute;
+      const positionPercentage = (minutesSinceStart / totalMinutes) * 100;
+
+      setLinePosition(positionPercentage);
+    };
+
+    updateCurrentTimeLine();
+    const intervalId = setInterval(updateCurrentTimeLine, 60000); // Обновляем каждую минуту
+
+    return () => clearInterval(intervalId); // Очищаем интервал при размонтировании
+  }, []);
+
+
   return (
-    <div className={css.schedulegrid} >
-{/* 
-       {data.posts.map((_, index) => (
+   
+    <div className={css.schedulegrid}
+    >
+ 
+      {data.posts.map((_, index) => (
+        
         <div
           key={`bg-${index}`}
-          className={`${css.rowBackground} ${index % 2 === 0 ? css.even : css.odd}`}
+          className={`${css.rowBackground} ${index % 2 === 0 ? css.odd : css.even}`}
           style={{
-            gridRow: index +1,
-            gridColumn: '2 ',
+            gridRow: `${index +2}`,
+           
           }}
         ></div>
-      ))}  */}
+      ))}  
+
 
       {/* Заголовки для дат */}
       {data.dates.map((date, index) => (
@@ -45,6 +94,19 @@ const AppointmentGrid = ({ data }) => {
           {post}
         </div>
       ))}
+
+         {/* Полоса текущего времени */}
+      {linePosition !== null && (
+        <div
+            className={css.currenttimeline}
+          style={{
+              left:
+                 `calc(100px - ${linePosition * 1.95}px + ${linePosition}%)` 
+                //  `${linePosition}%`
+            }}
+        /> 
+      )}
+
 
       {/* Ячейки для работ */}
       {data.workItems.map((item, index) => {
@@ -66,13 +128,15 @@ const AppointmentGrid = ({ data }) => {
              {item.workType !== 'empty' && <p className={css.plateinfo} style={{ background: 'var(--bg-secondary)', }} >{item.plate}</p>}
              {item.workType !== 'empty' && <p  style={{
               background: workTypeColors[item.workType] || '#333',
-              borderLeft: `1px solid ${workTypeBorder[item.workType] }`,
+              borderLeft: `1px solid ${workTypeBorder[item.workType]}`,
+              filter: `drop-shadow(-4px 0px 3px  ${workTypeBorder[item.workType]})`, 
               }}  className={css.mechanicinfo} >{item.mechanic}</p>
            }
           </div>
         );
       })}
     </div>
+    
   );
 };
 
