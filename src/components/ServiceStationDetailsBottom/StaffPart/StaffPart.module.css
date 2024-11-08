@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 9px;
 
-    margin-bottom: 20px;
+   
 }
 
 .teamListItem{
@@ -14,6 +14,7 @@
         align-self: stretch;
 
         border-bottom: 1px solid var(--input-stroke);
+        width: 854px;
 }
 
 .contentBox{
@@ -103,6 +104,14 @@
         line-height: normal;
 }
 
+.addBtn:hover {
+    background-color: var(--blue-btn-hover);
+}
+
+.addBtn:active {
+    background-color: var(--blue-btn-inactive);
+}
+
 .power{
     fill: var(--green-btn-normal);
     width: 18px;
@@ -147,6 +156,14 @@
     stroke-width: 2px;
 }
 
+.addBtn:hover .iconPlus {
+    color: var(--blue-btn-hover);
+}
+
+.addBtn:active .iconPlus {
+    color: var(--blue-btn-inactive);
+}
+
 .input{
     background-color: transparent;
     outline: none;
@@ -161,4 +178,27 @@
     gap: 3px;
     /* border: 1px dashed var(--input-stroke); */
     border-radius: 8px;
+}
+
+
+.divForScroll {
+    width: 876px;
+    height: 230px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.divForScroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.divForScroll::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+
+}
+
+.divForScroll::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: var(--main-gray);
 }

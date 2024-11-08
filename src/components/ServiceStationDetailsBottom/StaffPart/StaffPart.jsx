@@ -75,6 +75,7 @@ export default function StaffPart() {
 
     return (
         <div>
+            <div className={css.divForScroll}>
             <ul className={css.teamList}>
 
                 {members.map((member, index) =>(
@@ -127,7 +128,8 @@ export default function StaffPart() {
                 </li>
                 ))}
                  
-            </ul>
+                </ul>
+            </div>
             <button type="button" className={css.addBtn} onClick={openModal}>
                 <span className={css.plus}>
               <BsPlusLg className={css.iconPlus} />

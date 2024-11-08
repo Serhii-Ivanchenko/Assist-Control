@@ -21,6 +21,7 @@ export default function StationPart() {
   const [newPost, setNewPost] = useState("");
   const [isEditing, setIsEditing] = useState(null)
   const inputFocusRef = useRef();
+  const scrollToTheLastItemRef = useRef();
 
     const toDisable = (index) => {
         setPosts(posts.map((post, i) => i === index ? { ...post, isDisabled: !post.isDisabled } : post));
@@ -46,7 +47,16 @@ export default function StationPart() {
             setPosts([...posts, { name: newPost, isDisabled: false, id: Date.now() }]);
             setNewPost("");
         }
+  }
+  
+  useEffect(() => {
+   if (posts.length > 0) {
+        scrollToTheLastItemRef.current?.scrollTo({
+            top: scrollToTheLastItemRef.current.scrollHeight,
+            behavior: "smooth"
+        });
     }
+}, [posts])
 
     const deletePost = (index)=>{
         setPosts((prevPosts) => prevPosts.filter((_,i) => i !== index))
@@ -55,9 +65,10 @@ export default function StationPart() {
     return (
       <div>
         <p className={css.title}>Назва поста</p>
-        <ul className={css.postList}>
+        <div className={css.divForScroll} ref={scrollToTheLastItemRef}>
+        <ul className={css.postList} >
           {posts.map((post, index) => (
-            <li key={index} className={css.postListItem}>
+            <li key={post.id} className={css.postListItem} >
               {isEditing === post.id ? (
                 <input
                   value={post.name}
@@ -94,7 +105,8 @@ export default function StationPart() {
               </div>
             </li>
           ))}
-        </ul>
+          </ul>
+        </div>
         <div className={css.addBox}>
           <input
             placeholder="Додати новий пост..."
