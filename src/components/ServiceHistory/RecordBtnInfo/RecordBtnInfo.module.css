@@ -17,7 +17,7 @@
   cursor: pointer;
   transition: color 300ms ease-in-out;
 }
-
+.infoBtn:disabled,
 .nonActiveBtn {
   color: var(--input-text);
 }
@@ -57,15 +57,50 @@
 :global(
     .MuiTableHead-root > .MuiTableRow-root > .MuiTableCell-root:first-child
   ) {
-  padding: 6px 0 6px 10px !important;
+  padding: 6px 6px 6px 10px !important;
   text-align: left !important;
 }
 :global(.MuiTableCell-root) {
   color: var(--white) !important;
   outline: var(--light-gray-table) !important;
   border: 1px solid var(--light-gray-table) !important;
-  padding: 6px 0 6px 0 !important;
+  padding: 6px !important;
   font-size: 16px !important;
   font-weight: 600 !important;
   text-align: center !important;
+}
+.repairTableHeaderCell {
+  text-align: left !important;
+}
+.repairTableRow {
+  height: 100% !important;
+}
+.repairTableRow > :global(.MuiTableCell-root) {
+  text-align: left !important;
+}
+.repairTableCell {
+  height: 35px !important;
+  padding: 0px !important;
+  text-align: left !important;
+}
+
+.repairTableCell > :global(.MuiCheckbox-root) {
+  /* height: 100% !important; */
+  color: var(--green-btn-normal);
+  border-radius: 0px;
+  border-right: 1px solid var(--light-gray-table);
+  width: 25px !important;
+  padding: 0px !important;
+  margin-right: 10px;
+  background-color: none;
+  transition: background-color 200ms ease-in-out;
+}
+.repairTableCell > :global(.MuiCheckbox-root):hover {
+  background-color: hsla(120, 100%, 25%, 0.2);
+}
+:global(.Mui-checked) {
+  color: var(--green-btn-normal) !important;
+}
+.repairTableText {
+  text-wrap: balance;
 }
