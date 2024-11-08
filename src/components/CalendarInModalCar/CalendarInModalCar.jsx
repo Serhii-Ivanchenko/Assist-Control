@@ -1,34 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectDate } from "../../redux/cars/selectors";
 import css from "./CalendarInModalCar.module.css";
 import DatePicker from "react-datepicker";
 import { BsCalendar2Week } from "react-icons/bs";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function CalendarInModalCar({ startDate, endDate, onDateBegChange, onDateEndChange }) {
-  const [periodStartData, setPeriodStartData] = useState(startDate || null);  // Початкове значення null
-  const [periodEndData, setPeriodEndData] = useState(endDate || null);  // Початкове значення null
+  const selectedDate = useSelector(selectDate); // Отримуємо selectedDate з Redux
+  const [periodStartData, setPeriodStartData] = useState(startDate || selectedDate || null);  // Якщо startDate немає, використовуємо selectedDate
+  const [periodEndData, setPeriodEndData] = useState(endDate || startDate || selectedDate || null);  // Якщо endDate немає, використовуємо startDate або selectedDate
   const [isOpenBeg, setIsOpenBeg] = useState(false);
   const [isOpenEnd, setIsOpenEnd] = useState(false);
 
+  useEffect(() => {
+    if (startDate !== periodStartData) {
+      setPeriodStartData(startDate || selectedDate);  // Оновлюємо період початкової дати
+    }
+  }, [startDate, periodStartData, selectedDate]);  // Залежність від пропсів та Redux дати
+
+  useEffect(() => {
+    if (endDate !== periodEndData) {
+      setPeriodEndData(endDate || periodStartData);  // Оновлюємо кінцеву дату, якщо вона не передана
+    }
+  }, [endDate, periodEndData, periodStartData]); // Перевірка кінцевої дати та початкової дати
+
   function handleInputChangeBeg(date) {
     setPeriodStartData(date);
-    onDateBegChange(date);
+    onDateBegChange(date);  // Передаємо вибрану дату в батьківський компонент
   }
 
   function handleInputChangeEnd(date) {
     setPeriodEndData(date);
-    onDateEndChange(date);
+    onDateEndChange(date);  // Передаємо кінцеву дату в батьківський компонент
   }
 
   const handleIconClickBeg = () => setIsOpenBeg((prev) => !prev);
   const handleIconClickEnd = () => setIsOpenEnd((prev) => !prev);
 
   return (
-    <div className={css.containerperiodselector}>
-      <p className={css.periodtitle}>З</p>
-      <div className={css.datewrapper}>
+    <div className={css.calendarContainer}>
+      <p className={css.periodTitle}>З</p>
+      <div className={css.dateWrapper}>
         <DatePicker
-          className={css.periodinput}
+          className={css.periodInput}
           selected={periodStartData}
           onChange={(date) => {
             handleInputChangeBeg(date);
@@ -37,18 +52,18 @@ export default function CalendarInModalCar({ startDate, endDate, onDateBegChange
           dateFormat="dd/MM/yyyy"
           open={isOpenBeg}
           onClickOutside={() => setIsOpenBeg(false)}
-          popperClassName={css.leftdatepickerdropdown}
+          popperClassName={css.leftdatePickerDropdown}
           onKeyDown={(e) => e.preventDefault()}
         />
-        <button className={css.calendarBtn}>
+        <div className={css.calendarBtn}>
           <BsCalendar2Week className={css.icon} onClick={handleIconClickBeg} />
-        </button>
+        </div>
       </div>
-      
-      <p className={css.periodtitle}>По</p>
-      <div className={css.datewrapper}>
+
+      <p className={css.periodTitle}>По</p>
+      <div className={css.dateWrapper}>
         <DatePicker
-          className={css.periodinput}
+          className={css.periodInput}
           selected={periodEndData}
           onChange={(date) => {
             handleInputChangeEnd(date);
@@ -57,12 +72,12 @@ export default function CalendarInModalCar({ startDate, endDate, onDateBegChange
           dateFormat="dd/MM/yyyy"
           open={isOpenEnd}
           onClickOutside={() => setIsOpenEnd(false)}
-          popperClassName={css.datepickerdropdown}
+          popperClassName={css.datePickerDropdown}
           onKeyDown={(e) => e.preventDefault()}
         />
-        <button className={css.calendarBtn}>
+        <div className={css.calendarBtn}>
           <BsCalendar2Week className={css.icon} onClick={handleIconClickEnd} />
-        </button>
+        </div>
       </div>
     </div>
   );

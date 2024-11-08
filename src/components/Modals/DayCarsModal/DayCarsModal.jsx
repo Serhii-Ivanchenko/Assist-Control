@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectLoading } from "../../../redux/cars/selectors";
+import { selectDate, selectLoading } from "../../../redux/cars/selectors";
 import styles from "./DayCarsModal.module.css";
 import DayCarsFilter from "../../DayCarsFilter/DayCarsFilter";
 import { FiGrid } from "react-icons/fi";
@@ -16,14 +16,14 @@ export default function DayCarsModal({
   onClose,
   isModal,
   carsData,
-  selectedDate,
 }) {
+  const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectLoading);
   const [viewMode, setViewMode] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [inputError, setInputError] = useState("");
-  const [startDate, setStartDate] = useState(null); // Початково null
-  const [endDate, setEndDate] = useState(null); // Початково null
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [filteredCarsData, setFilteredCarsData] = useState(carsData);
   const [selectedStatus, setSelectedStatus] = useState("all");
 
