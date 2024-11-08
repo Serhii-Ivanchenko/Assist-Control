@@ -14,7 +14,7 @@ export default function StatusFilterCars({ onStatusChange }) {
   };
 
   const statuses = [
-    { status: "all", label: "всі авто" },
+    { status: "all", label: "Всі авто" },
     { status: "diagnostic", label: "Діагностика" },
     { status: "repair", label: "Ремонт" },
     { status: "view_repair", label: "Огляд ПР" },
