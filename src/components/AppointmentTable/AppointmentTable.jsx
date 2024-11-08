@@ -2,8 +2,6 @@ import css from './AppointmentTable.module.css'
  import AppointmentGrid from '../AppointmentGrid/AppointmentGrid.jsx';
 
 
-// import Timeline from 'react-calendar-timeline';
-//  import 'react-calendar-timeline/lib/Timeline.css';
 
 // Входные данные с дополнительным полем `workType` для определения вида работ
 const data = [
@@ -24,10 +22,21 @@ const data = [
   { post_id: 3,
     cars: [
       { plate: 'AC45660KO', mechanic: 'Мироненко', start_time: 9, end_time: 17, workType: 'repair' },
+      { plate: 'AA6121CA', mechanic: 'Шевчук', start_time: 12, end_time: 13, workType: 'checkRepair' },
+    ],
+  },
+ { post_id: 4,
+    cars: [
+      { plate: 'AC45660KO', mechanic: 'Мироненко', start_time: 9, end_time: 12, workType: 'viewRepair' },
       { plate: 'AA6121CA', mechanic: 'Шевчук', start_time: 12, end_time: 13, workType: 'viewRepair' },
     ],
   },
-
+  { post_id: 5,
+    cars: [
+      { plate: 'AC45660KO', mechanic: 'Мироненко', start_time: 9, end_time: 10, workType: 'repair' },
+      { plate: 'AA6121CA', mechanic: 'Шевчук', start_time: 12, end_time: 15, workType: 'checkRepair' },
+    ],
+  },
 ];
 
 
@@ -177,9 +186,8 @@ function addEmptySlots(result, totalPosts) {
   return fullResult;
 }
 
-// let result = splitWorkStages(data);
-// result = addEmptySlots(result);
-const totalPosts = 4;
+
+const totalPosts = 5;
 
 // Убедимся, что каждый пост имеет данные, даже если они пустые
 const allPostsData = ensureAllPosts(data, totalPosts);
@@ -205,7 +213,7 @@ result.sort((a, b) => {
 
 
   const datares = { dates: ['Пости/  Години', '09.00', '10.00', '11.00', '12.00', '13.00', '14.00', '15.00', '16.00', '17.00', '18.00'],
-  posts: ['Пост 1', 'Пост 2', 'Пост 3', 'Пост 4'],
+  posts: ['Пост 1', 'Пост 2', 'Пост 3', 'Пост 4', 'Пост 5'],
     workItems: result
   }
   
