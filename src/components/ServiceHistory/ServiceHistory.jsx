@@ -134,6 +134,7 @@ export default function ServiceHistory() {
       newkilometrs: "9272",
       date: "17.06.2024",
       time: "16:08",
+      appeal: {},
       diagnostic: {},
     },
     {

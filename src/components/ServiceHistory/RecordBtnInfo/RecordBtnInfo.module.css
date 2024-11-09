@@ -21,7 +21,9 @@
 .nonActiveBtn {
   color: var(--input-text);
 }
-
+.disabledBtn {
+  cursor: default;
+}
 .infoWrapper {
   display: flex;
   flex-direction: column;

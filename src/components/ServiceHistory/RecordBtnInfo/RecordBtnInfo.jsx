@@ -37,24 +37,33 @@ export default function RecordBtnInfo({ recordInfo, item }) {
             <button
               className={clsx(
                 css.infoBtn,
-                !appealMsgToShow && css.nonActiveBtn
+                !appealMsgToShow && css.nonActiveBtn,
+                !item.appeal.client && css.disabledBtn
               )}
               onClick={() => changeAppealMsg(true)}
+              disabled={!item.appeal.client}
             >
               Клієнт
             </button>
             <button
-              className={clsx(css.infoBtn, appealMsgToShow && css.nonActiveBtn)}
+              className={clsx(
+                css.infoBtn,
+                appealMsgToShow && css.nonActiveBtn,
+                !item.appeal.menager && css.disabledBtn
+              )}
               onClick={() => changeAppealMsg(false)}
+              disabled={!item.appeal.menager}
             >
               Менеджер
             </button>
           </div>
-          {appealMsgToShow ? (
-            <div className={css.clientMsg}>{item.appeal.client}</div>
-          ) : (
-            <div className={css.wrapperOfComent}>{item.appeal.menager}</div>
-          )}
+          {appealMsgToShow
+            ? item.appeal.client && (
+                <div className={css.clientMsg}>{item.appeal.client}</div>
+              )
+            : item.appeal.menager && (
+                <div className={css.wrapperOfComent}>{item.appeal.menager}</div>
+              )}
         </div>
       )}
       {/* ДІАГНОСТИКА */}
@@ -64,7 +73,8 @@ export default function RecordBtnInfo({ recordInfo, item }) {
             <button
               className={clsx(
                 css.infoBtn,
-                diagnostic !== "spareParts" && css.nonActiveBtn
+                diagnostic !== "spareParts" && css.nonActiveBtn,
+                !item.diagnostic.spareParts && css.disabledBtn
               )}
               onClick={() => setDiagnostic("spareParts")}
               disabled={!item.diagnostic.spareParts}
@@ -74,7 +84,8 @@ export default function RecordBtnInfo({ recordInfo, item }) {
             <button
               className={clsx(
                 css.infoBtn,
-                diagnostic !== "PhotoOfBreakdown" && css.nonActiveBtn
+                diagnostic !== "PhotoOfBreakdown" && css.nonActiveBtn,
+                !item.diagnostic.PhotoOfBreakdown && css.disabledBtn
               )}
               onClick={() => setDiagnostic("PhotoOfBreakdown")}
               disabled={!item.diagnostic.PhotoOfBreakdown}
@@ -84,7 +95,8 @@ export default function RecordBtnInfo({ recordInfo, item }) {
             <button
               className={clsx(
                 css.infoBtn,
-                diagnostic !== "comment" && css.nonActiveBtn
+                diagnostic !== "comment" && css.nonActiveBtn,
+                !item.diagnostic.message && css.disabledBtn
               )}
               onClick={() => setDiagnostic("comment")}
               disabled={!item.diagnostic.message}
