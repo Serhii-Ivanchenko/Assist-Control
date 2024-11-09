@@ -17,7 +17,7 @@
 
 .postListItem {
     display: flex;
-    padding: 10px 0px 9px;
+    padding: 4px 0px 4px;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
@@ -25,11 +25,19 @@
     width: 854px;
 }
 
+/* .postListItemActive{
+        padding: 4px 0px 4px;
+} */
+
 .postName {
     font-size: 16px;
     font-style: normal;
     font-weight: 300;
     line-height: 1.1875em;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
 }
 
 .iconsBox {
@@ -104,15 +112,21 @@
 }
 
 .inputForPostName {
-    background-color: transparent;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--input-stroke);
     outline: none;
-    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
 
     color: var(--white);
     font-size: 16px;
     font-style: normal;
     font-weight: 300;
-    line-height: normal;
+    line-height: 30px;
 }
 
 .plus {
