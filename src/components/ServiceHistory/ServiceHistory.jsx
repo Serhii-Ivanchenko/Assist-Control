@@ -56,7 +56,7 @@ export default function ServiceHistory() {
       diagnostic: {
         spareParts: [
           {
-            id: "11111111111111 1111111111111111111111111111",
+            id: "1",
             name: "Тормозні",
             number: "BRK123456",
             state: "Зношений",
@@ -79,6 +79,46 @@ export default function ServiceHistory() {
         ],
         message:
           "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
+      },
+      repair: {
+        fillOfRepair: [
+          {
+            isCellChecked: true,
+            nameOfDetail: "Лобове скло",
+            priceOfDetail: "3500",
+            repairName: "Заміна лобового скла",
+            repairPrice: "800",
+          },
+          {
+            isCellChecked: false,
+            nameOfDetail: "Бампер передній",
+            priceOfDetail: "4500",
+            repairName: "Установка бампера",
+            repairPrice: "1200",
+          },
+          {
+            isCellChecked: true,
+            nameOfDetail: "Капот",
+            priceOfDetail: "6000",
+            repairName: "Встановлення капота",
+            repairPrice: "1500",
+          },
+          {
+            isCellChecked: true,
+            nameOfDetail: "Крила (л + п)",
+            priceOfDetail: "4000",
+            repairName: "Встановлення крил",
+            repairPrice: "1000",
+          },
+          {
+            isCellChecked: false,
+            nameOfDetail: "Фари передні (2 шт.)",
+            priceOfDetail: "3200",
+            repairName: "Налаштування фар",
+            repairPrice: "600",
+          },
+        ],
+        repairSum: "21200",
       },
     },
     {

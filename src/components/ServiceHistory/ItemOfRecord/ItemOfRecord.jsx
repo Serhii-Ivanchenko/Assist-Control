@@ -152,9 +152,19 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
               <button
                 className={css.btnDownloadsItem}
                 onClick={() => handleSetRecordInfo("repair")}
+                style={
+                  item.repair && recordInfo === "repair"
+                    ? { cursor: "pointer", outline: "1px solid #fff" }
+                    : !item.repair
+                    ? null
+                    : { cursor: "pointer" }
+                }
+                disabled={!item.repair}
               >
                 <p>Ремонт</p>
-                <div className={css.downloadBtn}>
+                <div
+                  className={clsx(css.downloadBtn, item.repair && css.btnBg)}
+                >
                   <BsWrench size={13} />
                 </div>
               </button>

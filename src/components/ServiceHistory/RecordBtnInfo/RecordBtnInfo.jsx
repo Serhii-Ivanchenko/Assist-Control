@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BsCheckCircle, BsCheckCircleFill } from "react-icons/bs";
+import { BsCheckCircleFill, BsPencil, BsFillPrinterFill } from "react-icons/bs";
 import css from "./RecordBtnInfo.module.css";
 import clsx from "clsx";
 import {
@@ -129,38 +129,76 @@ export default function RecordBtnInfo({ recordInfo, item }) {
       {/* РЕМОНТ */}
       {recordInfo === "repair" && (
         <div className={css.repairWrapper}>
+          <div className={css.repairHeader}>
+            <p className={css.repairTitle}>Запчастини + робота</p>
+            <div className={css.repairBtnWrapper}>
+              <div className={css.editAndPrintIconWrapper}>
+                <BsPencil size={13} />
+              </div>
+              <div className={css.editAndPrintIconWrapper}>
+                <BsFillPrinterFill size={13} />
+              </div>
+            </div>
+          </div>
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell className={css.repairTableHeaderCell}>Запчастини</TableCell>
-                  <TableCell className={css.repairTableHeaderCell}>Вартість </TableCell>
-                  <TableCell className={css.repairTableHeaderCell}>Робота</TableCell>
-                  <TableCell className={css.repairTableHeaderCell}>Вартість</TableCell>
+                  <TableCell className={css.repairTableHeaderCell}>
+                    Запчастини
+                  </TableCell>
+                  <TableCell className={css.priceCell}>Вартість</TableCell>
+                  <TableCell className={css.repairTableHeaderCell}>
+                    Робота
+                  </TableCell>
+                  <TableCell className={css.priceCell}>Вартість</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {item.diagnostic.spareParts.map((item) => {
+                {item.repair.fillOfRepair.map((item) => {
                   return (
                     <TableRow
                       className={css.repairTableRow}
                       key={`${Math.random()}`}
                     >
-                      <TableCell className={css.repairTableCell}>
+                      <TableCell
+                        className={clsx(
+                          css.repairTableCell,
+                          css.repairNamedCell
+                        )}
+                      >
                         <Checkbox
+                          checked={item.isCellChecked}
+                          disabled={true}
                           sx={{ height: "100%" }}
-                          icon={<BsCheckCircle size={18} />}
                           checkedIcon={<BsCheckCircleFill size={18} />}
-                          className={css.repairTableCheckBox}
+                          className={clsx(
+                            css.repairTableCheckBox,
+                            !item.isCellChecked && css.nonCheckedCheckBox
+                          )}
                         />
-                        <span className={css.repairTableText}>{item.id}</span>
+                        {item.nameOfDetail}
                       </TableCell>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell>{item.number}</TableCell>
-                      <TableCell>{item.state}</TableCell>
+                      <TableCell className={css.priceCell}>
+                        {item.priceOfDetail}
+                      </TableCell>
+                      <TableCell className={css.repairNamedCell}>
+                        {item.repairName}
+                      </TableCell>
+                      <TableCell className={css.priceCell}>
+                        {item.repairPrice}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
+                <TableRow className={css.footerRow}>
+                  <TableCell>Загальна вартість</TableCell>
+                  <TableCell className={css.priceCell}>
+                    {item.repair.repairSum}
+                  </TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
