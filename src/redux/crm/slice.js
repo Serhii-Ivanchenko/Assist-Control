@@ -4,8 +4,11 @@ import {
   createRecord,
   getAllRecords,
   getMechsAndPosts,
+  getMonthlyLoad,
   getPlannedVisits,
   getRecordsFromDate,
+  getServiceDataForBooking,
+  updateRecordData,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -42,19 +45,38 @@ const crmSlice = createSlice({
         state.records.push(action.payload.record);
       })
       .addCase(createRecord.rejected, handleRejected)
-      .addCase(getMechsAndPosts.pending, handlePending)
-      .addCase(getMechsAndPosts.fulfilled, (state, action) => {
+      .addCase(updateRecordData.pending, handlePending)
+      .addCase(updateRecordData.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        const recordToEditIndex = state.records.findIndex(
+          (record) => record.id === action.payload.id
+        );
+        state.records[recordToEditIndex] = action.payload;
+      })
+      .addCase(updateRecordData.rejected, handleRejected)
+      .addCase(getServiceDataForBooking.pending, handlePending)
+      .addCase(getServiceDataForBooking.fulfilled, (state, action) => {
         state.isLoading = false;
         state.serviceData.mechanics = action.payload.mechanics;
         state.serviceData.posts = action.payload.posts;
+        state.serviceData.services = action.payload.services;
+        state.serviceData.workingHours = action.payload.working_hours;
+        state.serviceData.availability = action.payload.availability;
       })
-      .addCase(getMechsAndPosts.rejected, handleRejected)
+      .addCase(getServiceDataForBooking.rejected, handleRejected)
       .addCase(getPlannedVisits.pending, handlePending)
       .addCase(getPlannedVisits.fulfilled, (state, action) => {
         state.isLoading = false;
         state.visits = action.payload.planner;
       })
-      .addCase(getPlannedVisits.rejected, handleRejected),
+      .addCase(getPlannedVisits.rejected, handleRejected)
+      .addCase(getMonthlyLoad.pending, handlePending)
+      .addCase(getMonthlyLoad.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.load = action.payload.load;
+      })
+      .addCase(getMonthlyLoad.rejected, handleRejected),
 });
 
 export default crmSlice.reducer;

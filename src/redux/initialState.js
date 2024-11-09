@@ -75,9 +75,13 @@ export const initialState = {
     serviceData: {
       mechanics: [],
       posts: [],
+      services: [],
+      workingHours: [],
+      availability: [],
     },
     records: [],
     visits: [],
+    load: [],
     isLoading: false,
     error: null,
   },

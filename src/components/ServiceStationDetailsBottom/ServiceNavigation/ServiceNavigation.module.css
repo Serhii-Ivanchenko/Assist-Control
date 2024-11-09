@@ -23,6 +23,13 @@
     border: 1px solid transparent;
 }
 
+.btnService:not(:first-child):hover{
+    background: var(--CRM-modal-hover);
+    cursor: pointer;
+}
+
+
+
 .title {
     color: var(--white);
     font-size: 20px;

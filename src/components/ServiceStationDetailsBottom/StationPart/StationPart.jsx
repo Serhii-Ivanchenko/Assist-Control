@@ -1,9 +1,8 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import css from "./StationPart.module.css"
 import { BsPencil, BsPlusLg } from "react-icons/bs";
 import { BsTrash } from "react-icons/bs";
 import { BsPower } from "react-icons/bs";
-import { BiSolidPlusSquare } from "react-icons/bi";
 import clsx from "clsx";
 import { RiSave3Fill } from "react-icons/ri";
 
@@ -15,11 +14,14 @@ import { RiSave3Fill } from "react-icons/ri";
 
 export default function StationPart() {
     const [posts, setPosts] = useState([
-        { name: "ПОСТ 1", isEditing: false, isDisabled: false },
-        { name: "ПОСТ 2", isEditing: false, isDisabled: false },
-        { name: "ПОСТ 3", isEditing: false, isDisabled: false },
-        { name: "ПОСТ 4", isEditing: false, isDisabled: false }]);
-    const [newPost, setNewPost] = useState("");
+        { name: "ПОСТ 1",  isDisabled: false, id: 1 },
+        { name: "ПОСТ 2",  isDisabled: false, id: 2 },
+        { name: "ПОСТ 3",  isDisabled: false, id: 3 },
+        { name: "ПОСТ 4",  isDisabled: false, id: 4 }]);
+  const [newPost, setNewPost] = useState("");
+  const [isEditing, setIsEditing] = useState(null)
+  const inputFocusRef = useRef();
+  const scrollToTheLastItemRef = useRef();
 
     const toDisable = (index) => {
         setPosts(posts.map((post, i) => i === index ? { ...post, isDisabled: !post.isDisabled } : post));
@@ -30,16 +32,31 @@ export default function StationPart() {
         setPosts(posts.map((post, i) => i === index ? { ...post, name: newName } : post));
     }
 
-    const handleEditing = (index) => {
-        setPosts(posts.map((post, i) => i === index ? { ...post, isEditing: !post.isEditing } : post));
+  const handleEditing = (postId) => {
+    setIsEditing(isEditing === postId ? null : postId);
     }
 
+  useEffect(() => {
+  if(isEditing){
+      inputFocusRef.current.focus()
+    }
+}, [isEditing])
+  
     const handleAddPost = () => {
         if (newPost.trim()) {
-            setPosts([...posts, { name: newPost, isEditing: false, isDisabled: false }]);
+            setPosts([...posts, { name: newPost, isDisabled: false, id: Date.now() }]);
             setNewPost("");
         }
+  }
+  
+  useEffect(() => {
+   if (posts.length > 0) {
+        scrollToTheLastItemRef.current?.scrollTo({
+            top: scrollToTheLastItemRef.current.scrollHeight,
+            behavior: "smooth"
+        });
     }
+}, [posts])
 
     const deletePost = (index)=>{
         setPosts((prevPosts) => prevPosts.filter((_,i) => i !== index))
@@ -48,62 +65,48 @@ export default function StationPart() {
     return (
       <div>
         <p className={css.title}>Назва поста</p>
-        <ul className={css.postList}>
+        <div className={css.divForScroll} ref={scrollToTheLastItemRef}>
+        <ul className={css.postList} >
           {posts.map((post, index) => (
-            <li key={index} className={css.postListItem}>
-              {post.isEditing ? (
+            <li key={post.id} className={css.postListItem} >
+              {isEditing === post.id ? (
                 <input
                   value={post.name}
                   onChange={(e) => handleChangePN(e.target.value, index)}
                   className={css.inputForPostName}
+                  ref={inputFocusRef}
                 />
               ) : (
                 <p className={css.postName}>{post.name}</p>
               )}
               <div className={css.iconsBox}>
-                {/* <button
-                  type="button"
-                  className={css.iconBtn}
-                  onClick={() => handleEditing(index)}
-                > */}
-                {post.isEditing ? (
+                
+                {isEditing === post.id ? (
                   <RiSave3Fill
                     className={css.icons}
-                    onClick={() => handleEditing(index)}
+                    onClick={() => handleEditing(post.id)}
                   />
                 ) : (
                   <BsPencil
                     className={css.icons}
-                    onClick={() => handleEditing(index)}
+                    onClick={() => handleEditing(post.id)}
                   />
                 )}
-                {/* </button> */}
-                {/* <button
-                  type="button"
-                  className={css.iconBtn}
-                  onClick={() => deletePost(index)}
-                > */}
                 <BsTrash
                   className={css.icons}
                   onClick={() => deletePost(index)}
                 />
-                {/* </button> */}
-                {/* <button
-                  type="button"
-                  onClick={() => toDisable(index)}
-                  className={css.iconBtn}
-                > */}
                 <BsPower
                   className={clsx(css.power, {
                     [css.powerDisabled]: post.isDisabled,
                   })}
                   onClick={() => toDisable(index)}
                 />
-                {/* </button> */}
               </div>
             </li>
           ))}
-        </ul>
+          </ul>
+        </div>
         <div className={css.addBox}>
           <input
             placeholder="Додати новий пост..."
