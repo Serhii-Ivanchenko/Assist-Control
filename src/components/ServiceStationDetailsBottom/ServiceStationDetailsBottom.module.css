@@ -1,4 +1,4 @@
-.changeablePart{
+.changeablePart {
     width: 914px;
     padding: 20px 40px 20px 20px;
 
@@ -7,8 +7,6 @@
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.bottomPartBox{
-    padding-left: 40px;
-    padding-right: 40px;
-    margin-top: 41px;
-    }
+.bottomPartBox {
+    /* margin-top: 41px; */
+}

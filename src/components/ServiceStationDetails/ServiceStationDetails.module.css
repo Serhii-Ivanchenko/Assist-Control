@@ -1,0 +1,5 @@
+.serviceDetailsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 41px;
+}
