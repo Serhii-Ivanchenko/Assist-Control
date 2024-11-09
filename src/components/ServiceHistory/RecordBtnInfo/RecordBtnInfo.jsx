@@ -167,42 +167,37 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {item.repair.fillOfRepair.map((item) => {
-                  return (
-                    <TableRow
-                      className={css.repairTableRow}
-                      key={`${Math.random()}`}
+                {item.repair.fillOfRepair.map((item) => (
+                  <TableRow
+                    className={css.repairTableRow}
+                    key={`${Math.random()}`}
+                  >
+                    <TableCell
+                      className={clsx(css.repairTableCell, css.repairNamedCell)}
                     >
-                      <TableCell
+                      <Checkbox
+                        checked={item.isCellChecked}
+                        disabled={true}
+                        sx={{ height: "100%" }}
+                        checkedIcon={<BsCheckCircleFill size={18} />}
                         className={clsx(
-                          css.repairTableCell,
-                          css.repairNamedCell
+                          css.repairTableCheckBox,
+                          !item.isCellChecked && css.nonCheckedCheckBox
                         )}
-                      >
-                        <Checkbox
-                          checked={item.isCellChecked}
-                          disabled={true}
-                          sx={{ height: "100%" }}
-                          checkedIcon={<BsCheckCircleFill size={18} />}
-                          className={clsx(
-                            css.repairTableCheckBox,
-                            !item.isCellChecked && css.nonCheckedCheckBox
-                          )}
-                        />
-                        {item.nameOfDetail}
-                      </TableCell>
-                      <TableCell className={css.priceCell}>
-                        {item.priceOfDetail}
-                      </TableCell>
-                      <TableCell className={css.repairNamedCell}>
-                        {item.repairName}
-                      </TableCell>
-                      <TableCell className={css.priceCell}>
-                        {item.repairPrice}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                      />
+                      {item.nameOfDetail}
+                    </TableCell>
+                    <TableCell className={css.priceCell}>
+                      {item.priceOfDetail}
+                    </TableCell>
+                    <TableCell className={css.repairNamedCell}>
+                      {item.repairName}
+                    </TableCell>
+                    <TableCell className={css.priceCell}>
+                      {item.repairPrice}
+                    </TableCell>
+                  </TableRow>
+                ))}
                 <TableRow className={css.footerRow}>
                   <TableCell>Загальна вартість</TableCell>
                   <TableCell className={css.priceCell}>
