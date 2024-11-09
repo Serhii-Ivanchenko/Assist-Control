@@ -4,7 +4,7 @@ import { IoCarSportSharp } from "react-icons/io5";
 import Modal from "../../Modals/Modal/Modal.jsx";
 import DayCarsModal from "../../Modals/DayCarsModal/DayCarsModal.jsx";
 
-export default function DetailsBtn({ carsData, selectedDate }) {
+export default function DetailsBtn({ carsData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDetailsBtnClick = () => {
@@ -28,7 +28,6 @@ export default function DetailsBtn({ carsData, selectedDate }) {
             carsData={carsData}
             isModal={true}
             onClose={handleCloseModal}
-            selectedDate={selectedDate}
           />
         </Modal>
       )}
