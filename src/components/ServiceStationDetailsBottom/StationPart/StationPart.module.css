@@ -11,7 +11,8 @@
     display: flex;
     flex-direction: column;
     gap: 9px;
-    margin-bottom: 20px;
+    height: 190px;
+   
 }
 
 .postListItem {
@@ -21,6 +22,7 @@
     align-items: center;
     align-self: stretch;
     border-bottom: 1px solid var(--input-stroke);
+    width: 854px;
 }
 
 .postName {
@@ -136,8 +138,40 @@
     stroke-width: 2px;
 }
 
+.addBtn:hover .iconPlus{
+   color: var(--blue-btn-hover);
+}
+
+.addBtn:active .iconPlus {
+    color: var(--blue-btn-inactive);
+}
+
+ 
+
 /* 
 .iconBtn {
     border: none;
     background-color: transparent;
 } */
+
+.divForScroll{
+    width: 876px;
+    height: 190px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.divForScroll::-webkit-scrollbar{
+    width: 8px;
+}
+
+.divForScroll::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+
+}
+
+.divForScroll::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+        background-color: var(--main-gray);
+}
