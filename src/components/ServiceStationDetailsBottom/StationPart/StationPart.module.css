@@ -23,6 +23,7 @@
     align-self: stretch;
     border-bottom: 1px solid var(--input-stroke);
     width: 854px;
+    height: 39px;
 }
 
 /* .postListItemActive{
@@ -34,11 +35,12 @@
     font-style: normal;
     font-weight: 300;
     line-height: 1.1875em;
-    height: 30px;
+    height: 39px;
     display: flex;
     align-items: center;
-    border: 1px solid transparent;
+    /* border: 1px solid transparent; */
 }
+
 
 .iconsBox {
     display: flex;
@@ -115,18 +117,14 @@
     background-color: var(--bg-secondary);
     border: 1px solid var(--input-stroke);
     outline: none;
-    padding: 5px 10px;
+    padding: 0 10px;
     border-radius: 6px;
-    height: 30px;
-
-    display: flex;
-    align-items: center;
-
+    height: 31px;
     color: var(--white);
     font-size: 16px;
     font-style: normal;
     font-weight: 300;
-    line-height: 30px;
+    line-height: 1.1875em;
 }
 
 .plus {
