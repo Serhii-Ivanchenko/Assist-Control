@@ -1,0 +1,6 @@
+.scheduleWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 311px;
+    padding: 0 30.5px;
+}

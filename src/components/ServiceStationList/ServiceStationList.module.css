@@ -36,25 +36,3 @@
 .serviceStationWrapper {
   position: relative;
 }
-
-.rightContainer {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 995px;
-  height: 921px;
-  border-radius: 12px;
-  background-color: var(--bg-input);
-  margin-left: 14px;
-  z-index: 1;
-}
-
-.rightContainer::before {
-  content: "";
-  position: absolute;
-  top: 62px;
-  left: -14px;
-  width: 14px;
-  height: 154px;
-  background-color: var(--bg-input);
-}

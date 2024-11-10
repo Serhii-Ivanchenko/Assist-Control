@@ -1,7 +1,61 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 .mainTitle {
   margin: 6px 0 12px;
   color: var(--white);
   font-family: "Roboto", sans-serif;
   font-size: 24px;
   font-weight: 400;
+}
+
+.rightContainer {
+  position: relative;
+  width: 995px;
+  height: 921px;
+  border-radius: 12px;
+  margin-left: 14px;
+  z-index: 1;
+  padding: 31px 40.5px 23px;
+  background: var(--bg-input) radial-gradient(221px at 50% 50%, rgba(81, 122, 184, 0.19) 0%, transparent 100%);
+  background-position: 15px -467px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.rightContainer::before,
+.rightContainer::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  /* filter: blur(200px); */
+  z-index: -1;
+}
+
+.rightContainer::before {
+  background: radial-gradient(341.5px at 50% 50%, rgba(184, 112, 81, 0.35) 0%, transparent 100%) no-repeat;
+  /* background: rgba(184, 112, 81, 0.35); */
+  opacity: 0.28;
+  width: 686px;
+  height: 683px;
+  top: 316px;
+  left: -277.5px;
+}
+
+.rightContainer::after {
+  background: radial-gradient(238px at 50% 50%, rgba(81, 141, 184, 0.60) 0%, transparent 100%) no-repeat;
+  /* background: rgba(81, 141, 184, 0.60); */
+  opacity: 0.28;
+  width: 492px;
+  height: 476px;
+  bottom: -114px;
+  right: -65px;
 }

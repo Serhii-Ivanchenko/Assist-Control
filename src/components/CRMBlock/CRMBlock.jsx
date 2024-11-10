@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import DayCarsList from '../DayCarsList/DayCarsList';
+import DayCarsListCrm from '../DayCarsListCrm/DayCarsListCrm';
 import css from './CRMBlock.module.css';
 import clsx from 'clsx';
-import { selectDate, selectDayCars } from '../../redux/cars/selectors.js';
-import { getCarsByDate } from '../../redux/cars/operations.js';
+import { selectDate } from '../../redux/cars/selectors.js';
 import toast from 'react-hot-toast';
+import { selectRecords } from '../../redux/crm/selectors.js';
+import { getRecordsFromDate } from '../../redux/crm/operations.js';
 
 const statusMapping = {
     new: 'Нова',
@@ -31,18 +32,18 @@ const getSvgIcon = (index) => {
     );
 };
 
-const filterCarsByStatus = (carsData, status) => {
-    return carsData.filter(car => car.status === status);
+const filterRecordsByStatus = (records, status) => {
+    return records.filter(record => record.status === status);
 };
 
 export default function CRMBlock() {
     const dispatch = useDispatch();
     const selectedDate = useSelector(selectDate);
-    const carsData = useSelector(selectDayCars);
+    const records = useSelector(selectRecords);
 
     useEffect(() => {
         if (selectedDate) {
-            dispatch(getCarsByDate(selectedDate))
+            dispatch(getRecordsFromDate(selectedDate))
                 .unwrap()
                 .then(() => {})
                 .catch(() => {
@@ -55,8 +56,8 @@ export default function CRMBlock() {
         <div className={css.container}>
             <div className={css.headersContainer}>
                 {Object.entries(statusMapping).map(([status, label], index) => {
-                    const filteredCars = filterCarsByStatus(carsData, status);
-                    const carCount = filteredCars.length;
+                    const filteredRecords = filterRecordsByStatus(records, status);
+                    const recordCount = filteredRecords.length;
 
                     return (
                         <div key={status} className={css.headerColumn}>
@@ -65,7 +66,7 @@ export default function CRMBlock() {
                             >
                                 {getSvgIcon(index)}
                                 {label}
-                                <span className={css.carCount}>{carCount}</span> 
+                                <span className={css.carCount}>{recordCount}</span> 
                             </h3>
                         </div>
                     );
@@ -74,13 +75,12 @@ export default function CRMBlock() {
 
             <div className={css.columnsContainer}>
                 {Object.entries(statusMapping).map(([status]) => {
-                    const filteredCars = filterCarsByStatus(carsData, status);
+                    const filteredRecords = filterRecordsByStatus(records, status);
 
                     return (
                         <div key={status} className={css.column}>
-                            <DayCarsList 
-                                    carsData={filteredCars} 
-                                    isCRMBlock
+                            <DayCarsListCrm 
+                                    records={filteredRecords}
                                 />
                         </div>
                     );

@@ -34,17 +34,20 @@
     top:100%;
     left: 0;
 
-    border-radius: 8px !important;
+    border-radius: 12px !important;
 }
 
 .react-tel-input .country-list::-webkit-scrollbar{
 width: 8px;
 overflow: hidden;
+/* border-radius: 4px; */
 }
 
 .react-tel-input .country-list::-webkit-scrollbar-track {
-    background-color: var(--dark-gray);
-    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    
 }
 
 .react-tel-input .country-list::-webkit-scrollbar-thumb {

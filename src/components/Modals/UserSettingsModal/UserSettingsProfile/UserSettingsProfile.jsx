@@ -4,7 +4,7 @@ import { useId } from "react";
 import * as Yup from "yup";
 import { BsSdCardFill } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
-import { useRef, useState} from "react";
+import { useRef, useState } from "react";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import PhoneSelect from "./PhoneSelect/PhoneSelect";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,11 +20,11 @@ import { getUserData } from "../../../../redux/auth/operations";
 import TimeZoneSelect from "./TimeZoneSelect/TimeZoneSelect";
 
 const Validation = Yup.object().shape({
-  username: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
-  phone: Yup.string().min(3, "Занадто коротке").max(50, "Занадто довге"),
-  adress: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
-  city: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
-  index: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
+  username: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Поле повинно бути заповнене"),
+  phone: Yup.string().min(3, "Занадто коротке").max(50, "Занадто довге").required("Поле повинно бути заповнене"),
+  adress: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Поле повинно бути заповнене"),
+  city: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Поле повинно бути заповнене"),
+  index: Yup.number().positive("Використовуйте додатні числа").integer("Використовуйте цілі числа").required("Поле повинно бути заповнене"),
 });
 
 export default function UserSettingsProfile({ onClose }) {
@@ -142,35 +142,42 @@ export default function UserSettingsProfile({ onClose }) {
     const dataToUpdate = {};
 
     if (values.username !== user.name) {
-      dataToUpdate.first_name = values.username;
+      dataToUpdate.first_name = values.username ;
     }
 
       if (values.country !== user.country) {
-        dataToUpdate.country = values.country;
+        dataToUpdate.country = values.country ;
             }
 
-    if (values.phone !== user.phone_number) {
-      dataToUpdate.phone_number = values.phone;
+    if ( values.phone !== user.phone_number) {
+      dataToUpdate.phone_number = values.phone ;
     }
 
-        if (values.adress !== user.address) {
-    dataToUpdate.address = values.adress;
+        if ( values.adress !== user.address) {
+    dataToUpdate.address = values.adress ;
         }
 
     if (values.section !== user.first_page) {
-      dataToUpdate.first_page = values.section;
+      dataToUpdate.first_page = values.section ;
     }
 
-    if (values.timeZone !== user.time_zone) {
-      dataToUpdate.time_zone = values.timeZone;
+    if ( values.timeZone !== user.time_zone) {
+      dataToUpdate.time_zone = values.timeZone ;
     }
 
         if (values.city !== user.city) {
-    dataToUpdate.city = values.city;
+    dataToUpdate.city = values.city ;
         }
 
-        if (values.index !== user.post_code) {
-    dataToUpdate.post_code = values.index;}
+        if ( values.index !== user.post_code) {
+          dataToUpdate.post_code = values.index;
+    }
+
+  //     // Заміна `null` або `undefined` на порожні рядки в `dataToUpdate`
+  // Object.keys(dataToUpdate).forEach(
+  //   (key) => (dataToUpdate[key] = dataToUpdate[key] ?? "")
+  // );
+
 
     // Якщо немає змін, не відправляємо запит на сервер
     if (Object.keys(dataToUpdate).length === 0) {
@@ -196,6 +203,14 @@ export default function UserSettingsProfile({ onClose }) {
       });
     } catch (error) {
       console.error("Error updating user data:", error);
+      toast.error("Не вдалося оновити дані :(", {
+        position: "top-right",
+        duration: 5000,
+        style: {
+          background: "var(--bg-input)",
+          color: "var(--white)FFF",
+        },
+      });
     } finally {
       actions.setSubmitting(false); // Завжди виконується
     }

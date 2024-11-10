@@ -1,0 +1,13 @@
+.crmBlockDayCarsListContainer {
+    background-color: transparent;
+    box-shadow: none;
+    width: 365px;
+    padding: 0;
+    
+  }
+  
+  .crmCarList{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }

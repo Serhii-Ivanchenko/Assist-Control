@@ -7,6 +7,8 @@ import { BsFillTelephoneOutboundFill } from "react-icons/bs";
 // import { BsFillPenFill } from "react-icons/bs";
 import { BsEnvelope } from "react-icons/bs";
 import { PiTelegramLogoLight } from "react-icons/pi";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 
 
@@ -27,10 +29,26 @@ export default function ConnectionSelect({ field, form }) {
     setIsOpen(false);
     };
     
-     const selectedOption = connection.find(type => type.value === field.value) || connection[0];
+  const selectedOption = connection.find(type => type.value === field.value) || connection[0];
+
+  const wrapperRef = useRef(null);
+
+const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+    }, []);
+
 
   return (
-    <div className={css.selectWrapper}>
+    <div className={css.selectWrapper} ref={wrapperRef}>
       <div className={css.connectionSelect} onClick={() => setIsOpen((prev) => !prev)}>
                {selectedOption.icon }
        {selectedOption.label}

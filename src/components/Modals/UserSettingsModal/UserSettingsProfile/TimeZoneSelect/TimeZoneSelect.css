@@ -12,6 +12,7 @@ border-radius: 10px !important;
 border: 1px solid var(--input-stroke) !important;
 margin-top: 8px !important;
 color: var(--input-text);
+/* cursor: pointer; */
 }
 
 .css-19bb58m{
@@ -38,6 +39,7 @@ width: 420px !important;
     border: 1px solid var(--input-stroke) !important;
     margin-top: 8px;
     box-shadow: none !important;
+    cursor: pointer !important;
 }
 
 .custom-select__control:hover{
@@ -47,24 +49,32 @@ box-shadow: none !important;
 
 .custom-select__menu{
     background-color: var(--bg-input) !important;
+    border-radius: 12px !important;
+    /* padding-top: 5px;
+    padding-bottom: 5px; */
 }
 
 .custom-select__menu-list {
     max-height: 200px !important;
     overflow-y: auto !important;
+    border-radius: 12px !important;
 }
 
 .custom-select__menu-list::-webkit-scrollbar {
     width: 8px !important;
+    overflow: hidden;
+
 }
 
 .custom-select__menu-list::-webkit-scrollbar-thumb {
-    background-color: var(--bg) !important;
+    background-color: var(--main-gray) !important;
     border-radius: 4px !important;
 }
 
 .custom-select__menu-list::-webkit-scrollbar-track {
-    background: var(--bg-input) !important;
+    background: var(--bg-secondary) !important;
+    border-top-right-radius: 10px;
+border-bottom-right-radius: 10px;
 }
 
 /* .custom-select__menu-list::-webkit-scrollbar{
@@ -73,7 +83,8 @@ box-shadow: none !important;
 
 .custom-select__menu-list::-webkit-scrollbar-thumb{
     
-    background-color: var(--bg);
+    background-crder-radius: 12px !important; */
+/* border-olor: var(--bg);
 } */
 
 /* .custom-select__menu {

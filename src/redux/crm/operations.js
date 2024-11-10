@@ -73,6 +73,24 @@ export const createRecord = createAsyncThunk(
   }
 );
 
+// Update record data
+export const updateRecordData = createAsyncThunk(
+  "auth/updateRecordData",
+  async (recordDataToUpdate, thunkAPI) => {
+    try {
+      const { recordId, ...recordDataToUpdateWithoutId } = recordDataToUpdate;
+
+      const response = await axiosInstance.patch(
+        `/crm/update_record/${recordId}/`,
+        recordDataToUpdateWithoutId
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 //Get mechanics and posts for particular service
 export const getMechsAndPosts = createAsyncThunk(
   "crm/getMechsAndPosts",
@@ -89,8 +107,29 @@ export const getMechsAndPosts = createAsyncThunk(
           },
         }
       );
-      console.log("response data", response.data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
+//Get booking data for particular service on a particular date (for ServiceBookingModal)
+export const getServiceDataForBooking = createAsyncThunk(
+  "crm/getServiceDataForBooking",
+  async (day, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.get(
+        `/crm/get_mechanics_and_posts/?date=${day}`,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -107,6 +146,31 @@ export const getPlannedVisits = createAsyncThunk(
     try {
       const response = await axiosInstance.get(
         `/crm/get_planner/?date=${day}`,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      console.log("response data", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Get monthly load for calendar
+export const getMonthlyLoad = createAsyncThunk(
+  "crm/getMonthlyLoad",
+  async (month, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.get(
+        `/crm/get_calendar_load/?month_year=${month}`,
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",

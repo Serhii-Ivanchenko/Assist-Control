@@ -1,9 +1,7 @@
 import css from './AppointmentTable.module.css'
  import AppointmentGrid from '../AppointmentGrid/AppointmentGrid.jsx';
-import { Grid, Typography, Box } from '@mui/material';
 
-// import Timeline from 'react-calendar-timeline';
-//  import 'react-calendar-timeline/lib/Timeline.css';
+
 
 // Входные данные с дополнительным полем `workType` для определения вида работ
 const data = [
@@ -11,7 +9,7 @@ const data = [
     post_id: 1,
     cars: [
       { plate: 'AA6121CA', mechanic: 'Мироненко', start_time: 9, end_time: 13, workType: 'checkRepair' },
-      { plate: 'CA9867OO', mechanic: 'Мироненко', start_time: 13, end_time: 15, workType: 'repair' },
+      { plate: 'CA9867OO', mechanic: 'Мироненко', start_time: 14, end_time: 15, workType: 'repair' },
     ],
   },
   {
@@ -21,126 +19,205 @@ const data = [
       { plate: 'AA6121CA', mechanic: 'Шевчук', start_time: 15, end_time: 17, workType: 'viewRepair' },
     ],
   },
+  { post_id: 3,
+    cars: [
+      { plate: 'AC45660KO', mechanic: 'Мироненко', start_time: 9, end_time: 17, workType: 'repair' },
+      { plate: 'AA6121CA', mechanic: 'Шевчук', start_time: 12, end_time: 13, workType: 'checkRepair' },
+    ],
+  },
+ { post_id: 4,
+    cars: [
+      { plate: 'AC45660KO', mechanic: 'Мироненко', start_time: 9, end_time: 12, workType: 'viewRepair' },
+      { plate: 'AA6121CA', mechanic: 'Шевчук', start_time: 12, end_time: 13, workType: 'viewRepair' },
+    ],
+  },
+  { post_id: 5,
+    cars: [
+      { plate: 'AC45660KO', mechanic: 'Мироненко', start_time: 9, end_time: 10, workType: 'repair' },
+      { plate: 'AA6121CA', mechanic: 'Шевчук', start_time: 12, end_time: 15, workType: 'checkRepair' },
+    ],
+  },
 ];
 
-// // Определяем цвета для каждого типа работ
-// const workTypeColors = {
-//   diagnostic: '#FF5733',
-//   repair: '#C70039',
-//   inspection: '#900C3F',
-//   maintenance: '#581845',
-// };
 
-
-
-// export default function AppointmentTable() {
 
 // const groups = data.map((post) => ({
 //   id: post.post_id,
 //   title: `Пост ${post.post_id}`,
 // }));
 
-// const items = data.flatMap((post) =>
-//   post.cars.map((car, index) => ({
-//     id: `${post.post_id}-${index}`,
-//     group: post.post_id,
-//     title: car.plate,
-//     start_time: new Date(2023, 9, 15, car.start_time),
-//     end_time: new Date(2023, 9, 15, car.end_time),
-//     itemProps: {
-//       style: {
-//         padding: '0',
-//         border: 'none',
-//         backgroundColor: 'transparent',
-//       },
-//       children: (
-//         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-//           <div style={{
-//             backgroundColor: '#000',
-//             color: '#fff',
-//             padding: '2px 5px',
-//             textAlign: 'center',
+
 //             borderTopLeftRadius: '4px',
 //             borderTopRightRadius: '4px',
-//             fontSize: '12px', // уменьшенный размер шрифта для лучшей видимости
 //             overflow: 'hidden',
 //             whiteSpace: 'nowrap',
 //             textOverflow: 'ellipsis'
-//           }}>
-//             {car.plate}
-//           </div>
-//           <div style={{
-//             backgroundColor: workTypeColors[car.workType] || '#333',
-//             color: '#fff',
-//             padding: '2px 5px',
-//             textAlign: 'center',
-//             borderBottomLeftRadius: '4px',
-//             borderBottomRightRadius: '4px',
-//             fontSize: '12px', // уменьшенный размер шрифта
-//             overflow: 'hidden',
-//             whiteSpace: 'nowrap',
-//             textOverflow: 'ellipsis'
-//           }}>
-//             {car.mechanic}
-//           </div>
-//         </div>
-//       ),
-//     },
-//   }))
-// );
-//   console.log(items);
-
-//   return (
-    
-//     <div  className={css.apptablecontainer}>
-//       <Timeline
-//         groups={groups}
-//         items={items}
-//         defaultTimeStart={new Date(2023, 9, 15, 8, 0)}
-//         defaultTimeEnd={new Date(2023, 9, 15, 18, 0)}
-//         lineHeight={60}
-//         itemHeightRatio={0.8}
-//         timeSteps={{ hour: 1 }} // Шаг временной шкалы
-//         minZoom={60 * 60 * 1000} // Минимальный зум: 1 час
-//         maxZoom={24 * 60 * 60 * 1000} // Максимальный зум: 24 часа
-//         traditionalZoom // Включает классический режим зума
-//       />
-//     </div>
-//   );
-// };
 
 
 export default function AppointmentTable() {
   
-  //   const data = {
-  //     dates: ['Пост/Години','09.00', '10.00', '11.00','12.00', '13.00', '14.00','15.00', '16.00', '17.00', '18.00'],
-  //     posts: ['Пост 1', 'Пост 2', 'Пост 3',  'Пост 4'],
-  //     workItems: [
-  //     { plate: 'AC45660KO', mechanic: 'Мироненко', start_time: 9, end_time: 13, workType: 'inspection' },
-  // { plate: 'AA6121CA', mechanic: 'Шевчук', start_time: 13, end_time: 15, workType: 'maintenance' , postIndex: 1 },
-  //     { name: 'Петров', startTime: '2024-10-15T10:00', endTime: '2024-10-15T15:00', color: '#add8e6', postIndex: 2 },
-  //     { name: 'Петров', startTime: '2024-10-15T15:00', endTime: '2024-10-15T16:00', color: '#add8e6', postIndex: 2 },
-  //     { name: 'Иванов', startTime: '2024-10-15T10:00', endTime: '2024-10-15T15:00', color: '#add8e6', postIndex: 1 },
-  //     { name: 'Петров', startTime: '2024-10-15T16:00', endTime: '2024-10-15T18:00', color: '#add8e6', postIndex: 2 },
-  //     { name: 'Сидоров',startTime: '2024-10-15T10:00', endTime: '2024-10-15T12:00', color: '#add8e6', postIndex: 3 },
-    
-      
-  //       ],
-  //   };
+ 
   const hours = Array.from({ length: 10 }, (_, i) => i + 9); // Массив часов от 9 до 18
-  const result = data.flatMap((post, postIndex) =>
-    post.cars.map((car) => ({
-      ...car,
-      postIndex: post.post_id,
-    }))
-  );
+  // const result = data.flatMap((post, postIndex) =>
+  //   post.cars.map((car) => ({
+  //     ...car,
+  //     postIndex: post.post_id,
+  //   }))
+  // );
+
+
+function ensureAllPosts(data, totalPosts) {
+  const allPostsData = [];
+
+  for (let i = 1; i <= totalPosts; i++) {
+    const postData = data.find(post => post.post_id === i);
+    if (postData) {
+      allPostsData.push(postData);
+    } else {
+      // Добавляем пустую запись для поста без данных
+      allPostsData.push({
+        post_id: i,
+        cars: [],
+      });
+    }
+  }
+  return allPostsData;
+}
+
+
   
+function splitWorkStages(data) {
+  const result = [];
+  
+  data.forEach(post => {
+    const { post_id, cars } = post;
+
+    cars.sort((a, b) => a.start_time - b.start_time); // сортируем работы по времени начала
+
+    for (let i = 0; i < cars.length; i++) {
+      const work = cars[i];
+      let { start_time, end_time } = work;
+      
+      // Проверяем, если текущая работа пересекается с другими работами на этом посту
+      for (let j = i + 1; j < cars.length; j++) {
+        const nextWork = cars[j];
+
+        if (nextWork.start_time < end_time && nextWork.start_time >= start_time) {
+          // Если наложение, добавляем первый этап текущей работы до начала следующей
+          result.push({
+            ...work,
+            post_id,
+            stage_start: start_time,
+            stage_end: nextWork.start_time-1,
+          });
+          
+          // Обновляем начало текущей работы для следующего этапа
+          start_time = nextWork.end_time > end_time ? end_time+1 : nextWork.end_time+1;
+        } else {
+          // Если больше наложений нет, завершаем текущий этап
+          break;
+        }
+      }
+
+      // Добавляем последний этап текущей работы
+      result.push({
+        ...work,
+        post_id,
+        stage_start: start_time,
+        stage_end: end_time,
+      });
+    }
+  });
+
+  return result;
+}
+ // Функция для вставки пустых ячеек
+function addEmptySlots(result, totalPosts) {
+  const fullResult = [];
+  const posts = new Set(result.map(item => item.post_id));
+  const groupedByPost = result.reduce((acc, item) => {
+    acc[item.post_id] = acc[item.post_id] || [];
+    acc[item.post_id].push(item);
+    return acc;
+  }, {});
+
+  const startOfDay = 9;
+  const endOfDay = 17;
+
+  for (let post_id = 1; post_id <= totalPosts; post_id++) {
+    const works = groupedByPost[post_id] || [];
+    let lastEnd = startOfDay;
+
+    if (works.length === 0) {
+      fullResult.push({
+        post_id,
+        workType: 'empty',
+        stage_start: startOfDay,
+        stage_end: endOfDay,
+        background: 'rgba(255, 255, 255, 0.3)',
+      });
+    } else {
+      works.forEach(work => {
+        if (work.stage_start > lastEnd) {
+          fullResult.push({
+            post_id,
+            workType: 'empty',
+            stage_start: lastEnd,
+            stage_end: work.stage_start-1,
+            background: 'rgba(255, 255, 255, 0.3)',
+          });
+        }
+        fullResult.push(work);
+        lastEnd = work.end_time+1;
+      });
+
+      if (lastEnd <= endOfDay) {
+        fullResult.push({
+          post_id,
+          workType: 'empty',
+          stage_start: lastEnd,
+          stage_end: endOfDay,
+          background: 'rgba(255, 255, 255, 0.3)',
+        });
+      }
+    }
+  }
+
+  return fullResult;
+}
+
+
+const totalPosts = 5;
+
+// Убедимся, что каждый пост имеет данные, даже если они пустые
+const allPostsData = ensureAllPosts(data, totalPosts);
+
+// Создаем этапы работ, разбивая их, если необходимо
+let result = splitWorkStages(allPostsData);
+result.sort((a, b) => {
+  if (a.post_id === b.post_id) {
+    return a.stage_start - b.stage_start; // Сортировка по stage_start, если post_id совпадают
+  }
+  return a.post_id - b.post_id; // Сортировка по post_id
+});
+// Добавляем пустые ячейки для отсутствующих работ
+result = addEmptySlots(result, totalPosts);
+
+  
+result.sort((a, b) => {
+  if (a.post_id === b.post_id) {
+    return a.stage_start - b.stage_start; // Сортировка по stage_start, если post_id совпадают
+  }
+  return a.post_id - b.post_id; // Сортировка по post_id
+});
+
+
   const datares = { dates: ['Пости/  Години', '09.00', '10.00', '11.00', '12.00', '13.00', '14.00', '15.00', '16.00', '17.00', '18.00'],
-  posts: ['Пост 1', 'Пост 2', 'Пост 3', 'Пост 4'],
+  posts: ['Пост 1', 'Пост 2', 'Пост 3', 'Пост 4', 'Пост 5'],
     workItems: result
   }
   
-  console.log(datares);
+  // console.log(datares);
 
   return (
     <div className={css.apptablecontainer}>
@@ -149,67 +226,3 @@ export default function AppointmentTable() {
     </div>
   );
 };
-
-// const hours = Array.from({ length: 10 }, (_, i) => i + 9); // Массив часов от 9 до 18
-
-// const AppointmentTable = () => {
-//   return (
-//     <Box padding={2} sx={{ backgroundColor: '#1a1a1a', color: '#ffffff' }}>
-//       <Typography variant="h5" marginBottom={2}>Диаграмма Ганта по постам</Typography>
-
-//       {/* Временная шкала */}
-//       <Grid container spacing={1} alignItems="center">
-//         <Grid item xs={2}>
-//           <Typography variant="subtitle1">Пост / Часы</Typography>
-//         </Grid>
-//         {hours.map((hour) => (
-//           <Grid item xs key={hour}>
-//             <Typography variant="subtitle1" align="center" color="gray">{hour}:00</Typography>
-//           </Grid>
-//         ))}
-//       </Grid>
-
-//       {/* Посты и работы */}
-//       {data.map((post) => (
-//         <Box key={post.post_id} marginTop={2}>
-//           <Typography variant="h6">Пост {post.post_id}</Typography>
-
-//           {post.cars.map((car, index) => (
-//             <Grid container spacing={1} alignItems="center" key={index}>
-//               <Grid item xs={2}>
-//                 <Typography variant="body2">{car.plate}</Typography>
-//                 <Typography variant="caption" color="gray">{car.mechanic}</Typography>
-//               </Grid>
-//               {hours.map((hour) => {
-//                 const isWorkHour = hour >= car.start_time && hour < car.end_time;
-//                 return (
-//                   <Grid item xs key={hour}>
-//                     <Box
-//                       height="30px"
-//                       bgcolor={isWorkHour ? (index % 2 === 0 ? '#6f42c1' : '#ff5a5a') : 'transparent'}
-//                       borderRadius={1}
-//                       display="flex"
-//                       justifyContent="center"
-//                       alignItems="center"
-//                       sx={{
-//                         transition: 'all 0.3s',
-//                         '&:hover': {
-//                           opacity: 0.9,
-//                         },
-//                       }}
-//                     />
-//                   </Grid>
-//                 );
-//               })}
-//             </Grid>
-//           ))}
-//         </Box>
-//       ))}
-//     </Box>
-//   );
-// };
-
-// export default AppointmentTable;
-
-
-

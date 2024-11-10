@@ -13,9 +13,9 @@
 .columnsContainer {
     display: flex;
     flex-direction: row;
+    gap: 11px;
     max-height: 480px; 
     overflow-y: auto;
-    gap: 11px;
 }
 
 .columnsContainer::-webkit-scrollbar {
@@ -61,14 +61,6 @@
 .headerColumn:not(:first-child) .statusHeader {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="368" height="61" viewBox="0 0 371 61" fill="none"><path d="M0 0.253906H359.863L370 30.5079L359.863 60.7618H0L7.96477 30.5079L0 0.253906Z" fill="%2323252C"/></svg>');
 }
-
-.column {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 365px;
-}
-
 
 .carCount {
     margin-left: auto;

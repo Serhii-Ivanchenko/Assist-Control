@@ -3,7 +3,6 @@
     flex-direction: column;
     width: 800px;
     height: 616px;
-    padding: 60px 0 4px;
     position: relative;
     background-color: var(--bg-secondary);
     overflow: hidden;
@@ -56,16 +55,62 @@
     display: none;
 } */
 
+.header{
+    /* position: absolute;
+    top: 20px;
+    left: 30px; */
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-bottom: 25px;
+    margin-right: 98px;
+}
+
+.leftHeader{
+    display: flex;
+    gap: 13px;
+}
+
+.rightHeader{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.rightHeader > :nth-child(2) {
+    margin-left: 47px;
+}
+
+.iconClose {
+    color: var(--input-stroke);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.closeButton {
+    /* width: 18px;
+    height: 18px; */
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 .switch {
     font-size: 17px;
     display: inline-block;
     width: 50px;
     height: 27px;
     cursor: pointer;
-
-    position: absolute;
-    top: 12px;
-    left: 30px;
+    position: relative;
 }
 
 .switch input {
@@ -118,34 +163,12 @@
     z-index: 2;
 }
 
-.iconClose {
-    color: var(--input-stroke);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-}
-
-.closeButton {
-    /* width: 18px;
-    height: 18px; */
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-
 .iconRight svg {
     animation: rotate 15s linear infinite;
 }
 
 @keyframes rotate {
-
+    
     0% {
         transform: rotate(0);
     }
@@ -193,10 +216,62 @@
 .active {
     transition: color 0.3s ease;
 }
+  
+  .filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 5px 7px;
+    border-radius: 17px;
+    background: var(--bg-input);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: var(--light-gray);
+    border: none;
+    cursor: pointer;
+  }
 
-.search {
-    position: absolute; 
-    top: 26px;
-    left: 96px; 
-    transform: translateY(-50%); 
+  .btnSettings {
+    background: transparent; /* Прозорий фон */
+    border: none; /* Без рамки */
+    cursor: pointer; /* Змінює курсор на pointer */
+    padding: 0; /* Відсутній внутрішній відступ */
+    display: flex; /* Для центрування іконки */
+    align-items: center; /* Вирівнювання по вертикалі */
+}
+
+.iconSettings {
+    fill: white; /* Білий колір іконки */
+    width: 17px; /* Ширина 17 пікселів */
+    height: 17px; /* Висота 17 пікселів */
+}
+
+
+.btnPdfContainer{
+    display: flex;
+    padding: 4px 6px;
+    width: 60px;
+    height: 24px;
+
+    border-radius: 6px;
+    background: var(--bg-input);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btnPdf{
+    background: transparent;
+    border: none;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 7px;
+
+}
+
+.btnPdfText{
+    color: var(--icon-gray);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
 }
