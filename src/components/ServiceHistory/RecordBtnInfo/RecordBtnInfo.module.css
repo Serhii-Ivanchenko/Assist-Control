@@ -17,11 +17,13 @@
   cursor: pointer;
   transition: color 300ms ease-in-out;
 }
-
+.infoBtn:disabled,
 .nonActiveBtn {
   color: var(--input-text);
 }
-
+.disabledBtn {
+  cursor: default;
+}
 .infoWrapper {
   display: flex;
   flex-direction: column;
@@ -45,6 +47,7 @@
   background: var(--blue-btn-normal);
 }
 :global(.MuiTableContainer-root) {
+  margin-top: 15px;
   border-radius: 0px !important;
   border-top-left-radius: 8px !important;
   border-top-right-radius: 8px !important;
@@ -57,15 +60,72 @@
 :global(
     .MuiTableHead-root > .MuiTableRow-root > .MuiTableCell-root:first-child
   ) {
-  padding: 6px 0 6px 10px !important;
+  padding: 6px 6px 6px 10px !important;
   text-align: left !important;
 }
 :global(.MuiTableCell-root) {
   color: var(--white) !important;
   outline: var(--light-gray-table) !important;
   border: 1px solid var(--light-gray-table) !important;
-  padding: 6px 0 6px 0 !important;
+  padding: 6px !important;
   font-size: 16px !important;
-  font-weight: 600 !important;
+  font-weight: 400 !important;
   text-align: center !important;
+}
+
+.repairHeader {
+  display: flex;
+  justify-content: space-between;
+}
+.repairTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+.repairBtnWrapper {
+  display: flex;
+  gap: 10px;
+}
+.editAndPrintIconWrapper {
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  color: var(--light-gray);
+  border-radius: 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  cursor: pointer;
+}
+
+.repairTableHeaderCell {
+  text-align: left !important;
+}
+.repairTableCell {
+  height: 35px !important;
+  padding: 0px !important;
+}
+.priceCell {
+  text-align: center !important;
+}
+.repairNamedCell {
+  text-align: left !important;
+}
+.repairTableCell > :global(.MuiCheckbox-root) {
+  border-radius: 0px;
+  border-right: 1px solid var(--light-gray-table);
+  width: 25px !important;
+  padding: 0px !important;
+  margin-right: 10px;
+}
+.nonCheckedCheckBox {
+  color: #ffffff00 !important;
+}
+.repairTableCell > :global(.MuiCheckbox-root):hover {
+  background-color: hsla(120, 100%, 25%, 0.2);
+}
+:global(.Mui-checked) {
+  color: var(--green-btn-normal) !important;
+}
+.footerRow > :global(.MuiTableCell-root) {
+  font-weight: 600 !important;
 }
