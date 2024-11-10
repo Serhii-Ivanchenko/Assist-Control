@@ -90,7 +90,7 @@ export default function PeriodSelector({
           className={css.periodinput}
           selected={periodStartData}
           onChange={(date) => {
-            handleInputChangeBeg(date), setIsOpenBeg(false)
+            handleInputChangeBeg(date), setIsOpenBeg(false);
           }}
           dateFormat="dd/MM/yyyy"
           open={isOpenBeg}
@@ -98,7 +98,6 @@ export default function PeriodSelector({
           popperClassName={css.leftdatepickerdropdown}
           //  placeholderText="Click to select a date"
           onKeyDown={(e) => e.preventDefault()}
-          
         />
         <button className={css.calendarBtn}>
           <BsCalendar2Week className={css.icon} onClick={handleIconClickBeg} />
@@ -110,16 +109,18 @@ export default function PeriodSelector({
         <DatePicker
           className={css.periodinput}
           selected={periodEndData}
-          onChange={(date) => {handleInputChangeEnd(date), setIsOpenEnd(false);}}
+          onChange={(date) => {
+            handleInputChangeEnd(date), setIsOpenEnd(false);
+          }}
           dateFormat="dd/MM/yyyy"
           open={isOpenEnd}
           onClickOutside={() => setIsOpenEnd(false)}
           popperClassName={css.datepickerdropdown}
           //  placeholderText="Click to select a date"
         />
-         <button className={css.calendarBtn}>
-        <BsCalendar2Week className={css.icon} onClick={handleIconClickEnd} />
-         </button>
+        <button className={css.calendarBtn}>
+          <BsCalendar2Week className={css.icon} onClick={handleIconClickEnd} />
+        </button>
       </div>
     </div>
   );

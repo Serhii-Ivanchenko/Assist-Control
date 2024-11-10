@@ -91,8 +91,10 @@
 @media only screen and (min-width: 1850px) {
     .areabox {
         width: 430px;
-        height: 315px;
+        height: 307px;
+        height: clamp(246px, calc(246px + (61 * ((100vh - 900px) / 180))), 307px);
         margin-left: 0;
+        margin-top: 6px;
     }
 }
 
