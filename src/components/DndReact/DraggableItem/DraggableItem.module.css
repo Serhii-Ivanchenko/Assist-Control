@@ -1,0 +1,528 @@
+.draggableItem {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    border: 2px solid var(--CRM-modal-GreenGrad, #246D4D);
+    background: var(--CRM-modal-SecondaryBG, #23252C);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: move;
+  }
+  
+
+  .crmBlockDayCarsItemContainer{
+    width: 365px;
+    height: 200px;
+    padding: 10px 12px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  
+    border-radius: 8px;
+    background: var(--bg-input);
+    border: 2px solid transparent;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  @media only screen and (min-width: 1850px) {
+    .crmBlockDayCarsItemContainer {
+      padding: 8px 18px;
+    }}
+  
+    .userInfo {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      
+    }
+    
+    .title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 7px;
+      width: 100px;
+      height: 18px;
+      padding-left: 8px;
+      margin-bottom: 8px;
+    
+      border-radius: 6px;
+      position: relative;
+      transition: background-color 0.3s ease, border-left 0.3s ease;
+    }
+    
+    .title::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background-color: var(--glow-color);
+      filter: blur(5px);
+      z-index: 1;
+      border-radius: 0 5px 5px 0;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .title {
+        width: 137px;
+        height: 24px;
+      }
+    }
+    
+    .statusText {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.43em;
+      font-variant: small-caps;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    
+    }
+
+    .icon {
+      width: 12px;
+      height: 12px;
+      transition: width 0.3s, height 0.3s;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .icon {
+        font-size: 16px;
+      }
+    }
+    
+    .iconHuman {
+      width: 13px;
+      height: 13px;
+    }
+    
+    
+    @media only screen and (min-width: 1850px) {
+      .iconHuman {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    
+    
+    .infoCard {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 7px;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .infoCard {
+        gap: 6px;
+        margin-bottom: 11px;
+      }
+    }
+    
+    .infoName,
+    .infoTel,
+    .infoCar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .vinContainer {
+      display: flex;
+      width: 185px;
+      height: 27px;
+      padding: 3px 5px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 6px;
+      background: var(--main-gray);
+    }
+    
+    .vinCode {
+      color: var(--white);
+      font-size: 10px;
+    
+        max-width: 134px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    
+    .copyButton{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 21px;
+      height: 21px;
+      border-radius: 6px;
+      color:  var(--icon-gray);
+      background: var(--main-gray);
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: auto;    
+    }
+    
+    
+    
+    @media only screen and (min-width: 1850px) {
+      .vinCode {
+        font-size: 14px;
+      }
+    
+      .vinContainer{
+        padding: 3px 10px;
+        width: 185px;
+        height: 27px;
+      }
+    }
+
+    
+    .textName {
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: normal;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .textName {
+        font-size: 16px;
+      }
+    }
+    
+    .textTel {
+      color: var(--text-gray);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: normal;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .textTel {
+        font-size: 14px;
+      }
+    }
+    
+    .iconTel {
+      width: 10px;
+      height: 10px;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .iconTel {
+        width: 12px;
+        height: 12px;
+      }
+    }
+    
+    .nameCar {
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 400;
+      white-space: nowrap;
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+      max-width: 120px;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .nameCar {
+        font-size: 14px;
+        max-width: 134px;
+      }
+    }
+    
+    .btnContainer {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: auto;
+    
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .btnContainer {
+        margin-top: auto;
+      }
+    }
+    
+    .carPhoto {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 87px;
+      height: 61px;
+      margin-bottom: 20.5px;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .carPhoto {
+        margin-bottom: 12px;
+      }
+    }
+    
+    .carPhoto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    
+    }
+    
+    .carInfoLeft {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .carInfoLeft {
+        width: 78px;
+      }
+    }
+
+    .money {
+      display: none;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .money {
+        display: flex;
+        color: var(--green);
+        font-size: 14px;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+    
+    .carInfoRight {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: end;
+      width: 96px;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .carInfoRight {
+        align-items: start;
+    
+      }
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .crmRating {
+        justify-content: end;
+        position: static;
+        top: auto;
+        left: auto;
+
+        width: 78px;
+        height: 11px;
+      }
+    }
+    
+
+    @media only screen and (min-width: 1850px) {
+      .crmRating {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+    }
+    
+    .carRegContainer {
+      display: flex;
+      align-items: center;
+      width: 96px;
+      height: 23px;
+      gap: 3px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 2px solid var(--black);
+      background: #D9D9D9;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      carRegContainer {
+        margin-bottom: 12px;
+      }
+    }
+    
+    .carRegFlag {
+      width: 5.4px;
+      height: 3.6px;
+    }
+    
+    .carRegCountrys {
+      padding: 4px 1.5px;
+      height: 100%;
+      border-radius: 4px 0px 0px 4px;
+      background: #00349A;
+    }
+    
+    .carRegCountry {
+      color: var(--white);
+      font-size: 4px;
+      font-style: normal;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .carNumber {
+      color: var(--bg-secondary);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+    }
+    
+    .carRegFlag {
+      margin-bottom: 4px;
+    }
+    
+    .mileInfo,
+    .timeWork {
+      display: none
+    }
+    
+    @media only screen and (min-width: 1850px) {
+    
+      .mileInfo,
+      .timeWork {
+        display: flex;
+        gap: 7px;
+        align-items: center;
+      }
+    }
+    
+    .timeWork {
+      margin-top: 6px;
+    
+    }
+    
+    .mileage {
+      align-items: center;
+      color: var(--mint);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: normal;
+    }
+    
+    .time {
+      color: var(--text-gray);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: normal;
+
+      max-width: 75px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    
+    .total {
+      margin-top: auto;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: normal;
+    }
+    
+    @media only screen and (min-width: 1850px) {
+      .total {
+        font-size: 16px;
+        margin-top: 12px;
+    
+      }
+    }
+    
+    .totalPay {
+      margin-top: auto;
+    }
+
+    .iconWrapper{
+      position: relative;
+    }
+  
+  .crmcarsInfo {
+    position: relative;
+    display: flex;
+    gap: 11px;
+    margin-left: -35px;
+  }
+  
+  .plus{
+      width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        border: none;
+        background-color: var(--green);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+  }
+  
+  .iconPlus {
+        display: flex;
+          width: 14px;
+          height: 14px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 3px;
+          color: var(--green);
+          background-color: var(--white);
+          stroke-width: 2px;
+  }
+  
+  .plus:hover{
+    background: var(--green-btn-hover);
+  
+  }
+  
+  .btnSave {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: var(--icon-gray);
+  
+    border-radius: 3px;
+    background: var(--CRM-modal-InputBG, #2D3038);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+  }
+
+  .btnCopy{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 21px;
+    height: 21px;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .copyIcon{
+    height: 13px;
+    width: 13px;
+    fill: var(--white);
+    cursor: pointer;
+  }
