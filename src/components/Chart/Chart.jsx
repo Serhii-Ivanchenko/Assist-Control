@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewCarsRange } from "../../redux/cars/operations.js";
-import { selectNewCars, selectDate, } from "../../redux/cars/selectors.js";
+import { selectNewCars, selectDate } from "../../redux/cars/selectors.js";
 import PeriodSelector from "../PeriodSelector/PeriodSelector.jsx";
 import { changeActualDate } from "../../redux/cars/slice.js";
 import {
-   BarChart,
+  BarChart,
   Bar,
-  XAxis, 
+  XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
@@ -16,41 +16,38 @@ import {
 import css from "./Chart.module.css";
 import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 
-
-
 const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
   if (active && payload && payload.length) {
     const { x, y } = coordinate;
-    const tooltipWidth = 23; 
+    const tooltipWidth = 23;
     const tooltipHeight = 34;
-    let leftPosition = x+30;
+    let leftPosition = x + 30;
     let topPosition = y - 35;
-    
-    if (x + tooltipWidth  > viewBox.width) {
-    leftPosition = viewBox.width - tooltipWidth+30 ; // Смещаем тултип влево
-  }
-if (y - tooltipHeight / 2 < 0) {
-    topPosition = -35; // Смещаем тултип вниз
-  }
+
+    if (x + tooltipWidth > viewBox.width) {
+      leftPosition = viewBox.width - tooltipWidth + 30; // Смещаем тултип влево
+    }
+    if (y - tooltipHeight / 2 < 0) {
+      topPosition = -35; // Смещаем тултип вниз
+    }
     return (
       <div
         className={css.customtooltip}
-         style={{
+        style={{
           position: "absolute",
           left: `${leftPosition}px`,
           top: `${topPosition}px`,
-      
-         }}
+        }}
       >
         <p className={css.popuptitle}>{`${label}`}</p>
         <div className={css.chartflex}>
           <p className={css.popupavto}>All </p>
           <p className={css.kolall}>{`${payload[0].value} `}</p>
         </div>
-         <div className={css.chartflex}>
+        <div className={css.chartflex}>
           <p className={css.popupavto}>New </p>
           <p className={css.kolnew}>{`${payload[1].value} `}</p>
-     </div>
+        </div>
       </div>
     );
   }
@@ -73,7 +70,7 @@ export default function Chart() {
 
   const selectedServiceId = useSelector(selectSelectedServiceId); // необхідно для коректної роботи вибору сервісів
 
-useEffect(() => {
+  useEffect(() => {
     if (carSelectDate === null) {
       dispatch(changeActualDate(currentDay));
     }
@@ -137,33 +134,32 @@ useEffect(() => {
 
   let data = newCarsData.map((el) => ({
     ...el,
-    dateeng:
-      el.date.substring(8, 10) +
-      "/" +
-       el.date.substring(5, 7) 
-      // +"/" +
-      // el.date.substring(0, 4),
+    dateeng: el.date.substring(8, 10) + "/" + el.date.substring(5, 7),
+    // +"/" +
+    // el.date.substring(0, 4),
   }));
   let interval = 0;
   const getMaxValue = (data) => Math.max(...data.map((d) => d.total_count));
   const maxY = getMaxValue(data);
-  if (maxY > 15) { interval = 4 }
-  else { interval = 0 };
-  
+  if (maxY > 15) {
+    interval = 4;
+  } else {
+    interval = 0;
+  }
+
   const sumNewCars = data.reduce((acc, current) => {
     return acc + current.new_for_day;
   }, 0);
-  
+
   const handleClick = (data) => {
-        dispatch(changeActualDate(data.date));
-    };
-  
+    dispatch(changeActualDate(data.date));
+  };
 
   // console.log('date',data)
   //  console.log('end', dateEnd)
   // let interval = data.length;
   return (
-    <div className={css.containerchart}>
+    <>
       <div className={css.charttitlebox}>
         <p className={css.charttitle}>Машинозаїзди</p>
         <p className={css.charttitleavto}>
@@ -296,6 +292,6 @@ useEffect(() => {
         onDateBegChange={handleDataChangeBeg}
         onDateEndChange={handleDataChangeEnd}
       />
-    </div>
+    </>
   );
 }

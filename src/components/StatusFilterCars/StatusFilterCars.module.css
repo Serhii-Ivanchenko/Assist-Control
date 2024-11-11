@@ -1,0 +1,121 @@
+.statysFilter {
+    display: flex;
+    position: relative;
+  }
+  
+  .filterButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    padding: 6px 10px;
+    height: 28px;
+
+    border-radius: 12px;
+    background: var(--bg-input);
+  }
+  
+  .statusFilterText {
+    color: var(--icon-gray);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .statusText{
+    text-transform: uppercase;
+  }
+
+
+  .dropdownList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 20px;
+    position: absolute;
+    top: 100%;
+    left: -35px;
+    width: 174px;
+    background-color: var(--bg-input);
+    border-radius: 12px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+  }
+  
+  .dropdownList li {
+    cursor: pointer;
+  }
+ 
+
+  .all,
+  .repair,
+  .checkRepair,
+  .viewRepair,
+  .completed{
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    /* padding: 1px 6px; */
+    
+  }
+
+ .dropdownList li {
+    cursor: pointer;
+    height: 22px;
+    width: 134px;
+  }
+  
+
+  .all{
+    color: var(--status-all);
+  }
+  
+  .repair{
+    color: var(--status-repair);
+  }
+
+  .checkRepair{
+    color: var(--status-diag);
+  }
+
+  .viewRepair{
+    color: var(--status-view-repair);
+  }
+
+  .completed{
+    color: var(--status-complete);
+  }
+
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    height: 22px;
+    padding-left: 6px;
+  
+    border-radius: 6px;
+    position: relative;
+    transition: background-color 0.3s ease, border-left 0.3s ease;
+  }
+  
+  .title::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--glow-color);
+    filter: blur(5px);
+    z-index: 1;
+    border-radius: 0 5px 5px 0;
+  }

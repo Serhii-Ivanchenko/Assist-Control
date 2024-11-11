@@ -40,7 +40,9 @@
   --current-mileage-text: #43a48d;
   --last-service-mileage-text: #a97742;
   --stats-all: #465d9b;
-  --contacts-info-bg: #373941;
+  --contacts-info-bg:#373941;
+  --CRM-modal-hover:#383C46;
+
 
   /* statuses */
   --status-new: #ebd534;
@@ -48,11 +50,14 @@
   --status-repair: #b25bc2;
   --status-complete: #53c178;
   --status-view-repair: #e76767;
+  --status-all: #6BE9FF;
   --glow-repair: #d926e9;
   --glow-diag: #265de9;
   --glow-complete: #71e926;
   --glow-new: #e9d226;
   --glow-view-repair: #e92626;
+  --glow-all: #26B5E9;
+  
 
   /* calendar */
   --calendar-gray: #4a4a4a;
@@ -71,6 +76,9 @@
   --status-gradient-repair: linear-gradient(90deg, #994ca54d 0%, #ab26e900 100%);
   --status-gradient-complete: linear-gradient(90deg, #4ca54c4d 0%, #3de92600 100%);
   --status-gradient-view-repair: linear-gradient(90deg, #a54f4c4d 0%, #e9362600 100%);
+  --status-gradient-all: linear-gradient(90deg, rgba(65, 156, 176, 0.30) 0%, rgba(38, 226, 233, 0.00) 100%);
+
+  ;
 
   --master-gradient-diag: linear-gradient(90deg, #4154b04d 0%, #2654e900 100%);
   --master-gradient-repair: linear-gradient(90deg, #994ca54d 0%, #ab26e900 100%);

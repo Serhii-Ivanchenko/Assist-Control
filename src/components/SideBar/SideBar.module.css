@@ -3,16 +3,20 @@
   flex-direction: column;
   /* width: 230px; */
   /* height: 641px; */
-  /* justify-content: space-between; */
+  justify-content: space-between;
   border-radius: 12px;
   background: var(--bg-secondary);
   padding: 20px 30px;
+
+  flex-grow: 1;
+  flex-shrink: 0;
+
 }
 
 @media only screen and (min-width: 1850px) {
   .sidebar {
     width: 230px;
-    height: 967px;
+    height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
   }
 }
 
@@ -21,20 +25,27 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  justify-content: space-between;
 }
 
 @media only screen and (min-width: 1850px) {
   .topContainer {
-    margin-bottom: 60px;
+    /* margin-bottom: 60px; */
+    flex: 1 0 401px;
+    max-height: 431px;
+    margin-bottom: 31px;
   }
 }
 
 .bottomContainer {
-  gap: 9px;
+  /* gap: 9px; */
 }
 
 @media only screen and (min-width: 1850px) {
   .bottomContainer {
+    /* gap: 20px; */
+    flex: 1 0 338px;
+    max-height: 385px;
     gap: 20px;
   }
 }
@@ -51,6 +62,6 @@
 
 .userInfo {
   position: relative;
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
 
 }
