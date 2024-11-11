@@ -1,0 +1,7 @@
+.droppableColumn {
+    width: 365px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+  }
+  

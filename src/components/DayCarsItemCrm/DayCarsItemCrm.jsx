@@ -22,7 +22,7 @@ import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton
 import PaymentBtn from "../sharedComponents/PaymentBtn/PaymentBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
 
-export default function DayCarsItemCrm({ car }) {
+export default function DayCarsItemCrm({ car, onDragStart }) {
   const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
     useState(false);
 
@@ -51,9 +51,12 @@ export default function DayCarsItemCrm({ car }) {
 
   return (
     <div
-      className={styles.crmBlockDayCarsItemContainer}
-      style={getBackgroundStyle(status)}
-    >
+    className={styles.crmBlockDayCarsItemContainer}
+    style={getBackgroundStyle(status)}
+    id={car.id}
+    draggable
+    onDragStart={(e) => onDragStart(e, car.id)}
+  >
       <div className={styles.userInfo}>
         <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>

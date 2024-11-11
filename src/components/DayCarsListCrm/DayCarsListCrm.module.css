@@ -2,7 +2,9 @@
     background-color: transparent;
     box-shadow: none;
     width: 365px;
+    min-height: 505px;
     padding: 0;
+    
     
   }
   
