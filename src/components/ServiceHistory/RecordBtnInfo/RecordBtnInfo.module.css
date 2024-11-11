@@ -1,10 +1,12 @@
 .recordBtnInfoWrapper {
   width: 100%;
 }
+
 .infoBtnWrapper {
   display: flex;
   gap: 23px;
 }
+
 .infoBtn {
   color: var(--white);
   border: none;
@@ -13,6 +15,11 @@
   font-weight: 600;
   text-decoration-line: underline;
   cursor: pointer;
+  transition: color 300ms ease-in-out;
+}
+
+.nonActiveBtn {
+  color: var(--input-text);
 }
 
 .infoWrapper {
@@ -20,25 +27,50 @@
   flex-direction: column;
   gap: 14px;
 }
+
 .clientMsg,
 .wrapperOfComent {
+  font-size: 16px;
   padding: 10px;
   border-radius: 0px 12px 12px 12px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
 .clientMsg {
   background: var(--player-secondary-bg);
 }
+
 .wrapperOfComent {
   background: var(--blue-btn-normal);
 }
+
 .sparePartsTable {
   width: 100%;
   text-align: center;
-  border-radius: 8px 8px 0px 0px;
-  background: var(--main-gray);
-  outline: 1px solid #d8e1ff40;
+  border-collapse: collapse;
+  border-radius: 20px 8px 100px 0px;
 }
+
+.sparePartsTable>thead {
+  padding: 6px 34px 6px 16px;
+}
+
+.sparePartsTable>thead>tr {
+  background: var(--main-gray);
+  border: 1px solid var(--light-gray-table);
+}
+
+.sparePartsTable>thead>tr>th:first {
+  border-top-left-radius: 8px;
+}
+
+th,
+td {
+  /* var(--light-gray-table) */
+  outline: 1px solid #fff;
+  padding: 6px 0px 6px 0px;
+}
+
 th {
   padding: 0;
 }
