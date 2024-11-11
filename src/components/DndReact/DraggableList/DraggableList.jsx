@@ -11,7 +11,7 @@ const DraggableList = ({ items, onDragStart }) => {
           content={
             <div>
               <strong>{item.name}</strong> <br />
-              {item.carBrand} {item.carNumber} <br />
+              {item.auto} {item.plate} <br />
               Телефон: {item.phone}
             </div>
           }
