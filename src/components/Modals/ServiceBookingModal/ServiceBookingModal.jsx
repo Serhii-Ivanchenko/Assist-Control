@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import { selectServiceData } from "../../../redux/crm/selectors.js";
 import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
 import SelectTime from "./SelectTime/SelectTime.jsx";
+import Loader from "../../Loader/Loader.jsx";
 
 export default function ServiceBookingModal({ onClose }) {
   const dispatch = useDispatch();
@@ -103,7 +104,9 @@ export default function ServiceBookingModal({ onClose }) {
     onClose();
   };
 
-  return (
+  return !posts ? (
+    <Loader />
+  ) : (
     <div className={css.serviceBookingModal}>
       <BsXLg className={css.closeIcon} onClick={onClose} />
       <h3 className={css.header}>Створення запису на {pickedDate}</h3>
@@ -114,7 +117,7 @@ export default function ServiceBookingModal({ onClose }) {
           service_id: "",
           prepayment: "",
           phone_number: "",
-          position: "",
+          position: posts[0]?.id_post,
           mechanic_id: "",
           make_model: "",
           note: "",
@@ -365,7 +368,7 @@ export default function ServiceBookingModal({ onClose }) {
                 <SelectDate newDate={setNewDate} />
                 <div className={css.timeWrapper}>
                   <SelectTime
-                    postId={values.position}
+                    postId={values.position || posts[0]?.id_post}
                     chosenTime={chosenTime}
                     setChosenTime={setChosenTime}
                   />
