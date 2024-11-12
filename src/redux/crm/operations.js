@@ -65,6 +65,7 @@ export const createRecord = createAsyncThunk(
           },
         }
       );
+      console.log(response.data);
 
       return response.data;
     } catch (error) {
@@ -92,27 +93,27 @@ export const updateRecordData = createAsyncThunk(
 );
 
 //Get mechanics and posts for particular service
-export const getMechsAndPosts = createAsyncThunk(
-  "crm/getMechsAndPosts",
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
-    try {
-      const response = await axiosInstance.get(
-        `/crm/get_mechanics_and_posts/`,
-        {
-          headers: {
-            "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const getMechsAndPosts = createAsyncThunk(
+//   "crm/getMechsAndPosts",
+//   async (_, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const serviceId = state.auth.userData.selectedServiceId;
+//     try {
+//       const response = await axiosInstance.get(
+//         `/crm/get_mechanics_and_posts/`,
+//         {
+//           headers: {
+//             "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 //Get booking data for particular service on a particular date (for ServiceBookingModal)
 export const getServiceDataForBooking = createAsyncThunk(
@@ -130,6 +131,8 @@ export const getServiceDataForBooking = createAsyncThunk(
           },
         }
       );
+      console.log(response.data);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -1,9 +1,6 @@
 import css from "../ServiceBookingModal/ServiceBookingModal.module.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import clsx from "clsx";
 import { ServiceBookingSchema } from "../../../validationSchemas/ServiceBookingSchema.js";
-import { services } from "../../Modals/ServiceBookingModal/constants.js";
-import { timeToChoose } from "../../Modals/ServiceBookingModal/constants.js";
 import { BsFillCameraFill } from "react-icons/bs";
 import { BsXLg } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
@@ -13,11 +10,12 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createRecord,
-  getMechsAndPosts,
+  getServiceDataForBooking,
 } from "../../../redux/crm/operations.js";
 import toast from "react-hot-toast";
 import { selectServiceData } from "../../../redux/crm/selectors.js";
 import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
+import SelectTime from "./SelectTime/SelectTime.jsx";
 
 export default function ServiceBookingModal({ onClose }) {
   const dispatch = useDispatch();
@@ -29,32 +27,9 @@ export default function ServiceBookingModal({ onClose }) {
   const selectRef = useRef(null);
 
   const selectedServiceId = useSelector(selectSelectedServiceId);
-  const { mechanics, posts } = useSelector(selectServiceData);
-  const mechanicsList = mechanics.map((mechanic) => mechanic.full_name);
-  const postsList = posts.map((post) => post.name_post); // дані про сервіс: пости та механіки
+  const { mechanics, posts, services } = useSelector(selectServiceData);
 
-  const Schema = ServiceBookingSchema(mechanicsList, postsList);
-
-  useEffect(() => {
-    const fetchServiceData = () => {
-      if (!selectedServiceId) {
-        return;
-      }
-      dispatch(getMechsAndPosts());
-    };
-    fetchServiceData();
-  }, [dispatch, selectedServiceId]); // Отримуємо дані про пости і механіків при рендері модалки
-
-  const onTimeBtnClick = (item) => {
-    if (!item.isFree) return;
-
-    console.log(item.time);
-    setChosenTime((prevChosenButtons) =>
-      prevChosenButtons.includes(item.time)
-        ? prevChosenButtons.filter((i) => i !== item.time)
-        : [...prevChosenButtons, item.time]
-    );
-  };
+  // Отримуємо дані про пости і механіків при рендері модалки
 
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
@@ -93,6 +68,17 @@ export default function ServiceBookingModal({ onClose }) {
   const startHour = chosenTime[0];
   const finishHour = chosenTime[chosenTime.length - 1];
 
+  useEffect(() => {
+    const fetchServiceData = () => {
+      if (!selectedServiceId) {
+        return;
+      }
+      dispatch(getServiceDataForBooking(dateToPass));
+      setChosenTime([]);
+    };
+    fetchServiceData();
+  }, [dispatch, selectedServiceId, dateToPass]);
+
   const handleSubmit = (values, actions) => {
     const recordData = {
       ...values,
@@ -102,7 +88,6 @@ export default function ServiceBookingModal({ onClose }) {
       appointment_date: dateToPass,
       hours_from: startHour,
       hours_to: finishHour,
-      mechanic_id: 0,
     };
 
     dispatch(createRecord(recordData))
@@ -126,17 +111,17 @@ export default function ServiceBookingModal({ onClose }) {
         initialValues={{
           car_number: "",
           vin: "",
-          service: "",
+          service_id: "",
           prepayment: "",
           phone_number: "",
           position: "",
-          mechanic: "",
+          mechanic_id: "",
           make_model: "",
           note: "",
           name: "",
         }}
         onSubmit={handleSubmit}
-        validationSchema={Schema}
+        validationSchema={ServiceBookingSchema}
         validateOnChange={true}
         validateOnBlur
       >
@@ -191,12 +176,12 @@ export default function ServiceBookingModal({ onClose }) {
                   <Field
                     as="select"
                     className={
-                      values.service === ""
+                      values.service_id === ""
                         ? `${css.placeholder}`
                         : `${css.inputSelect}`
                     }
                     type="text"
-                    name="service"
+                    name="service_id"
                     onClick={() =>
                       toggleDropdown(isDropdownOpen, setIsDropdownOpen)
                     }
@@ -204,10 +189,10 @@ export default function ServiceBookingModal({ onClose }) {
                     <option value="" disabled hidden>
                       Послуга
                     </option>
-                    {services.map((service, index) => {
+                    {services.map((service) => {
                       return (
-                        <option key={index} value={service}>
-                          {service}
+                        <option key={service.id} value={service.id}>
+                          {service.name_services}
                         </option>
                       );
                     })}
@@ -218,7 +203,7 @@ export default function ServiceBookingModal({ onClose }) {
                     }`}
                   />
                   <ErrorMessage
-                    name="service"
+                    name="service_id"
                     component="div"
                     className={css.errorMsg}
                   />
@@ -259,13 +244,14 @@ export default function ServiceBookingModal({ onClose }) {
                     <option value="" disabled hidden>
                       ПОСТ
                     </option>
-                    {posts.map((position) => {
+                    {posts.map((post) => {
                       return (
                         <option
-                          key={position.id_post}
-                          value={position.name_post}
+                          key={post.id_post}
+                          value={post.id_post}
+                          // disabled={post.status !==0}
                         >
-                          {position.name_post}
+                          {post.name_post}
                         </option>
                       );
                     })}
@@ -289,12 +275,12 @@ export default function ServiceBookingModal({ onClose }) {
                   <Field
                     as="select"
                     className={
-                      values.mechanic === ""
+                      values.mechanic_id === ""
                         ? `${css.placeholder}`
                         : `${css.inputSelect}`
                     }
                     type="text"
-                    name="mechanic"
+                    name="mechanic_id"
                     onClick={() =>
                       toggleDropdown(
                         isDropdownMechanicOpen,
@@ -307,7 +293,11 @@ export default function ServiceBookingModal({ onClose }) {
                     </option>
                     {mechanics.map((mechanic) => {
                       return (
-                        <option key={mechanic.id} value={mechanic.full_name}>
+                        <option
+                          key={mechanic.id}
+                          value={mechanic.id}
+                          // disabled={mechanic.status !== 0}
+                        >
                           {mechanic.full_name}
                         </option>
                       );
@@ -319,7 +309,7 @@ export default function ServiceBookingModal({ onClose }) {
                     }`}
                   />
                   <ErrorMessage
-                    name="mechanic"
+                    name="mechanic_id"
                     component="div"
                     className={css.errorMsg}
                   />
@@ -374,25 +364,11 @@ export default function ServiceBookingModal({ onClose }) {
               <div className={css.calendar}>
                 <SelectDate newDate={setNewDate} />
                 <div className={css.timeWrapper}>
-                  {timeToChoose.map((item, index) => {
-                    return (
-                      <button
-                        type="button"
-                        className={clsx(
-                          css.timeBtn,
-                          item.isFree ? css.timeBtnFree : css.timeBtnDisabled,
-                          chosenTime.includes(item.time) && css.timeBtnChosen
-                        )}
-                        key={index}
-                        onClick={() => {
-                          onTimeBtnClick(item);
-                        }}
-                        disabled={!item.isFree}
-                      >
-                        {item.time}
-                      </button>
-                    );
-                  })}
+                  <SelectTime
+                    postId={values.position}
+                    chosenTime={chosenTime}
+                    setChosenTime={setChosenTime}
+                  />
                 </div>
               </div>
               <div className={css.btnWrapper}>
