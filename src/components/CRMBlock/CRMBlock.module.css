@@ -12,10 +12,15 @@
 
 .columnsContainer {
     display: flex;
-    flex-direction: row;
-    gap: 11px;
-    max-height: 480px; 
+    max-height: 480px;
     overflow-y: auto;
+}
+
+.columnsInnerContainer {
+    display: flex;
+    width: 100%;
+    gap: 11px;
+    height: fit-content;
 }
 
 .columnsContainer::-webkit-scrollbar {
