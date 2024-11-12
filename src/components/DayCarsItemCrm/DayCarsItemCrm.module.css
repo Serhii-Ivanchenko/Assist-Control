@@ -9,28 +9,24 @@
   background: var(--bg-input);
   border: 2px solid transparent;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  cursor: grab; 
+  cursor: grab;
   transition: transform 0.2s ease, opacity 0.2s ease;
-  opacity: 1; 
   position: relative;
-  
-}
-
-
-.crmBlockDayCarsItemContainer:active{
-  box-shadow: 0px 4px 4px 0px rgba(255, 255, 255, 0.25);
-
-
 }
 
 .crmBlockDayCarsItemContainer.dragging {
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Збільшене підсвічування при перетягуванні */
-  opacity: 1; 
-  transform: rotate(20deg);
-  
-
+  opacity: 0.1;
+  cursor: grabbing;
 }
 
+.cloneDragging {
+  opacity: 1; /* Повна видимість для дубліката */
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.6); /* Підсвічування синім кольором */
+  border: 2px solid rgba(255, 255, 255, 0.8); /* Додатковий контур для підсвічування */
+  cursor: grabbing;
+  transition: none;
+  transform: scale(1.05); /* Легке збільшення для виділення */
+}
 
   @media only screen and (min-width: 1850px) {
     .crmBlockDayCarsItemContainer {
