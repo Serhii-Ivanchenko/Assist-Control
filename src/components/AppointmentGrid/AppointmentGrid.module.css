@@ -1,20 +1,19 @@
-
-
 .schedulegrid {
     display: grid;
     grid-template-columns: 100px repeat(10, 1fr);
     /* Колонки для дат */
-    grid-template-rows:  65px repeat(65px);
-
-      /* row-gap: 10px;   */
+    grid-template-rows: 65px repeat(auto-fill, 65px);
+    border-spacing: 1px;
+        /* Spacing for visible borders */
+    position: relative;
+    /* row-gap: 10px;   */
     width: 1049px;
 
-position: relative;
-        overflow-y: auto; 
-        overflow-x: hidden; 
-        max-height: 325px;   
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 325px;
     background: var(--bg-secondary);
-        /* background-image:
+    /* background-image:
                 repeating-linear-gradient(0deg,
                     transparent,
                     transparent 66px,
@@ -27,29 +26,29 @@ position: relative;
                     #23252C 100%    
                 ); */
 
-    
+
     /* background-size: 100% 132px, 100% 66px; */
 }
 
- .schedulegrid::-webkit-scrollbar {
+.schedulegrid::-webkit-scrollbar {
     width: 8px;
 }
 
 .schedulegrid::-webkit-scrollbar-thumb {
-     background-color: var(--main-gray); 
+    background-color: var(--main-gray);
     border-radius: 4px;
 }
 
 .schedulegrid::-webkit-scrollbar-track {
-     background-color: var(--bg); 
+    background-color: var(--bg);
     border-radius: 4px;
-} 
+}
 
 
 /* Чередующаяся подложка */
- .rowBackground {
+.rowBackground {
     grid-column: 2 / -1;
-    
+
     /* grid-row: 2/-1; */
     height: 65px;
     /* position: absolute;
@@ -58,65 +57,75 @@ position: relative;
     right: 0;
     bottom: 0; */
     z-index: 0;
-}  
+}
 
- .rowBackground.odd {
-    background: linear-gradient(90deg, #23252C 0%, #3E414F 50%, #23252C 100%); 
-    
- } 
+.rowBackground.odd {
+    background: linear-gradient(90deg, #23252C 0%, #3E414F 50%, #23252C 100%);
+    opacity: 0.5;
+    border-top: 1px dashed #D8E1FF12;
+    /* border-bottom: 1px dashed #D8E1FF12; */
+
+}
 
 .rowBackground.even {
-background: var(--bg-secondary);
-} 
+    background: var(--bg-secondary);
+    border-top: 1px dashed #D8E1FF12;
+}
 
 .gridheader {
     grid-row: 1;
     /* grid-column: 2 / 12; */
     /* Первая строка для заголовков дат */
     background-color: var(--bg-secondary);
-    margin-left: -15px;
-    padding-top: 13px;
-    padding-bottom: 8px;
+    /* margin-left: -15px; */
+    padding: 13px 0 8px 0;
+    /* padding-bottom: 8px; */
     text-align: left;
     align-content: center;
-    /* font-weight: bold; */
     white-space: pre-wrap;
     height: 65px;
     position: sticky;
-        top: 0;
-     z-index: 2; 
+    top: 0;
+    z-index: 2;
+    border-right: 1px dashed #D8E1FF12;
 }
 
+.gridheader span {
+    margin-left: -15px;
+}
+/* 
 .gridheader:first-child {
     margin-left: 10px;
     width: 75px;
     white-space: pre-wrap;
-}
+} */
 
 .gridpost {
     grid-column: 1;
     /* grid-row: 2 / 6; */
     /* Первая колонка для заголовков постов */
     background: var(--bg-secondary);
+    border-top: 1px dashed #D8E1FF12;
+    border-right: 1px dashed #D8E1FF12;
     padding: 10px;
     height: 55px;
-  
+
     text-align: left;
-     z-index: 1; 
+    z-index: 1;
 }
 
 .griditem {
     border-radius: 4px;
-        text-align: center;
-        height: 55px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-          /* position: relative;  */
-          margin-top: 4px;
-    z-index: 1; 
-   
+    text-align: center;
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* position: relative;  */
+    margin-top: 4px;
+    z-index: 1;
+    border-right: 1px dashed #D8E1FF12;
 }
 
 .plateinfo {
@@ -146,22 +155,23 @@ background: var(--bg-secondary);
     /* position:relative; */
 }
 
-  .mechanicinfo::before {
-     content: "";
-     position: absolute;
-     left: -1px;
-     top: 0;
-     width: 4px;
-     height: 100%;
-     filter: blur(5px);
-     border-radius: 0 5px 5px 0;
+.mechanicinfo::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    filter: blur(5px);
+    border-radius: 0 5px 5px 0;
     z-index: 1;
- } 
+}
 
- .currenttimeline {
-     position: absolute;
-     width: 1px;
+.currenttimeline {
+    position: absolute;
+    width: 1px;
     height: 325px;
-     background: linear-gradient(0deg,#23252C 0%, #8B8B8B 20%, #566596 50%, #8E8E8E 80%, #23252C 100%);;
-     z-index: 3;
- }
+    background: linear-gradient(0deg, #23252C 0%, #8B8B8B 20%, #566596 50%, #8E8E8E 80%, #23252C 100%);
+    ;
+    z-index: 3;
+}
