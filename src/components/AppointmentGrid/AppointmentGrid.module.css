@@ -7,7 +7,7 @@
     grid-template-rows:  65px repeat(65px);
 
       /* row-gap: 10px;   */
-    width: 1049px;
+    width: 1072px;
 
 position: relative;
         overflow-y: auto; 
@@ -52,6 +52,7 @@ position: relative;
     
     /* grid-row: 2/-1; */
     height: 65px;
+    position: relative;
     /* position: absolute;
     top: 0;
     left: 0;
@@ -69,6 +70,58 @@ position: relative;
 background: var(--bg-secondary);
 } 
 
+
+/* .rowBackground::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: repeating-linear-gradient(90deg,
+             transparent,  
+                transparent  calc(var(--gap-width) - 1px), 
+                rgba(255, 255, 255) 1px,
+                transparent calc(var(--gap-width) )  
+                
+               
+                );
+    z-index: 1;
+    pointer-events: none;
+   
+    opacity: 0.2;
+} */
+
+
+.overlayGrid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 100px repeat(10, 1fr);;
+    /* Ширина ячейки передается из props */
+    grid-template-rows: 65px repeat( 65px);
+    /* Высота каждой ячейки */
+    z-index: 1;
+    /* Располагаем ниже основного контента */
+    pointer-events: none;
+    /* Делает вспомогательный грид неактивным для кликов */
+}
+
+/* Стили для ячеек вспомогательного грида */
+.overlayCell {
+    border-left: 1px dashed rgba(255, 255, 255, 0.3);
+    
+    /* Штрихпунктирный левый бордер */
+}
+
+/* Удаляем левый бордер у первой колонки */
+.overlayCell.no-border {
+    border-left: none;
+}
+
 .gridheader {
     grid-row: 1;
     /* grid-column: 2 / 12; */
@@ -84,7 +137,7 @@ background: var(--bg-secondary);
     height: 65px;
     position: sticky;
         top: 0;
-     z-index: 2; 
+     z-index: 3; 
 }
 
 .gridheader:first-child {
@@ -102,7 +155,7 @@ background: var(--bg-secondary);
     height: 55px;
   
     text-align: left;
-     z-index: 1; 
+     z-index: 2; 
 }
 
 .griditem {
@@ -115,7 +168,7 @@ background: var(--bg-secondary);
         align-items: center;
           /* position: relative;  */
           margin-top: 4px;
-    z-index: 1; 
+    z-index: 2; 
    
 }
 
@@ -155,13 +208,14 @@ background: var(--bg-secondary);
      height: 100%;
      filter: blur(5px);
      border-radius: 0 5px 5px 0;
-    z-index: 1;
+    z-index: 2;
  } 
 
  .currenttimeline {
      position: absolute;
-     width: 1px;
+     top: 0;
+     width: 2px;
     height: 325px;
      background: linear-gradient(0deg,#23252C 0%, #8B8B8B 20%, #566596 50%, #8E8E8E 80%, #23252C 100%);;
-     z-index: 3;
+     z-index: 4;
  }
