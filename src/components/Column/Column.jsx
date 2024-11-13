@@ -1,22 +1,16 @@
-import styles from "./Column.module.css";
+import styles from './Column.module.css';
 
-export default function Column({ children, status, onDrop }) {
-  const handleDragOver = (event) => {
-    event.preventDefault();
-  };
-
-  const handleDrop = (event) => {
-    console.log(event)
-    onDrop(event, status); 
-  };
-
+const Column = ({ id, onDragOver, onDrop, children }) => {
   return (
     <div
-      className={styles.column}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
+      id={id}
+      onDragOver={onDragOver}
+      onDrop={(e) => onDrop(e, id)}
+      className={styles.droppableColumn}
     >
       {children}
     </div>
   );
-}
+};
+
+export default Column;

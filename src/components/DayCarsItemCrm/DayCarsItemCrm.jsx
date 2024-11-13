@@ -22,9 +22,61 @@ import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton
 import PaymentBtn from "../sharedComponents/PaymentBtn/PaymentBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
 
-export default function DayCarsItemCrm({ car }) {
+export default function DayCarsItemCrm({ car, onDragStart }) {
   const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
     useState(false);
+
+    const [isDragging, setIsDragging] = useState(false); 
+    const [draggingElement, setDraggingElement] = useState(null);
+    const [initialX, setInitialX] = useState(0); 
+
+    const handleDragStart = (e) => {
+      setIsDragging(true);
+      onDragStart(e, car.id);
+  
+      setInitialX(e.clientX);
+  
+      // Створюємо дубліката елемента для перетягування
+      const dragElement = e.target.cloneNode(true);
+      dragElement.style.position = 'absolute';
+      dragElement.style.pointerEvents = 'none';
+      dragElement.classList.add(styles.cloneDragging);
+  
+      document.body.appendChild(dragElement);
+      setDraggingElement(dragElement);
+  
+      const img = new Image();
+      img.src = "";
+      e.dataTransfer.setDragImage(img, 0, 0);
+    };
+  
+    const handleDrag = (e) => {
+      if (draggingElement) {
+        const currentX = e.clientX;
+        const rotationAngle = currentX > initialX ? 10 : -10;
+  
+        // Обновляємо позицію дубліката
+        draggingElement.style.top = `${e.clientY}px`;
+        draggingElement.style.left = `${e.clientX}px`;
+        draggingElement.style.transform = `rotate(${rotationAngle}deg)`;
+  
+        // Застосовуємо нахил до оригінального елемента
+        e.target.style.transform = `rotate(${rotationAngle}deg)`;
+      }
+    };
+  
+    const handleDragEnd = (e) => {
+      setIsDragging(false);
+  
+      // Відновлюємо початковий стан оригінального елемента
+      e.target.style.transform = '';
+  
+      // Видаляємо дублікат
+      if (draggingElement) {
+        document.body.removeChild(draggingElement);
+        setDraggingElement(null);
+      }
+    };
 
   const openServiceBookingModal = () => {
     setServiceBookingModalIsOpen(true);
@@ -51,9 +103,14 @@ export default function DayCarsItemCrm({ car }) {
 
   return (
     <div
-      className={styles.crmBlockDayCarsItemContainer}
-      style={getBackgroundStyle(status)}
-    >
+    className={`${styles.crmBlockDayCarsItemContainer} ${isDragging ? styles.dragging : ''}`}
+    style={getBackgroundStyle(status)}
+    id={car.id}
+    draggable
+    onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onDrag={handleDrag}
+  >
       <div className={styles.userInfo}>
         <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>
