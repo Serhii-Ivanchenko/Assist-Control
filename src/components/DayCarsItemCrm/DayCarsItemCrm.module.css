@@ -12,6 +12,7 @@
   cursor: grab;
   transition: transform 0.2s ease, opacity 0.2s ease;
   position: relative;
+  
 }
 
 .crmBlockDayCarsItemContainer.dragging {
@@ -20,12 +21,14 @@
 }
 
 .cloneDragging {
-  opacity: 1; /* Повна видимість для дубліката */
-  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.6); /* Підсвічування синім кольором */
-  border: 2px solid rgba(255, 255, 255, 0.8); /* Додатковий контур для підсвічування */
+  opacity: 1;
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   cursor: grabbing;
   transition: none;
-  transform: scale(1.05); /* Легке збільшення для виділення */
+  transform: scale(1.05);
+  background-color: var(--bg-input);
+  z-index: 1000; 
 }
 
   @media only screen and (min-width: 1850px) {
@@ -427,10 +430,7 @@
       font-weight: 600;
       line-height: normal;
 
-      max-width: 75px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+      
     }
     
     .total {
