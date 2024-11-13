@@ -79,6 +79,21 @@
   line-height: normal;
 }
 
+.input:-webkit-autofill {
+  background-color: var(--bg-input) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  background-color: var(--bg-input) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+
 .input::placeholder {
   color: var(--input-text);
   font-family: Roboto, sans-serif;
@@ -210,11 +225,11 @@ option {
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
-  justify-content: space-between;
-  align-content: space-between;
+  row-gap: 6px;
+  column-gap: 3px;
 }
 
-.timeBtn {
+/* .timeBtn {
   width: 69px;
   height: 39px;
   border-radius: 6px;
@@ -226,9 +241,9 @@ option {
   font-weight: 500;
   line-height: 1.1875em;
   border: transparent;
-}
+} */
 
-.timeBtnFree {
+/* .timeBtnFree {
   background: var(--main-gray);
   color: var(--white);
 }
@@ -236,9 +251,9 @@ option {
 .timeBtnFree:hover {
   border: 6px solid var(--green-btn-normal);
   cursor: pointer;
-}
+} */
 
-.timeBtnChosen {
+/* .timeBtnChosen {
   background: var(--green-btn-normal);
   color: var(--white);
 }
@@ -250,7 +265,7 @@ option {
 
 .timeBtnDisabled:hover {
   cursor: not-allowed;
-}
+} */
 
 .btnWrapper {
   display: flex;
