@@ -29,42 +29,48 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
     const [isDragging, setIsDragging] = useState(false); 
     const [draggingElement, setDraggingElement] = useState(null);
     const [initialX, setInitialX] = useState(0); 
+    const [initialY, setInitialY] = useState(0); 
 
     const handleDragStart = (e) => {
       setIsDragging(true);
       onDragStart(e, car.id);
-  
-      setInitialX(e.clientX);
-  
+    
+      // Зберігаємо початкове зміщення між курсором і позицією елемента
+      const rect = e.target.getBoundingClientRect();
+      const offsetX = e.clientX - rect.left;
+      const offsetY = e.clientY - rect.top;
+    
+      // Зберігаємо значення зміщення в стані
+      setInitialX(offsetX);
+      setInitialY(offsetY);
+    
       // Створюємо дубліката елемента для перетягування
       const dragElement = e.target.cloneNode(true);
       dragElement.style.position = 'absolute';
       dragElement.style.pointerEvents = 'none';
       dragElement.classList.add(styles.cloneDragging);
-  
+    
       document.body.appendChild(dragElement);
       setDraggingElement(dragElement);
-  
+    
+      // Відміняємо стандартний образ перетягування
       const img = new Image();
       img.src = "";
       e.dataTransfer.setDragImage(img, 0, 0);
     };
-  
+    
     const handleDrag = (e) => {
       if (draggingElement) {
         const currentX = e.clientX;
+        const currentY = e.clientY;
         const rotationAngle = currentX > initialX ? 10 : -10;
-  
-        // Обновляємо позицію дубліката
-        draggingElement.style.top = `${e.clientY}px`;
-        draggingElement.style.left = `${e.clientX}px`;
+    
+        // Обновляємо позицію дубліката, додаючи зміщення
+        draggingElement.style.top = `${currentY - initialY}px`;
+        draggingElement.style.left = `${currentX - initialX}px`;
         draggingElement.style.transform = `rotate(${rotationAngle}deg)`;
-  
-        // Застосовуємо нахил до оригінального елемента
-        e.target.style.transform = `rotate(${rotationAngle}deg)`;
       }
     };
-  
     const handleDragEnd = (e) => {
       setIsDragging(false);
   
@@ -188,6 +194,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
               className={styles.carImg}
               src={carPhoto}
               alt="Car image"
+              draggable="false"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = absentAutoImg;
