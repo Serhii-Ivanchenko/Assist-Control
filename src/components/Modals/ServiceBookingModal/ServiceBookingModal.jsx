@@ -103,6 +103,19 @@ export default function ServiceBookingModal({ onClose }) {
     onClose();
   };
 
+   const initialValues = {
+     car_number: "",
+     vin: "",
+     service_id: "",
+     prepayment: "",
+     phone_number: "",
+     position: posts.length > 0 ? posts[0]?.id_post : "",
+     mechanic_id: "",
+     make_model: "",
+     note: "",
+     name: "",
+  };
+  
   return !posts ? (
     <Loader />
   ) : (
@@ -110,20 +123,10 @@ export default function ServiceBookingModal({ onClose }) {
       <BsXLg className={css.closeIcon} onClick={onClose} />
       <h3 className={css.header}>Створення запису на {pickedDate}</h3>
       <Formik
-        initialValues={{
-          car_number: "",
-          vin: "",
-          service_id: "",
-          prepayment: "",
-          phone_number: "",
-          position: posts[0]?.id_post,
-          mechanic_id: "",
-          make_model: "",
-          note: "",
-          name: "",
-        }}
+        initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={ServiceBookingSchema}
+        enableReinitialize={true} 
         validateOnChange={true}
         validateOnBlur
       >
