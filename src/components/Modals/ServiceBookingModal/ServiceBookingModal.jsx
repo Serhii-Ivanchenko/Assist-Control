@@ -30,8 +30,6 @@ export default function ServiceBookingModal({ onClose }) {
   const selectedServiceId = useSelector(selectSelectedServiceId);
   const { mechanics, posts, services } = useSelector(selectServiceData);
 
-  // Отримуємо дані про пости і механіків при рендері модалки
-
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
   };
@@ -66,8 +64,8 @@ export default function ServiceBookingModal({ onClose }) {
 
   const dateToPass = pickedDate.split(".").reverse().join("-");
 
-  const startHour = chosenTime[0];
-  const finishHour = chosenTime[chosenTime.length - 1];
+  const startHour = chosenTime[0]?.split(":")[0];
+  const finishHour = chosenTime[chosenTime.length - 1]?.split(":")[0];
 
   useEffect(() => {
     const fetchServiceData = () => {
@@ -86,6 +84,7 @@ export default function ServiceBookingModal({ onClose }) {
       service_id: values.service_id ? Number(values.service_id) : null,
       prepayment: values.prepayment ? Number(values.prepayment) : null,
       position: values.position ? Number(values.position) : null,
+      mechanic_id: values.mechanic_id ? Number(values.mechanic_id) : null,
       appointment_date: dateToPass,
       hours_from: startHour,
       hours_to: finishHour,
@@ -371,6 +370,7 @@ export default function ServiceBookingModal({ onClose }) {
                     postId={values.position || posts[0]?.id_post}
                     chosenTime={chosenTime}
                     setChosenTime={setChosenTime}
+                    pickedDate={pickedDate}
                   />
                 </div>
               </div>

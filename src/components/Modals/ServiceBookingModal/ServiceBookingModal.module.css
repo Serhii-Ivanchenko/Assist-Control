@@ -229,44 +229,6 @@ option {
   column-gap: 3px;
 }
 
-/* .timeBtn {
-  width: 69px;
-  height: 39px;
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.1875em;
-  border: transparent;
-} */
-
-/* .timeBtnFree {
-  background: var(--main-gray);
-  color: var(--white);
-}
-
-.timeBtnFree:hover {
-  border: 6px solid var(--green-btn-normal);
-  cursor: pointer;
-} */
-
-/* .timeBtnChosen {
-  background: var(--green-btn-normal);
-  color: var(--white);
-}
-
-.timeBtnDisabled {
-  background: var(--bg-input);
-  color: var(--input-stroke);
-}
-
-.timeBtnDisabled:hover {
-  cursor: not-allowed;
-} */
-
 .btnWrapper {
   display: flex;
   gap: 10px;

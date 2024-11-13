@@ -4,7 +4,12 @@ import css from "../SelectTime/SelectTime.module.css";
 import clsx from "clsx";
 import { useEffect } from "react";
 
-export default function SelectTime({ postId, chosenTime, setChosenTime }) {
+export default function SelectTime({
+  postId,
+  chosenTime,
+  setChosenTime,
+  pickedDate,
+}) {
   const { availability } = useSelector(selectServiceData);
 
   useEffect(() => {
@@ -42,14 +47,22 @@ export default function SelectTime({ postId, chosenTime, setChosenTime }) {
           type="button"
           className={clsx(
             css.timeBtn,
-            value === 0 ? css.timeBtnFree : css.timeBtnDisabled,
+            value === 1 ||
+              (time.split(":")[0] <= new Date().getHours() &&
+                pickedDate === new Date(Date.now()).toLocaleDateString())
+              ? css.timeBtnDisabled
+              : css.timeBtnFree,
             chosenTime.includes(time) && css.timeBtnChosen
           )}
           key={index}
           onClick={() => {
             onTimeBtnClick(time, value);
           }}
-          disabled={value === 1}
+          disabled={
+            value === 1 ||
+            (time.split(":")[0] <= new Date().getHours() &&
+              pickedDate === new Date(Date.now()).toLocaleDateString())
+          }
         >
           {time}
         </button>
