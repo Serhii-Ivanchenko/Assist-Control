@@ -1,0 +1,7 @@
+.modal{
+    width: 110px;
+    height: 868px;
+
+    border-radius: 12px;
+    background: var(--bg-secondary);
+}
