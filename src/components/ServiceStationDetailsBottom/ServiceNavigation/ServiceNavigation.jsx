@@ -28,8 +28,8 @@ export default function ServiceNavigation({page, setPage}) {
                 <p className={css.value}>8</p>
             </button>
             <button type="button"
-                onClick={()=>setPage("works")}
-                className={clsx(css.btnService, { [css.isActiveBtn]: page === "works" })}>
+                onClick={()=>setPage("price")}
+                className={clsx(css.btnService, { [css.isActiveBtn]: page === "price" })}>
                 <p className={css.title}>ПРАЙС</p>
                 <p className={`${css.value} ${css.valueWords}`}>Роботи</p>
             </button>
