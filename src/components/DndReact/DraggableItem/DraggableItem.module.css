@@ -1,35 +1,28 @@
-.crmBlockDayCarsItemContainer {
-  width: 365px;
-  height: 200px;
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-radius: 8px;
-  background: var(--bg-input);
-  border: 2px solid transparent;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  cursor: grab;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  position: relative;
+.draggableItem {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    border: 2px solid var(--CRM-modal-GreenGrad, #246D4D);
+    background: var(--CRM-modal-SecondaryBG, #23252C);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: move;
+  }
   
-}
 
-.crmBlockDayCarsItemContainer.dragging {
-  opacity: 0.1;
-  cursor: grabbing;
-}
+  .crmBlockDayCarsItemContainer{
+    width: 365px;
+    height: 200px;
+    padding: 10px 12px;
 
-.cloneDragging {
-  opacity: 1;
-  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  cursor: grabbing;
-  transition: none;
-  transform: scale(1.05);
-  background-color: var(--bg-input);
-  z-index: 1000; 
-}
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  
+    border-radius: 8px;
+    background: var(--bg-input);
+    border: 2px solid transparent;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
 
   @media only screen and (min-width: 1850px) {
     .crmBlockDayCarsItemContainer {
@@ -430,7 +423,10 @@
       font-weight: 600;
       line-height: normal;
 
-      
+      max-width: 75px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
     
     .total {

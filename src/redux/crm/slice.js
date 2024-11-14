@@ -3,7 +3,6 @@ import { initialState } from "../initialState.js";
 import {
   createRecord,
   getAllRecords,
-  getMechsAndPosts,
   getMonthlyLoad,
   getPlannedVisits,
   getRecordsFromDate,
