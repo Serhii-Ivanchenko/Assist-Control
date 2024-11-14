@@ -5,7 +5,7 @@
     /* Колонки для дат */
     grid-template-rows: 65px repeat(auto-fill, 65px);
     /* row-gap: 10px;   */
-    width: 1049px;
+    width: 1057px;
 
     position: relative;
     overflow-y: auto;
@@ -85,7 +85,6 @@
     height: 100%;
     display: grid;
     grid-template-columns: 100px repeat(10, 1fr);
-    ;
     /* Ширина ячейки передается из props */
     grid-template-rows: 65px repeat(65px);
     /* Высота каждой ячейки */
@@ -147,9 +146,11 @@
     /* Первая колонка для заголовков постов */
     background: var(--bg-secondary);
     padding: 10px;
-    height: 55px;
+    height: 65px;
     border-top: 1px dashed #D8E1FF12;
     text-align: left;
+    align-content: center;
+
     z-index: 2;
 }
 

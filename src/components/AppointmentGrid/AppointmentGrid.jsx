@@ -33,7 +33,7 @@ const AppointmentGrid = ({ data }) => {
     }
   }, [data]);
 
-  const koeffWidth = (100 + (1072 - 100) / 10) / 100;
+  const koeffWidth = (100 + (1057 - 100) / 10) / 100;
 
   useEffect(() => {
     const updateCurrentTimeLine = () => {
@@ -70,7 +70,13 @@ const AppointmentGrid = ({ data }) => {
     <div className={css.schedulegrid} ref={gridRef}>
       {/* Заголовки для дат */}
       {data.dates.map((date, index) => (
-        <div key={index} className={css.gridheader}>
+        <div
+          key={index}
+          className={css.gridheader}
+          style={{
+            borderRight: index === data.dates.length - 1 ? "none" : undefined,
+          }}
+        >
           <span>{date}</span>
         </div>
       ))}
@@ -89,7 +95,10 @@ const AppointmentGrid = ({ data }) => {
       ))}
 
       {/* Слой сетки с ячейками и пунктирными линиями */}
-      <div className={css.overlayGrid}>
+      <div
+        className={css.overlayGrid}
+        style={{ height: `${(rowCount + 1) * 65}px` }}
+      >
         {Array.from({ length: rowCount }).map((_, rowIndex) =>
           Array.from({ length: columnCount }).map((_, colIndex) => (
             <div
