@@ -74,7 +74,7 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
               }}
             >
               {isEdit ? (
-                <RiSave3Fill className={styles.mainIcon} />
+                <RiSave3Fill className={styles.mainIcon} size={21} />
               ) : (
                 <BsPencil className={styles.mainIcon} />
               )}
