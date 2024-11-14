@@ -3,7 +3,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 
-import { calculateTimeInService } from "../../../utils/calculateTimeInService";
+import { renderTime } from "../../../utils/renderTime.js";
 import { getStatusDetails } from "../../../utils/getStatusDetails";
 import { changeCarStatus } from "../../../redux/cars/operations";
 import { getCurrentCars, getCarsByDate } from "../../../redux/cars/operations";
@@ -137,7 +137,7 @@ function CurrentCarModal({ onClose, car, status }) {
         <div className={styles.serviceInfo}>
           <p className={styles.serviceTime}>
             {<MdOutlineTimer className={styles.icon} />}
-            {calculateTimeInService(car.date_s)}
+            {renderTime(car.complete_d, car.date_s)}
           </p>
         </div>
         <div className={styles.radioGroup}>

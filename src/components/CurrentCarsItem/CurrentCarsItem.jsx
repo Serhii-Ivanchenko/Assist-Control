@@ -12,8 +12,8 @@ import { BsUiChecksGrid } from "react-icons/bs";
 import { getCurrentCars } from "../../redux/cars/operations.js";
 import { selectCurrentCars } from "../../redux/cars/selectors.js";
 import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
-import { calculateTimeInService } from "../../utils/calculateTimeInService.js";
 import { getStatusDetails } from "../../utils/getStatusDetails.js";
+import { renderTime } from "../../utils/renderTime.js";
 
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
@@ -105,7 +105,7 @@ export default function CurrentCarsItem() {
             </p>
             <h3 className={styles.carReg}>{car.plate}</h3>
             <h4 className={styles.carTimeStamp}>
-              {calculateTimeInService(car.date_s)}
+              {renderTime(car.complete_d, car.date_s)}
             </h4>
           </div>
           <div className={styles.detailsContainer}>
