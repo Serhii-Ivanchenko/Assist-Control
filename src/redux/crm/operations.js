@@ -131,8 +131,7 @@ export const getServiceDataForBooking = createAsyncThunk(
           },
         }
       );
-      console.log(response.data);
-
+       console.log("response data", response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

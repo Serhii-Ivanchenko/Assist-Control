@@ -64,20 +64,38 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
     }
   };
 
-  const getButtonColor = (percent) => {
-    if (percent >= 150) {
-      return "#DB3020";
-    } else if (percent >= 130) {
-      return "#DB4C20";
-    } else if (percent >= 80) {
-      return "var(--orange)";
-    } else if (percent >= 50) {
-      return "var(--mid-orange)";
-    } else if (percent > 0) {
-      return "var( --dark-orange)";
-    } else {
-      return "var(--input-stroke)";
-    }
+ 
+ 
+    const getButtonColor = (percent) => {
+      if (percent >= 150) {
+        return "#DB3020";
+      } else if (percent >= 130) {
+        return "#DB4C20";
+      } else if (percent >= 80) {
+        return "var(--orange)";
+      } else if (percent >= 50) {
+        return "var(--mid-orange)";
+      } else if (percent > 0) {
+        return "var( --dark-orange)";
+      } else {
+        return "var(--input-stroke)";
+      }
+  };
+
+   const getButtonColorCrm = (percent) => {
+      if (percent >= 80) {
+        return "#DB3020";
+      } else if (percent >= 60) {
+        return "#DB4C20";
+      } else if (percent >= 40) {
+        return "var(--orange)";
+      } else if (percent >= 20) {
+        return "var(--mid-orange)";
+      } else if (percent > 0) {
+        return "var( --dark-orange)";
+      } else {
+        return "var(--input-stroke)";
+      }
   };
 
   const isDateDisabled = (date) => {
@@ -124,7 +142,7 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
             }
             disabled={isDateDisabled(item.date)}
             style={{
-              backgroundColor: getButtonColor(item.percent),
+              backgroundColor: isCrm ? getButtonColorCrm(item.percent) : getButtonColor(item.percent),
               // border: item.date.isSame(selectedDate, "day")
               //   ? " 1px solid var(--white)"
               //   : "1px solid transparent",
