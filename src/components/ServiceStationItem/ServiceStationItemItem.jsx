@@ -7,6 +7,7 @@ import {
   BsEnvelope,
   BsCaretDownFill,
 } from "react-icons/bs";
+import { RiSave3Fill } from "react-icons/ri";
 
 import styles from "./ServiceStationItem.module.css";
 import { useState, useEffect } from "react";
@@ -65,7 +66,6 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
             ) : (
               <h3 className={styles.serviceTitle}>{name}</h3>
             )}
-
             <button
               className={styles.editBtn}
               onClick={(e) => {
@@ -73,7 +73,11 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
                 handleEditToggle();
               }}
             >
-              <BsPencil className={styles.mainIcon} />
+              {isEdit ? (
+                <RiSave3Fill className={styles.mainIcon} />
+              ) : (
+                <BsPencil className={styles.mainIcon} />
+              )}
             </button>
           </div>
 

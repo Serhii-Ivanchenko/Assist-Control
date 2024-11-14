@@ -103,13 +103,18 @@
   padding: 7px 10px;
   border-radius: 10px;
   border: 1px solid var(--input-stroke);
-  background-color: var(--bg-input);
+  background: var(--bg-secondary);
   outline: none;
   color: var(--light-gray);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.infoValueInput:focus,
+.infoValueInput:active {
+  border-color: var(--white);
 }
 
 .mainIcon {
