@@ -195,6 +195,8 @@ export const changeCarStatus = createAsyncThunk(
           "company-id": serviceId,
         },
       });
+      console.log("Status change response", response.data);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

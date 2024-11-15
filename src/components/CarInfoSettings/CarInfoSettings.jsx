@@ -1,43 +1,13 @@
 import { GiSettingsKnobs } from "react-icons/gi";
 import styles from "./CarInfoSettings.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function CarInfoSettings({ onToggleVisibility }) {
+export default function CarInfoSettings({ visibility, handleToggle }) {
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
-  const [visibility, setVisibility] = useState({
-    name: true,
-    raiting: true,
-    carNum: true,
-    carModelYear: true,
-    vin: true,
-    mileage: true,
-    time: true,
-    photo: true,
-    totalPrice: true,
-    prePayment: true,
-    button: true,
-    phoneNumber: true,
-    status: true,
-    info: true,
-    createBtn: true,
-    archive: true,
-  });
 
   const toggleSettings = () => {
     setSettingsIsOpen(!settingsIsOpen);
   };
-
-  const handleToggle = (field) => {
-    setVisibility((prev) => {
-      const newVisibility = { ...prev, [field]: !prev[field] };
-      return newVisibility;
-    });
-  };
-
-  // Викликаємо onToggleVisibility після оновлення visibility
-  useEffect(() => {
-    onToggleVisibility(visibility);
-  }, [visibility, onToggleVisibility]); // Викликається, коли visibility змінюється
 
   return (
     <div className={styles.btnSettingsContainer}>
