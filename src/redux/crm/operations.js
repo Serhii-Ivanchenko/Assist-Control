@@ -24,14 +24,14 @@ export const getAllRecords = createAsyncThunk(
 );
 
 // Get records of the service from a particular date till present date
-export const getRecordsFromDate = createAsyncThunk(
+export const getRecordsForDay = createAsyncThunk(
   "crm/getRecordsFromDate",
   async (day, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/crm/get_records/?date=${day}`,
+        `/crm/get_records/?start_date=${day}`,
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",

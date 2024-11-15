@@ -10,3 +10,5 @@ export const selectVisits = (state) => state.crm.visits;
 
 export const selectMonthlyLoadCrm = (state) => state.crm.load;
 
+export const selectDayRecords = (state) => state.crm.dayRecords;
+

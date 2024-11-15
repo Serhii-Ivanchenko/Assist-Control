@@ -10,6 +10,7 @@ import {
   getNewCarsRange,
   getPercentForHour,
   changeCarStatus,
+  getPeriodCars,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -112,7 +113,13 @@ const carsSlice = createSlice({
           state.current[carIndex].status = newStatus;
         }
       })
-      .addCase(changeCarStatus.rejected, handleRejected),
+      .addCase(changeCarStatus.rejected, handleRejected)
+      .addCase(getPeriodCars.pending, handlePending)
+      .addCase(getPeriodCars.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.periodCars = action.payload.cars;
+      })
+      .addCase(getPeriodCars.rejected, handleRejected),
 });
 
 export const { changeActualDate } = carsSlice.actions;
