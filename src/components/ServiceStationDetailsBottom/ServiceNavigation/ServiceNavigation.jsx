@@ -48,7 +48,7 @@ export default function ServiceNavigation({ page, setPage }) {
 
             <button type="button" className={css.arrowBtn} onClick={prevSlide}> <BsChevronLeft className={css.arrow} size={18} /> </button>
             
-           
+           {/* <div className={css.sliderContainer}>  */}
              <Slider {...settings} className={`${css.btnBox} slick-slider`} ref={sliderRef}>
                
             <button className={css.btnServiceCam}>
@@ -87,7 +87,7 @@ export default function ServiceNavigation({ page, setPage }) {
                   <button type="button"
                 onClick={()=>setPage("cashpoint")}
                 className={clsx(css.btnService, { [css.isActiveBtn]: page === "cashpoint" })}>
-                <p className={css.title}>Каса</p>
+                <p className={css.title}>КАСА</p>
                 </button>
                   <button type="button"
                 onClick={()=>setPage("distributors")}
@@ -95,6 +95,7 @@ export default function ServiceNavigation({ page, setPage }) {
                 <p className={`${css.title} ${css.titleDist}`}>ПОСТАЧАЛЬНИКИ</p>
                     </button>
                 </Slider>
+            {/* </div> */}
                 <button type="button" className={css.arrowBtn} onClick={nextSlide}> <BsChevronRight className={css.arrow} size={18} /> </button>
            
         </div>

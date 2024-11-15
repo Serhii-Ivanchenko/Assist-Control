@@ -1,6 +1,6 @@
 .navSettings{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     flex-direction: row;
     margin-bottom: 36px;
@@ -141,10 +141,17 @@
     padding: 5px !important;
 } */
 
-/* :global(.slick-list){
+/* .navSettings > .slick-list{
     padding: 8px 5px !important;
-}
+} */
 
-:global(.slick-track){
+/*:global(.slick-track){
     gap: 12px;
+} */
+
+/* .sliderContainer{
+    padding: 10px !important;
+    display: flex;
+    flex-direction: row;
+
 } */
