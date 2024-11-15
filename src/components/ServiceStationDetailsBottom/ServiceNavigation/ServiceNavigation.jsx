@@ -85,8 +85,8 @@ export default function ServiceNavigation({ page, setPage }) {
                 <p className={css.title}>СКЛАД</p>
                 </button>
                   <button type="button"
-                onClick={()=>setPage("cashpoint")}
-                className={clsx(css.btnService, { [css.isActiveBtn]: page === "cashpoint" })}>
+                onClick={()=>setPage("checkout")}
+                className={clsx(css.btnService, { [css.isActiveBtn]: page === "checkout" })}>
                 <p className={css.title}>КАСА</p>
                 </button>
                   <button type="button"

@@ -19,7 +19,7 @@ export default function ServiceStationDetailsBottom() {
                 {page === "price" && <PricePart/>}
                 {page === "spares" && <SparesPart />}
                 {page === "warehouse" && <WarehousePart />}
-                {page === "cashpoint" && ""}
+                {page === "checkout" && ""}
                 {page === "distributors" && ""}
             </div>
 
