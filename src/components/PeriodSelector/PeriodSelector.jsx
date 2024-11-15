@@ -4,6 +4,7 @@ import css from "./PeriodSelector.module.css";
 import DatePicker from "react-datepicker";
 import { BsCalendar2Week } from "react-icons/bs";
 import "react-datepicker/dist/react-datepicker.css";
+
 export default function PeriodSelector({
   startDate,
   endDate,
