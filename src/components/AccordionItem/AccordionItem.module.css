@@ -1,0 +1,87 @@
+.wrapper {
+  background: none;
+  color: var(--white);
+  box-shadow: none;
+}
+
+.accordion {
+  background: none;
+  color: var(--white);
+  box-shadow: none;
+}
+
+.accordionTitle {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  padding: 0px 20px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.accordionDesc {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 20px;
+  max-height: 395px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.accordionDesc::-webkit-scrollbar {
+  width: 8px;
+  max-height: 538px;
+}
+
+.accordionDesc::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+  height: 8px;
+}
+
+.accordionDesc::-webkit-scrollbar-track {
+  background-color: var(--bg);
+  border-radius: 4px;
+}
+
+.accordionDesc li {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+.text {
+  width: 450px;
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 35px;
+}
+
+.input {
+  display: flex;
+  padding: 18px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 136px;
+  align-self: stretch;
+  border-radius: 10px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+}
