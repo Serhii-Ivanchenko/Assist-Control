@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 285px;
-  height: 157px;
+  height: auto;
   padding: 15px 13px 13px 11px;
 
   border-radius: 8px;
@@ -16,7 +16,7 @@
 @media only screen and (min-width: 1850px) {
   .dayCarsItemContainer {
     width: 398px;
-    height: 200px;
+    height: auto;
     padding: 10px 18px;
   }
 }
@@ -24,7 +24,7 @@
 .modalDayCarsItemContainer {
   display: flex;
   width: 285px;
-  height: 157px;
+  height: auto;
   padding: 10px 18px;
   gap: 12px;
   border-radius: 8px;
@@ -35,7 +35,7 @@
 @media only screen and (min-width: 1850px) {
   .modalDayCarsItemContainer {
     width: 380px;
-    height: 200px;
+    height: auto;
     padding: 10px 18px;
     gap: 12px;
     border-radius: 8px;
@@ -385,6 +385,10 @@
   }
 }
 
+.prevCoast{
+  margin-top: auto;
+}
+
 .carInfoRight {
   display: flex;
   flex-direction: column;
@@ -546,3 +550,4 @@
 .hidden {
   display: none;
 }
+

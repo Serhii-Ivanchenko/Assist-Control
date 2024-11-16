@@ -8,7 +8,6 @@ import {
   selectDayCars,
   selectLoadingCarsByDay,
   selectDate,
-  selectVisibility,
 } from "../../redux/cars/selectors.js";
 import styles from "./CalendarBlock.module.css";
 import toast from "react-hot-toast";
@@ -20,7 +19,6 @@ export default function CalendarBlock() {
   const carsData = useSelector(selectDayCars);
   const selectedDate = useSelector(selectDate);
   const isLoadingCarsByDay = useSelector(selectLoadingCarsByDay);
-  const visibility = useSelector(selectVisibility);
   const selectedServiceId = useSelector(selectSelectedServiceId);
  
 
@@ -51,7 +49,6 @@ export default function CalendarBlock() {
         <DayCarsList
           carsData={carsData}
           isModal={false}
-          visibility={visibility}          
         />
       </div>
       <DetailsBtn carsData={carsData} />

@@ -12,8 +12,12 @@ import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
 import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
+import { selectVisibility } from "../../redux/cars/selectors.js";
+import { useSelector } from "react-redux";
 
-export default function DayCarsItem({ car, isModal, visibility }) {
+export default function DayCarsItem({ car, isModal }) {
+  const visibility = useSelector(selectVisibility);
+
   const {
     auto,
     photo_url: photoUrl,
