@@ -1,22 +1,27 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectDate, selectLoading } from "../../../redux/cars/selectors";
+import { selectDate, selectLoading, selectVisibility } from "../../../redux/cars/selectors";
 import styles from "./DayCarsModal.module.css";
 import DayCarsFilter from "../../DayCarsFilter/DayCarsFilter";
 import { FiGrid } from "react-icons/fi";
 import { BsListUl, BsSortUp, BsDownload } from "react-icons/bs";
-import { GiSettingsKnobs } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
 import DayCarsList from "../../DayCarsList/DayCarsList";
+import CarInfoSettings from '../../CarInfoSettings/CarInfoSettings';
 import Loader from "../../Loader/Loader";
 import CalendarInModalCar from "../../CalendarInModalCar/CalendarInModalCar";
 import StatusFilterCars from "../../StatusFilterCars/StatusFilterCars";
+import { useDispatch } from "react-redux";
+import { getPeriodCars } from "../../../redux/cars/operations";
+import { setVisibility } from "../../../redux/cars/slice";
 
 export default function DayCarsModal({
   onClose,
   isModal,
   carsData,
 }) {
+  const dispatch = useDispatch();
+  const visibility = useSelector(selectVisibility);
   const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectLoading);
   const [viewMode, setViewMode] = useState("grid");
@@ -26,6 +31,8 @@ export default function DayCarsModal({
   const [endDate, setEndDate] = useState(null);
   const [filteredCarsData, setFilteredCarsData] = useState(carsData);
   const [selectedStatus, setSelectedStatus] = useState("all");
+  
+
 
   useEffect(() => {
     let filteredData = carsData;
@@ -76,6 +83,10 @@ export default function DayCarsModal({
     }
   };
 
+  const fetchPeriodCars = (dates) => {
+    dispatch(getPeriodCars(dates));
+  };
+
   const filteredCars = () => {
     if (!searchTerm) return filteredCarsData;
 
@@ -88,6 +99,12 @@ export default function DayCarsModal({
       );
     });
   };
+
+  const handleToggle = (field) => {
+    const newVisibility = { ...visibility, [field]: !visibility[field] };
+    dispatch(setVisibility(newVisibility));
+  };
+
 
   return (
     <div className={styles.containerCarModal}>
@@ -134,6 +151,7 @@ export default function DayCarsModal({
             endDate={endDate}
             onDateBegChange={handleDateBegChange}
             onDateEndChange={handleDateEndChange}
+            onPeriodCarsFetch={fetchPeriodCars}
           />
           <div className={styles.btnPdfContainer}>
             <button className={styles.btnPdf}>
@@ -141,9 +159,7 @@ export default function DayCarsModal({
               <span className={styles.btnPdfText}>.pdf</span>
             </button>
           </div>
-          <button className={styles.btnSettings}>
-            <GiSettingsKnobs className={styles.iconSettings} />
-          </button>
+          <CarInfoSettings visibility={visibility} handleToggle={handleToggle}/>
         </div>
       </div>
       <button className={styles.closeButton} onClick={onClose}>
@@ -156,6 +172,7 @@ export default function DayCarsModal({
           carsData={filteredCars()}
           viewMode={viewMode}
           isModal={isModal}
+          visibility={visibility}
         />
       )}
     </div>
