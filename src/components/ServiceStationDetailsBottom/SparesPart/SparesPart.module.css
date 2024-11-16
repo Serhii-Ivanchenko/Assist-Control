@@ -23,17 +23,38 @@
 }
 
 .checkbox{
+display: none;
+}
+
+.cbIcon{
     display: none;
 }
 
 .cbMark{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 24px;
     height: 24px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+
+    border: 2px solid var(--white);
+    border-radius: 4px;
+    background-color: transparent;
+
+}
+
+.checkbox:checked+.cbMark{
+    border: 2px solid var(--blue);
 }
 
 .checkbox:checked + .cbMark > .cbIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     fill:var(--blue);
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .radiobutton{
@@ -59,6 +80,30 @@
 
         height: 75px;
 }
+
+
+.radiospan{
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    border: 3px solid var(--blue);
+
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* .dotIcon{
+    display: none;
+}
+
+.radiobutton:checked + .radiospan > .dotIcon{
+    display: flex;
+    fill: var(--blue);
+} */
+
 
 .radioAndInputs{
     display: flex;
@@ -173,4 +218,49 @@
 
  .iconMinus{
     fill: var(--red);
+ }
+
+ .cancel{
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 6px;
+    border: 1px solid var(--light-gray);
+    background-color: transparent;
+
+    color: var(--white);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    cursor: pointer;
+ }
+
+ .save{
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 6px;
+    background: var(--green-btn-normal);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    border: none;
+
+    color: var(--white);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+ }
+
+ .btnBox{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
  }
