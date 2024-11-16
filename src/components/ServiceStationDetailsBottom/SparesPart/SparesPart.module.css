@@ -83,16 +83,16 @@ display: none;
 
 
 .radiospan{
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-    border: 3px solid var(--blue);
+    width: 24px;
+    height: 24px;
+    /* border-radius: 20px; */
+    fill: var(--blue);
 
-    padding: 2px;
+    /* padding: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
+    flex-shrink: 0; */
 }
 
 /* .dotIcon{
@@ -263,4 +263,19 @@ display: none;
     display: flex;
     flex-direction: row;
     gap: 10px;
+    margin-top: auto;
  }
+
+ .sparesPart{
+    display: flex;
+    flex-direction: column;
+    height: 310px;
+    padding-bottom: 10px;
+    overflow: auto;
+
+   
+ }
+
+ /* .inputsList{
+    height:100px;
+ } */

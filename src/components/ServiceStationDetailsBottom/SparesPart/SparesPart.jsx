@@ -1,3 +1,4 @@
+import { useState } from "react";
 import css from "./SparesPart.module.css"
 // import { BsCheckSquare } from "react-icons/bs";
 // import CustomRadioBtn from "../../CustomRadioBtn/CustomRadioBtn.jsx"
@@ -5,15 +6,25 @@ import { BsPlusLg } from "react-icons/bs";
 import { BsDashSquareFill } from "react-icons/bs";
 import { BsCheckLg  } from "react-icons/bs";
 import { BsCheck } from "react-icons/bs";
-import { BsRecordFill } from "react-icons/bs";
+// import { BsRecordFill } from "react-icons/bs";
+import { BsCircle } from "react-icons/bs";
+import { BsRecordCircle } from "react-icons/bs";
+
 
 
  
 
 
 export default function SparesPart() {
+
+    const [isChecked, setIsChecked] = useState(null);
+
+    const chosenRadio = (index) => {
+        setIsChecked(isChecked === index ? null : index)
+    }
+
     return (
-        <div>
+        <div className={css.sparesPart}>
             <div className={css.cbPartBox}>
                 <label className={css.cbLabel}>
                     <input type="checkbox" className={css.checkbox}></input>
@@ -22,9 +33,9 @@ export default function SparesPart() {
                 </label>
 
                 <label className={css.cbLabel}>
-                    <input type="checkbox" className={css.checkbox}></input>
+                    <input type="checkbox" className={css.checkbox} ></input>
                     <span className={css.cbMark}>
-                        {/* <BsCheck size={24} className={css.cbIcon} /> */}
+                        <BsCheck size={24} className={css.cbIcon} />
                     </span>
                     Постачальник
                 </label>
@@ -32,7 +43,7 @@ export default function SparesPart() {
                 <label className={css.cbLabel}>
                     <input type="checkbox" className={css.checkbox}></input>
                     <span className={css.cbMark}>
-                        {/* <BsCheck size={24} className={css.cbIcon} /> */}
+                        <BsCheck size={24} className={css.cbIcon} />
                     </span>
                     Бренд
                 </label>
@@ -48,14 +59,18 @@ export default function SparesPart() {
             
             <div className={css.radioBtns}>
                 <label className={css.radioLabel}>
-                    <input type="radio" className={css.radiobutton } />
-                        <span className={css.radiospan}> <BsRecordFill size={15} className={css.dotIcon} /> </span>
+                        <input type="radio" className={css.radiobutton} onClick={() => chosenRadio(0)} />
+                     {isChecked === 0 ? (<BsRecordCircle className={css.radiospan} />) : (<BsCircle className={css.radiospan}/>)}
+
+                        {/* <span > <BsRecordFill size={15} className={css.dotIcon} /> </span> */}
                     Фіксована націнка (%)
                 </label>
 
                 <label className={css.radioLabel}>
-                    <input type="radio" className={css.radiobutton }/>
-                    <span className={css.radiospan}> <BsRecordFill size={12} className={css.dotIcon}/> </span>
+                        <input type="radio" className={css.radiobutton} onClick={() => chosenRadio(1)} />
+                    {isChecked === 1 ? (<BsRecordCircle className={css.radiospan}/>) : (<BsCircle className={css.radiospan}/>)}
+
+                    {/* <span className={css.radiospan}> <BsRecordFill size={12} className={css.dotIcon}/> </span> */}
                     Динамічна націнка (%)
                 </label>
             </div>
@@ -119,18 +134,20 @@ export default function SparesPart() {
                             </li>
 
 
-                        </ul>
+                            </ul>
+                        </div>
 
-                        <div className={css.btnBox}>
-                            <button type="button" className={css.cancel}>Закрити</button>
-                            <button type="button" className={css.save}> <BsCheckLg size={18}/> Зберегти</button>
-               </div>
-                        
+                       
                         
                     </div>
 
                 </div>
+            
+            <div className={css.btnBox}>
+            <button type="button" className={css.cancel}>Закрити</button>
+            <button type="button" className={css.save}> <BsCheckLg size={18}/> Зберегти</button>
             </div>
+                        
         </div>
     )
 }
