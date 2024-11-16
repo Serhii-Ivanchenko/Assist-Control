@@ -159,7 +159,7 @@ export default function DayCarsModal({
               <span className={styles.btnPdfText}>.pdf</span>
             </button>
           </div>
-          <CarInfoSettings visibility={visibility} handleToggle={handleToggle}/>
+          <CarInfoSettings isCrmView={false} visibility={visibility} handleToggle={handleToggle}/>
         </div>
       </div>
       <button className={styles.closeButton} onClick={onClose}>

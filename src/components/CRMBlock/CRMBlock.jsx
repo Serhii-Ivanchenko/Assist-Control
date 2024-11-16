@@ -1,14 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import DayCarsListCrm from "../DayCarsListCrm/DayCarsListCrm";
 import css from "./CRMBlock.module.css";
-import clsx from "clsx";
-import { selectDate } from "../../redux/cars/selectors.js";
-import toast from "react-hot-toast";
-import { changeCarStatus } from "../../redux/cars/operations.js";
-import { useEffect } from "react";
+import DayCarsListCrm from "../DayCarsListCrm/DayCarsListCrm";
+import CarInfoSettings from '../CarInfoSettings/CarInfoSettings.jsx';
 import Column from "../Column/Column.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import clsx from "clsx";
+import toast from "react-hot-toast";
+import { selectDate, selectVisibility } from "../../redux/cars/selectors.js";
+import { changeCarStatus } from "../../redux/cars/operations.js";
 import { getRecordsForDay } from "../../redux/crm/operations.js";
 import { selectDayRecords } from "../../redux/crm/selectors.js";
+import { setVisibility } from "../../redux/cars/slice.js";
 
 const statusMapping = {
   new: "Нова",
@@ -48,6 +50,7 @@ export default function CRMBlock() {
   const dispatch = useDispatch();
   const selectedDate = useSelector(selectDate);
   const records = useSelector(selectDayRecords);
+  const visibility = useSelector(selectVisibility);
 
   useEffect(() => {
     if (selectedDate) {
@@ -99,6 +102,11 @@ export default function CRMBlock() {
     return records.filter((item) => item.status === status);
   };
 
+  const handleToggle = (field) => {
+    const newVisibility = { ...visibility, [field]: !visibility[field] };
+    dispatch(setVisibility(newVisibility));
+  };
+
   return (
     <div className={css.container}>
       <div className={css.headersContainer}>
@@ -120,6 +128,9 @@ export default function CRMBlock() {
             </div>
           );
         })}
+        <div className={css.btnSettings}>
+        <CarInfoSettings isCrmView={true} visibility={visibility} handleToggle={handleToggle}/>
+        </div>
       </div>
 
       <div className={css.columnsContainer}>
@@ -137,6 +148,7 @@ export default function CRMBlock() {
                 <DayCarsListCrm
                   records={filteredRecords}
                   onDragStart={handleDragStart}
+                  visibility={visibility}
                 />
               </Column>
             );

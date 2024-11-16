@@ -22,67 +22,67 @@ import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton
 import PaymentBtn from "../sharedComponents/PaymentBtn/PaymentBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
 
-export default function DayCarsItemCrm({ car, onDragStart }) {
+export default function DayCarsItemCrm({ car, onDragStart, visibility }) {
   const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
     useState(false);
 
-    const [isDragging, setIsDragging] = useState(false); 
-    const [draggingElement, setDraggingElement] = useState(null);
-    const [initialX, setInitialX] = useState(0); 
-    const [initialY, setInitialY] = useState(0); 
+  const [isDragging, setIsDragging] = useState(false);
+  const [draggingElement, setDraggingElement] = useState(null);
+  const [initialX, setInitialX] = useState(0);
+  const [initialY, setInitialY] = useState(0);
 
-    const handleDragStart = (e) => {
-      setIsDragging(true);
-      onDragStart(e, car.id);
-    
-      // Зберігаємо початкове зміщення між курсором і позицією елемента
-      const rect = e.target.getBoundingClientRect();
-      const offsetX = e.clientX - rect.left;
-      const offsetY = e.clientY - rect.top;
-    
-      // Зберігаємо значення зміщення в стані
-      setInitialX(offsetX);
-      setInitialY(offsetY);
-    
-      // Створюємо дубліката елемента для перетягування
-      const dragElement = e.target.cloneNode(true);
-      dragElement.style.position = 'absolute';
-      dragElement.style.pointerEvents = 'none';
-      dragElement.classList.add(styles.cloneDragging);
-    
-      document.body.appendChild(dragElement);
-      setDraggingElement(dragElement);
-    
-      // Відміняємо стандартний образ перетягування
-      const img = new Image();
-      img.src = "";
-      e.dataTransfer.setDragImage(img, 0, 0);
-    };
-    
-    const handleDrag = (e) => {
-      if (draggingElement) {
-        const currentX = e.clientX;
-        const currentY = e.clientY;
-        const rotationAngle = currentX > initialX ? 10 : -10;
-    
-        // Обновляємо позицію дубліката, додаючи зміщення
-        draggingElement.style.top = `${currentY - initialY}px`;
-        draggingElement.style.left = `${currentX - initialX}px`;
-        draggingElement.style.transform = `rotate(${rotationAngle}deg)`;
-      }
-    };
-    const handleDragEnd = (e) => {
-      setIsDragging(false);
-  
-      // Відновлюємо початковий стан оригінального елемента
-      e.target.style.transform = '';
-  
-      // Видаляємо дублікат
-      if (draggingElement) {
-        document.body.removeChild(draggingElement);
-        setDraggingElement(null);
-      }
-    };
+  const handleDragStart = (e) => {
+    setIsDragging(true);
+    onDragStart(e, car.id);
+
+    // Зберігаємо початкове зміщення між курсором і позицією елемента
+    const rect = e.target.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+
+    // Зберігаємо значення зміщення в стані
+    setInitialX(offsetX);
+    setInitialY(offsetY);
+
+    // Створюємо дубліката елемента для перетягування
+    const dragElement = e.target.cloneNode(true);
+    dragElement.style.position = "absolute";
+    dragElement.style.pointerEvents = "none";
+    dragElement.classList.add(styles.cloneDragging);
+
+    document.body.appendChild(dragElement);
+    setDraggingElement(dragElement);
+
+    // Відміняємо стандартний образ перетягування
+    const img = new Image();
+    img.src = "";
+    e.dataTransfer.setDragImage(img, 0, 0);
+  };
+
+  const handleDrag = (e) => {
+    if (draggingElement) {
+      const currentX = e.clientX;
+      const currentY = e.clientY;
+      const rotationAngle = currentX > initialX ? 10 : -10;
+
+      // Обновляємо позицію дубліката, додаючи зміщення
+      draggingElement.style.top = `${currentY - initialY}px`;
+      draggingElement.style.left = `${currentX - initialX}px`;
+      draggingElement.style.transform = `rotate(${rotationAngle}deg)`;
+    }
+  };
+  const handleDragEnd = (e) => {
+    setIsDragging(false);
+
+    // Відновлюємо початковий стан оригінального елемента
+    e.target.style.transform = "";
+
+    // Видаляємо дублікат
+    if (draggingElement) {
+      document.body.removeChild(draggingElement);
+      setDraggingElement(null);
+    }
+  };
 
   const openServiceBookingModal = () => {
     setServiceBookingModalIsOpen(true);
@@ -109,62 +109,75 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
 
   return (
     <div
-    className={`${styles.crmBlockDayCarsItemContainer} ${isDragging ? styles.dragging : ''}`}
-    style={getBackgroundStyle(status)}
-    id={car.id}
-    draggable
-    onDragStart={handleDragStart}
+      className={`${styles.crmBlockDayCarsItemContainer} ${
+        isDragging ? styles.dragging : ""
+      }`}
+      style={getBackgroundStyle(status)}
+      id={car.id}
+      draggable
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDrag={handleDrag}
-  >
+    >
       <div className={styles.userInfo}>
         <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>
-          <div className={styles.infoName}>
-            <BsPersonFill className={styles.iconHuman} color="#617651" />
-            <span className={styles.textName}>{name ? name : "Гість"}</span>
-          </div>
-          <div className={styles.infoTel}>
-            <BsTelephoneOutboundFill
-              className={styles.iconTel}
-              color="#006D95"
-            />
-            <span className={styles.textTel}>
-              {phone ? phone : "ххх-ххххххх"}
-            </span>
-          </div>
-          <div className={styles.infoCar}>
-            <IoCarSportSharp size={13} color="#A97878" />
-            <span className={styles.nameCar}>{auto}</span>
-          </div>
+          {visibility?.name && (
+            <div className={styles.infoName}>
+              <BsPersonFill className={styles.iconHuman} color="#617651" />
+              <span className={styles.textName}>{name ? name : "Гість"}</span>
+            </div>
+          )}
+          {visibility?.phoneNumber && (
+            <div className={styles.infoTel}>
+              <BsTelephoneOutboundFill
+                className={styles.iconTel}
+                color="#006D95"
+              />
+              <span className={styles.textTel}>
+                {phone ? phone : "ххх-ххххххх"}
+              </span>
+            </div>
+          )}
+          {visibility?.carModelYear && (
+            <div className={styles.infoCar}>
+              <IoCarSportSharp size={13} color="#A97878" />
+              <span className={styles.nameCar}>{auto}</span>
+            </div>
+          )}
         </div>
-        <div className={styles.vinContainer}>
-          <p className={styles.vinCode}>
-            <span className={styles.vinNumber}>{vin || "VIN не вказано"}</span>
-          </p>
-          <button
-            className={styles.copyButton}
-            onClick={() => copyToClipboard(vin ? vin : "VIN не вказано")}
-          >
-            <BsFiles size={13} />
-          </button>
-        </div>
+        {visibility?.vin && (
+          <div className={styles.vinContainer}>
+            <p className={styles.vinCode}>
+              <span className={styles.vinNumber}>
+                {vin || "VIN не вказано"}
+              </span>
+            </p>
+            <button
+              className={styles.copyButton}
+              onClick={() => copyToClipboard(vin ? vin : "VIN не вказано")}
+            >
+              <BsFiles size={13} />
+            </button>
+          </div>
+        )}
         <div className={styles.btnContainer}>
-          <CarDetailButton />
+          {visibility?.info && <CarDetailButton />}
           {(status === "repair" ||
             status === "diagnostic" ||
-            status === "complete") && <PaymentBtn />}
+            status === "complete") &&
+            visibility?.paymentBtn && <PaymentBtn />}
           {status === "new" && (
             <button className={styles.plus} onClick={openServiceBookingModal}>
               <BsPlusLg className={styles.iconPlus} />
             </button>
           )}
-          {(status === "new" || status === "complete") && (
-            <button className={styles.btnSave}>
-              <BsLayerBackward size={16} />
-            </button>
-          )}
-
+          {(status === "new" || status === "complete") &&
+            visibility?.archive && (
+              <button className={styles.btnSave}>
+                <BsLayerBackward size={16} />
+              </button>
+            )}
           {serviceBookingModalIsOpen && (
             <Modal
               isOpen={serviceBookingModalIsOpen}

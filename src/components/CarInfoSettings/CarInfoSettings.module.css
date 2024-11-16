@@ -35,6 +35,11 @@
     width: max-content;
   }
 
+  .settingsContainerInCrm {
+    right: 0;
+    top: 50px;
+  }
+
   .switchItem{
     display: flex;
     align-items: center;

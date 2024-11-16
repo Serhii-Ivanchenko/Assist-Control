@@ -38,7 +38,7 @@ const carsSlice = createSlice({
       photo: true,
       totalPrice: true,
       prePayment: true,
-      button: true,
+      paymentBtn: true,
       phoneNumber: true,
       status: true,
       info: true,

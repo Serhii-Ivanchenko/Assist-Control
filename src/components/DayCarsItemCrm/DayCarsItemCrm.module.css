@@ -413,7 +413,7 @@
     
     .timeWork {
       margin-top: 6px;
-    
+      
     }
     
     .mileage {
@@ -430,7 +430,11 @@
       font-weight: 600;
       line-height: normal;
 
-      
+      max-width: 70px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    
     }
     
     .total {
