@@ -19,7 +19,7 @@
     display: flex;
     gap: 15px;
 
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 .checkbox{
@@ -169,6 +169,7 @@ display: none;
 
             width: 136px;
             text-align: center;
+            appearance: none;
 }
 
 .btnPlus{
@@ -214,6 +215,11 @@ display: none;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex-grow: 1;
+
+ height: 80px;
+ overflow-y: auto;
+ overflow-x: hidden;
  }
 
  .iconMinus{
@@ -264,14 +270,15 @@ display: none;
     flex-direction: row;
     gap: 10px;
     margin-top: auto;
+    margin-left: auto;
  }
 
  .sparesPart{
     display: flex;
     flex-direction: column;
-    height: 310px;
+    min-height: 325px;
     padding-bottom: 10px;
-    overflow: auto;
+    /* overflow: auto; */
 
    
  }

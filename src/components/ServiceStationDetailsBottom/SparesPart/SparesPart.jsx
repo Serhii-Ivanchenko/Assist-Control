@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useRef, useState } from "react";
 import css from "./SparesPart.module.css"
 // import { BsCheckSquare } from "react-icons/bs";
 // import CustomRadioBtn from "../../CustomRadioBtn/CustomRadioBtn.jsx"
@@ -18,6 +18,36 @@ import { BsRecordCircle } from "react-icons/bs";
 export default function SparesPart() {
 
     const [isChecked, setIsChecked] = useState(null);
+    const [rows, setRows] = useState([{ from: "", to: "", percentage: "" }]);
+    const scrollToTheLastItemRef = useRef();
+     const prevRowsLength = useRef(rows.length);
+
+
+    const addRow = () => {
+        setRows([...rows, { from: "", to: "", percentage: "" }])
+    }
+
+    useEffect(() => {
+   if (rows.length > prevRowsLength.current) {
+        scrollToTheLastItemRef.current?.scrollTo({
+            top: scrollToTheLastItemRef.current.scrollHeight,
+            behavior: "smooth"
+        });
+        }
+      prevRowsLength.current = rows.length;
+
+}, [rows])
+    
+
+    const removeRow = (index) => {
+        setRows(rows.filter((_, i) => i !== index))
+    }
+
+
+    const updateInputs = (index,field, value) =>{
+        setRows(rows.map((row, i) => i === index ? { ...row, [field]:value} : row))
+    }
+
 
     const chosenRadio = (index) => {
         setIsChecked(isChecked === index ? null : index)
@@ -59,18 +89,24 @@ export default function SparesPart() {
             
             <div className={css.radioBtns}>
                 <label className={css.radioLabel}>
-                        <input type="radio" className={css.radiobutton} onClick={() => chosenRadio(0)} />
-                     {isChecked === 0 ? (<BsRecordCircle className={css.radiospan} />) : (<BsCircle className={css.radiospan}/>)}
+                        <input type="radio"
+                            className={css.radiobutton}
+                            onClick={() => chosenRadio(0)} />
+                        {isChecked === 0 ?
+                            (<BsRecordCircle className={css.radiospan} />)
+                            : (<BsCircle className={css.radiospan} />)}
 
-                        {/* <span > <BsRecordFill size={15} className={css.dotIcon} /> </span> */}
                     Фіксована націнка (%)
                 </label>
 
                 <label className={css.radioLabel}>
-                        <input type="radio" className={css.radiobutton} onClick={() => chosenRadio(1)} />
-                    {isChecked === 1 ? (<BsRecordCircle className={css.radiospan}/>) : (<BsCircle className={css.radiospan}/>)}
+                        <input type="radio"
+                            className={css.radiobutton} 
+                            onClick={() => chosenRadio(1)} />
+                        {isChecked === 1 ?
+                            (<BsRecordCircle className={css.radiospan} />)
+                            : (<BsCircle className={css.radiospan} />)}
 
-                    {/* <span className={css.radiospan}> <BsRecordFill size={12} className={css.dotIcon}/> </span> */}
                     Динамічна націнка (%)
                 </label>
             </div>
@@ -98,41 +134,34 @@ export default function SparesPart() {
                     </div>
 
                     
-                        <ul className={css.inputsList}>
-                            <li className={css.Inputs}>
-               {/* <div  className={css.inputBox}>
-                    <label className={css.inputLabel}>Від грн</label> */}
-                        <input placeholder="250" className={css.input} />
-                        {/* </div> */}
-{/*                         
-                          <div  className={css.inputBox}>
-                    <label className={css.inputLabel}>До грн</label> */}
-                        <input placeholder="400" className={css.input} />
-                {/* </div> */}
-{/* 
-                <div className={css.inputBox}>
-                    <label className={css.inputLabel}>%</label> */}
-                    <input placeholder="7"  className={css.input}/>
-                        {/* </div> */}
-                           
-                            <BsDashSquareFill className={css.iconMinus } size={24}/>
-                         
-                            </li>
-
-                            <li className={css.Inputs}>
-<input placeholder="250" className={css.input} />
-                       
-                        <input placeholder="400" className={css.input} />
+                        <ul className={css.inputsList} ref={scrollToTheLastItemRef}>
+                            {rows.map((row, index) => (
+                            <li key={index} className={css.Inputs}>
               
-                    <input placeholder="7"  className={css.input}/>
-                        
-                        <button type="button" className={css.btnPlus}>
-                            <span className={css.plus}>
-              <BsPlusLg className={css.iconPlus} />
-            </span>
-                        </button>
+                                    <input placeholder="250" type="number"
+                                        className={css.input} value={row.from}
+                                        onChange={(e) => updateInputs(index, "from", e.target.value)} />
+                      
+                                    <input placeholder="400" type="number"
+                                        className={css.input} value={row.to}
+                                        onChange={(e) => updateInputs(index, "to", e.target.value)} />
+                                    
+                                    <input placeholder="7" type="number"
+                                        className={css.input} value={row.percentage}
+                                        onChange={(e) => updateInputs(index, "percentage", e.target.value)} />
+                                  
+                                    {index === rows.length - 1 ?
+                                        (<button type="button" className={css.btnPlus} onClick={addRow}>
+                                            <span className={css.plus}>                                               
+                                                <BsPlusLg className={css.iconPlus} />                                                
+                                            </span>                                            
+                                        </button>)
+                                        :
+                                        (<BsDashSquareFill className={css.iconMinus} size={24}
+                                            onClick={() => removeRow(index)} />
+                                        )}                          
                             </li>
-
+))}
 
                             </ul>
                         </div>
