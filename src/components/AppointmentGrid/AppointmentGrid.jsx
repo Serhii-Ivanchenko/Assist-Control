@@ -1,6 +1,8 @@
 import css from "./AppointmentGrid.module.css";
 
 import { useEffect, useState, useRef } from "react";
+import ServiceBookingModal from "../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
+import Modal from "../Modals/Modal/Modal.jsx";
 
 const workTypeColors = {
   new: "var(--status-gradient-new)",
@@ -25,6 +27,19 @@ const AppointmentGrid = ({ data }) => {
   const [linePosition, setLinePosition] = useState(null);
   const gridRef = useRef(null);
   const [gridHeight, setGridHeight] = useState(0);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState(null);
+
+   const handleWorkItemClick = (recordId, postId) => {
+    setModalData({ recordId, postId });
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalData(null);
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     if (gridRef.current) {
@@ -164,6 +179,7 @@ const AppointmentGrid = ({ data }) => {
               gridRow: postRowIndex + 2, // Смещаем на 2, чтобы учесть строки заголовков
               background: workTypeColors[item.service_name] || "#333",
             }}
+             onClick={() => handleWorkItemClick(item.record_id, item.post_id)}
           >
             {item.service_name !== "empty" && (
               <p
@@ -190,6 +206,18 @@ const AppointmentGrid = ({ data }) => {
           </div>
         );
       })}
+
+ {isModalOpen && modalData && (
+              <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+                <ServiceBookingModal
+                  recordId={modalData.recordId}
+                  postId={modalData.postId}
+                  onClose={handleCloseModal}
+                />
+              </Modal>
+            )}
+
+
     </div>
   );
 };

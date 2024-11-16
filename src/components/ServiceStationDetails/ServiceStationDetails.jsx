@@ -7,7 +7,7 @@ function ServiceStationDetails({ stationId }) {
   return (
     <div className={styles.serviceDetailsWrapper}>
       <ServiceSchedule stationId={stationId} />
-      {/* <ServiceStationDetailsTop /> */}
+      {/* <ServiceStationDetailsTop />  */}
       <ServiceStationDetailsBottom />
     </div>
   );
