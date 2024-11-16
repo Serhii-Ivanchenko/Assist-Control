@@ -443,6 +443,7 @@
       font-size: 14px;
       font-weight: 600;
       line-height: normal;
+      
     }
     
     @media only screen and (min-width: 1850px) {
@@ -533,4 +534,12 @@
     width: 13px;
     fill: var(--white);
     cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .prevCoast{
+    margin-top: auto;
   }

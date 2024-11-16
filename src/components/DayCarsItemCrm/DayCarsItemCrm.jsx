@@ -21,10 +21,14 @@ import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
 import PaymentBtn from "../sharedComponents/PaymentBtn/PaymentBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
+import { selectVisibility } from "../../redux/cars/selectors.js";
+import { useSelector } from "react-redux";
+import clsx from "clsx";
 
-export default function DayCarsItemCrm({ car, onDragStart, visibility }) {
+export default function DayCarsItemCrm({ car, onDragStart }) {
   const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
     useState(false);
+  const visibility = useSelector(selectVisibility);
 
   const [isDragging, setIsDragging] = useState(false);
   const [draggingElement, setDraggingElement] = useState(null);
@@ -123,13 +127,21 @@ export default function DayCarsItemCrm({ car, onDragStart, visibility }) {
         <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>
           {visibility?.name && (
-            <div className={styles.infoName}>
+            <div
+              className={clsx(styles.infoName, {
+                [styles.hidden]: !visibility?.name,
+              })}
+            >
               <BsPersonFill className={styles.iconHuman} color="#617651" />
               <span className={styles.textName}>{name ? name : "Гість"}</span>
             </div>
           )}
           {visibility?.phoneNumber && (
-            <div className={styles.infoTel}>
+            <div
+              className={clsx(styles.infoTel, {
+                [styles.hidden]: !visibility?.phoneNumber,
+              })}
+            >
               <BsTelephoneOutboundFill
                 className={styles.iconTel}
                 color="#006D95"
@@ -140,14 +152,22 @@ export default function DayCarsItemCrm({ car, onDragStart, visibility }) {
             </div>
           )}
           {visibility?.carModelYear && (
-            <div className={styles.infoCar}>
+            <div
+              className={clsx(styles.infoCar, {
+                [styles.hidden]: !visibility?.carModelYear,
+              })}
+            >
               <IoCarSportSharp size={13} color="#A97878" />
               <span className={styles.nameCar}>{auto}</span>
             </div>
           )}
         </div>
         {visibility?.vin && (
-          <div className={styles.vinContainer}>
+          <div
+            className={clsx(styles.vinContainer, {
+              [styles.hidden]: !visibility?.vin,
+            })}
+          >
             <p className={styles.vinCode}>
               <span className={styles.vinNumber}>
                 {vin || "VIN не вказано"}
@@ -163,21 +183,34 @@ export default function DayCarsItemCrm({ car, onDragStart, visibility }) {
         )}
         <div className={styles.btnContainer}>
           {visibility?.info && <CarDetailButton />}
+
           {(status === "repair" ||
             status === "diagnostic" ||
             status === "complete") &&
             visibility?.paymentBtn && <PaymentBtn />}
-          {status === "new" && (
-            <button className={styles.plus} onClick={openServiceBookingModal}>
+
+          {status === "new" && visibility?.createBtn && (
+            <button
+              className={clsx(styles.plus, {
+                [styles.hidden]: !visibility?.createBtn,
+              })}
+              onClick={openServiceBookingModal}
+            >
               <BsPlusLg className={styles.iconPlus} />
             </button>
           )}
+
           {(status === "new" || status === "complete") &&
             visibility?.archive && (
-              <button className={styles.btnSave}>
+              <button
+                className={clsx(styles.btnSave, {
+                  [styles.hidden]: !visibility?.archive,
+                })}
+              >
                 <BsLayerBackward size={16} />
               </button>
             )}
+
           {serviceBookingModalIsOpen && (
             <Modal
               isOpen={serviceBookingModalIsOpen}
@@ -190,54 +223,103 @@ export default function DayCarsItemCrm({ car, onDragStart, visibility }) {
       </div>
       <div className={styles.crmcarsInfo}>
         <div className={styles.carInfoLeft}>
-          <div className={styles.crmRating}>
-            <AiFillStar color="var(--star-orange)" size={14.5} />
-            <AiFillStar color="var(--star-orange)" size={14.5} />
-            <AiFillStar color="var(--star-orange)" size={14.5} />
-            <AiFillStar color="var(--star-orange)" size={14.5} />
-            <AiFillStar color="var(--star-white)" size={14.5} />
-          </div>
-          <div className={styles.prevCoast}>
-            <p className={styles.money}>₴ 2,200.00</p>
-          </div>
+          {visibility?.raiting && (
+            <div
+              className={clsx(
+                styles.crmRating,
+                !visibility.raiting && styles.hidden
+              )}
+            >
+              <AiFillStar color="var(--star-orange)" size={14.5} />
+              <AiFillStar color="var(--star-orange)" size={14.5} />
+              <AiFillStar color="var(--star-orange)" size={14.5} />
+              <AiFillStar color="var(--star-orange)" size={14.5} />
+              <AiFillStar color="var(--star-white)" size={14.5} />
+            </div>
+          )}
+          {visibility?.prePayment && (
+            <div
+              className={clsx(
+                styles.prevCoast,
+                !visibility.prePayment && styles.hidden
+              )}
+            >
+              <p className={styles.money}>₴ 2,200.00</p>
+            </div>
+          )}
         </div>
         <div className={styles.carInfoRight}>
-          <div className={styles.carPhoto}>
-            <img
-              className={styles.carImg}
-              src={carPhoto}
-              alt="Car image"
-              draggable="false"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = absentAutoImg;
-              }}
-            />
-          </div>
-          <div className={styles.carRegContainer}>
-            <div className={styles.carRegCountrys}>
+          {visibility?.photo && (
+            <div
+              className={clsx(
+                styles.carPhoto,
+                !visibility.photo && styles.hidden
+              )}
+            >
               <img
-                className={styles.carRegFlag}
-                src={flag}
-                alt="Car registration country flag"
+                className={styles.carImg}
+                src={carPhoto}
+                alt="Car image"
+                draggable="false"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = absentAutoImg;
+                }}
               />
-              <p className={styles.carRegCountry}>ua</p>
             </div>
-            <p className={styles.carNumber}>
-              {carNumber ? carNumber : "хххххх"}
-            </p>
-          </div>
-          <div className={styles.mileInfo}>
-            <SlSpeedometer size={13} color="var(--mint)" />
-            <p className={styles.mileage}>{mileage ? mileage : "хххххх"}</p>
-          </div>
-          <div className={styles.timeWork}>
-            <BsStopwatch size={13} color="#D5ACF3" />
-            <p className={styles.time}>{renderTime(complete_d, date_s)}</p>
-          </div>
-          <div className={styles.totalPay}>
-            <p className={styles.total}>₴ 6,613.83 </p>
-          </div>
+          )}
+          {visibility?.carNum && (
+            <div
+              className={clsx(
+                styles.carRegContainer,
+                !visibility.carNum && styles.hidden
+              )}
+            >
+              <div className={styles.carRegCountrys}>
+                <img
+                  className={styles.carRegFlag}
+                  src={flag}
+                  alt="Car registration country flag"
+                />
+                <p className={styles.carRegCountry}>ua</p>
+              </div>
+              <p className={styles.carNumber}>
+                {carNumber ? carNumber : "хххххх"}
+              </p>
+            </div>
+          )}
+          {visibility?.mileage && (
+            <div
+              className={clsx(
+                styles.mileInfo,
+                !visibility.mileage && styles.hidden
+              )}
+            >
+              <SlSpeedometer size={13} color="var(--mint)" />
+              <p className={styles.mileage}>{mileage ? mileage : "хххххх"}</p>
+            </div>
+          )}
+          {visibility?.time && (
+            <div
+              className={clsx(
+                styles.timeWork,
+                !visibility.time && styles.hidden
+              )}
+            >
+              <BsStopwatch size={13} color="#D5ACF3" />
+              <p className={styles.time}>{renderTime(complete_d, date_s)}</p>
+            </div>
+          )}
+          {visibility?.totalPrice && (
+            <div
+              className={clsx(
+                styles.totalPay,
+                !visibility.totalPrice && styles.hidden
+              )}
+            >
+              <p className={styles.total}>₴ 6,613.83 </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

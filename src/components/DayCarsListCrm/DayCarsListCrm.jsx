@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
+import { selectVisibility } from "../../redux/cars/selectors.js";
 import DayCarsItemCrm from "../DayCarsItemCrm/DayCarsItemCrm.jsx";
 import styles from './DayCarsListCrm.module.css';
 
-export default function DayCarsListCrm({ records, onDragStart, visibility  }) {
+export default function DayCarsListCrm({ records, onDragStart  }) {
+  const visibility = useSelector(selectVisibility);
   if (records.length === 0) return null;
 
   const renderCarItem = (car) => (
