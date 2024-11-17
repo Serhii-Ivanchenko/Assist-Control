@@ -1,36 +1,36 @@
-.cbLabel{
+.cbLabel {
     color: var(--white);
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        padding: 10px;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    padding: 10px;
 
-        display: flex;
-        gap: 10px;
-        align-items: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
-        /* border: 1px solid white; */
+    /* border: 1px solid white; */
 }
 
-.cbPartBox{
+.cbPartBox {
     display: flex;
     gap: 15px;
 
     margin-bottom: 20px;
 }
 
-.checkbox{
-display: none;
-}
-
-.cbIcon{
+.checkbox {
     display: none;
 }
 
-.cbMark{
+.cbIcon {
+    display: none;
+}
+
+.cbMark {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,45 +44,45 @@ display: none;
 
 }
 
-.checkbox:checked+.cbMark{
+.checkbox:checked+.cbMark {
     border: 2px solid var(--blue);
 }
 
-.checkbox:checked + .cbMark > .cbIcon{
+.checkbox:checked+.cbMark>.cbIcon {
     display: flex;
     align-items: center;
     justify-content: center;
-    fill:var(--blue);
+    fill: var(--blue);
     border-radius: 4px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.radiobutton{
+.radiobutton {
     display: none;
 }
 
-.radioBtns{
+.radioBtns {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.radioLabel{
+.radioLabel {
     color: var(--white);
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 
-        display: flex;
-        align-items: center;
-        gap: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 
-        height: 75px;
+    height: 75px;
 }
 
 
-.radiospan{
+.radiospan {
     width: 24px;
     height: 24px;
     /* border-radius: 20px; */
@@ -105,28 +105,29 @@ display: none;
 } */
 
 
-.radioAndInputs{
+.radioAndInputs {
     display: flex;
     gap: 89px;
 }
 
-.inputsPart{
+.inputsPart {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.labelAndInputs{
+.labelAndInputs {
     height: 75px;
 
 }
-.labels{
+
+.labels {
     display: flex;
     gap: 10px;
     margin-bottom: 4px;
 }
 
-.Inputs{
+.Inputs {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -141,92 +142,89 @@ display: none;
     gap: 4px;
 } */
 
-.inputLabel{
+.inputLabel {
     color: var(--input-text);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        width: 136px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 136px;
 }
 
-.input{
+.input {
     display: flex;
-        padding: 18px 20px;
-        justify-content: center;
-        align-items: center;
-        align-self: stretch;
+    padding: 18px 20px;
 
-        border-radius: 10px;
-        border: 1px solid var(--input-stroke);
-        background: var(--bg-input);
+    border-radius: 10px;
+    border: 1px solid var(--input-stroke);
+    background: var(--bg-input);
 
-        color: var(--light-gray);
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
+    color: var(--light-gray);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.1875em;
 
-            width: 136px;
-            text-align: center;
-            appearance: none;
+    width: 136px;
+    text-align: center;
+    appearance: none;
 }
 
-.btnPlus{
+.btnPlus {
     width: 26px;
-        height: 26px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        border: none;
-        background-color: var(--green);
-        cursor: pointer;
-    }
-    
-    .btnPlus:hover {
-        background-color: var(--green-btn-hover);
-    }
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--green);
+    cursor: pointer;
+}
+
+.btnPlus:hover {
+    background-color: var(--green-btn-hover);
+}
 
 .iconPlus {
-            display: flex;
-            width: 14px;
-            height: 14px;
-            justify-content: center;
-            align-items: center;
-            border-radius: 3px;
-            color: var(--green);
-            background-color: var(--white);
-            stroke-width: 2px;
-        }
+    display: flex;
+    width: 14px;
+    height: 14px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    color: var(--green);
+    background-color: var(--white);
+    stroke-width: 2px;
+}
 
- .plus {
-     width: 14px;
-     height: 14px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     border-radius: 3px;
-     border: none;
-     cursor: pointer;
- }
+.plus {
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
 
- .inputsList{
+.inputsList {
     display: flex;
     flex-direction: column;
     gap: 10px;
     flex-grow: 1;
 
- height: 80px;
- overflow-y: auto;
- overflow-x: hidden;
- }
+    height: 80px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
- .iconMinus{
+.iconMinus {
     fill: var(--red);
- }
+}
 
- .cancel{
+.cancel {
     display: flex;
     padding: 10px 20px;
     justify-content: center;
@@ -243,9 +241,9 @@ display: none;
     line-height: normal;
 
     cursor: pointer;
- }
+}
 
- .save{
+.save {
     display: flex;
     padding: 10px 20px;
     justify-content: center;
@@ -263,26 +261,26 @@ display: none;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
- }
+}
 
- .btnBox{
+.btnBox {
     display: flex;
     flex-direction: row;
     gap: 10px;
     margin-top: auto;
     margin-left: auto;
- }
+}
 
- .sparesPart{
+.sparesPart {
     display: flex;
     flex-direction: column;
     min-height: 325px;
     padding-bottom: 10px;
     /* overflow: auto; */
 
-   
- }
 
- /* .inputsList{
+}
+
+/* .inputsList{
     height:100px;
  } */

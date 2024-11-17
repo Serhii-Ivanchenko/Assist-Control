@@ -37,11 +37,11 @@
     gap: 12px !important;
     flex-wrap: nowrap;
     
-    /* padding: 5px !important; */
+    padding-top: 5px !important;
     width: 100%;
     overflow-x: hidden;
     /* width: 798px; */
-    height: 115px;
+    height: 112px;
     
 }
  .btnBox::-webkit-scrollbar{
