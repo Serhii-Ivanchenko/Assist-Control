@@ -27,12 +27,18 @@
     width: 218px;
     padding: 13px 16px;
     background: #2C2D31;
+    border-radius: 8px;
    
     position: absolute;
     top: 30px;
     right: -80px;
     z-index: 10;
     width: max-content;
+  }
+
+  .settingsContainerInCrm {
+    right: 0;
+    top: 50px;
   }
 
   .switchItem{

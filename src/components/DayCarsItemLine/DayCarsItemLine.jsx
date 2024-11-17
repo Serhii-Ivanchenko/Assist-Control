@@ -6,8 +6,12 @@ import { IoCarSportSharp } from "react-icons/io5";
 import renderStatus from "../../utils/renderStatus";
 import { renderTime } from "../../utils/renderTime";
 import clsx from "clsx";
+import { useSelector } from "react-redux";
+import { selectVisibility } from "../../redux/cars/selectors";
 
-export default function DayCarsItemLine({ car, visibility }) {
+export default function DayCarsItemLine({ car}) {
+  const visibility = useSelector(selectVisibility);
+
   const {
     photoUrl,
     complete_d,

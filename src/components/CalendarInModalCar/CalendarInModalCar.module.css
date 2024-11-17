@@ -104,3 +104,8 @@
         margin-left: -23px;
     }
 }
+
+.periodInput:focus {
+    outline: none; 
+    border: none;
+}

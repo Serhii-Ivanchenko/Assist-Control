@@ -413,7 +413,7 @@
     
     .timeWork {
       margin-top: 6px;
-    
+      
     }
     
     .mileage {
@@ -430,7 +430,11 @@
       font-weight: 600;
       line-height: normal;
 
-      
+      max-width: 70px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    
     }
     
     .total {
@@ -439,6 +443,7 @@
       font-size: 14px;
       font-weight: 600;
       line-height: normal;
+      
     }
     
     @media only screen and (min-width: 1850px) {
@@ -529,4 +534,12 @@
     width: 13px;
     fill: var(--white);
     cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .prevCoast{
+    margin-top: auto;
   }
