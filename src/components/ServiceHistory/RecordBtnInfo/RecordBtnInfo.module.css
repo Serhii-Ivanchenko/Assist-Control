@@ -96,13 +96,16 @@
   border: none;
   cursor: pointer;
 }
-
+.repairTableHeaderRow > :global(.MuiTableCell-root) {
+  font-weight: 600 !important;
+}
 .repairTableHeaderCell {
   text-align: left !important;
 }
 .repairTableCell {
+  position: relative !important;
   height: 35px !important;
-  padding: 0px !important;
+  padding-left: 35px !important;
 }
 .priceCell {
   text-align: center !important;
@@ -111,11 +114,13 @@
   text-align: left !important;
 }
 .repairTableCell > :global(.MuiCheckbox-root) {
+  position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 0px;
   border-right: 1px solid var(--light-gray-table);
   width: 25px !important;
   padding: 0px !important;
-  margin-right: 10px;
 }
 .nonCheckedCheckBox {
   color: #ffffff00 !important;

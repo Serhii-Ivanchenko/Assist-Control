@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsCheckCircleFill, BsPencil, BsFillPrinterFill } from "react-icons/bs";
 import css from "./RecordBtnInfo.module.css";
 import clsx from "clsx";
@@ -14,6 +14,18 @@ import {
 } from "@mui/material";
 
 export default function RecordBtnInfo({ recordInfo, item }) {
+  const [changeRepairInput, setChangeRepairInput] = useState(false);
+  const [repairRecords, setRepairRecords] = useState([]);
+  useEffect(() => {
+    if (item.repair) {
+      setRepairRecords(() => {
+        return [{ index: item.index, repair: item.repair }];
+      });
+    }
+    return () => {
+      setRepairRecords({});
+    };
+  }, []);
   const [appealMsgToShow, setAppealMsgToShow] = useState(true);
   const [diagnostic, setDiagnostic] = useState(
     !item.diagnostic
@@ -26,11 +38,13 @@ export default function RecordBtnInfo({ recordInfo, item }) {
       ? "comment"
       : "We dont have info about this car"
   );
+  const toggelRepairInput = () => setChangeRepairInput((prev) => !prev);
   const changeAppealMsg = (value) =>
     setAppealMsgToShow((prev) => (value !== prev ? value : prev));
   return (
     <div className={css.recordBtnInfoWrapper}>
       {/* ЗВЕРНЕННЯ */}
+
       {item.appeal && recordInfo === "appeal" && (
         <div className={css.infoWrapper}>
           <div className={css.infoBtnWrapper}>
@@ -66,7 +80,9 @@ export default function RecordBtnInfo({ recordInfo, item }) {
               )}
         </div>
       )}
+
       {/* ДІАГНОСТИКА */}
+
       {recordInfo === "diagnostic" && item.diagnostic && (
         <div className={css.infoWrapper}>
           <div className={css.infoBtnWrapper}>
@@ -138,77 +154,178 @@ export default function RecordBtnInfo({ recordInfo, item }) {
           )}
         </div>
       )}
+
       {/* РЕМОНТ */}
+
       {recordInfo === "repair" && (
         <div className={css.repairWrapper}>
           <div className={css.repairHeader}>
             <p className={css.repairTitle}>Запчастини + робота</p>
             <div className={css.repairBtnWrapper}>
-              <div className={css.editAndPrintIconWrapper}>
+              <div
+                className={css.editAndPrintIconWrapper}
+                onClick={() => toggelRepairInput()}
+              >
                 <BsPencil size={13} />
               </div>
-              <div className={css.editAndPrintIconWrapper}>
+              <div
+                className={css.editAndPrintIconWrapper}
+                onClick={() => window.print()}
+              >
                 <BsFillPrinterFill size={13} />
               </div>
             </div>
           </div>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell className={css.repairTableHeaderCell}>
-                    Запчастини
-                  </TableCell>
-                  <TableCell className={css.priceCell}>Вартість</TableCell>
-                  <TableCell className={css.repairTableHeaderCell}>
-                    Робота
-                  </TableCell>
-                  <TableCell className={css.priceCell}>Вартість</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {item.repair.fillOfRepair.map((item) => (
-                  <TableRow
-                    className={css.repairTableRow}
-                    key={`${Math.random()}`}
-                  >
-                    <TableCell
-                      className={clsx(css.repairTableCell, css.repairNamedCell)}
-                    >
-                      <Checkbox
-                        checked={item.isCellChecked}
-                        disabled={true}
-                        sx={{ height: "100%" }}
-                        checkedIcon={<BsCheckCircleFill size={18} />}
-                        className={clsx(
-                          css.repairTableCheckBox,
-                          !item.isCellChecked && css.nonCheckedCheckBox
-                        )}
-                      />
-                      {item.nameOfDetail}
+          {item.repair.fillOfRepair && (
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow className={css.repairTableHeaderRow}>
+                    <TableCell className={css.repairTableHeaderCell}>
+                      Запчастини
                     </TableCell>
-                    <TableCell className={css.priceCell}>
-                      {item.priceOfDetail}
+                    <TableCell className={css.priceCell}>Вартість</TableCell>
+                    <TableCell className={css.repairTableHeaderCell}>
+                      Робота
                     </TableCell>
-                    <TableCell className={css.repairNamedCell}>
-                      {item.repairName}
-                    </TableCell>
-                    <TableCell className={css.priceCell}>
-                      {item.repairPrice}
-                    </TableCell>
+                    <TableCell className={css.priceCell}>Вартість</TableCell>
                   </TableRow>
-                ))}
-                <TableRow className={css.footerRow}>
-                  <TableCell>Загальна вартість</TableCell>
-                  <TableCell className={css.priceCell}>
-                    {item.repair.repairSum}
-                  </TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableHead>
+                <TableBody>
+                  {repairRecords.map((i) => {
+                    return i.repair.fillOfRepair.map((recordInfo) => {
+                      const handleChangeRepairInput = (e) => {
+                        const { name, value } = e.target;
+                        console.log("====================================");
+                        console.log("name:", name, "value:", value);
+                        console.log("====================================");
+                        // setRepairRecords((prev) => {
+                        //   return prev.map((recordItem) => {
+                        //     if (recordInfo.repair) {
+                        //       return recordItem.repair.fillOfRepair.map(
+                        //         (detailItem) =>
+                        //           detailItem.index === id
+                        //             ? { ...detailItem, [name]: value }
+                        //             : detailItem
+                        //       );
+                        //     }
+                        //   });
+                        // });
+                      };
+                      return !changeRepairInput ? (
+                        <TableRow
+                          className={css.repairTableRow}
+                          key={`${Math.random()}`}
+                        >
+                          <TableCell
+                            className={clsx(
+                              css.repairTableCell,
+                              css.repairNamedCell
+                            )}
+                          >
+                            <Checkbox
+                              checked={recordInfo.isCellChecked}
+                              disabled={true}
+                              sx={{ height: "100%" }}
+                              checkedIcon={<BsCheckCircleFill size={18} />}
+                              className={clsx(
+                                css.repairTableCheckBox,
+                                !recordInfo.isCellChecked &&
+                                  css.nonCheckedCheckBox
+                              )}
+                            />
+                            {recordInfo.nameOfDetail}
+                          </TableCell>
+                          <TableCell className={css.priceCell}>
+                            {recordInfo.priceOfDetail}
+                          </TableCell>
+                          <TableCell className={css.repairNamedCell}>
+                            {recordInfo.repairName}
+                          </TableCell>
+                          <TableCell className={css.priceCell}>
+                            {recordInfo.repairPrice}
+                          </TableCell>
+                        </TableRow>
+                      ) : (
+                        <TableRow
+                          className={css.repairTableRow}
+                          key={`${Math.random()}`}
+                        >
+                          <TableCell
+                            className={clsx(
+                              css.repairTableCell,
+                              css.repairNamedCell
+                            )}
+                          >
+                            <Checkbox
+                              checked={recordInfo.isCellChecked}
+                              disabled={true}
+                              sx={{ height: "100%" }}
+                              checkedIcon={<BsCheckCircleFill size={18} />}
+                              className={clsx(
+                                css.repairTableCheckBox,
+                                !recordInfo.isCellChecked &&
+                                  css.nonCheckedCheckBox
+                              )}
+                            />
+                            <input
+                              id={i.index}
+                              name="nameOfDetail"
+                              onChange={(e) => handleChangeRepairInput(e)}
+                              value={recordInfo.nameOfDetail}
+                            />
+                          </TableCell>
+                          <TableCell className={css.priceCell}>
+                            <input
+                              id={i.index}
+                              name="priceOfDetail"
+                              onChange={(e) => handleChangeRepairInput(e)}
+                              value={recordInfo.priceOfDetail}
+                              style={{ width: "80px", textAlign: "center" }}
+                            />
+                          </TableCell>
+                          <TableCell className={css.repairNamedCell}>
+                            <input
+                              id={i.index}
+                              name="repairName"
+                              onChange={(e) => handleChangeRepairInput(e)}
+                              value={recordInfo.repairName}
+                            />
+                          </TableCell>
+                          <TableCell className={css.priceCell}>
+                            <input
+                              id={i.index}
+                              name="repairPrice"
+                              onChange={(e) => handleChangeRepairInput(e)}
+                              value={recordInfo.repairPrice}
+                              style={{ width: "80px", textAlign: "center" }}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      );
+                    });
+                  })}
+                  <TableRow className={css.footerRow}>
+                    <TableCell>Загальна вартість:</TableCell>
+                    {!changeRepairInput ? (
+                      <TableCell className={css.priceCell}>
+                        {item.repair.repairSum}
+                      </TableCell>
+                    ) : (
+                      <TableCell className={css.priceCell}>
+                        <input
+                          style={{ width: "80px", textAlign: "center" }}
+                          defaultValue={item.repair.repairSum}
+                        />
+                      </TableCell>
+                    )}
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
         </div>
       )}
     </div>
