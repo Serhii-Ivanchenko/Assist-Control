@@ -5,7 +5,7 @@ import styles from "./ServiceStationDetails.module.css";
 function ServiceStationDetails({ stationId }) {
   return (
     <div className={styles.serviceDetailsWrapper}>
-      {/* <ServiceStationDetailsTop />  */}
+      <ServiceStationDetailsTop /> 
       <ServiceStationDetailsBottom />
     </div>
   );
