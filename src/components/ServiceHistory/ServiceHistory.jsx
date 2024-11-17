@@ -198,7 +198,7 @@ export default function ServiceHistory() {
           <ul
             className={clsx(
               css.listOfAccardion,
-              maxItemRecord >= sortedArr.length && css.higherСontainer
+              maxItemRecord >= sortedArr.length && css.higherContainer
             )}
           >
             {sortedArr.map((item, index) => {
