@@ -22,11 +22,11 @@ export default function StaffPart() {
     const [modalIsOpen, setIsOpen] = useState(false);
     // const [disabled, setDisabled] = useState(false);
     const [members, setMembers] = useState([
-        { name: "Максим Коваленко", email: "maksim.kovalenko@example.com", role: "Власник", isDisabled: false },
-        { name: "Максим Коваленко", email: "maksim.kovalenko@example.com", role: "Власник", isDisabled: false },
-        { name: "Максим Коваленко", email: "maksim.kovalenko@example.com", role: "Власник", isDisabled: false },
-        { name: "Максим Коваленко", email: "maksim.kovalenko@example.com", role: "Власник", isDisabled: false },
-        { name: "Максим Коваленко", email: "maksim.kovalenko@example.com", role: "Власник", isDisabled: false },
+        { name: "Максим Коваленко", role: "Власник", salary: "20000 + 7%", isDisabled: false },
+        { name: "Максим Коваленко", role: "Кухарка", salary: "15000 + 5%", isDisabled: false },
+        { name: "Максим Коваленко", role: "Механік", salary: "40 % ВР", isDisabled: false },
+        { name: "Максим Коваленко", role: "Механік", salary: "40 % ВР", isDisabled: false },
+        { name: "Максим Коваленко", role: "Механік", salary: "40 % ВР", isDisabled: false },
         
     ]);
 
@@ -51,9 +51,9 @@ export default function StaffPart() {
         setMembers(members.map((member, i) => i === index ? { ...member, name: newName } : member));
     }
 
-     const handleChangeME = (index, newEmail) => {
-         setMembers(members.map((member, i) => i === index ? { ...member, email: newEmail } : member));
-    }
+    //  const handleChangeME = (index, newEmail) => {
+    //      setMembers(members.map((member, i) => i === index ? { ...member, email: newEmail } : member));
+    // }
 
      const handleChangeMR = (index, newRole) => {
          setMembers(members.map((member, i) => i === index ? { ...member, role: newRole } : member));
@@ -90,11 +90,11 @@ export default function StaffPart() {
                         
                             {isEditing === index ? (<div className={`${css.nameBox} ${css.inputBox}`}>
                                 <input type="text" className={css.input} ref={inputFocusRef} value={member.name} onChange={(e)=>handleChangeMN(index, e.target.value)}/>
-                                <input type="text" className={css.input} value={member.email} onChange={(e)=>handleChangeME(index, e.target.value)}/>
+                                <input type="text" className={css.input} value={member.role} onChange={(e)=>handleChangeMR(index, e.target.value)}/>
                             </div>)
                                 : (  <div className={css.nameBox}>
                                 <p className={css.memberName}>{ member.name}</p>
-                                    <p className= {css.memberEmail} > {member.email}</p>
+                                    <p className= {css.memberEmail} > {member.role}</p>
                         </div> )}
                         </div>
 
@@ -107,13 +107,13 @@ export default function StaffPart() {
                 </div>
                     
 
-                    {isEditing === index ? (<select onChange={(e)=>handleChangeMR(index, e.target.value)} className={css.select}>
+                    {/* {isEditing === index ? (<select onChange={(e)=>handleChangeMR(index, e.target.value)} className={css.select}>
                         <option value="Власник">Власник</option>
                         <option value="Перегляд">Перегляд</option>
                         <option value="Адміністратор">Адміністратор</option>
-</select>): (<p className={css.memberRole}> {member.role} </p>)}
+</select>): (<p className={css.memberRole}> {member.role} </p>)} */}
                        
-                    
+                    <p className={css.memberRole}> {member.salary} </p>
 
                     <div className={css.iconsBox}>
                                 {isEditing === index ?

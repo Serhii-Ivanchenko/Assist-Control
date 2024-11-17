@@ -8,5 +8,7 @@ export const selectServiceData = (state) => state.crm.serviceData;
 
 export const selectVisits = (state) => state.crm.visits;
 
-export const selectMonthlyLoad = (state) => state.crm.load;
+export const selectMonthlyLoadCrm = (state) => state.crm.load;
+
+export const selectDayRecords = (state) => state.crm.dayRecords;
 

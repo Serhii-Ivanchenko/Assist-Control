@@ -10,6 +10,7 @@ import {
   getNewCarsRange,
   getPercentForHour,
   changeCarStatus,
+  getPeriodCars,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -24,7 +25,26 @@ const handleRejected = (state, action) => {
 
 const carsSlice = createSlice({
   name: "cars",
-  initialState: initialState.cars,
+  initialState: {
+    ...initialState.cars,
+    visibility: {
+      name: true,
+      raiting: true,
+      carNum: true,
+      carModelYear: true,
+      vin: true,
+      mileage: true,
+      time: true,
+      photo: true,
+      totalPrice: true,
+      prePayment: true,
+      button: true,
+      phoneNumber: true,
+      status: true,
+      info: true,
+      createBtn: true,
+      archive: true,
+    },},
   reducers: {
     changeActualDate: (state, action) => {
       state.date = action.payload;
@@ -36,6 +56,9 @@ const carsSlice = createSlice({
     },
     setQueryMonth: (state, action) => {
       state.queryMonth = action.payload;
+    },
+    setVisibility: (state, action) => {
+      state.visibility = action.payload;
     },
   },
   extraReducers: (builder) =>
@@ -112,11 +135,18 @@ const carsSlice = createSlice({
           state.current[carIndex].status = newStatus;
         }
       })
-      .addCase(changeCarStatus.rejected, handleRejected),
+      .addCase(changeCarStatus.rejected, handleRejected)
+      .addCase(getPeriodCars.pending, handlePending)
+      .addCase(getPeriodCars.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.periodCars = action.payload.cars;
+      })
+      .addCase(getPeriodCars.rejected, handleRejected),
 });
 
 export const { changeActualDate } = carsSlice.actions;
 export const { changeActualPercent } = carsSlice.actions;
 export const { setQueryMonth } = carsSlice.actions;
+export const { setVisibility  } = carsSlice.actions;
 
 export default carsSlice.reducer;

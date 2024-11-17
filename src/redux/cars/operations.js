@@ -195,6 +195,8 @@ export const changeCarStatus = createAsyncThunk(
           "company-id": serviceId,
         },
       });
+      console.log("Status change response", response.data);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -202,3 +204,26 @@ export const changeCarStatus = createAsyncThunk(
   }
 );
 
+// Get all cars in time period
+export const getPeriodCars = createAsyncThunk(
+  "cars/getPeriodCars",
+  async (date, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    const { startDate, endDate } = date;
+    try {
+      const response = await axiosInstance.get(
+        `/v1/get_all_car/?start_date=${startDate}&end_date=${endDate}`,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

@@ -8,6 +8,7 @@ import {
   selectDayCars,
   selectLoadingCarsByDay,
   selectDate,
+  selectVisibility,
 } from "../../redux/cars/selectors.js";
 import styles from "./CalendarBlock.module.css";
 import toast from "react-hot-toast";
@@ -19,8 +20,9 @@ export default function CalendarBlock() {
   const carsData = useSelector(selectDayCars);
   const selectedDate = useSelector(selectDate);
   const isLoadingCarsByDay = useSelector(selectLoadingCarsByDay);
-
-  const selectedServiceId = useSelector(selectSelectedServiceId); // необхідно для коректної роботи вибору сервісів
+  const visibility = useSelector(selectVisibility);
+  const selectedServiceId = useSelector(selectSelectedServiceId);
+ 
 
   useEffect(() => {
     if (!selectedServiceId) {
@@ -38,14 +40,19 @@ export default function CalendarBlock() {
       .catch(() => {
         toast.error("Щось пішло не так. Будь ласка, спробуйте ще раз.");
       });
-  }, [dispatch, selectedDate, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
+  }, [dispatch, selectedDate, selectedServiceId]);
+
 
   return (
     <div className={styles.calendarContainer}>
       <div className={styles.topContainer}>
         <CalendarPagination isCrm={false} />
         {isLoadingCarsByDay && <p>Завантаження інформації...</p>}
-        <DayCarsList carsData={carsData} isModal={false} />
+        <DayCarsList
+          carsData={carsData}
+          isModal={false}
+          visibility={visibility}          
+        />
       </div>
       <DetailsBtn carsData={carsData} />
     </div>
