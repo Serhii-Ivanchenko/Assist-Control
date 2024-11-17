@@ -3,7 +3,7 @@ import  ScheduleSelector  from "react-schedule-selector";
 import { Accordion, AccordionSummary, AccordionDetails, Typography, Grid } from "@mui/material";
 import {BsCaretDownFill,
 } from "react-icons/bs";
-
+import css from './ServiceStationDetailsTop.module.css'
 
   const activePeriods = [
   { day: "Monday", startTime: 9, endTime: 12, isActive: true },
@@ -99,7 +99,7 @@ const ServiceStationDetailsTop = () => {
   // };
 
   return (
-    <div style={{ maxWidth: "600px", margin: "20px auto" }}>
+    <div className={css.scheduleWrapper}>
       <Accordion>
         <AccordionSummary
           expandIcon={<BsCaretDownFill />}
