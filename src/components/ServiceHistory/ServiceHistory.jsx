@@ -1,7 +1,10 @@
 import css from "./ServiceHistory.module.css";
 import ItemOfRecord from "./ItemOfRecord/ItemOfRecord";
-
+import { useState } from "react";
+import { clsx } from "clsx";
+import { BsArrowDownSquareFill } from "react-icons/bs";
 export default function ServiceHistory() {
+  const [maxItemRecord, setMaxItemRecord] = useState(1);
   const messages = [
     {
       orClientMsg: true,
@@ -88,6 +91,7 @@ export default function ServiceHistory() {
             priceOfDetail: "3500",
             repairName: "Заміна лобового скла",
             repairPrice: "800",
+            id: "1",
           },
           {
             isCellChecked: false,
@@ -95,6 +99,7 @@ export default function ServiceHistory() {
             priceOfDetail: "4500",
             repairName: "Установка бампера",
             repairPrice: "1200",
+            id: "2",
           },
           {
             isCellChecked: true,
@@ -102,6 +107,7 @@ export default function ServiceHistory() {
             priceOfDetail: "6000",
             repairName: "Встановлення капота",
             repairPrice: "1500",
+            id: "3",
           },
           {
             isCellChecked: true,
@@ -109,6 +115,7 @@ export default function ServiceHistory() {
             priceOfDetail: "4000",
             repairName: "Встановлення крил",
             repairPrice: "1000",
+            id: "4",
           },
           {
             isCellChecked: false,
@@ -116,6 +123,7 @@ export default function ServiceHistory() {
             priceOfDetail: "3200",
             repairName: "Налаштування фар",
             repairPrice: "600",
+            id: "5",
           },
         ],
         repairSum: "21200",
@@ -136,6 +144,7 @@ export default function ServiceHistory() {
       time: "16:08",
       appeal: {},
       diagnostic: {},
+      repair: {},
     },
     {
       index: "4",
@@ -182,22 +191,44 @@ export default function ServiceHistory() {
     a.totalkilometrs > b.totalkilometrs ? -1 : 1
   );
   return (
-    <div>
-      <h3 className={css.title}>Історія обслуговування</h3>
-      <div className={css.recordsListWrapper}>
-        <ul className={css.listOfAccardion}>
-          {sortedArr.map((item, index) => {
-            return (
-              <ItemOfRecord
-                key={item.index}
-                item={item}
-                messages={messages}
-                isExpanded={index === 0}
-              />
-            );
-          })}
-        </ul>
+    <div className={css.serviceHistory}>
+      <div>
+        <h3 className={css.title}>Історія обслуговування</h3>
+        <div className={css.recordsListWrapper}>
+          <ul
+            className={clsx(
+              css.listOfAccardion,
+              maxItemRecord >= sortedArr.length && css.higherСontainer
+            )}
+          >
+            {sortedArr.map((item, index) => {
+              if (index >= maxItemRecord) {
+                return null;
+              } else {
+                return (
+                  <ItemOfRecord
+                    key={item.index}
+                    item={item}
+                    messages={messages}
+                    isExpanded={index === 0}
+                  />
+                );
+              }
+            })}
+          </ul>
+        </div>
       </div>
+      {maxItemRecord < sortedArr.length && (
+        <div className={css.paginationRecord}>
+          <button
+            onClick={() => setMaxItemRecord((prev) => prev + 1)}
+            className={css.addRecordBtn}
+          >
+            <BsArrowDownSquareFill size={16} fill="var(--white)" />
+            <p>Історія</p>
+          </button>
+        </div>
+      )}
     </div>
   );
 }
