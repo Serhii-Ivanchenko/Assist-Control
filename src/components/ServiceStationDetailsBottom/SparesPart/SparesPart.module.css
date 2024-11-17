@@ -108,6 +108,9 @@
 .radioAndInputs {
     display: flex;
     gap: 89px;
+
+    height: 165px;
+    overflow-y: auto;
 }
 
 .inputsPart {
@@ -215,9 +218,9 @@
     gap: 10px;
     flex-grow: 1;
 
-    height: 80px;
+    /* height: 80px;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: hidden; */
 }
 
 .iconMinus {

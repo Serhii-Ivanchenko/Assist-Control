@@ -6,9 +6,17 @@ import StaffPart from "./StaffPart/StaffPart";
 import PricePart from "./PricePart/PricePart";
 import SparesPart from "./SparesPart/SparesPart";
 import WarehousePart from "./WarehousePart/WarehousePart";
+// import clsx from "clsx";
+// import { useEffect } from "react";
 
 export default function ServiceStationDetailsBottom() {
-    const [page, setPage] = useState("station")
+    const [page, setPage] = useState("station");
+//     const [background, setBackground] = useState(false);
+
+//     useEffect(() => {
+//     setBackground(isOpen());
+//   }, [isOpen]);
+
     return (
         <div className={css.bottomPartBox}>
             <ServiceNavigation page={page} setPage={setPage} />

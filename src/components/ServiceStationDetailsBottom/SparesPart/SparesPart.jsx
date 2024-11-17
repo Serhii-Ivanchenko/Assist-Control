@@ -12,9 +12,33 @@ import { BsRecordCircle } from "react-icons/bs";
 
 export default function SparesPart() {
   const [isChecked, setIsChecked] = useState(null);
-  const [rows, setRows] = useState([{ from: "", to: "", percentage: "" }]);
+
+  const [fixedRow, setFixedRow] = useState(() => {
+    const savedObjectFixed = window.localStorage.getItem("saved-rows-fixed");
+    if (savedObjectFixed !== null) {
+      return savedObjectFixed;
+    }
+    return { from: "", to: "", percentage: "" };
+  });
+
+  const [rows, setRows] = useState(() => {
+  const savedObject = window.localStorage.getItem("saved-rows");
+  if (savedObject !== null) {
+    return JSON.parse(savedObject);
+  }
+  return [{from:"", to:"", percentage:""}];
+  });
+  
   const scrollToTheLastItemRef = useRef();
   const prevRowsLength = useRef(rows.length);
+
+  useEffect(() => {
+    window.localStorage.setItem("saved-rows", JSON.stringify(rows) );
+  }, [rows]);
+
+  useEffect(() => {
+    window.localStorage.setItem("saved-rows-fixed", fixedRow );
+  }, [fixedRow]);
 
   const addRow = () => {
     setRows([...rows, { from: "", to: "", percentage: "" }]);
@@ -80,7 +104,7 @@ export default function SparesPart() {
         </label>
       </div>
 
-      <div className={css.radioAndInputs}>
+      <div className={css.radioAndInputs} ref={scrollToTheLastItemRef}>
         <div className={css.radioBtns}>
           <label className={css.radioLabel}>
             <input
@@ -131,7 +155,7 @@ export default function SparesPart() {
               <label className={css.inputLabel}>%</label>
             </div>
 
-            <ul className={css.inputsList} ref={scrollToTheLastItemRef}>
+            <ul className={css.inputsList}>
               {rows.map((row, index) => (
                 <li key={index} className={css.Inputs}>
                   <input
