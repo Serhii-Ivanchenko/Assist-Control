@@ -160,8 +160,8 @@ export default function CalendarPagination({ isCrm }) {
             {isModalOpen && (
               <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
                 <ServiceBookingModal
-                  // carsData={carsData}
-                  // isModal={true}
+                  // recordId={null}
+                  // postId={null}
                   onClose={handleCloseModal}
                 />
               </Modal>

@@ -216,6 +216,7 @@ function addEmptySlots(result,  referencePosts) {
 
     if (works.length === 0) {
       fullResult.push({
+        record_id: null,
         post_id,
         service_name: 'empty',
         stage_start: startOfDay,
@@ -226,6 +227,7 @@ function addEmptySlots(result,  referencePosts) {
       works.forEach(work => {
         if (work.stage_start > lastEnd) {
           fullResult.push({
+            record_id: null,
             post_id,
             service_name: 'empty',
             stage_start: lastEnd,
@@ -239,6 +241,7 @@ function addEmptySlots(result,  referencePosts) {
 
       if (lastEnd <= endOfDay) {
         fullResult.push({
+          record_id: null,
           post_id,
           service_name: 'empty',
           stage_start: lastEnd,
