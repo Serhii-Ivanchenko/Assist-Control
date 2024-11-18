@@ -300,16 +300,9 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-top: auto;
+  margin-top: 25px;
 
 }
-
-@media only screen and (min-width: 1850px) {
-  .btnContainer {
-    margin-top: auto;
-  }
-}
-
 
 .carPhoto {
   display: flex;
@@ -378,6 +371,7 @@
 @media only screen and (min-width: 1850px) {
   .money {
     display: flex;
+    margin-top: auto;
     color: var(--green);
     font-size: 14px;
     font-weight: 600;

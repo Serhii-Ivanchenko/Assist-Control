@@ -21,14 +21,14 @@ import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
 import PaymentBtn from "../sharedComponents/PaymentBtn/PaymentBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
-import { selectVisibility } from "../../redux/cars/selectors.js";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
+import { selectVisibilityRecords } from "../../redux/crm/selectors.js";
 
 export default function DayCarsItemCrm({ car, onDragStart }) {
   const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
     useState(false);
-  const visibility = useSelector(selectVisibility);
+  const visibility = useSelector(selectVisibilityRecords);
 
   const [isDragging, setIsDragging] = useState(false);
   const [draggingElement, setDraggingElement] = useState(null);

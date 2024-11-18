@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import {
   selectDate,
   selectLoading,
-  selectVisibility,
+  selectVisibilityCar,
 } from "../../../redux/cars/selectors";
 import styles from "./DayCarsModal.module.css";
 import DayCarsFilter from "../../DayCarsFilter/DayCarsFilter";
@@ -16,11 +16,11 @@ import Loader from "../../Loader/Loader";
 import CalendarInModalCar from "../../CalendarInModalCar/CalendarInModalCar";
 import StatusFilterCars from "../../StatusFilterCars/StatusFilterCars";
 import { useDispatch } from "react-redux";
-import { setVisibility } from "../../../redux/cars/slice";
+import { toggleVisibilityCar } from "../../../redux/cars/slice";
 
 export default function DayCarsModal({ onClose, isModal, carsData }) {
   const dispatch = useDispatch();
-  const visibility = useSelector(selectVisibility);
+  const visibility = useSelector(selectVisibilityCar);
   const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectLoading);
   const [viewMode, setViewMode] = useState("grid");
@@ -95,7 +95,7 @@ export default function DayCarsModal({ onClose, isModal, carsData }) {
 
   const handleToggle = (field) => {
     const newVisibility = { ...visibility, [field]: !visibility[field] };
-    dispatch(setVisibility(newVisibility));
+    dispatch(toggleVisibilityCar(newVisibility));
   };
 
   return (
