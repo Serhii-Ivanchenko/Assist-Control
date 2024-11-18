@@ -125,7 +125,7 @@ width: 8px;
 
 .radioAndInputs::-webkit-scrollbar-track{
     border-radius: 4px;
-        background-color: #202020;
+    background-color: #202020;
 }
 
 .inputsPart {
