@@ -1,4 +1,4 @@
-.statysFilter {
+.statusFilter {
     display: flex;
     position: relative;
   }
@@ -53,6 +53,7 @@
  
 
   .all,
+  .new,
   .repair,
   .checkRepair,
   .viewRepair,
@@ -75,6 +76,10 @@
 
   .all{
     color: var(--status-all);
+  }
+
+  .new{
+    color: var(--status-new);
   }
   
   .repair{
