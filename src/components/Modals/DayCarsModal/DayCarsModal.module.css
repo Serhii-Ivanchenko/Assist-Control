@@ -6,14 +6,16 @@
     position: relative;
     background-color: var(--bg-secondary);
     overflow: hidden;
+    border-radius: 8px;
 }
 
 @media only screen and (min-width: 1850px) {
     .containerCarModal {
         width: 1360px;
         height: 800px;
+        border-radius: 12px;
     }
-  }
+}
 
 /* .content {
     display: flex;
@@ -55,7 +57,7 @@
     display: none;
 } */
 
-.header{
+.header {
     /* position: absolute;
     top: 20px;
     left: 30px; */
@@ -68,18 +70,18 @@
     margin-right: 98px;
 }
 
-.leftHeader{
+.leftHeader {
     display: flex;
     gap: 13px;
 }
 
-.rightHeader{
+.rightHeader {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.rightHeader > :nth-child(2) {
+.rightHeader> :nth-child(2) {
     margin-left: 47px;
 }
 
@@ -168,7 +170,7 @@
 }
 
 @keyframes rotate {
-    
+
     0% {
         transform: rotate(0);
     }
@@ -216,8 +218,8 @@
 .active {
     transition: color 0.3s ease;
 }
-  
-  .filter {
+
+.filter {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,25 +232,34 @@
     color: var(--light-gray);
     border: none;
     cursor: pointer;
-  }
+}
 
-  .btnSettings {
-    background: transparent; /* Прозорий фон */
-    border: none; /* Без рамки */
-    cursor: pointer; /* Змінює курсор на pointer */
-    padding: 0; /* Відсутній внутрішній відступ */
-    display: flex; /* Для центрування іконки */
-    align-items: center; /* Вирівнювання по вертикалі */
+.btnSettings {
+    background: transparent;
+    /* Прозорий фон */
+    border: none;
+    /* Без рамки */
+    cursor: pointer;
+    /* Змінює курсор на pointer */
+    padding: 0;
+    /* Відсутній внутрішній відступ */
+    display: flex;
+    /* Для центрування іконки */
+    align-items: center;
+    /* Вирівнювання по вертикалі */
 }
 
 .iconSettings {
-    fill: white; /* Білий колір іконки */
-    width: 17px; /* Ширина 17 пікселів */
-    height: 17px; /* Висота 17 пікселів */
+    fill: white;
+    /* Білий колір іконки */
+    width: 17px;
+    /* Ширина 17 пікселів */
+    height: 17px;
+    /* Висота 17 пікселів */
 }
 
 
-.btnPdfContainer{
+.btnPdfContainer {
     display: flex;
     padding: 4px 6px;
     width: 60px;
@@ -259,7 +270,7 @@
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.btnPdf{
+.btnPdf {
     background: transparent;
     border: none;
     display: flex;
@@ -269,7 +280,7 @@
 
 }
 
-.btnPdfText{
+.btnPdfText {
     color: var(--icon-gray);
     font-size: 14px;
     font-weight: 400;

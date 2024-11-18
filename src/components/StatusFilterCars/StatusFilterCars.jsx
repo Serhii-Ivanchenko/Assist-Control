@@ -6,7 +6,7 @@ import renderStatus from "../../utils/renderStatus.jsx";
 export default function StatusFilterCars({ onStatusChange }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("Статус");
-  
+  const [isFilter, setIsFilter] = useState(true);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -15,6 +15,7 @@ export default function StatusFilterCars({ onStatusChange }) {
 
   const statuses = [
     { status: "all", label: "Всі авто" },
+    { status: "new", label: "Нові" },
     { status: "diagnostic", label: "Діагностика" },
     { status: "repair", label: "Ремонт" },
     { status: "view_repair", label: "Огляд ПР" },
@@ -30,11 +31,10 @@ export default function StatusFilterCars({ onStatusChange }) {
     setIsOpen(false);
   };
 
-  
   return (
-    <div className={styles.statysFilter}>
+    <div className={styles.statusFilter}>
       <button className={styles.filterButton} onClick={toggleDropdown}>
-      <p className={styles.statusFilterText}>{selectedStatus}</p>
+        <p className={styles.statusFilterText}>{selectedStatus}</p>
         {isOpen ? (
           <TiArrowSortedUp size={20} color="var(--icon-gray)" />
         ) : (
@@ -45,7 +45,7 @@ export default function StatusFilterCars({ onStatusChange }) {
         <ul className={styles.dropdownList}>
           {statuses.map(({ status }) => (
             <li key={status} onClick={() => handleStatusSelect(status)}>
-              {renderStatus(status, false, styles)}
+              {renderStatus(status, false, styles, isFilter)}
             </li>
           ))}
         </ul>
