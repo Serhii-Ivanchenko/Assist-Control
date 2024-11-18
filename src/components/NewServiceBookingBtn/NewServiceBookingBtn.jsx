@@ -23,7 +23,11 @@ export default function NewServiceBookingBtn() {
       </button>
       {modalIsOpen && (
         <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-          <ServiceBookingModal onClose={handleModalClose} />
+          <ServiceBookingModal
+            onClose={handleModalClose}
+            recordId={null}
+            postId={null}
+          />
         </Modal>
       )}
       <span className={css.tooltipContent}>Створити запис</span>

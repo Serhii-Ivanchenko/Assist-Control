@@ -1,3 +1,10 @@
+.scheduleWrapper {
+    display: flex;
+    flex-direction: column;
+    max-height: 311px;
+    padding: 0 30.5px;
+}
+
 .schedule-grid {
     display: grid;
     grid-template-columns: 89px repeat(15, 49px);

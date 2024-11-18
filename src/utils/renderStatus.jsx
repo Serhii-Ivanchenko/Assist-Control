@@ -4,7 +4,7 @@ import { PiEyeFill } from "react-icons/pi";
 import { IoCarSportSharp } from "react-icons/io5";
 import clsx from "clsx";
 
-const renderStatus = (status, complete_d, styles = {}) => {
+const renderStatus = (status, complete_d, styles = {}, isFilter) => {
   let icon;
   let statusText;
   let statusClass = "";
@@ -17,38 +17,38 @@ const renderStatus = (status, complete_d, styles = {}) => {
     background = "var(--status-gradient-all)";
     borderColor = "var(--glow-all)";
     icon = (
-      <IoCarSportSharp 
+      <IoCarSportSharp
         className={clsx(styles.icon, statusClass)}
         color="var(--light-gray)"
       />
     );
   } else if (status === "new") {
     statusClass = styles.new || "";
-    statusText = "нова";
+    statusText = isFilter ? "НОВІ" : "НОВА";
     background = "var(--status-gradient-new)";
     borderColor = "var(--glow-new)";
   } else if (status === "repair") {
     statusClass = styles.repair || "";
-    statusText = "ремонт";
+    statusText = "РЕМОНТ";
     background = "var(--status-gradient-repair)";
-    borderColor = "var(--glow-repair)"; 
+    borderColor = "var(--glow-repair)";
   } else if (status === "diagnostic") {
     statusClass = styles.checkRepair || "";
-    statusText = "діагностика";
+    statusText = "ДІАГНОСТИКА";
     background = "var(--status-gradient-diag)";
-    borderColor = "var(--glow-diag)"; 
+    borderColor = "var(--glow-diag)";
   } else if (status === "view_repair") {
     statusClass = styles.viewRepair || "";
-    statusText = "огляд пр";
+    statusText = "ОГЛЯД ПР";
     background = "var(--status-gradient-view-repair)";
-    borderColor = "var(--glow-view-repair)"; 
+    borderColor = "var(--glow-view-repair)";
   } else if (status === "complete" || complete_d) {
     statusClass = styles.completed || "";
-    statusText = "завершено";
+    statusText = "ЗАВЕРШЕНО";
     background = "var(--status-gradient-complete)";
     borderColor = "var(--glow-complete)";
   } else {
-    statusText = "уточнення";
+    statusText = "УТОЧНЕННЯ";
   }
 
   if (!icon) {

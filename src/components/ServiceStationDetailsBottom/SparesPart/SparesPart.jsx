@@ -1,7 +1,200 @@
+import { useEffect, useRef, useState } from "react";
+import css from "./SparesPart.module.css";
+// import { BsCheckSquare } from "react-icons/bs";
+// import CustomRadioBtn from "../../CustomRadioBtn/CustomRadioBtn.jsx"
+import { BsPlusLg } from "react-icons/bs";
+import { BsDashSquareFill } from "react-icons/bs";
+import { BsCheckLg } from "react-icons/bs";
+import { BsCheck } from "react-icons/bs";
+// import { BsRecordFill } from "react-icons/bs";
+import { BsCircle } from "react-icons/bs";
+import { BsRecordCircle } from "react-icons/bs";
+
 export default function SparesPart() {
-    return (
-        <div>
-            <p>SparesPart</p>
+  const [isChecked, setIsChecked] = useState(null);
+  const [rows, setRows] = useState([{ from: "", to: "", percentage: "" }]);
+  const scrollToTheLastItemRef = useRef();
+  const prevRowsLength = useRef(rows.length);
+
+  const addRow = () => {
+    setRows([...rows, { from: "", to: "", percentage: "" }]);
+  };
+
+  useEffect(() => {
+    if (rows.length > prevRowsLength.current) {
+      scrollToTheLastItemRef.current?.scrollTo({
+        top: scrollToTheLastItemRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+    prevRowsLength.current = rows.length;
+  }, [rows]);
+
+  const removeRow = (index) => {
+    setRows(rows.filter((_, i) => i !== index));
+  };
+
+  const updateInputs = (index, field, value) => {
+    setRows(
+      rows.map((row, i) => (i === index ? { ...row, [field]: value } : row))
+    );
+  };
+
+  const chosenRadio = (index) => {
+    setIsChecked(isChecked === index ? null : index);
+  };
+
+  return (
+    <div className={css.sparesPart}>
+      <div className={css.cbPartBox}>
+        <label className={css.cbLabel}>
+          <input type="checkbox" className={css.checkbox}></input>
+          <span className={css.cbMark}>
+            <BsCheck size={24} className={css.cbIcon} />
+          </span>
+          Загальна
+        </label>
+
+        <label className={css.cbLabel}>
+          <input type="checkbox" className={css.checkbox}></input>
+          <span className={css.cbMark}>
+            <BsCheck size={24} className={css.cbIcon} />
+          </span>
+          Постачальник
+        </label>
+
+        <label className={css.cbLabel}>
+          <input type="checkbox" className={css.checkbox}></input>
+          <span className={css.cbMark}>
+            <BsCheck size={24} className={css.cbIcon} />
+          </span>
+          Бренд
+        </label>
+
+        <label className={css.cbLabel}>
+          <input type="checkbox" className={css.checkbox}></input>
+          <span className={css.cbMark}>
+            <BsCheck size={24} className={css.cbIcon} />
+          </span>
+          Група
+        </label>
+      </div>
+
+      <div className={css.radioAndInputs}>
+        <div className={css.radioBtns}>
+          <label className={css.radioLabel}>
+            <input
+              type="radio"
+              className={css.radiobutton}
+              onClick={() => chosenRadio(0)}
+            />
+            {isChecked === 0 ? (
+              <BsRecordCircle className={css.radiospan} />
+            ) : (
+              <BsCircle className={css.radiospan} />
+            )}
+            Фіксована націнка (%)
+          </label>
+
+          <label className={css.radioLabel}>
+            <input
+              type="radio"
+              className={css.radiobutton}
+              onClick={() => chosenRadio(1)}
+            />
+            {isChecked === 1 ? (
+              <BsRecordCircle className={css.radiospan} />
+            ) : (
+              <BsCircle className={css.radiospan} />
+            )}
+            Динамічна націнка (%)
+          </label>
         </div>
-    )
+
+        <div className={css.inputsPart}>
+          <div className={css.Inputs}>
+            <div className={css.inputBox}>
+              <label className={css.inputLabel}>грн</label>
+              <input placeholder="400" className={css.input} />
+            </div>
+
+            <div className={css.inputBox}>
+              <label className={css.inputLabel}>%</label>
+              <input placeholder="10" className={css.input} />
+            </div>
+          </div>
+
+          <div className={css.labelAndInputs}>
+            <div className={css.labels}>
+              <label className={css.inputLabel}>Від грн</label>
+              <label className={css.inputLabel}>До грн</label>
+              <label className={css.inputLabel}>%</label>
+            </div>
+
+            <ul className={css.inputsList} ref={scrollToTheLastItemRef}>
+              {rows.map((row, index) => (
+                <li key={index} className={css.Inputs}>
+                  <input
+                    placeholder="250"
+                    type="number"
+                    className={css.input}
+                    value={row.from}
+                    onChange={(e) =>
+                      updateInputs(index, "from", e.target.value)
+                    }
+                  />
+
+                  <input
+                    placeholder="400"
+                    type="number"
+                    className={css.input}
+                    value={row.to}
+                    onChange={(e) => updateInputs(index, "to", e.target.value)}
+                  />
+
+                  <input
+                    placeholder="7"
+                    type="number"
+                    className={css.input}
+                    value={row.percentage}
+                    onChange={(e) =>
+                      updateInputs(index, "percentage", e.target.value)
+                    }
+                  />
+
+                  {index === rows.length - 1 ? (
+                    <button
+                      type="button"
+                      className={css.btnPlus}
+                      onClick={addRow}
+                    >
+                      <span className={css.plus}>
+                        <BsPlusLg className={css.iconPlus} />
+                      </span>
+                    </button>
+                  ) : (
+                    <BsDashSquareFill
+                      className={css.iconMinus}
+                      size={24}
+                      onClick={() => removeRow(index)}
+                    />
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className={css.btnBox}>
+        <button type="button" className={css.cancel}>
+          Закрити
+        </button>
+        <button type="button" className={css.save}>
+          {" "}
+          <BsCheckLg size={18} /> Зберегти
+        </button>
+      </div>
+    </div>
+  );
 }
