@@ -88,7 +88,7 @@
 .editAndPrintIconWrapper {
   display: flex;
   align-items: center;
-  padding: 4px 6px;
+  padding: 6px;
   color: var(--light-gray);
   border-radius: 6px;
   background: var(--bg-input);
@@ -126,7 +126,10 @@
   color: #ffffff00 !important;
 }
 .editInput {
-  background-color: transparent;
+  background-color: var(--main-gray);
+  height: 100%;
+  border-radius: 4px;
+  padding-left: 4px;
   border: none;
   color: var(--white);
 }

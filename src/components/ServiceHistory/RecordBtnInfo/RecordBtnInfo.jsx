@@ -1,4 +1,4 @@
-import { useState } from "react"; // useEffect
+import { useEffect, useRef, useState } from "react"; // useEffect
 import { BsCheckCircleFill, BsPencil, BsFillPrinterFill } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
 import css from "./RecordBtnInfo.module.css";
@@ -29,11 +29,21 @@ export default function RecordBtnInfo({ recordInfo, item }) {
       ? "PhotoOfBreakdown"
       : item.diagnostic.comment
       ? "comment"
-      : "We dont have info about this car"
+      : "We don't have info about this car"
   );
-  const toggelRepairInput = () => setChangeRepairInput((prev) => !prev);
+
+  const firstInputRef = useRef(null);
+
+  useEffect(() => {
+    if (changeRepairInput && firstInputRef.current) {
+      firstInputRef.current.focus(); // Встановлюємо фокус на інпут першого рядка
+    }
+  }, [changeRepairInput]);
+
+  const toggleRepairInput = () => setChangeRepairInput((prev) => !prev);
   const changeAppealMsg = (value) =>
     setAppealMsgToShow((prev) => (value !== prev ? value : prev));
+
   return (
     <div className={css.recordBtnInfoWrapper}>
       {/* ЗВЕРНЕННЯ */}
@@ -159,23 +169,23 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                 {!changeRepairInput ? (
                   <button
                     className={css.editAndPrintIconWrapper}
-                    onClick={() => toggelRepairInput()}
+                    onClick={() => toggleRepairInput()}
                   >
-                    <BsPencil size={13} />
+                    <BsPencil size={16} />
                   </button>
                 ) : (
                   <button
                     className={css.editAndPrintIconWrapper}
-                    onClick={() => toggelRepairInput()}
+                    onClick={() => toggleRepairInput()}
                   >
-                    <RiSave3Fill size={13} />
+                    <RiSave3Fill size={16} />
                   </button>
                 )}
                 <button
                   className={css.editAndPrintIconWrapper}
                   onClick={() => window.print()}
                 >
-                  <BsFillPrinterFill size={13} />
+                  <BsFillPrinterFill size={16} />
                 </button>
               </div>
             )}
@@ -196,7 +206,7 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {repairRecords.map((recordInfo) => {
+                  {repairRecords.map((recordInfo, index) => {
                     const handleChangeRepairInput = (e) => {
                       const { name, value, id } = e.target;
                       setRepairRecords((prev) =>
@@ -262,6 +272,7 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                             )}
                           />
                           <input
+                            ref={index === 0 ? firstInputRef : null}
                             className={css.editInput}
                             id={recordInfo.id}
                             name="nameOfDetail"
