@@ -113,6 +113,21 @@
     overflow-y: auto;
 }
 
+.radioAndInputs::-webkit-scrollbar{
+width: 8px;
+    border-radius: 4px;
+}
+
+.radioAndInputs::-webkit-scrollbar-thumb{
+    border-radius: 4px;
+        background-color: var(--player-secondary-bg);
+}
+
+.radioAndInputs::-webkit-scrollbar-track{
+    border-radius: 4px;
+        background-color: #202020;
+}
+
 .inputsPart {
     display: flex;
     flex-direction: column;
@@ -227,24 +242,6 @@
     fill: var(--red);
 }
 
-.cancel {
-    display: flex;
-    padding: 10px 20px;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 6px;
-    border: 1px solid var(--light-gray);
-    background-color: transparent;
-
-    color: var(--white);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-
-    cursor: pointer;
-}
 
 .save {
     display: flex;
