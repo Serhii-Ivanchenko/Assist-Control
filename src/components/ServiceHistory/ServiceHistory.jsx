@@ -126,7 +126,6 @@ export default function ServiceHistory() {
             id: "5",
           },
         ],
-        repairSum: "21200",
       },
     },
     {
