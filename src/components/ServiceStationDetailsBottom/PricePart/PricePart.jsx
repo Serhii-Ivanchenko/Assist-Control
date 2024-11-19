@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import AccordionList from "../../AccordionList/AccordionList";
+// import { useEffect, useState } from "react";
+import AccordionList from "./AccordionList/AccordionList";
 import { MdDone } from "react-icons/md";
 import styles from "./PricePart.module.css";
 
-export default function PricePart({ stationId }) {
-  const [data, setData] = useState([]);
+export default function PricePart() {
+  // const [data, setData] = useState([]);
 
   // Модель хардкодних даних
   const testData = [
@@ -15,6 +15,8 @@ export default function PricePart({ stationId }) {
         { item: "Заміна рідини гідропідсилювача з промиванням" },
         { item: "Зняття/встановлення/заміна форсунок високого тиску бензин " },
         { item: "Заміна рідини гідропідсилювача з промиванням " },
+        { item: "Заміна рідини гідропідсилювача з промиванням " },
+        { item: "Заміна рідини гідропідсилювача з промиванням " },
       ],
     },
     {
@@ -22,12 +24,17 @@ export default function PricePart({ stationId }) {
       items: [
         { item: "Заміна паливного фільтра" },
         { item: "Очищення інжектора" },
+        { item: "Очищення інжектора" },
+        { item: "Очищення інжектора" },
+        { item: "Очищення інжектора" },
       ],
     },
     {
       category: "Ремонт електрики та електроустаткування",
       items: [
         { item: "Ремонт генератора" },
+        { item: "Діагностика електропроводки" },
+        { item: "Діагностика електропроводки" },
         { item: "Діагностика електропроводки" },
       ],
     },
@@ -38,6 +45,8 @@ export default function PricePart({ stationId }) {
         { item: "Заміна поршнів і кільців" },
         { item: "Регулювання клапанів" },
         { item: "Заміна ременя ГРМ" },
+        { item: "Заміна ременя ГРМ" },
+        { item: "Заміна ременя ГРМ" },
       ],
     },
     {
@@ -45,21 +54,23 @@ export default function PricePart({ stationId }) {
       items: [
         { item: "Діагностика двигуна" },
         { item: "Перевірка ходової частини" },
+        { item: "Перевірка ходової частини" },
+        { item: "Перевірка ходової частини" },
       ],
     },
   ];
 
   // Логіка для фільтрації даних за stationId, коли вони будуть приходити з беку
-  useEffect(() => {
-    if (stationId) {
-      const filteredData = testData;
-      setData(filteredData);
-    }
-  }, [stationId]);
+  // useEffect(() => {
+  //   if (stationId) {
+  //     const filteredData = testData;
+  //     setData(filteredData);
+  //   }
+  // }, [stationId]);
 
   return (
     <div className={styles.wrapper}>
-      <AccordionList data={data} />
+      <AccordionList data={testData} />
       <button className={styles.saveBtn} type="button">
         <MdDone />
         Зберегти
