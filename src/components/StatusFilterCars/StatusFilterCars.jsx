@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import styles from "./StatusFilterCars.module.css";
 import renderStatus from "../../utils/renderStatus.jsx";
@@ -7,10 +7,10 @@ export default function StatusFilterCars({ onStatusChange }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("Статус");
   const [isFilter, setIsFilter] = useState(true);
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-    console.log("Dropdown isOpen:", !isOpen);
   };
 
   const statuses = [
@@ -31,6 +31,18 @@ export default function StatusFilterCars({ onStatusChange }) {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className={styles.statusFilter}>
       <button className={styles.filterButton} onClick={toggleDropdown}>
@@ -42,7 +54,7 @@ export default function StatusFilterCars({ onStatusChange }) {
         )}
       </button>
       {isOpen && (
-        <ul className={styles.dropdownList}>
+        <ul className={styles.dropdownList} ref={dropdownRef}>
           {statuses.map(({ status }) => (
             <li key={status} onClick={() => handleStatusSelect(status)}>
               {renderStatus(status, false, styles, isFilter)}

@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 285px;
-  height: auto;
+  height: 100%;
   padding: 15px 13px 13px 11px;
 
   border-radius: 8px;
@@ -16,7 +16,7 @@
 @media only screen and (min-width: 1850px) {
   .dayCarsItemContainer {
     width: 398px;
-    height: auto;
+    height: 100%;
     padding: 10px 18px;
   }
 }
@@ -42,12 +42,9 @@
   }
 }
 
-
 .userInfo {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  
 }
 
 .title {
@@ -300,7 +297,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-top: 25px;
+  margin-top: auto;
 
 }
 

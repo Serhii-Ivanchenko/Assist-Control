@@ -51,7 +51,7 @@ export default function CalendarBlock() {
           isModal={false}
         />
       </div>
-      <DetailsBtn carsData={carsData} />
+      <DetailsBtn/>
     </div>
   );
 }
