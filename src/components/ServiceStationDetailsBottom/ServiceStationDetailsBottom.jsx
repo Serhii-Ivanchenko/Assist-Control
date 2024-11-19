@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ServiceNavigation from "./ServiceNavigation/ServiceNavigation";
 import css from "./ServiceStationDetailsBottom.module.css";
+import css from "./ServiceStationDetailsBottom.module.css";
 import StationPart from "./StationPart/StationPart";
 import StaffPart from "./StaffPart/StaffPart";
 import PricePart from "./PricePart/PricePart";
