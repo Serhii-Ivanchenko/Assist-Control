@@ -4,13 +4,58 @@ import { RiFridgeLine } from "react-icons/ri";
 import { RiTableAltLine } from "react-icons/ri";
 import { RiFolder5Line } from "react-icons/ri";
 import { BiBuildingHouse } from "react-icons/bi";
-import { BsFolderPlus, BsThreeDotsVertical  } from "react-icons/bs";
+import { BsFolderPlus, BsThreeDotsVertical } from "react-icons/bs";
+import { useState } from "react";
+import Modal from "../../Modals/Modal/Modal";
+import NewItemModal from "./NewItemModal/NewItemModal";
+// import SortableTree from 'react-sortable-tree';
+// import 'react-sortable-tree/style.css';
+import { Tree } from "react-arborist";
+
 
 
 
 
 
 export default function WarehousePart() {
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [tree, setTree] = useState([
+  { id: '1', name: 'Root', parentId: null },
+  { id: '2', name: 'м. Академіка павлова (Назва склада)', parentId: '1',  children: [
+      { id: "c1", name: "Вітрина (Назва секції)" },
+      {
+          id: "c2", name: "2 Поверх (Назва секції)",
+          children: [
+      { id: "c3", name: "Стелаж 024" },
+          {
+              id: "c4", name: "Стелаж 025",
+              children: [
+                  {
+                      id: "c5", name: "Полиця 036",
+                      children: [
+      { id: "c6", name: "Місце 0243" },
+      { id: "c7", name: "Місце 0244" },
+      { id: "c8", name: "Місце 0245" },
+      
+    ] },
+      
+    ] },
+    ] },
+     
+    ], },
+  { id: '3', name: 'Child 2', parentId: '2' },
+])
+    
+    const openModal = () => {
+      setIsOpen(true);
+        };
+        
+        const handleModalClose = () => {
+      setIsOpen(false);
+  };
+
+    
+
     return (
         <div>
 
@@ -43,12 +88,28 @@ export default function WarehousePart() {
                 </li>
             </ul>
 
-                <button type="button" className={css.newWarehouse}>
+                <button type="button" className={css.newWarehouse} onClick={openModal}>
                     <BsFolderPlus/>
                     Новий склад
                     <BsThreeDotsVertical />
                 </button>
+{modalIsOpen && <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+                <NewItemModal onClose={handleModalClose}/>
+            </Modal>}
+
             </div>
+
+            {/* <SortableTree
+                treeData={tree}
+                onChange={(newTreeData)=> setTree(newTreeData)}
+            /> */}
+            <Tree
+                data={tree}
+                childrenAccessor="children"
+                height={400}
+                width={500}
+                parentAccessor="parentId"
+            />
 
         </div>
     )
