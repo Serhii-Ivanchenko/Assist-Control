@@ -57,7 +57,7 @@ export const initialState = {
     visibilityCar: {
       prePayment: true,
       name: true,
-      raiting: true,
+      rating: true,
       carNum: true,
       carModelYear: true,
       vin: true,
@@ -98,7 +98,7 @@ export const initialState = {
     records: [],
     visibilityRecords: {
       name: true,
-      raiting: true,
+      rating: true,
       carNum: true,
       carModelYear: true,
       vin: true,

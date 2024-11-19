@@ -223,11 +223,11 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
       </div>
       <div className={styles.crmcarsInfo}>
         <div className={styles.carInfoLeft}>
-          {visibility?.raiting && (
+          {visibility?.rating && (
             <div
               className={clsx(
                 styles.crmRating,
-                !visibility.raiting && styles.hidden
+                !visibility.rating && styles.hidden
               )}
             >
               <AiFillStar color="var(--star-orange)" size={14.5} />
