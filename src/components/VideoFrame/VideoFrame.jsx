@@ -190,8 +190,6 @@ export default function VideoFrame() {
   }
   return (
     <div className={css.cameraListCont}>
-      {/* <div className={css.cameraList}> */}
-      {/* <div className={css.cameraCont}> */}
       <Slider {...settings}>
         {videoImgSrc.map(({ src, url, index, err }) =>
           src ? (

@@ -1,33 +1,101 @@
-.btnBox {
+.navSettings{
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 36px;
-    padding: 5.5px 0;
+    /* justify-content: space-between; */
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 22px;
+        width: 914px !important;
+        gap: 24px;
 }
 
-.btnService {
+.arrowBtn{
     display: flex;
+    width: 30px;
+    height: 30px;
+    /* padding: 10px; */
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-shrink: 0;
 
-    width: 150px;
-    height: 101px;
+    border-radius: 32px;
+    background: rgba(81, 85, 98, 0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+
+    cursor: pointer;
+}
+
+.arrow{
+    /* width: 18px;
+    height: 18px; */
+    fill: var(--light-gray);
+}
+
+.btnBox {
+    display: flex !important;
+    justify-content:center !important;
+    gap: 12px !important;
+    flex-wrap: nowrap;
+    
+    padding-top: 5px !important;
+    width: 100%;
+    overflow-x: hidden;
+    /* width: 798px; */
+    height: 112px;
+    
+}
+ .btnBox::-webkit-scrollbar{
+    display: none;
+} 
+
+
+.btnService {
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: column;
+    justify-content: center !important;
+
+    width: 150px !important;
+    height: 101px !important;
     padding: 10px;
 
-    gap: 16px;
+    /* gap: 16px; */
     flex-shrink: 0;
     border-radius: 6px;
+    flex: 0 0 auto !important;
 
     background: var(--bg-input);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border: 1px solid transparent;
+
+    margin-left: 4px;
 }
 
-.btnService:not(:first-child):hover{
-    background: var(--CRM-modal-hover);
-    cursor: pointer;
+.btnService:hover{
+    background: var(--CRM-modal-hover) !important;
+    cursor: pointer !important;
 }
 
+.btnServiceCam{
+    display: flex !important;
+        align-items: center !important;
+        flex-direction: column;
+        justify-content: center !important;
+    
+        width: 150px !important;
+        height: 101px !important;
+        padding: 10px;
+    
+        /* gap: 16px; */
+        flex-shrink: 0;
+        border-radius: 6px;
+        flex: 0 0 auto !important;
+    
+        background: var(--bg-input);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        border: 1px solid transparent;
+        margin-left: 4px;
+}
 
 
 .title {
@@ -38,16 +106,27 @@
     line-height: normal;
 }
 
+.titleCam {
+    font-size: 18px;
+}
+
+.titleDist{
+    font-size: 16px;
+}
+
 .value {
     color: var(--white);
     font-size: 36px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
+    margin-top: 16px;
 }
 
 .valueWords {
-    font-size: 24px;
+    font-size: 20px;
+    margin-top: 0;
 }
 
 .isActiveBtn {
@@ -56,3 +135,26 @@
     background: var(--CRM-modal-hover);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
+/* .customSlider .slick-track{
+    gap: 12px;
+}
+
+.btnBox.slick-slider .slick-list{
+    padding: 5px !important;
+} */
+
+/* .navSettings > .slick-list{
+    padding: 8px 5px !important;
+} */
+
+/*:global(.slick-track){
+    gap: 12px;
+} */
+
+/* .sliderContainer{
+    padding: 10px !important;
+    display: flex;
+    flex-direction: row;
+
+} */

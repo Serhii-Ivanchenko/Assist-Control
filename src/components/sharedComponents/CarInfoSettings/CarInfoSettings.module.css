@@ -1,0 +1,102 @@
+.btnSettingsContainer {
+    position: relative;
+    display: inline-block;
+  }
+
+.btnSettings {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.iconSettings {
+    fill: white;
+    width: 17px;
+    height: 17px;
+}
+
+
+.settingsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    width: 218px;
+    padding: 13px 16px;
+    background: #2C2D31;
+    border-radius: 12px;
+   
+    position: absolute;
+    top: 30px;
+    right: -80px;
+    z-index: 10;
+    width: max-content;
+  }
+
+  .settingsContainerInCrm {
+    right: 0;
+    top: 50px;
+  }
+
+  .switchItem{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 128px;
+  }
+
+  label{
+    color: #c1c1c1;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+ /* перемикач */
+.toggleSwitch {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 16px;
+}
+
+.toggleSwitch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--contacts-info-bg);
+    transition: 0.4s;
+    border-radius: 16px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 1px;
+    bottom: 1px;
+    background-color: var(--white);
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(16px);
+}

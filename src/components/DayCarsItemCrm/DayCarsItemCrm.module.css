@@ -1,6 +1,6 @@
 .crmBlockDayCarsItemContainer {
   width: 365px;
-  height: 200px;
+  height: auto;
   padding: 10px 12px;
   display: flex;
   flex-direction: row;
@@ -12,6 +12,7 @@
   cursor: grab;
   transition: transform 0.2s ease, opacity 0.2s ease;
   position: relative;
+  
 }
 
 .crmBlockDayCarsItemContainer.dragging {
@@ -20,12 +21,14 @@
 }
 
 .cloneDragging {
-  opacity: 1; /* Повна видимість для дубліката */
-  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.6); /* Підсвічування синім кольором */
-  border: 2px solid rgba(255, 255, 255, 0.8); /* Додатковий контур для підсвічування */
+  opacity: 1;
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   cursor: grabbing;
   transition: none;
-  transform: scale(1.05); /* Легке збільшення для виділення */
+  transform: scale(1.05);
+  background-color: var(--bg-input);
+  z-index: 1000; 
 }
 
   @media only screen and (min-width: 1850px) {
@@ -36,8 +39,6 @@
     .userInfo {
       display: flex;
       flex-direction: column;
-      height: 100%;
-      
     }
     
     .title {
@@ -250,13 +251,7 @@
       margin-top: auto;
     
     }
-    
-    @media only screen and (min-width: 1850px) {
-      .btnContainer {
-        margin-top: auto;
-      }
-    }
-    
+   
     .carPhoto {
       display: flex;
       justify-content: center;
@@ -410,7 +405,7 @@
     
     .timeWork {
       margin-top: 6px;
-    
+      
     }
     
     .mileage {
@@ -427,10 +422,11 @@
       font-weight: 600;
       line-height: normal;
 
-      max-width: 75px;
-      overflow: hidden;
+      max-width: 70px;
       white-space: nowrap;
+      overflow: hidden;
       text-overflow: ellipsis;
+    
     }
     
     .total {
@@ -439,6 +435,7 @@
       font-size: 14px;
       font-weight: 600;
       line-height: normal;
+      
     }
     
     @media only screen and (min-width: 1850px) {
@@ -529,4 +526,12 @@
     width: 13px;
     fill: var(--white);
     cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .prevCoast{
+    margin-top: auto;
   }

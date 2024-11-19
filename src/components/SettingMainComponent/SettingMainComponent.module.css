@@ -24,8 +24,8 @@
   margin-left: 14px;
   z-index: 1;
   padding: 31px 40.5px 23px;
-  background: var(--bg-input) radial-gradient(221px at 50% 50%, rgba(81, 122, 184, 0.19) 0%, transparent 100%);
-  background-position: 15px -467px;
+  background: var(--bg-input) radial-gradient(350px at 50% 50%, rgba(81, 122, 184, 0.16) 0%, transparent 100%);
+  background-position: 10px -381px;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
@@ -41,21 +41,21 @@
 }
 
 .rightContainer::before {
-  background: radial-gradient(341.5px at 50% 50%, rgba(184, 112, 81, 0.35) 0%, transparent 100%) no-repeat;
+  background: radial-gradient(512px at 50% 50%, rgba(184, 112, 81, 0.35) 0%, transparent 100%) no-repeat;
   /* background: rgba(184, 112, 81, 0.35); */
   opacity: 0.28;
-  width: 686px;
-  height: 683px;
-  top: 316px;
-  left: -277.5px;
+  width: 1029px;
+  height: 1229px;
+  top: 91px;
+  right: 336px;
 }
 
 .rightContainer::after {
-  background: radial-gradient(238px at 50% 50%, rgba(81, 141, 184, 0.60) 0%, transparent 100%) no-repeat;
+  background: radial-gradient(357px at 50% 50%, rgba(81, 141, 184, 0.60) 0%, transparent 100%) no-repeat;
   /* background: rgba(81, 141, 184, 0.60); */
-  opacity: 0.28;
-  width: 492px;
-  height: 476px;
-  bottom: -114px;
-  right: -65px;
+  opacity: 0.2;
+  width: 738px;
+  height: 714px;
+  bottom: -90px;
+  right: -155px;
 }

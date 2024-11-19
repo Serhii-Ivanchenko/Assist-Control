@@ -1,13 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-// import { useEffect } from "react";
-import DayCarsListCrm from "../DayCarsListCrm/DayCarsListCrm";
 import css from "./CRMBlock.module.css";
-import clsx from "clsx";
-import { selectDate, selectDayCars } from "../../redux/cars/selectors.js";
-import toast from "react-hot-toast";
-import { changeCarStatus, getCarsByDate } from "../../redux/cars/operations.js";
-import { useEffect } from "react";
+import DayCarsListCrm from "../DayCarsListCrm/DayCarsListCrm";
 import Column from "../Column/Column.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import clsx from "clsx";
+import toast from "react-hot-toast";
+import { selectDate } from "../../redux/cars/selectors.js";
+import { changeCarStatus } from "../../redux/cars/operations.js";
+import { getRecordsForDay } from "../../redux/crm/operations.js";
+import { selectDayRecords, selectVisibilityRecords } from "../../redux/crm/selectors.js";
+import { toggleVisibilityRecords } from "../../redux/crm/slice.js";
+import CarInfoSettings from "../sharedComponents/CarInfoSettings/CarInfoSettings.jsx";
 
 const statusMapping = {
   new: "Нова",
@@ -43,22 +46,22 @@ const getSvgIcon = (index) => {
   );
 };
 
-// const filterRecordsByStatus = (records, status) => {
-//     return records.filter(record => record.status === status);
-// };
-
 export default function CRMBlock() {
   const dispatch = useDispatch();
   const selectedDate = useSelector(selectDate);
-  const records = useSelector(selectDayCars);
-  console.log("records", records);
+  const records = useSelector(selectDayRecords);
+  const visibility = useSelector(selectVisibilityRecords);
 
   useEffect(() => {
     if (selectedDate) {
-      dispatch(getCarsByDate(selectedDate))
+      console.log("Fetching records for selected date:", selectedDate);
+      dispatch(getRecordsForDay(selectedDate))
         .unwrap()
-        .then(() => {})
-        .catch(() => {
+        .then((response) => {
+          console.log("Fetched records:", response);
+        })
+        .catch((error) => {
+          console.error("Error fetching records:", error);
           toast.error("Щось пішло не так. Будь ласка, спробуйте ще раз.");
         });
     }
@@ -66,7 +69,7 @@ export default function CRMBlock() {
 
   const handleDragStart = (e, id) => {
     e.dataTransfer.setData("text/plain", id);
-    console.log("id", id);
+    console.log("Drag start with ID:", id);
   };
 
   const handleDragOver = (e) => {
@@ -76,25 +79,32 @@ export default function CRMBlock() {
   const handleDrop = (e, status) => {
     e.preventDefault();
     const itemId = Number(e.dataTransfer.getData("text/plain"));
-    console.log("itemId", itemId);
+    console.log("Dropped item ID:", itemId, "New status:", status);
 
     const item = records.find((item) => item.id === itemId);
+    console.log("Found item:", item);
+
     if (item) {
       dispatch(changeCarStatus({ carId: item.id, status }))
-        .then(() => {
-          dispatch(getCarsByDate(selectedDate));
-        })
-        .catch((error) => {
-          toast.error(
-            "Помилка при оновленні статусу автомобіля",
-            error.message
-          );
-        });
+  .unwrap()
+  .then(() => {
+    console.log("Updated status in frontend:", { ...item, status });
+    dispatch(getRecordsForDay(selectedDate));
+  })
+  .catch((error) => {
+    console.error("Error updating status:", error);
+    toast.error("Помилка при оновленні статусу: " + error.message);
+  });
     }
   };
 
   const getItemsForStatus = (status) => {
     return records.filter((item) => item.status === status);
+  };
+
+  const handleToggle = (field) => {
+    const newVisibility = { ...visibility, [field]: !visibility[field] };
+    dispatch(toggleVisibilityRecords(newVisibility));
   };
 
   return (
@@ -118,29 +128,32 @@ export default function CRMBlock() {
             </div>
           );
         })}
+        <div className={css.btnSettings}>
+        <CarInfoSettings isCrmView={true} handleToggle={handleToggle}/>
+        </div>
       </div>
 
       <div className={css.columnsContainer}>
-          <div className={css.columnsInnerContainer}>
-            {Object.entries(statusMapping).map(([status, label]) => {
-              const filteredRecords = getItemsForStatus(status);
-              return (
-                <Column
-                  key={status}
-                  id={status}
-                  title={label}
-                  onDragOver={handleDragOver}
-                  onDrop={(e) => handleDrop(e, status)}
-                >
-                  <DayCarsListCrm
-                    records={filteredRecords}
-                    onDragStart={handleDragStart}
-                  />
-                </Column>
-              );
-            })}
-          </div>
+        <div className={css.columnsInnerContainer}>
+          {Object.entries(statusMapping).map(([status, label]) => {
+            const filteredRecords = getItemsForStatus(status);
+            return (
+              <Column
+                key={status}
+                id={status}
+                title={label}
+                onDragOver={handleDragOver}
+                onDrop={(e) => handleDrop(e, status)}
+              >
+                <DayCarsListCrm
+                  records={filteredRecords}
+                  onDragStart={handleDragStart}
+                />
+              </Column>
+            );
+          })}
         </div>
+      </div>
     </div>
   );
 }

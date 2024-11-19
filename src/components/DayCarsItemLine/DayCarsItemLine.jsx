@@ -5,8 +5,13 @@ import { SlSpeedometer } from "react-icons/sl";
 import { IoCarSportSharp } from "react-icons/io5";
 import renderStatus from "../../utils/renderStatus";
 import { renderTime } from "../../utils/renderTime";
+import clsx from "clsx";
+import { useSelector } from "react-redux";
+import { selectVisibilityCar } from "../../redux/cars/selectors";
 
-export default function DayCarsItemLine({ car }) {
+export default function DayCarsItemLine({ car}) {
+  const visibility = useSelector(selectVisibilityCar);
+
   const {
     photoUrl,
     complete_d,
@@ -17,58 +22,87 @@ export default function DayCarsItemLine({ car }) {
     vin,
     date_s,
     client,
-  } = car; // Деструктуризація пропсів car
+  } = car;
 
-  console.log('car', car);
-  
   const carPhoto = photoUrl || absentAutoImg;
 
   return (
     <div className={styles.carLineContainer}>
       <div className={styles.leftContainer}>
-        <div className={styles.carPhoto}>
-          <img
-            className={styles.carImg}
-            src={carPhoto}
-            alt="Car"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = absentAutoImg;
-            }}
-          />
-        </div>
-        <div className={styles.infoName}>
-          <span className={styles.textName}>{client ? client.name : "Гість"}</span>
-        </div>
+        {visibility?.photo && (
+          <div className={clsx(styles.carPhoto, !visibility.photo && styles.hidden)}>
+            <img
+              className={styles.carImg}
+              src={carPhoto}
+              alt="Car"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = absentAutoImg;
+              }}
+            />
+          </div>
+        )}
+
+        {visibility?.name && (
+          <div className={clsx(styles.infoName, !visibility.name && styles.hidden)}>
+            <span className={styles.textName}>
+              {client ? client.name : "Гість"}
+            </span>
+          </div>
+        )}
       </div>
 
-      <div className={styles.status}>
-        {renderStatus(status, complete_d, styles)}
-      </div>
-      <p className={styles.plate}>{plate || "хххххх"}</p>
-      <div className={styles.infoCar}>
-        <IoCarSportSharp size={13} color="#A97878" />
-        <span className={styles.nameCar}>{auto}</span>
-      </div>
-      <div className={styles.infoVin}>
-        <span className={styles.vinNum}>{vin || "VIN не вказано"}</span>
-      </div>
-      <div className={styles.mileInfo}>
-        <SlSpeedometer size={13} color="var(--mint)" />
-        <p className={styles.mileage}>{mileage || "хххххх"}</p>
-      </div>
-      <div className={styles.timeWork}>
-        <BsStopwatch size={13} color="#D5ACF3" />
-        <p className={styles.time}>{renderTime(complete_d, date_s)}</p>
-      </div>
-      <div className={styles.rightContainer}>
-        <div className={styles.totalPay}>
-          <p className={styles.total}>₴ 6,613.83</p>
+      {visibility?.status && (
+        <div className={clsx(styles.status, !visibility.status && styles.hidden)}>
+          {renderStatus(status, complete_d, styles)}
         </div>
+      )}
+
+      {visibility?.plate && (
+        <p className={clsx(styles.plate, !visibility.plate && styles.hidden)}>
+          {plate || "хххххх"}
+        </p>
+      )}
+
+      {visibility?.carModelYear && (
+        <div className={clsx(styles.infoCar, !visibility.carModelYear && styles.hidden)}>
+          <IoCarSportSharp size={13} color="#A97878" />
+          <span className={styles.nameCar}>{auto}</span>
+        </div>
+      )}
+
+      {visibility?.vin && (
+        <div className={clsx(styles.infoVin, !visibility.vin && styles.hidden)}>
+          <span className={styles.vinNum}>{vin || "VIN не вказано"}</span>
+        </div>
+      )}
+
+      {visibility?.mileage && (
+        <div className={clsx(styles.mileInfo, !visibility.mileage && styles.hidden)}>
+          <SlSpeedometer size={13} color="var(--mint)" />
+          <p className={styles.mileage}>{mileage || "хххххх"}</p>
+        </div>
+      )}
+
+      {visibility?.time && (
+        <div className={clsx(styles.timeWork, !visibility.time && styles.hidden)}>
+          <BsStopwatch size={13} color="#D5ACF3" />
+          <p className={styles.time}>{renderTime(complete_d, date_s)}</p>
+        </div>
+      )}
+
+      <div className={styles.rightContainer}>
+        {visibility?.totalPrice && (
+          <div className={clsx(styles.totalPay, !visibility.totalPrice && styles.hidden)}>
+            <p className={styles.total}>₴ 6,613.83</p>
+          </div>
+        )}
         <div className={styles.btnContainer}>
-          <button className={styles.btnDetail}>
-            <p className={styles.btnDetailText}>Деталі</p>
-          </button>
+          {visibility?.details && (
+            <button className={styles.btnDetail}>
+              <p className={styles.btnDetailText}>Деталі</p>
+            </button>
+          )}
         </div>
       </div>
     </div>

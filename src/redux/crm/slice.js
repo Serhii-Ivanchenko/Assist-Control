@@ -5,7 +5,7 @@ import {
   getAllRecords,
   getMonthlyLoad,
   getPlannedVisits,
-  getRecordsFromDate,
+  getRecordsForDay,
   getServiceDataForBooking,
   updateRecordData,
 } from "./operations.js";
@@ -23,7 +23,12 @@ const handleRejected = (state, action) => {
 const crmSlice = createSlice({
   name: "crm",
   initialState: initialState.crm,
-  reducers: {},
+  reducers: {
+    toggleVisibilityRecords: (state, action) => {
+      const { key } = action.payload;
+      state.visibilityRecords[key] = !state.visibilityRecords[key];
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getAllRecords.pending, handlePending)
@@ -32,12 +37,12 @@ const crmSlice = createSlice({
         state.records = action.payload.records;
       })
       .addCase(getAllRecords.rejected, handleRejected)
-      .addCase(getRecordsFromDate.pending, handlePending)
-      .addCase(getRecordsFromDate.fulfilled, (state, action) => {
+      .addCase(getRecordsForDay.pending, handlePending)
+      .addCase(getRecordsForDay.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.records = action.payload.records;
+        state.dayRecords = action.payload.records;
       })
-      .addCase(getRecordsFromDate.rejected, handleRejected)
+      .addCase(getRecordsForDay.rejected, handleRejected)
       .addCase(createRecord.pending, handlePending)
       .addCase(createRecord.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -77,5 +82,8 @@ const crmSlice = createSlice({
       })
       .addCase(getMonthlyLoad.rejected, handleRejected),
 });
+
+export const {toggleVisibilityRecords} = crmSlice.actions;
+
 
 export default crmSlice.reducer;
