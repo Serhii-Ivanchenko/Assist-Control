@@ -1,7 +1,12 @@
 import styles from "./DayCarsItem.module.css";
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import clsx from "clsx";
-import { BsPersonFill, BsTelephoneOutboundFill, BsStopwatch, BsFiles } from "react-icons/bs";
+import {
+  BsPersonFill,
+  BsTelephoneOutboundFill,
+  BsStopwatch,
+  BsFiles,
+} from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { AiFillStar } from "react-icons/ai";
 import { SlSpeedometer } from "react-icons/sl";
@@ -12,11 +17,11 @@ import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
 import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
-import { selectVisibility } from "../../redux/cars/selectors.js";
+import { selectVisibilityCar } from "../../redux/cars/selectors.js";
 import { useSelector } from "react-redux";
 
 export default function DayCarsItem({ car, isModal }) {
-  const visibility = useSelector(selectVisibility);
+  const visibility = useSelector(selectVisibilityCar);
 
   const {
     auto,
@@ -44,15 +49,30 @@ export default function DayCarsItem({ car, isModal }) {
         <div>{renderStatus(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>
           {visibility?.name && (
-            <div className={clsx(styles.infoName, !visibility.name && styles.hidden)}>
+            <div
+              className={clsx(
+                styles.infoName,
+                !visibility.name && styles.hidden
+              )}
+            >
               <BsPersonFill className={styles.iconHuman} color="#617651" />
-              <span className={styles.textName}>{client ? client.name : "Гість"}</span>
+              <span className={styles.textName}>
+                {client ? client.name : "Гість"}
+              </span>
             </div>
           )}
 
           {visibility?.phoneNumber && (
-            <div className={clsx(styles.infoTel, !visibility.phoneNumber && styles.hidden)}>
-              <BsTelephoneOutboundFill className={styles.iconTel} color="#006D95" />
+            <div
+              className={clsx(
+                styles.infoTel,
+                !visibility.phoneNumber && styles.hidden
+              )}
+            >
+              <BsTelephoneOutboundFill
+                className={styles.iconTel}
+                color="#006D95"
+              />
               <span className={styles.textTel}>
                 {client ? client.phone : "ххх-ххххххх"}
               </span>
@@ -60,7 +80,12 @@ export default function DayCarsItem({ car, isModal }) {
           )}
 
           {visibility?.carModelYear && (
-            <div className={clsx(styles.infoCar, !visibility.carModelYear && styles.hidden)}>
+            <div
+              className={clsx(
+                styles.infoCar,
+                !visibility.carModelYear && styles.hidden
+              )}
+            >
               <IoCarSportSharp size={13} color="#A97878" />
               <span className={styles.nameCar}>{auto}</span>
             </div>
@@ -68,9 +93,16 @@ export default function DayCarsItem({ car, isModal }) {
         </div>
 
         {visibility?.vin && (
-          <div className={clsx(styles.vinContainer, !visibility.vin && styles.hidden)}>
+          <div
+            className={clsx(
+              styles.vinContainer,
+              !visibility.vin && styles.hidden
+            )}
+          >
             <p className={styles.vinCode}>
-              <span className={styles.vinNumber}>{vin || "VIN не вказано"}</span>
+              <span className={styles.vinNumber}>
+                {vin || "VIN не вказано"}
+              </span>
             </p>
             <button
               className={styles.copyButton}
@@ -89,8 +121,13 @@ export default function DayCarsItem({ car, isModal }) {
 
       <div className={clsx(styles.carsInfo, isModal && styles.modalCarsInfo)}>
         <div className={styles.carInfoLeft}>
-          {visibility?.raiting && (
-            <div className={clsx(styles.rating, !visibility.raiting && styles.hidden)}>
+          {visibility?.rating && (
+            <div
+              className={clsx(
+                styles.rating,
+                !visibility.rating && styles.hidden
+              )}
+            >
               <AiFillStar color="var(--star-orange)" size={14.5} />
               <AiFillStar color="var(--star-orange)" size={14.5} />
               <AiFillStar color="var(--star-orange)" size={14.5} />
@@ -100,7 +137,12 @@ export default function DayCarsItem({ car, isModal }) {
           )}
 
           {visibility?.prePayment && (
-            <div className={clsx(styles.prevCoast, !visibility.prePayment && styles.hidden)}>
+            <div
+              className={clsx(
+                styles.prevCoast,
+                !visibility.prePayment && styles.hidden
+              )}
+            >
               <p className={styles.money}>₴ 2,200.00</p>
             </div>
           )}
@@ -108,7 +150,12 @@ export default function DayCarsItem({ car, isModal }) {
 
         <div className={styles.carInfoRight}>
           {visibility?.photo && (
-            <div className={clsx(styles.carPhoto, !visibility.photo && styles.hidden)}>
+            <div
+              className={clsx(
+                styles.carPhoto,
+                !visibility.photo && styles.hidden
+              )}
+            >
               <img
                 className={styles.carImg}
                 src={carPhoto}
@@ -122,7 +169,12 @@ export default function DayCarsItem({ car, isModal }) {
           )}
 
           {visibility?.carNum && (
-            <div className={clsx(styles.carRegContainer, !visibility.carNum && styles.hidden)}>
+            <div
+              className={clsx(
+                styles.carRegContainer,
+                !visibility.carNum && styles.hidden
+              )}
+            >
               <div className={styles.carRegCountrys}>
                 <img
                   className={styles.carRegFlag}
@@ -138,21 +190,36 @@ export default function DayCarsItem({ car, isModal }) {
           )}
 
           {visibility?.mileage && (
-            <div className={clsx(styles.mileInfo, !visibility.mileage && styles.hidden)}>
+            <div
+              className={clsx(
+                styles.mileInfo,
+                !visibility.mileage && styles.hidden
+              )}
+            >
               <SlSpeedometer size={13} color="var(--mint)" />
               <p className={styles.mileage}>{mileage ? mileage : "хххххх"}</p>
             </div>
           )}
 
           {visibility.time && (
-            <div className={clsx(styles.timeWork, !visibility.time && styles.hidden)}>
+            <div
+              className={clsx(
+                styles.timeWork,
+                !visibility.time && styles.hidden
+              )}
+            >
               <BsStopwatch size={13} color="#D5ACF3" />
               <p className={styles.time}>{renderTime(complete_d, date_s)}</p>
             </div>
           )}
 
           {visibility?.totalPrice && (
-            <div className={clsx(styles.totalPay, !visibility.totalPrice && styles.hidden)}>
+            <div
+              className={clsx(
+                styles.totalPay,
+                !visibility.totalPrice && styles.hidden
+              )}
+            >
               <p className={styles.total}>₴ 6,613.83 </p>
             </div>
           )}

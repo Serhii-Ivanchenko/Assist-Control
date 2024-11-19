@@ -27,16 +27,25 @@ const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 const carsPersistConfig = {
   key: "carsSlice",
   storage,
-  whitelist: ["visibility"],
+  whitelist: ["visibilityCar"],
 };
 
 const persistedCarsReducer = persistReducer(carsPersistConfig, carsReducer);
+
+const crmPersistConfig = {
+  key: "crmSlice",
+  storage,
+  whitelist: ["visibilityRecords"],
+};
+
+const persistedCrmReducer = persistReducer(crmPersistConfig, crmReducer);
+
 
 export const store = configureStore({
   reducer: {
     cars: persistedCarsReducer,
     auth: persistedAuthReducer,
-    crm: crmReducer,
+    crm: persistedCrmReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

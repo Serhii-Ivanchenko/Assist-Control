@@ -1,28 +1,71 @@
 import { GiSettingsKnobs } from "react-icons/gi";
 import styles from "./CarInfoSettings.module.css";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
-import { useSelector } from "react-redux";
-import { toggleVisibility } from "../../redux/cars/slice";
-import { selectVisibility } from "../../redux/cars/selectors";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleVisibilityCar } from "../../redux/cars/slice";
+import { toggleVisibilityRecords } from "../../redux/crm/slice";
+import { selectVisibilityCar } from "../../redux/cars/selectors";
+import { selectVisibilityRecords } from "../../redux/crm/selectors";
 
-export default function CarInfoSettings({  isCrmView }) {
+const CarInfoSettings = ({ isCrmView }) => {
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
+  const popoverRef = useRef(null);
   const dispatch = useDispatch();
 
-  const visibility = useSelector(selectVisibility);
+  // Динамічний вибір селектора і екшену
+  const visibility = useSelector(
+    isCrmView ? selectVisibilityRecords : selectVisibilityCar
+  );
+  const toggleVisibilityAction = isCrmView
+    ? toggleVisibilityRecords
+    : toggleVisibilityCar;
 
   const toggleSettings = () => {
-    setSettingsIsOpen(!settingsIsOpen);
+    setSettingsIsOpen((prev) => !prev);
   };
 
   const handleToggle = (key) => {
-    dispatch(toggleVisibility({ key }));
+    dispatch(toggleVisibilityAction({ key }));
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+        setSettingsIsOpen(false);
+      }
+    };
+
+    if (settingsIsOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [settingsIsOpen]);
+
+  const labelNames = {
+    name: "Ім'я",
+    rating: "Рейтинг",
+    carNum: "Номер машини",
+    carModelYear: "Марка-модель",
+    vin: "VIN",
+    mileage: "Пробіг",
+    time: "Час",
+    photo: "Фото",
+    totalPrice: "Загальна сума",
+    prePayment: "Переплата",
+    paymentBtn: "Оплатити",
+    phoneNumber: "Телефон",
+    status: "Статус",
+    info: "Інфо",
+    createBtn: "Створити запис",
+    archive: "Архів",
   };
 
   return (
-    <div className={styles.btnSettingsContainer}>
+    <div className={styles.btnSettingsContainer} ref={popoverRef}>
       <button className={styles.btnSettings} onClick={toggleSettings}>
         <GiSettingsKnobs className={styles.iconSettings} />
       </button>
@@ -34,53 +77,19 @@ export default function CarInfoSettings({  isCrmView }) {
         >
           {Object.entries(visibility)
             .filter(([key]) => {
-              if (!isCrmView && (key === "createBtn" || key === "archive" || key === "paymentBtn")) {
+              if (
+                !isCrmView &&
+                (key === "createBtn" ||
+                  key === "archive" ||
+                  key === "paymentBtn")
+              ) {
                 return false;
               }
               return true;
             })
             .map(([key, value]) => (
               <div className={styles.switchItem} key={key}>
-                <label htmlFor={key}>
-                  {(() => {
-                    switch (key) {
-                      case "name":
-                        return "Ім'я";
-                      case "raiting":
-                        return "Рейтинг";
-                      case "carNum":
-                        return "Номер машини";
-                      case "carModelYear":
-                        return "Марка-модель";
-                      case "vin":
-                        return "VIN";
-                      case "mileage":
-                        return "Пробіг";
-                      case "time":
-                        return "Час";
-                      case "photo":
-                        return "Фото";
-                      case "totalPrice":
-                        return "Загальна сума";
-                      case "prePayment":
-                        return "Переплата";
-                      case "paymentBtn":
-                        return "Оплатити";
-                      case "phoneNumber":
-                        return "Телефон";
-                      case "status":
-                        return "Статус";
-                      case "info":
-                        return "Інфо";
-                      case "createBtn":
-                        return "Створити запис";
-                      case "archive":
-                        return "Архів";
-                      default:
-                        return key;
-                    }
-                  })()}
-                </label>
+                <label htmlFor={key}>{labelNames[key] || key}</label>
                 <label className={styles.toggleSwitch}>
                   <input
                     type="checkbox"
@@ -96,4 +105,6 @@ export default function CarInfoSettings({  isCrmView }) {
       )}
     </div>
   );
-}
+};
+
+export default CarInfoSettings;
