@@ -11,9 +11,7 @@ import {
   selectUser,
 } from "../../redux/auth/selectors.js";
 import { Toaster } from "react-hot-toast";
-import ValidateEmailPage from "../../pages/ValidateEmailPage/ValidateEmailPage.jsx";
 import { refreshUser } from "../../redux/auth/operations.js";
-import ChangePasswordWithEmailPage from "../../pages/ChangePasswordWithEmailPage/ChangePasswordWithEmailPage.jsx";
 import { Navigate } from "react-router-dom";
 import firstPage from "../../utils/firstPage.js";
 
@@ -22,16 +20,40 @@ const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
 const RegistrationPage = lazy(() =>
   import("../../pages/RegistrationPage/RegistrationPage.jsx")
 );
+const MainPage = lazy(() => import("../../pages/MainPage/MainPage.jsx"));
 const VideoControlPage = lazy(() =>
   import("../../pages/VideoControlPage/VideoControlPage.jsx")
 );
 const CRMPage = lazy(() => import("../../pages/CRMPage/CRMPage.jsx"));
-const ReportPage = lazy(() => import("../../pages/ReportPage/ReportPage.jsx"));
+const RecommendationsPage = lazy(() =>
+  import("../../pages/RecommendationsPage/RecommendationsPage.jsx")
+);
+const AccountingPage = lazy(() =>
+  import("../../pages/AccountingPage/AccountingPage.jsx")
+);
+const ReportsPage = lazy(() =>
+  import("../../pages/ReportsPage/ReportsPage.jsx")
+);
 const SettingsPage = lazy(() =>
   import("../../pages/SettingsPage/SettingsPage.jsx")
 );
+const BonusesPage = lazy(() =>
+  import("../../pages/BonusesPage/BonusesPage.jsx")
+);
+const RatingPage = lazy(() => import("../../pages/RatingPage/RatingPage.jsx"));
+const ProficiencyPage = lazy(() =>
+  import("../../pages/ProficiencyPage/ProficiencyPage.jsx")
+);
 const NotFoundPage = lazy(() =>
   import("../../pages/NotFoundPage/NotFoundPage.jsx")
+);
+const ChangePasswordWithEmailPage = lazy(() =>
+  import(
+    "../../pages/ChangePasswordWithEmailPage/ChangePasswordWithEmailPage.jsx"
+  )
+);
+const ValidateEmailPage = lazy(() =>
+  import("../../pages/ValidateEmailPage/ValidateEmailPage.jsx")
 );
 
 export default function App() {
@@ -83,6 +105,12 @@ export default function App() {
             }
           />
           <Route
+            path="/main"
+            element={
+              <PrivateRoute redirectTo="/login" component={<MainPage />} />
+            }
+          />
+          <Route
             path="/video-control"
             element={
               <PrivateRoute
@@ -98,9 +126,27 @@ export default function App() {
             }
           />
           <Route
-            path="/report"
+            path="/recommendations"
             element={
-              <PrivateRoute redirectTo="/login" component={<ReportPage />} />
+              <PrivateRoute
+                redirectTo="/login"
+                component={<RecommendationsPage />}
+              />
+            }
+          />
+          <Route
+            path="/accounting"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<AccountingPage />}
+              />
+            }
+          />
+          <Route
+            path="/reports"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ReportsPage />} />
             }
           />
           <Route
@@ -109,7 +155,27 @@ export default function App() {
               <PrivateRoute redirectTo="/login" component={<SettingsPage />} />
             }
           />
-
+          <Route
+            path="/bonuses"
+            element={
+              <PrivateRoute redirectTo="/login" component={<BonusesPage />} />
+            }
+          />
+          <Route
+            path="/rating"
+            element={
+              <PrivateRoute redirectTo="/login" component={<RatingPage />} />
+            }
+          />
+          <Route
+            path="/proficiency"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<ProficiencyPage />}
+              />
+            }
+          />
           <Route
             path="/validate-email/:api_key"
             element={
@@ -119,12 +185,10 @@ export default function App() {
               />
             }
           />
-
           <Route
             path="/reset-password/:api_key"
             element={<ChangePasswordWithEmailPage />}
           />
-
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>

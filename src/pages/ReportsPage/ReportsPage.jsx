@@ -1,10 +1,10 @@
 import Header from "../../components/Header/Header.jsx";
 
-export default function ReportPage() {
+export default function ReportsPage() {
   return (
     <div>
       <Header />
-      <p>Report Page</p>
+      <p>Reports Page</p>
     </div>
   );
 }
