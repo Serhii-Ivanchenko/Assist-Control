@@ -5,11 +5,12 @@ import { BsTrash } from "react-icons/bs";
 import { BsPower } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import Modal from "../../Modals/Modal/Modal";
-import AddTeamMember from "../../Modals/UserSettingsModal/AddTeamMember/AddTeamMember.jsx"
+// import AddTeamMember from "../../Modals/UserSettingsModal/AddTeamMember/AddTeamMember.jsx"
 import { RiSave3Fill } from "react-icons/ri";
 import clsx from "clsx";
 import { IoStarSharp } from "react-icons/io5";
 import { useRef } from "react";
+import AddStaffMemberModal from "../../Modals/AddStaffMemberModal/AddStaffMemberModal.jsx";
 
 
 
@@ -136,7 +137,7 @@ export default function StaffPart() {
             </span>
                 Додати користувача</button>
             {modalIsOpen && <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-                <AddTeamMember onClose={handleModalClose}/>
+                <AddStaffMemberModal onClose={handleModalClose}/>
             </Modal>}
       </div>
   )  
