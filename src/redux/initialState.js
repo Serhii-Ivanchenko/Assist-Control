@@ -55,6 +55,7 @@ export const initialState = {
       modelPhoto: null,
     },
     visibilityCar: {
+      prePayment: true,
       name: true,
       rating: true,
       carNum: true,
@@ -64,7 +65,6 @@ export const initialState = {
       time: true,
       photo: true,
       totalPrice: true,
-      paymentBtn: true,
       phoneNumber: true,
       status: true,
       info: true,

@@ -1,6 +1,5 @@
 import css from "./CRMBlock.module.css";
 import DayCarsListCrm from "../DayCarsListCrm/DayCarsListCrm";
-import CarInfoSettings from '../CarInfoSettings/CarInfoSettings.jsx';
 import Column from "../Column/Column.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -11,6 +10,7 @@ import { changeCarStatus } from "../../redux/cars/operations.js";
 import { getRecordsForDay } from "../../redux/crm/operations.js";
 import { selectDayRecords, selectVisibilityRecords } from "../../redux/crm/selectors.js";
 import { toggleVisibilityRecords } from "../../redux/crm/slice.js";
+import CarInfoSettings from "../sharedComponents/CarInfoSettings/CarInfoSettings.jsx";
 
 const statusMapping = {
   new: "Нова",
@@ -129,7 +129,7 @@ export default function CRMBlock() {
           );
         })}
         <div className={css.btnSettings}>
-        <CarInfoSettings isCrmView={true} visibility={visibility} handleToggle={handleToggle}/>
+        <CarInfoSettings isCrmView={true} handleToggle={handleToggle}/>
         </div>
       </div>
 
@@ -148,7 +148,6 @@ export default function CRMBlock() {
                 <DayCarsListCrm
                   records={filteredRecords}
                   onDragStart={handleDragStart}
-                  visibility={visibility}
                 />
               </Column>
             );

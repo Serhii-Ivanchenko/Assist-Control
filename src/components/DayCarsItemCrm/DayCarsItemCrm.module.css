@@ -39,8 +39,6 @@
     .userInfo {
       display: flex;
       flex-direction: column;
-      height: 100%;
-      
     }
     
     .title {
@@ -250,7 +248,7 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      margin-top: 25px;
+      margin-top: auto;
     
     }
    

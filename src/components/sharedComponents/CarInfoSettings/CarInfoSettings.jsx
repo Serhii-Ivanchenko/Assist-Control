@@ -3,10 +3,10 @@ import styles from "./CarInfoSettings.module.css";
 import { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleVisibilityCar } from "../../redux/cars/slice";
-import { toggleVisibilityRecords } from "../../redux/crm/slice";
-import { selectVisibilityCar } from "../../redux/cars/selectors";
-import { selectVisibilityRecords } from "../../redux/crm/selectors";
+import { toggleVisibilityCar } from "../../../redux/cars/slice";
+import { toggleVisibilityRecords } from "../../../redux/crm/slice";
+import { selectVisibilityCar } from "../../../redux/cars/selectors";
+import { selectVisibilityRecords } from "../../../redux/crm/selectors";
 
 const CarInfoSettings = ({ isCrmView }) => {
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
@@ -55,13 +55,13 @@ const CarInfoSettings = ({ isCrmView }) => {
     time: "Час",
     photo: "Фото",
     totalPrice: "Загальна сума",
-    prePayment: "Переплата",
     paymentBtn: "Оплатити",
     phoneNumber: "Телефон",
     status: "Статус",
     info: "Інфо",
     createBtn: "Створити запис",
     archive: "Архів",
+    prePayment: "Предоплата"
   };
 
   return (
