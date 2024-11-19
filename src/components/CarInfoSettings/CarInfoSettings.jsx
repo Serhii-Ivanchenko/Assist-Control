@@ -45,11 +45,9 @@ const CarInfoSettings = ({ isCrmView }) => {
     };
   }, [settingsIsOpen]);
 
-
-
   const labelNames = {
     name: "Ім'я",
-    raiting: "Рейтинг",
+    rating: "Рейтинг",
     carNum: "Номер машини",
     carModelYear: "Марка-модель",
     vin: "VIN",
@@ -81,7 +79,9 @@ const CarInfoSettings = ({ isCrmView }) => {
             .filter(([key]) => {
               if (
                 !isCrmView &&
-                (key === "createBtn" || key === "archive" || key === "paymentBtn")
+                (key === "createBtn" ||
+                  key === "archive" ||
+                  key === "paymentBtn")
               ) {
                 return false;
               }
@@ -89,9 +89,7 @@ const CarInfoSettings = ({ isCrmView }) => {
             })
             .map(([key, value]) => (
               <div className={styles.switchItem} key={key}>
-                <label htmlFor={key}>
-                  {labelNames[key] || key}
-                </label>
+                <label htmlFor={key}>{labelNames[key] || key}</label>
                 <label className={styles.toggleSwitch}>
                   <input
                     type="checkbox"
