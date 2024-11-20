@@ -11,33 +11,36 @@ import { BsCalendar2Week } from "react-icons/bs";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BsKeyFill } from "react-icons/bs";
 import { useState } from "react";
+import avatar from "../../../assets/images/avatar_default.png";
 
 export default function AddStaffMemberModal() {
+  const generateRandomString = (length) => {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    return Array.from({ length }, () =>
+      characters.charAt(Math.floor(Math.random() * characters.length))
+    ).join("");
+  };
 
-    const generateRandomString = (length) => {
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  return Array.from({ length }, () => characters.charAt(Math.floor(Math.random() * characters.length))).join('');
-    };
-    
-    const generateRandomStringPassword = (length) => {
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-  return Array.from({ length }, () => characters.charAt(Math.floor(Math.random() * characters.length))).join('');
-};
+  const generateRandomStringPassword = (length) => {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    return Array.from({ length }, () =>
+      characters.charAt(Math.floor(Math.random() * characters.length))
+    ).join("");
+  };
 
-    const [login, setLogin] = useState("");
-    const [password, setPassword] = useState("")
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
 
-    const generateLogin = () => {
+  const generateLogin = () => {
     setLogin(generateRandomString(8));
-  setPassword(generateRandomStringPassword(12));
-        
-    }
+    setPassword(generateRandomStringPassword(12));
+  };
 
-    const deleteLoginAndPassword = () => {
-        setLogin(""),
-            setPassword("")
-    }
-
+  const deleteLoginAndPassword = () => {
+    setLogin(""), setPassword("");
+  };
 
   return (
     <div className={css.modal}>
@@ -47,7 +50,7 @@ export default function AddStaffMemberModal() {
             <div className={css.column}>
               <div className={css.iputBox}>
                 <label className={css.label}>ПІБ</label>
-                <Field name="name" className={css.inputFirst} />
+                <Field name="name" className={css.input} />
               </div>
 
               <div className={css.iputBox}>
@@ -55,28 +58,28 @@ export default function AddStaffMemberModal() {
                 <div className={css.phoneLine}>
                   <Field
                     name="phone"
-                    className={`${css.inputFirst} ${css.inputPhone}`}
+                    className={`${css.input} ${css.inputPhone}`}
                   />
                   <button type="button" className={css.phoneUpload}>
-                    <BsFillCloudUploadFill size={30} />
+                    <BsFillCloudUploadFill size={33} />
                   </button>
-                  <img src="" alt="" className={css.phoneImg} />
+                  <img src={avatar} alt="" className={css.phoneImg} />
                 </div>
               </div>
 
               <div className={css.iputBox}>
                 <label className={css.label}>Місце проживання</label>
-                <Field name="address" className={css.inputFirst} />
+                <Field name="address" className={css.input} />
               </div>
             </div>
 
-            <div className={css.column}>
+            <div className={`${css.column} ${css.columnTwo}`}>
               <div className={css.iputBox}>
                 <label className={css.label}>Дата народження</label>
                 <div className={css.calendarBox}>
                   <DatePicker
                     id=""
-                    className={`${css.inputSecond} ${css.calendar}`}
+                    className={`${css.input} ${css.calendar}`}
                     name="birthday"
                     dateFormat="dd.mm.yyyy"
                     selected=""
@@ -90,11 +93,7 @@ export default function AddStaffMemberModal() {
               <div className={css.iputBox}>
                 <label className={css.label}>Посада</label>
                 <div className={css.inputAndArrow}>
-                  <Field
-                    as="select"
-                    name="position"
-                    className={css.inputSecond}
-                  >
+                  <Field as="select" name="position" className={css.input}>
                     <option value="m">Механік</option>
                     <option value="c">Кухар</option>
                     <option value="w">Працівник</option>
@@ -106,10 +105,10 @@ export default function AddStaffMemberModal() {
               <div className={css.iputBox}>
                 <label className={css.label}>Ролі</label>
                 <div className={css.inputAndArrow}>
-                  <Field as="select" name="role" className={css.inputSecond}>
-                    <option value="adm">Адміністратор</option>
-                    <option value="person">Хтось ще)</option>
-                    <option value="person1">Соррі, я забула які ще є)</option>
+                  <Field as="select" name="role" className={css.input}>
+                    <option value="admin">Адміністратор</option>
+                    <option value="manager">Менеджер</option>
+                    <option value="employee">Працівник</option>
                   </Field>
                   <BsFillCaretDownFill className={css.iconArrowRight} />
                 </div>
@@ -119,17 +118,21 @@ export default function AddStaffMemberModal() {
             <div className={`${css.column} ${css.columnThree}`}>
               <div className={css.iputBox}>
                 <label className={css.label}>E-mail</label>
-                <Field name="email" className={css.inputThird} />
+                <Field name="email" className={css.input} />
               </div>
 
               <div className={css.iputBoxLP}>
                 <div className={css.lpIconBox}>
-                                  <Field name="login" className={css.inputLP} value={login } />
+                  <Field name="login" className={css.inputLP} value={login} />
                   <BsFillPersonFill size={16} className={css.lpIcon} />
                 </div>
 
                 <div className={css.lpIconBox}>
-                                  <Field name="password" className={css.inputLP} value={ password} />
+                  <Field
+                    name="password"
+                    className={css.inputLP}
+                    value={password}
+                  />
                   <BsKeyFill size={16} className={css.lpIcon} />
                 </div>
               </div>
@@ -138,10 +141,18 @@ export default function AddStaffMemberModal() {
                 <p className={css.label}>Логін та пароль</p>
 
                 <div className={css.buttons}>
-                  <button type="button" className={css.create} onClick={generateLogin}>
+                  <button
+                    type="button"
+                    className={css.create}
+                    onClick={generateLogin}
+                  >
                     Згенерувати
                   </button>
-                  <button type="button" className={css.delete} onClick={deleteLoginAndPassword}>
+                  <button
+                    type="button"
+                    className={css.delete}
+                    onClick={deleteLoginAndPassword}
+                  >
                     {" "}
                     <BsTrash size={18} />{" "}
                   </button>
