@@ -52,7 +52,7 @@
 }
 
 .accordionDesc::-webkit-scrollbar-track {
-  background-color: var(--bg);
+  background-color: var(--bg-secondary);
   border-radius: 4px;
 }
 
@@ -108,4 +108,7 @@
   text-align: center;
   appearance: none;
   outline: none;
+}
+.wrapper .accordionDesc .input:focus {
+  outline: 1px solid var(--light-gray);
 }

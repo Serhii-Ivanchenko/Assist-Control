@@ -1,6 +1,7 @@
 .changeablePart {
   width: 914px;
   height: auto;
+  max-height: 648px;
   padding: 20px 15px 20px 20px;
 
   border-radius: 6px;
