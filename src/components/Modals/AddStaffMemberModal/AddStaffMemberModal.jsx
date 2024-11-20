@@ -6,6 +6,11 @@ import { BsFillCloudUploadFill } from "react-icons/bs";
 import { BsReceipt } from "react-icons/bs";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { BsCheckLg } from "react-icons/bs";
+import { BsFillCaretDownFill } from "react-icons/bs";
+import { BsCalendar2Week } from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
+import { BsKeyFill } from "react-icons/bs";
+
 
 
 
@@ -45,30 +50,46 @@ export default function AddStaffMemberModal() {
                         <div className={css.column}>
 
                           <div className={css.iputBox}>  
-                         <label className={css.label}>Дата народження</label>
+                                <label className={css.label}>Дата народження</label>
+                                <div className={css.calendarBox}>
                                 <DatePicker
-                                    className={css.inputSecond}
-                            name="birthday"
-                    dateFormat="dd.mm.yyyy"
+                                    id=""
+                                    className={`${css.inputSecond} ${css.calendar}`}
+                                    name="birthday"
+                                    dateFormat="dd.mm.yyyy"
+                                    selected=""
+                                    onChange=""
                                 />
+
+                                    <BsCalendar2Week size={24} className={css.calendarIcon} />
+                              </div>
+
                             </div>
                             
                         <div className={css.iputBox}>
-                    <label className={css.label}>Посада</label>
+                                <label className={css.label}>Посада</label>
+                                <div className={css.inputAndArrow}>
                                 <Field as="select" name="position" className={css.inputSecond}>
                                     <option value="m">Механік</option>
                                     <option value="c">Кухар</option>
                                     <option value="w">Працівник</option>
-                                </Field>
+                                    </Field>
+                                    <BsFillCaretDownFill className={css.iconArrowRight } />
+                                </div>
+
                             </div>
                             
                             <div className={css.iputBox}>
-                    <label className={css.label}>Ролі</label>
+                                <label className={css.label}>Ролі</label>
+                                <div className={css.inputAndArrow}>
+                                
                                 <Field as="select" name="role" className={css.inputSecond}>
                                     <option value="adm">Адміністратор</option>
                                     <option value="person">Хтось ще)</option>
                                     <option value="person1">Соррі, я забула які ще є)</option>
                                 </Field>
+                                <BsFillCaretDownFill className={css.iconArrowRight } />
+</div>
                             </div>
                         </div>
                         
@@ -80,8 +101,16 @@ export default function AddStaffMemberModal() {
                             </div>
                             
                             <div className={css.iputBoxLP}>
-                                <Field name="login" className={css.inputLP } />                               
-                                <Field name="password" className={css.inputLP} />
+                                <div className={css.lpIconBox}>
+                                    <Field name="login" className={css.inputLP} />
+                                    <BsFillPersonFill size={16} className={css.lpIcon } />
+                                </div>    
+                                
+                                <div className={css.lpIconBox}>
+                                    <Field name="password" className={css.inputLP} />
+                                    <BsKeyFill size={16} className={css.lpIcon } />
+
+                                    </div>
                             </div>
 
                             <div className={css.btnAndLabel}>
@@ -178,13 +207,16 @@ export default function AddStaffMemberModal() {
                         <div className={css.calculation}>
                         <div className={css.leftPart}>
                         <div className={css.rateDiv}>
-                            <p className={css.rate}>Ставка</p>
+                                    <p className={css.rate}>Ставка</p>
+                                    <div className={css.inputAndArrow}>
                             <Field as="select" name="period" className={css.periodInput}>
                                 <option value="day">День</option>
                                 <option value="week">Тиждень</option>                             
                                 <option value="month">Місяць</option>
                                 <option value="year">Рік</option>                              
-                            </Field>
+                                    </Field>
+                                        <BsFillCaretDownFill className={css.arrowIcon} size={10}/>
+                                    </div>
                         </div>
                             <Field name="rate" className={css.rateInput } value="15000" placeholder="15000" />
                         <div className={css.minRateDiv}>
@@ -241,6 +273,7 @@ export default function AddStaffMemberModal() {
                     </div>
 
                     <div className={css.schedule}>
+                        <p>Графік</p>
 
                         {/* <div>
                             <label>Графік роботи
@@ -254,7 +287,7 @@ export default function AddStaffMemberModal() {
 
             <div className={css.btnBox}>
                 <button type="button" className={css.close}>Закрити</button>
-                <button type="submit" className={css.save}>Зберегти</button>
+                <button type="submit" className={css.save}><BsCheckLg size={18}/> Зберегти</button>
                     </div>
                 </Form>
             </Formik>

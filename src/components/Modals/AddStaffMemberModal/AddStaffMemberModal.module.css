@@ -87,6 +87,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        appearance: none;
 }
 
 .column{
@@ -187,6 +188,44 @@
 
 }
 
+.iconArrowRight{
+    fill: var(--icon-gray);
+    position: absolute;
+    right: 20px;
+    top:50%;
+    transform: translateY(-50%);
+    appearance: none;
+    pointer-events: none;
+}
+
+.calendarBox{
+    position: relative;
+}
+
+.calendarIcon{
+    fill:var(--light-gray);
+    position: absolute;
+    left: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.calendar{
+    padding-left: 77px;
+}
+
+.lpIconBox{
+    position: relative;
+}
+
+.lpIcon{
+    fill: #6E6C77;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 
 
 /* DocumentPart */
@@ -278,7 +317,12 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+    appearance: none;
+    padding-left: 20px;
 }
+
+
 
 .rateInput{
     display: flex;
@@ -480,6 +524,25 @@ color: var(--blue);
                 font-style: normal;
                 font-weight: 600;
 }
+
+.arrowIcon{
+    fill: var(--icon-gray);
+    /* width: 10px; */
+    /* height: 7px; */
+    position: absolute;
+    left:0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.inputAndArrow{
+    position: relative;
+}
+
+
+
 
 .checkbox{
     display: none;
