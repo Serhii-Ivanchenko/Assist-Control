@@ -5,6 +5,8 @@ import { BsTrash } from "react-icons/bs";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import { BsReceipt } from "react-icons/bs";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsCheckLg } from "react-icons/bs";
+
 
 
 
@@ -24,8 +26,12 @@ export default function AddStaffMemberModal() {
                 
 
                         <div className={css.iputBox}>                         
-                    <label className={css.label}>Телефон</label>
-                    <Field name="phone" className={css.inputFirst} />
+                                <label className={css.label}>Телефон</label>
+                                <div className={css.phoneLine}>
+                    <Field name="phone" className={`${css.inputFirst} ${css.inputPhone}`} />
+                                <button type="button" className={css.phoneUpload}><BsFillCloudUploadFill size={30}/></button> 
+                                    <img src="" alt="" className={css.phoneImg } />
+                                </div>
                         </div>
                         
 
@@ -166,12 +172,89 @@ export default function AddStaffMemberModal() {
                             </div>
                         </div>
 
- </div>
+                    </div>
+                    
+                    <div className={css.salary}>
+                        <div className={css.calculation}>
+                        <div className={css.leftPart}>
+                        <div className={css.rateDiv}>
+                            <p className={css.rate}>Ставка</p>
+                            <Field as="select" name="period" className={css.periodInput}>
+                                <option value="day">День</option>
+                                <option value="week">Тиждень</option>                             
+                                <option value="month">Місяць</option>
+                                <option value="year">Рік</option>                              
+                            </Field>
+                        </div>
+                            <Field name="rate" className={css.rateInput } value="15000" placeholder="15000" />
+                        <div className={css.minRateDiv}>
+                            <Field name="minRate" className={css.minRateInput }/>
+                            <p className={css.text}>Мінімальна</p>
+                            </div>
+                        </div>
+
+                        <p className={css.plus}>+</p>
+
+                        <div className={css.rightPart}>
+                            <p className={css.percent}>%</p>
+
+                            <ul className={css.inputsList}>
+                                <li className={css.listItem}>
+                                    <Field name="" className={css.salaryInput} />
+                                    <div className={css.salaryLabel}>
+                                    <p className={css.salaryTitle}>СР</p>
+                                        <p className={`${css.salaryText} ${css.salaryTextAmount}`}>Сума робіт</p>
+                                    </div>
+                                </li >
+
+                                <li className={css.listItem}>
+                                    <Field name="" className={css.salaryInput} />
+                                    <div className={css.salaryLabel}>
+                                    <p className={css.salaryTitle}>СЗ</p>
+                                        <p  className={css.salaryText}>Сума запчастин</p>
+                                    </div>
+                                </li>
+
+                                <li className={css.listItem}>
+                                    <Field name="" className={css.salaryInput }/>
+                                    <div className={css.salaryLabel}>
+                                    <p className={css.salaryTitle}>НЗ</p>
+                                        <p  className={css.salaryText}>Націнка запчастини</p>
+                                    </div>
+                                </li>
+
+                                <li className={css.listItem}>
+                                    <Field name="" className={css.salaryInput }/>
+                                    <div className={css.salaryLabel}>
+                                    <p className={css.salaryTitle}>ЧП</p>
+                                        <p  className={css.salaryText}>Чистого прибутку</p>
+                                    </div>
+                                </li>
+                            </ul>
 
 
-            <div>
-                <button type="button">Закрити</button>
-                <button type="submit">Зберегти</button>
+                            </div>
+                        </div>
+
+                        <p className={css.salaryRules}>Правила начислення зарплатні</p>
+
+                    </div>
+
+                    <div className={css.schedule}>
+
+                        {/* <div>
+                            <label>Графік роботи
+                            <Field type="checkbox" name="schedule" className={css.checkbox} />
+                            <span className={css.checkboxSpan}><BsCheckLg className={css.cbIcon} /></span>
+                            </label>
+                        </div> */}
+
+                    </div>
+
+
+            <div className={css.btnBox}>
+                <button type="button" className={css.close}>Закрити</button>
+                <button type="submit" className={css.save}>Зберегти</button>
                     </div>
                 </Form>
             </Formik>
