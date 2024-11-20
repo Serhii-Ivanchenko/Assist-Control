@@ -10,8 +10,25 @@ import { BsFillCaretDownFill } from "react-icons/bs";
 import { BsCalendar2Week } from "react-icons/bs";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BsKeyFill } from "react-icons/bs";
+import { useState } from "react";
 
 export default function AddStaffMemberModal() {
+
+    const [login, setLogin] = useState("");
+    const [password, setPassword] = useState("")
+
+    const generateLogin = () => {
+        setLogin(crypto.randomUUID()),
+        setPassword(crypto.randomUUID())
+        
+    }
+
+    const deleteLoginAndPassword = () => {
+        setLogin(""),
+            setPassword("")
+    }
+
+
   return (
     <div className={css.modal}>
       <Formik>
@@ -97,12 +114,12 @@ export default function AddStaffMemberModal() {
 
               <div className={css.iputBoxLP}>
                 <div className={css.lpIconBox}>
-                  <Field name="login" className={css.inputLP} />
+                                  <Field name="login" className={css.inputLP} value={login } />
                   <BsFillPersonFill size={16} className={css.lpIcon} />
                 </div>
 
                 <div className={css.lpIconBox}>
-                  <Field name="password" className={css.inputLP} />
+                                  <Field name="password" className={css.inputLP} value={ password} />
                   <BsKeyFill size={16} className={css.lpIcon} />
                 </div>
               </div>
@@ -111,10 +128,10 @@ export default function AddStaffMemberModal() {
                 <p className={css.label}>Логін та пароль</p>
 
                 <div className={css.buttons}>
-                  <button type="button" className={css.create}>
+                  <button type="button" className={css.create} onClick={generateLogin}>
                     Згенерувати
                   </button>
-                  <button type="button" className={css.delete}>
+                  <button type="button" className={css.delete} onClick={deleteLoginAndPassword}>
                     {" "}
                     <BsTrash size={18} />{" "}
                   </button>
