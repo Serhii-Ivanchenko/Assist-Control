@@ -7,7 +7,7 @@ function AccordionList({ data }) {
       {data.map((itemData, index) => (
         <li key={index}>
           <AccordionItem
-            className={styles.listItem}
+            // className={styles.listItem}
             category={itemData.category}
             items={itemData.items}
             index={index}

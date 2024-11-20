@@ -14,7 +14,7 @@
   width: 100%;
   height: 50px;
   padding: 0px 20px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   flex-shrink: 0;
   border-radius: 6px;
@@ -28,13 +28,16 @@
 .icon {
   color: var(--icon-gray);
   margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  transform: scale(1.6);
 }
 
 .accordionDesc {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin: 20px 0;
+  gap: 12px;
+  margin: 20px 0 0;
   padding-right: 17px;
   max-height: 395px;
   overflow-y: auto;
@@ -59,7 +62,7 @@
 .wrapper .accordionDesc li {
   display: flex;
   align-items: center;
-  align-self: stretch;
+  /* align-self: stretch; */
   justify-content: space-between;
 }
 
@@ -93,7 +96,7 @@
 
 .wrapper .accordionDesc .input {
   display: flex;
-  padding: 18px 20px;
+  padding: 17px 19px;
 
   border-radius: 10px;
   border: 1px solid var(--input-stroke);

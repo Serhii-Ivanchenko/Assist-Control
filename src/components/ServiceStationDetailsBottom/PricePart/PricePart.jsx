@@ -1,6 +1,7 @@
 // import { useEffect, useState } from "react";
 import AccordionList from "./AccordionList/AccordionList";
-import { MdDone } from "react-icons/md";
+// import { MdDone } from "react-icons/md";
+import { BsCheckLg } from "react-icons/bs";
 import styles from "./PricePart.module.css";
 
 export default function PricePart() {
@@ -72,7 +73,8 @@ export default function PricePart() {
     <div className={styles.wrapper}>
       <AccordionList data={testData} />
       <button className={styles.saveBtn} type="button">
-        <MdDone />
+        {/* <MdDone /> */}
+        <BsCheckLg className={styles.checkIcon} />
         Зберегти
       </button>
     </div>

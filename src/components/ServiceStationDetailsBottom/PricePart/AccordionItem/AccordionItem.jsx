@@ -36,7 +36,7 @@ function AccordionItem({ category, items, index }) {
             <TiArrowSortedDown className={styles.icon} />
           )}
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
           <ul className={styles.accordionDesc}>
             {items.map((itemData, idx) => (
               <li key={idx}>

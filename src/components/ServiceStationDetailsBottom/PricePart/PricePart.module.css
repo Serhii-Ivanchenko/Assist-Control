@@ -27,3 +27,7 @@
   font-size: 14px;
   font-weight: 600;
 }
+
+.checkIcon {
+  transform: scale(1.3);
+}
