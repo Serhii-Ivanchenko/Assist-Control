@@ -5,34 +5,60 @@ import css from "./CalendarInModalCar.module.css";
 import DatePicker from "react-datepicker";
 import { BsCalendar2Week } from "react-icons/bs";
 import "react-datepicker/dist/react-datepicker.css";
+import { getPeriodCars } from "../../redux/cars/operations";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 export default function CalendarInModalCar({ startDate, endDate, onDateBegChange, onDateEndChange }) {
-  const selectedDate = useSelector(selectDate); // Отримуємо selectedDate з Redux
-  const [periodStartData, setPeriodStartData] = useState(startDate || selectedDate || null);  // Якщо startDate немає, використовуємо selectedDate
-  const [periodEndData, setPeriodEndData] = useState(endDate || startDate || selectedDate || null);  // Якщо endDate немає, використовуємо startDate або selectedDate
+  const selectedDate = useSelector(selectDate);
+  const dispatch = useDispatch();
+  
+  const [periodStartData, setPeriodStartData] = useState(startDate || selectedDate || null);
+  const [periodEndData, setPeriodEndData] = useState(endDate || startDate || selectedDate || null);
   const [isOpenBeg, setIsOpenBeg] = useState(false);
   const [isOpenEnd, setIsOpenEnd] = useState(false);
 
   useEffect(() => {
-    if (startDate !== periodStartData) {
-      setPeriodStartData(startDate || selectedDate);  // Оновлюємо період початкової дати
+    if (!startDate) {
+      setPeriodStartData(selectedDate);
     }
-  }, [startDate, periodStartData, selectedDate]);  // Залежність від пропсів та Redux дати
+    if (!endDate) {
+      setPeriodEndData(selectedDate);
+    }
+  }, [startDate, endDate, selectedDate]);
 
-  useEffect(() => {
-    if (endDate !== periodEndData) {
-      setPeriodEndData(endDate || periodStartData);  // Оновлюємо кінцеву дату, якщо вона не передана
-    }
-  }, [endDate, periodEndData, periodStartData]); // Перевірка кінцевої дати та початкової дати
+  const fetchPeriodCars = (dates) => {
+    dispatch(getPeriodCars(dates));
+  };
 
   function handleInputChangeBeg(date) {
-    setPeriodStartData(date);
-    onDateBegChange(date);  // Передаємо вибрану дату в батьківський компонент
+    let newStartDate = date;
+    if (periodEndData && date && new Date(date) > new Date(periodEndData)) {
+      newStartDate = periodEndData;
+      toast.error("Кінцева дата не має перевищувати початкову!");
+    }
+
+    setPeriodStartData(newStartDate);
+    onDateBegChange(newStartDate);
+
+    if (newStartDate && periodEndData) {
+      fetchPeriodCars({ startDate: newStartDate, endDate: periodEndData });
+    }
   }
 
   function handleInputChangeEnd(date) {
-    setPeriodEndData(date);
-    onDateEndChange(date);  // Передаємо кінцеву дату в батьківський компонент
+    let newEndDate = date;
+    if (periodStartData && date && new Date(date) < new Date(periodStartData)) {
+      newEndDate = periodStartData;
+    }
+
+    setPeriodEndData(newEndDate);
+    onDateEndChange(newEndDate);
+
+    // Оновлюємо список авто
+    if (periodStartData && newEndDate) {
+      fetchPeriodCars({ startDate: periodStartData, endDate: newEndDate });
+    }
   }
 
   const handleIconClickBeg = () => setIsOpenBeg((prev) => !prev);

@@ -46,7 +46,9 @@
 }
 
 .editBtn {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   background-color: var(--bg-input);
 
@@ -54,7 +56,6 @@
 
   width: 34px;
   height: 34px;
-  padding: 10px;
   border-radius: 6px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   cursor: pointer;
@@ -100,16 +101,22 @@
 }
 
 .infoValueInput {
-  padding: 7px 10px;
-  border-radius: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
   border: 1px solid var(--input-stroke);
-  background-color: var(--bg-input);
+  background: var(--bg-secondary);
   outline: none;
   color: var(--light-gray);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  height: 31px;
+}
+
+.infoValueInput:focus,
+.infoValueInput:active {
+  border-color: var(--white);
 }
 
 .mainIcon {

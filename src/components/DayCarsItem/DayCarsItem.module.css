@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 285px;
-  height: 157px;
+  height: 100%;
   padding: 15px 13px 13px 11px;
 
   border-radius: 8px;
@@ -16,7 +16,7 @@
 @media only screen and (min-width: 1850px) {
   .dayCarsItemContainer {
     width: 398px;
-    height: 200px;
+    height: 100%;
     padding: 10px 18px;
   }
 }
@@ -24,7 +24,7 @@
 .modalDayCarsItemContainer {
   display: flex;
   width: 285px;
-  height: 157px;
+  height: auto;
   padding: 10px 18px;
   gap: 12px;
   border-radius: 8px;
@@ -35,19 +35,16 @@
 @media only screen and (min-width: 1850px) {
   .modalDayCarsItemContainer {
     width: 380px;
-    height: 200px;
+    height: auto;
     padding: 10px 18px;
     gap: 12px;
     border-radius: 8px;
   }
 }
 
-
 .userInfo {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  
 }
 
 .title {
@@ -304,13 +301,6 @@
 
 }
 
-@media only screen and (min-width: 1850px) {
-  .btnContainer {
-    margin-top: auto;
-  }
-}
-
-
 .carPhoto {
   display: flex;
   justify-content: center;
@@ -378,11 +368,16 @@
 @media only screen and (min-width: 1850px) {
   .money {
     display: flex;
+    margin-top: auto;
     color: var(--green);
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
   }
+}
+
+.prevCoast{
+  margin-top: auto;
 }
 
 .carInfoRight {
@@ -541,5 +536,9 @@
 
 .iconWrapper{
   position: relative;
+}
+
+.hidden {
+  display: none;
 }
 

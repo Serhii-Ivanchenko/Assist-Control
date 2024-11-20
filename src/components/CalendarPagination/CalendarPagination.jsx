@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCalendarByMonth } from "../../redux/cars/operations.js";
+import { getMonthlyLoad } from '../../redux/crm/operations.js'
 import {
   selectMonthlyLoad,
   selectDate,
   selectLoadingForCalendar,
 } from "../../redux/cars/selectors.js";
+import { selectMonthlyLoadCrm } from "../../redux/crm/selectors.js";
 
 import cssvideo from "./CalendarPagination.module.css";
 import csscrm from "./CalendarPaginationCrm.module.css";
@@ -36,7 +38,7 @@ export default function CalendarPagination({ isCrm }) {
   const css = isCrm ? csscrm : cssvideo;
 
   const dispatch = useDispatch();
-  const monthlyLoadData = useSelector(selectMonthlyLoad);
+  const monthlyLoadData =  useSelector(isCrm ? selectMonthlyLoadCrm:selectMonthlyLoad );
   const currentMonth = new Date().toISOString().substring(0, 7);
   const currentDate = new Date().toISOString().substring(0, 10);
   const carSelectDate = useSelector(selectDate);
@@ -90,17 +92,23 @@ export default function CalendarPagination({ isCrm }) {
   let calendarMonth = queryMonth.toISOString().substring(0, 7);
 
   useEffect(() => {
-    const fetchCalendarData = async () => {
-      if (!selectedServiceId) {
-        // console.warn("Service ID is not available yet. Skipping fetch.");
-        return;
-      }
 
-      await dispatch(getCalendarByMonth(calendarMonth));
-    };
+      const fetchCalendarData = async () => {
+        if (!selectedServiceId) {
+          // console.warn("Service ID is not available yet. Skipping fetch.");
+          return;
+        }
+        if (isCrm) {
+          await dispatch(getMonthlyLoad(calendarMonth));
+        }
+        else {
+          await dispatch(getCalendarByMonth(calendarMonth));
+        }
+      };
 
-    fetchCalendarData();
-  }, [dispatch, calendarMonth, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
+      fetchCalendarData();
+   
+  }, [dispatch, calendarMonth, selectedServiceId, isCrm]); // необхідно для коректної роботи вибору сервісів
 
   let isCurrentMonth = currentMonth === calendarMonth ? true : false;
   
@@ -152,8 +160,8 @@ export default function CalendarPagination({ isCrm }) {
             {isModalOpen && (
               <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
                 <ServiceBookingModal
-                  // carsData={carsData}
-                  // isModal={true}
+                  recordId={null}
+                  postId={null}
                   onClose={handleCloseModal}
                 />
               </Modal>

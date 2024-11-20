@@ -1,6 +1,6 @@
 .crmBlockDayCarsItemContainer {
   width: 365px;
-  height: 200px;
+  height: auto;
   padding: 10px 12px;
   display: flex;
   flex-direction: row;
@@ -39,8 +39,6 @@
     .userInfo {
       display: flex;
       flex-direction: column;
-      height: 100%;
-      
     }
     
     .title {
@@ -253,13 +251,7 @@
       margin-top: auto;
     
     }
-    
-    @media only screen and (min-width: 1850px) {
-      .btnContainer {
-        margin-top: auto;
-      }
-    }
-    
+   
     .carPhoto {
       display: flex;
       justify-content: center;
@@ -413,7 +405,7 @@
     
     .timeWork {
       margin-top: 6px;
-    
+      
     }
     
     .mileage {
@@ -430,7 +422,11 @@
       font-weight: 600;
       line-height: normal;
 
-      
+      max-width: 70px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    
     }
     
     .total {
@@ -439,6 +435,7 @@
       font-size: 14px;
       font-weight: 600;
       line-height: normal;
+      
     }
     
     @media only screen and (min-width: 1850px) {
@@ -529,4 +526,12 @@
     width: 13px;
     fill: var(--white);
     cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .prevCoast{
+    margin-top: auto;
   }

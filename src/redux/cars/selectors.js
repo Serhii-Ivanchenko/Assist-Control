@@ -28,4 +28,7 @@ export const selectLoadingForCalendar = (state) => state.cars.isLoadingForCalend
 
 export const selectLoadingCarsByDay = (state) => state.cars.isLoadingCarsByDay;
 
+export const selectPeriodCars = (state) => state.cars.periodCars;
+
+export const selectVisibilityCar = (state) => state.cars.visibilityCar;
 

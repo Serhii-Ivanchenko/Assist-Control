@@ -4,6 +4,7 @@ import styles from './DayCarsList.module.css';
 import clsx from 'clsx';
 
 export default function DayCarsList({ carsData, isModal, viewMode = "grid" }) {
+  
   const visibleCars = carsData;
 
   if (visibleCars.length === 0) return null;

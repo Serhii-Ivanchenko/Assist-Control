@@ -1,14 +1,14 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  /* width: 230px; */
+  width: 230px;
   /* height: 641px; */
   justify-content: space-between;
   border-radius: 12px;
   background: var(--bg-secondary);
   padding: 20px 30px;
 
-  flex-grow: 1;
+  /* flex-grow: 1; */
   flex-shrink: 0;
 
 }
