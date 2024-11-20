@@ -14,12 +14,22 @@ import { useState } from "react";
 
 export default function AddStaffMemberModal() {
 
+    const generateRandomString = (length) => {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  return Array.from({ length }, () => characters.charAt(Math.floor(Math.random() * characters.length))).join('');
+    };
+    
+    const generateRandomStringPassword = (length) => {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+  return Array.from({ length }, () => characters.charAt(Math.floor(Math.random() * characters.length))).join('');
+};
+
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("")
 
     const generateLogin = () => {
-        setLogin(crypto.randomUUID()),
-        setPassword(crypto.randomUUID())
+    setLogin(generateRandomString(8));
+  setPassword(generateRandomStringPassword(12));
         
     }
 
