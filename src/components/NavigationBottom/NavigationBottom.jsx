@@ -11,7 +11,7 @@ export default function NavigationBottom() {
         <ul className={styles.bottomNavContainer}>
           <li className={styles.navItem}>
             <NavLink
-              to="/"
+              to="/bonuses"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
               }
@@ -24,7 +24,7 @@ export default function NavigationBottom() {
           </li>
           <li className={styles.navItem}>
             <NavLink
-              to="/"
+              to="/rating"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
               }
@@ -37,7 +37,7 @@ export default function NavigationBottom() {
           </li>
           <li className={styles.navItem}>
             <NavLink
-              to="/"
+              to="/proficiency"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
               }

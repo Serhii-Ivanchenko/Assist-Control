@@ -12,7 +12,7 @@ export default function Navigation() {
         <ul className={styles.topNavContainer}>
           <li className={styles.navItem}>
             <NavLink
-              to="/"
+              to="/main"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
               }
@@ -51,7 +51,7 @@ export default function Navigation() {
           </li>
           <li className={styles.navItem}>
             <NavLink
-              to="/"
+              to="/recommendations"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
               }
@@ -64,7 +64,7 @@ export default function Navigation() {
           </li>
           <li className={styles.navItem}>
             <NavLink
-              to="/"
+              to="/accounting"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
               }
@@ -77,7 +77,7 @@ export default function Navigation() {
           </li>
           <li className={styles.navItem}>
             <NavLink
-              to="/report"
+              to="/reports"
               className={({ isActive }) =>
                 clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
               }
