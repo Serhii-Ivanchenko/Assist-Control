@@ -10,6 +10,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createRecord,
+  getPlannedVisits,
   getRecordsForDay,
   getServiceDataForBooking,
 } from "../../../redux/crm/operations.js";
@@ -117,6 +118,7 @@ export default function ServiceBookingModal({ onClose }) {
       .then(() => {
         toast.success("Запис успішно створено");
         dispatch(getRecordsForDay(selectedDate));
+        dispatch(getPlannedVisits(selectedDate));
       })
       .catch(() => {
         toast.error("Щось пішло не так. Спробуйте ще раз!");
