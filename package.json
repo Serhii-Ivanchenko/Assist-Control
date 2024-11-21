@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@minoru/react-dnd-treeview": "^3.4.4",
     "@mui/material": "^6.1.6",
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.7",
