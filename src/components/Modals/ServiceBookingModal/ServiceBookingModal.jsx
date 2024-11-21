@@ -90,7 +90,7 @@ export default function ServiceBookingModal({ onClose }) {
     }, {})
   );
 
-  const datesToPass = transformedData.map(({ date, times }) => ({
+  const datesArray = transformedData.map(({ date, times }) => ({
     appointment_date: date.split(".").reverse().join("-"),
     start_time: times[0],
     end_time: times[times.length - 1],
@@ -99,12 +99,12 @@ export default function ServiceBookingModal({ onClose }) {
   const handleSubmit = (values, actions) => {
     const recordData = {
       ...values,
-      shedule_date: datesToPass,
+      shedule_date: dateToPass,
       service_id: values.service_id ? Number(values.service_id) : null,
       prepayment: values.prepayment ? Number(values.prepayment) : null,
       position: values.position ? Number(values.position) : null,
       mechanic_id: values.mechanic_id ? Number(values.mechanic_id) : null,
-      dates: datesToPass,
+      dates: datesArray,
     };
 
     console.log(recordData);
