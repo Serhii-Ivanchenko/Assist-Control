@@ -84,11 +84,6 @@
     height: 12px;
 }
 
-.iconPayment{
-    width: 15px;
-    height: 15px;
-}
-
 @media only screen and (min-width: 1850px) {
     .iconVideo,
     .iconCrm,
@@ -118,10 +113,10 @@
 .navLink.active .iconHome,
 .navLink.active .iconBook,
 .navLink.active .iconPayment {
-    color: black;
+    color: var(--bg-secondary);
 }
 
 .disabled {
     pointer-events: none;
-    color: #767B88;
+    color: var(--input-text);
   }

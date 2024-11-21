@@ -4,7 +4,7 @@
   gap: 28px;
   /* width: 230px; */
   /* height: 641px; */
-  max-height: 100vh;
+  /* max-height: 100vh; */
   border-radius: 12px;
   background: var(--bg-secondary);
   padding: 20px 30px;
@@ -20,12 +20,11 @@
   }
 }
 
-.userBar {
-  position: absolute;
-}
-
 .userInfo {
   position: relative;
+}
+.userBar {
+  position: absolute;
 }
 
 .bottomContainer {
@@ -37,4 +36,5 @@
 
 .topContainer {
   flex-shrink: 0;
+    position: relative;
 }

@@ -74,8 +74,8 @@
     }
 
     .iconRating {
-        width: 19px;
-        height: 19px;
+        width: 22px;
+        height: 22px;
     }
 
     .iconBonus{
@@ -90,10 +90,10 @@
 
 .navLink.active .iconRating,
 .navLink.active .iconChart {
-    color: black;
+    color: var(--bg-secondary);
 }
 
 .disabled {
     pointer-events: none;
-    color: #767B88;
+    color: var(--input-text);
   }
