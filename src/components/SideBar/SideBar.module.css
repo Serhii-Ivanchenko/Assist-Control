@@ -1,16 +1,16 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 230px;
+  gap: 28px;
+  /* width: 230px; */
   /* height: 641px; */
-  justify-content: space-between;
+  /* max-height: 100vh; */
   border-radius: 12px;
   background: var(--bg-secondary);
   padding: 20px 30px;
 
   /* flex-grow: 1; */
   flex-shrink: 0;
-
 }
 
 @media only screen and (min-width: 1850px) {
@@ -20,48 +20,21 @@
   }
 }
 
-.topContainer,
-.bottomContainer {
-  display: flex;
-  flex-direction: column;
+.userInfo {
   position: relative;
-  justify-content: space-between;
 }
-
-@media only screen and (min-width: 1850px) {
-  .topContainer {
-    /* margin-bottom: 60px; */
-    flex: 1 0 401px;
-    max-height: 431px;
-    margin-bottom: 31px;
-  }
-}
-
-.bottomContainer {
-  /* gap: 9px; */
-}
-
-@media only screen and (min-width: 1850px) {
-  .bottomContainer {
-    /* gap: 20px; */
-    flex: 1 0 338px;
-    max-height: 385px;
-    gap: 20px;
-  }
-}
-
 .userBar {
   position: absolute;
 }
 
-/* @media only screen and (min-width: 1850px) {
-  .userBar {
-    margin-bottom: 60px;
-  }
-} */
+.bottomContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
 
-.userInfo {
-  position: relative;
-  /* margin-bottom: 60px; */
-
+.topContainer {
+  flex-shrink: 0;
+    position: relative;
 }

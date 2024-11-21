@@ -1,0 +1,573 @@
+.modal {
+  width: 1066px;
+  height: 868px;
+  padding: 40px 63px;
+
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+
+.mainInfo {
+  display: flex;
+  align-items: center;
+  gap: 84px;
+
+  margin-bottom: 46px;
+}
+
+.iputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.phoneUpload {
+  display: flex;
+  width: 55px;
+  height: 55px;
+  /* padding: 10px 19px; */
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 6px;
+  border: 1px solid var(--green-btn-normal);
+  background-color: transparent;
+
+  color: var(--light-gray);
+  flex-shrink: 0;
+}
+
+.phoneImg {
+  width: 55px;
+  height: 55px;
+  border-radius: 8px;
+
+  border: 1px solid wheat;
+}
+
+.phoneLine {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.inputPhone {
+  width: 240px;
+}
+
+.input {
+  display: flex;
+  width: 100%;
+  height: 55px;
+  padding: 17.5px 20px;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  appearance: none;
+  outline: none;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 380px;
+}
+
+.columnTwo {
+  width: 192px;
+}
+
+.columnThree {
+  gap: 36px;
+  width: 200px;
+}
+
+.label {
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.1875em;
+}
+
+.iputBoxLP {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputLP {
+  display: flex;
+  width: 100%;
+  height: 35px;
+  padding: 8px 20px;
+  padding-left: 46px;
+  align-items: center;
+  gap: 10px;
+  /* align-self: stretch; */
+
+  background: #242525;
+  border: none;
+
+  color: var(--light-gray);
+  outline: none;
+}
+
+.btnAndLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.create {
+  width: 114px;
+  height: 39px;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border: none;
+  border-radius: 6px;
+  background: var(--blue-btn-normal);
+
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete {
+  height: 38px;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 6px;
+  border: 1px solid var(--red);
+  background-color: transparent;
+
+  color: var(--light-gray);
+
+  cursor: pointer;
+}
+
+.iconArrowRight {
+  fill: var(--icon-gray);
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  appearance: none;
+  pointer-events: none;
+}
+
+.calendarBox {
+  position: relative;
+}
+
+.calendarIcon {
+  fill: var(--light-gray);
+  position: absolute;
+  left: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.calendar {
+  padding-left: 77px;
+}
+
+.lpIconBox {
+  position: relative;
+}
+
+.lpIcon {
+  fill: #6e6c77;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* DocumentPart */
+
+.docInput {
+  display: none;
+}
+
+.documents {
+  display: flex;
+  gap: 86px;
+  align-items: flex-start;
+
+  margin-bottom: 46px;
+}
+
+.docLabel {
+  color: var(--input-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.docLabelForPhoto {
+  width: 82px;
+}
+
+.icon {
+  fill: var(--light-gray);
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.docColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.docImage {
+  width: 35px;
+  height: 22px;
+  border: 1px solid wheat;
+}
+
+.docBox {
+  display: flex;
+  gap: 8px;
+}
+
+/* .docBoxID{
+    gap: 40px;
+} */
+
+/* .images{
+    display: flex;
+    gap: 8px;
+} */
+
+/* SalaryPart */
+
+.leftPart {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.rate {
+  color: var(--white);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.periodInput {
+  border: none;
+  background-color: transparent;
+
+  color: var(--input-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  appearance: none;
+  padding-left: 20px;
+}
+
+.rateInput {
+  /* display: flex; */
+  padding: 18px 10px;
+  /* justify-content: center;
+    align-items: center; */
+  text-align: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+
+  width: 85px;
+  height: 55px;
+
+  color: var(--light-gray);
+  outline: none;
+}
+
+.minRateInput {
+  /* display: flex; */
+  height: 32px;
+  width: 76px;
+  padding: 10px;
+  /* justify-content: center;
+  align-items: center; */
+
+  border-radius: 10px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+  width: 76px;
+
+  color: var(--light-gray);
+  outline: none;
+  text-align: center;
+}
+
+.text {
+  color: var(--input-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.rateDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.minRateDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+  /* margin-right: auto;
+    margin-left: auto; */
+}
+
+.salary {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  margin-bottom: 39px;
+}
+
+.calculation {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 10px;
+}
+
+.inputsList {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.plus {
+  color: var(--white);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.rightPart {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+.listItem {
+  display: flex;
+  gap: 12px;
+}
+
+.salaryInput {
+  display: flex;
+  width: 56px;
+  height: 55px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  border-radius: 8px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+
+  color: var(--light-gray);
+  outline: none;
+}
+
+.salaryLabel {
+  display: flex;
+  flex-direction: column;
+  height: 55px;
+  justify-content: center;
+}
+
+.salaryTitle {
+  color: var(--white);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  height: 23px;
+}
+
+.salaryText {
+  color: var(--input-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 77px;
+  height: 33px;
+}
+
+.salaryTextAmount {
+  width: 70px;
+}
+
+.percent {
+  color: var(--white);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.salaryRules {
+  color: var(--blue);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.close {
+  height: 36px;
+  width: 95px;
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 6px;
+  border: 1px solid var(--light-gray);
+  background-color: transparent;
+
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.save {
+  width: 123px;
+  height: 36px;
+  display: flex;
+  /* padding: 10px 20px; */
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border: none;
+  border-radius: 6px;
+  background: var(--green-btn-normal);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.arrowIcon {
+  fill: var(--icon-gray);
+  /* width: 10px; */
+  /* height: 7px; */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  cursor: pointer;
+}
+
+.inputAndArrow {
+  position: relative;
+}
+
+.checkbox {
+  display: none;
+}
+
+.checkboxSpan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--white);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cbIcon {
+  display: none;
+  fill: var(--white);
+}
+
+.checkbox:checked + .checkboxSpan > .cbIcon {
+  display: block;
+}
+
+.scheduleLabel {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  margin-bottom: 12px;
+}
+
+/* .schedule{
+    height: 297px;
+} */
