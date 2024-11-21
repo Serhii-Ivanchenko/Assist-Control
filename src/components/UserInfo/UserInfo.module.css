@@ -1,13 +1,10 @@
 .userInfo {
   width: 113px;
-  /* margin-bottom: 20px; */
 }
 
 @media only screen and (min-width: 1850px) {
   .userInfo {
     width: 169px;
-    margin-bottom: 31px;
-
   }
 }
 

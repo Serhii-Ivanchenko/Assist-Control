@@ -1,9 +1,8 @@
 import styles from './SideBar.module.css';
 import UserInfo from '../UserInfo/UserInfo';
 import Navigation from '../Navigation/Navigation';
-import LoadStats from '../LoadStats/LoadStats';
-import PremiumAd from '../PremiumAd/PremiumAd';
 import UserBar from '../UserBar/UserBar';
+import NavigationBottom from '../NavigationBottom/NavigationBottom';
 
 
 export default function SideBar() {
@@ -12,11 +11,10 @@ export default function SideBar() {
           <div className={styles.topContainer}>
           <UserBar className={styles.userBar}/>
           <UserInfo className={styles.userInfo}/>
-          <Navigation />
           </div>
           <div className={styles.bottomContainer}>
-          <LoadStats />
-          <PremiumAd />
+          <Navigation />
+          <NavigationBottom />
           </div>
         </div>
       );

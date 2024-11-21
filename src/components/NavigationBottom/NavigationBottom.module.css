@@ -26,7 +26,7 @@
     }
 }
 
-.topNavContainer {
+.bottomNavContainer{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -50,53 +50,35 @@
     }
 }
 
+.iconBonus{
+    transition: color 0.3s;
+    color: var(--orange);
+}
 
-.iconVideo,
-.iconCrm,
-.iconAvto,
-.iconSettinds,
-.iconHome,
-.iconBook,
-.iconPayment {
+.iconRating,
+.iconChart {
     transition: color 0.3s;
     color: white;
 }
 
-.iconVideo {
-    width: 14px;
-    height: 17px;
-}
-.iconPayment{
-    width: 18px;
-    height: 18px;
+
+.iconChart {
+    width: 15px;
+    height: 15px;
 }
 
 @media only screen and (min-width: 1850px) {
-    .iconPayment{
-        width: 28px;
-        height: 28px;
+    .iconChart {
+        width: 22px;
+        height: 22px;
     }
-}
 
-.iconSettings,
-.iconAvto {
-    width: 12px;
-    height: 12px;
-}
-
-@media only screen and (min-width: 1850px) {
-    .iconVideo,
-    .iconCrm,
-    .iconHome {
-        width: 19px;
-        height: 19px;
+    .iconRating {
+        width: 22px;
+        height: 22px;
     }
-}
 
-@media only screen and (min-width: 1850px) {
-    .iconAvto,
-    .iconSettings,
-    .iconBook {
+    .iconBonus{
         width: 18px;
         height: 18px;
     }
@@ -106,13 +88,8 @@
     background-color: var(--light-gray);
 }
 
-.navLink.active .iconVideo,
-.navLink.active .iconAvto,
-.navLink.active .iconSettings,
-.navLink.active .iconCrm,
-.navLink.active .iconHome,
-.navLink.active .iconBook,
-.navLink.active .iconPayment {
+.navLink.active .iconRating,
+.navLink.active .iconChart {
     color: var(--bg-secondary);
 }
 
