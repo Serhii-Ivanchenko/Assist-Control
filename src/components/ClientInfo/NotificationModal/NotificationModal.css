@@ -129,10 +129,10 @@
 }
 
 .react-datepicker__year-select::-webkit-scrollbar {
-  width: 8px;
+  width: 8px !important;
 }
 
 .react-datepicker__year-select::-webkit-scrollbar-thumb {
-  background-color: var(--bg);
-  border-radius: 10px;
+  background-color: var(--bg) !important;
+  border-radius: 10px !important;
 }
