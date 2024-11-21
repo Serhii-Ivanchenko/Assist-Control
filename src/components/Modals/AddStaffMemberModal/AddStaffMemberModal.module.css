@@ -292,7 +292,7 @@
 
 .periodInput {
   border: none;
-  background-color: transparent;
+  background-color: var(--bg-secondary);
 
   color: var(--input-text);
   font-size: 14px;
@@ -302,6 +302,7 @@
 
   appearance: none;
   padding-left: 20px;
+  outline: none;
 }
 
 .rateInput {
@@ -493,6 +494,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .save {
@@ -512,6 +514,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .arrowIcon {
