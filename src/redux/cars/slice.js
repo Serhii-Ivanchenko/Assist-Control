@@ -40,12 +40,9 @@ const carsSlice = createSlice({
     setQueryMonth: (state, action) => {
       state.queryMonth = action.payload;
     },
-    setVisibility: (state, action) => {
-      state.visibility = action.payload;
-    },
-    toggleVisibility: (state, action) => {
+    toggleVisibilityCar: (state, action) => {
       const { key } = action.payload;
-      state.visibility[key] = !state.visibility[key];
+      state.visibilityCar[key] = !state.visibilityCar[key];
     },
   },
   extraReducers: (builder) =>
@@ -134,7 +131,6 @@ const carsSlice = createSlice({
 export const { changeActualDate } = carsSlice.actions;
 export const { changeActualPercent } = carsSlice.actions;
 export const { setQueryMonth } = carsSlice.actions;
-export const { setVisibility  } = carsSlice.actions;
-export const {toggleVisibility} = carsSlice.actions;
+export const {toggleVisibilityCar} = carsSlice.actions;
 
 export default carsSlice.reducer;

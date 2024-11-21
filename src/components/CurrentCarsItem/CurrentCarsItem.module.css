@@ -73,6 +73,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 209px;
   /* margin-top: 2px; */
 }
 
@@ -251,7 +252,6 @@
   }
 
   .newStatus {
-    padding: 8px 18px;
     stroke: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-new) border-box;
@@ -260,7 +260,6 @@
   }
 
   .repairStatus {
-    padding: 8px 18px;
     fill: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-repair) border-box;
@@ -269,7 +268,6 @@
   }
 
   .checkRepairStatus {
-    padding: 8px 18px;
     fill: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-diag) border-box;
@@ -278,7 +276,6 @@
   }
 
   .completeStatus {
-    padding: 8px 18px;
     fill: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--border-gradient-complete) border-box;
@@ -287,7 +284,6 @@
   }
 
   .viewRepairStatus {
-    padding: 8px 18px;
     fill: var(--light-gray);
     background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
       var(--status-gradient-view-repair) border-box;

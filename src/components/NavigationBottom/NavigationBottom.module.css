@@ -1,0 +1,99 @@
+.navItem {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: normal;
+    font-variant-numeric: lining-nums proportional-nums;
+}
+
+@media only screen and (min-width: 1850px) {
+    .navItem {
+        font-size: 16px;
+    }
+}
+
+.navLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    gap: 7px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+@media only screen and (min-width: 1850px) {
+    .navLink {
+        gap: 10px;
+    }
+}
+
+.bottomNavContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.iconContainer {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: var(--main-gray);
+    border-radius: 50%;
+}
+
+@media only screen and (min-width: 1850px) {
+    .iconContainer {
+        width: 42px;
+        height: 42px;
+    }
+}
+
+.iconBonus{
+    transition: color 0.3s;
+    color: var(--orange);
+}
+
+.iconRating,
+.iconChart {
+    transition: color 0.3s;
+    color: white;
+}
+
+
+.iconChart {
+    width: 15px;
+    height: 15px;
+}
+
+@media only screen and (min-width: 1850px) {
+    .iconChart {
+        width: 22px;
+        height: 22px;
+    }
+
+    .iconRating {
+        width: 22px;
+        height: 22px;
+    }
+
+    .iconBonus{
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.navLink.active .iconContainer {
+    background-color: var(--light-gray);
+}
+
+.navLink.active .iconRating,
+.navLink.active .iconChart {
+    color: var(--bg-secondary);
+}
+
+.disabled {
+    pointer-events: none;
+    color: var(--input-text);
+  }

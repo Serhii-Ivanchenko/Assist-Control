@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { selectServiceData } from "../../../../redux/crm/selectors";
 import css from "../SelectTime/SelectTime.module.css";
 import clsx from "clsx";
-import { useEffect } from "react";
 
 export default function SelectTime({
   postId,
@@ -12,23 +11,27 @@ export default function SelectTime({
 }) {
   const { availability } = useSelector(selectServiceData);
 
-  useEffect(() => {
-    setChosenTime([]);
-  }, [postId, setChosenTime]);
+  const isChosenDate = chosenTime?.find((item) => {
+    return item.date === pickedDate;
+  });
+  const chosenHours = isChosenDate?.times;
+  console.log(chosenHours);
 
   const onTimeBtnClick = (time, value) => {
     if (value !== 0) return;
 
     setChosenTime((prevValues) => {
-      if (prevValues.includes(time)) {
-        return prevValues.filter((item) => item !== time);
+      const newObject = { date: pickedDate, time: time };
+
+      const indexOfElem = prevValues.findIndex(
+        (item) => item.date === newObject.date && item.time === newObject.time
+      );
+
+      if (indexOfElem === -1) {
+        return [...prevValues, newObject];
+      } else {
+        return prevValues.filter((_, index) => index !== indexOfElem);
       }
-      const updatedValues = [...prevValues, time].sort((a, b) => {
-        const timeA = new Date(`1970-01-01T${a}:00`);
-        const timeB = new Date(`1970-01-01T${b}:00`);
-        return timeA - timeB;
-      });
-      return updatedValues;
     });
   };
 
@@ -42,29 +45,29 @@ export default function SelectTime({
 
   return (
     <>
-      {Object.entries(availableHours.hours).map(([time, value], index) => (
+      {Object.entries(availableHours.hours).map(([hour, value], index) => (
         <button
           type="button"
           className={clsx(
             css.timeBtn,
             value === 1 ||
-              (time.split(":")[0] <= new Date().getHours() &&
+              (hour.split(":")[0] <= new Date().getHours() &&
                 pickedDate === new Date(Date.now()).toLocaleDateString())
               ? css.timeBtnDisabled
               : css.timeBtnFree,
-            chosenTime.includes(time) && css.timeBtnChosen
+            chosenHours?.includes(hour) && css.timeBtnChosen
           )}
           key={index}
           onClick={() => {
-            onTimeBtnClick(time, value);
+            onTimeBtnClick(hour, value);
           }}
           disabled={
             value === 1 ||
-            (time.split(":")[0] <= new Date().getHours() &&
+            (hour.split(":")[0] <= new Date().getHours() &&
               pickedDate === new Date(Date.now()).toLocaleDateString())
           }
         >
-          {time}
+          {hour}
         </button>
       ))}
     </>
