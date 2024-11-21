@@ -127,3 +127,12 @@
   margin-top: 10px !important;
   border: 2px solid var(--input-stroke) !important;
 }
+
+.react-datepicker__year-select::-webkit-scrollbar {
+  width: 8px;
+}
+
+.react-datepicker__year-select::-webkit-scrollbar-thumb {
+  background-color: var(--bg);
+  border-radius: 10px;
+}
