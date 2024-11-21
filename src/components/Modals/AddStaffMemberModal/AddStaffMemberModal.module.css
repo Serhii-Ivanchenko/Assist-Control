@@ -262,6 +262,8 @@
 .docBox {
   display: flex;
   gap: 8px;
+  position: relative;
+  width: fit-content;
 }
 
 /* .docBoxID{

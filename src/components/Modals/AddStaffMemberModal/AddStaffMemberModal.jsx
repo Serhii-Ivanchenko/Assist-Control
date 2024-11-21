@@ -12,31 +12,27 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { BsKeyFill } from "react-icons/bs";
 import { useState } from "react";
 import avatar from "../../../assets/images/avatar_default.png";
-import Modal from "../Modal/Modal";
+// import Modal from "../Modal/Modal";
 import ThreeDotsModal from "./ThreeDotsModal/ThreeDotsModal";
 import doc from "../../../assets/images/passport_image.png";
 import "../../ClientInfo/NotificationModal/NotificationModal.css";
 import { useRef } from "react";
+import { useEffect } from "react";
 
 export default function AddStaffMemberModal({ onClose }) {
   const [isDateOpen, setDateOpen] = useState(false);
   const handleDateButtonClick = () => setDateOpen((prev) => !prev);
 
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
-  const popoverRef = useRef(null);
+  // const popoverRef = useRef(null);
+  const buttonRefs = useRef([]);
 
-  const toggleSettings = () => {
-    setSettingsIsOpen((prev) => !prev);
+  const toggleSettings = (index) => {
+    setSettingsIsOpen(settingsIsOpen === index ? null : index);
   };
 
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsOpen(false);
+  const closePopover = () => {
+    setSettingsIsOpen(false);
   };
 
   const generateRandomString = (length) => {
@@ -66,6 +62,21 @@ export default function AddStaffMemberModal({ onClose }) {
   const deleteLoginAndPassword = () => {
     setLogin(""), setPassword("");
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        buttonRefs.current &&
+        !buttonRefs.current.some((ref) => ref && ref.contains(event.target))
+      ) {
+        setSettingsIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const initialValues = {
     name: "",
@@ -314,32 +325,50 @@ export default function AddStaffMemberModal({ onClose }) {
               </div>
 
               <div className={css.docColumn}>
-                <div className={css.docBox} ref={popoverRef}>
+                <div
+                  className={css.docBox}
+                  ref={(el) => (buttonRefs.current[0] = el)}
+                >
                   <label className={css.docLabel}>
                     <BsReceipt className={css.icon} />
                     Договір підряда
                     <BsThreeDotsVertical
                       className={css.icon}
-                      onClick={toggleSettings}
+                      onClick={() => toggleSettings(0)}
+                      ref={buttonRefs.current[0]}
                     />
                   </label>
+                  {settingsIsOpen === 0 && (
+                    <ThreeDotsModal
+                      isVisible={true}
+                      buttonRef={buttonRefs.current[0]}
+                      onClose={closePopover}
+                    />
+                  )}
 
                   <Field type="file" name="contract" className={css.docInput} />
                 </div>
 
-                <div className={css.docBox}>
+                <div
+                  className={css.docBox}
+                  ref={(el) => (buttonRefs.current[1] = el)}
+                >
                   <label className={css.docLabel}>
                     <BsReceipt className={css.icon} />
                     Договір про найм
                     <BsThreeDotsVertical
                       className={css.icon}
-                      onClick={openModal}
+                      onClick={() => toggleSettings(1)}
+                      ref={buttonRefs.current[1]}
                     />
                   </label>
-                  {modalIsOpen && (
-                    <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-                      <ThreeDotsModal onClose={handleModalClose} />
-                    </Modal>
+
+                  {settingsIsOpen === 1 && (
+                    <ThreeDotsModal
+                      isVisible={true}
+                      buttonRef={buttonRefs.current[1]}
+                      onClose={closePopover}
+                    />
                   )}
 
                   <Field
@@ -349,15 +378,26 @@ export default function AddStaffMemberModal({ onClose }) {
                   />
                 </div>
 
-                <div className={css.docBox}>
+                <div
+                  className={css.docBox}
+                  ref={(el) => (buttonRefs.current[2] = el)}
+                >
                   <label className={css.docLabel}>
                     <BsReceipt className={css.icon} />
                     Договір МВ
                     <BsThreeDotsVertical
                       className={css.icon}
-                      onClick={openModal}
+                      ref={buttonRefs.current[2]}
+                      onClick={() => toggleSettings(2)}
                     />
                   </label>
+                  {settingsIsOpen === 2 && (
+                    <ThreeDotsModal
+                      isVisible={true}
+                      buttonRef={buttonRefs.current[2]}
+                      onClose={closePopover}
+                    />
+                  )}
                   <Field
                     type="file"
                     name="agreement"
