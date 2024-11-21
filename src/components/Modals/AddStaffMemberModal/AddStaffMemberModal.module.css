@@ -120,6 +120,7 @@
   border: none;
 
   color: var(--light-gray);
+  outline: none;
 }
 
 .btnAndLabel {
@@ -156,7 +157,6 @@
 }
 
 .delete {
-  width: 38px;
   height: 38px;
   display: flex;
   padding: 10px;
@@ -244,6 +244,7 @@
   fill: var(--light-gray);
   width: 18px;
   height: 18px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .docColumn {
@@ -278,6 +279,7 @@
   display: flex;
   gap: 11px;
   align-items: center;
+  padding-right: 10px;
 }
 
 .rate {
@@ -414,6 +416,7 @@
   padding: 10px;
   justify-content: center;
   align-items: center;
+  text-align: center;
 
   border-radius: 8px;
   border: 1px solid var(--input-stroke);
@@ -426,6 +429,8 @@
 .salaryLabel {
   display: flex;
   flex-direction: column;
+  height: 55px;
+  justify-content: center;
 }
 
 .salaryTitle {
@@ -433,7 +438,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  height: 23px;
 }
 
 .salaryText {
@@ -443,6 +448,7 @@
   font-weight: 400;
   line-height: normal;
   width: 77px;
+  height: 33px;
 }
 
 .salaryTextAmount {
@@ -546,6 +552,20 @@
 
 .checkbox:checked + .checkboxSpan > .cbIcon {
   display: block;
+}
+
+.scheduleLabel {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  margin-bottom: 12px;
 }
 
 /* .schedule{
