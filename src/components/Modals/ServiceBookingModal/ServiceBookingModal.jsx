@@ -109,17 +109,17 @@ export default function ServiceBookingModal({ onClose }) {
 
     console.log(recordData);
 
-    // dispatch(createRecord(recordData))
-    //   .unwrap()
-    //   .then(() => {
-    //     toast.success("Запис успішно створено");
-    //   })
-    //   .catch(() => {
-    //     toast.error("Щось пішло не так. Спробуйте ще раз!");
-    //   });
-    // setChosenTime([]);
-    // actions.resetForm();
-    // onClose();
+    dispatch(createRecord(recordData))
+      .unwrap()
+      .then(() => {
+        toast.success("Запис успішно створено");
+      })
+      .catch(() => {
+        toast.error("Щось пішло не так. Спробуйте ще раз!");
+      });
+    setChosenTime([]);
+    actions.resetForm();
+    onClose();
   };
 
   const initialValues = {
