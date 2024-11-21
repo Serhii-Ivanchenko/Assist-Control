@@ -64,31 +64,50 @@ export default function ServiceBookingModal({ onClose }) {
 
   const dateToPass = pickedDate.split(".").reverse().join("-");
 
-  const startHour = chosenTime[0]?.split(":")[0];
-  const finishHour = chosenTime[chosenTime.length - 1]?.split(":")[0];
-
   useEffect(() => {
     const fetchServiceData = () => {
       if (!selectedServiceId) {
         return;
       }
       dispatch(getServiceDataForBooking(dateToPass));
-      setChosenTime([]);
+      // setChosenTime([]);
     };
     fetchServiceData();
   }, [dispatch, selectedServiceId, dateToPass]);
 
+  const transformedData = Object.values(
+    chosenTime.reduce((acc, { date, time }) => {
+      if (!acc[date]) {
+        acc[date] = { date, times: [] };
+      }
+      acc[date].times.push(time);
+      acc[date].times.sort((a, b) => {
+        const timeA = new Date(`1970-01-01T${a}:00`);
+        const timeB = new Date(`1970-01-01T${b}:00`);
+        return timeA - timeB;
+      });
+      return acc;
+    }, {})
+  );
+
+  const datesArray = transformedData.map(({ date, times }) => ({
+    appointment_date: date.split(".").reverse().join("-"),
+    start_time: times[0],
+    end_time: times[times.length - 1],
+  }));
+
   const handleSubmit = (values, actions) => {
     const recordData = {
       ...values,
+      shedule_date: dateToPass,
       service_id: values.service_id ? Number(values.service_id) : null,
       prepayment: values.prepayment ? Number(values.prepayment) : null,
       position: values.position ? Number(values.position) : null,
       mechanic_id: values.mechanic_id ? Number(values.mechanic_id) : null,
-      appointment_date: dateToPass,
-      hours_from: startHour,
-      hours_to: finishHour,
+      dates: datesArray,
     };
+
+    console.log(recordData);
 
     dispatch(createRecord(recordData))
       .unwrap()
@@ -103,19 +122,19 @@ export default function ServiceBookingModal({ onClose }) {
     onClose();
   };
 
-   const initialValues = {
-     car_number: "",
-     vin: "",
-     service_id: "",
-     prepayment: "",
-     phone_number: "",
-     position: posts.length > 0 ? posts[0]?.id_post : "",
-     mechanic_id: "",
-     make_model: "",
-     note: "",
-     name: "",
+  const initialValues = {
+    name: "",
+    phone_number: "",
+    car_number: "",
+    service_id: "",
+    make_model: "",
+    vin: "",
+    note: "",
+    prepayment: "",
+    position: posts.length > 0 ? posts[0]?.id_post : "",
+    mechanic_id: "",
   };
-  
+
   return !posts ? (
     <Loader />
   ) : (
@@ -126,7 +145,7 @@ export default function ServiceBookingModal({ onClose }) {
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={ServiceBookingSchema}
-        enableReinitialize={true} 
+        enableReinitialize={true}
         validateOnChange={true}
         validateOnBlur
       >
@@ -371,7 +390,7 @@ export default function ServiceBookingModal({ onClose }) {
                 <div className={css.timeWrapper}>
                   <SelectTime
                     postId={values.position || posts[0]?.id_post}
-                    chosenTime={chosenTime}
+                    chosenTime={transformedData}
                     setChosenTime={setChosenTime}
                     pickedDate={pickedDate}
                   />
