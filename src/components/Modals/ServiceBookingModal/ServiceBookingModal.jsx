@@ -10,6 +10,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createRecord,
+  getRecordsForDay,
   getServiceDataForBooking,
 } from "../../../redux/crm/operations.js";
 import toast from "react-hot-toast";
@@ -17,9 +18,11 @@ import { selectServiceData } from "../../../redux/crm/selectors.js";
 import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
 import SelectTime from "./SelectTime/SelectTime.jsx";
 import Loader from "../../Loader/Loader.jsx";
+import { selectDate } from "../../../redux/cars/selectors.js";
 
 export default function ServiceBookingModal({ onClose }) {
   const dispatch = useDispatch();
+  const selectedDate = useSelector(selectDate);
 
   const [chosenTime, setChosenTime] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -113,6 +116,7 @@ export default function ServiceBookingModal({ onClose }) {
       .unwrap()
       .then(() => {
         toast.success("Запис успішно створено");
+        dispatch(getRecordsForDay(selectedDate));
       })
       .catch(() => {
         toast.error("Щось пішло не так. Спробуйте ще раз!");
