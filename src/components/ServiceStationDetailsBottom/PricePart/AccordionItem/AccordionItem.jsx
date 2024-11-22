@@ -21,6 +21,9 @@ function AccordionItem({ category, items, index }) {
           background: "none",
           color: "var(--white)",
           boxShadow: "none",
+          "& .MuiAccordionSummary-root.Mui-expanded": {
+            minHeight: "50px",
+          },
         }}
       >
         <AccordionSummary
