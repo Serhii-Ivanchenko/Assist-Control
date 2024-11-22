@@ -12,44 +12,41 @@ import NewItemModal from "./NewItemModal/NewItemModal";
 // import 'react-sortable-tree/style.css';
 // import { Tree } from "react-arborist";
 
-// import { Tree } from "@minoru/react-dnd-treeview";
+import { Tree } from "@minoru/react-dnd-treeview";
 
 export default function WarehousePart() {
   const [modalIsOpen, setIsOpen] = useState(false);
-  //   const [tree, setTree] = useState([
-  //     { id: "1", name: "Root", parentId: null },
-  //     {
-  //       id: "2",
-  //       name: "м. Академіка павлова (Назва склада)",
-  //       parentId: "1",
-  //       children: [
-  //         { id: "c1", name: "Вітрина (Назва секції)" },
-  //         {
-  //           id: "c2",
-  //           name: "2 Поверх (Назва секції)",
-  //           children: [
-  //             { id: "c3", name: "Стелаж 024" },
-  //             {
-  //               id: "c4",
-  //               name: "Стелаж 025",
-  //               children: [
-  //                 {
-  //                   id: "c5",
-  //                   name: "Полиця 036",
-  //                   children: [
-  //                     { id: "c6", name: "Місце 0243" },
-  //                     { id: "c7", name: "Місце 0244" },
-  //                     { id: "c8", name: "Місце 0245" },
-  //                   ],
-  //                 },
-  //               ],
-  //             },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //     { id: "3", name: "Child 2", parentId: "2" },
-  //   ]);
+  const [tree, setTree] = useState([
+    {
+      id: "2",
+      text: "м. Академіка павлова (Назва склада)",
+      parent: "1",
+    },
+    { id: "3", text: "Вітрина (Назва секції)", parent: "2" },
+    {
+      id: "4",
+      text: "2 Поверх (Назва секції)",
+      parent: "3",
+    },
+
+    { id: "5", text: "Стелаж 024", parent: "4" },
+    {
+      id: "6",
+      text: "Стелаж 025",
+      parent: "5",
+    },
+    {
+      id: "7",
+      text: "Полиця 036",
+      parent: "6",
+    },
+
+    { id: "8", text: "Місце 0243", parent: "7" },
+    { id: "9", text: "Місце 0244", parent: "8" },
+    { id: "10", text: "Місце 0245", parent: "9" },
+
+    // { id: "3", name: "Child 2", parentId: "2" },
+  ]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -107,13 +104,12 @@ export default function WarehousePart() {
                 onChange={(newTreeData)=> setTree(newTreeData)}
             /> */}
       {/* <Tree
-                treeData={tree}
-                // childrenAccessor="children"
-                height={400}
-                width={500}
-                 isDropTarget={}
-                // parentAccessor="parentId"
-            /> */}
+        treeData={tree}
+        // childrenAccessor="children"
+        height={400}
+        width={500}
+        // parentAccessor="parentId"
+      /> */}
     </div>
   );
 }
