@@ -11,7 +11,7 @@
 
 .wrapper .accordionTitle {
   display: flex;
-  width: 100%;
+  width: 860px;
   height: 50px;
   padding: 0px 20px;
   align-items: center;
@@ -33,6 +33,7 @@
 .accordionDesc {
   display: flex;
   flex-direction: column;
+  width: 840px;
   gap: 12px;
   margin: 20px 0 0;
   padding-right: 25px;
