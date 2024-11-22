@@ -1,65 +1,127 @@
-.scheduleWrapper {
+/* .scheduleWrapper {
     display: flex;
     flex-direction: column;
     max-height: 311px;
     padding: 0 30.5px;
+    width:853px;
+    border-radius: 12px;
 }
+*/
 
-.schedule-grid {
-    display: grid;
-    grid-template-columns: 89px repeat(15, 49px);
-    /* 100px для метки дня, и по 1fr для каждого часа */
-    gap: 2px;
-    /* пространство между ячейками */
+.workSchedule {
+    border-collapse: collapse;
+    width: 863px;
+    border-radius: 12px ;
+    background: linear-gradient(0deg, #23252C 0%, #8B8B8B 20%, #566596 50%, #8E8E8E 80%, #23252C 100%);
+        ;
+        /* background: var(--white); */
+     border-collapse: separate; 
+        /* Для скругления углов */
+         border-spacing: 0; 
 }
 
 .header {
-    display: contents;
-padding: 10px 13px 10px 10px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 12px 12px 0px 0px;
-        background: rgba(81, 85, 98, 0.75);
+    background-color: rgba(81, 85, 98, 0.75);
+     height: 39px;
+    color: var(--white);
+    
+    font-weight: bold;
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+    /* Скругление верхних углов */
 }
 
-.corner {
-    grid-column: 1 / 2;
-background: rgba(81, 85, 98, 0.75);
+.header th {
+    border: none;
    
 }
 
-.headercell {
+.headerfirstcolumn {
+    width: 89px;
+    background-color: rgba(81, 85, 98, 0.75);
+    color: var(--white);
+    font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
     text-align: center;
-    background:  rgba(81, 85, 98, 0.75);;
-    color: white;
-    padding: 10px 0;
+    border-radius: 12px 0 0 0;
+}
+
+.headerothercolumn {
+    width: 40px;
     font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
 }
 
-.daylabel {
-    text-align: left;
-    background-color:var(--bg-input);
-    color: white;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+.header .headerothercolumn:last-child {
+    border-radius: 0 12px 0 0;
 }
 
-.hourcell {
-    height: 40px;
+tbody {
+    padding: 1px 7px 10px 7px;
+    border-radius: 0px 0px 12px 12px;
+        /* background-color: rgba(81, 85, 98, 0.10); */
+        box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10);
+}
+
+tbody td {
+    width: 40px;
+    height: 30px;
+    text-align: center;
     cursor: pointer;
-    background-color: var(--bg-input);
-    transition: background-color 0.3s;
+    border-bottom: 2px solid transparent;
+    border-right: 2px solid transparent;
+    /* Прозрачный бордер */
 }
 
-.hourcell.active {
+tbody td:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    /* Легкий эффект при наведении */
+}
+
+.active {
     background-color: var(--blue-btn-normal);
-    /* Цвет активной ячейки */
+   
+    color: white;
+}
+
+.inactive {
+    background-color: var(--contacts-info-bg);
+    /* Фон для неактивных */
+}
+
+tbody tr td:first-child {
+    background-color: var(--contacts-info-bg);
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    width: 89px;
+}
+
+tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 12px;
+}
+
+tbody tr:last-child td:last-child {
+    border-radius: 0 0 12px 0;
+}
+
+.generateButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--blue-btn-normal);
+    /* Зеленая кнопка */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.generateButton:hover {
+    background-color:var(--blue-btn-normal);
+   
 }
