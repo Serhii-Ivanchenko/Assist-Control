@@ -13,40 +13,51 @@ import NewItemModal from "./NewItemModal/NewItemModal";
 // import { Tree } from "react-arborist";
 
 import { Tree } from "@minoru/react-dnd-treeview";
+// import "@minoru/react-dnd-treeview/dist/style.css";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
+const dataForTree = [
+  {
+    id: "2",
+    text: "м. Академіка павлова (Назва склада)",
+    droppable: true,
+    parent: null,
+  },
+  { id: "3", text: "Вітрина (Назва секції)", droppable: true, parent: "2" },
+  {
+    id: "4",
+    text: "2 Поверх (Назва секції)",
+    droppable: true,
+    parent: "3",
+  },
+
+  { id: "5", text: "Стелаж 024", droppable: true, parent: "4" },
+  {
+    id: "6",
+    text: "Стелаж 025",
+    droppable: true,
+    parent: "5",
+  },
+  {
+    id: "7",
+    text: "Полиця 036",
+    droppable: true,
+    parent: "6",
+  },
+
+  { id: "8", text: "Місце 0243" },
+  { id: "9", text: "Місце 0244" },
+  { id: "10", text: "Місце 0245" },
+];
 
 export default function WarehousePart() {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [tree, setTree] = useState([
-    {
-      id: "2",
-      text: "м. Академіка павлова (Назва склада)",
-      parent: "1",
-    },
-    { id: "3", text: "Вітрина (Назва секції)", parent: "2" },
-    {
-      id: "4",
-      text: "2 Поверх (Назва секції)",
-      parent: "3",
-    },
+  const [tree, setTree] = useState(dataForTree);
 
-    { id: "5", text: "Стелаж 024", parent: "4" },
-    {
-      id: "6",
-      text: "Стелаж 025",
-      parent: "5",
-    },
-    {
-      id: "7",
-      text: "Полиця 036",
-      parent: "6",
-    },
-
-    { id: "8", text: "Місце 0243", parent: "7" },
-    { id: "9", text: "Місце 0244", parent: "8" },
-    { id: "10", text: "Місце 0245", parent: "9" },
-
-    // { id: "3", name: "Child 2", parentId: "2" },
-  ]);
+  const handleDrop = (newTree) => {
+    setTree(newTree); // Збереження нового дерева у state
+  };
 
   const openModal = () => {
     setIsOpen(true);
@@ -103,13 +114,23 @@ export default function WarehousePart() {
                 treeData={tree}
                 onChange={(newTreeData)=> setTree(newTreeData)}
             /> */}
-      {/* <Tree
-        treeData={tree}
-        // childrenAccessor="children"
-        height={400}
-        width={500}
-        // parentAccessor="parentId"
-      /> */}
+      <DndProvider backend={HTML5Backend}>
+        <Tree
+          tree={tree}
+          rootId={null}
+          render={(node, { depth, isOpen, onToggle }) => (
+            <div style={{ marginLeft: depth * 20 }}>
+              <span onClick={onToggle}>{isOpen ? "▼" : "▶"}</span> {node.text}
+            </div>
+          )}
+          dragPreviewRender={(node) => <div>{node.text}</div>}
+          onDrop={handleDrop}
+          // childrenAccessor="children"
+          // height={400}
+          // width={500}
+          // parentAccessor="parentId"
+        />
+      </DndProvider>
     </div>
   );
 }
