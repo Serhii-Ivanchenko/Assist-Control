@@ -33,7 +33,7 @@
 }
 
 .button {
-  width: 100%;
+  width: 250px;
   height: 34px;
   background-color: transparent;
   border: none;
@@ -53,7 +53,7 @@
   gap: 10px;
 }
 
-a > .button {
+div > .button {
   width: 250px;
   border-top: 2px solid var(--input-stroke);
   padding: 6px 20px 8px 10px;
