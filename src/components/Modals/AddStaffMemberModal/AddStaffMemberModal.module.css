@@ -254,7 +254,7 @@
 }
 
 .docImage {
-  width: 35px;
+  /* width: 35px; */
   height: 22px;
   border: 1px solid wheat;
 }
@@ -262,6 +262,8 @@
 .docBox {
   display: flex;
   gap: 8px;
+  position: relative;
+  width: fit-content;
 }
 
 /* .docBoxID{
@@ -292,7 +294,7 @@
 
 .periodInput {
   border: none;
-  background-color: transparent;
+  background-color: var(--bg-secondary);
 
   color: var(--input-text);
   font-size: 14px;
@@ -302,6 +304,7 @@
 
   appearance: none;
   padding-left: 20px;
+  outline: none;
 }
 
 .rateInput {
@@ -493,6 +496,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .save {
@@ -512,6 +516,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .arrowIcon {

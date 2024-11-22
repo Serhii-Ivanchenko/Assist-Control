@@ -12,21 +12,27 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { BsKeyFill } from "react-icons/bs";
 import { useState } from "react";
 import avatar from "../../../assets/images/avatar_default.png";
-import Modal from "../Modal/Modal";
+// import Modal from "../Modal/Modal";
 import ThreeDotsModal from "./ThreeDotsModal/ThreeDotsModal";
+import doc from "../../../assets/images/passport_image.png";
+import "../../ClientInfo/NotificationModal/NotificationModal.css";
+import { useRef } from "react";
+import { useEffect } from "react";
 
-export default function AddStaffMemberModal() {
+export default function AddStaffMemberModal({ onClose }) {
   const [isDateOpen, setDateOpen] = useState(false);
   const handleDateButtonClick = () => setDateOpen((prev) => !prev);
 
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [settingsIsOpen, setSettingsIsOpen] = useState(false);
+  // const popoverRef = useRef(null);
+  const buttonRefs = useRef([]);
 
-  const openModal = () => {
-    setIsOpen(true);
+  const toggleSettings = (index) => {
+    setSettingsIsOpen(settingsIsOpen === index ? null : index);
   };
 
-  const handleModalClose = () => {
-    setIsOpen(false);
+  const closePopover = () => {
+    setSettingsIsOpen(false);
   };
 
   const generateRandomString = (length) => {
@@ -57,14 +63,29 @@ export default function AddStaffMemberModal() {
     setLogin(""), setPassword("");
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        buttonRefs.current &&
+        !buttonRefs.current.some((ref) => ref && ref.contains(event.target))
+      ) {
+        setSettingsIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const initialValues = {
-    name: "Блудов Олександр Анатолійович",
-    phone: "+380733291212",
-    address: "Харків, вул. Таджицька, буд. 38",
+    name: "",
+    phone: "",
+    address: "",
     birthday: new Date(),
-    position: "m",
-    role: "admin",
-    email: "birthday@gmail.com",
+    position: "",
+    role: "",
+    email: "",
     passport: "",
     ID: "",
     diploma: "",
@@ -74,12 +95,12 @@ export default function AddStaffMemberModal() {
     employment: "",
     agreement: "",
     period: "month",
-    rate: "15000",
-    minRate: "8000",
-    amount: "40",
-    sparesAmount: "40",
-    sparesPrice: "40",
-    profit: "40",
+    rate: "",
+    minRate: "",
+    amount: "",
+    sparesAmount: "",
+    sparesPrice: "",
+    profit: "",
     schedule: "false",
   };
 
@@ -101,7 +122,11 @@ export default function AddStaffMemberModal() {
               <div className={css.column}>
                 <div className={css.iputBox}>
                   <label className={css.label}>ПІБ</label>
-                  <Field name="name" className={css.input} />
+                  <Field
+                    name="name"
+                    className={css.input}
+                    placeholder="Блудов Олександр Анатолійович"
+                  />
                 </div>
 
                 <div className={css.iputBox}>
@@ -110,6 +135,7 @@ export default function AddStaffMemberModal() {
                     <Field
                       name="phone"
                       className={`${css.input} ${css.inputPhone}`}
+                      placeholder="+380733291212"
                     />
                     <button type="button" className={css.phoneUpload}>
                       <BsFillCloudUploadFill size={33} />
@@ -120,7 +146,11 @@ export default function AddStaffMemberModal() {
 
                 <div className={css.iputBox}>
                   <label className={css.label}>Місце проживання</label>
-                  <Field name="address" className={css.input} />
+                  <Field
+                    name="address"
+                    className={css.input}
+                    placeholder="Харків, вул. Таджицька, буд. 38"
+                  />
                 </div>
               </div>
 
@@ -140,6 +170,10 @@ export default function AddStaffMemberModal() {
                       onSelect={() => setDateOpen(false)}
                       toggleCalendarOnIconClick
                       readOnly
+                      peekNextMonth
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
                     />
 
                     <BsCalendar2Week
@@ -165,7 +199,12 @@ export default function AddStaffMemberModal() {
                 <div className={css.iputBox}>
                   <label className={css.label}>Ролі</label>
                   <div className={css.inputAndArrow}>
-                    <Field as="select" name="role" className={css.input}>
+                    <Field
+                      as="select"
+                      name="role"
+                      className={css.input}
+                      placeholder="Адміністратор"
+                    >
                       <option value="admin">Адміністратор</option>
                       <option value="manager">Менеджер</option>
                       <option value="employee">Працівник</option>
@@ -178,7 +217,11 @@ export default function AddStaffMemberModal() {
               <div className={`${css.column} ${css.columnThree}`}>
                 <div className={css.iputBox}>
                   <label className={css.label}>E-mail</label>
-                  <Field name="email" className={css.input} />
+                  <Field
+                    name="email"
+                    className={css.input}
+                    placeholder="birthday@gmail.com"
+                  />
                 </div>
 
                 <div className={css.iputBoxLP}>
@@ -229,8 +272,8 @@ export default function AddStaffMemberModal() {
                     <BsFillCloudUploadFill className={css.icon} /> Паспорт
                   </label>
                   <Field type="file" name="passport" className={css.docInput} />
-                  <img src="" alt="doc" className={css.docImage} />
-                  <img src="" alt="doc" className={css.docImage} />
+                  <img src={doc} alt="doc" className={css.docImage} />
+                  <img src={doc} alt="doc" className={css.docImage} />
                 </div>
 
                 <div className={`${css.docBox} ${css.docBoxID}`}>
@@ -240,8 +283,8 @@ export default function AddStaffMemberModal() {
                   </label>
                   <Field type="file" name="ID" className={css.docInput} />
 
-                  <img src="" alt="doc" className={css.docImage} />
-                  <img src="" alt="doc" className={css.docImage} />
+                  <img src={doc} alt="doc" className={css.docImage} />
+                  <img src={doc} alt="doc" className={css.docImage} />
                 </div>
               </div>
 
@@ -252,8 +295,8 @@ export default function AddStaffMemberModal() {
                     <BsFillCloudUploadFill className={css.icon} /> Диплом
                   </label>
                   <Field type="file" name="diploma" className={css.docInput} />
-                  <img src="" alt="doc" className={css.docImage} />
-                  <img src="" alt="doc" className={css.docImage} />
+                  <img src={doc} alt="doc" className={css.docImage} />
+                  <img src={doc} alt="doc" className={css.docImage} />
                 </div>
 
                 <div className={css.docBox}>
@@ -267,7 +310,7 @@ export default function AddStaffMemberModal() {
                     name="laborBook"
                     className={css.docInput}
                   />
-                  <img src="" alt="doc" className={css.docImage} />
+                  <img src={doc} alt="doc" className={css.docImage} />
                 </div>
 
                 <div className={css.docBox}>
@@ -277,37 +320,55 @@ export default function AddStaffMemberModal() {
                     Резюме
                   </label>
                   <Field type="file" name="CV" className={css.docInput} />
-                  <img src="" alt="doc" className={css.docImage} />
+                  <img src={doc} alt="doc" className={css.docImage} />
                 </div>
               </div>
 
               <div className={css.docColumn}>
-                <div className={css.docBox}>
+                <div
+                  className={css.docBox}
+                  ref={(el) => (buttonRefs.current[0] = el)}
+                >
                   <label className={css.docLabel}>
                     <BsReceipt className={css.icon} />
                     Договір підряда
                     <BsThreeDotsVertical
                       className={css.icon}
-                      onClick={openModal}
+                      onClick={() => toggleSettings(0)}
+                      ref={buttonRefs.current[0]}
                     />
                   </label>
+                  {settingsIsOpen === 0 && (
+                    <ThreeDotsModal
+                      isVisible={true}
+                      buttonRef={buttonRefs.current[0]}
+                      onClose={closePopover}
+                    />
+                  )}
 
                   <Field type="file" name="contract" className={css.docInput} />
                 </div>
 
-                <div className={css.docBox}>
+                <div
+                  className={css.docBox}
+                  ref={(el) => (buttonRefs.current[1] = el)}
+                >
                   <label className={css.docLabel}>
                     <BsReceipt className={css.icon} />
                     Договір про найм
                     <BsThreeDotsVertical
                       className={css.icon}
-                      onClick={openModal}
+                      onClick={() => toggleSettings(1)}
+                      ref={buttonRefs.current[1]}
                     />
                   </label>
-                  {modalIsOpen && (
-                    <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-                      <ThreeDotsModal onClose={handleModalClose} />
-                    </Modal>
+
+                  {settingsIsOpen === 1 && (
+                    <ThreeDotsModal
+                      isVisible={true}
+                      buttonRef={buttonRefs.current[1]}
+                      onClose={closePopover}
+                    />
                   )}
 
                   <Field
@@ -317,15 +378,26 @@ export default function AddStaffMemberModal() {
                   />
                 </div>
 
-                <div className={css.docBox}>
+                <div
+                  className={css.docBox}
+                  ref={(el) => (buttonRefs.current[2] = el)}
+                >
                   <label className={css.docLabel}>
                     <BsReceipt className={css.icon} />
                     Договір МВ
                     <BsThreeDotsVertical
                       className={css.icon}
-                      onClick={openModal}
+                      ref={buttonRefs.current[2]}
+                      onClick={() => toggleSettings(2)}
                     />
                   </label>
+                  {settingsIsOpen === 2 && (
+                    <ThreeDotsModal
+                      isVisible={true}
+                      buttonRef={buttonRefs.current[2]}
+                      onClose={closePopover}
+                    />
+                  )}
                   <Field
                     type="file"
                     name="agreement"
@@ -360,11 +432,14 @@ export default function AddStaffMemberModal() {
                   <Field
                     name="rate"
                     className={css.rateInput}
-                    value="15000"
                     placeholder="15000"
                   />
                   <div className={css.minRateDiv}>
-                    <Field name="minRate" className={css.minRateInput} />
+                    <Field
+                      name="minRate"
+                      className={css.minRateInput}
+                      placeholder="8000"
+                    />
                     <p className={css.text}>Мінімальна</p>
                   </div>
                 </div>
@@ -376,7 +451,11 @@ export default function AddStaffMemberModal() {
 
                   <ul className={css.inputsList}>
                     <li className={css.listItem}>
-                      <Field name="amount" className={css.salaryInput} />
+                      <Field
+                        name="amount"
+                        className={css.salaryInput}
+                        placeholder="40"
+                      />
                       <div className={css.salaryLabel}>
                         <p className={css.salaryTitle}>СР</p>
                         <p
@@ -388,7 +467,11 @@ export default function AddStaffMemberModal() {
                     </li>
 
                     <li className={css.listItem}>
-                      <Field name="sparesAmount" className={css.salaryInput} />
+                      <Field
+                        name="sparesAmount"
+                        className={css.salaryInput}
+                        placeholder="40"
+                      />
                       <div className={css.salaryLabel}>
                         <p className={css.salaryTitle}>СЗ</p>
                         <p className={css.salaryText}>Сума запчастин</p>
@@ -396,7 +479,11 @@ export default function AddStaffMemberModal() {
                     </li>
 
                     <li className={css.listItem}>
-                      <Field name="sparesPrice" className={css.salaryInput} />
+                      <Field
+                        name="sparesPrice"
+                        className={css.salaryInput}
+                        placeholder="40"
+                      />
                       <div className={css.salaryLabel}>
                         <p className={css.salaryTitle}>НЗ</p>
                         <p className={css.salaryText}>Націнка запчастини</p>
@@ -404,7 +491,11 @@ export default function AddStaffMemberModal() {
                     </li>
 
                     <li className={css.listItem}>
-                      <Field name="profit" className={css.salaryInput} />
+                      <Field
+                        name="profit"
+                        className={css.salaryInput}
+                        placeholder="40"
+                      />
                       <div className={css.salaryLabel}>
                         <p className={css.salaryTitle}>ЧП</p>
                         <p className={css.salaryText}>Чистого прибутку</p>
@@ -436,7 +527,7 @@ export default function AddStaffMemberModal() {
             </div>
 
             <div className={css.btnBox}>
-              <button type="button" className={css.close}>
+              <button type="button" className={css.close} onClick={onClose}>
                 Закрити
               </button>
               <button type="submit" className={css.save}>
