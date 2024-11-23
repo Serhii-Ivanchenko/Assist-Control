@@ -37,12 +37,14 @@ const dataForTree = [
     droppable: true,
     parent: null,
   },
+
   {
     id: "3",
     text: "Вітрина (Назва секції)",
     droppable: true,
     parent: "2",
   },
+
   {
     id: "4",
     text: "2 Поверх (Назва секції)",
@@ -186,7 +188,7 @@ export default function WarehousePart() {
                 treeData={tree}
                 onChange={(newTreeData)=> setTree(newTreeData)}
             /> */}
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={HTML5Backend} options={getBackendOptions()}>
         <div className={css.wrapper}>
           <Tree
             ref={ref}
@@ -205,7 +207,7 @@ export default function WarehousePart() {
             }}
             dragPreviewRender={(node) => <div>{node.text}</div>}
             onDrop={handleDrop}
-            // sort={false}
+            sort={(a, b) => a.id - b.id}
             insertDroppableFirst={false}
             enableAnimateExpand={true}
             canDrop={() => true}

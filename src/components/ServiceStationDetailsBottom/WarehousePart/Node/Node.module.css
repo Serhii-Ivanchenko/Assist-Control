@@ -51,7 +51,7 @@
 .pipeY {
   position: absolute;
   border-left: 2px solid #e7e7e7;
-  left: -7px;
+  left: -30px;
   top: -7px;
 }
 
@@ -61,7 +61,7 @@
 
 .pipeX {
   position: absolute;
-  left: -7px;
+  left: -30px;
   top: 15px;
   height: 2px;
   background-color: #e7e7e7;

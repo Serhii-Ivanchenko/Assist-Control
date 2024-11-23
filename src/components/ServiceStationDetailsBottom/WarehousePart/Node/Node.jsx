@@ -2,8 +2,10 @@ import { getDescendants } from "@minoru/react-dnd-treeview";
 // import NodeIcon from "../NodeIcon/NodeIcon";
 import css from "./Node.module.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useRef, useState } from "react";
+import NewElemPop from "../NewElemPop/NewElemPop";
 
-const TREE_X_OFFSET = 22;
+const TREE_X_OFFSET = 40;
 
 export default function Node({
   node,
@@ -23,6 +25,23 @@ export default function Node({
     onClick(node.id);
   };
 
+  const buttonRefs = useRef([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleTogglePopover = ({ id }) => {
+    // e.stopPropagation();
+    setIsOpen(isOpen === id ? null : id);
+  };
+
+  const handleClosePopover = () => {
+    setIsOpen(false);
+  };
+
+  console.log(
+    `Pipe height for ${node.parent}:`,
+    getPipeHeight(node.parent, treeData)
+  );
+
   return (
     <div
       className={`${css.nodeWrapper} tree-node ${
@@ -30,13 +49,14 @@ export default function Node({
       }`}
       style={{ marginInlineStart: indent }}
       onClick={handleToggle}
+      ref={(el) => (buttonRefs.current[node.id] = el)}
     >
       {/* <NodeIcon
         type={node.droppable ? (isOpen ? "folder-open" : "folder") : null}
       /> */}
       <div
         className={css.pipeX}
-        style={{ width: depth > 0 ? TREE_X_OFFSET - 9 : 0 }}
+        style={{ width: depth > 0 ? TREE_X_OFFSET - 15 : 0 }}
       />
       {getDescendants(treeData, node.parent)[0].id === node.id && (
         <div
@@ -48,7 +68,20 @@ export default function Node({
       )}
 
       <p className={css.labelGridItem}>{node.text}</p>
-      <BsThreeDotsVertical className={css.icon} size={24} />
+      <BsThreeDotsVertical
+        onClick={() => handleTogglePopover(node.id)}
+        className={css.icon}
+        size={24}
+        buttonRef={buttonRefs.current[node.id]}
+      />
+      {isOpen === node.id && (
+        <NewElemPop
+          isVisible={isOpen}
+          addText="Додати секцію"
+          buttonRef={buttonRefs.current[node.id]}
+          onClose={handleClosePopover}
+        />
+      )}
       {/* <div className={`${css.expandIconWrapper} ${isOpen ? css.isOpen : ""}`}> */}
       {/* {node.droppable && (
           <svg
