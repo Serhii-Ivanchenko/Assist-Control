@@ -12,10 +12,23 @@ import NewItemModal from "./NewItemModal/NewItemModal";
 // import 'react-sortable-tree/style.css';
 // import { Tree } from "react-arborist";
 
-import { Tree } from "@minoru/react-dnd-treeview";
+import {
+  Tree,
+  getBackendOptions,
+  getDescendants,
+} from "@minoru/react-dnd-treeview";
 // import "@minoru/react-dnd-treeview/dist/style.css";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import Node from "./Node/Node";
+import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
+
+const reorderArray = (array, sourceIndex, targetIndex) => {
+  const newArray = [...array];
+  const element = newArray.splice(sourceIndex, 1)[0];
+  newArray.splice(targetIndex, 0, element);
+  return newArray;
+};
 
 const dataForTree = [
   {
@@ -32,12 +45,12 @@ const dataForTree = [
     parent: "3",
   },
 
-  { id: "5", text: "Стелаж 024", droppable: true, parent: "4" },
+  { id: "5", text: "Стелаж", droppable: true, parent: "4" },
   {
     id: "6",
-    text: "Стелаж 025",
+    text: "Стелаж",
     droppable: true,
-    parent: "5",
+    parent: "4",
   },
   {
     id: "7",
@@ -46,18 +59,72 @@ const dataForTree = [
     parent: "6",
   },
 
-  { id: "8", text: "Місце 0243" },
-  { id: "9", text: "Місце 0244" },
-  { id: "10", text: "Місце 0245" },
+  { id: "8", text: "Місце 0243", parent: "7" },
+  { id: "9", text: "Місце 0244", parent: "7" },
+  { id: "10", text: "Місце 0245", parent: "7" },
 ];
 
 export default function WarehousePart() {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [tree, setTree] = useState(dataForTree);
+  // const [tree, setTree] = useState(dataForTree);
 
-  const handleDrop = (newTree) => {
-    setTree(newTree); // Збереження нового дерева у state
+  const { ref, getPipeHeight, toggle } = useTreeOpenHandler();
+  const [treeData, setTreeData] = useState(dataForTree);
+
+  const handleDrop = (newTree, e) => {
+    const { dragSourceId, dropTargetId, destinationIndex } = e;
+    if (
+      typeof dragSourceId === "undefined" ||
+      typeof dropTargetId === "undefined"
+    )
+      return;
+    const start = treeData.find((v) => v.id === dragSourceId);
+    const end = treeData.find((v) => v.id === dropTargetId);
+
+    if (
+      start?.parent === dropTargetId &&
+      start &&
+      typeof destinationIndex === "number"
+    ) {
+      setTreeData((treeData) => {
+        const output = reorderArray(
+          treeData,
+          treeData.indexOf(start),
+          destinationIndex
+        );
+        return output;
+      });
+    }
+
+    if (
+      start?.parent !== dropTargetId &&
+      start &&
+      typeof destinationIndex === "number"
+    ) {
+      if (
+        getDescendants(treeData, dragSourceId).find(
+          (el) => el.id === dropTargetId
+        ) ||
+        dropTargetId === dragSourceId ||
+        (end && !end?.droppable)
+      )
+        return;
+      setTreeData((treeData) => {
+        const output = reorderArray(
+          treeData,
+          treeData.indexOf(start),
+          destinationIndex
+        );
+        const movedElement = output.find((el) => el.id === dragSourceId);
+        if (movedElement) movedElement.parent = dropTargetId;
+        return output;
+      });
+    }
   };
+
+  // const handleDrop = (newTree) => {
+  //   setTree(newTree); // Збереження нового дерева у state
+  // };
 
   const openModal = () => {
     setIsOpen(true);
@@ -116,15 +183,43 @@ export default function WarehousePart() {
             /> */}
       <DndProvider backend={HTML5Backend}>
         <Tree
-          tree={tree}
+          ref={ref}
+          tree={treeData}
           rootId={null}
-          render={(node, { depth, isOpen, onToggle }) => (
-            <div style={{ marginLeft: depth * 20 }}>
-              <span onClick={onToggle}>{isOpen ? "▼" : "▶"}</span> {node.text}
-            </div>
-          )}
+          // render={(node, { depth, isOpen, onToggle }) => (
+          //   <div style={{ marginLeft: depth * 40 }}>
+          //     <span onClick={onToggle}>{isOpen ? "▼" : "▶"}</span> {node.text}
+          //   </div>
+          // )}
+          classes={{
+            root: css.treeRoot,
+            placeholder: css.placeholder,
+            dropTarget: css.dropTarget,
+            listItem: css.listItem,
+          }}
           dragPreviewRender={(node) => <div>{node.text}</div>}
           onDrop={handleDrop}
+          // sort={false}
+          insertDroppableFirst={false}
+          enableAnimateExpand={true}
+          canDrop={() => true}
+          dropTargetOffset={5}
+          render={(node, { depth, isOpen, isDropTarget }) => (
+            <Node
+              getPipeHeight={getPipeHeight}
+              node={node}
+              depth={depth}
+              isOpen={isOpen}
+              onClick={() => {
+                if (node.droppable) {
+                  toggle(node?.id);
+                }
+              }}
+              isDropTarget={isDropTarget}
+              treeData={treeData}
+            />
+          )}
+
           // childrenAccessor="children"
           // height={400}
           // width={500}

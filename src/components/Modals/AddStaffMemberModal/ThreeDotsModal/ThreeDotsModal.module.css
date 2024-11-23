@@ -32,6 +32,10 @@
   transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
+a {
+  text-decoration: none;
+}
+
 .button {
   width: 250px;
   height: 34px;
