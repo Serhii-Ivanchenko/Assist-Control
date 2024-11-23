@@ -23,7 +23,12 @@ const handleRejected = (state, action) => {
 const crmSlice = createSlice({
   name: "crm",
   initialState: initialState.crm,
-  reducers: {},
+  reducers: {
+    toggleVisibilityRecords: (state, action) => {
+      const { key } = action.payload;
+      state.visibilityRecords[key] = !state.visibilityRecords[key];
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getAllRecords.pending, handlePending)
@@ -77,5 +82,8 @@ const crmSlice = createSlice({
       })
       .addCase(getMonthlyLoad.rejected, handleRejected),
 });
+
+export const {toggleVisibilityRecords} = crmSlice.actions;
+
 
 export default crmSlice.reducer;

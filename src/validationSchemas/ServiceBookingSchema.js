@@ -11,7 +11,12 @@ export const ServiceBookingSchema = Yup.object().shape({
   ),
   service_id: Yup.string().required("Це поле повинно бути заповнене"),
   prepayment: Yup.number(),
-  phone_number: Yup.string().required("Це поле повинно бути заповнене"),
+  phone_number: Yup.string()
+    .matches(
+      /^\+380\d{9}$/,
+      "Телефон повинен відповідати формату +380123456789"
+    )
+    .required("Це поле повинно бути заповнене"),
   position: Yup.string().required("Це поле повинно бути заповнене"),
   mechanic_id: Yup.string().required("Це поле повинно бути заповнене"),
   make_model: Yup.string()

@@ -7,6 +7,7 @@
   --current-mileage-bg: #43a48d14;
   --last-service-mileage-bg: #a4704314;
   --visit-date-bg: #c38ce614;
+  --contacts-info-bg: #373941;
 
   /* btns colors */
   --green-btn-normal: #008000;
@@ -40,8 +41,7 @@
   --current-mileage-text: #43a48d;
   --last-service-mileage-text: #a97742;
   --stats-all: #465d9b;
-  --contacts-info-bg:#373941;
-  --CRM-modal-hover:#383C46;
+  --CRM-modal-hover: #383C46;
 
 
   /* statuses */
@@ -57,7 +57,7 @@
   --glow-new: #e9d226;
   --glow-view-repair: #e92626;
   --glow-all: #26B5E9;
-  
+
 
   /* calendar */
   --calendar-gray: #4a4a4a;

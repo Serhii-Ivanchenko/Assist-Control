@@ -1,32 +1,13 @@
-.navList {
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
-
-@media only screen and (min-width: 1850px) {
-.navList {
-        gap: 9px;
-    }
-}
-
 .navItem {
-    display: flex;
-    align-items: center;
-    /* margin-bottom: 6px; */
-
     font-size: 11px;
     font-weight: 400;
     line-height: normal;
     font-variant-numeric: lining-nums proportional-nums;
-
 }
 
 @media only screen and (min-width: 1850px) {
     .navItem {
         font-size: 16px;
-        gap: 11.5px;
-        /* margin-bottom: 9px; */
     }
 }
 
@@ -41,8 +22,14 @@ gap: 6px;
 
 @media only screen and (min-width: 1850px) {
     .navLink {
-        gap: 9px;
+        gap: 10px;
     }
+}
+
+.topNavContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .iconContainer {
@@ -64,62 +51,72 @@ gap: 6px;
 }
 
 
-.videoIcon,
+.iconVideo,
 .iconCrm,
 .iconAvto,
-.iconSettinds {
+.iconSettinds,
+.iconHome,
+.iconBook,
+.iconPayment {
     transition: color 0.3s;
     color: white;
 }
 
-.videoIcon {
+.iconVideo {
     width: 14px;
     height: 17px;
 }
-
-.iconCrm {
-    width: 16px;
-    height: 15px;
-    fill: white;
+.iconPayment{
+    width: 18px;
+    height: 18px;
 }
 
 @media only screen and (min-width: 1850px) {
-
-    .videoIcon,
-    .iconCrm {
-        width: 20px;
-        height: 20px;
+    .iconPayment{
+        width: 28px;
+        height: 28px;
     }
 }
 
-.iconAvto,
-.iconSettinds {
+.iconSettings,
+.iconAvto {
     width: 12px;
     height: 12px;
 }
 
 @media only screen and (min-width: 1850px) {
-
-    .iconAvto,
-    .iconSettinds {
-        width: 17px;
-        height: 17px;
+    .iconVideo,
+    .iconCrm,
+    .iconHome {
+        width: 19px;
+        height: 19px;
     }
 }
 
+@media only screen and (min-width: 1850px) {
+    .iconAvto,
+    .iconSettings,
+    .iconBook {
+        width: 18px;
+        height: 18px;
+    }
+}
 
 .navLink.active .iconContainer {
     background-color: var(--light-gray);
 }
 
-.navLink.active .videoIcon,
+.navLink.active .iconVideo,
 .navLink.active .iconAvto,
-.navLink.active .iconSettinds {
-    color: black;
+.navLink.active .iconSettings,
+.navLink.active .iconCrm,
+.navLink.active .iconHome,
+.navLink.active .iconBook,
+.navLink.active .iconPayment {
+    color: var(--bg-secondary);
 }
 
-.navLink.active .iconCrm{
-    fill: black;
-    stroke: black;
-    stroke-width: 5px;
-}
+.disabled {
+    pointer-events: none;
+    color: var(--input-text);
+  }

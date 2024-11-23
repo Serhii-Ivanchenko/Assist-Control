@@ -4,7 +4,7 @@
   align-items: center;
   width: 304px;
   height: 55px;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: var(--blue);
   color: var(--white);
   font-size: 14px;
@@ -26,9 +26,9 @@
 
 @media only screen and (min-width: 1850px) {
   .btn {
-    width: 454px;
+    width: 460px;
     height: 70px;
-    border-radius: 6px;
+    border-radius: 12px;
     font-size: 16px;
     font-weight: 600;
   }

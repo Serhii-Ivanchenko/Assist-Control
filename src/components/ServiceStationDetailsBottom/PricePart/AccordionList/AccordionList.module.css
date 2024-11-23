@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: transparent;
+  max-height: 538px;
+  overflow-y: auto;
+  padding-right: 25px;
+  padding-bottom: 6px;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 8px;
+  max-height: 538px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+  height: 8px;
+}
+
+.wrapper::-webkit-scrollbar-track {
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
+}

@@ -10,9 +10,6 @@ import {
   BsUiChecksGrid,
   BsShieldExclamation,
   BsReceipt,
-  // BsDownload,
-  // BsSearch,
-  // BsXLg,
 } from "react-icons/bs";
 import { GiSoundWaves } from "react-icons/gi";
 import Accordion from "@mui/material/Accordion";
@@ -171,6 +168,14 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
               <button
                 className={css.btnDownloadsItem}
                 onClick={() => handleSetRecordInfo("recommendation")}
+                style={
+                  item.recommendation && recordInfo === "recommendation"
+                    ? { cursor: "pointer", outline: "1px solid #fff" }
+                    : !item.recommendation
+                    ? null
+                    : { cursor: "pointer" }
+                }
+                disabled={!item.recommendation}
               >
                 <p>Рекомендації</p>
                 <div className={css.downloadBtn}>
