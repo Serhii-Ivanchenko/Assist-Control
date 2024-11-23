@@ -37,12 +37,17 @@ const dataForTree = [
     droppable: true,
     parent: null,
   },
-  { id: "3", text: "Вітрина (Назва секції)", droppable: true, parent: "2" },
+  {
+    id: "3",
+    text: "Вітрина (Назва секції)",
+    droppable: true,
+    parent: "2",
+  },
   {
     id: "4",
     text: "2 Поверх (Назва секції)",
     droppable: true,
-    parent: "3",
+    parent: "2",
   },
 
   { id: "5", text: "Стелаж", droppable: true, parent: "4" },
@@ -139,36 +144,36 @@ export default function WarehousePart() {
       <div className={css.listAndButton}>
         <ul className={css.itemsList}>
           <li className={css.items}>
-            <BiBuildingHouse />
-            <p>6</p>
-            <p>Склади</p>
+            <BiBuildingHouse className={css.icon} />
+            <p className={css.value}>6</p>
+            <p className={css.title}>Склади</p>
           </li>
           <li className={css.items}>
-            <RiDatabaseLine />
-            <p>14</p>
-            <p>Секції</p>
+            <RiDatabaseLine className={css.icon} />
+            <p className={css.value}>14</p>
+            <p className={css.title}>Секції</p>
           </li>
           <li className={css.items}>
-            <RiFridgeLine />
-            <p>46</p>
-            <p>Стелажі</p>
+            <RiFridgeLine className={css.icon} />
+            <p className={css.value}>46</p>
+            <p className={css.title}>Стелажі</p>
           </li>
           <li className={css.items}>
-            <RiTableAltLine />
-            <p>94</p>
-            <p>Полиці</p>
+            <RiTableAltLine className={css.icon} />
+            <p className={css.value}>94</p>
+            <p className={css.title}>Полиці</p>
           </li>
           <li className={css.items}>
-            <RiFolder5Line />
-            <p>116</p>
-            <p>Місця</p>
+            <RiFolder5Line className={css.icon} />
+            <p className={css.value}>116</p>
+            <p className={css.title}>Місця</p>
           </li>
         </ul>
 
         <button type="button" className={css.newWarehouse} onClick={openModal}>
-          <BsFolderPlus />
+          <BsFolderPlus className={css.icon} />
           Новий склад
-          <BsThreeDotsVertical />
+          <BsThreeDotsVertical className={css.icon} />
         </button>
         {modalIsOpen && (
           <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
@@ -182,49 +187,51 @@ export default function WarehousePart() {
                 onChange={(newTreeData)=> setTree(newTreeData)}
             /> */}
       <DndProvider backend={HTML5Backend}>
-        <Tree
-          ref={ref}
-          tree={treeData}
-          rootId={null}
-          // render={(node, { depth, isOpen, onToggle }) => (
-          //   <div style={{ marginLeft: depth * 40 }}>
-          //     <span onClick={onToggle}>{isOpen ? "▼" : "▶"}</span> {node.text}
-          //   </div>
-          // )}
-          classes={{
-            root: css.treeRoot,
-            placeholder: css.placeholder,
-            dropTarget: css.dropTarget,
-            listItem: css.listItem,
-          }}
-          dragPreviewRender={(node) => <div>{node.text}</div>}
-          onDrop={handleDrop}
-          // sort={false}
-          insertDroppableFirst={false}
-          enableAnimateExpand={true}
-          canDrop={() => true}
-          dropTargetOffset={5}
-          render={(node, { depth, isOpen, isDropTarget }) => (
-            <Node
-              getPipeHeight={getPipeHeight}
-              node={node}
-              depth={depth}
-              isOpen={isOpen}
-              onClick={() => {
-                if (node.droppable) {
-                  toggle(node?.id);
-                }
-              }}
-              isDropTarget={isDropTarget}
-              treeData={treeData}
-            />
-          )}
+        <div className={css.wrapper}>
+          <Tree
+            ref={ref}
+            tree={treeData}
+            rootId={null}
+            // render={(node, { depth, isOpen, onToggle }) => (
+            //   <div style={{ marginLeft: depth * 40 }}>
+            //     <span onClick={onToggle}>{isOpen ? "▼" : "▶"}</span> {node.text}
+            //   </div>
+            // )}
+            classes={{
+              root: css.treeRoot,
+              placeholder: css.placeholder,
+              dropTarget: css.dropTarget,
+              listItem: css.listItem,
+            }}
+            dragPreviewRender={(node) => <div>{node.text}</div>}
+            onDrop={handleDrop}
+            // sort={false}
+            insertDroppableFirst={false}
+            enableAnimateExpand={true}
+            canDrop={() => true}
+            dropTargetOffset={5}
+            render={(node, { depth, isOpen, isDropTarget }) => (
+              <Node
+                getPipeHeight={getPipeHeight}
+                node={node}
+                depth={depth}
+                isOpen={isOpen}
+                onClick={() => {
+                  if (node.droppable) {
+                    toggle(node?.id);
+                  }
+                }}
+                isDropTarget={isDropTarget}
+                treeData={treeData}
+              />
+            )}
 
-          // childrenAccessor="children"
-          // height={400}
-          // width={500}
-          // parentAccessor="parentId"
-        />
+            // childrenAccessor="children"
+            // height={400}
+            // width={500}
+            // parentAccessor="parentId"
+          />
+        </div>
       </DndProvider>
     </div>
   );

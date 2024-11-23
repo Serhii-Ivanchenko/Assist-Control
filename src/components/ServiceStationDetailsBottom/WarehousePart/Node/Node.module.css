@@ -1,20 +1,27 @@
 .nodeWrapper {
   align-items: center;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  height: 32px;
-  padding-inline-end: 8px;
-  padding-inline-start: 8px;
-  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+
+  /* grid-template-columns: auto 1fr auto; */
+  height: 44px;
+  padding: 10px 20px;
+  border: 1px solid var(--CRM-modal-SecondaryBG, #23252c);
+  background-color: var(--CRM-modal-InputBG, #2d3038);
+  margin-bottom: 14px;
+
+  /* padding-inline-end: 8px;
+  padding-inline-start: 8px; */
+  /* border-radius: 4px; */
   cursor: pointer;
   white-space: nowrap;
   position: relative;
   z-index: 3;
 }
 
-.nodeWrapper:hover {
+/* .nodeWrapper:hover {
   background-color: rgba(0, 0, 0, 0.04);
-}
+} */
 
 .nodeWrapper .expandIconWrapper {
   align-items: center;
@@ -48,9 +55,9 @@
   top: -7px;
 }
 
-.pipeY:first-child {
+/* .pipeY:first-child {
   height: 0;
-}
+} */
 
 .pipeX {
   position: absolute;

@@ -1,18 +1,19 @@
 import { getDescendants } from "@minoru/react-dnd-treeview";
-import NodeIcon from "../NodeIcon/NodeIcon";
+// import NodeIcon from "../NodeIcon/NodeIcon";
 import css from "./Node.module.css";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const TREE_X_OFFSET = 22;
 
 export default function Node({
   node,
   depth,
-  isOpen,
+  //   isOpen,
   isDropTarget,
   onClick,
   treeData,
   getPipeHeight,
-  rootId,
+  //   rootId,
   //   parent,
 }) {
   const indent = depth * TREE_X_OFFSET;
@@ -30,9 +31,9 @@ export default function Node({
       style={{ marginInlineStart: indent }}
       onClick={handleToggle}
     >
-      <NodeIcon
+      {/* <NodeIcon
         type={node.droppable ? (isOpen ? "folder-open" : "folder") : null}
-      />
+      /> */}
       <div
         className={css.pipeX}
         style={{ width: depth > 0 ? TREE_X_OFFSET - 9 : 0 }}
@@ -41,16 +42,15 @@ export default function Node({
         <div
           className={css.pipeY}
           style={{
-            height:
-              rootId === node.parent
-                ? ""
-                : Math.max(0, getPipeHeight(node.parent, treeData) - 8),
+            height: Math.max(0, getPipeHeight(node.parent, treeData) - 8),
           }}
         />
       )}
-      <div className={css.labelGridItem}>{node.text}</div>
-      <div className={`${css.expandIconWrapper} ${isOpen ? css.isOpen : ""}`}>
-        {node.droppable && (
+
+      <p className={css.labelGridItem}>{node.text}</p>
+      <BsThreeDotsVertical className={css.icon} size={24} />
+      {/* <div className={`${css.expandIconWrapper} ${isOpen ? css.isOpen : ""}`}> */}
+      {/* {node.droppable && (
           <svg
             width="16"
             height="16"
@@ -63,8 +63,8 @@ export default function Node({
               fill="black"
             />
           </svg>
-        )}
-      </div>
+        )} */}
+      {/* </div> */}
     </div>
   );
 }
