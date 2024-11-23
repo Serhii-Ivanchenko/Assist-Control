@@ -22,7 +22,7 @@ export default function ServiceStationDetailsBottom() {
 
   const getChangeablePartClass = () => {
     if (page === "distributors") {
-      return "";
+      return css.noBackground;
     }
     return css.changeablePart;
   };
