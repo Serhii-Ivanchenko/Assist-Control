@@ -1,4 +1,9 @@
 .modal {
+  position: absolute;
+  top: -30%;
+  left: 105%;
+  width: 250px;
+
   height: 68px;
 
   border-radius: 6px;
@@ -9,10 +14,26 @@
   align-items: center;
   /* justify-content: center; */
   flex-direction: column;
+  z-index: 100;
+  transform: translateY(-5px);
+  transition: max-height 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.popoverVisible {
+  visibility: visible;
+  max-height: 200px;
+  transform: translateY(0);
+}
+
+.hidden {
+  visibility: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .button {
-  width: 100%;
+  width: 250px;
   height: 34px;
   background-color: transparent;
   border: none;
@@ -32,7 +53,8 @@
   gap: 10px;
 }
 
-.button:not(:first-child) {
+div > .button {
+  width: 250px;
   border-top: 2px solid var(--input-stroke);
   padding: 6px 20px 8px 10px;
 }
