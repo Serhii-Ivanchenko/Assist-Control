@@ -85,7 +85,6 @@ export default function CurrentCarsItem() {
     return currentCars?.map((car) => {
       const icon = getStatusIcon(car.status);
       const { label, className } = getStatusDetails(styles, car.status, icon);
-
       return (
         <div className={clsx(styles.wrapper, className)} key={car.id}>
           <div className={styles.imgContainer}>
@@ -111,7 +110,7 @@ export default function CurrentCarsItem() {
           <div className={styles.detailsContainer}>
             <div className={styles.btnContainer}>
               <StatusBtn car={car} />
-              <CarDetailButton />
+              <CarDetailButton carName={car.auto} />
             </div>
             <div className={styles.statusContainer}>
               <p className={clsx(styles.carStatus, className)}>

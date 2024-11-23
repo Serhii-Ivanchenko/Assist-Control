@@ -1,10 +1,14 @@
 import css from "./ServiceHistory.module.css";
 import ItemOfRecord from "./ItemOfRecord/ItemOfRecord";
+import { IoIosSearch } from "react-icons/io";
+
 import { useState } from "react";
 import { clsx } from "clsx";
 import { BsArrowDownSquareFill } from "react-icons/bs";
-export default function ServiceHistory() {
+export default function ServiceHistory({ carName }) {
+  const [inputValue, setInputValue] = useState("");
   const [maxItemRecord, setMaxItemRecord] = useState(1);
+  const [filteredRecords, setFilteredRecords] = useState([]); // Додаємо стан для фільтрованих записів
   const messages = [
     {
       orClientMsg: true,
@@ -143,7 +147,42 @@ export default function ServiceHistory() {
       time: "16:08",
       appeal: {},
       diagnostic: {},
-      repair: {},
+      repair: {
+        fillOfRepair: [
+          {
+            isCellChecked: true,
+            nameOfDetail: "Лобове скло",
+            priceOfDetail: "3500",
+            repairName: "Заміна лобового скла",
+            repairPrice: "800",
+            id: "1",
+          },
+          {
+            isCellChecked: false,
+            nameOfDetail: "Бампер передній",
+            priceOfDetail: "4500",
+            repairName: "Установка бампера",
+            repairPrice: "1200",
+            id: "2",
+          },
+          {
+            isCellChecked: true,
+            nameOfDetail: "Крила (л + п)",
+            priceOfDetail: "4000",
+            repairName: "Встановлення крил",
+            repairPrice: "1000",
+            id: "4",
+          },
+          {
+            isCellChecked: false,
+            nameOfDetail: "Фари передні (2 шт.)",
+            priceOfDetail: "3200",
+            repairName: "Налаштування фар",
+            repairPrice: "600",
+            id: "5",
+          },
+        ],
+      },
     },
     {
       index: "4",
@@ -184,40 +223,112 @@ export default function ServiceHistory() {
         message:
           "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
       },
+      repair: {
+        fillOfRepair: [
+          {
+            isCellChecked: true,
+            nameOfDetail: "Лобове скло",
+            priceOfDetail: "3500",
+            repairName: "Заміна лобового скла",
+            repairPrice: "800",
+            id: "1",
+          },
+          {
+            isCellChecked: false,
+            nameOfDetail: "Бампер передній",
+            priceOfDetail: "4500",
+            repairName: "Установка бампера",
+            repairPrice: "1200",
+            id: "2",
+          },
+          {
+            isCellChecked: true,
+            nameOfDetail: "Крила (л + п)",
+            priceOfDetail: "4000",
+            repairName: "Встановлення крил",
+            repairPrice: "1000",
+            id: "4",
+          },
+        ],
+      },
     },
   ];
   const sortedArr = recordRace.sort((a, b) =>
     a.totalkilometrs > b.totalkilometrs ? -1 : 1
   );
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    console.log("====================================");
+    console.log(inputValue);
+    console.log(sortedArr);
+    console.log("====================================");
+    if (inputValue === "") return setFilteredRecords(sortedArr);
+    // Фільтруємо записи, де у repair.fillOfRepair є значення nameOfDetail, що містить inputValue
+    const filtered = sortedArr.filter((record) =>
+      record.repair?.fillOfRepair?.some((repairItem) =>
+        repairItem.nameOfDetail.toLowerCase().includes(inputValue.toLowerCase())
+      )
+    );
+
+    setFilteredRecords(filtered);
+    setInputValue(""); // Очищаємо поле вводу після пошуку
+  };
+
   return (
     <div className={css.serviceHistory}>
       <div>
-        <h3 className={css.title}>Історія обслуговування</h3>
+        <div className={css.headerOfServiceHistory}>
+          <h3 className={css.title}>Історія обслуговування</h3>
+          <h2>{carName}</h2>
+          <div className={css.filtrationWrapper}>
+            <button
+              className={css.searchBtn}
+              type="sumbit"
+              onClick={handleButtonClick}
+            >
+              <IoIosSearch size={14} />
+            </button>
+            <input
+              className={css.filtrationInput}
+              type="text"
+              placeholder="Пошук"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+          </div>
+        </div>
+
         <div className={css.recordsListWrapper}>
           <ul
             className={clsx(
               css.listOfAccardion,
-              maxItemRecord >= sortedArr.length && css.higherContainer
+              maxItemRecord >= (filteredRecords.length || sortedArr.length) &&
+                css.higherContainer
             )}
           >
-            {sortedArr.map((item, index) => {
-              if (index >= maxItemRecord) {
-                return null;
-              } else {
-                return (
-                  <ItemOfRecord
-                    key={item.index}
-                    item={item}
-                    messages={messages}
-                    isExpanded={index === 0}
-                  />
-                );
+            {(filteredRecords.length > 0 ? filteredRecords : sortedArr).map(
+              (item, index) => {
+                if (index >= maxItemRecord) {
+                  return null;
+                } else {
+                  return (
+                    <ItemOfRecord
+                      key={item.index}
+                      item={item}
+                      messages={messages}
+                      isExpanded={index === 0}
+                    />
+                  );
+                }
               }
-            })}
+            )}
           </ul>
         </div>
       </div>
-      {maxItemRecord < sortedArr.length && (
+      {maxItemRecord <
+        (filteredRecords.length > 0
+          ? filteredRecords.length
+          : sortedArr.length) && (
         <div className={css.paginationRecord}>
           <button
             onClick={() => setMaxItemRecord((prev) => prev + 1)}
