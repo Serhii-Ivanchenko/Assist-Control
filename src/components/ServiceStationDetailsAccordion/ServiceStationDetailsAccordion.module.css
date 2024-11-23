@@ -1,7 +1,7 @@
 .accwrapper {
 background-color:  var(--bg-input);
 color: var(--white);
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
@@ -16,7 +16,7 @@ color: var(--white);
 
 .acctitle {
     color: var(--white);
-        font-family: Roboto;
+        font-family: Roboto, sans-serif;
         font-size: 20px;
         font-style: normal;
         font-weight: 600;

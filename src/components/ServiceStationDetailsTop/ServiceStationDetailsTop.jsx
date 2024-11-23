@@ -1,6 +1,5 @@
-
-import css from './ServiceStationDetailsTop.module.css';
-import { useState } from 'react';
+import css from "./ServiceStationDetailsTop.module.css";
+import { useState } from "react";
 
 const hours = Array.from({ length: 15 }, (_, i) => i + 7); // 7:00 - 21:00
 const daysUa = [
@@ -12,7 +11,15 @@ const daysUa = [
   "Субота",
   "Неділя",
 ];
-const daysEn = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const daysEn = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
 
 export default function ServiceStationDetailsTop() {
   const activePeriods = [
@@ -28,7 +35,10 @@ export default function ServiceStationDetailsTop() {
     for (const day of daysEn) {
       for (let hour = 7; hour <= 21; hour++) {
         const isActive = activePeriods.some(
-          (period) => period.day === day && hour >= period.startTime && hour < period.endTime
+          (period) =>
+            period.day === day &&
+            hour >= period.startTime &&
+            hour < period.endTime
         );
         grid.push({ day, hour, isActive });
       }
@@ -65,15 +75,15 @@ export default function ServiceStationDetailsTop() {
     setIsSelecting(false);
   };
 
-  
-
- // Формирование выходного массива для бэкенда
+  // Формирование выходного массива для бэкенда
   const generateBackendData = () => {
     const activeCells = gridData.filter((cell) => cell.isActive);
     const result = [];
 
     activeCells.forEach(({ day, hour }) => {
-      const existingPeriod = result.find((period) => period.day === day && period.endTime === hour - 1);
+      const existingPeriod = result.find(
+        (period) => period.day === day && period.endTime === hour - 1
+      );
       if (existingPeriod) {
         existingPeriod.endTime = hour; // Продлить существующий период
       } else {
@@ -85,7 +95,6 @@ export default function ServiceStationDetailsTop() {
     return result;
   };
 
-
   return (
     <div>
       <table
@@ -93,10 +102,12 @@ export default function ServiceStationDetailsTop() {
         onMouseLeave={() => setIsSelecting(false)} // Прекращаем выделение при выходе мыши из таблицы
       >
         <thead className={css.header}>
-          <tr >
+          <tr>
             <th className={css.headerfirstcolumn}>дні/години</th>
             {hours.map((hour) => (
-              <th key={hour} className={css.headerothercolumn}>{hour}:00</th>
+              <th key={hour} className={css.headerothercolumn}>
+                {hour}:00
+              </th>
             ))}
           </tr>
         </thead>
@@ -107,7 +118,9 @@ export default function ServiceStationDetailsTop() {
               <tr key={dayEn}>
                 <td>{dayUa}</td>
                 {hours.map((hour) => {
-                  const cell = gridData.find((c) => c.day === dayEn && c.hour === hour);
+                  const cell = gridData.find(
+                    (c) => c.day === dayEn && c.hour === hour
+                  );
                   return (
                     <td
                       key={`${dayEn}-${hour}`}
@@ -123,7 +136,7 @@ export default function ServiceStationDetailsTop() {
           })}
         </tbody>
       </table>
-       {/* <button className={css.generateButton} onClick={() => generateBackendData()}>
+      {/* <button className={css.generateButton} onClick={() => generateBackendData()}>
         Зберегти
       </button> */}
     </div>

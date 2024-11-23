@@ -11,20 +11,20 @@
 .workSchedule {
     border-collapse: collapse;
     width: 863px;
-    border-radius: 12px ;
+    border-radius: 12px;
     background: linear-gradient(0deg, #23252C 0%, #8B8B8B 20%, #566596 50%, #8E8E8E 80%, #23252C 100%);
-        ;
-        /* background: var(--white); */
-     border-collapse: separate; 
-        /* Для скругления углов */
-         border-spacing: 0; 
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10);
+    /* background: var(--white); */
+    border-collapse: separate;
+    /* Для скругления углов */
+    border-spacing: 1px;
 }
 
 .header {
     background-color: rgba(81, 85, 98, 0.75);
-     height: 39px;
+    height: 39px;
     color: var(--white);
-    
+
     font-weight: bold;
     text-align: center;
     border-radius: 12px 12px 0 0;
@@ -33,7 +33,7 @@
 
 .header th {
     border: none;
-   
+
 }
 
 .headerfirstcolumn {
@@ -41,9 +41,9 @@
     background-color: rgba(81, 85, 98, 0.75);
     color: var(--white);
     font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
     text-align: center;
     border-radius: 12px 0 0 0;
 }
@@ -51,21 +51,16 @@
 .headerothercolumn {
     width: 40px;
     font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .header .headerothercolumn:last-child {
     border-radius: 0 12px 0 0;
 }
 
-tbody {
-    padding: 1px 7px 10px 7px;
-    border-radius: 0px 0px 12px 12px;
-        /* background-color: rgba(81, 85, 98, 0.10); */
-        box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10);
-}
+
 
 tbody td {
     width: 40px;
@@ -84,7 +79,7 @@ tbody td:hover {
 
 .active {
     background-color: var(--blue-btn-normal);
-   
+
     color: white;
 }
 
@@ -122,6 +117,6 @@ tbody tr:last-child td:last-child {
 }
 
 .generateButton:hover {
-    background-color:var(--blue-btn-normal);
-   
+    background-color: var(--blue-btn-normal);
+
 }
