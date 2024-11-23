@@ -26,3 +26,7 @@
 .reducedChangeableHeight {
   max-height: 343px; /* Обмеження висоти, коли акордеон відкритий */
 }
+
+.fullChangeableHeight {
+  height: auto;
+}
