@@ -27,6 +27,11 @@
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
+}
+
+.saveBtn:hover {
+  background: var(--green-btn-hover);
 }
 
 .checkIcon {
