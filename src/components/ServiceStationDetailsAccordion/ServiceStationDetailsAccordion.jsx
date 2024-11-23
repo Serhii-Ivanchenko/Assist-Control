@@ -10,7 +10,10 @@ import { BsCaretDownFill } from "react-icons/bs";
 import ServiceStationDetailsTop from "../ServiceStationDetailsTop/ServiceStationDetailsTop.jsx";
 import css from "./ServiceStationDetailsAccordion.module.css";
 
-export default function ServiceStationDetailsAccordion() {
+export default function ServiceStationDetailsAccordion({ onToggle }) {
+  const handleChange = (e, isExpanded) => {
+    onToggle(isExpanded);
+  };
   // const activePeriods = [
   //   { day: "Monday", startTime: 9, endTime: 12, isActive: true },
   //   { day: "Monday", startTime: 14, endTime: 16, isActive: true },
@@ -55,6 +58,7 @@ export default function ServiceStationDetailsAccordion() {
   return (
     <Accordion
       className={css.accwrapper}
+      onChange={handleChange}
       sx={{
         background: "none",
         // color: "inherit",
@@ -94,7 +98,7 @@ export default function ServiceStationDetailsAccordion() {
         style={{
           width: "863px",
           padding: "0",
-          marginTop: "19px"
+          marginTop: "19px",
         }}
       >
         <ServiceStationDetailsTop />

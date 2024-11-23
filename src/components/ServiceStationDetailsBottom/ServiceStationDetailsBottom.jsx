@@ -17,21 +17,31 @@ const pageComponents = {
   distributors: <DistributorsPart />,
 };
 
-export default function ServiceStationDetailsBottom() {
+export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
   const [page, setPage] = useState("station");
 
   const getChangeablePartClass = () => {
-    if (page === "distributors") {
-      return css.noBackground;
-    }
-    return css.changeablePart;
+    return page === "distributors" ? css.noBackground : css.changeablePart;
   };
 
   return (
-    <div className={css.bottomPartBox}>
+    <div
+      className={`${css.bottomPartBox} ${
+        isAccordionExpanded ? css.reducedHeight : css.fullHeight
+      }`}
+    >
       <ServiceNavigation page={page} setPage={setPage} />
-
-      <div className={getChangeablePartClass()}>{pageComponents[page]}</div>
+      
+      {/* Рендеринг вибраної частини сторінки */}
+      <div
+        className={`${getChangeablePartClass()} ${
+          isAccordionExpanded
+            ? css.reducedChangeableHeight
+            : css.fullChangeableHeight
+        }`}
+      >
+        {pageComponents[page]}
+      </div>
     </div>
   );
 }

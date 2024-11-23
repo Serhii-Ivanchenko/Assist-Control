@@ -1,8 +1,9 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 34px;
-  height: auto;
+  justify-content: space-between;
+  gap: 20px;
+  height: 100%;
   width: 100%;
   background: none;
 }
@@ -26,6 +27,11 @@
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
+}
+
+.saveBtn:hover {
+  background: var(--green-btn-hover);
 }
 
 .checkIcon {
