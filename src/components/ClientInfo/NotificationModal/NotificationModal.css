@@ -115,6 +115,7 @@
   font-size: 16px !important;
   margin-top: 10px !important;
   border: 2px solid var(--input-stroke) !important;
+  text-align: center !important;
 }
 
 .react-datepicker__year-select {
@@ -126,6 +127,8 @@
   font-size: 16px !important;
   margin-top: 10px !important;
   border: 2px solid var(--input-stroke) !important;
+  /* height: auto; /* Забезпечення коректного відображення основного селекту 
+  overflow: hidden; */
 }
 
 .react-datepicker__year-select::-webkit-scrollbar {
@@ -136,3 +139,23 @@
   background-color: var(--bg) !important;
   border-radius: 10px !important;
 }
+
+/* .react-datepicker__year-dropdown {
+  height: 200px !important;
+  overflow-y: auto;
+} */
+
+/* .react-datepicker {
+  .react-datepicker__year-dropdown {
+    max-height: 100px;
+    overflow-y: auto;
+  }
+} */
+/* .react-datepicker__year-dropdown-container--select {
+  max-height: 100px;
+} */
+
+/* .react-datepicker__year-select option {
+  max-height: 200px;
+  overflow-y: auto;
+} */

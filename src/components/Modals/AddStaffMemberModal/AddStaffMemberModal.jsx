@@ -18,6 +18,12 @@ import doc from "../../../assets/images/passport_image.png";
 import "../../ClientInfo/NotificationModal/NotificationModal.css";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { TfiClose } from "react-icons/tfi";
+
+import { registerLocale } from "react-datepicker";
+import uk from "date-fns/locale/uk";
+
+registerLocale("uk", uk);
 
 export default function AddStaffMemberModal({ onClose }) {
   const [isDateOpen, setDateOpen] = useState(false);
@@ -35,7 +41,15 @@ export default function AddStaffMemberModal({ onClose }) {
     setSettingsIsOpen(false);
   };
 
-  const generateRandomString = (length) => {
+  // const generateRandomString = (length) => {
+  //   const characters =
+  //     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  //   return Array.from({ length }, () =>
+  //     characters.charAt(Math.floor(Math.random() * characters.length))
+  //   ).join("");
+  // };
+
+  const generateRandomStringPassword = (length) => {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     return Array.from({ length }, () =>
@@ -43,19 +57,16 @@ export default function AddStaffMemberModal({ onClose }) {
     ).join("");
   };
 
-  const generateRandomStringPassword = (length) => {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-    return Array.from({ length }, () =>
-      characters.charAt(Math.floor(Math.random() * characters.length))
-    ).join("");
-  };
-
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const updatePhone = (e) => {
+    setPhone(e.target.value);
+  };
 
   const generateLogin = () => {
-    setLogin(generateRandomString(8));
+    setLogin(phone);
     setPassword(generateRandomStringPassword(12));
   };
 
@@ -115,6 +126,8 @@ export default function AddStaffMemberModal({ onClose }) {
 
   return (
     <div className={css.modal}>
+      <TfiClose onClick={onClose} className={css.closeBtn} />
+
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({ values, setFieldValue }) => (
           <Form>
@@ -136,6 +149,8 @@ export default function AddStaffMemberModal({ onClose }) {
                       name="phone"
                       className={`${css.input} ${css.inputPhone}`}
                       placeholder="+380733291212"
+                      value={phone}
+                      onChange={updatePhone}
                     />
                     <button type="button" className={css.phoneUpload}>
                       <BsFillCloudUploadFill size={33} />
@@ -174,6 +189,7 @@ export default function AddStaffMemberModal({ onClose }) {
                       showMonthDropdown
                       showYearDropdown
                       dropdownMode="select"
+                      locale="uk"
                     />
 
                     <BsCalendar2Week
@@ -187,7 +203,11 @@ export default function AddStaffMemberModal({ onClose }) {
                 <div className={css.iputBox}>
                   <label className={css.label}>Посада</label>
                   <div className={css.inputAndArrow}>
-                    <Field as="select" name="position" className={css.input}>
+                    <Field
+                      as="select"
+                      name="position"
+                      className={`${css.input} ${css.inputSelect}`}
+                    >
                       <option value="m">Механік</option>
                       <option value="c">Кухар</option>
                       <option value="w">Працівник</option>
@@ -202,7 +222,7 @@ export default function AddStaffMemberModal({ onClose }) {
                     <Field
                       as="select"
                       name="role"
-                      className={css.input}
+                      className={`${css.input} ${css.inputSelect}`}
                       placeholder="Адміністратор"
                     >
                       <option value="admin">Адміністратор</option>
@@ -226,7 +246,12 @@ export default function AddStaffMemberModal({ onClose }) {
 
                 <div className={css.iputBoxLP}>
                   <div className={css.lpIconBox}>
-                    <Field name="login" className={css.inputLP} value={login} />
+                    <Field
+                      name="login"
+                      className={css.inputLP}
+                      value={login}
+                      readOnly
+                    />
                     <BsFillPersonFill size={16} className={css.lpIcon} />
                   </div>
 
@@ -235,6 +260,7 @@ export default function AddStaffMemberModal({ onClose }) {
                       name="password"
                       className={css.inputLP}
                       value={password}
+                      readOnly
                     />
                     <BsKeyFill size={16} className={css.lpIcon} />
                   </div>
@@ -330,7 +356,7 @@ export default function AddStaffMemberModal({ onClose }) {
                   ref={(el) => (buttonRefs.current[0] = el)}
                 >
                   <label className={css.docLabel}>
-                    <BsReceipt className={css.icon} />
+                    <BsReceipt className={css.iconAgr} />
                     Договір підряда
                     <BsThreeDotsVertical
                       className={css.icon}
@@ -354,7 +380,7 @@ export default function AddStaffMemberModal({ onClose }) {
                   ref={(el) => (buttonRefs.current[1] = el)}
                 >
                   <label className={css.docLabel}>
-                    <BsReceipt className={css.icon} />
+                    <BsReceipt className={css.iconAgr} />
                     Договір про найм
                     <BsThreeDotsVertical
                       className={css.icon}
@@ -383,7 +409,7 @@ export default function AddStaffMemberModal({ onClose }) {
                   ref={(el) => (buttonRefs.current[2] = el)}
                 >
                   <label className={css.docLabel}>
-                    <BsReceipt className={css.icon} />
+                    <BsReceipt className={css.iconAgr} />
                     Договір МВ
                     <BsThreeDotsVertical
                       className={css.icon}

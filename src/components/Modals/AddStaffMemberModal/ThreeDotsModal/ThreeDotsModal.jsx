@@ -32,18 +32,18 @@ export default function ThreeDotsModal({ isVisible, onClose, buttonRefs }) {
       className={`${css.modal} ${isVisible ? css.popoverVisible : css.hidden}`}
       ref={popoverRef}
     >
-      <button type="button" className={css.button}>
-        {" "}
-        <BsFillCloudDownloadFill className={css.icon} size={18} />
-        Скачати заповнений{" "}
-      </button>
-
       <a href="" download="">
         <button type="button" className={css.button}>
-          <BsFillCloudUploadFill className={css.icon} size={18} />
-          Завантажити підписаний{" "}
+          {" "}
+          <BsFillCloudDownloadFill className={css.icon} size={18} />
+          Скачати заповнений{" "}
         </button>
       </a>
+
+      <button type="button" className={css.button}>
+        <BsFillCloudUploadFill className={css.icon} size={18} />
+        Завантажити підписаний{" "}
+      </button>
     </div>
   );
 }
