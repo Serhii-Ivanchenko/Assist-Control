@@ -5,7 +5,7 @@ import { RiTableAltLine } from "react-icons/ri";
 import { RiFolder5Line } from "react-icons/ri";
 import { BiBuildingHouse } from "react-icons/bi";
 import { BsFolderPlus, BsThreeDotsVertical } from "react-icons/bs";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "../../Modals/Modal/Modal";
 import NewItemModal from "./NewItemModal/NewItemModal";
 // import SortableTree from 'react-sortable-tree';
@@ -23,6 +23,8 @@ import { DndProvider } from "react-dnd";
 // import { HTML5Backend, HTML5BackendOptions } from "react-dnd-html5-backend";
 import Node from "./Node/Node";
 import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
+// import ThreeDotsModal from "../../Modals/AddStaffMemberModal/ThreeDotsModal/ThreeDotsModal";
+import NewWhpopover from "./newWhpopover/newWhpopover";
 
 const reorderArray = (array, sourceIndex, targetIndex) => {
   const newArray = [...array];
@@ -78,11 +80,21 @@ const dataForTree = [
 ];
 
 export default function WarehousePart() {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  // const [modalIsOpen, setIsOpen] = useState(false);
   // const [tree, setTree] = useState(dataForTree);
 
   const { ref, getPipeHeight, toggle } = useTreeOpenHandler();
   const [treeData, setTreeData] = useState(dataForTree);
+  const [popover, setPopover] = useState(false);
+  const buttonRef = useRef(null);
+
+  const handleTogglePopover = () => {
+    setPopover((prev) => !prev);
+  };
+
+  const handleClosePopover = () => {
+    setPopover(false);
+  };
 
   const handleDrop = (newTree, e) => {
     const { dragSourceId, dropTargetId, destinationIndex } = e;
@@ -139,17 +151,17 @@ export default function WarehousePart() {
   //   setTree(newTree); // Збереження нового дерева у state
   // };
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
+  // const openModal = () => {
+  //   setIsOpen(true);
+  // };
 
-  const handleModalClose = () => {
-    setIsOpen(false);
-  };
+  // const handleModalClose = () => {
+  //   setIsOpen(false);
+  // };
 
   return (
     <div>
-      <div className={css.listAndButton}>
+      <div className={css.listAndButton} ref={buttonRef}>
         <ul className={css.itemsList}>
           <li className={css.items}>
             <BiBuildingHouse className={css.icon} />
@@ -178,16 +190,28 @@ export default function WarehousePart() {
           </li>
         </ul>
 
-        <button type="button" className={css.newWarehouse} onClick={openModal}>
+        <button
+          type="button"
+          className={css.newWarehouse}
+          onClick={handleTogglePopover}
+          ref={buttonRef}
+        >
           <BsFolderPlus className={css.icon} />
           Новий склад
           <BsThreeDotsVertical className={css.icon} />
         </button>
-        {modalIsOpen && (
+        {popover && (
+          <NewWhpopover
+            isVisible={popover}
+            buttonRef={buttonRef}
+            onClose={handleClosePopover}
+          />
+        )}
+        {/* {modalIsOpen && (
           <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
             <NewItemModal onClose={handleModalClose} />
           </Modal>
-        )}
+        )} */}
       </div>
 
       {/* <SortableTree

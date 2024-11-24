@@ -25,19 +25,19 @@ export default function Node({
   const buttonRefs = useRef([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleTogglePopover = ({ id }) => {
+  const handleTogglePopover = () => {
     // e.stopPropagation();
-    setIsOpen(isOpen === id ? null : id);
+    setIsOpen(true);
   };
 
   const handleClosePopover = () => {
     setIsOpen(false);
   };
 
-  console.log(
-    `Pipe height for ${node.parent}:`,
-    getPipeHeight(node.parent, treeData)
-  );
+  // console.log(
+  //   `Pipe height for ${node.parent}:`,
+  //   getPipeHeight(node.parent, treeData)
+  // );
 
   return (
     <div
@@ -63,7 +63,7 @@ export default function Node({
 
       <div className={css.iconAndText}>
         {" "}
-        <NodeIcon type={node.data} className={css.icon} />
+        <NodeIcon type={node.data} />
         <p
           className={`${css.labelGridItem} ${
             node.data === "warehouse" && css.warehouse
@@ -72,8 +72,9 @@ export default function Node({
           {node.text}
         </p>
       </div>
+      {/* <button type="button"></button> */}
       <BsThreeDotsVertical
-        onClick={() => handleTogglePopover(node.id)}
+        onClick={handleTogglePopover}
         className={css.icon}
         size={24}
         ref={buttonRefs.current[node.id]}
@@ -82,7 +83,7 @@ export default function Node({
         <NewElemPop
           isVisible={isOpen}
           addText="Додати секцію"
-          buttonRef={buttonRefs.current[node.id]}
+          buttonRefs={buttonRefs.current[node.id]}
           onClose={handleClosePopover}
         />
       )}

@@ -66,6 +66,7 @@
   left: -30px;
   top: -7px;
   background-color: var(--light-gray);
+  width: 2px;
 }
 
 /* .pipeY:first-child {
@@ -88,3 +89,10 @@
   gap: 10px;
   align-items: center;
 }
+
+/* .icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+} */
