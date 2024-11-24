@@ -21,7 +21,9 @@ export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
   const [page, setPage] = useState("station");
 
   const getChangeablePartClass = () => {
-    return page === "distributors" ? css.noBackground : css.changeablePart;
+    return page === "distributors" || page === "warehouse"
+      ? css.noBackground
+      : css.changeablePart;
   };
 
   return (
@@ -31,7 +33,7 @@ export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
       }`}
     >
       <ServiceNavigation page={page} setPage={setPage} />
-      
+
       {/* Рендеринг вибраної частини сторінки */}
       <div
         className={`${getChangeablePartClass()} ${
