@@ -58,7 +58,7 @@
   padding-right: 23px;
   height: 100%;
   max-height: 680px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .higherContainer {
   max-height: 760px;
@@ -76,6 +76,10 @@
   background: #202020;
   border-radius: 4px;
   padding: 5px 0 5px 0;
+}
+.notFoundText{
+  width: 684px;
+  padding-left: 44px;
 }
 .paginationRecord {
   display: flex;

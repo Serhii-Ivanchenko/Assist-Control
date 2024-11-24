@@ -2,7 +2,7 @@ import css from "./ServiceHistory.module.css";
 import ItemOfRecord from "./ItemOfRecord/ItemOfRecord";
 import { IoIosSearch } from "react-icons/io";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { BsArrowDownSquareFill } from "react-icons/bs";
 export default function ServiceHistory({ carName }) {
@@ -255,30 +255,34 @@ export default function ServiceHistory({ carName }) {
       },
     },
   ];
-
-  const sortedArr = recordRace.sort((a, b) =>
+  const sortedArr = [...recordRace].sort((a, b) =>
     a.totalkilometrs > b.totalkilometrs ? -1 : 1
   );
-
   const handleButtonClick = (e) => {
     e.preventDefault();
-    if (inputValue === "") return setFilteredRecords(sortedArr);
+    const input = e.target.value;
+    setInputValue(input);
+    const searchTerm = input.toLowerCase().trim();
+    if (!searchTerm) {
+      setMaxItemRecord(1);
+      setFilteredRecords(sortedArr); // Повертаємо початковий список
+      return;
+    }
     // Фільтруємо записи, де у repair.fillOfRepair є значення nameOfDetail, що містить inputValue
     const filtered = sortedArr.filter((record) =>
       record.repair?.fillOfRepair?.some((repairItem) =>
-        repairItem.nameOfDetail.toLowerCase().includes(inputValue.toLowerCase())
+        repairItem.nameOfDetail
+          .toLowerCase()
+          .trim()
+          .includes(input.toLowerCase().trim())
       )
     );
-
+    setMaxItemRecord(filtered.length);
     setFilteredRecords(filtered);
-    setInputValue(""); // Очищаємо поле вводу після пошуку
   };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleButtonClick(e);
-    }
-  };
+  useEffect(() => {
+    setFilteredRecords(sortedArr);
+  }, []);
   return (
     <div className={css.serviceHistory}>
       <div>
@@ -298,8 +302,7 @@ export default function ServiceHistory({ carName }) {
               type="text"
               placeholder="Пошук"
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={handleKeyDown}
+              onChange={handleButtonClick}
             />
           </div>
         </div>
@@ -312,8 +315,11 @@ export default function ServiceHistory({ carName }) {
                 css.higherContainer
             )}
           >
-            {(filteredRecords.length > 0 ? filteredRecords : sortedArr).map(
-              (item, index) => {
+            {/* {(filteredRecords.length > 0 ? filteredRecords : sortedArr).map( */}
+            {filteredRecords.length === 0 ? (
+              <p className={css.notFoundText}>Нічого не знайдено</p>
+            ) : (
+              filteredRecords.map((item, index) => {
                 if (index >= maxItemRecord) {
                   return null;
                 } else {
@@ -326,15 +332,12 @@ export default function ServiceHistory({ carName }) {
                     />
                   );
                 }
-              }
+              })
             )}
           </ul>
         </div>
       </div>
-      {maxItemRecord <
-        (filteredRecords.length > 0
-          ? filteredRecords.length
-          : sortedArr.length) && (
+      {maxItemRecord < filteredRecords.length && (
         <div className={css.paginationRecord}>
           <button
             onClick={() => setMaxItemRecord((prev) => prev + 1)}
