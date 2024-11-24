@@ -623,9 +623,16 @@
   align-items: center;
   flex-direction: column;
 }
+.scincenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 266px;
+}
 
 .cblabelBox {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 863px;
 }

@@ -548,8 +548,9 @@ export default function AddStaffMemberModal({ onClose }) {
                   </span>
                   Графік роботи
                 </label>
-
-                <ServiceStationDetailsTop />
+                <div className={css.scincenter}>
+                  {values.schedule && <ServiceStationDetailsTop />}
+                </div>
               </div>
             </div>
 
