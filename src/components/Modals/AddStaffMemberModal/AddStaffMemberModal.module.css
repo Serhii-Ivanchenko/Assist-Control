@@ -1,6 +1,6 @@
 .modal {
   width: 1066px;
-  height: 868px;
+  height: auto;
   padding: 40px 63px;
 
   border-radius: 12px;
@@ -617,6 +617,15 @@
   cursor: pointer;
 }
 
-/* .schedule{
-    height: 297px;
-} */
+.schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cblabelBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

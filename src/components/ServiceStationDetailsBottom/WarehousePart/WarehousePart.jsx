@@ -231,7 +231,7 @@ export default function WarehousePart() {
                 }}
                 isDropTarget={isDropTarget}
                 treeData={treeData}
-                data={treeData.data}
+                // data={treeData.data}
               />
             )}
 
