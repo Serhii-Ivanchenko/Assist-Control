@@ -10,13 +10,10 @@ const TREE_X_OFFSET = 40;
 export default function Node({
   node,
   depth,
-  //   isOpen,
   isDropTarget,
   onClick,
   treeData,
   getPipeHeight,
-  //   rootId,
-  //   parent,
 }) {
   const indent = depth * TREE_X_OFFSET;
 
@@ -49,7 +46,7 @@ export default function Node({
       }`}
       style={{ marginInlineStart: indent }}
       onClick={handleToggle}
-      // ref={(el) => (buttonRefs.current[node.id] = el)}
+      ref={(el) => (buttonRefs.current[node.id] = el)}
     >
       <div
         className={css.pipeX}
@@ -59,15 +56,21 @@ export default function Node({
         <div
           className={css.pipeY}
           style={{
-            height: Math.max(0, getPipeHeight(node.parent, treeData) - 8),
+            height: Math.max(0, getPipeHeight(node.parent, treeData) - 30),
           }}
         />
       )}
 
       <div className={css.iconAndText}>
         {" "}
-        <NodeIcon type={node.data} />
-        <p className={css.labelGridItem}>{node.text}</p>
+        <NodeIcon type={node.data} className={css.icon} />
+        <p
+          className={`${css.labelGridItem} ${
+            node.data === "warehouse" && css.warehouse
+          }`}
+        >
+          {node.text}
+        </p>
       </div>
       <BsThreeDotsVertical
         onClick={() => handleTogglePopover(node.id)}

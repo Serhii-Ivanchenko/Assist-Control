@@ -39,10 +39,10 @@
 }
 
 .newWarehouse {
-  /* width: 181px; */
+  width: 181px;
   height: 34px;
   display: flex;
-  padding: 8px 20px;
+  /* padding: 8px 20px; */
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -85,8 +85,8 @@
   background: var(--CRM-modal-InputBG, #2d3038);
 } */
 
-.wrapper {
+/* .wrapper {
   display: flex;
   flex-direction: column;
   gap: 14px;
-}
+} */

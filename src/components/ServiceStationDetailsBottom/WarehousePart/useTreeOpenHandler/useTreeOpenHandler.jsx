@@ -41,7 +41,7 @@ const useTreeOpenHandler = () => {
 
   const getPipeHeight = (id, treeData) => {
     treeData = getDescendants(treeData, id);
-    const ROW_HEIGHT = 44;
+    const ROW_HEIGHT = 58;
     const LIST_PADDING = 14;
 
     const droppableHeightExceedsRow = (node) =>
