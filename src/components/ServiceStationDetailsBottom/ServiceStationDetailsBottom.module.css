@@ -27,6 +27,10 @@
   max-height: 343px; /* Обмеження висоти, коли акордеон відкритий */
 }
 
+.noBackground {
+  width: 921px;
+}
+
 .fullChangeableHeight {
   height: auto;
 }
