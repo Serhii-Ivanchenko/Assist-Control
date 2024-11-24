@@ -9,6 +9,7 @@ export default function ServiceHistory({ carName }) {
   const [inputValue, setInputValue] = useState("");
   const [maxItemRecord, setMaxItemRecord] = useState(1);
   const [filteredRecords, setFilteredRecords] = useState([]); // Додаємо стан для фільтрованих записів
+
   const messages = [
     {
       orClientMsg: true,
@@ -47,6 +48,7 @@ export default function ServiceHistory({ carName }) {
         "Можемо тільки з наступної середи, тому що електрик у нас відпустив.",
     },
   ];
+
   const recordRace = [
     {
       index: "1",
@@ -253,15 +255,13 @@ export default function ServiceHistory({ carName }) {
       },
     },
   ];
+
   const sortedArr = recordRace.sort((a, b) =>
     a.totalkilometrs > b.totalkilometrs ? -1 : 1
   );
+
   const handleButtonClick = (e) => {
     e.preventDefault();
-    console.log("====================================");
-    console.log(inputValue);
-    console.log(sortedArr);
-    console.log("====================================");
     if (inputValue === "") return setFilteredRecords(sortedArr);
     // Фільтруємо записи, де у repair.fillOfRepair є значення nameOfDetail, що містить inputValue
     const filtered = sortedArr.filter((record) =>
@@ -274,6 +274,11 @@ export default function ServiceHistory({ carName }) {
     setInputValue(""); // Очищаємо поле вводу після пошуку
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleButtonClick(e);
+    }
+  };
   return (
     <div className={css.serviceHistory}>
       <div>
@@ -294,6 +299,7 @@ export default function ServiceHistory({ carName }) {
               placeholder="Пошук"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
           </div>
         </div>
