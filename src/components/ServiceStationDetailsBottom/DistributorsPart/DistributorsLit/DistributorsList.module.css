@@ -2,5 +2,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 14px; /* змінила геп, щоб дві картки помістились в один рядок*/
+  justify-content: center;
+  gap: 20px;
 }

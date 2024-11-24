@@ -1,14 +1,20 @@
+span {
+  display: inline-block;
+  padding: 0;
+}
+
 .wrapper {
+  position: relative;
   display: flex;
-  width: fit-content;
+  width: 440px;
   height: 100%;
-  padding-right: 20px;
   align-items: center;
+  justify-content: flex-start;
   gap: 18px;
   flex-shrink: 0;
   border-radius: 12px;
   border: 1px solid rgba(216, 225, 255, 0.3);
-  background: #2d3038;
+  background: var(--bg-input);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -22,8 +28,7 @@
   justify-content: center;
   align-items: flex-start;
   border-radius: 12px 0px 0px 12px;
-  background: var(--CRM-modal-SecondaryBG, #23252c);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: var(--bg-secondary);
 }
 
 .nameBox {
@@ -35,13 +40,74 @@
 .name {
   display: flex;
   gap: 14px;
+  width: 136px;
   align-items: flex-start;
-  color: var(--CRM-modal-LightGray, #d8e1ff);
+  color: var(--light-gray);
   font-family: "Roboto", sans-serif;
   font-size: 20px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
+}
+
+.popupIcon {
+  cursor: pointer;
+}
+
+.popup {
+  position: absolute;
+  top: 10px;
+  left: 168px;
+  z-index: 10;
+
+  display: flex;
+  width: 166px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border: none;
+  border-radius: 0px 0px 6px 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.popup li {
+  width: 100%;
+  border-top: 1px solid var(--main-gray);
+  border-bottom: 1px solid var(--main-gray);
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.popup li:last-child {
+  border: none;
+}
+
+.popup li button {
+  display: inline-flex;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+  background: var(--main-gray);
+  width: 166px;
+  cursor: pointer;
+  border: none;
+}
+
+.editBtn {
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.deleteBtn {
+  color: var(--red);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.popup li button:hover {
+  background: var(--bg-input);
 }
 
 .img {
@@ -61,12 +127,10 @@
 }
 
 .option p {
-  color: var(--CRM-modal-LightGray, #d8e1ff);
+  color: var(--light-gray);
   font-family: "Roboto", sans-serif;
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 }
 
 .activeIcon {
@@ -77,7 +141,35 @@
   color: var(--white);
 }
 
+.connect {
+  color: var(--input-text);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
+  gap: 8px;
+}
+
+.connectIcon {
+  width: 11px;
+  height: auto;
+}
+
+.connectDesc {
+  display: inline-flex;
+  position: relative;
+  z-index: 10;
+  width: 400px;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
 .authContainer {
+  padding-right: 20px;
+}
+
+.authBox {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -90,12 +182,10 @@
 }
 
 .statusToggle {
-  color: var(--CRM-modal-LightGray, #d8e1ff);
+  color: var(--light-gray);
   font-family: "Roboto", sans-serif;
   font-size: 16px;
-  font-style: normal;
   font-weight: 300;
-  line-height: normal;
   margin-top: -4px;
 }
 
@@ -119,7 +209,7 @@
   bottom: 0;
   width: 25px;
   height: 11px;
-  background-color: #ccc;
+  background-color: var(--light-gray-table);
   border-radius: 25px;
   transition: 0.4s;
   cursor: pointer;
@@ -132,13 +222,13 @@
   width: 17px;
   left: -8px;
   bottom: -3px;
-  background-color: white;
+  background-color: var(--white);
   border-radius: 50%;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #4caf50;
+  background-color: var(--green);
 }
 
 input:checked + .slider::before {
@@ -149,6 +239,7 @@ input:checked + .slider::before {
   display: flex;
   flex-direction: column;
   gap: 17px;
+  width: 243px;
 }
 
 .inputBox {
@@ -158,12 +249,10 @@ input:checked + .slider::before {
 }
 
 .inputBox label {
-  color: var(--CRM-modal-LightGray, #d8e1ff);
+  color: var(--light-gray);
   font-family: "Roboto", sans-serif;
   font-size: 14px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
 }
 
 .inputBox input {
@@ -176,9 +265,10 @@ input:checked + .slider::before {
   align-items: center;
   gap: 10px;
   border-radius: 4px;
-  border: 1px solid var(--CRM-modal-InputStroke, #4a4a4a);
-  background: var(--CRM-modal-InputBG, #2d3038);
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
   outline: none;
+  color: var(--light-gray);
 }
 
 .btnBox {
