@@ -1,0 +1,6 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 14px; /* змінила геп, щоб дві картки помістились в один рядок*/
+}
