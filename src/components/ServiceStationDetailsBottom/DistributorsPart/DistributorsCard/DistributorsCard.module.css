@@ -148,6 +148,7 @@ span {
   font-weight: 400;
   display: flex;
   gap: 8px;
+  cursor: pointer;
 }
 
 .connectIcon {
@@ -163,6 +164,7 @@ span {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   font-weight: 400;
+  cursor: default;
 }
 
 .authContainer {
