@@ -14,12 +14,13 @@ import NewItemModal from "./NewItemModal/NewItemModal";
 
 import {
   Tree,
-  getBackendOptions,
   getDescendants,
+  MultiBackend,
+  getBackendOptions,
 } from "@minoru/react-dnd-treeview";
 // import "@minoru/react-dnd-treeview/dist/style.css";
 import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+// import { HTML5Backend, HTML5BackendOptions } from "react-dnd-html5-backend";
 import Node from "./Node/Node";
 import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
 
@@ -36,6 +37,7 @@ const dataForTree = [
     text: "м. Академіка павлова (Назва склада)",
     droppable: true,
     parent: null,
+    data: "warehouse",
   },
 
   {
@@ -43,6 +45,7 @@ const dataForTree = [
     text: "Вітрина (Назва секції)",
     droppable: true,
     parent: "2",
+    data: "section",
   },
 
   {
@@ -50,25 +53,28 @@ const dataForTree = [
     text: "2 Поверх (Назва секції)",
     droppable: true,
     parent: "2",
+    data: "section",
   },
 
-  { id: "5", text: "Стелаж", droppable: true, parent: "4" },
+  { id: "5", text: "Стелаж", droppable: true, parent: "4", data: "rack" },
   {
     id: "6",
     text: "Стелаж",
     droppable: true,
     parent: "4",
+    data: "rack",
   },
   {
     id: "7",
     text: "Полиця 036",
     droppable: true,
     parent: "6",
+    data: "shelf",
   },
 
-  { id: "8", text: "Місце 0243", parent: "7" },
-  { id: "9", text: "Місце 0244", parent: "7" },
-  { id: "10", text: "Місце 0245", parent: "7" },
+  { id: "8", text: "Місце 0243", parent: "7", data: "place" },
+  { id: "9", text: "Місце 0244", parent: "7", data: "place" },
+  { id: "10", text: "Місце 0245", parent: "7", data: "place" },
 ];
 
 export default function WarehousePart() {
@@ -188,7 +194,7 @@ export default function WarehousePart() {
                 treeData={tree}
                 onChange={(newTreeData)=> setTree(newTreeData)}
             /> */}
-      <DndProvider backend={HTML5Backend} options={getBackendOptions()}>
+      <DndProvider backend={MultiBackend} options={getBackendOptions()}>
         <div className={css.wrapper}>
           <Tree
             ref={ref}
@@ -225,6 +231,7 @@ export default function WarehousePart() {
                 }}
                 isDropTarget={isDropTarget}
                 treeData={treeData}
+                data={treeData.data}
               />
             )}
 

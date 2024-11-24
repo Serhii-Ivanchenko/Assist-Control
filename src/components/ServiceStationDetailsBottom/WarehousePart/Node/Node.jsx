@@ -1,5 +1,5 @@
 import { getDescendants } from "@minoru/react-dnd-treeview";
-// import NodeIcon from "../NodeIcon/NodeIcon";
+import NodeIcon from "../NodeIcon/NodeIcon";
 import css from "./Node.module.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
@@ -49,11 +49,8 @@ export default function Node({
       }`}
       style={{ marginInlineStart: indent }}
       onClick={handleToggle}
-      ref={(el) => (buttonRefs.current[node.id] = el)}
+      // ref={(el) => (buttonRefs.current[node.id] = el)}
     >
-      {/* <NodeIcon
-        type={node.droppable ? (isOpen ? "folder-open" : "folder") : null}
-      /> */}
       <div
         className={css.pipeX}
         style={{ width: depth > 0 ? TREE_X_OFFSET - 15 : 0 }}
@@ -67,12 +64,16 @@ export default function Node({
         />
       )}
 
-      <p className={css.labelGridItem}>{node.text}</p>
+      <div className={css.iconAndText}>
+        {" "}
+        <NodeIcon type={node.data} />
+        <p className={css.labelGridItem}>{node.text}</p>
+      </div>
       <BsThreeDotsVertical
         onClick={() => handleTogglePopover(node.id)}
         className={css.icon}
         size={24}
-        buttonRef={buttonRefs.current[node.id]}
+        ref={buttonRefs.current[node.id]}
       />
       {isOpen === node.id && (
         <NewElemPop

@@ -68,3 +68,9 @@
   z-index: -1;
   border-radius: 12px;
 }
+
+.iconAndText {
+  display: flex;
+  grid-area: 10px;
+  align-items: center;
+}
