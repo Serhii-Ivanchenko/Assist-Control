@@ -3,7 +3,7 @@ import DetailedClientInfo from '../../DetailedClientInfo/DetailedClientInfo';
 import { useState } from 'react';
 import styles from './CarDetailButton.module.css';
 
-const CarDetailButton = () => {
+const CarDetailButton = ({ carName }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -21,7 +21,7 @@ const CarDetailButton = () => {
       </button>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-          <DetailedClientInfo onClose={handleModalClose} />
+          <DetailedClientInfo onClose={handleModalClose} carName={carName} />
         </Modal>
       )}
     </div>

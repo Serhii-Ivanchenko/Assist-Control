@@ -3,9 +3,52 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.headerOfServiceHistory {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  margin-bottom: 19px;
+  margin-right: 30px;
+}
 .title {
   margin-left: 44px;
-  margin-bottom: 18px;
+  margin-right: 20px;
+}
+.filtrationWrapper {
+  height: 27px;
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  padding: 0px 30px;
+  background-color: var(--bg-input);
+  border-radius: 15px;
+}
+.searchBtn {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  background-color: var(--main-gray);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+.filtrationInput {
+  text-align: center;
+  color: var(--white);
+  width: 90px;  
+  border: none;
+  background-color: transparent;
+  height: 27px;
+}
+.filtrationInput:focus-visible {
+  outline: none;
+  border: none;
 }
 /* Хедер першого акардіона */
 .listOfAccardion {

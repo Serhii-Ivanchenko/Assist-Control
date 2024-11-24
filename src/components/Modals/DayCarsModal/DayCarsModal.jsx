@@ -93,12 +93,18 @@ export default function DayCarsModal({ onClose, isModal}) {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     return filteredCarsData.filter((car) => {
       const { plate, auto } = car;
+
+      // Перевірка наявності значення перед toLowerCase()
+      const plateValue = plate ? plate.toLowerCase() : "";
+      const autoValue = auto ? auto.toLowerCase() : "";
+
       return (
-        plate.toLowerCase().includes(lowerCaseSearchTerm) ||
-        auto.toLowerCase().includes(lowerCaseSearchTerm)
+        plateValue.includes(lowerCaseSearchTerm) ||
+        autoValue.includes(lowerCaseSearchTerm)
       );
     });
   };
+
 
   const handleToggle = (field) => {
     const newVisibility = { ...visibility, [field]: !visibility[field] };

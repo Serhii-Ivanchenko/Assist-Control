@@ -182,7 +182,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
           </div>
         )}
         <div className={styles.btnContainer}>
-          {visibility?.info && <CarDetailButton />}
+          {visibility?.info && <CarDetailButton carName={car.auto} />}
 
           {(status === "repair" ||
             status === "diagnostic" ||
