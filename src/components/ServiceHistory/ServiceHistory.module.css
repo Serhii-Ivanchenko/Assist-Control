@@ -77,6 +77,10 @@
   border-radius: 4px;
   padding: 5px 0 5px 0;
 }
+.notFoundText{
+  width: 684px;
+  padding-left: 44px;
+}
 .paginationRecord {
   display: flex;
   align-content: flex-end;

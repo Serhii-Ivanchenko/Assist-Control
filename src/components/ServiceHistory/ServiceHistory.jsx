@@ -317,7 +317,7 @@ export default function ServiceHistory({ carName }) {
           >
             {/* {(filteredRecords.length > 0 ? filteredRecords : sortedArr).map( */}
             {filteredRecords.length === 0 ? (
-              <p>Нічого не знайдено</p>
+              <p className={css.notFoundText}>Нічого не знайдено</p>
             ) : (
               filteredRecords.map((item, index) => {
                 if (index >= maxItemRecord) {
