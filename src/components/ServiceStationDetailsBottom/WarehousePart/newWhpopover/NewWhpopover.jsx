@@ -56,7 +56,7 @@ export default function NewWhpopover({ isVisible, onClose, buttonRef }) {
       <button type="button" className={css.button} onClick={openSaveTempModal}>
         {" "}
         <BsFillCloudDownloadFill className={css.icon} size={18} />
-        Скачати заповнений{" "}
+        Зберегти у шаблон{" "}
       </button>
       {saveTemplate && (
         <Modal isOpen={openSaveTempModal} onClose={closeSaveTempModal}>
