@@ -101,6 +101,7 @@
   line-height: normal;
 
   width: fit-content;
+  margin-top: auto;
 }
 
 .addBtn:hover {
