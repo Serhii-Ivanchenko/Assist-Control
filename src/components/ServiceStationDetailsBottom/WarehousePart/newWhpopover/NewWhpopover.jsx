@@ -33,17 +33,15 @@ export default function NewWhpopover({ isVisible, onClose, buttonRef }) {
       className={`${css.modal} ${isVisible ? css.popoverVisible : css.hidden}`}
       ref={popoverRef}
     >
-      <a href="" download="">
-        <button type="button" className={css.button}>
-          {" "}
-          <BsFillCloudDownloadFill className={css.icon} size={18} />
-          Скачати заповнений{" "}
-        </button>
-      </a>
+      <button type="button" className={css.button}>
+        {" "}
+        <BsFillCloudDownloadFill className={css.icon} size={18} />
+        Зберегти у шаблон{" "}
+      </button>
 
       <button type="button" className={css.button}>
         <BsFillCloudUploadFill className={css.icon} size={18} />
-        Завантажити підписаний{" "}
+        Завантажити з шаблону{" "}
       </button>
     </div>
   );

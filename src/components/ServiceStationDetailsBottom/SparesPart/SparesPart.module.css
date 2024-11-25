@@ -106,8 +106,9 @@
   display: flex;
   gap: 89px;
 
-  height: 165px;
+  max-height: 450px;
   overflow-y: auto;
+  margin-bottom: 15px;
 }
 
 .radioAndInputs::-webkit-scrollbar {
@@ -131,9 +132,9 @@
   gap: 12px;
 }
 
-.labelAndInputs {
+/* .labelAndInputs {
   height: 75px;
-}
+} */
 
 .labels {
   display: flex;
@@ -286,8 +287,8 @@
 .sparesPart {
   display: flex;
   flex-direction: column;
-  min-height: 325px;
   padding-bottom: 10px;
+  height: 100%;
   /* overflow: auto; */
 }
 
