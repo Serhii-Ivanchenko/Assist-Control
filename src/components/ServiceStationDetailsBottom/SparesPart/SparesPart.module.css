@@ -105,6 +105,24 @@
 .radioAndInputs {
   display: flex;
   gap: 89px;
+
+  height: 165px;
+  overflow-y: auto;
+}
+
+.radioAndInputs::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+}
+
+.radioAndInputs::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--player-secondary-bg);
+}
+
+.radioAndInputs::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: #202020;
 }
 
 .inputsPart {
@@ -209,9 +227,9 @@
   gap: 10px;
   flex-grow: 1;
 
-  height: 80px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  /* height: 80px;
+    overflow-y: auto;
+    overflow-x: hidden; */
 }
 
 .iconMinus {

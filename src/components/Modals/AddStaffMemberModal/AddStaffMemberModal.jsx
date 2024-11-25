@@ -22,6 +22,7 @@ import { TfiClose } from "react-icons/tfi";
 
 import { registerLocale } from "react-datepicker";
 import uk from "date-fns/locale/uk";
+import ServiceStationDetailsTop from "../../ServiceStationDetailsTop/ServiceStationDetailsTop";
 
 registerLocale("uk", uk);
 
@@ -535,7 +536,7 @@ export default function AddStaffMemberModal({ onClose }) {
             </div>
 
             <div className={css.schedule}>
-              <div>
+              <div className={css.cblabelBox}>
                 <label className={css.scheduleLabel}>
                   <Field
                     type="checkbox"
@@ -547,9 +548,10 @@ export default function AddStaffMemberModal({ onClose }) {
                   </span>
                   Графік роботи
                 </label>
+                <div className={css.scincenter}>
+                  {values.schedule && <ServiceStationDetailsTop />}
+                </div>
               </div>
-
-              <p>Графік</p>
             </div>
 
             <div className={css.btnBox}>

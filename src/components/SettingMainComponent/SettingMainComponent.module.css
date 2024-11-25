@@ -23,7 +23,7 @@
   border-radius: 12px;
   margin-left: 14px;
   z-index: 1;
-  padding: 31px 40.5px 23px;
+  padding: 31px 40px 23px;
   background: var(--bg-input) radial-gradient(350px at 50% 50%, rgba(81, 122, 184, 0.16) 0%, transparent 100%);
   background-position: 10px -381px;
   background-repeat: no-repeat;

@@ -1,6 +1,6 @@
 .modal {
   width: 1066px;
-  height: 868px;
+  height: auto;
   padding: 40px 63px;
 
   border-radius: 12px;
@@ -611,12 +611,29 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.1875em;
 
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
   cursor: pointer;
 }
 
-/* .schedule{
-    height: 297px;
-} */
+.schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.scincenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 266px; */
+}
+
+.cblabelBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 863px;
+  gap: 12px;
+}

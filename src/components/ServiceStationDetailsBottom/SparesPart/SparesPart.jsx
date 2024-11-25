@@ -12,9 +12,27 @@ import { BsRecordCircle } from "react-icons/bs";
 
 export default function SparesPart() {
   const [isChecked, setIsChecked] = useState(null);
-  const [rows, setRows] = useState([{ from: "", to: "", percentage: "" }]);
+
+  const [fixedRow, setFixedRow] = useState({ UAH: "", percent: "" });
+
+  const [rows, setRows] = useState(() => {
+  const savedObject = window.localStorage.getItem("saved-rows");
+  if (savedObject !== null) {
+    return JSON.parse(savedObject);
+  }
+  return [{from:"", to:"", percentage:""}];
+  });
+  
   const scrollToTheLastItemRef = useRef();
   const prevRowsLength = useRef(rows.length);
+
+  useEffect(() => {
+    window.localStorage.setItem("saved-rows", JSON.stringify(rows) );
+  }, [rows]);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem("saved-rows-fixed", JSON.stringify(fixedRow));
+  // }, [fixedRow]);
 
   const addRow = () => {
     setRows([...rows, { from: "", to: "", percentage: "" }]);
@@ -39,6 +57,10 @@ export default function SparesPart() {
       rows.map((row, i) => (i === index ? { ...row, [field]: value } : row))
     );
   };
+
+  const updateFixedRow = (field,value) => {
+    setFixedRow((fixedRow)=>({...fixedRow,[field]: value}))
+  }
 
   const chosenRadio = (index) => {
     setIsChecked(isChecked === index ? null : index);
@@ -80,7 +102,7 @@ export default function SparesPart() {
         </label>
       </div>
 
-      <div className={css.radioAndInputs}>
+      <div className={css.radioAndInputs} ref={scrollToTheLastItemRef}>
         <div className={css.radioBtns}>
           <label className={css.radioLabel}>
             <input
@@ -115,12 +137,16 @@ export default function SparesPart() {
           <div className={css.Inputs}>
             <div className={css.inputBox}>
               <label className={css.inputLabel}>грн</label>
-              <input placeholder="400" className={css.input} />
+              <input placeholder="400" className={css.input}
+                value={fixedRow.UAH}
+                onChange={(e) => updateFixedRow("UAH", e.target.value)} />
             </div>
 
             <div className={css.inputBox}>
               <label className={css.inputLabel}>%</label>
-              <input placeholder="10" className={css.input} />
+              <input placeholder="10" className={css.input}
+                value={fixedRow.percent}
+                onChange={(e) => updateFixedRow("percent", e.target.value)} />
             </div>
           </div>
 
@@ -131,7 +157,7 @@ export default function SparesPart() {
               <label className={css.inputLabel}>%</label>
             </div>
 
-            <ul className={css.inputsList} ref={scrollToTheLastItemRef}>
+            <ul className={css.inputsList}>
               {rows.map((row, index) => (
                 <li key={index} className={css.Inputs}>
                   <input
@@ -187,9 +213,6 @@ export default function SparesPart() {
       </div>
 
       <div className={css.btnBox}>
-        <button type="button" className={css.cancel}>
-          Закрити
-        </button>
         <button type="button" className={css.save}>
           {" "}
           <BsCheckLg size={18} /> Зберегти
