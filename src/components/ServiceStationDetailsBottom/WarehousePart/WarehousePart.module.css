@@ -87,8 +87,6 @@
   background: var(--CRM-modal-InputBG, #2d3038);
 } */
 
-/* .wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-} */
+.wrapper {
+  width: 915px;
+}
