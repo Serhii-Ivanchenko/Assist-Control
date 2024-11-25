@@ -1,29 +1,28 @@
 .title {
-    color: var(--white);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    margin-bottom: 20px;
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin-bottom: 20px;
 }
 
 .postList {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    height: 190px;
-   
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  /* height: 190px; */
 }
 
 .postListItem {
-    display: flex;
-    padding: 4px 0px 4px;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-    border-bottom: 1px solid var(--input-stroke);
-    width: 854px;
-    height: 39px;
+  display: flex;
+  padding: 4px 0px 4px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-bottom: 1px solid var(--input-stroke);
+  width: 854px;
+  height: 39px;
 }
 
 /* .postListItemActive{
@@ -31,134 +30,131 @@
 } */
 
 .postName {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 1.1875em;
-    height: 39px;
-    display: flex;
-    align-items: center;
-    /* border: 1px solid transparent; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.1875em;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid transparent; */
 }
 
-
 .iconsBox {
-    display: flex;
-    gap: 22px;
+  display: flex;
+  gap: 22px;
 }
 
 .addBox {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .addInput {
-    display: flex;
-    width: 667px;
-    padding: 5px 10px;
-    align-items: center;
+  display: flex;
+  width: 667px;
+  padding: 5px 10px;
+  align-items: center;
 
-    border-radius: 6px;
-    border: 1px solid var(--input-stroke);
-    background: var(--bg-secondary);
-    outline: none;
+  border-radius: 6px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-secondary);
+  outline: none;
 
-    color: var(--white);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 1.1875em;
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.1875em;
 }
 
 .addBtn {
-    display: flex;
-    padding: 6px 10px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border: none;
+  display: flex;
+  padding: 6px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
 
-    border-radius: 6px;
-    background-color: var(--blue-btn-normal);
+  border-radius: 6px;
+  background-color: var(--blue-btn-normal);
 
-    color: var(--white);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 1.1875;
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.1875;
 }
 
 .addBtn:hover {
-    background-color: var(--blue-btn-hover);
+  background-color: var(--blue-btn-hover);
 }
 
 .addBtn:active {
-    background-color: var(--blue-btn-inactive);
+  background-color: var(--blue-btn-inactive);
 }
 
 .power {
-    fill: var(--green-btn-normal);
-    width: 18px;
-    height: 18px;
+  fill: var(--green-btn-normal);
+  width: 18px;
+  height: 18px;
 }
 
 .powerDisabled {
-    fill: var(--red);
+  fill: var(--red);
 }
 
 .icons {
-    fill: var(--light-gray);
-    width: 18px;
-    height: 18px;
+  fill: var(--light-gray);
+  width: 18px;
+  height: 18px;
 }
 
 .inputForPostName {
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--input-stroke);
-    outline: none;
-    padding: 0 10px;
-    border-radius: 6px;
-    height: 31px;
-    color: var(--white);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 1.1875em;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--input-stroke);
+  outline: none;
+  padding: 0 10px;
+  border-radius: 6px;
+  height: 31px;
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.1875em;
 }
 
 .plus {
-    width: 14px;
-    height: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3px;
-    border: none;
-    cursor: pointer;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
 }
 
 .iconPlus {
-    display: flex;
-    width: 14px;
-    height: 14px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
-    color: var(--blue-btn-normal);
-    background-color: var(--white);
-    stroke-width: 2px;
+  display: flex;
+  width: 14px;
+  height: 14px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  color: var(--blue-btn-normal);
+  background-color: var(--white);
+  stroke-width: 2px;
 }
 
-.addBtn:hover .iconPlus{
-   color: var(--blue-btn-hover);
+.addBtn:hover .iconPlus {
+  color: var(--blue-btn-hover);
 }
 
 .addBtn:active .iconPlus {
-    color: var(--blue-btn-inactive);
+  color: var(--blue-btn-inactive);
 }
-
- 
 
 /* 
 .iconBtn {
@@ -166,24 +162,29 @@
     background-color: transparent;
 } */
 
-.divForScroll{
-    width: 876px;
-    height: 190px;
-    overflow-y: auto;
-    margin-bottom: 20px;
+.divForScroll {
+  width: 876px;
+  max-height: 520px;
+  overflow-y: auto;
+  margin-bottom: 20px;
 }
 
-.divForScroll::-webkit-scrollbar{
-    width: 8px;
+.divForScroll::-webkit-scrollbar {
+  width: 8px;
 }
 
 .divForScroll::-webkit-scrollbar-track {
-    border-radius: 4px;
-    background-color: var(--bg-secondary);
-
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
 }
 
 .divForScroll::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-        background-color: var(--main-gray);
+  border-radius: 4px;
+  background-color: var(--main-gray);
+}
+
+.stationPart {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
