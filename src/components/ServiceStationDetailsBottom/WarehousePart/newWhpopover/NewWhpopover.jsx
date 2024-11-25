@@ -23,9 +23,9 @@ export default function NewWhpopover({ isVisible, onClose, buttonRef }) {
     setSaveTemplate(false);
   };
 
-  const closeAddFromTempModal = () => {
-    setAddFromSaveTemplate(false);
-  };
+  // const closeAddFromTempModal = () => {
+  //   setAddFromSaveTemplate(false);
+  // };
 
   const handleClickOutside = (event) => {
     if (
