@@ -105,7 +105,7 @@ export default function StaffPart() {
   };
 
   return (
-    <div>
+    <div className={css.StaffPart}>
       <div className={css.divForScroll}>
         <ul className={css.teamList}>
           {members.map((member, index) => (

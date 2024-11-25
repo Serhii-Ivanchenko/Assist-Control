@@ -1,156 +1,144 @@
+import css from "./ServiceStationDetailsTop.module.css";
 import { useState } from "react";
-import  ScheduleSelector  from "react-schedule-selector";
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Grid } from "@mui/material";
-import {BsCaretDownFill,
-} from "react-icons/bs";
-import css from './ServiceStationDetailsTop.module.css'
 
-  const activePeriods = [
-  { day: "Monday", startTime: 9, endTime: 12, isActive: true },
-  { day: "Monday", startTime: 14, endTime: 16, isActive: true },
-  { day: "Wednesday", startTime: 10, endTime: 15, isActive: true },
-  { day: "Friday", startTime: 8, endTime: 11, isActive: true },
+const hours = Array.from({ length: 15 }, (_, i) => i + 7); // 7:00 - 21:00
+const daysUa = [
+  "Понеділок",
+  "Вівторок",
+  "Середа",
+  "Четвер",
+  "П'ятниця",
+  "Субота",
+  "Неділя",
 ];
-const DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const START_HOUR = 7;
-const END_HOUR = 21;
+const daysEn = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
 
-function generateGridData(activePeriods) {
-  const result = [];
+export default function ServiceStationDetailsTop() {
+  const activePeriods = [
+    { day: "Monday", startTime: 9, endTime: 12, isActive: true },
+    { day: "Monday", startTime: 14, endTime: 16, isActive: true },
+    { day: "Wednesday", startTime: 10, endTime: 15, isActive: true },
+    { day: "Friday", startTime: 8, endTime: 11, isActive: true },
+  ];
 
-  // Обходим каждый день недели
-  for (const day of DAYS_OF_WEEK) {
-    // Получаем все активные периоды для текущего дня
-    const periodsForDay = activePeriods.filter((period) => period.day === day);
-
-    // Проходим по каждому часу дня
-    for (let hour = START_HOUR; hour < END_HOUR; hour++) {
-      // Проверяем, находится ли текущий час в активном периоде
-      const isActive = periodsForDay.some(
-        (period) => hour >= period.startTime && hour < period.endTime
-      );
-
-      // Добавляем ячейку в массив
-      result.push({
-        day,
-        hour,
-        isActive,
-      });
+  // Генерация начального состояния таблицы
+  const generateGridData = (activePeriods) => {
+    const grid = [];
+    for (const day of daysEn) {
+      for (let hour = 7; hour <= 21; hour++) {
+        const isActive = activePeriods.some(
+          (period) =>
+            period.day === day &&
+            hour >= period.startTime &&
+            hour < period.endTime
+        );
+        grid.push({ day, hour, isActive });
+      }
     }
-  }
-
-  return result;
-}
-
-const initialData = generateGridData(activePeriods);
-
-const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
-const transformDataToSchedule = (data) => {
-  const schedule = [];
-  for (let hour = 7; hour <= 20; hour++) {
-    const row = daysOfWeek.map((day) => {
-      const entry = data.find((item) => item.day === day && item.hour === hour);
-      return entry ? entry.isActive : false;
-    });
-    schedule.push(row);
-  }
-  return schedule;
-};
-
-// const transformScheduleToData = (schedule, originalData) => {
-//   return originalData.map((entry) => {
-//     const dayIndex = daysOfWeek.indexOf(entry.day);
-//     const hourIndex = entry.hour - 7;
-//     return {
-//       ...entry,
-//       isActive: schedule[hourIndex][dayIndex],
-//     };
-//   });
-// };
-
-
-const ServiceStationDetailsTop = () => {
-  const [scheduleData, setScheduleData] = useState(transformDataToSchedule(initialData));
-
-  const handleCellClick = (newSchedule) => {
-    setScheduleData(newSchedule);
+    return grid;
   };
 
-  // const handleSave = () => {
-  //   const updatedData = transformScheduleToData(scheduleData, initialData);
-  //   // Отправка данных на бекенд (замените URL на ваш эндпоинт)
-  //   fetch("/api/save-schedule", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(updatedData),
-  //   })
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         alert("Schedule saved successfully!");
-  //       } else {
-  //         alert("Failed to save schedule.");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error:", error);
-  //       alert("An error occurred while saving.");
-  //     });
-  // };
+  const [gridData, setGridData] = useState(generateGridData(activePeriods));
+  const [isSelecting, setIsSelecting] = useState(false);
+
+  // Обработчики событий
+  const toggleCell = (day, hour) => {
+    setGridData((prevData) =>
+      prevData.map((cell) =>
+        cell.day === day && cell.hour === hour
+          ? { ...cell, isActive: !cell.isActive }
+          : cell
+      )
+    );
+  };
+
+  const handleMouseDown = (day, hour) => {
+    setIsSelecting(true);
+    toggleCell(day, hour);
+  };
+
+  const handleMouseOver = (day, hour) => {
+    if (isSelecting) {
+      toggleCell(day, hour);
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsSelecting(false);
+  };
+
+  // Формирование выходного массива для бэкенда
+  const generateBackendData = () => {
+    const activeCells = gridData.filter((cell) => cell.isActive);
+    const result = [];
+
+    activeCells.forEach(({ day, hour }) => {
+      const existingPeriod = result.find(
+        (period) => period.day === day && period.endTime === hour - 1
+      );
+      if (existingPeriod) {
+        existingPeriod.endTime = hour; // Продлить существующий период
+      } else {
+        result.push({ day, startTime: hour, endTime: hour, isActive: true }); // Создать новый период
+      }
+    });
+
+    console.log("Backend Data:", result);
+    return result;
+  };
 
   return (
-    <div className={css.scheduleWrapper}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<BsCaretDownFill />}
-          aria-controls="schedule-content"
-          id="schedule-header"
-          style={{
-            backgroundColor: "var(--bg-primary)",
-            border: "1px solid var(--border-color)",
-            borderRadius: "8px",
-          }}
-        >
-          <Typography variant="h6">Weekly Work Schedule</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography variant="subtitle1" gutterBottom>
-            Click on cells to toggle availability.
-          </Typography>
-          <ScheduleSelector
-            selection={scheduleData}
-            numDays={7}
-            minTime={7}
-            maxTime={21}
-            hourlyChunks={1}
-            onChange={handleCellClick}
-            timeFormat="24" // формат времени
-            dateFormat="ddd" // формат заголовка дней
-            renderDateCell={(time, selected) => (
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: selected ? "var(--status-gradient-repair)" : "var(--bg-secondary)",
-                  border: "1px solid var(--border-color)",
-                  cursor: "pointer",
-                }}
-              />
-            )}
-          />
-        </AccordionDetails>
-      </Accordion>
-      {/* <Button
-        variant="contained"
-        color="primary"
-        style={{ marginTop: "16px", width: "100%" }}
-        onClick={handleSave}
+    <div>
+      <table
+        className={css.workSchedule}
+        onMouseLeave={() => setIsSelecting(false)} // Прекращаем выделение при выходе мыши из таблицы
       >
-        Save Schedule
-      </Button> */}
+        <thead className={css.header}>
+          <tr>
+            <th className={css.headerfirstcolumn}>дні/години</th>
+            {hours.map((hour) => (
+              <th key={hour} className={css.headerothercolumn}>
+                {hour}:00
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {daysUa.map((dayUa, index) => {
+            const dayEn = daysEn[index];
+            return (
+              <tr key={dayEn}>
+                <td>{dayUa}</td>
+                {hours.map((hour) => {
+                  const cell = gridData.find(
+                    (c) => c.day === dayEn && c.hour === hour
+                  );
+                  return (
+                    <td
+                      key={`${dayEn}-${hour}`}
+                      className={cell.isActive ? css.active : css.inactive}
+                      onMouseDown={() => handleMouseDown(dayEn, hour)}
+                      onMouseOver={() => handleMouseOver(dayEn, hour)}
+                      onMouseUp={handleMouseUp}
+                    ></td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {/* <button className={css.generateButton} onClick={() => generateBackendData()}>
+        Зберегти
+      </button> */}
     </div>
   );
-};
-
-
-export default ServiceStationDetailsTop;
+}

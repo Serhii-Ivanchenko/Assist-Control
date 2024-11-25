@@ -1,10 +1,21 @@
 .modal {
   width: 1066px;
-  height: 868px;
+  height: auto;
   padding: 40px 63px;
 
   border-radius: 12px;
   background: var(--bg-secondary);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  cursor: pointer;
+
+  width: 18px;
+  height: 18px;
+  stroke: var(--input-stroke);
 }
 
 .mainInfo {
@@ -35,6 +46,7 @@
 
   color: var(--light-gray);
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .phoneImg {
@@ -74,6 +86,25 @@
   line-height: normal;
   appearance: none;
   outline: none;
+}
+
+.input:-webkit-autofill {
+  background-color: var(--bg-input) !important;
+  color: var(--light-gray) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--light-gray) !important;
+}
+
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  background-color: var(--bg-input) !important;
+  color: var(--light-gray) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--light-gray) !important;
+}
+
+.inputSelect {
+  cursor: pointer;
 }
 
 .column {
@@ -180,6 +211,7 @@
   transform: translateY(-50%);
   appearance: none;
   pointer-events: none;
+  /* cursor: pointer; */
 }
 
 .calendarBox {
@@ -192,6 +224,7 @@
   left: 45px;
   top: 50%;
   transform: translateY(-50%);
+  cursor: pointer;
 }
 
 .calendar {
@@ -245,6 +278,14 @@
   width: 18px;
   height: 18px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+}
+
+.iconAgr {
+  fill: var(--light-gray);
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .docColumn {
@@ -254,7 +295,7 @@
 }
 
 .docImage {
-  width: 35px;
+  /* width: 35px; */
   height: 22px;
   border: 1px solid wheat;
 }
@@ -262,6 +303,8 @@
 .docBox {
   display: flex;
   gap: 8px;
+  position: relative;
+  width: fit-content;
 }
 
 /* .docBoxID{
@@ -292,7 +335,7 @@
 
 .periodInput {
   border: none;
-  background-color: transparent;
+  background-color: var(--bg-secondary);
 
   color: var(--input-text);
   font-size: 14px;
@@ -302,6 +345,8 @@
 
   appearance: none;
   padding-left: 20px;
+  outline: none;
+  cursor: pointer;
 }
 
 .rateInput {
@@ -475,6 +520,7 @@
   text-decoration-thickness: auto;
   text-underline-offset: auto;
   text-underline-position: from-font;
+  cursor: pointer;
 }
 
 .close {
@@ -493,6 +539,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .save {
@@ -512,6 +559,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .arrowIcon {
@@ -563,11 +611,29 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.1875em;
 
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
+  cursor: pointer;
 }
 
-/* .schedule{
-    height: 297px;
-} */
+.schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.scincenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 266px; */
+}
+
+.cblabelBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 863px;
+  gap: 12px;
+}

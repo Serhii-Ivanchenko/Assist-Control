@@ -29,12 +29,14 @@ function AccordionItem({ category, items, index }) {
           aria-controls={`panel${index}-content`}
           id={`panel${index}-header`}
         >
-          {category}{" "}
-          {expanded ? (
-            <TiArrowSortedUp className={styles.icon} />
-          ) : (
-            <TiArrowSortedDown className={styles.icon} />
-          )}
+          <div className={styles.titleContent}>
+            {category}{" "}
+            {expanded ? (
+              <TiArrowSortedUp className={styles.icon} />
+            ) : (
+              <TiArrowSortedDown className={styles.icon} />
+            )}
+          </div>
         </AccordionSummary>
         <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
           <ul className={styles.accordionDesc}>

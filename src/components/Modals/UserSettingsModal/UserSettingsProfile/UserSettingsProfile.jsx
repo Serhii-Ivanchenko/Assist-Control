@@ -20,11 +20,26 @@ import { getUserData } from "../../../../redux/auth/operations";
 import TimeZoneSelect from "./TimeZoneSelect/TimeZoneSelect";
 
 const Validation = Yup.object().shape({
-  username: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Поле повинно бути заповнене"),
-  phone: Yup.string().min(3, "Занадто коротке").max(50, "Занадто довге").required("Поле повинно бути заповнене"),
-  adress: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Поле повинно бути заповнене"),
-  city: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге").required("Поле повинно бути заповнене"),
-  index: Yup.number().positive("Використовуйте додатні числа").integer("Використовуйте цілі числа").required("Поле повинно бути заповнене"),
+  username: Yup.string()
+    .min(2, "Занадто коротке")
+    .max(30, "Занадто довге")
+    .required("Поле повинно бути заповнене"),
+  phone: Yup.string()
+    .min(3, "Занадто коротке")
+    .max(50, "Занадто довге")
+    .required("Поле повинно бути заповнене"),
+  adress: Yup.string()
+    .min(2, "Занадто коротке")
+    .max(30, "Занадто довге")
+    .required("Поле повинно бути заповнене"),
+  city: Yup.string()
+    .min(2, "Занадто коротке")
+    .max(30, "Занадто довге")
+    .required("Поле повинно бути заповнене"),
+  index: Yup.number()
+    .positive("Використовуйте додатні числа")
+    .integer("Використовуйте цілі числа")
+    .required("Поле повинно бути заповнене"),
 });
 
 export default function UserSettingsProfile({ onClose }) {
@@ -142,42 +157,41 @@ export default function UserSettingsProfile({ onClose }) {
     const dataToUpdate = {};
 
     if (values.username !== user.name) {
-      dataToUpdate.first_name = values.username ;
+      dataToUpdate.first_name = values.username;
     }
 
-      if (values.country !== user.country) {
-        dataToUpdate.country = values.country ;
-            }
-
-    if ( values.phone !== user.phone_number) {
-      dataToUpdate.phone_number = values.phone ;
+    if (values.country !== user.country) {
+      dataToUpdate.country = values.country;
     }
 
-        if ( values.adress !== user.address) {
-    dataToUpdate.address = values.adress ;
-        }
+    if (values.phone !== user.phone_number) {
+      dataToUpdate.phone_number = values.phone;
+    }
+
+    if (values.adress !== user.address) {
+      dataToUpdate.address = values.adress;
+    }
 
     if (values.section !== user.first_page) {
-      dataToUpdate.first_page = values.section ;
+      dataToUpdate.first_page = values.section;
     }
 
-    if ( values.timeZone !== user.time_zone) {
-      dataToUpdate.time_zone = values.timeZone ;
+    if (values.timeZone !== user.time_zone) {
+      dataToUpdate.time_zone = values.timeZone;
     }
 
-        if (values.city !== user.city) {
-    dataToUpdate.city = values.city ;
-        }
-
-        if ( values.index !== user.post_code) {
-          dataToUpdate.post_code = values.index;
+    if (values.city !== user.city) {
+      dataToUpdate.city = values.city;
     }
 
-  //     // Заміна `null` або `undefined` на порожні рядки в `dataToUpdate`
-  // Object.keys(dataToUpdate).forEach(
-  //   (key) => (dataToUpdate[key] = dataToUpdate[key] ?? "")
-  // );
+    if (values.index !== user.post_code) {
+      dataToUpdate.post_code = values.index;
+    }
 
+    //     // Заміна `null` або `undefined` на порожні рядки в `dataToUpdate`
+    // Object.keys(dataToUpdate).forEach(
+    //   (key) => (dataToUpdate[key] = dataToUpdate[key] ?? "")
+    // );
 
     // Якщо немає змін, не відправляємо запит на сервер
     if (Object.keys(dataToUpdate).length === 0) {
@@ -345,9 +359,12 @@ export default function UserSettingsProfile({ onClose }) {
                   // onClick={() => toggleDropdown(1)}
                 >
                   <option value="default">За замовченням</option>
-                  <option value="v-c">Відеоконтроль</option>
-                  <option value="crm">CRM</option>
-                  <option value="carReport">Звіт по авто</option>
+                  <option value="main">Головна</option>
+                  <option value="v-c">Моніторинг</option>
+                  <option value="crm">Планувальник</option>
+                  <option value="rec">Рекомендації</option>
+                  <option value="tracking">Облік</option>
+                  <option value="carReport">Звіти</option>
                   <option value="Settings">Налаштування</option>
                 </Field>
                 <BsFillCaretDownFill

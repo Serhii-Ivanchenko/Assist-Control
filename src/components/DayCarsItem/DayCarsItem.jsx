@@ -119,7 +119,7 @@ export default function DayCarsItem({ car, isModal }) {
 
         <div className={styles.btnContainer}>
           {visibility?.status && <StatusBtn car={car} />}
-          {visibility?.info && <CarDetailButton />}
+          {visibility?.info && <CarDetailButton carName={car.auto} />}
         </div>
       </div>
 

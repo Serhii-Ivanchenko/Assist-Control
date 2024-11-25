@@ -31,7 +31,7 @@ const AppointmentGrid = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
-   const handleWorkItemClick = (recordId, postId) => {
+  const handleWorkItemClick = (recordId, postId) => {
     setModalData({ recordId, postId });
     setIsModalOpen(true);
   };
@@ -48,12 +48,20 @@ const AppointmentGrid = ({ data }) => {
     }
   }, [data]);
 
-  const koeffWidth = (100 + (1057 - 100) / 10) / 100;
+  let rowCount = data.posts.length;
+  let columnCount = data.dates.length;
+  let startIndexColumn = parseInt(data.dates[1]);
+
+  const gridStyle = {
+    "--column-count": columnCount - 1,
+  };
+
+  const koeffWidth = (100 + (1057 - 100) / columnCount - 1) / 100;
 
   useEffect(() => {
     const updateCurrentTimeLine = () => {
-      const startHour = 9; // Начало рабочего дня
-      const endHour = 18; // Конец рабочего дня
+      const startHour = parseInt(data.dates[1]); // Начало рабочего дня
+      const endHour = parseInt(data.dates[data.dates.length - 2]); // Конец рабочего дня
       const now = new Date();
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes();
@@ -78,11 +86,8 @@ const AppointmentGrid = ({ data }) => {
     return () => clearInterval(intervalId); // Очищаем интервал при размонтировании
   }, []);
 
-  let rowCount = data.posts.length;
-  let columnCount = data.dates.length;
-
   return (
-    <div className={css.schedulegrid} ref={gridRef}>
+    <div className={css.schedulegrid} style={gridStyle} ref={gridRef}>
       {/* Заголовки для дат */}
       {data.dates.map((date, index) => (
         <div
@@ -156,8 +161,8 @@ const AppointmentGrid = ({ data }) => {
       {data.workItems.map((item, index) => {
         // const startHour = new Date(item.startTime).getHours();
         // const endHour = new Date(item.endTime).getHours();
-        const gridColumn = `${item.stage_start + 1 - 8} / ${
-          item.stage_end + 2 - 8
+        const gridColumn = `${item.stage_start + 1 - startIndexColumn + 2} / ${
+          item.stage_end + 2 - startIndexColumn + 2
         }`;
         // Находим индекс строки в массиве постов, где id совпадает с post_id в работе
         const postRowIndex = data.posts.findIndex(
@@ -179,7 +184,7 @@ const AppointmentGrid = ({ data }) => {
               gridRow: postRowIndex + 2, // Смещаем на 2, чтобы учесть строки заголовков
               background: workTypeColors[item.service_name] || "#333",
             }}
-             onClick={() => handleWorkItemClick(item.record_id, item.post_id)}
+            onClick={() => handleWorkItemClick(item.record_id, item.post_id)}
           >
             {item.service_name !== "empty" && (
               <p
@@ -207,17 +212,15 @@ const AppointmentGrid = ({ data }) => {
         );
       })}
 
- {isModalOpen && modalData && (
-              <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-                <ServiceBookingModal
-                  recordId={modalData.recordId}
-                  postId={modalData.postId}
-                  onClose={handleCloseModal}
-                />
-              </Modal>
-            )}
-
-
+      {isModalOpen && modalData && (
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <ServiceBookingModal
+            recordId={modalData.recordId}
+            postId={modalData.postId}
+            onClose={handleCloseModal}
+          />
+        </Modal>
+      )}
     </div>
   );
 };

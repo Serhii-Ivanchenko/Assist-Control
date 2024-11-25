@@ -1,94 +1,92 @@
 .cbLabel {
-    color: var(--white);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    padding: 10px;
+  color: var(--white);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 10px;
 
-    display: flex;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
-    /* border: 1px solid white; */
+  /* border: 1px solid white; */
 }
 
 .cbPartBox {
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 15px;
 
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .checkbox {
-    display: none;
+  display: none;
 }
 
 .cbIcon {
-    display: none;
+  display: none;
 }
 
 .cbMark {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
 
-    border: 2px solid var(--white);
-    border-radius: 4px;
-    background-color: transparent;
-
+  border: 2px solid var(--white);
+  border-radius: 4px;
+  background-color: transparent;
 }
 
-.checkbox:checked+.cbMark {
-    border: 2px solid var(--blue);
+.checkbox:checked + .cbMark {
+  border: 2px solid var(--blue);
 }
 
-.checkbox:checked+.cbMark>.cbIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    fill: var(--blue);
-    border-radius: 4px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+.checkbox:checked + .cbMark > .cbIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  fill: var(--blue);
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .radiobutton {
-    display: none;
+  display: none;
 }
 
 .radioBtns {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .radioLabel {
-    color: var(--white);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: var(--white);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 
-    height: 75px;
+  height: 75px;
 }
 
-
 .radiospan {
-    width: 24px;
-    height: 24px;
-    /* border-radius: 20px; */
-    fill: var(--blue);
+  width: 24px;
+  height: 24px;
+  /* border-radius: 20px; */
+  fill: var(--blue);
 
-    /* padding: 2px;
+  /* padding: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,37 +102,52 @@
     fill: var(--blue);
 } */
 
-
 .radioAndInputs {
-    display: flex;
-    gap: 89px;
+  display: flex;
+  gap: 89px;
+
+  max-height: 450px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.radioAndInputs::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+}
+
+.radioAndInputs::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--player-secondary-bg);
+}
+
+.radioAndInputs::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: #202020;
 }
 
 .inputsPart {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.labelAndInputs {
-    height: 75px;
-
-}
+/* .labelAndInputs {
+  height: 75px;
+} */
 
 .labels {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 4px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 4px;
 }
 
 .Inputs {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-direction: row;
-
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-direction: row;
 }
-
 
 /* .inputBox{
     display: flex;
@@ -143,142 +156,140 @@
 } */
 
 .inputLabel {
-    color: var(--input-text);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    width: 136px;
+  color: var(--input-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 136px;
 }
 
 .input {
-    display: flex;
-    padding: 18px 20px;
+  display: flex;
+  padding: 18px 20px;
 
-    border-radius: 10px;
-    border: 1px solid var(--input-stroke);
-    background: var(--bg-input);
+  border-radius: 10px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
 
-    color: var(--light-gray);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.1875em;
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.1875em;
 
-    width: 136px;
-    text-align: center;
-    appearance: none;
+  width: 136px;
+  text-align: center;
+  appearance: none;
 }
 
 .btnPlus {
-    width: 26px;
-    height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: none;
-    background-color: var(--green);
-    cursor: pointer;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--green);
+  cursor: pointer;
 }
 
 .btnPlus:hover {
-    background-color: var(--green-btn-hover);
+  background-color: var(--green-btn-hover);
 }
 
 .iconPlus {
-    display: flex;
-    width: 14px;
-    height: 14px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
-    color: var(--green);
-    background-color: var(--white);
-    stroke-width: 2px;
+  display: flex;
+  width: 14px;
+  height: 14px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  color: var(--green);
+  background-color: var(--white);
+  stroke-width: 2px;
 }
 
 .plus {
-    width: 14px;
-    height: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3px;
-    border: none;
-    cursor: pointer;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
 }
 
 .inputsList {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
 
-    height: 80px;
+  /* height: 80px;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: hidden; */
 }
 
 .iconMinus {
-    fill: var(--red);
+  fill: var(--red);
 }
 
 .cancel {
-    display: flex;
-    padding: 10px 20px;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
 
-    border-radius: 6px;
-    border: 1px solid var(--light-gray);
-    background-color: transparent;
+  border-radius: 6px;
+  border: 1px solid var(--light-gray);
+  background-color: transparent;
 
-    color: var(--white);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .save {
-    display: flex;
-    padding: 10px 20px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 
-    border-radius: 6px;
-    background: var(--green-btn-normal);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  background: var(--green-btn-normal);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-    border: none;
+  border: none;
 
-    color: var(--white);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .btnBox {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin-top: auto;
-    margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: auto;
+  margin-left: auto;
 }
 
 .sparesPart {
-    display: flex;
-    flex-direction: column;
-    min-height: 325px;
-    padding-bottom: 10px;
-    /* overflow: auto; */
-
-
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  height: 100%;
+  /* overflow: auto; */
 }
 
 /* .inputsList{
