@@ -611,9 +611,9 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.1875em;
 
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
   cursor: pointer;
 }
 
@@ -627,7 +627,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 266px;
+  /* height: 266px; */
 }
 
 .cblabelBox {
@@ -635,4 +635,5 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 863px;
+  gap: 12px;
 }
