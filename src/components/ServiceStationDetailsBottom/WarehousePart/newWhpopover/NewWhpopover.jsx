@@ -66,7 +66,7 @@ export default function NewWhpopover({ isVisible, onClose, buttonRef }) {
 
       <button type="button" className={css.button}>
         <BsFillCloudUploadFill className={css.icon} size={18} />
-        Завантажити підписаний{" "}
+        Завантажити з шаблону{" "}
       </button>
     </div>
   );

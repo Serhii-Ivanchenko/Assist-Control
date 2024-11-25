@@ -28,9 +28,9 @@
 }
 
 .noBackground {
-  width: 921px;
+  /* width: 929px; */
 }
 
 .fullChangeableHeight {
-  height: auto;
+  height: 100%;
 }
