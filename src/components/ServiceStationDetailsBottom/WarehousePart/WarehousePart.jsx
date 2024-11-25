@@ -24,7 +24,7 @@ import { DndProvider } from "react-dnd";
 import Node from "./Node/Node";
 import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
 // import ThreeDotsModal from "../../Modals/AddStaffMemberModal/ThreeDotsModal/ThreeDotsModal";
-import NewWhpopover from "./NewWhpopover/NewWhpopover.jsx";
+// import NewWhpopover from "./NewWhpopover/NewWhpopover.jsx";
 
 const reorderArray = (array, sourceIndex, targetIndex) => {
   const newArray = [...array];
@@ -200,13 +200,13 @@ export default function WarehousePart() {
           Новий склад
           <BsThreeDotsVertical className={css.icon} />
         </button>
-        {popover && (
+        {/* {popover && (
           <NewWhpopover
             isVisible={popover}
             buttonRef={buttonRef}
             onClose={handleClosePopover}
           />
-        )}
+        )} */}
         {/* {modalIsOpen && (
           <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
             <NewItemModal onClose={handleModalClose} />
