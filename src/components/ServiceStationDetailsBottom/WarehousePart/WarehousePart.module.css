@@ -60,6 +60,10 @@
   cursor: pointer;
 }
 
+.popoverBox {
+  position: relative;
+}
+
 /* .treeRoot {
   display: flex;
   width: 915px;

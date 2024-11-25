@@ -24,8 +24,7 @@ import { DndProvider } from "react-dnd";
 import Node from "./Node/Node";
 import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
 // import ThreeDotsModal from "../../Modals/AddStaffMemberModal/ThreeDotsModal/ThreeDotsModal";
-// import NewWhpopover from "./NewWhpopover/NewWhpopover.jsx";
-
+import NewWhpopover from "./newWhpopover/newWhpopover";
 const reorderArray = (array, sourceIndex, targetIndex) => {
   const newArray = [...array];
   const element = newArray.splice(sourceIndex, 1)[0];
@@ -190,23 +189,25 @@ export default function WarehousePart() {
           </li>
         </ul>
 
-        <button
-          type="button"
-          className={css.newWarehouse}
-          onClick={handleTogglePopover}
-          ref={buttonRef}
-        >
-          <BsFolderPlus className={css.icon} />
-          Новий склад
-          <BsThreeDotsVertical className={css.icon} />
-        </button>
-        {/* {popover && (
-          <NewWhpopover
-            isVisible={popover}
-            buttonRef={buttonRef}
-            onClose={handleClosePopover}
-          />
-        )} */}
+        <div className={css.popoverBox}>
+          <button
+            type="button"
+            className={css.newWarehouse}
+            onClick={handleTogglePopover}
+            ref={buttonRef}
+          >
+            <BsFolderPlus className={css.icon} />
+            Новий склад
+            <BsThreeDotsVertical className={css.icon} />
+          </button>
+          {popover && (
+            <NewWhpopover
+              isVisible={popover}
+              buttonRef={buttonRef}
+              onClose={handleClosePopover}
+            />
+          )}
+        </div>
         {/* {modalIsOpen && (
           <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
             <NewItemModal onClose={handleModalClose} />
