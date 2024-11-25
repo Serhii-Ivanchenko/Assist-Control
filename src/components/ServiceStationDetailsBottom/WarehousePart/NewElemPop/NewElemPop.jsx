@@ -42,11 +42,11 @@ export default function NewElemPop({
         {addText}
       </button>
       <button type="button" className={css.btn}>
-        <BsPencil />
+        <BsPencil size={18} className={css.icon} />
         Редагувати
       </button>
-      <button type="button" className={css.btn}>
-        <BsTrash />
+      <button type="button" className={`${css.btn} ${css.btnDelete}`}>
+        <BsTrash size={18} />
         Видалити
       </button>
     </div>

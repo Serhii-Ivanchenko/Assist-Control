@@ -16,7 +16,7 @@
   cursor: pointer;
   white-space: nowrap;
   position: relative;
-  z-index: 3;
+  /* z-index: 3; */
 }
 .whWidth {
   width: 915px;
@@ -93,9 +93,17 @@
   align-items: center;
 }
 
+.popoverDiv {
+  position: relative;
+}
+
 /* .icon {
   position: absolute;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
 } */
+
+.icon {
+  fill: var(--light-gray);
+}

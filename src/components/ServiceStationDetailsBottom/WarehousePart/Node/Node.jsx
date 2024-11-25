@@ -4,8 +4,26 @@ import css from "./Node.module.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
 import NewElemPop from "../NewElemPop/NewElemPop";
+import { RiDatabaseLine } from "react-icons/ri";
 
 const TREE_X_OFFSET = 40;
+
+const TextForPopover = ({ type }) => {
+  switch (type) {
+    case "warehouse":
+      return "Додати секцію";
+    case "section":
+      return "Додати стелаж";
+    case "rack":
+      return "Додати полицю";
+    case "shelf":
+      return "Додати місце";
+    // case "place":
+    //   return ""
+    default:
+      return "Додати";
+  }
+};
 
 export default function Node({
   node,
@@ -25,9 +43,9 @@ export default function Node({
   const buttonRefs = useRef([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleTogglePopover = () => {
+  const handleTogglePopover = (id) => {
     // e.stopPropagation();
-    setIsOpen(true);
+    setIsOpen(isOpen === id ? null : id);
   };
 
   const handleClosePopover = () => {
@@ -46,7 +64,6 @@ export default function Node({
       } ${node.data === "warehouse" && css.whWidth}`}
       style={{ marginInlineStart: indent }}
       onClick={handleToggle}
-      ref={(el) => (buttonRefs.current[node.id] = el)}
     >
       <div
         className={css.pipeX}
@@ -72,21 +89,27 @@ export default function Node({
           {node.text}
         </p>
       </div>
-      {/* <button type="button"></button> */}
-      <BsThreeDotsVertical
-        onClick={handleTogglePopover}
-        className={css.icon}
-        size={24}
-        ref={buttonRefs.current[node.id]}
-      />
-      {isOpen === node.id && (
-        <NewElemPop
-          isVisible={isOpen}
-          addText="Додати секцію"
-          buttonRefs={buttonRefs.current[node.id]}
-          onClose={handleClosePopover}
+      <div
+        className={css.popoverDiv}
+        ref={(el) => (buttonRefs.current[node.id] = el)}
+      >
+        {/* <button type="button"></button> */}
+        <BsThreeDotsVertical
+          onClick={() => handleTogglePopover(node.id)}
+          className={css.icon}
+          size={24}
+          // ref={buttonRefs.current[node.id]}
         />
-      )}
+        {isOpen === node.id && (
+          <NewElemPop
+            isVisible={isOpen}
+            icon={<NodeIcon type={node.data} />}
+            addText={<TextForPopover type={node.data} />}
+            buttonRefs={buttonRefs.current[node.id]}
+            onClose={handleClosePopover}
+          />
+        )}
+      </div>
       {/* <div className={`${css.expandIconWrapper} ${isOpen ? css.isOpen : ""}`}> */}
       {/* {node.droppable && (
           <svg
