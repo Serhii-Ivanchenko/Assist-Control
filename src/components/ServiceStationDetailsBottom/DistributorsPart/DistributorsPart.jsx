@@ -1,4 +1,4 @@
-import DistributorsList from "./DistributorsLit/DistributorsList";
+import DistributorsList from "./DistributorsList/DistributorsList";
 
 function DistributorsPart() {
   return (
