@@ -64,10 +64,19 @@ export default function NewWhpopover({ isVisible, onClose, buttonRef }) {
         </Modal>
       )}
 
-      <button type="button" className={css.button}>
+      <button
+        type="button"
+        className={css.button}
+        onClick={openAddFromTempModal}
+      >
         <BsFillCloudUploadFill className={css.icon} size={18} />
         Завантажити з шаблону{" "}
       </button>
+      {addFromTemplate && (
+        <Modal isOpen={openAddFromTempModal} onClose={closeAddFromTempModal}>
+          <NewItemModal onClose={closeAddFromTempModal} />
+        </Modal>
+      )}
     </div>
   );
 }
