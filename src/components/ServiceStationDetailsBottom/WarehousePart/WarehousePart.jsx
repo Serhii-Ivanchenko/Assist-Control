@@ -160,7 +160,7 @@ export default function WarehousePart() {
 
   return (
     <div>
-      <div className={css.listAndButton} ref={buttonRef}>
+      <div className={css.listAndButton}>
         <ul className={css.itemsList}>
           <li className={css.items}>
             <BiBuildingHouse className={css.icon} />
@@ -189,7 +189,7 @@ export default function WarehousePart() {
           </li>
         </ul>
 
-        <div className={css.popoverBox}>
+        <div className={css.popoverBox} ref={buttonRef}>
           <button
             type="button"
             className={css.newWarehouse}
