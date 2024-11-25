@@ -1,4 +1,4 @@
-import css from "./newWhpopover.module.css";
+import css from "./CreateWarehousePop.module.css";
 import { BsFillCloudDownloadFill } from "react-icons/bs";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import { useRef, useState } from "react";
@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import NewItemModal from "../NewItemModal/NewItemModal";
 import Modal from "../../../Modals/Modal/Modal";
 
-export default function NewWhpopover({ isVisible, onClose, buttonRef }) {
+export default function CreateWarehousePop({ isVisible, onClose, buttonRef }) {
   const [saveTemplate, setSaveTemplate] = useState(false);
   const [addFromTemplate, setAddFromSaveTemplate] = useState(false);
   const popoverRef = useRef(null);
@@ -23,9 +23,9 @@ export default function NewWhpopover({ isVisible, onClose, buttonRef }) {
     setSaveTemplate(false);
   };
 
-  // const closeAddFromTempModal = () => {
-  //   setAddFromSaveTemplate(false);
-  // };
+  const closeAddFromTempModal = () => {
+    setAddFromSaveTemplate(false);
+  };
 
   const handleClickOutside = (event) => {
     if (
