@@ -37,6 +37,10 @@ export default function DayCarsItem({ car, isModal }) {
 
   const carPhoto = photoUrl || absentAutoImg;
 
+  const formatCarNumber = (number) => {
+    return number.replace(/\s+/g, "");
+  };
+
   return (
     <div
       className={clsx(
@@ -184,8 +188,8 @@ export default function DayCarsItem({ car, isModal }) {
                 <p className={styles.carRegCountry}>ua</p>
               </div>
               <p className={styles.carNumber}>
-                {carNumber ? carNumber : "хххххх"}
-              </p>
+  {carNumber ? formatCarNumber(carNumber) : "хххххх"}
+</p>
             </div>
           )}
 

@@ -13,7 +13,6 @@ const CarInfoSettings = ({ isCrmView }) => {
   const popoverRef = useRef(null);
   const dispatch = useDispatch();
 
-  // Динамічний вибір селектора і екшену
   const visibility = useSelector(
     isCrmView ? selectVisibilityRecords : selectVisibilityCar
   );

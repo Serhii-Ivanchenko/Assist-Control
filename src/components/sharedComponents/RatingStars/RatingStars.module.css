@@ -1,0 +1,19 @@
+@media only screen and (min-width: 1850px) {
+    .rating {
+      justify-content: end;
+      position: static;
+      top: auto;
+      left: auto;
+
+      width: 78px;
+      height: 11px;
+    }
+  }
+  
+
+  @media only screen and (min-width: 1850px) {
+    .rating {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+  }
