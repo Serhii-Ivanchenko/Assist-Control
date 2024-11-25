@@ -6,8 +6,8 @@ import { RiFolder5Line } from "react-icons/ri";
 import { BiBuildingHouse } from "react-icons/bi";
 import { BsFolderPlus, BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
-import Modal from "../../Modals/Modal/Modal";
-import NewItemModal from "./NewItemModal/NewItemModal";
+// import Modal from "../../Modals/Modal/Modal";
+// import NewItemModal from "./NewItemModal/NewItemModal";
 // import SortableTree from 'react-sortable-tree';
 // import 'react-sortable-tree/style.css';
 // import { Tree } from "react-arborist";
@@ -24,7 +24,7 @@ import { DndProvider } from "react-dnd";
 import Node from "./Node/Node";
 import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
 // import ThreeDotsModal from "../../Modals/AddStaffMemberModal/ThreeDotsModal/ThreeDotsModal";
-import NewWhpopover from "./newWhpopover/newWhpopover";
+import NewWhpopover from "./NewWhpopover/NewWhpopover.jsx";
 
 const reorderArray = (array, sourceIndex, targetIndex) => {
   const newArray = [...array];
