@@ -145,7 +145,7 @@ function DistributorsCard() {
           </p>
         )}
       </div>
-      <div className={styles.authContainer}>
+      {/* <div className={styles.authContainer}> */}
         <div className={styles.authBox}>
           <div className={styles.toggleBox}>
             <p className={styles.statusToggle}>
@@ -173,7 +173,7 @@ function DistributorsCard() {
             ))}
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 }
