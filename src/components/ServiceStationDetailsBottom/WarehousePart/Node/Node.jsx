@@ -43,7 +43,7 @@ export default function Node({
     <div
       className={`${css.nodeWrapper} tree-node ${
         node.droppable && isDropTarget ? css.dropTarget : ""
-      }`}
+      } ${node.data === "warehouse" && css.whWidth}`}
       style={{ marginInlineStart: indent }}
       onClick={handleToggle}
       ref={(el) => (buttonRefs.current[node.id] = el)}

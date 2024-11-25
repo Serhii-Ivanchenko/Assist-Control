@@ -18,6 +18,9 @@
   position: relative;
   z-index: 3;
 }
+.whWidth {
+  width: 915px;
+}
 
 /* .nodeWrapper:hover {
   background-color: rgba(0, 0, 0, 0.04);
