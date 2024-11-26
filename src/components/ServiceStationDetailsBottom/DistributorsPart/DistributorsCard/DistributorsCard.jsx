@@ -41,8 +41,8 @@ const InputField = memo(
   ({ label, type }) => {
     return (
       <div className={styles.inputBox}>
-        <label htmlFor={label}>{label}</label>
-        <input id={label} type={type} />
+        <label htmlFor={label[label]}>{label}</label>
+        <input id={label[label]} type={type} />
       </div>
     );
   },
@@ -138,42 +138,39 @@ function DistributorsCard() {
           <BsInfoCircleFill className={styles.connectIcon} />
           <p className={styles.connectText}>Підключення</p>
         </div>
-
-        {isConnectionInfoVisible && (
+        <Popup isOpen={isConnectionInfoVisible}>
           <p className={styles.connectDesc}>
             Для активації доступу введіть логін і пароль від сайту...
           </p>
-        )}
+        </Popup>
       </div>
-      {/* <div className={styles.authContainer}> */}
-        <div className={styles.authBox}>
-          <div className={styles.toggleBox}>
-            <p className={styles.statusToggle}>
-              {isActive ? "Активний" : "Неактивний"}
-            </p>
-            <label className={styles.toggleSwitch}>
-              <input
-                type="checkbox"
-                checked={isActive}
-                onChange={handleToggleChange}
-              />
-              <span className={styles.slider}></span>
-            </label>
-          </div>
-          <div className={styles.inputsWrapper}>
-            {inputs.map((input, index) => (
-              <InputField key={index} label={input.label} type={input.type} />
-            ))}
-          </div>
-          <div className={styles.btnBox}>
-            {btns.map((btnText, index) => (
-              <button key={index} className={styles.btn}>
-                {btnText}
-              </button>
-            ))}
-          </div>
+      <div className={styles.authBox}>
+        <div className={styles.toggleBox}>
+          <p className={styles.statusToggle}>
+            {isActive ? "Активний" : "Неактивний"}
+          </p>
+          <label className={styles.toggleSwitch}>
+            <input
+              type="checkbox"
+              checked={isActive}
+              onChange={handleToggleChange}
+            />
+            <span className={styles.slider}></span>
+          </label>
         </div>
-      {/* </div> */}
+        <div className={styles.inputsWrapper}>
+          {inputs.map((input, index) => (
+            <InputField key={index} label={input.label} type={input.type} />
+          ))}
+        </div>
+        <div className={styles.btnBox}>
+          {btns.map((btnText, index) => (
+            <button key={index} className={styles.btn}>
+              {btnText}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
