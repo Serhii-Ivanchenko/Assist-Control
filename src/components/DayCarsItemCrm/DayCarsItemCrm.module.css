@@ -29,7 +29,7 @@
   transform: scale(1.05);
   background-color: var(--bg-input);
   z-index: 1000; 
-  transition: transform 0.8s ease-out;
+  transition: transform 0.5s ease-out;
 
 }
 

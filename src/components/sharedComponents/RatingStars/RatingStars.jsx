@@ -1,10 +1,11 @@
 import { AiFillStar } from "react-icons/ai";
 import styles from "./RatingStars.module.css";
+import { FaRegStarHalfStroke } from "react-icons/fa6";
 
 export default function RatingStars({ rating }) {
   const getStarElements = (rating) => {
     const stars = [];
-    for (let i = 1; i <= 5; i++) {
+   for (let i = 1; i <= 5; i++) {
       if (rating >= i) {
         stars.push(
           <div key={i} className={styles.fullStar}>
@@ -29,8 +30,7 @@ export default function RatingStars({ rating }) {
     return stars;
   };
 
-  const parsedRating =
-    rating && rating !== "Немає рейтингу" ? parseFloat(rating) : 2.5;
+  const parsedRating = rating && rating !== "Немає рейтингу" ? parseFloat(rating) : 5;
 
   return <div className={styles.rating}>{getStarElements(parsedRating)}</div>;
 }
