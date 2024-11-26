@@ -23,6 +23,9 @@
     "firebase": "^10.14.1",
     "flag-icons": "^7.2.3",
     "formik": "^2.4.6",
+    "html2pdf.js": "^0.10.2",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
     "modern-normalize": "^3.0.1",
     "qs": "^6.13.0",
     "react": "^18.3.1",
@@ -50,6 +53,7 @@
     "recharts": "^2.13.0",
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
+    "svg2pdf.js": "^2.2.4",
     "yup": "^1.4.0"
   },
   "devDependencies": {
