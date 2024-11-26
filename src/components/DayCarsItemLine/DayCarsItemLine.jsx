@@ -24,7 +24,7 @@ export default function DayCarsItemLine({ car}) {
     client,
   } = car;
 
-  const carPhoto = photoUrl || absentAutoImg;;
+  const carPhoto = photoUrl || absentAutoImg;
 
   return (
     <div className={styles.carLineContainer}>

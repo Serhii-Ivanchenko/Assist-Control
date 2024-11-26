@@ -2,8 +2,8 @@
     .rating {
       justify-content: end;
       position: static;
-      top: auto;
-      left: auto;
+      /* top: auto;
+      left: auto; */
 
       width: 78px;
       height: 11px;
