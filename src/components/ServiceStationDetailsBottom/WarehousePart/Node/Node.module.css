@@ -106,4 +106,6 @@
 
 .icon {
   fill: var(--light-gray);
+  width: 18px;
+  height: 18px;
 }

@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { useEffect } from "react";
 import NewItemModal from "../NewItemModal/NewItemModal";
 import Modal from "../../../Modals/Modal/Modal";
+import NewItemSelectModal from "../NewItemSelectModal/NewItemSelectModal";
 
 export default function CreateWarehousePop({ isVisible, onClose, buttonRef }) {
   const [saveTemplate, setSaveTemplate] = useState(false);
@@ -12,11 +13,11 @@ export default function CreateWarehousePop({ isVisible, onClose, buttonRef }) {
   const popoverRef = useRef(null);
 
   const openSaveTempModal = () => {
-    setSaveTemplate((prev) => !prev);
+    setSaveTemplate(true);
   };
 
   const openAddFromTempModal = () => {
-    setAddFromSaveTemplate((prev) => !prev);
+    setAddFromSaveTemplate(true);
   };
 
   const closeSaveTempModal = () => {
@@ -74,7 +75,7 @@ export default function CreateWarehousePop({ isVisible, onClose, buttonRef }) {
       </button>
       {addFromTemplate && (
         <Modal isOpen={openAddFromTempModal} onClose={closeAddFromTempModal}>
-          <NewItemModal onClose={closeAddFromTempModal} />
+          <NewItemSelectModal onClose={closeAddFromTempModal} />
         </Modal>
       )}
     </div>

@@ -5,6 +5,11 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
 import NewElemPop from "../NewElemPop/NewElemPop";
 import { RiDatabaseLine } from "react-icons/ri";
+import { RiFridgeLine } from "react-icons/ri";
+import { RiTableAltLine } from "react-icons/ri";
+import { RiFolder5Line } from "react-icons/ri";
+import { BiBuildingHouse } from "react-icons/bi";
+import { useEffect } from "react";
 
 const TREE_X_OFFSET = 40;
 
@@ -22,6 +27,23 @@ const TextForPopover = ({ type }) => {
     //   return ""
     default:
       return "Додати";
+  }
+};
+
+const IconForPopover = ({ type }) => {
+  switch (type) {
+    case "warehouse":
+      return <RiDatabaseLine className={css.icon} />;
+    case "section":
+      return <RiFridgeLine className={css.icon} />;
+    case "rack":
+      return <RiTableAltLine className={css.icon} />;
+    case "shelf":
+      return <RiFolder5Line className={css.icon} />;
+    // case "place":
+    //   return ""
+    default:
+      return <BiBuildingHouse className={css.icon} />;
   }
 };
 
@@ -56,6 +78,21 @@ export default function Node({
   //   `Pipe height for ${node.parent}:`,
   //   getPipeHeight(node.parent, treeData)
   // );
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        buttonRefs.current &&
+        !buttonRefs.current.some((ref) => ref && ref.contains(event.target))
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div
@@ -103,10 +140,11 @@ export default function Node({
         {isOpen === node.id && (
           <NewElemPop
             isVisible={isOpen}
-            icon={<NodeIcon type={node.data} />}
+            icon={<IconForPopover type={node.data} />}
             addText={<TextForPopover type={node.data} />}
             buttonRefs={buttonRefs.current[node.id]}
             onClose={handleClosePopover}
+            type={node.data}
           />
         )}
       </div>
