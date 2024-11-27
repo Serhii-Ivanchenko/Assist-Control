@@ -4,8 +4,48 @@ import css from "./Node.module.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
 import NewElemPop from "../NewElemPop/NewElemPop";
+import { RiDatabaseLine } from "react-icons/ri";
+import { RiFridgeLine } from "react-icons/ri";
+import { RiTableAltLine } from "react-icons/ri";
+import { RiFolder5Line } from "react-icons/ri";
+import { BiBuildingHouse } from "react-icons/bi";
+import { useEffect } from "react";
 
 const TREE_X_OFFSET = 40;
+
+const TextForPopover = ({ type }) => {
+  switch (type) {
+    case "warehouse":
+      return "Додати секцію";
+    case "section":
+      return "Додати стелаж";
+    case "rack":
+      return "Додати полицю";
+    case "shelf":
+      return "Додати місце";
+    // case "place":
+    //   return ""
+    default:
+      return "Додати";
+  }
+};
+
+const IconForPopover = ({ type }) => {
+  switch (type) {
+    case "warehouse":
+      return <RiDatabaseLine className={css.icon} />;
+    case "section":
+      return <RiFridgeLine className={css.icon} />;
+    case "rack":
+      return <RiTableAltLine className={css.icon} />;
+    case "shelf":
+      return <RiFolder5Line className={css.icon} />;
+    // case "place":
+    //   return ""
+    default:
+      return <BiBuildingHouse className={css.icon} />;
+  }
+};
 
 export default function Node({
   node,
@@ -14,7 +54,29 @@ export default function Node({
   onClick,
   treeData,
   getPipeHeight,
+  setTreeData,
 }) {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditing = (id, e) => {
+    e.stopPropagation();
+    setIsEditing(isEditing === id ? null : id);
+  };
+  const handleStopEditing = () => {
+    setIsEditing(false);
+  };
+
+  const changeName = (newName, id) => {
+    setTreeData(
+      treeData.map((data, i) => (i === id ? { ...data, text: newName } : data))
+    );
+  };
+
+  const deleteChild = (id, e) => {
+    e.stopPropagation();
+    setTreeData((prevData) => prevData.filter((_, i) => i !== id));
+  };
+
   const indent = depth * TREE_X_OFFSET;
 
   const handleToggle = (e) => {
@@ -25,9 +87,9 @@ export default function Node({
   const buttonRefs = useRef([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleTogglePopover = () => {
-    // e.stopPropagation();
-    setIsOpen(true);
+  const handleTogglePopover = (id, e) => {
+    e.stopPropagation();
+    setIsOpen(isOpen === id ? null : id);
   };
 
   const handleClosePopover = () => {
@@ -39,6 +101,21 @@ export default function Node({
   //   getPipeHeight(node.parent, treeData)
   // );
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        buttonRefs.current &&
+        !buttonRefs.current.some((ref) => ref && ref.contains(event.target))
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div
       className={`${css.nodeWrapper} tree-node ${
@@ -46,7 +123,6 @@ export default function Node({
       } ${node.data === "warehouse" && css.whWidth}`}
       style={{ marginInlineStart: indent }}
       onClick={handleToggle}
-      ref={(el) => (buttonRefs.current[node.id] = el)}
     >
       <div
         className={css.pipeX}
@@ -63,46 +139,45 @@ export default function Node({
 
       <div className={css.iconAndText}>
         {" "}
-        <NodeIcon type={node.data} />
-        <p
-          className={`${css.labelGridItem} ${
-            node.data === "warehouse" && css.warehouse
-          }`}
-        >
-          {node.text}
-        </p>
-      </div>
-      {/* <button type="button"></button> */}
-      <BsThreeDotsVertical
-        onClick={handleTogglePopover}
-        className={css.icon}
-        size={24}
-        ref={buttonRefs.current[node.id]}
-      />
-      {isOpen === node.id && (
-        <NewElemPop
-          isVisible={isOpen}
-          addText="Додати секцію"
-          buttonRefs={buttonRefs.current[node.id]}
-          onClose={handleClosePopover}
-        />
-      )}
-      {/* <div className={`${css.expandIconWrapper} ${isOpen ? css.isOpen : ""}`}> */}
-      {/* {node.droppable && (
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        <NodeIcon type={node.data} onClick={handleStopEditing} />
+        {isEditing === node.id ? (
+          <input
+            value={node.text}
+            onChange={(e) => changeName(e.target.value, node.id)}
+          />
+        ) : (
+          <p
+            className={`${css.labelGridItem} ${
+              node.data === "warehouse" && css.warehouse
+            }`}
           >
-            <path
-              d="M10.5866 5.99969L7.99997 8.58632L5.41332 5.99969C5.15332 5.73969 4.73332 5.73969 4.47332 5.99969C4.21332 6.25969 4.21332 6.67965 4.47332 6.93965L7.5333 9.99965C7.59497 10.0615 7.66823 10.1105 7.7489 10.144C7.82957 10.1775 7.91603 10.1947 8.0033 10.1947C8.09063 10.1947 8.1771 10.1775 8.25777 10.144C8.33837 10.1105 8.41163 10.0615 8.4733 9.99965L11.5333 6.93965C11.7933 6.67965 11.7933 6.25969 11.5333 5.99969C11.2733 5.74635 10.8466 5.73969 10.5866 5.99969Z"
-              fill="black"
-            />
-          </svg>
-        )} */}
-      {/* </div> */}
+            {node.text}
+          </p>
+        )}
+      </div>
+      <div
+        className={css.popoverDiv}
+        ref={(el) => (buttonRefs.current[node.id] = el)}
+      >
+        <BsThreeDotsVertical
+          onClick={(e) => handleTogglePopover(node.id, e)}
+          className={css.icon}
+          size={24}
+        />
+        {isOpen === node.id && (
+          <NewElemPop
+            isVisible={isOpen}
+            icon={<IconForPopover type={node.data} />}
+            addText={<TextForPopover type={node.data} />}
+            buttonRefs={buttonRefs.current[node.id]}
+            onClose={handleClosePopover}
+            type={node.data}
+            isEditing={handleEditing}
+            id={node.id}
+            deleteChild={deleteChild}
+          />
+        )}
+      </div>
     </div>
   );
 }
