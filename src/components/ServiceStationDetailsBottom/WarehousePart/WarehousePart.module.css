@@ -108,6 +108,17 @@
 .wrapper {
   width: 915px;
   height: 508px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 7px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  width: 7px;
+  background-color: var(--bg);
 }
 
 .btnBox {
