@@ -39,10 +39,11 @@ function Option({ icon, label, isActive }) {
 
 const InputField = memo(
   ({ label, type }) => {
+    const dynamicId = `$id${Math.random()}`;
     return (
       <div className={styles.inputBox}>
-        <label htmlFor={label[label]}>{label}</label>
-        <input id={label[label]} type={type} />
+        <label htmlFor={dynamicId}>{label}</label>
+        <input id={dynamicId} type={type} />
       </div>
     );
   },
