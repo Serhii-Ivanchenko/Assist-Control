@@ -92,7 +92,7 @@ export default function DownloadPdfButton({ carsData = [], status }) {
         startY: styles.title.y + 10,
         head: [
           [
-            "Дата запису",
+            "Дата заїзду",
             // "Ім'я гостя",
             // "Телефон",
             "Марка авто",
