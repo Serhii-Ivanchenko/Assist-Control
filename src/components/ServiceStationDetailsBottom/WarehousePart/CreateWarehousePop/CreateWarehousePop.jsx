@@ -12,69 +12,80 @@ export default function CreateWarehousePop({ isVisible, onClose, buttonRef }) {
   const [addFromTemplate, setAddFromSaveTemplate] = useState(false);
   const popoverRef = useRef(null);
 
-  const openSaveTempModal = () => {
-    setSaveTemplate(true);
+  // const openSaveTempModal = () => {
+  //   onClose();
+  //   setSaveTemplate(true);
+  // };
+
+  // const openAddFromTempModal = () => {
+  //   onClose();
+  //   setAddFromSaveTemplate(true);
+  // };
+
+  // const closeSaveTempModal = () => {
+  //   setSaveTemplate(false);
+  // };
+
+  // const closeAddFromTempModal = () => {
+  //   setAddFromSaveTemplate(false);
+  // };
+
+  const openSaveTempModal = () => setSaveTemplate(true);
+  const closeSaveTempModal = () => setSaveTemplate(false);
+  const openAddFromTempModal = () => setAddFromSaveTemplate(true);
+  const closeAddFromTempModal = () => setAddFromSaveTemplate(false);
+
+  const handleSaveClick = () => {
+    openSaveTempModal();
   };
 
-  const openAddFromTempModal = () => {
-    setAddFromSaveTemplate(true);
+  const handleAddClick = () => {
+    openAddFromTempModal();
   };
 
-  const closeSaveTempModal = () => {
-    setSaveTemplate(false);
-  };
+  // const handleClickOutside = (event) => {
+  //   if (
+  //     popoverRef.current &&
+  //     !popoverRef.current.contains(event.target) &&
+  //     buttonRef.current &&
+  //     !buttonRef.current.contains(event.target)
+  //   ) {
+  //     onClose();
+  //   }
+  // };
 
-  const closeAddFromTempModal = () => {
-    setAddFromSaveTemplate(false);
-  };
+  // useEffect(() => {
+  //   if (isVisible) {
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //   }
 
-  const handleClickOutside = (event) => {
-    if (
-      popoverRef.current &&
-      !popoverRef.current.contains(event.target) &&
-      buttonRef.current &&
-      !buttonRef.current.contains(event.target)
-    ) {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isVisible]);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [isVisible]);
 
   return (
     <div
       className={`${css.modal} ${isVisible ? css.popoverVisible : css.hidden}`}
       ref={popoverRef}
     >
-      <button type="button" className={css.button} onClick={openSaveTempModal}>
+      <button type="button" className={css.button} onClick={handleSaveClick}>
         {" "}
         <BsFillCloudDownloadFill className={css.icon} size={18} />
         Зберегти у шаблон{" "}
       </button>
       {saveTemplate && (
-        <Modal isOpen={openSaveTempModal} onClose={closeSaveTempModal}>
+        <Modal isOpen={saveTemplate} onClose={closeSaveTempModal}>
           <NewItemModal onClose={closeSaveTempModal} />
         </Modal>
       )}
 
-      <button
-        type="button"
-        className={css.button}
-        onClick={openAddFromTempModal}
-      >
+      <button type="button" className={css.button} onClick={handleAddClick}>
         <BsFillCloudUploadFill className={css.icon} size={18} />
         Завантажити з шаблону{" "}
       </button>
       {addFromTemplate && (
-        <Modal isOpen={openAddFromTempModal} onClose={closeAddFromTempModal}>
+        <Modal isOpen={addFromTemplate} onClose={closeAddFromTempModal}>
           <NewItemSelectModal onClose={closeAddFromTempModal} />
         </Modal>
       )}

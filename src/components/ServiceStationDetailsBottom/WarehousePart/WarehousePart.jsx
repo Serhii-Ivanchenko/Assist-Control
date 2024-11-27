@@ -6,6 +6,8 @@ import { RiFolder5Line } from "react-icons/ri";
 import { BiBuildingHouse } from "react-icons/bi";
 import { BsFolderPlus, BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
+import { BsCheckLg } from "react-icons/bs";
+
 // import Modal from "../../Modals/Modal/Modal";
 // import NewItemModal from "./NewItemModal/NewItemModal";
 // import SortableTree from 'react-sortable-tree';
@@ -25,57 +27,53 @@ import Node from "./Node/Node";
 import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
 // import ThreeDotsModal from "../../Modals/AddStaffMemberModal/ThreeDotsModal/ThreeDotsModal";
 import CreateWarehousePop from "./CreateWarehousePop/CreateWarehousePop";
-const reorderArray = (array, sourceIndex, targetIndex) => {
-  const newArray = [...array];
-  const element = newArray.splice(sourceIndex, 1)[0];
-  newArray.splice(targetIndex, 0, element);
-  return newArray;
-};
 
 const dataForTree = [
   {
-    id: "2",
+    id: "1",
+    parent: null,
     text: "м. Академіка павлова (Назва склада)",
     droppable: true,
-    parent: null,
+
     data: "warehouse",
   },
 
   {
-    id: "3",
+    id: "2",
+    parent: "1",
     text: "Вітрина (Назва секції)",
     droppable: true,
-    parent: "2",
     data: "section",
   },
 
   {
-    id: "4",
+    id: "3",
+    parent: "1",
     text: "2 Поверх (Назва секції)",
     droppable: true,
-    parent: "2",
     data: "section",
   },
 
-  { id: "5", text: "Стелаж", droppable: true, parent: "4", data: "rack" },
+  { id: "4", parent: "3", text: "Стелаж", droppable: true, data: "rack" },
   {
-    id: "6",
+    id: "5",
+    parent: "3",
     text: "Стелаж",
     droppable: true,
-    parent: "4",
+
     data: "rack",
   },
   {
-    id: "7",
+    id: "6",
+    parent: "5",
     text: "Полиця 036",
     droppable: true,
-    parent: "6",
     data: "shelf",
   },
 
-  { id: "8", text: "Місце 0243", parent: "7", data: "place" },
-  { id: "9", text: "Місце 0244", parent: "7", data: "place" },
-  { id: "10", text: "Місце 0245", parent: "7", data: "place" },
+  { id: "7", parent: "6", text: "Місце 0243", data: "place" },
+  { id: "8", parent: "6", text: "Місце 0244", data: "place" },
+  { id: "9", parent: "6", text: "Місце 0245", data: "place" },
 ];
 
 export default function WarehousePart() {
@@ -85,14 +83,35 @@ export default function WarehousePart() {
   const { ref, getPipeHeight, toggle } = useTreeOpenHandler();
   const [treeData, setTreeData] = useState(dataForTree);
   const [popover, setPopover] = useState(false);
+
   const buttonRef = useRef(null);
 
-  const handleTogglePopover = () => {
+  const addNewTree = () => {
+    const newRoot = {
+      id: `${Date.now()}`,
+      text: "Новий склад",
+      droppable: true,
+      parent: null,
+      data: "warehouse",
+    };
+
+    setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
+  };
+
+  const handleTogglePopover = (e) => {
+    e.stopPropagation();
     setPopover((prev) => !prev);
   };
 
   const handleClosePopover = () => {
     setPopover(false);
+  };
+
+  const reorderArray = (array, sourceIndex, targetIndex) => {
+    const newArray = [...array];
+    const element = newArray.splice(sourceIndex, 1)[0];
+    newArray.splice(targetIndex, 0, element);
+    return newArray;
   };
 
   const handleDrop = (newTree, e) => {
@@ -104,7 +123,11 @@ export default function WarehousePart() {
       return;
     const start = treeData.find((v) => v.id === dragSourceId);
     const end = treeData.find((v) => v.id === dropTargetId);
-
+    console.log("handleDrop triggered", {
+      dragSourceId,
+      dropTargetId,
+      destinationIndex,
+    });
     if (
       start?.parent === dropTargetId &&
       start &&
@@ -141,6 +164,7 @@ export default function WarehousePart() {
         );
         const movedElement = output.find((el) => el.id === dragSourceId);
         if (movedElement) movedElement.parent = dropTargetId;
+        console.log("Destination index:", destinationIndex);
         return output;
       });
     }
@@ -189,17 +213,23 @@ export default function WarehousePart() {
           </li>
         </ul>
 
-        <div className={css.popoverBox} ref={buttonRef}>
+        <div className={css.newWarehouse}>
           <button
             type="button"
-            className={css.newWarehouse}
-            onClick={handleTogglePopover}
-            ref={buttonRef}
+            className={css.newWarehouseBtn}
+            onClick={addNewTree}
           >
             <BsFolderPlus className={css.icon} />
             Новий склад
-            <BsThreeDotsVertical className={css.icon} />
           </button>
+
+          <div className={css.popoverBox} ref={buttonRef}>
+            <BsThreeDotsVertical
+              className={css.icon}
+              onClick={handleTogglePopover}
+            />
+          </div>
+
           {popover && (
             <CreateWarehousePop
               isVisible={popover}
@@ -236,12 +266,24 @@ export default function WarehousePart() {
               dropTarget: css.dropTarget,
               listItem: css.listItem,
             }}
-            dragPreviewRender={(node) => <div>{node.text}</div>}
+            dragPreviewRender={(node) => (
+              <div
+              // style={{
+              //   // padding: "5px 10px",
+              //   // backgroundColor: "lightblue",
+              //   width: "100px",
+              //   color: "white",
+              //   // border: "1px solid blue",
+              // }}
+              >
+                {node.text}
+              </div>
+            )}
             onDrop={handleDrop}
-            sort={(a, b) => a.id - b.id}
+            sort={false}
             insertDroppableFirst={false}
             enableAnimateExpand={true}
-            canDrop={() => true}
+            canDrop={(targetNode) => targetNode.droppable}
             dropTargetOffset={5}
             render={(node, { depth, isOpen, isDropTarget }) => (
               <Node
@@ -256,6 +298,7 @@ export default function WarehousePart() {
                 }}
                 isDropTarget={isDropTarget}
                 treeData={treeData}
+                setTreeData={setTreeData}
                 // data={treeData.data}
               />
             )}
@@ -267,6 +310,16 @@ export default function WarehousePart() {
           />
         </div>
       </DndProvider>
+
+      <div className={css.btnBox}>
+        <button type="button" className={css.btnClose}>
+          Закрити
+        </button>
+        <button type="button" className={css.btnSave}>
+          <BsCheckLg size={18} />
+          Зберегти
+        </button>
+      </div>
     </div>
   );
 }

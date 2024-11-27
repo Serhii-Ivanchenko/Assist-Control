@@ -9,7 +9,7 @@ import { RiFridgeLine } from "react-icons/ri";
 import { RiTableAltLine } from "react-icons/ri";
 import { RiFolder5Line } from "react-icons/ri";
 import { BiBuildingHouse } from "react-icons/bi";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 const TREE_X_OFFSET = 40;
 
@@ -54,7 +54,31 @@ export default function Node({
   onClick,
   treeData,
   getPipeHeight,
+  setTreeData,
 }) {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditing = (id, e) => {
+    e.stopPropagation();
+    setIsEditing(isEditing === id ? null : id);
+  };
+  const handleStopEditing = () => {
+    setIsEditing(false);
+  };
+
+  const changeName = (newName, index) => {
+    setTreeData(
+      treeData.map((data, i) =>
+        i === index ? { ...data, text: newName } : data
+      )
+    );
+  };
+
+  const deleteChild = (index, e) => {
+    e.stopPropagation();
+    setTreeData((prevData) => prevData.filter((_, i) => i !== index));
+  };
+
   const indent = depth * TREE_X_OFFSET;
 
   const handleToggle = (e) => {
@@ -65,8 +89,8 @@ export default function Node({
   const buttonRefs = useRef([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleTogglePopover = (id) => {
-    // e.stopPropagation();
+  const handleTogglePopover = (id, e) => {
+    e.stopPropagation();
     setIsOpen(isOpen === id ? null : id);
   };
 
@@ -79,20 +103,20 @@ export default function Node({
   //   getPipeHeight(node.parent, treeData)
   // );
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        buttonRefs.current &&
-        !buttonRefs.current.some((ref) => ref && ref.contains(event.target))
-      ) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (
+  //       buttonRefs.current &&
+  //       !buttonRefs.current.some((ref) => ref && ref.contains(event.target))
+  //     ) {
+  //       setIsOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
   return (
     <div
@@ -117,14 +141,21 @@ export default function Node({
 
       <div className={css.iconAndText}>
         {" "}
-        <NodeIcon type={node.data} />
-        <p
-          className={`${css.labelGridItem} ${
-            node.data === "warehouse" && css.warehouse
-          }`}
-        >
-          {node.text}
-        </p>
+        <NodeIcon type={node.data} onClick={handleStopEditing} />
+        {isEditing === node.id ? (
+          <input
+            value={node.text}
+            onChange={(e) => changeName(e.target.value, node.id)}
+          />
+        ) : (
+          <p
+            className={`${css.labelGridItem} ${
+              node.data === "warehouse" && css.warehouse
+            }`}
+          >
+            {node.text}
+          </p>
+        )}
       </div>
       <div
         className={css.popoverDiv}
@@ -132,7 +163,7 @@ export default function Node({
       >
         {/* <button type="button"></button> */}
         <BsThreeDotsVertical
-          onClick={() => handleTogglePopover(node.id)}
+          onClick={(e) => handleTogglePopover(node.id, e)}
           className={css.icon}
           size={24}
           // ref={buttonRefs.current[node.id]}
@@ -145,6 +176,9 @@ export default function Node({
             buttonRefs={buttonRefs.current[node.id]}
             onClose={handleClosePopover}
             type={node.data}
+            isEditing={handleEditing}
+            id={node.id}
+            deleteChild={deleteChild}
           />
         )}
       </div>
