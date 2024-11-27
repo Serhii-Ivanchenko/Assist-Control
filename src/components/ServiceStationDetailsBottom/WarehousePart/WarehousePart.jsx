@@ -283,7 +283,7 @@ export default function WarehousePart() {
             sort={false}
             insertDroppableFirst={false}
             enableAnimateExpand={true}
-            canDrop={(targetNode) => targetNode.droppable}
+            canDrop={() => true}
             dropTargetOffset={5}
             render={(node, { depth, isOpen, isDropTarget }) => (
               <Node
