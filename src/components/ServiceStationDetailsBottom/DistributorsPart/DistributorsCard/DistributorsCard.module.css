@@ -23,7 +23,7 @@ span {
   gap: 27px;
   width: 166px;
   height: auto;
-  padding: 15px 10px 17px 19px;
+  padding: 15px 10px 18px 18px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -240,7 +240,7 @@ input:checked + .slider::before {
   transform: translateX(25px);
 }
 
-.inputsWrapper {
+.authForm {
   display: flex;
   flex-direction: column;
   gap: 17px;
@@ -285,10 +285,9 @@ input:checked + .slider::before {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-
   width: fit-content;
   padding: 6px 10px;
+  gap: 11px;
 
   border: transparent;
   border-radius: 6px;
@@ -299,4 +298,6 @@ input:checked + .slider::before {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
 }
