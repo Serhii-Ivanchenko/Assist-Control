@@ -160,19 +160,6 @@ span {
   height: auto;
 }
 
-.connectDesc {
-  position: absolute;
-  top: 255px;
-  display: inline-flex;
-  position: relative;
-  z-index: 10;
-  width: 400px;
-  font-family: "Roboto", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  cursor: default;
-}
-
 .authBox {
   display: flex;
   flex-direction: column;
@@ -299,5 +286,53 @@ input:checked + .slider::before {
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
+  cursor: pointer;
+}
+
+.popupConnectionWrapper {
+  position: absolute;
+  left: 42px;
+  top: 82px;
+  display: flex;
+  justify-content: flex-end;
+  width: 391px;
+  height: 144px;
+  padding: 13px 19px 20px 20px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.popupInnerContainer {
+  display: flex;
+  min-height: 84px;
+  width: 351px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 0px 12px 12px 12px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.connectDesc {
+  color: var(--light-gray);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  cursor: default;
+}
+
+.closeConnectionPopupBtn {
+  display: inline-block;
+  background: none;
+  border: none;
+  color: var(--input-stroke);
   cursor: pointer;
 }
