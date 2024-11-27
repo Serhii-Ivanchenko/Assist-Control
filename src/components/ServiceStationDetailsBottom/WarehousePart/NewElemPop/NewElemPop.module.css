@@ -69,6 +69,7 @@
   font-weight: 400;
   line-height: normal;
   font-variant: small-caps;
+  cursor: pointer;
 }
 
 .btn:hover {
