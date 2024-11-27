@@ -5,7 +5,6 @@
 
   border-radius: 12px;
   background: var(--bg-secondary);
-  transition: height 0.3s ease, flex-grow 0.3s ease;
 }
 
 .closeBtn {
@@ -623,7 +622,20 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transition: height 0.5s ease; /* Плавна анімація висоти */
 }
+
+.scheduleCollapsed {
+  height: 31px; /* Висота без графіка */
+}
+.scheduleExpanded {
+  height: 298px;
+}
+
+.scincenterHidden {
+  display: none;
+}
+
 .scincenter {
   display: flex;
   align-items: center;
