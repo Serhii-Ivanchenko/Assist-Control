@@ -43,26 +43,26 @@ export default function CreateWarehousePop({ isVisible, onClose, buttonRef }) {
     openAddFromTempModal();
   };
 
-  // const handleClickOutside = (event) => {
-  //   if (
-  //     popoverRef.current &&
-  //     !popoverRef.current.contains(event.target) &&
-  //     buttonRef.current &&
-  //     !buttonRef.current.contains(event.target)
-  //   ) {
-  //     onClose();
-  //   }
-  // };
+  const handleClickOutside = (event) => {
+    if (
+      popoverRef.current &&
+      !popoverRef.current.contains(event.target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target)
+    ) {
+      onClose();
+    }
+  };
 
-  // useEffect(() => {
-  //   if (isVisible) {
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //   }
+  useEffect(() => {
+    if (isVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
 
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [isVisible]);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isVisible]);
 
   return (
     <div
