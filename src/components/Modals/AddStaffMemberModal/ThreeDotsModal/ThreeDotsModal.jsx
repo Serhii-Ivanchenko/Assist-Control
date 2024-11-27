@@ -2,30 +2,30 @@ import css from "./ThreeDotsModal.module.css";
 import { BsFillCloudDownloadFill } from "react-icons/bs";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import { useRef } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
-export default function ThreeDotsModal({ isVisible, onClose, buttonRefs }) {
+export default function ThreeDotsModal({ isVisible }) {
   const popoverRef = useRef(null);
 
-  const handleClickOutside = (event) => {
-    if (
-      popoverRef.current &&
-      !popoverRef.current.contains(event.target) &&
-      buttonRefs.every((ref) => ref.current && !ref.contains(event.target))
-    ) {
-      onClose();
-    }
-  };
+  // const handleClickOutside = (event) => {
+  //   if (
+  //     popoverRef.current &&
+  //     !popoverRef.current.contains(event.target) &&
+  //     buttonRefs.every((ref) => ref.current && !ref.contains(event.target))
+  //   ) {
+  //     onClose();
+  //   }
+  // };
 
-  useEffect(() => {
-    if (!isVisible) return;
+  // useEffect(() => {
+  //   if (!isVisible) return;
 
-    document.addEventListener("mousedown", handleClickOutside);
+  //   document.addEventListener("mousedown", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isVisible]);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [isVisible]);
 
   return (
     <div

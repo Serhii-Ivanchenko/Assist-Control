@@ -38,9 +38,9 @@ export default function AddStaffMemberModal({ onClose }) {
     setSettingsIsOpen(settingsIsOpen === index ? null : index);
   };
 
-  const closePopover = () => {
-    setSettingsIsOpen(false);
-  };
+  // const closePopover = () => {
+  //   setSettingsIsOpen(false);
+  // };
 
   // const generateRandomString = (length) => {
   //   const characters =
@@ -368,8 +368,8 @@ export default function AddStaffMemberModal({ onClose }) {
                   {settingsIsOpen === 0 && (
                     <ThreeDotsModal
                       isVisible={true}
-                      buttonRef={buttonRefs.current[0]}
-                      onClose={closePopover}
+                      // buttonRef={buttonRefs.current[0]}
+                      // onClose={closePopover}
                     />
                   )}
 
@@ -393,8 +393,8 @@ export default function AddStaffMemberModal({ onClose }) {
                   {settingsIsOpen === 1 && (
                     <ThreeDotsModal
                       isVisible={true}
-                      buttonRef={buttonRefs.current[1]}
-                      onClose={closePopover}
+                      // buttonRef={buttonRefs.current[1]}
+                      // onClose={closePopover}
                     />
                   )}
 
@@ -421,8 +421,8 @@ export default function AddStaffMemberModal({ onClose }) {
                   {settingsIsOpen === 2 && (
                     <ThreeDotsModal
                       isVisible={true}
-                      buttonRef={buttonRefs.current[2]}
-                      onClose={closePopover}
+                      // buttonRef={buttonRefs.current[2]}
+                      // onClose={closePopover}
                     />
                   )}
                   <Field
