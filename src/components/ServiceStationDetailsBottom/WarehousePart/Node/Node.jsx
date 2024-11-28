@@ -57,24 +57,41 @@ export default function Node({
   setTreeData,
 }) {
   const [isEditing, setIsEditing] = useState(false);
+  const inputFocusRef = useRef();
 
   const handleEditing = (id, e) => {
     e.stopPropagation();
-    setIsEditing(isEditing === id ? null : id);
+    // setIsEditing(isEditing === id ? null : id);
+    setIsEditing(id);
   };
+
+  useEffect(() => {
+    if (isEditing) {
+      inputFocusRef.current.focus();
+    }
+  }, [isEditing]);
+
   const handleStopEditing = () => {
     setIsEditing(false);
   };
 
   const changeName = (newName, id) => {
     setTreeData(
-      treeData.map((data, i) => (i === id ? { ...data, text: newName } : data))
+      treeData.map((node) =>
+        node.id === id ? { ...node, text: newName } : node
+      )
     );
   };
 
   const deleteChild = (id, e) => {
     e.stopPropagation();
-    setTreeData((prevData) => prevData.filter((_, i) => i !== id));
+    setTreeData((prevData) =>
+      prevData.filter((node) => node.id !== id && node.parentId !== id)
+    );
+  };
+
+  const onInputClick = (e) => {
+    e.stopPropagation();
   };
 
   const indent = depth * TREE_X_OFFSET;
@@ -122,7 +139,10 @@ export default function Node({
         node.droppable && isDropTarget ? css.dropTarget : ""
       } ${node.data === "warehouse" && css.whWidth}`}
       style={{ marginInlineStart: indent }}
-      onClick={handleToggle}
+      onClick={(e) => {
+        handleToggle(e);
+        handleStopEditing();
+      }}
     >
       <div
         className={css.pipeX}
@@ -142,8 +162,11 @@ export default function Node({
         <NodeIcon type={node.data} onClick={handleStopEditing} />
         {isEditing === node.id ? (
           <input
+            className={css.input}
             value={node.text}
             onChange={(e) => changeName(e.target.value, node.id)}
+            onClick={onInputClick}
+            ref={inputFocusRef}
           />
         ) : (
           <p

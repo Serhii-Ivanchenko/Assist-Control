@@ -18,7 +18,8 @@ export default function NewElemPop({
   const popoverRef = useRef(null);
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const openModal = () => {
+  const openModal = (e) => {
+    e.stopPropagation();
     setIsOpen(true);
   };
 
