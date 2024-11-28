@@ -181,9 +181,24 @@
 
 .treeContainer {
   display: flex;
+  flex-direction: column;
   min-height: 200px;
-  max-height: 508px;
+  max-height: 525px;
   overflow-y: auto;
   overflow-x: hidden;
   margin-bottom: 31px;
+}
+
+.treeContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.treeContainer::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+}
+
+.treeContainer::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--main-gray);
 }

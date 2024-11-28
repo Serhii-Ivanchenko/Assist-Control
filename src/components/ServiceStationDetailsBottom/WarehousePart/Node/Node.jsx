@@ -135,7 +135,9 @@ export default function Node({
     <div
       className={`${css.nodeWrapper} tree-node ${
         node.droppable && isDropTarget ? css.dropTarget : ""
-      } ${node.data === "warehouse" && css.whWidth}`}
+      }
+      `}
+      // ${node.data === "warehouse" && css.whWidth}
       style={{ marginInlineStart: indent }}
       onClick={handleToggle}
     >
