@@ -11,9 +11,8 @@
     text-align: center;
     justify-content: center;
     gap: 7px;
-    cursor: pointer;
-
 }
+
 
 .btnPdfText {
     color: var(--icon-gray);
