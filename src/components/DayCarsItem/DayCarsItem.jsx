@@ -126,8 +126,7 @@ export default function DayCarsItem({ car, isModal }) {
       <div className={clsx(styles.carsInfo, isModal && styles.modalCarsInfo)}>
         <div className={styles.carInfoLeft}>
         {visibility?.rating && (
-            <div
-            className={clsx(
+            <div className={clsx(
               !visibility.rating && styles.hidden
             )}
           >

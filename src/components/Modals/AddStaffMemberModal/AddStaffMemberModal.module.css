@@ -5,6 +5,7 @@
 
   border-radius: 12px;
   background: var(--bg-secondary);
+  transition: height 0.3s ease, flex-grow 0.3s ease;
 }
 
 .closeBtn {
