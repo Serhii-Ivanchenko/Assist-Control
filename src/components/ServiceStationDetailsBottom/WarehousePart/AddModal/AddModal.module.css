@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
 }
 
@@ -55,6 +55,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  cursor: pointer;
 }
 
 .btnSave {
@@ -74,4 +75,6 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+
+  cursor: pointer;
 }

@@ -18,11 +18,14 @@ export default function NewElemPop({
   const popoverRef = useRef(null);
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const openModal = () => {
-    setIsOpen(true);
+  const openModal = (e) => {
+     e.stopPropagation();
+     console.log("Modal is being opened");
+     setIsOpen(true);
   };
 
   const handleModalClose = () => {
+     console.log("Modal is being closed");
     setIsOpen(false);
   };
 
@@ -40,8 +43,20 @@ export default function NewElemPop({
             {addText}
           </button>
           {modalIsOpen && (
-            <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-              <AddModal onClose={handleModalClose} />
+            <Modal
+              isOpen={modalIsOpen}
+              onClose={handleModalClose}
+              shouldCloseOnOverlayClick={false}
+            >
+              <div
+                className={css.modalContent}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  console.log("Clicked inside modal");
+                }}
+              >
+                <AddModal onClose={handleModalClose} />
+              </div>
             </Modal>
           )}
         </div>
