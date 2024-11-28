@@ -535,11 +535,7 @@ export default function AddStaffMemberModal({ onClose }) {
               <p className={css.salaryRules}>Правила начислення зарплатні</p>
             </div>
 
-            <div
-              className={`${css.schedule} ${
-                values.schedule ? css.scheduleExpanded : css.scheduleCollapsed
-              }`}
-            >
+            <div className={css.schedule}>
               <div className={css.cblabelBox}>
                 <label className={css.scheduleLabel}>
                   <Field
