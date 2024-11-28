@@ -55,14 +55,16 @@ export default function Node({
   treeData,
   getPipeHeight,
   setTreeData,
+  // setIsEditing,
+  isEditing,
+  onStartEditing,
 }) {
-  const [isEditing, setIsEditing] = useState(false);
   const inputFocusRef = useRef();
 
   const handleEditing = (id, e) => {
     e.stopPropagation();
     // setIsEditing(isEditing === id ? null : id);
-    setIsEditing(id);
+    onStartEditing(id);
   };
 
   useEffect(() => {
@@ -70,10 +72,6 @@ export default function Node({
       inputFocusRef.current.focus();
     }
   }, [isEditing]);
-
-  const handleStopEditing = () => {
-    setIsEditing(false);
-  };
 
   const changeName = (newName, id) => {
     setTreeData(
@@ -139,10 +137,7 @@ export default function Node({
         node.droppable && isDropTarget ? css.dropTarget : ""
       } ${node.data === "warehouse" && css.whWidth}`}
       style={{ marginInlineStart: indent }}
-      onClick={(e) => {
-        handleToggle(e);
-        handleStopEditing();
-      }}
+      onClick={handleToggle}
     >
       <div
         className={css.pipeX}
@@ -159,7 +154,7 @@ export default function Node({
 
       <div className={css.iconAndText}>
         {" "}
-        <NodeIcon type={node.data} onClick={handleStopEditing} />
+        <NodeIcon type={node.data} />
         {isEditing === node.id ? (
           <input
             className={css.input}

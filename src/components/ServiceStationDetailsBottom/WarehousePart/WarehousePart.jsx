@@ -82,6 +82,16 @@ export default function WarehousePart() {
 
   const buttonRef = useRef(null);
 
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleStopEditing = () => {
+    setIsEditing(false);
+  };
+
+  const handleStartEditing = (nodeId) => {
+    setIsEditing(nodeId); // Початок редагування
+  };
+
   // const addNewTree = () => {
   //   const newRoot = {
   //     id: `${Date.now()}`,
@@ -300,6 +310,9 @@ export default function WarehousePart() {
                   isDropTarget={isDropTarget}
                   treeData={treeData}
                   setTreeData={setTreeData}
+                  isEditing={isEditing}
+                  setIsEditing={setIsEditing}
+                  onStartEditing={handleStartEditing}
                   // data={treeData.data}
                 />
               )}
@@ -317,7 +330,11 @@ export default function WarehousePart() {
         <button type="button" className={css.btnClose}>
           Закрити
         </button>
-        <button type="button" className={css.btnSave}>
+        <button
+          type="button"
+          className={css.btnSave}
+          onClick={handleStopEditing}
+        >
           <BsCheckLg size={18} />
           Зберегти
         </button>

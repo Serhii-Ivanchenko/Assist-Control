@@ -181,6 +181,7 @@
 
 .treeContainer {
   display: flex;
+  min-height: 200px;
   max-height: 508px;
   overflow-y: auto;
   overflow-x: hidden;
