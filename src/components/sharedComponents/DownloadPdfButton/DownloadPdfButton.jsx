@@ -1,4 +1,3 @@
-import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 import { BsDownload } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -7,6 +6,8 @@ import logo from "../../../assets/images/logo-dark-theme.png";
 import { selectUser } from "../../../redux/auth/selectors";
 import { selectDate } from "../../../redux/cars/selectors";
 import "../../../assets/fonts/Roboto-Regular-normal.js";
+import jsPDF from "jspdf";
+
 
 export default function DownloadPdfButton({ carsData = [], status }) {
   const userData = useSelector(selectUser);
@@ -114,13 +115,10 @@ export default function DownloadPdfButton({ carsData = [], status }) {
 
     generatePdf();
   };
-
   return (
-    <div className={css.btnPdfContainer}>
       <button className={css.btnPdf} onClick={handleDownload}>
         <BsDownload size={16} color="var(--icon-gray)" />
         <span className={css.btnPdfText}>.pdf</span>
       </button>
-    </div>
   );
 }

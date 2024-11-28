@@ -127,13 +127,12 @@ export default function DayCarsItem({ car, isModal }) {
         <div className={styles.carInfoLeft}>
         {visibility?.rating && (
             <div
-              className={clsx(
-                styles.crmRating,
-                !visibility.rating && styles.hidden
-              )}
-            >
-              <RatingStars rating={car.rating} />
-            </div>
+            className={clsx(
+              !visibility.rating && styles.hidden
+            )}
+          >
+            <RatingStars rating={car.rating} />
+          </div>
           )}
 
           {visibility?.prePayment && (
