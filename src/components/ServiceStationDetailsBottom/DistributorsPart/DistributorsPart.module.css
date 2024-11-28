@@ -2,7 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  max-height: 265px;
+  justify-content: space-between;
+  max-height: 1000px;
 }
 
 .btn {

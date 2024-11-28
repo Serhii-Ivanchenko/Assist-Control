@@ -15,7 +15,7 @@ function PopupMenu({ isOpen, onClose, popupRef }) {
               onClose();
             }}
           >
-            <BsPencil /> Редагувати
+            <BsPencil size={18} /> Редагувати
           </button>
         </li>
         <li>
@@ -25,7 +25,7 @@ function PopupMenu({ isOpen, onClose, popupRef }) {
               onClose();
             }}
           >
-            <BsTrash /> Видалити
+            <BsTrash size={18} /> Видалити
           </button>
         </li>
       </ul>
