@@ -180,7 +180,12 @@
 
   width: 136px;
   text-align: center;
-  appearance: none;
+  outline: none;
+}
+
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+  display: none;
 }
 
 .btnPlus {
@@ -320,6 +325,10 @@
   text-align: center;
 
   outline: none;
+}
+
+.select > option {
+  font-size: 20px;
 }
 
 .iconArrow {

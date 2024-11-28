@@ -151,6 +151,7 @@ export default function SparesPart() {
             <div className={css.inputBox}>
               <label className={css.inputLabel}>грн</label>
               <input
+                type="number"
                 placeholder="400"
                 className={css.input}
                 value={fixedRow.UAH}
@@ -161,6 +162,7 @@ export default function SparesPart() {
             <div className={css.inputBox}>
               <label className={css.inputLabel}>%</label>
               <input
+                type="number"
                 placeholder="10"
                 className={css.input}
                 value={fixedRow.percent}
