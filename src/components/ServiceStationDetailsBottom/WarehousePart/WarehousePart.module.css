@@ -1,3 +1,9 @@
+.warehouseContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .itemsList {
   display: flex;
   gap: 20px;
@@ -107,9 +113,9 @@
 
 .wrapper {
   width: 915px;
-  height: 508px;
+  /* height: 508px;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: hidden; */
 }
 
 .wrapper::-webkit-scrollbar {
@@ -172,3 +178,11 @@
   border-bottom: 3px solid #e8f0fe;
   border-radius: 4px;
 } */
+
+.treeContainer {
+  display: flex;
+  max-height: 508px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 31px;
+}

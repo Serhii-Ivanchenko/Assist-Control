@@ -183,7 +183,7 @@ export default function WarehousePart() {
   // };
 
   return (
-    <div>
+    <div className={css.warehouseContainer}>
       <div className={css.listAndButton}>
         <ul className={css.itemsList}>
           <li className={css.items}>
@@ -249,67 +249,69 @@ export default function WarehousePart() {
                 treeData={tree}
                 onChange={(newTreeData)=> setTree(newTreeData)}
             /> */}
-      <DndProvider backend={MultiBackend} options={getBackendOptions()}>
-        <div className={css.wrapper}>
-          <Tree
-            ref={ref}
-            tree={treeData}
-            rootId={null}
-            // render={(node, { depth, isOpen, onToggle }) => (
-            //   <div style={{ marginLeft: depth * 40 }}>
-            //     <span onClick={onToggle}>{isOpen ? "▼" : "▶"}</span> {node.text}
-            //   </div>
-            // )}
-            classes={{
-              root: css.treeRoot,
-              placeholder: css.placeholder,
-              dropTarget: css.dropTarget,
-              listItem: css.listItem,
-            }}
-            dragPreviewRender={(node) => (
-              <div
-              // style={{
-              //   // padding: "5px 10px",
-              //   // backgroundColor: "lightblue",
-              //   width: "100px",
-              //   color: "white",
-              //   // border: "1px solid blue",
-              // }}
-              >
-                {node.text}
-              </div>
-            )}
-            onDrop={handleDrop}
-            sort={false}
-            insertDroppableFirst={false}
-            enableAnimateExpand={true}
-            canDrop={() => true}
-            dropTargetOffset={5}
-            render={(node, { depth, isOpen, isDropTarget }) => (
-              <Node
-                getPipeHeight={getPipeHeight}
-                node={node}
-                depth={depth}
-                isOpen={isOpen}
-                onClick={() => {
-                  if (node.droppable) {
-                    toggle(node?.id);
-                  }
-                }}
-                isDropTarget={isDropTarget}
-                treeData={treeData}
-                setTreeData={setTreeData}
-                // data={treeData.data}
-              />
-            )}
+      <div className={css.treeContainer}>
+        <DndProvider backend={MultiBackend} options={getBackendOptions()}>
+          <div className={css.wrapper}>
+            <Tree
+              ref={ref}
+              tree={treeData}
+              rootId={null}
+              // render={(node, { depth, isOpen, onToggle }) => (
+              //   <div style={{ marginLeft: depth * 40 }}>
+              //     <span onClick={onToggle}>{isOpen ? "▼" : "▶"}</span> {node.text}
+              //   </div>
+              // )}
+              classes={{
+                root: css.treeRoot,
+                placeholder: css.placeholder,
+                dropTarget: css.dropTarget,
+                listItem: css.listItem,
+              }}
+              dragPreviewRender={(node) => (
+                <div
+                // style={{
+                //   // padding: "5px 10px",
+                //   // backgroundColor: "lightblue",
+                //   width: "100px",
+                //   color: "white",
+                //   // border: "1px solid blue",
+                // }}
+                >
+                  {node.text}
+                </div>
+              )}
+              onDrop={handleDrop}
+              sort={false}
+              insertDroppableFirst={false}
+              enableAnimateExpand={true}
+              canDrop={() => true}
+              dropTargetOffset={5}
+              render={(node, { depth, isOpen, isDropTarget }) => (
+                <Node
+                  getPipeHeight={getPipeHeight}
+                  node={node}
+                  depth={depth}
+                  isOpen={isOpen}
+                  onClick={() => {
+                    if (node.droppable) {
+                      toggle(node?.id);
+                    }
+                  }}
+                  isDropTarget={isDropTarget}
+                  treeData={treeData}
+                  setTreeData={setTreeData}
+                  // data={treeData.data}
+                />
+              )}
 
-            // childrenAccessor="children"
-            // height={400}
-            // width={500}
-            // parentAccessor="parentId"
-          />
-        </div>
-      </DndProvider>
+              // childrenAccessor="children"
+              // height={400}
+              // width={500}
+              // parentAccessor="parentId"
+            />
+          </div>
+        </DndProvider>
+      </div>
 
       <div className={css.btnBox}>
         <button type="button" className={css.btnClose}>
