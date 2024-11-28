@@ -8,6 +8,7 @@ import {
 import { BsCaretDownFill } from "react-icons/bs";
 // import { useState } from "react";
 import ServiceStationDetailsTop from "../ServiceStationDetailsTop/ServiceStationDetailsTop.jsx";
+import ServiceStationDetailsTopTable from "../ServiceStationDetailsTopTable/ServiceStationDetailsTopTable.jsx";
 import css from "./ServiceStationDetailsAccordion.module.css";
 
 export default function ServiceStationDetailsAccordion({ onToggle }) {
@@ -101,7 +102,8 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
           marginTop: "19px",
         }}
       >
-        <ServiceStationDetailsTop />
+          <ServiceStationDetailsTop /> 
+        {/* <ServiceStationDetailsTopTable /> */}
       </AccordionDetails>
     </Accordion>
   );

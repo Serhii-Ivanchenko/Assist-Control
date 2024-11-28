@@ -1,24 +1,80 @@
-/* .scheduleWrapper {
-    display: flex;
-    flex-direction: column;
-    max-height: 311px;
-    padding: 0 30.5px;
-    width:853px;
-    border-radius: 12px;
-}
-*/
 
 .workSchedule {
-    border-collapse: collapse;
+     /* border-collapse: collapse;   */
     width: 863px;
+   
     border-radius: 12px;
-    background: linear-gradient(0deg, #23252C 0%, #8B8B8B 20%, #566596 50%, #8E8E8E 80%, #23252C 100%);
+    /* background:
+            linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(81, 85, 98, 0.75) 10%, rgba(81, 85, 98, 0.75) 90%, rgba(0, 0, 0, 0.1) 100%),
+           
+            linear-gradient(to bottom, rgba(81, 85, 98, 0.75) 300px,  rgba(0, 0, 0, 0.1) 11px);
+        
+        background-blend-mode: multiply;
+         */
+       background-color: rgba(81, 85, 98, 0.75);   
+    /* background: linear-gradient(0deg, #8B8B8B 0%, #566596 50%, #8E8E8E 80%, #23252E 100%); */
     box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10);
     /* background: var(--white); */
-    border-collapse: separate;
+      border-collapse: separate;      
     /* Для скругления углов */
-    border-spacing: 1px;
+     border-spacing: 0px; 
+    margin: 0;
+     border: none; 
+    border-collapse: separate;
+        /* Не объединять ячейки */
+        border-spacing: 1px;
+        /* Прозрачные зазоры для сетки */
+        border: none;
 }
+.container{
+    width: 864px;
+    border-radius: 12px;
+    margin-left: 1px;
+        background: linear-gradient(180deg, rgba(81, 85, 98, 0.75) 39px, #8B8B8B 30%, #566596 50%, #8E8E8E 90%, #23252E 100%);
+}
+.workScheduleGrid {
+    display: grid;
+    grid-template-rows: 39px repeat( 7, 30px);
+     grid-template-columns: 85px repeat(15, 1fr); 
+    /* gap: 1px ; */
+   
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10);
+    border-radius: 12px;
+width: 865px;
+    /* background: linear-gradient(180deg, rgba(81, 85, 98, 0.75) 39px, #8B8B8B 30%, #566596 50%, #8E8E8E 90%, #23252E 100%); */
+    
+}
+
+
+
+.daycell {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    background-color: #31353E;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    width: 89px;
+    border-left: 2px solid #31353E;
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #eee;
+        font-weight: bold;
+        text-align: center;
+        padding: 5px;
+}
+
+.hourCell {
+    width: 51px;
+    height: 30px;
+    border: 1px solid transparent;
+    text-align: center;
+    cursor: pointer;
+}
+
+
 
 .header {
     background-color: rgba(81, 85, 98, 0.75);
@@ -28,16 +84,52 @@
     font-weight: bold;
     text-align: center;
     border-radius: 12px 12px 0 0;
-    /* Скругление верхних углов */
+    border: none;
+    /* border-spacing: 0; */
+
+     /* display: grid;
+        grid-template-columns: 89px repeat(15, 40px);
+        gap: 1px; */
+} 
+
+
+tbody {
+    background: transparent;
+    background: linear-gradient(0deg, #23252E 0%,#8B8B8B 10%, #566596 50%, #8E8E8E 90%, #23252E 100%);
+    /* Прозрачный фон для отображения основного фона таблицы */
 }
 
-.header th {
-    border: none;
 
+.headercell {
+    font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        background-color: rgba(81, 85, 98, 0.75);
+        color: var(--white);
+        text-align: center;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+}
+
+.headercell:first-child{
+    font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        padding-top: 10px;
+            border-radius: 12px 0 0 0;
+}
+
+.headerlast{
+border-radius: 0 12px 0 0;
+border-top-right-radius: 12px;
 }
 
 .headerfirstcolumn {
-    width: 89px;
+    width: 85px;
     background-color: rgba(81, 85, 98, 0.75);
     color: var(--white);
     font-size: 14px;
@@ -45,19 +137,28 @@
     font-weight: 500;
     line-height: normal;
     text-align: center;
+    padding-top: 10px;
     border-radius: 12px 0 0 0;
 }
 
 .headerothercolumn {
-    width: 40px;
+    width: 51px;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    background-color: rgba(81, 85, 98, 0.75);
+        color: var(--white);
+        text-align: center;
+        padding: 5px;
+        display: flex;
+            align-items: center;
+            justify-content: center;
 }
 
-.header .headerothercolumn:last-child {
+.headerothercolumn::last-of-type {
     border-radius: 0 12px 0 0;
+    border-top-right-radius: 12px;
 }
 
 
@@ -69,46 +170,40 @@ tbody td {
     cursor: pointer;
     border-bottom: 2px solid transparent;
     border-right: 2px solid transparent;
-    /* Прозрачный бордер */
+    border-spacing: 2px;
 }
 
-tbody td:hover {
+.cell:hover {
     background-color: rgba(0, 0, 0, 0.1);
     /* Легкий эффект при наведении */
 }
 
 .active {
-    background-color: var(--blue-btn-normal);
+    background-color: var(--blue-btn-normal); 
+    
 
-    color: white;
+   
 }
 
 .inactive {
-    background-color: var(--contacts-info-bg);
+    background-color: #31353E;
     /* Фон для неактивных */
 }
 
 tbody tr td:first-child {
-    background-color: var(--contacts-info-bg);
+    background-color: #31353E;
     color: white;
     text-align: center;
     font-size: 16px;
     width: 89px;
-}
+border-left: 2px solid #31353E;
 
-tbody tr:last-child td:first-child {
-    border-radius: 0 0 0 12px;
-}
-
-tbody tr:last-child td:last-child {
-    border-radius: 0 0 12px 0;
 }
 
 .generateButton {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: var(--blue-btn-normal);
-    /* Зеленая кнопка */
     color: white;
     font-size: 16px;
     border: none;
@@ -119,4 +214,38 @@ tbody tr:last-child td:last-child {
 .generateButton:hover {
     background-color: var(--blue-btn-normal);
 
+}
+
+
+
+
+
+.dayLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+        background-color: #31353E;
+        color: white;
+        text-align: center;
+        font-size: 16px;
+        width: 85px;
+        font-style: normal;
+        line-height: normal;
+        font-weight: 300;
+}
+
+.dayLabel:last-child {
+    border-radius: 0 0 0 12px ;
+}
+
+.cell {
+    width: 51px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.cell:last-child{
+    border-radius: 0 0 12px 0;
 }
