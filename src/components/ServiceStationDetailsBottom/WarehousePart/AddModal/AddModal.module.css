@@ -55,6 +55,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  cursor: pointer;
 }
 
 .btnSave {
@@ -74,4 +75,6 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+
+  cursor: pointer;
 }
