@@ -23,7 +23,6 @@
     "firebase": "^10.14.1",
     "flag-icons": "^7.2.3",
     "formik": "^2.4.6",
-    "html2pdf.js": "^0.10.2",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4",
     "modern-normalize": "^3.0.1",

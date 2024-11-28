@@ -1,0 +1,19 @@
+.scincenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.scincenter.show {
+    max-height: 300px;
+    opacity: 1;
+}
+
+.scincenter.hide {
+    max-height: 0;
+    opacity: 0;
+}
