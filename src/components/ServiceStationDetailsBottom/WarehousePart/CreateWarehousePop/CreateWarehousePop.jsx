@@ -76,7 +76,11 @@ export default function CreateWarehousePop({ isVisible, onClose, buttonRef }) {
       </button>
       {saveTemplate && (
         <Modal isOpen={saveTemplate} onClose={closeSaveTempModal}>
-          <NewItemModal onClose={closeSaveTempModal} />
+          <NewItemModal
+            onClose={closeSaveTempModal}
+            title="Введіть назву шаблона"
+            name="newTemplate"
+          />
         </Modal>
       )}
 

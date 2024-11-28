@@ -7,12 +7,8 @@ import { BiBuildingHouse } from "react-icons/bi";
 import { BsFolderPlus, BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
-
-// import Modal from "../../Modals/Modal/Modal";
-// import NewItemModal from "./NewItemModal/NewItemModal";
-// import SortableTree from 'react-sortable-tree';
-// import 'react-sortable-tree/style.css';
-// import { Tree } from "react-arborist";
+import Modal from "../../Modals/Modal/Modal";
+import NewItemModal from "./NewItemModal/NewItemModal";
 
 import {
   Tree,
@@ -77,7 +73,7 @@ const dataForTree = [
 ];
 
 export default function WarehousePart() {
-  // const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   // const [tree, setTree] = useState(dataForTree);
 
   const { ref, getPipeHeight, toggle } = useTreeOpenHandler();
@@ -86,17 +82,17 @@ export default function WarehousePart() {
 
   const buttonRef = useRef(null);
 
-  const addNewTree = () => {
-    const newRoot = {
-      id: `${Date.now()}`,
-      text: "Новий склад",
-      droppable: true,
-      parent: null,
-      data: "warehouse",
-    };
+  // const addNewTree = () => {
+  //   const newRoot = {
+  //     id: `${Date.now()}`,
+  //     text: "Новий склад",
+  //     droppable: true,
+  //     parent: null,
+  //     data: "warehouse",
+  //   };
 
-    setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
-  };
+  //   setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
+  // };
 
   const handleTogglePopover = (e) => {
     e.stopPropagation();
@@ -174,13 +170,13 @@ export default function WarehousePart() {
   //   setTree(newTree); // Збереження нового дерева у state
   // };
 
-  // const openModal = () => {
-  //   setIsOpen(true);
-  // };
+  const openModal = () => {
+    setIsOpen(true);
+  };
 
-  // const handleModalClose = () => {
-  //   setIsOpen(false);
-  // };
+  const handleModalClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div className={css.warehouseContainer}>
@@ -217,11 +213,20 @@ export default function WarehousePart() {
           <button
             type="button"
             className={css.newWarehouseBtn}
-            onClick={addNewTree}
+            onClick={openModal}
           >
             <BsFolderPlus className={css.icon} />
             Новий склад
           </button>
+          {modalIsOpen && (
+            <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+              <NewItemModal
+                onClose={handleModalClose}
+                title="Введіть назву складу"
+                name="newWarehouse"
+              />
+            </Modal>
+          )}
 
           <div className={css.popoverBox} ref={buttonRef}>
             <BsThreeDotsVertical
@@ -238,11 +243,6 @@ export default function WarehousePart() {
             />
           )}
         </div>
-        {/* {modalIsOpen && (
-          <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-            <NewItemModal onClose={handleModalClose} />
-          </Modal>
-        )} */}
       </div>
 
       {/* <SortableTree
