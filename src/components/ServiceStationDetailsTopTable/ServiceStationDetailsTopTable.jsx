@@ -96,7 +96,7 @@ export default function ServiceStationDetailsTop() {
   };
 
   return (
-    <div>
+    <div className={css.container}>
       <table
         className={css.workSchedule}
         onMouseLeave={() => setIsSelecting(false)} // Прекращаем выделение при выходе мыши из таблицы

@@ -135,7 +135,7 @@ useEffect(() => {
             <div
               key={`overlay-${rowIndex}-${colIndex}`}
               className={`${css.overlayCell} ${
-                colIndex < 2 || rowIndex < 2 || colIndex===columnCount? "no-border" : ""
+                colIndex === columnCount - 1 ? css.noBorder : ""
               }`}
               style={{
                 gridRow: `${rowIndex + 2}`,

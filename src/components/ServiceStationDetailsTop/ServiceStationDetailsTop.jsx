@@ -97,23 +97,27 @@ export default function ServiceStationDetailsTop() {
 
   return (
     <div className={css.container}>
-    <div className={css.workScheduleGrid}     
-          onMouseLeave={() => setIsSelecting(false)
-           
-          } // Прекращаем выделение при выходе мыши из таблицы>
-         >
-      {/* Заголовки часов */}
-      {/* <div className={css.headerrow}> */}
+      <div
+        className={css.workScheduleGrid}
+        onMouseLeave={() => setIsSelecting(false)} // Прекращаем выделение при выходе мыши из таблицы>
+      >
+        {/* Заголовки часов */}
+        {/* <div className={css.headerrow}> */}
         <div className={css.headercell}>дні/години</div>
-        {hours.map((hour,index) => (
-          <div key={hour}  className={`${css.headercell} ${index === hours.length - 1 ? css.headerlast : ""}`}>
+        {hours.map((hour, index) => (
+          <div
+            key={hour}
+            className={`${css.headercell} ${
+              index === hours.length - 1 ? css.headerlast : ""
+            }`}
+          >
             {hour}:00
           </div>
         ))}
-      {/* </div> */}
+        {/* </div> */}
 
-      {/* Дни недели и ячейки */}
-      {/* {daysUa.map((dayUa, index) => {
+        {/* Дни недели и ячейки */}
+        {/* {daysUa.map((dayUa, index) => {
         const dayEn = daysEn[index];
          return (
            <div key={dayEn} className={css.dayRow}>
@@ -135,39 +139,43 @@ export default function ServiceStationDetailsTop() {
               );
             })}
             </div>  */}
-      
-{/* Сетка с днями и часами */}
-      {daysUa.map((dayUa, index) => {
-        const dayEn = daysEn[index];
-        return (
-          <>
-            {/* Заголовок строки */}
-            <div key={`${dayEn}-label`} className={css.dayLabel}>
-              {dayUa}
-            </div>
 
-            {/* Часовые ячейки */}
-            {hours.map((hour) => {
-              const cell = gridData.find(
-                (c) => c.day === dayEn && c.hour === hour
-              );
-              return (
-                <div
-                  key={`${dayEn}-${hour}`}
-                  className={`${css.cell} ${
-                    cell.isActive ? css.active : css.inactive
-                  }`}
-                  onMouseDown={() => handleMouseDown(dayEn, hour)}
-                  onMouseOver={() => handleMouseOver(dayEn, hour)}
-                  onMouseUp={handleMouseUp}
-                ></div>
-              );
-            })}
-          </>
+        {/* Сетка с днями и часами */}
+        {daysUa.map((dayUa, index) => {
+          const dayEn = daysEn[index];
+          const isLastDay = index === daysUa.length - 1;
+          return (
+            <>
+              {/* Заголовок строки */}
+              <div
+                className={`${css.dayLabel} ${
+                  isLastDay ? css.lastDayLabel : ""
+                }`}
+              >
+                {dayUa}
+              </div>
 
-        );
-      })}
+              {/* Часовые ячейки */}
+              {hours.map((hour) => {
+                const cell = gridData.find(
+                  (c) => c.day === dayEn && c.hour === hour
+                );
+                return (
+                  <div
+                    key={`${dayEn}-${hour}`}
+                    className={`${css.cell} ${
+                      cell.isActive ? css.active : css.inactive
+                    }`}
+                    onMouseDown={() => handleMouseDown(dayEn, hour)}
+                    onMouseOver={() => handleMouseOver(dayEn, hour)}
+                    onMouseUp={handleMouseUp}
+                  ></div>
+                );
+              })}
+            </>
+          );
+        })}
       </div>
-      </div>
+    </div>
   );
 }
