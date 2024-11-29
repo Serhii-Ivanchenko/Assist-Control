@@ -7,12 +7,9 @@ import { BiBuildingHouse } from "react-icons/bi";
 import { BsFolderPlus, BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
-
-// import Modal from "../../Modals/Modal/Modal";
-// import NewItemModal from "./NewItemModal/NewItemModal";
-// import SortableTree from 'react-sortable-tree';
-// import 'react-sortable-tree/style.css';
-// import { Tree } from "react-arborist";
+import Modal from "../../Modals/Modal/Modal";
+import NewItemModal from "./NewItemModal/NewItemModal";
+import Placeholder from "./Placeholder/Placeholder";
 
 import {
   Tree,
@@ -77,7 +74,7 @@ const dataForTree = [
 ];
 
 export default function WarehousePart() {
-  // const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   // const [tree, setTree] = useState(dataForTree);
 
   const { ref, getPipeHeight, toggle } = useTreeOpenHandler();
@@ -86,17 +83,27 @@ export default function WarehousePart() {
 
   const buttonRef = useRef(null);
 
-  const addNewTree = () => {
-    const newRoot = {
-      id: `${Date.now()}`,
-      text: "Новий склад",
-      droppable: true,
-      parent: null,
-      data: "warehouse",
-    };
+  const [isEditing, setIsEditing] = useState(false);
 
-    setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
+  const handleStopEditing = () => {
+    setIsEditing(false);
   };
+
+  const handleStartEditing = (nodeId) => {
+    setIsEditing(nodeId); // Початок редагування
+  };
+
+  // const addNewTree = () => {
+  //   const newRoot = {
+  //     id: `${Date.now()}`,
+  //     text: "Новий склад",
+  //     droppable: true,
+  //     parent: null,
+  //     data: "warehouse",
+  //   };
+
+  //   setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
+  // };
 
   const handleTogglePopover = (e) => {
     e.stopPropagation();
@@ -174,16 +181,16 @@ export default function WarehousePart() {
   //   setTree(newTree); // Збереження нового дерева у state
   // };
 
-  // const openModal = () => {
-  //   setIsOpen(true);
-  // };
+  const openModal = () => {
+    setIsOpen(true);
+  };
 
-  // const handleModalClose = () => {
-  //   setIsOpen(false);
-  // };
+  const handleModalClose = () => {
+    setIsOpen(false);
+  };
 
   return (
-    <div>
+    <div className={css.warehouseContainer}>
       <div className={css.listAndButton}>
         <ul className={css.itemsList}>
           <li className={css.items}>
@@ -217,11 +224,20 @@ export default function WarehousePart() {
           <button
             type="button"
             className={css.newWarehouseBtn}
-            onClick={addNewTree}
+            onClick={openModal}
           >
             <BsFolderPlus className={css.icon} />
             Новий склад
           </button>
+          {modalIsOpen && (
+            <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+              <NewItemModal
+                onClose={handleModalClose}
+                title="Введіть назву складу"
+                name="newWarehouse"
+              />
+            </Modal>
+          )}
 
           <div className={css.popoverBox} ref={buttonRef}>
             <BsThreeDotsVertical
@@ -238,84 +254,68 @@ export default function WarehousePart() {
             />
           )}
         </div>
-        {/* {modalIsOpen && (
-          <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-            <NewItemModal onClose={handleModalClose} />
-          </Modal>
-        )} */}
       </div>
 
       {/* <SortableTree
                 treeData={tree}
                 onChange={(newTreeData)=> setTree(newTreeData)}
             /> */}
-      <DndProvider backend={MultiBackend} options={getBackendOptions()}>
-        <div className={css.wrapper}>
-          <Tree
-            ref={ref}
-            tree={treeData}
-            rootId={null}
-            // render={(node, { depth, isOpen, onToggle }) => (
-            //   <div style={{ marginLeft: depth * 40 }}>
-            //     <span onClick={onToggle}>{isOpen ? "▼" : "▶"}</span> {node.text}
-            //   </div>
-            // )}
-            classes={{
-              root: css.treeRoot,
-              placeholder: css.placeholder,
-              dropTarget: css.dropTarget,
-              listItem: css.listItem,
-            }}
-            dragPreviewRender={(node) => (
-              <div
-              // style={{
-              //   // padding: "5px 10px",
-              //   // backgroundColor: "lightblue",
-              //   width: "100px",
-              //   color: "white",
-              //   // border: "1px solid blue",
-              // }}
-              >
-                {node.text}
-              </div>
-            )}
-            onDrop={handleDrop}
-            sort={false}
-            insertDroppableFirst={false}
-            enableAnimateExpand={true}
-            canDrop={() => true}
-            dropTargetOffset={5}
-            render={(node, { depth, isOpen, isDropTarget }) => (
-              <Node
-                getPipeHeight={getPipeHeight}
-                node={node}
-                depth={depth}
-                isOpen={isOpen}
-                onClick={() => {
-                  if (node.droppable) {
-                    toggle(node?.id);
-                  }
-                }}
-                isDropTarget={isDropTarget}
-                treeData={treeData}
-                setTreeData={setTreeData}
-                // data={treeData.data}
-              />
-            )}
-
-            // childrenAccessor="children"
-            // height={400}
-            // width={500}
-            // parentAccessor="parentId"
-          />
-        </div>
-      </DndProvider>
+      <div className={css.treeContainer}>
+        <DndProvider backend={MultiBackend} options={getBackendOptions()}>
+          <div className={css.wrapper}>
+            <Tree
+              ref={ref}
+              tree={treeData}
+              rootId={null}
+              classes={{
+                root: css.treeRoot,
+                placeholder: css.placeholder,
+                dropTarget: css.dropTarget,
+                listItem: css.listItem,
+              }}
+              dragPreviewRender={(node) => <div>{node.text}</div>}
+              onDrop={handleDrop}
+              sort={false}
+              insertDroppableFirst={false}
+              enableAnimateExpand={true}
+              canDrop={() => true}
+              dropTargetOffset={5}
+              placeholderRender={(node, { depth }) => (
+                <Placeholder node={node} depth={depth} />
+              )}
+              render={(node, { depth, isOpen, isDropTarget }) => (
+                <Node
+                  getPipeHeight={getPipeHeight}
+                  node={node}
+                  depth={depth}
+                  isOpen={isOpen}
+                  onClick={() => {
+                    if (node.droppable) {
+                      toggle(node?.id);
+                    }
+                  }}
+                  isDropTarget={isDropTarget}
+                  treeData={treeData}
+                  setTreeData={setTreeData}
+                  isEditing={isEditing}
+                  setIsEditing={setIsEditing}
+                  onStartEditing={handleStartEditing}
+                />
+              )}
+            />
+          </div>
+        </DndProvider>
+      </div>
 
       <div className={css.btnBox}>
         <button type="button" className={css.btnClose}>
           Закрити
         </button>
-        <button type="button" className={css.btnSave}>
+        <button
+          type="button"
+          className={css.btnSave}
+          onClick={handleStopEditing}
+        >
           <BsCheckLg size={18} />
           Зберегти
         </button>
