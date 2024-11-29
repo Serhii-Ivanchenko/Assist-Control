@@ -1,4 +1,4 @@
-import { Slider, Box, Typography } from "@mui/material";
+import { Slider, Typography } from "@mui/material";
 import { SlSpeedometer } from "react-icons/sl";
 import {
   BsCalendar2Week,
@@ -251,7 +251,7 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                 >
                   <div className={css.secondAcordion}>
                     <div className={css.callRecordWrapper}>
-                      <img src={userAvater} alt="" />
+                      <img src={userAvater} alt="user avater" />
                       <div className={css.callTranscription}>
                         <Slider
                           value={progress}
@@ -273,10 +273,11 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                               background: "var(--player-secondary-bg)",
                             },
                             "& .MuiSlider-rail": {
-                              zIndex: "1",
-                              opacity: "0",
+                              cursor: "ew-resize",
+                              zIndex: "3",
+                              opacity: "1",
                               height: "100%",
-                              backgroundColor: "var(--contacts-info-bg)",
+                              backgroundColor: "#ffffff00",
                               boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25);",
                             },
                           }}
@@ -315,16 +316,6 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                           src={audio}
                         />
                       </div>
-                      {/* <div className={css.callRecord}>
-                        <div>
-                          <BsPlayFill
-                            size={24}
-                            fill="var(--play-btn-triangle)"
-                          />
-                        </div>
-                        <GiSoundWaves size={80} />
-                        <p>1:26</p>
-                      </div> */}
                     </div>
                     <AccordionSummary
                       sx={{
