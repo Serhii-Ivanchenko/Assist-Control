@@ -2,12 +2,13 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+  /* gap: 14px; */
 
   /* grid-template-columns: auto 1fr auto; */
   height: 44px;
   padding: 10px 20px;
-  border: 1px solid var(--CRM-modal-SecondaryBG, #23252c);
-  background-color: var(--CRM-modal-InputBG, #2d3038);
+  border: 1px solid var(--bg-secondary);
+  background-color: var(--bg-input);
   margin-bottom: 14px;
 
   /* padding-inline-end: 8px;
@@ -22,9 +23,13 @@
   width: 915px;
 }
 
-/* .nodeWrapper:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+/* .nodeWrapper:not(:last-child) {
+  margin-bottom: 14px;
 } */
+
+.nodeWrapper:hover {
+  background-color: var(--bg-secondary);
+}
 
 /* .nodeWrapper .expandIconWrapper {
   align-items: center;

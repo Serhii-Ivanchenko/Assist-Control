@@ -9,6 +9,7 @@ import { useRef, useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
 import Modal from "../../Modals/Modal/Modal";
 import NewItemModal from "./NewItemModal/NewItemModal";
+import Placeholder from "./Placeholder/Placeholder";
 
 import {
   Tree,
@@ -266,36 +267,22 @@ export default function WarehousePart() {
               ref={ref}
               tree={treeData}
               rootId={null}
-              // render={(node, { depth, isOpen, onToggle }) => (
-              //   <div style={{ marginLeft: depth * 40 }}>
-              //     <span onClick={onToggle}>{isOpen ? "▼" : "▶"}</span> {node.text}
-              //   </div>
-              // )}
               classes={{
                 root: css.treeRoot,
                 placeholder: css.placeholder,
                 dropTarget: css.dropTarget,
                 listItem: css.listItem,
               }}
-              dragPreviewRender={(node) => (
-                <div
-                // style={{
-                //   // padding: "5px 10px",
-                //   // backgroundColor: "lightblue",
-                //   width: "100px",
-                //   color: "white",
-                //   // border: "1px solid blue",
-                // }}
-                >
-                  {node.text}
-                </div>
-              )}
+              dragPreviewRender={(node) => <div>{node.text}</div>}
               onDrop={handleDrop}
               sort={false}
               insertDroppableFirst={false}
               enableAnimateExpand={true}
               canDrop={() => true}
               dropTargetOffset={5}
+              placeholderRender={(node, { depth }) => (
+                <Placeholder node={node} depth={depth} />
+              )}
               render={(node, { depth, isOpen, isDropTarget }) => (
                 <Node
                   getPipeHeight={getPipeHeight}
@@ -313,14 +300,8 @@ export default function WarehousePart() {
                   isEditing={isEditing}
                   setIsEditing={setIsEditing}
                   onStartEditing={handleStartEditing}
-                  // data={treeData.data}
                 />
               )}
-
-              // childrenAccessor="children"
-              // height={400}
-              // width={500}
-              // parentAccessor="parentId"
             />
           </div>
         </DndProvider>

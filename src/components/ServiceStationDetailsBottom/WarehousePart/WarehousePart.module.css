@@ -113,6 +113,7 @@
 
 .wrapper {
   width: 915px;
+
   /* height: 508px;
   overflow-y: auto;
   overflow-x: hidden; */
@@ -187,6 +188,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   margin-bottom: 31px;
+  /* gap: 14px; */
 }
 
 .treeContainer::-webkit-scrollbar {
@@ -202,3 +204,59 @@
   border-radius: 4px;
   background-color: var(--main-gray);
 }
+
+.treeRoot {
+  list-style-type: none;
+  padding-inline-start: 0px;
+  padding-left: 5px;
+  position: relative;
+}
+
+.treeRoot ul {
+  list-style-type: none;
+  padding-inline-start: 0px;
+  position: relative;
+  /* padding-bottom: 5px; */
+  /* display: flex;
+  flex-direction: column; */
+  /* gap: 14px; */
+}
+
+.treeRoot > li:after {
+  display: none;
+}
+
+/* .wrapper .draggingSource {
+  opacity: 0.3;
+  color: white;
+} */
+
+/* .drag {
+  border: 1px solid white;
+} */
+
+.wrapper .placeholder {
+  position: relative;
+}
+
+.wrapper > ul > li > .nodeWrapper > div.pipeY {
+  display: none;
+}
+
+.wrapper li:has(> .dropTarget) {
+  outline: 3px solid #206bec;
+  border-radius: 4px;
+}
+
+/* .dropTarget {
+  background-color: white;
+} */
+
+/* .wrapper {
+  li {
+    &.hasDropTarget {
+      outline: 3px solid #206bec;
+      border-radius: 4px;
+    }
+  }
+} */
