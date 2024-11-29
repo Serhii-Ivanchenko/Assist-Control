@@ -1,4 +1,4 @@
-import SwitchableBtns from "../../../../sharedComponents/switchableBtns/SwitchableBtns";
+import SwitchableBtns from "../../../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
 import RatingStars from "../../../../sharedComponents/RatingStars/RatingStars";
 import OptionList from "../OptionsList";
 
