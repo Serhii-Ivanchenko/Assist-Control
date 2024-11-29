@@ -93,17 +93,17 @@ export default function WarehousePart() {
     setIsEditing(nodeId); // Початок редагування
   };
 
-  // const addNewTree = () => {
-  //   const newRoot = {
-  //     id: `${Date.now()}`,
-  //     text: "Новий склад",
-  //     droppable: true,
-  //     parent: null,
-  //     data: "warehouse",
-  //   };
+  const addNewTree = (name) => {
+    const newRoot = {
+      id: `${Date.now()}`,
+      text: name,
+      droppable: true,
+      parent: null,
+      data: "warehouse",
+    };
 
-  //   setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
-  // };
+    setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
+  };
 
   const handleTogglePopover = (e) => {
     e.stopPropagation();
@@ -235,6 +235,7 @@ export default function WarehousePart() {
                 onClose={handleModalClose}
                 title="Введіть назву складу"
                 name="newWarehouse"
+                addNewTree={addNewTree}
               />
             </Modal>
           )}
