@@ -230,7 +230,6 @@
   height: 48px;
 }
 .callTranscription {
-
   background-color: var(--contacts-info-bg);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   position: relative;
@@ -243,7 +242,6 @@
   border-radius: 0px 10px 10px 10px;
 }
 .wrapperOfUiElement {
-  /* z-index: 1; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -261,33 +259,33 @@
   background: var(--white, #fff);
   border-radius: 50%;
 }
-.callRecord {
-  display: flex;
-  padding: 15px 20px;
-  justify-content: center;
-  align-items: center;
-  gap: 26px;
-  width: 252px;
-  height: 70px;
-  border-radius: 0px 10px 10px 10px;
-  background-color: var(--player-secondary-bg);
+.customSlider {
+  padding: 0px !important;
+  box-sizing: content-box !important;
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
 }
-
-.callRecord > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  gap: 10px;
-  border-radius: 20px;
-  background: var(--white, #fff);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+.customSlider .MuiSlider-rail {
+  cursor: ew-resize !important;
+  z-index: 3 !important;
+  opacity: 1 !important;
+  height: 100% !important;
 }
-
-.callRecord > p {
-  font-size: 16px;
-  font-weight: 600;
+:global(.MuiSlider-thumb) {
+  display: none !important;
+}
+:global(.MuiSlider-track) {
+  border: none !important;
+  background: var(--player-secondary-bg) !important;
+}
+:global(.MuiSlider-rail) {
+  cursor: ew-resize !important;
+  z-index: 3 !important;
+  /* opacity: 1 !important; */
+  height: 100% !important;
+  background-color: #ffffff00 !important;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
 }
 
 .transcriptionToggleBtn {

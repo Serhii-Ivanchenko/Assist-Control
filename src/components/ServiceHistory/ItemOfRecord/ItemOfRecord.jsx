@@ -254,33 +254,10 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                       <img src={userAvater} alt="user avater" />
                       <div className={css.callTranscription}>
                         <Slider
+                          className={css.customSlider}
                           value={progress}
                           max={duration}
                           onChange={handleSliderChange}
-                          sx={{
-                            padding: "0px",
-                            boxSizing: "content-box",
-                            position: "absolute",
-                            width: "100%",
-                            height: "100%",
-                            "& .MuiSlider-thumb": {
-                              display: "none",
-                            },
-                            "& .MuiSlider-track": {
-                              border: "none",
-                              position: "relative",
-                              height: "100%",
-                              background: "var(--player-secondary-bg)",
-                            },
-                            "& .MuiSlider-rail": {
-                              cursor: "ew-resize",
-                              zIndex: "3",
-                              opacity: "1",
-                              height: "100%",
-                              backgroundColor: "#ffffff00",
-                              boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25);",
-                            },
-                          }}
                         />
                         <div className={css.wrapperOfUiElement}>
                           <button
