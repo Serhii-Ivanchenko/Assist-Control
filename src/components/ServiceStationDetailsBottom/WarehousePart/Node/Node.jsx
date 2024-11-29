@@ -59,7 +59,7 @@ export default function Node({
   isEditing,
   onStartEditing,
 }) {
-  const inputFocusRef = useRef();
+  const inputFocusRef = useRef(null);
 
   const handleEditing = (id, e) => {
     e.stopPropagation();
@@ -68,7 +68,7 @@ export default function Node({
   };
 
   useEffect(() => {
-    if (isEditing) {
+    if (isEditing && inputFocusRef.current) {
       inputFocusRef.current.focus();
     }
   }, [isEditing]);
