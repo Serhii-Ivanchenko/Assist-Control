@@ -308,7 +308,11 @@ export default function WarehousePart() {
       </div>
 
       <div className={css.btnBox}>
-        <button type="button" className={css.btnClose}>
+        <button
+          type="button"
+          className={css.btnClose}
+          onClick={handleStopEditing}
+        >
           Закрити
         </button>
         <button
