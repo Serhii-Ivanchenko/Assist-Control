@@ -189,6 +189,17 @@ export default function WarehousePart() {
     setIsOpen(false);
   };
 
+  //Popover in Node element
+  const [isNodePopoverOpen, setIsPopoverOpen] = useState(null);
+
+  const handleToggleNodePopover = (id) => {
+    setIsPopoverOpen((prevId) => (prevId === id ? null : id));
+  };
+
+  const handleCloseNodePopover = () => {
+    setIsPopoverOpen(null);
+  };
+
   return (
     <div className={css.warehouseContainer}>
       <div className={css.listAndButton}>
@@ -298,8 +309,11 @@ export default function WarehousePart() {
                   treeData={treeData}
                   setTreeData={setTreeData}
                   isEditing={isEditing}
-                  setIsEditing={setIsEditing}
+                  // setIsEditing={setIsEditing}
                   onStartEditing={handleStartEditing}
+                  isNodePopoverOpen={isNodePopoverOpen}
+                  handleToggleNodePopover={handleToggleNodePopover}
+                  handleCloseNodePopover={handleCloseNodePopover}
                 />
               )}
             />

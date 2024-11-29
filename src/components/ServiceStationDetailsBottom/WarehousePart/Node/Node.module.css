@@ -19,6 +19,7 @@
   position: relative;
   /* z-index: 3; */
 }
+
 .whWidth {
   width: 915px;
 }
@@ -110,9 +111,14 @@
 } */
 
 .icon {
-  fill: var(--light-gray);
-  width: 18px;
-  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--light-gray);
+  background: transparent;
+  border: none;
 }
 
 .input {
