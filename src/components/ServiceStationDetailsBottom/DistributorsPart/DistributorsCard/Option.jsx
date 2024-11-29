@@ -1,12 +1,52 @@
+import { useState } from "react";
 import styles from "./DistributorsCard.module.css";
 
-function Option({ icon, label, isActive, index, onToggle }) {
+function Option({ icon, isActive, index, onToggle, label }) {
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+
+  const handleMouseEnter = (e) => {
+    setIsTooltipVisible(true);
+    updateTooltipPosition(e);
+  };
+
+  const handleMouseMove = (e) => {
+    updateTooltipPosition(e);
+  };
+
+  const handleMouseLeave = () => {
+    setIsTooltipVisible(false);
+  };
+
+  const updateTooltipPosition = (e) => {
+    setTooltipPosition({
+      x: e.clientX + 10, // Зміщення тултіпу від курсора по X
+      y: e.clientY + 10, // Зміщення тултіпу від курсора по Y
+    });
+  };
+
   return (
-    <div className={styles.option} onClick={() => onToggle(index)}>
+    <div
+      className={styles.option}
+      onClick={() => onToggle(index)}
+      onMouseEnter={handleMouseEnter}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       <span className={isActive ? styles.activeIcon : styles.inactiveIcon}>
         {icon}
       </span>
-      <p>{label}</p>
+      {isTooltipVisible && (
+        <div
+          className={styles.tooltip}
+          style={{
+            top: `${tooltipPosition.y}px`,
+            left: `${tooltipPosition.x}px`,
+          }}
+        >
+          {label}
+        </div>
+      )}
     </div>
   );
 }
