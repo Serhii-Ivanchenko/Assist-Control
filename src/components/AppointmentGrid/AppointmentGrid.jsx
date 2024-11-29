@@ -27,7 +27,8 @@ const AppointmentGrid = ({ data }) => {
   const [linePosition, setLinePosition] = useState(null);
   const gridRef = useRef(null);
   const [gridHeight, setGridHeight] = useState(0);
-
+ const [startHour, setStartHour] = useState(null); // Начало рабочего дня
+  const [endHour, setEndHour] = useState(null); // Конец рабочего дня
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
@@ -48,10 +49,18 @@ const AppointmentGrid = ({ data }) => {
     }
   }, [data]);
 
+useEffect(() => {
+    if (data.dates && data.dates.length > 0) {
+      setStartHour(parseInt(data.dates[1])); // Начало рабочего дня
+      setEndHour(parseInt(data.dates[data.dates.length - 1])); // Конец рабочего дня
+    }
+  }, [data.dates]);
+
   let rowCount = data.posts.length;
   let columnCount = data.dates.length;
+  console.log('cc',columnCount)
   let startIndexColumn = parseInt(data.dates[1]);
-
+  
   const gridStyle = {
     "--column-count": columnCount - 1,
   };
@@ -59,9 +68,11 @@ const AppointmentGrid = ({ data }) => {
   const koeffWidth = (100 + (1057 - 100) / columnCount - 1) / 100;
 
   useEffect(() => {
+ if (startHour === null || endHour === null) return;
+
     const updateCurrentTimeLine = () => {
-      const startHour = parseInt(data.dates[1]); // Начало рабочего дня
-      const endHour = parseInt(data.dates[data.dates.length - 2]); // Конец рабочего дня
+      // startHour =  parseInt(data.dates[1]); // Начало рабочего дня
+      //  endHour = parseInt(data.dates[data.dates.length - 1]); // Конец рабочего дня
       const now = new Date();
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes();
@@ -84,7 +95,7 @@ const AppointmentGrid = ({ data }) => {
     const intervalId = setInterval(updateCurrentTimeLine, 60000); // Обновляем каждую минуту
 
     return () => clearInterval(intervalId); // Очищаем интервал при размонтировании
-  }, []);
+  }, [startHour, endHour]);
 
   return (
     <div className={css.schedulegrid} style={gridStyle} ref={gridRef}>
@@ -124,7 +135,7 @@ const AppointmentGrid = ({ data }) => {
             <div
               key={`overlay-${rowIndex}-${colIndex}`}
               className={`${css.overlayCell} ${
-                colIndex < 2 || rowIndex < 2 ? "no-border" : ""
+                colIndex === columnCount - 1 ? css.noBorder : ""
               }`}
               style={{
                 gridRow: `${rowIndex + 2}`,

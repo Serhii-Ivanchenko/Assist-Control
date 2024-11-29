@@ -1,122 +1,120 @@
-/* .scheduleWrapper {
-    display: flex;
-    flex-direction: column;
-    max-height: 311px;
-    padding: 0 30.5px;
-    width:853px;
+.container {
+    width: 864px;
     border-radius: 12px;
+    margin-left: 1px;
+    /* background: linear-gradient(180deg, rgba(81, 85, 98, 0.75) 39px, #8B8B8B 30%, #566596 50%, #8E8E8E 90%, #23252E 100%); */
+    background:
+            linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(81, 85, 98, 0.75) 10%, rgba(81, 85, 98, 0.75) 90%, rgba(0, 0, 0, 0.1) 100%),
+            linear-gradient(to bottom, rgba(81, 85, 98, 0.75) 300px, rgba(0, 0, 0, 0.1) 11px);
 }
-*/
 
-.workSchedule {
-    border-collapse: collapse;
-    width: 863px;
-    border-radius: 12px;
-    background: linear-gradient(0deg, #23252C 0%, #8B8B8B 20%, #566596 50%, #8E8E8E 80%, #23252C 100%);
+.workScheduleGrid {
+    display: grid;
+    grid-template-rows: 39px repeat(7, 30px);
+    grid-template-columns: 85px repeat(15, 1fr);
+    gap: 1px ;
+
     box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10);
-    /* background: var(--white); */
-    border-collapse: separate;
-    /* Для скругления углов */
-    border-spacing: 1px;
+    border-radius: 12px;
+    width: 867px;
+    margin-left: -1px;
 }
 
-.header {
-    background-color: rgba(81, 85, 98, 0.75);
-    height: 39px;
-    color: var(--white);
-
+.daycell {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    background-color: #31353E;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    width: 89px;
+    border-left: 2px solid #31353E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
     font-weight: bold;
     text-align: center;
-    border-radius: 12px 12px 0 0;
-    /* Скругление верхних углов */
+    padding: 5px;
 }
 
-.header th {
-    border: none;
-
-}
-
-.headerfirstcolumn {
-    width: 89px;
-    background-color: rgba(81, 85, 98, 0.75);
-    color: var(--white);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+.hourCell {
+    width: 51px;
+    height: 30px;
+    border: 1px solid transparent;
     text-align: center;
-    border-radius: 12px 0 0 0;
+    cursor: pointer;
 }
 
-.headerothercolumn {
-    width: 40px;
+.headercell {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-}
-
-.header .headerothercolumn:last-child {
-    border-radius: 0 12px 0 0;
-}
-
-
-
-tbody td {
-    width: 40px;
-    height: 30px;
+    background-color: rgba(81, 85, 98, 0.75);
+    color: var(--white);
     text-align: center;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    border-right: 2px solid transparent;
-    /* Прозрачный бордер */
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
-tbody td:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.headercell:first-child {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    padding-top: 10px;
+    border-radius: 12px 0 0 0;
+}
+
+.headerlast {
+    border-radius: 0 12px 0 0;
+    border-top-right-radius: 12px;
+}
+
+.cell:hover {
+    background-color: var(--blue-btn-hover);
     /* Легкий эффект при наведении */
 }
 
 .active {
     background-color: var(--blue-btn-normal);
-
-    color: white;
 }
 
 .inactive {
-    background-color: var(--contacts-info-bg);
+    background-color: #31353E;
     /* Фон для неактивных */
 }
 
-tbody tr td:first-child {
-    background-color: var(--contacts-info-bg);
+.dayLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    background-color: #31353E;
     color: white;
     text-align: center;
     font-size: 16px;
-    width: 89px;
+    width: 85px;
+    font-style: normal;
+    line-height: normal;
+    font-weight: 300;
 }
 
-tbody tr:last-child td:first-child {
+.lastDayLabel {
     border-radius: 0 0 0 12px;
 }
 
-tbody tr:last-child td:last-child {
-    border-radius: 0 0 12px 0;
-}
-
-.generateButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: var(--blue-btn-normal);
-    /* Зеленая кнопка */
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
+.cell {
+    /* width: 51px; */
+    height: 30px;
+    text-align: center;
     cursor: pointer;
 }
 
-.generateButton:hover {
-    background-color: var(--blue-btn-normal);
-
+.cell:last-child {
+    border-radius: 0 0 12px 0;
 }

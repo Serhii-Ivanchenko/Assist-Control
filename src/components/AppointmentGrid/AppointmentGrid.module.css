@@ -98,12 +98,10 @@
 .overlayCell {
     border-left: 1px dashed var(--light-gray);
     opacity: 0.1;
-
-    /* Штрихпунктирный левый бордер */
 }
 
 /* Удаляем левый бордер у первой колонки */
-.overlayCell.no-border {
+.noBorder {
     border-left: none;
 }
 
