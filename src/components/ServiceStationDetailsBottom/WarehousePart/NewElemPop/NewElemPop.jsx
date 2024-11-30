@@ -1,10 +1,9 @@
 import { BsPencil, BsTrash } from "react-icons/bs";
 import css from "./NewElemPop.module.css";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useState } from "react";
 import Modal from "../../../Modals/Modal/Modal";
 import AddModal from "../AddModal/AddModal";
-// import { useEffect } from "react";
 
 export default function NewElemPop({
   icon,
@@ -14,81 +13,68 @@ export default function NewElemPop({
   isEditing,
   id,
   deleteChild,
-  onPopoverClose,
-  nodeBtnRef,
+  onClose,
 }) {
   const popoverRef = useRef(null);
-  const modalRef = useRef(null);
 
-  const [isAddModalOpen, setAddModalOpen] = useState(false);
-
-  const openAddModal = () => setAddModalOpen(true);
-  const closeAddModal = () => setAddModalOpen(false);
-
+  const [modalIsOpen, setIsOpen] = useState(false);
   const openModal = (e) => {
     e.stopPropagation();
-
-    openAddModal();
-    console.log("Modal is being open");
-    // onPopoverClose();
+    console.log("Modal is being opened");
+    setIsOpen(true);
+    onClose();
   };
 
   const handleModalClose = () => {
     console.log("Modal is being closed");
-    closeAddModal();
+    setIsOpen(false);
   };
 
-  // const handleClickOutside = (event) => {
-  //   if (
-  //     popoverRef.current &&
-  //     !popoverRef.current.contains(event.target) &&
-  //     modalRef.current &&
-  //     !modalRef.current.contains(event.target)
-  //   ) {
-  //     onPopoverClose();
-  //   }
-  // };
+  const openEdit = (e) => {
+    e.stopPropagation();
+    isEditing(id, e);
+    onClose();
+  };
 
-  // useEffect(() => {
-  //   if (isVisible) {
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //   }
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [isVisible]);
+  const deleteRow = (e) => {
+    deleteChild(id, e); 
+    onClose();
+  }
 
   return (
     <div
-      ref={popoverRef}
       className={`${css.modal} ${isVisible ? css.popoverVisible : css.hidden}`}
+      ref={popoverRef}
     >
       {type === "place" ? (
         ""
       ) : (
         <div className={css.btnBox}>
-          <button className={css.btn} onClick={openModal}>
+          <button type="button" className={css.btn} onClick={openModal}>
             {icon}
             {addText}
           </button>
-          {isAddModalOpen && (
+          {modalIsOpen && (
             <Modal
-              ref={modalRef}
-              isOpen={isAddModalOpen}
+              isOpen={modalIsOpen}
               onClose={handleModalClose}
+              shouldCloseOnOverlayClick={false}
             >
-              <AddModal onClose={handleModalClose} />
+              <div
+                className={css.modalContent}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  console.log("Clicked inside modal");
+                }}
+              >
+                <AddModal onClose={handleModalClose} />
+              </div>
             </Modal>
           )}
         </div>
       )}
       <div className={css.btnBox}>
-        <button
-          type="button"
-          className={css.btn}
-          onClick={(e) => isEditing(id, e)}
-        >
+        <button type="button" className={css.btn} onClick={openEdit}>
           <BsPencil size={18} className={css.icon} />
           Редагувати
         </button>
@@ -97,7 +83,7 @@ export default function NewElemPop({
         <button
           type="button"
           className={`${css.btn} ${css.btnDelete}`}
-          onClick={(e) => deleteChild(id, e)}
+          onClick={deleteRow}
         >
           <BsTrash size={18} />
           Видалити

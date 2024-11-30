@@ -189,17 +189,6 @@ export default function WarehousePart() {
     setAddWhModalOpen(false);
   };
 
-  //Popover in Node element
-  const [isNodePopoverOpen, setIsPopoverOpen] = useState(null);
-
-  const handleToggleNodePopover = (id) => {
-    setIsPopoverOpen((prevId) => (prevId === id ? null : id));
-  };
-
-  const handleCloseNodePopover = () => {
-    setIsPopoverOpen(null);
-  };
-
   return (
     <div className={css.warehouseContainer}>
       <div className={css.listAndButton}>
@@ -258,12 +247,11 @@ export default function WarehousePart() {
             />
           </button>
 
-            <CreateWarehousePop
-              isVisible={isNewWhPopoverOpen}
-              buttonRef={buttonRef}
-              onClose={handleClosePopover}
-            />
-        
+          <CreateWarehousePop
+            isVisible={isNewWhPopoverOpen}
+            buttonRef={buttonRef}
+            onClose={handleClosePopover}
+          />
         </div>
       </div>
 
@@ -311,9 +299,6 @@ export default function WarehousePart() {
                   isEditing={isEditing}
                   // setIsEditing={setIsEditing}
                   onStartEditing={handleStartEditing}
-                  isNodePopoverOpen={isNodePopoverOpen}
-                  handleToggleNodePopover={handleToggleNodePopover}
-                  handleCloseNodePopover={handleCloseNodePopover}
                 />
               )}
             />

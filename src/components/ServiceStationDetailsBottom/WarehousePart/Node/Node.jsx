@@ -58,12 +58,8 @@ export default function Node({
   // setIsEditing,
   isEditing,
   onStartEditing,
-  isNodePopoverOpen,
-  handleToggleNodePopover,
-  handleCloseNodePopover,
 }) {
   const inputFocusRef = useRef(null);
-  const nodeBtnRef = useRef(null);
 
   const handleEditing = (id, e) => {
     e.stopPropagation();
@@ -102,6 +98,38 @@ export default function Node({
     e.stopPropagation();
     onClick(node.id);
   };
+
+  const buttonRefs = useRef([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleTogglePopover = (id, e) => {
+    e.stopPropagation();
+    setIsOpen(isOpen === id ? null : id);
+  };
+
+  const handleClosePopover = () => {
+    setIsOpen(false);
+  };
+
+  // console.log(
+  //   `Pipe height for ${node.parent}:`,
+  //   getPipeHeight(node.parent, treeData)
+  // );
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        buttonRefs.current &&
+        !buttonRefs.current.some((ref) => ref && ref.contains(event.target))
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div
@@ -149,39 +177,25 @@ export default function Node({
       </div>
       <div
         className={css.popoverDiv}
-        // ref={(el) => (buttonRefs.current[node.id] = el)}
+        ref={(el) => (buttonRefs.current[node.id] = el)}
       >
-        <button
-          ref={(el) => {
-            if (nodeBtnRef.current) {
-              nodeBtnRef.current[node.id] = el;
-            }
-          }}
+        <BsThreeDotsVertical
+          onClick={(e) => handleTogglePopover(node.id, e)}
           className={css.icon}
-          onClick={(e) => {
-            e.stopPropagation();
-            handleToggleNodePopover(node.id);
-          }}
-        >
-          <BsThreeDotsVertical />
-        </button>
-        {isNodePopoverOpen === node.id && (
-          <>
-            <NewElemPop
-              isVisible={isNodePopoverOpen}
-              icon={<IconForPopover type={node.data} />}
-              addText={<TextForPopover type={node.data} />}
-              nodeBtnRef={
-                nodeBtnRef.current ? nodeBtnRef.current[node.id] : null
-              }
-              onPopoverClose={handleCloseNodePopover}
-              type={node.data}
-              isEditing={handleEditing}
-              id={node.id}
-              deleteChild={deleteChild}
-            />
-          </>
-        )}
+          size={24}
+        />
+
+        <NewElemPop
+          isVisible={isOpen}
+          icon={<IconForPopover type={node.data} />}
+          addText={<TextForPopover type={node.data} />}
+          buttonRefs={buttonRefs.current[node.id]}
+          onClose={handleClosePopover}
+          type={node.data}
+          isEditing={handleEditing}
+          id={node.id}
+          deleteChild={deleteChild}
+        />
       </div>
     </div>
   );
