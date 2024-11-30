@@ -25,7 +25,8 @@ export default function NewElemPop({
     onClose();
   };
 
-  const handleModalClose = () => {
+  const handleModalClose = (e) => {
+    e.stopPropagation();
     console.log("Modal is being closed");
     setIsOpen(false);
   };
@@ -37,9 +38,9 @@ export default function NewElemPop({
   };
 
   const deleteRow = (e) => {
-    deleteChild(id, e); 
+    deleteChild(id, e);
     onClose();
-  }
+  };
 
   return (
     <div
