@@ -1,7 +1,9 @@
+import { Slider, Typography } from "@mui/material";
 import { SlSpeedometer } from "react-icons/sl";
 import {
   BsCalendar2Week,
   BsCaretDownFill,
+  BsPauseFill,
   BsPlayFill,
   BsChevronDown,
   BsFilter,
@@ -18,9 +20,10 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import userAvater from "../../../assets/images/ava.png";
 import TranscriptionMessage from "../TranscriptionMessage/TranscriptionMessage";
 import css from "./ItemOfRecord.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import clsx from "clsx";
 import RecordBtnInfo from "../RecordBtnInfo/RecordBtnInfo";
+import audio from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
 
 export default function ItemOfRecord({ item, messages, isExpanded }) {
   const [showDialogModal, setShowDialogModal] = useState(isExpanded);
@@ -50,6 +53,45 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
     recordInfo === string
       ? handleToogleRecordInfo()
       : handleToogleRecordInfo(string);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+  };
+
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const audioRef = useRef(null);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleProgress = () => {
+    const currentTime = audioRef.current.currentTime;
+    setProgress(currentTime);
+  };
+
+  const handleLoadedMetadata = () => {
+    setDuration(audioRef.current.duration);
+  };
+
+  const handleSliderChange = (event, value) => {
+    audioRef.current.currentTime = value;
+    setProgress(value);
+  };
+
+  const handleAudioEnd = () => {
+    setIsPlaying(false); // Повертаємо стан у "не відтворюється"
+    setProgress(0); // Повертаємо слайдер у початок
+  };
   return (
     <li key={item.totalkilometrs} className={css.itemOfAccardion}>
       <div className={css.itemOfMarking}>
@@ -209,16 +251,47 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                 >
                   <div className={css.secondAcordion}>
                     <div className={css.callRecordWrapper}>
-                      <img src={userAvater} alt="" />
-                      <div className={css.callRecord}>
-                        <div>
-                          <BsPlayFill
-                            size={24}
-                            fill="var(--play-btn-triangle)"
-                          />
+                      <img src={userAvater} alt="user avater" />
+                      <div className={css.callTranscription}>
+                        <Slider
+                          className={css.customSlider}
+                          value={progress}
+                          max={duration}
+                          onChange={handleSliderChange}
+                        />
+                        <div className={css.wrapperOfUiElement}>
+                          <button
+                            className={css.transcriptionBtn}
+                            onClick={togglePlay}
+                          >
+                            {isPlaying ? (
+                              <BsPauseFill
+                                size={24}
+                                fill="var(--play-btn-triangle)"
+                              />
+                            ) : (
+                              <BsPlayFill
+                                size={24}
+                                fill="var(--play-btn-triangle)"
+                              />
+                            )}
+                          </button>
+                          <GiSoundWaves size={80} style={{ zIndex: "1" }} />
+                          <Typography
+                            variant="caption"
+                            sx={{ color: "#fff", zIndex: "1", lineHeight: "1" }}
+                          >
+                            {formatTime(progress)}
+                          </Typography>
                         </div>
-                        <GiSoundWaves size={80} />
-                        <p>1:26</p>
+
+                        <audio
+                          ref={audioRef}
+                          onTimeUpdate={handleProgress}
+                          onLoadedMetadata={handleLoadedMetadata}
+                          onEnded={handleAudioEnd}
+                          src={audio}
+                        />
                       </div>
                     </div>
                     <AccordionSummary

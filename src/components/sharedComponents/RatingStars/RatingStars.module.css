@@ -1,19 +1,17 @@
-.rating {
+/* .rating {
   display: flex;
   position: absolute;
   top: 64px;
   right: -10px;
   width: 78px;
   height: 11px;
-}
+} */
 
 @media only screen and (min-width: 1850px) {
   .rating {
-    justify-content: end;
-    position: static;
-    flex-wrap: nowrap;
-    width: 78px;
-    height: 11px;
+    display: flex;
+    align-items: center;
+    /* height: 100%; */
   }
 }
 
@@ -21,6 +19,7 @@
 .emptyStar svg {
   width: 14.5px;
   height: 14.5px;
+  transform: scale(1.1);
 }
 
 .fullStar svg {
@@ -32,9 +31,10 @@
 }
 
 .halfStar {
-  position: relative;
+  /* position: relative; */
   width: 14.5px;
   height: 14.5px;
+  transform: scale(1.1);
 }
 
 .halfFilled {

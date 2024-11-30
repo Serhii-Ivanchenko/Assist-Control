@@ -34,6 +34,14 @@
   border-radius: 10px;
   border: 1px solid var(--input-stroke);
   background: var(--bg-input);
+
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  outline: none;
 }
 
 .btnBox {

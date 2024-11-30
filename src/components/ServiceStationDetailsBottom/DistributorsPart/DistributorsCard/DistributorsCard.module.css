@@ -116,31 +116,52 @@ span {
 
 .optionsBox {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  gap: 10px;
+  align-items: center;
 }
 
 .option {
+  position: relative;
   display: flex;
   flex-direction: row;
   gap: 10px;
+  cursor: pointer;
 }
 
-.option p {
-  color: var(--light-gray);
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+.tooltip {
+  position: fixed;
+  background-color: var(--bg-secondary);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  /* Щоб тултіп не блокував події курсора */
+  z-index: 1000;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .activeIcon {
   color: var(--green);
-  height: 19px;
+  width: 18px;
+  height: 18px;
+}
+
+.activeIcon>svg {
+  width: 18px;
+  height: 18px;
 }
 
 .inactiveIcon {
   color: var(--light-gray);
-  height: 19px;
+  width: 18px;
+  height: 18px;
+}
+
+.inactiveIcon>svg {
+  width: 18px;
+  height: 18px;
 }
 
 .connect {
@@ -219,11 +240,11 @@ span {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: var(--green);
 }
 
-input:checked + .slider::before {
+input:checked+.slider::before {
   transform: translateX(25px);
 }
 
@@ -339,7 +360,6 @@ input:checked + .slider::before {
   cursor: pointer;
 }
 
-.closeConnectionPopupBtn > svg {
+.closeConnectionPopupBtn>svg {
   transform: scale(1.39);
 }
-

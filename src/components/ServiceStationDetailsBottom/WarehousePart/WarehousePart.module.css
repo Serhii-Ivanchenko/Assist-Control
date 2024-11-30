@@ -211,6 +211,7 @@
   padding-inline-start: 0px;
   padding-left: 5px;
   position: relative;
+  width: 900px;
 }
 
 .treeRoot ul {

@@ -1,23 +1,46 @@
-import DistributorsCard from "../DistributorsCard/DistributorsCard";
+import { useState } from "react";
+import DistributorsItem from "../DistributorsCard/DistributorsItem/DistributorsItem";
 import styles from "./DistributorsList.module.css";
 
-const distributorsData = [
-  { id: 1, name: "Distributor 1" },
-  { id: 2, name: "Distributor 2" },
-  { id: 3, name: "Distributor 3" },
-  { id: 4, name: "Distributor 4" },
-];
+function DistributorsList({ distributorsData }) {
+  const [distributors, setDistributors] = useState(distributorsData);
 
-function DistributorsList() {
+  const handleToggleDisable = (id) => {
+    setDistributors((prev) =>
+      prev.map((distributor) =>
+        distributor.id === id
+          ? { ...distributor, isDisabled: !distributor.isDisabled }
+          : distributor
+      )
+    );
+  };
+
+  const handleDelete = (id) => {
+    setDistributors((prev) =>
+      prev.filter((distributor) => distributor.id !== id)
+    );
+  };
+
   return (
     <div className={styles.wrapper}>
-      {distributorsData.map((distributor) => (
-        <DistributorsCard
-          key={distributor.id}
-          id={distributor.id}
-          name={distributor.name}
-        />
-      ))}
+      <div className={styles.innerContainer}>
+        <ul className={styles.distributorsList}>
+          {distributors.map((distributor, index) => (
+            <li key={index} className={styles.distributorsItem}>
+              <DistributorsItem
+                item={distributor}
+                onEdit={(id, updates) =>
+                  setDistributors((prev) =>
+                    prev.map((d) => (d.id === id ? { ...d, ...updates } : d))
+                  )
+                }
+                onDelete={handleDelete}
+                onToggleDisable={() => handleToggleDisable(distributor.id)}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
