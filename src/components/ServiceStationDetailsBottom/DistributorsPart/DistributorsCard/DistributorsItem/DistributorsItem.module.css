@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   align-items: center;
-  gap: 16px;
+  /* gap: 16px; */
 }
 
 .infoContainer {
@@ -13,6 +13,7 @@
   width: 96px;
   height: 37.069px;
   flex-shrink: 0;
+  margin-right: 16px;
 }
 
 .nameContainer {
@@ -41,10 +42,10 @@
   gap: 23px;
   margin-left: 100px;
 }
-
+/* 
 .rating {
   margin: auto 0;
-}
+} */
 
 .contactsContainer {
   display: flex;
@@ -60,5 +61,5 @@
 }
 
 .btnsContainer {
-  margin-left: 50px;
+  margin-left: 68px;
 }

@@ -135,7 +135,8 @@ span {
   padding: 5px 10px;
   border-radius: 4px;
   font-size: 12px;
-  pointer-events: none; /* Щоб тултіп не блокував події курсора */
+  pointer-events: none;
+  /* Щоб тултіп не блокував події курсора */
   z-index: 1000;
   white-space: nowrap;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -143,12 +144,24 @@ span {
 
 .activeIcon {
   color: var(--green);
-  height: 19px;
+  width: 18px;
+  height: 18px;
+}
+
+.activeIcon>svg {
+  width: 18px;
+  height: 18px;
 }
 
 .inactiveIcon {
   color: var(--light-gray);
-  height: 19px;
+  width: 18px;
+  height: 18px;
+}
+
+.inactiveIcon>svg {
+  width: 18px;
+  height: 18px;
 }
 
 .connect {
@@ -227,11 +240,11 @@ span {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: var(--green);
 }
 
-input:checked + .slider::before {
+input:checked+.slider::before {
   transform: translateX(25px);
 }
 
@@ -347,6 +360,6 @@ input:checked + .slider::before {
   cursor: pointer;
 }
 
-.closeConnectionPopupBtn > svg {
+.closeConnectionPopupBtn>svg {
   transform: scale(1.39);
 }
