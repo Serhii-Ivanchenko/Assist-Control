@@ -78,11 +78,13 @@
   border-radius: 24px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-.numberOfKilometers > div,
-.kilometersDriven > div,
-.date > div {
+
+.numberOfKilometers>div,
+.kilometersDriven>div,
+.date>div {
   height: 16px;
 }
+
 .numberOfKilometers {
   color: var(--current-mileage-text);
   background: var(--current-mileage-bg);
@@ -108,22 +110,27 @@
   background-color: none;
   transform: rotate(180deg);
 }
+
 .dialogBtnIcon {
   color: var(--icon-gray);
   display: flex;
   cursor: pointer;
 }
+
 /* Тіло першого акардіона */
 :global(.MuiAccordionSummary-root) {
   min-height: 0px !important;
 }
+
 :global(.MuiAccordionSummary-content) {
   margin: 0 !important;
   display: block !important;
 }
+
 :global(.MuiPaper-root::before) {
   display: none;
 }
+
 .bodyAccardionWrapper {
   margin-top: 14px;
 }
@@ -153,6 +160,7 @@
   line-height: 1.1875em;
   border: none;
 }
+
 .downloadBtn {
   display: flex;
   align-items: center;
@@ -163,9 +171,11 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border: none;
 }
+
 .btnBg {
   background: var(--green-btn-normal);
 }
+
 .RecordBtnInfoWrapper {
   border-radius: 6px;
   background: var(--bg-input);
@@ -225,38 +235,65 @@
   align-items: center;
 }
 
-.callRecordWrapper > img {
+.callRecordWrapper>img {
   width: 48px;
   height: 48px;
 }
 
-.callRecord {
+.callTranscription {
+  position: relative;
   display: flex;
-  padding: 15px 20px;
-  justify-content: center;
   align-items: center;
-  gap: 26px;
+  box-sizing: border-box;
   width: 252px;
   height: 70px;
   border-radius: 0px 10px 10px 10px;
-  background-color: var(--player-secondary-bg);
-}
-
-.callRecord > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  gap: 10px;
-  border-radius: 20px;
-  background: var(--white, #fff);
+  background-color: var(--contacts-info-bg);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.callRecord > p {
-  font-size: 16px;
-  font-weight: 600;
+.wrapperOfUiElement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  height: 100%;
+}
+
+.transcriptionBtn {
+  z-index: 5;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-left: 21px;
+  border: none;
+  background: var(--white, #fff);
+  border-radius: 50%;
+}
+
+.customSlider {
+  padding: 0px !important;
+  box-sizing: content-box !important;
+  position: absolute !important;
+  height: 100% !important;
+}
+
+:global(.MuiSlider-thumb) {
+  display: none !important;
+}
+
+:global(.MuiSlider-track) {
+  border: none !important;
+  background: var(--player-secondary-bg) !important;
+}
+
+:global(.MuiSlider-rail) {
+  cursor: ew-resize !important;
+  z-index: 3 !important;
+  height: 100% !important;
+  background-color: #ffffff00 !important;
 }
 
 .transcriptionToggleBtn {
@@ -273,7 +310,7 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.transcriptionToggleBtn > p {
+.transcriptionToggleBtn>p {
   font-size: 16px;
   font-weight: 600;
 }
@@ -324,7 +361,7 @@
   background-color: var(--player-secondary-bg);
 }
 
-.transcriptionImportantBtn > p {
+.transcriptionImportantBtn>p {
   font-size: 14px;
   font-weight: 300;
 }
