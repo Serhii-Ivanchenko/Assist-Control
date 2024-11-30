@@ -12,24 +12,6 @@ export default function CreateWarehousePop({ isVisible, onClose, buttonRef }) {
   const [addFromTemplate, setAddFromSaveTemplate] = useState(false);
   const popoverRef = useRef(null);
 
-  // const openSaveTempModal = () => {
-  //   onClose();
-  //   setSaveTemplate(true);
-  // };
-
-  // const openAddFromTempModal = () => {
-  //   onClose();
-  //   setAddFromSaveTemplate(true);
-  // };
-
-  // const closeSaveTempModal = () => {
-  //   setSaveTemplate(false);
-  // };
-
-  // const closeAddFromTempModal = () => {
-  //   setAddFromSaveTemplate(false);
-  // };
-
   const openSaveTempModal = () => setSaveTemplate(true);
   const closeSaveTempModal = () => setSaveTemplate(false);
   const openAddFromTempModal = () => setAddFromSaveTemplate(true);
@@ -37,10 +19,12 @@ export default function CreateWarehousePop({ isVisible, onClose, buttonRef }) {
 
   const handleSaveClick = () => {
     openSaveTempModal();
+    onClose();
   };
 
   const handleAddClick = () => {
     openAddFromTempModal();
+    onClose();
   };
 
   const handleClickOutside = (event) => {
