@@ -25,18 +25,36 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
   const endOfCalendar = endOfMonth.isoWeekday(7); // Заканчиваем неделю на воскресенье
   const [selectedDate, setSelectedDate] = useState(dayjs(carSelectDate));
 
+  if (!isCrm && selectedDate > currentDate) {
+      setSelectedDate(currentDate);
+      dispatch(changeActualDate(currentDate.format("YYYY-MM-DD")));
+}
+
   // Генерируем массив дат для отображения в календаре
+  // const generateCalendarDates = () => {
+  //   let dates = [];
+  //   let date = startOfCalendar;
+
+  //   while (date.isBefore(endOfCalendar)) {
+  //     dates.push(date);
+  //     date = date.add(1, "day");
+  //   }
+
+  //   return dates;
+  // };
+
   const generateCalendarDates = () => {
-    let dates = [];
-    let date = startOfCalendar;
+  let dates = [];
+  let date = startOfCalendar; // Начинаем с понедельника первой недели
 
-    while (date.isBefore(endOfCalendar)) {
-      dates.push(date);
-      date = date.add(1, "day");
-    }
+  // Генерация всех дат до конца недели последнего дня месяца
+  while (date.isBefore(endOfCalendar, "day") || date.isSame(endOfCalendar, "day")) {
+    dates.push(date);
+    date = date.add(1, "day");
+  }
 
-    return dates;
-  };
+  return dates;
+};
 
   const addDataToDates = (calendarDates, dataMonth) => {
     return calendarDates.map((date) => {
@@ -98,22 +116,30 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
       }
   };
 
-  const isDateDisabled = (date) => {
-    if (!isCrm) {
-      return (
-        date.isAfter(currentDate, "day") ||
-        date.isAfter(currentDate, "month") ||
-        !date.isSame(queryMonthDayjs, "month")
-      );
-    }
-    else {
- return (
+//   const isDateDisabled = (date) => {
+//     if (!isCrm) {
+//       return (
+//         date.isAfter(currentDate, "day") ||
+//         date.isAfter(currentDate, "month") ||
+//         !date.isSame(queryMonthDayjs, "month")
+//       );
+//     }
+//     else {
+//  return (
        
-        !date.isSame(queryMonthDayjs, "month")
-      );
+//         !date.isSame(queryMonthDayjs, "month")
+//       );
 
-    }
-  };
+//     }
+  //   };
+  
+  const isDateDisabled = (date) => {
+  if (!isCrm) {
+    return date.isAfter(currentDate, "day");
+  } else {
+    return false; // Все даты кликабельны для `isCrm = true`
+  }
+};
 
   if (carSelectDate !== selectedDate) {
     setSelectedDate(carSelectDate)
@@ -130,36 +156,38 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
       </div>
 
       <div className={css.calendargrid}>
-        {calendarWithPercent.map((item, index) => (
-          <button
-            key={index}
-            onClick={() =>
-              handleDateClick(
-                item,
-                item.date.format("YYYY-MM-DD"),
-                item.percent
-              )
-            }
-            disabled={isDateDisabled(item.date)}
-            style={{
-              backgroundColor: isCrm ? getButtonColorCrm(item.percent) : getButtonColor(item.percent),
-              // border: item.date.isSame(selectedDate, "day")
-              //   ? " 1px solid var(--white)"
-              //   : "1px solid transparent",
-            }}
-            className={`calendar-day  
+        {calendarWithPercent.map((item, index) => 
+          (
+          
+            <button
+              key={index}
+              onClick={() =>
+                handleDateClick(
+                  item,
+                  item.date.format("YYYY-MM-DD"),
+                  item.percent
+                )
+              }
+              disabled={isDateDisabled(item.date)}
+              style={{
+                backgroundColor: isCrm ? getButtonColorCrm(item.percent) : getButtonColor(item.percent), 
+                // border: item.date.isSame(selectedDate, "day")
+                //   ? " 1px solid var(--white)"
+                //   : "1px solid transparent",
+              }}
+              className={`calendar-day  
               ${isCrm ? "crm-width" : ""} 
              ${!isCrm && item.date.date() > currentDate.date() ? "cursordefault" : ""} 
-              ${
-                item.date.month() !== queryMonthDayjs.month()
+              ${item.date.month() !== queryMonthDayjs.month()
                   ? "other-month"
                   : ""
-              } 
+                } 
               ${item.date.isSame(selectedDate, "day") ? "today" : ""}`}
-          >
-            {item.date.date()}
-          </button>
-        ))}
+            >
+              {item.date.date()}
+            </button>
+          )
+        )}
       </div>
 
       <style>{`
@@ -195,7 +223,7 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
 
         .other-month {
           background-color: var(--input-stroke);
-          color: var(--input-stroke);
+         color: var(--text-gray);
           cursor: default;
         }
         .today {

@@ -1,6 +1,8 @@
 import css from "./AppointmentGrid.module.css";
 
 import { useEffect, useState, useRef } from "react";
+import { useSelector } from "react-redux";
+import { selectDate } from "../../redux/cars/selectors.js";
 import ServiceBookingModal from "../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
 import Modal from "../Modals/Modal/Modal.jsx";
 
@@ -24,6 +26,7 @@ const workTypeBorder = {
 };
 
 const AppointmentGrid = ({ data }) => {
+  const carSelectDate = useSelector(selectDate);
   const [linePosition, setLinePosition] = useState(null);
   const gridRef = useRef(null);
   const [gridHeight, setGridHeight] = useState(0);
@@ -31,11 +34,28 @@ const AppointmentGrid = ({ data }) => {
   const [endHour, setEndHour] = useState(null); // Конец рабочего дня
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const currentDate = new Date().toISOString().substring(0, 10);
 
-  const handleWorkItemClick = (recordId, postId) => {
-    setModalData({ recordId, postId });
-    setIsModalOpen(true);
-  };
+
+  // const handleWorkItemClick = (recordId, postId) => {
+  //   setModalData({ recordId, postId });
+  //   setIsModalOpen(true);
+  // };
+
+  const handleWorkItemClick = (recordId, postId, itemEndTime) => {
+    
+  const now = new Date();
+  const currentTime = now.getHours() * 60 + now.getMinutes();
+    
+    if ((carSelectDate === currentDate && currentTime > (itemEndTime + 1) * 60) || 
+         carSelectDate < currentDate) {
+    console.log("Ячейка недоступна для выбора.");
+    return;
+  }
+
+  setModalData({ recordId, postId });
+  setIsModalOpen(true);
+};
 
   const handleCloseModal = () => {
     setModalData(null);
@@ -58,7 +78,7 @@ useEffect(() => {
 
   let rowCount = data.posts.length;
   let columnCount = data.dates.length;
-  console.log('cc',columnCount)
+ 
   let startIndexColumn = parseInt(data.dates[1]);
   
   const gridStyle = {
@@ -78,7 +98,7 @@ useEffect(() => {
       const currentMinute = now.getMinutes();
 
       // Проверка, чтобы полоса не отображалась вне рабочего времени
-      if (currentHour < startHour || currentHour >= endHour) {
+      if ((currentHour < startHour || currentHour >= endHour ) || carSelectDate !== currentDate) {
         setLinePosition(null);
         return;
       }
@@ -95,7 +115,7 @@ useEffect(() => {
     const intervalId = setInterval(updateCurrentTimeLine, 60000); // Обновляем каждую минуту
 
     return () => clearInterval(intervalId); // Очищаем интервал при размонтировании
-  }, [startHour, endHour]);
+  }, [startHour, endHour, carSelectDate, currentDate]);
 
   return (
     <div className={css.schedulegrid} style={gridStyle} ref={gridRef}>
@@ -172,6 +192,14 @@ useEffect(() => {
       {data.workItems.map((item, index) => {
         // const startHour = new Date(item.startTime).getHours();
         // const endHour = new Date(item.endTime).getHours();
+
+        const now = new Date();
+        const currentTime = now.getHours() * 60 + now.getMinutes(); // Текущее время в минутах
+        const itemEndTime = item.stage_end * 60; // Конец рабочего времени в минутах
+
+        const isDisabled = (carSelectDate === currentDate && currentTime > (itemEndTime + 1) * 60) ||
+        carSelectDate < currentDate ;
+
         const gridColumn = `${item.stage_start + 1 - startIndexColumn + 2} / ${
           item.stage_end + 2 - startIndexColumn + 2
         }`;
@@ -189,13 +217,14 @@ useEffect(() => {
         return (
           <div
             key={index}
-            className={css.griditem}
+            className={`${css.griditem} ${isDisabled ? css.disabled : ""}`}
             style={{
               gridColumn: gridColumn,
               gridRow: postRowIndex + 2, // Смещаем на 2, чтобы учесть строки заголовков
               background: workTypeColors[item.service_name] || "#333",
             }}
-            onClick={() => handleWorkItemClick(item.record_id, item.post_id)}
+            // onClick={() => handleWorkItemClick(item.record_id, item.post_id, item.stage_end)}
+            onClick={!isDisabled ? () => handleWorkItemClick(item.record_id, item.post_id, item.stage_end) : undefined}
           >
             {item.service_name !== "empty" && (
               <p
