@@ -5,7 +5,7 @@ import "/node_modules/flag-icons/css/flag-icons.min.css";
 import * as Yup from "yup";
 import { ErrorMessage } from "formik";
 import { useState } from "react";
-import CustomSelect from "./CustomSelect/CustomSelect";
+import CustomSelect from "../UserSettingsProfile/CustomSelect/CustomSelect.jsx";
 import { BsFillKeyFill } from "react-icons/bs";
 import { BsSdCardFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,9 +13,9 @@ import { selectUser } from "../../../../redux/auth/selectors";
 import { updateUserData } from "../../../../redux/auth/operations";
 import { getUserData } from "../../../../redux/auth/operations";
 import Modal from "../../Modal/Modal";
-import ChangePasswordModal from "./ChangePasswordModal/ChangePasswordModal";
+import ChangePasswordModal from "../UserSettingsProfile/ChangePasswordModal/ChangePasswordModal.jsx";
 import toast from "react-hot-toast";
-import CurrencySelect from "./CurrencySelect/CurrencySelect.jsx";
+import CurrencySelect from "../UserSettingsProfile/CurrencySelect/CurrencySelect.jsx";
 // import { useEffect } from "react";
 
 const Validation = Yup.object().shape({
@@ -108,8 +108,6 @@ export default function UserSettingsAccount({ onClose }) {
   const handleToggleClick = () => {
     setIsVisible((prev) => !prev);
   };
-
-  
 
   return (
     <Formik
