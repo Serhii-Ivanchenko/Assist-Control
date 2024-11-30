@@ -57,7 +57,6 @@ const dataForTree = [
     parent: "3",
     text: "Стелаж",
     droppable: true,
-
     data: "rack",
   },
   {
@@ -153,7 +152,8 @@ export default function WarehousePart() {
     if (
       start?.parent !== dropTargetId &&
       start &&
-      typeof destinationIndex === "number"
+      typeof destinationIndex === "number" &&
+      start.data !== end.data
     ) {
       if (
         getDescendants(treeData, dragSourceId).find(

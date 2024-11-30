@@ -14,6 +14,7 @@ export default function NewElemPop({
   id,
   deleteChild,
   onClose,
+  // setTreeData,
 }) {
   const popoverRef = useRef(null);
 
@@ -42,6 +43,18 @@ export default function NewElemPop({
     onClose();
   };
 
+  // const addNewBranch = (name, parentId) => {
+  //   const NewBranch = {
+  //     id: `${Date.now()}`,
+  //     text: name,
+  //     droppable: true,
+  //     parent: parentId,
+  //     data: ,
+  //   };
+
+  //   setTreeData((prevTreeData) => [...prevTreeData, NewBranch]);
+  // };
+
   return (
     <div
       className={`${css.modal} ${isVisible ? css.popoverVisible : css.hidden}`}
@@ -68,7 +81,10 @@ export default function NewElemPop({
                   console.log("Clicked inside modal");
                 }}
               >
-                <AddModal onClose={handleModalClose} />
+                <AddModal
+                  onClose={handleModalClose}
+                  // addNewBranch={addNewBranch}
+                />
               </div>
             </Modal>
           )}

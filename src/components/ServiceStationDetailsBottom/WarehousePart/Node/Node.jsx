@@ -195,6 +195,7 @@ export default function Node({
           isEditing={handleEditing}
           id={node.id}
           deleteChild={deleteChild}
+          setTreeData={setTreeData}
         />
       </div>
     </div>
