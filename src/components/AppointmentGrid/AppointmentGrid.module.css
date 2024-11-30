@@ -218,3 +218,8 @@
     ;
     z-index: 4;
 }
+
+.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+}
