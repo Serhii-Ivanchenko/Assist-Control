@@ -74,12 +74,12 @@ const dataForTree = [
 ];
 
 export default function WarehousePart() {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [isAddWhModalOpen, setAddWhModalOpen] = useState(false);
   // const [tree, setTree] = useState(dataForTree);
 
   const { ref, getPipeHeight, toggle } = useTreeOpenHandler();
   const [treeData, setTreeData] = useState(dataForTree);
-  const [popover, setPopover] = useState(false);
+  const [isNewWhPopoverOpen, setNewWhPopoverOpen] = useState(false);
 
   const buttonRef = useRef(null);
 
@@ -107,11 +107,11 @@ export default function WarehousePart() {
 
   const handleTogglePopover = (e) => {
     e.stopPropagation();
-    setPopover((prev) => !prev);
+    setNewWhPopoverOpen((prev) => !prev);
   };
 
   const handleClosePopover = () => {
-    setPopover(false);
+    setNewWhPopoverOpen(false);
   };
 
   const reorderArray = (array, sourceIndex, targetIndex) => {
@@ -182,11 +182,11 @@ export default function WarehousePart() {
   // };
 
   const openModal = () => {
-    setIsOpen(true);
+    setAddWhModalOpen(true);
   };
 
   const handleModalClose = () => {
-    setIsOpen(false);
+    setAddWhModalOpen(false);
   };
 
   return (
@@ -229,8 +229,8 @@ export default function WarehousePart() {
             <BsFolderPlus className={css.icon} />
             Новий склад
           </button>
-          {modalIsOpen && (
-            <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+          {isAddWhModalOpen && (
+            <Modal isOpen={isAddWhModalOpen} onClose={handleModalClose}>
               <NewItemModal
                 onClose={handleModalClose}
                 title="Введіть назву складу"
@@ -240,20 +240,18 @@ export default function WarehousePart() {
             </Modal>
           )}
 
-          <div className={css.popoverBox} ref={buttonRef}>
+          <button className={css.popoverBox} ref={buttonRef}>
             <BsThreeDotsVertical
               className={css.icon}
               onClick={handleTogglePopover}
             />
-          </div>
+          </button>
 
-          {popover && (
-            <CreateWarehousePop
-              isVisible={popover}
-              buttonRef={buttonRef}
-              onClose={handleClosePopover}
-            />
-          )}
+          <CreateWarehousePop
+            isVisible={isNewWhPopoverOpen}
+            buttonRef={buttonRef}
+            onClose={handleClosePopover}
+          />
         </div>
       </div>
 
@@ -299,7 +297,7 @@ export default function WarehousePart() {
                   treeData={treeData}
                   setTreeData={setTreeData}
                   isEditing={isEditing}
-                  setIsEditing={setIsEditing}
+                  // setIsEditing={setIsEditing}
                   onStartEditing={handleStartEditing}
                 />
               )}

@@ -2,10 +2,11 @@ import { Formik, Form, Field } from "formik";
 import css from "./AddModal.module.css";
 import { BsCheckLg } from "react-icons/bs";
 
-export default function AddModal({onClose}) {
-  const handleSubmit = (actions, values) => {
-    console.log(values);
+export default function AddModal({ onClose }) {
+  const handleSubmit = (values, actions) => {
+    console.log("values", values);
     actions.resetForm();
+    onClose();
   };
 
   return (

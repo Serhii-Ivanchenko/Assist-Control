@@ -184,19 +184,18 @@ export default function Node({
           className={css.icon}
           size={24}
         />
-        {isOpen === node.id && (
-          <NewElemPop
-            isVisible={isOpen}
-            icon={<IconForPopover type={node.data} />}
-            addText={<TextForPopover type={node.data} />}
-            buttonRefs={buttonRefs.current[node.id]}
-            onClose={handleClosePopover}
-            type={node.data}
-            isEditing={handleEditing}
-            id={node.id}
-            deleteChild={deleteChild}
-          />
-        )}
+
+        <NewElemPop
+          isVisible={isOpen}
+          icon={<IconForPopover type={node.data} />}
+          addText={<TextForPopover type={node.data} />}
+          buttonRefs={buttonRefs.current[node.id]}
+          onClose={handleClosePopover}
+          type={node.data}
+          isEditing={handleEditing}
+          id={node.id}
+          deleteChild={deleteChild}
+        />
       </div>
     </div>
   );

@@ -79,9 +79,11 @@
 
 .popoverBox {
   cursor: pointer;
-
   display: flex;
   align-items: center;
+  background: transparent;
+  border: none;
+
 }
 
 /* .treeRoot {
