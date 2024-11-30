@@ -2,7 +2,7 @@ import { Formik, Form, Field } from "formik";
 import css from "./NewItemSelectModal.module.css";
 import { BsCheckLg } from "react-icons/bs";
 
-export default function NewItemSelectModal() {
+export default function NewItemSelectModal({ onClose }) {
   const handleSubmit = (actions, values) => {
     console.log(values);
     actions.resetForm();
@@ -17,7 +17,7 @@ export default function NewItemSelectModal() {
             <option value="new">Новий</option>
           </Field>
           <div className={css.btnBox}>
-            <button type="button" className={css.btnClose}>
+            <button type="button" className={css.btnClose} onClick={onClose}>
               Закрити
             </button>
             <button type="submit" className={css.btnSave}>
