@@ -196,6 +196,7 @@ export default function Node({
           id={node.id}
           deleteChild={deleteChild}
           setTreeData={setTreeData}
+          node={node}
         />
       </div>
     </div>

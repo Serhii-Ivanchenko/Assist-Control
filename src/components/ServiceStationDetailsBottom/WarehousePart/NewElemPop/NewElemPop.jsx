@@ -5,6 +5,40 @@ import { useState } from "react";
 import Modal from "../../../Modals/Modal/Modal";
 import AddModal from "../AddModal/AddModal";
 
+const TextForNewBranch = ({ type }) => {
+  switch (type) {
+    case "warehouse":
+      return "Секція";
+    case "section":
+      return "Стелаж";
+    case "rack":
+      return "Полиця";
+    case "shelf":
+      return "Місце";
+    // case "place":
+    //   return ""
+    default:
+      return "Секція";
+  }
+};
+
+const DataForNewBranch = ({ type }) => {
+  switch (type) {
+    case "warehouse":
+      return "section";
+    case "section":
+      return "rack";
+    case "rack":
+      return "shelf";
+    case "shelf":
+      return "place";
+    // case "place":
+    //   return ""
+    default:
+      return "warehouse";
+  }
+};
+
 export default function NewElemPop({
   icon,
   addText,
@@ -14,7 +48,8 @@ export default function NewElemPop({
   id,
   deleteChild,
   onClose,
-  // setTreeData,
+  setTreeData,
+  node,
 }) {
   const popoverRef = useRef(null);
 
@@ -26,8 +61,8 @@ export default function NewElemPop({
     onClose();
   };
 
-  const handleModalClose = (e) => {
-    e.stopPropagation();
+  const handleModalClose = () => {
+    // e.stopPropagation();
     console.log("Modal is being closed");
     setIsOpen(false);
   };
@@ -43,17 +78,26 @@ export default function NewElemPop({
     onClose();
   };
 
-  // const addNewBranch = (name, parentId) => {
-  //   const NewBranch = {
-  //     id: `${Date.now()}`,
-  //     text: name,
-  //     droppable: true,
-  //     parent: parentId,
-  //     data: ,
-  //   };
+  const addNewBranch = (count) => {
+    if (count <= 0) return;
 
-  //   setTreeData((prevTreeData) => [...prevTreeData, NewBranch]);
-  // };
+    const NewBranches = Array.from({ length: count }).map((_, index) => {
+      const branchText = TextForNewBranch({ type: node.data });
+      const branchData = DataForNewBranch({ type: node.data });
+
+      return {
+        id: `${Date.now()} - ${index}`,
+        text: `${branchText} ${index + 1}`,
+        droppable: true,
+        parent: node.id,
+        data: branchData,
+      };
+    });
+
+    console.log(NewBranches);
+
+    setTreeData((prevTreeData) => [...prevTreeData, ...NewBranches]);
+  };
 
   return (
     <div
@@ -83,7 +127,7 @@ export default function NewElemPop({
               >
                 <AddModal
                   onClose={handleModalClose}
-                  // addNewBranch={addNewBranch}
+                  addNewBranch={addNewBranch}
                 />
               </div>
             </Modal>

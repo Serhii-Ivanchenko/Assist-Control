@@ -4,10 +4,10 @@ import { BsCheckLg } from "react-icons/bs";
 
 export default function AddModal({ onClose, addNewBranch }) {
   const handleSubmit = (values, actions) => {
-    addNewBranch();
+    addNewBranch(values.number);
     console.log("values", values);
-    actions.resetForm();
     onClose();
+    actions.resetForm();
   };
 
   return (
