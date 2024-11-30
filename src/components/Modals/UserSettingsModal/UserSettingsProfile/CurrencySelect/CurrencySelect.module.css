@@ -76,7 +76,7 @@
     top: 50%;
     transform: translateY(-50%); */
   /* pointer-events: none; */
-  fill: #767676;
+  fill: var(--icon-gray);
   width: 20px;
   height: 20px;
   transition: transform 0.3s ease;

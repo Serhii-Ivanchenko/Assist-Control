@@ -173,9 +173,9 @@ export default function UserSettingsProfile({ onClose }) {
   //   };
   // }, [avatar]);
 
-  // const toggleDropdown = (index) => {
-  //   setActiveDropdown(activeDropdown === index ? null : index);
-  // };
+  const toggleDropdown = () => {
+    setActiveDropdown((prev) => !prev);
+  };
 
   const handleBlur = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
@@ -423,7 +423,7 @@ export default function UserSettingsProfile({ onClose }) {
                   name="section"
                   id={sectionFieldId}
                   className={`${css.input} ${css.inputSelect}`}
-                  // onClick={() => toggleDropdown(1)}
+                  onClick={toggleDropdown}
                 >
                   <option value="default">За замовченням</option>
                   <option value="main">Головна</option>
@@ -436,7 +436,7 @@ export default function UserSettingsProfile({ onClose }) {
                 </Field>
                 <BsFillCaretDownFill
                   className={`${css.btnArrowSelect} ${
-                    activeDropdown === 1 ? css.rotated : ""
+                    activeDropdown ? css.rotated : ""
                   }`}
                 />
               </div>
