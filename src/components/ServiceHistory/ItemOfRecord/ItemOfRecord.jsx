@@ -279,7 +279,7 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                           <GiSoundWaves size={80} style={{ zIndex: "1" }} />
                           <Typography
                             variant="caption"
-                            sx={{ color: "#fff", zIndex: "1" }}
+                            sx={{ color: "#fff", zIndex: "1", lineHeight: "1" }}
                           >
                             {formatTime(progress)}
                           </Typography>
