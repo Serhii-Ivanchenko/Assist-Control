@@ -176,6 +176,9 @@ export default function ServiceStationDetailsTop() {
           );
         })}
       </div>
+       {/* <button className={css.generateButton} onClick={() => generateBackendData()}>
+        Зберегти
+      </button> */}
     </div>
   );
 }

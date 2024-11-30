@@ -1,140 +1,137 @@
 .formBox {
-    width: 975px;
-    padding: 40px 42px 45px 42px;
+  width: 975px;
+  padding: 40px 42px 45px 42px;
+  height: 850px;
 
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
 }
 
 @media only screen and (min-width: 1850px) {
-    .formBox {
-        width: 1056px;
-        padding: 40px 83px 45px 83px;
-    }
+  .formBox {
+    width: 1056px;
+    padding: 40px 83px 45px 83px;
+  }
 }
 
 .input {
-    width: 420px;
-    padding: 18px 20px;
+  width: 420px;
+  padding: 18px 20px;
 
-    border-radius: 10px;
-    border: 1px solid var(--input-stroke);
-    background-color: var(--bg-input);
-    outline: none;
+  border-radius: 10px;
+  border: 1px solid var(--input-stroke);
+  background-color: var(--bg-input);
+  outline: none;
 
+  margin-top: 8px;
 
-    margin-top: 8px;
-
-    /* color: var(--White, var(--Color, var(--white))); */
-    color: var(--light-gray);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  /* color: var(--White, var(--Color, var(--white))); */
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .inputs .inputBox:not(:last-child) {
-    margin-bottom: 24px;
-    /* Add your desired margin here */
+  margin-bottom: 35px;
 }
 
 .input::placeholder {
-    color: var(--input-text);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: var(--input-text);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .input:-webkit-autofill {
-    background-color: var(--bg-input) !important;
-    color: var(--light-gray) !important;
-    box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
-    -webkit-text-fill-color: var(--light-gray) !important;
+  background-color: var(--bg-input) !important;
+  color: var(--light-gray) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--light-gray) !important;
 }
 
 .input:-webkit-autofill:hover,
 .input:-webkit-autofill:focus {
-    background-color: var(--bg-input) !important;
-    color: var(--light-gray) !important;
-    box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
-    -webkit-text-fill-color: var(--light-gray) !important;
+  background-color: var(--bg-input) !important;
+  color: var(--light-gray) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--light-gray) !important;
 }
 
 .inputSelect {
-    appearance: none;
-    cursor: pointer;
+  appearance: none;
+  cursor: pointer;
+  height: 56px;
 }
 
 .btnArrowSelect {
-    position: absolute;
-    right: 20px;
-    top: 60%;
-    /* transform: translateY(-50%); */
-    /* fill: white; */
-    width: 20px;
-    height: 20px;
-    fill: var(--icon-gray);
-    pointer-events: none;
+  position: absolute;
+  right: 20px;
+  top: 60%;
+  /* transform: translateY(-50%); */
+  /* fill: white; */
+  width: 20px;
+  height: 20px;
+  fill: var(--icon-gray);
+  pointer-events: none;
 }
 
 .rotated {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .inputName {
-    width: 100%;
-    margin-bottom: 24px;
+  width: 100%;
+  margin-bottom: 24px;
 }
 
 .inputBox {
-    position: relative;
+  position: relative;
 }
 
 .errorMessage {
-    color: var(--red);
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    /* margin-left: 20px; */
+  color: var(--red);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  /* margin-left: 20px; */
 
-    cursor: default;
-    position: absolute;
-    left: 20px;
-    top: 100%;
+  cursor: default;
+  position: absolute;
+  left: 20px;
+  top: 100%;
 }
 
-.errorMessageName{
-    top: 80%;
+.errorMessageName {
+  top: 80%;
 }
-
 
 .inputs {
-    display: flex;
-    align-items: flex-start;
-    gap: 51px;
+  display: flex;
+  align-items: flex-start;
+  gap: 51px;
 }
 
 .firstColumn {
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
 }
 
 .secondColumn {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .inputLable {
-    color: var(--white);
-    font-family: "Roboto", sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 /* .photoBox{
@@ -148,125 +145,184 @@
 } */
 
 .photo {
-    width: 126px;
-    height: 126px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    object-fit: cover;
+  width: 126px;
+  height: 126px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  object-fit: cover;
 
-    /* border-radius: 120px; */
+  /* border-radius: 120px; */
 }
 
 .photoField {
-    display: none;
-
+  display: none;
 }
 
 .changePhotoBtn {
-    width: fit-content;
-    padding: 15px 30px;
+  width: fit-content;
+  padding: 15px 30px;
 
-    display: flex;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 
-    border: none;
-    border-radius: 8px;
-    background-color: var(--blue);
+  border: none;
+  border-radius: 8px;
+  background-color: var(--blue);
 
-    color: var(--white);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    cursor: pointer;
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
 }
 
 .changePhotoBtn:hover {
-    background-color: var(--blue-btn-hover);
+  background-color: var(--blue-btn-hover);
 }
 
 .changePhotoBtn:active {
-    background-color: var(--blue-btn-inactive);
+  background-color: var(--blue-btn-inactive);
 }
 
 .btnPlus {
-    width: 20px;
-    height: 20px;
-    fill: var(--icon-gray);
+  width: 20px;
+  height: 20px;
+  fill: var(--icon-gray);
 }
 
 .addPhotoBox {
-    display: flex;
-    gap: 60px;
-    align-items: center;
+  display: flex;
+  gap: 60px;
+  align-items: center;
 
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .btnBox {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 15px;
-    margin-top: 17px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: auto;
 }
 
 .cancelBtn {
-    width: fit-content;
-    /* height: 43px; */
-    padding: 15px 30px;
+  width: fit-content;
+  /* height: 43px; */
+  padding: 15px 30px;
 
-    border-radius: 8px;
-    border: 1px solid var(--light-gray);
-    background-color: transparent;
+  border-radius: 8px;
+  border: 1px solid var(--light-gray);
+  background-color: transparent;
 
-    color: var(--white);
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .saveBtn {
-    width: fit-content;
-    /* height: 43px; */
-    padding: 15px 30px;
+  width: fit-content;
+  /* height: 43px; */
+  padding: 15px 30px;
 
-    border-radius: 8px;
-    background-color: var(--blue);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  background-color: var(--blue);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-    border: none;
+  border: none;
 
-    color: var(--white);
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .saveBtn:hover {
-    background-color: var(--blue-btn-hover);
+  background-color: var(--blue-btn-hover);
 }
 
 .saveBtn:active {
-    background-color: var(--blue-btn-inactive);
+  background-color: var(--blue-btn-inactive);
 }
 
 .iconSave {
-    fill: var(--icon-gray);
+  fill: var(--icon-gray);
+}
+
+.email {
+  width: 100%;
+  /* height: 43px; */
+  padding: 18px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--input-stroke);
+
+  background-color: var(--bg-input);
+  outline: none;
+
+  display: flex;
+  align-items: center;
+  /* padding-left: 20px; */
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--input-text);
+  margin-top: 8px;
+}
+
+.passwortChBtn {
+  width: fit-content;
+  height: 56px;
+  margin-top: 8px;
+  padding: 15px 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border: none;
+
+  border-radius: 8px;
+  background-color: var(--blue);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.passwortChBtn:hover {
+  background-color: var(--blue-btn-hover);
+}
+
+.passwortChBtn:active {
+  background-color: var(--blue-btn-inactive);
+}
+
+.iconKey {
+  fill: var(--icon-gray);
 }

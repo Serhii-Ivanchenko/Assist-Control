@@ -1,85 +1,95 @@
 .sideBarBox {
-    width: 250px;
-    height: 850px;
-    border-right: solid 1px var(--black);
-    padding-top: 20px;
+  width: 250px;
+  /* height: 850px; */
+  border-right: solid 1px var(--black);
+  /* padding-top: 20px; */
+}
+
+.contentBox {
+  height: 850px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 45px;
 }
 
 @media only screen and (min-width: 1850px) {
-    .sideBarBox {
-        width: 300px;
-    }
+  .sideBarBox {
+    width: 300px;
+  }
+
+  /* .contentBox {
+    height: 850px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 45px;
+    padding-top: 20px;
+  } */
 }
 
 @media only screen and (max-width: 1279.9px) {
-    .sideBarBox {
-        width: 216px;
-        max-width: 300px;
-
-    }
+  .sideBarBox {
+    width: 216px;
+    max-width: 300px;
+  }
 }
 
 @media only screen and (max-width: 767.9px) {
-    .sideBarBox {
-        max-width: 300px;
-        width: 60px;
+  .sideBarBox {
+    max-width: 300px;
+    width: 60px;
+  }
 
-
-    }
-
-    .contentBox {
-        display: none;
-    }
+  .contentBox {
+    display: none;
+  }
 }
 
 .burgerMenu {
-    display: none;
+  display: none;
 }
 
 @media only screen and (max-width: 767.9px) {
-    .burgerMenu {
-        display: block;
-        fill: var(--icon-gray);
+  .burgerMenu {
+    display: block;
+    fill: var(--icon-gray);
 
-
-        /* width: 18px;
+    /* width: 18px;
             height: 15px; */
-    }
+  }
 
-    .iconBox {
-        width: inherit;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-    }
+  .iconBox {
+    width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .titleBox {
-    /* height: 60px; */
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px 30px;
-    margin-bottom: 62px;
-    /* border-bottom: solid 1px var(--black); */
+  /* height: 60px; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 30px;
+  margin-bottom: 62px;
+  /* border-bottom: solid 1px var(--black); */
 }
 
 .title {
-    color: var(--white);
-    font-family: "Roboto", sans-serif;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    cursor: default;
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: default;
 }
 
 @media only screen and (max-width: 1279.9px) {
-    .title {
-        font-size: 20px;
-
-    }
+  .title {
+    font-size: 20px;
+  }
 }
 
 /* .sideBarNav {
@@ -88,103 +98,98 @@
 } */
 
 .sideBarNavItem {
-    /* height: 38px; */
-    /* padding: 10px 30px; */
+  /* height: 38px; */
+  /* padding: 10px 30px; */
 
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-
-
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
-
 .sideBarNavItemLink {
-    color: var(--white);
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 
-    text-decoration: none;
-    padding: 10px 30px;
+  text-decoration: none;
+  padding: 10px 30px;
 
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 11px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 11px;
 
-    height: 50px;
-    width: 100%;
-    /* height: 38px; */
-    /* width: 165px; */
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+  height: 50px;
+  width: 100%;
+  /* height: 38px; */
+  /* width: 165px; */
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .linkIsActive {
-    color: var(--white);
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 
-    text-decoration: none;
+  text-decoration: none;
 
-    padding: 10px 30px;
-    width: 100%;
-    height: 50px;
+  padding: 10px 30px;
+  width: 100%;
+  height: 50px;
 
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    background-color: var(--bg-input);
-    border: none;
-    border-right: solid 2px var(--blue);
-
+  background-color: var(--bg-input);
+  border: none;
+  border-right: solid 2px var(--blue);
 }
 
 .balanceBox {
-    /* display: block; */
-    /* flex-direction: column; */
-    /* justify-cotennt: flex-end; */
-    margin-top: 410px;
-    padding-left: 29px;
+  /* display: block; */
+  /* flex-direction: column; */
+  /* justify-cotennt: flex-end; */
+  margin-top: auto;
+  padding-left: 29px;
 }
 
 .balance {
-    color: var(--text-gray);
-    font-variant-numeric: lining-nums proportional-nums;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    font-variant: small-caps;
+  color: var(--text-gray);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  font-variant: small-caps;
 
-    margin-bottom: 3px;
+  margin-bottom: 3px;
 }
 
 .amount {
-    color: var(--white);
-    font-variant-numeric: lining-nums proportional-nums;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    font-variant: small-caps;
+  color: var(--white);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  font-variant: small-caps;
 
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-    background: transparent;
-    border: none;
-    cursor: pointer;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
-
 
 /* Mobile Menu */
 
