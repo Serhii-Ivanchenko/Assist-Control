@@ -23,6 +23,7 @@ import CurrencySelect from "./CurrencySelect/CurrencySelect";
 import Modal from "../../Modal/Modal";
 import ChangePasswordModal from "./ChangePasswordModal/ChangePasswordModal";
 import { BsFillKeyFill } from "react-icons/bs";
+import clsx from "clsx";
 
 const Validation = Yup.object().shape({
   username: Yup.string()
@@ -435,9 +436,9 @@ export default function UserSettingsProfile({ onClose }) {
                   <option value="Settings">Налаштування</option>
                 </Field>
                 <BsFillCaretDownFill
-                  className={`${css.btnArrowSelect} ${
-                    activeDropdown ? css.rotated : ""
-                  }`}
+                  className={clsx(css.btnArrowSelect, {
+                    [css.rotated]: activeDropdown,
+                  })}
                 />
               </div>
             </div>
