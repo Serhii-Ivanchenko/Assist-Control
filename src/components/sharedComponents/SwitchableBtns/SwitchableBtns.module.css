@@ -1,0 +1,22 @@
+.btnsBox {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.btn {
+  fill: var(--light-gray);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.active {
+  fill: var(--green-btn-normal);
+  width: 18px;
+  height: 18px;
+}
+
+.disabled {
+  fill: var(--red);
+}

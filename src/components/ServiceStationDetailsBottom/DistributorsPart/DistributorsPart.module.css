@@ -1,9 +1,11 @@
 .wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: 1000px;
+  gap: 20px;
+  height: 100%;
+  width: 100%;
+  background: none;
 }
 
 .btn {
