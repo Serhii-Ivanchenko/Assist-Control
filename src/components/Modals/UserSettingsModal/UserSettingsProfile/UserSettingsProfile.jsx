@@ -6,7 +6,7 @@ import { BsSdCardFill } from "react-icons/bs";
 import { HiPlus } from "react-icons/hi";
 import { useRef, useState } from "react";
 import { BsFillCaretDownFill } from "react-icons/bs";
-import PhoneSelect from "./PhoneSelect/PhoneSelect";
+// import PhoneSelect from "./PhoneSelect/PhoneSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../../../redux/auth/selectors";
 import toast from "react-hot-toast";
@@ -17,70 +17,103 @@ import {
   updateUserData,
 } from "../../../../redux/auth/operations";
 import { getUserData } from "../../../../redux/auth/operations";
-import TimeZoneSelect from "./TimeZoneSelect/TimeZoneSelect";
+import CustomSelect from "./CustomSelect/CustomSelect";
+import CurrencySelect from "./CurrencySelect/CurrencySelect";
+// import TimeZoneSelect from "./TimeZoneSelect/TimeZoneSelect";
+import Modal from "../../Modal/Modal";
+import ChangePasswordModal from "./ChangePasswordModal/ChangePasswordModal";
+import { BsFillKeyFill } from "react-icons/bs";
+import clsx from "clsx";
 
 const Validation = Yup.object().shape({
   username: Yup.string()
     .min(2, "Занадто коротке")
     .max(30, "Занадто довге")
     .required("Поле повинно бути заповнене"),
-  phone: Yup.string()
-    .min(3, "Занадто коротке")
-    .max(50, "Занадто довге")
-    .required("Поле повинно бути заповнене"),
-  adress: Yup.string()
-    .min(2, "Занадто коротке")
-    .max(30, "Занадто довге")
-    .required("Поле повинно бути заповнене"),
-  city: Yup.string()
-    .min(2, "Занадто коротке")
-    .max(30, "Занадто довге")
-    .required("Поле повинно бути заповнене"),
-  index: Yup.number()
-    .positive("Використовуйте додатні числа")
-    .integer("Використовуйте цілі числа")
-    .required("Поле повинно бути заповнене"),
+  company: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
+  languages: Yup.string().oneOf(["ukr", "eng"]).required("Оберіть мову:)"),
+  // phone: Yup.string()
+  //   .min(3, "Занадто коротке")
+  //   .max(50, "Занадто довге")
+  //   .required("Поле повинно бути заповнене"),
+  // adress: Yup.string()
+  //   .min(2, "Занадто коротке")
+  //   .max(30, "Занадто довге")
+  //   .required("Поле повинно бути заповнене"),
+  // city: Yup.string()
+  //   .min(2, "Занадто коротке")
+  //   .max(30, "Занадто довге")
+  //   .required("Поле повинно бути заповнене"),
+  // index: Yup.number()
+  //   .positive("Використовуйте додатні числа")
+  //   .integer("Використовуйте цілі числа")
+  //   .required("Поле повинно бути заповнене"),
 });
 
 export default function UserSettingsProfile({ onClose }) {
   const fileInputRef = useRef(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
-
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
   const userName = user.name || "";
-  const userPhone = user.phone_number || "";
   const userDefaultPage = user.first_page || "";
-  const userTimeZone = user.time_zone || "";
   const userPhoto = user?.avatar_url || defaultAvatar;
-  const userCountry = user.country || "";
-  const userCity = user.city || "";
-  const userIndex = user.post_code || "";
-  const userAddress = user.address || "";
+  const userEmail = user.email || "";
+  const userCompany = user.company_name || "";
+  const userLanguage = user.language;
+  const userCurrency = user.currency;
+
+  // const userPhone = user.phone_number || "";
+  // const userTimeZone = user.time_zone || "";
+  // const userCountry = user.country || "";
+  // const userCity = user.city || "";
+  // const userIndex = user.post_code || "";
+  // const userAddress = user.address || "";
 
   const [avatar, setAvatar] = useState(userPhoto);
   console.log("Current avatar URL:", avatar);
 
   const nameFieldId = useId();
-  const phoneFieldId = useId();
-  const countryFieldId = useId();
-  const adressFieldId = useId();
   const sectionFieldId = useId();
-  const timeZoneFieldId = useId();
-  const cityFieldId = useId();
-  const indexFieldId = useId();
+  const companyFieldId = useId();
+  const languagesFieldId = useId();
+  const currencyFieldId = useId();
+
+  const handleToggleClick = () => {
+    setIsVisible((prev) => !prev);
+  };
+  const openModal = () => {
+    console.log("Opening modal");
+    setIsOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsOpen(false);
+  };
+
+  // const phoneFieldId = useId();
+  // const countryFieldId = useId();
+  // const adressFieldId = useId();
+  // const timeZoneFieldId = useId();
+  // const cityFieldId = useId();
+  // const indexFieldId = useId();
 
   const initialValues = {
     username: userName,
-    phone: userPhone,
-    country: userCountry,
-    adress: userAddress,
     section: userDefaultPage,
-    timeZone: userTimeZone,
-    city: userCity,
-    index: userIndex,
+    company: userCompany,
+    languages: userLanguage || "ukr",
+    currency: userCurrency || "UAH",
+    // phone: userPhone,
+    // country: userCountry,
+    // adress: userAddress,
+    // timeZone: userTimeZone,
+    // city: userCity,
+    // index: userIndex,
   };
 
   const handleChangePhoto = () => {
@@ -141,9 +174,9 @@ export default function UserSettingsProfile({ onClose }) {
   //   };
   // }, [avatar]);
 
-  // const toggleDropdown = (index) => {
-  //   setActiveDropdown(activeDropdown === index ? null : index);
-  // };
+  const toggleDropdown = () => {
+    setActiveDropdown((prev) => !prev);
+  };
 
   const handleBlur = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
@@ -160,33 +193,45 @@ export default function UserSettingsProfile({ onClose }) {
       dataToUpdate.first_name = values.username;
     }
 
-    if (values.country !== user.country) {
-      dataToUpdate.country = values.country;
-    }
-
-    if (values.phone !== user.phone_number) {
-      dataToUpdate.phone_number = values.phone;
-    }
-
-    if (values.adress !== user.address) {
-      dataToUpdate.address = values.adress;
-    }
-
     if (values.section !== user.first_page) {
       dataToUpdate.first_page = values.section;
     }
 
-    if (values.timeZone !== user.time_zone) {
-      dataToUpdate.time_zone = values.timeZone;
+    if (values.company !== user.company_name) {
+      dataToUpdate.company_name = values.company;
     }
 
-    if (values.city !== user.city) {
-      dataToUpdate.city = values.city;
+    if (values.languages !== user.language) {
+      dataToUpdate.language = values.languages;
     }
 
-    if (values.index !== user.post_code) {
-      dataToUpdate.post_code = values.index;
+    if (values.currency !== user.currency) {
+      dataToUpdate.currency = values.currency;
     }
+
+    // if (values.country !== user.country) {
+    //   dataToUpdate.country = values.country;
+    // }
+
+    // if (values.phone !== user.phone_number) {
+    //   dataToUpdate.phone_number = values.phone;
+    // }
+
+    // if (values.adress !== user.address) {
+    //   dataToUpdate.address = values.adress;
+    // }
+
+    // if (values.timeZone !== user.time_zone) {
+    //   dataToUpdate.time_zone = values.timeZone;
+    // }
+
+    // if (values.city !== user.city) {
+    //   dataToUpdate.city = values.city;
+    // }
+
+    // if (values.index !== user.post_code) {
+    //   dataToUpdate.post_code = values.index;
+    // }
 
     //     // Заміна `null` або `undefined` на порожні рядки в `dataToUpdate`
     // Object.keys(dataToUpdate).forEach(
@@ -290,7 +335,22 @@ export default function UserSettingsProfile({ onClose }) {
           <div className={css.inputs}>
             <div className={css.firstColumn}>
               <div className={css.inputBox}>
-                <label htmlFor={phoneFieldId} className={css.inputLable}>
+                <label className={css.inputLable}>Пошта</label>
+
+                <Field
+                  className={css.email}
+                  name="email"
+                  value={userEmail}
+                  onClick={handleToggleClick}
+                  readOnly
+                />
+
+                {isVisible && (
+                  <span className={css.errorMessage}>
+                    для зміни пошти зверніться у технічну підтримку
+                  </span>
+                )}
+                {/* <label htmlFor={phoneFieldId} className={css.inputLable}>
                   Телефон
                 </label>
                 <Field
@@ -305,11 +365,19 @@ export default function UserSettingsProfile({ onClose }) {
                   name="phone"
                   component="span"
                   className={css.errorMessage}
-                />
+                /> */}
               </div>
 
               <div className={css.inputBox}>
-                <label htmlFor={countryFieldId} className={css.inputLable}>
+                <label htmlFor={languagesFieldId} className={css.inputLable}>
+                  Мова
+                </label>
+                <Field
+                  name="languages"
+                  id={languagesFieldId}
+                  component={CustomSelect}
+                />
+                {/* <label htmlFor={countryFieldId} className={css.inputLable}>
                   Країна
                 </label>
                 <Field
@@ -326,11 +394,11 @@ export default function UserSettingsProfile({ onClose }) {
                   className={`${css.btnArrowSelect} ${
                     activeDropdown === 0 ? css.rotated : ""
                   }`}
-                />
+                /> */}
               </div>
 
-              <div className={css.inputBox}>
-                <label htmlFor={adressFieldId} className={css.inputLable}>
+              {/* <div className={css.inputBox}> */}
+              {/* <label htmlFor={adressFieldId} className={css.inputLable}>
                   Адреса
                 </label>
                 <Field
@@ -344,8 +412,8 @@ export default function UserSettingsProfile({ onClose }) {
                   name="adress"
                   component="span"
                   className={css.errorMessage}
-                />
-              </div>
+                /> */}
+              {/* </div> */}
 
               <div className={css.inputBox}>
                 <label htmlFor={sectionFieldId} className={css.inputLable}>
@@ -356,7 +424,7 @@ export default function UserSettingsProfile({ onClose }) {
                   name="section"
                   id={sectionFieldId}
                   className={`${css.input} ${css.inputSelect}`}
-                  // onClick={() => toggleDropdown(1)}
+                  onClick={toggleDropdown}
                 >
                   <option value="default">За замовченням</option>
                   <option value="main">Головна</option>
@@ -368,16 +436,31 @@ export default function UserSettingsProfile({ onClose }) {
                   <option value="Settings">Налаштування</option>
                 </Field>
                 <BsFillCaretDownFill
-                  className={`${css.btnArrowSelect} ${
-                    activeDropdown === 1 ? css.rotated : ""
-                  }`}
+                  className={clsx(css.btnArrowSelect, {
+                    [css.rotated]: activeDropdown,
+                  })}
                 />
               </div>
             </div>
 
             <div className={css.secondColumn}>
               <div className={css.inputBox}>
-                <label htmlFor={timeZoneFieldId} className={css.inputLable}>
+                <label htmlFor={companyFieldId} className={css.inputLable}>
+                  Назва компанії
+                </label>
+                <Field
+                  type="text"
+                  name="company"
+                  className={css.input}
+                  id={companyFieldId}
+                  placeholder="Avtoatmosfera"
+                />
+                <ErrorMessage
+                  name="company"
+                  component="span"
+                  className={css.errorMessage}
+                />
+                {/* <label htmlFor={timeZoneFieldId} className={css.inputLable}>
                   Часовий пояс
                 </label>
                 <Field
@@ -387,21 +470,29 @@ export default function UserSettingsProfile({ onClose }) {
                   className={`${css.input} ${css.inputSelect}`}
                   // onClick={() => toggleDropdown(2)}
                   component={TimeZoneSelect}
-                />
+                /> */}
                 {/* <option value="default">За замовченням</option> *
                   {/* <option value="Europe/Kyiv">(UTC +03:00) Київ</option>
                   <option value="Europe/London">(GTM +01:00) London</option> 
                    </Field> */}
 
-                <BsFillCaretDownFill
+                {/* <BsFillCaretDownFill
                   className={`${css.btnArrowSelect} ${
                     activeDropdown === 2 ? css.rotated : ""
                   }`}
-                />
+                /> */}
               </div>
 
               <div className={css.inputBox}>
-                <label htmlFor={cityFieldId} className={css.inputLable}>
+                <label htmlFor={currencyFieldId} className={css.inputLable}>
+                  Валюта
+                </label>
+                <Field
+                  name="currency"
+                  id={currencyFieldId}
+                  component={CurrencySelect}
+                />
+                {/* <label htmlFor={cityFieldId} className={css.inputLable}>
                   Місто
                 </label>
                 <Field
@@ -415,11 +506,25 @@ export default function UserSettingsProfile({ onClose }) {
                   name="city"
                   component="span"
                   className={css.errorMessage}
-                />
+                /> */}
               </div>
 
               <div className={css.inputBox}>
-                <label htmlFor={indexFieldId} className={css.inputLable}>
+                <label className={css.inputLable}>Пароль</label>
+                <button
+                  className={css.passwortChBtn}
+                  type="button"
+                  onClick={openModal}
+                >
+                  {" "}
+                  <BsFillKeyFill className={css.iconKey} /> Змінити пароль
+                </button>
+                {modalIsOpen && (
+                  <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
+                    <ChangePasswordModal onClose={handleModalClose} />
+                  </Modal>
+                )}
+                {/* <label htmlFor={indexFieldId} className={css.inputLable}>
                   Індекс
                 </label>
                 <Field
@@ -433,7 +538,7 @@ export default function UserSettingsProfile({ onClose }) {
                   name="index"
                   component="span"
                   className={css.errorMessage}
-                />
+                /> */}
               </div>
             </div>
           </div>

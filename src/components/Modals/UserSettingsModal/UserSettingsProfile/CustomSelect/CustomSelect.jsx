@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { ErrorMessage } from "formik";
-import { IoIosArrowDown } from "react-icons/io";
+import { BsFillCaretDownFill } from "react-icons/bs";
+// import { IoIosArrowDown } from "react-icons/io";
 import clsx from "clsx";
-import css from "./CustomSelect.module.css"
+import css from "./CustomSelect.module.css";
 import { useRef } from "react";
 import { useEffect } from "react";
 
@@ -26,9 +27,9 @@ export default function CustomSelect({ field, form }) {
   //   }
   // };
 
-    const wrapperRef = useRef(null);
+  const wrapperRef = useRef(null);
 
-const handleClickOutside = (event) => {
+  const handleClickOutside = (event) => {
     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
       setIsOpen(false);
     }
@@ -39,14 +40,23 @@ const handleClickOutside = (event) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-    }, []);
+  }, []);
 
   return (
     <div className={css.selectWrapper} ref={wrapperRef}>
-      <div className={css.inputSelect} onClick={() => setIsOpen((prev) => !prev)}>
-        <span className={`fi ${languages.find(lang => lang.value === field.value)?.flag} ${css.icon}`} />
-        {languages.find(lang => lang.value === field.value)?.label}
-              <IoIosArrowDown className={clsx(css.selectIcon, { [css.rotated]: isOpen })} />
+      <div
+        className={css.inputSelect}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        <span
+          className={`fi ${
+            languages.find((lang) => lang.value === field.value)?.flag
+          } ${css.icon}`}
+        />
+        {languages.find((lang) => lang.value === field.value)?.label}
+        <BsFillCaretDownFill
+          className={clsx(css.selectIcon, { [css.rotated]: isOpen })}
+        />
       </div>
       {isOpen && (
         <div className={css.options}>
