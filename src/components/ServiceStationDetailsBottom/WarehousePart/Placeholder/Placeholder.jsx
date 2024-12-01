@@ -3,7 +3,7 @@ const Placeholder = ({ node, depth }) => {
     <div
       style={{
         position: "absolute",
-        top: "-100%",
+        top: -7,
         right: 0,
         height: 4,
         left: depth * 40,

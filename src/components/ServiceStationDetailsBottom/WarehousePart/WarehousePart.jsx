@@ -57,7 +57,6 @@ const dataForTree = [
     parent: "3",
     text: "Стелаж",
     droppable: true,
-
     data: "rack",
   },
   {
@@ -82,6 +81,7 @@ export default function WarehousePart() {
   const [isNewWhPopoverOpen, setNewWhPopoverOpen] = useState(false);
 
   const buttonRef = useRef(null);
+  const containerRef = useRef(null);
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -114,6 +114,18 @@ export default function WarehousePart() {
     setNewWhPopoverOpen(false);
   };
 
+  const calculateDepth = (nodeId, tree) => {
+    let depth = 0;
+    let currentNode = tree.find((node) => node.id === nodeId);
+
+    while (currentNode && currentNode.parent) {
+      depth += 1;
+      currentNode = tree.find((node) => node.id === currentNode.parent);
+    }
+
+    return depth;
+  };
+
   const reorderArray = (array, sourceIndex, targetIndex) => {
     const newArray = [...array];
     const element = newArray.splice(sourceIndex, 1)[0];
@@ -135,6 +147,15 @@ export default function WarehousePart() {
       dropTargetId,
       destinationIndex,
     });
+
+    const startDepth = calculateDepth(dragSourceId, treeData);
+    const endDepth = calculateDepth(dropTargetId, treeData);
+
+    if (startDepth < endDepth) {
+      //  console.warn("Переміщення вниз по ієрархії заборонено");
+      return;
+    }
+
     if (
       start?.parent === dropTargetId &&
       start &&
@@ -153,7 +174,8 @@ export default function WarehousePart() {
     if (
       start?.parent !== dropTargetId &&
       start &&
-      typeof destinationIndex === "number"
+      typeof destinationIndex === "number" &&
+      start.data !== end.data
     ) {
       if (
         getDescendants(treeData, dragSourceId).find(
@@ -259,7 +281,7 @@ export default function WarehousePart() {
                 treeData={tree}
                 onChange={(newTreeData)=> setTree(newTreeData)}
             /> */}
-      <div className={css.treeContainer}>
+      <div className={css.treeContainer} ref={containerRef}>
         <DndProvider backend={MultiBackend} options={getBackendOptions()}>
           <div className={css.wrapper}>
             <Tree
@@ -299,6 +321,7 @@ export default function WarehousePart() {
                   isEditing={isEditing}
                   // setIsEditing={setIsEditing}
                   onStartEditing={handleStartEditing}
+                  containerRef={containerRef}
                 />
               )}
             />
