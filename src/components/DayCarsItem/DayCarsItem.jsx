@@ -38,9 +38,9 @@ export default function DayCarsItem({ car, isModal }) {
   const carPhoto = photoUrl || absentAutoImg;
 
   const formatCarNumber = (number) => {
+    if (!number) return "";
     return number.replace(/\s+/g, "");
   };
-
   return (
     <div
       className={clsx(

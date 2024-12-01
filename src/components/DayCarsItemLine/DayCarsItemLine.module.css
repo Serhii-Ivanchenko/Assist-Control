@@ -129,12 +129,6 @@
   }
 }
 
-@media only screen and (min-width: 1850px) {
-  .checkRepair {
-    font-size: 16px;
-  }
-}
-
 .infoCar {
   display: flex;
   align-items: center;
@@ -178,7 +172,8 @@
 }
 
 .btnContainer {
-  display: none;
+  display: flex;
+  gap: 8px;
 }
 
 @media only screen and (min-width: 1850px) {
