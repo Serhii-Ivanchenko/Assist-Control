@@ -58,6 +58,7 @@ export default function Node({
   // setIsEditing,
   isEditing,
   onStartEditing,
+  containerRef,
 }) {
   const inputFocusRef = useRef(null);
 
@@ -197,6 +198,7 @@ export default function Node({
           deleteChild={deleteChild}
           setTreeData={setTreeData}
           node={node}
+          containerRef={containerRef}
         />
       </div>
     </div>

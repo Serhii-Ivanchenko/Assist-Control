@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import Modal from "../../../Modals/Modal/Modal";
 import AddModal from "../AddModal/AddModal";
+import { useEffect } from "react";
 
 const TextForNewBranch = ({ type }) => {
   switch (type) {
@@ -50,6 +51,7 @@ export default function NewElemPop({
   onClose,
   setTreeData,
   node,
+  // containerRef,
 }) {
   const popoverRef = useRef(null);
 
@@ -98,6 +100,19 @@ export default function NewElemPop({
 
     setTreeData((prevTreeData) => [...prevTreeData, ...NewBranches]);
   };
+
+  useEffect(() => {
+    // console.log("Popover visibility: ", isVisible);
+    // console.log("Popover ref: ", popoverRef.current);
+
+    if (isVisible && popoverRef.current) {
+      const popover = popoverRef.current;
+      popover.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [isVisible]);
 
   return (
     <div
