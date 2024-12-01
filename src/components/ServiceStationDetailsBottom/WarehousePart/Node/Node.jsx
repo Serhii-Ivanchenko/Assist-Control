@@ -117,11 +117,19 @@ export default function Node({
   //   getPipeHeight(node.parent, treeData)
   // );
 
+  const addButtonRef = (el) => {
+    if (el && !buttonRefs.current.includes(el)) {
+      buttonRefs.current[node.id] = el;
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
         buttonRefs.current &&
-        !buttonRefs.current.some((ref) => ref && ref.contains(event.target))
+        !Object.values(buttonRefs.current).some(
+          (ref) => ref && ref.contains(event.target)
+        )
       ) {
         setIsOpen(false);
       }
@@ -176,10 +184,7 @@ export default function Node({
           </p>
         )}
       </div>
-      <div
-        className={css.popoverDiv}
-        ref={(el) => (buttonRefs.current[node.id] = el)}
-      >
+      <div className={css.popoverDiv} ref={addButtonRef}>
         <BsThreeDotsVertical
           onClick={(e) => handleTogglePopover(node.id, e)}
           className={css.icon}
