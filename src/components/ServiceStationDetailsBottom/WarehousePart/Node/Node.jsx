@@ -62,13 +62,16 @@ export default function Node({
   openParentIfNeeded,
 }) {
   const inputFocusRef = useRef(null);
+  const scrollForPopover = useRef(null);
 
+  // Редагування
   const handleEditing = (id, e) => {
     e.stopPropagation();
     // setIsEditing(isEditing === id ? null : id);
     onStartEditing(id);
   };
 
+  // При ввімкненні редагування, з'являється мигаюча паличка
   useEffect(() => {
     if (isEditing && inputFocusRef.current) {
       inputFocusRef.current.focus();
@@ -83,6 +86,7 @@ export default function Node({
     );
   };
 
+  // Видалення
   const deleteChild = (id, e) => {
     e.stopPropagation();
     setTreeData((prevData) =>
@@ -90,10 +94,12 @@ export default function Node({
     );
   };
 
+  // Щоб не тригерилось дерево
   const onInputClick = (e) => {
     e.stopPropagation();
   };
 
+  // Розкриття вузлів дерева
   const indent = depth * TREE_X_OFFSET;
 
   const handleToggle = (e) => {
@@ -101,6 +107,7 @@ export default function Node({
     onClick(node.id);
   };
 
+  // Функціонал для поповерів
   const buttonRefs = useRef([]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -124,6 +131,7 @@ export default function Node({
     }
   };
 
+  // Щоб по кліку кудись, попове вимикався
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -140,6 +148,31 @@ export default function Node({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // // Автоматичний скролл при відкритті останнього поповера(не працює)
+
+  useEffect(() => {
+    if (isOpen && scrollForPopover.current && containerRef.current) {
+      const popover = scrollForPopover.current;
+      // const container = containerRef.current;
+
+      // // Перевірка, чи поповер виходить за межі контейнера
+      // const containerRect = container.getBoundingClientRect();
+      // const popoverRect = popover.getBoundingClientRect();
+
+      // // Прокручуємо лише в разі, якщо поповер виходить за межі видимості контейнера
+      // if (
+      //   popoverRect.bottom > containerRect.bottom ||
+      //   popoverRect.top < containerRect.top
+      // )
+      {
+        popover.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest", // Встановлює найближчу позицію для видимості
+        });
+      }
+    }
+  }, [isOpen]);
 
   return (
     <div
@@ -191,23 +224,24 @@ export default function Node({
           className={css.icon}
           size={24}
         />
-
-        <NewElemPop
-          isVisible={isOpen}
-          icon={<IconForPopover type={node.data} />}
-          addText={<TextForPopover type={node.data} />}
-          buttonRefs={buttonRefs.current[node.id]}
-          onClose={handleClosePopover}
-          type={node.data}
-          isEditing={handleEditing}
-          id={node.id}
-          deleteChild={deleteChild}
-          setTreeData={setTreeData}
-          node={node}
-          containerRef={containerRef}
-          // handleToggle={handleToggle}
-          openParentIfNeeded={openParentIfNeeded}
-        />
+        <div ref={scrollForPopover}>
+          <NewElemPop
+            isVisible={isOpen}
+            icon={<IconForPopover type={node.data} />}
+            addText={<TextForPopover type={node.data} />}
+            buttonRefs={buttonRefs.current[node.id]}
+            onClose={handleClosePopover}
+            type={node.data}
+            isEditing={handleEditing}
+            id={node.id}
+            deleteChild={deleteChild}
+            setTreeData={setTreeData}
+            node={node}
+            containerRef={containerRef}
+            // handleToggle={handleToggle}
+            openParentIfNeeded={openParentIfNeeded}
+          />
+        </div>
       </div>
     </div>
   );

@@ -113,14 +113,18 @@ export default function WarehousePart() {
   const scrollToTheLastItemRef = useRef(null);
 
   // Прокрутка до ост. елементу при додаванні
-  // useEffect(() => {
-  //   if (treeData.length > 0) {
-  //     scrollToTheLastItemRef.current?.scrollTo({
-  //       top: scrollToTheLastItemRef.current.scrollHeight,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // }, [treeData]);
+  useEffect(() => {
+    if (
+      treeData.length > 0 &&
+      scrollToTheLastItemRef.current &&
+      treeData[treeData.length - 1]?.data === "warehouse"
+    ) {
+      scrollToTheLastItemRef.current?.scrollTo({
+        top: scrollToTheLastItemRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [treeData]);
 
   // Відкриття і закриття поповеру
   const handleTogglePopover = (e) => {

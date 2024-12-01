@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import Modal from "../../../Modals/Modal/Modal";
 import AddModal from "../AddModal/AddModal";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 const TextForNewBranch = ({ type }) => {
   switch (type) {
@@ -51,7 +51,7 @@ export default function NewElemPop({
   onClose,
   setTreeData,
   node,
-  containerRef,
+  // containerRef,
   // handleToggle,
   openParentIfNeeded,
 }) {
@@ -113,23 +113,29 @@ export default function NewElemPop({
     });
   };
 
-  // Автоматичний скролл при відкритті останнього поповера(не працює)
+  // // Автоматичний скролл при відкритті останнього поповера(не працює)
 
-  useEffect(() => {
-    // console.log("Popover visibility: ", isVisible);
-    // console.log("Popover ref: ", popoverRef.current);
+  // useEffect(() => {
+  //   if (isVisible && popoverRef.current && containerRef.current) {
+  //     const popover = popoverRef.current;
+  //     const container = containerRef.current;
 
-    if (!popoverRef.current || !containerRef.current) return;
+  //     // Перевірка, чи поповер виходить за межі контейнера
+  //     const containerRect = container.getBoundingClientRect();
+  //     const popoverRect = popover.getBoundingClientRect();
 
-    if (isVisible === node.id && popoverRef.current && containerRef.current) {
-      const popover = popoverRef.current;
-      // const container = containerRef.current;
-      popover.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
-    }
-  }, [isVisible, node.id, popoverRef.current, containerRef.current]);
+  //     // Прокручуємо лише в разі, якщо поповер виходить за межі видимості контейнера
+  //     if (
+  //       popoverRect.bottom > containerRect.bottom ||
+  //       popoverRect.top < containerRect.top
+  //     ) {
+  //       popover.scrollIntoView({
+  //         behavior: "smooth",
+  //         block: "nearest", // Встановлює найближчу позицію для видимості
+  //       });
+  //     }
+  //   }
+  // }, [isVisible]);
 
   return (
     <div
