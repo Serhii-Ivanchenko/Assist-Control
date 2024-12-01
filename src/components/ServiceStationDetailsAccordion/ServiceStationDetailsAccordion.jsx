@@ -1,19 +1,42 @@
+import { useState , useRef} from "react";
 import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Button,
   Typography,
 } from "@mui/material";
-import { BsCaretDownFill } from "react-icons/bs";
+import { BsCaretDownFill, BsPencil } from "react-icons/bs";
+import { RiSave3Fill } from "react-icons/ri";
 // import { useState } from "react";
 import ServiceStationDetailsTop from "../ServiceStationDetailsTop/ServiceStationDetailsTop.jsx";
 import ServiceStationDetailsTopTable from "../ServiceStationDetailsTopTable/ServiceStationDetailsTopTable.jsx";
 import css from "./ServiceStationDetailsAccordion.module.css";
 
 export default function ServiceStationDetailsAccordion({ onToggle }) {
-  const handleChange = (e, isExpanded) => {
-    onToggle(isExpanded);
+
+   const [isEditing, setIsEditing] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+// Реф для доступа к generateBackendData
+  const detailsRef = useRef();
+  const handleChange = (e, expanded) => {
+
+     setIsExpanded(expanded);
+    if (!expanded) {
+      setIsEditing(false); // Сбрасываем режим редактирования при закрытии
+    }
+    onToggle(expanded);
+  };
+
+  const handleEditToggle = (event) => {
+        event.stopPropagation(); // Останавливаем всплытие события
+    if (isEditing) {
+      // Вызов функции generateBackendData через реф
+      if (detailsRef.current?.generateBackendData) {
+        detailsRef.current.generateBackendData();
+      }
+      console.log("Сохранение завершено.");
+    }
+    setIsEditing((prev) => !prev);
   };
   // const activePeriods = [
   //   { day: "Monday", startTime: 9, endTime: 12, isActive: true },
@@ -94,6 +117,16 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
         >
           Налаштування робочого графіка:
         </Typography>
+
+        {isExpanded && (
+          <button
+            onClick={handleEditToggle}
+            style={{ color: "var(--white)", marginLeft: "15px" }}
+            className={css.editbtn}    
+          >
+            {isEditing ?  <RiSave3Fill className={css.mainIcon} size={21} /> :  <BsPencil className={css.mainIcon} />}
+          </button>
+        )}
       </AccordionSummary>
       <AccordionDetails
         style={{
@@ -102,7 +135,7 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
           marginTop: "19px",
         }}
       >
-          <ServiceStationDetailsTop /> 
+          <ServiceStationDetailsTop ref={detailsRef} isEditing={isEditing}/> 
         {/* <ServiceStationDetailsTopTable /> */}
       </AccordionDetails>
     </Accordion>

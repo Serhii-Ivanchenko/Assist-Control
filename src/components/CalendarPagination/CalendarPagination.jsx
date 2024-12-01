@@ -147,7 +147,7 @@ export default function CalendarPagination({ isCrm }) {
           <button
             className={css.iconstep}
             onClick={handleClickRight}
-            disabled={isCurrentMonth}
+            disabled={isCurrentMonth && !isCrm}
             style={{ cursor: "default" }}
           >
             <FiChevronRight className={css.arrowIcon} />
