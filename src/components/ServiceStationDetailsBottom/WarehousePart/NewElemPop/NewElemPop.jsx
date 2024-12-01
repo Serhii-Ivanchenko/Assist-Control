@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import Modal from "../../../Modals/Modal/Modal";
 import AddModal from "../AddModal/AddModal";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 
 const TextForNewBranch = ({ type }) => {
   switch (type) {
@@ -51,7 +51,7 @@ export default function NewElemPop({
   onClose,
   setTreeData,
   node,
-  // containerRef,
+  containerRef,
   // handleToggle,
   openParentIfNeeded,
 }) {
@@ -93,7 +93,7 @@ export default function NewElemPop({
       const branchData = DataForNewBranch({ type: node.data });
 
       return {
-        id: `${Date.now()} - ${index}`,
+        id: `${Date.now()}  - ${index}`,
         text: `${branchText} ${index + 1}`,
         droppable: true,
         parent: node.id,
@@ -136,6 +136,28 @@ export default function NewElemPop({
   //     }
   //   }
   // }, [isVisible]);
+
+  useEffect(() => {
+    console.log("isVisible:", isVisible, "node.id:", node.id);
+    if (isVisible === node.id && popoverRef.current && containerRef.current) {
+      const popover = popoverRef.current;
+      const container = containerRef.current;
+
+      // Координати контейнера і поповера
+      const containerRect = container.getBoundingClientRect();
+      const popoverRect = popover.getBoundingClientRect();
+
+      // Якщо нижня межа поповера виходить за межі контейнера
+      if (popoverRect.bottom > containerRect.bottom) {
+        container.scrollTop += popoverRect.bottom - containerRect.bottom;
+      }
+
+      // Якщо верхня межа поповера виходить за межі контейнера
+      if (popoverRect.top < containerRect.top) {
+        container.scrollTop -= containerRect.top - popoverRect.top;
+      }
+    }
+  }, [isVisible, node.id]);
 
   return (
     <div

@@ -113,7 +113,7 @@ export default function Node({
 
   const handleTogglePopover = (id, e) => {
     e.stopPropagation();
-    setIsOpen(isOpen === id ? null : id);
+    setIsOpen(isOpen === id ? false : id);
   };
 
   const handleClosePopover = () => {
@@ -151,28 +151,26 @@ export default function Node({
 
   // // Автоматичний скролл при відкритті останнього поповера(не працює)
 
-  useEffect(() => {
-    if (isOpen && scrollForPopover.current && containerRef.current) {
-      const popover = scrollForPopover.current;
-      // const container = containerRef.current;
+  // useEffect(() => {
+  //   if (isOpen && scrollForPopover.current && containerRef.current) {
+  //     const popover = scrollForPopover.current;
+  //     const container = containerRef.current;
 
-      // // Перевірка, чи поповер виходить за межі контейнера
-      // const containerRect = container.getBoundingClientRect();
-      // const popoverRect = popover.getBoundingClientRect();
+  //     // Координати контейнера і поповера
+  //     const containerRect = container.getBoundingClientRect();
+  //     const popoverRect = popover.getBoundingClientRect();
 
-      // // Прокручуємо лише в разі, якщо поповер виходить за межі видимості контейнера
-      // if (
-      //   popoverRect.bottom > containerRect.bottom ||
-      //   popoverRect.top < containerRect.top
-      // )
-      {
-        popover.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest", // Встановлює найближчу позицію для видимості
-        });
-      }
-    }
-  }, [isOpen]);
+  //     // Якщо нижня межа поповера виходить за межі контейнера
+  //     if (popoverRect.bottom > containerRect.bottom) {
+  //       container.scrollTop += popoverRect.bottom - containerRect.bottom;
+  //     }
+
+  //     // Якщо верхня межа поповера виходить за межі контейнера
+  //     if (popoverRect.top < containerRect.top) {
+  //       container.scrollTop -= containerRect.top - popoverRect.top;
+  //     }
+  //   }
+  // }, [isOpen, node.id]);
 
   return (
     <div
@@ -240,6 +238,7 @@ export default function Node({
             containerRef={containerRef}
             // handleToggle={handleToggle}
             openParentIfNeeded={openParentIfNeeded}
+            treeData={treeData}
           />
         </div>
       </div>

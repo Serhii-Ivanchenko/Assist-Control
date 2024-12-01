@@ -84,7 +84,7 @@ export default function WarehousePart() {
   // const [openedNode, setOpenedNode] = useState();
 
   const buttonRef = useRef(null);
-  const containerRef = useRef(null);
+  // const containerRef = useRef(null);
 
   // Редагування гілочок
   const [isEditing, setIsEditing] = useState(false);
@@ -338,7 +338,7 @@ export default function WarehousePart() {
                   isEditing={isEditing}
                   // setIsEditing={setIsEditing}
                   onStartEditing={handleStartEditing}
-                  containerRef={containerRef}
+                  containerRef={scrollToTheLastItemRef}
                   openParentIfNeeded={openParentIfNeeded}
                 />
               )}
