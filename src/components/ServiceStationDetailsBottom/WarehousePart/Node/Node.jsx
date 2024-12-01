@@ -59,6 +59,7 @@ export default function Node({
   isEditing,
   onStartEditing,
   containerRef,
+  openParentIfNeeded,
 }) {
   const inputFocusRef = useRef(null);
 
@@ -204,6 +205,8 @@ export default function Node({
           setTreeData={setTreeData}
           node={node}
           containerRef={containerRef}
+          // handleToggle={handleToggle}
+          openParentIfNeeded={openParentIfNeeded}
         />
       </div>
     </div>

@@ -27,6 +27,17 @@ const useTreeOpenHandler = () => {
     openIds.includes(id) ? close(id) : open(id);
   };
 
+  const openParentIfNeeded = (newNodeId, treeData) => {
+    const newNode = treeData.find((node) => node.id === newNodeId);
+    if (
+      newNode &&
+      newNode.parent !== null &&
+      !openIds.includes(newNode.parent)
+    ) {
+      open(newNode.parent); // Відкриваємо батьківський вузол
+    }
+  };
+
   const isVisible = (id, treeData) => {
     const parentId = treeData.find((node) => node.id === id)?.parent;
     const parentExistsInTree =
@@ -70,7 +81,16 @@ const useTreeOpenHandler = () => {
     return getHeightOfId(id);
   };
 
-  return { ref, open, close, toggle, getPipeHeight, isVisible, openIds };
+  return {
+    ref,
+    open,
+    close,
+    toggle,
+    getPipeHeight,
+    isVisible,
+    openIds,
+    openParentIfNeeded,
+  };
 };
 
 export default useTreeOpenHandler;

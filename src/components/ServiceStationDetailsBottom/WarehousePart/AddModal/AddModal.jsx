@@ -7,6 +7,7 @@ export default function AddModal({ onClose, addNewBranch }) {
     addNewBranch(values.number);
     console.log("values", values);
     onClose();
+
     actions.resetForm();
   };
 

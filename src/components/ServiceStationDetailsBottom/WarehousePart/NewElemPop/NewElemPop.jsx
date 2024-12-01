@@ -51,10 +51,13 @@ export default function NewElemPop({
   onClose,
   setTreeData,
   node,
-  // containerRef,
+  containerRef,
+  // handleToggle,
+  openParentIfNeeded,
 }) {
   const popoverRef = useRef(null);
 
+  // Відкриття і закриття модалки
   const [modalIsOpen, setIsOpen] = useState(false);
   const openModal = (e) => {
     e.stopPropagation();
@@ -69,6 +72,7 @@ export default function NewElemPop({
     setIsOpen(false);
   };
 
+  // Редагування і видалення гілочок
   const openEdit = (e) => {
     e.stopPropagation();
     isEditing(id, e);
@@ -80,6 +84,7 @@ export default function NewElemPop({
     onClose();
   };
 
+  // Додавання нових гілочок
   const addNewBranch = (count) => {
     if (count <= 0) return;
 
@@ -98,21 +103,33 @@ export default function NewElemPop({
 
     console.log(NewBranches);
 
-    setTreeData((prevTreeData) => [...prevTreeData, ...NewBranches]);
+    setTreeData((prevTreeData) => {
+      const updatedTree = [...prevTreeData, ...NewBranches];
+      // Відкриття батьківської гілки після додавання
+      NewBranches.forEach((newNode) =>
+        openParentIfNeeded(newNode.id, updatedTree)
+      );
+      return updatedTree;
+    });
   };
+
+  // Автоматичний скролл при відкритті останнього поповера(не працює)
 
   useEffect(() => {
     // console.log("Popover visibility: ", isVisible);
     // console.log("Popover ref: ", popoverRef.current);
 
-    if (isVisible && popoverRef.current) {
+    if (!popoverRef.current || !containerRef.current) return;
+
+    if (isVisible === node.id && popoverRef.current && containerRef.current) {
       const popover = popoverRef.current;
+      // const container = containerRef.current;
       popover.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
       });
     }
-  }, [isVisible]);
+  }, [isVisible, node.id, popoverRef.current, containerRef.current]);
 
   return (
     <div
@@ -143,6 +160,7 @@ export default function NewElemPop({
                 <AddModal
                   onClose={handleModalClose}
                   addNewBranch={addNewBranch}
+                  // handleToggle={handleToggle}
                 />
               </div>
             </Modal>
