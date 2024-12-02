@@ -30,7 +30,7 @@ export default function RatingStars({ rating }) {
   };
 
   const parsedRating =
-    rating && rating !== "Немає рейтингу" ? parseFloat(rating) : 2.5;
+    rating && rating !== "Немає рейтингу" ? parseFloat(rating) : 5;
 
   return <div className={styles.rating}>{getStarElements(parsedRating)}</div>;
 }
