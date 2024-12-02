@@ -36,7 +36,7 @@ const AppointmentGrid = ({ data }) => {
   const [modalData, setModalData] = useState(null);
   const currentDate = new Date().toISOString().substring(0, 10);
 
-
+  console.log(data);
   // const handleWorkItemClick = (recordId, postId) => {
   //   setModalData({ recordId, postId });
   //   setIsModalOpen(true);
@@ -80,7 +80,7 @@ useEffect(() => {
   let columnCount = data.dates.length;
  
   let startIndexColumn = parseInt(data.dates[1]);
-  
+  console.log('sic', startIndexColumn);
   const gridStyle = {
     "--column-count": columnCount - 1,
   };
@@ -195,13 +195,14 @@ useEffect(() => {
 
         const now = new Date();
         const currentTime = now.getHours() * 60 + now.getMinutes(); // Текущее время в минутах
-        const itemEndTime = item.stage_end * 60; // Конец рабочего времени в минутах
+        const itemEndTime = (item.stage_end +1)* 60; // Конец рабочего времени в минутах
 
-        const isDisabled = (carSelectDate === currentDate && currentTime > (itemEndTime + 1) * 60) ||
+        const isDisabled = (carSelectDate === currentDate && currentTime > itemEndTime) ||
         carSelectDate < currentDate ;
-
-        const gridColumn = `${item.stage_start + 1 - startIndexColumn + 2} / ${
-          item.stage_end + 2 - startIndexColumn + 2
+        console.log('col', item.stage_start + 1 - startIndexColumn + 1)
+        console.log('colend',item.stage_end + 2 - startIndexColumn + 1)
+        const gridColumn = `${item.stage_start + 1 - startIndexColumn + 1} / ${
+          item.stage_end + 2 - startIndexColumn + 1
         }`;
         // Находим индекс строки в массиве постов, где id совпадает с post_id в работе
         const postRowIndex = data.posts.findIndex(

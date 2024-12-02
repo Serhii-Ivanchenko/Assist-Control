@@ -1,5 +1,5 @@
 import css from "./ServiceStationDetailsTop.module.css";
-import { useState } from "react";
+import { forwardRef, useImperativeHandle,useState  } from "react";
 
 const hours = Array.from({ length: 15 }, (_, i) => i + 7); // 7:00 - 21:00
 const daysUa = [
@@ -21,7 +21,10 @@ const daysEn = [
   "Sunday",
 ];
 
-export default function ServiceStationDetailsTop() {
+const ServiceStationDetailsTop = forwardRef(({ isEditing }, ref) => {
+
+  console.log('ie',isEditing);
+
   const activePeriods = [
     { day: "Monday", startTime: 9, endTime: 12, isActive: true },
     { day: "Monday", startTime: 14, endTime: 16, isActive: true },
@@ -51,6 +54,7 @@ export default function ServiceStationDetailsTop() {
 
   // Обработчики событий
   const toggleCell = (day, hour) => {
+    if (!isEditing) return; // Блокируем изменения, если режим редактирования выключен
     setGridData((prevData) =>
       prevData.map((cell) =>
         cell.day === day && cell.hour === hour
@@ -59,6 +63,10 @@ export default function ServiceStationDetailsTop() {
       )
     );
   };
+
+  useImperativeHandle(ref, () => ({
+    generateBackendData,
+  }));
 
   const handleMouseDown = (day, hour) => {
     setIsSelecting(true);
@@ -107,9 +115,8 @@ export default function ServiceStationDetailsTop() {
         {hours.map((hour, index) => (
           <div
             key={hour}
-            className={`${css.headercell} ${
-              index === hours.length - 1 ? css.headerlast : ""
-            }`}
+            className={`${css.headercell} ${index === hours.length - 1 ? css.headerlast : ""
+              }`}
           >
             {hour}:00
           </div>
@@ -145,17 +152,16 @@ export default function ServiceStationDetailsTop() {
           const dayEn = daysEn[index];
           const isLastDay = index === daysUa.length - 1;
           return (
-            <>
-              {/* Заголовок строки */}
-              <div
-                className={`${css.dayLabel} ${
-                  isLastDay ? css.lastDayLabel : ""
-                }`}
+             <>
+             
+              <div key={dayEn}
+                className={`${css.dayLabel} ${isLastDay ? css.lastDayLabel : ""
+                  }`}
               >
                 {dayUa}
               </div>
 
-              {/* Часовые ячейки */}
+             
               {hours.map((hour) => {
                 const cell = gridData.find(
                   (c) => c.day === dayEn && c.hour === hour
@@ -163,22 +169,27 @@ export default function ServiceStationDetailsTop() {
                 return (
                   <div
                     key={`${dayEn}-${hour}`}
-                    className={`${css.cell} ${
-                      cell.isActive ? css.active : css.inactive
-                    }`}
+                    className={`${css.cell} ${cell.isActive ? css.active : css.inactive
+                      }`}
                     onMouseDown={() => handleMouseDown(dayEn, hour)}
                     onMouseOver={() => handleMouseOver(dayEn, hour)}
                     onMouseUp={handleMouseUp}
                   ></div>
                 );
               })}
-            </>
+             </> 
           );
         })}
       </div>
-       {/* <button className={css.generateButton} onClick={() => generateBackendData()}>
+      {/* <button className={css.generateButton} onClick={() => generateBackendData()}>
         Зберегти
       </button> */}
     </div>
   );
-}
+});
+
+ServiceStationDetailsTop.displayName = "ServiceStationDetailsTop";
+
+export default ServiceStationDetailsTop;
+
+
