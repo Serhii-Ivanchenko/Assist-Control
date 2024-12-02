@@ -20,16 +20,18 @@
 }
 
 .popoverVisible {
-  /* visibility: visible; */
-  max-height: 200px;
+  visibility: visible;
+  /* max-height: 200px; */
+  opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.3s ease-in-out;
 }
 
 .hidden {
   visibility: hidden;
-  max-height: 0;
+  /* max-height: 0; */
   opacity: 0;
-  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .btnBox {
