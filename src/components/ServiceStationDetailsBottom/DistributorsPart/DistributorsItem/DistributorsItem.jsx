@@ -1,6 +1,6 @@
-import SwitchableBtns from "../../../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
-import RatingStars from "../../../../sharedComponents/RatingStars/RatingStars";
-import OptionList from "../OptionsList";
+import SwitchableBtns from "../../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
+import RatingStars from "../../../sharedComponents/RatingStars/RatingStars.jsx";
+import OptionList from "../DistributorsCard/OptionsList.jsx";
 
 import styles from "./DistributorsItem.module.css";
 

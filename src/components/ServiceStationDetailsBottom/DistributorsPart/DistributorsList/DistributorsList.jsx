@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DistributorsItem from "../DistributorsCard/DistributorsItem/DistributorsItem";
+import DistributorsItem from "../DistributorsItem/DistributorsItem";
 import styles from "./DistributorsList.module.css";
 
 function DistributorsList({ distributorsData }) {
@@ -23,24 +23,22 @@ function DistributorsList({ distributorsData }) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.innerContainer}>
-        <ul className={styles.distributorsList}>
-          {distributors.map((distributor, index) => (
-            <li key={index} className={styles.distributorsItem}>
-              <DistributorsItem
-                item={distributor}
-                onEdit={(id, updates) =>
-                  setDistributors((prev) =>
-                    prev.map((d) => (d.id === id ? { ...d, ...updates } : d))
-                  )
-                }
-                onDelete={handleDelete}
-                onToggleDisable={() => handleToggleDisable(distributor.id)}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className={styles.distributorsList}>
+        {distributors.map((distributor, index) => (
+          <li key={index} className={styles.distributorsItem}>
+            <DistributorsItem
+              item={distributor}
+              onEdit={(id, updates) =>
+                setDistributors((prev) =>
+                  prev.map((d) => (d.id === id ? { ...d, ...updates } : d))
+                )
+              }
+              onDelete={handleDelete}
+              onToggleDisable={() => handleToggleDisable(distributor.id)}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
