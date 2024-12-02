@@ -113,51 +113,36 @@ export default function NewElemPop({
     });
   };
 
-  // // Автоматичний скролл при відкритті останнього поповера(не працює)
-
-  // useEffect(() => {
-  //   if (isVisible && popoverRef.current && containerRef.current) {
-  //     const popover = popoverRef.current;
-  //     const container = containerRef.current;
-
-  //     // Перевірка, чи поповер виходить за межі контейнера
-  //     const containerRect = container.getBoundingClientRect();
-  //     const popoverRect = popover.getBoundingClientRect();
-
-  //     // Прокручуємо лише в разі, якщо поповер виходить за межі видимості контейнера
-  //     if (
-  //       popoverRect.bottom > containerRect.bottom ||
-  //       popoverRect.top < containerRect.top
-  //     ) {
-  //       popover.scrollIntoView({
-  //         behavior: "smooth",
-  //         block: "nearest", // Встановлює найближчу позицію для видимості
-  //       });
-  //     }
-  //   }
-  // }, [isVisible]);
-
+  // Автоматичний скролл при відкритті останнього поповера (наче працює)
   useEffect(() => {
-    console.log("isVisible:", isVisible, "node.id:", node.id);
     if (isVisible === node.id && popoverRef.current && containerRef.current) {
       const popover = popoverRef.current;
       const container = containerRef.current;
 
-      // Координати контейнера і поповера
       const containerRect = container.getBoundingClientRect();
       const popoverRect = popover.getBoundingClientRect();
 
-      // Якщо нижня межа поповера виходить за межі контейнера
+      const extraPadding = 5; // Додаткові пікселі для тіні
+
       if (popoverRect.bottom > containerRect.bottom) {
-        container.scrollTop += popoverRect.bottom - containerRect.bottom;
+        container.scrollTo({
+          top:
+            container.scrollTop +
+            (popoverRect.bottom - containerRect.bottom + extraPadding),
+          behavior: "smooth",
+        });
       }
 
-      // Якщо верхня межа поповера виходить за межі контейнера
       if (popoverRect.top < containerRect.top) {
-        container.scrollTop -= containerRect.top - popoverRect.top;
+        container.scrollTo({
+          top:
+            container.scrollTop -
+            (containerRect.top - popoverRect.top + extraPadding),
+          behavior: "smooth",
+        });
       }
     }
-  }, [isVisible, node.id]);
+  }, [isVisible, node.id, popoverRef, containerRef]);
 
   return (
     <div
