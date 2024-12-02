@@ -10,6 +10,7 @@ import { BsCheckLg } from "react-icons/bs";
 import Modal from "../../Modals/Modal/Modal";
 import NewItemModal from "./NewItemModal/NewItemModal";
 import Placeholder from "./Placeholder/Placeholder";
+import { useEffect } from "react";
 
 import {
   Tree,
@@ -76,13 +77,16 @@ export default function WarehousePart() {
   const [isAddWhModalOpen, setAddWhModalOpen] = useState(false);
   // const [tree, setTree] = useState(dataForTree);
 
-  const { ref, getPipeHeight, toggle } = useTreeOpenHandler();
+  const { ref, getPipeHeight, toggle, openParentIfNeeded } =
+    useTreeOpenHandler();
   const [treeData, setTreeData] = useState(dataForTree);
   const [isNewWhPopoverOpen, setNewWhPopoverOpen] = useState(false);
+  // const [openedNode, setOpenedNode] = useState();
 
   const buttonRef = useRef(null);
-  const containerRef = useRef(null);
+  // const containerRef = useRef(null);
 
+  // Редагування гілочок
   const [isEditing, setIsEditing] = useState(false);
 
   const handleStopEditing = () => {
@@ -90,9 +94,10 @@ export default function WarehousePart() {
   };
 
   const handleStartEditing = (nodeId) => {
-    setIsEditing(nodeId); // Початок редагування
+    setIsEditing(nodeId);
   };
 
+  // Додавання нового елементу
   const addNewTree = (name) => {
     const newRoot = {
       id: `${Date.now()}`,
@@ -105,6 +110,23 @@ export default function WarehousePart() {
     setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
   };
 
+  const scrollToTheLastItemRef = useRef(null);
+
+  // Прокрутка до ост. елементу при додаванні
+  useEffect(() => {
+    if (
+      treeData.length > 0 &&
+      scrollToTheLastItemRef.current &&
+      treeData[treeData.length - 1]?.data === "warehouse"
+    ) {
+      scrollToTheLastItemRef.current?.scrollTo({
+        top: scrollToTheLastItemRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [treeData]);
+
+  // Відкриття і закриття поповеру
   const handleTogglePopover = (e) => {
     e.stopPropagation();
     setNewWhPopoverOpen((prev) => !prev);
@@ -114,6 +136,7 @@ export default function WarehousePart() {
     setNewWhPopoverOpen(false);
   };
 
+  // Обчислення глибини,щоб елемент не можна було перетягнути вниз
   const calculateDepth = (nodeId, tree) => {
     let depth = 0;
     let currentNode = tree.find((node) => node.id === nodeId);
@@ -126,6 +149,7 @@ export default function WarehousePart() {
     return depth;
   };
 
+  // Перетягування
   const reorderArray = (array, sourceIndex, targetIndex) => {
     const newArray = [...array];
     const element = newArray.splice(sourceIndex, 1)[0];
@@ -152,7 +176,6 @@ export default function WarehousePart() {
     const endDepth = calculateDepth(dropTargetId, treeData);
 
     if (startDepth < endDepth) {
-      //  console.warn("Переміщення вниз по ієрархії заборонено");
       return;
     }
 
@@ -199,10 +222,7 @@ export default function WarehousePart() {
     }
   };
 
-  // const handleDrop = (newTree) => {
-  //   setTree(newTree); // Збереження нового дерева у state
-  // };
-
+  // Відкриття і закриття модалки
   const openModal = () => {
     setAddWhModalOpen(true);
   };
@@ -277,17 +297,14 @@ export default function WarehousePart() {
         </div>
       </div>
 
-      {/* <SortableTree
-                treeData={tree}
-                onChange={(newTreeData)=> setTree(newTreeData)}
-            /> */}
-      <div className={css.treeContainer} ref={containerRef}>
+      <div className={css.treeContainer} ref={scrollToTheLastItemRef}>
         <DndProvider backend={MultiBackend} options={getBackendOptions()}>
           <div className={css.wrapper}>
             <Tree
               ref={ref}
               tree={treeData}
               rootId={null}
+              // initialOpen={treeData.length - 1}
               classes={{
                 root: css.treeRoot,
                 placeholder: css.placeholder,
@@ -321,7 +338,8 @@ export default function WarehousePart() {
                   isEditing={isEditing}
                   // setIsEditing={setIsEditing}
                   onStartEditing={handleStartEditing}
-                  containerRef={containerRef}
+                  containerRef={scrollToTheLastItemRef}
+                  openParentIfNeeded={openParentIfNeeded}
                 />
               )}
             />
