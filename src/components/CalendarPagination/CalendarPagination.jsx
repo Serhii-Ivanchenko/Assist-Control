@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCalendarByMonth } from "../../redux/cars/operations.js";
-import { getMonthlyLoad } from '../../redux/crm/operations.js'
+import { getMonthlyLoad } from "../../redux/crm/operations.js";
 import {
   selectMonthlyLoad,
   selectDate,
@@ -38,7 +38,9 @@ export default function CalendarPagination({ isCrm }) {
   const css = isCrm ? csscrm : cssvideo;
 
   const dispatch = useDispatch();
-  const monthlyLoadData =  useSelector(isCrm ? selectMonthlyLoadCrm:selectMonthlyLoad );
+  const monthlyLoadData = useSelector(
+    isCrm ? selectMonthlyLoadCrm : selectMonthlyLoad
+  );
   const currentMonth = new Date().toISOString().substring(0, 7);
   const currentDate = new Date().toISOString().substring(0, 10);
   const carSelectDate = useSelector(selectDate);
@@ -92,26 +94,23 @@ export default function CalendarPagination({ isCrm }) {
   let calendarMonth = queryMonth.toISOString().substring(0, 7);
 
   useEffect(() => {
+    const fetchCalendarData = async () => {
+      if (!selectedServiceId) {
+        // console.warn("Service ID is not available yet. Skipping fetch.");
+        return;
+      }
+      if (isCrm) {
+        await dispatch(getMonthlyLoad(calendarMonth));
+      } else {
+        await dispatch(getCalendarByMonth(calendarMonth));
+      }
+    };
 
-      const fetchCalendarData = async () => {
-        if (!selectedServiceId) {
-          // console.warn("Service ID is not available yet. Skipping fetch.");
-          return;
-        }
-        if (isCrm) {
-          await dispatch(getMonthlyLoad(calendarMonth));
-        }
-        else {
-          await dispatch(getCalendarByMonth(calendarMonth));
-        }
-      };
-
-      fetchCalendarData();
-   
+    fetchCalendarData();
   }, [dispatch, calendarMonth, selectedServiceId, isCrm]); // необхідно для коректної роботи вибору сервісів
 
   let isCurrentMonth = currentMonth === calendarMonth ? true : false;
-  
+
   let crmSelectDate = carSelectDate
     ? carSelectDate.substring(8, 10) +
       "." +
@@ -148,7 +147,7 @@ export default function CalendarPagination({ isCrm }) {
             className={css.iconstep}
             onClick={handleClickRight}
             disabled={isCurrentMonth && !isCrm}
-            style={{ cursor: "default" }}
+            style={!isCrm ? { cursor: "default" } : { cursor: "pointer" }}
           >
             <FiChevronRight className={css.arrowIcon} />
           </button>

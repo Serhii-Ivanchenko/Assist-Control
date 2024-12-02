@@ -1,4 +1,4 @@
-import { useState , useRef} from "react";
+import { useState, useRef } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -13,14 +13,12 @@ import ServiceStationDetailsTopTable from "../ServiceStationDetailsTopTable/Serv
 import css from "./ServiceStationDetailsAccordion.module.css";
 
 export default function ServiceStationDetailsAccordion({ onToggle }) {
-
-   const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-// Реф для доступа к generateBackendData
+  // Реф для доступа к generateBackendData
   const detailsRef = useRef();
   const handleChange = (e, expanded) => {
-
-     setIsExpanded(expanded);
+    setIsExpanded(expanded);
     if (!expanded) {
       setIsEditing(false); // Сбрасываем режим редактирования при закрытии
     }
@@ -28,7 +26,7 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
   };
 
   const handleEditToggle = (event) => {
-        event.stopPropagation(); // Останавливаем всплытие события
+    event.stopPropagation(); // Останавливаем всплытие события
     if (isEditing) {
       // Вызов функции generateBackendData через реф
       if (detailsRef.current?.generateBackendData) {
@@ -83,6 +81,7 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
     <Accordion
       className={css.accwrapper}
       onChange={handleChange}
+      disableGutters={true}
       sx={{
         background: "none",
         // color: "inherit",
@@ -99,7 +98,7 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
         style={{
           backgroundColor: "var(--bg-input)",
           color: "var(--white)",
-          border: "1px solid var(--bg-input)",
+          // border: "1px solid var(--bg-input)",
           fontSize: "20px",
           fontWeight: "600",
           height: "43px",
@@ -113,6 +112,7 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
           style={{
             fontSize: "20px",
             fontWeight: "600",
+            lineHeight: "34px",
           }}
         >
           Налаштування робочого графіка:
@@ -121,10 +121,14 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
         {isExpanded && (
           <button
             onClick={handleEditToggle}
-            style={{ color: "var(--white)", marginLeft: "15px" }}
-            className={css.editbtn}    
+            // style={{ color: "var(--white)", marginLeft: "15px" }}
+            className={css.editbtn}
           >
-            {isEditing ?  <RiSave3Fill className={css.mainIcon} size={21} /> :  <BsPencil className={css.mainIcon} />}
+            {isEditing ? (
+              <RiSave3Fill className={css.mainIcon} size={21} />
+            ) : (
+              <BsPencil className={css.mainIcon} />
+            )}
           </button>
         )}
       </AccordionSummary>
@@ -135,7 +139,7 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
           marginTop: "19px",
         }}
       >
-          <ServiceStationDetailsTop ref={detailsRef} isEditing={isEditing}/> 
+        <ServiceStationDetailsTop ref={detailsRef} isEditing={isEditing} />
         {/* <ServiceStationDetailsTopTable /> */}
       </AccordionDetails>
     </Accordion>
