@@ -148,7 +148,7 @@ span {
   height: 18px;
 }
 
-.activeIcon>svg {
+.activeIcon > svg {
   width: 18px;
   height: 18px;
 }
@@ -159,9 +159,28 @@ span {
   height: 18px;
 }
 
-.inactiveIcon>svg {
+.inactiveIcon > svg {
   width: 18px;
   height: 18px;
+}
+
+.connectionWrapper {
+  display: flex;
+  width: 391px;
+  margin-top: 7px;
+  padding: 13px 20px 17px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background: var(--CRM-modal-SecondaryBG, #23252c);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.connectionTitle {
+  color: var(--input-text);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .connect {
@@ -191,6 +210,7 @@ span {
 
 .toggleBox {
   display: flex;
+  justify-content: flex-end;
   gap: 20px;
 }
 
@@ -240,11 +260,11 @@ span {
   transition: 0.4s;
 }
 
-input:checked+.slider {
+input:checked + .slider {
   background-color: var(--green);
 }
 
-input:checked+.slider::before {
+input:checked + .slider::before {
   transform: translateX(25px);
 }
 
@@ -252,14 +272,83 @@ input:checked+.slider::before {
   display: flex;
   flex-direction: column;
   gap: 17px;
+  margin-top: 39px;
+  margin-bottom: 31px;
   /* width: 243px; */
+}
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.addressBox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.addressBox input {
+  display: flex;
+  min-width: 242px;
+  height: 31px;
+  padding: 6px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+  outline: none;
+  color: var(--light-gray);
+}
+
+.addressBox label {
+  color: var(--light-gray);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.radioBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.radioBox label {
+  color: var(--light-gray);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 25px;
+}
+
+.radioBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .inputBox {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 6px;
+  justify-content: space-between;
+}
+
+.columnBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .inputBox label {
@@ -271,7 +360,7 @@ input:checked+.slider::before {
 
 .inputBox input {
   display: flex;
-  width: 170px;
+  width: auto;
   height: 31px;
   padding: 6px 20px;
   justify-content: center;
@@ -285,7 +374,7 @@ input:checked+.slider::before {
 
 .btnBox {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 8px;
 }
 
@@ -360,6 +449,10 @@ input:checked+.slider::before {
   cursor: pointer;
 }
 
-.closeConnectionPopupBtn>svg {
+.closeConnectionPopupBtn > svg {
   transform: scale(1.39);
+}
+
+.link {
+  color: var(--blue-btn-normal);
 }

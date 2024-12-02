@@ -9,9 +9,16 @@ const initialValues = {
 };
 
 const validationSchema = Yup.object({
-  login: Yup.string().required(""),
-  password: Yup.string().required(""),
+  website: Yup.string().required("Поле обов'язкове"),
+  distrEmail: Yup.string()
+    .email("Невірний формат e-mail")
+    .required("Поле обов'язкове"),
+  login: Yup.string().required("Поле обов'язкове"),
+  password: Yup.string().required("Поле обов'язкове"),
   tokenAPI: Yup.string(),
+  priceEmail: Yup.string()
+    .email("Невірний формат e-mail")
+    .required("Поле обов'язкове"),
 });
 
 const AuthForm = () => {
@@ -27,44 +34,96 @@ const AuthForm = () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }) => (
+      {() => (
         <Form className={styles.authForm}>
           <div className={styles.inputBox}>
+            <label htmlFor="website">Сайт</label>
+            <div className={styles.columnBox}>
+              <Field
+                name="website"
+                type="text"
+                placeholder="https://example.com"
+              />
+              <ErrorMessage
+                name="website"
+                component="div"
+                className={styles.error}
+              />
+            </div>
+          </div>
+          <div className={styles.inputBox}>
+            <label htmlFor="distrEmail">E-mail постачальника</label>
+            <div className={styles.columnBox}>
+              <Field
+                name="distrEmail"
+                type="email"
+                placeholder="Busmarket@gmail.com"
+              />
+              <ErrorMessage
+                name="distrEmail"
+                component="div"
+                className={styles.error}
+              />
+            </div>
+          </div>
+          <div className={styles.inputBox}>
             <label htmlFor="login">Login</label>
-            <Field name="login" type="text" />
-            <ErrorMessage
-              name="login"
-              component="div"
-              className={styles.error}
-            />
+            <div className={styles.columnBox}>
+              <Field name="login" type="text" placeholder="Введіть ваш логін" />
+              <ErrorMessage
+                name="login"
+                component="div"
+                className={styles.error}
+              />
+            </div>
           </div>
           <div className={styles.inputBox}>
             <label htmlFor="password">Password</label>
-            <Field name="password" type="password" />
-            <ErrorMessage
-              name="password"
-              component="div"
-              className={styles.error}
-            />
+            <div className={styles.columnBox}>
+              <Field
+                name="password"
+                type="password"
+                placeholder="Введіть ваш пароль"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className={styles.error}
+              />
+            </div>
           </div>
           <div className={styles.inputBox}>
             <label htmlFor="tokenAPI">Token API</label>
-            <Field name="tokenAPI" type="text" />
-            <ErrorMessage
-              name="tokenAPI"
-              component="div"
-              className={styles.error}
-            />
+            <div className={styles.columnBox}>
+              <Field
+                name="tokenAPI"
+                type="text"
+                placeholder="Введіть Token API (необов'язково)"
+              />
+              <ErrorMessage
+                name="tokenAPI"
+                component="div"
+                className={styles.error}
+              />
+            </div>
+          </div>
+          <div className={styles.inputBox}>
+            <label htmlFor="priceEmail">E-mail для прайсів</label>
+            <div className={styles.columnBox}>
+              <Field
+                name="priceEmail"
+                type="email"
+                placeholder="Busmarket@gmail.com"
+              />
+              <ErrorMessage
+                name="priceEmail"
+                component="div"
+                className={styles.error}
+              />
+            </div>
           </div>
           <div className={styles.btnBox}>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={styles.btn}
-            >
-              Зберегти
-            </button>
-            <button type="button" className={styles.btn}>
+            <button type="submit" className={styles.btn}>
               Тест
             </button>
           </div>

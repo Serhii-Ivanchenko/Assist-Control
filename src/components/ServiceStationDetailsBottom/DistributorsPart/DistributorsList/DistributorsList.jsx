@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DistributorsItem from "../DistributorsCard/DistributorsItem/DistributorsItem";
+import DistributorsItem from "../DistributorsItem/DistributorsItem";
 import styles from "./DistributorsList.module.css";
 
 function DistributorsList({ distributorsData }) {
