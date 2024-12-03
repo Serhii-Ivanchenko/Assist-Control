@@ -100,7 +100,7 @@ export default function NewElemPop({
       };
     });
 
-    console.log(newBranches);
+    // console.log(newBranches);
 
     setTreeData((prevTreeData) => {
       const updatedTree = [...prevTreeData, ...newBranches];
@@ -157,25 +157,27 @@ export default function NewElemPop({
             {addText}
           </button>
           {modalIsOpen && (
-            <Modal
-              isOpen={modalIsOpen}
-              onClose={handleModalClose}
-              shouldCloseOnOverlayClick={false}
-            >
-              <div
-                className={css.modalContent}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log("Clicked inside modal");
-                }}
+            <div onClick={(e) => e.stopPropagation()}>
+              <Modal
+                isOpen={modalIsOpen}
+                onClose={handleModalClose}
+                shouldCloseOnOverlayClick={false}
               >
-                <AddModal
-                  onClose={handleModalClose}
-                  addNewBranch={addNewBranch}
-                  // handleToggle={handleToggle}
-                />
-              </div>
-            </Modal>
+                <div
+                  className={css.modalContent}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // console.log("Clicked inside modal");
+                  }}
+                >
+                  <AddModal
+                    onClose={handleModalClose}
+                    addNewBranch={addNewBranch}
+                    // handleToggle={handleToggle}
+                  />
+                </div>
+              </Modal>
+            </div>
           )}
         </div>
       )}
