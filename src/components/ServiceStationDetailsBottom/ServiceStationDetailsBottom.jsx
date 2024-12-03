@@ -7,6 +7,7 @@ import PricePart from "./PricePart/PricePart";
 import SparesPart from "./SparesPart/SparesPart";
 import WarehousePart from "./WarehousePart/WarehousePart";
 import DistributorsPart from "./DistributorsPart/DistributorsPart";
+import RatingPart from "./RatingPart/RatingPart";
 
 const pageComponents = {
   station: <StationPart />,
@@ -15,6 +16,9 @@ const pageComponents = {
   spares: <SparesPart />,
   warehouse: <WarehousePart />,
   distributors: <DistributorsPart />,
+  migration: "",
+  rating: <RatingPart />,
+  integration: "",
 };
 
 export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
