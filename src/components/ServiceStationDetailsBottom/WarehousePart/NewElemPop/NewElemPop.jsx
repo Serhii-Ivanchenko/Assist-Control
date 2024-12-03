@@ -123,7 +123,7 @@ export default function NewElemPop({
 
       const extraPadding = 5; // Додаткові пікселі для тіні
 
-      if (popoverRect.bottom > containerRect.bottom) {
+      if (popoverRect.bottom + extraPadding > containerRect.bottom) {
         container.scrollTo({
           top:
             container.scrollTop +
@@ -132,7 +132,7 @@ export default function NewElemPop({
         });
       }
 
-      if (popoverRect.top < containerRect.top) {
+      if (popoverRect.top - extraPadding < containerRect.top) {
         container.scrollTo({
           top:
             container.scrollTop -
@@ -145,57 +145,61 @@ export default function NewElemPop({
 
   return (
     <div
-      className={`${css.modal} ${isVisible ? css.popoverVisible : css.hidden}`}
       ref={popoverRef}
+      className={`${type === "place" ? css.placeHeight : css.popoverHeight} ${
+        isVisible ? css.popoverVisible : css.hidden
+      }`}
     >
-      {type === "place" ? (
-        ""
-      ) : (
-        <div className={css.btnBox}>
-          <button type="button" className={css.btn} onClick={openModal}>
-            {icon}
-            {addText}
-          </button>
-          {modalIsOpen && (
-            <div onClick={(e) => e.stopPropagation()}>
-              <Modal
-                isOpen={modalIsOpen}
-                onClose={handleModalClose}
-                shouldCloseOnOverlayClick={false}
-              >
-                <div
-                  className={css.modalContent}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // console.log("Clicked inside modal");
-                  }}
+      <div className={css.modal}>
+        {type === "place" ? (
+          ""
+        ) : (
+          <div className={css.btnBox}>
+            <button type="button" className={css.btn} onClick={openModal}>
+              {icon}
+              {addText}
+            </button>
+            {modalIsOpen && (
+              <div onClick={(e) => e.stopPropagation()}>
+                <Modal
+                  isOpen={modalIsOpen}
+                  onClose={handleModalClose}
+                  shouldCloseOnOverlayClick={false}
                 >
-                  <AddModal
-                    onClose={handleModalClose}
-                    addNewBranch={addNewBranch}
-                    // handleToggle={handleToggle}
-                  />
-                </div>
-              </Modal>
-            </div>
-          )}
+                  <div
+                    className={css.modalContent}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // console.log("Clicked inside modal");
+                    }}
+                  >
+                    <AddModal
+                      onClose={handleModalClose}
+                      addNewBranch={addNewBranch}
+                      // handleToggle={handleToggle}
+                    />
+                  </div>
+                </Modal>
+              </div>
+            )}
+          </div>
+        )}
+        <div className={css.btnBox}>
+          <button type="button" className={css.btn} onClick={openEdit}>
+            <BsPencil size={18} className={css.icon} />
+            Редагувати
+          </button>
         </div>
-      )}
-      <div className={css.btnBox}>
-        <button type="button" className={css.btn} onClick={openEdit}>
-          <BsPencil size={18} className={css.icon} />
-          Редагувати
-        </button>
-      </div>
-      <div className={css.btnBox}>
-        <button
-          type="button"
-          className={`${css.btn} ${css.btnDelete}`}
-          onClick={deleteRow}
-        >
-          <BsTrash size={18} />
-          Видалити
-        </button>
+        <div className={css.btnBox}>
+          <button
+            type="button"
+            className={`${css.btn} ${css.btnDelete}`}
+            onClick={deleteRow}
+          >
+            <BsTrash size={18} />
+            Видалити
+          </button>
+        </div>
       </div>
     </div>
   );
