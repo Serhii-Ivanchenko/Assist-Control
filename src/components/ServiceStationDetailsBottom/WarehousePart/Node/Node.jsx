@@ -63,6 +63,15 @@ export default function Node({
 }) {
   const inputFocusRef = useRef(null);
   const scrollForPopover = useRef(null);
+  const addNodeRef = useRef({});
+  console.log("addNodeRef", addNodeRef);
+
+  const addNodeButtonRef = (nodeId, el) => {
+    if (el && !addNodeRef.current[nodeId]) {
+      addNodeRef.current[nodeId] = el;
+    }
+  };
+  console.log("addNodeButtonRef", addNodeButtonRef);
 
   // Редагування
   const handleEditing = (id, e) => {
@@ -149,28 +158,19 @@ export default function Node({
     };
   }, []);
 
-  // // Автоматичний скролл при відкритті останнього поповера(не працює)
+  // Автоматичний скролл для гілочок дерева
+  useEffect(() => {
+    if (addNodeRef.current[node.id]) {
+      // Прокрутка до кожного нового вузла
+      const nodeElement = addNodeRef.current[node.id];
+      console.log("nodeElem", nodeElement);
 
-  // useEffect(() => {
-  //   if (isOpen && scrollForPopover.current && containerRef.current) {
-  //     const popover = scrollForPopover.current;
-  //     const container = containerRef.current;
-
-  //     // Координати контейнера і поповера
-  //     const containerRect = container.getBoundingClientRect();
-  //     const popoverRect = popover.getBoundingClientRect();
-
-  //     // Якщо нижня межа поповера виходить за межі контейнера
-  //     if (popoverRect.bottom > containerRect.bottom) {
-  //       container.scrollTop += popoverRect.bottom - containerRect.bottom;
-  //     }
-
-  //     // Якщо верхня межа поповера виходить за межі контейнера
-  //     if (popoverRect.top < containerRect.top) {
-  //       container.scrollTop -= containerRect.top - popoverRect.top;
-  //     }
-  //   }
-  // }, [isOpen, node.id]);
+      nodeElement.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [node.id]);
 
   return (
     <div
@@ -181,6 +181,7 @@ export default function Node({
       // ${node.data === "warehouse" && css.whWidth}
       style={{ marginInlineStart: indent }}
       onClick={handleToggle}
+      ref={(el) => addNodeButtonRef(node.id, el)}
     >
       <div
         className={css.pipeX}
