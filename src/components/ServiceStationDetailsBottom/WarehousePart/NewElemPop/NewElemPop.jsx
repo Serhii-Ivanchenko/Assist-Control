@@ -52,7 +52,6 @@ export default function NewElemPop({
   setTreeData,
   node,
   containerRef,
-  // handleToggle,
   openParentIfNeeded,
 }) {
   const popoverRef = useRef(null);
@@ -88,7 +87,7 @@ export default function NewElemPop({
   const addNewBranch = (count) => {
     if (count <= 0) return;
 
-    const NewBranches = Array.from({ length: count }).map((_, index) => {
+    const newBranches = Array.from({ length: count }).map((_, index) => {
       const branchText = TextForNewBranch({ type: node.data });
       const branchData = DataForNewBranch({ type: node.data });
 
@@ -101,12 +100,12 @@ export default function NewElemPop({
       };
     });
 
-    console.log(NewBranches);
+    console.log(newBranches);
 
     setTreeData((prevTreeData) => {
-      const updatedTree = [...prevTreeData, ...NewBranches];
+      const updatedTree = [...prevTreeData, ...newBranches];
       // Відкриття батьківської гілки після додавання
-      NewBranches.forEach((newNode) =>
+      newBranches.forEach((newNode) =>
         openParentIfNeeded(newNode.id, updatedTree)
       );
       return updatedTree;
