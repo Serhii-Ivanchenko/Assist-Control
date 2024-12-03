@@ -1,20 +1,10 @@
-import Popup from "../Popup/Popup";
-import { IoMdClose } from "react-icons/io";
 import styles from "./DistributorsCard.module.css";
 
-function PopupConnection({ isOpen, popupRef, onClose }) {
-  if (!isOpen) return null;
+function PopupConnection() {
   return (
-    <Popup isOpen={isOpen} popupRef={popupRef}>
-      <div className={styles.popupConnectionWrapper}>
-        <button
-          className={styles.closeConnectionPopupBtn}
-          onClick={() => {
-            onClose();
-          }}
-        >
-          <IoMdClose />
-        </button>
+    <>
+      <p className={styles.connectionTitle}>Підключення</p>
+      <div className={styles.connectionWrapper}>
         <div className={styles.popupInnerContainer}>
           <p className={styles.connectDesc}>
             Для отримання токена перейдіть на сторінку{" "}
@@ -31,7 +21,7 @@ function PopupConnection({ isOpen, popupRef, onClose }) {
           </p>
         </div>
       </div>
-    </Popup>
+    </>
   );
 }
 

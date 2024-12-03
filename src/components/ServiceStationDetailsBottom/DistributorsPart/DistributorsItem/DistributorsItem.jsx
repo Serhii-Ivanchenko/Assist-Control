@@ -3,10 +3,22 @@ import RatingStars from "../../../sharedComponents/RatingStars/RatingStars.jsx";
 import OptionList from "../DistributorsCard/OptionsList.jsx";
 
 import styles from "./DistributorsItem.module.css";
+import { useState } from "react";
+import DistributorsModal from "../DistributorsModal/DistributorsModal.jsx";
+import Modal from "../../../Modals/Modal/Modal.jsx";
 
 function DistributorsItem({ item, onEdit, onDelete }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleToggleDisable = () => {
     onEdit(item.id, { isDisabled: !item.isDisabled });
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -33,11 +45,16 @@ function DistributorsItem({ item, onEdit, onDelete }) {
       <div className={styles.btnsContainer}>
         <SwitchableBtns
           isDisabled={item.isDisabled}
-          onEdit={() => console.log("Редагування модалки")}
+          onEdit={() => openModal()}
           onDelete={() => onDelete(item.id)}
           onToggleDisable={handleToggleDisable}
         />
       </div>
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <DistributorsModal onClose={closeModal} />
+        </Modal>
+      )}
     </div>
   );
 }
