@@ -166,11 +166,11 @@ export default function WarehousePart() {
       return;
     const start = treeData.find((v) => v.id === dragSourceId);
     const end = treeData.find((v) => v.id === dropTargetId);
-    console.log("handleDrop triggered", {
-      dragSourceId,
-      dropTargetId,
-      destinationIndex,
-    });
+    // console.log("handleDrop triggered", {
+    //   dragSourceId,
+    //   dropTargetId,
+    //   destinationIndex,
+    // });
 
     const startDepth = calculateDepth(dragSourceId, treeData);
     const endDepth = calculateDepth(dropTargetId, treeData);
@@ -216,7 +216,7 @@ export default function WarehousePart() {
         );
         const movedElement = output.find((el) => el.id === dragSourceId);
         if (movedElement) movedElement.parent = dropTargetId;
-        console.log("Destination index:", destinationIndex);
+        // console.log("Destination index:", destinationIndex);
         return output;
       });
     }

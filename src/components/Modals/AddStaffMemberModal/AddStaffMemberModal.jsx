@@ -24,6 +24,7 @@ import { registerLocale } from "react-datepicker";
 import uk from "date-fns/locale/uk";
 import ServiceStationDetailsTop from "../../ServiceStationDetailsTop/ServiceStationDetailsTop";
 import AnimatedContent from "./AnimatedContent.jsx";
+import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent.jsx";
 
 registerLocale("uk", uk);
 
@@ -295,21 +296,24 @@ export default function AddStaffMemberModal({ onClose }) {
             <div className={css.documents}>
               <div className={css.docColumn}>
                 <div className={css.docBox}>
-                  <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
+                  {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
                     {" "}
                     <BsFillCloudUploadFill className={css.icon} /> Паспорт
-                  </label>
-                  <Field type="file" name="passport" className={css.docInput} />
+                  </label> */}
+                  <UploadComponent title="Паспорт" name="passport" />
+                  {/* <Field type="file" name="passport" className={css.docInput} /> */}
                   <img src={doc} alt="doc" className={css.docImage} />
                   <img src={doc} alt="doc" className={css.docImage} />
                 </div>
 
                 <div className={`${css.docBox} ${css.docBoxID}`}>
-                  <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
+                  {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
                     {" "}
                     <BsFillCloudUploadFill className={css.icon} /> ІПН
-                  </label>
-                  <Field type="file" name="ID" className={css.docInput} />
+                  </label> */}
+                  <UploadComponent title="ІПН" name="ID" />
+
+                  {/* <Field type="file" name="ID" className={css.docInput} /> */}
 
                   <img src={doc} alt="doc" className={css.docImage} />
                   <img src={doc} alt="doc" className={css.docImage} />
@@ -318,36 +322,39 @@ export default function AddStaffMemberModal({ onClose }) {
 
               <div className={css.docColumn}>
                 <div className={css.docBox}>
-                  <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
+                  {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
                     {" "}
                     <BsFillCloudUploadFill className={css.icon} /> Диплом
-                  </label>
-                  <Field type="file" name="diploma" className={css.docInput} />
+                  </label> */}
+                  <UploadComponent title="Диплом" name="diploma" />
+                  {/* <Field type="file" name="diploma" className={css.docInput} /> */}
                   <img src={doc} alt="doc" className={css.docImage} />
                   <img src={doc} alt="doc" className={css.docImage} />
                 </div>
 
                 <div className={css.docBox}>
-                  <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
+                  {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
                     {" "}
                     <BsFillCloudUploadFill className={css.icon} />
                     Трудова
-                  </label>
-                  <Field
+                  </label> */}
+                  <UploadComponent title="Трудова" name="laborBook" />
+                  {/* <Field
                     type="file"
                     name="laborBook"
                     className={css.docInput}
-                  />
+                  /> */}
                   <img src={doc} alt="doc" className={css.docImage} />
                 </div>
 
                 <div className={css.docBox}>
-                  <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
+                  {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
                     {" "}
                     <BsFillCloudUploadFill className={css.icon} />
                     Резюме
-                  </label>
-                  <Field type="file" name="CV" className={css.docInput} />
+                  </label> */}
+                  <UploadComponent title="Резюме" name="CV" />
+                  {/* <Field type="file" name="CV" className={css.docInput} /> */}
                   <img src={doc} alt="doc" className={css.docImage} />
                 </div>
               </div>
