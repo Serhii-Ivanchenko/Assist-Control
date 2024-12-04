@@ -30,14 +30,29 @@ registerLocale("uk", uk);
 
 export default function AddStaffMemberModal({ onClose }) {
   const [isDateOpen, setDateOpen] = useState(false);
-  const handleDateButtonClick = () => setDateOpen((prev) => !prev);
-
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
-  // const popoverRef = useRef(null);
+  const [photo, setPhoto] = useState(avatar);
   const buttonRefs = useRef([]);
+  const fileInputRef = useRef(null);
+
+  const handleDateButtonClick = () => setDateOpen((prev) => !prev);
 
   const toggleSettings = (index) => {
     setSettingsIsOpen(settingsIsOpen === index ? null : index);
+  };
+
+  const handleChangePhoto = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = async (event) => {
+    const file = event.currentTarget.files[0];
+    if (file) {
+      const newLogoUrl = URL.createObjectURL(file);
+      setPhoto(newLogoUrl);
+    }
   };
 
   // const closePopover = () => {
@@ -155,10 +170,25 @@ export default function AddStaffMemberModal({ onClose }) {
                       value={phone}
                       onChange={updatePhone}
                     />
-                    <button type="button" className={css.phoneUpload}>
+                    <button
+                      type="button"
+                      className={css.phoneUpload}
+                      onClick={handleChangePhoto}
+                    >
                       <BsFillCloudUploadFill size={33} />
                     </button>
-                    <img src={avatar} alt="" className={css.phoneImg} />
+                    <input
+                      type="file"
+                      name="photo"
+                      className={css.docInput}
+                      ref={fileInputRef}
+                      onChange={handleFileChange}
+                      // multiple
+                      // accept="image/*"
+                    />
+                    {/* <div className={css.phoneImgBox}> */}
+                    <img src={photo} alt="" className={css.phoneImg} />
+                    {/* </div> */}
                   </div>
                 </div>
 
