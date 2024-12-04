@@ -6,9 +6,14 @@ import { BsCalendar2Week } from "react-icons/bs";
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
 import { format, addDays, subDays } from "date-fns";
+import { useSelector } from "react-redux";
+import { selectDate } from "../../../../redux/cars/selectors";
 
-export default function SelectDate({ newDate }) {
-  const [startDate, setStartDate] = useState(new Date());
+export default function SelectDate({ newDate, recordId }) {
+  const selectedDate = useSelector(selectDate);
+  const [startDate, setStartDate] = useState(
+    recordId ? new Date(selectedDate) : new Date()
+  );
 
   useEffect(() => {
     newDate(startDate.toLocaleDateString());

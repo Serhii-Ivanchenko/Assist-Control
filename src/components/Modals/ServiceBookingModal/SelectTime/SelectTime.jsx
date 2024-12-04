@@ -15,7 +15,6 @@ export default function SelectTime({
     return item.date === pickedDate;
   });
   const chosenHours = isChosenDate?.times;
-  console.log(chosenHours);
 
   const onTimeBtnClick = (time, value) => {
     if (value !== 0) return;
@@ -42,6 +41,8 @@ export default function SelectTime({
   const availableHours = availability.find(
     (item) => Number(item.post_id) === Number(postId)
   );
+  // console.log(availableHours);
+  console.log(availability);
 
   return (
     <>

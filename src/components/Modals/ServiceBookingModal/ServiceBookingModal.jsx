@@ -13,15 +13,19 @@ import {
   getPlannedVisits,
   getRecordsForDay,
   getServiceDataForBooking,
+  updateRecordData,
 } from "../../../redux/crm/operations.js";
 import toast from "react-hot-toast";
-import { selectServiceData } from "../../../redux/crm/selectors.js";
+import {
+  selectDayRecords,
+  selectServiceData,
+} from "../../../redux/crm/selectors.js";
 import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
 import SelectTime from "./SelectTime/SelectTime.jsx";
 import Loader from "../../Loader/Loader.jsx";
 import { selectDate } from "../../../redux/cars/selectors.js";
 
-export default function ServiceBookingModal({ onClose }) {
+export default function ServiceBookingModal({ onClose, postId, recordId }) {
   const dispatch = useDispatch();
   const selectedDate = useSelector(selectDate);
 
@@ -33,6 +37,19 @@ export default function ServiceBookingModal({ onClose }) {
 
   const selectedServiceId = useSelector(selectSelectedServiceId);
   const { mechanics, posts, services } = useSelector(selectServiceData);
+  const dayRecords = useSelector(selectDayRecords);
+
+  const [pickedDate, setPickedDate] = useState(
+    recordId
+      ? new Date(selectedDate).toLocaleDateString()
+      : new Date().toLocaleDateString()
+  );
+
+  const recordById = dayRecords?.find((dayRecord) => {
+    return dayRecord.id === recordId;
+  });
+
+  console.log(recordById);
 
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
@@ -53,14 +70,6 @@ export default function ServiceBookingModal({ onClose }) {
       setIsDropdownMechanicOpen(false);
     }
   };
-
-  const currentDate = new Date(Date.now());
-  const day = String(currentDate.getDate()).padStart(2, "0");
-  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
-  const year = currentDate.getFullYear();
-  const formattedDate = `${day}.${month}.${year}`;
-
-  const [pickedDate, setPickedDate] = useState(formattedDate);
 
   const setNewDate = (date) => {
     setPickedDate(date);
@@ -109,36 +118,46 @@ export default function ServiceBookingModal({ onClose }) {
       position: values.position ? Number(values.position) : null,
       mechanic_id: values.mechanic_id ? Number(values.mechanic_id) : null,
       dates: datesArray,
+      recordId,
     };
 
-    console.log(recordData);
-
-    dispatch(createRecord(recordData))
-      .unwrap()
-      .then(() => {
-        toast.success("Запис успішно створено");
-        dispatch(getRecordsForDay(selectedDate));
-        dispatch(getPlannedVisits(selectedDate));
-      })
-      .catch(() => {
-        toast.error("Щось пішло не так. Спробуйте ще раз!");
-      });
+    recordId
+      ? dispatch(updateRecordData(recordData))
+          .unwrap()
+          .then(() => {
+            toast.success("Запис успішно відредаговано");
+            dispatch(getRecordsForDay(selectedDate));
+            dispatch(getPlannedVisits(selectedDate));
+          })
+          .catch(() => {
+            toast.error("Щось пішло не так. Спробуйте ще раз!");
+          })
+      : dispatch(createRecord(recordData))
+          .unwrap()
+          .then(() => {
+            toast.success("Запис успішно створено");
+            dispatch(getRecordsForDay(selectedDate));
+            dispatch(getPlannedVisits(selectedDate));
+          })
+          .catch(() => {
+            toast.error("Щось пішло не так. Спробуйте ще раз!");
+          });
     setChosenTime([]);
     actions.resetForm();
     onClose();
   };
 
   const initialValues = {
-    name: "",
-    phone_number: "",
-    car_number: "",
-    service_id: "",
-    make_model: "",
-    vin: "",
-    note: "",
-    prepayment: "",
-    position: posts.length > 0 ? posts[0]?.id_post : "",
-    mechanic_id: "",
+    name: recordById?.client_name || "",
+    phone_number: recordId ? `${"+" + recordById?.phone}` : "",
+    car_number: recordById?.plate || "",
+    service_id: recordById?.service_id || "",
+    make_model: recordById?.auto || "",
+    vin: recordById?.vin || "",
+    note: recordById?.note || "",
+    prepayment: recordById?.prepayment || "",
+    position: postId || recordById?.post_id || posts[0]?.id_post,
+    mechanic_id: recordById?.mechanic_id || "",
   };
 
   return !posts ? (
@@ -146,7 +165,11 @@ export default function ServiceBookingModal({ onClose }) {
   ) : (
     <div className={css.serviceBookingModal}>
       <BsXLg className={css.closeIcon} onClick={onClose} />
-      <h3 className={css.header}>Створення запису на {pickedDate}</h3>
+      {recordId ? (
+        <h3 className={css.header}>Редагування запису на {pickedDate}</h3>
+      ) : (
+        <h3 className={css.header}>Створення запису на {pickedDate}</h3>
+      )}
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -164,6 +187,7 @@ export default function ServiceBookingModal({ onClose }) {
                   type="text"
                   name="phone_number"
                   placeholder="Телефон"
+                  disabled={recordId}
                 />
                 <ErrorMessage
                   name="phone_number"
@@ -392,7 +416,7 @@ export default function ServiceBookingModal({ onClose }) {
                 placeholder="Примітка"
               />
               <div className={css.calendar}>
-                <SelectDate newDate={setNewDate} />
+                <SelectDate newDate={setNewDate} recordId={recordId} />
                 <div className={css.timeWrapper}>
                   <SelectTime
                     postId={values.position || posts[0]?.id_post}

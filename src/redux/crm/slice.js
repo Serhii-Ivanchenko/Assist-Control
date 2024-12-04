@@ -52,6 +52,7 @@ const crmSlice = createSlice({
       .addCase(updateRecordData.pending, handlePending)
       .addCase(updateRecordData.fulfilled, (state, action) => {
         state.isLoading = false;
+        // console.log(action.payload.id);
 
         const recordToEditIndex = state.records.findIndex(
           (record) => record.id === action.payload.id
@@ -83,7 +84,6 @@ const crmSlice = createSlice({
       .addCase(getMonthlyLoad.rejected, handleRejected),
 });
 
-export const {toggleVisibilityRecords} = crmSlice.actions;
-
+export const { toggleVisibilityRecords } = crmSlice.actions;
 
 export default crmSlice.reducer;
