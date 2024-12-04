@@ -36,7 +36,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 300;
-  line-height: normal;
+  line-height: 1.1875em;
 }
 
 .editInfo {
@@ -89,6 +89,7 @@
 
 .selectAndArrow {
   position: relative;
+  height: 19px;
 }
 
 .icon {
