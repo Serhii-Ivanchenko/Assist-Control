@@ -1,14 +1,19 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AccordionList from "./AccordionList/AccordionList";
-// import { MdDone } from "react-icons/md";
-import { BsCheckLg } from "react-icons/bs";
+import { BsFolderPlus } from "react-icons/bs";
 import styles from "./PricePart.module.css";
+import SearchBar from "./SearchBar/SearchBar";
+import Modal from "../../Modals/Modal/Modal";
+import AddCategoryModal from "./AddCategoryModal/AddCategoryModal";
 
 export default function PricePart() {
+  const [activeSearch, setActiveSearch] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
+  const [isModal, setIsModal] = useState(false);
   // const [data, setData] = useState([]);
 
   // Модель хардкодних даних
-  const testData = [
+  const [testData, setTestData] = useState([
     {
       category: "Техобслуговування",
       items: [
@@ -59,7 +64,43 @@ export default function PricePart() {
         { item: "Перевірка ходової частини" },
       ],
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    setFilteredData(testData);
+  }, [testData]);
+
+  const handleFilter = (data) => {
+    setFilteredData(data);
+    setActiveSearch(true);
+  };
+
+  const handleClearSearch = () => {
+    if (!activeSearch) {
+      setFilteredData(testData);
+      setActiveSearch(false);
+    }
+  };
+
+  const handleNewCategory = (categoryName) => {
+    const newCategory = {
+      category: categoryName,
+      items: [
+        {
+          item: "Додайте послугу",
+        },
+      ],
+    };
+    setTestData((prev) => [...prev, newCategory]); // тільки оновлюємо testData
+  };
+
+  const openModal = () => {
+    setIsModal(true);
+  };
+
+  const closeModal = () => {
+    setIsModal(false);
+  };
 
   // Логіка для фільтрації даних за stationId, коли вони будуть приходити з беку
   // useEffect(() => {
@@ -71,12 +112,28 @@ export default function PricePart() {
 
   return (
     <div className={styles.wrapper}>
-      <AccordionList data={testData} />
-      <button className={styles.saveBtn} type="button">
-        {/* <MdDone /> */}
-        <BsCheckLg className={styles.checkIcon} />
-        Зберегти
-      </button>
+      <div className={styles.searchContainer}>
+        <SearchBar
+          searchData={testData}
+          onFilter={handleFilter}
+          onBlur={handleClearSearch}
+        />
+        <button type="button" className={styles.btn} onClick={openModal}>
+          <BsFolderPlus className={styles.icon} />
+          Нова група
+        </button>
+        {isModal && (
+          <Modal isOpen={isModal} onClose={closeModal}>
+            <AddCategoryModal
+              onClose={closeModal}
+              title="Введіть назву категорії"
+              name="newCategory"
+              addNewCategory={handleNewCategory}
+            />
+          </Modal>
+        )}
+      </div>
+      <AccordionList data={filteredData} />
     </div>
   );
 }
