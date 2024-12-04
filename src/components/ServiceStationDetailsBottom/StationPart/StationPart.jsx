@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import css from "./StationPart.module.css";
-import { BsPencil, BsPlusLg } from "react-icons/bs";
-import { BsTrash } from "react-icons/bs";
-import { BsPower } from "react-icons/bs";
-import clsx from "clsx";
-import { RiSave3Fill } from "react-icons/ri";
+import { BsPlusLg } from "react-icons/bs";
+import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns";
 
 export default function StationPart() {
   const [posts, setPosts] = useState([
@@ -82,29 +79,16 @@ export default function StationPart() {
               ) : (
                 <p className={css.postName}>{post.name}</p>
               )}
-              <div className={css.iconsBox}>
-                {isEditing === post.id ? (
-                  <RiSave3Fill
-                    className={css.icons}
-                    onClick={() => handleEditing(post.id)}
-                  />
-                ) : (
-                  <BsPencil
-                    className={css.icons}
-                    onClick={() => handleEditing(post.id)}
-                  />
-                )}
-                <BsTrash
-                  className={css.icons}
-                  onClick={() => deletePost(index)}
-                />
-                <BsPower
-                  className={clsx(css.power, {
-                    [css.powerDisabled]: post.isDisabled,
-                  })}
-                  onClick={() => toDisable(index)}
-                />
-              </div>
+
+              <SwitchableBtns
+                onEdit={() => handleEditing(post.id)}
+                onToggleDisable={() => toDisable(index)}
+                onDelete={() => deletePost(index)}
+                isDisabled={post.isDisabled}
+                showIconSave={true}
+                id={post.id}
+                isEditing={isEditing}
+              />
             </li>
           ))}
         </ul>
