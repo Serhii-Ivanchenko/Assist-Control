@@ -197,6 +197,9 @@ export default function CheckoutPart() {
                 onDelete={() => deleteCheckout(index)}
                 onToggleDisable={() => toDisable(index)}
                 isDisabled={checkout.isDisabled}
+                isEditing={isEditing}
+                id={index}
+                showIconSave={true}
               />
             </li>
           ))}
