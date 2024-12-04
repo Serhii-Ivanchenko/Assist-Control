@@ -80,6 +80,7 @@ export default function CheckoutPart() {
       isDisabled: false,
     },
   ]);
+  const [newRow, setNewRow] = useState("");
 
   const handleEditing = (index) => {
     setIsEditing(isEditing === index ? null : index);
@@ -99,6 +100,30 @@ export default function CheckoutPart() {
     );
   };
 
+  const handleAdd = () => {
+    if (newRow.trim()) {
+      setCheckouts([
+        ...checkouts,
+        {
+          name: newRow,
+          currency: "грн",
+          entrepreneur: "ФОП Блудов",
+          warehouse: "Склад Черкаси",
+          responsible: "Відповідальний ПІБ",
+          isDisabled: false,
+        },
+      ]);
+    }
+  };
+
+  const handleChangeName = (newName, index) => {
+    setCheckouts(
+      checkouts.map((checkout, i) =>
+        i === index ? { ...checkout, name: newName } : checkout
+      )
+    );
+  };
+
   return (
     <div className={css.checkoutPart}>
       <div className={css.divForScroll}>
@@ -108,7 +133,7 @@ export default function CheckoutPart() {
               {isEditing === index ? (
                 <div className={css.infoPart}>
                   <div className={css.selectAndArrow}>
-                    <select
+                    {/* <select
                       name="name"
                       id=""
                       className={`${css.editInfo} ${css.infoName}`}
@@ -117,7 +142,12 @@ export default function CheckoutPart() {
                       <option value="2">Блудов</option>
                       <option value="3">Блудов</option>
                     </select>
-                    <BsFillCaretDownFill className={css.icon} />
+                    <BsFillCaretDownFill className={css.icon} />*/}
+                    <input
+                      value={checkout.name}
+                      onChange={(e) => handleChangeName(e.target.value, index)}
+                      className={`${css.editInput} ${css.infoName}`}
+                    />
                   </div>
 
                   <div className={css.selectAndArrow}>
@@ -135,7 +165,7 @@ export default function CheckoutPart() {
 
                   <div className={css.selectAndArrow}>
                     <select
-                      name="enterpreneur"
+                      name="entrepreneur"
                       id=""
                       className={`${css.editInfo} ${css.infoEnt}`}
                     >
@@ -209,10 +239,10 @@ export default function CheckoutPart() {
         <input
           placeholder="Додати нову касу..."
           className={css.addInput}
-          //   value={newPost}
-          //   onChange={(e) => setNewPost(e.target.value)}
+          value={newRow}
+          onChange={(e) => setNewRow(e.target.value)}
         />
-        <button type="button" className={css.addBtn}>
+        <button type="button" className={css.addBtn} onClick={handleAdd}>
           <span className={css.plus}>
             <BsPlusLg className={css.iconPlus} />
           </span>
