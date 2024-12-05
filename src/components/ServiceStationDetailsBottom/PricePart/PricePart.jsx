@@ -119,7 +119,7 @@ export default function PricePart() {
           onBlur={handleClearSearch}
         />
         <button type="button" className={styles.btn} onClick={openModal}>
-          <BsFolderPlus className={styles.icon} />
+          <BsFolderPlus size={18} />
           Нова група
         </button>
         {isModal && (

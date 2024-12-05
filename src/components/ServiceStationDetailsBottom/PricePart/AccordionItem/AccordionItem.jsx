@@ -30,6 +30,7 @@ function AccordionItem({ category, items, index }) {
       <Accordion
         expanded={expanded}
         onChange={handleChange}
+        disableGutters={true}
         sx={{
           background: "none",
           color: "var(--white)",
