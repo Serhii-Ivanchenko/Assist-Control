@@ -1,0 +1,52 @@
+.wrapper {
+  background-color: var(--bg-input);
+  color: var(--white);
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  /* height: 43px;
+   width: 863px;
+   padding:10px;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+}
+
+.title {
+  color: var(--white);
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.title > div {
+  display: flex !important;
+}
+
+.mainIcon {
+  fill: var(--light-gray);
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 16px;
+  border: none;
+  background-color: var(--bg-input);
+
+  color: var(--white);
+
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+:root.css-jineix-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded {
+  min-height: 43px !important;
+}

@@ -2,6 +2,9 @@ import DistributorsList from "./DistributorsList/DistributorsList";
 import logo from "../../../assets/images/distrImg.png";
 import { BsTruck } from "react-icons/bs";
 import styles from "./DistributorsPart.module.css";
+import { useState } from "react";
+import Modal from "../../Modals/Modal/Modal";
+import DistributorsModal from "./DistributorsModal/DistributorsModal";
 
 const distributors = [
   {
@@ -16,7 +19,7 @@ const distributors = [
   },
   {
     id: 2,
-    name: "Busmarket",
+    name: "Autoworld",
     country: "Україна",
     logo: logo,
     managerName: "Менеджер Діана",
@@ -26,7 +29,7 @@ const distributors = [
   },
   {
     id: 3,
-    name: "Busmarket",
+    name: "VIDI",
     country: "Україна",
     logo: logo,
     managerName: "Менеджер Діана",
@@ -36,7 +39,7 @@ const distributors = [
   },
   {
     id: 4,
-    name: "Busmarket",
+    name: "WAG",
     country: "Україна",
     logo: logo,
     managerName: "Менеджер Діана",
@@ -46,7 +49,7 @@ const distributors = [
   },
   {
     id: 5,
-    name: "Busmarket",
+    name: "ATL",
     country: "Україна",
     logo: logo,
     managerName: "Менеджер Діана",
@@ -56,7 +59,7 @@ const distributors = [
   },
   {
     id: 6,
-    name: "Busmarket",
+    name: "BOSCH",
     country: "Україна",
     logo: logo,
     managerName: "Менеджер Діана",
@@ -66,7 +69,7 @@ const distributors = [
   },
   {
     id: 7,
-    name: "Busmarket",
+    name: "Garage",
     country: "Україна",
     logo: logo,
     managerName: "Менеджер Діана",
@@ -76,7 +79,7 @@ const distributors = [
   },
   {
     id: 8,
-    name: "Busmarket",
+    name: "Vianor",
     country: "Україна",
     logo: logo,
     managerName: "Менеджер Діана",
@@ -86,7 +89,7 @@ const distributors = [
   },
   {
     id: 9,
-    name: "Busmarket",
+    name: "ABT",
     country: "Україна",
     logo: logo,
     managerName: "Менеджер Діана",
@@ -97,13 +100,42 @@ const distributors = [
 ];
 
 function DistributorsPart() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentDistributor, setCurrentDistributor] = useState(null);
+
+  const handleEditDistributor = (distributor) => {
+    setCurrentDistributor(distributor);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setCurrentDistributor(null);
+  };
+
   return (
     <div className={styles.wrapper}>
-      <DistributorsList distributorsData={distributors} />
-      <button className={styles.btn} type="button">
+      <DistributorsList
+        distributorsData={distributors}
+        onEditDistributor={handleEditDistributor}
+      />
+      <button
+        className={styles.btn}
+        type="button"
+        onClick={() => setIsModalOpen(true)}
+      >
         <BsTruck />
         Додати постачальника
       </button>
+
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <DistributorsModal
+            onClose={closeModal}
+            distributorData={currentDistributor}
+          />
+        </Modal>
+      )}
     </div>
   );
 }

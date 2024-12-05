@@ -1,4 +1,4 @@
-import styles from "./DistributorsCard.module.css";
+import styles from "./PopupConnection.module.css";
 
 function PopupConnection() {
   return (

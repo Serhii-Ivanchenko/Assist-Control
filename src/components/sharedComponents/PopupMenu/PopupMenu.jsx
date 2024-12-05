@@ -1,8 +1,8 @@
 import Popup from "../Popup/Popup";
 import { BsPencil, BsTrash } from "react-icons/bs";
-import styles from "./DistributorsCard.module.css";
+import styles from "./PopupMenu.module.css";
 
-function PopupMenu({ isOpen, onClose, popupRef }) {
+function PopupMenu({ isOpen, onClose, popupRef, onEdit }) {
   if (!isOpen) return null;
 
   return (
@@ -13,6 +13,7 @@ function PopupMenu({ isOpen, onClose, popupRef }) {
             className={styles.editBtn}
             onClick={() => {
               onClose();
+              onEdit();
             }}
           >
             <BsPencil size={18} /> Редагувати

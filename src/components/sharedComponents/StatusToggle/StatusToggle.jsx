@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./DistributorsCard.module.css";
+import styles from "./StatusToggle.module.css";
 
 function StatusToggle() {
   const [isActive, setIsActive] = useState(false);
