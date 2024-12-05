@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding-bottom: 40px;
 }
 
 .itemsList {
@@ -134,8 +135,11 @@
   gap: 10px;
   align-items: center;
   justify-content: flex-end;
-  margin-top: auto;
+  /* margin-top: auto; */
   /* margin-left: auto; */
+  position: absolute;
+  bottom: 43px;
+  right: 40px;
 }
 
 .btnClose {
