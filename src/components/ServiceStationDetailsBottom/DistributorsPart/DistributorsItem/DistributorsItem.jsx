@@ -1,6 +1,6 @@
 import SwitchableBtns from "../../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
 import RatingStars from "../../../sharedComponents/RatingStars/RatingStars.jsx";
-import OptionList from "../DistributorsCard/OptionsList.jsx";
+import OptionList from "./OptionList/OptionsList.jsx";
 
 import styles from "./DistributorsItem.module.css";
 import { useState } from "react";
@@ -52,7 +52,7 @@ function DistributorsItem({ item, onEdit, onDelete }) {
       </div>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <DistributorsModal onClose={closeModal} />
+          <DistributorsModal onClose={closeModal} distributorData={item} />
         </Modal>
       )}
     </div>

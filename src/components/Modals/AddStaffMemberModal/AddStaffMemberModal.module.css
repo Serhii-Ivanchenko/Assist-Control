@@ -49,12 +49,16 @@
   cursor: pointer;
 }
 
+/* .phoneImgBox {
+  width: 55px;
+  height: 55px;
+} */
+
 .phoneImg {
   width: 55px;
   height: 55px;
   border-radius: 8px;
-
-  border: 1px solid wheat;
+  object-fit: cover;
 }
 
 .phoneLine {
@@ -64,7 +68,7 @@
 }
 
 .inputPhone {
-  width: 240px;
+  width: 240px !important;
 }
 
 .input {

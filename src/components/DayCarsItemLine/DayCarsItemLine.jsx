@@ -10,10 +10,10 @@ import { useSelector } from "react-redux";
 import { selectVisibilityCar } from "../../redux/cars/selectors";
 import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton";
+import RatingStars from "../sharedComponents/RatingStars/RatingStars";
 
 export default function DayCarsItemLine({ car }) {
   const visibility = useSelector(selectVisibilityCar);
-  console.log("Visibility for plate:", visibility?.plate);
 
 
 
@@ -68,6 +68,15 @@ export default function DayCarsItemLine({ car }) {
           </div>
         )}
       </div>
+      {visibility?.rating && (
+            <div
+            className={clsx(
+              !visibility.rating && styles.hidden
+            )}
+          >
+            <RatingStars rating={car.rating} />
+          </div>
+          )}
 
       {visibility?.status && (
         <div
