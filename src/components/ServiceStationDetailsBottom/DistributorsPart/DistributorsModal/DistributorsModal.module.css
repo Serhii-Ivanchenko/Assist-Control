@@ -33,7 +33,7 @@
 .name {
   display: flex;
   gap: 14px;
-  width: 100px;
+  min-width: 100px;
   justify-content: center;
   align-items: flex-start;
   color: var(--light-gray);
@@ -135,6 +135,7 @@
   background: var(--bg-input);
   outline: none;
   color: var(--light-gray);
+  font-size: 16px;
 }
 
 .addressBox label {
@@ -196,6 +197,7 @@
   background: var(--bg-input);
   outline: none;
   color: var(--light-gray);
+  font-size: 16px;
 }
 
 .authContainer {

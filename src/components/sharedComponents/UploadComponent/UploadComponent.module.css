@@ -11,7 +11,7 @@
 }
 
 .docLabelForPhoto {
-  /* width: 82px; */
+  min-width: 82px;
 }
 
 .icon {

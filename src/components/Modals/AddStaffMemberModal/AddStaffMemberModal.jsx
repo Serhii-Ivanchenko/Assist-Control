@@ -22,7 +22,7 @@ import { TfiClose } from "react-icons/tfi";
 
 import { registerLocale } from "react-datepicker";
 import uk from "date-fns/locale/uk";
-import ServiceStationDetailsTop from "../../ServiceStationDetailsTop/ServiceStationDetailsTop";
+import ScheduleTable from "../../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 import AnimatedContent from "./AnimatedContent.jsx";
 import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent.jsx";
 
@@ -587,7 +587,7 @@ export default function AddStaffMemberModal({ onClose }) {
                   Графік роботи
                 </label>
                 <AnimatedContent>
-                  <ServiceStationDetailsTop />
+                  <ScheduleTable />
                 </AnimatedContent>
               </div>
             </div>

@@ -8,6 +8,7 @@ import {
 import { BsCaretDownFill } from "react-icons/bs";
 import DeliverySchedule from "../DeliverySchedule/DeliverySchedule";
 import styles from "./ScheduleAccordion.module.css";
+import ScheduleTable from "../../../../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 
 function ScheduleAccordion({ deliveryData }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -70,7 +71,7 @@ function ScheduleAccordion({ deliveryData }) {
           marginTop: "19px",
         }}
       >
-        <DeliverySchedule
+        <ScheduleTable
           ref={detailsRef}
           isEditing={isEditing}
           activePeriods={deliveryData}
