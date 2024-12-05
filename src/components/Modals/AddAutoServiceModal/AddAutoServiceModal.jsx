@@ -50,7 +50,7 @@ export default function AddAutoServiceModal({ onClose }) {
         validateOnBlur
       >
         <Form>
-          <div className={css.haderWrapper}>
+          <div className={css.headerWrapper}>
             <BsXLg className={css.closeIcon} onClick={onClose} />
             <h3 className={css.autoServiceName}>СТО Название</h3>
             <BsThreeDotsVertical
