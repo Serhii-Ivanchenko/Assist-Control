@@ -1,0 +1,14 @@
+.treeContainer {
+    width: 100%;
+    max-width: 200px;
+    background-color: transparent;
+  }
+
+  .navLink {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .treeContainer .textSecond{
+    font-size: 16px;
+  }

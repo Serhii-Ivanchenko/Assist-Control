@@ -3,6 +3,7 @@
     font-weight: 400;
     line-height: normal;
     font-variant-numeric: lining-nums proportional-nums;
+  
 }
 
 @media only screen and (min-width: 1850px) {
@@ -18,6 +19,7 @@
     color: inherit;
     gap: 7px;
     transition: color 0.3s, background-color 0.3s;
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 1850px) {
