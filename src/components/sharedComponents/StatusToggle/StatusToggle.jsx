@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./StatusToggle.module.css";
 
-function StatusToggle() {
-  const [isActive, setIsActive] = useState(false);
+function StatusToggle({ isDisabled, onToggleDisable }) {
+  const [isActive, setIsActive] = useState(!isDisabled);
+
+  useEffect(() => {
+    setIsActive(!isDisabled);
+  }, [isDisabled]);
 
   return (
     <div className={styles.toggleBox}>
@@ -13,7 +17,7 @@ function StatusToggle() {
         <input
           type="checkbox"
           checked={isActive}
-          onChange={() => setIsActive((prev) => !prev)}
+          onChange={() => onToggleDisable()}
         />
         <span className={styles.slider}></span>
       </label>

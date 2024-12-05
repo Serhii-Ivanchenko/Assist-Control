@@ -21,29 +21,24 @@ const daysEn = [
   "Sunday",
 ];
 
-const DeliverySchedule = forwardRef(({ isEditing }, ref) => {
+const DeliverySchedule = forwardRef(({ isEditing, activePeriods }, ref) => {
   const [gridData, setGridData] = useState(generateGridData());
   const [isSelecting, setIsSelecting] = useState(false);
 
   // Генерація початкових даних для таблиці
   function generateGridData() {
-    const activePeriods = [
-      { day: "Monday", startTime: 9, endTime: 12, isActive: true },
-      { day: "Monday", startTime: 14, endTime: 16, isActive: true },
-      { day: "Wednesday", startTime: 10, endTime: 15, isActive: true },
-      { day: "Friday", startTime: 8, endTime: 11, isActive: true },
-    ];
-
     return daysEn.flatMap((day) =>
       hours.map((hour) => ({
         day,
         hour,
-        isActive: activePeriods.some(
-          (period) =>
-            period.day === day &&
-            hour >= period.startTime &&
-            hour < period.endTime
-        ),
+        isActive:
+          Array.isArray(activePeriods) &&
+          activePeriods.some(
+            (period) =>
+              period.day === day &&
+              hour >= period.startTime &&
+              hour < period.endTime
+          ),
       }))
     );
   }
