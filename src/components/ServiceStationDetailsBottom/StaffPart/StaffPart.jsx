@@ -4,10 +4,11 @@ import { BsPlusLg } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import Modal from "../../Modals/Modal/Modal";
 // import AddTeamMember from "../../Modals/UserSettingsModal/AddTeamMember/AddTeamMember.jsx"
-import { IoStarSharp } from "react-icons/io5";
+// import { IoStarSharp } from "react-icons/io5";
 import { useRef } from "react";
 import AddStaffMemberModal from "../../Modals/AddStaffMemberModal/AddStaffMemberModal.jsx";
 import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
+import RatingStars from "../../sharedComponents/RatingStars/RatingStars.jsx";
 
 export default function StaffPart() {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -121,12 +122,16 @@ export default function StaffPart() {
                       value={member.name}
                       onChange={(e) => handleChangeMN(index, e.target.value)}
                     />
-                    <input
+                    <select
                       type="text"
                       className={css.input}
                       value={member.role}
                       onChange={(e) => handleChangeMR(index, e.target.value)}
-                    />
+                    >
+                      <option value="Працівник">Працівник</option>
+                      <option value="Механік">Механік</option>
+                      <option value="Прибиральниця">Прибиральниця</option>
+                    </select>
                   </div>
                 ) : (
                   <div className={css.nameBox}>
@@ -135,23 +140,20 @@ export default function StaffPart() {
                   </div>
                 )}
               </div>
-
-              <div className={css.rating}>
+              {/* <div className={css.rating}>
                 <IoStarSharp color="var(--star-orange)" size={18} />
                 <IoStarSharp color="var(--star-orange)" size={18} />
                 <IoStarSharp color="var(--star-orange)" size={18} />
                 <IoStarSharp color="var(--star-orange)" size={18} />
                 <IoStarSharp color="var(--star-white)" size={18} />
-              </div>
-
+              </div> */}
+              <RatingStars rating={5} ratingGap={css.ratingGap} />
               {/* {isEditing === index ? (<select onChange={(e)=>handleChangeMR(index, e.target.value)} className={css.select}>
                         <option value="Власник">Власник</option>
                         <option value="Перегляд">Перегляд</option>
                         <option value="Адміністратор">Адміністратор</option>
 </select>): (<p className={css.memberRole}> {member.role} </p>)} */}
-
               <p className={css.memberRole}> {member.salary} </p>
-
               <SwitchableBtns
                 onEdit={() => handleEditing(index)}
                 onToggleDisable={() => toDisable(index)}
@@ -169,7 +171,7 @@ export default function StaffPart() {
         <span className={css.plus}>
           <BsPlusLg className={css.iconPlus} />
         </span>
-        Додати користувача
+        Додати працівника
       </button>
       {modalIsOpen && (
         <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
