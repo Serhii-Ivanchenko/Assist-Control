@@ -8,8 +8,7 @@ import {
 import { BsCaretDownFill, BsPencil } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
 // import { useState } from "react";
-import ServiceStationDetailsTop from "../ServiceStationDetailsTop/ServiceStationDetailsTop.jsx";
-import ServiceStationDetailsTopTable from "../ServiceStationDetailsTopTable/ServiceStationDetailsTopTable.jsx";
+import ScheduleTable from "../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 import css from "./ServiceStationDetailsAccordion.module.css";
 
 export default function ServiceStationDetailsAccordion({ onToggle }) {
@@ -77,6 +76,13 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
 
   // const [data, setData] = useState(initialData);
 
+  const activePeriods = [
+    { day: "Monday", startTime: 9, endTime: 12, isActive: true },
+    { day: "Monday", startTime: 14, endTime: 16, isActive: true },
+    { day: "Wednesday", startTime: 10, endTime: 15, isActive: true },
+    { day: "Friday", startTime: 8, endTime: 11, isActive: true },
+  ];
+
   return (
     <Accordion
       className={css.accwrapper}
@@ -139,8 +145,7 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
           marginTop: "19px",
         }}
       >
-        <ServiceStationDetailsTop ref={detailsRef} isEditing={isEditing} />
-        {/* <ServiceStationDetailsTopTable /> */}
+        <ScheduleTable ref={detailsRef} isEditing={isEditing} activePeriods={activePeriods} />
       </AccordionDetails>
     </Accordion>
   );

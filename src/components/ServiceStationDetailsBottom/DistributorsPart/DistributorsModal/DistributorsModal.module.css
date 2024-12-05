@@ -20,25 +20,44 @@
 .credentialsContainer {
   display: flex;
   flex-direction: column;
-  gap: 33px;
+  /* gap: 33px; */
 }
 
 .nameBox {
   display: flex;
   align-items: center;
   gap: 7px;
+  margin-bottom: 7px;
 }
 
 .name {
   display: flex;
   gap: 14px;
-  width: 100px;
+  min-width: 100px;
   justify-content: center;
   align-items: flex-start;
   color: var(--light-gray);
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   font-weight: 600;
+}
+
+.inputName {
+  width: auto;
+  height: 40px;
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: var(--light-gray);
+  font-size: 20px;
+  font-style: normal;
+  line-height: normal;
+  font-weight: 400;
+  height: 100%;
+  background-color: var(--main-gray);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .popupIcon {
@@ -66,13 +85,24 @@
   display: flex;
   gap: 15px;
   align-items: center;
+  margin-bottom: 33px;
+}
+
+.imgWrapper div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .img {
   width: 96px;
 }
 
-.uploadLogoText {
+.uploadLogoContainer {
+  margin-top: 19px;
+}
+
+.uploadLogoContainer p {
   color: var(--input-text);
   font-family: "Roboto", sans-serif;
   font-size: 14px;
@@ -105,6 +135,7 @@
   background: var(--bg-input);
   outline: none;
   color: var(--light-gray);
+  font-size: 16px;
 }
 
 .addressBox label {
@@ -166,6 +197,7 @@
   background: var(--bg-input);
   outline: none;
   color: var(--light-gray);
+  font-size: 16px;
 }
 
 .authContainer {

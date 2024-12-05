@@ -9,9 +9,6 @@ import Modal from "../../../Modals/Modal/Modal.jsx";
 
 function DistributorsItem({ item, onEdit, onDelete }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleToggleDisable = () => {
-    onEdit(item.id, { isDisabled: !item.isDisabled });
-  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -20,6 +17,18 @@ function DistributorsItem({ item, onEdit, onDelete }) {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  function formatPhoneNumber(phone) {
+    const cleaned = phone.replace(/\D/g, "");
+    if (cleaned.length !== 12) return phone;
+
+    const match = cleaned.match(/(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})/);
+    if (match) {
+      return `+${match[1]} (${match[2]}) ${match[3]} ${match[4]} ${match[5]}`;
+    }
+
+    return phone;
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -37,7 +46,7 @@ function DistributorsItem({ item, onEdit, onDelete }) {
         <RatingStars rating={item.rating} className={styles.rating} />
         <div className={styles.contactsContainer}>
           <a className={styles.phone} href={`tel:${item.managerPhone}`}>
-            {item.managerPhone}
+            {formatPhoneNumber(item.managerPhone)}
           </a>
           <p className={styles.subText}>{item.managerName}</p>
         </div>
@@ -47,12 +56,20 @@ function DistributorsItem({ item, onEdit, onDelete }) {
           isDisabled={item.isDisabled}
           onEdit={() => openModal()}
           onDelete={() => onDelete(item.id)}
-          onToggleDisable={handleToggleDisable}
+          onToggleDisable={() =>
+            onEdit(item.id, { isDisabled: !item.isDisabled })
+          }
         />
       </div>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <DistributorsModal onClose={closeModal} distributorData={item} />
+          <DistributorsModal
+            onClose={closeModal}
+            distributorData={item}
+            onToggleDisable={(newStatus) =>
+              onEdit(item.id, { isDisabled: newStatus })
+            }
+          />
         </Modal>
       )}
     </div>

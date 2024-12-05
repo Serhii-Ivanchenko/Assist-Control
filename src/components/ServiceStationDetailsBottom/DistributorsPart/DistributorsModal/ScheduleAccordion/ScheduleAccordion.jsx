@@ -6,36 +6,29 @@ import {
   Typography,
 } from "@mui/material";
 import { BsCaretDownFill } from "react-icons/bs";
-// import {BsPencil } from "react-icons/bs";
-// import { RiSave3Fill } from "react-icons/ri";
 import DeliverySchedule from "../DeliverySchedule/DeliverySchedule";
 import styles from "./ScheduleAccordion.module.css";
+import ScheduleTable from "../../../../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 
-function ScheduleAccordion({ onToggle }) {
+function ScheduleAccordion({ deliveryData }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const detailsRef = useRef();
+
   const handleChange = (e, expanded) => {
     setIsExpanded(expanded);
-    if (!expanded) {
+    if (expanded) {
+      setIsEditing(true);
+    } else {
       setIsEditing(false);
     }
-    onToggle(expanded);
   };
 
-  //   const handleEditToggle = (event) => {
-  //     event.stopPropagation();
-  //     if (isEditing) {
-  //       if (detailsRef.current?.generateBackendData) {
-  //         detailsRef.current.generateBackendData();
-  //       }
-  //     }
-  //     setIsEditing((prev) => !prev);
-  //   };
   return (
     <Accordion
       className={styles.wrapper}
+      expanded={isExpanded}
       onChange={handleChange}
       disableGutters={true}
       sx={{
@@ -70,16 +63,6 @@ function ScheduleAccordion({ onToggle }) {
         >
           Графік доставки:
         </Typography>
-
-        {/* {isExpanded && (
-          <button onClick={handleEditToggle} className={styles.btn}>
-            {isEditing ? (
-              <RiSave3Fill className={styles.mainIcon} size={21} />
-            ) : (
-              <BsPencil className={styles.mainIcon} />
-            )}
-          </button>
-        )} */}
       </AccordionSummary>
       <AccordionDetails
         style={{
@@ -88,7 +71,11 @@ function ScheduleAccordion({ onToggle }) {
           marginTop: "19px",
         }}
       >
-        <DeliverySchedule ref={detailsRef} isEditing={isEditing} />
+        <ScheduleTable
+          ref={detailsRef}
+          isEditing={isEditing}
+          activePeriods={deliveryData}
+        />
       </AccordionDetails>
     </Accordion>
   );
