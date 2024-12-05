@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./slider.css";
+import { IoStarSharp } from "react-icons/io5";
 
 // const GoPrevArrow = ({ onClick }) => {
 //     return(
@@ -131,7 +132,16 @@ export default function ServiceNavigation({ page, setPage }) {
             [css.isActiveBtn]: page === "rating",
           })}
         >
-          <p className={`${css.title} ${css.titleDist}`}>Рейтинг</p>
+          <div className={css.ratingBtn}>
+            <p className={`${css.title} ${css.titleDist}`}>Рейтинг</p>
+            <div className={css.rating}>
+              <IoStarSharp color="var(--star-orange)" size={13} />
+              <IoStarSharp color="var(--star-orange)" size={13} />
+              <IoStarSharp color="var(--star-orange)" size={13} />
+              <IoStarSharp color="var(--star-orange)" size={13} />
+              <IoStarSharp color="var(--star-orange)" size={13} />
+            </div>
+          </div>
         </button>
         <button
           type="button"
