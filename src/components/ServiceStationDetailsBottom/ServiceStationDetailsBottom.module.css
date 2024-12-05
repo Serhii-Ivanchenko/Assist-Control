@@ -4,7 +4,8 @@
 }
 
 .fullHeight {
-  flex-grow: 1; /* Розтягується, коли акордеон закритий */
+  /* flex-grow: 1; Розтягується, коли акордеон закритий */
+  height: 850px;
 }
 
 .reducedHeight {
@@ -21,10 +22,12 @@
   background: var(--bg-secondary);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   transition: height 0.3s ease;
+  position: absolute;
+  bottom: 23px;
 }
 
 .reducedChangeableHeight {
-  height: 343px; /* Обмеження висоти, коли акордеон відкритий */
+  height: 375px; /* Обмеження висоти, коли акордеон відкритий */
 }
 
 .noBackground {
