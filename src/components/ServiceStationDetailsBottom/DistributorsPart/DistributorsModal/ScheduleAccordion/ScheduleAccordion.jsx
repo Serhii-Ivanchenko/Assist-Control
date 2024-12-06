@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { BsCaretDownFill } from "react-icons/bs";
-import DeliverySchedule from "../DeliverySchedule/DeliverySchedule";
+// import DeliverySchedule from "../DeliverySchedule/DeliverySchedule";
 import styles from "./ScheduleAccordion.module.css";
 import ScheduleTable from "../../../../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 
