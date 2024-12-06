@@ -64,14 +64,14 @@ export default function Node({
   const inputFocusRef = useRef(null);
   const scrollForPopover = useRef(null);
   const addNodeRef = useRef({});
-  console.log("addNodeRef", addNodeRef);
+  // console.log("addNodeRef", addNodeRef);
 
   const addNodeButtonRef = (nodeId, el) => {
     if (el && !addNodeRef.current[nodeId]) {
       addNodeRef.current[nodeId] = el;
     }
   };
-  console.log("addNodeButtonRef", addNodeButtonRef);
+  // console.log("addNodeButtonRef", addNodeButtonRef);
 
   // Редагування
   const handleEditing = (id, e) => {
@@ -163,7 +163,7 @@ export default function Node({
     if (addNodeRef.current[node.id]) {
       // Прокрутка до кожного нового вузла
       const nodeElement = addNodeRef.current[node.id];
-      console.log("nodeElem", nodeElement);
+      // console.log("nodeElem", nodeElement);
 
       nodeElement.scrollIntoView({
         behavior: "smooth",

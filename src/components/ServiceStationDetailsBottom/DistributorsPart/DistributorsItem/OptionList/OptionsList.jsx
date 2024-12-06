@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Option from "./Option";
 import { BsCurrencyExchange, BsCardChecklist, BsCart3 } from "react-icons/bs";
-import styles from "./DistributorsCard.module.css";
+import styles from "./OptionList.module.css";
 
 const initialOptions = [
   { label: "Ціни", icon: <BsCurrencyExchange />, isActive: true },
@@ -10,15 +10,7 @@ const initialOptions = [
 ];
 
 function OptionList() {
-  const [options, setOptions] = useState(initialOptions);
-
-  const toggleOption = (index) => {
-    setOptions((prevOptions) =>
-      prevOptions.map((option, idx) =>
-        idx === index ? { ...option, isActive: !option.isActive } : option
-      )
-    );
-  };
+  const [options] = useState(initialOptions);
 
   return (
     <div className={styles.optionsBox}>
@@ -28,7 +20,6 @@ function OptionList() {
           icon={option.icon}
           label={option.label}
           isActive={option.isActive}
-          onClick={() => toggleOption(index)}
         />
       ))}
     </div>

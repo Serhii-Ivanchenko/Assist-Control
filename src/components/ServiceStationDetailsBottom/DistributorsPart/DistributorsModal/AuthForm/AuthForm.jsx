@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import styles from "./DistributorsCard.module.css";
+import styles from "./AuthForm.module.css";
 
 const initialValues = {
   login: "",
@@ -9,16 +9,12 @@ const initialValues = {
 };
 
 const validationSchema = Yup.object({
-  website: Yup.string().required("Поле обов'язкове"),
-  distrEmail: Yup.string()
-    .email("Невірний формат e-mail")
-    .required("Поле обов'язкове"),
+  website: Yup.string(),
+  distrEmail: Yup.string().email("Невірний формат e-mail"),
   login: Yup.string().required("Поле обов'язкове"),
   password: Yup.string().required("Поле обов'язкове"),
   tokenAPI: Yup.string(),
-  priceEmail: Yup.string()
-    .email("Невірний формат e-mail")
-    .required("Поле обов'язкове"),
+  priceEmail: Yup.string().email("Невірний формат e-mail"),
 });
 
 const AuthForm = () => {
