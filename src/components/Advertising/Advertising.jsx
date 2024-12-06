@@ -11,11 +11,7 @@ export default function Advertising() {
           Якщо ви тільки почали знайомство, рекомендуємо пройти безкоштоввний
           відеотренінг.
         </p>
-        <a
-          href="https://www.edu.goit.global/uk/homepage"
-          target="blank"
-          className={css.link}
-        >
+        <a href="" target="blank" className={css.link}>
           <p className={css.linkText}>Пройти курс</p>
           <BsBoxArrowUpRight className={css.linkIcon} />
         </a>
