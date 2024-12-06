@@ -1,48 +1,48 @@
-.notificationBox{
-    min-width: 388px;
-    padding: 18px 30px 30px 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+.notificationBox {
+  min-width: 388px;
+  padding: 18px 30px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
-    border-radius: 12px;
-    background: var(--bg-secondary);
+  border-radius: 12px;
+  background: var(--bg-secondary);
 }
 
-.notifForm{
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
+.notifForm {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
 }
 
-.dateAndTimeBox{
-    display: flex;
-   align-items: center;
-    justify-content: space-between;
+.dateAndTimeBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.inputBox{
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 
-    position: relative;
+  position: relative;
 }
 
-.crossBtn{
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    fill: var(--input-stroke);
-    cursor: pointer;
+.crossBtn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  fill: var(--input-stroke);
+  cursor: pointer;
 }
 
-.title{
-    color: var(--white);
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+.title {
+  color: var(--white);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 /* .connectionSelect{
@@ -67,16 +67,16 @@
     appearance: none;
 } */
 
-.input{
-display: flex;
-    padding: 6px 10px;
-    justify-content: center;
-    align-items: center;
-    /* gap: 10px; */
-    align-self: stretch;
+.input {
+  display: flex;
+  padding: 6px 10px;
+  justify-content: center;
+  align-items: center;
+  /* gap: 10px; */
+  align-self: stretch;
 
-    border-radius: 12px;
-    background-color: var(--bg-input);
+  border-radius: 12px;
+  background-color: var(--bg-input);
 }
 
 /* .inputDate{
@@ -87,8 +87,8 @@ display: flex;
     width: 100px;
 } */
 
-.date{
-    /* display: flex;
+.date {
+  /* display: flex;
     padding: 6px 10px;
     justify-content: center;
     align-items: center;
@@ -96,141 +96,180 @@ display: flex;
     align-self: stretch;
 
     border-radius: 12px; */
-    background-color: var(--bg-input);
+  background-color: var(--bg-input);
 
-    outline: none;
-    border: none;
+  outline: none;
+  border: none;
 
-    color: var(--white);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    cursor: default;
-
+  color: var(--white);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: default;
 }
 
-.dateDate{
-    width: 90px;
+.dateDate {
+  width: 90px;
 }
 
-.dateTime{
-    width: 60px;
+.dateTime {
+  width: 60px;
 }
 
-.date::-webkit-calendar-picker-indicator{
-    display: none;
+.date::-webkit-calendar-picker-indicator {
+  display: none;
 }
 
-.dateBtn{
-    border-radius: 46px;
-    background: var(--bg-input);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border: none;
+.dateBtn {
+  border-radius: 46px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
 
-    display: flex;
-    padding: 6px;
-    align-items: center;
-    cursor: pointer;
-    /* gap: 10px; */
+  display: flex;
+  padding: 6px;
+  align-items: center;
+  cursor: pointer;
+  /* gap: 10px; */
 }
 
-.iconBtn{
-    fill: var(--light-gray);
+.iconBtn {
+  fill: var(--light-gray);
 }
 
-.textarea{
-    height: 80px;
-    border-radius: 12px;
-    background-color: var(--bg-input);
-    outline: none;
-    border: none;
-    resize: none;
-    padding: 12px;
+.textarea {
+  height: 80px;
+  border-radius: 12px;
+  background-color: var(--bg-input);
+  outline: none;
+  border: none;
+  resize: none;
+  padding: 12px;
 
-    color: var(--white);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
-.closeBtn{
-    border-radius: 6px;
-    border: 1px solid var(--input-stroke);
-    background-color: transparent;
-    padding: 10px;
+.closeBtn {
+  border-radius: 6px;
+  border: 1px solid var(--input-stroke);
+  background-color: transparent;
+  padding: 10px;
 
-    color: var(--white);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
 }
 
-.createBtn{
-    border-radius: 6px;
-    background-color: var(--green-btn-normal);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border: none;
+.createBtn {
+  border-radius: 6px;
+  background-color: var(--green-btn-normal);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
 
-    display: flex;
-    padding: 10px;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
 
-    color: var(--white);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
 }
 
-.createBtn:hover{
-    background-color: var(--green-btn-hover);
+.createBtn:hover {
+  background-color: var(--green-btn-hover);
 }
 
-.btnBox{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 17px;
+.btnBox {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 17px;
 }
 
-.selectBox{
-    position: relative;
+.selectBox {
+  position: relative;
 }
 
-.arrowIcon{
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+.arrowIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 
-    fill:var(--icon-gray);
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-
+  fill: var(--icon-gray);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.label{
-    color: var(--white);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.label {
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
-.errorMessage{
-    color: var(--red);
-        font-size: 10px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        /* margin-left: 20px; */
-    
-        cursor: default;
-        position: absolute;
-        left: 20px;
-        top: 100%;
+.errorMessage {
+  color: var(--red);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  /* margin-left: 20px; */
+
+  cursor: default;
+  position: absolute;
+  left: 20px;
+  top: 100%;
+}
+
+.phoneIcon {
+  fill: var(--green-btn-normal);
+}
+
+.envelopeIcon {
+  fill: var(--blue);
+}
+
+.tgIcon {
+  fill: var(--icon-gray);
+}
+
+.speedBox {
+  display: flex;
+  gap: 10px;
+  height: 38px;
+  width: fit-content;
+  padding: 10px 14px;
+  align-items: center;
+
+  border-radius: 24px;
+  background-color: rgba(67, 164, 141, 0.08);
+
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.speedIcon {
+  fill: var(--current-mileage-text);
+  width: 13px;
+  height: 13px;
+}
+
+.speedValue {
+  color: var(--current-mileage-text);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }

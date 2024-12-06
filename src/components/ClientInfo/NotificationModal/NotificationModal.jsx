@@ -12,6 +12,11 @@ import "./NotificationModal.css";
 import { useId } from "react";
 import * as Yup from "yup";
 import { useState } from "react";
+import { BsFillTelephoneOutboundFill } from "react-icons/bs";
+import { BsEnvelope } from "react-icons/bs";
+import { PiTelegramLogoLight } from "react-icons/pi";
+import { BsCurrencyDollar } from "react-icons/bs";
+import { SlSpeedometer } from "react-icons/sl";
 
 import { registerLocale } from "react-datepicker";
 import uk from "date-fns/locale/uk";
@@ -25,7 +30,34 @@ const Validation = Yup.object().shape({
   comment: Yup.string().required("Заповніть це поле"),
 });
 
-export default function NotificationModal({ onClose }) {
+const connection = [
+  {
+    value: "call",
+    label: "Передзвонити",
+    icon: <BsFillTelephoneOutboundFill size={18} className={css.phoneIcon} />,
+  },
+  {
+    value: "email",
+    label: "Написати листа",
+    icon: <BsEnvelope size={18} className={css.envelopeIcon} />,
+  },
+  {
+    value: "tg",
+    label: "Зв'язатись в Телеграм",
+    icon: <PiTelegramLogoLight size={18} className={css.tgIcon} />,
+  },
+];
+
+const services = [
+  { value: "upsell", label: "Допродаж" },
+  { value: "check", label: "Огляд після ремонту" },
+  { value: "oilChange", label: "Заміна масла через {...}км" },
+  { value: "review", label: "Сезонне ТО" },
+  { value: "finishedRapair", label: "Закінчити ремонт" },
+  { value: "specialOffers", label: "Акції" },
+];
+
+export default function NotificationModal({ onClose, accountingModal }) {
   const [isDateOpen, setDateOpen] = useState(false);
   const [isTimeOpen, setTimeOpen] = useState(false);
 
@@ -56,6 +88,7 @@ export default function NotificationModal({ onClose }) {
       return date;
     })(),
     comment: "",
+    services: "upsell",
   };
 
   const handleSubmit = (values, actions) => {
@@ -96,6 +129,7 @@ export default function NotificationModal({ onClose }) {
                 name="connection"
                 className={css.connectionSelect}
                 component={ConnectionSelect}
+                options={connection}
               />
               <ErrorMessage
                 component="span"
@@ -103,6 +137,28 @@ export default function NotificationModal({ onClose }) {
                 className={css.errorMessage}
               />
             </div>
+
+            {accountingModal && (
+              <>
+                <div>
+                  <Field
+                    as="select"
+                    name="services"
+                    component={ConnectionSelect}
+                    options={services}
+                    showDefaultIcon={true}
+                    icon={
+                      <BsCurrencyDollar size={18} className={css.phoneIcon} />
+                    }
+                  />
+                </div>
+
+                <div className={css.speedBox}>
+                  <SlSpeedometer className={css.speedIcon} />
+                  <p className={css.speedValue}>246014</p>
+                </div>
+              </>
+            )}
 
             <div className={css.dateAndTimeBox}>
               <div className={css.inputBox}>
