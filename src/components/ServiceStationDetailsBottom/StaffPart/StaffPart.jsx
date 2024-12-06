@@ -9,6 +9,8 @@ import { useRef } from "react";
 import AddStaffMemberModal from "../../Modals/AddStaffMemberModal/AddStaffMemberModal.jsx";
 import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
 import RatingStars from "../../sharedComponents/RatingStars/RatingStars.jsx";
+import { BsFillCaretDownFill } from "react-icons/bs";
+import clsx from "clsx";
 
 export default function StaffPart() {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -46,6 +48,9 @@ export default function StaffPart() {
   ]);
 
   const [isEditing, setIsEditing] = useState(null);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  // const selectRef = useRef(null);
+
   const inputFocusRef = useRef();
 
   const toDisable = (index) => {
@@ -98,8 +103,18 @@ export default function StaffPart() {
     setMembers((prevMembers) => prevMembers.filter((_, i) => i !== index));
   };
 
+  const toggleDropdown = () => {
+    setActiveDropdown((prev) => !prev);
+  };
+
+  const handleBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setActiveDropdown(null);
+    }
+  };
+
   return (
-    <div className={css.StaffPart}>
+    <div className={css.StaffPart} onBlur={handleBlur}>
       <div className={css.divForScroll}>
         <ul className={css.teamList}>
           {members.map((member, index) => (
@@ -122,16 +137,24 @@ export default function StaffPart() {
                       value={member.name}
                       onChange={(e) => handleChangeMN(index, e.target.value)}
                     />
-                    <select
-                      type="text"
-                      className={css.input}
-                      value={member.role}
-                      onChange={(e) => handleChangeMR(index, e.target.value)}
-                    >
-                      <option value="Працівник">Працівник</option>
-                      <option value="Механік">Механік</option>
-                      <option value="Прибиральниця">Прибиральниця</option>
-                    </select>
+                    <div className={css.SelectAndArrowBox}>
+                      <select
+                        type="text"
+                        className={`${css.input} ${css.select}`}
+                        value={member.role}
+                        onChange={(e) => handleChangeMR(index, e.target.value)}
+                        onClick={toggleDropdown}
+                      >
+                        <option value="Працівник">Працівник</option>
+                        <option value="Механік">Механік</option>
+                        <option value="Прибиральниця">Прибиральниця</option>
+                      </select>
+                      <BsFillCaretDownFill
+                        className={clsx(css.arrow, {
+                          [css.rotated]: activeDropdown,
+                        })}
+                      />
+                    </div>
                   </div>
                 ) : (
                   <div className={css.nameBox}>
@@ -140,14 +163,9 @@ export default function StaffPart() {
                   </div>
                 )}
               </div>
-              {/* <div className={css.rating}>
-                <IoStarSharp color="var(--star-orange)" size={18} />
-                <IoStarSharp color="var(--star-orange)" size={18} />
-                <IoStarSharp color="var(--star-orange)" size={18} />
-                <IoStarSharp color="var(--star-orange)" size={18} />
-                <IoStarSharp color="var(--star-white)" size={18} />
-              </div> */}
+
               <RatingStars rating={5} ratingGap={css.ratingGap} />
+
               {/* {isEditing === index ? (<select onChange={(e)=>handleChangeMR(index, e.target.value)} className={css.select}>
                         <option value="Власник">Власник</option>
                         <option value="Перегляд">Перегляд</option>
