@@ -6,7 +6,7 @@ import { BsXLg } from "react-icons/bs";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { BsCloudUploadFill } from "react-icons/bs";
 import { useState } from "react";
-import PopupMenu from "../../ServiceStationDetailsBottom/DistributorsPart/DistributorsCard/PopupMenu";
+import PopupMenu from "../../sharedComponents/PopupMenu/PopupMenu.jsx";
 
 export default function AddAutoServiceModal({ onClose }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
