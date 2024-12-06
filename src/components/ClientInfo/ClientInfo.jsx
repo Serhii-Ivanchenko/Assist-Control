@@ -197,7 +197,6 @@ export default function ClientInfo() {
                     time="clientTime"
                     date="clientDate"
                     comment="clientComment"
-                    service="clientService"
                     connectionType="clientConnection"
                   />
                 </Modal>
