@@ -198,6 +198,8 @@ export default function ClientInfo() {
                     date="clientDate"
                     comment="clientComment"
                     connectionType="clientConnection"
+                    // accountingModal={true}
+                    // service="clientService"
                   />
                 </Modal>
               )}

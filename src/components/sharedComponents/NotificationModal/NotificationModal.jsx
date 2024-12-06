@@ -46,7 +46,7 @@ const services = [
   { value: "check", label: "Огляд після ремонту" },
   { value: "oilChange", label: "Заміна масла через {...}км" },
   { value: "review", label: "Сезонне ТО" },
-  { value: "finishedRapair", label: "Закінчити ремонт" },
+  { value: "finishedRepair", label: "Закінчити ремонт" },
   { value: "specialOffers", label: "Акції" },
 ];
 
@@ -96,7 +96,7 @@ export default function NotificationModal({
       return date;
     })(),
     [comment]: "",
-    [service]: "upsell",
+    ...(accountingModal && { [service]: "upsell" }),
   };
 
   const handleSubmit = (values, actions) => {
