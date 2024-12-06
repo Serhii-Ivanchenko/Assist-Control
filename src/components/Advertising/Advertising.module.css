@@ -1,0 +1,65 @@
+.wrapper {
+  width: 455px;
+  height: 199px;
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
+  overflow: hidden;
+  display: flex;
+  gap: 13px;
+}
+
+.imgWrapper {
+  width: 145px;
+  background-image: url(../../assets/images/advertising-1x.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+@media only screen and (min-resolution: 192dpi) {
+  .imgWrapper {
+    background-image: url(../../assets/images/advertising-2x.webp);
+  }
+}
+
+.textWrapper {
+  padding-top: 10px;
+}
+
+.header {
+  color: var(--light-gray);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 17px;
+}
+
+.text {
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 27px;
+}
+
+.link {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+  align-items: center;
+  text-decoration: none;
+}
+
+.linkText {
+  color: var(--play-btn-triangle);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.linkIcon {
+  color: var(--light-gray);
+}
