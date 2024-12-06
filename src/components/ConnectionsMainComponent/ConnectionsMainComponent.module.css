@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.bottomWrapper {
+    display: flex;
+    gap: 14px;
+}
+
+.leftPart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
