@@ -23,13 +23,6 @@ import uk from "date-fns/locale/uk";
 
 registerLocale("uk", uk);
 
-const Validation = Yup.object().shape({
-  connection: Yup.string().required("Заповніть це поле"),
-  date: Yup.string().required("Заповніть це поле"),
-  time: Yup.string().required("Заповніть це поле"),
-  comment: Yup.string().required("Заповніть це поле"),
-});
-
 const connection = [
   {
     value: "call",
@@ -57,12 +50,27 @@ const services = [
   { value: "specialOffers", label: "Акції" },
 ];
 
-export default function NotificationModal({ onClose, accountingModal }) {
+export default function NotificationModal({
+  onClose,
+  accountingModal,
+  date,
+  time,
+  connectionType,
+  comment,
+  service,
+}) {
   const [isDateOpen, setDateOpen] = useState(false);
   const [isTimeOpen, setTimeOpen] = useState(false);
 
   const handleDateButtonClick = () => setDateOpen((prev) => !prev);
   const handleTimeButtonClick = () => setTimeOpen((prev) => !prev);
+
+  const Validation = Yup.object().shape({
+    [connectionType]: Yup.string().required("Заповніть це поле"),
+    [date]: Yup.string().required("Заповніть це поле"),
+    [time]: Yup.string().required("Заповніть це поле"),
+    [comment]: Yup.string().required("Заповніть це поле"),
+  });
 
   //     const datepickerRef = useRef(null);
   //     const timepickerRef = useRef(null);
@@ -80,28 +88,28 @@ export default function NotificationModal({ onClose, accountingModal }) {
   //   };
 
   const initialValues = {
-    date: new Date(),
-    connection: "call",
-    time: (() => {
+    [date]: new Date(),
+    [connectionType]: "call",
+    [time]: (() => {
       const date = new Date();
       date.setHours(9, 0, 0, 0);
       return date;
     })(),
-    comment: "",
-    services: "upsell",
+    [comment]: "",
+    [service]: "upsell",
   };
 
   const handleSubmit = (values, actions) => {
-    const timeOnly = values.time
-      ? values.time.toLocaleTimeString([], {
+    const timeOnly = values[time]
+      ? values[time].toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
         })
       : null;
-    const dateOnly = values.date
-      ? values.date.toLocaleDateString("en-CA")
+    const dateOnly = values[date]
+      ? values[date].toLocaleDateString("en-CA")
       : null;
-    const submittedValues = { ...values, time: timeOnly, date: dateOnly };
+    const submittedValues = { ...values, [time]: timeOnly, [date]: dateOnly };
     console.log(submittedValues);
     actions.resetForm();
     onClose();
@@ -126,14 +134,14 @@ export default function NotificationModal({ onClose, accountingModal }) {
             <div className={css.selectBox}>
               <Field
                 as="select"
-                name="connection"
+                name={connectionType}
                 className={css.connectionSelect}
                 component={ConnectionSelect}
                 options={connection}
               />
               <ErrorMessage
                 component="span"
-                name="connection"
+                name={connection}
                 className={css.errorMessage}
               />
             </div>
@@ -143,7 +151,7 @@ export default function NotificationModal({ onClose, accountingModal }) {
                 <div>
                   <Field
                     as="select"
-                    name="services"
+                    name={service}
                     component={ConnectionSelect}
                     options={services}
                     showDefaultIcon={true}
@@ -168,9 +176,9 @@ export default function NotificationModal({ onClose, accountingModal }) {
                 <div className={css.input}>
                   <DatePicker
                     id={dateId}
-                    selected={values.date}
-                    onChange={(date) => setFieldValue("date", date)}
-                    name="date"
+                    selected={values[date]}
+                    onChange={(dateValue) => setFieldValue(date, dateValue)}
+                    name={date}
                     className={`${css.date} ${css.dateDate}`}
                     dateFormat="dd/MM/yy"
                     minDate={new Date()}
@@ -193,7 +201,7 @@ export default function NotificationModal({ onClose, accountingModal }) {
                 </div>
                 <ErrorMessage
                   component="span"
-                  name="date"
+                  name={date}
                   className={css.errorMessage}
                 />
               </div>
@@ -206,10 +214,10 @@ export default function NotificationModal({ onClose, accountingModal }) {
                 <div className={css.input}>
                   <DatePicker
                     id={timeId}
-                    name="time"
+                    name={time}
                     className={`${css.date} ${css.dateTime}`}
-                    selected={values.time}
-                    onChange={(time) => setFieldValue("time", time)}
+                    selected={values[time]}
+                    onChange={(timeValue) => setFieldValue(time, timeValue)}
                     showTimeSelect
                     showTimeSelectOnly
                     timeIntervals={15}
@@ -233,7 +241,7 @@ export default function NotificationModal({ onClose, accountingModal }) {
                 </div>
                 <ErrorMessage
                   component="span"
-                  name="time"
+                  name={time}
                   className={css.errorMessage}
                 />
               </div>
@@ -245,13 +253,13 @@ export default function NotificationModal({ onClose, accountingModal }) {
               </label>
               <Field
                 as="textarea"
-                name="comment"
+                name={comment}
                 className={css.textarea}
                 id={commentId}
               />
               <ErrorMessage
                 component="span"
-                name="comment"
+                name={comment}
                 className={css.errorMessage}
               />
             </div>

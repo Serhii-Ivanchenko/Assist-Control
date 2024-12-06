@@ -18,7 +18,7 @@ import { BsAlarm } from "react-icons/bs";
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import { useState } from "react";
 import Modal from "../Modals/Modal/Modal";
-import NotificationModal from "./NotificationModal/NotificationModal";
+import NotificationModal from "../sharedComponents/NotificationModal/NotificationModal";
 import { BsPencil } from "react-icons/bs";
 import avatar_default from "../../assets/images/avatar_default.png";
 import { RiSave3Fill } from "react-icons/ri";
@@ -192,7 +192,14 @@ export default function ClientInfo() {
               </button>
               {modalIsOpen && (
                 <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
-                  <NotificationModal onClose={handleModalClose} />
+                  <NotificationModal
+                    onClose={handleModalClose}
+                    time="clientTime"
+                    date="clientDate"
+                    comment="clientComment"
+                    service="clientService"
+                    connectionType="clientConnection"
+                  />
                 </Modal>
               )}
             </div>
