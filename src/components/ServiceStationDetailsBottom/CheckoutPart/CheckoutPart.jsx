@@ -3,6 +3,7 @@ import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns
 import css from "./CheckoutPart.module.css";
 import { BsPlusLg } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
+import clsx from "clsx";
 
 export default function CheckoutPart() {
   const [isEditing, setIsEditing] = useState(false);
@@ -81,6 +82,7 @@ export default function CheckoutPart() {
     },
   ]);
   const [newRow, setNewRow] = useState("");
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
   const handleEditing = (index) => {
     setIsEditing(isEditing === index ? null : index);
@@ -124,6 +126,9 @@ export default function CheckoutPart() {
     );
   };
 
+  const toggleDropdown = (index) => {
+    setActiveDropdown(activeDropdown === index ? null : index);
+  };
   return (
     <div className={css.checkoutPart}>
       <div className={css.divForScroll}>
@@ -155,12 +160,17 @@ export default function CheckoutPart() {
                       name="currency"
                       id=""
                       className={`${css.editInfo} ${css.infoCurrency}`}
+                      onClick={() => toggleDropdown(1)}
                     >
                       <option value="">грн</option>
                       <option value="">грн</option>
                       <option value="">грн</option>
                     </select>
-                    <BsFillCaretDownFill className={css.icon} />
+                    <BsFillCaretDownFill
+                      className={clsx(css.icon, {
+                        [css.rotated]: activeDropdown === 1,
+                      })}
+                    />
                   </div>
 
                   <div className={css.selectAndArrow}>
@@ -168,12 +178,17 @@ export default function CheckoutPart() {
                       name="entrepreneur"
                       id=""
                       className={`${css.editInfo} ${css.infoEnt}`}
+                      onClick={() => toggleDropdown(2)}
                     >
                       <option value="">ФОП Блудов</option>
                       <option value="">ФОП Блудов</option>
                       <option value="">ФОП Блудов</option>
                     </select>
-                    <BsFillCaretDownFill className={css.icon} />
+                    <BsFillCaretDownFill
+                      className={clsx(css.icon, {
+                        [css.rotated]: activeDropdown === 2,
+                      })}
+                    />
                   </div>
 
                   <div className={css.selectAndArrow}>
@@ -181,12 +196,17 @@ export default function CheckoutPart() {
                       name=" warehouse"
                       id=""
                       className={`${css.editInfo} ${css.infoWh}`}
+                      onClick={() => toggleDropdown(3)}
                     >
                       <option value="">Склад Черкаси</option>
                       <option value="">Склад Черкаси</option>
                       <option value="">Склад Черкаси</option>
                     </select>
-                    <BsFillCaretDownFill className={css.icon} />
+                    <BsFillCaretDownFill
+                      className={clsx(css.icon, {
+                        [css.rotated]: activeDropdown === 3,
+                      })}
+                    />
                   </div>
 
                   <div className={css.selectAndArrow}>
@@ -194,12 +214,17 @@ export default function CheckoutPart() {
                       name="responsible"
                       id=""
                       className={`${css.editInfo} ${css.infoResp}`}
+                      onClick={() => toggleDropdown(4)}
                     >
                       <option value="">Відповідальний ПІБ</option>
                       <option value="">Відповідальний ПІБ</option>
                       <option value="">Відповідальний ПІБ</option>
                     </select>
-                    <BsFillCaretDownFill className={css.icon} />
+                    <BsFillCaretDownFill
+                      className={clsx(css.icon, {
+                        [css.rotated]: activeDropdown === 4,
+                      })}
+                    />
                   </div>
                 </div>
               ) : (

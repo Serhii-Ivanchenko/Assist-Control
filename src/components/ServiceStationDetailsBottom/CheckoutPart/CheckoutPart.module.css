@@ -112,8 +112,8 @@
 
 .icon {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  /* top: 50%;
+  transform: translateY(-50%); */
   right: 0;
   pointer-events: none;
 
@@ -215,4 +215,8 @@
 .divForScroll::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background-color: var(--main-gray);
+}
+
+.rotated {
+  transform: rotate(180deg);
 }
