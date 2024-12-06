@@ -587,7 +587,7 @@ export default function AddStaffMemberModal({ onClose }) {
                   Графік роботи
                 </label>
                 <AnimatedContent>
-                  <ScheduleTable />
+                  <ScheduleTable isEditing={true} />
                 </AnimatedContent>
               </div>
             </div>
