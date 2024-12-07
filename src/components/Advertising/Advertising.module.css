@@ -9,7 +9,7 @@
 }
 
 .imgWrapper {
-  width: 145px;
+  min-width: 145px;
   background-image: url(../../assets/images/advertising-1x.webp);
   background-repeat: no-repeat;
   background-size: cover;
@@ -36,6 +36,7 @@
 }
 
 .text {
+  width: 276px;
   color: var(--light-gray);
   font-size: 16px;
   font-style: normal;

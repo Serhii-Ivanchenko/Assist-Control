@@ -8,10 +8,10 @@ export default function Advertising() {
       <div className={css.textWrapper}>
         <p className={css.header}>Повне керівництво по сервісу CRMmech</p>
         <p className={css.text}>
-          Якщо ви тільки почали знайомство, рекомендуємо пройти безкоштоввний
+          Якщо ви тільки почали знайомство, рекомендуємо пройти безкоштовний
           відеотренінг.
         </p>
-        <a href="" target="blank" className={css.link}>
+        <a href="https://www.crmmech.com/" target="blank" className={css.link}>
           <p className={css.linkText}>Пройти курс</p>
           <BsBoxArrowUpRight className={css.linkIcon} />
         </a>
