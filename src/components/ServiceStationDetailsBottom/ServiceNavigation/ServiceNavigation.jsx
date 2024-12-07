@@ -6,7 +6,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./slider.css";
-import { IoStarSharp } from "react-icons/io5";
+// import { IoStarSharp } from "react-icons/io5";
+import RatingStars from "../../sharedComponents/RatingStars/RatingStars";
 
 // const GoPrevArrow = ({ onClick }) => {
 //     return(
@@ -133,14 +134,16 @@ export default function ServiceNavigation({ page, setPage }) {
           })}
         >
           <div className={css.ratingBtn}>
-            <p className={`${css.title} ${css.titleDist}`}>Рейтинг</p>
-            <div className={css.rating}>
+            <p className={`${css.title} ${css.titleDist}`}>РЕЙТИНГ</p>
+            <RatingStars rating={5} ratingGap={css.ratingGap} />
+
+            {/* <div className={css.rating}>
               <IoStarSharp color="var(--star-orange)" size={13} />
               <IoStarSharp color="var(--star-orange)" size={13} />
               <IoStarSharp color="var(--star-orange)" size={13} />
               <IoStarSharp color="var(--star-orange)" size={13} />
               <IoStarSharp color="var(--star-orange)" size={13} />
-            </div>
+            </div> */}
           </div>
         </button>
         <button
@@ -150,7 +153,7 @@ export default function ServiceNavigation({ page, setPage }) {
             [css.isActiveBtn]: page === "migration",
           })}
         >
-          <p className={`${css.title} ${css.titleDist}`}>Міграція</p>
+          <p className={`${css.title} ${css.titleDist}`}>МІГРАЦІЯ</p>
         </button>
         <button
           type="button"
@@ -159,7 +162,7 @@ export default function ServiceNavigation({ page, setPage }) {
             [css.isActiveBtn]: page === "integration",
           })}
         >
-          <p className={`${css.title} ${css.titleDist}`}>Інтеграції</p>
+          <p className={`${css.title} ${css.titleDist}`}>ІНТЕГРАЦІЇ</p>
         </button>
       </Slider>
       {/* </div> */}

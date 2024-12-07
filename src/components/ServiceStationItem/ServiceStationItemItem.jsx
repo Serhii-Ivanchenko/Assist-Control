@@ -11,9 +11,21 @@ import { RiSave3Fill } from "react-icons/ri";
 
 import styles from "./ServiceStationItem.module.css";
 import { useState, useEffect } from "react";
+import AddAutoServiceModal from "../Modals/AddAutoServiceModal/AddAutoServiceModal";
+import Modal from "../Modals/Modal/Modal";
 
 function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+
+  const handlePencilBtnClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   const [info, setInfo] = useState(() => {
     const savedInfo = localStorage.getItem(name);
     return savedInfo
@@ -76,9 +88,17 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
               {isEdit ? (
                 <RiSave3Fill className={styles.mainIcon} size={21} />
               ) : (
-                <BsPencil className={styles.mainIcon} />
+                <BsPencil
+                  className={styles.mainIcon}
+                  onClick={handlePencilBtnClick}
+                />
               )}
             </button>
+            {isModalOpen && (
+              <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+                <AddAutoServiceModal onClose={handleCloseModal} />
+              </Modal>
+            )}
           </div>
 
           <ul className={styles.infoList}>
