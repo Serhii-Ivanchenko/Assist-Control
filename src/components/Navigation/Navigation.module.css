@@ -125,3 +125,9 @@
     pointer-events: none;
     color: var(--input-text);
   }
+
+
+  .navArrow {
+    font-size: 13px; 
+    vertical-align: middle;
+  }

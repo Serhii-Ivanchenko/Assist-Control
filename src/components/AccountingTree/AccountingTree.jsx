@@ -2,8 +2,9 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
-import { NavLink } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import { BiSolidRightArrow, BiSolidDownArrow } from 'react-icons/bi';
+import clsx from 'clsx';
 import styles from './AccountingTree.module.css';
 
 export default function AccountingTree() {
@@ -18,36 +19,30 @@ export default function AccountingTree() {
   };
 
   return (
-    <Box className={styles.treeBox} sx={{ minHeight: 0, minWidth: 200 }}>
+    <Box className={styles.treeBox} sx={{ minHeight: 0, minWidth: 170 }}>
       <SimpleTreeView>
         <TreeItem
           className={styles.treeItem}
           itemId="clients"
           label={
-            <span className={styles.treeLabel}>
+            <span className={styles.treeLabel} onClick={() => handleToggle('clients')}>
               Клієнти
-              <span
-                onClick={() => handleToggle('clients')}
-                className={styles.arrowIcon}
-              >
+              <span className={styles.arrowIcon}>
                 {expanded.includes('clients') ? (
-                  <BiSolidDownArrow size={12} />
+                  <BiSolidDownArrow />
                 ) : (
-                  <BiSolidRightArrow size={12} />
+                  <BiSolidRightArrow />
                 )}
               </span>
             </span>
           }
-          expandIcon={null} // Вимикаємо стандартну іконку
-          collapseIcon={null} // Вимикаємо стандартну іконку
-          sx={{
-            '.MuiTreeItem-iconContainer': {
-              display: 'none', // Приховуємо стандартні іконки MUI
-            },
-          }}
         >
           <ul className={styles.nestedList}>
-            <li className={styles.listItem}>
+            <li
+              className={clsx(styles.listItem, {
+                [styles.activeContainer]: location.pathname === '/accounting/clients/clients-list-general',
+              })}
+            >
               <NavLink
                 to="/accounting/clients/clients-list-general"
                 className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
@@ -55,7 +50,11 @@ export default function AccountingTree() {
                 Загальний список клієнтів з рейтингом
               </NavLink>
             </li>
-            <li className={styles.listItem}>
+            <li
+              className={clsx(styles.listItem, {
+                [styles.activeContainer]: location.pathname === '/accounting/clients/clients-list-in-work',
+              })}
+            >
               <NavLink
                 to="/accounting/clients/clients-list-in-work"
                 className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
@@ -69,30 +68,24 @@ export default function AccountingTree() {
         <TreeItem
           itemId="suppliers"
           label={
-            <span className={styles.treeLabel}>
+            <span className={styles.treeLabel} onClick={() => handleToggle('suppliers')}>
               Постачальники
-              <span
-                onClick={() => handleToggle('suppliers')}
-                className={styles.arrowIcon}
-              >
+              <span className={styles.arrowIcon}>
                 {expanded.includes('suppliers') ? (
-                  <BiSolidDownArrow size={12} />
+                  <BiSolidDownArrow />
                 ) : (
-                  <BiSolidRightArrow size={12} />
+                  <BiSolidRightArrow />
                 )}
               </span>
             </span>
           }
-          expandIcon={null} // Вимикаємо стандартну іконку
-          collapseIcon={null} // Вимикаємо стандартну іконку
-          sx={{
-            '.MuiTreeItem-iconContainer': {
-              display: 'none', // Приховуємо стандартні іконки MUI
-            },
-          }}
         >
           <ul className={styles.nestedList}>
-            <li className={styles.listItem}>
+            <li
+              className={clsx(styles.listItem, {
+                [styles.activeContainer]: location.pathname === '/accounting/distributors/spare-parts',
+              })}
+            >
               <NavLink
                 to="/accounting/distributors/spare-parts"
                 className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
@@ -100,7 +93,11 @@ export default function AccountingTree() {
                 Запчастини
               </NavLink>
             </li>
-            <li className={styles.listItem}>
+            <li
+              className={clsx(styles.listItem, {
+                [styles.activeContainer]: location.pathname === '/accounting/distributors/invoices',
+              })}
+            >
               <NavLink
                 to="/accounting/distributors/invoices"
                 className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
