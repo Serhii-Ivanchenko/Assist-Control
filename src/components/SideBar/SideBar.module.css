@@ -37,18 +37,13 @@
   max-height: calc(100vh - 200px); 
 }
 
+.bottomContainer.withScroll {
+  overflow-y: auto;
+}
+
 .bottomContainer::-webkit-scrollbar {
-  width: 8px;
+  width: 0px;
 }
-
-/* .bottomContainer::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-color);
-  border-radius: 4px;
-}
-
-.bottomContainer::-webkit-scrollbar-track {
-  background-color: var(--scrollbar-track-color);
-} */
 
 .topContainer {
   flex-shrink: 0;

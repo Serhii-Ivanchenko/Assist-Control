@@ -2,7 +2,7 @@
     font-size: 11px;
     font-weight: 400;
     line-height: normal;
-    font-variant-numeric: lining-nums proportional-nums;
+    font-variant: small-caps;
   
 }
 
@@ -32,6 +32,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex-shrink: 0;
 }
 
 .iconContainer {
@@ -104,7 +105,8 @@
     }
 }
 
-.navLink.active .iconContainer {
+.navLink.active .iconContainer,
+.iconContainerActive{
     background-color: var(--light-gray);
 }
 
@@ -114,7 +116,8 @@
 .navLink.active .iconCrm,
 .navLink.active .iconHome,
 .navLink.active .iconBook,
-.navLink.active .iconPayment {
+.navLink.active .iconPayment,
+.iconActive {
     color: var(--bg-secondary);
 }
 

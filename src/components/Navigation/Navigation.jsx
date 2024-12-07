@@ -1,20 +1,19 @@
-import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 import styles from "./Navigation.module.css";
 import { BsHouse, BsJournals, BsJournalCheck, BsChatText } from "react-icons/bs";
 import { IoVideocamOutline, IoCarSportSharp } from "react-icons/io5";
 import { HiOutlineCurrencyDollar } from "react-icons/hi2";
 import { GiSettingsKnobs } from "react-icons/gi";
-import { MdExpandMore, MdChevronRight } from "react-icons/md";
+import { BiSolidRightArrow, BiSolidDownArrow } from "react-icons/bi";
 import AccountingTree from "../AccountingTree/AccountingTree";
-import { AnimatedCollapse } from "../sharedComponents/AnimatedCollapse/AnimatedCollapse";
 
 export default function Navigation() {
-  const [showAccountingTree, setShowAccountingTree] = useState(false);
+  const [isAccountingOpen, setIsAccountingOpen] = useState(false);
 
-  const toggleAccountingTree = () => {
-    setShowAccountingTree((prevState) => !prevState);
+  const toggleAccounting = () => {
+    setIsAccountingOpen((prev) => !prev);
   };
 
   return (
@@ -81,24 +80,31 @@ export default function Navigation() {
           </NavLink>
         </li>
         <li className={styles.navItem}>
-          <div
-            className={clsx(styles.navLink, styles.expandable)}
-            onClick={toggleAccountingTree}
-          >
-            <div className={styles.iconContainer}>
-              <HiOutlineCurrencyDollar className={styles.iconPayment} />
-            </div>
-            Облік
-            <span className={styles.expandIcon}>
-              {showAccountingTree ? <MdExpandMore /> : <MdChevronRight />}
-            </span>
-          </div>
-          <AnimatedCollapse inProp={showAccountingTree}>
-            <div className={clsx(styles.accountingTreeContainer)}>
-              <AccountingTree />
-            </div>
-          </AnimatedCollapse>
-        </li>
+  <div
+    onClick={toggleAccounting}
+    className={clsx(styles.navLink, { [styles.active]: isAccountingOpen })}
+  >
+    <div
+      className={clsx(styles.iconContainer, {
+        [styles.active]: isAccountingOpen,
+      })}
+    >
+      <HiOutlineCurrencyDollar
+        className={clsx(styles.iconPayment, { [styles.active]: isAccountingOpen })}
+      />
+    </div>
+    Облік
+    <span className={styles.iconArrow}>
+      {isAccountingOpen ? <BiSolidDownArrow size={12}/> : <BiSolidRightArrow size={12}/>}
+    </span>
+  </div>
+  {isAccountingOpen && (
+    <div className={styles.accountingTreeContainer}>
+      <AccountingTree />
+    </div>
+  )}
+</li>
+
         <li className={styles.navItem}>
           <NavLink
             to="/reports"

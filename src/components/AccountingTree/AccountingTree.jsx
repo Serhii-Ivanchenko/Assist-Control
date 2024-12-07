@@ -1,87 +1,140 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { List, ListItem, ListItemText, ListItemButton } from "@mui/material";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { AnimatedCollapse } from "../sharedComponents/AnimatedCollapse/AnimatedCollapse";
-import styles from "./AccountingTree.module.css";
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
+import { NavLink } from 'react-router-dom';
+import { BiSolidRightArrow, BiSolidDownArrow } from 'react-icons/bi';
+import styles from './AccountingTree.module.css';
 
 export default function AccountingTree() {
-  const [openNodes, setOpenNodes] = useState({});
+  const [expanded, setExpanded] = useState([]);
 
   const handleToggle = (nodeId) => {
-    setOpenNodes((prev) => ({
-      ...prev,
-      [nodeId]: !prev[nodeId],
-    }));
+    setExpanded((prev) =>
+      prev.includes(nodeId)
+        ? prev.filter((id) => id !== nodeId)
+        : [...prev, nodeId]
+    );
   };
 
   return (
-    <div className={styles.treeContainer}>
-      <List>
-        {/* Перша гілка */}
-        <ListItem disablePadding>
-          <ListItemButton
-            className={styles.text}
-            onClick={() => handleToggle("2")}
-            sx={{ pl: 1, pb: 0.1 }}
-          >
-            <ListItemText primary="Клієнти" />
-            {openNodes["2"] ? <ExpandLess sx={{ fontSize: "16px" }} /> : <ExpandMore sx={{ fontSize: "16px" }} />}
-          </ListItemButton>
-        </ListItem>
-        <AnimatedCollapse inProp={openNodes["2"]}>
-          <List component="div" disablePadding>
-            <ListItemButton className={styles.text} sx={{ pl: 3, pb: 0.1 }}>
-              <NavLink to="/client-list" className={styles.navLink}>
-                <ListItemText className={styles.textSecond} primary="Загальний список клієнтів з рейтингом" />
+    <Box className={styles.treeBox} sx={{ minHeight: 0, minWidth: 200 }}>
+      <SimpleTreeView>
+        <TreeItem
+          className={styles.treeItem}
+          itemId="clients"
+          label={
+            <span className={styles.treeLabel}>
+              Клієнти
+              <span
+                onClick={() => handleToggle('clients')}
+                className={styles.arrowIcon}
+              >
+                {expanded.includes('clients') ? (
+                  <BiSolidDownArrow size={12} />
+                ) : (
+                  <BiSolidRightArrow size={12} />
+                )}
+              </span>
+            </span>
+          }
+          expandIcon={null} // Вимикаємо стандартну іконку
+          collapseIcon={null} // Вимикаємо стандартну іконку
+          sx={{
+            '.MuiTreeItem-iconContainer': {
+              display: 'none', // Приховуємо стандартні іконки MUI
+            },
+          }}
+        >
+          <ul className={styles.nestedList}>
+            <li className={styles.listItem}>
+              <NavLink
+                to="/accounting/clients/clients-list-general"
+                className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+              >
+                Загальний список клієнтів з рейтингом
               </NavLink>
-            </ListItemButton>
-            <ListItemButton className={styles.text} sx={{ pl: 3, pb: 0.1 }}>
-              <NavLink to="/clients-in-work" className={styles.navLink}>
-                <ListItemText className={styles.textSecond} primary="У роботі список клієнтів" />
+            </li>
+            <li className={styles.listItem}>
+              <NavLink
+                to="/accounting/clients/clients-list-in-work"
+                className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+              >
+                У роботі список клієнтів
               </NavLink>
-            </ListItemButton>
-          </List>
-        </AnimatedCollapse>
+            </li>
+          </ul>
+        </TreeItem>
 
-        {/* Друга гілка */}
-        <ListItem disablePadding>
-          <ListItemButton
-            className={styles.text}
-            onClick={() => handleToggle("5")}
-            sx={{ pl: 1, pb: 0.1 }}
-          >
-            <ListItemText primary="Постачальники" />
-            {openNodes["5"] ? <ExpandLess sx={{ fontSize: "16px" }} /> : <ExpandMore sx={{ fontSize: "16px" }} />}
-          </ListItemButton>
-        </ListItem>
-        <AnimatedCollapse inProp={openNodes["5"]}>
-          <List component="div" disablePadding>
-            <ListItemButton className={styles.text} sx={{ pl: 3, pb: 0.1 }}>
-              <NavLink to="/spare-parts" className={styles.navLink}>
-                <ListItemText className={styles.textSecond} primary="Запчастини" />
+        <TreeItem
+          itemId="suppliers"
+          label={
+            <span className={styles.treeLabel}>
+              Постачальники
+              <span
+                onClick={() => handleToggle('suppliers')}
+                className={styles.arrowIcon}
+              >
+                {expanded.includes('suppliers') ? (
+                  <BiSolidDownArrow size={12} />
+                ) : (
+                  <BiSolidRightArrow size={12} />
+                )}
+              </span>
+            </span>
+          }
+          expandIcon={null} // Вимикаємо стандартну іконку
+          collapseIcon={null} // Вимикаємо стандартну іконку
+          sx={{
+            '.MuiTreeItem-iconContainer': {
+              display: 'none', // Приховуємо стандартні іконки MUI
+            },
+          }}
+        >
+          <ul className={styles.nestedList}>
+            <li className={styles.listItem}>
+              <NavLink
+                to="/accounting/distributors/spare-parts"
+                className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+              >
+                Запчастини
               </NavLink>
-            </ListItemButton>
-            <ListItemButton className={styles.text} sx={{ pl: 3, pb: 0.1 }}>
-              <NavLink to="/invoices" className={styles.navLink}>
-                <ListItemText className={styles.textSecond} primary="Накладні" />
+            </li>
+            <li className={styles.listItem}>
+              <NavLink
+                to="/accounting/distributors/invoices"
+                className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+              >
+                Накладні
               </NavLink>
-            </ListItemButton>
-          </List>
-        </AnimatedCollapse>
+            </li>
+          </ul>
+        </TreeItem>
 
-        {/* Інші пункти */}
-        <ListItemButton className={styles.text} sx={{ pl: 1, pb: 0.1 }}>
-          <NavLink to="/cash" className={styles.navLink}>
-            <ListItemText primary="Каса" />
-          </NavLink>
-        </ListItemButton>
-        <ListItemButton className={styles.text} sx={{ pl: 1, pb: 0.1 }}>
-          <NavLink to="/equipment" className={styles.navLink}>
-            <ListItemText primary="Обладнання" />
-          </NavLink>
-        </ListItemButton>
-      </List>
-    </div>
+        <TreeItem
+          itemId="cashbox"
+          label={
+            <NavLink
+              to="/accounting/funds"
+              className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+            >
+              Каса
+            </NavLink>
+          }
+        />
+
+        <TreeItem
+          itemId="equipment"
+          label={
+            <NavLink
+              to="/accounting/equipment"
+              className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+            >
+              Обладнання
+            </NavLink>
+          }
+        />
+      </SimpleTreeView>
+    </Box>
   );
 }

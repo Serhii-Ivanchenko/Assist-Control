@@ -1,14 +1,40 @@
 .treeContainer {
-    width: 100%;
-    max-width: 200px;
-    background-color: transparent;
-  }
+  max-height: auto;
+  overflow-y: auto;
+}
+.treeItem {
+  /* padding: 0; */
+}
 
-  .navLink {
-    text-decoration: none;
-    color: inherit;
-  }
+.treeBox{
+  margin-top: 10px;
+}
 
-  .treeContainer .textSecond{
-    font-size: 16px;
-  }
+.MuiTreeItem-label {
+  font-variant: small-caps;
+  font-size: 16px;
+}
+
+.treeLabel {
+  display: flex;
+  align-items: center;
+  font-variant: small-caps;
+  font-size: 16px;
+}
+
+
+.nestedList {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.listItem {
+  margin: 3px 0;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
