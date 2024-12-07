@@ -12,6 +12,10 @@
   margin-bottom: 7px;
 }
 
+.serviceNameWrapper {
+  width: 135px;
+}
+
 .closeIcon {
   position: absolute;
   right: 4px;
@@ -41,26 +45,23 @@
 .logo {
   margin-bottom: 33px;
   display: flex;
+  align-items: center;
   gap: 8px;
+}
+
+.uploadLogoText {
+  color: var(--light-gray);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  white-space: nowrap;
 }
 
 .logoImg {
   width: 102px;
-  height: 30px;
+  height: 100%;
   object-fit: cover;
-}
-
-.logoInput {
-  display: none;
-}
-
-.uploadLogoBtn {
-  cursor: pointer;
-}
-
-.uploadLogoIcon {
-  width: 16px;
-  height: 16px;
 }
 
 .form {
@@ -119,8 +120,12 @@
   font-weight: 400;
   line-height: normal;
   width: 100%;
-  /* flex: 1; */
   -moz-appearance: textfield;
+}
+
+.input:focus {
+  border-color: var(--light-gray);
+  outline: none;
 }
 
 .input:-webkit-autofill {

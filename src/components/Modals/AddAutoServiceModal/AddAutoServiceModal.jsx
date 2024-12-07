@@ -4,22 +4,23 @@ import { AddServiceSchema } from "../../../validationSchemas/addServiceSchema";
 import { FaCheck } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { BsCloudUploadFill } from "react-icons/bs";
 import { useState } from "react";
-import PopupMenu from "../../sharedComponents/PopupMenu/PopupMenu.jsx";
+import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent";
+import PopupMenu from "../../sharedComponents/PopupMenu/PopupMenu";
 
 export default function AddAutoServiceModal({ onClose }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [logo, setLogo] = useState(null);
-  const [isUploadBtnVisible, setIsUploadBtnVisible] = useState(true);
+  const [isInputVisible, setIsInputVisible] = useState(false);
 
   const initialValues = {
+    autoServiceName: "",
     address: "",
     name: "",
-    userCode: null,
+    userCode: "",
     account: "",
     bank: "",
-    bankDetails: null,
+    bankDetails: "",
     legalAddress: "",
     managerPhone: "",
     managerName: "",
@@ -27,9 +28,12 @@ export default function AddAutoServiceModal({ onClose }) {
     headPhoneNumber: "",
   };
 
-  const handleChange = (e) => {
-    const newLogo = e.target.files[0];
-    setLogo(URL.createObjectURL(newLogo));
+  const handleThreeDotsBtnClick = () => {
+    setIsPopupOpen(true);
+  };
+
+  const onEdit = () => {
+    setIsInputVisible(true);
   };
 
   const handleSubmit = (values, actions) => {
@@ -37,6 +41,7 @@ export default function AddAutoServiceModal({ onClose }) {
     console.log(logo);
 
     actions.resetForm();
+    onClose();
   };
 
   return (
@@ -52,30 +57,34 @@ export default function AddAutoServiceModal({ onClose }) {
         <Form>
           <div className={css.headerWrapper}>
             <BsXLg className={css.closeIcon} onClick={onClose} />
-            <h3 className={css.autoServiceName}>СТО Название</h3>
+            <div className={css.serviceNameWrapper}>
+              {isInputVisible ? (
+                <Field
+                  type="text"
+                  name="autoServiceName"
+                  className={css.input}
+                ></Field>
+              ) : (
+                <h3 className={css.autoServiceName}>СТО назва</h3>
+              )}
+            </div>
             <BsThreeDotsVertical
               className={css.dotsIcon}
-              onClick={() => setIsPopupOpen(!isPopupOpen)}
+              onClick={handleThreeDotsBtnClick}
             />
             <PopupMenu
               isOpen={isPopupOpen}
               onClose={() => setIsPopupOpen(false)}
+              onEdit={onEdit}
             />
           </div>
           <div className={css.logo}>
-            <img src={logo} alt="logo" className={css.logoImg} />
-            <input
-              type="file"
-              name="logo"
-              id="logo"
-              className={css.logoInput}
-              onChange={handleChange}
-            />
-            {isUploadBtnVisible && (
-              <label htmlFor="logo" className={css.uploadLogoBtn}>
-                <BsCloudUploadFill className={css.uploadLogoIcon} />
-              </label>
+            {logo ? (
+              <img src={logo} alt="logo" className={css.logoImg} />
+            ) : (
+              <p className={css.uploadLogoText}>Завантажте логотип</p>
             )}
+            <UploadComponent name={"logo"} setLogo={setLogo} />
           </div>
 
           <div className={css.form}>
@@ -123,7 +132,7 @@ export default function AddAutoServiceModal({ onClose }) {
                 <div className={css.fieldWithErrorWrapper}>
                   <Field
                     className={css.input}
-                    type="number"
+                    type="text"
                     name="userCode"
                     placeholder="1385446843"
                   />
@@ -179,7 +188,7 @@ export default function AddAutoServiceModal({ onClose }) {
                 <div className={css.fieldWithErrorWrapper}>
                   <Field
                     className={css.input}
-                    type="number"
+                    type="text"
                     name="bankDetails"
                     placeholder="305299"
                   />
