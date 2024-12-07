@@ -15,7 +15,7 @@ import avatar from "../../../assets/images/avatar_default.png";
 // import Modal from "../Modal/Modal";
 import ThreeDotsModal from "./ThreeDotsModal/ThreeDotsModal";
 import doc from "../../../assets/images/passport_image.png";
-import "../../ClientInfo/NotificationModal/NotificationModal.css";
+import "../../sharedComponents/NotificationModal/NotificationModal.css";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { TfiClose } from "react-icons/tfi";
@@ -587,7 +587,7 @@ export default function AddStaffMemberModal({ onClose }) {
                   Графік роботи
                 </label>
                 <AnimatedContent>
-                  <ScheduleTable />
+                  <ScheduleTable isEditing={true} />
                 </AnimatedContent>
               </div>
             </div>

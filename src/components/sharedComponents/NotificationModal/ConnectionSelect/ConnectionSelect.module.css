@@ -1,0 +1,102 @@
+.connectionSelect {
+  width: 100%;
+  display: flex;
+  padding: 10px 10px 10px 16px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+
+  border-radius: 12px;
+  background-color: var(--bg-input);
+  outline: none;
+  border: none;
+
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+
+  /* appearance: none; */
+}
+
+.options {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  right: 0;
+  border: 0.2px dashed var(--input-stroke);
+  border-radius: 12px;
+  background-color: var(--bg-input);
+  z-index: 1000;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+  padding: 10px 20px;
+
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.option:hover {
+  background-color: var(--bg-secondary);
+}
+
+.option:not(:last-child) {
+  border-bottom: dashed 1px var(--input-stroke);
+}
+
+.option:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.option:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.selectIcon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+
+  margin-left: auto;
+  fill: var(--icon-gray);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+/* .phoneIcon{
+    fill: var(--green-btn-normal);
+}
+
+.envelopeIcon{
+    fill:var(--blue);
+}
+
+.tgIcon{
+    fill: var(--icon-gray);
+} */
