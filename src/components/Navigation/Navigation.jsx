@@ -25,8 +25,8 @@ export default function Navigation() {
     overflow: "hidden",
     config: {
       mass: 1,
-      tension: 120,
-      friction: 30,
+      tension: 170,
+      friction: 20,
     },
   });
 
