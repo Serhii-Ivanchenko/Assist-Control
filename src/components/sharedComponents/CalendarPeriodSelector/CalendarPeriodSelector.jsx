@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectDate } from "../../redux/cars/selectors";
-import css from "./CalendarInModalCar.module.css";
+import { selectDate } from "../../../redux/cars/selectors";
+import css from "./CalendarPeriodSelector.module.css";
 import DatePicker from "react-datepicker";
 import { BsCalendar2Week } from "react-icons/bs";
 import "react-datepicker/dist/react-datepicker.css";
-import { getPeriodCars } from "../../redux/cars/operations";
+import { getPeriodCars } from "../../../redux/cars/operations";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-
-export default function CalendarInModalCar({ startDate, endDate, onDateBegChange, onDateEndChange }) {
+import clsx from "clsx";
+export default function CalendarPeriodSelector({
+  startDate,
+  endDate,
+  onDateBegChange,
+  onDateEndChange,
+  renderInModal,
+}) {
   const selectedDate = useSelector(selectDate);
   const dispatch = useDispatch();
   
@@ -55,7 +61,6 @@ export default function CalendarInModalCar({ startDate, endDate, onDateBegChange
     setPeriodEndData(newEndDate);
     onDateEndChange(newEndDate);
 
-    // Оновлюємо список авто
     if (periodStartData && newEndDate) {
       fetchPeriodCars({ startDate: periodStartData, endDate: newEndDate });
     }
@@ -67,7 +72,10 @@ export default function CalendarInModalCar({ startDate, endDate, onDateBegChange
   return (
     <div className={css.calendarContainer}>
       <p className={css.periodTitle}>З</p>
-      <div className={css.dateWrapper}>
+      <div className={clsx(css.dateWrapper, { 
+        [css.dateWrapperModal]: renderInModal, 
+        [css.dateWrapperSection]: !renderInModal 
+      })}>
         <DatePicker
           className={css.periodInput}
           selected={periodStartData}
@@ -87,7 +95,10 @@ export default function CalendarInModalCar({ startDate, endDate, onDateBegChange
       </div>
 
       <p className={css.periodTitle}>По</p>
-      <div className={css.dateWrapper}>
+      <div className={clsx(css.dateWrapper, { 
+        [css.dateWrapperModal]: renderInModal, 
+        [css.dateWrapperSection]: !renderInModal 
+      })}>
         <DatePicker
           className={css.periodInput}
           selected={periodEndData}

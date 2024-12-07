@@ -48,9 +48,9 @@ export default function StatusFilterCars({ onStatusChange }) {
       <button className={styles.filterButton} onClick={toggleDropdown}>
         <p className={styles.statusFilterText}>{selectedStatus}</p>
         {isOpen ? (
-          <TiArrowSortedUp size={20} color="var(--icon-gray)" />
+          <TiArrowSortedUp className={styles.icon} color="var(--icon-gray)" />
         ) : (
-          <TiArrowSortedDown size={20} color="var(--icon-gray)" />
+          <TiArrowSortedDown className={styles.icon} color="var(--icon-gray)" />
         )}
       </button>
       {isOpen && (

@@ -1,6 +1,7 @@
 .statusFilter {
     display: flex;
     position: relative;
+    height: 100%;
   }
   
   .filterButton {
@@ -11,8 +12,8 @@
     background: none;
     border: none;
 
-    padding: 6px 10px;
-    height: 28px;
+    padding-left: 10px;
+    padding-right: 10px;
 
     border-radius: 12px;
     background: var(--bg-input);
@@ -23,6 +24,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+    font-variant: small-caps;
   }
   
   .statusText{
@@ -123,4 +125,8 @@
     filter: blur(5px);
     z-index: 1;
     border-radius: 0 5px 5px 0;
+  }
+  .icon{
+    width: 17px;
+    height: 17px;
   }

@@ -1,0 +1,23 @@
+.wrapper{
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    background: var(--dark-gray);
+}
+
+.timeText{
+    color: var(--light-gray);
+    font-size: 16px;
+    font-variant: small-caps;
+}
+
+.timeContainer{
+    padding: 10px;
+}
+
+.timeContainer:not(:last-child) {
+    border-right: 1px solid var(--main-gray);
+  }
