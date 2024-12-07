@@ -15,14 +15,14 @@ import avatar from "../../../assets/images/avatar_default.png";
 // import Modal from "../Modal/Modal";
 import ThreeDotsModal from "./ThreeDotsModal/ThreeDotsModal";
 import doc from "../../../assets/images/passport_image.png";
-import "../../ClientInfo/NotificationModal/NotificationModal.css";
+import "../../sharedComponents/NotificationModal/NotificationModal.css";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { TfiClose } from "react-icons/tfi";
 
 import { registerLocale } from "react-datepicker";
 import uk from "date-fns/locale/uk";
-import ServiceStationDetailsTop from "../../ServiceStationDetailsTop/ServiceStationDetailsTop";
+import ScheduleTable from "../../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 import AnimatedContent from "./AnimatedContent.jsx";
 import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent.jsx";
 
@@ -587,7 +587,7 @@ export default function AddStaffMemberModal({ onClose }) {
                   Графік роботи
                 </label>
                 <AnimatedContent>
-                  <ServiceStationDetailsTop />
+                  <ScheduleTable isEditing={true} />
                 </AnimatedContent>
               </div>
             </div>

@@ -95,6 +95,18 @@
   margin-left: 4px;
 }
 
+.ratingBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.rating {
+  display: flex;
+  gap: 4px;
+}
+
 .title {
   color: var(--white);
   font-size: 20px;
@@ -131,6 +143,10 @@
   border: 1px solid var(--light-gray);
   background: var(--CRM-modal-hover);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.ratingGap {
+  gap: 4px;
 }
 
 /* .customSlider .slick-track{

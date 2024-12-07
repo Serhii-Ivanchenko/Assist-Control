@@ -10,16 +10,18 @@ import UploadComponent from "../../../sharedComponents/UploadComponent/UploadCom
 import { RiSave3Fill } from "react-icons/ri";
 import styles from "./DistributorsModal.module.css";
 
-function DistributorsModal({ onClose, distributorData }) {
+function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [distributor, setDistributor] = useState(distributorData || {});
   const [isEditing, setIsEditing] = useState(false);
   const [editableName, setEditableName] = useState(distributor.name || "");
+  const [logo, setLogo] = useState(distributor.logo);
 
   useEffect(() => {
     if (distributorData) {
       setDistributor(distributorData);
       setEditableName(distributorData.name || "");
+      setLogo(distributorData.logo);
     }
   }, [distributorData]);
 
@@ -34,6 +36,13 @@ function DistributorsModal({ onClose, distributorData }) {
     onClose();
   };
 
+  const handleToggleDisable = () => {
+    if (onToggleDisable) {
+      onToggleDisable(!distributor.isDisabled);
+    }
+    setDistributor((prev) => ({ ...prev, isDisabled: !prev.isDisabled }));
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.mainInfo}>
@@ -45,7 +54,7 @@ function DistributorsModal({ onClose, distributorData }) {
                 value={editableName}
                 onChange={(e) => setEditableName(e.target.value)}
                 onBlur={handleSaveName}
-                className={styles.input}
+                className={styles.inputName}
                 autoFocus
               />
             ) : (
@@ -57,18 +66,28 @@ function DistributorsModal({ onClose, distributorData }) {
             />
           </div>
           <div className={styles.imgWrapper}>
-            {distributor.logo && (
-              <img
-                className={styles.img}
-                src={distributor.logo}
-                alt={distributor.name || "Distribution Img"}
-              />
+            {logo ? (
+              <div>
+                <img
+                  className={styles.img}
+                  src={logo}
+                  alt={distributor.name || "Distribution Img"}
+                />
+                <UploadComponent
+                  title="Завантажити лого"
+                  name="logo"
+                  setLogo={setLogo}
+                />
+              </div>
+            ) : (
+              <div className={styles.uploadLogoContainer}>
+                <UploadComponent
+                  title="Завантажити лого"
+                  name="logo"
+                  setLogo={setLogo}
+                />
+              </div>
             )}
-
-            {!distributor.logo && (
-              <div className={styles.uploadLogoText}>Завантажити лого</div>
-            )}
-            <UploadComponent />
           </div>
 
           <PopupMenu
@@ -85,7 +104,10 @@ function DistributorsModal({ onClose, distributorData }) {
           />
         </div>
         <div className={styles.authContainer}>
-          <StatusToggle />
+          <StatusToggle
+            isDisabled={distributor.isDisabled}
+            onToggleDisable={handleToggleDisable}
+          />
           <AuthForm />
           <div>
             <PopupConnection />
@@ -93,10 +115,12 @@ function DistributorsModal({ onClose, distributorData }) {
         </div>
       </div>
       <div className={styles.scheduleContainer}>
-        <ScheduleAccordion />
+        <ScheduleAccordion
+          deliveryData={distributor.deliverySchedule || null}
+        />
       </div>
 
-      <button className={styles.saveBtn} type="submit" onClick={handleSave}>
+      <button className={styles.saveBtn} onClick={handleSave}>
         <RiSave3Fill style={{ transform: "scale(1.2)" }} />
         Зберегти
       </button>
