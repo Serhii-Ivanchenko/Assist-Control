@@ -94,9 +94,9 @@ export default function Navigation() {
       />
     </div>
     Облік
-    <span className={styles.iconArrow}>
-      {isAccountingOpen ? <BiSolidDownArrow size={12}/> : <BiSolidRightArrow size={12}/>}
-    </span>
+    {/* <span className={styles.iconArrow}> */}
+      {isAccountingOpen ? <BiSolidDownArrow /> : <BiSolidRightArrow />}
+    {/* </span> */}
   </div>
   {isAccountingOpen && (
     <div className={styles.accountingTreeContainer}>
