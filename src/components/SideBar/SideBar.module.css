@@ -32,6 +32,17 @@
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
+  gap: 10px;
+  overflow-y: auto;
+  max-height: calc(100vh - 200px); 
+}
+
+.bottomContainer.withScroll {
+  overflow-y: auto;
+}
+
+.bottomContainer::-webkit-scrollbar {
+  width: 0px;
 }
 
 .topContainer {
