@@ -3,7 +3,6 @@
   overflow-y: auto;
 }
 .treeItem {
-  /* padding: 0; */
 }
 
 .treeBox{
@@ -25,16 +24,53 @@
 
 .nestedList {
   list-style-type: disc;
-  padding-left: 20px;
+  padding-left: 8px;
   margin: 0;
   margin-top: 10px;
 }
 
 .listItem {
-  margin: 3px 0;
+  margin: 5px 0;
+  padding: 2px;
+  padding-left: 4px;
 }
 
 .link {
   text-decoration: none;
   color: inherit;
+}
+
+.activeLink {
+  text-decoration: none; 
+  color: var(--white);
+  
+}
+
+.activeContainer {
+  background: var(--main-gray);
+  border-radius: 4px;
+  
+}
+
+:global(.MuiTreeItem-content .MuiTreeItem-iconContainer) {
+  display: none !important;
+  width: 0 !important;
+}
+
+:global(.MuiTreeItem-content.Mui-selected) {
+  background: var(--bg-input) !important;
+}
+:global(.MuiTreeItem-content) {
+  padding: 2px !important;
+  margin-bottom: 6px;
+}
+
+
+.arrowIcon svg{
+  margin-top: 1px;
+  margin-left: 10px;
+  height: 13px;
+  width: 13px;
+  display: flex;
+  align-items: center;
 }
