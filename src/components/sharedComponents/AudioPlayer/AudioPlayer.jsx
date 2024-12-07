@@ -1,13 +1,13 @@
 import css from "./AudioPlayer.module.css";
 import { Slider, Typography } from "@mui/material";
 import { GiSoundWaves } from "react-icons/gi";
-import audio from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
+// import audio from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
-import userAvater from "../../../assets/images/ava.png";
+// import userAvater from "../../../assets/images/ava.png";
 import { useState } from "react";
 import { useRef } from "react";
 
-export default function AudioPlayer() {
+export default function AudioPlayer({ audio, size }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -47,41 +47,86 @@ export default function AudioPlayer() {
     return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
   };
 
-  return (
-    <div className={css.callRecordWrapper}>
-      <img src={userAvater} alt="user avater" />
-      <div className={css.callTranscription}>
-        <Slider
-          className={css.customSlider}
-          value={progress}
-          max={duration}
-          onChange={handleSliderChange}
-        />
-        <div className={css.wrapperOfUiElement}>
-          <button className={css.transcriptionBtn} onClick={togglePlay}>
-            {isPlaying ? (
-              <BsPauseFill size={24} fill="var(--play-btn-triangle)" />
-            ) : (
-              <BsPlayFill size={24} fill="var(--play-btn-triangle)" />
-            )}
-          </button>
-          <GiSoundWaves size={80} style={{ zIndex: "1" }} />
-          <Typography
-            variant="caption"
-            sx={{ color: "#fff", zIndex: "1", lineHeight: "1" }}
-          >
-            {formatTime(progress)}
-          </Typography>
-        </div>
+  //   const playerDesign = (type) => {
+  //     switch (type) {
+  //       case "client":
+  //         return css.callTranscriptionClient;
+  //       case "lastCall":
+  //         return css.callTranscriptionLastCall;
+  //       case "accounting":
+  //         return css.callTranscriptionAccounting;
+  //       default:
+  //         return css.callTranscription;
+  //     }
+  //   };
 
-        <audio
-          ref={audioRef}
-          onTimeUpdate={handleProgress}
-          onLoadedMetadata={handleLoadedMetadata}
-          onEnded={handleAudioEnd}
-          src={audio}
+  return (
+    // <div className={css.callRecordWrapper}>
+    //   {showUserPhoto && <img src={userAvater} alt="user avater" />}
+
+    <div
+      className={`${css.callTranscription} 
+      ${size === "big" && css.callTranscriptionClientAndLC} 
+      ${size === "small" && css.callTranscriptionAccounting}`}
+    >
+      <Slider
+        className={`${css.customSlider}  ${
+          size === "small" && css.customSliderAccounting
+        }`}
+        value={progress}
+        max={duration}
+        onChange={handleSliderChange}
+      />
+      <div
+        className={`${css.wrapperOfUiElement} 
+        ${size === "big" && css.wrapperOfUiElementClientAndLC} 
+      ${size === "small" && css.wrapperOfUiElementAccounting}`}
+      >
+        <button
+          className={`${css.transcriptionBtn}  
+          ${size === "big" && css.transcriptionBtClientAndLC} 
+      ${size === "small" && css.transcriptionBtAccounting}`}
+          onClick={togglePlay}
+        >
+          {isPlaying ? (
+            <BsPauseFill
+              size={`${size === "big" ? 24 : 12}`}
+              fill="var(--play-btn-triangle)"
+            />
+          ) : (
+            <BsPlayFill
+              size={`${size === "big" ? 24 : 12}`}
+              fill="var(--play-btn-triangle)"
+            />
+          )}
+        </button>
+        <GiSoundWaves
+          size={`${size === "big" ? 80 : 40}`}
+          className={css.wave}
         />
+        <Typography
+          //   className={css.time}
+          variant="caption"
+          sx={{
+            color: "#fff",
+            zIndex: "1",
+            lineHeight: "1",
+            fontSize: "16px",
+            fontWeight: "600",
+          }}
+        >
+          {formatTime(progress)}
+        </Typography>
       </div>
+
+      <audio
+        ref={audioRef}
+        onTimeUpdate={handleProgress}
+        onLoadedMetadata={handleLoadedMetadata}
+        onEnded={handleAudioEnd}
+        src={audio}
+      />
     </div>
+    // </div>
   );
 }
