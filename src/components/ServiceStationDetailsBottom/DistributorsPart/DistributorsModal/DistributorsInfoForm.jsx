@@ -2,7 +2,7 @@ import { useState } from "react";
 import CustomRadioBtn from "../../../CustomRadioBtn/CustomRadioBtn";
 import styles from "./DistributorsModal.module.css";
 
-const DistributorsInfoForm = () => {
+const DistributorsInfoForm = ({ distributor }) => {
   const [selectedPayment, setSelectedPayment] = useState("prepaid");
 
   const handleRadioChange = (value) => {
@@ -13,7 +13,11 @@ const DistributorsInfoForm = () => {
     <form className={styles.formContainer}>
       <div className={styles.addressBox}>
         <label className={styles.label}>Фактична адреса</label>
-        <input type="text" defaultValue="Харків, Байрона 189 оф 27" />
+        <input
+          type="text"
+          value={distributor.address || ""}
+          placeholder="Харків, Байрона 189 оф 27"
+        />
       </div>
 
       <div className={styles.radioBox}>
@@ -44,7 +48,8 @@ const DistributorsInfoForm = () => {
             <input
               className={styles.input}
               type="text"
-              defaultValue="5 днів"
+              value={distributor.days || ""}
+              placeholder="5 днів"
               style={{ width: "87px" }}
             />
           </div>
@@ -58,7 +63,8 @@ const DistributorsInfoForm = () => {
             <input
               className={styles.input}
               type="text"
-              defaultValue="Іваненко Іван Іванович"
+              value={distributor.owner || ""}
+              placeholder="Іваненко Іван Іванович"
               style={{ width: "214px" }}
             />
           </label>
@@ -70,7 +76,8 @@ const DistributorsInfoForm = () => {
             <input
               className={styles.input}
               type="text"
-              defaultValue="1385446843"
+              value={distributor.code || ""}
+              placeholder="1385446843"
               style={{ width: "130px" }}
             />
           </label>
@@ -83,7 +90,8 @@ const DistributorsInfoForm = () => {
           <input
             className={styles.input}
             type="text"
-            defaultValue="UA123456789012345678901234567"
+            value={distributor.bill || ""}
+            placeholder="UA123456789012345678901234567"
             style={{ width: "304px" }}
           />
         </label>
@@ -96,7 +104,8 @@ const DistributorsInfoForm = () => {
             <input
               className={styles.input}
               type="text"
-              defaultValue="ПриватБанк"
+              value={distributor.bank || ""}
+              placeholder="ПриватБанк"
               style={{ width: "132px" }}
             />
           </label>
@@ -108,7 +117,8 @@ const DistributorsInfoForm = () => {
             <input
               className={styles.input}
               type="text"
-              defaultValue="305299"
+              value={distributor.bankCode || ""}
+              placeholder="305299"
               style={{ width: "94px" }}
             />
           </label>
@@ -121,7 +131,8 @@ const DistributorsInfoForm = () => {
           <input
             className={styles.input}
             type="text"
-            defaultValue="м. Київ, вул. Шевченка, буд. 10"
+            value={distributor.companyAddress || ""}
+            placeholder="м. Київ, вул. Шевченка, буд. 10"
             style={{ width: "269px" }}
           />
         </label>
@@ -134,7 +145,8 @@ const DistributorsInfoForm = () => {
             <input
               className={styles.input}
               type="tel"
-              defaultValue="+380671234567"
+              value={distributor.managerPhone || ""}
+              placeholder="+380671234567"
               style={{ width: "158px" }}
             />
           </label>
@@ -145,7 +157,8 @@ const DistributorsInfoForm = () => {
             <input
               className={styles.input}
               type="text"
-              defaultValue="Діана"
+              value={distributor.manager || ""}
+              placeholder="Діана"
               style={{ width: "83px" }}
             />
           </label>
@@ -159,7 +172,8 @@ const DistributorsInfoForm = () => {
             <input
               className={styles.input}
               type="tel"
-              defaultValue="+380671234567"
+              value={distributor.officePhone || ""}
+              placeholder="+380671234567"
               style={{ width: "158px" }}
             />
           </label>
@@ -170,7 +184,8 @@ const DistributorsInfoForm = () => {
             <input
               className={styles.input}
               type="tel"
-              defaultValue="+380671234567"
+              value={distributor.ownerPhone || ""}
+              placeholder="+380671234567"
               style={{ width: "158px" }}
             />
           </label>

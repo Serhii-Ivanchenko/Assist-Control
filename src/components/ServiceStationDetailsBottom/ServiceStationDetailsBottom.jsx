@@ -8,6 +8,7 @@ import SparesPart from "./SparesPart/SparesPart";
 import WarehousePart from "./WarehousePart/WarehousePart";
 import DistributorsPart from "./DistributorsPart/DistributorsPart";
 import RatingPart from "./RatingPart/RatingPart";
+import CheckoutPart from "./CheckoutPart/CheckoutPart";
 
 const pageComponents = {
   station: <StationPart />,
@@ -15,6 +16,7 @@ const pageComponents = {
   price: <PricePart />,
   spares: <SparesPart />,
   warehouse: <WarehousePart />,
+  checkout: <CheckoutPart />,
   distributors: <DistributorsPart />,
   migration: "",
   rating: <RatingPart />,

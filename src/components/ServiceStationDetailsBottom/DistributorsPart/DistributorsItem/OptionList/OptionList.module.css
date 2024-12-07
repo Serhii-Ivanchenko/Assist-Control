@@ -1,0 +1,49 @@
+.option {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.activeIcon {
+  color: var(--green);
+  width: 18px;
+  height: 18px;
+}
+
+.activeIcon > svg {
+  width: 18px;
+  height: 18px;
+}
+
+.inactiveIcon {
+  color: var(--light-gray);
+  width: 18px;
+  height: 18px;
+}
+
+.inactiveIcon > svg {
+  width: 18px;
+  height: 18px;
+}
+
+.tooltip {
+  position: fixed;
+  background-color: var(--bg-secondary);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  /* Щоб тултіп не блокував події курсора */
+  z-index: 1000;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.optionsBox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

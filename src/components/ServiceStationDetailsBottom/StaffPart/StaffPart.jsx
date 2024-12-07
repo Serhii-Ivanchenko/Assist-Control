@@ -1,23 +1,16 @@
 import css from "./StaffPart.module.css";
 import avatar from "../../../assets/images/avatar_default.png";
-import { BsPencil, BsPlusLg } from "react-icons/bs";
-import { BsTrash } from "react-icons/bs";
-import { BsPower } from "react-icons/bs";
+import { BsPlusLg } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import Modal from "../../Modals/Modal/Modal";
 // import AddTeamMember from "../../Modals/UserSettingsModal/AddTeamMember/AddTeamMember.jsx"
-import { RiSave3Fill } from "react-icons/ri";
-import clsx from "clsx";
 import { IoStarSharp } from "react-icons/io5";
 import { useRef } from "react";
 import AddStaffMemberModal from "../../Modals/AddStaffMemberModal/AddStaffMemberModal.jsx";
+import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
 
 export default function StaffPart() {
-  // const [memberName, setMemberName] = useState("Максим Коваленко")
-  // const [memberEmail, setMemberEmail] = useState("maksim.kovalenko@example.com")
-  // const [memberRole, setMemberRole] = useState("Власник")
   const [modalIsOpen, setIsOpen] = useState(false);
-  // const [disabled, setDisabled] = useState(false);
   const [members, setMembers] = useState([
     {
       name: "Максим Коваленко",
@@ -159,31 +152,15 @@ export default function StaffPart() {
 
               <p className={css.memberRole}> {member.salary} </p>
 
-              <div className={css.iconsBox}>
-                {isEditing === index ? (
-                  <RiSave3Fill
-                    className={css.icons}
-                    onClick={() => handleEditing(index)}
-                  />
-                ) : (
-                  <BsPencil
-                    className={css.icons}
-                    onClick={() => handleEditing(index)}
-                  />
-                )}
-
-                <BsTrash
-                  className={css.icons}
-                  onClick={() => deleteMember(index)}
-                />
-
-                <BsPower
-                  onClick={() => toDisable(index)}
-                  className={clsx(css.power, {
-                    [css.powerDisabled]: member.isDisabled,
-                  })}
-                />
-              </div>
+              <SwitchableBtns
+                onEdit={() => handleEditing(index)}
+                onToggleDisable={() => toDisable(index)}
+                onDelete={() => deleteMember(index)}
+                isDisabled={member.isDisabled}
+                showIconSave={true}
+                id={index}
+                isEditing={isEditing}
+              />
             </li>
           ))}
         </ul>

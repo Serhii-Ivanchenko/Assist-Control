@@ -1,7 +1,7 @@
 .modal {
-  position: absolute;
+  /* position: absolute;
   top: 100%;
-  right: -70%;
+  right: -70%; */
   width: 166px;
 
   height: auto;
@@ -14,7 +14,7 @@
   align-items: center;
   /* justify-content: center; */
   flex-direction: column;
-  z-index: 100;
+  /* z-index: 100; */
   transform: translateY(-5px);
   transition: max-height 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
@@ -84,4 +84,22 @@
 
 .icon {
   fill: var(--light-gray);
+}
+
+.placeHeight {
+  height: 90px;
+  position: absolute;
+  top: 150%;
+  right: -70%;
+  /* z-index: 9; */
+  z-index: 100;
+}
+
+.popoverHeight {
+  height: 135px;
+  position: absolute;
+  top: 150%;
+  right: -70%;
+  /* z-index: 9; */
+  z-index: 100;
 }

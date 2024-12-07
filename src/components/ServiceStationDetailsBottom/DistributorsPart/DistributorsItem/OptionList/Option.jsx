@@ -1,7 +1,7 @@
 import { useState } from "react";
-import styles from "./DistributorsCard.module.css";
+import styles from "./OptionList.module.css";
 
-function Option({ icon, isActive, index, onToggle, label }) {
+function Option({ icon, isActive, label }) {
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
@@ -28,7 +28,6 @@ function Option({ icon, isActive, index, onToggle, label }) {
   return (
     <div
       className={styles.option}
-      onClick={() => onToggle(index)}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
