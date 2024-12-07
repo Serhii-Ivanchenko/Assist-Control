@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
+import { useSpring, animated } from "react-spring";
 import styles from "./Navigation.module.css";
 import {
   BsHouse,
@@ -16,6 +17,18 @@ import AccountingTree from "../AccountingTree/AccountingTree";
 
 export default function Navigation() {
   const [isAccountingOpen, setIsAccountingOpen] = useState(false);
+
+  const animationProps = useSpring({
+    height: isAccountingOpen ? "auto" : 0,
+    opacity: isAccountingOpen ? 1 : 0,
+    transform: isAccountingOpen ? "translateY(0)" : "translateY(-20px)", // Ефект виїзджання
+    overflow: "hidden",
+    config: {
+      mass: 1,
+      tension: 120,
+      friction: 30,
+    },
+  });
 
   const toggleAccounting = () => {
     setIsAccountingOpen((prev) => !prev);
@@ -120,15 +133,14 @@ export default function Navigation() {
               <BiSolidRightArrow className={styles.navArrow} />
             )}
           </div>
-          {isAccountingOpen && (
-            <div
-              className={clsx(styles.accountingTreeContainer, {
-                [styles.open]: isAccountingOpen,
-              })}
-            >
-              <AccountingTree />
-            </div>
-          )}
+          <animated.div // Використовуємо animated.div для анімації
+            style={animationProps}
+            className={clsx(styles.accountingTreeContainer, {
+              [styles.open]: isAccountingOpen,
+            })}
+          >
+            <AccountingTree />
+          </animated.div>
         </li>
 
         <li className={styles.navItem}>
