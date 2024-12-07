@@ -4,6 +4,8 @@ import css from "./CheckoutPart.module.css";
 import { BsPlusLg } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import clsx from "clsx";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 export default function CheckoutPart() {
   const [isEditing, setIsEditing] = useState(false);
@@ -83,10 +85,18 @@ export default function CheckoutPart() {
   ]);
   const [newRow, setNewRow] = useState("");
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const inputFocusRef = useRef();
+  const scrollToTheLastItemRef = useRef();
 
   const handleEditing = (index) => {
     setIsEditing(isEditing === index ? null : index);
   };
+
+  useEffect(() => {
+    if (isEditing) {
+      inputFocusRef.current.focus();
+    }
+  }, [isEditing]);
 
   const deleteCheckout = (index) => {
     setCheckouts((prevMembers) => prevMembers.filter((_, i) => i !== index));
@@ -115,8 +125,18 @@ export default function CheckoutPart() {
           isDisabled: false,
         },
       ]);
+      setNewRow("");
     }
   };
+
+  useEffect(() => {
+    if (checkouts.length > 0) {
+      scrollToTheLastItemRef.current?.scrollTo({
+        top: scrollToTheLastItemRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [checkouts]);
 
   const handleChangeName = (newName, index) => {
     setCheckouts(
@@ -129,9 +149,16 @@ export default function CheckoutPart() {
   const toggleDropdown = (index) => {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
+
+  const handleBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setActiveDropdown(null);
+    }
+  };
+
   return (
-    <div className={css.checkoutPart}>
-      <div className={css.divForScroll}>
+    <div className={css.checkoutPart} onBlur={handleBlur}>
+      <div className={css.divForScroll} ref={scrollToTheLastItemRef}>
         <ul className={css.checkoutPartList}>
           {checkouts.map((checkout, index) => (
             <li key={index} className={css.checkoutItem}>
@@ -152,6 +179,7 @@ export default function CheckoutPart() {
                       value={checkout.name}
                       onChange={(e) => handleChangeName(e.target.value, index)}
                       className={`${css.editInput} ${css.infoName}`}
+                      ref={inputFocusRef}
                     />
                   </div>
 
