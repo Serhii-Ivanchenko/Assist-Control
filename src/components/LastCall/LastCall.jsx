@@ -2,6 +2,7 @@ import clsx from "clsx";
 import css from "../LastCall/LastCall.module.css";
 import { BsPersonSquare } from "react-icons/bs";
 import { BsCalendarWeek } from "react-icons/bs";
+import defaultAvatar from "../../assets/images/avatar_default.png";
 
 const calls = [
   {
@@ -58,7 +59,11 @@ export default function LastCall() {
         )}
       ></div>
       <div className={css.bottomWrapper}>
-        <img src={lastCallDetails.avatar} alt="" className={css.avatar} />
+        <img
+          src={lastCallDetails.avatar || defaultAvatar}
+          alt=""
+          className={css.avatar}
+        />
       </div>
     </div>
   );
