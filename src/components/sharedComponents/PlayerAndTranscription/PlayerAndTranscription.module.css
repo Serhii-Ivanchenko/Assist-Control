@@ -1,0 +1,37 @@
+.secondAcordionList {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.secondAcordionWrapper {
+  padding: 10px 12.5px;
+  width: 430px;
+  border-radius: 12px;
+  background: #31353e;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.secondAcordion {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.callRecordWrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+
+  /* position: absolute;
+  top: 0; */
+}
+
+.callRecordWrapper > img {
+  width: 48px;
+  height: 48px;
+}

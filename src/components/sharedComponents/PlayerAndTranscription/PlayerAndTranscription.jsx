@@ -1,15 +1,24 @@
 import css from "./PlayerAndTranscription.module.css";
-import MainInfoFromVoiceMessage from "../MainInfoFromVoiceMessage/MainInfoFromVoiceMessage";
+// import MainInfoFromVoiceMessage from "../MainInfoFromVoiceMessage/MainInfoFromVoiceMessage";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import userAvatar from "../../../assets/images/ava.png";
-import TranscriptionMessage from "../TranscriptionMessage/TranscriptionMessage";
+// import userAvatar from "../../../assets/images/ava.png";
+// import TranscriptionMessage from "../TranscriptionMessage/TranscriptionMessage";
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
-import audio from "../../../assets/audio2/Marian Hill – Got It (Kill Them With Colour Remix).mp3";
+// import audio from "../../../assets/audio2/Marian Hill – Got It (Kill Them With Colour Remix).mp3";
+import TranscriptionComponent from "../TranscriptionComponent/TranscriptionComponent";
+import TranscribedDialog from "../TranscriptionComponent/TranscribedDialog/TranscribedDialog";
 // import audio2 from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
 
-export default function PlayerAndTranscription({ messages, summary }) {
+export default function PlayerAndTranscription({
+  messages,
+  summary,
+  sizePlayer,
+  sizeBtn,
+  audio,
+  userAvatar,
+}) {
   return (
     <div className={css.secondAcordionList}>
       <div className={css.secondAcordionWrapper}>
@@ -24,7 +33,7 @@ export default function PlayerAndTranscription({ messages, summary }) {
           <div className={css.secondAcordion}>
             <div className={css.callRecordWrapper}>
               <img src={userAvatar} alt="user avatar" />
-              <AudioPlayer audio={audio} size="big" />
+              <AudioPlayer audio={audio} size={sizePlayer} />
             </div>
             <AccordionSummary
               sx={{
@@ -45,6 +54,7 @@ export default function PlayerAndTranscription({ messages, summary }) {
                   size={14}
                 />
               </button> */}
+              <TranscriptionComponent size={sizeBtn} />
             </AccordionSummary>
           </div>
           <AccordionDetails
@@ -52,7 +62,7 @@ export default function PlayerAndTranscription({ messages, summary }) {
               padding: "0",
             }}
           >
-            <div className={css.scrollBarWrapper}>
+            {/* <div className={css.scrollBarWrapper}>
               <div className={css.secondAcordionBody}>
                 <MainInfoFromVoiceMessage summary={summary} />
                 <ul className={css.messages}>
@@ -66,7 +76,8 @@ export default function PlayerAndTranscription({ messages, summary }) {
                   ))}
                 </ul>
               </div>
-            </div>
+            </div> */}
+            <TranscribedDialog summary={summary} messages={messages} />
           </AccordionDetails>
         </Accordion>
       </div>
