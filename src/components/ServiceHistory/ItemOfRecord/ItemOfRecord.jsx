@@ -13,11 +13,10 @@ import {
   BsShieldExclamation,
   BsReceipt,
 } from "react-icons/bs";
-// import { GiSoundWaves } from "react-icons/gi";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import userAvater from "../../../assets/images/ava.png";
+import userAvatar from "../../../assets/images/ava.png";
 import TranscriptionMessage from "../TranscriptionMessage/TranscriptionMessage";
 import css from "./ItemOfRecord.module.css";
 import { useState } from "react";
@@ -25,6 +24,8 @@ import clsx from "clsx";
 import RecordBtnInfo from "../RecordBtnInfo/RecordBtnInfo";
 import AudioPlayer from "../../sharedComponents/AudioPlayer/AudioPlayer";
 import audio from "../../../assets/audio2/Marian Hill – Got It (Kill Them With Colour Remix).mp3";
+// import audio2 from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
+
 
 export default function ItemOfRecord({ item, messages, isExpanded }) {
   const [showDialogModal, setShowDialogModal] = useState(isExpanded);
@@ -252,7 +253,7 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                 >
                   <div className={css.secondAcordion}>
                     <div className={css.callRecordWrapper}>
-                      <img src={userAvater} alt="user avater" />
+                      <img src={userAvatar} alt="user avatar" />
                       <AudioPlayer audio={audio} size="big" />
                     </div>
                     <AccordionSummary
