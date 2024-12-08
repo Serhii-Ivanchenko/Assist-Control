@@ -12,6 +12,7 @@ export default function AddAutoServiceModal({ onClose }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [logo, setLogo] = useState(null);
   const [isInputVisible, setIsInputVisible] = useState(false);
+  const [serviceName, setServiceName] = useState("СТО назва");
 
   const initialValues = {
     autoServiceName: "",
@@ -34,6 +35,11 @@ export default function AddAutoServiceModal({ onClose }) {
 
   const onEdit = () => {
     setIsInputVisible(true);
+  };
+
+  const handleBlur = (e) => {
+    setServiceName(e.target.value);
+    setIsInputVisible(false);
   };
 
   const handleSubmit = (values, actions) => {
@@ -62,21 +68,22 @@ export default function AddAutoServiceModal({ onClose }) {
                 <Field
                   type="text"
                   name="autoServiceName"
-                  className={css.input}
+                  className={css.changedInput}
+                  onBlur={handleBlur}
                 ></Field>
               ) : (
-                <h3 className={css.autoServiceName}>СТО назва</h3>
+                <p className={css.autoServiceName}>{serviceName}</p>
               )}
+              <BsThreeDotsVertical
+                className={css.dotsIcon}
+                onClick={handleThreeDotsBtnClick}
+              />
+              <PopupMenu
+                isOpen={isPopupOpen}
+                onClose={() => setIsPopupOpen(false)}
+                onEdit={onEdit}
+              />
             </div>
-            <BsThreeDotsVertical
-              className={css.dotsIcon}
-              onClick={handleThreeDotsBtnClick}
-            />
-            <PopupMenu
-              isOpen={isPopupOpen}
-              onClose={() => setIsPopupOpen(false)}
-              onEdit={onEdit}
-            />
           </div>
           <div className={css.logo}>
             {logo ? (
