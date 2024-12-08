@@ -12,7 +12,6 @@ import {
   BsFiles,
 } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
-import { AiFillStar } from "react-icons/ai";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
 import { renderTime } from "../../utils/renderTime.js";
@@ -24,6 +23,7 @@ import { copyToClipboard } from "../../utils/copy.js";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
 import { selectVisibilityRecords } from "../../redux/crm/selectors.js";
+import RatingStars from "../sharedComponents/RatingStars/RatingStars.jsx";
 
 export default function DayCarsItemCrm({ car, onDragStart }) {
   const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
@@ -111,6 +111,10 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
 
   const carPhoto = photoUrl || absentAutoImg;
 
+  const formatCarNumber = (number) => {
+    return number.replace(/\s+/g, "");
+  };
+
   return (
     <div
       className={`${styles.crmBlockDayCarsItemContainer} ${
@@ -158,7 +162,9 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
               })}
             >
               <IoCarSportSharp size={13} color="#A97878" />
-              <span className={styles.nameCar}>{auto}</span>
+              <span className={styles.nameCar}>
+                {auto ? auto : "Невідома модель"}
+              </span>
             </div>
           )}
         </div>
@@ -182,7 +188,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
           </div>
         )}
         <div className={styles.btnContainer}>
-          {visibility?.info && <CarDetailButton />}
+          {visibility?.info && <CarDetailButton carName={car.auto} />}
 
           {(status === "repair" ||
             status === "diagnostic" ||
@@ -223,19 +229,14 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
       </div>
       <div className={styles.crmcarsInfo}>
         <div className={styles.carInfoLeft}>
-          {visibility?.rating && (
+        {visibility?.rating && (
             <div
-              className={clsx(
-                styles.crmRating,
-                !visibility.rating && styles.hidden
-              )}
-            >
-              <AiFillStar color="var(--star-orange)" size={14.5} />
-              <AiFillStar color="var(--star-orange)" size={14.5} />
-              <AiFillStar color="var(--star-orange)" size={14.5} />
-              <AiFillStar color="var(--star-orange)" size={14.5} />
-              <AiFillStar color="var(--star-white)" size={14.5} />
-            </div>
+            className={clsx(
+              !visibility.rating && styles.hidden
+            )}
+          >
+            <RatingStars rating={car.rating} />
+          </div>
           )}
           {visibility?.prePayment && (
             <div
@@ -284,7 +285,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
                 <p className={styles.carRegCountry}>ua</p>
               </div>
               <p className={styles.carNumber}>
-                {carNumber ? carNumber : "хххххх"}
+                {carNumber ? formatCarNumber(carNumber) : "хххххх"}
               </p>
             </div>
           )}

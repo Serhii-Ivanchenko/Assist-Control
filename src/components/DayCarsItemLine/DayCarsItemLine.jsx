@@ -8,12 +8,17 @@ import { renderTime } from "../../utils/renderTime";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectVisibilityCar } from "../../redux/cars/selectors";
+import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn";
+import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton";
+import RatingStars from "../sharedComponents/RatingStars/RatingStars";
 
-export default function DayCarsItemLine({ car}) {
+export default function DayCarsItemLine({ car }) {
   const visibility = useSelector(selectVisibilityCar);
 
+
+
   const {
-    photoUrl,
+    photo_url: photoUrl,
     complete_d,
     status,
     plate,
@@ -23,6 +28,11 @@ export default function DayCarsItemLine({ car}) {
     date_s,
     client,
   } = car;
+  
+  const formatCarNumber = (number) => {
+    if (!number) return "";
+    return number.replace(/\s+/g, "");
+  };
 
   const carPhoto = photoUrl || absentAutoImg;
 
@@ -30,7 +40,12 @@ export default function DayCarsItemLine({ car}) {
     <div className={styles.carLineContainer}>
       <div className={styles.leftContainer}>
         {visibility?.photo && (
-          <div className={clsx(styles.carPhoto, !visibility.photo && styles.hidden)}>
+          <div
+            className={clsx(
+              styles.carPhoto,
+              !visibility.photo && styles.hidden
+            )}
+          >
             <img
               className={styles.carImg}
               src={carPhoto}
@@ -44,28 +59,51 @@ export default function DayCarsItemLine({ car}) {
         )}
 
         {visibility?.name && (
-          <div className={clsx(styles.infoName, !visibility.name && styles.hidden)}>
+          <div
+            className={clsx(styles.infoName, !visibility.name && styles.hidden)}
+          >
             <span className={styles.textName}>
               {client ? client.name : "Гість"}
             </span>
           </div>
         )}
       </div>
+      {visibility?.rating && (
+            <div
+            className={clsx(
+              !visibility.rating && styles.hidden
+            )}
+          >
+            <RatingStars rating={car.rating} />
+          </div>
+          )}
 
       {visibility?.status && (
-        <div className={clsx(styles.status, !visibility.status && styles.hidden)}>
+        <div
+          className={clsx(styles.status, !visibility.status && styles.hidden)}
+        >
           {renderStatus(status, complete_d, styles)}
         </div>
       )}
 
-      {visibility?.plate && (
-        <p className={clsx(styles.plate, !visibility.plate && styles.hidden)}>
-          {plate || "хххххх"}
+      {visibility.carNum && (
+        <p
+          className={clsx(
+            styles.carNumber,
+            !visibility.carNum && styles.hidden
+          )}
+        >
+          {plate ? formatCarNumber(plate) : "хххххх"}
         </p>
       )}
 
       {visibility?.carModelYear && (
-        <div className={clsx(styles.infoCar, !visibility.carModelYear && styles.hidden)}>
+        <div
+          className={clsx(
+            styles.infoCar,
+            !visibility.carModelYear && styles.hidden
+          )}
+        >
           <IoCarSportSharp size={13} color="#A97878" />
           <span className={styles.nameCar}>{auto}</span>
         </div>
@@ -78,14 +116,21 @@ export default function DayCarsItemLine({ car}) {
       )}
 
       {visibility?.mileage && (
-        <div className={clsx(styles.mileInfo, !visibility.mileage && styles.hidden)}>
+        <div
+          className={clsx(
+            styles.mileInfo,
+            !visibility.mileage && styles.hidden
+          )}
+        >
           <SlSpeedometer size={13} color="var(--mint)" />
           <p className={styles.mileage}>{mileage || "хххххх"}</p>
         </div>
       )}
 
       {visibility?.time && (
-        <div className={clsx(styles.timeWork, !visibility.time && styles.hidden)}>
+        <div
+          className={clsx(styles.timeWork, !visibility.time && styles.hidden)}
+        >
           <BsStopwatch size={13} color="#D5ACF3" />
           <p className={styles.time}>{renderTime(complete_d, date_s)}</p>
         </div>
@@ -93,16 +138,18 @@ export default function DayCarsItemLine({ car}) {
 
       <div className={styles.rightContainer}>
         {visibility?.totalPrice && (
-          <div className={clsx(styles.totalPay, !visibility.totalPrice && styles.hidden)}>
+          <div
+            className={clsx(
+              styles.totalPay,
+              !visibility.totalPrice && styles.hidden
+            )}
+          >
             <p className={styles.total}>₴ 6,613.83</p>
           </div>
         )}
         <div className={styles.btnContainer}>
-          {visibility?.details && (
-            <button className={styles.btnDetail}>
-              <p className={styles.btnDetailText}>Деталі</p>
-            </button>
-          )}
+          {visibility?.status && <StatusBtn car={car} />}
+          {visibility?.info && <CarDetailButton carName={car.auto} />}
         </div>
       </div>
     </div>

@@ -1,23 +1,19 @@
 import css from "./StaffPart.module.css";
 import avatar from "../../../assets/images/avatar_default.png";
-import { BsPencil, BsPlusLg } from "react-icons/bs";
-import { BsTrash } from "react-icons/bs";
-import { BsPower } from "react-icons/bs";
+import { BsPlusLg } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import Modal from "../../Modals/Modal/Modal";
 // import AddTeamMember from "../../Modals/UserSettingsModal/AddTeamMember/AddTeamMember.jsx"
-import { RiSave3Fill } from "react-icons/ri";
-import clsx from "clsx";
-import { IoStarSharp } from "react-icons/io5";
+// import { IoStarSharp } from "react-icons/io5";
 import { useRef } from "react";
 import AddStaffMemberModal from "../../Modals/AddStaffMemberModal/AddStaffMemberModal.jsx";
+import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
+import RatingStars from "../../sharedComponents/RatingStars/RatingStars.jsx";
+import { BsFillCaretDownFill } from "react-icons/bs";
+import clsx from "clsx";
 
 export default function StaffPart() {
-  // const [memberName, setMemberName] = useState("Максим Коваленко")
-  // const [memberEmail, setMemberEmail] = useState("maksim.kovalenko@example.com")
-  // const [memberRole, setMemberRole] = useState("Власник")
   const [modalIsOpen, setIsOpen] = useState(false);
-  // const [disabled, setDisabled] = useState(false);
   const [members, setMembers] = useState([
     {
       name: "Максим Коваленко",
@@ -52,6 +48,9 @@ export default function StaffPart() {
   ]);
 
   const [isEditing, setIsEditing] = useState(null);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  // const selectRef = useRef(null);
+
   const inputFocusRef = useRef();
 
   const toDisable = (index) => {
@@ -104,8 +103,18 @@ export default function StaffPart() {
     setMembers((prevMembers) => prevMembers.filter((_, i) => i !== index));
   };
 
+  const toggleDropdown = () => {
+    setActiveDropdown((prev) => !prev);
+  };
+
+  const handleBlur = (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setActiveDropdown(null);
+    }
+  };
+
   return (
-    <div>
+    <div className={css.StaffPart} onBlur={handleBlur}>
       <div className={css.divForScroll}>
         <ul className={css.teamList}>
           {members.map((member, index) => (
@@ -128,12 +137,24 @@ export default function StaffPart() {
                       value={member.name}
                       onChange={(e) => handleChangeMN(index, e.target.value)}
                     />
-                    <input
-                      type="text"
-                      className={css.input}
-                      value={member.role}
-                      onChange={(e) => handleChangeMR(index, e.target.value)}
-                    />
+                    <div className={css.SelectAndArrowBox}>
+                      <select
+                        type="text"
+                        className={`${css.input} ${css.select}`}
+                        value={member.role}
+                        onChange={(e) => handleChangeMR(index, e.target.value)}
+                        onClick={toggleDropdown}
+                      >
+                        <option value="Працівник">Працівник</option>
+                        <option value="Механік">Механік</option>
+                        <option value="Прибиральниця">Прибиральниця</option>
+                      </select>
+                      <BsFillCaretDownFill
+                        className={clsx(css.arrow, {
+                          [css.rotated]: activeDropdown,
+                        })}
+                      />
+                    </div>
                   </div>
                 ) : (
                   <div className={css.nameBox}>
@@ -143,47 +164,23 @@ export default function StaffPart() {
                 )}
               </div>
 
-              <div className={css.rating}>
-                <IoStarSharp color="var(--star-orange)" size={18} />
-                <IoStarSharp color="var(--star-orange)" size={18} />
-                <IoStarSharp color="var(--star-orange)" size={18} />
-                <IoStarSharp color="var(--star-orange)" size={18} />
-                <IoStarSharp color="var(--star-white)" size={18} />
-              </div>
+              <RatingStars rating={5} ratingGap={css.ratingGap} />
 
               {/* {isEditing === index ? (<select onChange={(e)=>handleChangeMR(index, e.target.value)} className={css.select}>
                         <option value="Власник">Власник</option>
                         <option value="Перегляд">Перегляд</option>
                         <option value="Адміністратор">Адміністратор</option>
 </select>): (<p className={css.memberRole}> {member.role} </p>)} */}
-
               <p className={css.memberRole}> {member.salary} </p>
-
-              <div className={css.iconsBox}>
-                {isEditing === index ? (
-                  <RiSave3Fill
-                    className={css.icons}
-                    onClick={() => handleEditing(index)}
-                  />
-                ) : (
-                  <BsPencil
-                    className={css.icons}
-                    onClick={() => handleEditing(index)}
-                  />
-                )}
-
-                <BsTrash
-                  className={css.icons}
-                  onClick={() => deleteMember(index)}
-                />
-
-                <BsPower
-                  onClick={() => toDisable(index)}
-                  className={clsx(css.power, {
-                    [css.powerDisabled]: member.isDisabled,
-                  })}
-                />
-              </div>
+              <SwitchableBtns
+                onEdit={() => handleEditing(index)}
+                onToggleDisable={() => toDisable(index)}
+                onDelete={() => deleteMember(index)}
+                isDisabled={member.isDisabled}
+                showIconSave={true}
+                id={index}
+                isEditing={isEditing}
+              />
             </li>
           ))}
         </ul>
@@ -192,7 +189,7 @@ export default function StaffPart() {
         <span className={css.plus}>
           <BsPlusLg className={css.iconPlus} />
         </span>
-        Додати користувача
+        Додати працівника
       </button>
       {modalIsOpen && (
         <Modal isOpen={modalIsOpen} onClose={handleModalClose}>

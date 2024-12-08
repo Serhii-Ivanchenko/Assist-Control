@@ -6,21 +6,47 @@ import StaffPart from "./StaffPart/StaffPart";
 import PricePart from "./PricePart/PricePart";
 import SparesPart from "./SparesPart/SparesPart";
 import WarehousePart from "./WarehousePart/WarehousePart";
+import DistributorsPart from "./DistributorsPart/DistributorsPart";
+import RatingPart from "./RatingPart/RatingPart";
+import CheckoutPart from "./CheckoutPart/CheckoutPart";
 
-export default function ServiceStationDetailsBottom() {
+const pageComponents = {
+  station: <StationPart />,
+  staff: <StaffPart />,
+  price: <PricePart />,
+  spares: <SparesPart />,
+  warehouse: <WarehousePart />,
+  checkout: <CheckoutPart />,
+  distributors: <DistributorsPart />,
+  migration: "",
+  rating: <RatingPart />,
+  integration: "",
+};
+
+export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
   const [page, setPage] = useState("station");
+
+  const getChangeablePartClass = () => {
+    return page === "warehouse" || page === "rating" ? css.noBackground : css.changeablePart;
+  };
+
   return (
-    <div className={css.bottomPartBox}>
+    <div
+      className={`${css.bottomPartBox} ${
+        isAccordionExpanded ? css.reducedHeight : css.fullHeight
+      }`}
+    >
       <ServiceNavigation page={page} setPage={setPage} />
 
-      <div className={css.changeablePart}>
-        {page === "station" && <StationPart />}
-        {page === "staff" && <StaffPart />}
-        {page === "price" && <PricePart />}
-        {page === "spares" && <SparesPart />}
-        {page === "warehouse" && <WarehousePart />}
-        {page === "checkout" && ""}
-        {page === "distributors" && ""}
+      {/* Рендеринг вибраної частини сторінки */}
+      <div
+        className={`${getChangeablePartClass()} ${
+          isAccordionExpanded
+            ? css.reducedChangeableHeight
+            : css.fullChangeableHeight
+        }`}
+      >
+        {pageComponents[page]}
       </div>
     </div>
   );

@@ -1,0 +1,71 @@
+.modal {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 230px;
+
+  height: 68px;
+
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: var(--bg-input);
+
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+  z-index: 100;
+  transform: translateY(-5px);
+  transition: max-height 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.popoverVisible {
+  visibility: visible;
+  max-height: 200px;
+  transform: translateY(0);
+}
+
+.hidden {
+  visibility: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+a {
+  text-decoration: none;
+}
+
+.button {
+  width: 230px;
+  height: 34px;
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  padding: 8px 20px 8px 10px;
+  align-self: stretch;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  cursor: pointer;
+}
+
+.button:last-child {
+  width: 230px;
+  border-top: 2px solid var(--input-stroke);
+  padding: 6px 20px 8px 10px;
+}
+
+.icon {
+  fill: var(--light-gray);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}

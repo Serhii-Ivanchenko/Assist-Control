@@ -1,0 +1,123 @@
+.workSchedule {
+    width: 867px;
+    border-radius: 12px;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 1px;
+    border: none;
+    margin-left: -1px
+}
+
+.container {
+    width: 864px;
+    height: 257px;
+    border-radius: 12px;
+    margin-left: 1px;
+    /* background: linear-gradient(180deg, rgba(81, 85, 98, 0.75) 39px, #8B8B8B 30%, #566596 50%, #8E8E8E 90%, #23252E 100%); */
+    background:
+        linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(81, 85, 98, 0.75) 10%, rgba(81, 85, 98, 0.75) 90%, rgba(0, 0, 0, 0.1) 100%),
+        linear-gradient(to bottom, rgba(81, 85, 98, 0.75) 300px, rgba(0, 0, 0, 0.1) 11px);
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10);
+}
+
+.header {
+    background-color: rgba(81, 85, 98, 0.75);
+    height: 39px;
+    color: var(--white);
+
+    font-weight: bold;
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+    border: none;
+    border-spacing: 0;
+}
+
+.header th {
+    border: none;
+}
+
+tbody {
+    background: transparent;
+    background: linear-gradient(0deg, #23252E 0%, #8B8B8B 10%, #566596 50%, #8E8E8E 90%, #23252E 100%);
+    /* Прозрачный фон для отображения основного фона таблицы */
+}
+
+.headerfirstcolumn {
+    width: 89px;
+    background-color: rgba(81, 85, 98, 0.75);
+    color: var(--white);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: center;
+    border-radius: 12px 0 0 0;
+}
+
+.headerothercolumn {
+    width: 40px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.header .headerothercolumn:last-child {
+    border-radius: 0 12px 0 0;
+}
+
+
+tbody td {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    border-right: 2px solid transparent;
+    border-spacing: 2px;
+}
+
+tbody td:hover {
+    background-color: var(--blue-btn-hover);
+    /* Легкий эффект при наведении */
+}
+
+.active {
+    background-color: var(--blue-btn-normal);
+
+    color: white;
+}
+
+.inactive {
+    background-color: #31353E;
+    /* Фон для неактивных */
+}
+
+tbody tr td:first-child {
+    background-color: #31353E;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    width: 89px;
+    border-left: 2px solid #31353E;
+
+}
+
+tbody tr td:last-child {
+    border-right: none;
+    /* Убираем правый бордер последней колонки */
+}
+
+tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 12px;
+}
+
+tbody tr:last-child td:last-child {
+    border-radius: 0 0 12px 0;
+}
+
+/* tbody  tr td:last-child {
+   
+    border-right: 2px solid #31353E;
+} */

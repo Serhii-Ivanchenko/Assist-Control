@@ -9,12 +9,31 @@ import { BsCheck } from "react-icons/bs";
 // import { BsRecordFill } from "react-icons/bs";
 import { BsCircle } from "react-icons/bs";
 import { BsRecordCircle } from "react-icons/bs";
+import { BsFillCaretDownFill } from "react-icons/bs";
 
 export default function SparesPart() {
   const [isChecked, setIsChecked] = useState(null);
-  const [rows, setRows] = useState([{ from: "", to: "", percentage: "" }]);
+
+  const [fixedRow, setFixedRow] = useState({ UAH: "", percent: "" });
+
+  const [rows, setRows] = useState(() => {
+    const savedObject = window.localStorage.getItem("saved-rows");
+    if (savedObject !== null) {
+      return JSON.parse(savedObject);
+    }
+    return [{ from: "", to: "", percentage: "" }];
+  });
+
   const scrollToTheLastItemRef = useRef();
   const prevRowsLength = useRef(rows.length);
+
+  useEffect(() => {
+    window.localStorage.setItem("saved-rows", JSON.stringify(rows));
+  }, [rows]);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem("saved-rows-fixed", JSON.stringify(fixedRow));
+  // }, [fixedRow]);
 
   const addRow = () => {
     setRows([...rows, { from: "", to: "", percentage: "" }]);
@@ -40,6 +59,10 @@ export default function SparesPart() {
     );
   };
 
+  const updateFixedRow = (field, value) => {
+    setFixedRow((fixedRow) => ({ ...fixedRow, [field]: value }));
+  };
+
   const chosenRadio = (index) => {
     setIsChecked(isChecked === index ? null : index);
   };
@@ -55,32 +78,44 @@ export default function SparesPart() {
           Загальна
         </label>
 
-        <label className={css.cbLabel}>
-          <input type="checkbox" className={css.checkbox}></input>
-          <span className={css.cbMark}>
-            <BsCheck size={24} className={css.cbIcon} />
-          </span>
-          Постачальник
-        </label>
+        {/* <label className={css.cbLabel}> </label>*/}
+        <div className={css.selectBox}>
+          <select className={css.select}>
+            <option value="default">Постачальник</option>
+            <option value="1">Постачальник1</option>
+            <option value="2">Постачальник2</option>
+          </select>
+          <BsFillCaretDownFill className={css.iconArrow} size={20} />
+        </div>
+        {/* Постачальник */}
 
-        <label className={css.cbLabel}>
-          <input type="checkbox" className={css.checkbox}></input>
-          <span className={css.cbMark}>
+        {/* <label className={css.cbLabel}></label> */}
+        <div className={css.selectBox}>
+          <select className={css.select}>
+            <option value="default">Бренд</option>
+            <option value="1">Бренд1</option>
+            <option value="2">Бренд2</option>
+          </select>
+          <BsFillCaretDownFill className={css.iconArrow} size={20} />
+        </div>
+        {/* <span className={css.cbMark}>
             <BsCheck size={24} className={css.cbIcon} />
-          </span>
-          Бренд
-        </label>
+          </span> */}
+        {/* Бренд */}
 
-        <label className={css.cbLabel}>
-          <input type="checkbox" className={css.checkbox}></input>
-          <span className={css.cbMark}>
-            <BsCheck size={24} className={css.cbIcon} />
-          </span>
-          Група
-        </label>
+        {/* <label className={css.cbLabel}></label> */}
+        <div className={css.selectBox}>
+          <select className={css.select}>
+            <option value="default">Група</option>
+            <option value="1">Група1</option>
+            <option value="2">Група2</option>
+          </select>
+          <BsFillCaretDownFill className={css.iconArrow} size={20} />
+        </div>
+        {/* Група */}
       </div>
 
-      <div className={css.radioAndInputs}>
+      <div className={css.radioAndInputs} ref={scrollToTheLastItemRef}>
         <div className={css.radioBtns}>
           <label className={css.radioLabel}>
             <input
@@ -115,12 +150,24 @@ export default function SparesPart() {
           <div className={css.Inputs}>
             <div className={css.inputBox}>
               <label className={css.inputLabel}>грн</label>
-              <input placeholder="400" className={css.input} />
+              <input
+                type="number"
+                placeholder="400"
+                className={css.input}
+                value={fixedRow.UAH}
+                onChange={(e) => updateFixedRow("UAH", e.target.value)}
+              />
             </div>
 
             <div className={css.inputBox}>
               <label className={css.inputLabel}>%</label>
-              <input placeholder="10" className={css.input} />
+              <input
+                type="number"
+                placeholder="10"
+                className={css.input}
+                value={fixedRow.percent}
+                onChange={(e) => updateFixedRow("percent", e.target.value)}
+              />
             </div>
           </div>
 
@@ -131,7 +178,7 @@ export default function SparesPart() {
               <label className={css.inputLabel}>%</label>
             </div>
 
-            <ul className={css.inputsList} ref={scrollToTheLastItemRef}>
+            <ul className={css.inputsList}>
               {rows.map((row, index) => (
                 <li key={index} className={css.Inputs}>
                   <input
@@ -187,9 +234,6 @@ export default function SparesPart() {
       </div>
 
       <div className={css.btnBox}>
-        <button type="button" className={css.cancel}>
-          Закрити
-        </button>
         <button type="button" className={css.save}>
           {" "}
           <BsCheckLg size={18} /> Зберегти

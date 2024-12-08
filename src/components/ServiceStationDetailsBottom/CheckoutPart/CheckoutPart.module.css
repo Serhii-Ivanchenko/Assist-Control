@@ -1,0 +1,222 @@
+.checkoutPart {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-left: 5px;
+}
+
+.checkoutPartList {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 854px;
+}
+
+.checkoutItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  /* gap: 33px; */
+
+  height: 39px;
+  padding: 10px 0px;
+
+  border-bottom: 1px solid var(--input-stroke);
+}
+
+.infoPart {
+  display: flex;
+  align-items: center;
+  gap: 33px;
+}
+
+.info {
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.1875em;
+}
+
+.editInfo {
+  height: 100%;
+  border: none;
+  outline: none;
+  background-color: var(--bg-secondary);
+  appearance: none;
+
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+.editInput {
+  outline: none;
+  border: none;
+
+  display: flex;
+  align-items: center;
+
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  line-height: normal;
+  font-weight: 400;
+  height: 100%;
+
+  background-color: var(--main-gray);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* .editInfo option {
+  text-align: center;
+} */
+
+.infoName {
+  width: 80px;
+}
+
+.infoCurrency {
+  width: 51px;
+}
+
+.infoEnt {
+  width: 118px;
+}
+
+.infoWh {
+  width: 138px;
+}
+
+.infoResp {
+  width: 171px;
+}
+
+.addBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: auto;
+}
+
+.selectAndArrow {
+  position: relative;
+  height: 19px;
+}
+
+.icon {
+  position: absolute;
+  /* top: 50%;
+  transform: translateY(-50%); */
+  right: 0;
+  pointer-events: none;
+
+  fill: var(--light-gray);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.addInput {
+  display: flex;
+  width: 667px;
+  padding: 5px 10px;
+  align-items: center;
+
+  border-radius: 6px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-secondary);
+  outline: none;
+
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.1875em;
+}
+
+.addBtn {
+  display: flex;
+  padding: 6px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+
+  border-radius: 6px;
+  background-color: var(--blue-btn-normal);
+
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.1875;
+}
+
+.addBtn:hover {
+  background-color: var(--blue-btn-hover);
+}
+
+.addBtn:active {
+  background-color: var(--blue-btn-inactive);
+}
+
+.plus {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+.iconPlus {
+  display: flex;
+  width: 14px;
+  height: 14px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  color: var(--blue-btn-normal);
+  background-color: var(--white);
+  stroke-width: 2px;
+}
+
+.addBtn:hover .iconPlus {
+  color: var(--blue-btn-hover);
+}
+
+.addBtn:active .iconPlus {
+  color: var(--blue-btn-inactive);
+}
+
+.divForScroll {
+  width: 876px;
+  max-height: 520px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.divForScroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.divForScroll::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+}
+
+.divForScroll::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--main-gray);
+}
+
+.rotated {
+  transform: rotate(180deg);
+}

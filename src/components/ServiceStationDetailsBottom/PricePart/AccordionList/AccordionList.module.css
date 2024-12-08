@@ -4,7 +4,7 @@
   gap: 20px;
   background: transparent;
   max-height: 538px;
-  overflow-y: auto;
+  overflow-y: none;
   padding-right: 25px;
   padding-bottom: 6px;
 }

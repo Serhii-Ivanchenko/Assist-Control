@@ -11,7 +11,7 @@
 
 .wrapper .accordionTitle {
   display: flex;
-  width: 100%;
+  width: 860px;
   height: 50px;
   padding: 0px 20px;
   align-items: center;
@@ -24,15 +24,49 @@
   font-weight: 500;
 }
 
+.titleContent {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .icon {
   color: var(--icon-gray);
   margin-left: auto;
   transform: scale(1.6);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  margin-left: 28px;
+}
+
+.btnInput {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  margin-right: -10px;
+  margin-top: 20px;
+}
+
+.dotsIcon {
+  width: 18px;
+  height: 18px;
+  fill: var(--light-gray);
 }
 
 .accordionDesc {
   display: flex;
   flex-direction: column;
+  width: 840px;
   gap: 12px;
   margin: 20px 0 0;
   padding-right: 25px;

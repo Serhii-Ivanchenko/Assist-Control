@@ -1,0 +1,269 @@
+.warehouseContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 40px;
+}
+
+.itemsList {
+  display: flex;
+  gap: 20px;
+}
+
+.items {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.listAndButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 915px;
+}
+
+.value {
+  color: var(--white);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.title {
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  fill: var(--light-gray);
+}
+
+.newWarehouse {
+  width: 181px;
+  height: 34px;
+  display: flex;
+  /* padding: 8px 20px; */
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 6px;
+  background: var(--green-btn-normal);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  position: relative;
+}
+
+.newWarehouseBtn {
+  display: flex;
+  background-color: transparent;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+
+  height: 100%;
+}
+
+.popoverBox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+}
+
+/* .treeRoot {
+  display: flex;
+  width: 915px;
+  padding: 10px 20px;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 1px solid var(--CRM-modal-SecondaryBG, #23252c);
+  background: var(--CRM-modal-InputBG, #2d3038);
+} */
+
+/* .listItem {
+  display: flex;
+  width: 915px;
+  padding: 10px 20px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+ 
+} */
+
+/* .dropTarget {
+  border: 1px solid var(--CRM-modal-SecondaryBG, #23252c);
+  background: var(--CRM-modal-InputBG, #2d3038);
+} */
+
+.wrapper {
+  width: 915px;
+
+  /* height: 508px;
+  overflow-y: auto;
+  overflow-x: hidden; */
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 7px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  width: 7px;
+  background-color: var(--bg);
+}
+
+.btnBox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  /* margin-top: auto; */
+  /* margin-left: auto; */
+  position: absolute;
+  bottom: 43px;
+  right: 40px;
+}
+
+.btnClose {
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--light-gray);
+  background-color: transparent;
+
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.btnSave {
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border: none;
+  border-radius: 6px;
+  background: var(--blue-btn-normal);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+/* .placeholder {
+  border-bottom: 3px solid #e8f0fe;
+  border-radius: 4px;
+} */
+
+.treeContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* min-height: 200px; */
+  max-height: 525px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 31px;
+  /* gap: 14px; */
+}
+
+.treeContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.treeContainer::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+}
+
+.treeContainer::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--main-gray);
+}
+
+.treeRoot {
+  list-style-type: none;
+  padding-inline-start: 0px;
+  padding-left: 5px;
+  position: relative;
+  width: 900px;
+}
+
+.treeRoot ul {
+  list-style-type: none;
+  padding-inline-start: 0px;
+  position: relative;
+  /* padding-bottom: 5px; */
+  /* display: flex;
+  flex-direction: column; */
+  /* gap: 14px; */
+}
+
+.treeRoot > li:after {
+  display: none;
+}
+
+/* .wrapper .draggingSource {
+  opacity: 0.3;
+  color: white;
+} */
+
+/* .drag {
+  border: 1px solid white;
+} */
+
+.wrapper .placeholder {
+  position: relative;
+}
+
+.wrapper > ul > li > .nodeWrapper > div.pipeY {
+  display: none;
+}
+
+.wrapper li:has(> .dropTarget) {
+  outline: 3px solid #206bec;
+  border-radius: 4px;
+}
+
+/* .dropTarget {
+  background-color: white;
+} */
+
+/* .wrapper {
+  li {
+    &.hasDropTarget {
+      outline: 3px solid #206bec;
+      border-radius: 4px;
+    }
+  }
+} */

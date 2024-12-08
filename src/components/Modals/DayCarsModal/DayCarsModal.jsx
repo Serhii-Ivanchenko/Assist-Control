@@ -9,7 +9,7 @@ import {
 import styles from "./DayCarsModal.module.css";
 import DayCarsFilter from "../../DayCarsFilter/DayCarsFilter";
 import { FiGrid } from "react-icons/fi";
-import { BsListUl, BsDownload } from "react-icons/bs";
+import { BsListUl } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import DayCarsList from "../../DayCarsList/DayCarsList";
 import Loader from "../../Loader/Loader";
@@ -19,8 +19,9 @@ import { useDispatch } from "react-redux";
 import { toggleVisibilityCar } from "../../../redux/cars/slice";
 import CarInfoSettings from "../../sharedComponents/CarInfoSettings/CarInfoSettings";
 import TimeSortCarItem from "../../sharedComponents/TimeSortCarItem/TimeSortCarItem";
+import DownloadPdfButton from "../../sharedComponents/DownloadPdfButton/DownloadPdfButton";
 
-export default function DayCarsModal({ onClose, isModal}) {
+export default function DayCarsModal({ onClose, isModal }) {
   const dispatch = useDispatch();
   const visibility = useSelector(selectVisibilityCar);
   const selectedDate = useSelector(selectDate);
@@ -34,30 +35,31 @@ export default function DayCarsModal({ onClose, isModal}) {
   const [filteredCarsData, setFilteredCarsData] = useState(carsData);
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [isDescending, setIsDescending] = useState(true);
-  
 
   useEffect(() => {
     let filteredData = [...carsData];
-  
+
     // Функція для обчислення часу в мілісекундах між двома датами
     const getDurationInMillis = (startDate, completeDate) => {
       const start = new Date(startDate);
       const end = completeDate ? new Date(completeDate) : new Date();
       return end - start; // повертаємо різницю в мілісекундах
     };
-  
+
     // Сортування за тривалістю (часом)
     filteredData.sort((a, b) => {
       const durationA = getDurationInMillis(a.date_s, a.complete_d);
       const durationB = getDurationInMillis(b.date_s, b.complete_d);
       return isDescending ? durationB - durationA : durationA - durationB;
     });
-  
+
     // Фільтрація по статусу
     if (selectedStatus !== "all") {
-      filteredData = filteredData.filter((car) => car.status === selectedStatus);
+      filteredData = filteredData.filter(
+        (car) => car.status === selectedStatus
+      );
     }
-  
+
     // Фільтрація по датах
     if (startDate && endDate) {
       const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
@@ -67,7 +69,7 @@ export default function DayCarsModal({ onClose, isModal}) {
         return carStartDate <= endDate && carEndDate >= startDate;
       });
     }
-  
+
     setFilteredCarsData(filteredData);
   }, [selectedStatus, startDate, endDate, carsData, isDescending]);
 
@@ -93,19 +95,23 @@ export default function DayCarsModal({ onClose, isModal}) {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     return filteredCarsData.filter((car) => {
       const { plate, auto } = car;
+
+      // Перевірка наявності значення перед toLowerCase()
+      const plateValue = plate ? plate.toLowerCase() : "";
+      const autoValue = auto ? auto.toLowerCase() : "";
+
       return (
-        plate.toLowerCase().includes(lowerCaseSearchTerm) ||
-        auto.toLowerCase().includes(lowerCaseSearchTerm)
+        plateValue.includes(lowerCaseSearchTerm) ||
+        autoValue.includes(lowerCaseSearchTerm)
       );
     });
   };
+
 
   const handleToggle = (field) => {
     const newVisibility = { ...visibility, [field]: !visibility[field] };
     dispatch(toggleVisibilityCar(newVisibility));
   };
-
-
 
   return (
     <div className={styles.containerCarModal}>
@@ -141,7 +147,7 @@ export default function DayCarsModal({ onClose, isModal}) {
             />
           </div>
           <div>
-          <TimeSortCarItem onSortChange={handleSortChange}/>
+            <TimeSortCarItem onSortChange={handleSortChange} />
           </div>
         </div>
         <div className={styles.rightHeader}>
@@ -153,16 +159,11 @@ export default function DayCarsModal({ onClose, isModal}) {
             onDateBegChange={handleDateBegChange}
             onDateEndChange={handleDateEndChange}
           />
-          <div className={styles.btnPdfContainer}>
-            <button className={styles.btnPdf}>
-              <BsDownload size={16} color="var(--icon-gray)" />
-              <span className={styles.btnPdfText}>.pdf</span>
-            </button>
-          </div>
-          <CarInfoSettings
-            isCrmView={false}
-            handleToggle={handleToggle}
+          <DownloadPdfButton
+            carsData={filteredCars()}
+            status={selectedStatus}
           />
+          <CarInfoSettings isCrmView={false} handleToggle={handleToggle} />
         </div>
       </div>
       <button className={styles.closeButton} onClick={onClose}>

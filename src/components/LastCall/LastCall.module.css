@@ -1,0 +1,98 @@
+.wrapper {
+  width: 455px;
+  height: 283px;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--dark-gray);
+}
+
+.header {
+  color: var(--light-gray);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  font-variant: small-caps;
+  margin-bottom: 14px;
+}
+
+.phoneNumber {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 24px;
+}
+
+.lost {
+  color: var(--red);
+}
+
+.active {
+  color: var(--play-btn-triangle);
+}
+
+.nameWrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.name {
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.1875em;
+  font-variant: small-caps;
+}
+
+.dateWrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.date {
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.1875em;
+  font-variant: small-caps;
+}
+
+.line {
+  width: 415px;
+  height: 8px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+
+.lostLine {
+  background-color: var(--red);
+}
+
+.activeLine {
+  background-color: var(--play-btn-triangle);
+}
+
+.bottomWrapper {
+  display: flex;
+  gap: 20px;
+  height: 70px;
+  align-items: center;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  object-fit: cover;
+}

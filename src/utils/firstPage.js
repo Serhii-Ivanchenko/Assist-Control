@@ -10,6 +10,12 @@ export default function firstPage(userData) {
       return "/settings";
     case "v-c":
       return "/video-control";
+    case "rec":
+      return "/recommendations";
+    case "tracking":
+      return "/accounting";
+    case "main":
+      return "/main"
     case "default":
     default:
       return "/video-control";

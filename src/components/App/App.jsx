@@ -25,11 +25,46 @@ const VideoControlPage = lazy(() =>
   import("../../pages/VideoControlPage/VideoControlPage.jsx")
 );
 const CRMPage = lazy(() => import("../../pages/CRMPage/CRMPage.jsx"));
+const ConnectionsPage = lazy(() =>
+  import("../../pages/ConnectionsPage/ConnectionsPage.jsx")
+);
 const RecommendationsPage = lazy(() =>
   import("../../pages/RecommendationsPage/RecommendationsPage.jsx")
 );
 const AccountingPage = lazy(() =>
   import("../../pages/AccountingPage/AccountingPage.jsx")
+);
+const ClientsPage = lazy(() =>
+  import("../../pages/AccountingPage/ClientsPage/ClientsPage.jsx")
+);
+const GeneralClientsListPage = lazy(() =>
+  import(
+    "../../pages/AccountingPage/ClientsPage/GeneralClientsListPage/GeneralClientsListPage.jsx"
+  )
+);
+const ClientsListInWork = lazy(() =>
+  import(
+    "../../pages/AccountingPage/ClientsPage/ClientsListInWork/ClientsListInWork.jsx"
+  )
+);
+const DistributorsPage = lazy(() =>
+  import("../../pages/AccountingPage/DistributorsPage/DistributorsPage.jsx")
+);
+const SparePartsPage = lazy(() =>
+  import(
+    "../../pages/AccountingPage/DistributorsPage/SparePartsPage/SparePartsPage.jsx"
+  )
+);
+const InvoicesPage = lazy(() =>
+  import(
+    "../../pages/AccountingPage/DistributorsPage/InvoicesPage/InvoicesPage.jsx"
+  )
+);
+const FundsPage = lazy(() =>
+  import("../../pages/AccountingPage/FundsPage/FundsPage.jsx")
+);
+const EquipmentPage = lazy(() =>
+  import("../../pages/AccountingPage/EquipmentPage/EquipmentPage.jsx")
 );
 const ReportsPage = lazy(() =>
   import("../../pages/ReportsPage/ReportsPage.jsx")
@@ -126,6 +161,15 @@ export default function App() {
             }
           />
           <Route
+            path="/connections"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<ConnectionsPage />}
+              />
+            }
+          />
+          <Route
             path="/recommendations"
             element={
               <PrivateRoute
@@ -141,6 +185,66 @@ export default function App() {
                 redirectTo="/login"
                 component={<AccountingPage />}
               />
+            }
+          />
+          <Route
+            path="/accounting/clients"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ClientsPage />} />
+            }
+          />
+          <Route
+            path="/accounting/clients/clients-list-general"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<GeneralClientsListPage />}
+              />
+            }
+          />
+          <Route
+            path="/accounting/clients/clients-list-in-work"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<ClientsListInWork />}
+              />
+            }
+          />
+          <Route
+            path="/accounting/distributors"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<DistributorsPage />}
+              />
+            }
+          />
+          <Route
+            path="/accounting/distributors/spare-parts"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<SparePartsPage />}
+              />
+            }
+          />
+          <Route
+            path="/accounting/distributors/invoices"
+            element={
+              <PrivateRoute redirectTo="/login" component={<InvoicesPage />} />
+            }
+          />
+          <Route
+            path="/accounting/funds"
+            element={
+              <PrivateRoute redirectTo="/login" component={<FundsPage />} />
+            }
+          />
+          <Route
+            path="/accounting/equipment"
+            element={
+              <PrivateRoute redirectTo="/login" component={<EquipmentPage />} />
             }
           />
           <Route

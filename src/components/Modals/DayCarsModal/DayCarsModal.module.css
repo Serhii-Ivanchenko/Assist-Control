@@ -259,30 +259,3 @@
 }
 
 
-.btnPdfContainer {
-    display: flex;
-    padding: 4px 6px;
-    width: 60px;
-    height: 24px;
-
-    border-radius: 6px;
-    background: var(--bg-input);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.btnPdf {
-    background: transparent;
-    border: none;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    gap: 7px;
-
-}
-
-.btnPdfText {
-    color: var(--icon-gray);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: normal;
-}

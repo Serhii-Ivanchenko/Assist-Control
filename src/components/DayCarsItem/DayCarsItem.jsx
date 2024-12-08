@@ -8,7 +8,6 @@ import {
   BsFiles,
 } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
-import { AiFillStar } from "react-icons/ai";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
 import { renderTime } from "../../utils/renderTime.js";
@@ -19,6 +18,7 @@ import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
 import { selectVisibilityCar } from "../../redux/cars/selectors.js";
 import { useSelector } from "react-redux";
+import RatingStars from "../sharedComponents/RatingStars/RatingStars.jsx";
 
 export default function DayCarsItem({ car, isModal }) {
   const visibility = useSelector(selectVisibilityCar);
@@ -37,6 +37,10 @@ export default function DayCarsItem({ car, isModal }) {
 
   const carPhoto = photoUrl || absentAutoImg;
 
+  const formatCarNumber = (number) => {
+    if (!number) return "";
+    return number.replace(/\s+/g, "");
+  };
   return (
     <div
       className={clsx(
@@ -115,25 +119,20 @@ export default function DayCarsItem({ car, isModal }) {
 
         <div className={styles.btnContainer}>
           {visibility?.status && <StatusBtn car={car} />}
-          {visibility?.info && <CarDetailButton />}
+          {visibility?.info && <CarDetailButton carName={car.auto} />}
         </div>
       </div>
 
       <div className={clsx(styles.carsInfo, isModal && styles.modalCarsInfo)}>
         <div className={styles.carInfoLeft}>
-          {visibility?.rating && (
+        {visibility?.rating && (
             <div
-              className={clsx(
-                styles.rating,
-                !visibility.rating && styles.hidden
-              )}
-            >
-              <AiFillStar color="var(--star-orange)" size={14.5} />
-              <AiFillStar color="var(--star-orange)" size={14.5} />
-              <AiFillStar color="var(--star-orange)" size={14.5} />
-              <AiFillStar color="var(--star-orange)" size={14.5} />
-              <AiFillStar color="var(--star-white)" size={14.5} />
-            </div>
+            className={clsx(
+              !visibility.rating && styles.hidden
+            )}
+          >
+            <RatingStars rating={car.rating} />
+          </div>
           )}
 
           {visibility?.prePayment && (
@@ -184,8 +183,8 @@ export default function DayCarsItem({ car, isModal }) {
                 <p className={styles.carRegCountry}>ua</p>
               </div>
               <p className={styles.carNumber}>
-                {carNumber ? carNumber : "хххххх"}
-              </p>
+  {carNumber ? formatCarNumber(carNumber) : "хххххх"}
+</p>
             </div>
           )}
 

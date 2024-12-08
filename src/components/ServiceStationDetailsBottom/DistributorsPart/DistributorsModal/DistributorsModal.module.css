@@ -1,0 +1,234 @@
+.wrapper {
+  height: auto;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 31px;
+  padding: 20px 30px;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+
+.mainInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 92px;
+  width: 100%;
+}
+
+.credentialsContainer {
+  display: flex;
+  flex-direction: column;
+  /* gap: 33px; */
+}
+
+.nameBox {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 7px;
+}
+
+.name {
+  display: flex;
+  gap: 14px;
+  min-width: 100px;
+  justify-content: center;
+  align-items: flex-start;
+  color: var(--light-gray);
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.inputName {
+  width: auto;
+  height: 40px;
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: var(--light-gray);
+  font-size: 20px;
+  font-style: normal;
+  line-height: normal;
+  font-weight: 400;
+  height: 100%;
+  background-color: var(--main-gray);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.popupIcon {
+  cursor: pointer;
+}
+
+.popup {
+  position: absolute;
+  top: 10px;
+  left: 168px;
+  z-index: 10;
+
+  display: flex;
+  width: 166px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border: none;
+  border-radius: 0px 0px 6px 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.imgWrapper {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 33px;
+}
+
+.imgWrapper div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.img {
+  width: 96px;
+}
+
+.uploadLogoContainer {
+  margin-top: 19px;
+}
+
+.uploadLogoContainer p {
+  color: var(--input-text);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.addressBox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.addressBox input {
+  display: flex;
+  min-width: 242px;
+  height: 31px;
+  padding: 6px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+  outline: none;
+  color: var(--light-gray);
+  font-size: 16px;
+}
+
+.addressBox label {
+  color: var(--light-gray);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.radioBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.radioBox label {
+  color: var(--light-gray);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 25px;
+}
+
+.radioBtn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.rowContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.label {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  color: var(--light-gray);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.input {
+  display: flex;
+  width: auto;
+  height: 31px;
+  padding: 6px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+  outline: none;
+  color: var(--light-gray);
+  font-size: 16px;
+}
+
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 391px;
+}
+
+.saveBtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 10px;
+  margin-left: auto;
+  gap: 10px;
+
+  border: transparent;
+  border-radius: 6px;
+  background: var(--green);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.scheduleContainer {
+  margin: 0 auto;
+}

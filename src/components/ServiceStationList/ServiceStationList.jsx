@@ -1,10 +1,22 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ServiceStationItem from "../ServiceStationItem/ServiceStationItemItem";
 import { BsPlusCircleDotted } from "react-icons/bs";
 import { BsHouseFill } from "react-icons/bs";
 import styles from "./ServiceStationList.module.css";
+import AddAutoServiceModal from "../Modals/AddAutoServiceModal/AddAutoServiceModal";
+import Modal from "../Modals/Modal/Modal";
 
 function ServiceStationList({ activeStationId, setActiveStationId }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddBtnClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   const stations = useMemo(
     () => [
       {
@@ -44,10 +56,15 @@ function ServiceStationList({ activeStationId, setActiveStationId }) {
           </div>
         ))}
       </div>
-      <button className={styles.addBtn}>
+      <button className={styles.addBtn} onClick={handleAddBtnClick}>
         <BsPlusCircleDotted className={styles.icon} />
         <BsHouseFill className={styles.icon} />
       </button>
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <AddAutoServiceModal onClose={handleCloseModal} />
+        </Modal>
+      )}
     </div>
   );
 }

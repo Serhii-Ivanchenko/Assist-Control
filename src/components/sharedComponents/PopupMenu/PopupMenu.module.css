@@ -1,0 +1,57 @@
+.popup {
+  position: absolute;
+  top: 10px;
+  left: 170px;
+  z-index: 10;
+
+  display: flex;
+  width: 166px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border: none;
+  border-radius: 0px 0px 6px 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.popup li {
+  width: 100%;
+  border-top: 1px solid var(--main-gray);
+  border-bottom: 1px solid var(--main-gray);
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.popup li:last-child {
+  border: none;
+}
+
+.popup li button {
+  display: inline-flex;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-input);
+  width: 166px;
+  cursor: pointer;
+  border: none;
+}
+
+.popup li button:hover {
+  background: var(--main-gray);
+}
+
+.editBtn {
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.deleteBtn {
+  color: var(--red);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}

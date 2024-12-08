@@ -7,13 +7,25 @@ import {
   BsEnvelope,
   BsCaretDownFill,
 } from "react-icons/bs";
-import { RiSave3Fill } from "react-icons/ri";
+// import { RiSave3Fill } from "react-icons/ri";
 
 import styles from "./ServiceStationItem.module.css";
 import { useState, useEffect } from "react";
+import AddAutoServiceModal from "../Modals/AddAutoServiceModal/AddAutoServiceModal";
+import Modal from "../Modals/Modal/Modal";
 
 function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
-  const [isEdit, setIsEdit] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isEdit, setIsEdit] = useState(false);
+
+  const handlePencilBtnClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   const [info, setInfo] = useState(() => {
     const savedInfo = localStorage.getItem(name);
     return savedInfo
@@ -28,24 +40,24 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
         };
   });
 
-  useEffect(() => {
-    if (!isActive) {
-      setIsEdit(false);
-    }
-  }, [isActive]);
+  // useEffect(() => {
+  //   if (!isActive) {
+  //     setIsEdit(false);
+  //   }
+  // }, [isActive]);
 
   useEffect(() => {
     localStorage.setItem(name, JSON.stringify(info));
   }, [info, name]);
 
-  const handleEditToggle = () => {
-    setIsEdit((prev) => !prev);
-  };
+  // const handleEditToggle = () => {
+  //   setIsEdit((prev) => !prev);
+  // };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
+  // };
 
   return (
     <div className={styles.generalContainer}>
@@ -55,7 +67,7 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
           onClick={(e) => e.stopPropagation()}
         >
           <div className={styles.serviceContainer}>
-            {isEdit ? (
+            {/* {isEdit ? (
               <input
                 type="text"
                 name="stationName"
@@ -65,20 +77,33 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
               />
             ) : (
               <h3 className={styles.serviceTitle}>{name}</h3>
-            )}
+            )} */}
+            <h3 className={styles.serviceTitle}>{name}</h3>
             <button
               className={styles.editBtn}
               onClick={(e) => {
                 e.stopPropagation();
-                handleEditToggle();
+                // handleEditToggle();
               }}
             >
-              {isEdit ? (
+              {/* {isEdit ? (
                 <RiSave3Fill className={styles.mainIcon} size={21} />
               ) : (
-                <BsPencil className={styles.mainIcon} />
-              )}
+                <BsPencil
+                  className={styles.mainIcon}
+                  onClick={handlePencilBtnClick}
+                />
+              )} */}
+              <BsPencil
+                className={styles.mainIcon}
+                onClick={handlePencilBtnClick}
+              />
             </button>
+            {isModalOpen && (
+              <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+                <AddAutoServiceModal onClose={handleCloseModal} />
+              </Modal>
+            )}
           </div>
 
           <ul className={styles.infoList}>
@@ -87,7 +112,7 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
                 <BsEnvelope className={styles.keyIcon} />
                 <p>Email</p>
               </div>
-              {isEdit ? (
+              {/* {isEdit ? (
                 <input
                   type="text"
                   name="email"
@@ -97,13 +122,14 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
                 />
               ) : (
                 <p className={styles.infoValue}>{info.email}</p>
-              )}
+              )} */}
+              <p className={styles.infoValue}>{info.email}</p>
             </li>
             <li className={styles.infoItem}>
               <p className={styles.infoKey}>
                 <BsGeoAlt className={styles.keyIcon} /> Адреса
               </p>
-              {isEdit ? (
+              {/* {isEdit ? (
                 <input
                   type="text"
                   name="address"
@@ -113,7 +139,8 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
                 />
               ) : (
                 <p className={styles.infoValue}>{info.address}</p>
-              )}
+              )} */}
+              <p className={styles.infoValue}>{info.address}</p>
             </li>
             <li className={styles.infoItem}>
               <p className={styles.infoKey}>
@@ -129,7 +156,7 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
               <p className={styles.infoKey}>
                 <BsPeople className={styles.keyIcon} /> Співробітники
               </p>
-              {isEdit ? (
+              {/* {isEdit ? (
                 <input
                   type="text"
                   name="employees"
@@ -139,13 +166,14 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
                 />
               ) : (
                 <p className={styles.infoValue}>{info.employees}</p>
-              )}
+              )} */}
+              <p className={styles.infoValue}>{info.employees}</p>
             </li>
             <li className={styles.infoItem}>
               <p className={styles.infoKey}>
                 <BsCalendarWeek className={styles.keyIcon} /> Дійсний до:
               </p>
-              {isEdit ? (
+              {/* {isEdit ? (
                 <input
                   type="text"
                   name="validUntil"
@@ -155,7 +183,8 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
                 />
               ) : (
                 <p className={styles.infoValue}>{info.validUntil}</p>
-              )}
+              )} */}
+              <p className={styles.infoValue}>{info.validUntil}</p>
             </li>
           </ul>
         </div>
