@@ -18,9 +18,9 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
   const detailsRef = useRef();
   const handleChange = (e, expanded) => {
     setIsExpanded(expanded);
-    if (!expanded) {
-      setIsEditing(false); // Сбрасываем режим редактирования при закрытии
-    }
+    // if (!expanded) {
+    //   setIsEditing(false); // Сбрасываем режим редактирования при закрытии
+    // }
     onToggle(expanded);
   };
 
