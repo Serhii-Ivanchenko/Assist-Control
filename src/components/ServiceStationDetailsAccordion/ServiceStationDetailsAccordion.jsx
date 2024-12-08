@@ -5,7 +5,7 @@ import {
   AccordionDetails,
   Typography,
 } from "@mui/material";
-import { BsCaretDownFill, BsPencil } from "react-icons/bs";
+import { BsCaretDownFill, BsPencil, BsXCircle } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
 // import { useState } from "react";
 import ScheduleTable from "../sharedComponents/ScheduleTable/ScheduleTable.jsx";
@@ -131,7 +131,9 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
             className={css.editbtn}
           >
             {isEditing ? (
-              <RiSave3Fill className={css.mainIcon} size={21} />
+            //  <div className={css.blockflex}> <BsXCircle className={css.mainIcon} size={21}  />
+                <RiSave3Fill className={css.mainIcon} size={21} />
+              // </div>
             ) : (
               <BsPencil className={css.mainIcon} />
             )}

@@ -1,5 +1,6 @@
 import React,  { useState } from "react";
 import { BsPower, BsFillCaretDownFill } from "react-icons/bs";
+import { RiSave3Fill } from "react-icons/ri";
 import css from './RatingPart.module.css'
 
 const action = [
@@ -77,6 +78,7 @@ const RatingPart = () => {
   //   </select>
   // );
 
+ 
   const renderSelect = (recId, field, value, dictionary) => (
   <div className={css.customSelectWrapper}>
     <select
@@ -95,7 +97,7 @@ const RatingPart = () => {
 );
 
   return (
-   
+   <div className={css.container}>
     <div className={css.divForScroll}>
       {/* Заголовок */}
       <div
@@ -103,7 +105,7 @@ const RatingPart = () => {
       >
         <div style={{ flex: "0 0 20%" }}></div>
         <div className={css.titleitem}  style={{ flex: "0 0 20%" }}>Відповідальний</div>
-        <div className={css.titleitem} style={{ flex: "0 0 20%" }}>Подія</div>
+        <div className={css.titleitem} style={{ flex: "0 0 25%" }}>Подія</div>
         <div className={css.titleitem} style={{ flex: "0 0 20%" }}>Частота</div>
         <div style={{ flex: "0 0 3%" }}></div>
       </div>
@@ -124,7 +126,7 @@ const RatingPart = () => {
                 <div style={{ flex: "0 0 20%" }}>
                   {renderSelect(item.recId, "acc", item.acc, dictionaries.acc)}
                 </div>
-                <div style={{ flex: "0 0 20%" }}>
+                <div style={{ flex: "0 0 25%" }}>
                    {renderSelect(item.recId, "action", item.action, dictionaries.action)}
                 </div>
                 <div style={{ flex: "0 0 20%" }}>
@@ -189,7 +191,7 @@ const RatingPart = () => {
                 <div style={{ flex: "0 0 20%" , marginLeft: "-20px"}}>
                   {renderSelect(item.recId, "acc", item.acc, dictionaries.acc)}
                 </div>
-                <div style={{ flex: "0 0 20%" }}>
+                <div style={{ flex: "0 0 25%" }}>
                   
                   {renderSelect(item.recId, "action", item.action, dictionaries.action)}
                 </div>
@@ -212,8 +214,25 @@ const RatingPart = () => {
           </React.Fragment>
         );
       })}
-    </div>
-    
+      </div>
+      <div className={css.blockbtn}>
+        <button
+        className={css.btncancel}
+        type="button"
+          onClick={() =>  setEditedData(data) }
+      >
+        Відмінити
+      </button>
+      <button
+        className={css.btnsave}
+        type="button"
+        // onClick={() => }
+      >
+        <RiSave3Fill className={css.iconsave} />
+        Зберегти
+      </button>
+      </div>
+   </div> 
   );
 };
 
