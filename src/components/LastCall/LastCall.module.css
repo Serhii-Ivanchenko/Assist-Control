@@ -12,7 +12,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  font-variant: small-caps;
   margin-bottom: 14px;
 }
 
@@ -21,7 +20,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .lost {
@@ -32,15 +31,29 @@
   color: var(--play-btn-triangle);
 }
 
-.dateWrapper {
-  height: 38px;
-  padding: 10px;
+.nameWrapper {
   display: flex;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 .icon {
-  margin-right: 20px;
+  width: 18px;
+  height: 18px;
+}
+
+.name {
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.dateWrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
 }
 
 .date {
@@ -49,14 +62,13 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-left: 10px;
 }
 
 .line {
   width: 415px;
   height: 8px;
   border-radius: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .lostLine {

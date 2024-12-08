@@ -43,9 +43,12 @@ export default function LastCall() {
       >
         {lastCallDetails.phone}
       </p>
-      <div className={css.dateWrapper}>
+      <div className={css.nameWrapper}>
         <BsPersonSquare className={css.icon} />
-        <BsCalendarWeek />
+        <p className={css.name}>{lastCallDetails.name}</p>
+      </div>
+      <div className={css.dateWrapper}>
+        <BsCalendarWeek className={css.icon} />
         <p className={css.date}>{lastCallDetails.date}</p>
       </div>
       <div
