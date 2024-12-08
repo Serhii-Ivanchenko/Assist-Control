@@ -1,8 +1,7 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 455px;
-    height: 763px;
-    border: 1px solid var(--light-gray);
-    border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 455px;
+  height: 763px;
+  gap: 20px;
 }

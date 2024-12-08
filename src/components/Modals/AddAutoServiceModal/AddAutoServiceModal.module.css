@@ -12,8 +12,37 @@
   margin-bottom: 7px;
 }
 
-.serviceNameWrapper {
-  width: 135px;
+.changedInput {
+  background: var(--main-gray);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 6px 20px;
+  /* text-align: center; */
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+}
+
+.changedInput:focus {
+  border-color: var(--light-gray);
+  outline: none;
+}
+
+.changedInput:-webkit-autofill {
+  background-color: var(--bg-input) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+
+.changedInput:-webkit-autofill:hover,
+.changedInput:-webkit-autofill:focus {
+  background-color: var(--bg-input) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
 }
 
 .closeIcon {
@@ -28,12 +57,22 @@
   cursor: pointer;
 }
 
+.serviceNameWrapper {
+  display: flex;
+  gap: 14px;
+  max-width: 460px;
+  align-items: center;
+}
+
 .autoServiceName {
   color: var(--light-gray);
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dotsIcon {
@@ -120,7 +159,6 @@
   font-weight: 400;
   line-height: normal;
   width: 100%;
-  -moz-appearance: textfield;
 }
 
 .input:focus {
@@ -143,16 +181,9 @@
   -webkit-text-fill-color: var(--white) !important;
 }
 
-.input::-webkit-inner-spin-button,
-.input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 .input::placeholder {
   color: var(--input-text);
   font-family: Roboto, sans-serif;
-  /* color: var(--light-gray); */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

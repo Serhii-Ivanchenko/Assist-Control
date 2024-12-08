@@ -4,7 +4,7 @@ import { AddServiceSchema } from "../../../validationSchemas/addServiceSchema";
 import { FaCheck } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent";
 import PopupMenu from "../../sharedComponents/PopupMenu/PopupMenu";
 
@@ -12,6 +12,8 @@ export default function AddAutoServiceModal({ onClose }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [logo, setLogo] = useState(null);
   const [isInputVisible, setIsInputVisible] = useState(false);
+  const [serviceName, setServiceName] = useState("СТО назва");
+  const inputRef = useRef(null);
 
   const initialValues = {
     autoServiceName: "",
@@ -34,6 +36,14 @@ export default function AddAutoServiceModal({ onClose }) {
 
   const onEdit = () => {
     setIsInputVisible(true);
+    setTimeout(() => {
+      inputRef.current?.focus(); // Фокусуємо інпут після оновлення стану
+    }, 0);
+  };
+
+  const handleBlur = (e) => {
+    setServiceName(e.target.value);
+    setIsInputVisible(false);
   };
 
   const handleSubmit = (values, actions) => {
@@ -60,23 +70,27 @@ export default function AddAutoServiceModal({ onClose }) {
             <div className={css.serviceNameWrapper}>
               {isInputVisible ? (
                 <Field
+                  innerRef={inputRef}
+                  value={serviceName}
+                  onChange={(e) => setServiceName(e.target.value)}
                   type="text"
                   name="autoServiceName"
-                  className={css.input}
+                  className={css.changedInput}
+                  onBlur={handleBlur}
                 ></Field>
               ) : (
-                <h3 className={css.autoServiceName}>СТО назва</h3>
+                <p className={css.autoServiceName}>{serviceName}</p>
               )}
+              <BsThreeDotsVertical
+                className={css.dotsIcon}
+                onClick={handleThreeDotsBtnClick}
+              />
+              <PopupMenu
+                isOpen={isPopupOpen}
+                onClose={() => setIsPopupOpen(false)}
+                onEdit={onEdit}
+              />
             </div>
-            <BsThreeDotsVertical
-              className={css.dotsIcon}
-              onClick={handleThreeDotsBtnClick}
-            />
-            <PopupMenu
-              isOpen={isPopupOpen}
-              onClose={() => setIsPopupOpen(false)}
-              onEdit={onEdit}
-            />
           </div>
           <div className={css.logo}>
             {logo ? (

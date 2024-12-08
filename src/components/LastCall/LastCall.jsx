@@ -2,6 +2,7 @@ import clsx from "clsx";
 import css from "../LastCall/LastCall.module.css";
 import { BsPersonSquare } from "react-icons/bs";
 import { BsCalendarWeek } from "react-icons/bs";
+import defaultAvatar from "../../assets/images/avatar_default.png";
 
 const calls = [
   {
@@ -27,7 +28,7 @@ const calls = [
   },
 ];
 
-const lastCallDetails = calls[calls.length - 1];
+const lastCallDetails = calls.length > 0 ? calls[calls.length - 1] : null;
 
 console.log(lastCallDetails);
 
@@ -43,9 +44,12 @@ export default function LastCall() {
       >
         {lastCallDetails.phone}
       </p>
-      <div className={css.dateWrapper}>
+      <div className={css.nameWrapper}>
         <BsPersonSquare className={css.icon} />
-        <BsCalendarWeek />
+        <p className={css.name}>{lastCallDetails.name}</p>
+      </div>
+      <div className={css.dateWrapper}>
+        <BsCalendarWeek className={css.icon} />
         <p className={css.date}>{lastCallDetails.date}</p>
       </div>
       <div
@@ -55,7 +59,11 @@ export default function LastCall() {
         )}
       ></div>
       <div className={css.bottomWrapper}>
-        <img src={lastCallDetails.avatar} alt="" className={css.avatar} />
+        <img
+          src={lastCallDetails.avatar || defaultAvatar}
+          alt=""
+          className={css.avatar}
+        />
       </div>
     </div>
   );
