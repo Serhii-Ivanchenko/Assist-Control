@@ -13,7 +13,7 @@ import { BsListUl } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import DayCarsList from "../../DayCarsList/DayCarsList";
 import Loader from "../../Loader/Loader";
-import CalendarInModalCar from "../../CalendarInModalCar/CalendarInModalCar";
+import CalendarPeriodSelector from "../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
 import StatusFilterCars from "../../StatusFilterCars/StatusFilterCars";
 import { useDispatch } from "react-redux";
 import { toggleVisibilityCar } from "../../../redux/cars/slice";
@@ -152,7 +152,7 @@ export default function DayCarsModal({ onClose, isModal }) {
         </div>
         <div className={styles.rightHeader}>
           <StatusFilterCars onStatusChange={handleStatusChange} />
-          <CalendarInModalCar
+          <CalendarPeriodSelector
             selectedDate={selectedDate}
             startDate={startDate}
             endDate={endDate}

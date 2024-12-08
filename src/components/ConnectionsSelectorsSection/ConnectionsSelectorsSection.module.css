@@ -1,6 +1,5 @@
 .wrapper {
     display: flex;
     height: 39px;
-    border: 1px solid var(--light-gray);
-    border-radius: 12px;
+    gap: 50px;
 }

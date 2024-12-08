@@ -19,9 +19,9 @@ export default function Navigation() {
   const [isAccountingOpen, setIsAccountingOpen] = useState(false);
 
   const animationProps = useSpring({
-    height: isAccountingOpen ? "auto" : 0,
+    maxHeight: isAccountingOpen ? 200 : 0,
     opacity: isAccountingOpen ? 1 : 0,
-    transform: isAccountingOpen ? "translateY(0)" : "translateY(-20px)", // Ефект виїзджання
+    transform: isAccountingOpen ? "translateY(0)" : "translateY(-20px)",
     overflow: "hidden",
     config: {
       mass: 1,
@@ -133,7 +133,7 @@ export default function Navigation() {
               <BiSolidRightArrow className={styles.navArrow} />
             )}
           </div>
-          <animated.div // Використовуємо animated.div для анімації
+          <animated.div
             style={animationProps}
             className={clsx(styles.accountingTreeContainer, {
               [styles.open]: isAccountingOpen,
