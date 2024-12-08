@@ -19,7 +19,7 @@ function AccordionItem({
   onEnableEditing,
 }) {
   const [expanded, setExpanded] = useState(false);
-  const [isSummaryPopupOpen, setIsSummaryPopupOpen] = useState(false);
+  const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(category);
   const [currentServices, setCurrentServices] = useState(items);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,19 +27,22 @@ function AccordionItem({
   const inputRef = useRef(null);
 
   const handleChange = () => {
+    console.log("currentServices,", currentServices);
+
     if (!isEdit) {
       setExpanded((prev) => !prev);
     }
   };
 
-  const handleSummaryPopupToggle = (e) => {
+  const handleCategoryPopupToggle = (e) => {
     e.stopPropagation();
-    setIsSummaryPopupOpen((prev) => !prev);
+    setIsCategoryPopupOpen((prev) => !prev);
   };
 
-  const handleCategoryEdit = () => {
+  const handleCategoryEdit = (e) => {
+    e.stopPropagation();
     onEnableEditing();
-    setIsSummaryPopupOpen(false);
+    setIsCategoryPopupOpen(false);
   };
 
   const handleClickOutside = (e) => {
@@ -48,7 +51,7 @@ function AccordionItem({
       inputRef.current &&
       !inputRef.current.contains(e.target)
     ) {
-      setIsSummaryPopupOpen(false);
+      setIsCategoryPopupOpen(false);
     }
   };
 
@@ -64,31 +67,35 @@ function AccordionItem({
     onUpdate({ category: newName, items: currentServices });
   };
 
-  const handleServiceUpdate = (updatedService, idx) => {
-    const updatedServices = [...currentServices];
-    updatedServices[idx] = updatedService;
-    setCurrentServices(updatedServices);
-    onUpdate({ category: currentCategory, items: updatedServices });
-  };
-
-  const handleDeleteItem = (idx) => {
-    const updatedServices = currentServices.filter((_, index) => index !== idx);
-    setCurrentServices(updatedServices);
-  };
-
   const handleAddService = () => {
     setIsModalOpen(true);
   };
 
   const handleNewService = (serviceName) => {
-    setIsSummaryPopupOpen(false);
-    const newService = { item: serviceName };
+    setIsCategoryPopupOpen(false);
+    const newService = { id: Date.now(), item: serviceName };
     setCurrentServices((prevServices) => [...prevServices, newService]);
     onUpdate({
       category: currentCategory,
       items: [...currentServices, newService],
     });
     setIsModalOpen(false);
+  };
+
+  const handleServiceUpdate = (updatedService) => {
+    const updatedServices = currentServices.map((service) =>
+      service.id === updatedService.id ? updatedService : service
+    );
+    setCurrentServices(updatedServices);
+    onUpdate({
+      category: currentCategory,
+      items: updatedServices,
+    });
+  };
+
+  const handleDeleteItem = (idx) => {
+    const updatedServices = currentServices.filter((_, index) => index !== idx);
+    setCurrentServices(updatedServices);
   };
 
   const closeModal = () => {
@@ -130,44 +137,42 @@ function AccordionItem({
             ) : (
               <TiArrowSortedDown className={styles.icon} />
             )}
-            <button className={styles.btn} onClick={handleSummaryPopupToggle}>
+            <button className={styles.btn} onClick={handleCategoryPopupToggle}>
               <BsThreeDotsVertical className={styles.dotsIcon} />
+              {isCategoryPopupOpen && (
+                <div className={styles.popupContainer}>
+                  <PopupMenu
+                    isOpen={isCategoryPopupOpen}
+                    onClose={handleCategoryPopupToggle}
+                    onEdit={handleCategoryEdit}
+                    onAdd={handleAddService}
+                  />
+                  {isModalOpen && (
+                    <Modal isOpen={isModalOpen} onClose={closeModal}>
+                      <AddCategoryModal
+                        onClose={closeModal}
+                        title="Введіть назву послуги"
+                        name="newService"
+                        addNewCategory={handleNewService}
+                      />
+                    </Modal>
+                  )}
+                </div>
+              )}
             </button>
-            {isSummaryPopupOpen && (
-              <div className={styles.popupContainer}>
-                <PopupMenu
-                  isOpen={isSummaryPopupOpen}
-                  onClose={handleSummaryPopupToggle}
-                  onEdit={handleCategoryEdit}
-                  onAdd={handleAddService}
-                />
-                {isModalOpen && (
-                  <Modal isOpen={isModalOpen} onClose={closeModal}>
-                    <AddCategoryModal
-                      onClose={closeModal}
-                      title="Введіть назву послуги"
-                      name="newService"
-                      addNewCategory={handleNewService}
-                    />
-                  </Modal>
-                )}
-              </div>
-            )}
           </div>
         </AccordionSummary>
         <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
           <ul className={styles.accordionDesc}>
             {currentServices.map((service, idx) => (
-              <ServiceItem
-                isEdit={isEdit}
-                key={idx}
-                serviceData={service}
-                onUpdate={(updatedService) =>
-                  handleServiceUpdate(updatedService, idx)
-                }
-                onDelete={() => handleDeleteItem(idx)}
-                onEnableEditing={(e) => onEnableEditing(idx, e)}
-              />
+              <li key={service.id}>
+                <ServiceItem
+                  id={service.id}
+                  serviceData={service}
+                  onUpdate={handleServiceUpdate}
+                  onDelete={() => handleDeleteItem(idx)}
+                />
+              </li>
             ))}
           </ul>
         </AccordionDetails>

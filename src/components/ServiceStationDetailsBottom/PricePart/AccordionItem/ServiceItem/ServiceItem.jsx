@@ -3,47 +3,40 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import PopupMenu from "../../../../sharedComponents/PopupMenu/PopupMenu";
 import styles from "./ServiceItem.module.css";
 
-function ServiceItem({
-  isEdit,
-  serviceData,
-  idx,
-  onDelete,
-  onUpdate,
-  onEnableEditing,
-}) {
+function ServiceItem({ id, serviceData, onUpdate, onDelete }) {
   const [serviceName, setServiceName] = useState(serviceData.item);
-  const [openPopupIndex, setOpenPopupIndex] = useState(null);
+  const [isEdit, setIsEdit] = useState(false);
+  const [activePopupId, setActivePopupId] = useState(null);
   const inputRef = useRef();
 
-  const handlePopupToggle = (idx) => {
-    setOpenPopupIndex((prev) => (prev === idx ? null : idx));
+  const handlePopupToggle = () => {
+    setActivePopupId((prev) => (prev === id ? null : id));
   };
 
-  const handleServiceEdit = () => {
-    onEnableEditing((prev) => (prev === idx ? null : idx));
+  const handleEdit = () => {
+    setIsEdit(true);
+    setActivePopupId(null);
   };
 
   const handleSave = () => {
-    onUpdate({ ...serviceData, item: serviceName });
+    setIsEdit(false);
+    onUpdate({ id, name: serviceName });
   };
 
   const handleDelete = () => {
-    setOpenPopupIndex(null);
-    onDelete();
+    onDelete(id);
   };
+
   return (
-    <li key={idx}>
+    <>
       {isEdit ? (
         <div className={styles.editInputBox}>
           <input
             className={styles.editInput}
             type="text"
             value={serviceName}
-            onChange={(e) => {
-              const newValue = e.target.value;
-              setServiceName(newValue);
-              onUpdate(handleSave);
-            }}
+            onChange={(e) => setServiceName(e.target.value)}
+            onBlur={handleSave}
             ref={inputRef}
           />
         </div>
@@ -64,26 +57,21 @@ function ServiceItem({
         </div>
       </div>
 
-      <button
-        className={styles.btnInput}
-        onClick={(e) => handlePopupToggle(idx, e)}
-      >
+      <button className={styles.btnInput} onClick={handlePopupToggle}>
         <BsThreeDotsVertical className={styles.dotsIcon} />
       </button>
 
-      {openPopupIndex === idx && (
+      {activePopupId === id && (
         <div className={styles.popupContainer}>
-          <div className={styles.popupMenu}>
-            <PopupMenu
-              isOpen={openPopupIndex === idx}
-              onClose={(e) => handlePopupToggle(idx, e)}
-              onEdit={(e) => handleServiceEdit(idx, e)}
-              onDelete={handleDelete}
-            />
-          </div>
+          <PopupMenu
+            isOpen={true}
+            onClose={handlePopupToggle}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
         </div>
       )}
-    </li>
+    </>
   );
 }
 

@@ -1,4 +1,5 @@
 import { BsPencil, BsTrash } from "react-icons/bs";
+import { RiTableAltLine } from "react-icons/ri";
 import styles from "./PopupMenu.module.css";
 import { useEffect, useRef } from "react";
 
@@ -34,8 +35,8 @@ function PopupMenu({ isOpen, onClose, onEdit, onAdd, onDelete }) {
       )}
       {onAdd && (
         <li>
-          <button className={styles.addBtn} onClick={onAdd}>
-            Додати послугу
+          <button className={styles.editBtn} onClick={onAdd}>
+            <RiTableAltLine size={18} /> Додати послугу
           </button>
         </li>
       )}
