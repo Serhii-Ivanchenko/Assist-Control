@@ -28,7 +28,7 @@ const calls = [
   },
 ];
 
-const lastCallDetails = calls[calls.length - 1];
+const lastCallDetails = calls.length > 0 ? calls[calls.length - 1] : null;
 
 console.log(lastCallDetails);
 
