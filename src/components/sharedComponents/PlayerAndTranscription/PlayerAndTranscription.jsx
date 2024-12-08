@@ -1,4 +1,15 @@
-export default function PlayerAndTranscription() {
+import css from "./PlayerAndTranscription.module.css";
+import MainInfoFromVoiceMessage from "../MainInfoFromVoiceMessage/MainInfoFromVoiceMessage";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import userAvatar from "../../../assets/images/ava.png";
+import TranscriptionMessage from "../TranscriptionMessage/TranscriptionMessage";
+import AudioPlayer from "../AudioPlayer/AudioPlayer";
+import audio from "../../../assets/audio2/Marian Hill – Got It (Kill Them With Colour Remix).mp3";
+// import audio2 from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
+
+export default function PlayerAndTranscription({ messages, summary }) {
   return (
     <div className={css.secondAcordionList}>
       <div className={css.secondAcordionWrapper}>
@@ -20,7 +31,7 @@ export default function PlayerAndTranscription() {
                 padding: "0",
               }}
             >
-              <button
+              {/* <button
                 className={css.transcriptionToggleBtn}
                 onClick={() => toogleTranscription()}
               >
@@ -33,7 +44,7 @@ export default function PlayerAndTranscription() {
                   strokeWidth={3}
                   size={14}
                 />
-              </button>
+              </button> */}
             </AccordionSummary>
           </div>
           <AccordionDetails
@@ -43,11 +54,7 @@ export default function PlayerAndTranscription() {
           >
             <div className={css.scrollBarWrapper}>
               <div className={css.secondAcordionBody}>
-                {/* <button className={css.transcriptionImportantBtn}>
-                  <BsFilter />
-                  <p>Головне</p>
-                </button> */}
-                              <MainInfo
+                <MainInfoFromVoiceMessage summary={summary} />
                 <ul className={css.messages}>
                   {messages.map(({ orClientMsg, time, message }) => (
                     <TranscriptionMessage
