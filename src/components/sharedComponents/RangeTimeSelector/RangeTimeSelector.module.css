@@ -1,11 +1,9 @@
 .wrapper{
     display: flex;
-    padding: 10px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     border-radius: 12px;
-    background: var(--dark-gray);
+    background: var(--bg-secondary);
 }
 
 .timeText{
