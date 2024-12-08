@@ -5,17 +5,19 @@ import { useState } from "react";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import TranscribedDialog from "./TranscribedDialog/TranscribedDialog";
+import { Accordion } from "@mui/material";
 
 export default function TranscriptionComponent({ size, summary, messages }) {
   const [transcription, setTranscription] = useState(false);
   const toogleTranscription = () => setTranscription(!transcription);
 
   return (
-    <>
+    <Accordion className={css.accordion}>
       <AccordionSummary
         sx={{
           padding: "0",
         }}
+        className={css.accordionSummary}
       >
         <button
           className={`${css.transcriptionToggleBtn} 
@@ -40,9 +42,10 @@ export default function TranscriptionComponent({ size, summary, messages }) {
         sx={{
           padding: "0",
         }}
+        className={css.accordionDetails}
       >
         <TranscribedDialog summary={summary} messages={messages} />
       </AccordionDetails>
-    </>
+    </Accordion>
   );
 }

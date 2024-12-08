@@ -1,16 +1,15 @@
-// import { Slider, Typography } from "@mui/material";
 import { SlSpeedometer } from "react-icons/sl";
 import {
   BsCalendar2Week,
   BsCaretDownFill,
-  BsPauseFill,
-  BsPlayFill,
+  // BsPauseFill,
+  // BsPlayFill,
   // BsChevronDown,
   // BsFilter,
   // BsPauseFill,
   // BsPlayFill,
-  BsChevronDown,
-  BsFilter,
+  // BsChevronDown,
+  // BsFilter,
   BsRecordCircle,
   BsWrench,
   BsUiChecksGrid,
@@ -20,22 +19,22 @@ import {
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import userAvater from "../../../assets/images/ava.png";
+import userAvatar from "../../../assets/images/ava.png";
 // import TranscriptionMessage from "../TranscriptionMessage/TranscriptionMessage";
 import css from "./ItemOfRecord.module.css";
 import { useState } from "react";
 import clsx from "clsx";
 import RecordBtnInfo from "../RecordBtnInfo/RecordBtnInfo";
-import audio from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
+// import audio from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
 // import MainInfoFromVoiceMessage from "../../sharedComponents/MainInfoFromVoiceMessage/MainInfoFromVoiceMessage";
 import TranscriptionComponent from "../../sharedComponents/TranscriptionComponent/TranscriptionComponent";
 // import TranscribedDialog from "../../sharedComponents/TranscriptionComponent/TranscribedDialog/TranscribedDialog";
-
-const summary =
-  "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене[марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей.Також цікавить діагностика стану автомобіля після ремонту.Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!";
 import AudioPlayer from "../../sharedComponents/AudioPlayer/AudioPlayer";
 import audio from "../../../assets/audio2/Marian Hill – Got It (Kill Them With Colour Remix).mp3";
 // import audio2 from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
+
+const summary =
+  "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене[марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей.Також цікавить діагностика стану автомобіля після ремонту.Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!";
 
 export default function ItemOfRecord({ item, messages, isExpanded }) {
   const [showDialogModal, setShowDialogModal] = useState(isExpanded);
@@ -66,44 +65,6 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
       ? handleToogleRecordInfo()
       : handleToogleRecordInfo(string);
 
-  // const formatTime = (time) => {
-  //   const minutes = Math.floor(time / 60);
-  //   const seconds = Math.floor(time % 60);
-  //   return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
-  // };
-
-  // const [isPlaying, setIsPlaying] = useState(false);
-  // const [progress, setProgress] = useState(0);
-  // const [duration, setDuration] = useState(0);
-  // const audioRef = useRef(null);
-
-  // const togglePlay = () => {
-  //   if (isPlaying) {
-  //     audioRef.current.pause();
-  //   } else {
-  //     audioRef.current.play();
-  //   }
-  //   setIsPlaying(!isPlaying);
-  // };
-
-  // const handleProgress = () => {
-  //   const currentTime = audioRef.current.currentTime;
-  //   setProgress(currentTime);
-  // };
-
-  // const handleLoadedMetadata = () => {
-  //   setDuration(audioRef.current.duration);
-  // };
-
-  // const handleSliderChange = (event, value) => {
-  //   audioRef.current.currentTime = value;
-  //   setProgress(value);
-  // };
-
-  // const handleAudioEnd = () => {
-  //   setIsPlaying(false); // Повертаємо стан у "не відтворюється"
-  //   setProgress(0); // Повертаємо слайдер у початок
-  // };
   return (
     <li key={item.totalkilometrs} className={css.itemOfAccardion}>
       <div className={css.itemOfMarking}>
@@ -253,25 +214,34 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
             ) : null}
             <div className={css.secondAcordionList}>
               <div className={css.secondAcordionWrapper}>
-                <Accordion
+                {/* <Accordion
                   disableGutters={true}
                   sx={{
                     background: "none",
                     color: "inherit",
                     WebkitBoxShadow: "none",
+                    // position: "relative",
                   }}
-                >
-                  <div className={css.secondAcordion}>
-                    <div className={css.callRecordWrapper}>
-                      <img src={userAvatar} alt="user avatar" />
-                      <AudioPlayer audio={audio} size="big" />
-                    </div>
-                    {/* <AccordionSummary
+                > */}
+                <div className={css.secondAcordion}>
+                  <div className={css.callRecordWrapper}>
+                    <img src={userAvatar} alt="user avatar" />
+
+                    <AudioPlayer audio={audio} size="big" />
+                  </div>
+                  <TranscriptionComponent
+                    size="big"
+                    summary={summary}
+                    messages={messages}
+                  />
+                </div>
+              </div>
+              {/* <AccordionSummary
                       sx={{
                         padding: "0",
                       }}
                     > */}
-                    {/* <button
+              {/* <button
                         className={css.transcriptionToggleBtn}
                         onClick={() => toogleTranscription()}
                       >
@@ -285,14 +255,10 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                           size={14}
                         />
                       </button> */}
-                    <TranscriptionComponent
-                      size="small"
-                      summary={summary}
-                      messages={messages}
-                    />
-                    {/* </AccordionSummary> */}
-                  </div>
-                  {/* <AccordionDetails
+
+              {/* </AccordionSummary> */}
+
+              {/* <AccordionDetails
                     sx={{
                       padding: "0",
                     }}
@@ -318,8 +284,7 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                     // </div>
                     <TranscribedDialog summary={summary} messages={messages} />
                   </AccordionDetails> */}
-                </Accordion>
-              </div>
+              {/* </Accordion> */}
             </div>
           </div>
         </AccordionDetails>

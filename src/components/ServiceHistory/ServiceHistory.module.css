@@ -41,7 +41,7 @@
 .filtrationInput {
   text-align: center;
   color: var(--white);
-  width: 90px;  
+  width: 90px;
   border: none;
   background-color: transparent;
   height: 27px;
@@ -59,6 +59,7 @@
   height: 100%;
   max-height: 680px;
   overflow-y: auto;
+  padding-bottom: 8px;
 }
 .higherContainer {
   max-height: 760px;
@@ -77,7 +78,7 @@
   border-radius: 4px;
   padding: 5px 0 5px 0;
 }
-.notFoundText{
+.notFoundText {
   width: 684px;
   padding-left: 44px;
 }
