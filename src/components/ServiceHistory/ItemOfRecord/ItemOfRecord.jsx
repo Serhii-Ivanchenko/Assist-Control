@@ -25,12 +25,12 @@ import css from "./ItemOfRecord.module.css";
 import { useState } from "react";
 import clsx from "clsx";
 import RecordBtnInfo from "../RecordBtnInfo/RecordBtnInfo";
-// import audio from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
+import audio from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
 // import MainInfoFromVoiceMessage from "../../sharedComponents/MainInfoFromVoiceMessage/MainInfoFromVoiceMessage";
 import TranscriptionComponent from "../../sharedComponents/TranscriptionComponent/TranscriptionComponent";
 // import TranscribedDialog from "../../sharedComponents/TranscriptionComponent/TranscribedDialog/TranscribedDialog";
 import AudioPlayer from "../../sharedComponents/AudioPlayer/AudioPlayer";
-import audio from "../../../assets/audio2/Marian Hill – Got It (Kill Them With Colour Remix).mp3";
+// import audio from "../../../assets/audio2/Marian Hill – Got It (Kill Them With Colour Remix).mp3";
 // import audio2 from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
 
 const summary =
