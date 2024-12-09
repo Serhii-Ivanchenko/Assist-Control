@@ -49,6 +49,8 @@ export default function StaffPart() {
 
   const [isEditing, setIsEditing] = useState(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [editedValue, setEditedValue] = useState({});
+
   // const selectRef = useRef(null);
 
   const inputFocusRef = useRef();
@@ -90,6 +92,8 @@ export default function StaffPart() {
   };
 
   const handleEditing = (index) => {
+    const memberToEdit = members[index];
+    setEditedValue({ ...memberToEdit, index });
     setIsEditing(isEditing === index ? null : index);
   };
 
@@ -110,6 +114,19 @@ export default function StaffPart() {
   const handleBlur = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       setActiveDropdown(null);
+    }
+  };
+
+  const handleRepeal = () => {
+    if (editedValue && editedValue.index !== undefined) {
+      setMembers(
+        members.map((member, index) =>
+          index === editedValue.index
+            ? { ...member, name: editedValue.name }
+            : member
+        )
+      );
+      // setIsEditing(null);
     }
   };
 
@@ -180,6 +197,7 @@ export default function StaffPart() {
                 showIconSave={true}
                 id={index}
                 isEditing={isEditing}
+                onRepeal={() => handleRepeal(index)}
               />
             </li>
           ))}

@@ -74,9 +74,8 @@ export default function StationPart() {
             : post
         )
       );
-      // setIsEditing(null); // Вихід із режиму редагування
+      // setIsEditing(null);
     }
-    // setPosts(posts.map((post, i) => index === i && post));
   };
 
   return (
