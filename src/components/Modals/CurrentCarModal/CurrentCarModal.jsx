@@ -25,11 +25,14 @@ import { BsFiles } from "react-icons/bs";
 import { BsLayerBackward } from "react-icons/bs";
 
 import styles from "./CurrentCarModal.module.css";
+import ArchiveModal from "../ArchiveModal/ArchiveModal.jsx";
+import Modal from "../Modal/Modal.jsx";
 
 function CurrentCarModal({ onClose, car, status }) {
   const dispatch = useDispatch();
   const [selectedStatus, setSelectedStatus] = useState(status);
   const currentDate = useSelector(selectDate);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -68,6 +71,14 @@ function CurrentCarModal({ onClose, car, status }) {
 
   const handleStatusChange = (e) => {
     setSelectedStatus(e.target.value);
+  };
+
+  const handleArchiveModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeArchiveModal = () => {
+    setIsModalOpen(false);
   };
 
   const handleSubmit = () => {
@@ -214,9 +225,14 @@ function CurrentCarModal({ onClose, car, status }) {
           </div>
         </div>
         <div className={styles.btnContainer}>
-          <button className={styles.archiveBtn}>
+          <button className={styles.archiveBtn} onClick={handleArchiveModal}>
             <BsLayerBackward className={styles.iconArchive} />В архів
           </button>
+          {isModalOpen && (
+            <Modal isOpen={isModalOpen} onClose={closeArchiveModal}>
+              <ArchiveModal onClose={closeArchiveModal} />
+            </Modal>
+          )}
           <button
             className={styles.submitBtn}
             type="submit"
