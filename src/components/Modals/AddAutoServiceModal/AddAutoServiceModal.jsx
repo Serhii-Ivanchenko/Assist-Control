@@ -14,6 +14,7 @@ export default function AddAutoServiceModal({ onClose }) {
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [serviceName, setServiceName] = useState("СТО назва");
   const inputRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const initialValues = {
     autoServiceName: "",
@@ -30,8 +31,10 @@ export default function AddAutoServiceModal({ onClose }) {
     headPhoneNumber: "",
   };
 
-  const handleThreeDotsBtnClick = () => {
-    setIsPopupOpen(true);
+  const handleThreeDotsBtnClick = (e) => {
+    e.stopPropagation();
+    setIsPopupOpen((prevState) => !prevState);
+    // setIsPopupOpen(true);
   };
 
   const onEdit = () => {
@@ -81,15 +84,25 @@ export default function AddAutoServiceModal({ onClose }) {
               ) : (
                 <p className={css.autoServiceName}>{serviceName}</p>
               )}
-              <BsThreeDotsVertical
-                className={css.dotsIcon}
+              <button
+                type="button"
+                className={css.btn}
                 onClick={handleThreeDotsBtnClick}
-              />
-              <PopupMenu
-                isOpen={isPopupOpen}
-                onClose={() => setIsPopupOpen(false)}
-                onEdit={onEdit}
-              />
+                ref={buttonRef}
+              >
+                <BsThreeDotsVertical className={css.dotsIcon} />
+                <div className={css.popupContainer}>
+                  <PopupMenu
+                    isOpen={isPopupOpen}
+                    onClose={() => setIsPopupOpen(false)}
+                    buttonRef={buttonRef}
+                    onDelete={() => {}}
+                    containerRef
+                    innerAccRef
+                    onEdit={onEdit}
+                  />
+                </div>
+              </button>
             </div>
           </div>
           <div className={css.logo}>

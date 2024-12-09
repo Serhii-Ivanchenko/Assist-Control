@@ -16,7 +16,7 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editableName, setEditableName] = useState(distributor.name || "");
   const [logo, setLogo] = useState(distributor.logo);
-  const popupRef = useRef();
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     if (distributorData) {
@@ -65,8 +65,15 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
     setDistributor((prev) => ({ ...prev, isDisabled: !prev.isDisabled }));
   };
 
-  const handlePopupToggle = () => {
+  const handlePopupToggle = (e) => {
+    e.stopPropagation();
     setIsPopupActive((prevState) => !prevState);
+  };
+
+  const handleEdit = (e) => {
+    e.stopPropagation();
+    setIsEditing(true);
+    setIsPopupActive(false);
   };
 
   return (
@@ -87,20 +94,24 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
               <h2 className={styles.name}>{distributor.name || "Назва"}</h2>
             )}
 
-            <BsThreeDotsVertical
-              className={styles.popupIcon}
+            <button
+              className={styles.btn}
               onClick={handlePopupToggle}
-            />
-
-            <PopupMenu
-              isOpen={isPopupActive}
-              onClose={() => setIsPopupActive(false)}
-              popupRef={popupRef}
-              onEdit={() => {
-                setIsEditing(true);
-                setIsPopupActive(false);
-              }}
-            />
+              ref={buttonRef}
+            >
+              <BsThreeDotsVertical className={styles.popupIcon} />
+              <div>
+                <PopupMenu
+                  isOpen={isPopupActive}
+                  onClose={() => setIsPopupActive(false)}
+                  buttonRef={buttonRef}
+                  onDelete={() => {}}
+                  containerRef
+                  innerAccRef
+                  onEdit={handleEdit}
+                />
+              </div>
+            </button>
           </div>
           <div className={styles.imgWrapper}>
             {logo ? (
