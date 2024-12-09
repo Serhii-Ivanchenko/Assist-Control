@@ -10,7 +10,7 @@ const AddCategoryModal = ({ title, name, onClose, addNewCategory }) => {
   };
 
   return (
-    <div className={styles.modalBox}>
+    <div className={styles.modalBox} onClick={(e) => e.stopPropagation()}>
       <p className={styles.modalTitle}>{title}</p>
       <Formik initialValues={{ [name]: "" }} onSubmit={handleSubmit}>
         <Form className={styles.form}>
