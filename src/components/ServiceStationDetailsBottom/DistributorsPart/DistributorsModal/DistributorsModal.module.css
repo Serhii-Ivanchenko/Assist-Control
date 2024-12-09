@@ -224,7 +224,7 @@
   align-items: center;
   border-radius: 8px;
   background: transparent;
-  border: 1px solid var(--CRM-modal-LightGray, #d8e1ff);
+  border: 1px solid var(--light-gray);
 
   color: var(--white);
   font-family: "Roboto", sans-serif;
