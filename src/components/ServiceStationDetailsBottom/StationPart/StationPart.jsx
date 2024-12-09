@@ -12,6 +12,7 @@ export default function StationPart() {
   ]);
   const [newPost, setNewPost] = useState("");
   const [isEditing, setIsEditing] = useState(null);
+  const [editedValue, setEditedValue] = useState({});
   const inputFocusRef = useRef();
   const scrollToTheLastItemRef = useRef();
 
@@ -30,6 +31,8 @@ export default function StationPart() {
   };
 
   const handleEditing = (postId) => {
+    const postToEdit = posts.find((post) => post.id === postId);
+    setEditedValue(postToEdit);
     setIsEditing(isEditing === postId ? null : postId);
   };
 
@@ -62,6 +65,20 @@ export default function StationPart() {
     setPosts((prevPosts) => prevPosts.filter((_, i) => i !== index));
   };
 
+  const handleRepeal = () => {
+    if (editedValue) {
+      setPosts(
+        posts.map((post) =>
+          post.id === editedValue.id
+            ? { ...post, name: editedValue.name }
+            : post
+        )
+      );
+      // setIsEditing(null); // Вихід із режиму редагування
+    }
+    // setPosts(posts.map((post, i) => index === i && post));
+  };
+
   return (
     <div className={css.stationPart}>
       <p className={css.title}>Назва поста</p>
@@ -88,6 +105,7 @@ export default function StationPart() {
                 showIconSave={true}
                 id={post.id}
                 isEditing={isEditing}
+                onRepeal={() => handleRepeal(post.id)}
               />
             </li>
           ))}
