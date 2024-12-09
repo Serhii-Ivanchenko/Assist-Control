@@ -79,9 +79,9 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.numberOfKilometers>div,
-.kilometersDriven>div,
-.date>div {
+.numberOfKilometers > div,
+.kilometersDriven > div,
+.date > div {
   height: 16px;
 }
 
@@ -226,6 +226,7 @@
   align-items: center;
   gap: 19px;
   flex-shrink: 0;
+  position: relative;
 }
 
 .callRecordWrapper {
@@ -233,9 +234,12 @@
   gap: 20px;
   justify-content: center;
   align-items: center;
+
+  position: absolute;
+  top: 0;
 }
 
-.callRecordWrapper>img {
+.callRecordWrapper > img {
   width: 48px;
   height: 48px;
 }
@@ -310,7 +314,7 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.transcriptionToggleBtn>p {
+.transcriptionToggleBtn > p {
   font-size: 16px;
   font-weight: 600;
 }
@@ -361,7 +365,7 @@
   background-color: var(--player-secondary-bg);
 }
 
-.transcriptionImportantBtn>p {
+.transcriptionImportantBtn > p {
   font-size: 14px;
   font-weight: 300;
 }
