@@ -21,13 +21,12 @@
   width: 351px;
   display: flex;
   padding: 10px;
-  padding-top: 20px;
   justify-content: center;
   align-items: center;
   /* gap: 10px; */
   align-self: stretch;
 
-  overflow-y: auto;
+  /* overflow-y: auto; */
 
   border-radius: 0px 12px 12px 12px;
   background-color: var(--player-secondary-bg);
@@ -41,6 +40,23 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  max-height: 380px;
+  overflow: auto;
+}
+
+.modalText::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modalText::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+}
+
+.modalText::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--main-gray);
+  border: 1px solid var(--bg-secondary);
 }
 
 .closeBtn {
