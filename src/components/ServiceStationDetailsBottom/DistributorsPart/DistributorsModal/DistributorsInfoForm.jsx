@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import CustomRadioBtn from "../../../CustomRadioBtn/CustomRadioBtn";
 import styles from "./DistributorsModal.module.css";
 
-const DistributorsInfoForm = ({ distributor, setDistributor }) => {
+const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
   const initialValues = {
     address: distributor.address || "",
     paymentCondition: distributor.paymentCondition || "prepaid",
@@ -42,6 +42,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor }) => {
 
   return (
     <Formik
+      innerRef={formikRef}
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
@@ -53,7 +54,6 @@ const DistributorsInfoForm = ({ distributor, setDistributor }) => {
             <Field
               type="text"
               name="address"
-              value={distributor.address || ""}
               placeholder="Харків, Байрона 189 оф 27"
               className={styles.input}
             />
@@ -176,7 +176,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor }) => {
               <Field
                 className={styles.input}
                 type="text"
-                name="companeAddress"
+                name="companyAddress"
                 placeholder="м. Київ, вул. Шевченка, буд. 10"
                 style={{ width: "269px" }}
               />

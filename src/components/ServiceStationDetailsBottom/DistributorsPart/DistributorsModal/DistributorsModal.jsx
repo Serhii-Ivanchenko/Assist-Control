@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import PopupMenu from "../../../sharedComponents/PopupMenu/PopupMenu";
 import AuthForm from "./AuthForm/AuthForm";
@@ -16,6 +16,7 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editableName, setEditableName] = useState(distributor.name || "");
   const [logo, setLogo] = useState(distributor.logo);
+  const popupRef = useRef();
 
   useEffect(() => {
     if (distributorData) {
@@ -31,9 +32,30 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
   };
 
   const handleSave = () => {
-    //тут буде логіка пердачі даних на бек
     console.log(distributor);
     onClose();
+  };
+
+  const formRef = useRef(null);
+
+  const handleResetForm = () => {
+    if (formRef.current) {
+      formRef.current.resetForm();
+    }
+  };
+
+  const handleReset = () => {
+    if (distributorData) {
+      setDistributor(distributorData);
+      setEditableName(distributorData.name || "");
+      setLogo(distributorData.logo);
+    } else {
+      setDistributor({});
+      setEditableName("");
+      setLogo(null);
+    }
+    setIsEditing(false);
+    handleResetForm();
   };
 
   const handleToggleDisable = () => {
@@ -41,6 +63,10 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
       onToggleDisable(!distributor.isDisabled);
     }
     setDistributor((prev) => ({ ...prev, isDisabled: !prev.isDisabled }));
+  };
+
+  const handlePopupToggle = () => {
+    setIsPopupActive((prevState) => !prevState);
   };
 
   return (
@@ -60,9 +86,20 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
             ) : (
               <h2 className={styles.name}>{distributor.name || "Назва"}</h2>
             )}
+
             <BsThreeDotsVertical
               className={styles.popupIcon}
-              onClick={() => setIsPopupActive((prev) => !prev)}
+              onClick={handlePopupToggle}
+            />
+
+            <PopupMenu
+              isOpen={isPopupActive}
+              onClose={() => setIsPopupActive(false)}
+              popupRef={popupRef}
+              onEdit={() => {
+                setIsEditing(true);
+                setIsPopupActive(false);
+              }}
             />
           </div>
           <div className={styles.imgWrapper}>
@@ -89,18 +126,10 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
               </div>
             )}
           </div>
-
-          <PopupMenu
-            isOpen={isPopupActive}
-            onClose={() => setIsPopupActive(false)}
-            onEdit={() => {
-              setIsEditing(true);
-              setIsPopupActive(false);
-            }}
-          />
           <DistributorsInfoForm
             distributor={distributor}
             setDistributor={setDistributor}
+            formikRef={formRef}
           />
         </div>
         <div className={styles.authContainer}>
@@ -119,11 +148,15 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
           deliveryData={distributor.deliverySchedule || null}
         />
       </div>
-
-      <button className={styles.saveBtn} onClick={handleSave}>
-        <RiSave3Fill style={{ transform: "scale(1.2)" }} />
-        Зберегти
-      </button>
+      <div className={styles.btnGroup}>
+        <button className={styles.resetBtn} onClick={() => handleReset()}>
+          Відміна
+        </button>
+        <button className={styles.saveBtn} onClick={handleSave}>
+          <RiSave3Fill style={{ transform: "scale(1.2)" }} />
+          Зберегти
+        </button>
+      </div>
     </div>
   );
 }

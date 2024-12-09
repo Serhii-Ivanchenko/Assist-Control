@@ -207,6 +207,33 @@
   width: 391px;
 }
 
+.btnGroup {
+  display: flex;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.resetBtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  display: flex;
+  padding: 6px 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--CRM-modal-LightGray, #d8e1ff);
+
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
 .saveBtn {
   display: inline-flex;
   justify-content: center;
