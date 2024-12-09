@@ -5,7 +5,7 @@
   height: 212px;
   padding: 13px 19px 19px 19px;
   border-radius: 12px;
-  background: var(--CRM-modal-SecondaryBG, #23252c);
+  background: var(--bg-secondary);
 }
 
 .exitBtn {
@@ -44,13 +44,27 @@
   align-items: flex-start;
   outline: none;
   border-radius: 0px 12px 12px 12px;
-  background: #4e505f;
+  background: var(--player-secondary-bg);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   resize: none;
   color: #fff;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
+}
+
+.textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.textarea::-webkit-scrollbar-track {
+  background-color: var(--player-secondary-bg);
+  border-radius: 4px;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background: var(--bg);
+  border-radius: 12px;
 }
 
 .btnsGroup {
@@ -87,4 +101,9 @@
   background: var(--Blue, #3956cc);
   color: #fff;
   cursor: pointer;
+}
+
+.submitBtn:hover,
+.submitBtn:focus {
+  background-color: var(--blue-btn-hover);
 }
