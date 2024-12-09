@@ -1,4 +1,4 @@
-.secondAcordionList {
+/* .secondAcordionList {
   margin-top: 14px;
   display: flex;
   justify-content: flex-end;
@@ -11,7 +11,10 @@
   border-radius: 12px;
   background: #31353e;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
+} */
+
+/* .secondAcordionWrapperAccounting {
+} */
 
 .secondAcordion {
   display: flex;
@@ -19,6 +22,10 @@
   gap: 19px;
   flex-shrink: 0;
   position: relative;
+}
+
+.secondAcordionAccounting {
+  gap: 0;
 }
 
 .callRecordWrapper {
@@ -31,7 +38,36 @@
   top: 0; */
 }
 
-.callRecordWrapper > img {
+/* .callRecordWrapper > img {
+  
+} */
+
+.userPhoto {
   width: 48px;
   height: 48px;
+}
+
+.secondAcordionBody {
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  align-items: flex-end;
+  /* border-radius: 12px; */
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.secondAcordionBody::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+}
+
+.secondAcordionBody::-webkit-scrollbar-thumb {
+  background: var(--player-secondary-bg);
+  border-radius: 4px;
+}
+
+.secondAcordionBody::-webkit-scrollbar-track {
+  background: #202020;
+  border-radius: 4px;
 }

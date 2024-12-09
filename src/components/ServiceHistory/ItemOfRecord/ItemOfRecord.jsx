@@ -199,14 +199,20 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
               </div>
             ) : null}
 
-            <PlayerAndTranscription
-              sizePlayer="big"
-              sizeBtn="big"
-              summary={summary}
-              messages={messages}
-              audio={audio}
-              userAvatar={userAvatar}
-            />
+            <div className={css.secondAcordionList}>
+              <div className={css.secondAcordionWrapper}>
+                <PlayerAndTranscription
+                  sizePlayer="big"
+                  sizeBtn="tiny"
+                  summary={summary}
+                  messages={messages}
+                  audio={audio}
+                  userAvatar={userAvatar}
+                  showPhoto={true}
+                  // accounting={true}
+                />
+              </div>
+            </div>
           </div>
         </AccordionDetails>
       </Accordion>
