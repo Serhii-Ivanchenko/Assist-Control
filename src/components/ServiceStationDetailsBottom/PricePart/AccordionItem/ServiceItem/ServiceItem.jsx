@@ -3,11 +3,19 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import PopupMenu from "../../../../sharedComponents/PopupMenu/PopupMenu";
 import styles from "./ServiceItem.module.css";
 
-function ServiceItem({ id, serviceData, onUpdate, onDelete }) {
+function ServiceItem({
+  id,
+  serviceData,
+  onUpdate,
+  onDelete,
+  innerAccRef,
+  containerRef,
+}) {
   const [serviceName, setServiceName] = useState(serviceData.item);
   const [isEdit, setIsEdit] = useState(false);
   const [activePopupId, setActivePopupId] = useState(null);
   const inputRef = useRef();
+  const buttonRef = useRef(null);
 
   const handlePopupToggle = () => {
     setActivePopupId((prev) => (prev === id ? null : id));
@@ -57,7 +65,11 @@ function ServiceItem({ id, serviceData, onUpdate, onDelete }) {
         </div>
       </div>
 
-      <button className={styles.btnInput} onClick={handlePopupToggle}>
+      <button
+        className={styles.btnInput}
+        onClick={handlePopupToggle}
+        ref={buttonRef}
+      >
         <BsThreeDotsVertical className={styles.dotsIcon} />
       </button>
 
@@ -68,6 +80,9 @@ function ServiceItem({ id, serviceData, onUpdate, onDelete }) {
             onClose={handlePopupToggle}
             onEdit={handleEdit}
             onDelete={handleDelete}
+            buttonRef={buttonRef}
+            innerAccRef={innerAccRef}
+            containerRef={containerRef}
           />
         </div>
       )}

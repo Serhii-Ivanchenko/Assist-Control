@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AccordionList from "./AccordionList/AccordionList";
 import { BsFolderPlus } from "react-icons/bs";
 import styles from "./PricePart.module.css";
@@ -133,6 +133,24 @@ export default function PricePart() {
   //   }
   // }, [stationId]);
 
+  // Прокрутка до ост. елементу при додаванні
+ const scrollToTheLastItemRef = useRef(null);
+ const prevDataLengthRef = useRef(filteredData.length); // Зберігаємо попередню довжину даних
+
+ useEffect(() => {
+   if (
+     filteredData.length > prevDataLengthRef.current && // Перевіряємо, чи додано новий елемент
+     scrollToTheLastItemRef.current
+   ) {
+     scrollToTheLastItemRef.current.scrollTo({
+       top: scrollToTheLastItemRef.current.scrollHeight,
+       behavior: "smooth",
+     });
+   }
+   // Оновлюємо попередню довжину після виконання ефекту
+   prevDataLengthRef.current = filteredData.length;
+ }, [filteredData]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.searchContainer}>
@@ -161,6 +179,7 @@ export default function PricePart() {
         isEditable={isEditable}
         onUpdate={(updatedData) => setEditableData(updatedData)}
         onEnableEditing={enableEditing}
+        containerRef={scrollToTheLastItemRef}
       />
 
       <button onClick={handleSaveNewData} className={styles.btn}>

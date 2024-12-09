@@ -17,6 +17,7 @@ function AccordionItem({
   index,
   onUpdate,
   onEnableEditing,
+  containerRef,
 }) {
   const [expanded, setExpanded] = useState(false);
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
@@ -24,7 +25,9 @@ function AccordionItem({
   const [currentServices, setCurrentServices] = useState(items);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
+  const buttonRef = useRef(null);
+  const innerAccRef = useRef(null);
 
   const handleChange = () => {
     console.log("currentServices,", currentServices);
@@ -39,36 +42,42 @@ function AccordionItem({
     setIsCategoryPopupOpen((prev) => !prev);
   };
 
+  const handleCategoryPopupClose = () => {
+    setIsCategoryPopupOpen(false);
+  };
+
   const handleCategoryEdit = (e) => {
     e.stopPropagation();
     onEnableEditing();
     setIsCategoryPopupOpen(false);
   };
 
-  const handleClickOutside = (e) => {
-    if (
-      !e.target.closest(`.${styles.popupContainer}`) &&
-      inputRef.current &&
-      !inputRef.current.contains(e.target)
-    ) {
-      setIsCategoryPopupOpen(false);
-    }
-  };
+  // const handleClickOutside = (e) => {
+  //   if (
+  //     !e.target.closest(`.${styles.popupContainer}`) &&
+  //     inputRef.current &&
+  //     !inputRef.current.contains(e.target)
+  //   ) {
+  //     setIsCategoryPopupOpen(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  });
+  // useEffect(() => {
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // });
 
   const handleCategoryChange = (newName) => {
     setCurrentCategory(newName);
     onUpdate({ category: newName, items: currentServices });
   };
 
-  const handleAddService = () => {
+  const handleAddService = (e) => {
+    e.stopPropagation();
     setIsModalOpen(true);
+    setIsCategoryPopupOpen(false);
   };
 
   const handleNewService = (serviceName) => {
@@ -101,6 +110,23 @@ function AccordionItem({
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  // Прокрутка до ост. елементу при додаванні
+  const prevDataLengthRef = useRef(currentServices.length); // Зберігаємо попередню довжину даних
+
+  useEffect(() => {
+    if (
+      currentServices.length > prevDataLengthRef.current && // Перевіряємо, чи додано новий елемент
+      innerAccRef.current
+    ) {
+      innerAccRef.current.scrollTo({
+        top: innerAccRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+    // Оновлюємо попередню довжину після виконання ефекту
+    prevDataLengthRef.current = currentServices.length;
+  }, [currentServices]);
 
   return (
     <div className={styles.wrapper}>
@@ -137,18 +163,30 @@ function AccordionItem({
             ) : (
               <TiArrowSortedDown className={styles.icon} />
             )}
-            <button className={styles.btn} onClick={handleCategoryPopupToggle}>
+            <button
+              ref={buttonRef}
+              className={styles.btn}
+              onClick={handleCategoryPopupToggle}
+            >
               <BsThreeDotsVertical className={styles.dotsIcon} />
-              {isCategoryPopupOpen && (
-                <div className={styles.popupContainer}>
-                  <PopupMenu
-                    isOpen={isCategoryPopupOpen}
-                    onClose={handleCategoryPopupToggle}
-                    onEdit={handleCategoryEdit}
-                    onAdd={handleAddService}
-                  />
-                  {isModalOpen && (
-                    <Modal isOpen={isModalOpen} onClose={closeModal}>
+              {/* {isCategoryPopupOpen && ( */}
+              <div className={styles.popupContainer}>
+                <PopupMenu
+                  isOpen={isCategoryPopupOpen}
+                  onClose={handleCategoryPopupClose}
+                  onEdit={handleCategoryEdit}
+                  onAdd={handleAddService}
+                  buttonRef={buttonRef}
+                  containerRef={containerRef}
+                  innerAccRef={innerAccRef}
+                />
+                {isModalOpen && (
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <Modal
+                      isOpen={isModalOpen}
+                      onClose={closeModal}
+                      shouldCloseOnOverlayClick={false}
+                    >
                       <AddCategoryModal
                         onClose={closeModal}
                         title="Введіть назву послуги"
@@ -156,14 +194,15 @@ function AccordionItem({
                         addNewCategory={handleNewService}
                       />
                     </Modal>
-                  )}
-                </div>
-              )}
+                  </div>
+                )}
+              </div>
+              {/* )}  */}
             </button>
           </div>
         </AccordionSummary>
         <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
-          <ul className={styles.accordionDesc}>
+          <ul className={styles.accordionDesc} ref={innerAccRef}>
             {currentServices.map((service, idx) => (
               <li key={service.id}>
                 <ServiceItem
@@ -171,6 +210,8 @@ function AccordionItem({
                   serviceData={service}
                   onUpdate={handleServiceUpdate}
                   onDelete={() => handleDeleteItem(idx)}
+                  innerAccRef={innerAccRef}
+                  containerRef={containerRef}
                 />
               </li>
             ))}

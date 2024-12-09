@@ -3,16 +3,29 @@ import { RiTableAltLine } from "react-icons/ri";
 import styles from "./PopupMenu.module.css";
 import { useEffect, useRef } from "react";
 
-function PopupMenu({ isOpen, onClose, onEdit, onAdd, onDelete }) {
+function PopupMenu({
+  isOpen,
+  onClose,
+  onEdit,
+  onAdd,
+  onDelete,
+  buttonRef,
+  containerRef,
+  innerAccRef,
+}) {
   const popupRef = useRef(null);
 
+  const handleClickOutside = (event) => {
+    if (
+      popupRef.current &&
+      !popupRef.current.contains(event.target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target)
+    ) {
+      onClose();
+    }
+  };
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
-
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
@@ -20,7 +33,69 @@ function PopupMenu({ isOpen, onClose, onEdit, onAdd, onDelete }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
+
+  // Автоматичний скролл при відкритті останнього поповера (для категорій)
+  useEffect(() => {
+    if (isOpen && popupRef.current && containerRef.current) {
+      const popover = popupRef.current;
+      const container = containerRef.current;
+
+      const containerRect = container.getBoundingClientRect();
+      const popoverRect = popover.getBoundingClientRect();
+
+      const extraPadding = 5; // Додаткові пікселі для тіні
+
+      if (popoverRect.bottom + extraPadding > containerRect.bottom) {
+        container.scrollTo({
+          top:
+            container.scrollTop +
+            (popoverRect.bottom - containerRect.bottom + extraPadding),
+          behavior: "smooth",
+        });
+      }
+
+      if (popoverRect.top - extraPadding < containerRect.top) {
+        container.scrollTo({
+          top:
+            container.scrollTop -
+            (containerRect.top - popoverRect.top + extraPadding),
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [isOpen, containerRef]);
+
+  // Автоматичний скролл при відкритті останнього поповера (для внутрянки акордіону)
+  useEffect(() => {
+    if (isOpen && popupRef.current && innerAccRef.current) {
+      const popover = popupRef.current;
+      const container = innerAccRef.current;
+
+      const containerRect = container.getBoundingClientRect();
+      const popoverRect = popover.getBoundingClientRect();
+
+      const extraPadding = 5; // Додаткові пікселі для тіні
+
+      if (popoverRect.bottom + extraPadding > containerRect.bottom) {
+        container.scrollTo({
+          top:
+            container.scrollTop +
+            (popoverRect.bottom - containerRect.bottom + extraPadding),
+          behavior: "smooth",
+        });
+      }
+
+      if (popoverRect.top - extraPadding < containerRect.top) {
+        container.scrollTo({
+          top:
+            container.scrollTop -
+            (containerRect.top - popoverRect.top + extraPadding),
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [isOpen, popupRef, innerAccRef]);
 
   if (!isOpen) return null;
 
