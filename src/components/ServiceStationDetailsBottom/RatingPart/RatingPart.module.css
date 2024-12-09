@@ -1,41 +1,38 @@
 .container {
-overflow-y: auto;
-background-color: transparent;
-        width: 940px;
-        height: 100%;
-       
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
 }
 
 .title {
     display: flex;
-            border-bottom: 1px solid var(--input-stroke);
-            text-align: left;
+    border-bottom: 1px solid var(--input-stroke);
+    text-align: left;
     padding: 10px 0px;
-        justify-content: space-between;
-        align-items: center;
-        align-self: stretch;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
 }
 
-.titleitem{
+.titleitem {
     color: var(--input-text);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: normal;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.1875em;
 }
 
 
 .flexitem {
     display: flex;
-    text-align: left;
     border-bottom: 1px solid var(--input-stroke);
     padding: 10px 0px;
     height: 58px;
     justify-content: space-between;
     align-items: center;
-    align-self: stretch;
-  margin-bottom: 9px;
-    
+    margin-bottom: 9px;
 }
 
 .customSelectWrapper {
@@ -48,20 +45,17 @@ background-color: transparent;
 .customSelect {
     width: 100%;
     appearance: none;
-    /* border: 1px solid #ccc; */
     border-radius: 4px;
     border: none;
-    padding: 10px;
-    background-color: var(--bg-input);
+    padding-right: 30px;
+    background-color: var(--bg-secondary);
     color: var(--white);
     font-size: 16px;
     font-style: normal;
-        font-weight: 300;
-        line-height: normal;
-    line-height: 1.2;
+    font-weight: 300;
+    line-height: 1.1875em;
     white-space: pre-wrap;
-    overflow-wrap: break-word;
-    padding-right: 30px;
+    outline: none;
 }
 
 .customSelectIcon {
@@ -80,25 +74,26 @@ background-color: transparent;
 .dictionitem {
     line-height: 1.2;
     white-space: pre-wrap;
-    overflow-wrap: break-word;
-    background-color: var(--bg-input);
-        color: var(--white);
-        border: none;
-        white-space: pre-wrap;
-        width: 135px;
+    background-color: var(--bg-secondary);
+    color: var(--white);
+    border: none;
+    white-space: pre-wrap;
+    width: 135px;
 }
 
 .dictionoption {
-    background-color: var(--bg-input);
-   color: var(--white);
-   border: none;
+    background-color: var(--bg-secondary);
+    color: var(--white);
+    border: none;
     white-space: pre-wrap;
-   
+    max-width: 135px;
+
 }
 
 .dictionitemflex {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 8px;
 }
 
@@ -106,18 +101,18 @@ background-color: transparent;
     transform: rotate(180deg);
 }
 
-.iconbtn{
+.iconbtn {
     display: flex;
-                align-items: center;
-            width: 15px;
-            height: 15px;
-            cursor: pointer;
-            fill: var(--light-gray);
-                filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    align-items: center;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    fill: var(--light-gray);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .activbtn {
-fill: var(--green-btn-normal);
+    fill: var(--green-btn-normal);
     width: 15px;
     height: 15px;
 }
@@ -130,27 +125,15 @@ fill: var(--green-btn-normal);
     width: 100%;
     max-height: 100%;
     overflow-y: auto;
-    /* margin-bottom: 20px; */
-    background-color: var(--bg-input);
+    background-color: var(--bg-secondary);
     border-radius: 6px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-     padding: 20px 40px 20px 20px; 
     height: 100%;
-    /* position: relative; */
-/* margin-right: -20px; */
-    /* Сдвигаем контент */
-    padding-right: 20px;
-    /* Место для скролла */
-/* clip-path: inset(0px -20px 0px 0px); */
-
-
+    padding-right: 10px;
 }
 
 .divForScroll::-webkit-scrollbar {
     width: 8px;
-    
-    position: absolute;
-        margin-left: -20px;
+    margin-left: -20px;
 }
 
 .divForScroll::-webkit-scrollbar-track {
@@ -163,5 +146,67 @@ fill: var(--green-btn-normal);
     background-color: var(--main-gray);
 }
 
+.btnsave {
+    width: fit-content;
+    display: flex;
+    padding: 6px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 
+    border: transparent;
+    border-radius: 6px;
+    background: var(--green);
+    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
 
+    color: var(--white);
+    font-size: 14px;
+    line-height: normal;
+    cursor: pointer;
+
+    font-style: normal;
+    font-weight: 400;
+
+}
+
+.iconsave {
+    display: flex;
+    width: 16px;
+    height: 16px;
+    justify-content: center;
+    align-items: center;
+    background: var(--green);
+    color: var(--white);
+}
+
+.btncancel {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    width: 97px;
+    height: 38px;
+
+    border: 1px solid var(--light-gray);
+    border-radius: 6px;
+    background: transparent;
+    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+
+    color: var(--white);
+    font-size: 14px;
+    line-height: normal;
+    cursor: pointer;
+
+    font-style: normal;
+    font-weight: 400;
+
+}
+
+.blockbtn {
+    margin-top: 25px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

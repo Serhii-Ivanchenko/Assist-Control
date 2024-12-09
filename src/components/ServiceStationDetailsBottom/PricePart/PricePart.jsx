@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AccordionList from "./AccordionList/AccordionList";
 import { BsFolderPlus } from "react-icons/bs";
 import styles from "./PricePart.module.css";
@@ -6,78 +6,87 @@ import SearchBar from "./SearchBar/SearchBar";
 import Modal from "../../Modals/Modal/Modal";
 import AddCategoryModal from "./AddCategoryModal/AddCategoryModal";
 
+// Модель хардкодних даних
+const testData = [
+  {
+    id: 1,
+    category: "Техобслуговування",
+    items: [
+      { id: 1, item: "Заміна моторного масла та фільтра" },
+      { id: 2, item: "Заміна рідини гідропідсилювача з промиванням" },
+      {
+        id: 3,
+        item: "Зняття/встановлення/заміна форсунок високого тиску бензин ",
+      },
+      { id: 4, item: "Заміна рідини гідропідсилювача з промиванням " },
+      { id: 5, item: "Заміна рідини гідропідсилювача з промиванням " },
+      { id: 6, item: "Заміна рідини гідропідсилювача з промиванням " },
+    ],
+  },
+  {
+    id: 2,
+    category: "Ремонт паливної системи",
+    items: [
+      { id: 7, item: "Заміна паливного фільтра" },
+      { id: 8, item: "Очищення інжектора" },
+      { id: 9, item: "Очищення інжектора" },
+      { id: 10, item: "Очищення інжектора" },
+      { id: 11, item: "Очищення інжектора" },
+    ],
+  },
+  {
+    id: 3,
+    category: "Ремонт електрики та електроустаткування",
+    items: [
+      { id: 12, item: "Ремонт генератора" },
+      { id: 13, item: "Діагностика електропроводки" },
+      { id: 14, item: "Діагностика електропроводки" },
+      { id: 15, item: "Діагностика електропроводки" },
+    ],
+  },
+  {
+    id: 4,
+    category: "Ремонт двигуна",
+    items: [
+      { id: 16, item: "Капітальний ремонт двигуна" },
+      { id: 17, item: "Заміна поршнів і кільців" },
+      { id: 18, item: "Регулювання клапанів" },
+      { id: 19, item: "Заміна ременя ГРМ" },
+      { id: 20, item: "Заміна ременя ГРМ" },
+      { id: 21, item: "Заміна ременя ГРМ" },
+    ],
+  },
+  {
+    id: 5,
+    category: "Комплексна діагностика автомобіля",
+    items: [
+      { id: 22, item: "Діагностика двигуна" },
+      { id: 23, item: "Перевірка ходової частини" },
+      { id: 24, item: "Перевірка ходової частини" },
+      { id: 25, item: "Перевірка ходової частини" },
+    ],
+  },
+];
 export default function PricePart() {
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [isModal, setIsModal] = useState(false);
-  // const [data, setData] = useState([]);
-
-  // Модель хардкодних даних
-  const [testData, setTestData] = useState([
-    {
-      category: "Техобслуговування",
-      items: [
-        { item: "Заміна моторного масла та фільтра" },
-        { item: "Заміна рідини гідропідсилювача з промиванням" },
-        { item: "Зняття/встановлення/заміна форсунок високого тиску бензин " },
-        { item: "Заміна рідини гідропідсилювача з промиванням " },
-        { item: "Заміна рідини гідропідсилювача з промиванням " },
-        { item: "Заміна рідини гідропідсилювача з промиванням " },
-      ],
-    },
-    {
-      category: "Ремонт паливної системи",
-      items: [
-        { item: "Заміна паливного фільтра" },
-        { item: "Очищення інжектора" },
-        { item: "Очищення інжектора" },
-        { item: "Очищення інжектора" },
-        { item: "Очищення інжектора" },
-      ],
-    },
-    {
-      category: "Ремонт електрики та електроустаткування",
-      items: [
-        { item: "Ремонт генератора" },
-        { item: "Діагностика електропроводки" },
-        { item: "Діагностика електропроводки" },
-        { item: "Діагностика електропроводки" },
-      ],
-    },
-    {
-      category: "Ремонт двигуна",
-      items: [
-        { item: "Капітальний ремонт двигуна" },
-        { item: "Заміна поршнів і кільців" },
-        { item: "Регулювання клапанів" },
-        { item: "Заміна ременя ГРМ" },
-        { item: "Заміна ременя ГРМ" },
-        { item: "Заміна ременя ГРМ" },
-      ],
-    },
-    {
-      category: "Комплексна діагностика автомобіля",
-      items: [
-        { item: "Діагностика двигуна" },
-        { item: "Перевірка ходової частини" },
-        { item: "Перевірка ходової частини" },
-        { item: "Перевірка ходової частини" },
-      ],
-    },
-  ]);
+  const [isEditable, setIsEditable] = useState({});
+  const [originalData, setOriginalData] = useState(testData);
+  const [editableData, setEditableData] = useState(testData);
 
   useEffect(() => {
-    setFilteredData(testData);
-  }, [testData]);
+    setFilteredData(editableData);
+  }, [editableData]);
 
-  const handleFilter = (data) => {
-    setFilteredData(data);
+  const handleFilter = (searchData) => {
+    setFilteredData(searchData);
     setActiveSearch(true);
   };
 
   const handleClearSearch = () => {
     if (!activeSearch) {
-      setFilteredData(testData);
+      setFilteredData(originalData);
       setActiveSearch(false);
     }
   };
@@ -91,7 +100,21 @@ export default function PricePart() {
         },
       ],
     };
-    setTestData((prev) => [...prev, newCategory]); // тільки оновлюємо testData
+    const updatedData = [...originalData, newCategory];
+    setOriginalData(updatedData);
+    setEditableData(updatedData);
+  };
+
+  const handleSaveNewData = () => {
+    setOriginalData([...editableData]);
+    setIsEditable(false);
+  };
+
+  const enableEditing = (idx) => {
+    setIsEditable((prev) => ({
+      ...prev,
+      [idx]: !prev[idx],
+    }));
   };
 
   const openModal = () => {
@@ -110,11 +133,29 @@ export default function PricePart() {
   //   }
   // }, [stationId]);
 
+  // Прокрутка до ост. елементу при додаванні
+ const scrollToTheLastItemRef = useRef(null);
+ const prevDataLengthRef = useRef(filteredData.length); // Зберігаємо попередню довжину даних
+
+ useEffect(() => {
+   if (
+     filteredData.length > prevDataLengthRef.current && // Перевіряємо, чи додано новий елемент
+     scrollToTheLastItemRef.current
+   ) {
+     scrollToTheLastItemRef.current.scrollTo({
+       top: scrollToTheLastItemRef.current.scrollHeight,
+       behavior: "smooth",
+     });
+   }
+   // Оновлюємо попередню довжину після виконання ефекту
+   prevDataLengthRef.current = filteredData.length;
+ }, [filteredData]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.searchContainer}>
         <SearchBar
-          searchData={testData}
+          searchData={originalData}
           onFilter={handleFilter}
           onBlur={handleClearSearch}
         />
@@ -133,7 +174,17 @@ export default function PricePart() {
           </Modal>
         )}
       </div>
-      <AccordionList data={filteredData} />
+      <AccordionList
+        data={filteredData}
+        isEditable={isEditable}
+        onUpdate={(updatedData) => setEditableData(updatedData)}
+        onEnableEditing={enableEditing}
+        containerRef={scrollToTheLastItemRef}
+      />
+
+      <button onClick={handleSaveNewData} className={styles.btn}>
+        Зберегти
+      </button>
     </div>
   );
 }
