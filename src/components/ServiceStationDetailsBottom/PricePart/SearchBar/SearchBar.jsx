@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import styles from "./SearchBar.module.css";
 
@@ -9,21 +9,22 @@ function SearchBar({ searchData, onFilter }) {
     const userQuery = e.target.value.toLowerCase();
     setQuery(userQuery);
 
-    const filteredData = searchData.map((category) => ({
-      ...category,
-      items: category.items.filter((item) =>
-        item.item.toLowerCase().includes(userQuery)
-      ),
-    }));
+    if (userQuery === "") {
+      onFilter(searchData);
+      return;
+    }
+
+    const filteredData = searchData
+      .map((category) => ({
+        ...category,
+        items: category.items.filter((item) =>
+          item.item.toLowerCase().includes(userQuery)
+        ),
+      }))
+      .filter((category) => category.items.length > 0);
 
     onFilter(filteredData);
   };
-
-  useEffect(() => {
-    if (query === "") {
-      onFilter(searchData);
-    }
-  }, [query, searchData, onFilter]);
 
   return (
     <div className={styles.wrapper}>
