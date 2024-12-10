@@ -4,4 +4,8 @@
     height: 265px;
     border: 1px solid var(--light-gray);
     border-radius: 12px;
+    flex-direction: row;
+    padding: 30px 20px 40px 20px;
+    justify-content: space-between;
+    background-color: var(--bg-secondary);
 }
