@@ -74,7 +74,7 @@ export default function StationPart() {
             : post
         )
       );
-      // setIsEditing(null);
+      setIsEditing(null);
     }
   };
 

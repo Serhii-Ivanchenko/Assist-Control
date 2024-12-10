@@ -127,7 +127,7 @@ export default function StaffPart() {
             : member
         )
       );
-      // setIsEditing(null);
+      setIsEditing(null);
     }
   };
 

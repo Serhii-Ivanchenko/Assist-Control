@@ -19,7 +19,7 @@ function SwitchableBtns({
       {showIconSave && isEditing === id ? (
         <>
           <BsXCircle className={styles.btn} onClick={onRepeal} />
-          <RiSave3Fill className={styles.btn} onClick={onEdit} />
+          <RiSave3Fill className={styles.btn} onClick={onEdit} style={{transform: 'scale(1.32)'}}/>
         </>
       ) : (
         <BsPencil className={styles.btn} onClick={onEdit} />

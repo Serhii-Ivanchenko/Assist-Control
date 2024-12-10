@@ -168,7 +168,7 @@ export default function CheckoutPart() {
             : checkout
         )
       );
-      // setIsEditing(null);
+      setIsEditing(null);
     }
   };
 
