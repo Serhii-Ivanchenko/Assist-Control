@@ -13,6 +13,10 @@
   width: fit-content;
 }
 
+.transcriptionImportantBtnAccounting {
+  margin-right: 40px;
+}
+
 .transcriptionImportantBtn > p {
   font-size: 14px;
   font-weight: 300;

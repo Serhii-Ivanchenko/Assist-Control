@@ -4,7 +4,7 @@ import { BsFilter } from "react-icons/bs";
 import MainModal from "./MainModal/MainModal";
 import { useState } from "react";
 
-export default function MainInfoFromVoiceMessage({ summary }) {
+export default function MainInfoFromVoiceMessage({ summary, accounting }) {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -16,7 +16,12 @@ export default function MainInfoFromVoiceMessage({ summary }) {
   };
   return (
     <>
-      <button className={css.transcriptionImportantBtn} onClick={openModal}>
+      <button
+        className={`${css.transcriptionImportantBtn} ${
+          accounting && css.transcriptionImportantBtnAccounting
+        }`}
+        onClick={openModal}
+      >
         <BsFilter size={18} />
         <p>Головне</p>
       </button>
