@@ -1,0 +1,51 @@
+.wrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.closeBtn {
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--light-gray);
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.submitBtn {
+  display: flex;
+  gap: 10px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: var(--green-btn-normal);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+.submitBtn:hover {
+  background-color: var(--green-btn-hover);
+}
+
+.submitBtnIcon {
+  width: 13px;
+  height: 10px;
+  stroke: var(--white);
+}
