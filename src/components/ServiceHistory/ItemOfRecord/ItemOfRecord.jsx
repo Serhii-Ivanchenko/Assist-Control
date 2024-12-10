@@ -203,13 +203,13 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
               <div className={css.secondAcordionWrapper}>
                 <PlayerAndTranscription
                   sizePlayer="big"
-                  sizeBtn="tiny"
+                  sizeBtn="big"
                   summary={summary}
                   messages={messages}
                   audio={audio}
                   userAvatar={userAvatar}
                   showPhoto={true}
-                  // accounting={true}
+                  accounting={false}
                 />
               </div>
             </div>

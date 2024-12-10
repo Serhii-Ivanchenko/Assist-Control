@@ -63,7 +63,7 @@ export default function PlayerAndTranscription({
         <TranscribedDialog
           summary={summary}
           messages={messages}
-          accouting={accounting}
+          accounting={accounting}
         />
       </AccordionDetails>
     </Accordion>

@@ -3,7 +3,47 @@ import css from "../LastCall/LastCall.module.css";
 import { BsPersonSquare } from "react-icons/bs";
 import { BsCalendarWeek } from "react-icons/bs";
 import defaultAvatar from "../../assets/images/avatar_default.png";
-
+import PlayerAndTranscription from "../sharedComponents/PlayerAndTranscription/PlayerAndTranscription.jsx";
+const summary =
+  "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене[марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей.Також цікавить діагностика стану автомобіля після ремонту.Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!";
+  const messages = [
+    {
+      orClientMsg: true,
+      time: "00:00",
+      message:
+        "Доброго дня, ще раз заставлю. Скажіть, будь ласка, якщо я щось відвіду, я вам дзвоню, у мене нашовання блок АБС. Може хтось подивитися, це він чи не він?",
+    },
+    {
+      orClientMsg: false,
+      time: "00:15",
+      message:
+        "Можемо тільки з наступної середи, тому що електрик у нас відпустив.",
+    },
+    {
+      orClientMsg: true,
+      time: "00:00",
+      message:
+        "Доброго дня, ще раз заставлю. Скажіть, будь ласка, якщо я щось відвіду, я вам дзвоню, у мене нашовання блок АБС. Може хтось подивитися, це він чи не він?",
+    },
+    {
+      orClientMsg: false,
+      time: "00:15",
+      message:
+        "Можемо тільки з наступної середи, тому що електрик у нас відпустив.",
+    },
+    {
+      orClientMsg: true,
+      time: "00:00",
+      message:
+        "Доброго дня, ще раз заставлю. Скажіть, будь ласка, якщо я щось відвіду, я вам дзвоню, у мене нашовання блок АБС. Може хтось подивитися, це він чи не він?",
+    },
+    {
+      orClientMsg: false,
+      time: "00:15",
+      message:
+        "Можемо тільки з наступної середи, тому що електрик у нас відпустив.",
+    },
+  ];
 const calls = [
   {
     name: "Іван Іваненко",
@@ -59,10 +99,20 @@ export default function LastCall() {
         )}
       ></div>
       <div className={css.bottomWrapper}>
-        <img
+        {/* <img
           src={lastCallDetails.avatar || defaultAvatar}
           alt=""
           className={css.avatar}
+        /> */}
+        <PlayerAndTranscription
+          sizePlayer="big"
+          sizeBtn="small"
+          summary={summary}
+          messages={messages}
+          // audio={audio}
+          userAvatar={defaultAvatar}
+          showPhoto={true}
+          accounting={false}
         />
       </div>
     </div>
