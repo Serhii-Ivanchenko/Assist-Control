@@ -55,7 +55,6 @@ export default function Node({
   treeData,
   getPipeHeight,
   setTreeData,
-  // setIsEditing,
   isEditing,
   onStartEditing,
   containerRef,
@@ -64,6 +63,7 @@ export default function Node({
   const inputFocusRef = useRef(null);
   const scrollForPopover = useRef(null);
   const addNodeRef = useRef({});
+
   // console.log("addNodeRef", addNodeRef);
 
   const addNodeButtonRef = (nodeId, el) => {
@@ -76,6 +76,7 @@ export default function Node({
   // Редагування
   const handleEditing = (id, e) => {
     e.stopPropagation();
+
     // setIsEditing(isEditing === id ? null : id);
     onStartEditing(id);
   };
