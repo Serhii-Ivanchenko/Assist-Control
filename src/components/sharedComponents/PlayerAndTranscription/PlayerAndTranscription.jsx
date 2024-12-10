@@ -3,7 +3,7 @@ import MainInfoFromVoiceMessage from "../MainInfoFromVoiceMessage/MainInfoFromVo
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-// import userAvatar from "../../../assets/images/ava.png";
+import userPhoto from "../../../assets/images/avatar_default.png";
 // import TranscriptionMessage from "../TranscriptionMessage/TranscriptionMessage";
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
 // import audio from "../../../assets/audio2/Marian Hill – Got It (Kill Them With Colour Remix).mp3";
@@ -40,10 +40,16 @@ export default function PlayerAndTranscription({
         {/* <div className={css.callRecordWrapper}> */}
 
         {showPhoto && (
-          <img className={css.userPhoto} src={userAvatar} alt="user avatar" />
+          <img
+            className={css.userPhoto}
+            src={userAvatar || userPhoto}
+            alt="user avatar"
+          />
         )}
 
-        {accounting && <MainInfoFromVoiceMessage accounting={accounting} />}
+        {accounting && (
+          <MainInfoFromVoiceMessage accounting={accounting} summary={summary} />
+        )}
 
         <AudioPlayer audio={audio} size={sizePlayer} />
         {/* </div> */}
