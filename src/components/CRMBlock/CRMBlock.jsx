@@ -8,7 +8,11 @@ import toast from "react-hot-toast";
 import { selectDate } from "../../redux/cars/selectors.js";
 import { changeCarStatus } from "../../redux/cars/operations.js";
 import { getRecordsForDay } from "../../redux/crm/operations.js";
-import { selectDayRecords, selectVisibilityRecords } from "../../redux/crm/selectors.js";
+import {
+  selectDayRecords,
+  selectPeriodRecords,
+  selectVisibilityRecords,
+} from "../../redux/crm/selectors.js";
 import { toggleVisibilityRecords } from "../../redux/crm/slice.js";
 import CarInfoSettings from "../sharedComponents/CarInfoSettings/CarInfoSettings.jsx";
 
@@ -51,6 +55,12 @@ export default function CRMBlock() {
   const selectedDate = useSelector(selectDate);
   const records = useSelector(selectDayRecords);
   const visibility = useSelector(selectVisibilityRecords);
+  const periodRecords = useSelector(selectPeriodRecords);
+
+  console.log('records', records);
+  console.log("periodRecords", periodRecords);
+
+  
 
   useEffect(() => {
     if (selectedDate) {
@@ -86,21 +96,27 @@ export default function CRMBlock() {
 
     if (item) {
       dispatch(changeCarStatus({ carId: item.id, status }))
-  .unwrap()
-  .then(() => {
-    console.log("Updated status in frontend:", { ...item, status });
-    dispatch(getRecordsForDay(selectedDate));
-  })
-  .catch((error) => {
-    console.error("Error updating status:", error);
-    toast.error("Помилка при оновленні статусу: " + error.message);
-  });
+        .unwrap()
+        .then(() => {
+          console.log("Updated status in frontend:", { ...item, status });
+          dispatch(getRecordsForDay(selectedDate));
+        })
+        .catch((error) => {
+          console.error("Error updating status:", error);
+          toast.error("Помилка при оновленні статусу: " + error.message);
+        });
     }
   };
 
   const getItemsForStatus = (status) => {
     return records.filter((item) => item.status === status);
   };
+
+  // const getItemsForStatus = (status) => {
+  //   return Array.isArray(periodRecords) && periodRecords.length > 0
+  //     ? periodRecords.filter((item) => item.status === status)
+  //     : records.filter((item) => item.status === status);
+  // };
 
   const handleToggle = (field) => {
     const newVisibility = { ...visibility, [field]: !visibility[field] };
@@ -129,7 +145,7 @@ export default function CRMBlock() {
           );
         })}
         <div className={css.btnSettings}>
-        <CarInfoSettings isCrmView={true} handleToggle={handleToggle}/>
+          <CarInfoSettings isCrmView={true} handleToggle={handleToggle} />
         </div>
       </div>
 

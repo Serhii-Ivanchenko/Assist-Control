@@ -48,6 +48,34 @@ export const getRecordsForDay = createAsyncThunk(
   }
 );
 
+// Get records of the service for a particular period
+export const getRecordsForPeriod = createAsyncThunk(
+  "crm/getRecordsForPeriod",
+  async (dates, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    const { startDate, endDate } = dates;
+    console.log('dates',dates);
+    
+    try {
+      const response = await axiosInstance.get(
+        `/crm/get_records/?start_date=${startDate}&end_date=${endDate}`,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      console.log("response data getRecordsForPeriod", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 //Create record
 export const createRecord = createAsyncThunk(
   "crm/createRecord",
@@ -131,7 +159,6 @@ export const getServiceDataForBooking = createAsyncThunk(
           },
         }
       );
-       console.log("response data", response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -4,6 +4,7 @@ import {
   selectDate,
   selectDayCars,
   selectLoading,
+  selectPeriodCars,
   selectVisibilityCar,
 } from "../../../redux/cars/selectors";
 import styles from "./DayCarsModal.module.css";
@@ -28,6 +29,7 @@ export default function DayCarsModal({ onClose, isModal }) {
   const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectLoading);
   const carsData = useSelector(selectDayCars);
+  const periodCars = useSelector(selectPeriodCars);
   const [viewMode, setViewMode] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [inputError, setInputError] = useState("");
@@ -44,6 +46,9 @@ export default function DayCarsModal({ onClose, isModal }) {
     endDate || startDate || selectedDate || null
   );
 
+  console.log("carsData", carsData);
+  console.log("periodCars", periodCars);
+
   useEffect(() => {
     if (!startDate) {
       setPeriodStartData(selectedDate);
@@ -54,8 +59,23 @@ export default function DayCarsModal({ onClose, isModal }) {
   }, [startDate, endDate, selectedDate]);
 
   const fetchPeriodCars = (dates) => {
+    const { startDate, endDate } = dates;
+
+    if (!startDate || !endDate) {
+      toast.error("Обидві дати повинні бути вибрані!");
+      return;
+    }
+
     dispatch(getPeriodCars(dates));
   };
+
+  function formatToDate(date) {
+    if (!date || !(date instanceof Date)) {
+      console.error("Invalid date passed to formatToDate:", date);
+      return null;
+    }
+    return date ? date.toISOString().split("T")[0] : null;
+  }
 
   function handleInputChangeBeg(date) {
     let newStartDate = date;
@@ -68,7 +88,10 @@ export default function DayCarsModal({ onClose, isModal }) {
     setStartDate(newStartDate);
 
     if (newStartDate && periodEndData) {
-      fetchPeriodCars({ startDate: newStartDate, endDate: periodEndData });
+      fetchPeriodCars({
+        startDate: formatToDate(new Date(newStartDate)),
+        endDate: formatToDate(new Date(periodEndData)),
+      });
     }
   }
 
@@ -82,7 +105,10 @@ export default function DayCarsModal({ onClose, isModal }) {
     setEndDate(newEndDate);
 
     if (periodStartData && newEndDate) {
-      fetchPeriodCars({ startDate: periodStartData, endDate: newEndDate });
+      fetchPeriodCars({
+        startDate: formatToDate(new Date(periodStartData)),
+        endDate: formatToDate(new Date(newEndDate)),
+      });
     }
   }
 
@@ -101,8 +127,6 @@ export default function DayCarsModal({ onClose, isModal }) {
   //     dispatch(getPeriodCars({ startDate, endDate }));
   //   }
   // }, [dispatch, startDate, endDate]);
-
- 
 
   // Фільтрація даних
   useEffect(() => {
