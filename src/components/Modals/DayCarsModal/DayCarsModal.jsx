@@ -20,6 +20,7 @@ import CarInfoSettings from "../../sharedComponents/CarInfoSettings/CarInfoSetti
 import TimeSortCarItem from "../../sharedComponents/TimeSortCarItem/TimeSortCarItem";
 import DownloadPdfButton from "../../sharedComponents/DownloadPdfButton/DownloadPdfButton";
 import { getPeriodCars } from "../../../redux/cars/operations";
+import toast from "react-hot-toast";
 
 export default function DayCarsModal({ onClose, isModal }) {
   const dispatch = useDispatch();
@@ -34,22 +35,74 @@ export default function DayCarsModal({ onClose, isModal }) {
   const [endDate, setEndDate] = useState(null);
   const [filteredCarsData, setFilteredCarsData] = useState([]);
   const [sortDescending, setSortDescending] = useState(true);
+  const [selectedStatus, setSelectedStatus] = useState("all");
+
+  const [periodStartData, setPeriodStartData] = useState(
+    startDate || selectedDate || null
+  );
+  const [periodEndData, setPeriodEndData] = useState(
+    endDate || startDate || selectedDate || null
+  );
+
+  useEffect(() => {
+    if (!startDate) {
+      setPeriodStartData(selectedDate);
+    }
+    if (!endDate) {
+      setPeriodEndData(selectedDate);
+    }
+  }, [startDate, endDate, selectedDate]);
+
+  const fetchPeriodCars = (dates) => {
+    dispatch(getPeriodCars(dates));
+  };
+
+  function handleInputChangeBeg(date) {
+    let newStartDate = date;
+    if (periodEndData && date && new Date(date) > new Date(periodEndData)) {
+      newStartDate = periodEndData;
+      toast.error("Кінцева дата не має перевищувати початкову!");
+    }
+
+    setPeriodStartData(newStartDate);
+    setStartDate(newStartDate);
+
+    if (newStartDate && periodEndData) {
+      fetchPeriodCars({ startDate: newStartDate, endDate: periodEndData });
+    }
+  }
+
+  function handleInputChangeEnd(date) {
+    let newEndDate = date;
+    if (periodStartData && date && new Date(date) < new Date(periodStartData)) {
+      newEndDate = periodStartData;
+    }
+
+    setPeriodEndData(newEndDate);
+    setEndDate(newEndDate);
+
+    if (periodStartData && newEndDate) {
+      fetchPeriodCars({ startDate: periodStartData, endDate: newEndDate });
+    }
+  }
 
   // Початкове встановлення дат і завантаження даних
-  useEffect(() => {
-    if (selectedDate) {
-      setStartDate(selectedDate);
-      setEndDate(selectedDate);
-      dispatch(getPeriodCars({ startDate: selectedDate, endDate: selectedDate }));
-    }
-  }, [dispatch, selectedDate]);
+  // useEffect(() => {
+  //   if (selectedDate) {
+  //     setStartDate(selectedDate);
+  //     setEndDate(selectedDate);
+  //     dispatch(getPeriodCars({ startDate: selectedDate, endDate: selectedDate }));
+  //   }
+  // }, [dispatch, selectedDate]);
 
   // Оновлення списку при зміні дат
-  useEffect(() => {
-    if (startDate && endDate) {
-      dispatch(getPeriodCars({ startDate, endDate }));
-    }
-  }, [dispatch, startDate, endDate]);
+  // useEffect(() => {
+  //   if (startDate && endDate) {
+  //     dispatch(getPeriodCars({ startDate, endDate }));
+  //   }
+  // }, [dispatch, startDate, endDate]);
+
+ 
 
   // Фільтрація даних
   useEffect(() => {
@@ -67,8 +120,27 @@ export default function DayCarsModal({ onClose, isModal }) {
       return sortDescending ? durationB - durationA : durationA - durationB;
     });
 
+    // Фільтрація по статусу
+    if (selectedStatus !== "all") {
+      filteredData = filteredData.filter(
+        (car) => car.status === selectedStatus
+      );
+    }
+
+    // Фільтрація по датах
+    if (startDate && endDate) {
+      const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
+      filteredData = filteredData.filter((car) => {
+        const carStartDate = clearTime(new Date(car.date_s));
+        const carEndDate = clearTime(new Date(car.date_e));
+        return carStartDate <= endDate && carEndDate >= startDate;
+      });
+    }
+
     setFilteredCarsData(filteredData);
-  }, [carsData, sortDescending]);
+  }, [selectedStatus, startDate, endDate, carsData, sortDescending]);
+
+  const handleStatusChange = (status) => setSelectedStatus(status);
 
   const handleSearch = (term) => {
     if (/^[a-zA-Z0-9]*$/.test(term)) {
@@ -119,7 +191,9 @@ export default function DayCarsModal({ onClose, isModal }) {
               type="checkbox"
               className={styles.input}
               checked={viewMode === "list"}
-              onChange={() => setViewMode(viewMode === "grid" ? "list" : "grid")}
+              onChange={() =>
+                setViewMode(viewMode === "grid" ? "list" : "grid")
+              }
             />
             <span className={styles.slider}></span>
           </label>
@@ -132,12 +206,16 @@ export default function DayCarsModal({ onClose, isModal }) {
           </div>
         </div>
         <div className={styles.rightHeader}>
-          <StatusFilterCars />
+          <StatusFilterCars onStatusChange={handleStatusChange} />
           <CalendarPeriodSelector
+            periodStartData={periodStartData}
+            periodEndData={periodEndData}
             startDate={startDate}
             endDate={endDate}
-            onDateBegChange={setStartDate}
-            onDateEndChange={setEndDate}
+            // onDateBegChange={setStartDate}
+            // onDateEndChange={setEndDate}
+            handleInputChangeBeg={handleInputChangeBeg}
+            handleInputChangeEnd={handleInputChangeEnd}
           />
           <TimeSortCarItem onSortChange={setSortDescending} />
           <DownloadPdfButton carsData={filteredCars()} />
