@@ -31,8 +31,6 @@ export default function DayCarsModal({ onClose, isModal }) {
   const carsData = useSelector(selectDayCars);
   const periodCars = useSelector(selectPeriodCars);
   const [viewMode, setViewMode] = useState("grid");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [inputError, setInputError] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [filteredCarsData, setFilteredCarsData] = useState([]);
@@ -111,7 +109,6 @@ export default function DayCarsModal({ onClose, isModal }) {
       });
     }
   }
-
   // Початкове встановлення дат і завантаження даних
   // useEffect(() => {
   //   if (selectedDate) {
@@ -128,7 +125,6 @@ export default function DayCarsModal({ onClose, isModal }) {
   //   }
   // }, [dispatch, startDate, endDate]);
 
-  // Фільтрація даних
   useEffect(() => {
     let filteredData = [...carsData];
 
@@ -144,14 +140,12 @@ export default function DayCarsModal({ onClose, isModal }) {
       return sortDescending ? durationB - durationA : durationA - durationB;
     });
 
-    // Фільтрація по статусу
     if (selectedStatus !== "all") {
       filteredData = filteredData.filter(
         (car) => car.status === selectedStatus
       );
     }
 
-    // Фільтрація по датах
     if (startDate && endDate) {
       const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
       filteredData = filteredData.filter((car) => {
@@ -166,35 +160,12 @@ export default function DayCarsModal({ onClose, isModal }) {
 
   const handleStatusChange = (status) => setSelectedStatus(status);
 
-  const handleSearch = (term) => {
-    if (/^[a-zA-Z0-9]*$/.test(term)) {
-      setSearchTerm(term);
-      setInputError("");
-    } else {
-      setInputError("Вводьте лише латинські літери та цифри");
-    }
-  };
-
   const handleToggle = (field) => {
     const newVisibility = { ...visibility, [field]: !visibility[field] };
     dispatch(toggleVisibilityCar(newVisibility));
   };
 
-  const filteredCars = () => {
-    if (!searchTerm) return filteredCarsData;
-
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    return filteredCarsData.filter((car) => {
-      const { plate, auto } = car;
-      const plateValue = plate ? plate.toLowerCase() : "";
-      const autoValue = auto ? auto.toLowerCase() : "";
-
-      return (
-        plateValue.includes(lowerCaseSearchTerm) ||
-        autoValue.includes(lowerCaseSearchTerm)
-      );
-    });
-  };
+  const filteredCars = () => filteredCarsData;
 
   return (
     <div className={styles.containerCarModal}>
@@ -223,9 +194,8 @@ export default function DayCarsModal({ onClose, isModal }) {
           </label>
           <div className={styles.search}>
             <DayCarsFilter
-              value={searchTerm}
-              onChange={handleSearch}
-              error={inputError}
+              carsData={carsData}
+              onFilter={setFilteredCarsData}
             />
           </div>
         </div>
@@ -236,8 +206,6 @@ export default function DayCarsModal({ onClose, isModal }) {
             periodEndData={periodEndData}
             startDate={startDate}
             endDate={endDate}
-            // onDateBegChange={setStartDate}
-            // onDateEndChange={setEndDate}
             handleInputChangeBeg={handleInputChangeBeg}
             handleInputChangeEnd={handleInputChangeEnd}
           />
