@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import css from "./DayCarsFilter.module.css";
+import css from "./CarsSearch.module.css";
 import { IoIosSearch } from "react-icons/io";
 
-export default function DayCarsFilter({ carsData, onFilter, error }) {
+export default function CarsSearch({ carsData, onFilter, onNoResults }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [inputError, setInputError] = useState("");
 
@@ -26,10 +26,15 @@ export default function DayCarsFilter({ carsData, onFilter, error }) {
         (auto?.toLowerCase()?.includes(lowerCaseSearchTerm) || false)
       );
     });
-  
-    onFilter(filteredCars);
-  }, [searchTerm, carsData, onFilter]);
-  
+
+    const resultNotFound = filteredCars.length === 0 && searchTerm !== "";
+    onNoResults(resultNotFound);
+
+    if (filteredCars.length !== carsData.length) {
+      onFilter(filteredCars);
+    }
+  }, [searchTerm, carsData, onFilter, onNoResults]);
+
   return (
     <div className={css.inputWrapper}>
       <input
@@ -44,9 +49,7 @@ export default function DayCarsFilter({ carsData, onFilter, error }) {
       <button className={css.button} type="button">
         <IoIosSearch className={css.icon} />
       </button>
-      {(inputError || error) && (
-        <div className={css.errorMsg}>{inputError || error}</div>
-      )}
+      {inputError && <div className={css.errorMsg}>{inputError}</div>}
     </div>
   );
 }
