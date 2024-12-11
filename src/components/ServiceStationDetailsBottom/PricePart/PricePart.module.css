@@ -14,16 +14,34 @@
   padding-right: 20px;
 }
 
+.btnGroup {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  margin-top: auto;
+}
+
+.resetBtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 10px 20px;
+
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--CRM-modal-LightGray, #d8e1ff);
+
+  color: var(--white);
+  cursor: pointer;
+}
+
 .btn {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-
   width: fit-content;
   padding: 10px 20px;
-  margin-left: auto;
-  margin-top: auto;
 
   border: transparent;
   border-radius: 6px;
@@ -37,7 +55,7 @@
   cursor: pointer;
 }
 
-.saveBtn:hover {
+.btn:hover {
   background: var(--green-btn-hover);
 }
 

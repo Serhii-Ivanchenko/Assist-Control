@@ -7,6 +7,10 @@ function AccordionList({
   onUpdate,
   onEnableEditing,
   containerRef,
+  onReset,
+  resetPrice,
+  resetCategory,
+  resetService,
 }) {
   const handleUpdate = (updatedCategory, idx) => {
     const newData = [...data];
@@ -25,6 +29,10 @@ function AccordionList({
             onUpdate={(updatedCategory) => handleUpdate(updatedCategory, idx)}
             onEnableEditing={() => onEnableEditing(idx)}
             containerRef={containerRef}
+            onReset={onReset}
+            resetPrice={resetPrice}
+            resetCategory={resetCategory}
+            resetService={resetService}
           />
         </li>
       ))}
