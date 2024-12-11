@@ -8,7 +8,6 @@ import {
   selectVisibilityCar,
 } from "../../../redux/cars/selectors";
 import styles from "./DayCarsModal.module.css";
-import DayCarsFilter from "../../DayCarsFilter/DayCarsFilter";
 import { FiGrid } from "react-icons/fi";
 import { BsListUl } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
@@ -22,6 +21,7 @@ import TimeSortCarItem from "../../sharedComponents/TimeSortCarItem/TimeSortCarI
 import DownloadPdfButton from "../../sharedComponents/DownloadPdfButton/DownloadPdfButton";
 import { getPeriodCars } from "../../../redux/cars/operations";
 import toast from "react-hot-toast";
+import CarsSearch from "../../sharedComponents/CarsSearch/CarsSearch";
 
 export default function DayCarsModal({ onClose, isModal }) {
   const dispatch = useDispatch();
@@ -43,9 +43,18 @@ export default function DayCarsModal({ onClose, isModal }) {
   const [periodEndData, setPeriodEndData] = useState(
     endDate || startDate || selectedDate || null
   );
+  const [noResults, setNoResults] = useState(false);
 
-  console.log("carsData", carsData);
-  console.log("periodCars", periodCars);
+  const handleNoResults = (resultNotFound) => {
+    setNoResults(resultNotFound);
+  };
+
+  useEffect(() => {
+    console.log("carsData", carsData);
+    console.log("periodCars", periodCars);
+
+  }, [carsData, periodCars]);
+  
 
   useEffect(() => {
     if (!startDate) {
@@ -60,7 +69,7 @@ export default function DayCarsModal({ onClose, isModal }) {
     const { startDate, endDate } = dates;
 
     if (!startDate || !endDate) {
-      toast.error("Обидві дати повинні бути вибрані!");
+      toast.error("Потрібно обрати обидві дати!");
       return;
     }
 
@@ -166,6 +175,7 @@ export default function DayCarsModal({ onClose, isModal }) {
   };
 
   const filteredCars = () => filteredCarsData;
+  const carsToRender = periodCars.length > 0 ? periodCars : carsData;
 
   return (
     <div className={styles.containerCarModal}>
@@ -193,9 +203,10 @@ export default function DayCarsModal({ onClose, isModal }) {
             <span className={styles.slider}></span>
           </label>
           <div className={styles.search}>
-            <DayCarsFilter
+            <CarsSearch
               carsData={carsData}
               onFilter={setFilteredCarsData}
+              onNoResults={handleNoResults}
             />
           </div>
         </div>
@@ -217,9 +228,13 @@ export default function DayCarsModal({ onClose, isModal }) {
       <button className={styles.closeButton} onClick={onClose}>
         <MdClose className={styles.iconClose} />
       </button>
-      {!isLoading && filteredCarsData.length > 0 ? (
+      {noResults ? (
+        <div className={styles.noResults}>
+          <p>Нічого не знайдено за вашим запитом</p>
+        </div>
+      ) : !isLoading && carsToRender.length > 0 ? (
         <DayCarsList
-          carsData={filteredCars()}
+          carsData={carsToRender}
           viewMode={viewMode}
           isModal={isModal}
         />
