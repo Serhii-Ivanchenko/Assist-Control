@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+/* eslint-disable react/display-name */
+import { useState, forwardRef } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -6,17 +7,14 @@ import {
   Typography,
 } from "@mui/material";
 import { BsCaretDownFill } from "react-icons/bs";
-// import DeliverySchedule from "../DeliverySchedule/DeliverySchedule";
 import styles from "./ScheduleAccordion.module.css";
 import ScheduleTable from "../../../../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 
-function ScheduleAccordion({ deliveryData }) {
+const ScheduleAccordion = forwardRef(({ deliveryData }, ref) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const detailsRef = useRef();
-
-  const handleChange = (e, expanded) => {
+  const handleChange = (_e, expanded) => {
     setIsExpanded(expanded);
     if (expanded) {
       setIsEditing(true);
@@ -72,13 +70,13 @@ function ScheduleAccordion({ deliveryData }) {
         }}
       >
         <ScheduleTable
-          ref={detailsRef}
+          ref={ref} // Forward the ref to ScheduleTable
           isEditing={isEditing}
           activePeriods={deliveryData}
         />
       </AccordionDetails>
     </Accordion>
   );
-}
+});
 
 export default ScheduleAccordion;

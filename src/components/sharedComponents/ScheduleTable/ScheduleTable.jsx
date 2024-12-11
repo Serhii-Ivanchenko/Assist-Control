@@ -98,6 +98,7 @@ const ScheduleTable = forwardRef(({ isEditing, activePeriods }, ref) => {
   useImperativeHandle(ref, () => ({
     generateBackendData,
      resetGridData,
+
   }));
   return (
     <div className={css.container}>

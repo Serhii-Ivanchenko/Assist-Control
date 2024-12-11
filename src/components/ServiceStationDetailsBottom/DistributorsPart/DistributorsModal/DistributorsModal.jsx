@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { IoIosClose } from "react-icons/io";
 import PopupMenu from "../../../sharedComponents/PopupMenu/PopupMenu";
 import AuthForm from "./AuthForm/AuthForm";
 import StatusToggle from "../../../sharedComponents/StatusToggle/StatusToggle";
@@ -37,10 +38,15 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
   };
 
   const formRef = useRef(null);
+  const authFormRef = useRef(null);
+  const scheduleRef = useRef();
 
   const handleResetForm = () => {
     if (formRef.current) {
       formRef.current.resetForm();
+    }
+    if (authFormRef.current) {
+      authFormRef.current.resetForm();
     }
   };
 
@@ -56,6 +62,12 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
     }
     setIsEditing(false);
     handleResetForm();
+  };
+
+  const handleResetSchedule = () => {
+    if (scheduleRef.current) {
+      scheduleRef.current.resetGridData();
+    }
   };
 
   const handleToggleDisable = () => {
@@ -78,6 +90,9 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
 
   return (
     <div className={styles.wrapper}>
+      <button className={styles.exitBtn}>
+        <IoIosClose className={styles.icon} onClick={onClose} />
+      </button>
       <div className={styles.mainInfo}>
         <div className={styles.credentialsContainer}>
           <div className={styles.nameBox}>
@@ -148,7 +163,7 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
             isDisabled={distributor.isDisabled}
             onToggleDisable={handleToggleDisable}
           />
-          <AuthForm />
+          <AuthForm formikRef={authFormRef} />
           <div>
             <PopupConnection />
           </div>
@@ -156,11 +171,18 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
       </div>
       <div className={styles.scheduleContainer}>
         <ScheduleAccordion
+          ref={scheduleRef}
           deliveryData={distributor.deliverySchedule || null}
         />
       </div>
       <div className={styles.btnGroup}>
-        <button className={styles.resetBtn} onClick={() => handleReset()}>
+        <button
+          className={styles.resetBtn}
+          onClick={() => {
+            handleReset();
+            handleResetSchedule();
+          }}
+        >
           Відміна
         </button>
         <button className={styles.saveBtn} onClick={handleSave}>
