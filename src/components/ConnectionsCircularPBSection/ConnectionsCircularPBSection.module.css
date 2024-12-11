@@ -6,6 +6,6 @@
     border-radius: 12px;
     flex-direction: row;
     padding: 30px 20px 40px 20px;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: var(--bg-secondary);
 }
