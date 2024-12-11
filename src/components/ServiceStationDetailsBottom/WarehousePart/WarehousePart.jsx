@@ -18,12 +18,9 @@ import {
   MultiBackend,
   getBackendOptions,
 } from "@minoru/react-dnd-treeview";
-// import "@minoru/react-dnd-treeview/dist/style.css";
 import { DndProvider } from "react-dnd";
-// import { HTML5Backend, HTML5BackendOptions } from "react-dnd-html5-backend";
 import Node from "./Node/Node";
 import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
-// import ThreeDotsModal from "../../Modals/AddStaffMemberModal/ThreeDotsModal/ThreeDotsModal";
 import CreateWarehousePop from "./CreateWarehousePop/CreateWarehousePop";
 
 const dataForTree = [
@@ -75,43 +72,43 @@ const dataForTree = [
 
 export default function WarehousePart() {
   const [isAddWhModalOpen, setAddWhModalOpen] = useState(false);
-  // const [tree, setTree] = useState(dataForTree);
 
   const { ref, getPipeHeight, toggle, openParentIfNeeded } =
     useTreeOpenHandler();
   const [treeData, setTreeData] = useState(dataForTree);
   const [isNewWhPopoverOpen, setNewWhPopoverOpen] = useState(false);
-  // const [openedNode, setOpenedNode] = useState();
 
   const buttonRef = useRef(null);
-  // const containerRef = useRef(null);
 
   // Редагування гілочок
   const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState({});
+  const [tempNodeText, setTempNodeText] = useState({});
 
-  const handleStopEditing = () => {
-    setIsEditing(false);
-  };
+  // const handleStopEditing = () => {
+  //   setIsEditing(false);
+  // };
 
   const handleStartEditing = (nodeId) => {
-    const branchToEdit = treeData.find((branch) => branch.id === nodeId);
-    setEditedValue(branchToEdit);
     setIsEditing(nodeId);
   };
 
   // Відміна
   const handleRepeal = () => {
-    if (editedValue) {
-      setTreeData(
-        treeData.map((branch) =>
-          branch.id === editedValue.id
-            ? { ...branch, text: editedValue.text }
-            : branch
-        )
-      );
-      setIsEditing(null);
-    }
+    setTempNodeText({});
+    setIsEditing(null);
+  };
+
+  // Збереження данних
+  const handleSaveData = () => {
+    setTreeData((prev) =>
+      prev.map((node) =>
+        tempNodeText[node.id]
+          ? { ...node, text: tempNodeText[node.id] } // Оновлюємо текст вузла, якщо він редагувався
+          : node
+      )
+    );
+    setTempNodeText({});
+    setIsEditing(false);
   };
 
   // Додавання нового елементу
@@ -183,11 +180,6 @@ export default function WarehousePart() {
       return;
     const start = treeData.find((v) => v.id === dragSourceId);
     const end = treeData.find((v) => v.id === dropTargetId);
-    // console.log("handleDrop triggered", {
-    //   dragSourceId,
-    //   dropTargetId,
-    //   destinationIndex,
-    // });
 
     const startDepth = calculateDepth(dragSourceId, treeData);
     const endDepth = calculateDepth(dropTargetId, treeData);
@@ -233,7 +225,6 @@ export default function WarehousePart() {
         );
         const movedElement = output.find((el) => el.id === dragSourceId);
         if (movedElement) movedElement.parent = dropTargetId;
-        // console.log("Destination index:", destinationIndex);
         return output;
       });
     }
@@ -357,7 +348,8 @@ export default function WarehousePart() {
                   onStartEditing={handleStartEditing}
                   containerRef={scrollToTheLastItemRef}
                   openParentIfNeeded={openParentIfNeeded}
-                  editedValue={editedValue}
+                  tempNodeText={tempNodeText}
+                  setTempNodeText={setTempNodeText}
                 />
               )}
             />
@@ -372,11 +364,7 @@ export default function WarehousePart() {
           </button>
         )}
 
-        <button
-          type="button"
-          className={css.btnSave}
-          onClick={handleStopEditing}
-        >
+        <button type="button" className={css.btnSave} onClick={handleSaveData}>
           <BsCheckLg size={18} />
           Зберегти
         </button>

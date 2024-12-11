@@ -59,25 +59,23 @@ export default function Node({
   onStartEditing,
   containerRef,
   openParentIfNeeded,
+  tempNodeText,
+  setTempNodeText,
 }) {
   const inputFocusRef = useRef(null);
   const scrollForPopover = useRef(null);
   const addNodeRef = useRef({});
-
-  // console.log("addNodeRef", addNodeRef);
 
   const addNodeButtonRef = (nodeId, el) => {
     if (el && !addNodeRef.current[nodeId]) {
       addNodeRef.current[nodeId] = el;
     }
   };
-  // console.log("addNodeButtonRef", addNodeButtonRef);
 
   // Редагування
-  const handleEditing = (id, e) => {
+  const handleEditing = (id, e, text) => {
     e.stopPropagation();
-
-    // setIsEditing(isEditing === id ? null : id);
+    setTempNodeText((prev) => ({ ...prev, [id]: text }));
     onStartEditing(id);
   };
 
@@ -88,12 +86,14 @@ export default function Node({
     }
   }, [isEditing]);
 
+  // Зміна назви
   const changeName = (newName, id) => {
-    setTreeData(
-      treeData.map((node) =>
-        node.id === id ? { ...node, text: newName } : node
-      )
-    );
+    // setTreeData(
+    //   treeData.map((node) =>
+    //     node.id === id ? { ...node, text: newName } : node
+    //   )
+    // );
+    setTempNodeText((prev) => ({ ...prev, [id]: newName }));
   };
 
   // Видалення
@@ -203,7 +203,7 @@ export default function Node({
         {isEditing === node.id ? (
           <input
             className={css.input}
-            value={node.text}
+            value={tempNodeText[node.id] || node.text}
             onChange={(e) => changeName(e.target.value, node.id)}
             onClick={onInputClick}
             ref={inputFocusRef}
@@ -214,7 +214,7 @@ export default function Node({
               node.data === "warehouse" && css.warehouse
             }`}
           >
-            {node.text}
+            {tempNodeText[node.id] || node.text}
           </p>
         )}
       </div>
