@@ -88,13 +88,30 @@ export default function WarehousePart() {
 
   // Редагування гілочок
   const [isEditing, setIsEditing] = useState(false);
+  const [editedValue, setEditedValue] = useState({});
 
   const handleStopEditing = () => {
     setIsEditing(false);
   };
 
   const handleStartEditing = (nodeId) => {
+    const branchToEdit = treeData.find((branch) => branch.id === nodeId);
+    setEditedValue(branchToEdit);
     setIsEditing(nodeId);
+  };
+
+  // Відміна
+  const handleRepeal = () => {
+    if (editedValue) {
+      setTreeData(
+        treeData.map((branch) =>
+          branch.id === editedValue.id
+            ? { ...branch, text: editedValue.text }
+            : branch
+        )
+      );
+      setIsEditing(null);
+    }
   };
 
   // Додавання нового елементу
@@ -336,10 +353,11 @@ export default function WarehousePart() {
                   treeData={treeData}
                   setTreeData={setTreeData}
                   isEditing={isEditing}
-                  // setIsEditing={setIsEditing}
+                  setIsEditing={setIsEditing}
                   onStartEditing={handleStartEditing}
                   containerRef={scrollToTheLastItemRef}
                   openParentIfNeeded={openParentIfNeeded}
+                  editedValue={editedValue}
                 />
               )}
             />
@@ -348,13 +366,12 @@ export default function WarehousePart() {
       </div>
 
       <div className={css.btnBox}>
-        <button
-          type="button"
-          className={css.btnClose}
-          onClick={handleStopEditing}
-        >
-          Закрити
-        </button>
+        {isEditing && (
+          <button type="button" className={css.btnClose} onClick={handleRepeal}>
+            Відміна
+          </button>
+        )}
+
         <button
           type="button"
           className={css.btnSave}
