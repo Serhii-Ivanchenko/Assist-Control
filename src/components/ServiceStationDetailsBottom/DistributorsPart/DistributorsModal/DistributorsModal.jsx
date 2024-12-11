@@ -37,10 +37,15 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
   };
 
   const formRef = useRef(null);
+  const authFormRef = useRef(null);
+  const scheduleRef = useRef();
 
   const handleResetForm = () => {
     if (formRef.current) {
       formRef.current.resetForm();
+    }
+    if (authFormRef.current) {
+      authFormRef.current.resetForm();
     }
   };
 
@@ -56,6 +61,12 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
     }
     setIsEditing(false);
     handleResetForm();
+  };
+
+  const handleResetSchedule = () => {
+    if (scheduleRef.current) {
+      scheduleRef.current.resetGridData();
+    }
   };
 
   const handleToggleDisable = () => {
@@ -148,7 +159,7 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
             isDisabled={distributor.isDisabled}
             onToggleDisable={handleToggleDisable}
           />
-          <AuthForm />
+          <AuthForm formikRef={authFormRef} />
           <div>
             <PopupConnection />
           </div>
@@ -156,11 +167,18 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
       </div>
       <div className={styles.scheduleContainer}>
         <ScheduleAccordion
+          ref={scheduleRef}
           deliveryData={distributor.deliverySchedule || null}
         />
       </div>
       <div className={styles.btnGroup}>
-        <button className={styles.resetBtn} onClick={() => handleReset()}>
+        <button
+          className={styles.resetBtn}
+          onClick={() => {
+            handleReset();
+            handleResetSchedule();
+          }}
+        >
           Відміна
         </button>
         <button className={styles.saveBtn} onClick={handleSave}>
