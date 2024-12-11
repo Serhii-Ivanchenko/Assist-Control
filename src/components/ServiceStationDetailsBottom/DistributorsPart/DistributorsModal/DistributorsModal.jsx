@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { IoIosClose } from "react-icons/io";
 import PopupMenu from "../../../sharedComponents/PopupMenu/PopupMenu";
 import AuthForm from "./AuthForm/AuthForm";
 import StatusToggle from "../../../sharedComponents/StatusToggle/StatusToggle";
@@ -89,6 +90,9 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
 
   return (
     <div className={styles.wrapper}>
+      <button className={styles.exitBtn}>
+        <IoIosClose className={styles.icon} onClick={onClose} />
+      </button>
       <div className={styles.mainInfo}>
         <div className={styles.credentialsContainer}>
           <div className={styles.nameBox}>
