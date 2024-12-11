@@ -1,72 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import AccordionList from "./AccordionList/AccordionList";
 import { BsFolderPlus } from "react-icons/bs";
-import styles from "./PricePart.module.css";
 import SearchBar from "./SearchBar/SearchBar";
 import Modal from "../../Modals/Modal/Modal";
 import AddCategoryModal from "./AddCategoryModal/AddCategoryModal";
+import { testData } from "./testData";
 
-// Модель хардкодних даних
-const testData = [
-  {
-    id: 1,
-    category: "Техобслуговування",
-    items: [
-      { id: 1, item: "Заміна моторного масла та фільтра" },
-      { id: 2, item: "Заміна рідини гідропідсилювача з промиванням" },
-      {
-        id: 3,
-        item: "Зняття/встановлення/заміна форсунок високого тиску бензин ",
-      },
-      { id: 4, item: "Заміна рідини гідропідсилювача з промиванням " },
-      { id: 5, item: "Заміна рідини гідропідсилювача з промиванням " },
-      { id: 6, item: "Заміна рідини гідропідсилювача з промиванням " },
-    ],
-  },
-  {
-    id: 2,
-    category: "Ремонт паливної системи",
-    items: [
-      { id: 7, item: "Заміна паливного фільтра" },
-      { id: 8, item: "Очищення інжектора" },
-      { id: 9, item: "Очищення інжектора" },
-      { id: 10, item: "Очищення інжектора" },
-      { id: 11, item: "Очищення інжектора" },
-    ],
-  },
-  {
-    id: 3,
-    category: "Ремонт електрики та електроустаткування",
-    items: [
-      { id: 12, item: "Ремонт генератора" },
-      { id: 13, item: "Діагностика електропроводки" },
-      { id: 14, item: "Діагностика електропроводки" },
-      { id: 15, item: "Діагностика електропроводки" },
-    ],
-  },
-  {
-    id: 4,
-    category: "Ремонт двигуна",
-    items: [
-      { id: 16, item: "Капітальний ремонт двигуна" },
-      { id: 17, item: "Заміна поршнів і кільців" },
-      { id: 18, item: "Регулювання клапанів" },
-      { id: 19, item: "Заміна ременя ГРМ" },
-      { id: 20, item: "Заміна ременя ГРМ" },
-      { id: 21, item: "Заміна ременя ГРМ" },
-    ],
-  },
-  {
-    id: 5,
-    category: "Комплексна діагностика автомобіля",
-    items: [
-      { id: 22, item: "Діагностика двигуна" },
-      { id: 23, item: "Перевірка ходової частини" },
-      { id: 24, item: "Перевірка ходової частини" },
-      { id: 25, item: "Перевірка ходової частини" },
-    ],
-  },
-];
+import styles from "./PricePart.module.css";
+
 export default function PricePart() {
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
@@ -74,21 +15,15 @@ export default function PricePart() {
   const [isEditable, setIsEditable] = useState({});
   const [originalData, setOriginalData] = useState(testData);
   const [editableData, setEditableData] = useState(testData);
-
-  useEffect(() => {
-    setFilteredData(editableData);
-  }, [editableData]);
+  const [resetCategory, setResetCategory] = useState(false);
+  const [resetService, setResetService] = useState(false);
+  const [resetPrice, setResetPrice] = useState(false);
 
   const handleFilter = (searchData) => {
+    console.log("searchData", searchData);
+
     setFilteredData(searchData);
     setActiveSearch(true);
-  };
-
-  const handleClearSearch = () => {
-    if (!activeSearch) {
-      setFilteredData(originalData);
-      setActiveSearch(false);
-    }
   };
 
   const handleNewCategory = (categoryName) => {
@@ -125,31 +60,36 @@ export default function PricePart() {
     setIsModal(false);
   };
 
-  // Логіка для фільтрації даних за stationId, коли вони будуть приходити з беку
-  // useEffect(() => {
-  //   if (stationId) {
-  //     const filteredData = testData;
-  //     setData(filteredData);
-  //   }
-  // }, [stationId]);
+  const handleResetSearch = () => {
+    setFilteredData(originalData);
+    setActiveSearch(false);
+  };
+
+  const handleResetData = () => {
+    setResetPrice((prev) => !prev);
+    setResetCategory((prev) => !prev);
+    setResetService((prev) => !prev);
+    setEditableData([...originalData]);
+    setIsEditable(false);
+  };
 
   // Прокрутка до ост. елементу при додаванні
- const scrollToTheLastItemRef = useRef(null);
- const prevDataLengthRef = useRef(filteredData.length); // Зберігаємо попередню довжину даних
+  const scrollToTheLastItemRef = useRef(null);
+  const prevDataLengthRef = useRef(filteredData.length); // Зберігаємо попередню довжину даних
 
- useEffect(() => {
-   if (
-     filteredData.length > prevDataLengthRef.current && // Перевіряємо, чи додано новий елемент
-     scrollToTheLastItemRef.current
-   ) {
-     scrollToTheLastItemRef.current.scrollTo({
-       top: scrollToTheLastItemRef.current.scrollHeight,
-       behavior: "smooth",
-     });
-   }
-   // Оновлюємо попередню довжину після виконання ефекту
-   prevDataLengthRef.current = filteredData.length;
- }, [filteredData]);
+  useEffect(() => {
+    if (
+      filteredData.length > prevDataLengthRef.current && // Перевіряємо, чи додано новий елемент
+      scrollToTheLastItemRef.current
+    ) {
+      scrollToTheLastItemRef.current.scrollTo({
+        top: scrollToTheLastItemRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+    // Оновлюємо попередню довжину після виконання ефекту
+    prevDataLengthRef.current = filteredData.length;
+  }, [filteredData]);
 
   return (
     <div className={styles.wrapper}>
@@ -157,7 +97,7 @@ export default function PricePart() {
         <SearchBar
           searchData={originalData}
           onFilter={handleFilter}
-          onBlur={handleClearSearch}
+          onReset={handleResetSearch}
         />
         <button type="button" className={styles.btn} onClick={openModal}>
           <BsFolderPlus size={18} />
@@ -175,16 +115,25 @@ export default function PricePart() {
         )}
       </div>
       <AccordionList
-        data={filteredData}
+        data={activeSearch ? filteredData : originalData}
         isEditable={isEditable}
         onUpdate={(updatedData) => setEditableData(updatedData)}
         onEnableEditing={enableEditing}
         containerRef={scrollToTheLastItemRef}
+        onReset={handleResetData}
+        resetPrice={resetPrice}
+        resetCategory={resetCategory}
+        resetService={resetService}
       />
 
-      <button onClick={handleSaveNewData} className={styles.btn}>
-        Зберегти
-      </button>
+      <div className={styles.btnGroup}>
+        <button onClick={handleResetData} className={styles.resetBtn}>
+          Відміна
+        </button>
+        <button onClick={handleSaveNewData} className={styles.btn}>
+          Зберегти
+        </button>
+      </div>
     </div>
   );
 }

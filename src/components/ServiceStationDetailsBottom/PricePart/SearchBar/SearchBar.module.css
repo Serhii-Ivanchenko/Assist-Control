@@ -1,5 +1,8 @@
 .wrapper {
   position: relative;
+  display: flex;
+
+  gap: 5px;
 }
 
 .wrapper input {
@@ -38,4 +41,17 @@
 .icon > svg {
   margin-bottom: 2px;
   margin-right: 2px;
+}
+
+.wrapper button {
+  height: 23px;
+  display: inline-flex;
+  align-items: flex-end;
+  border: none;
+  background: transparent;
+  color: white;
+
+  border: none;
+
+  cursor: pointer;
 }
