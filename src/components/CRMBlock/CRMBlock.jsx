@@ -49,16 +49,16 @@ const getSvgIcon = (index) => {
   );
 };
 
-export default function CRMBlock({ currentDate }) {
+export default function CRMBlock() {
   const dispatch = useDispatch();
   const records = useSelector(selectDayRecords);
   const visibility = useSelector(selectVisibilityRecords);
   const periodRecords = useSelector(selectPeriodRecords);
 
-  console.log('records', records);
-  console.log("periodRecords", periodRecords);
+  const currentDate = new Date().toISOString().split("T")[0];
 
-  
+  console.log("records", records);
+  console.log("periodRecords", periodRecords);
 
   useEffect(() => {
     if (currentDate) {
