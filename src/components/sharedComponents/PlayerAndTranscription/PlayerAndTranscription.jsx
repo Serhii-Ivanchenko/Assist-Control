@@ -44,6 +44,10 @@ export default function PlayerAndTranscription({
             className={css.userPhoto}
             src={userAvatar || userPhoto}
             alt="user avatar"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = userPhoto;
+            }}
           />
         )}
 
