@@ -1,0 +1,50 @@
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  border-radius: 12px;
+}
+
+.boxContainer {
+  display: flex;
+  border-radius: 6px;
+  background-color: #313540;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 2px solid var(--border-gradient-new);
+}
+
+.newStatus {
+  background: linear-gradient(#313540, #313540) padding-box,
+    var(--border-gradient-new) border-box;
+  border: 2px solid transparent;
+}
+
+.diagnosticStatus {
+  background: linear-gradient(#313540, #313540) padding-box,
+    var(--border-gradient-diag) border-box;
+  border: 2px solid transparent;
+}
+
+.repairStatus {
+  background: linear-gradient(#313540, #313540) padding-box,
+    var(--border-gradient-repair) border-box;
+  border: 2px solid transparent;
+}
+
+.completeStatus {
+  background: linear-gradient(#313540, #313540) padding-box,
+    var(--border-gradient-complete) border-box;
+  border: 2px solid transparent;
+}
+
+.carImage {
+  width: 36px;
+  height: 32px;
+  background: none;
+  border-radius: 50%;
+}
+
+.listItem {
+  display: flex;
+  border-radius: 6px;
+}
