@@ -3,11 +3,37 @@
   display: flex;
   padding: 10px 16px;
   align-items: center;
-  gap: 10px;
-
   border-radius: 6px;
   border: none;
-  background: transparent;
+  background: #313540;
+  cursor: pointer;
+}
+
+.wrapperImg {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 10px 16px;
+  align-items: center;
+  gap: 10px;
+  background: #313540;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.textImg {
+  width: 126px;
+  color: #fff;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.iconImg {
+  background: none;
+  border-radius: 50%;
 }
 
 .text {
@@ -15,11 +41,13 @@
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 600;
+  margin-right: 10px;
 }
 
 .icon {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 24px;
   height: 24px;
   padding: 4px 6px;
@@ -39,4 +67,18 @@
 
 .inactive {
   background: var(--CRM-modal-InputBG, #2d3038);
+}
+
+.noBackground {
+  background: transparent;
+  box-shadow: none;
+  margin-left: -10px;
+}
+
+.noBackground.active {
+  color: #008000;
+}
+
+.noBackground.inactive {
+  color: #008000;
 }

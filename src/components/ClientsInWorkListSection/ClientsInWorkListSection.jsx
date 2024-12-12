@@ -9,6 +9,24 @@ const data = [
     car_model: "HONDA CIVIC",
     car_img: defImg,
   },
+  {
+    id: 2,
+    status: "new",
+    car_model: "HONDA CIVIC",
+    car_img: defImg,
+  },
+  {
+    id: 3,
+    status: "complete",
+    car_model: "HONDA CIVIC",
+    car_img: defImg,
+  },
+  {
+    id: 4,
+    status: "complete",
+    car_model: "HONDA CIVIC",
+    car_img: defImg,
+  },
 ];
 
 export default function ClientsInWorkListSection() {

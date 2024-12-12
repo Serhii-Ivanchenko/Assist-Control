@@ -1,15 +1,21 @@
 import ClientStatusStepper from "../ClientsStatusStepper/ClientStatusStepper";
+import GetStatus from "./GetStatus";
+import styles from "./ClientsInWorkItem.module.css";
 
 function ClientsInWorkItem({ item }) {
   return (
-    <div>
-      <ul>
-        <li>04.02</li>
-        <li>{item.status}</li>
-        <li>
-          <div>
-            <ClientStatusStepper car={item.car_model} carImg={item.car_img} />
-          </div>
+    <div className={styles.wrapper}>
+      <ul className={styles.itemsList}>
+        <li className={styles.date}>04.02</li>
+        <li className={styles.status}>
+          <GetStatus status={item.status} />
+        </li>
+        <li className={styles.stepper}>
+          <ClientStatusStepper
+            car={item.car_model}
+            carImg={item.car_img}
+            status={item.status}
+          />
         </li>
       </ul>
     </div>
