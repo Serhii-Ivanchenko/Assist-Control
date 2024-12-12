@@ -1,0 +1,39 @@
+.scrollBarWrapper {
+  padding: 11px 10px 10px 21px;
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #2c2d31;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.secondAcordionBody {
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  align-items: flex-end;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.secondAcordionBody::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+}
+
+.secondAcordionBody::-webkit-scrollbar-thumb {
+  background: var(--player-secondary-bg);
+  border-radius: 4px;
+}
+
+.secondAcordionBody::-webkit-scrollbar-track {
+  background: #202020;
+  border-radius: 4px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 100%;
+  color: var(--white);
+}

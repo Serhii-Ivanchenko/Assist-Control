@@ -1,0 +1,73 @@
+.modalContainer {
+  display: flex;
+  width: 389px;
+  height: fit-content;
+  /* max-height: 400px; */
+  padding: 13px 19px 22px 19px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  /* position: relative; */
+
+  /* overflow-y: auto; */
+}
+
+.modalBox {
+  height: fit-content;
+  max-height: 400px;
+  width: 351px;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  /* gap: 10px; */
+  align-self: stretch;
+
+  /* overflow-y: auto; */
+
+  border-radius: 0px 12px 12px 12px;
+  background-color: var(--player-secondary-bg);
+
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modalText {
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  max-height: 380px;
+  overflow: auto;
+}
+
+.modalText::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modalText::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+}
+
+.modalText::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--main-gray);
+  border: 1px solid var(--bg-secondary);
+}
+
+.closeBtn {
+  /* position: absolute;
+  top: 13px;
+  right: 19px; */
+
+  /* width: 13px;
+  height: 13px; */
+
+  fill: var(--input-stroke);
+  cursor: pointer;
+  margin-bottom: 18px;
+}

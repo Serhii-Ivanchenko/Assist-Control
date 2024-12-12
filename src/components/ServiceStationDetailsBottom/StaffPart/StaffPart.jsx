@@ -11,6 +11,7 @@ import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns
 import RatingStars from "../../sharedComponents/RatingStars/RatingStars.jsx";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import clsx from "clsx";
+// import { Phone } from "@mui/icons-material";
 
 export default function StaffPart() {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -18,37 +19,39 @@ export default function StaffPart() {
     {
       name: "Максим Коваленко",
       role: "Власник",
-      salary: "20000 + 7%",
+      phone: "+38 (073) 329 12 12",
       isDisabled: false,
     },
     {
       name: "Максим Коваленко",
       role: "Кухарка",
-      salary: "15000 + 5%",
+      phone: "+38 (073) 329 12 12",
       isDisabled: false,
     },
     {
       name: "Максим Коваленко",
       role: "Механік",
-      salary: "40 % ВР",
+      phone: "+38 (073) 329 12 12",
       isDisabled: false,
     },
     {
       name: "Максим Коваленко",
       role: "Механік",
-      salary: "40 % ВР",
+      phone: "+38 (073) 329 12 12",
       isDisabled: false,
     },
     {
       name: "Максим Коваленко",
       role: "Механік",
-      salary: "40 % ВР",
+      phone: "+38 (073) 329 12 12",
       isDisabled: false,
     },
   ]);
 
   const [isEditing, setIsEditing] = useState(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [editedValue, setEditedValue] = useState({});
+
   // const selectRef = useRef(null);
 
   const inputFocusRef = useRef();
@@ -90,6 +93,8 @@ export default function StaffPart() {
   };
 
   const handleEditing = (index) => {
+    const memberToEdit = members[index];
+    setEditedValue({ ...memberToEdit, index });
     setIsEditing(isEditing === index ? null : index);
   };
 
@@ -110,6 +115,19 @@ export default function StaffPart() {
   const handleBlur = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       setActiveDropdown(null);
+    }
+  };
+
+  const handleRepeal = () => {
+    if (editedValue && editedValue.index !== undefined) {
+      setMembers(
+        members.map((member, index) =>
+          index === editedValue.index
+            ? { ...member, name: editedValue.name }
+            : member
+        )
+      );
+      setIsEditing(null);
     }
   };
 
@@ -171,16 +189,20 @@ export default function StaffPart() {
                         <option value="Перегляд">Перегляд</option>
                         <option value="Адміністратор">Адміністратор</option>
 </select>): (<p className={css.memberRole}> {member.role} </p>)} */}
-              <p className={css.memberRole}> {member.salary} </p>
-              <SwitchableBtns
-                onEdit={() => handleEditing(index)}
-                onToggleDisable={() => toDisable(index)}
-                onDelete={() => deleteMember(index)}
-                isDisabled={member.isDisabled}
-                showIconSave={true}
-                id={index}
-                isEditing={isEditing}
-              />
+              <p className={css.memberRole}> {member.phone} </p>
+
+              <div className={css.containerForBtn}>
+                <SwitchableBtns
+                  onEdit={() => handleEditing(index)}
+                  onToggleDisable={() => toDisable(index)}
+                  onDelete={() => deleteMember(index)}
+                  isDisabled={member.isDisabled}
+                  showIconSave={true}
+                  id={index}
+                  isEditing={isEditing}
+                  onRepeal={() => handleRepeal(index)}
+                />
+              </div>
             </li>
           ))}
         </ul>

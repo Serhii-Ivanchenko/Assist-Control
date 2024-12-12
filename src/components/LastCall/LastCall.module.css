@@ -1,6 +1,6 @@
 .wrapper {
   width: 455px;
-  height: 283px;
+  height: auto;
   padding: 20px;
   border-radius: 12px;
   background: var(--dark-gray);
@@ -82,12 +82,12 @@
   background-color: var(--play-btn-triangle);
 }
 
-.bottomWrapper {
+/* .bottomWrapper {
   display: flex;
   gap: 20px;
   height: 70px;
   align-items: center;
-}
+} */
 
 .avatar {
   width: 48px;

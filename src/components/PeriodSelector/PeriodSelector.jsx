@@ -1,9 +1,10 @@
 import { useState } from "react";
 import dayjs from "dayjs";
 import css from "./PeriodSelector.module.css";
-import DatePicker from "react-datepicker";
-import { BsCalendar2Week } from "react-icons/bs";
+// import DatePicker from "react-datepicker";
+// import { BsCalendar2Week } from "react-icons/bs";
 import "react-datepicker/dist/react-datepicker.css";
+import CalendarPeriodSelector from "../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector.jsx";
 
 export default function PeriodSelector({
   startDate,
@@ -13,8 +14,8 @@ export default function PeriodSelector({
 }) {
   const [periodStartData, setPeriodStartData] = useState(startDate);
   const [periodEndData, setPeriodEndData] = useState(endDate);
-  const [isOpenBeg, setIsOpenBeg] = useState(false);
-  const [isOpenEnd, setIsOpenEnd] = useState(false);
+  // const [isOpenBeg, setIsOpenBeg] = useState(false);
+  // const [isOpenEnd, setIsOpenEnd] = useState(false);
   const currentDate = new Date();
   const sevenDaysAgo = new Date(currentDate);
   sevenDaysAgo.setDate(currentDate.getDate() - 7);
@@ -75,54 +76,67 @@ export default function PeriodSelector({
     return;
   }
 
-  const handleIconClickBeg = () => {
-    setIsOpenBeg((prev) => !prev); // Переключение состояния открытия календаря
-  };
-  const handleIconClickEnd = () => {
-    setIsOpenEnd((prev) => !prev); // Переключение состояния открытия календаря
-  };
+  // const handleIconClickBeg = () => {
+  //   setIsOpenBeg((prev) => !prev); // Переключение состояния открытия календаря
+  // };
+  // const handleIconClickEnd = () => {
+  //   setIsOpenEnd((prev) => !prev); // Переключение состояния открытия календаря
+  // };
 
   return (
     <div className={css.containerperiodselector}>
-      <p className={css.periodtitle}>З</p>
-
-      <div className={css.datewrapper}>
-        <DatePicker
-          className={css.periodinput}
-          selected={periodStartData}
-          onChange={(date) => {
-            handleInputChangeBeg(date), setIsOpenBeg(false);
-          }}
-          dateFormat="dd/MM/yyyy"
-          open={isOpenBeg}
-          onClickOutside={() => setIsOpenBeg(false)}
-          popperClassName={css.leftdatepickerdropdown}
-          //  placeholderText="Click to select a date"
-          onKeyDown={(e) => e.preventDefault()}
-        />
-        <button className={css.calendarBtn}>
-          <BsCalendar2Week className={css.icon} onClick={handleIconClickBeg} />
-        </button>
-      </div>
-      <p className={css.periodtitle}>По</p>
-
-      <div className={css.datewrapper}>
-        <DatePicker
-          className={css.periodinput}
-          selected={periodEndData}
-          onChange={(date) => {
-            handleInputChangeEnd(date), setIsOpenEnd(false);
-          }}
-          dateFormat="dd/MM/yyyy"
-          open={isOpenEnd}
-          onClickOutside={() => setIsOpenEnd(false)}
-          popperClassName={css.datepickerdropdown}
-          //  placeholderText="Click to select a date"
-        />
-        <button className={css.calendarBtn}>
-          <BsCalendar2Week className={css.icon} onClick={handleIconClickEnd} />
-        </button>
-      </div>
+    <CalendarPeriodSelector
+      periodStartData={periodStartData}
+      periodEndData={periodEndData}
+      startDate={startDate}
+      endDate={endDate}
+      // onDateBegChange={setStartDate}
+      // onDateEndChange={setEndDate}
+      handleInputChangeBeg={handleInputChangeBeg}
+      handleInputChangeEnd={handleInputChangeEnd}
+    />
     </div>
+
+    // <div className={css.containerperiodselector}>
+    //   <p className={css.periodtitle}>З</p>
+
+    //   <div className={css.datewrapper}>
+    //     <DatePicker
+    //       className={css.periodinput}
+    //       selected={periodStartData}
+    //       onChange={(date) => {
+    //         handleInputChangeBeg(date), setIsOpenBeg(false);
+    //       }}
+    //       dateFormat="dd/MM/yyyy"
+    //       open={isOpenBeg}
+    //       onClickOutside={() => setIsOpenBeg(false)}
+    //       popperClassName={css.leftdatepickerdropdown}
+    //       //  placeholderText="Click to select a date"
+    //       onKeyDown={(e) => e.preventDefault()}
+    //     />
+    //     <button className={css.calendarBtn}>
+    //       <BsCalendar2Week className={css.icon} onClick={handleIconClickBeg} />
+    //     </button>
+    //   </div>
+    //   <p className={css.periodtitle}>По</p>
+
+    //   <div className={css.datewrapper}>
+    //     <DatePicker
+    //       className={css.periodinput}
+    //       selected={periodEndData}
+    //       onChange={(date) => {
+    //         handleInputChangeEnd(date), setIsOpenEnd(false);
+    //       }}
+    //       dateFormat="dd/MM/yyyy"
+    //       open={isOpenEnd}
+    //       onClickOutside={() => setIsOpenEnd(false)}
+    //       popperClassName={css.datepickerdropdown}
+    //       //  placeholderText="Click to select a date"
+    //     />
+    //     <button className={css.calendarBtn}>
+    //       <BsCalendar2Week className={css.icon} onClick={handleIconClickEnd} />
+    //     </button>
+    //   </div>
+    // </div>
   );
 }

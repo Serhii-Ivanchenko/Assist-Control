@@ -80,7 +80,7 @@ useEffect(() => {
   let columnCount = data.dates.length;
  
   let startIndexColumn = parseInt(data.dates[1]);
-  console.log('sic', startIndexColumn);
+  // console.log('sic', startIndexColumn);
   const gridStyle = {
     "--column-count": columnCount - 1,
   };
@@ -199,8 +199,8 @@ useEffect(() => {
 
         const isDisabled = (carSelectDate === currentDate && currentTime > itemEndTime) ||
         carSelectDate < currentDate ;
-        console.log('col', item.stage_start + 1 - startIndexColumn + 1)
-        console.log('colend',item.stage_end + 2 - startIndexColumn + 1)
+        // console.log('col', item.stage_start + 1 - startIndexColumn + 1)
+        // console.log('colend',item.stage_end + 2 - startIndexColumn + 1)
         const gridColumn = `${item.stage_start + 1 - startIndexColumn + 1} / ${
           item.stage_end + 2 - startIndexColumn + 1
         }`;

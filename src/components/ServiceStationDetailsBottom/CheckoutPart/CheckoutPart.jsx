@@ -85,10 +85,13 @@ export default function CheckoutPart() {
   ]);
   const [newRow, setNewRow] = useState("");
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [editedValue, setEditedValue] = useState({});
   const inputFocusRef = useRef();
   const scrollToTheLastItemRef = useRef();
 
   const handleEditing = (index) => {
+    const checkoutToEdit = checkouts[index];
+    setEditedValue({ ...checkoutToEdit, index });
     setIsEditing(isEditing === index ? null : index);
   };
 
@@ -153,6 +156,19 @@ export default function CheckoutPart() {
   const handleBlur = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       setActiveDropdown(null);
+    }
+  };
+
+  const handleRepeal = () => {
+    if (editedValue && editedValue.index !== undefined) {
+      setCheckouts(
+        checkouts.map((checkout, index) =>
+          index === editedValue.index
+            ? { ...checkout, name: editedValue.name }
+            : checkout
+        )
+      );
+      setIsEditing(null);
     }
   };
 
@@ -283,6 +299,7 @@ export default function CheckoutPart() {
                 isEditing={isEditing}
                 id={index}
                 showIconSave={true}
+                onRepeal={() => handleRepeal(index)}
               />
             </li>
           ))}
