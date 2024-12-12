@@ -35,6 +35,19 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
     }
     setIsEditing((prev) => !prev);
   };
+
+
+const handleCancelEdit = (event) => {
+  event.stopPropagation(); 
+  setIsEditing(false);
+
+  // Сбрасываем данные через реф
+  if (detailsRef.current?.resetGridData) {
+    detailsRef.current.resetGridData();
+  }
+};
+
+
   // const activePeriods = [
   //   { day: "Monday", startTime: 9, endTime: 12, isActive: true },
   //   { day: "Monday", startTime: 14, endTime: 16, isActive: true },
@@ -125,19 +138,40 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
         </Typography>
 
         {isExpanded && (
-          <button
+          isEditing ? (
+              <div className={css.blockflex}> 
+                
+              <button onClick={handleCancelEdit} className={css.editbtn} style={{marginRight: "0"}} >
+                <BsXCircle className={css.mainIcon} size={21} /> </button> 
+      
+      <button
+            onClick={handleEditToggle}
+            // style={{ color: "var(--white)", marginLeft: "15px" }}
+            className={css.editbtn} style={{marginRight: "0"}}
+          > <RiSave3Fill className={css.mainIcon} size={21} /> </button> 
+          </div>
+            ) : (
+      <button
             onClick={handleEditToggle}
             // style={{ color: "var(--white)", marginLeft: "15px" }}
             className={css.editbtn}
-          >
-            {isEditing ? (
-            //  <div className={css.blockflex}> <BsXCircle className={css.mainIcon} size={21}  />
-                <RiSave3Fill className={css.mainIcon} size={21} />
-              // </div>
-            ) : (
-              <BsPencil className={css.mainIcon} />
-            )}
-          </button>
+          > <BsPencil className={css.mainIcon} /> </button> 
+              
+            )
+        
+          // <button
+          //   onClick={handleEditToggle}
+          //   // style={{ color: "var(--white)", marginLeft: "15px" }}
+          //   className={css.editbtn}
+          // >
+          //   {isEditing ? (
+          //   //  <div className={css.blockflex}> <BsXCircle className={css.mainIcon} size={21}  />
+          //       <RiSave3Fill className={css.mainIcon} size={21} />
+          //     // </div>
+          //   ) : (
+          //     <BsPencil className={css.mainIcon} />
+          //   )}
+          // </button>
         )}
       </AccordionSummary>
       <AccordionDetails

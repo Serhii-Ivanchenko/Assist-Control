@@ -3,10 +3,10 @@ import * as Yup from "yup";
 import CustomRadioBtn from "../../../CustomRadioBtn/CustomRadioBtn";
 import styles from "./DistributorsModal.module.css";
 
-const DistributorsInfoForm = ({ distributor, setDistributor }) => {
+const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
   const initialValues = {
     address: distributor.address || "",
-    paymentCondition: distributor.paymentCondition || "prepaid",
+    paymentCondition: distributor.paymentCondition || "",
     days: distributor.days || "",
     owner: distributor.owner || "",
     code: distributor.code || "",
@@ -42,6 +42,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor }) => {
 
   return (
     <Formik
+      innerRef={formikRef}
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
@@ -53,7 +54,6 @@ const DistributorsInfoForm = ({ distributor, setDistributor }) => {
             <Field
               type="text"
               name="address"
-              value={distributor.address || ""}
               placeholder="Харків, Байрона 189 оф 27"
               className={styles.input}
             />
@@ -66,29 +66,38 @@ const DistributorsInfoForm = ({ distributor, setDistributor }) => {
                 className={styles.radioBtn}
                 onClick={() => setFieldValue("paymentCondition", "prepaid")}
               >
-                <CustomRadioBtn
-                  isChecked={initialValues.paymentCondition === "prepaid"}
-                />
-                Передоплата
+                <Field name="paymentCondition">
+                  {({ field }) => (
+                    <CustomRadioBtn isChecked={field.value === "prepaid"} />
+                  )}
+                </Field>
+                <span>Передоплата</span>
               </label>
+
               <label
                 className={styles.radioBtn}
                 onClick={() => setFieldValue("paymentCondition", "actual")}
               >
-                <CustomRadioBtn
-                  isChecked={initialValues.paymentCondition === "actual"}
-                />
-                Фактична
+                <Field name="paymentCondition">
+                  {({ field }) => (
+                    <CustomRadioBtn isChecked={field.value === "actual"} />
+                  )}
+                </Field>
+                <span>Фактична</span>
               </label>
+
               <label
                 className={styles.radioBtn}
                 onClick={() => setFieldValue("paymentCondition", "postpaid")}
               >
-                <CustomRadioBtn
-                  isChecked={initialValues.paymentCondition === "postpaid"}
-                />
-                Післяплата
+                <Field name="paymentCondition">
+                  {({ field }) => (
+                    <CustomRadioBtn isChecked={field.value === "postpaid"} />
+                  )}
+                </Field>
+                <span>Післяплата</span>
               </label>
+
               <div className={styles.inputBox}>
                 <Field
                   className={styles.input}
@@ -176,7 +185,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor }) => {
               <Field
                 className={styles.input}
                 type="text"
-                name="companeAddress"
+                name="companyAddress"
                 placeholder="м. Київ, вул. Шевченка, буд. 10"
                 style={{ width: "269px" }}
               />

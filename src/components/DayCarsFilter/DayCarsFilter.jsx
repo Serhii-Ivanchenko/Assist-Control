@@ -1,11 +1,35 @@
+import { useEffect, useState } from "react";
 import css from "./DayCarsFilter.module.css";
 import { IoIosSearch } from "react-icons/io";
 
-export default function DayCarsFilter({ value, onChange, error }) {
+export default function DayCarsFilter({ carsData, onFilter, error }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [inputError, setInputError] = useState("");
+
   const handleInputChange = (event) => {
-    onChange(event.target.value); // Передаємо введене значення в батьківський компонент
+    const term = event.target.value;
+
+    if (/^[a-zA-Z0-9]*$/.test(term)) {
+      setSearchTerm(term);
+      setInputError("");
+    } else {
+      setInputError("Вводьте лише латинські літери та цифри");
+    }
   };
 
+  useEffect(() => {
+    const filteredCars = carsData.filter((car) => {
+      const { plate, auto } = car;
+      const lowerCaseSearchTerm = searchTerm.toLowerCase();
+      return (
+        (plate?.toLowerCase()?.includes(lowerCaseSearchTerm) || false) ||
+        (auto?.toLowerCase()?.includes(lowerCaseSearchTerm) || false)
+      );
+    });
+  
+    onFilter(filteredCars);
+  }, [searchTerm, carsData, onFilter]);
+  
   return (
     <div className={css.inputWrapper}>
       <input
@@ -14,13 +38,15 @@ export default function DayCarsFilter({ value, onChange, error }) {
         name="searchInput"
         id="searchInput"
         placeholder="Пошук по авто"
-        value={value} // Встановлюємо значення input
-        onChange={handleInputChange} // Викликаємо handleInputChange при зміні
+        value={searchTerm}
+        onChange={handleInputChange}
       />
       <button className={css.button} type="button">
         <IoIosSearch className={css.icon} />
       </button>
-      {error && <div className={css.errorMsg}>{error}</div>}
+      {(inputError || error) && (
+        <div className={css.errorMsg}>{inputError || error}</div>
+      )}
     </div>
   );
 }

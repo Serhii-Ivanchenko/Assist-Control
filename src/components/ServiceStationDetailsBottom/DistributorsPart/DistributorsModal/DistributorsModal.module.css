@@ -1,4 +1,5 @@
 .wrapper {
+  position: relative;
   height: auto;
   width: auto;
   display: flex;
@@ -8,6 +9,20 @@
   padding: 20px 30px;
   border-radius: 12px;
   background: var(--bg-secondary);
+}
+
+.exitBtn {
+  position: absolute;
+  top: 13px;
+  right: 19px;
+  background-color: transparent;
+  border: none;
+  color: var(--Button-grey, #4a4a4a);
+  cursor: pointer;
+}
+
+.icon {
+  scale: 2.1;
 }
 
 .mainInfo {
@@ -60,8 +75,16 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.popupIcon {
+.btn {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+}
+
+.popupIcon {
+  color: var(--light-gray);
 }
 
 .popup {
@@ -200,11 +223,53 @@
   font-size: 16px;
 }
 
+.input:-webkit-autofill {
+  background-color: var(--bg-input) !important;
+  color: var(--light-gray) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--light-gray) !important;
+}
+
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  background-color: var(--bg-input) !important;
+  color: var(--input-text) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--light-gray) !important;
+}
+
 .authContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   width: 391px;
+}
+
+.btnGroup {
+  display: flex;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.resetBtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  display: flex;
+  padding: 6px 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--light-gray);
+
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
 }
 
 .saveBtn {

@@ -43,6 +43,11 @@ const ScheduleTable = forwardRef(({ isEditing, activePeriods }, ref) => {
   const [gridData, setGridData] = useState(generateGridData());
   const [isSelecting, setIsSelecting] = useState(false);
 
+   // Сброс сетки к исходным данным
+  const resetGridData = () => {
+    setGridData(generateGridData());
+  };
+
   // Обробка зміни стану клітинки
   const toggleCell = (day, hour) => {
     if (!isEditing) return; // Блкуємо зміни, якщо режим редагування вимкнено
@@ -92,6 +97,8 @@ const ScheduleTable = forwardRef(({ isEditing, activePeriods }, ref) => {
 
   useImperativeHandle(ref, () => ({
     generateBackendData,
+     resetGridData,
+
   }));
   return (
     <div className={css.container}>

@@ -6,6 +6,7 @@ import {
   getMonthlyLoad,
   getPlannedVisits,
   getRecordsForDay,
+  getRecordsForPeriod,
   getServiceDataForBooking,
   updateRecordData,
 } from "./operations.js";
@@ -43,6 +44,12 @@ const crmSlice = createSlice({
         state.dayRecords = action.payload.records;
       })
       .addCase(getRecordsForDay.rejected, handleRejected)
+      .addCase(getRecordsForPeriod.pending, handlePending)
+      .addCase(getRecordsForPeriod.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.periodRecords = action.payload.records;
+      })
+      .addCase(getRecordsForPeriod.rejected, handleRejected)
       .addCase(createRecord.pending, handlePending)
       .addCase(createRecord.fulfilled, (state, action) => {
         state.isLoading = false;

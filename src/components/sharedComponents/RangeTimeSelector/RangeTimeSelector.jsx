@@ -1,20 +1,30 @@
+import { useState } from "react";
+import clsx from "clsx";
 import styles from "./RangeTimeSelector.module.css";
 
-export default function RangeTimeSelector() {
-    return (
-        <div className={styles.wrapper}>
-            <div className={styles.timeContainer}>
-                <p className={styles.timeText}>За день</p>
-            </div>
-            <div className={styles.timeContainer}>
-                <p className={styles.timeText}>За тиждень</p>
-            </div>
-            <div className={styles.timeContainer}>
-                <p className={styles.timeText}>За місяць</p>
-            </div>
-            <div className={styles.timeContainer}>
-                <p className={styles.timeText}>Весь час</p>
-            </div>
+export default function RangeTimeSelector({onSelectTimeRange}) {
+  const [selected, setSelected] = useState(0);
+
+  const options = ["За день", "За тиждень", "За місяць", "Весь час"];
+
+  const handleClick = (index) => {
+    setSelected(index);
+    if (onSelectTimeRange) onSelectTimeRange(index);
+  };
+
+  return (
+    <div className={styles.wrapper}>
+      {options.map((option, index) => (
+        <div
+          key={index}
+          className={clsx(styles.timeContainer, {
+            [styles.active]: index === selected,
+          })}
+          onClick={() => handleClick(index)}
+        >
+          <p className={styles.timeText}>{option}</p>
         </div>
-    );
-  }
+      ))}
+    </div>
+  );
+}

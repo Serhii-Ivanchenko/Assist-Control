@@ -96,6 +96,12 @@ export const initialState = {
       availability: [],
     },
     records: [],
+    dayRecords: [],
+    periodRecords: [],
+    visits: [],
+    load: [],
+    isLoading: false,
+    error: null,
     visibilityRecords: {
       name: true,
       rating: true,
@@ -114,11 +120,6 @@ export const initialState = {
       createBtn: true,
       archive: true,
     },
-    dayRecords: [],
-    visits: [],
-    load: [],
-    isLoading: false,
-    error: null,
   },
 
   client: {
