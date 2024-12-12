@@ -36,7 +36,7 @@ function SearchBar({ searchData, onFilter, onReset }) {
     if (matchedCategories.length > 0) {
       onFilter(matchedCategories);
     } else {
-      setIsBtnIsVisible(false);
+      // setIsBtnIsVisible(false);
       onFilter([]);
     }
   };
