@@ -1,8 +1,26 @@
-import css from './ClientsInWorkListSection.module.css'
+import ClientsInWorkItem from "./ClientsInWorkItem/ClientsInWorkItem";
+import defImg from "../../assets/images/avatar_default.png";
+import css from "./ClientsInWorkListSection.module.css";
+
+const data = [
+  {
+    id: 1,
+    status: "repair",
+    car_model: "HONDA CIVIC",
+    car_img: defImg,
+  },
+];
 
 export default function ClientsInWorkListSection() {
-      return (
-        <div className={css.wrapper}>ClientsInWorkListSection (Анастасія)</div>
-      );
-
-};
+  return (
+    <div className={css.wrapper}>
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>
+            <ClientsInWorkItem item={item} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
