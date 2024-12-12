@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import PopupMenu from "../../../../sharedComponents/PopupMenu/PopupMenu";
 import styles from "./ServiceItem.module.css";
@@ -10,10 +10,14 @@ function ServiceItem({
   onDelete,
   innerAccRef,
   containerRef,
+  resetPrice,
+  resetService,
 }) {
   const [serviceName, setServiceName] = useState(serviceData.item);
   const [isEdit, setIsEdit] = useState(false);
   const [activePopupId, setActivePopupId] = useState(null);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   const inputRef = useRef();
   const buttonRef = useRef(null);
 
@@ -26,14 +30,25 @@ function ServiceItem({
     setActivePopupId(null);
   };
 
-  const handleSave = () => {
-    setIsEdit(false);
-    onUpdate({ id, name: serviceName });
-  };
-
   const handleDelete = () => {
     onDelete(id);
   };
+
+  useEffect(() => {
+    if (resetPrice || resetService) {
+      setMinPrice("");
+      setMaxPrice("");
+      setServiceName(serviceData.item);
+      setIsEdit(false); // Завжди скидаємо режим редагування
+    }
+  }, [resetPrice, resetService, serviceData.item]);
+
+  useEffect(() => {
+    if (isEdit) {
+      setIsEdit(true);
+      onUpdate({ id, name: serviceName });
+    }
+  }, [id, isEdit, onUpdate, serviceName]);
 
   return (
     <>
@@ -44,7 +59,6 @@ function ServiceItem({
             type="text"
             value={serviceName}
             onChange={(e) => setServiceName(e.target.value)}
-            onBlur={handleSave}
             ref={inputRef}
           />
         </div>
@@ -57,11 +71,21 @@ function ServiceItem({
       <div className={styles.inputsContainer}>
         <div className={styles.inputBox}>
           <label className={styles.inputLabel}>Мін</label>
-          <input placeholder="250" className={styles.input} />
+          <input
+            placeholder="250"
+            className={styles.input}
+            value={minPrice ?? ""}
+            onChange={(e) => setMinPrice(e.target.value)}
+          />
         </div>
         <div className={styles.inputBox}>
           <label className={styles.inputLabel}>Макс</label>
-          <input placeholder="400" className={styles.input} />
+          <input
+            placeholder="400"
+            className={styles.input}
+            value={maxPrice ?? ""}
+            onChange={(e) => setMaxPrice(e.target.value)}
+          />
         </div>
       </div>
 
