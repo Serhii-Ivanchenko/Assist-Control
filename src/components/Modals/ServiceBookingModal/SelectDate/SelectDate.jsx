@@ -9,10 +9,10 @@ import { format, addDays, subDays } from "date-fns";
 import { useSelector } from "react-redux";
 import { selectDate } from "../../../../redux/cars/selectors";
 
-export default function SelectDate({ newDate, recordId }) {
+export default function SelectDate({ newDate, recordId, carSelectDate }) {
   const selectedDate = useSelector(selectDate);
   const [startDate, setStartDate] = useState(
-    recordId ? new Date(selectedDate) : new Date()
+    recordId || carSelectDate ? new Date(selectedDate) : new Date()
   );
 
   useEffect(() => {

@@ -162,6 +162,7 @@ export default function CalendarPagination({ isCrm }) {
                   recordId={null}
                   postId={null}
                   onClose={handleCloseModal}
+                  carSelectDate={carSelectDate}
                 />
               </Modal>
             )}

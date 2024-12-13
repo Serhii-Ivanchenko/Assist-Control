@@ -34,4 +34,15 @@
 
 .timeBtnDisabled:hover {
   cursor: not-allowed;
+  border: none;
+}
+
+button:disabled {
+  background: var(--bg-input);
+  color: var(--input-stroke);
+}
+
+button:disabled:hover {
+  cursor: not-allowed;
+  border: none;
 }
