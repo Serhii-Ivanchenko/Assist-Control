@@ -13,7 +13,7 @@ import { IoVideocamOutline, IoCarSportSharp } from "react-icons/io5";
 import { HiOutlineCurrencyDollar } from "react-icons/hi2";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { BiSolidRightArrow, BiSolidDownArrow } from "react-icons/bi";
-import AccountingTree from "../AccountingTree/AccountingTree";
+import AccountingTree from "./AccountingTree/AccountingTree";
 
 export default function Navigation() {
   const [isAccountingOpen, setIsAccountingOpen] = useState(false);
