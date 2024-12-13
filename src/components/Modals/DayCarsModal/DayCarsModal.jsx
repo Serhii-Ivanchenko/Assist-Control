@@ -22,6 +22,7 @@ import DownloadPdfButton from "../../sharedComponents/DownloadPdfButton/Download
 import { getPeriodCars } from "../../../redux/cars/operations";
 import toast from "react-hot-toast";
 import CarsSearch from "../../sharedComponents/CarsSearch/CarsSearch";
+import filterCarsBySearchTerm from "../../../utils/filterCarsBySearchTerm";
 
 export default function DayCarsModal({ onClose, isModal }) {
   const dispatch = useDispatch();
@@ -115,6 +116,8 @@ export default function DayCarsModal({ onClose, isModal }) {
       });
     }
   }
+
+  
   // Початкове встановлення дат і завантаження даних
   // useEffect(() => {
   //   if (selectedDate) {
@@ -158,15 +161,7 @@ export default function DayCarsModal({ onClose, isModal }) {
 
   // Фільтрація по пошуку
   if (searchTerm) {
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    filteredData = filteredData.filter((car) => {
-      const plateValue = car.plate?.toLowerCase() || "";
-      const autoValue = car.auto?.toLowerCase() || "";
-      return (
-        plateValue.includes(lowerCaseSearchTerm) ||
-        autoValue.includes(lowerCaseSearchTerm)
-      );
-    });
+    filteredData = filterCarsBySearchTerm(filteredData, searchTerm);
   }
 
   setFilteredCarsData(filteredData);
@@ -184,20 +179,7 @@ export default function DayCarsModal({ onClose, isModal }) {
   };
 
   const filteredCars = () => {
-    console.log("Фільтровані дані для пошуку:", filteredCarsData);
-    if (!searchTerm) return filteredCarsData;
-  
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    return filteredCarsData.filter((car) => {
-      const { plate, auto } = car;
-      const plateValue = plate ? plate.toLowerCase() : "";
-      const autoValue = auto ? auto.toLowerCase() : "";
-  
-      return (
-        plateValue.includes(lowerCaseSearchTerm) ||
-        autoValue.includes(lowerCaseSearchTerm)
-      );
-    });
+   return filterCarsBySearchTerm(filteredCarsData, searchTerm);
   };
 
   const handleToggle = (field) => {
