@@ -36,6 +36,8 @@ export default function DayCarsModal({ onClose, isModal }) {
   const [filteredCarsData, setFilteredCarsData] = useState([]);
   const [sortDescending, setSortDescending] = useState(true);
   const [selectedStatus, setSelectedStatus] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [inputError, setInputError] = useState("");
 
   const [periodStartData, setPeriodStartData] = useState(
     startDate || selectedDate || null
@@ -43,18 +45,13 @@ export default function DayCarsModal({ onClose, isModal }) {
   const [periodEndData, setPeriodEndData] = useState(
     endDate || startDate || selectedDate || null
   );
-  const [noResults, setNoResults] = useState(false);
-
-  const handleNoResults = (resultNotFound) => {
-    setNoResults(resultNotFound);
-  };
+  
 
   useEffect(() => {
     console.log("carsData", carsData);
     console.log("periodCars", periodCars);
 
   }, [carsData, periodCars]);
-  
 
   useEffect(() => {
     if (!startDate) {
@@ -135,47 +132,78 @@ export default function DayCarsModal({ onClose, isModal }) {
   // }, [dispatch, startDate, endDate]);
 
   useEffect(() => {
-    let filteredData = [...carsData];
+  let filteredData = periodCars.length ? [...periodCars] : [...carsData];
 
-    const getDurationInMillis = (startDate, completeDate) => {
-      const start = new Date(startDate);
-      const end = completeDate ? new Date(completeDate) : new Date();
-      return end - start;
-    };
+  // Сортування за тривалістю (часом)
+  filteredData.sort((a, b) => {
+    const durationA = new Date(a.date_e || Date.now()) - new Date(a.date_s);
+    const durationB = new Date(b.date_e || Date.now()) - new Date(b.date_s);
+    return sortDescending ? durationB - durationA : durationA - durationB;
+  });
 
-    filteredData.sort((a, b) => {
-      const durationA = getDurationInMillis(a.date_s, a.complete_d);
-      const durationB = getDurationInMillis(b.date_s, b.complete_d);
-      return sortDescending ? durationB - durationA : durationA - durationB;
+  // Фільтрація по статусу
+  if (selectedStatus !== "all") {
+    filteredData = filteredData.filter((car) => car.status === selectedStatus);
+  }
+
+  // Фільтрація по датах
+  if (startDate && endDate) {
+    const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
+    filteredData = filteredData.filter((car) => {
+      const carStartDate = clearTime(new Date(car.date_s));
+      const carEndDate = clearTime(new Date(car.date_e));
+      return carStartDate <= endDate && carEndDate >= startDate;
     });
+  }
 
-    if (selectedStatus !== "all") {
-      filteredData = filteredData.filter(
-        (car) => car.status === selectedStatus
+  // Фільтрація по пошуку
+  if (searchTerm) {
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    filteredData = filteredData.filter((car) => {
+      const plateValue = car.plate?.toLowerCase() || "";
+      const autoValue = car.auto?.toLowerCase() || "";
+      return (
+        plateValue.includes(lowerCaseSearchTerm) ||
+        autoValue.includes(lowerCaseSearchTerm)
       );
-    }
+    });
+  }
 
-    if (startDate && endDate) {
-      const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
-      filteredData = filteredData.filter((car) => {
-        const carStartDate = clearTime(new Date(car.date_s));
-        const carEndDate = clearTime(new Date(car.date_e));
-        return carStartDate <= endDate && carEndDate >= startDate;
-      });
-    }
-
-    setFilteredCarsData(filteredData);
-  }, [selectedStatus, startDate, endDate, carsData, sortDescending]);
+  setFilteredCarsData(filteredData);
+}, [periodCars, carsData, selectedStatus, startDate, endDate, sortDescending, searchTerm]);
+  
 
   const handleStatusChange = (status) => setSelectedStatus(status);
+  const handleSearch = (term) => {
+    if (/^[a-zA-Z0-9]*$/.test(term)) {
+      setSearchTerm(term);
+      setInputError("");
+    } else {
+      setInputError("Вводьте лише латинські літери та цифри");
+    }
+  };
+
+  const filteredCars = () => {
+    console.log("Фільтровані дані для пошуку:", filteredCarsData);
+    if (!searchTerm) return filteredCarsData;
+  
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return filteredCarsData.filter((car) => {
+      const { plate, auto } = car;
+      const plateValue = plate ? plate.toLowerCase() : "";
+      const autoValue = auto ? auto.toLowerCase() : "";
+  
+      return (
+        plateValue.includes(lowerCaseSearchTerm) ||
+        autoValue.includes(lowerCaseSearchTerm)
+      );
+    });
+  };
 
   const handleToggle = (field) => {
     const newVisibility = { ...visibility, [field]: !visibility[field] };
     dispatch(toggleVisibilityCar(newVisibility));
   };
-
-  const filteredCars = () => filteredCarsData;
-  const carsToRender = periodCars.length > 0 ? periodCars : carsData;
 
   return (
     <div className={styles.containerCarModal}>
@@ -204,9 +232,9 @@ export default function DayCarsModal({ onClose, isModal }) {
           </label>
           <div className={styles.search}>
             <CarsSearch
-              carsData={carsData}
-              onFilter={setFilteredCarsData}
-              onNoResults={handleNoResults}
+              value={searchTerm}
+              onChange={handleSearch}
+              error={inputError}
             />
           </div>
         </div>
@@ -228,13 +256,9 @@ export default function DayCarsModal({ onClose, isModal }) {
       <button className={styles.closeButton} onClick={onClose}>
         <MdClose className={styles.iconClose} />
       </button>
-      {noResults ? (
-        <div className={styles.noResults}>
-          <p>Нічого не знайдено за вашим запитом</p>
-        </div>
-      ) : !isLoading && carsToRender.length > 0 ? (
+      {!isLoading && filteredCarsData.length > 0 ? (
         <DayCarsList
-          carsData={carsToRender}
+          carsData={filteredCarsData}
           viewMode={viewMode}
           isModal={isModal}
         />

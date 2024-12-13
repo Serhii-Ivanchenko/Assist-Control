@@ -4,7 +4,7 @@ import { PiEyeFill } from "react-icons/pi";
 import { IoCarSportSharp } from "react-icons/io5";
 import clsx from "clsx";
 
-const renderStatus = (status, complete_d, styles = {}, isFilter) => {
+const renderStatusCars = (status, complete_d, styles = {}, isFilter) => {
   let icon;
   let statusText;
   let statusClass = "";
@@ -117,4 +117,4 @@ const renderStatus = (status, complete_d, styles = {}, isFilter) => {
   );
 };
 
-export default renderStatus;
+export default renderStatusCars;
