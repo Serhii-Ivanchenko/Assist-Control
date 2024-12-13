@@ -66,10 +66,10 @@ export default function AccountingTree() {
         </TreeItem>
 
         <TreeItem
-          itemId="suppliers"
+          itemId="distributors"
           label={
             <NavLink
-              to="/accounting/suppliers"
+              to="/accounting/distributors"
               className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
             >
               Постачальники
