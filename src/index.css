@@ -57,6 +57,7 @@
   --glow-new: #e9d226;
   --glow-view-repair: #e92626;
   --glow-all: #26B5E9;
+  --glow-all-calls: #00A3FF;
 
 
   /* calendar */
@@ -77,7 +78,7 @@
   --status-gradient-complete: linear-gradient(90deg, #4ca54c4d 0%, #3de92600 100%);
   --status-gradient-view-repair: linear-gradient(90deg, #a54f4c4d 0%, #e9362600 100%);
   --status-gradient-all: linear-gradient(90deg, rgba(65, 156, 176, 0.30) 0%, rgba(38, 226, 233, 0.00) 100%);
-
+  --status-gradient-all-calls: linear-gradient(90deg, rgba(65, 143, 176, 0.30) 0%, rgba(38, 174, 233, 0.00) 100%);
   ;
 
   --master-gradient-diag: linear-gradient(90deg, #4154b04d 0%, #2654e900 100%);

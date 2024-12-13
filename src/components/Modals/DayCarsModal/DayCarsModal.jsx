@@ -22,7 +22,10 @@ import DownloadPdfButton from "../../sharedComponents/DownloadPdfButton/Download
 import { getPeriodCars } from "../../../redux/cars/operations";
 import toast from "react-hot-toast";
 import CarsSearch from "../../sharedComponents/CarsSearch/CarsSearch";
-import filterCarsBySearchTerm from "../../../utils/filterCarsBySearchTerm";
+import {
+  validateSearchTerm,
+  filterCarsBySearchTerm,
+} from "../../../utils/filterCarsBySearchTerm";
 
 export default function DayCarsModal({ onClose, isModal }) {
   const dispatch = useDispatch();
@@ -46,12 +49,10 @@ export default function DayCarsModal({ onClose, isModal }) {
   const [periodEndData, setPeriodEndData] = useState(
     endDate || startDate || selectedDate || null
   );
-  
 
   useEffect(() => {
     console.log("carsData", carsData);
     console.log("periodCars", periodCars);
-
   }, [carsData, periodCars]);
 
   useEffect(() => {
@@ -117,7 +118,6 @@ export default function DayCarsModal({ onClose, isModal }) {
     }
   }
 
-  
   // Початкове встановлення дат і завантаження даних
   // useEffect(() => {
   //   if (selectedDate) {
@@ -135,51 +135,55 @@ export default function DayCarsModal({ onClose, isModal }) {
   // }, [dispatch, startDate, endDate]);
 
   useEffect(() => {
-  let filteredData = periodCars.length ? [...periodCars] : [...carsData];
+    let filteredData = periodCars.length ? [...periodCars] : [...carsData];
 
-  // Сортування за тривалістю (часом)
-  filteredData.sort((a, b) => {
-    const durationA = new Date(a.date_e || Date.now()) - new Date(a.date_s);
-    const durationB = new Date(b.date_e || Date.now()) - new Date(b.date_s);
-    return sortDescending ? durationB - durationA : durationA - durationB;
-  });
-
-  // Фільтрація по статусу
-  if (selectedStatus !== "all") {
-    filteredData = filteredData.filter((car) => car.status === selectedStatus);
-  }
-
-  // Фільтрація по датах
-  if (startDate && endDate) {
-    const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
-    filteredData = filteredData.filter((car) => {
-      const carStartDate = clearTime(new Date(car.date_s));
-      const carEndDate = clearTime(new Date(car.date_e));
-      return carStartDate <= endDate && carEndDate >= startDate;
+    // Сортування за тривалістю (часом)
+    filteredData.sort((a, b) => {
+      const durationA = new Date(a.date_e || Date.now()) - new Date(a.date_s);
+      const durationB = new Date(b.date_e || Date.now()) - new Date(b.date_s);
+      return sortDescending ? durationB - durationA : durationA - durationB;
     });
-  }
 
-  // Фільтрація по пошуку
-  if (searchTerm) {
-    filteredData = filterCarsBySearchTerm(filteredData, searchTerm);
-  }
+    // Фільтрація по статусу
+    if (selectedStatus !== "all") {
+      filteredData = filteredData.filter(
+        (car) => car.status === selectedStatus
+      );
+    }
 
-  setFilteredCarsData(filteredData);
-}, [periodCars, carsData, selectedStatus, startDate, endDate, sortDescending, searchTerm]);
-  
+    // Фільтрація по датах
+    if (startDate && endDate) {
+      const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
+      filteredData = filteredData.filter((car) => {
+        const carStartDate = clearTime(new Date(car.date_s));
+        const carEndDate = clearTime(new Date(car.date_e));
+        return carStartDate <= endDate && carEndDate >= startDate;
+      });
+    }
+
+    // Фільтрація по пошуку
+    if (searchTerm) {
+      filteredData = filterCarsBySearchTerm(filteredData, searchTerm);
+    }
+
+    setFilteredCarsData(filteredData);
+  }, [
+    periodCars,
+    carsData,
+    selectedStatus,
+    startDate,
+    endDate,
+    sortDescending,
+    searchTerm,
+  ]);
 
   const handleStatusChange = (status) => setSelectedStatus(status);
   const handleSearch = (term) => {
-    if (/^[a-zA-Z0-9]*$/.test(term)) {
-      setSearchTerm(term);
-      setInputError("");
-    } else {
-      setInputError("Вводьте лише латинські літери та цифри");
-    }
+    validateSearchTerm(term, setInputError, setSearchTerm);
   };
 
   const filteredCars = () => {
-   return filterCarsBySearchTerm(filteredCarsData, searchTerm);
+    return filterCarsBySearchTerm(filteredCarsData, searchTerm);
   };
 
   const handleToggle = (field) => {
@@ -238,14 +242,18 @@ export default function DayCarsModal({ onClose, isModal }) {
       <button className={styles.closeButton} onClick={onClose}>
         <MdClose className={styles.iconClose} />
       </button>
-      {!isLoading && filteredCarsData.length > 0 ? (
+      {isLoading ? (
+        <Loader />
+      ) : filteredCarsData.length === 0 ? (
+        <div className={styles.noResultsMessage}>
+          По вашому запиту нічого не знайдено
+        </div>
+      ) : (
         <DayCarsList
           carsData={filteredCarsData}
           viewMode={viewMode}
           isModal={isModal}
         />
-      ) : (
-        <Loader />
       )}
     </div>
   );
