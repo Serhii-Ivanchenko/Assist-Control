@@ -19,7 +19,7 @@ export default function Navigation() {
   const [isAccountingOpen, setIsAccountingOpen] = useState(false);
 
   const animationProps = useSpring({
-    maxHeight: isAccountingOpen ? 200 : 0,
+    maxHeight: isAccountingOpen ? 300 : 0,
     opacity: isAccountingOpen ? 1 : 0,
     transform: isAccountingOpen ? "translateY(0)" : "translateY(-20px)",
     overflow: "hidden",
