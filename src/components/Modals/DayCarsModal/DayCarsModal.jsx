@@ -26,6 +26,8 @@ import {
   validateSearchTerm,
   filterCarsBySearchTerm,
 } from "../../../utils/filterCarsBySearchTerm";
+import renderStatusCars from "../../../utils/renderStatusCars";
+import { statusesCar } from "../../../utils/dataStatuses";
 
 export default function DayCarsModal({ onClose, isModal }) {
   const dispatch = useDispatch();
@@ -225,7 +227,7 @@ export default function DayCarsModal({ onClose, isModal }) {
           </div>
         </div>
         <div className={styles.rightHeader}>
-          <StatusFilterCars onStatusChange={handleStatusChange} />
+          <StatusFilterCars onStatusChange={handleStatusChange} renderStatus={renderStatusCars} statuses={statusesCar}/>
           <CalendarPeriodSelector
             periodStartData={periodStartData}
             periodEndData={periodEndData}

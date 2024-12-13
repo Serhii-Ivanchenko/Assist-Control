@@ -1,26 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import styles from "./StatusFilterCars.module.css";
-import renderStatusCars from "../../../utils/renderStatusCars.jsx";
 
-export default function StatusFilterCars({ onStatusChange }) {
+export default function StatusFilterCars({ statuses, onStatusChange, renderStatus }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("Статус");
-  const [isFilter, setIsFilter] = useState(true);
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
-  const statuses = [
-    { status: "all", label: "Всі авто" },
-    { status: "new", label: "Нові" },
-    { status: "diagnostic", label: "Діагностика" },
-    { status: "repair", label: "Ремонт" },
-    { status: "view_repair", label: "Огляд ПР" },
-    { status: "complete", label: "Завершено" },
-  ];
 
   const handleStatusSelect = (status) => {
     const selectedStatusObj = statuses.find((s) => s.status === status);
@@ -57,7 +46,7 @@ export default function StatusFilterCars({ onStatusChange }) {
         <ul className={styles.dropdownList} ref={dropdownRef}>
           {statuses.map(({ status }) => (
             <li key={status} onClick={() => handleStatusSelect(status)}>
-              {renderStatusCars(status, false, styles, isFilter)}
+              {renderStatus(status, false, styles)}
             </li>
           ))}
         </ul>
