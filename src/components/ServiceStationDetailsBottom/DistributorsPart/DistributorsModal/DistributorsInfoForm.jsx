@@ -6,7 +6,7 @@ import styles from "./DistributorsModal.module.css";
 const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
   const initialValues = {
     address: distributor.address || "",
-    paymentCondition: distributor.paymentCondition || "prepaid",
+    paymentCondition: distributor.paymentCondition || "",
     days: distributor.days || "",
     owner: distributor.owner || "",
     code: distributor.code || "",
@@ -66,29 +66,38 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
                 className={styles.radioBtn}
                 onClick={() => setFieldValue("paymentCondition", "prepaid")}
               >
-                <CustomRadioBtn
-                  isChecked={initialValues.paymentCondition === "prepaid"}
-                />
-                Передоплата
+                <Field name="paymentCondition">
+                  {({ field }) => (
+                    <CustomRadioBtn isChecked={field.value === "prepaid"} />
+                  )}
+                </Field>
+                <span>Передоплата</span>
               </label>
+
               <label
                 className={styles.radioBtn}
                 onClick={() => setFieldValue("paymentCondition", "actual")}
               >
-                <CustomRadioBtn
-                  isChecked={initialValues.paymentCondition === "actual"}
-                />
-                Фактична
+                <Field name="paymentCondition">
+                  {({ field }) => (
+                    <CustomRadioBtn isChecked={field.value === "actual"} />
+                  )}
+                </Field>
+                <span>Фактична</span>
               </label>
+
               <label
                 className={styles.radioBtn}
                 onClick={() => setFieldValue("paymentCondition", "postpaid")}
               >
-                <CustomRadioBtn
-                  isChecked={initialValues.paymentCondition === "postpaid"}
-                />
-                Післяплата
+                <Field name="paymentCondition">
+                  {({ field }) => (
+                    <CustomRadioBtn isChecked={field.value === "postpaid"} />
+                  )}
+                </Field>
+                <span>Післяплата</span>
               </label>
+
               <div className={styles.inputBox}>
                 <Field
                   className={styles.input}

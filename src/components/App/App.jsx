@@ -50,21 +50,20 @@ const ClientsListInWork = lazy(() =>
 const DistributorsPage = lazy(() =>
   import("../../pages/AccountingPage/DistributorsPage/DistributorsPage.jsx")
 );
-const SparePartsPage = lazy(() =>
-  import(
-    "../../pages/AccountingPage/DistributorsPage/SparePartsPage/SparePartsPage.jsx"
-  )
-);
 const InvoicesPage = lazy(() =>
-  import(
-    "../../pages/AccountingPage/DistributorsPage/InvoicesPage/InvoicesPage.jsx"
-  )
+  import("../../pages/AccountingPage/InvoicesPage/InvoicesPage.jsx")
 );
-const FundsPage = lazy(() =>
-  import("../../pages/AccountingPage/FundsPage/FundsPage.jsx")
+const Goods = lazy(() =>
+  import("../../pages/AccountingPage/InvoicesPage/Goods/Goods.jsx")
 );
-const EquipmentPage = lazy(() =>
-  import("../../pages/AccountingPage/EquipmentPage/EquipmentPage.jsx")
+const Services = lazy(() =>
+  import("../../pages/AccountingPage/InvoicesPage/Services/Services.jsx")
+);
+const Funds = lazy(() =>
+  import("../../pages/AccountingPage/InvoicesPage/Funds/Funds.jsx")
+);
+const Equipment = lazy(() =>
+  import("../../pages/AccountingPage/InvoicesPage/Equipment/Equipment.jsx")
 );
 const ReportsPage = lazy(() =>
   import("../../pages/ReportsPage/ReportsPage.jsx")
@@ -221,32 +220,16 @@ export default function App() {
             }
           />
           <Route
-            path="/accounting/distributors/spare-parts"
-            element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<SparePartsPage />}
-              />
-            }
-          />
-          <Route
-            path="/accounting/distributors/invoices"
+            path="/accounting/invoices"
             element={
               <PrivateRoute redirectTo="/login" component={<InvoicesPage />} />
             }
-          />
-          <Route
-            path="/accounting/funds"
-            element={
-              <PrivateRoute redirectTo="/login" component={<FundsPage />} />
-            }
-          />
-          <Route
-            path="/accounting/equipment"
-            element={
-              <PrivateRoute redirectTo="/login" component={<EquipmentPage />} />
-            }
-          />
+          >
+            <Route path="goods" element={<Goods />} />
+            <Route path="services" element={<Services />} />
+            <Route path="funds" element={<Funds />} />
+            <Route path="equipment" element={<Equipment />} />
+          </Route>
           <Route
             path="/reports"
             element={

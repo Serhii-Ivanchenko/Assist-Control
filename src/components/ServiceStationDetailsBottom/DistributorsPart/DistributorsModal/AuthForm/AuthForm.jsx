@@ -3,9 +3,12 @@ import * as Yup from "yup";
 import styles from "./AuthForm.module.css";
 
 const initialValues = {
+  website: "",
+  distrEmail: "",
   login: "",
   password: "",
   tokenAPI: "",
+  priceEmail: "",
 };
 
 const validationSchema = Yup.object({
@@ -17,7 +20,7 @@ const validationSchema = Yup.object({
   priceEmail: Yup.string().email("Невірний формат e-mail"),
 });
 
-const AuthForm = () => {
+const AuthForm = ({ formikRef }) => {
   const handleSubmit = (values, { setSubmitting }) => {
     console.log("Values:", values);
 
@@ -26,6 +29,7 @@ const AuthForm = () => {
 
   return (
     <Formik
+      innerRef={formikRef}
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
