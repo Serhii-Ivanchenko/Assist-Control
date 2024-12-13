@@ -143,8 +143,8 @@ export default function UserSettingsProfile({ onClose }) {
         // Отримання оновлених даних користувача
 
         toast.success("Аватар успішно оновлено :)", {
-          position: "top-right",
-          duration: 5000,
+          position: "top-center",
+          duration: 3000,
           style: {
             background: "var(--bg-input)",
             color: "var(--white)FFF",
@@ -154,8 +154,8 @@ export default function UserSettingsProfile({ onClose }) {
         setAvatar(userPhoto);
         console.error("Помилка при оновленні аватара", error);
         toast.error("Не вдалося оновити аватар :(", {
-          position: "top-right",
-          duration: 5000,
+          position: "top-center",
+          duration: 3000,
           style: {
             background: "var(--bg-input)",
             color: "var(--white)FFF",
@@ -253,8 +253,8 @@ export default function UserSettingsProfile({ onClose }) {
       actions.resetForm({ values });
       dispatch(getUserData());
       toast.success("Дані успішно збережено :)", {
-        position: "top-right",
-        duration: 5000,
+        position: "top-center",
+        duration: 3000,
         style: {
           background: "var(--bg-input)",
           color: "var(--white)FFF",
@@ -263,8 +263,8 @@ export default function UserSettingsProfile({ onClose }) {
     } catch (error) {
       console.error("Error updating user data:", error);
       toast.error("Не вдалося оновити дані :(", {
-        position: "top-right",
-        duration: 5000,
+        position: "top-center",
+        duration: 3000,
         style: {
           background: "var(--bg-input)",
           color: "var(--white)FFF",
