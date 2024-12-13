@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
-import { NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { BiSolidRightArrow, BiSolidDownArrow } from 'react-icons/bi';
 import clsx from 'clsx';
 import styles from './AccountingTree.module.css';
@@ -68,66 +68,23 @@ export default function AccountingTree() {
         <TreeItem
           itemId="suppliers"
           label={
-            <span className={styles.treeLabel} onClick={() => handleToggle('suppliers')}>
-              Постачальники
-              <span className={styles.arrowIcon}>
-                {expanded.includes('suppliers') ? (
-                  <BiSolidDownArrow />
-                ) : (
-                  <BiSolidRightArrow />
-                )}
-              </span>
-            </span>
-          }
-        >
-          <ul className={styles.nestedList}>
-            <li
-              className={clsx(styles.listItem, {
-                [styles.activeContainer]: location.pathname === '/accounting/distributors/spare-parts',
-              })}
-            >
-              <NavLink
-                to="/accounting/distributors/spare-parts"
-                className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
-              >
-                Запчастини
-              </NavLink>
-            </li>
-            <li
-              className={clsx(styles.listItem, {
-                [styles.activeContainer]: location.pathname === '/accounting/distributors/invoices',
-              })}
-            >
-              <NavLink
-                to="/accounting/distributors/invoices"
-                className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
-              >
-                Накладні
-              </NavLink>
-            </li>
-          </ul>
-        </TreeItem>
-
-        <TreeItem
-          itemId="cashbox"
-          label={
             <NavLink
-              to="/accounting/funds"
+              to="/accounting/suppliers"
               className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
             >
-              Каса
+              Постачальники
             </NavLink>
           }
         />
 
         <TreeItem
-          itemId="equipment"
+          itemId="invoices"
           label={
             <NavLink
-              to="/accounting/equipment"
+              to="/accounting/invoices"
               className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
             >
-              Обладнання
+              Накладні
             </NavLink>
           }
         />
