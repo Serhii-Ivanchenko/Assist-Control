@@ -30,7 +30,7 @@ export default function GoogleBtn() {
           .then(() => {
             toast.success("Авторизація успішна!");
             dispatch(getUserData());
-            navigate(renderPage);
+            navigate({renderPage});
           });
       }
     } catch (error) {
