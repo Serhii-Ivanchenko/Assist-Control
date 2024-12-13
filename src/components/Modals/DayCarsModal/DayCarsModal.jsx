@@ -14,7 +14,7 @@ import { MdClose } from "react-icons/md";
 import DayCarsList from "../../DayCarsList/DayCarsList";
 import Loader from "../../Loader/Loader";
 import CalendarPeriodSelector from "../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
-import StatusFilterCars from "../../StatusFilterCars/StatusFilterCars";
+import StatusFilterCars from "../../sharedComponents/StatusFilterCars/StatusFilterCars";
 import { toggleVisibilityCar } from "../../../redux/cars/slice";
 import CarInfoSettings from "../../sharedComponents/CarInfoSettings/CarInfoSettings";
 import TimeSortCarItem from "../../sharedComponents/TimeSortCarItem/TimeSortCarItem";

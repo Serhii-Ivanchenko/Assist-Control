@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import styles from "./StatusFilterCars.module.css";
-import renderStatusCars from "../../utils/renderStatusCars.jsx";
+import renderStatusCars from "../../../utils/renderStatusCars.jsx";
 
 export default function StatusFilterCars({ onStatusChange }) {
   const [isOpen, setIsOpen] = useState(false);
