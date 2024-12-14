@@ -80,10 +80,10 @@ export default function InvoicesPart() {
   ];
 
   const sold = [
+    { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
     { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
     { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
     { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
   ];
@@ -92,38 +92,44 @@ export default function InvoicesPart() {
     {
       date: "19.12.24",
       warehouse: "Склад 1",
-      amount: "8000 грн",
-      amount2: "7000 грн",
+      amount: "8000",
+      amount2: "7000 ",
+      currency: "грн",
     },
     {
       date: "19.12.24",
       warehouse: "Склад 1",
-      amount: "8000 грн",
-      amount2: "7000 грн",
+      amount: "8000",
+      amount2: "7000",
+      currency: "грн",
     },
     {
       date: "19.12.24",
       warehouse: "Склад 1",
-      amount: "8000 грн",
-      amount2: "7000 грн",
+      amount: "8000",
+      amount2: "10000",
+      currency: "грн",
     },
     {
       date: "19.12.24",
       warehouse: "Склад 1",
-      amount: "8000 грн",
-      amount2: "7000 грн",
+      amount: "8000",
+      amount2: "7000",
+      currency: "грн",
     },
     {
       date: "19.12.24",
       warehouse: "Склад 1",
-      amount: "8000 грн",
-      amount2: "7000 грн",
+      amount: "8000",
+      amount2: "9000",
+      currency: "грн",
     },
     {
       date: "19.12.24",
       warehouse: "Склад 1",
-      amount: "8000 грн",
-      amount2: "7000 грн",
+      amount: "8000",
+      amount2: "9000",
+      currency: "грн",
     },
   ];
 

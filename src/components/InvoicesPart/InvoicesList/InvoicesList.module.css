@@ -10,7 +10,7 @@
   display: flex;
   gap: 9px;
 
-  height: 91px;
+  height: fit-content;
   padding: 12px;
 
   border-radius: 12px;
@@ -23,15 +23,32 @@
   border-radius: 6px;
 }
 
-/* .carReg {
-  display: block;
-
-  width: 217px;
-  height: 52px;
-
-  margin: 0 35px 10px;
+/* .carImageNull {
+  display: none;
 } */
 
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.infoWithoutPhoto {
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.invoiceText {
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* Car plate */
 .carRegContainer {
   display: flex;
   align-items: center;
@@ -68,7 +85,7 @@
 
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
 
   text-transform: uppercase;
@@ -82,4 +99,31 @@
   font-weight: 600;
 
   text-transform: uppercase;
+}
+
+.narrowType {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.first {
+  order: 1;
+}
+
+.higherAmount {
+  color: var(--green);
+}
+
+.lowerAmount {
+  color: var(--red);
+}
+
+.moneyBox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: end;
 }
