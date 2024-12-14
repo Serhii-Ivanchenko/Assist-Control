@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import styles from "./StatusFilterCars.module.css";
 
-export default function StatusFilterCars({ statuses, onStatusChange, renderStatus }) {
+export default function StatusFilterCars({
+  statuses,
+  onStatusChange,
+  renderStatus,
+  isFilter,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("Статус");
   const dropdownRef = useRef(null);
@@ -46,7 +51,7 @@ export default function StatusFilterCars({ statuses, onStatusChange, renderStatu
         <ul className={styles.dropdownList} ref={dropdownRef}>
           {statuses.map(({ status }) => (
             <li key={status} onClick={() => handleStatusSelect(status)}>
-              {renderStatus(status, false, styles)}
+              {renderStatus(status, false, styles, isFilter)}
             </li>
           ))}
         </ul>

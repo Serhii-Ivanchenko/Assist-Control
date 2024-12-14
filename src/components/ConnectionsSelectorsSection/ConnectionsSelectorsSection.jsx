@@ -6,6 +6,7 @@ import renderStatusCommunication from "../../utils/renderStatusCommunication ";
 import { statusesCommunications } from "../../utils/dataStatuses";
 
 export default function ConnectionsSelectorsSection() {
+  const isFilter = true;
 
   const handleStatusChange = (status) => {
     console.log("Selected status:", status);
@@ -19,6 +20,7 @@ export default function ConnectionsSelectorsSection() {
         onStatusChange={handleStatusChange}
         renderStatus={renderStatusCommunication}
         statuses={statusesCommunications}
+        isFilter={isFilter}
       />
     </div>
   );

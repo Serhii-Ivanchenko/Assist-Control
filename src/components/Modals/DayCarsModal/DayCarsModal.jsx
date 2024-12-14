@@ -45,6 +45,8 @@ export default function DayCarsModal({ onClose, isModal }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [inputError, setInputError] = useState("");
 
+  const isFilter = true; // для коректного відображенення "Нові"-"Нова"
+
   const [periodStartData, setPeriodStartData] = useState(
     startDate || selectedDate || null
   );
@@ -180,6 +182,7 @@ export default function DayCarsModal({ onClose, isModal }) {
   ]);
 
   const handleStatusChange = (status) => setSelectedStatus(status);
+  
   const handleSearch = (term) => {
     validateSearchTerm(term, setInputError, setSearchTerm);
   };
@@ -227,7 +230,12 @@ export default function DayCarsModal({ onClose, isModal }) {
           </div>
         </div>
         <div className={styles.rightHeader}>
-          <StatusFilterCars onStatusChange={handleStatusChange} renderStatus={renderStatusCars} statuses={statusesCar}/>
+          <StatusFilterCars
+            onStatusChange={handleStatusChange}
+            renderStatus={renderStatusCars}
+            statuses={statusesCar}
+            isFilter={isFilter}
+          />
           <CalendarPeriodSelector
             periodStartData={periodStartData}
             periodEndData={periodEndData}
