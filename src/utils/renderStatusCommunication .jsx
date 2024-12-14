@@ -1,10 +1,10 @@
 import { BsWrench, BsUiChecksGrid, BsExclamationCircle } from "react-icons/bs";
 import { AiFillCheckCircle } from "react-icons/ai";
-import { PiEyeFill } from "react-icons/pi";
 import { IoCarSportSharp } from "react-icons/io5";
 import clsx from "clsx";
+import { IoIosCloseCircle } from "react-icons/io";
 
-const renderStatus = (status, complete_d, styles = {}, isFilter) => {
+const renderStatusCommunication = (status, complete_d, styles = {}, isFilter) => {
   let icon;
   let statusText;
   let statusClass = "";
@@ -13,9 +13,9 @@ const renderStatus = (status, complete_d, styles = {}, isFilter) => {
 
   if (status === "all") {
     statusClass = styles.all || "";
-    statusText = "всі авто";
-    background = "var(--status-gradient-all)";
-    borderColor = "var(--glow-all)";
+    statusText = "всі";
+    background = "var(--status-gradient-all-calls)";
+    borderColor = "var(--glow-all-calls)";
     icon = (
       <IoCarSportSharp
         className={clsx(styles.icon, statusClass)}
@@ -32,19 +32,14 @@ const renderStatus = (status, complete_d, styles = {}, isFilter) => {
     statusText = "РЕМОНТ";
     background = "var(--status-gradient-repair)";
     borderColor = "var(--glow-repair)";
-  } else if (status === "diagnostic") {
-    statusClass = styles.checkRepair || "";
-    statusText = "ДІАГНОСТИКА";
-    background = "var(--status-gradient-diag)";
-    borderColor = "var(--glow-diag)";
   } else if (status === "view_repair") {
     statusClass = styles.viewRepair || "";
-    statusText = "ОГЛЯД ПР";
+    statusText = "ВТРАЧЕНО";
     background = "var(--status-gradient-view-repair)";
     borderColor = "var(--glow-view-repair)";
   } else if (status === "complete" || complete_d) {
     statusClass = styles.completed || "";
-    statusText = "ЗАВЕРШЕНО";
+    statusText = "ЗАПИС";
     background = "var(--status-gradient-complete)";
     borderColor = "var(--glow-complete)";
   } else {
@@ -63,7 +58,7 @@ const renderStatus = (status, complete_d, styles = {}, isFilter) => {
         break;
       case "view_repair":
         icon = (
-          <PiEyeFill 
+          <IoIosCloseCircle  
             className={clsx(styles.icon, statusClass)}
             color="var(--light-gray)"
           />
@@ -117,4 +112,4 @@ const renderStatus = (status, complete_d, styles = {}, isFilter) => {
   );
 };
 
-export default renderStatus;
+export default renderStatusCommunication;
