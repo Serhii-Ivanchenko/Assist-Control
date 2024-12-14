@@ -9,8 +9,8 @@ export default function CircleProgressBar({
   label,
   title,
 }) {
-  const percent = maxvalue > 0 ? (value / maxvalue) * 100 : 1;
-  const percentage = maxvalue > 0 ? ((value / maxvalue) * 100).toFixed(1) : 0;
+  const percent = value > 0 ? (value / maxvalue) * 100 : 1;
+  const percentage = value > 0 ? ((value / maxvalue) * 100).toFixed(1) : 0;
 
   return (
     <div className={css.wrapper}>

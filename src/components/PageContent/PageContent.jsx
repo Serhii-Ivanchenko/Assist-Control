@@ -19,7 +19,7 @@ export default function PageContent() {
     <div className={css.pageContent}>
       <Statistics />
       <div className={css.pagegrid}>
-        <VideoFrame />
+        {/* <VideoFrame /> */}
         <CarStatsChart />
         <CurrentCarsList />
         <LoadStatsChart />
