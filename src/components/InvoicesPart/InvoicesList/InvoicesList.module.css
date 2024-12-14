@@ -1,0 +1,85 @@
+.invoicesList {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  margin-top: 14px;
+}
+
+.invoiceItem {
+  display: flex;
+  gap: 9px;
+
+  height: 91px;
+  padding: 12px;
+
+  border-radius: 12px;
+  background: var(--bg-input);
+}
+
+.carImage {
+  width: 75px;
+  height: 67px;
+  border-radius: 6px;
+}
+
+/* .carReg {
+  display: block;
+
+  width: 217px;
+  height: 52px;
+
+  margin: 0 35px 10px;
+} */
+
+.carRegContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 118px;
+  height: 25px;
+  border-radius: 6px;
+  background-color: #d9d9d9;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+}
+
+.carRegCountry {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+
+  width: 11px;
+  height: 100%;
+
+  background-color: #00349a;
+  border-radius: 6px 0 0 6px;
+}
+
+.carRegFlag {
+  width: 8px;
+  height: 6px;
+
+  margin-top: 8px;
+}
+
+.carRegNumber {
+  color: var(--black);
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+.carRegCountry {
+  color: var(--white);
+
+  font-family: "Roboto", sans-serif;
+  font-size: 6px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+}

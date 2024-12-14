@@ -26,6 +26,40 @@
   align-items: center;
 }
 
+.categoryName {
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.amountAndBtnMore {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.amount {
+  height: 28px;
+  width: 89px;
+  /* padding: 6px 12px; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 12px;
+  /* border: 2px solid var(--CRM-modal-mega-green, #3cff00); */
+  background: var(--bg-input);
+
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .addBtn {
   width: 100%;
   display: flex;
