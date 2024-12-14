@@ -11,7 +11,7 @@ import { IoCarSportSharp } from "react-icons/io5";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
 import { renderTime } from "../../utils/renderTime.js";
-import renderStatus from "../../utils/renderStatus.jsx";
+import renderStatusCars from "../../utils/renderStatusCars.jsx";
 import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
 import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
@@ -50,7 +50,7 @@ export default function DayCarsItem({ car, isModal }) {
       style={getBackgroundStyle(status)}
     >
       <div className={styles.userInfo}>
-        <div>{renderStatus(status, complete_d, styles)}</div>
+        <div>{renderStatusCars(status, complete_d, styles)}</div>
         <div className={styles.infoCard}>
           {visibility?.name && (
             <div

@@ -1,11 +1,11 @@
-import { useState } from "react";
-import Box from "@mui/material/Box";
-import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
-import { TreeItem } from "@mui/x-tree-view/TreeItem";
-import { NavLink } from "react-router-dom";
-import { BiSolidRightArrow, BiSolidDownArrow } from "react-icons/bi";
-import clsx from "clsx";
-import styles from "./AccountingTree.module.css";
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
+import { NavLink } from 'react-router-dom';
+import { BiSolidRightArrow, BiSolidDownArrow } from 'react-icons/bi';
+import clsx from 'clsx';
+import styles from './AccountingTree.module.css';
 
 export default function AccountingTree() {
   const [expanded, setExpanded] = useState([]);
@@ -25,13 +25,10 @@ export default function AccountingTree() {
           className={styles.treeItem}
           itemId="clients"
           label={
-            <span
-              className={styles.treeLabel}
-              onClick={() => handleToggle("clients")}
-            >
+            <span className={styles.treeLabel} onClick={() => handleToggle('clients')}>
               Клієнти
               <span className={styles.arrowIcon}>
-                {expanded.includes("clients") ? (
+                {expanded.includes('clients') ? (
                   <BiSolidDownArrow />
                 ) : (
                   <BiSolidRightArrow />
@@ -43,32 +40,24 @@ export default function AccountingTree() {
           <ul className={styles.nestedList}>
             <li
               className={clsx(styles.listItem, {
-                [styles.activeContainer]:
-                  location.pathname ===
-                  "/accounting/clients/clients-list-general",
+                [styles.activeContainer]: location.pathname === '/accounting/clients/clients-list-general',
               })}
             >
               <NavLink
                 to="/accounting/clients/clients-list-general"
-                className={({ isActive }) =>
-                  isActive ? styles.activeLink : styles.link
-                }
+                className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
               >
                 Загальний список клієнтів з рейтингом
               </NavLink>
             </li>
             <li
               className={clsx(styles.listItem, {
-                [styles.activeContainer]:
-                  location.pathname ===
-                  "/accounting/clients/clients-list-in-work",
+                [styles.activeContainer]: location.pathname === '/accounting/clients/clients-list-in-work',
               })}
             >
               <NavLink
                 to="/accounting/clients/clients-list-in-work"
-                className={({ isActive }) =>
-                  isActive ? styles.activeLink : styles.link
-                }
+                className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
               >
                 У роботі список клієнтів
               </NavLink>
@@ -81,9 +70,7 @@ export default function AccountingTree() {
           label={
             <NavLink
               to="/accounting/distributors"
-              className={({ isActive }) =>
-                isActive ? styles.activeLink : styles.link
-              }
+              className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
             >
               Постачальники
             </NavLink>
@@ -95,9 +82,7 @@ export default function AccountingTree() {
           label={
             <NavLink
               to="/accounting/invoices"
-              className={({ isActive }) =>
-                isActive ? styles.activeLink : styles.link
-              }
+              className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
             >
               Накладні
             </NavLink>

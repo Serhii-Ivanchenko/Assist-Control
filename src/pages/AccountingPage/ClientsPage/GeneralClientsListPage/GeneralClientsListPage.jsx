@@ -1,5 +1,6 @@
-import css from "./GeneralClientsListPage.module.css";
+import GeneralClientsMainComponent from "../../../../components/GeneralClientsMainComponent/GeneralClientsMainComponent.jsx";
+// import css from "./GeneralClientsListPage.module.css";
 
 export default function GeneralClientsListPage() {
-  return <div>GeneralClientsListPage</div>;
+  return <GeneralClientsMainComponent/>;
 }

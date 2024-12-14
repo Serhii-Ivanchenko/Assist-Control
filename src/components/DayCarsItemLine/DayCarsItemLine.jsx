@@ -3,7 +3,7 @@ import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import { BsStopwatch } from "react-icons/bs";
 import { SlSpeedometer } from "react-icons/sl";
 import { IoCarSportSharp } from "react-icons/io5";
-import renderStatus from "../../utils/renderStatus";
+import renderStatusCars from "../../utils/renderStatusCars";
 import { renderTime } from "../../utils/renderTime";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
@@ -82,7 +82,7 @@ export default function DayCarsItemLine({ car }) {
         <div
           className={clsx(styles.status, !visibility.status && styles.hidden)}
         >
-          {renderStatus(status, complete_d, styles)}
+          {renderStatusCars(status, complete_d, styles)}
         </div>
       )}
 

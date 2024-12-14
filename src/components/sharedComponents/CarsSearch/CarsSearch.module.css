@@ -17,7 +17,6 @@
     border-radius: 13px;
     padding: 7px 7px 7px 45px;
     color: var(--white);
-    /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
     font-size: 13px;
     font-style: normal;
@@ -27,7 +26,6 @@
 
 .inputFilter::placeholder {
     color: var(--text-gray);
-    /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: "Roboto", sans-serif;
     font-size: 14px;
     font-style: normal;

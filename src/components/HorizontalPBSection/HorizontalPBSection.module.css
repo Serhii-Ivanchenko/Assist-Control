@@ -26,7 +26,15 @@ flex-direction: column;
 
 .tarplan {
     color: var(--text-gray);
-        font-variant-numeric: lining-nums proportional-nums;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        font-variant: small-caps;
+}
+
+.error {
+    color: var(--red);
         font-size: 14px;
         font-style: normal;
         font-weight: 300;
