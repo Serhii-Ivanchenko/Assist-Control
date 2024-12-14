@@ -139,7 +139,9 @@ export default function DayCarsModal({ onClose, isModal }) {
   // }, [dispatch, startDate, endDate]);
 
   useEffect(() => {
-    let filteredData = periodCars.length ? [...periodCars] : [...carsData];
+    // let filteredData = periodCars.length ? [...periodCars] : [...carsData];
+    let filteredData = startDate ? [...periodCars] : [...carsData];
+
 
     // Сортування за тривалістю (часом)
     filteredData.sort((a, b) => {
