@@ -1,10 +1,11 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "../EnterAmountModal/EnterAmountModal.module.css";
 import { EnterAmountSchema } from "../../../validationSchemas/EnterAmountSchema";
+import BtnsCloseAndSubmit from "../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit.jsx";
 
 export default function EnterAmountModal() {
   const initialValues = {
-    field: "",
+    sum: "",
   };
 
   const handleSubmit = (values, actions) => {
@@ -27,17 +28,18 @@ export default function EnterAmountModal() {
           <div className={css.inputWrapper}>
             <Field
               type="text"
-              name="field"
+              name="sum"
               className={css.input}
               placeholder="2000"
             />
-            <ErrorMessage
-              name="field"
-              component="div"
-              className={css.errorMsg}
+            <ErrorMessage name="sum" component="div" className={css.errorMsg} />
+          </div>
+          <div>
+            <BtnsCloseAndSubmit
+              handleSubmit={handleSubmit}
+              btnSave={"Внести"}
             />
           </div>
-          <div>{/* <BtnsCloseAndSubmit onClose={onClose} /> */}</div>
         </Form>
       </Formik>
     </div>

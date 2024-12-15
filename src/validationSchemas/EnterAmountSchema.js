@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export const EnterAmountSchema = Yup.object().shape({
-  field: Yup.string()
+  sum: Yup.string()
     .matches(/^\d+$/, "Це поле повинно містити тільки цифри")
-  .required("Це поле повинно бути заповнене"),
+    .required("Це поле повинно бути заповнене"),
 });
