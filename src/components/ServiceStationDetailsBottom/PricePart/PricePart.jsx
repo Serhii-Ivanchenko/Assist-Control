@@ -14,7 +14,7 @@ export default function PricePart() {
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [isModal, setIsModal] = useState(false);
-  const [isEditable, setIsEditable] = useState({});
+  const [isEditable, setIsEditable] = useState(false);
   const [originalData, setOriginalData] = useState(testData);
   const [editableData, setEditableData] = useState(testData);
   const [resetData, setResetData] = useState({
@@ -176,7 +176,7 @@ export default function PricePart() {
       />
 
       <div className={styles.btnGroup}>
-        {(!isLocalSave || isEditable) && (
+        {(isEditable || !isLocalSave) && (
           <button onClick={handleResetData} className={styles.resetBtn}>
             Відміна
           </button>
