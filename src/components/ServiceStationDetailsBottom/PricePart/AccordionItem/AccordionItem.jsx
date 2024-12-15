@@ -9,6 +9,7 @@ import styles from "./AccordionItem.module.css";
 import ServiceItem from "./ServiceItem/ServiceItem";
 import Modal from "../../../Modals/Modal/Modal";
 import AddCategoryModal from "../AddCategoryModal/AddCategoryModal";
+import addIdsToData from "../../../../utils/addIdsToData.js";
 
 function AccordionItem({
   isEdit,
@@ -18,6 +19,9 @@ function AccordionItem({
   onUpdate,
   onEnableEditing,
   containerRef,
+  resetPrice,
+  resetCategory,
+  resetService,
 }) {
   const [expanded, setExpanded] = useState(false);
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
@@ -30,8 +34,6 @@ function AccordionItem({
   const innerAccRef = useRef(null);
 
   const handleChange = () => {
-    console.log("currentServices,", currentServices);
-
     if (!isEdit) {
       setExpanded((prev) => !prev);
     }
@@ -52,23 +54,6 @@ function AccordionItem({
     setIsCategoryPopupOpen(false);
   };
 
-  // const handleClickOutside = (e) => {
-  //   if (
-  //     !e.target.closest(`.${styles.popupContainer}`) &&
-  //     inputRef.current &&
-  //     !inputRef.current.contains(e.target)
-  //   ) {
-  //     setIsCategoryPopupOpen(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   document.addEventListener("click", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("click", handleClickOutside);
-  //   };
-  // });
-
   const handleCategoryChange = (newName) => {
     setCurrentCategory(newName);
     onUpdate({ category: newName, items: currentServices });
@@ -82,12 +67,20 @@ function AccordionItem({
 
   const handleNewService = (serviceName) => {
     setIsCategoryPopupOpen(false);
-    const newService = { id: Date.now(), item: serviceName };
-    setCurrentServices((prevServices) => [...prevServices, newService]);
+    const newService = { item: serviceName };
+
+    const updatedCategory = {
+      ...currentCategory,
+      items: [...currentCategory.items, newService],
+    };
+
+    const updatedServices = addIdsToData([updatedCategory]);
+    setCurrentServices(updatedServices);
     onUpdate({
-      category: currentCategory,
-      items: [...currentServices, newService],
+      category: updatedCategory,
+      items: updatedCategory.items,
     });
+
     setIsModalOpen(false);
   };
 
@@ -110,6 +103,25 @@ function AccordionItem({
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    if (category !== currentCategory || items !== currentServices) {
+      setCurrentCategory(category);
+      setCurrentServices(items);
+      onUpdate({
+        category: category,
+        items: items,
+      });
+    }
+  }, [
+    resetCategory,
+    resetService,
+    category,
+    items,
+    currentCategory,
+    currentServices,
+    onUpdate,
+  ]);
 
   // Прокрутка до ост. елементу при додаванні
   const prevDataLengthRef = useRef(currentServices.length); // Зберігаємо попередню довжину даних
@@ -169,7 +181,6 @@ function AccordionItem({
               onClick={handleCategoryPopupToggle}
             >
               <BsThreeDotsVertical className={styles.dotsIcon} />
-              {/* {isCategoryPopupOpen && ( */}
               <div className={styles.popupContainer}>
                 <PopupMenu
                   isOpen={isCategoryPopupOpen}
@@ -197,14 +208,13 @@ function AccordionItem({
                   </div>
                 )}
               </div>
-              {/* )}  */}
             </button>
           </div>
         </AccordionSummary>
         <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
           <ul className={styles.accordionDesc} ref={innerAccRef}>
-            {currentServices.map((service, idx) => (
-              <li key={service.id}>
+            {currentServices.map((service, id, idx) => (
+              <li key={`${id}-${resetService}`}>
                 <ServiceItem
                   id={service.id}
                   serviceData={service}
@@ -212,6 +222,8 @@ function AccordionItem({
                   onDelete={() => handleDeleteItem(idx)}
                   innerAccRef={innerAccRef}
                   containerRef={containerRef}
+                  resetPrice={resetPrice}
+                  resetService={resetService}
                 />
               </li>
             ))}

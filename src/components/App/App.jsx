@@ -8,12 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsLoggedIn,
   selectIsRefreshing,
+  selectLoading,
   selectUser,
 } from "../../redux/auth/selectors.js";
 import { Toaster } from "react-hot-toast";
 import { refreshUser } from "../../redux/auth/operations.js";
 import { Navigate } from "react-router-dom";
 import firstPage from "../../utils/firstPage.js";
+import css from "./App.module.css";
+import Header from "../Header/Header.jsx";
+import SideBar from "../SideBar/SideBar.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
@@ -50,21 +54,20 @@ const ClientsListInWork = lazy(() =>
 const DistributorsPage = lazy(() =>
   import("../../pages/AccountingPage/DistributorsPage/DistributorsPage.jsx")
 );
-const SparePartsPage = lazy(() =>
-  import(
-    "../../pages/AccountingPage/DistributorsPage/SparePartsPage/SparePartsPage.jsx"
-  )
-);
 const InvoicesPage = lazy(() =>
-  import(
-    "../../pages/AccountingPage/DistributorsPage/InvoicesPage/InvoicesPage.jsx"
-  )
+  import("../../pages/AccountingPage/InvoicesPage/InvoicesPage.jsx")
 );
-const FundsPage = lazy(() =>
-  import("../../pages/AccountingPage/FundsPage/FundsPage.jsx")
+const Goods = lazy(() =>
+  import("../../pages/AccountingPage/InvoicesPage/Goods/Goods.jsx")
 );
-const EquipmentPage = lazy(() =>
-  import("../../pages/AccountingPage/EquipmentPage/EquipmentPage.jsx")
+const Services = lazy(() =>
+  import("../../pages/AccountingPage/InvoicesPage/Services/Services.jsx")
+);
+const Funds = lazy(() =>
+  import("../../pages/AccountingPage/InvoicesPage/Funds/Funds.jsx")
+);
+const Equipment = lazy(() =>
+  import("../../pages/AccountingPage/InvoicesPage/Equipment/Equipment.jsx")
 );
 const ReportsPage = lazy(() =>
   import("../../pages/ReportsPage/ReportsPage.jsx")
@@ -93,6 +96,7 @@ const ValidateEmailPage = lazy(() =>
 
 export default function App() {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectLoading);
   const isRefreshing = useSelector(selectIsRefreshing);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [isAuthChecked, setIsAuthChecked] = useState(false);
@@ -108,194 +112,217 @@ export default function App() {
   const userData = useSelector(selectUser);
   const renderPage = firstPage(userData);
 
-  return isRefreshing || !isAuthChecked ? (
-    <Loader />
-  ) : (
+  return (
     <Layout>
-      <Toaster position="top-right" reverseOrder={false} />
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              isLoggedIn ? <Navigate to={renderPage} replace /> : <HomePage />
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <RestrictedRoute
-                redirectTo={renderPage}
-                component={<LoginPage />}
-              />
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <RestrictedRoute
-                redirectTo={renderPage}
-                component={<RegistrationPage />}
-              />
-            }
-          />
-          <Route
-            path="/main"
-            element={
-              <PrivateRoute redirectTo="/login" component={<MainPage />} />
-            }
-          />
-          <Route
-            path="/video-control"
-            element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<VideoControlPage />}
-              />
-            }
-          />
-          <Route
-            path="/crm"
-            element={
-              <PrivateRoute redirectTo="/login" component={<CRMPage />} />
-            }
-          />
-          <Route
-            path="/connections"
-            element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<ConnectionsPage />}
-              />
-            }
-          />
-          <Route
-            path="/recommendations"
-            element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<RecommendationsPage />}
-              />
-            }
-          />
-          <Route
-            path="/accounting"
-            element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<AccountingPage />}
-              />
-            }
-          />
-          <Route
-            path="/accounting/clients"
-            element={
-              <PrivateRoute redirectTo="/login" component={<ClientsPage />} />
-            }
-          />
-          <Route
-            path="/accounting/clients/clients-list-general"
-            element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<GeneralClientsListPage />}
-              />
-            }
-          />
-          <Route
-            path="/accounting/clients/clients-list-in-work"
-            element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<ClientsListInWork />}
-              />
-            }
-          />
-          <Route
-            path="/accounting/distributors"
-            element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<DistributorsPage />}
-              />
-            }
-          />
-          <Route
-            path="/accounting/distributors/spare-parts"
-            element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<SparePartsPage />}
-              />
-            }
-          />
-          <Route
-            path="/accounting/distributors/invoices"
-            element={
-              <PrivateRoute redirectTo="/login" component={<InvoicesPage />} />
-            }
-          />
-          <Route
-            path="/accounting/funds"
-            element={
-              <PrivateRoute redirectTo="/login" component={<FundsPage />} />
-            }
-          />
-          <Route
-            path="/accounting/equipment"
-            element={
-              <PrivateRoute redirectTo="/login" component={<EquipmentPage />} />
-            }
-          />
-          <Route
-            path="/reports"
-            element={
-              <PrivateRoute redirectTo="/login" component={<ReportsPage />} />
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              <PrivateRoute redirectTo="/login" component={<SettingsPage />} />
-            }
-          />
-          <Route
-            path="/bonuses"
-            element={
-              <PrivateRoute redirectTo="/login" component={<BonusesPage />} />
-            }
-          />
-          <Route
-            path="/rating"
-            element={
-              <PrivateRoute redirectTo="/login" component={<RatingPage />} />
-            }
-          />
-          <Route
-            path="/proficiency"
-            element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<ProficiencyPage />}
-              />
-            }
-          />
-          <Route
-            path="/validate-email/:api_key"
-            element={
-              <RestrictedRoute
-                redirectTo="/video-control"
-                component={<ValidateEmailPage />}
-              />
-            }
-          />
-          <Route
-            path="/reset-password/:api_key"
-            element={<ChangePasswordWithEmailPage />}
-          />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
+      <div className={css.wrapper}>
+        <Header />
+        <div className={css.pagesContent}>
+          <SideBar />
+          <Toaster position="top-right" reverseOrder={false} />
+          {isLoading || isRefreshing || !isAuthChecked ? (
+            <Loader />
+          ) : (
+            <>
+              
+              <Suspense fallback={<Loader />}>
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      isLoggedIn ? (
+                        <Navigate to={renderPage} replace />
+                      ) : (
+                        <HomePage />
+                      )
+                    }
+                  />
+                  <Route
+                    path="/login"
+                    element={
+                      <RestrictedRoute
+                        redirectTo={renderPage}
+                        component={<LoginPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/register"
+                    element={
+                      <RestrictedRoute
+                        redirectTo={renderPage}
+                        component={<RegistrationPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/main"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<MainPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/video-control"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<VideoControlPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/crm"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<CRMPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/connections"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<ConnectionsPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/recommendations"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<RecommendationsPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/accounting"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<AccountingPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/accounting/clients"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<ClientsPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/accounting/clients/clients-list-general"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<GeneralClientsListPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/accounting/clients/clients-list-in-work"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<ClientsListInWork />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/accounting/distributors"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<DistributorsPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/accounting/invoices"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<InvoicesPage />}
+                      />
+                    }
+                  >
+                    <Route path="goods" element={<Goods />} />
+                    <Route path="services" element={<Services />} />
+                    <Route path="funds" element={<Funds />} />
+                    <Route path="equipment" element={<Equipment />} />
+                  </Route>
+                  <Route
+                    path="/reports"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<ReportsPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/settings"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<SettingsPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/bonuses"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<BonusesPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/rating"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<RatingPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/proficiency"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<ProficiencyPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/validate-email/:api_key"
+                    element={
+                      <RestrictedRoute
+                        redirectTo="/video-control"
+                        component={<ValidateEmailPage />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/reset-password/:api_key"
+                    element={<ChangePasswordWithEmailPage />}
+                  />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+              </Suspense>
+            </>
+          )}
+        </div>
+      </div>
     </Layout>
   );
 }

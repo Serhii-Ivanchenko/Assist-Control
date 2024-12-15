@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
-import { selectDate } from "../../redux/cars/selectors.js";
 import { changeCarStatus } from "../../redux/cars/operations.js";
 import { getRecordsForDay } from "../../redux/crm/operations.js";
 import {
@@ -52,20 +51,19 @@ const getSvgIcon = (index) => {
 
 export default function CRMBlock() {
   const dispatch = useDispatch();
-  const selectedDate = useSelector(selectDate);
   const records = useSelector(selectDayRecords);
   const visibility = useSelector(selectVisibilityRecords);
   const periodRecords = useSelector(selectPeriodRecords);
 
-  console.log('records', records);
+  const currentDate = new Date().toISOString().split("T")[0];
+
+  console.log("records", records);
   console.log("periodRecords", periodRecords);
 
-  
-
   useEffect(() => {
-    if (selectedDate) {
-      console.log("Fetching records for selected date:", selectedDate);
-      dispatch(getRecordsForDay(selectedDate))
+    if (currentDate) {
+      console.log("Fetching records for selected date:", currentDate);
+      dispatch(getRecordsForDay(currentDate))
         .unwrap()
         .then((response) => {
           console.log("Fetched records:", response);
@@ -75,7 +73,7 @@ export default function CRMBlock() {
           toast.error("Щось пішло не так. Будь ласка, спробуйте ще раз.");
         });
     }
-  }, [dispatch, selectedDate]);
+  }, [dispatch, currentDate]);
 
   const handleDragStart = (e, id) => {
     e.dataTransfer.setData("text/plain", id);
@@ -91,7 +89,7 @@ export default function CRMBlock() {
     const itemId = Number(e.dataTransfer.getData("text/plain"));
     console.log("Dropped item ID:", itemId, "New status:", status);
 
-    const item = records.find((item) => item.id === itemId);
+    const item = periodRecords.find((item) => item.id === itemId);
     console.log("Found item:", item);
 
     if (item) {
@@ -99,7 +97,7 @@ export default function CRMBlock() {
         .unwrap()
         .then(() => {
           console.log("Updated status in frontend:", { ...item, status });
-          dispatch(getRecordsForDay(selectedDate));
+          dispatch(getRecordsForDay(currentDate));
         })
         .catch((error) => {
           console.error("Error updating status:", error);
@@ -109,14 +107,10 @@ export default function CRMBlock() {
   };
 
   const getItemsForStatus = (status) => {
-    return records.filter((item) => item.status === status);
+    return Array.isArray(periodRecords) && periodRecords.length > 0
+      ? periodRecords.filter((item) => item.status === status)
+      : records.filter((item) => item.status === status);
   };
-
-  // const getItemsForStatus = (status) => {
-  //   return Array.isArray(periodRecords) && periodRecords.length > 0
-  //     ? periodRecords.filter((item) => item.status === status)
-  //     : records.filter((item) => item.status === status);
-  // };
 
   const handleToggle = (field) => {
     const newVisibility = { ...visibility, [field]: !visibility[field] };

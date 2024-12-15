@@ -3,14 +3,12 @@ import CalendarPeriodSelector from "../../sharedComponents/CalendarPeriodSelecto
 import css from "./DateSelector.module.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { selectDate } from "../../../redux/cars/selectors.js";
 import { getRecordsForPeriod } from "../../../redux/crm/operations.js";
 import toast from "react-hot-toast";
 import { selectPeriodRecords } from "../../../redux/crm/selectors.js";
 
 export default function DateSelector() {
   const dispatch = useDispatch();
-  const selectedDate = useSelector(selectDate);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 

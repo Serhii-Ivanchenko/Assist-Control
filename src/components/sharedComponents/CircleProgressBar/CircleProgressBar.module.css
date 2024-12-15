@@ -1,0 +1,50 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    width: 126px;
+    background-color: transparent;
+    align-items: center;
+}
+
+.title {
+    color: var(--light-gray);
+    text-align: center;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.1875em;
+    font-variant: small-caps;
+    text-transform: uppercase;
+}
+
+.titlenum {
+    color: var(--light-gray);
+    text-align: center;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: normal;
+    font-variant: small-caps;
+}
+
+.progressBar {
+    position: relative;
+    display: inline-block;
+    width: 126px;
+    height: 126px;
+}
+
+.label {
+    position: absolute;
+    width: 126px;
+    height: 126px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+
+}

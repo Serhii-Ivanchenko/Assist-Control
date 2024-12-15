@@ -1,4 +1,5 @@
 .wrapper {
+  position: relative;
   height: auto;
   width: auto;
   display: flex;
@@ -8,6 +9,20 @@
   padding: 20px 30px;
   border-radius: 12px;
   background: var(--bg-secondary);
+}
+
+.exitBtn {
+  position: absolute;
+  top: 13px;
+  right: 19px;
+  background-color: transparent;
+  border: none;
+  color: var(--Button-grey, #4a4a4a);
+  cursor: pointer;
+}
+
+.icon {
+  scale: 2.1;
 }
 
 .mainInfo {
@@ -206,6 +221,21 @@
   outline: none;
   color: var(--light-gray);
   font-size: 16px;
+}
+
+.input:-webkit-autofill {
+  background-color: var(--bg-input) !important;
+  color: var(--light-gray) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--light-gray) !important;
+}
+
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  background-color: var(--bg-input) !important;
+  color: var(--input-text) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--light-gray) !important;
 }
 
 .authContainer {

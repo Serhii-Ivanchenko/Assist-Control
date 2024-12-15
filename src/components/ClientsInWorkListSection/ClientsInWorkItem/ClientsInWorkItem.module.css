@@ -1,0 +1,37 @@
+.wrapper {
+  padding: 10px 15px;
+}
+
+.itemsList {
+  display: flex;
+  align-items: center;
+}
+
+.date {
+  margin-right: 13px;
+  color: var(--CRM-modal-LightGray, #d8e1ff);
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.statusContainer {
+  width: 48px;
+  height: 48px;
+  margin-right: 25px;
+  display: inline-flex;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+}
+
+.stepper {
+  display: flex;
+  min-width: 400px;
+  padding: 8px;
+  align-items: center;
+  border-radius: 12px;
+  background: var(--CRM-modal-InputBG, #2d3038);
+}
