@@ -106,7 +106,7 @@ export default function ServiceBookingModal({
       recordId,
       booking,
     };
-    console.log(recordData);
+    console.log("recordData", recordData);
 
     recordId
       ? dispatch(updateRecordData(recordData))
