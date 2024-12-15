@@ -5,7 +5,7 @@ import Logo from "../Logo/Logo.jsx";
 import DateSelector from "./DateSelector/DateSelector.jsx";
 import css from "./Header.module.css";
 import { useDispatch } from "react-redux";
-import { updateDates } from "../../redux/crm/slice.js";
+// import { updateDates } from "../../redux/crm/slice.js";
 
 export default function Header() {
   const location = useLocation();
@@ -13,16 +13,16 @@ export default function Header() {
   const headerOnLogin = location.pathname === "/login";
   const headerOnRegister = location.pathname === "/register";
   const headerOnMain = location.pathname === "/";
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
 
   if (headerOnLogin || headerOnRegister || headerOnMain) {
     return null; // не відображати Header
   }
 
-  const handleDatesChange = (dates) => {
-    dispatch(updateDates(dates));
-  };
+  // const handleDatesChange = (dates) => {
+  //   dispatch(updateDates(dates));
+  // };
   
   return (
     <div className={css.header}>
@@ -30,7 +30,9 @@ export default function Header() {
         <Logo />
         <AddressSelector />
       </div>
-      {isCrmPage && <DateSelector onDatesChange={handleDatesChange}/>}
+      {isCrmPage && <DateSelector
+        // onDatesChange={handleDatesChange}
+      />}
       <ControlBar />
     </div>
   );
