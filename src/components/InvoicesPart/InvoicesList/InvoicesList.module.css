@@ -8,9 +8,15 @@
   overflow-y: auto;
   overflow-x: hidden;
   height: inherit;
-  max-height: 691px;
+  max-height: 728px;
 
-  padding-right: 6px;
+  /* width: 240px; */
+
+  /* padding-right: 6px; */
+}
+
+.invoicesListScroll {
+  width: 240px;
 }
 
 .invoicesList::-webkit-scrollbar {
@@ -31,12 +37,18 @@
   display: flex;
   gap: 9px;
 
+  /* width: 226px; */
   height: fit-content;
   padding: 12px;
 
   border-radius: 12px;
   background: var(--bg-input);
   cursor: pointer;
+}
+
+.invoiceItemForScroll {
+  width: 226px;
+  justify-content: flex-start;
 }
 
 .carImage {

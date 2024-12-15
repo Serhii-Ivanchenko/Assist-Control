@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
 
-  width: 252px !important;
+  width: 252px;
   height: fit-content;
   max-height: 824px;
 
@@ -22,6 +22,10 @@
   /* overflow-y: auto;
   overflow-x: hidden; */
 }
+
+/* .categoriesItemScroll {
+  width: 252px !important;
+} */
 
 .titleBox {
   /* width: inherit; */
@@ -90,6 +94,7 @@
   align-items: center;
 
   height: 26px;
+  /* width: 226px; */
 
   border-radius: 12px;
   background: var(--bg-input);
