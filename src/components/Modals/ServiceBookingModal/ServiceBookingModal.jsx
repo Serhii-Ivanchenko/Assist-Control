@@ -4,7 +4,6 @@ import { ServiceBookingSchema } from "../../../validationSchemas/ServiceBookingS
 import { BsFillCameraFill } from "react-icons/bs";
 import { BsXLg } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
-// import { FaCheck } from "react-icons/fa";
 import SelectDate from "./SelectDate/SelectDate";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +18,6 @@ import toast from "react-hot-toast";
 import {
   selectDayRecords,
   selectServiceData,
-  // selectVisits,
 } from "../../../redux/crm/selectors.js";
 import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
 import SelectTime from "./SelectTime/SelectTime.jsx";
@@ -46,8 +44,6 @@ export default function ServiceBookingModal({
   const selectedServiceId = useSelector(selectSelectedServiceId);
   const { mechanics, posts, services } = useSelector(selectServiceData);
   const dayRecords = useSelector(selectDayRecords);
-  // const visits = useSelector(selectVisits);
-  console.log(dayRecords);
 
   const [pickedDate, setPickedDate] = useState(
     recordId || carSelectDate
@@ -429,17 +425,6 @@ export default function ServiceBookingModal({
                   handleSubmit={handleSubmit}
                   btnSave={"Зберегти"}
                 />
-                {/* <button
-                  type="button"
-                  className={css.closeBtn}
-                  onClick={onClose}
-                >
-                  Закрити
-                </button>
-                <button type="submit" className={css.submitBtn}>
-                  <FaCheck className={css.submitBtnIcon} />
-                  Зберегти
-                </button> */}
               </div>
             </div>
           </Form>

@@ -239,13 +239,10 @@ option {
 }
 
 .btnWrapper {
-  /* display: flex;
-  gap: 10px;
-  justify-content: flex-end; */
   margin-top: 10px;
 }
 
-.closeBtn {
+/* .closeBtn {
   width: 95px;
   height: 36px;
   display: flex;
@@ -291,4 +288,4 @@ option {
   width: 13px;
   height: 10px;
   stroke: var(--white);
-}
+} */

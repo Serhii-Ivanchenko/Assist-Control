@@ -18,16 +18,10 @@ export default function SelectTime({
   const { availability } = useSelector(selectServiceData);
   const dayRecords = useSelector(selectDayRecords);
 
-  // const recordById = dayRecords?.find((dayRecord) => {
-  //   return dayRecord.id === recordId;
-  // });
-  console.log(dayRecords);
-  console.log(recordId);
-
-  const newArr = [
-    { appointment_date: "13.12.2024", times: ["19:00"] },
-    { appointment_date: "14.12.2024", times: ["09:00"] },
-  ];
+  // const newArr = [
+  //   { appointment_date: "13.12.2024", times: ["19:00"] },
+  //   { appointment_date: "14.12.2024", times: ["09:00"] },
+  // ];
 
   const onTimeBtnClick = (time) => {
     setChosenTime((prevValues) => {
@@ -57,17 +51,23 @@ export default function SelectTime({
       }
     });
   };
-  console.log(chosenTime);
 
   useEffect(() => {
-    if (recordId) {
-      // const bookingRecord = dayRecords?.find((record) => {
-      //   return (record.id = recordId);
-      // });
-      // console.log(bookingRecord);
-
-      setChosenTime(newArr);
+    if (!recordId) {
+      return;
     }
+    const recordById = dayRecords?.find((dayRecord) => {
+      return dayRecord.id === recordId;
+    });
+
+    const bookingTime = recordById?.booking;
+
+    const newArr = bookingTime?.map(({ appointment_date, times }) => ({
+      appointment_date: appointment_date.split("-").reverse().join("."),
+      times,
+    }));
+
+    setChosenTime(newArr);
   }, [recordId]);
 
   useEffect(() => {
@@ -83,8 +83,6 @@ export default function SelectTime({
     }));
     setDatesArray(datesArray);
     setBooking(dataForBooking);
-    console.log(datesArray);
-    console.log(dataForBooking);
   }, [setDatesArray, chosenTime, setBooking]);
 
   const isChosenDate = chosenTime?.find((item) => {
@@ -102,36 +100,41 @@ export default function SelectTime({
 
   return (
     <>
-      {Object.entries(availableHours.hours).map(([hour, value], index) => (
-        <button
-          type="button"
-          className={clsx(
-            css.timeBtn,
-            css.timeBtnFree,
-            !recordId &&
-              value === 1 &&
-              !chosenHours?.includes(hour) &&
-              css.timeBtnDisabled,
-            recordId &&
-              value === 1 &&
-              chosenHours?.includes(hour) &&
-              css.timeBtnChosen,
-            chosenHours?.includes(hour) && css.timeBtnChosen
-          )}
-          key={index}
-          onClick={() => {
-            onTimeBtnClick(hour, value);
-          }}
-          disabled={
-            // value === 1 ||
-            (hour.split(":")[0] <= new Date().getHours() &&
-              pickedDate === new Date(Date.now()).toLocaleDateString()) ||
-            pickedDate < new Date(Date.now()).toLocaleDateString()
-          }
-        >
-          {hour}
-        </button>
-      ))}
+      {Object.entries(availableHours.hours).map(([hour, value], index) => {
+        const [hours, minutes] = hour.split(":");
+        const transformedHours = hours.padStart(2, 0);
+        const transformedTime = `${transformedHours}:${minutes}`;
+
+        return (
+          <button
+            type="button"
+            className={clsx(
+              css.timeBtn,
+              css.timeBtnFree,
+              !recordId &&
+                value === 1 &&
+                !chosenHours?.includes(transformedTime) &&
+                css.timeBtnDisabled,
+              recordId &&
+                value === 1 &&
+                chosenHours?.includes(transformedTime) &&
+                css.timeBtnChosen,
+              chosenHours?.includes(transformedTime) && css.timeBtnChosen
+            )}
+            key={index}
+            onClick={() => {
+              onTimeBtnClick(transformedTime, value);
+            }}
+            disabled={
+              (hour.split(":")[0] <= new Date().getHours() &&
+                pickedDate === new Date(Date.now()).toLocaleDateString()) ||
+              pickedDate < new Date(Date.now()).toLocaleDateString()
+            }
+          >
+            {transformedTime}
+          </button>
+        );
+      })}
     </>
   );
 }
