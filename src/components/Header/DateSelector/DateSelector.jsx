@@ -52,7 +52,7 @@ export default function DateSelector() {
       fetchPeriodRecords(updatedDates);
       updateDates(updatedDates);
     }
-  }, [startDate, endDate, fetchPeriodRecords, updateDates]);
+  }, [startDate, endDate, fetchPeriodRecords]);
 
   function formatToDate(date) {
     if (!date || !(date instanceof Date)) {

@@ -122,26 +122,8 @@ export default function DayCarsModal({ onClose, isModal }) {
     }
   }
 
-  // Початкове встановлення дат і завантаження даних
-  // useEffect(() => {
-  //   if (selectedDate) {
-  //     setStartDate(selectedDate);
-  //     setEndDate(selectedDate);
-  //     dispatch(getPeriodCars({ startDate: selectedDate, endDate: selectedDate }));
-  //   }
-  // }, [dispatch, selectedDate]);
-
-  // Оновлення списку при зміні дат
-  // useEffect(() => {
-  //   if (startDate && endDate) {
-  //     dispatch(getPeriodCars({ startDate, endDate }));
-  //   }
-  // }, [dispatch, startDate, endDate]);
-
   useEffect(() => {
-    // let filteredData = periodCars.length ? [...periodCars] : [...carsData];
     let filteredData = startDate ? [...periodCars] : [...carsData];
-
 
     // Сортування за тривалістю (часом)
     filteredData.sort((a, b) => {

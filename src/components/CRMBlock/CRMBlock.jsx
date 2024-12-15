@@ -24,11 +24,6 @@ export default function CRMBlock() {
   const periodRecords = useSelector(selectPeriodRecords);
   const dates = useSelector(selectDates);
 
-  // const currentDate = new Date().toISOString().split("T")[0];
-
-  // console.log("records", records);
-  // console.log("periodRecords", periodRecords);
-
   useEffect(() => {
     if (dates.startDate && dates.endDate) {
       dispatch(getRecordsForPeriod(dates))
@@ -73,6 +68,11 @@ export default function CRMBlock() {
   };
 
   const getItemsForStatus = (status) => {
+    if (status === "diagnostic") {
+      return periodRecords.filter(
+        (item) => item.status === status || item.status === "view_repair"
+      );
+    }
     return periodRecords.filter((item) => item.status === status);
   };
 
