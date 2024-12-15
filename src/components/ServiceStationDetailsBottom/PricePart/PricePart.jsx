@@ -7,6 +7,8 @@ import AddCategoryModal from "./AddCategoryModal/AddCategoryModal";
 import { testData } from "./testData";
 
 import styles from "./PricePart.module.css";
+import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 export default function PricePart() {
   const [activeSearch, setActiveSearch] = useState(false);
@@ -21,8 +23,6 @@ export default function PricePart() {
   const [serviceItemEdit, setServiceItemEdit] = useState(null);
 
   const handleFilter = (searchData) => {
-    console.log("searchData", searchData);
-
     setFilteredData(searchData);
     setActiveSearch(true);
   };
@@ -39,10 +39,23 @@ export default function PricePart() {
     const updatedData = [...originalData, newCategory];
     setOriginalData(updatedData);
     setEditableData(updatedData);
+
+    localStorage.setItem("priceData", JSON.stringify(updatedData));
+  };
+
+  const handleLocalSaveChange = (newState) => {
+    setIsLocalSave(newState);
   };
 
   const handleSaveNewData = () => {
-    setOriginalData([...editableData]);
+    if (!isLocalSave) {
+      toast.error(
+        "Є незбережені зміни послуг. Будь ласка, збережіть їх перед оновленням даних."
+      );
+      return;
+    }
+
+    handleSaveChanges(editableData);
     setIsEditable(false);
     setServiceItemEdit(false);
   };
@@ -72,9 +85,12 @@ export default function PricePart() {
   };
 
   const handleResetData = () => {
-    setResetPrice((prev) => !prev);
-    setResetCategory((prev) => !prev);
-    setResetService((prev) => !prev);
+    setResetData((prev) => ({
+      ...prev,
+      category: !prev.category,
+      service: !prev.service,
+      price: !prev.price,
+    }));
     setEditableData([...originalData]);
     setIsEditable(false);
     setServiceItemEdit(false);
@@ -126,6 +142,7 @@ export default function PricePart() {
         isEditable={isEditable}
         onUpdate={(updatedData) => setEditableData(updatedData)}
         onEnableEditing={enableEditing}
+        onSaveChanges={handleSaveChanges}
         containerRef={scrollToTheLastItemRef}
         onReset={handleResetData}
         resetPrice={resetPrice}

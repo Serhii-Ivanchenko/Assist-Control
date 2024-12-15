@@ -80,12 +80,36 @@
 
 .btnInput {
   cursor: pointer;
+  color: var(--white);
   display: flex;
   align-items: center;
   background: transparent;
   border: none;
   margin-right: -10px;
   margin-top: 20px;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tooltipContent {
+  font-size: 10px;
+  text-wrap: nowrap;
+  visibility: hidden;
+  background: var(--main-gray);
+  color: var(--light-gray);
+  text-align: center;
+  border-radius: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  position: absolute;
+  z-index: 1;
+  right: -200%;
+  top: 110%;
+}
+
+.tooltip:hover .tooltipContent {
+  visibility: visible;
 }
 
 .dotsIcon {
