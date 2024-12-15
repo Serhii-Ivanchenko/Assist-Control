@@ -1,9 +1,10 @@
 .wrapper {
-  width: 455px;
+  width: auto;
   height: auto;
   padding: 20px;
   border-radius: 12px;
   background: var(--dark-gray);
+  margin-bottom: 20px;
 }
 
 .header {
