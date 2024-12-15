@@ -1,9 +1,10 @@
-import { Outlet } from "react-router-dom";
 import css from "./InvoicesPage.module.css";
+import InvoicesMainComponent from "../../../components/InvoicesMainComponent/InvoicesMainComponent.jsx";
 
 export default function InvoicesPage() {
-  return <div>InvoicesPage
-    <Outlet/>
-  </div>;
-
+  return (
+    <>
+      <InvoicesMainComponent />
+    </>
+  );
 }
