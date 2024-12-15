@@ -6,8 +6,9 @@ import { useEffect, useState, useCallback } from "react";
 import { getRecordsForPeriod } from "../../../redux/crm/operations.js";
 import toast from "react-hot-toast";
 import { selectPeriodRecords } from "../../../redux/crm/selectors.js";
+import { updateDates } from "../../../redux/crm/slice.js";
 
-export default function DateSelector({ onDatesChange }) {
+export default function DateSelector() {
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -19,16 +20,19 @@ export default function DateSelector({ onDatesChange }) {
   const periodRecords = useSelector(selectPeriodRecords);
   console.log("periodRecords", periodRecords);
 
-  const fetchPeriodRecords = useCallback((dates) => {
-    const { startDate, endDate } = dates;
+  const fetchPeriodRecords = useCallback(
+    (dates) => {
+      const { startDate, endDate } = dates;
 
-    if (!startDate || !endDate) {
-      toast.error("Потрібно обрати обидві дати!");
-      return;
-    }
+      if (!startDate || !endDate) {
+        toast.error("Потрібно обрати обидві дати!");
+        return;
+      }
 
-    dispatch(getRecordsForPeriod(dates));
-  }, [dispatch]);
+      dispatch(getRecordsForPeriod(dates));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     if (!startDate && !endDate) {
@@ -46,9 +50,9 @@ export default function DateSelector({ onDatesChange }) {
         endDate: formatToDate(new Date(endDate)),
       };
       fetchPeriodRecords(updatedDates);
-      onDatesChange(updatedDates);
+      updateDates(updatedDates);
     }
-  }, [startDate, endDate, fetchPeriodRecords, onDatesChange]);
+  }, [startDate, endDate, fetchPeriodRecords, updateDates]);
 
   function formatToDate(date) {
     if (!date || !(date instanceof Date)) {
@@ -75,7 +79,7 @@ export default function DateSelector({ onDatesChange }) {
         endDate: formatToDate(new Date(periodEndData)),
       };
       fetchPeriodRecords(updatedDates);
-      onDatesChange(updatedDates);
+      updateDates(updatedDates);
     }
   }
 
@@ -95,7 +99,7 @@ export default function DateSelector({ onDatesChange }) {
         endDate: formatToDate(new Date(newEndDate)),
       };
       fetchPeriodRecords(updatedDates);
-      onDatesChange(updatedDates);
+      updateDates(updatedDates);
     }
   }
 
