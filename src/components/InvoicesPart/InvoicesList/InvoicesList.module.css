@@ -4,6 +4,27 @@
   gap: 9px;
 
   margin-top: 14px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: inherit;
+  max-height: 691px;
+
+  padding-right: 6px;
+}
+
+.invoicesList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.invoicesList::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+}
+
+.invoicesList::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--main-gray);
 }
 
 .invoiceItem {
@@ -15,6 +36,7 @@
 
   border-radius: 12px;
   background: var(--bg-input);
+  cursor: pointer;
 }
 
 .carImage {

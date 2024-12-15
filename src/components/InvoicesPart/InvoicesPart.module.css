@@ -18,6 +18,9 @@
 
   border-radius: 12px;
   background: var(--bg-secondary);
+
+  /* overflow-y: auto;
+  overflow-x: hidden; */
 }
 
 .titleBox {
@@ -33,6 +36,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  cursor: default;
 }
 
 .amountAndBtnMore {
@@ -51,7 +55,7 @@
   align-items: center;
 
   background: linear-gradient(#2d3038, #2d3038) padding-box,
-    var(--border-gradient-complete) border-box;
+    var(--border-gradient-invoices) border-box;
   border: 2px solid transparent;
 
   border-radius: 12px;
@@ -63,6 +67,20 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  cursor: default;
+}
+
+.amountDiagnostic {
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-new) border-box;
+  border: 2px solid transparent;
+}
+
+.amountMinus {
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-invoices-red) border-box;
+  border: 2px solid transparent;
 }
 
 .addBtn {
@@ -78,7 +96,15 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   margin-top: 9px;
+  cursor: pointer;
+
+  border: none;
+  color: var(--white);
 
   /* padding-top: 4px;
   padding-bottom: 4px; */
+}
+
+.icon {
+  cursor: pointer;
 }
