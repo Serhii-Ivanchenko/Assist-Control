@@ -1,0 +1,84 @@
+.categoriesList {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  /* overflow-x: auto; */
+  width: max-content;
+}
+
+.categoriesItem {
+  display: flex;
+  flex-direction: column;
+
+  width: 252px !important;
+  height: fit-content;
+  max-height: 824px;
+
+  padding: 12px 8px;
+
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+
+.titleBox {
+  /* width: inherit; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.categoryName {
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.amountAndBtnMore {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.amount {
+  height: 28px;
+  width: 89px;
+  /* padding: 6px 12px; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-complete) border-box;
+  border: 2px solid transparent;
+
+  border-radius: 12px;
+  /* border: 2px solid var(--CRM-modal-mega-green, #3cff00); */
+  /* background: var(--bg-input); */
+
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.addBtn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 26px;
+
+  border-radius: 12px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  margin-top: 9px;
+
+  /* padding-top: 4px;
+  padding-bottom: 4px; */
+}
