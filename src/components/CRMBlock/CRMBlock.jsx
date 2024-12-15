@@ -6,74 +6,40 @@ import { useEffect } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { changeCarStatus } from "../../redux/cars/operations.js";
-import { getRecordsForDay } from "../../redux/crm/operations.js";
+import { getRecordsForPeriod } from "../../redux/crm/operations.js";
 import {
-  selectDayRecords,
+  selectDates,
   selectPeriodRecords,
   selectVisibilityRecords,
 } from "../../redux/crm/selectors.js";
 import { toggleVisibilityRecords } from "../../redux/crm/slice.js";
 import CarInfoSettings from "../sharedComponents/CarInfoSettings/CarInfoSettings.jsx";
+import { statusMapping } from "../../utils/dataStatuses.js";
+import {borderHederInCrm} from "../../utils/borderHederInCrm.jsx";
 
-const statusMapping = {
-  new: "Нова",
-  diagnostic: "Діагностика",
-  repair: "Ремонт",
-  complete: "Завершено",
-};
-
-const getSvgIcon = (index) => {
-  const svgData = [
-    null,
-    { fill: "var(--blue)" },
-    { fill: "#994CA5" },
-    { fill: "#246D4D" },
-  ];
-
-  if (!svgData[index]) return null;
-
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="12"
-      height="61"
-      viewBox="0 0 12 61"
-      fill="none"
-      className={css.svgIcon}
-    >
-      <path
-        d="M0 0.253906H3.02041L11.3265 30.5079L3.02041 60.7618H0L8.30612 30.5079L0 0.253906Z"
-        fill={svgData[index].fill}
-      />
-    </svg>
-  );
-};
 
 export default function CRMBlock() {
   const dispatch = useDispatch();
-  const records = useSelector(selectDayRecords);
   const visibility = useSelector(selectVisibilityRecords);
   const periodRecords = useSelector(selectPeriodRecords);
+  const dates = useSelector(selectDates);
 
-  const currentDate = new Date().toISOString().split("T")[0];
+  // const currentDate = new Date().toISOString().split("T")[0];
 
-  console.log("records", records);
-  console.log("periodRecords", periodRecords);
+  // console.log("records", records);
+  // console.log("periodRecords", periodRecords);
 
   useEffect(() => {
-    if (currentDate) {
-      console.log("Fetching records for selected date:", currentDate);
-      dispatch(getRecordsForDay(currentDate))
+    if (dates.startDate && dates.endDate) {
+      dispatch(getRecordsForPeriod(dates))
         .unwrap()
-        .then((response) => {
-          console.log("Fetched records:", response);
-        })
+        .then((response) => console.log("Fetched records:", response))
         .catch((error) => {
           console.error("Error fetching records:", error);
-          toast.error("Щось пішло не так. Будь ласка, спробуйте ще раз.");
+          toast.error("Помилка отримання даних. Спробуйте знову.");
         });
     }
-  }, [dispatch, currentDate]);
+  }, [dispatch, dates]);
 
   const handleDragStart = (e, id) => {
     e.dataTransfer.setData("text/plain", id);
@@ -97,7 +63,7 @@ export default function CRMBlock() {
         .unwrap()
         .then(() => {
           console.log("Updated status in frontend:", { ...item, status });
-          dispatch(getRecordsForDay(currentDate));
+          dispatch(getRecordsForPeriod(dates));
         })
         .catch((error) => {
           console.error("Error updating status:", error);
@@ -107,9 +73,7 @@ export default function CRMBlock() {
   };
 
   const getItemsForStatus = (status) => {
-    return Array.isArray(periodRecords) && periodRecords.length > 0
-      ? periodRecords.filter((item) => item.status === status)
-      : records.filter((item) => item.status === status);
+    return periodRecords.filter((item) => item.status === status);
   };
 
   const handleToggle = (field) => {
@@ -131,7 +95,7 @@ export default function CRMBlock() {
                   [css.firstStatus]: index === 0,
                 })}
               >
-                {getSvgIcon(index)}
+                {borderHederInCrm(index, css.svgIcon)}
                 {label}
                 <span className={css.carCount}>{recordCount}</span>
               </h3>
