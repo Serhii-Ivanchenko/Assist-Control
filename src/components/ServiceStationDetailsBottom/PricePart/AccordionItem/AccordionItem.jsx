@@ -9,27 +9,34 @@ import styles from "./AccordionItem.module.css";
 import ServiceItem from "./ServiceItem/ServiceItem";
 import Modal from "../../../Modals/Modal/Modal";
 import AddCategoryModal from "../AddCategoryModal/AddCategoryModal";
-import addIdsToData from "../../../../utils/addIdsToData.js";
+// import addIdsToData from "../../../../utils/addIdsToData.js";
 
 function AccordionItem({
   isEdit,
   category,
   items,
   index,
-  onUpdate,
   onEnableEditing,
   containerRef,
   resetPrice,
   resetCategory,
+  onLocalSave,
   resetService,
+  onUnsavedChanges,
 }) {
   const [expanded, setExpanded] = useState(false);
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState(category);
-  const [currentServices, setCurrentServices] = useState(items);
+  const [currentCategory, setCurrentCategory] = useState(() => {
+    const savedCategory = localStorage.getItem(`category-${index}`);
+    return savedCategory ? savedCategory : category;
+  });
+  const [currentServices, setCurrentServices] = useState(() => {
+    const savedServices = localStorage.getItem(`services-${index}`);
+    return savedServices ? JSON.parse(savedServices) : items;
+  });
+  const [unsavedServices, setUnsavedServices] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // const inputRef = useRef(null);
   const buttonRef = useRef(null);
   const innerAccRef = useRef(null);
 
@@ -48,55 +55,57 @@ function AccordionItem({
     setIsCategoryPopupOpen(false);
   };
 
+  //ввімкнення редагування назви категорії
   const handleCategoryEdit = (e) => {
     e.stopPropagation();
     onEnableEditing();
     setIsCategoryPopupOpen(false);
   };
 
+  //оновлення назви категорії
   const handleCategoryChange = (newName) => {
     setCurrentCategory(newName);
-    onUpdate({ category: newName, items: currentServices });
+    // Save to localStorage
+    localStorage.setItem(`category-${index}`, newName);
   };
 
+  // відкриття модалки для додавання нової послуги
   const handleAddService = (e) => {
     e.stopPropagation();
     setIsModalOpen(true);
     setIsCategoryPopupOpen(false);
   };
 
+  // додавання нової послуги в список
   const handleNewService = (serviceName) => {
     setIsCategoryPopupOpen(false);
-    const newService = { item: serviceName };
+    const newService = { id: Date.now(), item: serviceName, isSaved: false };
 
-    const updatedCategory = {
-      ...currentCategory,
-      items: [...currentCategory.items, newService],
-    };
-
-    const updatedServices = addIdsToData([updatedCategory]);
+    const updatedServices = [...currentServices, newService];
     setCurrentServices(updatedServices);
-    onUpdate({
-      category: updatedCategory,
-      items: updatedCategory.items,
-    });
+    setUnsavedServices((prev) => ({ ...prev, [newService.id]: true }));
+
+    localStorage.setItem(`services-${index}`, JSON.stringify(updatedServices));
 
     setIsModalOpen(false);
   };
 
-  const handleServiceUpdate = (updatedService) => {
+  // оновлення послуги в списку
+  const handleServiceUpdate = ({ id, updatedService }) => {
     const updatedServices = currentServices.map((service) =>
-      service.id === updatedService.id ? updatedService : service
+      service.id === id ? updatedService : service
     );
     setCurrentServices(updatedServices);
-    onUpdate({
-      category: currentCategory,
-      items: updatedServices,
-    });
+
+    // Save to localStorage
+    localStorage.setItem(`services-${index}`, JSON.stringify(updatedServices));
   };
 
-  const handleDeleteItem = (idx) => {
-    const updatedServices = currentServices.filter((_, index) => index !== idx);
+  // видалення послуги зі списку
+  const handleDeleteItem = (id) => {
+    const updatedServices = currentServices.filter(
+      (service) => service.id !== id
+    );
     setCurrentServices(updatedServices);
   };
 
@@ -108,20 +117,18 @@ function AccordionItem({
     if (category !== currentCategory || items !== currentServices) {
       setCurrentCategory(category);
       setCurrentServices(items);
-      onUpdate({
-        category: category,
-        items: items,
-      });
     }
-  }, [
-    resetCategory,
-    resetService,
-    category,
-    items,
-    currentCategory,
-    currentServices,
-    onUpdate,
-  ]);
+  }, [resetCategory, resetService, category, items]);
+
+  useEffect(() => {
+    // Update localStorage whenever currentServices changes
+    localStorage.setItem(`services-${index}`, JSON.stringify(currentServices));
+  }, [currentServices, index]);
+
+  useEffect(() => {
+    const hasUnsaved = Object.values(unsavedServices).some((value) => value);
+    onUnsavedChanges(hasUnsaved);
+  }, [unsavedServices, onUnsavedChanges]);
 
   // Прокрутка до ост. елементу при додаванні
   const prevDataLengthRef = useRef(currentServices.length); // Зберігаємо попередню довжину даних
@@ -175,7 +182,7 @@ function AccordionItem({
             ) : (
               <TiArrowSortedDown className={styles.icon} />
             )}
-            <button
+            <div
               ref={buttonRef}
               className={styles.btn}
               onClick={handleCategoryPopupToggle}
@@ -208,22 +215,26 @@ function AccordionItem({
                   </div>
                 )}
               </div>
-            </button>
+            </div>
           </div>
         </AccordionSummary>
         <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
           <ul className={styles.accordionDesc} ref={innerAccRef}>
-            {currentServices.map((service, id, idx) => (
-              <li key={`${id}-${resetService}`}>
+            {currentServices.map((service) => (
+              <li key={service.id}>
                 <ServiceItem
                   id={service.id}
+                  isEdit={isEdit}
                   serviceData={service}
+                  unsavedServices={unsavedServices}
                   onUpdate={handleServiceUpdate}
-                  onDelete={() => handleDeleteItem(idx)}
+                  onDelete={() => handleDeleteItem(service.id)}
                   innerAccRef={innerAccRef}
                   containerRef={containerRef}
                   resetPrice={resetPrice}
+                  onLocalSave={onLocalSave}
                   resetService={resetService}
+                  onUnsavedChanges={onUnsavedChanges}
                 />
               </li>
             ))}

@@ -7,6 +7,8 @@ import AddCategoryModal from "./AddCategoryModal/AddCategoryModal";
 import { testData } from "./testData";
 
 import styles from "./PricePart.module.css";
+import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 export default function PricePart() {
   const [activeSearch, setActiveSearch] = useState(false);
@@ -15,13 +17,24 @@ export default function PricePart() {
   const [isEditable, setIsEditable] = useState({});
   const [originalData, setOriginalData] = useState(testData);
   const [editableData, setEditableData] = useState(testData);
-  const [resetCategory, setResetCategory] = useState(false);
-  const [resetService, setResetService] = useState(false);
-  const [resetPrice, setResetPrice] = useState(false);
+  const [resetData, setResetData] = useState({
+    category: false,
+    service: false,
+    price: false,
+  });
+  const [isLocalSave, setIsLocalSave] = useState(true);
+  const [unsavedChanges, setUnsavedChanges] = useState({});
+  const [hasUnsavedToastShown, setHasUnsavedToastShown] = useState(false);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("priceData");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setEditableData([...parsedData]);
+    }
+  }, []);
 
   const handleFilter = (searchData) => {
-    console.log("searchData", searchData);
-
     setFilteredData(searchData);
     setActiveSearch(true);
   };
@@ -38,11 +51,40 @@ export default function PricePart() {
     const updatedData = [...originalData, newCategory];
     setOriginalData(updatedData);
     setEditableData(updatedData);
+
+    localStorage.setItem("priceData", JSON.stringify(updatedData));
+  };
+
+  const handleLocalSaveChange = (newState) => {
+    setIsLocalSave(newState);
   };
 
   const handleSaveNewData = () => {
-    setOriginalData([...editableData]);
+    if (!isLocalSave) {
+      toast.error(
+        "Є незбережені зміни послуг. Будь ласка, збережіть їх перед оновленням даних."
+      );
+      return;
+    }
+
+    handleSaveChanges(editableData);
     setIsEditable(false);
+    toast.success("Дані успішно оновлено!");
+  };
+
+  const handleChildUnsavedChanges = (unsaved) => {
+    setUnsavedChanges(unsaved);
+    if (!unsaved) {
+      setHasUnsavedToastShown(false);
+    }
+  };
+
+  const handleSaveChanges = (updatedData) => {
+    setOriginalData(updatedData);
+    setEditableData(updatedData);
+
+    localStorage.setItem("priceData", JSON.stringify(updatedData));
+    localStorage.removeItem("priceData");
   };
 
   const enableEditing = (idx) => {
@@ -66,11 +108,15 @@ export default function PricePart() {
   };
 
   const handleResetData = () => {
-    setResetPrice((prev) => !prev);
-    setResetCategory((prev) => !prev);
-    setResetService((prev) => !prev);
+    setResetData((prev) => ({
+      ...prev,
+      category: !prev.category,
+      service: !prev.service,
+      price: !prev.price,
+    }));
     setEditableData([...originalData]);
     setIsEditable(false);
+    localStorage.removeItem("priceData");
   };
 
   // Прокрутка до ост. елементу при додаванні
@@ -119,17 +165,22 @@ export default function PricePart() {
         isEditable={isEditable}
         onUpdate={(updatedData) => setEditableData(updatedData)}
         onEnableEditing={enableEditing}
+        onSaveChanges={handleSaveChanges}
         containerRef={scrollToTheLastItemRef}
         onReset={handleResetData}
-        resetPrice={resetPrice}
-        resetCategory={resetCategory}
-        resetService={resetService}
+        resetPrice={resetData.price}
+        resetCategory={resetData.category}
+        onLocalSave={handleLocalSaveChange}
+        resetService={resetData.service}
+        onUnsavedChanges={handleChildUnsavedChanges}
       />
 
       <div className={styles.btnGroup}>
-        <button onClick={handleResetData} className={styles.resetBtn}>
-          Відміна
-        </button>
+        {(!isLocalSave || isEditable) && (
+          <button onClick={handleResetData} className={styles.resetBtn}>
+            Відміна
+          </button>
+        )}
         <button onClick={handleSaveNewData} className={styles.btn}>
           Зберегти
         </button>
