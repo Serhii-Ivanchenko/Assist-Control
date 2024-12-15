@@ -50,9 +50,13 @@
   justify-content: center;
   align-items: center;
 
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-complete) border-box;
+  border: 2px solid transparent;
+
   border-radius: 12px;
   /* border: 2px solid var(--CRM-modal-mega-green, #3cff00); */
-  background: var(--bg-input);
+  /* background: var(--bg-input); */
 
   color: var(--white);
   font-size: 14px;
