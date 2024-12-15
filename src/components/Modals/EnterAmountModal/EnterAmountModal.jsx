@@ -3,7 +3,7 @@ import css from "../EnterAmountModal/EnterAmountModal.module.css";
 import { EnterAmountSchema } from "../../../validationSchemas/EnterAmountSchema";
 import BtnsCloseAndSubmit from "../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit.jsx";
 
-export default function EnterAmountModal() {
+export default function EnterAmountModal({onClose}) {
   const initialValues = {
     sum: "",
   };
@@ -38,6 +38,7 @@ export default function EnterAmountModal() {
             <BtnsCloseAndSubmit
               handleSubmit={handleSubmit}
               btnSave={"Внести"}
+              onClose={onClose}
             />
           </div>
         </Form>
