@@ -1,5 +1,5 @@
 
-export  const borderHederInCrm = (index, className) => {
+export  const borderHeaderInCrm = (index, className) => {
     const svgData = [
       null,
       { fill: "var(--blue)" },
