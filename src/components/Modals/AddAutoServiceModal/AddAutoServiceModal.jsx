@@ -1,12 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "../AddAutoServiceModal/AddAutoServiceModal.module.css";
 import { AddServiceSchema } from "../../../validationSchemas/addServiceSchema";
-import { FaCheck } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
 import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent";
 import PopupMenu from "../../sharedComponents/PopupMenu/PopupMenu";
+import BtnsCloseAndSubmit from "../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
 
 export default function AddAutoServiceModal({ onClose }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -317,13 +317,11 @@ export default function AddAutoServiceModal({ onClose }) {
               </div>
             </div>
             <div className={css.btnWrapper}>
-              <button type="button" className={css.closeBtn} onClick={onClose}>
-                Закрити
-              </button>
-              <button type="submit" className={css.submitBtn}>
-                <FaCheck className={css.submitBtnIcon} />
-                Зберегти
-              </button>
+              <BtnsCloseAndSubmit
+                onClose={onClose}
+                handleSubmit={handleSubmit}
+                btnSave={"Зберегти"}
+              />
             </div>
           </div>
         </Form>
