@@ -34,7 +34,7 @@ export default function InvoicesList({ category, list }) {
       window.removeEventListener("resize", handleResizeOrScroll);
       containerRef.current.removeEventListener("scroll", handleResizeOrScroll);
     };
-  }, []);
+  }, [{ isScrolled }]);
 
   return (
     <ul
