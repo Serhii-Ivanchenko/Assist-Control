@@ -22,6 +22,8 @@ function AccordionItem({
   resetPrice,
   resetCategory,
   resetService,
+  serviceItemEdit,
+  setServiceItemEdit,
 }) {
   const [expanded, setExpanded] = useState(false);
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
@@ -224,6 +226,8 @@ function AccordionItem({
                   containerRef={containerRef}
                   resetPrice={resetPrice}
                   resetService={resetService}
+                  serviceItemEdit={serviceItemEdit}
+                  setServiceItemEdit={setServiceItemEdit}
                 />
               </li>
             ))}

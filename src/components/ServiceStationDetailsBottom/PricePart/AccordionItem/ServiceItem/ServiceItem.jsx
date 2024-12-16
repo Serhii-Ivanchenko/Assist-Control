@@ -12,9 +12,11 @@ function ServiceItem({
   containerRef,
   resetPrice,
   resetService,
+  serviceItemEdit,
+  setServiceItemEdit,
 }) {
   const [serviceName, setServiceName] = useState(serviceData.item);
-  const [isEdit, setIsEdit] = useState(false);
+  // const [serviceItemEdit, setServiceItemEdit] = useState(false);
   const [activePopupId, setActivePopupId] = useState(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
@@ -25,8 +27,8 @@ function ServiceItem({
     setActivePopupId((prev) => (prev === id ? null : id));
   };
 
-  const handleEdit = () => {
-    setIsEdit(true);
+  const handleEdit = (id) => {
+    setServiceItemEdit(id);
     setActivePopupId(null);
   };
 
@@ -39,20 +41,23 @@ function ServiceItem({
       setMinPrice("");
       setMaxPrice("");
       setServiceName(serviceData.item);
-      setIsEdit(false); // Завжди скидаємо режим редагування
+      setServiceItemEdit(false); // Завжди скидаємо режим редагування
     }
   }, [resetPrice, resetService, serviceData.item]);
 
-  useEffect(() => {
-    if (isEdit) {
-      setIsEdit(true);
-      onUpdate({ id, name: serviceName });
-    }
-  }, [id, isEdit, onUpdate, serviceName]);
+  // useEffect(() => {
+  //   if (serviceItemEdit) {
+  //     setServiceItemEdit(true);
+  //     onUpdate({ id, name: serviceName });
+  //   }
+  // }, [id, serviceItemEdit, onUpdate, serviceName]);
+
+  console.log("serviceItemEdit in ServiceItem", serviceItemEdit);
+  console.log("id in ServiceItem", id);
 
   return (
     <>
-      {isEdit ? (
+      {serviceItemEdit === id ? (
         <div className={styles.editInputBox}>
           <input
             className={styles.editInput}
@@ -76,6 +81,7 @@ function ServiceItem({
             className={styles.input}
             value={minPrice ?? ""}
             onChange={(e) => setMinPrice(e.target.value)}
+            onFocus={() => setServiceItemEdit(true)}
           />
         </div>
         <div className={styles.inputBox}>
@@ -102,7 +108,7 @@ function ServiceItem({
           <PopupMenu
             isOpen={true}
             onClose={handlePopupToggle}
-            onEdit={handleEdit}
+            onEdit={() => handleEdit(id)}
             onDelete={handleDelete}
             buttonRef={buttonRef}
             innerAccRef={innerAccRef}
