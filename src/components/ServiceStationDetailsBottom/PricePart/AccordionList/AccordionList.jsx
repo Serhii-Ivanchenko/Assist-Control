@@ -35,11 +35,11 @@ function AccordionList({
             category={itemData.category}
             items={itemData.items}
             index={idx}
-            onUpdate={(updatedCategory) => handleUpdate(updatedCategory, idx)}
+            onUpdate={(updatedCategory) => handleUpdate(updatedCategory, idx)} //?
             onEnableEditing={() => onEnableEditing(idx)}
-            onSaveChanges={onSaveChanges}
+            onSaveChanges={onSaveChanges} //?
             containerRef={containerRef}
-            onReset={onReset}
+            onReset={onReset} //?
             resetPrice={resetPrice}
             resetCategory={resetCategory}
             onLocalSave={onLocalSave}

@@ -225,10 +225,10 @@ function AccordionItem({
               <li key={service.id}>
                 <ServiceItem
                   id={service.id}
-                  isEdit={isEdit}
+                  isEdit={isEdit} // ?
                   serviceData={service}
                   unsavedServices={unsavedServices}
-                  onUpdate={handleServiceUpdate}
+                  onUpdate={handleServiceUpdate} // ?
                   onDelete={() => handleDeleteItem(service.id)}
                   innerAccRef={innerAccRef}
                   containerRef={containerRef}

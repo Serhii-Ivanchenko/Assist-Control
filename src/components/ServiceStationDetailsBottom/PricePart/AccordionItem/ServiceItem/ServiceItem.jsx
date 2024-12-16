@@ -14,7 +14,7 @@ function ServiceItem({
   containerRef,
   resetPrice,
   onLocalSave,
-  isLocalSave,
+  isLocalSave, // ?
   resetService,
   serviceItemEdit,
   setServiceItemEdit,
