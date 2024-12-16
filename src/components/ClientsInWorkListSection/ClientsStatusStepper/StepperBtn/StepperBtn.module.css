@@ -7,14 +7,15 @@
   border: none;
   background: #313540;
   cursor: pointer;
+  line-height: 1.1875em;
 }
 
 .wrapperImg {
   display: flex;
   flex-direction: row-reverse;
-  padding: 10px 16px;
+  padding: 4.5px 0 4.5px 4px;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   background: #313540;
   border-radius: 6px;
   cursor: pointer;
@@ -41,7 +42,8 @@
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 600;
-  margin-right: 10px;
+  margin-right: 12px;
+  text-align: center;
 }
 
 .icon {

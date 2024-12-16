@@ -15,7 +15,7 @@ import {
 import { toggleVisibilityRecords } from "../../redux/crm/slice.js";
 import CarInfoSettings from "../sharedComponents/CarInfoSettings/CarInfoSettings.jsx";
 import { statusMapping } from "../../utils/dataStatuses.js";
-import {borderHederInCrm} from "../../utils/borderHederInCrm.jsx";
+import {borderHeaderInCrm} from "../../utils/borderHeaderInCrm.jsx";
 
 
 export default function CRMBlock() {
@@ -95,7 +95,7 @@ export default function CRMBlock() {
                   [css.firstStatus]: index === 0,
                 })}
               >
-                {borderHederInCrm(index, css.svgIcon)}
+                {borderHeaderInCrm(index, css.svgIcon)}
                 {label}
                 <span className={css.carCount}>{recordCount}</span>
               </h3>

@@ -1,5 +1,5 @@
 .wrapper {
-  width: 455px;
+  width: auto;
   height: 199px;
   border-radius: 12px;
   background-color: var(--bg-secondary);

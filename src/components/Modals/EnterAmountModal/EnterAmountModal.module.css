@@ -1,0 +1,69 @@
+.wrapper {
+  padding: 40px;
+  border-radius: 6px;
+  background: var(--bg-input);
+}
+
+.header {
+  color: var(--light-gray);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 20px;
+}
+
+.inputWrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--input-stroke);
+  background-color: transparent;
+  outline: none;
+  text-align: center;
+  color: var(--light-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.input:-webkit-autofill {
+  background-color: var(--bg-input) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  background-color: var(--bg-input) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+
+.input::placeholder {
+  color: var(--input-text);
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.errorMsg {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: red;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  white-space: nowrap;
+}
