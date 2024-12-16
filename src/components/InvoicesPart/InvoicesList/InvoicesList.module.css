@@ -25,7 +25,7 @@
 
 .invoicesList::-webkit-scrollbar-track {
   border-radius: 4px;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-input);
 }
 
 .invoicesList::-webkit-scrollbar-thumb {
