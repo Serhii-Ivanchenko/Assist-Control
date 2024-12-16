@@ -3,6 +3,32 @@
   flex-direction: column;
   width: 1526px;
   height: 575px;
-  border: 1px solid var(--light-gray);
-  border-radius: 12px;
+  /* border: 1px solid var(--light-gray);
+  border-radius: 12px; */
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-height: 575px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.list::-webkit-scrollbar {
+  width: 8px;
+  max-height: 200px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+}
+
+.list::-webkit-scrollbar-track {
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
 }
