@@ -1,0 +1,42 @@
+/* IconRender.module.css */
+.iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--bg-secondary);
+    position: relative; 
+  }
+
+  .icon{
+    width: 24px;
+    height: 24px;
+  }
+
+  
+  .logo {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+  }
+
+  .iconContainer.logoContainer {
+    padding: 9px;
+  }
+
+  .notificationBubble {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    width: 9px;
+    height: 9px;
+    background: var(--red);
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+
+  

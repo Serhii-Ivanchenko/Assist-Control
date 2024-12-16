@@ -10,7 +10,7 @@ import {
 import { IoCarSportSharp } from "react-icons/io5";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
-import { renderTime } from "../../utils/renderTime.js";
+import { renderTime } from "../../utils/renderTime.jsx";
 import renderStatusCars from "../../utils/renderStatusCars.jsx";
 import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
