@@ -26,7 +26,7 @@
   .leftContainer,
   .rightContainer {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
   }
 
@@ -47,28 +47,33 @@
   }
 
   .rightContainer{
-    padding: 8px 8px 8px 16px;
+    padding: 0px 8px 0px 16px;
     width: 901px;
     height: 100%;
     background: var(--bg-secondary);
     border-radius: 12px;
-    gap: 40px;
+    /* gap: 40px; */
   }
   
   .userContainer{
     display: flex;
     gap: 8px;
     align-items: center;
-    width: 155px;
+    width: 152px;
+    height: 48px;
+    margin-right: 21px;
   }
 
   .avatar{
+    min-width: 32px;
     width: 32px;
     height: 32px;
   }
 
   .auto{
-    width: 160px;
+    display: flex;
+    gap: 8px;
+    width: 162px;
   }
 
   .audioContainer .callTranscription {
@@ -77,7 +82,7 @@
 
   .audioContainer {
     width: 345px;
-    
+    height: 48px;
     margin-left: auto;
   }
 
