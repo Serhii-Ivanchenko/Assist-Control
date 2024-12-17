@@ -3,7 +3,7 @@ import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSe
 import StatusFilterCars from "../sharedComponents/StatusFilterCars/StatusFilterCars";
 import css from "./ConnectionsSelectorsSection.module.css";
 import renderStatusCommunication from "../../utils/renderStatusCommunication ";
-import { statusesCommunications } from "../../utils/dataStatuses";
+import { statusesCommunications } from "../../utils/dataToRender.js";
 
 export default function ConnectionsSelectorsSection() {
   const isFilter = true;

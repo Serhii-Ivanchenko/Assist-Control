@@ -29,6 +29,8 @@ export const statusesCar = [
     { timeCall: "9:15", typeMessage: "call_outgoing", photoUrl: null, name: "Петро", auto: "2001 HONDA CIVIC", status: "appointment", callTranscription: null, content: null },
     { timeCall: "9:39", typeMessage: "setting", photoUrl: null, name: "Максим", auto: "HONDA CIVIC", status: "diagnostic", callTranscription: null, content: null }, 
     { timeCall: "9:39", typeMessage: "browser", photoUrl: null, name: "Максим", auto: "HONDA CIVIC", status: "appointment", callTranscription: null, content: null }, 
+    { timeCall: "9:27", typeMessage: "telegram", photoUrl: null, name: "Іван Петренко", auto: "2001 HONDA CIVIC", status: "repair", callTranscription: null, content: null },
+    { timeCall: "9:27", typeMessage: "telegram", photoUrl: null, name: "Іван Петренко", auto: "2001 HONDA CIVIC", status: "repair", callTranscription: null, content: null },
     { timeCall: "9:27", typeMessage: "telegram", photoUrl: null, name: "Іван Петренко", auto: "2001 HONDA CIVIC", status: "repair", callTranscription: null, content: null }
   ];
 

@@ -2,8 +2,24 @@
     display: flex;
     flex-direction: column;
     width: 1057px;
-    height: 478px;
+    max-height: 478px;
     gap: 20px;
+    overflow-y: auto;
+    padding-right: 15px; 
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 463px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+}
+
+.wrapper::-webkit-scrollbar-track {
+  background-color: var(--bg-secondary);
 }
 
   .item,
@@ -22,9 +38,17 @@
     gap: 8px;
   }
 
+  .timeCall{
+    color: var(--light-gray);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
   .rightContainer{
     padding: 8px 8px 8px 16px;
-    width: 100%;
+    width: 901px;
     height: 100%;
     background: var(--bg-secondary);
     border-radius: 12px;
@@ -53,9 +77,36 @@
 
   .audioContainer {
     width: 345px;
+    
     margin-left: auto;
   }
 
   .audioContainer .transcriptionImportantBtn .transcriptionImportantBtnAccounting{
     margin-right: 29px !important;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+    padding: 4px 6px;
+  
+    border-radius: 6px;
+    position: relative;
+    transition: background-color 0.3s ease, border-left 0.3s ease;
+  }
+  
+  .title::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--glow-color);
+    filter: blur(5px);
+    z-index: 1;
+    border-radius: 0 5px 5px 0;
   }

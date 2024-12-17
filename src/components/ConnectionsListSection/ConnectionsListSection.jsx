@@ -5,11 +5,20 @@ import defaultAvatar from "../../assets/images/avatar_default.png";
 import renderStatusCommunication from "../../utils/renderStatusCommunication ";
 // import AudioPlayer from "../sharedComponents/AudioPlayer/AudioPlayer";
 import PlayerAndTranscription from "../sharedComponents/PlayerAndTranscription/PlayerAndTranscription";
+import renderStatusCars from "../../utils/renderStatusCars";
 
 
 
 export default function ConnectionsListSection() {
-
+  function renderStatus(itemStatus, css) {
+    const isCommunicationStatus = ["all_appeal", "new_appeal", "client", "missing", "appointment"].includes(itemStatus);
+    
+    if (isCommunicationStatus) {
+      return renderStatusCommunication(itemStatus, false, css, false);
+    }
+  
+    return renderStatusCars(itemStatus, false, css, false);
+  }
 
 
   return (
@@ -34,7 +43,7 @@ export default function ConnectionsListSection() {
             <div className={css.name}>{item.name}</div>
             </div>
             <div className={css.auto}>{item.auto}</div>
-            <div className={css.status}>{renderStatusCommunication(item.status, false, css, false)}
+            <div className={css.status}>{renderStatus(item.status, css)}
             </div>
             <div className={css.audioContainer}>
               <PlayerAndTranscription
