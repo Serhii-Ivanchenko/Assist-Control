@@ -14,10 +14,10 @@ import { MdClose } from "react-icons/md";
 import DayCarsList from "../../DayCarsList/DayCarsList";
 import Loader from "../../Loader/Loader";
 import CalendarPeriodSelector from "../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
-import StatusFilterCars from "../../sharedComponents/StatusFilterCars/StatusFilterCars";
+import StatusFilter from "../../sharedComponents/StatusFilter/StatusFilter";
 import { toggleVisibilityCar } from "../../../redux/cars/slice";
 import CarInfoSettings from "../../sharedComponents/CarInfoSettings/CarInfoSettings";
-import TimeSortCarItem from "../../sharedComponents/TimeSortCarItem/TimeSortCarItem";
+import TimeSortItem from "../../sharedComponents/TimeSortItem/TimeSortItem";
 import DownloadPdfButton from "../../sharedComponents/DownloadPdfButton/DownloadPdfButton";
 import { getPeriodCars } from "../../../redux/cars/operations";
 import toast from "react-hot-toast";
@@ -214,7 +214,7 @@ export default function DayCarsModal({ onClose, isModal }) {
           </div>
         </div>
         <div className={styles.rightHeader}>
-          <StatusFilterCars
+          <StatusFilter
             onStatusChange={handleStatusChange}
             renderStatus={renderStatusCars}
             statuses={statusesCar}
@@ -228,7 +228,7 @@ export default function DayCarsModal({ onClose, isModal }) {
             handleInputChangeBeg={handleInputChangeBeg}
             handleInputChangeEnd={handleInputChangeEnd}
           />
-          <TimeSortCarItem onSortChange={setSortDescending} />
+          <TimeSortItem onSortChange={setSortDescending} />
           <DownloadPdfButton carsData={filteredCars()} />
           <CarInfoSettings isCrmView={false} handleToggle={handleToggle} />
         </div>

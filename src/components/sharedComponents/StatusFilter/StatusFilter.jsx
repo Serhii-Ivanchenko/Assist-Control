@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
-import styles from "./StatusFilterCars.module.css";
+import styles from "./StatusFilter.module.css";
 
-export default function StatusFilterCars({
+export default function StatusFilter({
   statuses,
   onStatusChange,
   renderStatus,

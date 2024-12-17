@@ -2,6 +2,46 @@
     display: flex;
     width: 100%;
     height: 28px;
-    border: 1px solid var(--light-gray);
-    border-radius: 12px;
 }
+
+.leftContainer{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-right: 138px;
+}
+
+.rightContainer{
+    display: flex;
+    align-items: center;
+}
+
+.rightContainer > :nth-child(1) {
+    margin-right: 69px;
+  }
+  
+  .rightContainer > :nth-child(2) {
+    margin-right: 87px;
+  }
+  
+  .rightContainer > :nth-child(3) {
+    margin-right: 140px;
+  }
+  
+  .rightContainer > :nth-child(4) {
+    margin-right: 157px;
+  }
+  
+  .rightContainer > :nth-child(5) {
+    margin-right: 105px;
+  }
+  
+  .rightContainer > :nth-child(6) {
+    margin-right: 94px;
+  }
+  
+  .rightContainer > :nth-child(7) {
+    margin-right: 26px;
+  }
+
+
