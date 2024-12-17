@@ -58,6 +58,7 @@ export default function PlayerAndTranscription({
         <AudioPlayer audio={audio} size={sizePlayer} />
         {/* </div> */}
         <AccordionSummary
+          className={css.accordionSummary}
           sx={{
             padding: "0",
           }}

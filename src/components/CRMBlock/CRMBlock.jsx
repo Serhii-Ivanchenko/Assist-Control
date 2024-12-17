@@ -14,7 +14,7 @@ import {
 } from "../../redux/crm/selectors.js";
 import { toggleVisibilityRecords } from "../../redux/crm/slice.js";
 import CarInfoSettings from "../sharedComponents/CarInfoSettings/CarInfoSettings.jsx";
-import { statusMapping } from "../../utils/dataStatuses.js";
+import { statusMapping } from "../../utils/dataToRender.js";
 import {borderHeaderInCrm} from "../../utils/borderHeaderInCrm.jsx";
 
 

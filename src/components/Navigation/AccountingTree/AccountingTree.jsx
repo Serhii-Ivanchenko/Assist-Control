@@ -81,7 +81,7 @@ export default function AccountingTree() {
           itemId="invoices"
           label={
             <NavLink
-              to="/accounting/invoices"
+              to="/accounting/invoices/goods"
               className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
             >
               Накладні

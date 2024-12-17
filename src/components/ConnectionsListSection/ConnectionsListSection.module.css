@@ -2,7 +2,116 @@
     display: flex;
     flex-direction: column;
     width: 1057px;
-    height: 478px;
-    border: 1px solid var(--light-gray);
-    border-radius: 12px;
+    max-height: 478px;
+    gap: 20px;
+    overflow-y: auto;
+    padding-right: 15px; 
 }
+
+.wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 463px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+}
+
+.wrapper::-webkit-scrollbar-track {
+  background-color: var(--bg-secondary);
+}
+
+  .item,
+  .leftContainer,
+  .rightContainer {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+  }
+
+  .item{
+    gap: 25px;
+  }
+  
+  .leftContainer{
+    gap: 8px;
+  }
+
+  .timeCall{
+    color: var(--light-gray);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .rightContainer{
+    padding: 0px 8px 0px 16px;
+    width: 901px;
+    height: 100%;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    /* gap: 40px; */
+  }
+  
+  .userContainer{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 152px;
+    height: 48px;
+    margin-right: 21px;
+  }
+
+  .avatar{
+    min-width: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .auto{
+    display: flex;
+    gap: 8px;
+    width: 172px;
+  }
+
+  .audioContainer .callTranscription {
+    border-radius: 20px;
+  }
+
+  .audioContainer {
+    width: 321px;
+    /* height: 48px; */
+    margin-left: auto;
+  }
+
+  .audioContainer .transcriptionImportantBtn .transcriptionImportantBtnAccounting{
+    margin-right: 29px !important;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+    padding: 4px 6px;
+  
+    border-radius: 6px;
+    position: relative;
+    transition: background-color 0.3s ease, border-left 0.3s ease;
+  }
+  
+  .title::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--glow-color);
+    filter: blur(5px);
+    z-index: 1;
+    border-radius: 0 5px 5px 0;
+  }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 
-import { renderTime } from "../../../utils/renderTime.js";
+import { renderTime } from "../../../utils/renderTime.jsx";
 import { getStatusDetails } from "../../../utils/getStatusDetails";
 import { changeCarStatus } from "../../../redux/cars/operations";
 import { getCurrentCars, getCarsByDate } from "../../../redux/cars/operations";
