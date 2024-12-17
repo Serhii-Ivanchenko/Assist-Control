@@ -73,7 +73,7 @@
   .auto{
     display: flex;
     gap: 8px;
-    width: 162px;
+    width: 172px;
   }
 
   .audioContainer .callTranscription {
@@ -81,8 +81,8 @@
   }
 
   .audioContainer {
-    width: 345px;
-    height: 48px;
+    width: 321px;
+    /* height: 48px; */
     margin-left: auto;
   }
 
