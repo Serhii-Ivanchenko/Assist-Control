@@ -7,10 +7,12 @@ function AccordionList({
   onUpdate,
   onEnableEditing,
   onSaveChanges,
+  onSaveChanges,
   containerRef,
   onReset,
   resetPrice,
   resetCategory,
+  onLocalSave,
   onLocalSave,
   resetService,
   serviceItemEdit,
@@ -20,6 +22,10 @@ function AccordionList({
     const newData = [...data];
     newData[idx] = updatedCategory;
     onUpdate(newData);
+  };
+
+  const handleUnsavedChanges = (unsaved) => {
+    onUnsavedChanges(unsaved);
   };
 
   const handleUnsavedChanges = (unsaved) => {
@@ -36,12 +42,16 @@ function AccordionList({
             items={itemData.items}
             index={idx}
             onUpdate={(updatedCategory) => handleUpdate(updatedCategory, idx)} //?
+            onUpdate={(updatedCategory) => handleUpdate(updatedCategory, idx)} //?
             onEnableEditing={() => onEnableEditing(idx)}
+            onSaveChanges={onSaveChanges} //?
             onSaveChanges={onSaveChanges} //?
             containerRef={containerRef}
             onReset={onReset} //?
+            onReset={onReset} //?
             resetPrice={resetPrice}
             resetCategory={resetCategory}
+            onLocalSave={onLocalSave}
             onLocalSave={onLocalSave}
             resetService={resetService}
             serviceItemEdit={serviceItemEdit}

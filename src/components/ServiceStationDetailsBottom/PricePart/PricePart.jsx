@@ -9,11 +9,14 @@ import { testData } from "./testData";
 import styles from "./PricePart.module.css";
 import toast from "react-hot-toast";
 // import toast from "react-hot-toast";
+import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 export default function PricePart() {
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [isModal, setIsModal] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
   const [originalData, setOriginalData] = useState(testData);
   const [editableData, setEditableData] = useState(testData);
@@ -45,9 +48,23 @@ export default function PricePart() {
 
   const handleLocalSaveChange = (newState) => {
     setIsLocalSave(newState);
+
+    localStorage.setItem("priceData", JSON.stringify(updatedData));
+  };
+
+  const handleLocalSaveChange = (newState) => {
+    setIsLocalSave(newState);
   };
 
   const handleSaveNewData = () => {
+    if (!isLocalSave) {
+      toast.error(
+        "Є незбережені зміни послуг. Будь ласка, збережіть їх перед оновленням даних."
+      );
+      return;
+    }
+
+    handleSaveChanges(editableData);
     if (!isLocalSave) {
       toast.error(
         "Є незбережені зміни послуг. Будь ласка, збережіть їх перед оновленням даних."
@@ -85,6 +102,12 @@ export default function PricePart() {
   };
 
   const handleResetData = () => {
+    setResetData((prev) => ({
+      ...prev,
+      category: !prev.category,
+      service: !prev.service,
+      price: !prev.price,
+    }));
     setResetData((prev) => ({
       ...prev,
       category: !prev.category,
@@ -142,6 +165,7 @@ export default function PricePart() {
         isEditable={isEditable}
         onUpdate={(updatedData) => setEditableData(updatedData)}
         onEnableEditing={enableEditing}
+        onSaveChanges={handleSaveChanges}
         onSaveChanges={handleSaveChanges}
         containerRef={scrollToTheLastItemRef}
         onReset={handleResetData}
