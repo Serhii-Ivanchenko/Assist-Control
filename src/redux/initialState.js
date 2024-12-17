@@ -98,6 +98,10 @@ export const initialState = {
     records: [],
     dayRecords: [],
     periodRecords: [],
+    dates: {
+      startDate: null,
+      endDate: null,
+    },
     visits: [],
     load: [],
     isLoading: false,

@@ -6,6 +6,7 @@
 
 .closeBtn {
   display: flex;
+  height: 36px;
   padding: 10px 20px;
   justify-content: center;
   align-items: center;

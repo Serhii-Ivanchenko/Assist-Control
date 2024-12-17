@@ -96,7 +96,7 @@
 .dotsIcon {
   /* width: 18px;
   height: 18px; */
-  color: var(--light-gray)
+  color: var(--light-gray);
 }
 
 .logo {
@@ -220,114 +220,5 @@
 }
 
 .btnWrapper {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
   margin-top: 10px;
 }
-
-.closeBtn {
-  width: 95px;
-  height: 36px;
-  display: flex;
-  padding: 10px 20px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  border: 1px solid var(--light-gray);
-  color: var(--white);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  background-color: transparent;
-  outline: none;
-  cursor: pointer;
-}
-
-.submitBtn {
-  display: flex;
-  gap: 10px;
-  padding: 10px 20px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  background: var(--green-btn-normal);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: var(--white);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  outline: none;
-  cursor: pointer;
-  border: none;
-}
-
-.submitBtn:hover {
-  background-color: var(--green-btn-hover);
-}
-
-.submitBtnIcon {
-  width: 13px;
-  height: 10px;
-  stroke: var(--white);
-}
-
-/* .popup {
-  position: absolute;
-  top: 10px;
-  left: 168px;
-  z-index: 10;
-
-  display: flex;
-  width: 166px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  border: none;
-  border-radius: 0px 0px 6px 6px;
-  background: var(--bg-input);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.popup li {
-  width: 100%;
-  border-top: 1px solid var(--main-gray);
-  border-bottom: 1px solid var(--main-gray);
-  padding: 4px 0;
-  cursor: pointer;
-}
-
-.popup li:last-child {
-  border: none;
-}
-
-.popup li button {
-  display: inline-flex;
-  padding: 10px;
-  align-items: center;
-  gap: 10px;
-  background: var(--bg-input);
-  width: 166px;
-  cursor: pointer;
-  border: none;
-}
-
-.editBtn {
-  color: var(--white);
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.deleteBtn {
-  color: var(--red);
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.popup li button:hover {
-  background: var(--main-gray);
-} */

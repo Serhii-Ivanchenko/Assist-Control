@@ -15,3 +15,6 @@ export const selectDayRecords = (state) => state.crm.dayRecords;
 export const selectPeriodRecords = (state) => state.crm.periodRecords;
 
 export const selectVisibilityRecords = (state) => state.crm.visibilityRecords;
+
+export const selectDates = (state) => state.crm.dates;
+

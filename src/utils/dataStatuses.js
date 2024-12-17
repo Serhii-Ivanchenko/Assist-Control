@@ -15,3 +15,10 @@ export const statusesCar = [
     { status: "complete", label: "Завершено" },
   ];
 
+  export const statusMapping = {
+    new: "Нова",
+    diagnostic: "Діагностика",
+    repair: "Ремонт",
+    complete: "Завершено",
+  };
+
