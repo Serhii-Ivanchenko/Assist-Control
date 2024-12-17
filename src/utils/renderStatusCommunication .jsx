@@ -11,7 +11,7 @@ const renderStatusCommunication = (status, complete_d, styles = {}, isFilter) =>
   let background;
   let borderColor;
 
-  if (status === "all") {
+  if (status === "all_appeal") {
     statusClass = styles.all || "";
     statusText = "всі";
     background = "var(--status-gradient-all-calls)";
@@ -22,22 +22,22 @@ const renderStatusCommunication = (status, complete_d, styles = {}, isFilter) =>
         color="var(--light-gray)"
       />
     );
-  } else if (status === "new") {
+  } else if (status === "new_appeal") {
     statusClass = styles.new || "";
     statusText = isFilter ? "НОВІ" : "НОВА";
     background = "var(--status-gradient-new)";
     borderColor = "var(--glow-new)";
-  } else if (status === "repair") {
+  } else if (status === "client") {
     statusClass = styles.repair || "";
-    statusText = "РЕМОНТ";
+    statusText = "КЛІЄНТИ";
     background = "var(--status-gradient-repair)";
     borderColor = "var(--glow-repair)";
-  } else if (status === "view_repair") {
+  } else if (status === "missing") {
     statusClass = styles.viewRepair || "";
     statusText = "ВТРАЧЕНО";
     background = "var(--status-gradient-view-repair)";
     borderColor = "var(--glow-view-repair)";
-  } else if (status === "complete" || complete_d) {
+  } else if (status === "appointment") {
     statusClass = styles.completed || "";
     statusText = "ЗАПИС";
     background = "var(--status-gradient-complete)";
@@ -48,7 +48,7 @@ const renderStatusCommunication = (status, complete_d, styles = {}, isFilter) =>
 
   if (!icon) {
     switch (status) {
-      case "new":
+      case "new_appeal":
         icon = (
           <BsExclamationCircle 
             className={clsx(styles.icon, statusClass)}
@@ -56,7 +56,7 @@ const renderStatusCommunication = (status, complete_d, styles = {}, isFilter) =>
           />
         );
         break;
-      case "view_repair":
+      case "missing":
         icon = (
           <IoIosCloseCircle  
             className={clsx(styles.icon, statusClass)}
@@ -64,7 +64,7 @@ const renderStatusCommunication = (status, complete_d, styles = {}, isFilter) =>
           />
         );
         break;
-      case "repair":
+      case "client":
         icon = (
           <BsWrench
             className={clsx(styles.icon, statusClass)}
@@ -80,8 +80,7 @@ const renderStatusCommunication = (status, complete_d, styles = {}, isFilter) =>
           />
         );
         break;
-      case "complete":
-      case complete_d:
+      case "appointment":
         icon = (
           <AiFillCheckCircle
             className={clsx(styles.icon, statusClass, styles.iconComplete)}

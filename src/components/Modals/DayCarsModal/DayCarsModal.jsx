@@ -27,7 +27,7 @@ import {
   filterCarsBySearchTerm,
 } from "../../../utils/filterCarsBySearchTerm";
 import renderStatusCars from "../../../utils/renderStatusCars";
-import { statusesCar } from "../../../utils/dataStatuses";
+import { statusesCar } from "../../../utils/dataToRender.js";
 
 export default function DayCarsModal({ onClose, isModal }) {
   const dispatch = useDispatch();

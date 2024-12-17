@@ -14,7 +14,7 @@ import {
 import { IoCarSportSharp } from "react-icons/io5";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
-import { renderTime } from "../../utils/renderTime.js";
+import { formatDateTime, renderTimeinWork} from "../../utils/renderTime.jsx";
 import renderStatusCars from "../../utils/renderStatusCars.jsx";
 import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
@@ -103,9 +103,10 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
     mileage,
     status,
     complete_d,
-    date_s,
     name,
     phone,
+    booking,
+    
     plate: carNumber,
   } = car;
 
@@ -114,6 +115,32 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
   const formatCarNumber = (number) => {
     return number.replace(/\s+/g, "");
   };
+
+  const renderBookingTime = () => {
+    if (booking && Array.isArray(booking) && booking.length > 0) {
+      const { appointment_date, times } = booking[0];
+      if (appointment_date && Array.isArray(times) && times.length > 0) {
+        const formattedDateTime = formatDateTime(appointment_date, times[0]);
+        return (
+          <div className={styles.bookingRecord}>
+            <p className={styles.time}>{formattedDateTime}</p>
+          </div>
+        );
+      }
+    }
+    // Якщо `booking` пустий, відображаємо час із `renderTimeinWork`
+    if (booking && Array.isArray(booking) && booking.length === 0) {
+      const timeInWork = renderTimeinWork(car.date_s);
+      return (
+        <div className={styles.bookingRecord}>
+          <p className={styles.time}>{timeInWork}</p>
+        </div>
+      );
+    }
+  
+    return null;
+  };
+
 
   return (
     <div
@@ -308,7 +335,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
               )}
             >
               <BsStopwatch size={13} color="#D5ACF3" />
-              <p className={styles.time}>{renderTime(complete_d, date_s)}</p>
+              <p className={styles.time}>{renderBookingTime(booking, styles)}</p>
             </div>
           )}
           {visibility?.totalPrice && (
