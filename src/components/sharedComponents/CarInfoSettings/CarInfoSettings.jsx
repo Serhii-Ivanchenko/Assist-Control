@@ -66,7 +66,7 @@ const CarInfoSettings = ({ isCrmView }) => {
   return (
     <div className={styles.btnSettingsContainer} ref={popoverRef}>
       <button className={styles.btnSettings} onClick={toggleSettings}>
-        <GiSettingsKnobs className={styles.iconSettings} />
+        <GiSettingsKnobs className={styles.iconSettings} size={19} />
       </button>
       {settingsIsOpen && (
         <div
