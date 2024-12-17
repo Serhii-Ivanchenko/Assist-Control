@@ -49,6 +49,36 @@ export default function InvoicesPart() {
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
     },
+    {
+      photo: car,
+      date: "19.12.24",
+      plate: "CA 6864 CO",
+      name: "ПІБ Клієнт",
+    },
+    {
+      photo: car,
+      date: "19.12.24",
+      plate: "CA 6864 CO",
+      name: "ПІБ Клієнт",
+    },
+    {
+      photo: car,
+      date: "19.12.24",
+      plate: "CA 6864 CO",
+      name: "ПІБ Клієнт",
+    },
+    {
+      photo: car,
+      date: "19.12.24",
+      plate: "CA 6864 CO",
+      name: "ПІБ Клієнт",
+    },
+    {
+      photo: car,
+      date: "19.12.24",
+      plate: "CA 6864 CO",
+      name: "ПІБ Клієнт",
+    },
   ];
 
   const invoicesMoney = [
@@ -157,7 +187,23 @@ export default function InvoicesPart() {
               <div className={css.titleBox}>
                 <p className={css.categoryName}>{category.name}</p>
                 <div className={css.amountAndBtnMore}>
-                  <span className={css.amount}>16000 грн</span>
+                  <span
+                    className={`${css.amount} ${
+                      category.name === "Діагностика" && css.amountDiagnostic
+                    } ${
+                      (category.name === "Списано" ||
+                        category.name === "Переоцінка" ||
+                        category.name === "Інвентаризація") &&
+                      css.amountMinus
+                    }`}
+                  >
+                    {category.name === "Списано" ||
+                    category.name === "Переоцінка" ||
+                    category.name === "Інвентаризація"
+                      ? -1000
+                      : 16000}{" "}
+                    грн
+                  </span>
                   <BsThreeDotsVertical className={css.icon} />
                 </div>
               </div>
@@ -169,9 +215,9 @@ export default function InvoicesPart() {
                   list={list}
                 />
               </div>
-              <div className={css.addBtn}>
+              <button type="button" className={css.addBtn}>
                 <BsPlusCircleDotted size={18} />
-              </div>
+              </button>
             </li>
           );
         })}

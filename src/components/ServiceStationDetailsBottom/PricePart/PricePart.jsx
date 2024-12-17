@@ -12,12 +12,13 @@ export default function PricePart() {
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [isModal, setIsModal] = useState(false);
-  const [isEditable, setIsEditable] = useState({});
+  const [isEditable, setIsEditable] = useState(false);
   const [originalData, setOriginalData] = useState(testData);
   const [editableData, setEditableData] = useState(testData);
   const [resetCategory, setResetCategory] = useState(false);
   const [resetService, setResetService] = useState(false);
   const [resetPrice, setResetPrice] = useState(false);
+  const [serviceItemEdit, setServiceItemEdit] = useState(null);
 
   const handleFilter = (searchData) => {
     console.log("searchData", searchData);
@@ -43,6 +44,7 @@ export default function PricePart() {
   const handleSaveNewData = () => {
     setOriginalData([...editableData]);
     setIsEditable(false);
+    setServiceItemEdit(false);
   };
 
   const enableEditing = (idx) => {
@@ -50,6 +52,10 @@ export default function PricePart() {
       ...prev,
       [idx]: !prev[idx],
     }));
+  };
+
+  const handleServiceEditing = (id) => {
+    setServiceItemEdit(id);
   };
 
   const openModal = () => {
@@ -71,15 +77,16 @@ export default function PricePart() {
     setResetService((prev) => !prev);
     setEditableData([...originalData]);
     setIsEditable(false);
+    setServiceItemEdit(false);
   };
 
   // Прокрутка до ост. елементу при додаванні
   const scrollToTheLastItemRef = useRef(null);
-  const prevDataLengthRef = useRef(filteredData.length); // Зберігаємо попередню довжину даних
+  const prevDataLengthRef = useRef(originalData.length); // Зберігаємо попередню довжину даних
 
   useEffect(() => {
     if (
-      filteredData.length > prevDataLengthRef.current && // Перевіряємо, чи додано новий елемент
+      originalData.length > prevDataLengthRef.current && // Перевіряємо, чи додано новий елемент
       scrollToTheLastItemRef.current
     ) {
       scrollToTheLastItemRef.current.scrollTo({
@@ -88,8 +95,8 @@ export default function PricePart() {
       });
     }
     // Оновлюємо попередню довжину після виконання ефекту
-    prevDataLengthRef.current = filteredData.length;
-  }, [filteredData]);
+    prevDataLengthRef.current = originalData.length;
+  }, [originalData]);
 
   return (
     <div className={styles.wrapper}>
@@ -124,16 +131,20 @@ export default function PricePart() {
         resetPrice={resetPrice}
         resetCategory={resetCategory}
         resetService={resetService}
+        serviceItemEdit={serviceItemEdit}
+        setServiceItemEdit={handleServiceEditing}
       />
 
-      <div className={styles.btnGroup}>
-        <button onClick={handleResetData} className={styles.resetBtn}>
-          Відміна
-        </button>
-        <button onClick={handleSaveNewData} className={styles.btn}>
-          Зберегти
-        </button>
-      </div>
+      {(isEditable || serviceItemEdit) && (
+        <div className={styles.btnGroup}>
+          <button onClick={handleResetData} className={styles.resetBtn}>
+            Відміна
+          </button>
+          <button onClick={handleSaveNewData} className={styles.btn}>
+            Зберегти
+          </button>
+        </div>
+      )}
     </div>
   );
 }

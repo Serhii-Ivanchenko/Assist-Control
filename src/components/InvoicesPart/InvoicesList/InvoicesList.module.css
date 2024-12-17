@@ -4,17 +4,51 @@
   gap: 9px;
 
   margin-top: 14px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: inherit;
+  max-height: 728px;
+
+  /* width: 240px; */
+
+  /* padding-right: 6px; */
+}
+
+.invoicesListScroll {
+  width: 240px;
+}
+
+.invoicesList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.invoicesList::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg-input);
+}
+
+.invoicesList::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--main-gray);
 }
 
 .invoiceItem {
   display: flex;
   gap: 9px;
 
+  /* width: 226px; */
   height: fit-content;
   padding: 12px;
 
   border-radius: 12px;
   background: var(--bg-input);
+  cursor: pointer;
+}
+
+.invoiceItemForScroll {
+  width: 226px;
+  justify-content: flex-start;
 }
 
 .carImage {

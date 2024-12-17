@@ -1,5 +1,7 @@
 import css from "./InvoicesList.module.css";
 import flag from "../../../assets/images/flagUa.webp";
+import { useRef, useState } from "react";
+import { useEffect } from "react";
 
 export default function InvoicesList({ category, list }) {
   // const categoryMap = {
@@ -9,10 +11,44 @@ export default function InvoicesList({ category, list }) {
 
   // const list = categoryMap[type] || invoices;
 
+  const containerRef = useRef(null); // Ссилка на контейнер
+  const [isScrolled, setIsScrolled] = useState(false); // Стан для перевірки наявності скролу
+
+  useEffect(() => {
+    const handleResizeOrScroll = () => {
+      // Перевірка наявності вертикального скролу
+      if (containerRef.current) {
+        const hasVerticalScroll =
+          containerRef.current.scrollHeight > containerRef.current.clientHeight;
+        console.log("hasVerticalScroll:", hasVerticalScroll);
+        setIsScrolled(hasVerticalScroll);
+      }
+    };
+
+    // Викликаємо при завантаженні, зміні розміру чи скролі
+    handleResizeOrScroll();
+    window.addEventListener("resize", handleResizeOrScroll);
+    containerRef.current.addEventListener("scroll", handleResizeOrScroll);
+
+    // Очищення ефекту
+    return () => {
+      window.removeEventListener("resize", handleResizeOrScroll);
+      containerRef.current.removeEventListener("scroll", handleResizeOrScroll);
+    };
+  }, [list]);
+
   return (
-    <ul className={css.invoicesList}>
+    <ul
+      className={`${css.invoicesList} ${isScrolled && css.invoicesListScroll}`}
+      ref={containerRef}
+    >
       {list.map((item, index) => (
-        <li key={index} className={css.invoiceItem}>
+        <li
+          key={index}
+          className={`${css.invoiceItem} ${
+            isScrolled && css.invoiceItemForScroll
+          }`}
+        >
           {(category === "Діагностика" ||
             category === "Погоджено" ||
             category === "Продано") && (
