@@ -14,15 +14,13 @@ export default function PricePart() {
   const [isModal, setIsModal] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
   const [originalData, setOriginalData] = useState(testData);
-  const [editableData, setEditableData] = useState(testData);
+  const [editableData, setEditableData] = useState([...testData]);
   const [resetCategory, setResetCategory] = useState(false);
   const [resetService, setResetService] = useState(false);
   const [resetPrice, setResetPrice] = useState(false);
   const [serviceItemEdit, setServiceItemEdit] = useState(null);
 
   const handleFilter = (searchData) => {
-    console.log("searchData", searchData);
-
     setFilteredData(searchData);
     setActiveSearch(true);
   };
@@ -37,8 +35,8 @@ export default function PricePart() {
       ],
     };
     const updatedData = [...originalData, newCategory];
-    setOriginalData(updatedData);
     setEditableData(updatedData);
+    setOriginalData(updatedData);
   };
 
   const handleSaveNewData = () => {
@@ -47,10 +45,10 @@ export default function PricePart() {
     setServiceItemEdit(false);
   };
 
-  const enableEditing = (idx) => {
+  const enableEditing = (id) => {
     setIsEditable((prev) => ({
       ...prev,
-      [idx]: !prev[idx],
+      [id]: !prev[id],
     }));
   };
 
@@ -75,7 +73,7 @@ export default function PricePart() {
     setResetPrice((prev) => !prev);
     setResetCategory((prev) => !prev);
     setResetService((prev) => !prev);
-    setEditableData([...originalData]);
+    setEditableData(originalData);
     setIsEditable(false);
     setServiceItemEdit(false);
   };

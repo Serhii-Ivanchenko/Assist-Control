@@ -6,7 +6,6 @@ import styles from "./ServiceItem.module.css";
 function ServiceItem({
   id,
   serviceData,
-  onUpdate,
   onDelete,
   innerAccRef,
   containerRef,
@@ -16,7 +15,6 @@ function ServiceItem({
   setServiceItemEdit,
 }) {
   const [serviceName, setServiceName] = useState(serviceData.item);
-  // const [serviceItemEdit, setServiceItemEdit] = useState(false);
   const [activePopupId, setActivePopupId] = useState(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
@@ -44,16 +42,6 @@ function ServiceItem({
       setServiceItemEdit(false); // Завжди скидаємо режим редагування
     }
   }, [resetPrice, resetService, serviceData.item]);
-
-  // useEffect(() => {
-  //   if (serviceItemEdit) {
-  //     setServiceItemEdit(true);
-  //     onUpdate({ id, name: serviceName });
-  //   }
-  // }, [id, serviceItemEdit, onUpdate, serviceName]);
-
-  console.log("serviceItemEdit in ServiceItem", serviceItemEdit);
-  console.log("id in ServiceItem", id);
 
   return (
     <>
