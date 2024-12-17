@@ -4,19 +4,21 @@ import { BsPlusCircleDotted } from "react-icons/bs";
 import InvoicesList from "./InvoicesList/InvoicesList";
 import car from "../../assets/images/carsItem.png";
 
-export default function InvoicesPart() {
-  const categories = [
-    { name: "Діагностика" },
-    { name: "Погоджено" },
-    { name: "Замовлено" },
-    { name: "Отримано" },
-    { name: "Продано" },
-    { name: "Повернуто" },
-    { name: "Переміщено" },
-    { name: "Переоцінка" },
-    { name: "Інвентаризація" },
-    { name: "Списано" },
-  ];
+export default function InvoicesPart({ categories }) {
+  // const categories = [
+  //   { name: "Діагностика" },
+  //   { name: "Погоджено" },
+  //   { name: "Замовлено" },
+  //   { name: "Отримано" },
+  //   { name: "Продано" },
+  //   { name: "Повернуто" },
+  //   { name: "Переміщено" },
+  //   { name: "Переоцінка" },
+  //   { name: "Інвентаризація" },
+  //   { name: "Списано" },
+  //   funds && { name: "Витрачено" },
+  //   equipment && { name: "Використання" },
+  // ].filter(Boolean);
 
   const invoices = [
     {

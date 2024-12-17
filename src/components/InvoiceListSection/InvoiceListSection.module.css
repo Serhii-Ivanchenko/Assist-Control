@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 1526px;
   height: 849px;
-  border: 1px solid var(--light-gray);
+  /* border: 1px solid var(--light-gray); */
   border-radius: 12px;
 
   overflow-x: auto;
