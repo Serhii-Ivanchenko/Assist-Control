@@ -28,12 +28,18 @@ export default function InvoicesList({ category, list }) {
     // Викликаємо при завантаженні, зміні розміру чи скролі
     handleResizeOrScroll();
     window.addEventListener("resize", handleResizeOrScroll);
+    // if (containerRef.current) {
+    //   containerRef.current.addEventListener("scroll", handleResizeOrScroll);
+    // }
     containerRef.current.addEventListener("scroll", handleResizeOrScroll);
 
     // Очищення ефекту
     return () => {
       window.removeEventListener("resize", handleResizeOrScroll);
       containerRef.current.removeEventListener("scroll", handleResizeOrScroll);
+      // if (containerRef.current) {
+      //   containerRef.current.removeEventListener("scroll", handleResizeOrScroll);
+      // }
     };
   }, [list]);
 

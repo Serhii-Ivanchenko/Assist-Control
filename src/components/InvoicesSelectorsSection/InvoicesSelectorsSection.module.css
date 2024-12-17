@@ -2,6 +2,9 @@
     display: flex;
     width: 100%;
     height: 39px;
-    border-radius: 12px;
-    border: 1px solid var(--light-gray);
+    gap: 110px;
+}
+
+.wrapper .dateWrapper{
+    margin-right: 10px;
 }
