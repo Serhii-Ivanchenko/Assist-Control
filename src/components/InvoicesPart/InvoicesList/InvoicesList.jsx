@@ -20,6 +20,7 @@ export default function InvoicesList({ category, list }) {
       if (containerRef.current) {
         const hasVerticalScroll =
           containerRef.current.scrollHeight > containerRef.current.clientHeight;
+        console.log("hasVerticalScroll:", hasVerticalScroll);
         setIsScrolled(hasVerticalScroll);
       }
     };
@@ -34,7 +35,7 @@ export default function InvoicesList({ category, list }) {
       window.removeEventListener("resize", handleResizeOrScroll);
       containerRef.current.removeEventListener("scroll", handleResizeOrScroll);
     };
-  }, [{ isScrolled }]);
+  }, [list]);
 
   return (
     <ul
