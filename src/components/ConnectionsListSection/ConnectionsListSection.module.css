@@ -36,6 +36,9 @@
   
   .leftContainer{
     gap: 8px;
+    position: relative; /* Базове позиціонування контейнера */
+  display: flex;
+    
   }
 
   .timeCall{
@@ -48,20 +51,26 @@
 
   .rightContainer{
     padding: 0px 8px 0px 16px;
-    width: 901px;
+    width: 920px;
     height: 100%;
     background: var(--bg-secondary);
     border-radius: 12px;
     /* gap: 40px; */
+    
+  }
+
+  .rightleftContainer{
+    display: flex;
+    align-items: center;
   }
   
   .userContainer{
     display: flex;
     gap: 8px;
     align-items: center;
-    width: 152px;
+    width: 175px;
     height: 48px;
-    margin-right: 21px;
+    margin-right: 18px;
   }
 
   .avatar{
@@ -72,8 +81,10 @@
 
   .auto{
     display: flex;
+    align-items: center;
     gap: 8px;
     width: 172px;
+    margin-right: 18px;
   }
 
   .audioContainer .callTranscription {
@@ -86,17 +97,12 @@
     margin-left: auto;
   }
 
-  .audioContainer .transcriptionImportantBtn .transcriptionImportantBtnAccounting{
-    margin-right: 29px !important;
-  }
-
   .title {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
-    height: 100%;
-    padding: 4px 6px;
+      padding: 4px 6px;
   
     border-radius: 6px;
     position: relative;
@@ -115,3 +121,40 @@
     z-index: 1;
     border-radius: 0 5px 5px 0;
   }
+
+  .btnSave {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: var(--icon-gray);
+    background: transparent;
+    padding: 4px;
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .plus{
+    cursor: pointer;
+    border-radius: 4px;
+    width: 14px;
+    height: 14px;
+
+}
+
+.iconPlus {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+      color: var(--green);
+      background-color: var(--white);
+      stroke-width: 3px;
+}
+
+.iconAuto{
+  flex-shrink: 0;
+}
+
