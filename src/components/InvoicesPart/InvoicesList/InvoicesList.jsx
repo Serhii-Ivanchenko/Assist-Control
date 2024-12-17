@@ -36,15 +36,25 @@ export default function InvoicesList({ category, list }) {
     return () => {
       window.removeEventListener("resize", handleResizeOrScroll);
       if (containerRef.current) {
-        containerRef.current.removeEventListener("scroll", handleResizeOrScroll);
+        containerRef.current.removeEventListener(
+          "scroll",
+          handleResizeOrScroll
+        );
       }
     };
   }, [list]);
+
+  const handleWheel = (e) => {
+    if (isScrolled) {
+      e.stopPropagation();
+    }
+  };
 
   return (
     <ul
       className={`${css.invoicesList} ${isScrolled && css.invoicesListScroll}`}
       ref={containerRef}
+      onWheel={handleWheel}
     >
       {list.map((item, index) => (
         <li
