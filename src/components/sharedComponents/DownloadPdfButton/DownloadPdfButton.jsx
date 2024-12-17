@@ -7,7 +7,7 @@ import { selectDate, selectVisibilityCar } from "../../../redux/cars/selectors";
 import "../../../assets/fonts/Roboto-Regular-normal.js";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { renderTime } from "../../../utils/renderTime.js";
+import { renderTime } from "../../../utils/renderTime.jsx";
 
 export default function DownloadPdfButton({ carsData = [], status }) {
   const userData = useSelector(selectUser);

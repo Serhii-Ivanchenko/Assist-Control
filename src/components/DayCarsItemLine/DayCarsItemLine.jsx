@@ -4,7 +4,7 @@ import { BsStopwatch } from "react-icons/bs";
 import { SlSpeedometer } from "react-icons/sl";
 import { IoCarSportSharp } from "react-icons/io5";
 import renderStatusCars from "../../utils/renderStatusCars";
-import { renderTime } from "../../utils/renderTime";
+import { renderTime } from "../../utils/renderTime.jsx";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { selectVisibilityCar } from "../../redux/cars/selectors";

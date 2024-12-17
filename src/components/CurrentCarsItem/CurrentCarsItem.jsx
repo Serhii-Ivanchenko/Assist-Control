@@ -13,7 +13,7 @@ import { getCurrentCars } from "../../redux/cars/operations.js";
 import { selectCurrentCars } from "../../redux/cars/selectors.js";
 import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 import { getStatusDetails } from "../../utils/getStatusDetails.js";
-import { renderTime } from "../../utils/renderTime.js";
+import { renderTime } from "../../utils/renderTime.jsx";
 
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";

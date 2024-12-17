@@ -71,3 +71,7 @@
   background: #202020;
   border-radius: 4px;
 }
+
+.accordionSummary>div {
+  margin: 0;
+}
