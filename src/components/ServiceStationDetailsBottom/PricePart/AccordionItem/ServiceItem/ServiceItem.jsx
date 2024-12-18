@@ -52,9 +52,6 @@ function ServiceItem({
   //   }
   // }, [id, serviceItemEdit, onUpdate, serviceName]);
 
-  console.log("serviceItemEdit in ServiceItem", serviceItemEdit);
-  console.log("id in ServiceItem", id);
-
   return (
     <>
       {serviceItemEdit === id ? (

@@ -14,7 +14,7 @@ export default function PricePart() {
   const [isModal, setIsModal] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
   const [originalData, setOriginalData] = useState(testData);
-  const [editableData, setEditableData] = useState(testData);
+  const [editableData, setEditableData] = useState([...originalData]);
   const [resetCategory, setResetCategory] = useState(false);
   const [resetService, setResetService] = useState(false);
   const [resetPrice, setResetPrice] = useState(false);
@@ -82,11 +82,11 @@ export default function PricePart() {
 
   // Прокрутка до ост. елементу при додаванні
   const scrollToTheLastItemRef = useRef(null);
-  const prevDataLengthRef = useRef(originalData.length); // Зберігаємо попередню довжину даних
+  const prevDataLengthRef = useRef(editableData.length); // Зберігаємо попередню довжину даних
 
   useEffect(() => {
     if (
-      originalData.length > prevDataLengthRef.current && // Перевіряємо, чи додано новий елемент
+      editableData.length > prevDataLengthRef.current && // Перевіряємо, чи додано новий елемент
       scrollToTheLastItemRef.current
     ) {
       scrollToTheLastItemRef.current.scrollTo({
@@ -95,14 +95,14 @@ export default function PricePart() {
       });
     }
     // Оновлюємо попередню довжину після виконання ефекту
-    prevDataLengthRef.current = originalData.length;
-  }, [originalData]);
+    prevDataLengthRef.current = editableData.length;
+  }, [editableData]);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.searchContainer}>
         <SearchBar
-          searchData={originalData}
+          searchData={editableData}
           onFilter={handleFilter}
           onReset={handleResetSearch}
         />
@@ -122,7 +122,7 @@ export default function PricePart() {
         )}
       </div>
       <AccordionList
-        data={activeSearch ? filteredData : originalData}
+        data={activeSearch ? filteredData : editableData}
         isEditable={isEditable}
         onUpdate={(updatedData) => setEditableData(updatedData)}
         onEnableEditing={enableEditing}
