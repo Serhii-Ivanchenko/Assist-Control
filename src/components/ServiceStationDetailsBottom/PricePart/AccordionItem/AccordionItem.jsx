@@ -96,6 +96,9 @@ function AccordionItem({
     const updatedServices = currentServices.map((service) =>
       service.id === updatedService.id ? updatedService : service
     );
+    console.log("updatedService", updatedService);
+    console.log("updatedServices", updatedServices);
+
     setCurrentServices(updatedServices);
     onUpdate({
       category: currentCategory,

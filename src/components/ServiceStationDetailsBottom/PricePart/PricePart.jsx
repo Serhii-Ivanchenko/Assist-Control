@@ -14,7 +14,7 @@ export default function PricePart() {
   const [isModal, setIsModal] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
   const [originalData, setOriginalData] = useState(testData);
-  const [editableData, setEditableData] = useState([...testData]);
+  const [editableData, setEditableData] = useState([...originalData]);
   const [resetCategory, setResetCategory] = useState(false);
   const [resetService, setResetService] = useState(false);
   const [resetPrice, setResetPrice] = useState(false);
@@ -43,6 +43,8 @@ export default function PricePart() {
     setOriginalData([...editableData]);
     setIsEditable(false);
     setServiceItemEdit(false);
+    console.log('saving', editableData);
+    
   };
 
   const enableEditing = (id) => {

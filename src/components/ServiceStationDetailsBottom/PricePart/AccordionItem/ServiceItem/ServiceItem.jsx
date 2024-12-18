@@ -13,10 +13,12 @@ function ServiceItem({
   resetService,
   serviceItemEdit,
   setServiceItemEdit,
+  onUpdate,
 }) {
+  const [service, setService] = useState(serviceData);
   const [serviceName, setServiceName] = useState(serviceData.item);
   const [activePopupId, setActivePopupId] = useState(null);
-  const [minPrice, setMinPrice] = useState("");
+  const [minPrice, setMinPrice] = useState(serviceData.price[0].min);
   const [maxPrice, setMaxPrice] = useState("");
   const inputRef = useRef();
   const buttonRef = useRef(null);
@@ -33,6 +35,15 @@ function ServiceItem({
   const handleDelete = () => {
     onDelete(id);
   };
+  useEffect(() => {
+    setService({
+      id: id,
+      item: serviceName,
+      price: [{ min: minPrice }, { max: maxPrice }],
+    });
+  }, [id, serviceName, minPrice, maxPrice]);
+
+  useEffect(() => onUpdate(service), [service]);
 
   useEffect(() => {
     if (resetPrice || resetService) {
