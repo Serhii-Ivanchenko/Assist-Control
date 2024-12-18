@@ -118,6 +118,18 @@ export default function InvoicesPart({ categories }) {
     { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
     { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
     { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
+    { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
   ];
 
   const replacedAndothers = [
