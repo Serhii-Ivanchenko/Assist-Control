@@ -21,15 +21,14 @@ function AccordionList({
   };
   return (
     <ul className={styles.wrapper} ref={containerRef}>
-      {data.map((itemData, idx) => (
-        <li key={idx}>
+      {data.map((itemData, id) => (
+        <li key={id}>
           <AccordionItem
-            isEdit={isEditable[idx] || false}
+            isEdit={isEditable[id] || false}
             category={itemData.category}
             items={itemData.items}
-            index={idx}
-            onUpdate={(updatedCategory) => handleUpdate(updatedCategory, idx)}
-            onEnableEditing={() => onEnableEditing(idx)}
+            onUpdate={(updatedCategory) => handleUpdate(updatedCategory, id)}
+            onEnableEditing={() => onEnableEditing(id)}
             containerRef={containerRef}
             onReset={onReset}
             resetPrice={resetPrice}

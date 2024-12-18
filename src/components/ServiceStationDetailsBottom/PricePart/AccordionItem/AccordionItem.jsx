@@ -27,7 +27,7 @@ function AccordionItem({
 }) {
   const [expanded, setExpanded] = useState(false);
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState(category);
+  const [currentCategory, setCurrentCategory] = useState(null);
   const [currentServices, setCurrentServices] = useState(items);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -56,9 +56,15 @@ function AccordionItem({
     setIsCategoryPopupOpen(false);
   };
 
-  const handleCategoryChange = (newName) => {
-    setCurrentCategory(newName);
-    onUpdate({ category: newName, items: currentServices });
+  const handleCategoryUpdate = (e) => {
+    const newCategory = e.target.value;
+    if (newCategory !== currentCategory) {
+      setCurrentCategory(newCategory);
+      onUpdate({
+        category: newCategory,
+        items: currentServices,
+      });
+    }
   };
 
   const handleAddService = (e) => {
@@ -97,8 +103,11 @@ function AccordionItem({
     });
   };
 
-  const handleDeleteItem = (idx) => {
-    const updatedServices = currentServices.filter((_, index) => index !== idx);
+  // видалення послуги зі списку
+  const handleDeleteItem = (id) => {
+    const updatedServices = currentServices.filter(
+      (service) => service.id !== id
+    );
     setCurrentServices(updatedServices);
   };
 
@@ -106,24 +115,27 @@ function AccordionItem({
     setIsModalOpen(false);
   };
 
+  // ця частина визиває помилку зациклення юз ефекту, але дає можливість завжди скидувати дані до початкового стану
+  // зараз дані скидаються до стану останнього редагування
+
+  // useEffect(() => {
+  //   {
+  //     onUpdate({
+  //       category: currentCategory,
+  //       items: currentServices,
+  //     });
+  //   }
+  // }, [currentCategory, currentServices, onUpdate]);
+
   useEffect(() => {
-    if (category !== currentCategory || items !== currentServices) {
+    if (
+      JSON.stringify(category) !== JSON.stringify(currentCategory) ||
+      JSON.stringify(items) !== JSON.stringify(currentServices)
+    ) {
       setCurrentCategory(category);
       setCurrentServices(items);
-      onUpdate({
-        category: category,
-        items: items,
-      });
     }
-  }, [
-    resetCategory,
-    resetService,
-    category,
-    items,
-    currentCategory,
-    currentServices,
-    onUpdate,
-  ]);
+  }, [category, items, resetCategory, resetService]);
 
   // Прокрутка до ост. елементу при додаванні
   const prevDataLengthRef = useRef(currentServices.length); // Зберігаємо попередню довжину даних
@@ -165,7 +177,7 @@ function AccordionItem({
               <input
                 type="text"
                 value={currentCategory}
-                onChange={(e) => handleCategoryChange(e.target.value)}
+                onChange={handleCategoryUpdate}
                 autoFocus
                 className={styles.editInput}
               />
@@ -177,7 +189,7 @@ function AccordionItem({
             ) : (
               <TiArrowSortedDown className={styles.icon} />
             )}
-            <button
+            <div
               ref={buttonRef}
               className={styles.btn}
               onClick={handleCategoryPopupToggle}
@@ -210,18 +222,18 @@ function AccordionItem({
                   </div>
                 )}
               </div>
-            </button>
+            </div>
           </div>
         </AccordionSummary>
         <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
           <ul className={styles.accordionDesc} ref={innerAccRef}>
-            {currentServices.map((service, id, idx) => (
-              <li key={`${id}-${resetService}`}>
+            {currentServices.map((service) => (
+              <li key={service.id}>
                 <ServiceItem
                   id={service.id}
                   serviceData={service}
                   onUpdate={handleServiceUpdate}
-                  onDelete={() => handleDeleteItem(idx)}
+                  onDelete={() => handleDeleteItem(service.id)}
                   innerAccRef={innerAccRef}
                   containerRef={containerRef}
                   resetPrice={resetPrice}

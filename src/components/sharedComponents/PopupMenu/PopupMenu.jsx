@@ -16,7 +16,6 @@ function PopupMenu({
   const popupRef = useRef(null);
 
   const handleClickOutside = (event) => {
-    console.log("Clicked element:", event.target); // Додати лог
     if (
       popupRef.current &&
       !popupRef.current.contains(event.target) &&
