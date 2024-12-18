@@ -16,7 +16,7 @@ import Loader from "../../Loader/Loader";
 import CalendarPeriodSelector from "../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
 import StatusFilter from "../../sharedComponents/StatusFilter/StatusFilter";
 import { toggleVisibilityCar } from "../../../redux/cars/slice";
-import CarInfoSettings from "../../sharedComponents/CarInfoSettings/CarInfoSettings";
+import InfoSettingsVisibility from "../../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
 import TimeSortItem from "../../sharedComponents/TimeSortItem/TimeSortItem";
 import DownloadPdfButton from "../../sharedComponents/DownloadPdfButton/DownloadPdfButton";
 import { getPeriodCars } from "../../../redux/cars/operations";
@@ -27,11 +27,11 @@ import {
   filterCarsBySearchTerm,
 } from "../../../utils/filterCarsBySearchTerm";
 import renderStatusCars from "../../../utils/renderStatusCars";
-import { statusesCar } from "../../../utils/dataToRender.js";
+import { labelNamesInModal, statusesCar } from "../../../utils/dataToRender.js";
 
 export default function DayCarsModal({ onClose, isModal }) {
   const dispatch = useDispatch();
-  const visibility = useSelector(selectVisibilityCar);
+  // const visibility = useSelector(selectVisibilityCar);
   const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectLoading);
   const carsData = useSelector(selectDayCars);
@@ -175,10 +175,10 @@ export default function DayCarsModal({ onClose, isModal }) {
     return filterCarsBySearchTerm(filteredCarsData, searchTerm);
   };
 
-  const handleToggle = (field) => {
-    const newVisibility = { ...visibility, [field]: !visibility[field] };
-    dispatch(toggleVisibilityCar(newVisibility));
-  };
+  // const handleToggle = (field) => {
+  //   const newVisibility = { ...visibility, [field]: !visibility[field] };
+  //   dispatch(toggleVisibilityCar(newVisibility));
+  // };
 
   return (
     <div className={styles.containerCarModal}>
@@ -230,7 +230,11 @@ export default function DayCarsModal({ onClose, isModal }) {
           />
           <TimeSortItem onSortChange={setSortDescending} />
           <DownloadPdfButton carsData={filteredCars()} />
-          <CarInfoSettings isCrmView={false} handleToggle={handleToggle} />
+          <InfoSettingsVisibility
+          selectVisibility={selectVisibilityCar}
+          toggleVisibilityAction={toggleVisibilityCar}
+          labelNames={labelNamesInModal}
+        />
         </div>
       </div>
       <button className={styles.closeButton} onClick={onClose}>

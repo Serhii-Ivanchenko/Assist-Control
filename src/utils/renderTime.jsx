@@ -52,23 +52,20 @@ export const formatDateTime = (dateString, timeString) => {
 
 export const renderTimeinWork = (date_s) => { 
   if (!date_s) {
-    console.error('Date is not provided');
     return 'Уточнення';
   }
   
   const startDate = new Date(date_s);
   
   if (isNaN(startDate.getTime())) {
-    console.error('Invalid date:', date_s);
     return 'Invalid Date';
   }
 
   const endDate = Date.now();
   const differenceInMilliseconds = endDate - startDate;
 
-  if (isNaN(differenceInMilliseconds)) {
-    console.error('Invalid difference in milliseconds:', differenceInMilliseconds);
-    return 'Invalid Time Difference';
+  if (differenceInMilliseconds < 0) {
+    return 'Invalid Time Difference'; 
   }
 
   const totalMinutes = Math.floor(differenceInMilliseconds / (1000 * 60));

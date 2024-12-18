@@ -1,7 +1,7 @@
 import css from "./ClientsInWorkSorterSection.module.css";
 import { statusesCommunications } from '../../utils/dataToRender';
 import renderStatusCommunication from '../../utils/renderStatusCommunication ';
-import CarInfoSettings from '../sharedComponents/CarInfoSettings/CarInfoSettings';
+import InfoSettingsVisibility from '../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility';
 import CarsSearch from '../sharedComponents/CarsSearch/CarsSearch';
 import StatusFilter from '../sharedComponents/StatusFilter/StatusFilter';
 import TimeSortItem from '../sharedComponents/TimeSortItem/TimeSortItem';
@@ -27,7 +27,7 @@ export default function ClientsInWorkSorterSection() {
         statuses={statusesCommunications}
         isFilter={isFilter}/>
         <CarsSearch />
-        <CarInfoSettings />
+        <InfoSettingsVisibility />
         <TimeSortItem onSortChange={noop}/>
         </div>
         <div className={css.rightContainer}>

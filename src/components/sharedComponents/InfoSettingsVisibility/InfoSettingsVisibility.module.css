@@ -34,10 +34,10 @@
     width: max-content;
   }
 
-  .settingsContainerInCrm {
+  /* .settingsContainerInCrm {
     right: 0;
     top: 50px;
-  }
+  } */
 
   .switchItem{
     display: flex;
