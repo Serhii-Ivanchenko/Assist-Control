@@ -1,6 +1,6 @@
 import CalendarPeriodSelector from "../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
 import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSelector";
-import StatusFilterCars from "../sharedComponents/StatusFilterCars/StatusFilterCars";
+import StatusFilter from "../sharedComponents/StatusFilter/StatusFilter";
 import css from "./ConnectionsSelectorsSection.module.css";
 import renderStatusCommunication from "../../utils/renderStatusCommunication ";
 import { statusesCommunications } from "../../utils/dataToRender.js";
@@ -16,7 +16,7 @@ export default function ConnectionsSelectorsSection() {
     <div className={css.wrapper}>
       <RangeTimeSelector />
       <CalendarPeriodSelector />
-      <StatusFilterCars
+      <StatusFilter
         onStatusChange={handleStatusChange}
         renderStatus={renderStatusCommunication}
         statuses={statusesCommunications}

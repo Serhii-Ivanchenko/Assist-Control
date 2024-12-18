@@ -3,9 +3,11 @@ import IconRender from "../sharedComponents/iconsCommunicateStatus/iconsCommunic
 import css from "./ConnectionsListSection.module.css";
 import defaultAvatar from "../../assets/images/avatar_default.png";
 import renderStatusCommunication from "../../utils/renderStatusCommunication ";
-// import AudioPlayer from "../sharedComponents/AudioPlayer/AudioPlayer";
 import PlayerAndTranscription from "../sharedComponents/PlayerAndTranscription/PlayerAndTranscription";
 import renderStatusCars from "../../utils/renderStatusCars";
+import { IoCarSportSharp } from "react-icons/io5";
+import { FiPlus } from "react-icons/fi";
+import { BsLayerBackward } from "react-icons/bs";
 
 export default function ConnectionsListSection() {
   function renderStatus(itemStatus, css) {
@@ -35,6 +37,7 @@ export default function ConnectionsListSection() {
             </div>
           </div>
           <div className={css.rightContainer}>
+            {/* <div className={css.rightleftContainer}> */}
             <div className={css.userContainer}>
               <div className={css.avatar}>
                 <img
@@ -44,9 +47,31 @@ export default function ConnectionsListSection() {
                 />
               </div>
               <div className={css.name}>{item.name}</div>
+
+              {/* Умовний рендер кнопки, якщо clientId === null */}
+              {item.clientId === null && (
+                <button className={css.plus}>
+                  <FiPlus className={css.iconPlus} size={14} />
+                </button>
+              )}
             </div>
-            <div className={css.auto}>{item.auto}</div>
+            <div className={css.auto}>
+              <IoCarSportSharp
+                className={css.iconAuto}
+                size={13}
+                color="#A97878"
+              />
+              <span>{item.auto}</span>
+            </div>
             <div className={css.status}>{renderStatus(item.status, css)}</div>
+            <div className={css.archiveBtnContainer}>
+              {item.status === "missing" && (
+                <button className={css.btnSave}>
+                  <BsLayerBackward size={20} />
+                </button>
+              )}
+            </div>
+            {/* </div> */}
             <div className={css.audioContainer}>
               <PlayerAndTranscription
                 sizePlayer="small"

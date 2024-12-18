@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { BsSortUp, BsSortDownAlt } from "react-icons/bs";
-import styles from './TimeSortCarItem.module.css';
+import styles from './TimeSortItem.module.css';
 
-export default function TimeSortCarItem({ onSortChange }) {
+export default function TimeSortItem({ onSortChange }) {
   const [isDescending, setIsDescending] = useState(true);
   
   const toggleSortOrder = () => {
