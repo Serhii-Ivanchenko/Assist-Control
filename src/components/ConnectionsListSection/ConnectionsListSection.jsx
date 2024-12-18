@@ -30,7 +30,6 @@ export default function ConnectionsListSection() {
     <div className={css.wrapper}>
       {connections.map((item, index) => (
         <div className={css.item} key={index}>
-          
           <div className={css.leftContainer}>
             <div className={css.timeCall}>{item.timeCall}</div>
             <div className={css.typeMessage}>
@@ -38,41 +37,41 @@ export default function ConnectionsListSection() {
             </div>
           </div>
           <div className={css.rightContainer}>
-            <div className={css.rightleftContainer}>
-              <div className={css.userContainer}>
-                <div className={css.avatar}>
-                  <img
-                    src={item.photoUrl || defaultAvatar}
-                    alt={item.name}
-                    className={css.avatarImage}
-                  />
-                </div>
-                <div className={css.name}>{item.name}</div>
-
-                {/* Умовний рендер кнопки, якщо clientId === null */}
-                {item.clientId === null && (
-                  <button className={css.plus}>
-                    <FiPlus className={css.iconPlus} size={14}/>
-                  </button>
-                )}
-              </div>
-              <div className={css.auto}>
-                <IoCarSportSharp
-                  className={css.iconAuto}
-                  size={13}
-                  color="#A97878"
+            {/* <div className={css.rightleftContainer}> */}
+            <div className={css.userContainer}>
+              <div className={css.avatar}>
+                <img
+                  src={item.photoUrl || defaultAvatar}
+                  alt={item.name}
+                  className={css.avatarImage}
                 />
-                <span>{item.auto}</span>
               </div>
-              <div className={css.status}>{renderStatus(item.status, css)}</div>
-              <div>
-                {item.status === "missing" && (
-                  <button className={css.btnSave}>
-                    <BsLayerBackward size={20} />
-                  </button>
-                )}
-              </div>
+              <div className={css.name}>{item.name}</div>
+
+              {/* Умовний рендер кнопки, якщо clientId === null */}
+              {item.clientId === null && (
+                <button className={css.plus}>
+                  <FiPlus className={css.iconPlus} size={14} />
+                </button>
+              )}
             </div>
+            <div className={css.auto}>
+              <IoCarSportSharp
+                className={css.iconAuto}
+                size={13}
+                color="#A97878"
+              />
+              <span>{item.auto}</span>
+            </div>
+            <div className={css.status}>{renderStatus(item.status, css)}</div>
+            <div className={css.archiveBtnContainer}>
+              {item.status === "missing" && (
+                <button className={css.btnSave}>
+                  <BsLayerBackward size={20} />
+                </button>
+              )}
+            </div>
+            {/* </div> */}
             <div className={css.audioContainer}>
               <PlayerAndTranscription
                 sizePlayer="small"
