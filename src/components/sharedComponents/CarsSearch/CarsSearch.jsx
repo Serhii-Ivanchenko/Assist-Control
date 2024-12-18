@@ -1,7 +1,8 @@
+import clsx from "clsx";
 import css from "./CarsSearch.module.css";
 import { IoIosSearch } from "react-icons/io";
 
-export default function CarsSearch({ value, onChange, error }) {
+export default function CarsSearch({ value, onChange, error, isHeader }) {
   const handleInputChange = (event) => {
     onChange(event.target.value);
   };
@@ -9,7 +10,7 @@ export default function CarsSearch({ value, onChange, error }) {
   return (
     <div className={css.inputWrapper}>
       <input
-        className={css.inputFilter}
+        className={clsx(css.inputFilter, { [css.isHeader]: isHeader })}
         type="text"
         name="searchInput"
         id="searchInput"

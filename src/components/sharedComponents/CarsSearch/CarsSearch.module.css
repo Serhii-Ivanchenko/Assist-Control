@@ -9,7 +9,7 @@
 }
 
 .inputFilter {
-    width: 188px;
+    width: 158px;
     height: 27px;
     /* flex-shrink: 0; */
     background-color: var(--bg-input);
@@ -23,6 +23,10 @@
     font-weight: 400;
     line-height: 1.18em;
 }
+
+.inputFilter.isHeader {
+    width: 188px;
+  }
 
 .inputFilter::placeholder {
     color: var(--text-gray);
