@@ -1,6 +1,6 @@
 
 import CalendarPeriodSelector from '../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector';
-import CarInfoSettings from '../sharedComponents/CarInfoSettings/CarInfoSettings';
+import InfoSettingsVisibility from '../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility';
 import DownloadPdfButton from '../sharedComponents/DownloadPdfButton/DownloadPdfButton';
 import TimeSortItem from '../sharedComponents/TimeSortItem/TimeSortItem';
 import css from './GeneralClientsSorterAndSelectorsSection.module.css';
@@ -17,7 +17,7 @@ export default function GeneralClientsSorterAndSelectorsSection() {
         <TimeSortItem onSortChange={noop}/>
         <CalendarPeriodSelector renderInModal={true}/>
         <DownloadPdfButton />
-        <CarInfoSettings />
+        {/* <InfoSettingsVisibility /> */}
         </div>
       </div>
     );

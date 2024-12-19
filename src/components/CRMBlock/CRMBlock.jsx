@@ -13,14 +13,12 @@ import {
   selectVisibilityRecords,
 } from "../../redux/crm/selectors.js";
 import { toggleVisibilityRecords } from "../../redux/crm/slice.js";
-import CarInfoSettings from "../sharedComponents/CarInfoSettings/CarInfoSettings.jsx";
-import { statusMapping } from "../../utils/dataToRender.js";
-import {borderHeaderInCrm} from "../../utils/borderHeaderInCrm.jsx";
-
+import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility.jsx";
+import { labelNamesInCrm, statusMapping } from "../../utils/dataToRender.js";
+import { borderHeaderInCrm } from "../../utils/borderHeaderInCrm.jsx";
 
 export default function CRMBlock() {
   const dispatch = useDispatch();
-  const visibility = useSelector(selectVisibilityRecords);
   const periodRecords = useSelector(selectPeriodRecords);
   const dates = useSelector(selectDates);
 
@@ -76,10 +74,10 @@ export default function CRMBlock() {
     return periodRecords.filter((item) => item.status === status);
   };
 
-  const handleToggle = (field) => {
-    const newVisibility = { ...visibility, [field]: !visibility[field] };
-    dispatch(toggleVisibilityRecords(newVisibility));
-  };
+  // const handleToggle = (field) => {
+  //   const newVisibility = { ...visibility, [field]: !visibility[field] };
+  //   dispatch(toggleVisibilityRecords(newVisibility));
+  // };
 
   return (
     <div className={css.container}>
@@ -103,7 +101,12 @@ export default function CRMBlock() {
           );
         })}
         <div className={css.btnSettings}>
-          <CarInfoSettings isCrmView={true} handleToggle={handleToggle} />
+          <InfoSettingsVisibility
+            selectVisibility={selectVisibilityRecords}
+            toggleVisibilityAction={toggleVisibilityRecords}
+            labelNames={labelNamesInCrm}
+            className={css.settingsContainerInCrm}
+          />
         </div>
       </div>
 
