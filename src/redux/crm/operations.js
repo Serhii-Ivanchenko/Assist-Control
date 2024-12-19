@@ -104,7 +104,7 @@ export const createRecord = createAsyncThunk(
 
 // Update record data
 export const updateRecordData = createAsyncThunk(
-  "auth/updateRecordData",
+  "crm/updateRecordData",
   async (recordDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;

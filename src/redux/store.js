@@ -14,7 +14,9 @@ import storage from "redux-persist/lib/storage";
 
 import carsReducer from "./cars/slice";
 import authReducer from "./auth/slice";
-import crmReducer from './crm/slice.js'
+import crmReducer from "./crm/slice.js";
+import serviceReducer from "./service/slice.js";
+import settingsReducer from './settings/slice.js'
 
 const authPersistConfig = {
   key: "authSlice",
@@ -40,12 +42,13 @@ const crmPersistConfig = {
 
 const persistedCrmReducer = persistReducer(crmPersistConfig, crmReducer);
 
-
 export const store = configureStore({
   reducer: {
     cars: persistedCarsReducer,
     auth: persistedAuthReducer,
     crm: persistedCrmReducer,
+    service: serviceReducer,
+    settings: settingsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

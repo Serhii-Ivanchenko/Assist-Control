@@ -1,3 +1,5 @@
+import { Warehouse } from "@mui/icons-material";
+
 export const initialState = {
   auth: {
     userData: {
@@ -152,5 +154,32 @@ export const initialState = {
     accumulated_bonus: null,
     related_customer_id: null,
     company_id: null,
+  },
+
+  service: {
+    data: {
+      name: null,
+      logo: null,
+      address: null,
+      userCode: null,
+      account: null,
+      bank: null,
+      bankDetails: null,
+      legalAddress: null,
+      managerPhone: null,
+      managerName: null,
+      officePhoneNumber: null,
+      headPhoneNumber: null,
+    },
+    isLoading: false,
+    error: null,
+  },
+
+  settings: {
+    schedule: [],
+    posts: [],
+    prices: [],
+    isLoading: false,
+    error: null,
   },
 };
