@@ -25,7 +25,7 @@ export default function ClientsInWorkSorterSection() {
         <StatusFilter 
         onStatusChange={handleStatusChange}
         renderStatus={renderStatusCars}
-        statuses={statusesCar}
+        // statuses={statusesCar}
         isFilter={isFilter}/>
         </div>
         <CarsSearch />
