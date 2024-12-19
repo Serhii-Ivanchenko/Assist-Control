@@ -41,9 +41,24 @@
     width: 126px;
     height: 126px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+
+}
+
+.labelsecond {
+    position: absolute;
+        width: 126px;
+        height: 93px;
+    
+    display: flex;
+    justify-content: center; 
+    align-items:end;
+    font-size: 15px;
     font-style: normal;
     font-weight: 500;
 
