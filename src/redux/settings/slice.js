@@ -1,12 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
 import {
+  createCategory,
   createPost,
+  createService,
   deletePost,
+  deleteService,
+  editPrices,
   getPosts,
+  getPrices,
   getWorkSchedule,
+  updateCategoryData,
   updatePostData,
   updatePostStatus,
+  updateServiceName,
   updateWorkSchedule,
 } from "./operations.js";
 
@@ -76,7 +83,57 @@ const settingsSlice = createSlice({
           (post) => post.id !== action.payload.id
         );
       })
-      .addCase(deletePost.rejected, handleRejected),
+      .addCase(deletePost.rejected, handleRejected)
+      .addCase(getPrices.pending, handlePending)
+      .addCase(getPrices.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.prices = action.payload;
+      })
+      .addCase(getPrices.rejected, handleRejected)
+      .addCase(editPrices.pending, handlePending)
+      .addCase(editPrices.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const pricesToEditIndex = state.posts.findIndex(
+          (service) => service.id === action.payload.id
+        );
+        state.prices[pricesToEditIndex].prices = action.payload;
+      })
+      .addCase(editPrices.rejected, handleRejected)
+      .addCase(createCategory.pending, handlePending)
+      .addCase(createCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.prices.push(action.payload);
+      })
+      .addCase(createCategory.rejected, handleRejected)
+      .addCase(updateCategoryData.pending, handlePending)
+      .addCase(updateCategoryData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const categoryToEditIndex = state.prices.findIndex(
+          (category) => category.id === action.payload.id
+        );
+        state.prices[categoryToEditIndex].category = action.payload;
+      })
+      .addCase(updateCategoryData.rejected, handleRejected)
+      .addCase(createService.pending, handlePending)
+      .addCase(createService.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        const categoryToAddNewService = state.prices.findIndex(
+          (category) => category.id === action.payload.id
+        );
+        state.prices[categoryToAddNewService].items.push(action.payload);
+      })
+      .addCase(createService.rejected, handleRejected)
+      .addCase(deleteService.pending, handlePending)
+      .addCase(deleteService.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.prices = state.prices.items.filter(
+          (item) => item.id !== action.payload.id
+        );
+      })
+      .addCase(deleteService.rejected, handleRejected),
 });
 
 export default settingsSlice.reducer;
