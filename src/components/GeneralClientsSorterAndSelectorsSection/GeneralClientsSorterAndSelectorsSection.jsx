@@ -17,7 +17,7 @@ export default function GeneralClientsSorterAndSelectorsSection() {
         <TimeSortItem onSortChange={noop}/>
         <CalendarPeriodSelector renderInModal={true}/>
         <DownloadPdfButton />
-        <InfoSettingsVisibility />
+        {/* <InfoSettingsVisibility /> */}
         </div>
       </div>
     );

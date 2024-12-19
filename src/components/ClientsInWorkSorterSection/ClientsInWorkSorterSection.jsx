@@ -27,7 +27,7 @@ export default function ClientsInWorkSorterSection() {
         statuses={statusesCommunications}
         isFilter={isFilter}/>
         <CarsSearch />
-        <InfoSettingsVisibility />
+        {/* <InfoSettingsVisibility /> */}
         <TimeSortItem onSortChange={noop}/>
         </div>
         <div className={css.rightContainer}>
