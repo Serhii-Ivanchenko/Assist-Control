@@ -30,32 +30,33 @@ const AppointmentGrid = ({ data }) => {
   const [linePosition, setLinePosition] = useState(null);
   const gridRef = useRef(null);
   const [gridHeight, setGridHeight] = useState(0);
- const [startHour, setStartHour] = useState(null); // Начало рабочего дня
+  const [startHour, setStartHour] = useState(null); // Начало рабочего дня
   const [endHour, setEndHour] = useState(null); // Конец рабочего дня
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
   const currentDate = new Date().toISOString().substring(0, 10);
 
-  console.log(data);
+  console.log(modalData);
   // const handleWorkItemClick = (recordId, postId) => {
   //   setModalData({ recordId, postId });
   //   setIsModalOpen(true);
   // };
 
   const handleWorkItemClick = (recordId, postId, itemEndTime) => {
-    
-  const now = new Date();
-  const currentTime = now.getHours() * 60 + now.getMinutes();
-    
-    if ((carSelectDate === currentDate && currentTime > (itemEndTime + 1) * 60) || 
-         carSelectDate < currentDate) {
-    console.log("Ячейка недоступна для выбора.");
-    return;
-  }
+    const now = new Date();
+    const currentTime = now.getHours() * 60 + now.getMinutes();
 
-  setModalData({ recordId, postId });
-  setIsModalOpen(true);
-};
+    if (
+      (carSelectDate === currentDate && currentTime > (itemEndTime + 1) * 60) ||
+      carSelectDate < currentDate
+    ) {
+      console.log("Ячейка недоступна для выбора.");
+      return;
+    }
+
+    setModalData({ recordId, postId });
+    setIsModalOpen(true);
+  };
 
   const handleCloseModal = () => {
     setModalData(null);
@@ -69,7 +70,7 @@ const AppointmentGrid = ({ data }) => {
     }
   }, [data]);
 
-useEffect(() => {
+  useEffect(() => {
     if (data.dates && data.dates.length > 0) {
       setStartHour(parseInt(data.dates[1])); // Начало рабочего дня
       setEndHour(parseInt(data.dates[data.dates.length - 1])); // Конец рабочего дня
@@ -78,7 +79,7 @@ useEffect(() => {
 
   let rowCount = data.posts.length;
   let columnCount = data.dates.length;
- 
+
   let startIndexColumn = parseInt(data.dates[1]);
   // console.log('sic', startIndexColumn);
   const gridStyle = {
@@ -88,7 +89,7 @@ useEffect(() => {
   const koeffWidth = (100 + (1057 - 100) / columnCount - 1) / 100;
 
   useEffect(() => {
- if (startHour === null || endHour === null) return;
+    if (startHour === null || endHour === null) return;
 
     const updateCurrentTimeLine = () => {
       // startHour =  parseInt(data.dates[1]); // Начало рабочего дня
@@ -98,7 +99,11 @@ useEffect(() => {
       const currentMinute = now.getMinutes();
 
       // Проверка, чтобы полоса не отображалась вне рабочего времени
-      if ((currentHour < startHour || currentHour >= endHour ) || carSelectDate !== currentDate) {
+      if (
+        currentHour < startHour ||
+        currentHour >= endHour ||
+        carSelectDate !== currentDate
+      ) {
         setLinePosition(null);
         return;
       }
@@ -195,10 +200,11 @@ useEffect(() => {
 
         const now = new Date();
         const currentTime = now.getHours() * 60 + now.getMinutes(); // Текущее время в минутах
-        const itemEndTime = (item.stage_end +1)* 60; // Конец рабочего времени в минутах
+        const itemEndTime = (item.stage_end + 1) * 60; // Конец рабочего времени в минутах
 
-        const isDisabled = (carSelectDate === currentDate && currentTime > itemEndTime) ||
-        carSelectDate < currentDate ;
+        const isDisabled =
+          (carSelectDate === currentDate && currentTime > itemEndTime) ||
+          carSelectDate < currentDate;
         // console.log('col', item.stage_start + 1 - startIndexColumn + 1)
         // console.log('colend',item.stage_end + 2 - startIndexColumn + 1)
         const gridColumn = `${item.stage_start + 1 - startIndexColumn + 1} / ${
@@ -225,7 +231,16 @@ useEffect(() => {
               background: workTypeColors[item.service_name] || "#333",
             }}
             // onClick={() => handleWorkItemClick(item.record_id, item.post_id, item.stage_end)}
-            onClick={!isDisabled ? () => handleWorkItemClick(item.record_id, item.post_id, item.stage_end) : undefined}
+            onClick={
+              !isDisabled
+                ? () =>
+                    handleWorkItemClick(
+                      item.record_id,
+                      item.post_id,
+                      item.stage_end
+                    )
+                : undefined
+            }
           >
             {item.service_name !== "empty" && (
               <p
@@ -259,6 +274,7 @@ useEffect(() => {
             recordId={modalData.recordId}
             postId={modalData.postId}
             onClose={handleCloseModal}
+            carSelectDate={carSelectDate}
           />
         </Modal>
       )}
