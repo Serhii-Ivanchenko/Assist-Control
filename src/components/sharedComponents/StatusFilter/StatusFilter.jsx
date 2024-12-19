@@ -10,10 +10,10 @@ export default function StatusFilter({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("Статус");
-  const dropdownRef = useRef(null);
+  const containerRef = useRef(null);
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   const handleStatusSelect = (status) => {
@@ -27,7 +27,7 @@ export default function StatusFilter({
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
@@ -38,8 +38,8 @@ export default function StatusFilter({
   }, []);
 
   return (
-    <div className={styles.statusFilter}>
-      <button className={styles.filterButton} onClick={toggleDropdown}>
+    <div className={styles.statusFilter} ref={containerRef} onClick={toggleDropdown}>
+      <button className={styles.filterButton}>
         <p className={styles.statusFilterText}>{selectedStatus}</p>
         {isOpen ? (
           <TiArrowSortedUp className={styles.icon} color="var(--icon-gray)" />
@@ -48,9 +48,12 @@ export default function StatusFilter({
         )}
       </button>
       {isOpen && (
-        <ul className={styles.dropdownList} ref={dropdownRef}>
+        <ul className={styles.dropdownList}>
           {statuses.map(({ status }) => (
-            <li key={status} onClick={() => handleStatusSelect(status)}>
+            <li key={status} onClick={(e) => { 
+              e.stopPropagation(); 
+              handleStatusSelect(status); 
+            }}>
               {renderStatus(status, false, styles, isFilter)}
             </li>
           ))}

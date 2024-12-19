@@ -10,11 +10,16 @@
     height: 28px;
 }
 
+.statusContainer{
+  height: 100%;
+  width: 130px;
+}
+
 .leftContainer{
     display: flex;
     align-items: center;
-    gap: 30px;
-    margin-right: 138px;
+    gap: 22px;
+    margin-right: 29px;
 }
 
 .rightContainer{
@@ -23,31 +28,36 @@
 }
 
 .rightContainer > :nth-child(1) {
-    margin-right: 69px;
+    margin-right: 132px;
   }
   
   .rightContainer > :nth-child(2) {
-    margin-right: 87px;
+    margin-right: 64px;
   }
   
   .rightContainer > :nth-child(3) {
-    margin-right: 140px;
+    margin-right: 84px;
   }
   
   .rightContainer > :nth-child(4) {
-    margin-right: 157px;
+    margin-right: 148px;
   }
   
   .rightContainer > :nth-child(5) {
-    margin-right: 105px;
+    margin-right: 144px;
   }
   
   .rightContainer > :nth-child(6) {
-    margin-right: 94px;
+    margin-right: 100px;
   }
   
   .rightContainer > :nth-child(7) {
-    margin-right: 26px;
+    margin-right: 85px;
   }
+
+  .rightContainer > :nth-child(8) {
+    margin-right: 41px;
+  }
+
 
 
