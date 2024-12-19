@@ -61,7 +61,7 @@ export default function InvoicesList({ category, list }) {
           key={index}
           className={`${css.invoiceItem} ${
             isScrolled && css.invoiceItemForScroll
-          }`}
+          } ${item.paid && css.isPaidBorder}`}
         >
           {(category === "Діагностика" ||
             category === "Погоджено" ||

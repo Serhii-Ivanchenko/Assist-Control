@@ -161,3 +161,9 @@
   gap: 6px;
   align-items: end;
 }
+
+.isPaidBorder {
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-invoices) border-box;
+  border: 2px solid transparent;
+}

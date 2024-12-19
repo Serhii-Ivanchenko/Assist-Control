@@ -21,23 +21,10 @@ export default function InvoiceListSection() {
   //   };
   // }, []);
 
-  // Майже робочий варіант)
-  // const handleWheel = (e) => {
-  //   const container = containerRef.current;
-
-  //   // Якщо мишка НЕ над списком карток
-  //   if (!e.target.closest("li")) {
-  //     container.scrollLeft += e.deltaY; // Горизонтальний скрол
-  //     e.preventDefault(); // Забороняємо стандартний скрол
-  //   }
-  // };
-
   const handleWheel = (e) => {
     const container = containerRef.current;
-
-    // Горизонтальний скрол, якщо подія не зупинена дочірнім елементом
     container.scrollLeft += e.deltaY;
-    e.preventDefault(); // Забороняємо стандартний скрол
+    e.preventDefault();
   };
 
   return (
