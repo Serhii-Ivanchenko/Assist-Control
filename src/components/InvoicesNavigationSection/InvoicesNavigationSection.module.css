@@ -1,0 +1,29 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    background: var(--bg-secondary);
+    overflow: hidden;
+    height: 39px;
+    width: 325px;
+  }
+  
+  .navText {
+    color: var(--light-gray);
+    font-size: 16px;
+    font-variant: small-caps;
+    transition: color 0.3s ease;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .navText:not(:last-child) {
+    border-right: 1px solid var(--main-gray);
+  }
+  
+  .navText.active {
+    background-color: var(--main-gray);
+  }
+  

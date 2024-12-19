@@ -29,6 +29,9 @@ const crmSlice = createSlice({
       const { key } = action.payload;
       state.visibilityRecords[key] = !state.visibilityRecords[key];
     },
+    updateDates(state, action) {
+      state.dates = action.payload;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -91,6 +94,9 @@ const crmSlice = createSlice({
       .addCase(getMonthlyLoad.rejected, handleRejected),
 });
 
-export const { toggleVisibilityRecords } = crmSlice.actions;
+export const {toggleVisibilityRecords} = crmSlice.actions;
+export const { updateDates } = crmSlice.actions;
+
+
 
 export default crmSlice.reducer;

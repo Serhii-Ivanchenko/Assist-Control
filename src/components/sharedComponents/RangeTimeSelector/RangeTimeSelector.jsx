@@ -3,7 +3,7 @@ import clsx from "clsx";
 import styles from "./RangeTimeSelector.module.css";
 
 export default function RangeTimeSelector({onSelectTimeRange}) {
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(null);
 
   const options = ["За день", "За тиждень", "За місяць", "Весь час"];
 

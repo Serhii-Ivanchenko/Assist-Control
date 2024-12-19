@@ -11,6 +11,8 @@ function AccordionList({
   resetPrice,
   resetCategory,
   resetService,
+  serviceItemEdit,
+  setServiceItemEdit,
 }) {
   const handleUpdate = (updatedCategory, idx) => {
     const newData = [...data];
@@ -33,6 +35,8 @@ function AccordionList({
             resetPrice={resetPrice}
             resetCategory={resetCategory}
             resetService={resetService}
+            serviceItemEdit={serviceItemEdit}
+            setServiceItemEdit={setServiceItemEdit}
           />
         </li>
       ))}

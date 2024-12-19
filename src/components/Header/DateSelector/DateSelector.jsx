@@ -2,10 +2,11 @@ import { useDispatch } from "react-redux";
 import CalendarPeriodSelector from "../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector.jsx";
 import css from "./DateSelector.module.css";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { getRecordsForPeriod } from "../../../redux/crm/operations.js";
 import toast from "react-hot-toast";
 import { selectPeriodRecords } from "../../../redux/crm/selectors.js";
+import { updateDates } from "../../../redux/crm/slice.js";
 
 export default function DateSelector() {
   const dispatch = useDispatch();
@@ -13,31 +14,45 @@ export default function DateSelector() {
   const [endDate, setEndDate] = useState(null);
 
   const [periodStartData, setPeriodStartData] = useState();
-    const [periodEndData, setPeriodEndData] = useState();
-    const currentDate = new Date().toISOString().split("T")[0];
+  const [periodEndData, setPeriodEndData] = useState();
+  const currentDate = new Date().toISOString().split("T")[0];
 
   const periodRecords = useSelector(selectPeriodRecords);
-    console.log("periodRecords", periodRecords);
+  console.log("periodRecords", periodRecords);
+
+  const fetchPeriodRecords = useCallback(
+    (dates) => {
+      const { startDate, endDate } = dates;
+
+      if (!startDate || !endDate) {
+        toast.error("Потрібно обрати обидві дати!");
+        return;
+      }
+
+      dispatch(getRecordsForPeriod(dates));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
-    if (!startDate) {
+    if (!startDate && !endDate) {
       setPeriodStartData(currentDate);
-    }
-    if (!endDate) {
       setPeriodEndData(currentDate);
+      setStartDate(currentDate);
+      setEndDate(currentDate);
     }
   }, [startDate, endDate, currentDate]);
 
-  const fetchPeriodRecords = (dates) => {
-    const { startDate, endDate } = dates;
-
-    if (!startDate || !endDate) {
-      toast.error("Обидві дати повинні бути вибрані!");
-      return;
+  useEffect(() => {
+    if (startDate && endDate) {
+      const updatedDates = {
+        startDate: formatToDate(new Date(startDate)),
+        endDate: formatToDate(new Date(endDate)),
+      };
+      fetchPeriodRecords(updatedDates);
+      updateDates(updatedDates);
     }
-
-    dispatch(getRecordsForPeriod(dates));
-  };
+  }, [startDate, endDate, fetchPeriodRecords]);
 
   function formatToDate(date) {
     if (!date || !(date instanceof Date)) {
@@ -59,10 +74,12 @@ export default function DateSelector() {
     console.log("newStartDate", newStartDate);
 
     if (newStartDate && periodEndData) {
-      fetchPeriodRecords({
+      const updatedDates = {
         startDate: formatToDate(new Date(newStartDate)),
         endDate: formatToDate(new Date(periodEndData)),
-      });
+      };
+      fetchPeriodRecords(updatedDates);
+      updateDates(updatedDates);
     }
   }
 
@@ -77,10 +94,12 @@ export default function DateSelector() {
     console.log("periodStartData", periodStartData);
 
     if (periodStartData && newEndDate) {
-      fetchPeriodRecords({
+      const updatedDates = {
         startDate: formatToDate(new Date(periodStartData)),
         endDate: formatToDate(new Date(newEndDate)),
-      });
+      };
+      fetchPeriodRecords(updatedDates);
+      updateDates(updatedDates);
     }
   }
 

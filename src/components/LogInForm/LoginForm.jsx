@@ -43,13 +43,14 @@ export default function LoginForm() {
       .then(() => {
         toast.success("Welcome to Assist CONTROL", {
           position: "top-center",
+          duration: 3000,
           style: {
             background: "var(--bg-input)",
             color: "var(--white)FFF",
           },
         });
         dispatch(getUserData());
-        navigate({ renderPage });
+        // navigate({ renderPage });
       })
       .catch((err) => {
         if (err.status === 401) {

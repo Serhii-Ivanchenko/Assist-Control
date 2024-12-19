@@ -28,9 +28,16 @@ export default function GoogleBtn() {
         await dispatch(logInWithGoogle({ token, email, displayName }))
           .unwrap()
           .then(() => {
-            toast.success("Авторизація успішна!");
+            toast.success("Авторизація успішна!", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
             dispatch(getUserData());
-            navigate({ renderPage });
+            // navigate({renderPage});
           });
       }
     } catch (error) {

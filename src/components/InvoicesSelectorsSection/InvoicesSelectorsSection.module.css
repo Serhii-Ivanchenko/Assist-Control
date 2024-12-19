@@ -1,0 +1,10 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 39px;
+    gap: 110px;
+}
+
+.wrapper .dateWrapper{
+    margin-right: 10px;
+}

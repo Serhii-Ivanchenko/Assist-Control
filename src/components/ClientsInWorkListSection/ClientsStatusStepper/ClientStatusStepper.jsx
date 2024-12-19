@@ -50,12 +50,16 @@ function ClientStatusStepper({ car, carImg, status }) {
   // Ось тут додаємо класи для статусу
   const getStatusClass = (status) => {
     switch (status) {
+      case "all":
+        return styles.allStatus;
       case "new":
         return styles.newStatus;
       case "diagnostic":
         return styles.diagnosticStatus;
       case "repair":
         return styles.repairStatus;
+      case "viewRepair":
+        return styles.viewRepairStatus;
       case "complete":
         return styles.completeStatus;
       default:
@@ -64,11 +68,13 @@ function ClientStatusStepper({ car, carImg, status }) {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <ul className={styles.wrapper}>
       {groupedButtons.map((group, idx) => (
         <ul
           key={idx}
-          className={`${styles.boxContainer} ${getStatusClass(status)}`}
+          className={`${styles.boxContainer} ${
+            idx === groupedButtons.length - 1 ? "" : getStatusClass(status)
+          }`}
         >
           {group.map(({ id, title, icon, isActive, noBackground }) => (
             <li key={id} className={styles.listItem}>
@@ -82,7 +88,7 @@ function ClientStatusStepper({ car, carImg, status }) {
           ))}
         </ul>
       ))}
-    </div>
+    </ul>
   );
 }
 
