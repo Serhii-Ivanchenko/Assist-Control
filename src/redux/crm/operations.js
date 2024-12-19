@@ -39,7 +39,7 @@ export const getRecordsForDay = createAsyncThunk(
           },
         }
       );
-      console.log("response data", response.data);
+      // console.log("getRecordsForDay", response.data);
 
       return response.data;
     } catch (error) {
@@ -55,8 +55,8 @@ export const getRecordsForPeriod = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     const { startDate, endDate } = dates;
-    console.log('dates',dates);
-    
+    console.log("dates", dates);
+
     try {
       const response = await axiosInstance.get(
         `/crm/get_records/?start_date=${startDate}&end_date=${endDate}`,
@@ -93,7 +93,7 @@ export const createRecord = createAsyncThunk(
           },
         }
       );
-      console.log(response.data);
+      console.log("create record", response.data);
 
       return response.data;
     } catch (error) {
@@ -106,13 +106,23 @@ export const createRecord = createAsyncThunk(
 export const updateRecordData = createAsyncThunk(
   "auth/updateRecordData",
   async (recordDataToUpdate, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
       const { recordId, ...recordDataToUpdateWithoutId } = recordDataToUpdate;
 
       const response = await axiosInstance.patch(
         `/crm/update_record/${recordId}/`,
-        recordDataToUpdateWithoutId
+        recordDataToUpdateWithoutId,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
       );
+      console.log(response.data);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -182,7 +192,7 @@ export const getPlannedVisits = createAsyncThunk(
           },
         }
       );
-      console.log("response data", response.data);
+      console.log("getPlannedVisits", response.data);
 
       return response.data;
     } catch (error) {

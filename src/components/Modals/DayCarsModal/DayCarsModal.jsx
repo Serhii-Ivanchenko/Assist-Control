@@ -127,8 +127,11 @@ export default function DayCarsModal({ onClose, isModal }) {
 
     // Сортування за тривалістю (часом)
     filteredData.sort((a, b) => {
-      const durationA = new Date(a.date_e || Date.now()) - new Date(a.date_s);
-      const durationB = new Date(b.date_e || Date.now()) - new Date(b.date_s);
+      const currentDate = Date.now();
+    
+      const durationA = currentDate - new Date(a.date_s);
+      const durationB = currentDate - new Date(b.date_s);
+    
       return sortDescending ? durationB - durationA : durationA - durationB;
     });
 
@@ -212,6 +215,7 @@ export default function DayCarsModal({ onClose, isModal }) {
               error={inputError}
             />
           </div>
+          <TimeSortItem onSortChange={setSortDescending} />
         </div>
         <div className={styles.rightHeader}>
           <StatusFilter
@@ -228,7 +232,6 @@ export default function DayCarsModal({ onClose, isModal }) {
             handleInputChangeBeg={handleInputChangeBeg}
             handleInputChangeEnd={handleInputChangeEnd}
           />
-          <TimeSortItem onSortChange={setSortDescending} />
           <DownloadPdfButton carsData={filteredCars()} />
           <InfoSettingsVisibility
           selectVisibility={selectVisibilityCar}

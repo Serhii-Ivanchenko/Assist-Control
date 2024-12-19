@@ -4,7 +4,6 @@ import { ServiceBookingSchema } from "../../../validationSchemas/ServiceBookingS
 import { BsFillCameraFill } from "react-icons/bs";
 import { BsXLg } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
-import { FaCheck } from "react-icons/fa";
 import SelectDate from "./SelectDate/SelectDate";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,19 +12,30 @@ import {
   getPlannedVisits,
   getRecordsForDay,
   getServiceDataForBooking,
+  updateRecordData,
 } from "../../../redux/crm/operations.js";
 import toast from "react-hot-toast";
-import { selectServiceData } from "../../../redux/crm/selectors.js";
+import {
+  selectDayRecords,
+  selectServiceData,
+} from "../../../redux/crm/selectors.js";
 import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
 import SelectTime from "./SelectTime/SelectTime.jsx";
 import Loader from "../../Loader/Loader.jsx";
 import { selectDate } from "../../../redux/cars/selectors.js";
+import BtnsCloseAndSubmit from "../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit.jsx";
 
-export default function ServiceBookingModal({ onClose }) {
+export default function ServiceBookingModal({
+  onClose,
+  postId,
+  recordId,
+  carSelectDate,
+}) {
   const dispatch = useDispatch();
   const selectedDate = useSelector(selectDate);
 
-  const [chosenTime, setChosenTime] = useState([]);
+  const [datesArray, setDatesArray] = useState([]);
+  const [booking, setBooking] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownPostOpen, setIsDropdownPostOpen] = useState(false);
   const [isDropdownMechanicOpen, setIsDropdownMechanicOpen] = useState(false);
@@ -33,6 +43,17 @@ export default function ServiceBookingModal({ onClose }) {
 
   const selectedServiceId = useSelector(selectSelectedServiceId);
   const { mechanics, posts, services } = useSelector(selectServiceData);
+  const dayRecords = useSelector(selectDayRecords);
+
+  const [pickedDate, setPickedDate] = useState(
+    recordId || carSelectDate
+      ? new Date(selectedDate).toLocaleDateString()
+      : new Date().toLocaleDateString()
+  );
+
+  const recordById = dayRecords?.find((dayRecord) => {
+    return dayRecord.id === recordId;
+  });
 
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
@@ -48,25 +69,22 @@ export default function ServiceBookingModal({ onClose }) {
       setIsDropdownOpen(false);
     }
   };
+
   const handleMechanicBlur = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       setIsDropdownMechanicOpen(false);
     }
   };
 
-  const currentDate = new Date(Date.now());
-  const day = String(currentDate.getDate()).padStart(2, "0");
-  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
-  const year = currentDate.getFullYear();
-  const formattedDate = `${day}.${month}.${year}`;
-
-  const [pickedDate, setPickedDate] = useState(formattedDate);
-
   const setNewDate = (date) => {
     setPickedDate(date);
   };
 
   const dateToPass = pickedDate.split(".").reverse().join("-");
+  const sheduleDate = datesArray[0]?.appointment_date
+    .split(".")
+    .reverse()
+    .join("-");
 
   useEffect(() => {
     const fetchServiceData = () => {
@@ -74,71 +92,63 @@ export default function ServiceBookingModal({ onClose }) {
         return;
       }
       dispatch(getServiceDataForBooking(dateToPass));
-      // setChosenTime([]);
+      dispatch(getRecordsForDay(dateToPass));
     };
     fetchServiceData();
   }, [dispatch, selectedServiceId, dateToPass]);
 
-  const transformedData = Object.values(
-    chosenTime.reduce((acc, { date, time }) => {
-      if (!acc[date]) {
-        acc[date] = { date, times: [] };
-      }
-      acc[date].times.push(time);
-      acc[date].times.sort((a, b) => {
-        const timeA = new Date(`1970-01-01T${a}:00`);
-        const timeB = new Date(`1970-01-01T${b}:00`);
-        return timeA - timeB;
-      });
-      return acc;
-    }, {})
-  );
-
-  const datesArray = transformedData.map(({ date, times }) => ({
-    appointment_date: date.split(".").reverse().join("-"),
-    start_time: times[0],
-    end_time: times[times.length - 1],
-  }));
-
   const handleSubmit = (values, actions) => {
     const recordData = {
       ...values,
-      shedule_date: dateToPass,
+      shedule_date: sheduleDate,
       service_id: values.service_id ? Number(values.service_id) : null,
       prepayment: values.prepayment ? Number(values.prepayment) : null,
       position: values.position ? Number(values.position) : null,
       mechanic_id: values.mechanic_id ? Number(values.mechanic_id) : null,
       dates: datesArray,
+      hours_from: datesArray[0].start_time,
+      recordId,
+      booking,
     };
 
-    console.log(recordData);
-
-    dispatch(createRecord(recordData))
-      .unwrap()
-      .then(() => {
-        toast.success("Запис успішно створено");
-        dispatch(getRecordsForDay(selectedDate));
-        dispatch(getPlannedVisits(selectedDate));
-      })
-      .catch(() => {
-        toast.error("Щось пішло не так. Спробуйте ще раз!");
-      });
-    setChosenTime([]);
+    recordId
+      ? dispatch(updateRecordData(recordData))
+          .unwrap()
+          .then(() => {
+            toast.success("Запис успішно відредаговано");
+            dispatch(getRecordsForDay(selectedDate));
+            dispatch(getPlannedVisits(selectedDate));
+          })
+          .catch(() => {
+            toast.error("Щось пішло не так. Спробуйте ще раз!");
+          })
+      : dispatch(createRecord(recordData))
+          .unwrap()
+          .then(() => {
+            toast.success("Запис успішно створено");
+            dispatch(getRecordsForDay(selectedDate));
+            dispatch(getPlannedVisits(selectedDate));
+          })
+          .catch(() => {
+            toast.error("Щось пішло не так. Спробуйте ще раз!");
+          });
+    setDatesArray([]);
+    setBooking([]);
     actions.resetForm();
     onClose();
   };
 
   const initialValues = {
-    name: "",
-    phone_number: "",
-    car_number: "",
-    service_id: "",
-    make_model: "",
-    vin: "",
-    note: "",
-    prepayment: "",
-    position: posts.length > 0 ? posts[0]?.id_post : "",
-    mechanic_id: "",
+    name: recordById?.client_name || "",
+    phone_number: recordId ? `${"+" + recordById?.phone}` : "",
+    car_number: recordById?.plate || "",
+    service_id: recordById?.service_id || "",
+    make_model: recordById?.auto || "",
+    vin: recordById?.vin || "",
+    note: recordById?.note || "",
+    prepayment: recordById?.prepayment || "",
+    position: postId || recordById?.post_id || posts[0]?.id_post,
+    mechanic_id: recordById?.mechanic_id || "",
   };
 
   return !posts ? (
@@ -146,7 +156,11 @@ export default function ServiceBookingModal({ onClose }) {
   ) : (
     <div className={css.serviceBookingModal}>
       <BsXLg className={css.closeIcon} onClick={onClose} />
-      <h3 className={css.header}>Створення запису на {pickedDate}</h3>
+      {recordId ? (
+        <h3 className={css.header}>Редагування запису на {pickedDate}</h3>
+      ) : (
+        <h3 className={css.header}>Створення запису на {pickedDate}</h3>
+      )}
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -164,6 +178,7 @@ export default function ServiceBookingModal({ onClose }) {
                   type="text"
                   name="phone_number"
                   placeholder="Телефон"
+                  disabled={recordId}
                 />
                 <ErrorMessage
                   name="phone_number"
@@ -392,28 +407,27 @@ export default function ServiceBookingModal({ onClose }) {
                 placeholder="Примітка"
               />
               <div className={css.calendar}>
-                <SelectDate newDate={setNewDate} />
+                <SelectDate
+                  newDate={setNewDate}
+                  recordId={recordId}
+                  carSelectDate={carSelectDate}
+                />
                 <div className={css.timeWrapper}>
                   <SelectTime
                     postId={values.position || posts[0]?.id_post}
-                    chosenTime={transformedData}
-                    setChosenTime={setChosenTime}
+                    setDatesArray={setDatesArray}
                     pickedDate={pickedDate}
+                    recordId={recordId}
+                    setBooking={setBooking}
                   />
                 </div>
               </div>
               <div className={css.btnWrapper}>
-                <button
-                  type="button"
-                  className={css.closeBtn}
-                  onClick={onClose}
-                >
-                  Закрити
-                </button>
-                <button type="submit" className={css.submitBtn}>
-                  <FaCheck className={css.submitBtnIcon} />
-                  Зберегти
-                </button>
+                <BtnsCloseAndSubmit
+                  onClose={onClose}
+                  handleSubmit={handleSubmit}
+                  btnSave={"Зберегти"}
+                />
               </div>
             </div>
           </Form>
