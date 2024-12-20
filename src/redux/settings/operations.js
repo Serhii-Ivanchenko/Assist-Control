@@ -154,7 +154,7 @@ export const deletePost = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.patch(`/set/update_post/${postId}`, {
+      const response = await axiosInstance.delete(`/set/update_post/${postId}`, {
         headers: {
           "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -306,7 +306,7 @@ export const deleteService = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.patch(
+      const response = await axiosInstance.delete(
         `/v1/services/${service_id}`,
         {
           headers: {

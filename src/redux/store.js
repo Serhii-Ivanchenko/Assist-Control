@@ -16,7 +16,8 @@ import carsReducer from "./cars/slice";
 import authReducer from "./auth/slice";
 import crmReducer from "./crm/slice.js";
 import serviceReducer from "./service/slice.js";
-import settingsReducer from './settings/slice.js'
+import settingsReducer from './settings/slice.js';
+import warehouseReducer from './warehouse/slice.js'
 
 const authPersistConfig = {
   key: "authSlice",
@@ -49,6 +50,7 @@ export const store = configureStore({
     crm: persistedCrmReducer,
     service: serviceReducer,
     settings: settingsReducer,
+    warehouse: warehouseReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

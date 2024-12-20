@@ -13,7 +13,6 @@ import {
   updateCategoryData,
   updatePostData,
   updatePostStatus,
-  updateServiceName,
   updateWorkSchedule,
 } from "./operations.js";
 

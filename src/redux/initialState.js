@@ -182,4 +182,15 @@ export const initialState = {
     isLoading: false,
     error: null,
   },
+
+  warehouse: {
+    warehouses: [],
+    // sections: [],
+    // racks: [],
+    // shelves: [],
+    // places: [],
+    prompts: [],
+    isLoading: false,
+    error: null,
+  },
 };
