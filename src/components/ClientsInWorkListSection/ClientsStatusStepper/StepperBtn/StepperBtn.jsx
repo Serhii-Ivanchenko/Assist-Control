@@ -2,11 +2,20 @@ import React from "react";
 import clsx from "clsx";
 import styles from "./StepperBtn.module.css";
 
-function StepperBtn({ value, icon, isActive, noBackground }) {
+function StepperBtn({
+  value,
+  icon,
+  isActive,
+  noBackground,
+  notificationSent,
+  status,
+}) {
   const iconColor = clsx(styles.icon, {
     [styles.active]: isActive,
     [styles.inactive]: !isActive,
     [styles.noBackground]: noBackground,
+    [styles.notificationSent]: status === "complete" && notificationSent,
+    [styles.notificationDelay]: status === "complete" && !notificationSent,
   });
 
   if (React.isValidElement(icon) && icon.type === "img") {

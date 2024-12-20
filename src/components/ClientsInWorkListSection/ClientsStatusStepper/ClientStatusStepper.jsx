@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   BsReceipt,
   BsUiRadiosGrid,
@@ -10,26 +11,47 @@ import {
 } from "react-icons/bs";
 import StepperBtn from "../ClientsStatusStepper/StepperBtn/StepperBtn";
 import styles from "./ClientStatusStepper.module.css";
+import Modal from "../../Modals/Modal/Modal";
+import DetailedClientInfo from "../../DetailedClientInfo/DetailedClientInfo";
+import EnterAmountModal from "../../Modals/EnterAmountModal/EnterAmountModal";
+import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal";
 
-// Массив кнопок
+// Масив кнопок
 const buttons = [
-  { id: 1, title: "Звернення", icon: <BsReceipt />, isActive: true },
-  { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid />, isActive: true },
-  { id: 3, title: "КП", icon: <BsClipboardCheck />, isActive: true },
-  { id: 4, title: 2000, icon: <BsCurrencyDollar />, isActive: true },
-  { id: 5, title: "Замовлення", icon: <BsUiChecksGrid />, isActive: false },
-  { id: 6, title: "Постчальник", icon: <BsUiChecks />, isActive: false },
-  { id: 7, title: "Ремонт", icon: <BsWrench />, isActive: false },
-  { id: 8, title: 8482, icon: <BsCurrencyDollar />, isActive: true },
+  { id: 1, title: "Звернення", icon: <BsReceipt /> },
+  { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid /> },
+  { id: 3, title: "КП", icon: <BsClipboardCheck /> },
+  { id: 4, title: 2000, icon: <BsCurrencyDollar /> },
+  { id: 5, title: "Замовлення", icon: <BsUiChecksGrid /> },
+  { id: 6, title: "Постчальник", icon: <BsUiChecks /> },
+  { id: 7, title: "Ремонт", icon: <BsWrench /> },
+  { id: 8, title: 8482, icon: <BsCurrencyDollar /> },
   {
     id: 9,
     icon: <BsAlarm style={{ transform: "scale(1.7)" }} />,
     noBackground: true,
-    isActive: true,
   },
 ];
 
 function ClientStatusStepper({ car, carImg, status }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  const [notificationSent, setNotificationSent] = useState(false);
+  // визнчення кольору іконок степера
+  const [completedSteps, setCompletedSteps] = useState(() => {
+    if (status === "complete") {
+      return [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    }
+    if (status === "repair") {
+      return [1, 2, 3, 7];
+    }
+    return [1];
+  });
+
+  const isStepCompleted = (stepId) => {
+    return completedSteps.includes(stepId);
+  };
+
   const groupedButtons = [
     [
       {
@@ -46,6 +68,48 @@ function ClientStatusStepper({ car, carImg, status }) {
     [buttons[7]],
     [buttons[8]],
   ];
+
+  // виклик модалки на групі кнопок
+  const handleClick = (idx) => {
+    switch (idx) {
+      case 0:
+        setModalContent(<DetailedClientInfo />);
+        break;
+      case 1:
+        setModalContent(<EnterAmountModal />);
+        break;
+      case 2:
+        setModalContent("Modal for ordering parts");
+        break;
+      case 3:
+        setModalContent(<EnterAmountModal />);
+        break;
+      case 4:
+        setModalContent(
+          <NotificationModal
+            onClose={closeModal}
+            time="clientTime"
+            date="clientDate"
+            comment="clientComment"
+            connectionType="clientConnection"
+            accountingModal={true}
+            service="clientService"
+          />
+        );
+        setNotificationSent(true);
+        break;
+      default:
+        setModalContent(null);
+        setCompletedSteps([]);
+        setNotificationSent(false);
+    }
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalContent(null);
+  };
 
   // Ось тут додаємо класи для статусу
   const getStatusClass = (status) => {
@@ -68,27 +132,42 @@ function ClientStatusStepper({ car, carImg, status }) {
   };
 
   return (
-    <ul className={styles.wrapper}>
-      {groupedButtons.map((group, idx) => (
-        <ul
-          key={idx}
-          className={`${styles.boxContainer} ${
-            idx === groupedButtons.length - 1 ? "" : getStatusClass(status)
-          }`}
-        >
-          {group.map(({ id, title, icon, isActive, noBackground }) => (
-            <li key={id} className={styles.listItem}>
-              <StepperBtn
-                value={title}
-                icon={icon}
-                isActive={isActive}
-                noBackground={noBackground}
-              />
-            </li>
-          ))}
-        </ul>
-      ))}
-    </ul>
+    <div>
+      <ul className={styles.wrapper}>
+        {groupedButtons.map((group, idx) => (
+          <ul
+            key={idx}
+            className={`${styles.boxContainer} ${
+              idx === groupedButtons.length - 1 ? "" : getStatusClass(status)
+            }`}
+            onClick={() => handleClick(idx)}
+          >
+            {group.map(({ id, title, icon, noBackground }) => (
+              <li key={id} className={styles.listItem}>
+                <StepperBtn
+                  value={title}
+                  icon={icon}
+                  isActive={isStepCompleted(id)}
+                  noBackground={noBackground}
+                  notificationSent={notificationSent}
+                  status={status}
+                />
+              </li>
+            ))}
+          </ul>
+        ))}
+      </ul>
+
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          {/* <div className={styles.modal}> */}
+          {/* <h2> */}
+            {modalContent}
+          {/* </h2> */}
+          {/* </div> */}
+        </Modal>
+      )}
+    </div>
   );
 }
 

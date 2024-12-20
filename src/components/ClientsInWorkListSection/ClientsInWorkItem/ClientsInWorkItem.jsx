@@ -15,6 +15,8 @@ function ClientsInWorkItem({ item }) {
             car={item.car_model}
             carImg={item.car_img}
             status={item.status}
+            prePaid={item.pre_paid}
+            postPaid={item.post_paid}
           />
         </li>
       </ul>
