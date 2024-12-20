@@ -1,8 +1,10 @@
-import css from './DistributorsListSection.module.css'
+import DistributorsInvoicesList from "../DistributorsInvoicesList/DistributorsInvoicesList.jsx";
+import css from "./DistributorsListSection.module.css";
 
 export default function DistributorsListSection() {
-      return (
-        <div className={css.wrapper}>DistributorsListSection (Юлія Прядка)</div>
-      );
-    
-};
+  return (
+    <div className={css.wrapper}>
+      <DistributorsInvoicesList />
+    </div>
+  );
+}
