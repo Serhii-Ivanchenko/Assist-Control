@@ -18,6 +18,18 @@
   outline: none;
 }
 
+/* Видалити стрілочки в Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Видалити стрілочки в Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .input {
   display: flex;
   padding: 17px 19px;

@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import Modal from "../../Modals/Modal/Modal";
 import AddCategoryModal from "./AddCategoryModal/AddCategoryModal";
 import { testData } from "./testData";
+import addIdsToData from "../../../utils/addIdsToData";
 
 import styles from "./PricePart.module.css";
 
@@ -14,15 +15,13 @@ export default function PricePart() {
   const [isModal, setIsModal] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
   const [originalData, setOriginalData] = useState(testData);
-  const [editableData, setEditableData] = useState(testData);
+  const [editableData, setEditableData] = useState([...originalData]);
   const [resetCategory, setResetCategory] = useState(false);
   const [resetService, setResetService] = useState(false);
   const [resetPrice, setResetPrice] = useState(false);
   const [serviceItemEdit, setServiceItemEdit] = useState(null);
 
   const handleFilter = (searchData) => {
-    console.log("searchData", searchData);
-
     setFilteredData(searchData);
     setActiveSearch(true);
   };
@@ -32,25 +31,28 @@ export default function PricePart() {
       category: categoryName,
       items: [
         {
+          id: addIdsToData(),
           item: "Додайте послугу",
+          price: { min: null, max: null },
         },
       ],
     };
     const updatedData = [...originalData, newCategory];
-    setOriginalData(updatedData);
     setEditableData(updatedData);
+    setOriginalData(updatedData);
   };
 
   const handleSaveNewData = () => {
     setOriginalData([...editableData]);
     setIsEditable(false);
     setServiceItemEdit(false);
+    console.log("saving", editableData);
   };
 
-  const enableEditing = (idx) => {
+  const enableEditing = (id) => {
     setIsEditable((prev) => ({
       ...prev,
-      [idx]: !prev[idx],
+      [id]: !prev[id],
     }));
   };
 
@@ -75,7 +77,7 @@ export default function PricePart() {
     setResetPrice((prev) => !prev);
     setResetCategory((prev) => !prev);
     setResetService((prev) => !prev);
-    setEditableData([...originalData]);
+    setEditableData(originalData);
     setIsEditable(false);
     setServiceItemEdit(false);
   };
