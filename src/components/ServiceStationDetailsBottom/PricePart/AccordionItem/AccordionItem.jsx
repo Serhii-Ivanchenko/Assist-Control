@@ -9,7 +9,7 @@ import styles from "./AccordionItem.module.css";
 import ServiceItem from "./ServiceItem/ServiceItem";
 import Modal from "../../../Modals/Modal/Modal";
 import AddCategoryModal from "../AddCategoryModal/AddCategoryModal";
-import addIdsToData from "../../../../utils/addIdsToData.js";
+import addIdsToData from "../../../../utils/addIdsToData";
 
 function AccordionItem({
   isEdit,
@@ -27,11 +27,10 @@ function AccordionItem({
 }) {
   const [expanded, setExpanded] = useState(false);
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState(null);
+  const [currentCategory, setCurrentCategory] = useState("");
   const [currentServices, setCurrentServices] = useState(items);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // const inputRef = useRef(null);
   const buttonRef = useRef(null);
   const innerAccRef = useRef(null);
 
@@ -74,16 +73,18 @@ function AccordionItem({
   };
 
   const handleNewService = (serviceName) => {
+    console.log("Adding new service:", serviceName);
+    console.log("Current Category:", currentCategory);
     setIsCategoryPopupOpen(false);
-    const newService = { item: serviceName };
+    const newService = { id: addIdsToData(), item: serviceName };
 
     const updatedCategory = {
-      ...currentCategory,
-      items: [...currentCategory.items, newService],
+      category: currentCategory,
+      items: [...items, newService],
     };
 
-    const updatedServices = addIdsToData([updatedCategory]);
-    setCurrentServices(updatedServices);
+    console.log("Updated Category:", updatedCategory);
+    setCurrentServices(updatedCategory.items);
     onUpdate({
       category: updatedCategory,
       items: updatedCategory.items,
@@ -96,8 +97,7 @@ function AccordionItem({
     const updatedServices = currentServices.map((service) =>
       service.id === updatedService.id ? updatedService : service
     );
-    console.log("updatedService", updatedService);
-    console.log("updatedServices", updatedServices);
+    // console.log("updatedService", updatedService);
 
     setCurrentServices(updatedServices);
     onUpdate({
@@ -106,7 +106,6 @@ function AccordionItem({
     });
   };
 
-  // видалення послуги зі списку
   const handleDeleteItem = (id) => {
     const updatedServices = currentServices.filter(
       (service) => service.id !== id
@@ -117,18 +116,6 @@ function AccordionItem({
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  // ця частина визиває помилку зациклення юз ефекту, але дає можливість завжди скидувати дані до початкового стану
-  // зараз дані скидаються до стану останнього редагування
-
-  // useEffect(() => {
-  //   {
-  //     onUpdate({
-  //       category: currentCategory,
-  //       items: currentServices,
-  //     });
-  //   }
-  // }, [currentCategory, currentServices, onUpdate]);
 
   useEffect(() => {
     if (

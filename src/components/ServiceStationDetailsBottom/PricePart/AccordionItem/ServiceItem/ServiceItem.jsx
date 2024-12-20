@@ -15,11 +15,10 @@ function ServiceItem({
   setServiceItemEdit,
   onUpdate,
 }) {
-  const [service, setService] = useState(serviceData);
   const [serviceName, setServiceName] = useState(serviceData.item);
   const [activePopupId, setActivePopupId] = useState(null);
-  const [minPrice, setMinPrice] = useState(serviceData.price[0].min);
-  const [maxPrice, setMaxPrice] = useState("");
+  const [minPrice, setMinPrice] = useState(serviceData.price?.min || "");
+  const [maxPrice, setMaxPrice] = useState(serviceData.price?.max || "");
   const inputRef = useRef();
   const buttonRef = useRef(null);
 
@@ -35,22 +34,36 @@ function ServiceItem({
   const handleDelete = () => {
     onDelete(id);
   };
+
+  const handleMinPriceChange = (e) => {
+    const value = e.target.value;
+    if (!isNaN(value) && Number(value) >= 0) {
+      setMinPrice(value);
+    }
+  };
+
+  const handleMaxPriceChange = (e) => {
+    const value = e.target.value;
+    if (!isNaN(value) && Number(value) >= 0) {
+      setMaxPrice(value);
+    }
+  };
+
   useEffect(() => {
-    setService({
+    const updatedService = {
       id: id,
       item: serviceName,
-      price: [{ min: minPrice }, { max: maxPrice }],
-    });
+      price: { min: minPrice, max: maxPrice },
+    };
+    onUpdate(updatedService);
   }, [id, serviceName, minPrice, maxPrice]);
-
-  useEffect(() => onUpdate(service), [service]);
 
   useEffect(() => {
     if (resetPrice || resetService) {
-      setMinPrice("");
-      setMaxPrice("");
+      setMinPrice(serviceData.price?.min || "");
+      setMaxPrice(serviceData.price?.max || "");
       setServiceName(serviceData.item);
-      setServiceItemEdit(false); // Завжди скидаємо режим редагування
+      setServiceItemEdit(false);
     }
   }, [resetPrice, resetService, serviceData.item]);
 
@@ -76,20 +89,23 @@ function ServiceItem({
         <div className={styles.inputBox}>
           <label className={styles.inputLabel}>Мін</label>
           <input
+            type="number"
             placeholder="250"
             className={styles.input}
-            value={minPrice ?? ""}
-            onChange={(e) => setMinPrice(e.target.value)}
+            value={minPrice}
+            onChange={handleMinPriceChange}
             onFocus={() => setServiceItemEdit(true)}
           />
         </div>
         <div className={styles.inputBox}>
           <label className={styles.inputLabel}>Макс</label>
           <input
+            type="number"
             placeholder="400"
             className={styles.input}
-            value={maxPrice ?? ""}
-            onChange={(e) => setMaxPrice(e.target.value)}
+            value={maxPrice}
+            onChange={handleMaxPriceChange}
+            onFocus={() => setServiceItemEdit(true)}
           />
         </div>
       </div>

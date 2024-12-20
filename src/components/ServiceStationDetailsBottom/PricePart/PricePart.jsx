@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import Modal from "../../Modals/Modal/Modal";
 import AddCategoryModal from "./AddCategoryModal/AddCategoryModal";
 import { testData } from "./testData";
+import addIdsToData from "../../../utils/addIdsToData";
 
 import styles from "./PricePart.module.css";
 
@@ -30,7 +31,9 @@ export default function PricePart() {
       category: categoryName,
       items: [
         {
+          id: addIdsToData(),
           item: "Додайте послугу",
+          price: { min: null, max: null },
         },
       ],
     };
@@ -43,8 +46,7 @@ export default function PricePart() {
     setOriginalData([...editableData]);
     setIsEditable(false);
     setServiceItemEdit(false);
-    console.log('saving', editableData);
-    
+    console.log("saving", editableData);
   };
 
   const enableEditing = (id) => {
