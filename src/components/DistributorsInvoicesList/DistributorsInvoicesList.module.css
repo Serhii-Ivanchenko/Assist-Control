@@ -1,0 +1,60 @@
+.headerWrapper {
+  display: grid;
+  grid-template-columns: 60px 81px 110px 130px 260px 106px 112px 120px 85px 60px;
+  margin-bottom: 20px;
+  justify-items: center;
+  align-items: center;
+  justify-content: end;
+}
+
+.header {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.headerWithArrows {
+  display: flex;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrowWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrowIcon {
+  cursor: pointer;
+  height: 10px;
+}
+
+.table {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 590px;
+  padding-right: 4px;
+}
+
+.table::-webkit-scrollbar {
+  width: 8px;
+  padding-top: 4px;
+  height: 760px;
+}
+
+.table::-webkit-scrollbar-track {
+  background-color: var(--bg);
+  border-radius: 4px;
+}
+
+.table::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+}
