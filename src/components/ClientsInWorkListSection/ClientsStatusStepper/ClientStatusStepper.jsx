@@ -92,6 +92,8 @@ function ClientStatusStepper({ car, carImg, status }) {
             date="clientDate"
             comment="clientComment"
             connectionType="clientConnection"
+            accountingModal={true}
+            service="clientService"
           />
         );
         setNotificationSent(true);
@@ -158,9 +160,11 @@ function ClientStatusStepper({ car, carImg, status }) {
 
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <div className={styles.modal}>
-            <h2>{modalContent}</h2>
-          </div>
+          {/* <div className={styles.modal}> */}
+          {/* <h2> */}
+            {modalContent}
+          {/* </h2> */}
+          {/* </div> */}
         </Modal>
       )}
     </div>
