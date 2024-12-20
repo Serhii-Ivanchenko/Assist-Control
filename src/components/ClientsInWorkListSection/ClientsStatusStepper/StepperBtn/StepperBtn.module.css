@@ -76,12 +76,17 @@
   background: transparent;
   box-shadow: none;
   margin-left: -10px;
-}
-
-.noBackground.active {
-  color: #008000;
+  color: var(--light-grey);
 }
 
 .noBackground.inactive {
-  color: #008000;
+  color: var(--light-grey);
+}
+
+.noBackground.notificationSent {
+  color: green;
+}
+
+.noBackground.notificationDelay {
+  color: red;
 }
