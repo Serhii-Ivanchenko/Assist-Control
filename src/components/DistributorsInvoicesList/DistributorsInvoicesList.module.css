@@ -21,7 +21,7 @@
   font-weight: 300;
   line-height: normal;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
 }
 
 .arrowWrapper {
@@ -29,18 +29,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 16px;
 }
 
 .arrowIcon {
   cursor: pointer;
-  height: 10px;
+  /* height: 10px; */
+  transform: scale(1.5);
 }
 
 .table {
   overflow: hidden;
   overflow-y: scroll;
-  height: 590px;
-  padding-right: 4px;
+  height: 596px;
+  padding-right: 10px;
 }
 
 .table::-webkit-scrollbar {

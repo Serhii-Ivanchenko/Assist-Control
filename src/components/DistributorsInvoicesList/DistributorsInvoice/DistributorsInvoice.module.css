@@ -2,13 +2,13 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-bottom: 17px;
+  margin-bottom: 12px;
 }
 
 .subHeader {
   width: 100%;
   height: 47px;
-  padding: 15px 16px;
+  padding: 15px 10px;
   border-radius: 4px;
   background-color: var(--bg-input);
   display: flex;
@@ -35,10 +35,10 @@
 }
 
 .logo {
-  width: 31px;
+  width: 41px;
   height: 31px;
-  background-color: green;
-  margin-right: 16px;
+  /* background-color: green; */
+  margin-right: 11px;
 }
 
 .distributorName {
@@ -112,8 +112,8 @@
 
 .wrapper {
   display: flex;
-  margin-bottom: 16px;
-  margin-left: 74px;
+  /* margin-bottom: 16px; */
+  margin-left: 60px;
   justify-content: space-between;
 }
 
