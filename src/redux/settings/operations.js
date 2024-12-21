@@ -281,10 +281,10 @@ export const createService = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
 
-    const { categoryId, ...serviceName } = newService;
+    // const { categoryId, ...serviceName } = newService;
 
     try {
-      const response = await axiosInstance.post(`/v1/services/`, serviceName, {
+      const response = await axiosInstance.post(`/v1/services/`, newService, {
         headers: {
           "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
