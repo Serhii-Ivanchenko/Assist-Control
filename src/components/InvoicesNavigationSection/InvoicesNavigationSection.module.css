@@ -4,8 +4,14 @@
     border-radius: 12px;
     background: var(--bg-secondary);
     overflow: hidden;
-    height: 39px;
     width: 325px;
+  }
+
+  .navContainer{
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    height: 39px;
   }
   
   .navText {

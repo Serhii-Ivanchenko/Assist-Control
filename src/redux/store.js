@@ -17,7 +17,8 @@ import authReducer from "./auth/slice";
 import crmReducer from "./crm/slice.js";
 import serviceReducer from "./service/slice.js";
 import settingsReducer from './settings/slice.js';
-import warehouseReducer from './warehouse/slice.js'
+import warehouseReducer from './warehouse/slice.js';
+import visibilityReducer from './visibility/slice.js';
 
 const authPersistConfig = {
   key: "authSlice",
@@ -51,6 +52,7 @@ export const store = configureStore({
     service: serviceReducer,
     settings: settingsReducer,
     warehouse: warehouseReducer,
+    visibility: visibilityReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

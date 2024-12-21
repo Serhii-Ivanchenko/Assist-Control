@@ -5,6 +5,8 @@ import InvoicesList from "./InvoicesList/InvoicesList";
 import car from "../../assets/images/carsItem.png";
 
 export default function InvoicesPart({ categories }) {
+
+  
   // const categories = [
   //   { name: "Діагностика" },
   //   { name: "Погоджено" },

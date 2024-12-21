@@ -1,42 +1,20 @@
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 import styles from "./InvoicesNavigationSection.module.css";
+import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
+import { labelNamesInvoices } from "../../utils/dataToRender";
+import { toggleVisibilityInvoices } from "../../redux/visibility/slice";
+import { selectVisibilityInvoices } from "../../redux/visibility/selectors";
 
 export default function InvoicesNavigationSection() {
-  // const [selected, setSelected] = useState(null);
-  // const navigate = useNavigate();
-
-  // const options = [
-  //   { name: "Товар", path: "goods" },
-  //   { name: "Послуги", path: "services" },
-  //   { name: "Каса", path: "funds" },
-  //   { name: "Обладнання", path: "equipment" },
-  // ];
-
-  // const handleClick = (index, path) => {
-  //   setSelected(index);
-  //   navigate(path);
-  // };
+  
   const navLinkClass = ({ isActive }) => {
     return clsx(styles.navText, isActive && styles.active);
   };
 
   return (
-    // <div className={styles.wrapper}>
-    //   {options.map((option, index) => (
-    //     <div
-    //       key={index}
-    //       className={clsx(styles.navContainer, {
-    //         [styles.active]: index === selected,
-    //       })}
-    //       onClick={() => handleClick(index, option.path)}
-    //     >
-    //       <p className={styles.navText}>{option.name}</p>
-    //     </div>
-    //   ))}
-    // </div>
-    <nav className={styles.wrapper}>
+    <div className={styles.navContainer}>
+       <nav className={styles.wrapper}>
       <NavLink to="goods" className={navLinkClass}>
         Товар
       </NavLink>
@@ -53,5 +31,13 @@ export default function InvoicesNavigationSection() {
         Обладнання
       </NavLink>
     </nav>
+    <InfoSettingsVisibility
+            selectVisibility={selectVisibilityInvoices}
+            toggleVisibilityAction={toggleVisibilityInvoices}
+            labelNames={labelNamesInvoices}
+            className={styles.settingsContainer}
+          />
+    </div>
+       
   );
 }
