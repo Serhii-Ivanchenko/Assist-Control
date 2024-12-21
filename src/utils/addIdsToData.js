@@ -1,11 +1,8 @@
-export default function addIdsToData(data) {
-  let itemId = 1;
-  return data.map((category, categoryIndex) => ({
-    ...category,
-    id: category.id || categoryIndex + 1,
-    items: category.items.map((item) => ({
-      ...item,
-      id: item.id || itemId++,
-    })),
-  }));
+export default function addIdsToData() {
+  const generateUniqueId = () =>
+    `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+
+  return {
+    id: generateUniqueId(),
+  };
 }
