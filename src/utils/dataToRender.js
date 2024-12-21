@@ -165,6 +165,22 @@ export const labelNamesInCrm = {
     writeOff: "Списано"
   };
 
+  // Прикожу назви в компонентів до назв в стані заголовки
+
+  export const categoryNameMapping = {
+      "Діагностика": "diagnostics",
+      "Погоджено": "agreed",
+      "Зарезервовано": "reserved",
+      "Отримано": "received",
+      "Продано": "soldOut",
+      "Повернуто": "returned",
+      "Переміщено": "moved",
+      "Переоцінка": "revaluation",
+      "Інвентаризація": "inventory",
+      "Списано": "writeOff"
+    };
+
+
     // Лейбл для секції облік(клієнти у роботі) - налаштування видимості 
 
     export const labelNamesClientsInWork = {

@@ -44,6 +44,19 @@ const crmPersistConfig = {
 
 const persistedCrmReducer = persistReducer(crmPersistConfig, crmReducer);
 
+const visibilityPersistConfig = {
+  key: "visibilitySlice",
+  storage,
+  whitelist: [
+    "visibilityInvoices", 
+    "visibilitySuppliers", 
+    "visibilityClientsInWork", 
+    "visibilityAllClients"
+  ],
+};
+
+const persistedVisibilityReducer = persistReducer(visibilityPersistConfig, visibilityReducer);
+
 export const store = configureStore({
   reducer: {
     cars: persistedCarsReducer,
@@ -52,7 +65,7 @@ export const store = configureStore({
     service: serviceReducer,
     settings: settingsReducer,
     warehouse: warehouseReducer,
-    visibility: visibilityReducer,
+    visibility: persistedVisibilityReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

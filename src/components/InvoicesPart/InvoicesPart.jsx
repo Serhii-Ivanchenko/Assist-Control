@@ -3,9 +3,13 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { BsPlusCircleDotted } from "react-icons/bs";
 import InvoicesList from "./InvoicesList/InvoicesList";
 import car from "../../assets/images/carsItem.png";
+import { useSelector } from "react-redux";
+import { selectVisibilityInvoices } from "../../redux/visibility/selectors";
+import clsx from "clsx";
+import { categoryNameMapping } from "../../utils/dataToRender";
 
 export default function InvoicesPart({ categories }) {
-
+  const visibility = useSelector(selectVisibilityInvoices);
   
   // const categories = [
   //   { name: "Діагностика" },
@@ -239,8 +243,16 @@ export default function InvoicesPart({ categories }) {
         {categories.map((category, index) => {
           const list = categoryMap[category.name] || [];
 
+          const visibilityKey = categoryNameMapping[category.name];
+          const isVisible = visibility[visibilityKey];
+
           return (
-            <li key={index} className={css.categoriesItem}>
+            <li
+              key={index}
+              className={clsx(css.categoriesItem, {
+                [css.hidden]: !isVisible,
+              })}
+            >
               <div className={css.titleBox}>
                 <p className={css.categoryName}>{category.name}</p>
                 <div className={css.amountAndBtnMore}>
@@ -266,8 +278,6 @@ export default function InvoicesPart({ categories }) {
               </div>
               <div>
                 <InvoicesList
-                  // invoices={invoices}
-                  // invoicesMoney={invoicesMoney}
                   category={category.name}
                   list={list}
                 />
