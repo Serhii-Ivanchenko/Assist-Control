@@ -52,7 +52,7 @@
 }
 
 .table::-webkit-scrollbar-track {
-  background-color: var(--bg);
+  background: var(--bg-input);
   border-radius: 4px;
 }
 
