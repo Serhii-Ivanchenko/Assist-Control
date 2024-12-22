@@ -18,8 +18,8 @@
 .subHeaderLeft {
   display: flex;
   align-items: center;
-  margin-right: 22px;
-  width: 300px;
+  margin-right: 12px;
+  width: 355px;
   justify-content: space-between;
 }
 
@@ -37,7 +37,6 @@
 .logo {
   width: 41px;
   height: 31px;
-  /* background-color: green; */
   margin-right: 11px;
 }
 
@@ -53,8 +52,6 @@
   height: 31px;
   padding: 6px 14px;
   border-radius: 6px;
-  background-color: rgba(164, 112, 67, 0.08);
-
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border: none;
   font-size: 16px;
@@ -69,13 +66,14 @@
 }
 
 .invoiceSumBtn {
-  color: var(--last-service-mileage-text);
+  color: #ffff8c;
+  background-color: rgba(164, 112, 67, 0.08);
 }
 
 .btnIcon {
   width: 18px;
   height: 18px;
-  color: var(--last-service-mileage-text);
+  color: #ffff8c;
 }
 
 .storage {
@@ -96,7 +94,7 @@
 .headerCenterWrapper {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
 }
 
 .headerCenterText {
@@ -107,12 +105,17 @@
 }
 
 .salesAmountBtn {
-  color: #ffff8c;
+  color: #aef3d3;
+  background-color: rgba(67, 164, 141, 0.28);
+}
+
+.table {
+  overflow: hidden;
+  transition: height 0.5s ease; /* Анимация изменения высоты */
 }
 
 .wrapper {
   display: flex;
-  /* margin-bottom: 16px; */
   margin-left: 60px;
   justify-content: space-between;
 }
@@ -189,12 +192,12 @@
 .salesAmountBtnIcon {
   width: 18px;
   height: 18px;
-  color: #ffff8c;
+  color: #aef3d3;
 }
 
 .stringWrapper {
   display: grid;
-  grid-template-columns: 60px 81px 110px 130px 260px 106px 112px 120px 85px 60px;
+  grid-template-columns: 60px 81px 110px 130px 230px 106px 112px 120px 85px 55px;
   justify-items: center;
   align-items: center;
   margin-bottom: 13px;

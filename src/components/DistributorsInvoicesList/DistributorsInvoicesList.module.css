@@ -1,10 +1,11 @@
 .headerWrapper {
   display: grid;
-  grid-template-columns: 60px 81px 110px 130px 260px 106px 112px 120px 85px 60px;
+  grid-template-columns: 60px 81px 110px 130px 230px 106px 112px 120px 85px 57px;
   margin-bottom: 20px;
   justify-items: center;
   align-items: center;
   justify-content: end;
+  margin-right: 16px;
 }
 
 .header {
@@ -34,7 +35,6 @@
 
 .arrowIcon {
   cursor: pointer;
-  /* height: 10px; */
   transform: scale(1.5);
 }
 
