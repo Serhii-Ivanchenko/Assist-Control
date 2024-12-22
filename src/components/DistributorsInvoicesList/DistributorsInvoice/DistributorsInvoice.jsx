@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import css from "./DistributorsInvoice.module.css";
 import { BsReceipt } from "react-icons/bs";
 import clsx from "clsx";
@@ -7,10 +7,21 @@ import distrLogo from "../../../assets/images/distrImg.png";
 
 export default function DistributorsInvoice({ arr }) {
   const [showAllInvoice, setShowAllInvoice] = useState(false);
+  const [tableHeight, setTableHeight] = useState("auto");
+  const tableRef = useRef(null);
 
   const displayedCarParts = showAllInvoice
     ? arr.carParts
     : arr.carParts.slice(0, 3);
+
+  useEffect(() => {
+    // Вычисляем высоту содержимого при изменении состояния
+    if (tableRef.current) {
+      setTableHeight(`${tableRef.current.scrollHeight}px`);
+    }
+  }, [showAllInvoice, displayedCarParts]);
+
+  const lineHeight = arr.carParts.length > 2 ? "87px" : "auto";
 
   return (
     <div>
@@ -24,7 +35,7 @@ export default function DistributorsInvoice({ arr }) {
             </div>
             <button type="button" className={`${css.sum} ${css.invoiceSumBtn}`}>
               <BsReceipt className={css.btnIcon} />
-              {arr.invoiceSum}
+              {arr.invoiceSum} грн
             </button>
           </div>
           <div className={css.centerWrapper}>
@@ -58,13 +69,18 @@ export default function DistributorsInvoice({ arr }) {
 
           <button type="button" className={`${css.sum} ${css.salesAmountBtn}`}>
             <BsReceipt className={css.salesAmountBtnIcon} />
-            {arr.salesAmount}
+            {arr.salesAmount} грн
           </button>
         </div>
-        <div>
+        <div
+          className={css.table}
+          // style={{ height: showAllInvoice ? tableHeight : "87px" }}
+          style={{ height: showAllInvoice ? tableHeight : lineHeight }}
+          ref={tableRef}
+        >
           {displayedCarParts.map((part, index) => {
             return (
-              <div key={index} className={css.table}>
+              <div key={index}>
                 <div className={css.stringWrapper}>
                   <p className={css.tableText}>{arr.deliveryDate}</p>
                   <p className={css.tableText}>{part.quantity} шт</p>

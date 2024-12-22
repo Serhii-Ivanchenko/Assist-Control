@@ -385,7 +385,23 @@ export default function DistributorsInvoicesList() {
             />
           </div>
         </div>
-        <p className={css.header}>%</p>
+        <div className={css.headerWithArrows}>
+          <p className={css.header}>%</p>
+          <div className={css.arrowWrapper}>
+            <TiArrowSortedUp
+              className={css.arrowIcon}
+              onClick={() => {
+                handleSort("percent", "asc", sort);
+              }}
+            />
+            <TiArrowSortedDown
+              className={css.arrowIcon}
+              onClick={() => {
+                handleSort("percent", "desc", sort);
+              }}
+            />
+          </div>
+        </div>
       </div>
       <div className={css.table}>
         {data.map((item) => {
