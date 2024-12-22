@@ -147,7 +147,7 @@ export const labelNamesInCrm = {
     purchaseAmount: "Сума закупки",
     saleAmount: "Сума продажу",
     profit: "Прибуток",
-    percent: "%"
+    percent: "% прибутку"
   };
 
   // Лейбл для секції накладних - налаштування видимості 
@@ -189,7 +189,7 @@ export const labelNamesInCrm = {
       appeal: "Звернення",
       diagnostics: "Діагностика",
       KP: "КП",
-      prePayment: "Предоплата",
+      prePayment: "Аванс",
       order: "Замовлення",
       provider: "Постачальник",
       repair: "Ремонт",
@@ -217,5 +217,5 @@ export const labelNamesInCrm = {
       coefficient: "Коефіцієнт",
       NG: "НГ",
       profit: "Прибуток",
-      percent: "%"
+      percent: "% прибутку"
     };
