@@ -21,6 +21,8 @@ export default function DistributorsInvoice({ arr }) {
     }
   }, [showAllInvoice, displayedCarParts]);
 
+  const lineHeight = arr.carParts.length > 2 ? "87px" : "auto";
+
   return (
     <div>
       <div className={css.topWrapper}>
@@ -72,8 +74,8 @@ export default function DistributorsInvoice({ arr }) {
         </div>
         <div
           className={css.table}
-          // style={{ height: showAllInvoice ? tableHeight : "auto" }}
-          style={{ height: showAllInvoice ? tableHeight : "87px" }}
+          // style={{ height: showAllInvoice ? tableHeight : "87px" }}
+          style={{ height: showAllInvoice ? tableHeight : lineHeight }}
           ref={tableRef}
         >
           {displayedCarParts.map((part, index) => {
