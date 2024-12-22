@@ -15,6 +15,39 @@ const visibilitySlice = createSlice({
             inventory: true,
             writeOff: true
           },
+          visibilityCar: {
+            prePayment: true,
+            name: true,
+            rating: true,
+            carNum: true,
+            carModelYear: true,
+            vin: true,
+            mileage: true,
+            time: true,
+            photo: true,
+            totalPrice: true,
+            phoneNumber: true,
+            status: true,
+            info: true,
+          },
+          visibilityRecords: {
+            name: true,
+            rating: true,
+            carNum: true,
+            carModelYear: true,
+            vin: true,
+            mileage: true,
+            time: true,
+            photo: true,
+            totalPrice: true,
+            prePayment: true,
+            paymentBtn: true,
+            phoneNumber: true,
+            status: true,
+            info: true,
+            createBtn: true,
+            archive: true,
+          },
           visibilitySuppliers: {
             date: true,
             quantity: true,
@@ -65,6 +98,14 @@ const visibilitySlice = createSlice({
             const { key } = action.payload;
             state.visibilityInvoices[key] = !state.visibilityInvoices[key];
           },
+          toggleVisibilityCar: (state, action) => {
+            const { key } = action.payload;
+            state.visibilityCar[key] = !state.visibilityCar[key];
+          },
+          toggleVisibilityRecords: (state, action) => {
+            const { key } = action.payload;
+            state.visibilityRecords[key] = !state.visibilityRecords[key];
+          },
           toggleVisibilitySuppliers: (state, action) => {
             const { key } = action.payload;
             state.visibilitySuppliers[key] = !state.visibilitySuppliers[key];
@@ -80,7 +121,7 @@ const visibilitySlice = createSlice({
       },
 })
 
-export const { toggleVisibilityInvoices, toggleVisibilitySuppliers,toggleVisibilityClientsInWork, toggleVisibilityAllClients } = visibilitySlice.actions;
+export const { toggleVisibilityInvoices, toggleVisibilityCar, toggleVisibilityRecords, toggleVisibilitySuppliers,toggleVisibilityClientsInWork, toggleVisibilityAllClients } = visibilitySlice.actions;
 
 
 export default visibilitySlice.reducer;
