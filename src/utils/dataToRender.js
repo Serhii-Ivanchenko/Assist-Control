@@ -134,3 +134,88 @@ export const labelNamesInCrm = {
   archive: "Архів",
   prePayment: "Предоплата"
 };
+
+  // Лейбл для секції постачальників - налаштування видимості 
+
+  export const labelNamesDistributorSection = {
+    date: "Дата",
+    quantity: "Кількість",
+    article: "Артикул",
+    brand: "Бренд",
+    nomenclature: "Номенклатура",
+    purchasePrice: "Ціна закупки",
+    purchaseAmount: "Сума закупки",
+    saleAmount: "Сума продажу",
+    profit: "Прибуток",
+    percent: "% прибутку"
+  };
+
+  // Лейбл для секції накладних - налаштування видимості 
+
+  export const labelNamesInvoices = {
+    diagnostics: "Діагностика",
+    agreed: "Погоджено",
+    reserved: "Замовлено",
+    received: "Отримано",
+    soldOut: "Продано",
+    returned: "Повернуто",
+    moved: "Переміщено",
+    revaluation: "Переоцінка",
+    inventory: "Інвентарізація",
+    writeOff: "Списано"
+  };
+
+  // Прикожу назви в компонентів до назв в стані заголовки
+
+  export const categoryNameMapping = {
+      "Діагностика": "diagnostics",
+      "Погоджено": "agreed",
+      "Зарезервовано": "reserved",
+      "Отримано": "received",
+      "Продано": "soldOut",
+      "Повернуто": "returned",
+      "Переміщено": "moved",
+      "Переоцінка": "revaluation",
+      "Інвентаризація": "inventory",
+      "Списано": "writeOff"
+    };
+
+
+    // Лейбл для секції облік(клієнти у роботі) - налаштування видимості 
+
+    export const labelNamesClientsInWork = {
+      photo: "Фото",
+      carModelYear: "Марка-модель",
+      appeal: "Звернення",
+      diagnostics: "Діагностика",
+      KP: "КП",
+      prePayment: "Аванс",
+      order: "Замовлення",
+      provider: "Постачальник",
+      repair: "Ремонт",
+      totaAmount: "Загальна сума",
+      notification: "Сповіщення"
+    };
+
+    
+    // Лейбл для секції облік(загальний список клієнтів) - налаштування видимості 
+
+    export const labelNamesAllClients = {
+      photo: "Фото",
+      name: "Ім'я",
+      rating: "Рейтинг",
+      appeal: "Звернення",
+      repair: "Ремонт",
+      averageCheck: "Середній чек",
+      diagnostics: "Каса",
+      workPayment: "Оплата за роботу",
+      salaryMechanics: "ЗП механіка",
+      spareParts: "Запчастини",
+      markUp: "Націнка",
+      salaryManager: "ЗП Менеджер",
+      salaryAdmin: "ЗП Адмін",
+      coefficient: "Коефіцієнт",
+      NG: "НГ",
+      profit: "Прибуток",
+      percent: "% прибутку"
+    };

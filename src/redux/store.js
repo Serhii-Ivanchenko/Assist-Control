@@ -17,7 +17,8 @@ import authReducer from "./auth/slice";
 import crmReducer from "./crm/slice.js";
 import serviceReducer from "./service/slice.js";
 import settingsReducer from './settings/slice.js';
-import warehouseReducer from './warehouse/slice.js'
+import warehouseReducer from './warehouse/slice.js';
+import visibilityReducer from './visibility/slice.js';
 
 const authPersistConfig = {
   key: "authSlice",
@@ -43,6 +44,19 @@ const crmPersistConfig = {
 
 const persistedCrmReducer = persistReducer(crmPersistConfig, crmReducer);
 
+const visibilityPersistConfig = {
+  key: "visibilitySlice",
+  storage,
+  whitelist: [
+    "visibilityInvoices", 
+    "visibilitySuppliers", 
+    "visibilityClientsInWork", 
+    "visibilityAllClients"
+  ],
+};
+
+const persistedVisibilityReducer = persistReducer(visibilityPersistConfig, visibilityReducer);
+
 export const store = configureStore({
   reducer: {
     cars: persistedCarsReducer,
@@ -51,6 +65,7 @@ export const store = configureStore({
     service: serviceReducer,
     settings: settingsReducer,
     warehouse: warehouseReducer,
+    visibility: persistedVisibilityReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
