@@ -1,12 +1,7 @@
 .wrapper {
     width: 1526px;
     height: 632px;
-    /* border: 1px solid var(--light-gray); */
-    /* border-radius: 12px; */
-
-    /* background-color: var(--bg); */
     overflow-y: auto;
-    /* padding: 8px; */
 
     display: flex;
     flex-direction: column;
@@ -30,7 +25,6 @@
 
 .titletext {
     color: #FFF;
-    /* font-variant-numeric: lining-nums proportional-nums; */
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
@@ -38,7 +32,6 @@
     text-align: center;
     display: flex;
     justify-content: center;
-    /* margin-right: 24px; */
 }
 
 .titletext:first-child {
@@ -48,7 +41,6 @@
 .container {
     display: flex;
     flex-direction: row;
-    /* overflow-y: auto; */
     flex-grow: 1;
     gap: 4px;
 }
@@ -76,8 +68,6 @@
 }
 
 .subRow {
-    /* background: var(--bg); */
-    /* border-top: 1px solid #ddd; */
     transition: all 0.3s ease;
     flex-direction: row;
     display: flex;
@@ -87,32 +77,20 @@
 .header {
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
     background: var(--bg);
-    /* border-radius: 4px; */
     width: 1509px;
     min-width: 400px;
-    /* padding: 8px; */
     align-items: center;
-    /* justify-content: space-between; */
 }
 
 .item,
 .shortitem {
-
-    /* position: relative; */
-    /* Базове позиціонування контейнера */
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
-    /* padding: 0px 8px 0px 16px; */
     background: var(--bg-secondary);
     border-radius: 4px;
-    /* width: 1509px; */
-    /* min-width: 400px; */
     padding: 8px;
     align-items: center;
-    /* justify-content: space-between; */
     flex-shrink: 0;
 }
 
@@ -133,12 +111,10 @@
     justify-content: center;
     align-items: center;
     color: var(--light-gray);
-    /* font-variant-numeric: lining-nums proportional-nums; */
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    /* font-variant: small-caps; */
     width: 42px;
 }
 
@@ -157,8 +133,6 @@
 
 .carsbox {
     display: flex;
-    /* justify-content: center;
-        align-items: center; */
     gap: 8px;
     margin-right: 8px;
 }
@@ -177,7 +151,6 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    /* border-radius: 50%; */
     width: 20px;
     height: 20px;
     display: flex;
@@ -194,28 +167,20 @@
     line-height: normal;
 }
 
-/* .rating {
-    height: 13px;
-    width: 80px;
-} */
-
 .ratingGap {
     gap: 2px;
-width: 78px;
-justify-content: center;
-margin-right: 24px;
+    width: 78px;
+    justify-content: center;
+    margin-right: 24px;
 }
 
 .smalltext {
     color: #FFF;
-
-    /* font-variant-numeric: lining-nums proportional-nums; */
     font-family: Roboto, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
-    /* text-align: right; */
     width: 80px;
     height: 16px;
     margin-right: 24px;
@@ -228,7 +193,6 @@ margin-right: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    /* text-align: right; */
     width: 51px;
     height: 16px;
     margin-right: 24px;
@@ -258,7 +222,6 @@ margin-right: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    /* text-align: right; */
 
     white-space: nowrap;
     overflow: hidden;
@@ -266,21 +229,14 @@ margin-right: 24px;
 }
 
 .totalAmount {
-color: #FFF;
-    /* width: 156px; */
+    color: #FFF;
     height: 16px;
-    /* margin-right: 8px; */
 
     font-family: Roboto, sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    /* text-align: right; */
-
-    /* white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; */
 }
 
 .connection {
