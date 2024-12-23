@@ -22,31 +22,32 @@ export default function ClientsInWorkSorterSection() {
     return (
       <div className={css.wrapper}>
         <div className={css.leftContainer}>
-        <TimeSortItem onSortChange={noop}/>
-        <div className={css.statusContainer}>
-        <StatusFilter 
-        onStatusChange={handleStatusChange}
-        renderStatus={renderStatusCars}
-        statuses={statusesCar}
-        isFilter={isFilter}/>
-        </div>
-        <CarsSearch />
-        <InfoSettingsVisibility
+          <TimeSortItem onSortChange={noop} />
+          <div className={css.statusContainer}>
+            <StatusFilter
+              onStatusChange={handleStatusChange}
+              renderStatus={renderStatusCars}
+              statuses={statusesCar}
+              isFilter={isFilter}
+            />
+          </div>
+          <CarsSearch />
+          <InfoSettingsVisibility
             selectVisibility={selectVisibilityClientsInWork}
             toggleVisibilityAction={toggleVisibilityClientsInWork}
             labelNames={labelNamesClientsInWork}
           />
         </div>
         <div className={css.rightContainer}>
-        <TimeSortItem onSortChange={noop}/>
-        <TimeSortItem onSortChange={noop}/>
-        <TimeSortItem onSortChange={noop}/>
-        <TimeSortItem onSortChange={noop}/>
-        <TimeSortItem onSortChange={noop}/>
-        <TimeSortItem onSortChange={noop}/>
-        <TimeSortItem onSortChange={noop}/>
-        <TimeSortItem onSortChange={noop}/>
-        <TimeSortItem onSortChange={noop}/>
+          <TimeSortItem onSortChange={noop} />
+          <TimeSortItem onSortChange={noop} />
+          <TimeSortItem onSortChange={noop} />
+          <TimeSortItem onSortChange={noop} />
+          <TimeSortItem onSortChange={noop} />
+          <TimeSortItem onSortChange={noop} />
+          <TimeSortItem onSortChange={noop} />
+          <TimeSortItem onSortChange={noop} />
+          <TimeSortItem onSortChange={noop} />
         </div>
       </div>
     );

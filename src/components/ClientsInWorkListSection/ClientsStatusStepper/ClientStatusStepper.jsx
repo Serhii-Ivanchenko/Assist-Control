@@ -20,7 +20,33 @@ import { selectVisibilityClientsInWork } from "../../../redux/visibility/selecto
 import { categoryIdClients} from "../../../utils/dataToRender";
 
 // Масив кнопок
+// const buttons = [ {
+//         id: "0",
+//         title: "car",
+//         icon: <img src={carImg} alt="img" className={styles.carImage} />,
+//       },
+//   { id: 1, title: "Звернення", icon: <BsReceipt /> },
+//   { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid /> },
+//   { id: 3, title: "КП", icon: <BsClipboardCheck /> },
+//   { id: 4, title: 2000, icon: <BsCurrencyDollar /> },
+//   { id: 5, title: "Замовлення", icon: <BsUiChecksGrid /> },
+//   { id: 6, title: "Постчальник", icon: <BsUiChecks /> },
+//   { id: 7, title: "Ремонт", icon: <BsWrench /> },
+//   { id: 8, title: 8482, icon: <BsCurrencyDollar /> },
+//   {
+//     id: 9,
+//     icon: <BsAlarm style={{ transform: "scale(1.7)" }} />,
+//     noBackground: true,
+//   },
+// ];
+
+function ClientStatusStepper({ car, carImg, status }) {
 const buttons = [
+  {
+    id: 0,
+    title: car,
+    icon: <img src={carImg} alt="img" className={styles.carImage} />,
+  },
   { id: 1, title: "Звернення", icon: <BsReceipt /> },
   { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid /> },
   { id: 3, title: "КП", icon: <BsClipboardCheck /> },
@@ -36,7 +62,7 @@ const buttons = [
   },
 ];
 
-function ClientStatusStepper({ car, carImg, status }) {
+
   const visibility = useSelector(selectVisibilityClientsInWork);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
@@ -58,19 +84,20 @@ function ClientStatusStepper({ car, carImg, status }) {
 
   const groupedButtons = [
     [
-      {
-        id: "car",
-        title: car,
-        icon: <img src={carImg} alt="img" className={styles.carImage} />,
-      },
+      // {
+      //   id: "0",
+      //   title: car,
+      //   icon: <img src={carImg} alt="img" className={styles.carImage} />,
+      // },
       buttons[0],
       buttons[1],
       buttons[2],
+      buttons[3],
     ],
-    [buttons[3]],
-    [buttons[4], buttons[5], buttons[6]],
-    [buttons[7]],
+    [buttons[4]],
+    [buttons[5], buttons[6], buttons[7]],
     [buttons[8]],
+    [buttons[9]],
   ];
 
   // виклик модалки на групі кнопок
