@@ -73,16 +73,16 @@ function ClientStatusStepper({ car, carImg, status }) {
   const handleClick = (idx) => {
     switch (idx) {
       case 0:
-        setModalContent(<DetailedClientInfo />);
+        setModalContent(<DetailedClientInfo onClose={closeModal} />);
         break;
       case 1:
-        setModalContent(<EnterAmountModal />);
+        setModalContent(<EnterAmountModal onClose={closeModal} />);
         break;
       case 2:
         setModalContent("Modal for ordering parts");
         break;
       case 3:
-        setModalContent(<EnterAmountModal />);
+        setModalContent(<EnterAmountModal onClose={closeModal} />);
         break;
       case 4:
         setModalContent(
@@ -94,9 +94,9 @@ function ClientStatusStepper({ car, carImg, status }) {
             connectionType="clientConnection"
             accountingModal={true}
             service="clientService"
+            setNotificationSent={setNotificationSent}
           />
         );
-        setNotificationSent(true);
         break;
       default:
         setModalContent(null);
@@ -160,11 +160,7 @@ function ClientStatusStepper({ car, carImg, status }) {
 
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          {/* <div className={styles.modal}> */}
-          {/* <h2> */}
-            {modalContent}
-          {/* </h2> */}
-          {/* </div> */}
+          {modalContent}
         </Modal>
       )}
     </div>
