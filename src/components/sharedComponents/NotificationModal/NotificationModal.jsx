@@ -58,6 +58,7 @@ export default function NotificationModal({
   connectionType,
   comment,
   service,
+  setNotificationSent,
 }) {
   const [isDateOpen, setDateOpen] = useState(false);
   const [isTimeOpen, setTimeOpen] = useState(false);
@@ -110,6 +111,11 @@ export default function NotificationModal({
       ? values[date].toLocaleDateString("en-CA")
       : null;
     const submittedValues = { ...values, [time]: timeOnly, [date]: dateOnly };
+
+    if (setNotificationSent) {
+      setNotificationSent(true);
+    }
+
     console.log(submittedValues);
     actions.resetForm();
     onClose();
