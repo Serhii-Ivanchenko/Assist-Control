@@ -16,9 +16,9 @@ import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
 import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
-import { selectVisibilityCar } from "../../redux/cars/selectors.js";
 import { useSelector } from "react-redux";
 import RatingStars from "../sharedComponents/RatingStars/RatingStars.jsx";
+import { selectVisibilityCar } from "../../redux/visibility/selectors.js";
 
 export default function DayCarsItem({ car, isModal }) {
   const visibility = useSelector(selectVisibilityCar);

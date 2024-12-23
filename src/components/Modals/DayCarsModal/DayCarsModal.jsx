@@ -5,7 +5,6 @@ import {
   selectDayCars,
   selectLoading,
   selectPeriodCars,
-  selectVisibilityCar,
 } from "../../../redux/cars/selectors";
 import styles from "./DayCarsModal.module.css";
 import { FiGrid } from "react-icons/fi";
@@ -15,7 +14,6 @@ import DayCarsList from "../../DayCarsList/DayCarsList";
 import Loader from "../../Loader/Loader";
 import CalendarPeriodSelector from "../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
 import StatusFilter from "../../sharedComponents/StatusFilter/StatusFilter";
-import { toggleVisibilityCar } from "../../../redux/cars/slice";
 import InfoSettingsVisibility from "../../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
 import TimeSortItem from "../../sharedComponents/TimeSortItem/TimeSortItem";
 import DownloadPdfButton from "../../sharedComponents/DownloadPdfButton/DownloadPdfButton";
@@ -28,10 +26,11 @@ import {
 } from "../../../utils/filterCarsBySearchTerm";
 import renderStatusCars from "../../../utils/renderStatusCars";
 import { labelNamesInModal, statusesCar } from "../../../utils/dataToRender.js";
+import { selectVisibilityCar } from "../../../redux/visibility/selectors.js";
+import { toggleVisibilityCar } from "../../../redux/visibility/slice.js";
 
 export default function DayCarsModal({ onClose, isModal }) {
   const dispatch = useDispatch();
-  // const visibility = useSelector(selectVisibilityCar);
   const selectedDate = useSelector(selectDate);
   const isLoading = useSelector(selectLoading);
   const carsData = useSelector(selectDayCars);

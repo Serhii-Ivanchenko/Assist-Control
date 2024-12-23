@@ -237,12 +237,11 @@ export default function InvoicesPart({ categories }) {
     Списано: replacedAndothers,
   };
 
-  return (
+   return (
     <div>
       <ul className={css.categoriesList}>
         {categories.map((category, index) => {
           const list = categoryMap[category.name] || [];
-
           const visibilityKey = categoryNameMapping[category.name];
           const isVisible = visibility[visibilityKey];
 
@@ -250,7 +249,7 @@ export default function InvoicesPart({ categories }) {
             <li
               key={index}
               className={clsx(css.categoriesItem, {
-                [css.hidden]: !isVisible,
+                [css.hidden]: !isVisible || !categories.some(c => c.name === category.name),
               })}
             >
               <div className={css.titleBox}>
@@ -285,6 +284,7 @@ export default function InvoicesPart({ categories }) {
               <button type="button" className={css.addBtn}>
                 <BsPlusCircleDotted size={18} />
               </button>
+
             </li>
           );
         })}

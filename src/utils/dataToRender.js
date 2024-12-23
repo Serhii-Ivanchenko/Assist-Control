@@ -170,7 +170,7 @@ export const labelNamesInCrm = {
   export const categoryNameMapping = {
       "Діагностика": "diagnostics",
       "Погоджено": "agreed",
-      "Зарезервовано": "reserved",
+      "Замовлено": "reserved",
       "Отримано": "received",
       "Продано": "soldOut",
       "Повернуто": "returned",
@@ -184,8 +184,6 @@ export const labelNamesInCrm = {
     // Лейбл для секції облік(клієнти у роботі) - налаштування видимості 
 
     export const labelNamesClientsInWork = {
-      photo: "Фото",
-      carModelYear: "Марка-модель",
       appeal: "Звернення",
       diagnostics: "Діагностика",
       KP: "КП",
@@ -196,6 +194,31 @@ export const labelNamesInCrm = {
       totaAmount: "Загальна сума",
       notification: "Сповіщення"
     };
+
+    // export const categoryNameClients = {
+    //   "Звернення": "appeal",
+    //   "Діагностика": "diagnostics",
+    //   "КП": "KP",
+    //   "Замовлення": "order",
+    //   "Аванс": "prePayment",
+    //   "Постчальник": "provider",
+    //   "Ремонт": "repair",
+    //   "Тотальна сума": "totalAmount",
+    //   "Сповіщення": "notification"
+    // };
+
+    export const categoryIdClients = {
+      "1": "appeal",
+      "2": "diagnostics",
+      "3": "KP",
+      "4": "order",
+      "5": "prePayment",
+      "6": "provider",
+      "7": "repair",
+      "8": "totalAmount",
+      "9": "notification"
+    };
+
 
     
     // Лейбл для секції облік(загальний список клієнтів) - налаштування видимості 

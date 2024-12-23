@@ -22,8 +22,8 @@ import PaymentBtn from "../sharedComponents/PaymentBtn/PaymentBtn.jsx";
 import { copyToClipboard } from "../../utils/copy.js";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
-import { selectVisibilityRecords } from "../../redux/crm/selectors.js";
 import RatingStars from "../sharedComponents/RatingStars/RatingStars.jsx";
+import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
 
 export default function DayCarsItemCrm({ car, onDragStart }) {
   const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
