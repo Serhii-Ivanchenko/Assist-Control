@@ -94,9 +94,10 @@ function ClientStatusStepper({ car, carImg, status }) {
             connectionType="clientConnection"
             accountingModal={true}
             service="clientService"
+            setNotificationSent={setNotificationSent}
           />
         );
-        setNotificationSent(true);
+
         break;
       default:
         setModalContent(null);
