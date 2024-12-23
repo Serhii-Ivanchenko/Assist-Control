@@ -111,7 +111,11 @@ export default function NotificationModal({
       ? values[date].toLocaleDateString("en-CA")
       : null;
     const submittedValues = { ...values, [time]: timeOnly, [date]: dateOnly };
-    setNotificationSent(true);
+
+    if (setNotificationSent) {
+      setNotificationSent(true);
+    }
+
     console.log(submittedValues);
     actions.resetForm();
     onClose();
