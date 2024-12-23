@@ -61,8 +61,6 @@ const visibilitySlice = createSlice({
             percent: true
           },
           visibilityClientsInWork: {
-            photo: true,
-            carModelYear: true,
             appeal: true,
             diagnostics: true,
             KP: true,

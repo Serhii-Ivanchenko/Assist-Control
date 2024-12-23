@@ -15,6 +15,9 @@ import Modal from "../../Modals/Modal/Modal";
 import DetailedClientInfo from "../../DetailedClientInfo/DetailedClientInfo";
 import EnterAmountModal from "../../Modals/EnterAmountModal/EnterAmountModal";
 import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal";
+import { useSelector } from "react-redux";
+import { selectVisibilityClientsInWork } from "../../../redux/visibility/selectors";
+import { categoryIdClients} from "../../../utils/dataToRender";
 
 // Масив кнопок
 const buttons = [
@@ -34,6 +37,7 @@ const buttons = [
 ];
 
 function ClientStatusStepper({ car, carImg, status }) {
+  const visibility = useSelector(selectVisibilityClientsInWork);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [notificationSent, setNotificationSent] = useState(false);
@@ -142,8 +146,15 @@ function ClientStatusStepper({ car, carImg, status }) {
             }`}
             onClick={() => handleClick(idx)}
           >
-            {group.map(({ id, title, icon, noBackground }) => (
-              <li key={id} className={styles.listItem}>
+               {group.map(({ id, title, icon, noBackground }) => {
+            // Отримуємо ключ з маппінгу для перевірки видимості
+            const visibilityKey = categoryIdClients[id];
+
+            return (
+              <li 
+                key={id} 
+                className={`${styles.listItem} ${!visibility[visibilityKey] ? styles.hidden : ''}`}
+              >
                 <StepperBtn
                   value={title}
                   icon={icon}
@@ -153,10 +164,11 @@ function ClientStatusStepper({ car, carImg, status }) {
                   status={status}
                 />
               </li>
-            ))}
-          </ul>
-        ))}
-      </ul>
+            );
+          })}
+        </ul>
+      ))}
+    </ul>
 
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
