@@ -5,7 +5,7 @@ import styles from "./ClientsInWorkItem.module.css";
 function ClientsInWorkItem({ item }) {
   const formatDate = (date) => {
     const options = {
-      year: "numeric",
+      day: "numeric",
       month: "numeric",
     };
     return new Date(date).toLocaleDateString("uk-UA", options);
