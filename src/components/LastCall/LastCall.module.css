@@ -3,24 +3,6 @@
   flex-direction: column;
   gap: 14px;
   padding: 4px;
-  max-height: 478px;
-  overflow-y: auto;
-}
-
-.sectionWrapper::-webkit-scrollbar {
-  width: 8px;
-  padding-top: 4px;
-  height: 760px;
-}
-
-.sectionWrapper::-webkit-scrollbar-track {
-  background-color: var(--bg);
-  border-radius: 4px;
-}
-
-.sectionWrapper::-webkit-scrollbar-thumb {
-  background-color: var(--main-gray);
-  border-radius: 4px;
 }
 
 .wrapper {
