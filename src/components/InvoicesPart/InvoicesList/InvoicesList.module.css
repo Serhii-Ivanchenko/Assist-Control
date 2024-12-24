@@ -10,6 +10,8 @@
   height: inherit;
   max-height: 728px;
 
+  user-select: none;
+
   /* width: 240px; */
 
   /* padding-right: 6px; */
@@ -162,8 +164,20 @@
   align-items: end;
 }
 
-.isPaidBorder {
+.completedBorder {
   background: linear-gradient(#2d3038, #2d3038) padding-box,
     var(--border-gradient-invoices) border-box;
+  border: 2px solid transparent;
+}
+
+.pendingBorder {
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-new) border-box;
+  border: 2px solid transparent;
+}
+
+.rejectedBorder {
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-invoices-red) border-box;
   border: 2px solid transparent;
 }
