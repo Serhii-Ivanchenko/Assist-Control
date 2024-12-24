@@ -74,11 +74,6 @@ export default function CRMBlock() {
     return periodRecords.filter((item) => item.status === status);
   };
 
-  // const handleToggle = (field) => {
-  //   const newVisibility = { ...visibility, [field]: !visibility[field] };
-  //   dispatch(toggleVisibilityRecords(newVisibility));
-  // };
-
   return (
     <div className={css.container}>
       <div className={css.headersContainer}>

@@ -6,8 +6,6 @@
   gap: 14px;
   overflow-y: auto;
   padding-right: 15px;
-  border: 1px solid var(--light-gray);
-    border-radius: 12px;
 }
 
 .wrapper::-webkit-scrollbar {
@@ -29,11 +27,11 @@
 .rightContainer {
   display: flex;
   /* justify-content: space-between; */
-  /* align-items: center; */
+  align-items: center;
 }
 
 .item {
-  gap: 25px;
+  gap: 14px;
   align-items: start;
 }
 
@@ -72,7 +70,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  width: 175px;
+  width: 180px;
   height: 48px;
   margin-right: 18px;
 }
@@ -110,8 +108,7 @@
 
 .audioContainer {
   width: 321px;
-  /* height: 48px; */
-  padding: 8px 0;
+  /* padding: 8px 0; */
   margin-left: auto;
 }
 
