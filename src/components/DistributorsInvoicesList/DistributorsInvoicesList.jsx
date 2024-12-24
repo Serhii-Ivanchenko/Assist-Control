@@ -1,8 +1,9 @@
 import { useState } from "react";
 import css from "./DistributorsInvoicesList.module.css";
-import { TiArrowSortedDown } from "react-icons/ti";
-import { TiArrowSortedUp } from "react-icons/ti";
+// import { TiArrowSortedDown } from "react-icons/ti";
+// import { TiArrowSortedUp } from "react-icons/ti";
 import DistributorsInvoice from "./DistributorsInvoice/DistributorsInvoice";
+import SortButtonsArrow from "../sharedComponents/SortButtonsArrow/SortButtonsArrow";
 
 const dataArr = [
   {
@@ -282,7 +283,12 @@ export default function DistributorsInvoicesList() {
       <div className={css.headerWrapper}>
         <div className={css.headerWithArrows}>
           <p className={css.header}>Дата</p>
-          <div className={css.arrowWrapper}>
+          <SortButtonsArrow
+            orderKey="deliveryDate"
+            func={sortDates}
+            handleFunc={handleSort}
+          />
+          {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
               onClick={() => {
@@ -295,11 +301,16 @@ export default function DistributorsInvoicesList() {
                 handleSort("deliveryDate", "desc", sortDates);
               }}
             />
-          </div>
+          </div> */}
         </div>
         <div className={css.headerWithArrows}>
           <p className={css.header}>Кількість</p>
-          <div className={css.arrowWrapper}>
+          <SortButtonsArrow
+            orderKey="carPartsQuantity"
+            func={sort}
+            handleFunc={handleSort}
+          />
+          {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
               onClick={() => {
@@ -312,14 +323,19 @@ export default function DistributorsInvoicesList() {
                 handleSort("carPartsQuantity", "desc", sort);
               }}
             />
-          </div>
+          </div> */}
         </div>
         <p className={css.header}>Артикул</p>
         <p className={css.header}>Бренд</p>
         <p className={css.header}>Номенклатура</p>
         <div className={css.headerWithArrows}>
           <p className={css.header}>Ціна закупки</p>
-          <div className={css.arrowWrapper}>
+          <SortButtonsArrow
+            orderKey="price"
+            func={null}
+            handleFunc={sortCarParts}
+          />
+          {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
               onClick={() => {
@@ -332,11 +348,16 @@ export default function DistributorsInvoicesList() {
                 sortCarParts("price", "desc");
               }}
             />
-          </div>
+          </div> */}
         </div>
         <div className={css.headerWithArrows}>
           <p className={css.header}>Сума закупки</p>
-          <div className={css.arrowWrapper}>
+          <SortButtonsArrow
+            orderKey="purchaseAmount"
+            func={null}
+            handleFunc={sortCarParts}
+          />
+          {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
               onClick={() => {
@@ -349,11 +370,16 @@ export default function DistributorsInvoicesList() {
                 sortCarParts("purchaseAmount", "desc");
               }}
             />
-          </div>
+          </div> */}
         </div>
         <div className={css.headerWithArrows}>
           <p className={css.header}>Сума продажу</p>
-          <div className={css.arrowWrapper}>
+          <SortButtonsArrow
+            orderKey="salesAmount"
+            func={null}
+            handleFunc={sortCarParts}
+          />
+          {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
               onClick={() => {
@@ -366,11 +392,16 @@ export default function DistributorsInvoicesList() {
                 sortCarParts("salesAmount", "desc");
               }}
             />
-          </div>
+          </div> */}
         </div>
         <div className={css.headerWithArrows}>
           <p className={css.header}>Прибуток</p>
-          <div className={css.arrowWrapper}>
+          <SortButtonsArrow
+            orderKey="profit"
+            func={sort}
+            handleFunc={handleSort}
+          />
+          {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
               onClick={() => {
@@ -383,11 +414,16 @@ export default function DistributorsInvoicesList() {
                 handleSort("profit", "desc", sort);
               }}
             />
-          </div>
+          </div> */}
         </div>
         <div className={css.headerWithArrows}>
           <p className={css.header}>%</p>
-          <div className={css.arrowWrapper}>
+          <SortButtonsArrow
+            orderKey="percent"
+            func={sort}
+            handleFunc={handleSort}
+          />
+          {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
               onClick={() => {
@@ -400,7 +436,7 @@ export default function DistributorsInvoicesList() {
                 handleSort("percent", "desc", sort);
               }}
             />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className={css.table}>

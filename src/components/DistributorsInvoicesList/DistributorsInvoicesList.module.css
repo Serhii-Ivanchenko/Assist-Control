@@ -25,7 +25,7 @@
   gap: 4px;
 }
 
-.arrowWrapper {
+/* .arrowWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,7 +36,7 @@
 .arrowIcon {
   cursor: pointer;
   transform: scale(1.5);
-}
+} */
 
 .table {
   overflow: hidden;
