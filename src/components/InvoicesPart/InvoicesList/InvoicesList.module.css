@@ -10,6 +10,8 @@
   height: inherit;
   max-height: 728px;
 
+  user-select: none;
+
   /* width: 240px; */
 
   /* padding-right: 6px; */

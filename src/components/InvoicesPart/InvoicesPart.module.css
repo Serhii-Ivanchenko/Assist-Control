@@ -4,6 +4,8 @@
   gap: 10px;
   /* overflow-x: auto; */
   width: max-content;
+
+  user-select: none;
 }
 
 .categoriesItem {
