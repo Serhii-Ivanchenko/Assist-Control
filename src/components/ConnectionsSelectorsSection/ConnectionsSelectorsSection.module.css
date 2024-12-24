@@ -2,4 +2,6 @@
     display: flex;
     height: 39px;
     gap: 50px;
+    border: 1px solid var(--light-gray);
+    border-radius: 12px;
 }

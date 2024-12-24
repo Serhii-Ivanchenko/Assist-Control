@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 1057px;
-  max-height: 478px;
-  gap: 20px;
+  max-height: 652px;
+  gap: 14px;
   overflow-y: auto;
   padding-right: 15px;
+  border: 1px solid var(--light-gray);
+    border-radius: 12px;
 }
 
 .wrapper::-webkit-scrollbar {
