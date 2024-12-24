@@ -8,13 +8,15 @@ import css from "./ConnectionsMainComponent.module.css";
 export default function ConnectionsMainComponent() {
   return (
     <div className={css.wrapper}>
-      <HorizontalPBSection />
       <ConnectionsSelectorsSection />
+
+      <div className={css.upperWrapper}>
+        <ConnectionsCircularPBSection />
+        <HorizontalPBSection />
+      </div>
+
       <div className={css.bottomWrapper}>
-        <div className={css.leftPart}>
-          <ConnectionsCircularPBSection />
-          <ConnectionsListSection />
-        </div>
+        <ConnectionsListSection />
         <LastConnectionSection />
       </div>
     </div>
