@@ -10,9 +10,9 @@
   scroll-behavior: smooth;
 }
 
-.wrapper:active {
+/* .wrapper:active {
   cursor: grabbing;
-}
+} */
 
 .wrapper::-webkit-scrollbar {
   height: 8px;

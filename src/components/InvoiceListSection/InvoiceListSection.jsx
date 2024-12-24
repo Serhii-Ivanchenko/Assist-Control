@@ -5,59 +5,37 @@ import {
   useRef,
 } from "react";
 import { useState } from "react";
+// import { useEffect } from "react";
 
 export default function InvoiceListSection() {
   const containerRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
-  // const [startX, setStartX] = useState(0);
-  // const [scrollLeft, setScrollLeft] = useState(0);
+  const startXRef = useRef(0); // Початкова позиція миші
+  const scrollLeftRef = useRef(0);
 
-  // const handleMouseDown = (e) => {
-  //   const container = containerRef.current;
-  //   // setIsDragging(true);
-  //   // setStartX(e.pageX - container.offsetLeft);
-  //   // setScrollLeft(container.scrollLeft);
-  // };
-
-  // const handleMouseLeave = () => {
-  //   setIsDragging(false);
-  // };
-
-  // const handleMouseUp = () => {
-  //   setIsDragging(false);
-  // };
-
-  const onMouseDown = () => {
+  const onMouseDown = (e) => {
     setIsDragging(true);
+    startXRef.current = e.clientX;
+    scrollLeftRef.current = containerRef.current.scrollLeft;
+    containerRef.current.style.scrollBehavior = "auto";
   };
 
   const onMouseUp = () => {
     setIsDragging(false);
+
+    containerRef.current.style.scrollBehavior = "";
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-    const container = containerRef.current;
-
-    if (!container) return;
-
-    const containerRect = container.getBoundingClientRect();
-    const mouseX = e.clientX - containerRect.left;
-    const mouseY = e.clientY - containerRect.top;
-
-    const percentX = mouseX / containerRect.width;
-    const percentY = mouseY / containerRect.height;
-
-    const scrollX = percentX * (container.scrollWidth - containerRect.width);
-    const scrollY = percentY * (container.scrollHeight - containerRect.height);
-
-    container.scrollTo(scrollX, scrollY);
+    const dx = e.clientX - startXRef.current; // Різниця між поточною і початковою позицією миші
+    containerRef.current.scrollLeft = scrollLeftRef.current - dx;
   };
 
   const handleWheel = (e) => {
     const container = containerRef.current;
     container.scrollLeft += e.deltaY;
-    e.preventDefault();
+    // e.preventDefault();
   };
 
   return (
@@ -65,9 +43,6 @@ export default function InvoiceListSection() {
       className={css.wrapper}
       ref={containerRef}
       onWheel={handleWheel}
-      // onMouseDown={handleMouseDown}
-      // onMouseLeave={handleMouseLeave}
-      // onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
       onMouseUp={onMouseUp}
       onMouseLeave={onMouseUp}

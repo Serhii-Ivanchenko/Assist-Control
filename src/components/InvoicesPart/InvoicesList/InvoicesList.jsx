@@ -20,7 +20,7 @@ export default function InvoicesList({ category, list }) {
       if (containerRef.current) {
         const hasVerticalScroll =
           containerRef.current.scrollHeight > containerRef.current.clientHeight;
-        console.log("hasVerticalScroll:", hasVerticalScroll);
+        // console.log("hasVerticalScroll:", hasVerticalScroll);
         setIsScrolled(hasVerticalScroll);
       }
     };

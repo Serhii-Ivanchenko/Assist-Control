@@ -123,6 +123,78 @@ export default function InvoicesPart({ categories }) {
       amount: "8000 грн",
       status: "completed",
     },
+    {
+      date: "19.12.24",
+      distributorName: "Elit",
+      amount: "8000 грн",
+      status: "pending",
+    },
+    {
+      date: "19.12.24",
+      distributorName: "Elit",
+      amount: "8000 грн",
+      status: "completed",
+    },
+    {
+      date: "19.12.24",
+      distributorName: "Elit",
+      amount: "8000 грн",
+      status: "completed",
+    },
+    {
+      date: "19.12.24",
+      distributorName: "Elit",
+      amount: "8000 грн",
+      status: "pending",
+    },
+    {
+      date: "19.12.24",
+      distributorName: "Elit",
+      amount: "8000 грн",
+      status: "completed",
+    },
+    //{
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "completed",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "pending",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "completed",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "completed",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "pending",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "completed",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "completed",
+    // },
   ];
 
   const sold = [
@@ -225,6 +297,77 @@ export default function InvoicesPart({ categories }) {
       amount2: "9000",
       currency: "грн",
     },
+
+    {
+      date: "19.12.24",
+      warehouse: "Склад 1",
+      amount: "8000",
+      amount2: "10000",
+      currency: "грн",
+    },
+    {
+      date: "19.12.24",
+      warehouse: "Склад 1",
+      amount: "8000",
+      amount2: "7000",
+      currency: "грн",
+    },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "7000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "7000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
   ];
 
   const categoryMap = {
