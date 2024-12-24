@@ -1,4 +1,4 @@
-import css from "../LastCall/LastCall.module.css";
+import css from "./ProblemCall.module.css";
 import { BsPersonSquare } from "react-icons/bs";
 import { BsCalendarWeek } from "react-icons/bs";
 import { FaAt } from "react-icons/fa6";
@@ -85,7 +85,7 @@ const calls = [
   },
 ];
 
-export default function LastCall() {
+export default function ProblemCall() {
   return (
     <div className={css.sectionWrapper}>
       {calls.map((call, index) => {

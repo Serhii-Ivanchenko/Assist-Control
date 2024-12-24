@@ -1,11 +1,11 @@
 // import Advertising from "../Advertising/Advertising";
-import LastCall from "../LastCall/LastCall";
+import ProblemCall from "../ProblemCall/ProblemCall.jsx";
 import css from "./LastConnectionSection.module.css";
 
 export default function LastConnectionSection() {
   return (
     <div className={css.wrapper}>
-      <LastCall />
+      <ProblemCall />
       {/* <Advertising /> */}
     </div>
   );
