@@ -1,0 +1,84 @@
+.popupContainer {
+  position: absolute;
+  top: 100%;
+  right: 0;
+
+  width: 174px;
+  padding: 15px;
+
+  border-radius: 12px;
+  background-color: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+
+  /* background: linear-gradient(90deg, #ff7e5f, #fff); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; */
+}
+
+.text {
+  font-size: 18px;
+  color: var(--white);
+}
+
+/* .textCompleted {
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-invoices) border-box;
+  border: 2px solid transparent;
+}
+
+.textPending {
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-new) border-box;
+  border: 2px solid transparent;
+}
+
+.textRejected {
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-invoices-red) border-box;
+  border: 2px solid transparent;
+} */
+
+.checkbox {
+  display: none;
+}
+
+.cbIcon {
+  display: none;
+}
+
+.cbMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+
+  border: 2px solid var(--white);
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.checkbox:checked + .cbMark {
+  border: 2px solid var(--blue);
+}
+
+.checkbox:checked + .cbMark > .cbIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  fill: var(--blue);
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}

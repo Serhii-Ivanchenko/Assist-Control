@@ -6,8 +6,8 @@ import css from './DistributorsMainComponent.module.css'
 export default function DistributorsMainComponent() {
      return (
        <div className={css.wrapper}>
-         <DistributorsCircularPBSection />
          <DistributorsSorterAndSelectorsSection />
+         <DistributorsCircularPBSection />
          <DistributorsListSection />
        </div>
      );

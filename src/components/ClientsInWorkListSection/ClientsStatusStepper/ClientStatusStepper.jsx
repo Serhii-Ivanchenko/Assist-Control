@@ -19,54 +19,28 @@ import { useSelector } from "react-redux";
 import { selectVisibilityClientsInWork } from "../../../redux/visibility/selectors";
 import { categoryIdClients} from "../../../utils/dataToRender";
 
-// Масив кнопок
-// const buttons = [ {
-//         id: "0",
-//         title: "car",
-//         icon: <img src={carImg} alt="img" className={styles.carImage} />,
-//       },
-//   { id: 1, title: "Звернення", icon: <BsReceipt /> },
-//   { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid /> },
-//   { id: 3, title: "КП", icon: <BsClipboardCheck /> },
-//   { id: 4, title: 2000, icon: <BsCurrencyDollar /> },
-//   { id: 5, title: "Замовлення", icon: <BsUiChecksGrid /> },
-//   { id: 6, title: "Постчальник", icon: <BsUiChecks /> },
-//   { id: 7, title: "Ремонт", icon: <BsWrench /> },
-//   { id: 8, title: 8482, icon: <BsCurrencyDollar /> },
-//   {
-//     id: 9,
-//     icon: <BsAlarm style={{ transform: "scale(1.7)" }} />,
-//     noBackground: true,
-//   },
-// ];
-
-function ClientStatusStepper({ car, carImg, status }) {
-const buttons = [
-  {
-    id: 0,
-    title: car,
-    icon: <img src={carImg} alt="img" className={styles.carImage} />,
-  },
-  { id: 1, title: "Звернення", icon: <BsReceipt /> },
-  { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid /> },
-  { id: 3, title: "КП", icon: <BsClipboardCheck /> },
-  { id: 4, title: 2000, icon: <BsCurrencyDollar /> },
-  { id: 5, title: "Замовлення", icon: <BsUiChecksGrid /> },
-  { id: 6, title: "Постчальник", icon: <BsUiChecks /> },
-  { id: 7, title: "Ремонт", icon: <BsWrench /> },
-  { id: 8, title: 8482, icon: <BsCurrencyDollar /> },
-  {
-    id: 9,
-    icon: <BsAlarm style={{ transform: "scale(1.7)" }} />,
-    noBackground: true,
-  },
-];
-
-
-  const visibility = useSelector(selectVisibilityClientsInWork);
+function ClientStatusStepper({ car, carImg, status, prePaid, postPaid }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [notificationSent, setNotificationSent] = useState(false);
+
+  // Масив кнопок
+  const buttons = [
+    { id: 1, title: "Звернення", icon: <BsReceipt /> },
+    { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid /> },
+    { id: 3, title: "КП", icon: <BsClipboardCheck /> },
+    { id: 4, title: prePaid, icon: <BsCurrencyDollar /> },
+    { id: 5, title: "Замовлення", icon: <BsUiChecksGrid /> },
+    { id: 6, title: "Постчальник", icon: <BsUiChecks /> },
+    { id: 7, title: "Ремонт", icon: <BsWrench /> },
+    { id: 8, title: postPaid, icon: <BsCurrencyDollar /> },
+    {
+      id: 9,
+      icon: <BsAlarm style={{ transform: "scale(1.7)" }} />,
+      noBackground: true,
+    },
+  ];
+
   // визнчення кольору іконок степера
   const [completedSteps, setCompletedSteps] = useState(() => {
     if (status === "complete") {

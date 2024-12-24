@@ -20,7 +20,7 @@ export default function InvoicesList({ category, list }) {
       if (containerRef.current) {
         const hasVerticalScroll =
           containerRef.current.scrollHeight > containerRef.current.clientHeight;
-        console.log("hasVerticalScroll:", hasVerticalScroll);
+        // console.log("hasVerticalScroll:", hasVerticalScroll);
         setIsScrolled(hasVerticalScroll);
       }
     };
@@ -61,7 +61,9 @@ export default function InvoicesList({ category, list }) {
           key={index}
           className={`${css.invoiceItem} ${
             isScrolled && css.invoiceItemForScroll
-          } ${item.paid && css.isPaidBorder}`}
+          } ${item.status === "completed" && css.completedBorder} 
+          ${item.status === "pending" && css.pendingBorder}
+          ${item.status === "rejected" && css.rejectedBorder}`}
         >
           {(category === "Діагностика" ||
             category === "Погоджено" ||

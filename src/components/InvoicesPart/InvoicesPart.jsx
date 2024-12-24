@@ -7,10 +7,13 @@ import { useSelector } from "react-redux";
 import { selectVisibilityInvoices } from "../../redux/visibility/selectors";
 import clsx from "clsx";
 import { categoryNameMapping } from "../../utils/dataToRender";
+import { useState } from "react";
+import InvoicesColumnPopup from "./InvoicesColumnPopup/InvoicesColumnPopup";
+// import { useEffect } from "react";
 
 export default function InvoicesPart({ categories }) {
   const visibility = useSelector(selectVisibilityInvoices);
-  
+
   // const categories = [
   //   { name: "Діагностика" },
   //   { name: "Погоджено" },
@@ -94,32 +97,104 @@ export default function InvoicesPart({ categories }) {
       date: "19.12.28",
       distributorName: "Elit",
       amount: "8000 грн",
-      paid: true,
+      status: "completed",
     },
     {
       date: "19.12.24",
       distributorName: "Elit",
       amount: "8000 грн",
-      paid: false,
+      status: "pending",
     },
     {
       date: "19.12.24",
       distributorName: "Elit",
       amount: "8000 грн",
-      paid: false,
+      status: "pending",
     },
     {
       date: "19.12.24",
       distributorName: "Elit",
       amount: "8000 грн",
-      paid: true,
+      status: "completed",
     },
     {
       date: "19.12.24",
       distributorName: "Elit",
       amount: "8000 грн",
-      paid: true,
+      status: "completed",
     },
+    {
+      date: "19.12.24",
+      distributorName: "Elit",
+      amount: "8000 грн",
+      status: "pending",
+    },
+    {
+      date: "19.12.24",
+      distributorName: "Elit",
+      amount: "8000 грн",
+      status: "completed",
+    },
+    {
+      date: "19.12.24",
+      distributorName: "Elit",
+      amount: "8000 грн",
+      status: "completed",
+    },
+    {
+      date: "19.12.24",
+      distributorName: "Elit",
+      amount: "8000 грн",
+      status: "pending",
+    },
+    {
+      date: "19.12.24",
+      distributorName: "Elit",
+      amount: "8000 грн",
+      status: "completed",
+    },
+    //{
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "completed",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "pending",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "completed",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "completed",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "pending",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "completed",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   distributorName: "Elit",
+    //   amount: "8000 грн",
+    //   status: "completed",
+    // },
   ];
 
   const sold = [
@@ -128,42 +203,42 @@ export default function InvoicesPart({ categories }) {
       date: "19.12.24",
       name: "Клієнт 1",
       amount: "8000 грн",
-      paid: false,
+      status: "completed",
     },
     {
       photo: "",
       date: "19.12.24",
       name: "Клієнт 1",
       amount: "8000 грн",
-      paid: true,
+      status: "completed",
     },
     {
       photo: car,
       date: "19.12.24",
       name: "Клієнт 1",
       amount: "8000 грн",
-      paid: false,
+      status: "rejected",
     },
     {
       photo: "",
       date: "19.12.24",
       name: "Клієнт 1",
       amount: "8000 грн",
-      paid: true,
+      status: "rejected",
     },
     {
       photo: car,
       date: "19.12.24",
       name: "Клієнт 1",
       amount: "8000 грн",
-      paid: true,
+      status: "pending",
     },
     {
       photo: car,
       date: "19.12.24",
       name: "Клієнт 1",
       amount: "8000 грн",
-      paid: false,
+      status: "completed",
     },
     // { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
     // { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
@@ -222,6 +297,77 @@ export default function InvoicesPart({ categories }) {
       amount2: "9000",
       currency: "грн",
     },
+
+    {
+      date: "19.12.24",
+      warehouse: "Склад 1",
+      amount: "8000",
+      amount2: "10000",
+      currency: "грн",
+    },
+    {
+      date: "19.12.24",
+      warehouse: "Склад 1",
+      amount: "8000",
+      amount2: "7000",
+      currency: "грн",
+    },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "7000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "7000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
+    // {
+    //   date: "19.12.24",
+    //   warehouse: "Склад 1",
+    //   amount: "8000",
+    //   amount2: "9000",
+    //   currency: "грн",
+    // },
   ];
 
   const categoryMap = {
@@ -237,11 +383,43 @@ export default function InvoicesPart({ categories }) {
     Списано: replacedAndothers,
   };
 
-   return (
+  const [openPopup, setOpenPopup] = useState(false);
+  // const [filteredData, setFilteredData] = useState([]);
+  // const [filteredDataMap, setFilteredDataMap] = useState({});
+  // const [selectedStatus, setSelectedStatus] = useState([]);
+
+  const handleOpen = (index) => {
+    setOpenPopup(openPopup === index ? null : index);
+  };
+
+  // Працюючий варіант
+  // const showParticularCards = (status, list, category) => {
+  //   const filteredList = status
+  //     ? list.filter((item) => item.status === status)
+  //     : list;
+  //   setFilteredData(filteredList);
+
+  //   setFilteredDataMap((prev) => ({
+  //     ...prev,
+  //     [category]: filteredList,
+  //   }));
+  // };
+
+  // useEffect(() => {
+  //   const initialData = {};
+  //   categories.forEach((category) => {
+  //     initialData[category.name] = categoryMap[category.name] || [];
+  //   });
+  //   setFilteredDataMap(initialData);
+  // }, [categories]);
+
+  return (
     <div>
       <ul className={css.categoriesList}>
         {categories.map((category, index) => {
           const list = categoryMap[category.name] || [];
+          // setFilteredData(list);
+
           const visibilityKey = categoryNameMapping[category.name];
           const isVisible = visibility[visibilityKey];
 
@@ -272,13 +450,26 @@ export default function InvoicesPart({ categories }) {
                       : 16000}{" "}
                     грн
                   </span>
-                  <BsThreeDotsVertical className={css.icon} />
+                  <BsThreeDotsVertical
+                    className={css.icon}
+                    onClick={() => handleOpen(index)}
+                  />
+                  {openPopup === index && (
+                    <InvoicesColumnPopup
+                      list={list}
+                      category={category.name}
+                      // showParticularCards={(status) =>
+                      //   showParticularCards(status, list, category.name)
+                      // }
+                    />
+                  )}
                 </div>
               </div>
               <div>
                 <InvoicesList
                   category={category.name}
                   list={list}
+                  // list={filteredDataMap[category.name] || list}
                 />
               </div>
               <button type="button" className={css.addBtn}>

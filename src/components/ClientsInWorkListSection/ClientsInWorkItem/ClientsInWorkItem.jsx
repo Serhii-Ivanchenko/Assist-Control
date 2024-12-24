@@ -3,12 +3,18 @@ import GetStatus from "./GetStatus";
 import styles from "./ClientsInWorkItem.module.css";
 
 function ClientsInWorkItem({ item }) {
+  const formatDate = (date) => {
+    const options = {
+      day: "numeric",
+      month: "numeric",
+    };
+    return new Date(date).toLocaleDateString("uk-UA", options);
+  };
 
-  
   return (
     <div className={styles.wrapper}>
       <ul className={styles.itemsList}>
-        <li className={styles.date}>04.02</li>
+        <li className={styles.date}>{formatDate(item.date_e)}</li>
         <li className={styles.status}>
           <GetStatus status={item.status} />
         </li>

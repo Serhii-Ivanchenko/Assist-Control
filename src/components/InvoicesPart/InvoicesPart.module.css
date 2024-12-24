@@ -4,6 +4,8 @@
   gap: 10px;
   /* overflow-x: auto; */
   width: max-content;
+
+  user-select: none;
 }
 
 .categoriesItem {
@@ -32,6 +34,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  position: relative;
 }
 
 .categoryName {
@@ -114,6 +118,6 @@
   cursor: pointer;
 }
 
-.hidden{
+.hidden {
   display: none;
 }

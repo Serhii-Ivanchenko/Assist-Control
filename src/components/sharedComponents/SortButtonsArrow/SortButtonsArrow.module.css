@@ -1,0 +1,12 @@
+.arrowWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 16px;
+}
+
+.arrowIcon {
+  cursor: pointer;
+  transform: scale(1.5);
+}

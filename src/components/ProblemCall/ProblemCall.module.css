@@ -1,10 +1,16 @@
+.sectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 4px;
+}
+
 .wrapper {
   width: auto;
   height: auto;
   padding: 20px;
   border-radius: 12px;
   background: var(--dark-gray);
-  margin-bottom: 20px;
 }
 
 .header {
@@ -22,15 +28,21 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-bottom: 24px;
-}
-
-.lost {
   color: var(--red);
 }
 
-.active {
-  color: var(--play-btn-triangle);
+.problemCallPhoneNumber {
+  margin-bottom: 24px;
+}
+.emailWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.emailIcon {
+  color: var(--red);
 }
 
 .nameWrapper {
@@ -73,27 +85,16 @@
   height: 8px;
   border-radius: 12px;
   margin-bottom: 14px;
-}
-
-.lostLine {
   background-color: var(--red);
 }
 
-.activeLine {
-  background-color: var(--play-btn-triangle);
-}
-
-/* .bottomWrapper {
-  display: flex;
-  gap: 20px;
-  height: 70px;
-  align-items: center;
-} */
-
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 48px;
+.problemRequestMessage {
+  padding: 10px;
+  border-radius: 0px 12px 12px 12px;
+  background-color: var(--player-secondary-bg);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  object-fit: cover;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

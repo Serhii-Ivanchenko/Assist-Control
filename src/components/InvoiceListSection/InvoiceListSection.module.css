@@ -10,6 +10,10 @@
   scroll-behavior: smooth;
 }
 
+/* .wrapper:active {
+  cursor: grabbing;
+} */
+
 .wrapper::-webkit-scrollbar {
   height: 8px;
 }

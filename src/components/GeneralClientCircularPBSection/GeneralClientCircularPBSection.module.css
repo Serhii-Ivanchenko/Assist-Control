@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     width: 1526px;
-    height: 265px;
+    height: 245px;
     border-radius: 12px;
     /* border: 1px solid var(--light-gray); */
     justify-content: space-between;
