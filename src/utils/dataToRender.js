@@ -39,7 +39,9 @@ export const statusesCar = [
     { timeCall: "9:39", typeMessage: "browser", photoUrl: null, name: "Максим", auto: "HONDA CIVIC", status: "appointment", callTranscription: null, content: null, clientId: "789" }, 
     { timeCall: "9:27", typeMessage: "telegram", photoUrl: null, name: "Іван Петренко", auto: "2001 HONDA CIVIC", status: "repair", callTranscription: null, content: null, clientId: null },
     { timeCall: "9:27", typeMessage: "telegram", photoUrl: null, name: "Іван Петренко", auto: "2001 HONDA CIVIC", status: "repair", callTranscription: null, content: null, clientId: "987" },
-    { timeCall: "9:27", typeMessage: "telegram", photoUrl: null, name: "Іван Петренко", auto: "2001 HONDA CIVIC", status: "repair", callTranscription: null, content: null, clientId: null }
+    { timeCall: "9:27", typeMessage: "telegram", photoUrl: null, name: "Іван Петренко", auto: "2001 HONDA CIVIC", status: "repair", callTranscription: null, content: null, clientId: null },
+    { timeCall: "9:27", typeMessage: "call_incoming", photoUrl: null, name: "Олександр Макаренковчук", auto: "2001 Volkswagen Passat", status: "repair", callTranscription: null, content: null, clientId: null },
+    { timeCall: "9:27", typeMessage: "call_incoming", photoUrl: null, name: "Олександр Макаренковчук", auto: "2001 Volkswagen Passat", status: "repair", callTranscription: null, content: null, clientId: null }
   ];
 
   // пробні статуси для компоненту зв'язку (клієнти)

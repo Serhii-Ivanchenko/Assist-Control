@@ -5,24 +5,47 @@ import TimeSortItem from "../sharedComponents/TimeSortItem/TimeSortItem";
 import css from "./GeneralClientsSorterAndSelectorsSection.module.css";
 import { toggleVisibilityAllClients } from "../../redux/visibility/slice";
 import { selectVisibilityAllClients } from "../../redux/visibility/selectors";
-import { labelNamesAllClients } from "../../utils/dataToRender";
+import {
+  labelNamesAllClients,
+  statusesCommunications,
+} from "../../utils/dataToRender";
+import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSelector";
+import StatusFilter from "../sharedComponents/StatusFilter/StatusFilter";
+import renderStatusCommunication from "../../utils/renderStatusCommunication ";
+import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch";
 
 export default function GeneralClientsSorterAndSelectorsSection() {
   // Порожня функція для тимчасової передачі
   const noop = () => {};
+  const isFilter = true;
+
+  const handleStatusChange = (status) => {
+    console.log("Selected status:", status);
+  };
 
   return (
     <div className={css.wrapper}>
       <div className={css.leftContainer}>
         <TimeSortItem onSortChange={noop} />
+        <RangeTimeSelector />
         <CalendarPeriodSelector renderInModal={true} />
-        <DownloadPdfButton />
-        <InfoSettingsVisibility
-          selectVisibility={selectVisibilityAllClients}
-          toggleVisibilityAction={toggleVisibilityAllClients}
-          labelNames={labelNamesAllClients}
-        />{" "}
+        <StatusFilter
+          onStatusChange={handleStatusChange}
+          renderStatus={renderStatusCommunication}
+          statuses={statusesCommunications}
+          isFilter={isFilter}
+        />
       </div>
+      <div className={css.rightContainer}>
+          <CarsSearch />
+          <DownloadPdfButton />
+          <InfoSettingsVisibility
+            selectVisibility={selectVisibilityAllClients}
+            toggleVisibilityAction={toggleVisibilityAllClients}
+            labelNames={labelNamesAllClients}
+            className={css.settingsContainerInCrm}
+          />
+        </div>
     </div>
   );
 }

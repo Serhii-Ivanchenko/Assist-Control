@@ -1,6 +1,6 @@
 .btnSettingsContainer {
     position: relative;
-    display: inline-block;
+    display: flex;
   }
 
 .btnSettings {
