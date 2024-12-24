@@ -1,22 +1,5 @@
 .wrapper {
   width: 455px;
   height: 763px;
-  gap: 20px;
-  overflow-y: auto;
-}
-
-.wrapper::-webkit-scrollbar {
-  width: 8px;
-  padding-top: 4px;
-  height: 760px;
-}
-
-.wrapper::-webkit-scrollbar-track {
-  background-color: var(--bg);
-  border-radius: 4px;
-}
-
-.wrapper::-webkit-scrollbar-thumb {
-  background-color: var(--main-gray);
-  border-radius: 4px;
+  /* gap: 20px; */
 }
