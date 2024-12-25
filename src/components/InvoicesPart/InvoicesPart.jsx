@@ -36,60 +36,70 @@ export default function InvoicesPart({ categories }) {
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
+      status: "pending",
     },
     {
       photo: car,
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
+      status: "pending",
     },
     {
       photo: car,
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
+      status: "completed",
     },
     {
       photo: car,
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
+      status: "rejected",
     },
     {
       photo: car,
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
+      status: "completed",
     },
     {
       photo: car,
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
+      status: "completed",
     },
     {
       photo: car,
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
+      status: "completed",
     },
     {
       photo: car,
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
+      status: "completed",
     },
     {
       photo: car,
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
+      status: "pending",
     },
     {
       photo: car,
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
+      status: "completed",
     },
   ];
 
@@ -262,6 +272,7 @@ export default function InvoicesPart({ categories }) {
       amount: "8000",
       amount2: "7000 ",
       currency: "грн",
+      status: "completed",
     },
     {
       date: "19.12.24",
@@ -269,6 +280,7 @@ export default function InvoicesPart({ categories }) {
       amount: "8000",
       amount2: "7000",
       currency: "грн",
+      status: "rejected",
     },
     {
       date: "19.12.24",
@@ -276,6 +288,7 @@ export default function InvoicesPart({ categories }) {
       amount: "8000",
       amount2: "10000",
       currency: "грн",
+      status: "pending",
     },
     {
       date: "19.12.24",
@@ -283,6 +296,7 @@ export default function InvoicesPart({ categories }) {
       amount: "8000",
       amount2: "7000",
       currency: "грн",
+      status: "completed",
     },
     {
       date: "19.12.24",
@@ -290,6 +304,7 @@ export default function InvoicesPart({ categories }) {
       amount: "8000",
       amount2: "9000",
       currency: "грн",
+      status: "completed",
     },
     {
       date: "19.12.24",
@@ -297,6 +312,7 @@ export default function InvoicesPart({ categories }) {
       amount: "8000",
       amount2: "9000",
       currency: "грн",
+      status: "pending",
     },
 
     {
@@ -305,6 +321,7 @@ export default function InvoicesPart({ categories }) {
       amount: "8000",
       amount2: "10000",
       currency: "грн",
+      status: "rejected",
     },
     {
       date: "19.12.24",
@@ -312,6 +329,7 @@ export default function InvoicesPart({ categories }) {
       amount: "8000",
       amount2: "7000",
       currency: "грн",
+      status: "completed",
     },
     // {
     //   date: "19.12.24",
@@ -387,11 +405,13 @@ export default function InvoicesPart({ categories }) {
   const [openPopup, setOpenPopup] = useState(false);
   const buttonRefs = useRef([]);
 
-  // const [filteredData, setFilteredData] = useState([]);
   const [filteredDataMap, setFilteredDataMap] = useState({});
-  const [selectedStatus, setSelectedStatus] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [selectedStatusMap, setSelectedStatusMap] = useState({});
 
   const handleOpen = (index) => {
+    const category = categories[index].name;
+    setActiveCategory(openPopup === index ? null : category);
     setOpenPopup(openPopup === index ? null : index);
   };
 
@@ -412,6 +432,8 @@ export default function InvoicesPart({ categories }) {
 
   // Працюючий варіант
   const showParticularCards = (list, category) => {
+    const selectedStatus = selectedStatusMap[category] || [];
+
     const filteredCards =
       selectedStatus.length === 0 || selectedStatus.includes("")
         ? list // Показуємо всі
@@ -424,17 +446,11 @@ export default function InvoicesPart({ categories }) {
   };
 
   useEffect(() => {
-    //   const initialData = {};
-    //   categories.forEach((category) => {
-    //     initialData[category.name] = categoryMap[category.name] || [];
-    //   });
-    //   setFilteredDataMap(initialData);
-    // }, [categories]);
-    categories.forEach((category) => {
-      const list = categoryMap[category.name] || [];
-      showParticularCards(list, category.name); // Фільтруємо після зміни статусів
-    });
-  }, [selectedStatus]);
+    if (activeCategory) {
+      const list = categoryMap[activeCategory] || [];
+      showParticularCards(list, activeCategory);
+    }
+  }, [selectedStatusMap, activeCategory]);
 
   return (
     <div>
@@ -442,8 +458,6 @@ export default function InvoicesPart({ categories }) {
         {categories.map((category, index) => {
           const list = categoryMap[category.name] || [];
           const filteredList = filteredDataMap[category.name] || list;
-
-          // setFilteredData(list);
 
           const visibilityKey = categoryNameMapping[category.name];
           const isVisible = visibility[visibilityKey];
@@ -485,10 +499,12 @@ export default function InvoicesPart({ categories }) {
                   />
                   {openPopup === index && (
                     <InvoicesColumnPopup
-                      list={list}
+                      // list={list}
                       category={category.name}
-                      setSelectedStatus={setSelectedStatus}
-                      selectedStatus={selectedStatus}
+                      // setSelectedStatus={setSelectedStatus}
+                      // selectedStatus={selectedStatus}
+                      selectedStatus={selectedStatusMap[category.name] || []}
+                      setSelectedStatusMap={setSelectedStatusMap}
                     />
                   )}
                 </div>

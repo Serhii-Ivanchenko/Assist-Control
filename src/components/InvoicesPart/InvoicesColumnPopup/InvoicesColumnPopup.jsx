@@ -2,11 +2,10 @@ import css from "./InvoicesColumnPopup.module.css";
 import { BsCheck } from "react-icons/bs";
 
 export default function InvoicesColumnPopup({
-  // list,
   // showParticularCards,
-  // category,
-  setSelectedStatus,
+  setSelectedStatusMap,
   selectedStatus,
+  category,
 }) {
   //   const showParticularCards = (status) => {
   //     list.filter((item) => item.status === status);
@@ -14,17 +13,34 @@ export default function InvoicesColumnPopup({
 
   const handleFilter = (status) => {
     // showParticularCards(status); // Виклик фільтрації з переданим статусом
-    setSelectedStatus((prevStatuses) => {
+    // setSelectedStatus((prevStatuses) => {
+    //   if (status === "") {
+    //     return prevStatuses.includes("") ? [] : [""];
+    //   } else {
+    //     const updatedStatuses = prevStatuses.filter((s) => s !== "");
+    //     if (updatedStatuses.includes(status)) {
+    //       return updatedStatuses.filter((s) => s !== status);
+    //     } else {
+    //       return [...updatedStatuses, status];
+    //     }
+    //   }
+    // });
+    setSelectedStatusMap((prevMap) => {
+      const currentStatuses = prevMap[category] || [];
+
+      let updatedStatuses;
       if (status === "") {
-        return prevStatuses.includes("") ? [] : [""];
+        updatedStatuses = currentStatuses.includes("") ? [] : [""];
       } else {
-        const updatedStatuses = prevStatuses.filter((s) => s !== "");
-        if (updatedStatuses.includes(status)) {
-          return updatedStatuses.filter((s) => s !== status);
-        } else {
-          return [...updatedStatuses, status];
-        }
+        updatedStatuses = currentStatuses.includes(status)
+          ? currentStatuses.filter((item) => item !== status)
+          : [...currentStatuses.filter((item) => item !== ""), status];
       }
+
+      return {
+        ...prevMap,
+        [category]: updatedStatuses,
+      };
     });
   };
 
@@ -34,7 +50,7 @@ export default function InvoicesColumnPopup({
         <input
           type="checkbox"
           name="all"
-          id=""
+          id="all"
           className={css.checkbox}
           checked={selectedStatus.length === 0 || selectedStatus.includes("")}
           onChange={() => handleFilter("")}
@@ -48,7 +64,7 @@ export default function InvoicesColumnPopup({
         <input
           type="checkbox"
           name="completed"
-          id=""
+          id="completed"
           className={css.checkbox}
           checked={selectedStatus.includes("completed")}
           onChange={() => handleFilter("completed")}
@@ -62,7 +78,7 @@ export default function InvoicesColumnPopup({
         <input
           type="checkbox"
           name="pending"
-          id=""
+          id="pending"
           className={css.checkbox}
           checked={selectedStatus.includes("pending")}
           onChange={() => handleFilter("pending")}
@@ -76,7 +92,7 @@ export default function InvoicesColumnPopup({
         <input
           type="checkbox"
           name="rejected"
-          id=""
+          id="rejected"
           className={css.checkbox}
           checked={selectedStatus.includes("rejected")}
           onChange={() => handleFilter("rejected")}
