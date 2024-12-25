@@ -27,7 +27,7 @@
 .rightContainer {
   display: flex;
   /* justify-content: space-between; */
-  align-items: center;
+  /* align-items: center; */
 }
 
 .item {
@@ -108,8 +108,12 @@
 
 .audioContainer {
   width: 321px;
-  /* padding: 8px 0; */
+  padding: 8px 0;
   margin-left: auto;
+}
+
+:global(.MuiAccordionSummary-root) {
+  min-height: 0px !important;
 }
 
 .title {
