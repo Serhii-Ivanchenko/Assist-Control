@@ -387,9 +387,9 @@ export default function InvoicesPart({ categories }) {
   const [openPopup, setOpenPopup] = useState(false);
   const buttonRefs = useRef([]);
 
-  const [filteredData, setFilteredData] = useState([]);
+  // const [filteredData, setFilteredData] = useState([]);
   const [filteredDataMap, setFilteredDataMap] = useState({});
-  // const [selectedStatus, setSelectedStatus] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState([]);
 
   const handleOpen = (index) => {
     setOpenPopup(openPopup === index ? null : index);
@@ -411,31 +411,38 @@ export default function InvoicesPart({ categories }) {
   }, []);
 
   // Працюючий варіант
-  const showParticularCards = (status, list, category) => {
-    const filteredList = status
-      ? list.filter((item) => item.status === status)
-      : list;
-    setFilteredData(filteredList);
+  const showParticularCards = (list, category) => {
+    const filteredCards =
+      selectedStatus.length === 0 || selectedStatus.includes("")
+        ? list // Показуємо всі
+        : list.filter((card) => selectedStatus.includes(card.status));
 
     setFilteredDataMap((prev) => ({
       ...prev,
-      [category]: filteredList,
+      [category]: filteredCards,
     }));
   };
 
   useEffect(() => {
-    const initialData = {};
+    //   const initialData = {};
+    //   categories.forEach((category) => {
+    //     initialData[category.name] = categoryMap[category.name] || [];
+    //   });
+    //   setFilteredDataMap(initialData);
+    // }, [categories]);
     categories.forEach((category) => {
-      initialData[category.name] = categoryMap[category.name] || [];
+      const list = categoryMap[category.name] || [];
+      showParticularCards(list, category.name); // Фільтруємо після зміни статусів
     });
-    setFilteredDataMap(initialData);
-  }, [categories]);
+  }, [selectedStatus]);
 
   return (
     <div>
       <ul className={css.categoriesList}>
         {categories.map((category, index) => {
           const list = categoryMap[category.name] || [];
+          const filteredList = filteredDataMap[category.name] || list;
+
           // setFilteredData(list);
 
           const visibilityKey = categoryNameMapping[category.name];
@@ -480,9 +487,8 @@ export default function InvoicesPart({ categories }) {
                     <InvoicesColumnPopup
                       list={list}
                       category={category.name}
-                      showParticularCards={(status) =>
-                        showParticularCards(status, list, category.name)
-                      }
+                      setSelectedStatus={setSelectedStatus}
+                      selectedStatus={selectedStatus}
                     />
                   )}
                 </div>
@@ -491,7 +497,7 @@ export default function InvoicesPart({ categories }) {
                 <InvoicesList
                   category={category.name}
                   // list={list}
-                  list={filteredDataMap[category.name] || list}
+                  list={filteredList}
                 />
               </div>
               <button type="button" className={css.addBtn}>

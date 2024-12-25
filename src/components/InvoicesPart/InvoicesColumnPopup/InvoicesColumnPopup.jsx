@@ -2,16 +2,30 @@ import css from "./InvoicesColumnPopup.module.css";
 import { BsCheck } from "react-icons/bs";
 
 export default function InvoicesColumnPopup({
-  list,
-  showParticularCards,
-  category,
+  // list,
+  // showParticularCards,
+  // category,
+  setSelectedStatus,
+  selectedStatus,
 }) {
   //   const showParticularCards = (status) => {
   //     list.filter((item) => item.status === status);
   //   };
 
   const handleFilter = (status) => {
-    showParticularCards(status); // Виклик фільтрації з переданим статусом
+    // showParticularCards(status); // Виклик фільтрації з переданим статусом
+    setSelectedStatus((prevStatuses) => {
+      if (status === "") {
+        return prevStatuses.includes("") ? [] : [""];
+      } else {
+        const updatedStatuses = prevStatuses.filter((s) => s !== "");
+        if (updatedStatuses.includes(status)) {
+          return updatedStatuses.filter((s) => s !== status);
+        } else {
+          return [...updatedStatuses, status];
+        }
+      }
+    });
   };
 
   return (
@@ -22,6 +36,7 @@ export default function InvoicesColumnPopup({
           name="all"
           id=""
           className={css.checkbox}
+          checked={selectedStatus.length === 0 || selectedStatus.includes("")}
           onChange={() => handleFilter("")}
         />
         <span className={css.cbMark}>
@@ -35,6 +50,7 @@ export default function InvoicesColumnPopup({
           name="completed"
           id=""
           className={css.checkbox}
+          checked={selectedStatus.includes("completed")}
           onChange={() => handleFilter("completed")}
         />
         <span className={css.cbMark}>
@@ -45,9 +61,10 @@ export default function InvoicesColumnPopup({
       <label className={css.label}>
         <input
           type="checkbox"
-          name="panding"
+          name="pending"
           id=""
           className={css.checkbox}
+          checked={selectedStatus.includes("pending")}
           onChange={() => handleFilter("pending")}
         />
         <span className={css.cbMark}>
@@ -61,6 +78,7 @@ export default function InvoicesColumnPopup({
           name="rejected"
           id=""
           className={css.checkbox}
+          checked={selectedStatus.includes("rejected")}
           onChange={() => handleFilter("rejected")}
         />
         <span className={css.cbMark}>
