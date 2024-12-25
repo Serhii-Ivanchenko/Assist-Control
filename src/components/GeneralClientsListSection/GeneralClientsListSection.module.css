@@ -32,6 +32,7 @@
     text-align: center;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .titletext:first-child {
@@ -43,6 +44,7 @@
     flex-direction: row;
     flex-grow: 1;
     gap: 4px;
+    
 }
 
 .containercolumn {
@@ -72,7 +74,9 @@
     flex-direction: row;
     display: flex;
     gap: 4px;
+  
 }
+
 
 .header {
     display: flex;
@@ -92,6 +96,7 @@
     padding: 8px;
     align-items: center;
     flex-shrink: 0;
+    position: relative;
 }
 
 .shortitem {
@@ -104,6 +109,18 @@
 
 .subitem {
     background: transparent;
+}
+
+.downfill{
+    position: absolute;
+    right: 13px;
+    top: 16px;
+    fill: var(--white);
+    cursor: pointer;
+}
+
+.rotated {
+    transform: rotate(180deg);
 }
 
 .date {
@@ -225,7 +242,7 @@
 
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; 
 }
 
 .totalAmount {
@@ -305,3 +322,8 @@
     font-weight: 500;
     line-height: 20px;
 }
+
+ .expandedRow {
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+} 
