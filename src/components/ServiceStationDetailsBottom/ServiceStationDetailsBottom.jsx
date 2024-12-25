@@ -26,7 +26,7 @@ const pageComponents = {
 };
 
 export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
-  const [page, setPage] = useState("plan");
+  const [page, setPage] = useState("station");
 
   const getChangeablePartClass = () => {
     return page === "warehouse" ? css.noBackground : css.changeablePart;
