@@ -2,7 +2,8 @@ import ConnectionsCircularPBSection from "../ConnectionsCircularPBSection/Connec
 import ConnectionsListSection from "../ConnectionsListSection/ConnectionsListSection.jsx";
 import ConnectionsSelectorsSection from "../ConnectionsSelectorsSection/ConnectionsSelectorsSection.jsx";
 import HorizontalPBSection from "../HorizontalPBSection/HorizontalPBSection.jsx";
-import LastConnectionSection from "../LastConnectionSection/LastConnectionSection.jsx";
+// import LastConnectionSection from "../LastConnectionSection/LastConnectionSection.jsx";
+import ProblemCall from "../ProblemCall/ProblemCall.jsx";
 import css from "./ConnectionsMainComponent.module.css";
 
 export default function ConnectionsMainComponent() {
@@ -17,7 +18,8 @@ export default function ConnectionsMainComponent() {
 
       <div className={css.bottomWrapper}>
         <ConnectionsListSection />
-        <LastConnectionSection />
+        {/* <LastConnectionSection /> */}
+        <ProblemCall />
       </div>
     </div>
   );

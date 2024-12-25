@@ -4,6 +4,7 @@ import { BsCalendarWeek } from "react-icons/bs";
 import { FaAt } from "react-icons/fa6";
 import defaultAvatar from "../../assets/images/avatar_default.png";
 import PlayerAndTranscription from "../sharedComponents/PlayerAndTranscription/PlayerAndTranscription.jsx";
+import { useEffect, useRef, useState } from "react";
 const summary =
   "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене[марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей.Також цікавить діагностика стану автомобіля після ремонту.Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!";
 const messages = [
@@ -86,11 +87,46 @@ const calls = [
 ];
 
 export default function ProblemCall() {
+  const containerRef = useRef(null); // Ссилка на контейнер
+  const [isScrolled, setIsScrolled] = useState(false); // Стан для перевірки наявності скролу
+
+  useEffect(() => {
+    const handleResizeOrScroll = () => {
+      // Перевірка наявності вертикального скролу
+      if (containerRef.current) {
+        const hasVerticalScroll =
+          containerRef.current.scrollHeight > containerRef.current.clientHeight;
+        setIsScrolled(hasVerticalScroll);
+      }
+    };
+
+    // Викликаємо при завантаженні, зміні розміру чи скролі
+    handleResizeOrScroll();
+    window.addEventListener("resize", handleResizeOrScroll);
+    if (containerRef.current) {
+      containerRef.current.addEventListener("scroll", handleResizeOrScroll);
+    }
+
+    // Очищення ефекту
+    return () => {
+      window.removeEventListener("resize", handleResizeOrScroll);
+      if (containerRef.current) {
+        containerRef.current.removeEventListener(
+          "scroll",
+          handleResizeOrScroll
+        );
+      }
+    };
+  }, [calls]);
+
   return (
-    <div className={css.sectionWrapper}>
+    <div className={css.sectionWrapper} ref={containerRef}>
       {calls.map((call, index) => {
         return (
-          <div className={css.wrapper} key={index}>
+          <div
+            className={`${css.wrapper} ${isScrolled && css.wrapperScrolled}`}
+            key={index}
+          >
             {call.problemCall ? (
               <h3 className={css.header}>Проблемний дзвінок</h3>
             ) : (
