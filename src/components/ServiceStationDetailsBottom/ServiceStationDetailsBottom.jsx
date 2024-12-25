@@ -9,8 +9,10 @@ import WarehousePart from "./WarehousePart/WarehousePart";
 import DistributorsPart from "./DistributorsPart/DistributorsPart";
 import RatingPart from "./RatingPart/RatingPart";
 import CheckoutPart from "./CheckoutPart/CheckoutPart";
+import PlanPart from "./PlanPart/PlanPart";
 
 const pageComponents = {
+  plan: <PlanPart />,
   station: <StationPart />,
   staff: <StaffPart />,
   price: <PricePart />,
@@ -24,10 +26,10 @@ const pageComponents = {
 };
 
 export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
-  const [page, setPage] = useState("station");
+  const [page, setPage] = useState("plan");
 
   const getChangeablePartClass = () => {
-    return page === "warehouse"  ? css.noBackground : css.changeablePart;
+    return page === "warehouse" ? css.noBackground : css.changeablePart;
   };
 
   return (
