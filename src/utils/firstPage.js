@@ -12,8 +12,14 @@ export default function firstPage(userData) {
       return "/video-control";
     case "rec":
       return "/recommendations";
-    case "tracking":
-      return "/accounting";
+    case "clients-general":
+      return "/accounting/clients/clients-list-general";
+    case "clients-pending":
+      return "/accounting/clients/clients-list-in-work";
+    case "distributors":
+      return "/accounting/distributors";
+    case "invoices":
+      return "/accounting/invoices/goods";
     case "main":
       return "/main"
     case "default":

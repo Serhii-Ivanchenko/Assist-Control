@@ -431,7 +431,12 @@ export default function UserSettingsProfile({ onClose }) {
                   <option value="v-c">Моніторинг</option>
                   <option value="crm">Планувальник</option>
                   <option value="rec">Рекомендації</option>
-                  <option value="tracking">Облік</option>
+                  <option value="clients-general">
+                    Клієнти (Загальний список)
+                  </option>
+                  <option value="clients-pending">Клієнти (У роботі)</option>
+                  <option value="distributors">Постачальники</option>
+                  <option value="invoices">Накладні</option>
                   <option value="carReport">Звіти</option>
                   <option value="Settings">Налаштування</option>
                 </Field>
