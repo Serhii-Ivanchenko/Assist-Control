@@ -20,12 +20,18 @@ import { selectVisibilityClientsInWork } from "../../../redux/visibility/selecto
 import { categoryIdClients} from "../../../utils/dataToRender";
 
 function ClientStatusStepper({ car, carImg, status, prePaid, postPaid }) {
+  const visibility = useSelector(selectVisibilityClientsInWork);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [notificationSent, setNotificationSent] = useState(false);
 
   // Масив кнопок
   const buttons = [
+    {
+      id: "0",
+      title: car,
+      icon: <img src={carImg} alt="img" className={styles.carImage} />
+    },
     { id: 1, title: "Звернення", icon: <BsReceipt /> },
     { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid /> },
     { id: 3, title: "КП", icon: <BsClipboardCheck /> },
@@ -137,39 +143,52 @@ function ClientStatusStepper({ car, carImg, status, prePaid, postPaid }) {
     }
   };
 
+  const areAllItemsHidden = (group) => {
+    return group.every(({ id }) => {
+      const visibilityKey = categoryIdClients[id];
+      return !visibility[visibilityKey];
+    });
+  };
+
   return (
     <div>
       <ul className={styles.wrapper}>
-        {groupedButtons.map((group, idx) => (
-          <ul
-            key={idx}
-            className={`${styles.boxContainer} ${
-              idx === groupedButtons.length - 1 ? "" : getStatusClass(status)
-            }`}
-            onClick={() => handleClick(idx)}
-          >
-               {group.map(({ id, title, icon, noBackground }) => {
-            // Отримуємо ключ з маппінгу для перевірки видимості
-            const visibilityKey = categoryIdClients[id];
+        {groupedButtons.map((group, idx) => {
+  if (areAllItemsHidden(group)) {
+    return null;
+  }
 
-            return (
-              <li 
-                key={id} 
-                className={`${styles.listItem} ${!visibility[visibilityKey] ? styles.hidden : ''}`}
-              >
-                <StepperBtn
-                  value={title}
-                  icon={icon}
-                  isActive={isStepCompleted(id)}
-                  noBackground={noBackground}
-                  notificationSent={notificationSent}
-                  status={status}
-                />
-              </li>
-            );
-          })}
-        </ul>
-      ))}
+  return (
+    <ul
+      key={idx}
+      className={`${styles.boxContainer} ${
+        idx === groupedButtons.length - 1 ? "" : getStatusClass(status)
+      }`}
+      onClick={() => handleClick(idx)}
+    >
+      {group.map(({ id, title, icon, noBackground }) => {
+        const visibilityKey = categoryIdClients[id];
+        return (
+          <li
+            key={id}
+            className={`${styles.listItem} ${
+              !visibility[visibilityKey] ? styles.hidden : ""
+            }`}
+          >
+            <StepperBtn
+              value={title}
+              icon={icon}
+              isActive={isStepCompleted(id)}
+              noBackground={noBackground}
+              notificationSent={notificationSent}
+              status={status}
+            />
+          </li>
+        );
+      })}
+    </ul>
+  );
+})}
     </ul>
 
       {isModalOpen && (
