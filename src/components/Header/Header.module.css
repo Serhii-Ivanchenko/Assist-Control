@@ -1,18 +1,12 @@
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 16px;
-    padding-bottom: 11px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
 }
 
-@media only screen and (min-width: 1850px) {
-.header {
-    padding: 10px 0;
-  }
-}
-
-.leftSideWrapper{
+.leftSideWrapper {
   display: flex;
   align-items: center;
   gap: 27px;

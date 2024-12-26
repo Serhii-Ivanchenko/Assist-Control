@@ -1,0 +1,27 @@
+.pageContent {
+  width: 740px;
+  /* height: 600px; */
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 1850px) {
+  .pageContent {
+    width: 1052px;
+    /* height: 900px; */
+  }
+}
+
+.pagegrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+}
+
+@media only screen and (min-width: 1850px) {
+  .pagegrid {
+    grid-column-gap: 14px;
+    grid-row-gap: 14px;
+    height: clamp(665px, calc(665px + (163 * ((100vh - 900px) / 180))), 828px);
+  }
+}

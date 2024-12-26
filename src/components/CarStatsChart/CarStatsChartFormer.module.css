@@ -1,0 +1,17 @@
+.containerstats {
+    width: 310px;
+    height: 270px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 9px 13px 11px;
+    /* display: flex; */
+}
+
+@media only screen and (min-width: 1850px) {
+    .containerstats {
+        width: 462px;
+        height: 405px;
+        height: clamp(328px, calc(328px + (77 * ((100vh - 900px) / 180))), 405px);
+        padding: 13px 18px 12px 14px;
+    }
+}

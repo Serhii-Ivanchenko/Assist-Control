@@ -1,6 +1,6 @@
 .wrapper {
   width: 386px;
-  max-height: 191px;
+  max-height: 215px;
   background: var(--bg-secondary);
   border-radius: 5px;
   overflow-y: scroll;
@@ -29,7 +29,11 @@
     display: flex;
     height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 409px);
     padding-top: clamp(14px, calc(14px + (2 * ((100vh - 900px) / 180))), 16px);
-    padding-bottom: clamp(11px, calc(11px + (5 * ((100vh - 900px) / 180))), 16px);
+    padding-bottom: clamp(
+      11px,
+      calc(11px + (5 * ((100vh - 900px) / 180))),
+      16px
+    );
     padding-left: 20px;
     padding-right: 10px;
     background: var(--bg-secondary);
