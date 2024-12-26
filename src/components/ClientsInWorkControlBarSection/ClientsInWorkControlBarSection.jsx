@@ -8,9 +8,9 @@ import DownloadPdfButton from "../sharedComponents/DownloadPdfButton/DownloadPdf
 import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
 import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSelector";
 import StatusFilter from "../sharedComponents/StatusFilter/StatusFilter";
-import css from "./ClientsInWorkSelectorsSection.module.css";
+import css from "./ClientsInWorkControlBarSection.module.css";
 
-export default function ClientsInWorkSelectorsSection() {
+export default function ClientsInWorkControlBarSection() {
   const isFilter = true;
   const handleStatusChange = (status) => {
     console.log("Selected status:", status);

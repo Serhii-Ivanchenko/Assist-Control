@@ -8,9 +8,9 @@ import DownloadPdfButton from "../sharedComponents/DownloadPdfButton/DownloadPdf
 import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
 import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSelector";
 import TimeSortItem from "../sharedComponents/TimeSortItem/TimeSortItem";
-import css from "./DistributorsSorterAndSelectorsSection.module.css";
+import css from "./DistributorsControlBarSection.module.css";
 
-export default function DistributorsSorterAndSelectorsSection() {
+export default function DistributorsControlBarSection() {
   const noop = () => {};
 
   return (

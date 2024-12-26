@@ -466,7 +466,7 @@ export default function InvoicesPart({ categories }) {
             <li
               key={index}
               className={clsx(css.categoriesItem, {
-                [css.hidden]: !isVisible,
+                [css.hidden]: !isVisible || !categories.some(c => c.name === category.name),
               })}
             >
               <div
@@ -519,6 +519,7 @@ export default function InvoicesPart({ categories }) {
               <button type="button" className={css.addBtn}>
                 <BsPlusCircleDotted size={18} />
               </button>
+
             </li>
           );
         })}

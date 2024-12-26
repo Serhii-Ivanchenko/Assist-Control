@@ -2,7 +2,7 @@ import CalendarPeriodSelector from "../sharedComponents/CalendarPeriodSelector/C
 import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
 import DownloadPdfButton from "../sharedComponents/DownloadPdfButton/DownloadPdfButton";
 import TimeSortItem from "../sharedComponents/TimeSortItem/TimeSortItem";
-import css from "./GeneralClientsSorterAndSelectorsSection.module.css";
+import css from "./GeneralClientsControlBarSection.module.css";
 import { toggleVisibilityAllClients } from "../../redux/visibility/slice";
 import { selectVisibilityAllClients } from "../../redux/visibility/selectors";
 import {
@@ -14,7 +14,7 @@ import StatusFilter from "../sharedComponents/StatusFilter/StatusFilter";
 import renderStatusCommunication from "../../utils/renderStatusCommunication ";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch";
 
-export default function GeneralClientsSorterAndSelectorsSection() {
+export default function GeneralClientsControlBarSection() {
   // Порожня функція для тимчасової передачі
   const noop = () => {};
   const isFilter = true;
