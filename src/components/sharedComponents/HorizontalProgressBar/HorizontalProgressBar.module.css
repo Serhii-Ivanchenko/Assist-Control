@@ -1,0 +1,50 @@
+.wrapper {
+    display: flex;
+    width: 415px;
+    height: 75px;
+    /* border: 1px solid var(--light-gray); */
+    gap: 10px;
+    background: var(--bg-secondary);
+    flex-direction: column;
+}
+
+.titlebox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 27px;
+}
+
+
+.title {
+    color: var(--lightgray);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.1875em;
+    font-variant: small-caps;
+}
+
+.titlespan {
+    color: var(--play-btn-triangle);
+}
+
+.tarplan {
+    color: var(--text-gray);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-variant: small-caps;
+}
+
+.error {
+    color: var(--red);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-variant: small-caps;
+}
