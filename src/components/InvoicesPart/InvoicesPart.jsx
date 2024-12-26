@@ -15,21 +15,6 @@ import { useEffect } from "react";
 export default function InvoicesPart({ categories }) {
   const visibility = useSelector(selectVisibilityInvoices);
 
-  // const categories = [
-  //   { name: "Діагностика" },
-  //   { name: "Погоджено" },
-  //   { name: "Замовлено" },
-  //   { name: "Отримано" },
-  //   { name: "Продано" },
-  //   { name: "Повернуто" },
-  //   { name: "Переміщено" },
-  //   { name: "Переоцінка" },
-  //   { name: "Інвентаризація" },
-  //   { name: "Списано" },
-  //   funds && { name: "Витрачено" },
-  //   equipment && { name: "Використання" },
-  // ].filter(Boolean);
-
   const invoices = [
     {
       photo: car,
@@ -57,7 +42,7 @@ export default function InvoicesPart({ categories }) {
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
-      status: "rejected",
+      status: "",
     },
     {
       photo: car,
@@ -164,48 +149,6 @@ export default function InvoicesPart({ categories }) {
       amount: "8000 грн",
       status: "completed",
     },
-    //{
-    //   date: "19.12.24",
-    //   distributorName: "Elit",
-    //   amount: "8000 грн",
-    //   status: "completed",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   distributorName: "Elit",
-    //   amount: "8000 грн",
-    //   status: "pending",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   distributorName: "Elit",
-    //   amount: "8000 грн",
-    //   status: "completed",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   distributorName: "Elit",
-    //   amount: "8000 грн",
-    //   status: "completed",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   distributorName: "Elit",
-    //   amount: "8000 грн",
-    //   status: "pending",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   distributorName: "Elit",
-    //   amount: "8000 грн",
-    //   status: "completed",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   distributorName: "Elit",
-    //   amount: "8000 грн",
-    //   status: "completed",
-    // },
   ];
 
   const sold = [
@@ -251,18 +194,6 @@ export default function InvoicesPart({ categories }) {
       amount: "8000 грн",
       status: "completed",
     },
-    // { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: "", date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
-    // { photo: car, date: "19.12.24", name: "Клієнт 1", amount: "8000 грн" },
   ];
 
   const replacedAndothers = [
@@ -331,62 +262,6 @@ export default function InvoicesPart({ categories }) {
       currency: "грн",
       status: "completed",
     },
-    // {
-    //   date: "19.12.24",
-    //   warehouse: "Склад 1",
-    //   amount: "8000",
-    //   amount2: "9000",
-    //   currency: "грн",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   warehouse: "Склад 1",
-    //   amount: "8000",
-    //   amount2: "9000",
-    //   currency: "грн",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   warehouse: "Склад 1",
-    //   amount: "8000",
-    //   amount2: "7000",
-    //   currency: "грн",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   warehouse: "Склад 1",
-    //   amount: "8000",
-    //   amount2: "9000",
-    //   currency: "грн",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   warehouse: "Склад 1",
-    //   amount: "8000",
-    //   amount2: "9000",
-    //   currency: "грн",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   warehouse: "Склад 1",
-    //   amount: "8000",
-    //   amount2: "7000",
-    //   currency: "грн",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   warehouse: "Склад 1",
-    //   amount: "8000",
-    //   amount2: "9000",
-    //   currency: "грн",
-    // },
-    // {
-    //   date: "19.12.24",
-    //   warehouse: "Склад 1",
-    //   amount: "8000",
-    //   amount2: "9000",
-    //   currency: "грн",
-    // },
   ];
 
   const categoryMap = {
@@ -408,6 +283,7 @@ export default function InvoicesPart({ categories }) {
   const [filteredDataMap, setFilteredDataMap] = useState({});
   const [activeCategory, setActiveCategory] = useState(null);
   const [selectedStatusMap, setSelectedStatusMap] = useState({});
+  const [borderColor, setBorderColor] = useState({});
 
   const handleOpen = (index) => {
     const category = categories[index].name;
@@ -436,14 +312,36 @@ export default function InvoicesPart({ categories }) {
 
     const filteredCards =
       selectedStatus.length === 0 || selectedStatus.includes("")
-        ? list // Показуємо всі
+        ? list
         : list.filter((card) => selectedStatus.includes(card.status));
 
     setFilteredDataMap((prev) => ({
       ...prev,
       [category]: filteredCards,
     }));
+
+    changeBorderColor(filteredCards, category);
   };
+
+  const changeBorderColor = (list, category) => {
+    if (list.some((item) => item.status === "rejected")) {
+      setBorderColor((prev) => ({
+        ...prev,
+        [category]: css.amountMinus,
+      }));
+    } else if (list.some((item) => item.status === "pending")) {
+      setBorderColor((prev) => ({ ...prev, [category]: css.amountDiagnostic }));
+    } else if (list.every((item) => item.status === "completed")) {
+      setBorderColor((prev) => ({ ...prev, [category]: css.amountGreen }));
+    }
+  };
+
+  useEffect(() => {
+    categories.forEach((category) => {
+      const list = categoryMap[category.name] || [];
+      showParticularCards(list, category.name);
+    });
+  }, []);
 
   useEffect(() => {
     if (activeCategory) {
@@ -458,6 +356,7 @@ export default function InvoicesPart({ categories }) {
         {categories.map((category, index) => {
           const list = categoryMap[category.name] || [];
           const filteredList = filteredDataMap[category.name] || list;
+          const categoryBorderColor = borderColor[category.name];
 
           const visibilityKey = categoryNameMapping[category.name];
           const isVisible = visibility[visibilityKey];
@@ -466,7 +365,9 @@ export default function InvoicesPart({ categories }) {
             <li
               key={index}
               className={clsx(css.categoriesItem, {
-                [css.hidden]: !isVisible || !categories.some(c => c.name === category.name),
+                [css.hidden]:
+                  !isVisible ||
+                  !categories.some((c) => c.name === category.name),
               })}
             >
               <div
@@ -476,14 +377,16 @@ export default function InvoicesPart({ categories }) {
                 <p className={css.categoryName}>{category.name}</p>
                 <div className={css.amountAndBtnMore}>
                   <span
-                    className={`${css.amount} ${
-                      category.name === "Діагностика" && css.amountDiagnostic
-                    } ${
-                      (category.name === "Списано" ||
-                        category.name === "Переоцінка" ||
-                        category.name === "Інвентаризація") &&
-                      css.amountMinus
-                    }`}
+                    className={`${css.amount} ${categoryBorderColor}
+                    `}
+                    // ${
+                    //   category.name === "Діагностика" && css.amountDiagnostic
+                    // } ${
+                    //   (category.name === "Списано" ||
+                    //     category.name === "Переоцінка" ||
+                    //     category.name === "Інвентаризація") &&
+                    //   css.amountMinus
+                    //   }
                   >
                     {category.name === "Списано" ||
                     category.name === "Переоцінка" ||
@@ -519,7 +422,6 @@ export default function InvoicesPart({ categories }) {
               <button type="button" className={css.addBtn}>
                 <BsPlusCircleDotted size={18} />
               </button>
-
             </li>
           );
         })}
