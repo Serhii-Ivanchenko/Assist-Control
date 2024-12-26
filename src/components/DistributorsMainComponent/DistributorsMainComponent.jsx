@@ -1,12 +1,12 @@
 import DistributorsCircularPBSection from '../DistributorsCircularPBSection/DistributorsCircularPBSection.jsx';
 import DistributorsListSection from '../DistributorsListSection/DistributorsListSection.jsx';
-import DistributorsSorterAndSelectorsSection from '../DistributorsSorterAndSelectorsSection/DistributorsSorterAndSelectorsSection.jsx';
+import DistributorsControlBarSection from '../DistributorsControlBarSection/DistributorsControlBarSection.jsx';
 import css from './DistributorsMainComponent.module.css'
 
 export default function DistributorsMainComponent() {
      return (
        <div className={css.wrapper}>
-         <DistributorsSorterAndSelectorsSection />
+         <DistributorsControlBarSection />
          <DistributorsCircularPBSection />
          <DistributorsListSection />
        </div>

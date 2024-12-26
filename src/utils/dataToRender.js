@@ -184,7 +184,7 @@ export const categoryNameMapping = {
 // Лейбл для секції облік(клієнти у роботі) - налаштування видимості
 
 export const labelNamesClientsInWork = {
-  photo: "Photo",
+  photo: "Фото",
   appeal: "Звернення",
   diagnostics: "Діагностика",
   KP: "КП",
@@ -213,8 +213,8 @@ export const categoryIdClients = {
   1: "appeal",
   2: "diagnostics",
   3: "KP",
-  4: "order",
-  5: "prePayment",
+  4: "prePayment",
+  5: "order",
   6: "provider",
   7: "repair",
   8: "totalAmount",
@@ -224,13 +224,11 @@ export const categoryIdClients = {
 // Лейбл для секції облік(загальний список клієнтів) - налаштування видимості
 
 export const labelNamesAllClients = {
-  photo: "Фото",
-  name: "Ім'я",
   rating: "Рейтинг",
   appeal: "Звернення",
   repair: "Ремонт",
   averageCheck: "Середній чек",
-  diagnostics: "Каса",
+  paydesk: "Каса",
   workPayment: "Оплата за роботу",
   salaryMechanics: "ЗП механіка",
   spareParts: "Запчастини",
