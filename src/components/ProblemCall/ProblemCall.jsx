@@ -119,6 +119,45 @@ export default function ProblemCall() {
     };
   }, [calls]);
 
+  const lastWrapperRef = useRef(null); // Ссылка на последний wrapper
+  const previousHeightRef = useRef(0); // Хранение предыдущей высоты
+  const [isInitialRender, setIsInitialRender] = useState(true); // Флаг первого рендера
+
+  const scrollToBottom = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (!lastWrapperRef.current) return;
+
+    const observer = new ResizeObserver(() => {
+      const currentHeight = lastWrapperRef.current.offsetHeight;
+
+      if (!isInitialRender && currentHeight > previousHeightRef.current) {
+        // Скроллим вниз только если это не первый рендер
+        scrollToBottom();
+      }
+
+      // Обновляем предыдущую высоту
+      previousHeightRef.current = currentHeight;
+
+      // Сбрасываем флаг после первого рендера
+      if (isInitialRender) {
+        setIsInitialRender(false);
+      }
+    });
+
+    observer.observe(lastWrapperRef.current);
+
+    // Очищаем наблюдателя при размонтировании
+    return () => observer.disconnect();
+  }, [calls, isInitialRender]);
+
   return (
     <div className={css.sectionWrapper} ref={containerRef}>
       {calls.map((call, index) => {
@@ -126,6 +165,7 @@ export default function ProblemCall() {
           <div
             className={`${css.wrapper} ${isScrolled && css.wrapperScrolled}`}
             key={index}
+            ref={index === calls.length - 1 ? lastWrapperRef : null}
           >
             {call.problemCall ? (
               <h3 className={css.header}>Проблемний дзвінок</h3>
