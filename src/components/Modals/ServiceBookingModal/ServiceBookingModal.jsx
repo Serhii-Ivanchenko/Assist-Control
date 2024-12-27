@@ -140,7 +140,7 @@ export default function ServiceBookingModal({
   };
 
   const initialValues = {
-    name: recordById?.client_name || "",
+    name: recordById?.name || "",
     phone_number: recordId ? `${"+" + recordById?.phone}` : "",
     car_number: recordById?.plate || "",
     service_id: recordById?.service_id || "",
