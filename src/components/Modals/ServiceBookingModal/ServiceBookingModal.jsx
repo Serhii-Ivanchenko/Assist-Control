@@ -11,11 +11,13 @@ import {
   createRecord,
   getPlannedVisits,
   getRecordsForDay,
+  getRecordsForPeriod,
   getServiceDataForBooking,
   updateRecordData,
 } from "../../../redux/crm/operations.js";
 import toast from "react-hot-toast";
 import {
+  selectDates,
   selectDayRecords,
   selectServiceData,
 } from "../../../redux/crm/selectors.js";
@@ -33,6 +35,7 @@ export default function ServiceBookingModal({
 }) {
   const dispatch = useDispatch();
   const selectedDate = useSelector(selectDate);
+  const dates = useSelector(selectDates);
 
   const [datesArray, setDatesArray] = useState([]);
   const [booking, setBooking] = useState([]);
@@ -81,10 +84,6 @@ export default function ServiceBookingModal({
   };
 
   const dateToPass = pickedDate.split(".").reverse().join("-");
-  const sheduleDate = datesArray[0]?.appointment_date
-    .split(".")
-    .reverse()
-    .join("-");
 
   useEffect(() => {
     const fetchServiceData = () => {
@@ -100,7 +99,7 @@ export default function ServiceBookingModal({
   const handleSubmit = (values, actions) => {
     const recordData = {
       ...values,
-      shedule_date: sheduleDate,
+      shedule_date: datesArray[0]?.appointment_date,
       service_id: values.service_id ? Number(values.service_id) : null,
       prepayment: values.prepayment ? Number(values.prepayment) : null,
       position: values.position ? Number(values.position) : null,
@@ -118,6 +117,7 @@ export default function ServiceBookingModal({
             toast.success("Запис успішно відредаговано");
             dispatch(getRecordsForDay(selectedDate));
             dispatch(getPlannedVisits(selectedDate));
+            dispatch(getRecordsForPeriod(dates));
           })
           .catch(() => {
             toast.error("Щось пішло не так. Спробуйте ще раз!");
@@ -128,6 +128,7 @@ export default function ServiceBookingModal({
             toast.success("Запис успішно створено");
             dispatch(getRecordsForDay(selectedDate));
             dispatch(getPlannedVisits(selectedDate));
+            dispatch(getRecordsForPeriod(dates));
           })
           .catch(() => {
             toast.error("Щось пішло не так. Спробуйте ще раз!");
@@ -139,7 +140,7 @@ export default function ServiceBookingModal({
   };
 
   const initialValues = {
-    name: recordById?.client_name || "",
+    name: recordById?.name || "",
     phone_number: recordId ? `${"+" + recordById?.phone}` : "",
     car_number: recordById?.plate || "",
     service_id: recordById?.service_id || "",
