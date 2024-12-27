@@ -1,0 +1,45 @@
+.inputBox {
+  display: flex;
+  width: 364px;
+  height: 40px;
+  padding: 0 30px;
+  padding-left: 52px;
+  align-items: center;
+  gap: 122px;
+  flex-shrink: 0;
+
+  border-radius: 8px;
+  background: var(--CRM-modal-InputBG, #2d3038);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+
+  position: relative;
+}
+
+.input {
+  height: 100%;
+  background: var(--CRM-modal-InputBG, #2d3038);
+  border: none;
+  outline: none;
+
+  color: white;
+}
+
+.iconSearch {
+  fill: white;
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.iconArrow {
+  fill: white;
+  position: absolute;
+  right: 10px;
+
+  top: 50%;
+  transform: translateY(-50%);
+}
