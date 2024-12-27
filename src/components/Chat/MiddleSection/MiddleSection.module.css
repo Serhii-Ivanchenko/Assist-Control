@@ -1,0 +1,6 @@
+.middleSectionWrapper {
+    width: 522px;
+    height: 967px;
+    border-radius: 12px;
+    border: 1px solid var(--light-gray);
+}
