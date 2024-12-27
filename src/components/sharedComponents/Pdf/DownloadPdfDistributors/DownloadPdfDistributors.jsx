@@ -83,7 +83,6 @@ export default function DownloadPdfDistributors() {
       doc.text(`Дата замовлення: ${date}`, styles.logo.x, currentY);
       currentY += 7;
 
-      // Підготовка даних таблиці
       const tableData = [];
 
       distributors.forEach((distributor) => {
@@ -93,32 +92,48 @@ export default function DownloadPdfDistributors() {
           distributor.invoiceSum || "—",
           visibility?.date ? distributor.deliveryDate || "—" : "—",
           visibility?.quantity ? distributor.carPartsQuantity || "—" : "—",
-          distributor.carNumber || "—", // Номер авто
         ];
 
         // Додавання основного рядка для постачальника
         tableData.push(row);
 
-        // Додавання деталей для кожного постачальника
         const carPartsData = distributor.carParts || [];
-        carPartsData.forEach((part) => {
-          // Рядки для запчастин з порожніми значеннями для постачальника
-          tableData.push([
-            "",  // Порожній рядок для постачальника
-            "", 
-            "", 
-            "", 
-            "", // Порожня колонка для номера авто
-            part.carPartsName || "—",
-            part.quantity || "—",
-            part.article || "—",
-            part.brandName || "—",
-            part.price || "—",
-            part.purchaseAmount || "—",
-            part.salesAmount || "—",
-            part.salesPercent || "—",
-          ]);
-        });
+        if (carPartsData.length > 0) {
+          if (distributor.carNumber) {
+            tableData.push([
+              "",
+              "",
+              "",
+              "",
+              `${distributor.carNumber || "—"}`,
+              "",
+              "",
+              "",
+              "",
+              "",
+              `Загальна сума: ${distributor.salesAmount || "—"}грн`,
+              `Середнійf  відсоток: ${distributor.percent || "—"}%`,
+            ]);
+          }
+
+          // Додавання окремих рядків для запчастин
+          carPartsData.forEach((part) => {
+            tableData.push([
+              "",
+              "",
+              "",
+              "",
+              part.carPartsName || "—",
+              part.quantity || "—",
+              part.article || "—",
+              part.brandName || "—",
+              part.price || "—",
+              part.purchaseAmount || "—",
+              part.salesAmount || "—",
+              part.salesPercent || "—",
+            ]);
+          });
+        }
       });
 
       // Заголовки таблиці
@@ -127,7 +142,6 @@ export default function DownloadPdfDistributors() {
         "Сума рахунку",
         "Дата доставки",
         "Загальна кількість",
-        "Номер авто",  // Новий заголовок для номера авто
         "Назва деталі",
         "Кількість",
         "Артикул",
@@ -140,8 +154,10 @@ export default function DownloadPdfDistributors() {
 
       // Налаштування ширини стовпців
       const columnStyles = {
-        4: { cellWidth: 30 }, // Ширина стовпця для "Номер авто"
+        4: { cellWidth: 30},
       };
+
+    
 
       // Додавання таблиці
       doc.autoTable({
@@ -150,13 +166,16 @@ export default function DownloadPdfDistributors() {
         body: tableData,
         styles: { fontSize: 9, font: "Roboto-Regular" },
         headStyles: { fillColor: [22, 160, 133] },
-        columnStyles: columnStyles, // Застосовуємо налаштування ширини стовпців
+        columnStyles: columnStyles,
+
       });
 
       currentY = doc.lastAutoTable.finalY + 10;
     });
 
-    doc.save(`distributor_report_${new Date().toISOString().split("T")[0]}.pdf`);
+    doc.save(
+      `distributor_report_${new Date().toISOString().split("T")[0]}.pdf`
+    );
   };
 
   return (
