@@ -6,9 +6,7 @@
     /* border-radius: 12px; */
     /* padding: 20px; */
     gap: 15px;
-    /* background: var(--bg-secondary); */
     flex-direction: column;
-   
 }
 
 .horizontalBox{
@@ -42,10 +40,10 @@ border-radius: 12px;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    line-height: 1.1875em;
     font-variant: small-caps;
     display: flex;
-    padding: 4px 10px;
+    justify-content: center;
     align-items: center;
     border-radius: 12px;
     background-color: var(--green-btn-normal);
@@ -56,5 +54,9 @@ border-radius: 12px;
     top: 20px;
     right: 20px;
     z-index: 1;
+    cursor: pointer;
+}
 
+.btnadd:hover {
+    background-color: var(--green-btn-hover);
 }

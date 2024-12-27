@@ -11,7 +11,7 @@ const valuesecond = 2400;
 const titlefirst = "розмов";
 const titlesecond = "AI";
 const activecolor = "var(--play-btn-triangle)";
-const haightline = 12;
+const lineHeight = 12;
 const borderradius = 5;
 
 export default function HorizontalPBSection() {
@@ -20,7 +20,7 @@ export default function HorizontalPBSection() {
   // const toastShown = useRef(false);
   
   useEffect(() => {
-    if (valuefirst+valuesecond > maxvalue) {
+    if (valuefirst > maxvalue || valuesecond > maxvalue) {
       toast.error("Ліміт дзвінків вичерпано.", {
         position: "top-center",
         duration: 5000,
@@ -39,7 +39,7 @@ export default function HorizontalPBSection() {
     <div className={css.wrapper}>
       <div className={css.horizontalBox}>
         <HorizontalProgressBar value={valuefirst} minvalue={minvalue} maxvalue={maxvalue}
-          title={titlefirst} activecolor={activecolor} haightline={haightline}
+          title={titlefirst} activecolor={activecolor} lineHeight={lineHeight}
           borderradius={borderradius} />
         <button
           className={css.btnadd}
@@ -48,7 +48,7 @@ export default function HorizontalPBSection() {
       
       <div className={css.horizontalBox}>
         <HorizontalProgressBar value={valuesecond} minvalue={minvalue} maxvalue={maxvalue}
-          title={titlesecond} activecolor={activecolor} haightline={haightline}
+          title={titlesecond} activecolor={activecolor} lineHeight={lineHeight}
           borderradius={borderradius} />
         <button
           className={css.btnadd}
