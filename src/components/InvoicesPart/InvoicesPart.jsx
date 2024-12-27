@@ -21,20 +21,6 @@ export default function InvoicesPart({ categories }) {
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
-      status: "pending",
-    },
-    {
-      photo: car,
-      date: "19.12.24",
-      plate: "CA 6864 CO",
-      name: "ПІБ Клієнт",
-      status: "pending",
-    },
-    {
-      photo: car,
-      date: "19.12.24",
-      plate: "CA 6864 CO",
-      name: "ПІБ Клієнт",
       status: "completed",
     },
     {
@@ -42,7 +28,7 @@ export default function InvoicesPart({ categories }) {
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
-      status: "",
+      status: "completed",
     },
     {
       photo: car,
@@ -77,7 +63,21 @@ export default function InvoicesPart({ categories }) {
       date: "19.12.24",
       plate: "CA 6864 CO",
       name: "ПІБ Клієнт",
-      status: "pending",
+      status: "completed",
+    },
+    {
+      photo: car,
+      date: "19.12.24",
+      plate: "CA 6864 CO",
+      name: "ПІБ Клієнт",
+      status: "completed",
+    },
+    {
+      photo: car,
+      date: "19.12.24",
+      plate: "CA 6864 CO",
+      name: "ПІБ Клієнт",
+      status: "completed",
     },
     {
       photo: car,
