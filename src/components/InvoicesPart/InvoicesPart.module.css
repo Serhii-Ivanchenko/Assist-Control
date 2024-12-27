@@ -4,6 +4,8 @@
   gap: 10px;
   /* overflow-x: auto; */
   width: max-content;
+
+  user-select: none;
 }
 
 .categoriesItem {
@@ -32,6 +34,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  position: relative;
 }
 
 .categoryName {
@@ -58,9 +62,9 @@
   justify-content: center;
   align-items: center;
 
-  background: linear-gradient(#2d3038, #2d3038) padding-box,
+  /* background: linear-gradient(#2d3038, #2d3038) padding-box,
     var(--border-gradient-invoices) border-box;
-  border: 2px solid transparent;
+  border: 2px solid transparent;*/
 
   border-radius: 12px;
   /* border: 2px solid var(--CRM-modal-mega-green, #3cff00); */
@@ -73,6 +77,12 @@
   line-height: normal;
 
   cursor: default;
+}
+
+.amountGreen {
+  background: linear-gradient(#2d3038, #2d3038) padding-box,
+    var(--border-gradient-invoices) border-box;
+  border: 2px solid transparent;
 }
 
 .amountDiagnostic {
@@ -114,6 +124,6 @@
   cursor: pointer;
 }
 
-.hidden{
+.hidden {
   display: none;
 }

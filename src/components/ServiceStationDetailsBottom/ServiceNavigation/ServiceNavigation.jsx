@@ -55,9 +55,14 @@ export default function ServiceNavigation({ page, setPage }) {
         className={`${css.btnBox} slick-slider`}
         ref={sliderRef}
       >
-        <button className={css.btnServiceCam}>
-          <p className={`${css.title} ${css.titleCam}`}>ВІДЕОКАМЕРИ</p>
-          <p className={css.value}>4</p>
+        <button
+          type="button"
+          onClick={() => setPage("plan")}
+          className={clsx(css.btnService, {
+            [css.isActiveBtn]: page === "plan",
+          })}
+        >
+          <p className={css.title}>ПЛАН</p>
         </button>
         <button
           type="button"

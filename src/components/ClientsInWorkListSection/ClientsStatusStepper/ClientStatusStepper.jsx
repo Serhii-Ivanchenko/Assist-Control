@@ -15,28 +15,38 @@ import Modal from "../../Modals/Modal/Modal";
 import DetailedClientInfo from "../../DetailedClientInfo/DetailedClientInfo";
 import EnterAmountModal from "../../Modals/EnterAmountModal/EnterAmountModal";
 import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal";
+import { useSelector } from "react-redux";
+import { selectVisibilityClientsInWork } from "../../../redux/visibility/selectors";
+import { categoryIdClients} from "../../../utils/dataToRender";
 
-// Масив кнопок
-const buttons = [
-  { id: 1, title: "Звернення", icon: <BsReceipt /> },
-  { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid /> },
-  { id: 3, title: "КП", icon: <BsClipboardCheck /> },
-  { id: 4, title: 2000, icon: <BsCurrencyDollar /> },
-  { id: 5, title: "Замовлення", icon: <BsUiChecksGrid /> },
-  { id: 6, title: "Постчальник", icon: <BsUiChecks /> },
-  { id: 7, title: "Ремонт", icon: <BsWrench /> },
-  { id: 8, title: 8482, icon: <BsCurrencyDollar /> },
-  {
-    id: 9,
-    icon: <BsAlarm style={{ transform: "scale(1.7)" }} />,
-    noBackground: true,
-  },
-];
-
-function ClientStatusStepper({ car, carImg, status }) {
+function ClientStatusStepper({ car, carImg, status, prePaid, postPaid }) {
+  const visibility = useSelector(selectVisibilityClientsInWork);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [notificationSent, setNotificationSent] = useState(false);
+
+  // Масив кнопок
+  const buttons = [
+    {
+      id: "0",
+      title: car,
+      icon: <img src={carImg} alt="img" className={styles.carImage} />
+    },
+    { id: 1, title: "Звернення", icon: <BsReceipt /> },
+    { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid /> },
+    { id: 3, title: "КП", icon: <BsClipboardCheck /> },
+    { id: 4, title: prePaid, icon: <BsCurrencyDollar /> },
+    { id: 5, title: "Замовлення", icon: <BsUiChecksGrid /> },
+    { id: 6, title: "Постчальник", icon: <BsUiChecks /> },
+    { id: 7, title: "Ремонт", icon: <BsWrench /> },
+    { id: 8, title: postPaid, icon: <BsCurrencyDollar /> },
+    {
+      id: 9,
+      icon: <BsAlarm style={{ transform: "scale(1.7)" }} />,
+      noBackground: true,
+    },
+  ];
+
   // визнчення кольору іконок степера
   const [completedSteps, setCompletedSteps] = useState(() => {
     if (status === "complete") {
@@ -54,19 +64,20 @@ function ClientStatusStepper({ car, carImg, status }) {
 
   const groupedButtons = [
     [
-      {
-        id: "car",
-        title: car,
-        icon: <img src={carImg} alt="img" className={styles.carImage} />,
-      },
+      // {
+      //   id: "0",
+      //   title: car,
+      //   icon: <img src={carImg} alt="img" className={styles.carImage} />,
+      // },
       buttons[0],
       buttons[1],
       buttons[2],
+      buttons[3],
     ],
-    [buttons[3]],
-    [buttons[4], buttons[5], buttons[6]],
-    [buttons[7]],
+    [buttons[4]],
+    [buttons[5], buttons[6], buttons[7]],
     [buttons[8]],
+    [buttons[9]],
   ];
 
   // виклик модалки на групі кнопок
@@ -94,9 +105,10 @@ function ClientStatusStepper({ car, carImg, status }) {
             connectionType="clientConnection"
             accountingModal={true}
             service="clientService"
+            setNotificationSent={setNotificationSent}
           />
         );
-        setNotificationSent(true);
+
         break;
       default:
         setModalContent(null);
@@ -131,40 +143,57 @@ function ClientStatusStepper({ car, carImg, status }) {
     }
   };
 
+  const areAllItemsHidden = (group) => {
+    return group.every(({ id }) => {
+      const visibilityKey = categoryIdClients[id];
+      return !visibility[visibilityKey];
+    });
+  };
+
   return (
     <div>
       <ul className={styles.wrapper}>
-        {groupedButtons.map((group, idx) => (
-          <ul
-            key={idx}
-            className={`${styles.boxContainer} ${
-              idx === groupedButtons.length - 1 ? "" : getStatusClass(status)
+        {groupedButtons.map((group, idx) => {
+  if (areAllItemsHidden(group)) {
+    return null;
+  }
+
+  return (
+    <ul
+      key={idx}
+      className={`${styles.boxContainer} ${
+        idx === groupedButtons.length - 1 ? "" : getStatusClass(status)
+      }`}
+      onClick={() => handleClick(idx)}
+    >
+      {group.map(({ id, title, icon, noBackground }) => {
+        const visibilityKey = categoryIdClients[id];
+        return (
+          <li
+            key={id}
+            className={`${styles.listItem} ${
+              !visibility[visibilityKey] ? styles.hidden : ""
             }`}
-            onClick={() => handleClick(idx)}
           >
-            {group.map(({ id, title, icon, noBackground }) => (
-              <li key={id} className={styles.listItem}>
-                <StepperBtn
-                  value={title}
-                  icon={icon}
-                  isActive={isStepCompleted(id)}
-                  noBackground={noBackground}
-                  notificationSent={notificationSent}
-                  status={status}
-                />
-              </li>
-            ))}
-          </ul>
-        ))}
-      </ul>
+            <StepperBtn
+              value={title}
+              icon={icon}
+              isActive={isStepCompleted(id)}
+              noBackground={noBackground}
+              notificationSent={notificationSent}
+              status={status}
+            />
+          </li>
+        );
+      })}
+    </ul>
+  );
+})}
+    </ul>
 
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          {/* <div className={styles.modal}> */}
-          {/* <h2> */}
-            {modalContent}
-          {/* </h2> */}
-          {/* </div> */}
+          {modalContent}
         </Modal>
       )}
     </div>

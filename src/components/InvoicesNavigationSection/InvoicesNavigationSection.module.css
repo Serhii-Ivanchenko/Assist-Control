@@ -33,3 +33,7 @@
     background-color: var(--main-gray);
   }
   
+  .disabled {
+    pointer-events: none;
+    color: var(--input-text); 
+  }

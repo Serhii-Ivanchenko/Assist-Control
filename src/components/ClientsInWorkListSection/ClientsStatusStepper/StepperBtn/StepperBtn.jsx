@@ -14,7 +14,7 @@ function StepperBtn({
     [styles.active]: isActive,
     [styles.inactive]: !isActive,
     [styles.noBackground]: noBackground,
-    [styles.notificationSent]: status === "complete" && notificationSent,
+    [styles.notificationSent]: notificationSent,
     [styles.notificationDelay]: status === "complete" && !notificationSent,
   });
 

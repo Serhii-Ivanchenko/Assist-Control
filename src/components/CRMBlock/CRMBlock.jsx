@@ -9,13 +9,13 @@ import { changeCarStatus } from "../../redux/cars/operations.js";
 import { getRecordsForPeriod } from "../../redux/crm/operations.js";
 import {
   selectDates,
-  selectPeriodRecords,
-  selectVisibilityRecords,
+  selectPeriodRecords
 } from "../../redux/crm/selectors.js";
-import { toggleVisibilityRecords } from "../../redux/crm/slice.js";
 import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility.jsx";
 import { labelNamesInCrm, statusMapping } from "../../utils/dataToRender.js";
 import { borderHeaderInCrm } from "../../utils/borderHeaderInCrm.jsx";
+import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
+import { toggleVisibilityRecords } from "../../redux/visibility/slice.js";
 
 export default function CRMBlock() {
   const dispatch = useDispatch();
@@ -73,11 +73,6 @@ export default function CRMBlock() {
     }
     return periodRecords.filter((item) => item.status === status);
   };
-
-  // const handleToggle = (field) => {
-  //   const newVisibility = { ...visibility, [field]: !visibility[field] };
-  //   dispatch(toggleVisibilityRecords(newVisibility));
-  // };
 
   return (
     <div className={css.container}>

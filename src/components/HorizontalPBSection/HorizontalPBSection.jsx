@@ -1,18 +1,26 @@
 import css from './HorizontalPBSection.module.css'
-import LinearProgress from '@mui/material/LinearProgress';
+// import LinearProgress from '@mui/material/LinearProgress';
 import toast from "react-hot-toast";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
+import HorizontalProgressBar from '../sharedComponents/HorizontalProgressBar/HorizontalProgressBar.jsx'
 
 const minvalue = 0;
 const maxvalue = 2500;
-const value = 2502; 
+const valuefirst = 250;
+const valuesecond = 2400; 
+const titlefirst = "розмов";
+const titlesecond = "AI";
+const activecolor = "var(--play-btn-triangle)";
+const lineHeight = 12;
+const borderradius = 5;
+
 export default function HorizontalPBSection() {
-  const valueLinear = ((value - minvalue) * 100) / (maxvalue - minvalue);
+  // const valueLinear = ((value - minvalue) * 100) / (maxvalue - minvalue);
  
-  const toastShown = useRef(false);
+  // const toastShown = useRef(false);
   
   useEffect(() => {
-    if (value > maxvalue) {
+    if (valuefirst > maxvalue || valuesecond > maxvalue) {
       toast.error("Ліміт дзвінків вичерпано.", {
         position: "top-center",
         duration: 5000,
@@ -24,37 +32,33 @@ export default function HorizontalPBSection() {
       });
       // toastShown.current = true; // Устанавливаем флаг после первого вызова
     }
-  }, [value, maxvalue]);
+  }, [valuefirst,valuesecond, maxvalue]);
    
   
-    return (
-      <div className={css.wrapper}>
-        <p className={css.title}>
-          {" "}
-          Контакти: <span className={css.titlespan}> {value} </span>з {maxvalue}{" "}
-        </p>
-
-        <LinearProgress
-          variant="determinate"
-          value={valueLinear}
-          sx={{
-            height: 12,
-            borderRadius: 5,
-            backgroundColor: "var(--main-gray)", // Цвет неактивной части
-            "& .MuiLinearProgress-bar": {
-              backgroundColor: "var(--play-btn-triangle)", // Цвет активной части
-            },
-          }}
-        />
-        {value > maxvalue ? (
-          <p className={css.error}>
-            Ліміт дзвінків по тарифу “Телефонія 2500” вичерпано.
-          </p>
-        ) : (
-          <p className={css.tarplan}>
-            Тариф “Телефонія 2500” буде продовжений 26 квітня 2025 р.
-          </p>
-        )}
+  return (
+    <div className={css.wrapper}>
+      <div className={css.horizontalBox}>
+        <HorizontalProgressBar value={valuefirst} minvalue={minvalue} maxvalue={maxvalue}
+          title={titlefirst} activecolor={activecolor} lineHeight={lineHeight}
+          borderradius={borderradius} />
+        <button
+          className={css.btnadd}
+          type="button" > Додати</button>
       </div>
-    );
+      
+      <div className={css.horizontalBox}>
+        <HorizontalProgressBar value={valuesecond} minvalue={minvalue} maxvalue={maxvalue}
+          title={titlesecond} activecolor={activecolor} lineHeight={lineHeight}
+          borderradius={borderradius} />
+        <button
+          className={css.btnadd}
+          type="button" > Додати</button>
+      </div>
+
+      
+    </div>
+
+  );
+
+
 };

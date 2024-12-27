@@ -1,43 +1,62 @@
 .wrapper {
     display: flex;
-    width: 1526px;
-    height: 115px;
+    width: 455px;
+    height: 245px;
     /* border: 1px solid var(--light-gray); */
-    border-radius: 12px;
-padding : 20px;
-gap: 14px;
-background: var(--bg-secondary);
-flex-direction: column;
+    /* border-radius: 12px; */
+    /* padding: 20px; */
+    gap: 15px;
+    flex-direction: column;
 }
 
-.title {
-    color: var(--lightgray);
-        font-variant-numeric: lining-nums proportional-nums;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1.1875em;
-        font-variant: small-caps;
+.horizontalBox{
+position: relative;
+border-radius: 12px;
+    padding: 20px;
+    background: var(--bg-secondary);
 }
 
-.titlespan {
-    color: var(--play-btn-triangle);
-}
 
 .tarplan {
     color: var(--text-gray);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: normal;
-        font-variant: small-caps;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-variant: small-caps;
 }
 
 .error {
     color: var(--red);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: normal;
-        font-variant: small-caps;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-variant: small-caps;
+}
+
+.btnadd {
+    color: var(--lightgray);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.1875em;
+    font-variant: small-caps;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    background-color: var(--green-btn-normal);
+    border: none;
+    width: 79px;
+    height: 27px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.btnadd:hover {
+    background-color: var(--green-btn-hover);
 }

@@ -7,10 +7,10 @@ import renderStatusCars from "../../utils/renderStatusCars";
 import { renderTime } from "../../utils/renderTime.jsx";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
-import { selectVisibilityCar } from "../../redux/cars/selectors";
 import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton";
 import RatingStars from "../sharedComponents/RatingStars/RatingStars";
+import { selectVisibilityCar } from "../../redux/visibility/selectors.js";
 
 export default function DayCarsItemLine({ car }) {
   const visibility = useSelector(selectVisibilityCar);

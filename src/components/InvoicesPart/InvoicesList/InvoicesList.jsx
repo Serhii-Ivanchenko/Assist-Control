@@ -4,35 +4,23 @@ import { useRef, useState } from "react";
 import { useEffect } from "react";
 
 export default function InvoicesList({ category, list }) {
-  // const categoryMap = {
-  //   "Діагностика": invoices,
-  //   "Замовлено": invoicesMoney,
-  // };
-
-  // const list = categoryMap[type] || invoices;
-
-  const containerRef = useRef(null); // Ссилка на контейнер
-  const [isScrolled, setIsScrolled] = useState(false); // Стан для перевірки наявності скролу
-
+  const containerRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleResizeOrScroll = () => {
-      // Перевірка наявності вертикального скролу
       if (containerRef.current) {
         const hasVerticalScroll =
           containerRef.current.scrollHeight > containerRef.current.clientHeight;
-        console.log("hasVerticalScroll:", hasVerticalScroll);
         setIsScrolled(hasVerticalScroll);
       }
     };
 
-    // Викликаємо при завантаженні, зміні розміру чи скролі
     handleResizeOrScroll();
     window.addEventListener("resize", handleResizeOrScroll);
     if (containerRef.current) {
       containerRef.current.addEventListener("scroll", handleResizeOrScroll);
     }
 
-    // Очищення ефекту
     return () => {
       window.removeEventListener("resize", handleResizeOrScroll);
       if (containerRef.current) {
@@ -61,7 +49,9 @@ export default function InvoicesList({ category, list }) {
           key={index}
           className={`${css.invoiceItem} ${
             isScrolled && css.invoiceItemForScroll
-          } ${item.paid && css.isPaidBorder}`}
+          } ${item.status === "completed" && css.completedBorder} 
+          ${item.status === "pending" && css.pendingBorder}
+          ${item.status === "rejected" && css.rejectedBorder}`}
         >
           {(category === "Діагностика" ||
             category === "Погоджено" ||

@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 39px;
+    gap: 20px;
+}
+
+.rightContainer{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: auto;
+}
+
+.settingsContainerInCrm {
+    right: 0 !important;
+    top: 40px !important;
+  }

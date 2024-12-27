@@ -27,9 +27,13 @@ export default function InvoicesNavigationSection() {
         Каса
       </NavLink>
 
-      <NavLink to="equipment" className={navLinkClass}>
-        Обладнання
-      </NavLink>
+      <NavLink
+          to="equipment"
+          className={clsx(styles.navText, styles.disabled)}
+          onClick={(e) => e.preventDefault()}
+        >
+          Обладнання
+        </NavLink>
     </nav>
     <InfoSettingsVisibility
             selectVisibility={selectVisibilityInvoices}
