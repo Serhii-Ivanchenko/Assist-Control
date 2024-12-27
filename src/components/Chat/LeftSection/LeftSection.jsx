@@ -1,11 +1,11 @@
 import css from "./LeftSection.module.css";
-import SearchByMessages from "./SearchByMessages/SearchByMessages";
+import MessagesPart from "./MessagesPart/MessagesPart";
 
 export default function LeftSection() {
   return (
     <div className={css.leftSectionWrapper}>
       LeftSection
-      <SearchByMessages />
+      <MessagesPart />
     </div>
   );
 }
