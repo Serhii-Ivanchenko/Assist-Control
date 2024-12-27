@@ -1,0 +1,126 @@
+.containerloadstats {
+    border-radius: 12px;
+    width: 310px;
+    /* height: 191px; */
+    height: 215px;
+    padding: 10px 17px;
+    background: var(--bg-secondary);
+    /* border: 1px solid var(--black); */
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+@media only screen and (min-width: 1850px) {
+    .containerloadstats {
+        width: 464px;
+        height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 409px);
+        padding: 18px 25px;
+    }
+}
+
+.stattitle {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--white);
+    width: 191px;
+    height: 21px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 1850px) {
+    .stattitle {
+        width: 284px;
+        height: 28px;
+        margin-bottom: 18px;
+        font-size: 24px;
+    }
+}
+
+.statpercent {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--orange);
+    width: 40px;
+    height: 21px;
+}
+
+@media only screen and (min-width: 1850px) {
+    .statpercent {
+        font-size: 24px;
+        width: 60px;
+        height: 28px;
+    }
+}
+
+.titlebox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* width: 310px;
+    
+    padding-top: 9px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px; */
+
+}
+
+
+.areabox {
+    width: 292px;
+    /* height: 141px; */
+    height: 176px;
+    margin-left: -10px;
+}
+
+@media only screen and (min-width: 1850px) {
+    .areabox {
+        width: 422px;
+        height: clamp(255px, calc(255px + (66 * ((100vh - 900px) / 180))), 321px);
+        margin-left: -10px;
+    }
+}
+
+.customtooltip {
+    background-color: var(--light-gray);
+    width: 51px;
+
+    padding: 2px 4px;
+
+    border-radius: 6px;
+
+    /* border: '1px solid #ccc', */
+    /* position: absolute;
+            left: x+30;
+            
+            top: y - 35; */
+    transform: translateX(-50%);
+    font-weight: 400;
+    font-size: 6px;
+    font-variant: smallCaps;
+
+    font-style: normal;
+}
+
+.popuptitle {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    font-variant: small-caps;
+    color: var(--blue-btn-inactive);
+    text-align: center;
+}
+
+.popupavto {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    font-variant: small-caps;
+    color: var(--blue-btn-inactive);
+}
+
+.kolavto {
+    font-size: 16px;
+    color: var(--play-btn-triangle);
+}

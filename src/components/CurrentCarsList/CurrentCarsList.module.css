@@ -1,15 +1,33 @@
-.wrapper {
-  width: 386px;
-  max-height: 215px;
+.scrollWrapper {
+  width: 576px;
+  display: flex;
+  height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 409px);
+  padding-top: clamp(14px, calc(14px + (2 * ((100vh - 900px) / 180))), 16px);
+  padding-bottom: clamp(11px, calc(11px + (5 * ((100vh - 900px) / 180))), 16px);
+  padding-left: 20px;
+  padding-right: 10px;
   background: var(--bg-secondary);
-  border-radius: 5px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.wrapper {
+  width: 546px;
+  /*менший контейнер, на який вішається скрол*/
+  height: 100%;
+  min-height: 297px;
+  max-height: 381px;
+  padding-right: 17px;
   overflow-y: scroll;
   overflow-x: hidden;
   -ms-overflow-style: none;
+  /*падінг для відступу скролбара*/
 }
 
 .wrapper::-webkit-scrollbar {
   width: 8px;
+  min-height: 100px;
   max-height: 200px;
 }
 
@@ -23,38 +41,25 @@
   border-radius: 4px;
 }
 
-@media screen and (min-width: 1850px) {
-  .scrollWrapper {
-    width: 576px;
-    display: flex;
-    height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 409px);
-    padding-top: clamp(14px, calc(14px + (2 * ((100vh - 900px) / 180))), 16px);
-    padding-bottom: clamp(
-      11px,
-      calc(11px + (5 * ((100vh - 900px) / 180))),
-      16px
-    );
-    padding-left: 20px;
-    padding-right: 10px;
-    background: var(--bg-secondary);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 12px;
-    overflow: hidden;
+.carsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media only screen and (max-width: 1920px) and (min-width: 1280px) {
+  .wrapper {
+    min-height: 265px;
+    width: 100%;
+    height: calc(100% - 5vh);
   }
 
-  .wrapper {
-    width: 546px;
-    /*менший контейнер, на який вішається скрол*/
-    height: 100%;
-    min-height: 297px;
-    max-height: 381px;
-    padding-right: 17px;
-    /*падінг для відступу скролбара*/
+  .scrollWrapper {
+    width: 100%;
+    max-height: 297px;
   }
 
   .carsList {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    gap: 8px;
   }
 }

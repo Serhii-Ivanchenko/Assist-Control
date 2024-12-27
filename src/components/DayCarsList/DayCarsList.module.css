@@ -1,23 +1,28 @@
 .dayCarsListContainer {
-  width: 303px;
-  /* padding: 8px; */
-
-  border-radius: 12px;
+  width: 460px;
+  height: clamp(447px, calc(447px + (155 * ((100vh - 900px) / 180))), 602px);
+  padding-top: clamp(15px, calc(15px + (5 * ((100vh - 900px) / 180))), 20px);
+  padding-bottom: clamp(14px, calc(18px - (4 * ((100vh - 900px) / 180))), 18px);
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow: hidden;
   background: var(--bg-secondary);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
 }
 
 .scrollWrapper {
+  width: 424px;
+  min-height: 414px;
+  max-height: 538px;
   overflow-y: scroll;
   overflow-x: hidden;
   -ms-overflow-style: none;
-  max-height: 295px;
 }
 
 .carsList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 
 .scrollWrapper::-webkit-scrollbar {
@@ -35,29 +40,6 @@
   border-radius: 4px;
 }
 
-@media only screen and (min-width: 1850px) {
-  .dayCarsListContainer {
-    width: 460px;
-    height: clamp(447px, calc(447px + (155 * ((100vh - 900px) / 180))), 602px);
-    padding-top: clamp(15px, calc(15px + (5 * ((100vh - 900px) / 180))), 20px);
-    padding-bottom: clamp(14px, calc(18px - (4 * ((100vh - 900px) / 180))), 18px);
-    padding-left: 20px;
-    padding-right: 20px;
-    overflow: hidden;
-  }
-
-  .scrollWrapper {
-    width: 424px;
-    height: 100%;
-    min-height: 414px;
-    max-height: 568px;
-  }
-
-  .carsList {
-    gap: 14px;
-  }
-}
-
 .modalCarsList {
   display: flex;
   flex-direction: row;
@@ -66,17 +48,31 @@
   gap: 12px;
 }
 
-@media only screen and (min-width: 1850px) {
-  .modaldayCarsListContainer {
-    width: 1360px;
-    height: 740px;
-    padding: 0 20px 20px 20px;
-    box-shadow: none;
-    margin-bottom: 0;
+.modaldayCarsListContainer {
+  width: 1360px;
+  height: 740px;
+  padding: 0 20px 20px 20px;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+
+.modalscrollWrapper {
+  width: 1320px;
+  max-height: 720px;
+}
+
+@media only screen and (max-width: 1920px) and (min-width: 1280px) {
+  .dayCarsListContainer {
+    height: 460px;
+    width: 400px;
   }
 
-  .modalscrollWrapper {
-    width: 1320px;
-    max-height: 720px;
+  .scrollWrapper {
+    width: 370px;
+    max-height: 425px;
+  }
+
+  .carsList {
+    margin-right: 10px;
   }
 }

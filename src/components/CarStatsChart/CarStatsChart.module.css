@@ -3,6 +3,7 @@
   width: 462px;
   padding: 13px 18px 12px 14px;
   background: var(--bg-secondary);
+  border-radius: 12px;
 }
 
 @media only screen and (max-width: 1920px) and (min-width: 1280px) {
@@ -11,7 +12,7 @@
     padding: 20px 12px 30px 12px;
   }
 }
- @media only screen and (min-width: 1280px) {
+@media only screen and (min-width: 1280px) {
   .containerstats {
     min-width: 350px;
   }

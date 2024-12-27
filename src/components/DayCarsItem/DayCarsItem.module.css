@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 285px;
+  /* width: 285px; */
+  width: 100%;
   height: 100%;
   padding: 15px 13px 13px 11px;
 
@@ -10,7 +11,6 @@
   background: var(--bg-input);
   border: 2px solid transparent;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
 }
 
 @media only screen and (min-width: 1850px) {
@@ -92,7 +92,6 @@
   text-overflow: ellipsis;
   overflow: hidden;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
 }
 
 /* @media only screen and (min-width: 1850px) {
@@ -101,7 +100,7 @@
   }
 } */
 
-.viewRepair{
+.viewRepair {
   font-size: 12px;
   color: var(--status-view-repair);
 }
@@ -110,7 +109,6 @@
   font-size: 12px;
   color: var(--status-complete);
 }
-
 
 .new {
   font-size: 12px;
@@ -126,7 +124,6 @@
   font-size: 12px;
   color: var(--status-diag);
 }
-
 
 @media only screen and (min-width: 1850px) {
   .checkRepair,
@@ -155,14 +152,12 @@
   height: 13px;
 }
 
-
 @media only screen and (min-width: 1850px) {
   .iconHuman {
     width: 16px;
     height: 16px;
   }
 }
-
 
 .infoCard {
   display: flex;
@@ -203,35 +198,34 @@
   color: var(--white);
   font-size: 10px;
 
-    max-width: 134px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  max-width: 134px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.copyButton{
+.copyButton {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 21px;
   height: 21px;
   border-radius: 6px;
-  color:  var(--icon-gray);
+  color: var(--icon-gray);
   background: var(--main-gray);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);      border: none;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: auto;    
+  margin-left: auto;
 }
-
-
 
 @media only screen and (min-width: 1850px) {
   .vinCode {
     font-size: 14px;
   }
 
-  .vinContainer{
+  .vinContainer {
     padding: 3px 10px;
     width: 185px;
     height: 27px;
@@ -281,8 +275,8 @@
   font-size: 12px;
   font-weight: 400;
   white-space: nowrap;
-  overflow: hidden; 
-  text-overflow: ellipsis; 
+  overflow: hidden;
+  text-overflow: ellipsis;
   max-width: 120px;
 }
 
@@ -298,7 +292,6 @@
   align-items: center;
   gap: 4px;
   margin-top: auto;
-
 }
 
 .carPhoto {
@@ -310,20 +303,17 @@
   margin-bottom: 20.5px;
 }
 
-
 @media only screen and (min-width: 1850px) {
   .carPhoto {
     margin-bottom: 12px;
   }
 }
 
-
 .carPhoto img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
-
 }
 
 .carsInfo {
@@ -332,17 +322,15 @@
   gap: 11px;
 }
 
-.modalCarsInfo{
+.modalCarsInfo {
   margin-left: -30px;
 }
-
 
 .carInfoLeft {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  
 }
 
 @media only screen and (min-width: 1850px) {
@@ -376,7 +364,7 @@
   }
 }
 
-.prevCoast{
+.prevCoast {
   margin-top: auto;
 }
 
@@ -391,7 +379,6 @@
 @media only screen and (min-width: 1850px) {
   .carInfoRight {
     align-items: start;
-
   }
 }
 
@@ -404,16 +391,14 @@
   margin-bottom: 10px;
   border-radius: 5px;
   border: 2px solid var(--black);
-  background: #D9D9D9;
+  background: #d9d9d9;
 }
-
 
 @media only screen and (min-width: 1850px) {
   carRegContainer {
     margin-bottom: 12px;
   }
 }
-
 
 .carRegFlag {
   width: 5.4px;
@@ -424,7 +409,7 @@
   padding: 4px 1.5px;
   height: 100%;
   border-radius: 4px 0px 0px 4px;
-  background: #00349A;
+  background: #00349a;
 }
 
 .carRegCountry {
@@ -449,11 +434,10 @@
 
 .mileInfo,
 .timeWork {
-  display: none
+  display: none;
 }
 
 @media only screen and (min-width: 1850px) {
-
   .mileInfo,
   .timeWork {
     display: flex;
@@ -462,11 +446,8 @@
   }
 }
 
-
-
 .timeWork {
   margin-top: 6px;
-
 }
 
 .mileage {
@@ -484,8 +465,6 @@
   line-height: normal;
 }
 
-
-
 .total {
   margin-top: auto;
   color: var(--white);
@@ -498,7 +477,6 @@
   .total {
     font-size: 16px;
     margin-top: 12px;
-
   }
 }
 
@@ -506,13 +484,10 @@
   margin-top: auto;
 }
 
-
-
-.iconWrapper{
+.iconWrapper {
   position: relative;
 }
 
 .hidden {
   display: none;
 }
-

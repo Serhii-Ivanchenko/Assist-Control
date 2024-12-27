@@ -1,94 +1,92 @@
 .calendarWrapper {
-    padding: 20px 20px 20px 20px; 
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    border-radius: 12px;
-    background-color: var(--bg-secondary);
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
 }
 
 .containerpagin {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 280px;
-    /* width: 303px; */
-    /* min-width: 276px; */
-    /* height: 20px; */
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 420px;
+  /* width: 303px; */
+  /* min-width: 276px; */
+  /* height: 20px; */
 }
 
 @media only screen and (min-width: 1850px) {
-    .containerpagin {
-        width: 420px;
-    }
+  .containerpagin {
+    width: 420px;
+  }
 }
 
 .boxpagination {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 180px;
-    height: 20px;
-    gap: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  height: 20px;
+  gap: 5px;
 }
 
 @media only screen and (min-width: 1850px) {
-    .boxpagination {
-        width: 200px;
-        height: 19px;
-        gap: 5px;
-    }
+  .boxpagination {
+    width: 200px;
+    height: 19px;
+    gap: 5px;
+  }
 }
 
 .namemonth {
-    color: var(--white);
+  color: var(--white);
 
-    font-family: "Roboto", sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 300;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
 }
 
-
 .iconstep {
-    stroke-width: 2px;
-    stroke: var(--white);
-    border: none;
-    width: 14px;
-    height: 14px;
-    text-align: center;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 50%;
-    background-color: var(--input-stroke);
+  stroke-width: 2px;
+  stroke: var(--white);
+  border: none;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--input-stroke);
 }
 
 @media only screen and (min-width: 1850px) {
-    .iconstep {
-        stroke-width: 3px;
-        width: 18px;
-        height: 18px;
-    }
+  .iconstep {
+    stroke-width: 3px;
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .arrowIcon {
-    width: 14px;
-    height: 14px;
-    stroke: var(--white);
+  width: 18px;
+  height: 18px;
+  stroke: var(--white);
 }
 
 @media only screen and (min-width: 1850px) {
-    .arrowIcon {
-        width: 18px;
-        height: 18px;
-    }
+  .arrowIcon {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .pieIconWrapper {
-    border: none;
-    text-align: center;
-    cursor: pointer;
+  border: none;
+  text-align: center;
+  cursor: pointer;
 }

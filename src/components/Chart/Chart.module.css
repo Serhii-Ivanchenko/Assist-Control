@@ -41,6 +41,10 @@
     width: 100%;
     height: calc(100% - 5vh);
   }
+
+  .charttitle {
+    font-size: 1.2rem;
+  }
 }
 
 @media only screen and (min-width: 1280px) {
