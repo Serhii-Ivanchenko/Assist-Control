@@ -2,29 +2,11 @@ import css from "./InvoicesColumnPopup.module.css";
 import { BsCheck } from "react-icons/bs";
 
 export default function InvoicesColumnPopup({
-  // showParticularCards,
   setSelectedStatusMap,
   selectedStatus,
   category,
 }) {
-  //   const showParticularCards = (status) => {
-  //     list.filter((item) => item.status === status);
-  //   };
-
   const handleFilter = (status) => {
-    // showParticularCards(status); // Виклик фільтрації з переданим статусом
-    // setSelectedStatus((prevStatuses) => {
-    //   if (status === "") {
-    //     return prevStatuses.includes("") ? [] : [""];
-    //   } else {
-    //     const updatedStatuses = prevStatuses.filter((s) => s !== "");
-    //     if (updatedStatuses.includes(status)) {
-    //       return updatedStatuses.filter((s) => s !== status);
-    //     } else {
-    //       return [...updatedStatuses, status];
-    //     }
-    //   }
-    // });
     setSelectedStatusMap((prevMap) => {
       const currentStatuses = prevMap[category] || [];
 
