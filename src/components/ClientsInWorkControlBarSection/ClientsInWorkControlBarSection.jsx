@@ -4,8 +4,8 @@ import { labelNamesClientsInWork, statusesCar } from "../../utils/dataToRender";
 import renderStatusCars from "../../utils/renderStatusCars";
 import CalendarPeriodSelector from "../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch";
-import DownloadPdfButton from "../sharedComponents/DownloadPdfButton/DownloadPdfButton";
 import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
+import DownloadPdfButtonModalCar from "../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar";
 import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSelector";
 import StatusFilter from "../sharedComponents/StatusFilter/StatusFilter";
 import css from "./ClientsInWorkControlBarSection.module.css";
@@ -28,7 +28,7 @@ export default function ClientsInWorkControlBarSection() {
       />
       <div className={css.rightContainer}>
         <CarsSearch />
-        <DownloadPdfButton />
+        <DownloadPdfButtonModalCar />
         <InfoSettingsVisibility
           selectVisibility={selectVisibilityClientsInWork}
           toggleVisibilityAction={toggleVisibilityClientsInWork}

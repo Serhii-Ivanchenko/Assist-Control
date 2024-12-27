@@ -1,6 +1,5 @@
 import CalendarPeriodSelector from "../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
 import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
-import DownloadPdfButton from "../sharedComponents/DownloadPdfButton/DownloadPdfButton";
 import TimeSortItem from "../sharedComponents/TimeSortItem/TimeSortItem";
 import css from "./GeneralClientsControlBarSection.module.css";
 import { toggleVisibilityAllClients } from "../../redux/visibility/slice";
@@ -13,6 +12,7 @@ import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSe
 import StatusFilter from "../sharedComponents/StatusFilter/StatusFilter";
 import renderStatusCommunication from "../../utils/renderStatusCommunication ";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch";
+import DownloadPdfButtonModalCar from "../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar";
 
 export default function GeneralClientsControlBarSection() {
   // Порожня функція для тимчасової передачі
@@ -38,7 +38,7 @@ export default function GeneralClientsControlBarSection() {
       </div>
       <div className={css.rightContainer}>
           <CarsSearch />
-          <DownloadPdfButton />
+          <DownloadPdfButtonModalCar />
           <InfoSettingsVisibility
             selectVisibility={selectVisibilityAllClients}
             toggleVisibilityAction={toggleVisibilityAllClients}

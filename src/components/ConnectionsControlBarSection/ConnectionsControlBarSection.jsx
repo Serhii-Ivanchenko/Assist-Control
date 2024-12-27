@@ -5,7 +5,7 @@ import css from "./ConnectionsControlBarSection.module.css";
 import renderStatusCommunication from "../../utils/renderStatusCommunication .jsx";
 import { statusesCommunications } from "../../utils/dataToRender.js";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch.jsx";
-import DownloadPdfButton from "../sharedComponents/DownloadPdfButton/DownloadPdfButton.jsx";
+import DownloadPdfButtonModalCar from "../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar.jsx";
 
 export default function ConnectionsControlBarSection() {
   const isFilter = true;
@@ -26,7 +26,7 @@ export default function ConnectionsControlBarSection() {
       />
       <div className={css.rightContainer}>
           <CarsSearch />
-          <DownloadPdfButton />
+          <DownloadPdfButtonModalCar />
         </div>
     </div>
   );
