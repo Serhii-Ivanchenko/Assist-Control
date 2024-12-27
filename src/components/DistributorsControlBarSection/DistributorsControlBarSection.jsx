@@ -4,8 +4,8 @@ import { labelNamesDistributorSection } from "../../utils/dataToRender";
 import CalendarPeriodSelector from "../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch";
 // import CarInfoSettings from "../sharedComponents/CarInfoSettings/CarInfoSettings";
-import DownloadPdfButton from "../sharedComponents/DownloadPdfButton/DownloadPdfButton";
 import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
+import DownloadPdfDistributors from "../sharedComponents/Pdf/DownloadPdfDistributors/DownloadPdfDistributors";
 import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSelector";
 import TimeSortItem from "../sharedComponents/TimeSortItem/TimeSortItem";
 import css from "./DistributorsControlBarSection.module.css";
@@ -15,12 +15,12 @@ export default function DistributorsControlBarSection() {
 
   return (
     <div className={css.wrapper}>
-      <RangeTimeSelector className={css.rangeTime} />
       <TimeSortItem onSortChange={noop} />
+      <RangeTimeSelector className={css.rangeTime} />
       <CalendarPeriodSelector renderInModal={true} />
       <div className={css.rightContainer}>
         <CarsSearch />
-        <DownloadPdfButton />
+        <DownloadPdfDistributors />
         <InfoSettingsVisibility
           selectVisibility={selectVisibilitySuppliers}
           toggleVisibilityAction={toggleVisibilitySuppliers}
