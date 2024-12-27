@@ -17,6 +17,7 @@ import {
 } from "../../../redux/crm/operations.js";
 import toast from "react-hot-toast";
 import {
+  selectDates,
   selectDayRecords,
   selectServiceData,
 } from "../../../redux/crm/selectors.js";
@@ -34,6 +35,7 @@ export default function ServiceBookingModal({
 }) {
   const dispatch = useDispatch();
   const selectedDate = useSelector(selectDate);
+  const dates = useSelector(selectDates);
 
   const [datesArray, setDatesArray] = useState([]);
   const [booking, setBooking] = useState([]);
@@ -115,7 +117,7 @@ export default function ServiceBookingModal({
             toast.success("Запис успішно відредаговано");
             dispatch(getRecordsForDay(selectedDate));
             dispatch(getPlannedVisits(selectedDate));
-            dispatch(getRecordsForPeriod(selectedDate));
+            dispatch(getRecordsForPeriod(dates));
           })
           .catch(() => {
             toast.error("Щось пішло не так. Спробуйте ще раз!");
@@ -126,7 +128,7 @@ export default function ServiceBookingModal({
             toast.success("Запис успішно створено");
             dispatch(getRecordsForDay(selectedDate));
             dispatch(getPlannedVisits(selectedDate));
-            dispatch(getRecordsForPeriod(selectedDate));
+            dispatch(getRecordsForPeriod(dates));
           })
           .catch(() => {
             toast.error("Щось пішло не так. Спробуйте ще раз!");
