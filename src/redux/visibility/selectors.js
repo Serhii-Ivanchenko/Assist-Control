@@ -5,3 +5,7 @@ export const selectVisibilitySuppliers = (state) =>state.visibility.visibilitySu
 export const selectVisibilityClientsInWork = (state) => state.visibility.visibilityClientsInWork;
 
 export const selectVisibilityAllClients = (state) => state.visibility.visibilityAllClients;
+
+export const selectVisibilityCar = (state) => state.visibility.visibilityCar;
+
+export const selectVisibilityRecords = (state) => state.visibility.visibilityRecords;

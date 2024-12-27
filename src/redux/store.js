@@ -28,21 +28,7 @@ const authPersistConfig = {
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
-const carsPersistConfig = {
-  key: "carsSlice",
-  storage,
-  whitelist: ["visibilityCar"],
-};
 
-const persistedCarsReducer = persistReducer(carsPersistConfig, carsReducer);
-
-const crmPersistConfig = {
-  key: "crmSlice",
-  storage,
-  whitelist: ["visibilityRecords"],
-};
-
-const persistedCrmReducer = persistReducer(crmPersistConfig, crmReducer);
 
 const visibilityPersistConfig = {
   key: "visibilitySlice",
@@ -51,7 +37,9 @@ const visibilityPersistConfig = {
     "visibilityInvoices", 
     "visibilitySuppliers", 
     "visibilityClientsInWork", 
-    "visibilityAllClients"
+    "visibilityAllClients",
+    "visibilityCar",
+    "visibilityRecords"
   ],
 };
 
@@ -59,9 +47,9 @@ const persistedVisibilityReducer = persistReducer(visibilityPersistConfig, visib
 
 export const store = configureStore({
   reducer: {
-    cars: persistedCarsReducer,
     auth: persistedAuthReducer,
-    crm: persistedCrmReducer,
+    cars: carsReducer,
+    crm: crmReducer,
     service: serviceReducer,
     settings: settingsReducer,
     warehouse: warehouseReducer,

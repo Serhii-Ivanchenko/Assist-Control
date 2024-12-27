@@ -31,3 +31,6 @@
   border-radius: 12px;
   background: var(--CRM-modal-InputBG, #2d3038);
 }
+.hidden {
+  display: none;
+}

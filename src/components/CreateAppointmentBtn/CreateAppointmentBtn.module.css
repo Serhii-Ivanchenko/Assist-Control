@@ -12,7 +12,6 @@
     background: var(--green);
     color: var(--white);
     font-size: 14px;
-    padding-bottom: 2px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -20,22 +19,14 @@
     border: transparent;
 }
 
-.iconPlus {
-    display: flex;
-    width: 14px;
-    height: 14px;
-    padding: 2px;
-    align-items: center;
-    background: var(--white);
-
-
-
-}
-
-.icon {
-    color: var(--green);
-    background: var(--white);
-    width: 10px;
-    height: 10px;
-    stroke-width: 2;
-}
+ .icon {
+     display: flex;
+     width: 14px;
+     height: 14px;
+     justify-content: center;
+     align-items: center;
+     border-radius: 3px;
+     color: var(--green);
+     background-color: var(--white);
+     stroke-width: 2px;
+ }

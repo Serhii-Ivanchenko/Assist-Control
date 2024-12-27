@@ -1,0 +1,30 @@
+.chatWrapper {
+    position: absolute;
+    top: 64px;
+    right: 0;
+    width: 1645px;
+    height: 967px;
+    border-radius: 12px;;
+    background-color: var(--bg);
+    display: flex;
+    gap: 14px;
+    z-index: 999;
+    transform: translate(110%);
+    transition: transform 0.7s ease-in;
+}
+
+.isOpen {
+    transform: translate(0);
+}
+
+.isClosed {
+    transform: translate(110%);
+}
+
+.closeIcon {
+    position: absolute;
+    top:15px;
+    left: 15px;
+    color: var(--light-gray);
+    cursor: pointer;
+}
