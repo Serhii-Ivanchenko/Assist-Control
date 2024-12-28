@@ -5,7 +5,7 @@
     border: 1px solid var(--light-gray);
     border-radius: 12px;
     flex-direction: row;
-    padding: 30px 20px 40px 20px;
+    padding: 25px 20px;
     justify-content: space-around;
     background-color: var(--bg-secondary);
 }
