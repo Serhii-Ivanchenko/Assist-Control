@@ -9,7 +9,7 @@
   flex-shrink: 0;
 
   border-radius: 8px;
-  background: var(--CRM-modal-InputBG, #2d3038);
+  background: var(--bg-input);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@
 
 .input {
   height: 100%;
-  background: var(--CRM-modal-InputBG, #2d3038);
+  background: var(--bg-input);
   border: none;
   outline: none;
 
@@ -42,4 +42,31 @@
 
   top: 50%;
   transform: translateY(-50%);
+}
+
+.optionsBox {
+  background-color: var(--bg-input);
+  margin-top: 5px;
+  border-radius: 8px;
+  /* padding: 8px 0; */
+  border: 1px dashed var(--input-stroke);
+  overflow: hidden;
+}
+
+.option {
+  color: var(--white);
+  height: 40px;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.option:not(:last-child) {
+  border-bottom: 1px dashed var(--input-stroke);
+}
+
+.option:hover {
+  background-color: var(--bg-secondary);
 }
