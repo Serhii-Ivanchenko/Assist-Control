@@ -8,6 +8,7 @@ import { HiOutlineHashtag } from "react-icons/hi";
 export default function SearchByMessages() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [inputValue, setInputValue] = useState("");
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
@@ -15,7 +16,12 @@ export default function SearchByMessages() {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
+    setInputValue("");
     setIsOpen(false);
+  };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
   };
 
   const options = [
@@ -24,15 +30,17 @@ export default function SearchByMessages() {
       text: "Пошук по повідомленням",
       icon: <BiMessageRoundedDetail />,
     },
-    { value: "teg", text: "Пошук по тегам", icon: <HiOutlineHashtag /> },
+    { value: "tag", text: "Пошук по тегам", icon: <HiOutlineHashtag /> },
   ];
 
   return (
-    <div>
+    <div className={css.searchPart}>
       <div className={css.inputBox}>
-        <IoIosSearch className={css.iconSearch} size={18} />
+        <IoIosSearch className={css.iconSearch} size={16} />
         <input
           className={css.input}
+          value={inputValue}
+          onChange={handleInputChange}
           placeholder={
             selectedOption
               ? options.find((option) => option.value === selectedOption.value)

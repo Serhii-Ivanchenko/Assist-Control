@@ -1,3 +1,7 @@
+.searchPart {
+  position: relative;
+}
+
 .inputBox {
   display: flex;
   width: 364px;
@@ -23,6 +27,7 @@
   background: var(--bg-input);
   border: none;
   outline: none;
+  width: 260px;
 
   color: white;
 }
@@ -46,11 +51,16 @@
 
 .optionsBox {
   background-color: var(--bg-input);
-  margin-top: 5px;
+  /* margin-top: 5px; */
   border-radius: 8px;
   /* padding: 8px 0; */
   border: 1px dashed var(--input-stroke);
   overflow: hidden;
+  position: absolute;
+  top: 107%;
+  left: 0;
+
+  width: 364px;
 }
 
 .option {

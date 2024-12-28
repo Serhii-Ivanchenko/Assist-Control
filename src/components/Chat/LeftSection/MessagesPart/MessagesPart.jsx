@@ -1,6 +1,7 @@
 import SearchByMessages from "./SearchByMessages/SearchByMessages";
 import { BsPencilSquare } from "react-icons/bs";
 import css from "./MessagesPart.module.css";
+import ActionsPart from "./ActionsPart/ActionsPart";
 
 export default function MessagesPart() {
   return (
@@ -13,6 +14,7 @@ export default function MessagesPart() {
       </div>
 
       <SearchByMessages />
+      <ActionsPart />
     </div>
   );
 }
