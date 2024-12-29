@@ -46,58 +46,56 @@ export default function DownloadPdfButtonGeneralClients() {
       doc.setFontSize(styles.title.fontSize);
       doc.text("Загальна інформація по клієнту", styles.title.x, styles.title.y);
 
+      const headers = [
+        "Дата",
+        "Ім'я гостя",
+        visibility?.rating && "Рейтинг",
+        visibility?.appeal && "Звернення",
+        visibility?.repair && "Ремонт",
+        visibility?.averageCheck && "Середній чек, грн",
+        visibility?.paydesk && "Каса, грн",
+        visibility?.workPayment && "Робота, грн",
+        visibility?.salaryMechanics && "ЗП Механіка, грн",
+        visibility?.spareParts && "Запчастини, грн",
+        visibility?.markUp && "Націнка, грн",
+        visibility?.salaryManager && "ЗП Менеджер, грн",
+        visibility?.salaryAdmin && "ЗП Адмін, грн",
+        visibility?.coefficient && "Коеф",
+        visibility?.NG && "НГ, грн",
+        visibility?.profit && "Прибуток, грн",
+        visibility?.percent && "%",
+      ].filter(Boolean);
+
       const tableData = dataGeneralClients.map((client) => {
-        const row = [
-            client.date
+        return [
+          client.date
             ? new Date(client.date).toLocaleString("uk-UA", {
                 month: "2-digit",
                 day: "2-digit",
               })
             : "—",
           client.name || "Гість",
-          visibility?.rating ? client.raiting || "—": "—",
-          visibility?.appeal ? client.connection || "—": "—",
-          visibility?.repair ? client.repair || "—": "—",
-          visibility?.averageCheck ? client.middlecheck || "—": "—",
-          visibility?.paydesk ? client.cash || "—": "—",
-          visibility?.workPayment ? client.work || "—": "—",
-          visibility?.salaryMechanics ? client.paymmechc || "—": "—",
-          visibility?.spareParts ? client.parts || "—": "—",
-          visibility?.markUp ? client.mark || "—": "—",
-          visibility?.salaryManager ? client.paymmng || "—": "—",
-          visibility?.salaryAdmin ? client.paymadm || "—": "—",
-          visibility?.coefficient ? client.coeff || "—": "—",
-          visibility?.NG ? client.ng || "—": "—",
-          visibility?.profit ? client.income || "—": "—",
-          visibility?.percent ? client.percent || "—": "—",
-        ];
-
-        return row;
+          visibility?.rating ? client.raiting || "—" : null,
+          visibility?.appeal ? client.connection || "—" : null,
+          visibility?.repair ? client.repair || "—" : null,
+          visibility?.averageCheck ? client.middlecheck || "—" : null,
+          visibility?.paydesk ? client.cash || "—" : null,
+          visibility?.workPayment ? client.work || "—" : null,
+          visibility?.salaryMechanics ? client.paymmechc || "—" : null,
+          visibility?.spareParts ? client.parts || "—" : null,
+          visibility?.markUp ? client.mark || "—" : null,
+          visibility?.salaryManager ? client.paymmng || "—" : null,
+          visibility?.salaryAdmin ? client.paymadm || "—" : null,
+          visibility?.coefficient ? client.coeff || "—" : null,
+          visibility?.NG ? client.ng || "—" : null,
+          visibility?.profit ? client.income || "—" : null,
+          visibility?.percent ? client.percent || "—" : null,
+        ].filter(Boolean);
       });
 
       doc.autoTable({
         startY: styles.title.y + 10,
-        head: [
-          [
-            "Дата",
-            "Ім'я гостя",
-            "Рейтинг",
-            "Звернення",
-            "Ремонт",
-            "Срередній чек, грн",
-            "Каса, грн",
-            "Робота, грн",
-            "ЗП Механіка, грн",
-            "Запчастини, грн",
-            "Націнка, грн",
-            "ЗП Менеджер, грн",
-            "ЗП Адмін, грн",
-            "Коеф",
-            "НГ, грн",
-            "Прибуток, грн",
-            "%",
-          ],
-        ],
+        head: [headers],
         body: tableData,
         styles: {
           fontSize: 9,
@@ -107,7 +105,6 @@ export default function DownloadPdfButtonGeneralClients() {
         },
         headStyles: { fillColor: [22, 160, 133], halign: "center" },
       });
-      
 
       doc.save(`clients_report_${new Date().toISOString().split("T")[0]}.pdf`);
     };
