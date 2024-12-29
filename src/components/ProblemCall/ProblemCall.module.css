@@ -1,8 +1,26 @@
 .sectionWrapper {
+  width: 455px;
+  height: 652px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 4px;
+}
+
+.sectionWrapper::-webkit-scrollbar {
+  width: 8px;
+  padding-top: 4px;
+  height: 760px;
+}
+
+.sectionWrapper::-webkit-scrollbar-track {
+  background-color: var(--bg);
+  border-radius: 4px;
+}
+
+.sectionWrapper::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
 }
 
 .wrapper {
@@ -11,6 +29,10 @@
   padding: 20px;
   border-radius: 12px;
   background: var(--dark-gray);
+}
+
+.wrapperScrolled {
+  width: 440px;
 }
 
 .header {
