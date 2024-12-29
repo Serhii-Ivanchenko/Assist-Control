@@ -29,13 +29,13 @@ export default function DownloadPdfButtonGeneralClients() {
         format: "a4",
       });
       doc.setFont("Roboto-Regular", "normal");
-
+  
       const logoUrl = userData.company_logo || logo;
       doc.addImage(logoUrl, "PNG", styles.logo.x, styles.logo.y, styles.logo.width, styles.logo.height);
-
+  
       doc.setFontSize(styles.companyInfo.fontSize);
       doc.text(userData.company_name || "Назва компанії", styles.companyInfo.x, styles.companyInfo.y, { align: styles.companyInfo.alignment });
-
+  
       doc.setFontSize(styles.dateInfo.fontSize);
       doc.text(
         `Дата: ${new Date().toISOString().split("T")[0]}`,
@@ -45,7 +45,7 @@ export default function DownloadPdfButtonGeneralClients() {
       );
       doc.setFontSize(styles.title.fontSize);
       doc.text("Загальна інформація по клієнту", styles.title.x, styles.title.y);
-
+  
       const headers = [
         "Дата",
         "Ім'я гостя",
@@ -65,15 +65,35 @@ export default function DownloadPdfButtonGeneralClients() {
         visibility?.profit && "Прибуток, грн",
         visibility?.percent && "%",
       ].filter(Boolean);
-
-      const tableData = dataGeneralClients.map((client) => {
-        return [
-          client.date
-            ? new Date(client.date).toLocaleString("uk-UA", {
-                month: "2-digit",
-                day: "2-digit",
-              })
-            : "—",
+  
+      const tableData = [];
+      let lastId = null;
+  
+      dataGeneralClients.forEach((client) => {
+        // Перевірка на унікальність клієнта
+        const isUniqueClient = dataGeneralClients.filter(c => c.id === client.id).length === 1;
+  
+        if (client.id !== lastId) {
+          // Якщо id змінився, додаємо один порожній рядок замість всіх елементів
+          if (lastId !== null) {
+            tableData.push([""]); // Один порожній рядок
+          }
+          lastId = client.id;
+        }
+  
+        // Умовна перевірка для значення parent
+        const date = (client.parent === 0 && !isUniqueClient)
+          ? ""
+          : (client.date
+              ? new Date(client.date).toLocaleString("uk-UA", {
+                  day: "2-digit",
+                  month: "2-digit",
+                })
+              : "—");
+  
+  
+        tableData.push([
+          date,
           client.name || "Гість",
           visibility?.rating ? client.raiting || "—" : null,
           visibility?.appeal ? client.connection || "—" : null,
@@ -90,9 +110,10 @@ export default function DownloadPdfButtonGeneralClients() {
           visibility?.NG ? client.ng || "—" : null,
           visibility?.profit ? client.income || "—" : null,
           visibility?.percent ? client.percent || "—" : null,
-        ].filter(Boolean);
+          
+        ]);
       });
-
+  
       doc.autoTable({
         startY: styles.title.y + 10,
         head: [headers],
@@ -105,12 +126,13 @@ export default function DownloadPdfButtonGeneralClients() {
         },
         headStyles: { fillColor: [22, 160, 133], halign: "center" },
       });
-
+  
       doc.save(`clients_report_${new Date().toISOString().split("T")[0]}.pdf`);
     };
-
+  
     generatePdf();
   };
+  
 
   return (
     <button className={css.btnPdf} onClick={handleDownload}>
