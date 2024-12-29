@@ -16,6 +16,21 @@ export default function ActionsPart() {
 
   return (
     <div className={css.actions}>
+      {isChecked && (
+        <label className={css.newLabel}>
+          <input
+            type="checkbox"
+            name="chooseAll"
+            id="chooseAll"
+            className={css.checkbox}
+            // checked={isChecked}
+            // onChange={handleChecked}
+          />
+          <span className={css.cbMark}>
+            <BsCheck size={16} className={css.cbIcon} />
+          </span>
+        </label>
+      )}
       <label className={css.label}>
         <input
           type="checkbox"
@@ -25,8 +40,8 @@ export default function ActionsPart() {
           checked={isChecked}
           onChange={handleChecked}
         />
-        <span className={css.cbMark}>
-          <BsCheck size={20} className={css.cbIcon} />
+        <span className={`${css.cbMark} ${isChecked && css.cbMarkIsChecked}`}>
+          <BsCheck size={16} className={css.cbIcon} />
         </span>
       </label>
 

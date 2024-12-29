@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--bg-secondary);
+
+  border-left: 1px solid #515562;
 }
 
 .titleBox {
@@ -34,5 +37,7 @@
   border-radius: 10px;
   border: 1px solid var(--main-gray);
   background-color: transparent;
-  color: white;
+  color: var(--light-gray);
+
+  cursor: pointer;
 }

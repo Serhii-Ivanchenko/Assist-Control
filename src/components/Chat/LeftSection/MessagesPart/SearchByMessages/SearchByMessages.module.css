@@ -32,6 +32,18 @@
   color: white;
 }
 
+.input::placeholder {
+  color: #828a9e;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  /* font-family: Raleway; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  /* font-variant: small-caps; */
+}
+
 .iconSearch {
   fill: white;
   position: absolute;
@@ -47,6 +59,7 @@
 
   top: 50%;
   transform: translateY(-50%);
+  cursor: pointer;
 }
 
 .optionsBox {
@@ -61,6 +74,7 @@
   left: 0;
 
   width: 364px;
+  z-index: 3;
 }
 
 .option {

@@ -4,6 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { BiMessageRoundedDetail } from "react-icons/bi";
 import { HiOutlineHashtag } from "react-icons/hi";
+import { useRef, useEffect } from "react";
 
 export default function SearchByMessages() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +25,21 @@ export default function SearchByMessages() {
     setInputValue(e.target.value);
   };
 
+  const wrapperRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const options = [
     {
       value: "message",
@@ -34,7 +50,7 @@ export default function SearchByMessages() {
   ];
 
   return (
-    <div className={css.searchPart}>
+    <div className={css.searchPart} ref={wrapperRef}>
       <div className={css.inputBox}>
         <IoIosSearch className={css.iconSearch} size={16} />
         <input
