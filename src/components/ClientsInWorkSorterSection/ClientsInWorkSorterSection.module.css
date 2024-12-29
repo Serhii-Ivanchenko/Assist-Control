@@ -4,38 +4,79 @@
     height: 28px;
 }
 
-.wrapper > div:nth-child(1) {
-  margin-right: 400px;
+.hidden {
+  display: none !important;
 }
 
-.wrapper > div:nth-child(2) {
-  margin-right: 134px;
+.leftContainer,
+.rightContainer{
+  display: flex;
 }
 
-.wrapper > div:nth-child(3) {
-  margin-right: 63px;
+.info{
+  width: 1367px;
+  gap: 8px;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 8px;
 }
 
-.wrapper > div:nth-child(4) {
-  margin-right: 86px;
+.sorterAppeal,
+.sorterDiagnostics,
+.sorterKP,
+.sorterPrePayment,
+.sorterOrder,
+.sorterProvider,
+.sorterRepair,
+.sorterTotalAmount,
+.sorterNotification,
+.photoContainer{
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 16px;
 }
 
-.wrapper > div:nth-child(5) {
-  margin-right: 149px;
+.sorterDate{
+  width: 136px;
 }
 
-.wrapper > div:nth-child(6) {
-  margin-right: 143px;
+.photoContainer{
+  padding: 4.5px 0 4.5px 4px;
+  width: 172px;
 }
 
-.wrapper > div:nth-child(7) {
-  margin-right: 98px;
+.sorterAppeal{
+  width: 153.5px;
 }
 
-.wrapper > div:nth-child(8) {
-  margin-right: 87px;
+.sorterDiagnostics{
+width: 162.11px;
 }
 
-.wrapper > div:nth-child(9) {
-  margin-right: 39px;
+.sorterKP{
+  width: 89.28px;
+}
+
+.sorterPrePayment{
+  width: 109px;
+}
+
+.sorterOrder{
+  width: 169px;
+}
+
+.sorterProvider{
+  width: 171.5px;
+}
+
+.sorterRepair{
+  width: 125.86px;
+}
+
+.sorterTotalAmount{
+  width: 109px;
+}
+
+.sorterNotification{
+  width: 58px;
 }
