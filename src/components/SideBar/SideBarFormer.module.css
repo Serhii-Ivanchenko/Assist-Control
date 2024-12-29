@@ -1,10 +1,23 @@
-/* базові розміри  */
 .sidebar {
   display: flex;
   flex-direction: column;
   gap: 28px;
-  width: 230px;
-  height: auto;
+  /* width: 230px; */
+  /* height: 641px; */
+  /* max-height: 100vh; */
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  padding: 20px 30px;
+
+  /* flex-grow: 1; */
+  flex-shrink: 0;
+}
+
+@media only screen and (min-width: 1850px) {
+  .sidebar {
+    width: 230px;
+    height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
+  }
 }
 
 .userInfo {
@@ -21,7 +34,7 @@
   flex-grow: 1;
   gap: 10px;
   overflow-y: auto;
-  max-height: calc(100vh - 200px);
+  max-height: calc(100vh - 200px); 
 }
 
 .bottomContainer.withScroll {
@@ -34,12 +47,5 @@
 
 .topContainer {
   flex-shrink: 0;
-  position: relative;
+    position: relative;
 }
-
-/*  адаптація розмірів в діапазоні 1280px- 1920px */
-/* @media only screen and (max-width: 1920px) and (min-width: 1280px) {
-  .sidebar {
-    height: calc(100% - 5vh);
-  }
-} */

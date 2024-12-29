@@ -1,10 +1,11 @@
 .mainContainer {
   display: flex;
-  gap: 10px;
+  width: 100%;
+  gap: 14px;
 }
 
-@media only screen and (min-width: 1850px) {
+@media only screen and (max-width: 1920px) and (min-width: 1280px) {
   .mainContainer {
-    gap: 14px;
+    width: calc(100% - 5vw);
   }
 }

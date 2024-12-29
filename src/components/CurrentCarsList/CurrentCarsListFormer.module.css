@@ -1,0 +1,60 @@
+.wrapper {
+  width: 386px;
+  max-height: 215px;
+  background: var(--bg-secondary);
+  border-radius: 5px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 8px;
+  max-height: 200px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+}
+
+.wrapper::-webkit-scrollbar-track {
+  background-color: var(--bg);
+  border-radius: 4px;
+}
+
+@media screen and (min-width: 1850px) {
+  .scrollWrapper {
+    width: 576px;
+    display: flex;
+    height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 409px);
+    padding-top: clamp(14px, calc(14px + (2 * ((100vh - 900px) / 180))), 16px);
+    padding-bottom: clamp(
+      11px,
+      calc(11px + (5 * ((100vh - 900px) / 180))),
+      16px
+    );
+    padding-left: 20px;
+    padding-right: 10px;
+    background: var(--bg-secondary);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .wrapper {
+    width: 546px;
+    /*менший контейнер, на який вішається скрол*/
+    height: 100%;
+    min-height: 297px;
+    max-height: 381px;
+    padding-right: 17px;
+    /*падінг для відступу скролбара*/
+  }
+
+  .carsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}

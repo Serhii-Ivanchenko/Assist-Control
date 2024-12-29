@@ -1,0 +1,27 @@
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 304px;
+}
+
+@media only screen and (min-width: 1850px) {
+  .calendarContainer {
+    width: 460px;
+    height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
+  }
+}
+
+.topContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+@media only screen and (min-width: 1850px) {
+  .topContainer {
+    max-height: 883px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+}

@@ -1,0 +1,10 @@
+.mainContainer {
+  display: flex;
+  gap: 10px;
+}
+
+@media only screen and (min-width: 1850px) {
+  .mainContainer {
+    gap: 14px;
+  }
+}
