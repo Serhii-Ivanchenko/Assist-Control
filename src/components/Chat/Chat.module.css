@@ -1,7 +1,7 @@
 .chatWrapper {
     position: absolute;
-    top: 64px;
-    right: 0;
+    top: 65px;
+    right: -1px;
     width: 1645px;
     height: 967px;
     border-radius: 12px;;
