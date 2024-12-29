@@ -3,7 +3,7 @@
     width: 1526px;
     height: 265px;
     border-radius: 12px;
-    border: 1px solid var(--light-gray);
+    /* border: 1px solid var(--light-gray); */
     justify-content: space-between;
         padding: 25px 20px;
         background-color: var(--bg-secondary);
