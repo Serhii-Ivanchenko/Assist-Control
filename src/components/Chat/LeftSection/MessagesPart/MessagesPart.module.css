@@ -1,0 +1,43 @@
+.messagesPart {
+  width: 418px;
+  padding: 33px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-secondary);
+
+  border-left: 1px solid #515562;
+}
+
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 364px;
+
+  margin-bottom: 18px;
+}
+
+.title {
+  color: var(--light-gray);
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--main-gray);
+  background-color: transparent;
+  color: var(--light-gray);
+
+  cursor: pointer;
+}
