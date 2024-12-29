@@ -519,7 +519,7 @@ export default function GeneralClientsListSection() {
         {visibility?.percent && (<div
           className={css.titletext}
           // style={{ width: "30px" }}
-          style={{ marginRight: "32px" }}
+          style={{ marginRight: "18px" }}
         >
           %
           <SortButtonsArrow
