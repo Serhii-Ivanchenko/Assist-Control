@@ -1,16 +1,16 @@
 import { BsDownload } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import css from "./DownloadPdfButton.module.css";
-import logo from "../../../assets/images/logo-light-theme.png";
-import { selectUser } from "../../../redux/auth/selectors";
-import { selectDate} from "../../../redux/cars/selectors";
-import "../../../assets/fonts/Roboto-Regular-normal.js";
+import css from "./DownloadPdfButtonModalCar.module.css";
+import logo from "../../../../assets/images/logo-light-theme.png";
+import { selectUser } from "../../../../redux/auth/selectors.js";
+import { selectDate} from "../../../../redux/cars/selectors.js";
+import "../../../../assets/fonts/Roboto-Regular-normal.js";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { renderTime } from "../../../utils/renderTime.jsx";
-import { selectVisibilityCar } from "../../../redux/visibility/selectors.js";
+import { renderTime } from "../../../../utils/renderTime.jsx";
+import { selectVisibilityCar } from "../../../../redux/visibility/selectors.js";
 
-export default function DownloadPdfButton({ carsData = [], status }) {
+export default function DownloadPdfButtonModalCar({ carsData = [], status }) {
   const userData = useSelector(selectUser);
   const selectedDate = useSelector(selectDate);
   const visibility = useSelector(selectVisibilityCar);
