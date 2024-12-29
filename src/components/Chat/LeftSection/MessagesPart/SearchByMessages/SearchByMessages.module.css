@@ -9,17 +9,17 @@
   padding: 0 30px;
   padding-left: 52px;
   align-items: center;
-  gap: 122px;
-  flex-shrink: 0;
+  /* gap: 122px; */
+  /* flex-shrink: 0; */
 
   border-radius: 8px;
   background: var(--bg-input);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
+  /* overflow: hidden; */
+  /* display: flex; */
+  /* align-items: center; */
   /* justify-content: center; */
 
-  position: relative;
+  /* position: relative; */
 }
 
 .input {
@@ -27,7 +27,7 @@
   background: var(--bg-input);
   border: none;
   outline: none;
-  width: 260px;
+  width: 304px;
 
   color: white;
 }
@@ -35,7 +35,7 @@
 .input::placeholder {
   color: #828a9e;
 
-  font-variant-numeric: lining-nums proportional-nums;
+  /* font-variant-numeric: lining-nums proportional-nums; */
   /* font-family: Raleway; */
   font-size: 14px;
   font-style: normal;
@@ -55,7 +55,7 @@
 .iconArrow {
   fill: white;
   position: absolute;
-  right: 10px;
+  right: 5px;
 
   top: 50%;
   transform: translateY(-50%);
