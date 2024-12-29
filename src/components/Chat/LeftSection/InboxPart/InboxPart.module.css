@@ -1,4 +1,79 @@
 .inboxContainer {
   width: 266px;
+  padding: 25px;
   background-color: var(--bg-secondary);
+}
+
+.title {
+  color: var(--light-gray);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  margin-bottom: 10px;
+}
+
+.emailSelect {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.email {
+  color: var(--txt-gray-light, #828a9e);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.iconArrow {
+  fill: var(--light-gray);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+}
+
+.totalContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.totalInbox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.numberBox {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--main-gray);
+}
+
+.text {
+  color: var(--input-text);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }

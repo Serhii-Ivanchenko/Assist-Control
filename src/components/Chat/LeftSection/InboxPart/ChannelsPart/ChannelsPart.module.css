@@ -1,0 +1,55 @@
+.channelsSelect {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  margin-bottom: 15px;
+}
+
+.textAndArrow {
+  display: flex;
+  gap: 10px;
+}
+
+.numberBox {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--main-gray);
+}
+
+.iconBox {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--main-gray);
+}
+
+.channelsPart {
+  margin-top: 60px;
+}
+
+.channelsList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.channelsListItem {
+  display: flex;
+  justify-content: space-between;
+  height: 46px;
+}
+
+.iconAndText {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
