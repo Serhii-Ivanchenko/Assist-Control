@@ -362,7 +362,8 @@ export default function GeneralClientsListSection() {
         <div className={css.titletext} style={{ width: "75px" }}>
           {" "}
         </div> */}
-        <div className={css.hederLeft}></div>
+        <div className={css.hederPhoto}></div>
+        <div className={css.hederName}></div>
         {visibility?.rating && (<div className={css.hederRight}></div>)}
 
         {visibility?.appeal && (
