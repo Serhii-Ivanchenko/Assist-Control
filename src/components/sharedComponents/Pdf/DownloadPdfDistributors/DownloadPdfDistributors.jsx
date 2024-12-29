@@ -101,18 +101,18 @@ export default function DownloadPdfDistributors() {
         if (carPartsData.length > 0) {
           if (distributor.carNumber) {
             tableData.push([
-              "",
-              "",
-              "",
-              "",
               `${distributor.carNumber || "—"}`,
               "",
               "",
               "",
               "",
               "",
+              "",
+              "",
+              "",
+              "",
               `Загальна сума: ${distributor.salesAmount || "—"}грн`,
-              `Середнійf  відсоток: ${distributor.percent || "—"}%`,
+              `Середній  відсоток: ${distributor.percent || "—"}%`,
             ]);
           }
 
