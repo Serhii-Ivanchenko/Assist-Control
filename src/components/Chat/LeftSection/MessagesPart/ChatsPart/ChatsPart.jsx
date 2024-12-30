@@ -100,26 +100,29 @@ export default function ChatsPart() {
                 }`}
               />
             </div>
-            <div className={css.nameAndMessageBox}>
-              <p className={css.name}>{chat.name}</p>
-              <p
-                className={`${css.lastMessage} ${
-                  !chat.read && css.freshMessage
-                }`}
-              >
-                {chat.lastMessage}
-              </p>
-            </div>
-            <div className={css.timeContainer}>
-              <div className={css.managersPhotoBox}>
-                <img
-                  src={chat.managersPhoto}
-                  alt=""
-                  className={css.managersPhoto}
-                />
-                <BsBookmark size={18} />
+
+            <div className={css.commonBox}>
+              <div className={css.nameAndMessageBox}>
+                <p className={css.name}>{chat.name}</p>
+                <p
+                  className={`${css.lastMessage} ${
+                    !chat.read && css.freshMessage
+                  }`}
+                >
+                  {chat.lastMessage}
+                </p>
               </div>
-              <p className={css.time}>{chat.time}</p>
+              <div className={css.timeContainer}>
+                <div className={css.managersPhotoBox}>
+                  <img
+                    src={chat.managersPhoto}
+                    alt=""
+                    className={css.managersPhoto}
+                  />
+                  <BsBookmark size={18} />
+                </div>
+                <p className={css.time}>{chat.time}</p>
+              </div>
             </div>
           </li>
         ))}

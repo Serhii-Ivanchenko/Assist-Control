@@ -15,6 +15,8 @@
 
   padding-left: 16px;
   padding-right: 16px;
+  /* padding-bottom: 20px;
+  padding-top: 20px; */
   justify-content: space-between;
   cursor: pointer;
 }
@@ -124,7 +126,7 @@
   text-overflow: ellipsis;
 
   width: 223px;
-  height: 32px;
+  height: 33px;
 }
 
 .freshMessage {
@@ -142,4 +144,10 @@
   font-weight: 400;
   line-height: normal;
   text-transform: lowercase;
+}
+
+.commonBox {
+  display: flex;
+  align-items: end;
+  gap: 10px;
 }
