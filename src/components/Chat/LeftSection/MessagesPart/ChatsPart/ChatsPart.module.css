@@ -1,0 +1,62 @@
+.chatsList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  width: 378px;
+  margin-top: 6px;
+}
+
+.chatsListItem {
+  height: 93px;
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 16px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 1;
+}
+
+.managersPhoto {
+  width: 30px;
+  height: 30px;
+}
+
+.channelIcon {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.channelIconTF {
+  width: 16px;
+  height: 16px;
+}
+
+.avatarBox {
+  width: 40px;
+  height: 42px;
+  position: relative;
+}
+
+.managersPhotoBox {
+  display: flex;
+  gap: 11px;
+  align-items: end;
+}
+
+.nameAndMessageBox {
+  width: 223px;
+}
+
+.timeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  align-items: end;
+}
