@@ -8,12 +8,16 @@ import css from "./EmailType.module.css";
 
 export default function EmailType() {
   const types = [
-    { icon: <BsEnvelope />, text: "Email", value: "4" },
-    { icon: <BsChatDots />, text: "Чати", value: "6" },
-    { icon: <BsClock />, text: "Відложені", value: "1" },
-    { icon: <BsCheck2Square />, text: "Закриті", value: "" },
-    { icon: <BsBookmark />, text: "Вибрані", value: "6" },
-    { icon: <BsArchive />, text: "Архів", value: "" },
+    { icon: <BsEnvelope className={css.icon} />, text: "Email", value: "4" },
+    { icon: <BsChatDots className={css.icon} />, text: "Чати", value: "6" },
+    { icon: <BsClock className={css.icon} />, text: "Відложені", value: "1" },
+    {
+      icon: <BsCheck2Square className={css.icon} />,
+      text: "Закриті",
+      value: "",
+    },
+    { icon: <BsBookmark className={css.icon} />, text: "Вибрані", value: "6" },
+    { icon: <BsArchive className={css.icon} />, text: "Архів", value: "" },
   ];
 
   return (
@@ -23,7 +27,7 @@ export default function EmailType() {
           <li key={index} className={css.typeItem}>
             <div className={css.iconTextBox}>
               {type.icon}
-              <p>{type.text}</p>
+              <p className={css.text}>{type.text}</p>
             </div>
             <span
               className={`${css.numberBox} ${
@@ -31,7 +35,7 @@ export default function EmailType() {
                 css.numberBoxHidden
               }`}
             >
-              <p>{type.value}</p>
+              <p className={css.number}>{type.value}</p>
             </span>
           </li>
         ))}

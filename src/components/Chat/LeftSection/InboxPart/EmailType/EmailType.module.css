@@ -10,12 +10,29 @@
   align-items: center;
   justify-content: space-between;
   height: 40px;
+  cursor: pointer;
+  width: 202px;
 }
 
 .iconTextBox {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  color: var(--light-gray);
+}
+
+.text {
+  color: var(--light-gray);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
 }
 
 .numberBox {
@@ -31,4 +48,13 @@
 
 .numberBoxHidden {
   display: none;
+}
+
+.number {
+  color: var(--light-gray);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }

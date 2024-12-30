@@ -1,6 +1,6 @@
 .inboxContainer {
   width: 266px;
-  padding: 25px;
+  padding: 25px 10px 25px 30px;
   background-color: var(--bg-secondary);
 }
 
@@ -32,7 +32,7 @@
   font-weight: 400;
   line-height: normal;
 
-  width: 200px;
+  width: 190px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -44,6 +44,7 @@
   top: 50%;
   transform: translateY(-50%);
   right: 0;
+  cursor: pointer;
 }
 
 .totalContainer {
@@ -69,6 +70,19 @@
   border: 1px solid var(--main-gray);
 }
 
+.numberBoxIsActive {
+  border-color: var(--red);
+}
+
+.number {
+  color: var(--light-gray);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
 .text {
   color: var(--input-text);
   font-family: "Montserrat", sans-serif;
@@ -76,4 +90,18 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.textIsActive {
+  color: var(--light-gray);
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }
