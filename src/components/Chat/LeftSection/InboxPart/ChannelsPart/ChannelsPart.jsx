@@ -23,9 +23,7 @@ export default function ChannelsPart() {
           <IoIosArrowDown size={18} className={css.arrowIcon} />
           <p className={css.text}>Канали</p>
         </div>
-        <span className={css.numberBox}>
-          <p className={css.number}>10</p>
-        </span>
+        <p className={css.numberBox}>10</p>
       </div>
 
       <ul className={css.channelsList}>
@@ -45,9 +43,7 @@ export default function ChannelsPart() {
             </div>
 
             <div className={css.dragContainer}>
-              <span className={css.numberBox}>
-                <p className={css.number}>{channel.value}</p>
-              </span>
+              <p className={css.numberBox}>{channel.value}</p>
               <RxDragHandleDots2 className={css.dragIcon} />
             </div>
           </li>

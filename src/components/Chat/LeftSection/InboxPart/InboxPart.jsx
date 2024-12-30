@@ -22,18 +22,16 @@ export default function InboxPart() {
 
       <div className={css.totalContainer}>
         <div className={css.totalInbox}>
-          <p className={`${css.numberBox} ${css.numberBoxIsActive}`}>
-            11
-          </p>
+          <p className={`${css.numberBox} ${css.numberBoxIsActive}`}>11</p>
           <button type="button" className={`${css.text} ${css.textIsActive}`}>
             Клієнти
           </button>
         </div>
 
         <div className={css.totalInbox}>
-          <span className={css.numberBox}>
-            <p className={css.number}>1</p>
-          </span>
+          {/* <span className={css.numberBox}> */}
+          <p className={css.numberBox}>1</p>
+          {/* </span> */}
           <button type="button" className={css.text}>
             Колеги
           </button>

@@ -31,6 +31,12 @@
 
   border-radius: 10px;
   border: 1px solid var(--main-gray);
+
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .iconBox {
@@ -100,14 +106,9 @@
   height: 16px;
 }
 
-.number {
-  color: var(--CRM-modal-LightGray, #d8e1ff);
-  /* font-family: "Montserrat", sans-serif; */
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
+/* .number {
+  
+} */
 
 .dragIcon {
   color: var(--main-gray);
