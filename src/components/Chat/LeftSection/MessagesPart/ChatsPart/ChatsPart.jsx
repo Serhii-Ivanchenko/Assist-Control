@@ -80,8 +80,8 @@ export default function ChatsPart() {
               />
             </div>
             <div className={css.nameAndMessageBox}>
-              <p>{chat.name}</p>
-              <p>{chat.lastMessage}</p>
+              <p className={css.name}>{chat.name}</p>
+              <p className={css.lastMessage}>{chat.lastMessage}</p>
             </div>
             <div className={css.timeContainer}>
               <div className={css.managersPhotoBox}>
@@ -92,7 +92,7 @@ export default function ChatsPart() {
                 />
                 <BsBookmark size={18} />
               </div>
-              <p>{chat.time}</p>
+              <p className={css.time}>{chat.time}</p>
             </div>
           </li>
         ))}

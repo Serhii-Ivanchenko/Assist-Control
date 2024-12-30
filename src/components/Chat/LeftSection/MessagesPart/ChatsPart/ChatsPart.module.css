@@ -52,6 +52,9 @@
 
 .nameAndMessageBox {
   width: 223px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .timeContainer {
@@ -59,4 +62,34 @@
   flex-direction: column;
   gap: 19px;
   align-items: end;
+}
+
+.name {
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.lastMessage {
+  color: #828a9e;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  /* font-variant: small-caps; */
+}
+
+.time {
+  color: #828a9e;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: lowercase;
 }
