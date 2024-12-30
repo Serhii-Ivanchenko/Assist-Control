@@ -20,6 +20,7 @@ function ClientsInWorkItem({ item }) {
         </li>
         <li className={styles.stepper}>
           <ClientStatusStepper
+            carId={item.car_id}
             car={item.car_model}
             carImg={item.car_img}
             status={item.status}

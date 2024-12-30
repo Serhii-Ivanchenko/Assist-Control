@@ -17,20 +17,31 @@ import EnterAmountModal from "../../Modals/EnterAmountModal/EnterAmountModal";
 import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal";
 import { useSelector } from "react-redux";
 import { selectVisibilityClientsInWork } from "../../../redux/visibility/selectors";
-import { categoryIdClients} from "../../../utils/dataToRender";
+import { categoryIdClients } from "../../../utils/dataToRender";
+import { useDispatch } from "react-redux";
+import { getClientInfo } from "../../../redux/client/operations.js";
 
-function ClientStatusStepper({ car, carImg, status, prePaid, postPaid }) {
+function ClientStatusStepper({
+  carId,
+  car,
+  carImg,
+  status,
+  prePaid,
+  postPaid,
+}) {
   const visibility = useSelector(selectVisibilityClientsInWork);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [notificationSent, setNotificationSent] = useState(false);
+  const dispatch = useDispatch();
+  const [isCrm, setIsCrm] = useState("record");
 
   // Масив кнопок
   const buttons = [
     {
       id: "0",
       title: car,
-      icon: <img src={carImg} alt="img" className={styles.carImage} />
+      icon: <img src={carImg} alt="img" className={styles.carImage} />,
     },
     { id: 1, title: "Звернення", icon: <BsReceipt /> },
     { id: 2, title: "Діагностика", icon: <BsUiRadiosGrid /> },
@@ -84,16 +95,17 @@ function ClientStatusStepper({ car, carImg, status, prePaid, postPaid }) {
   const handleClick = (idx) => {
     switch (idx) {
       case 0:
-        setModalContent(<DetailedClientInfo />);
+        dispatch(getClientInfo({ carId: carId, location: isCrm }));
+        setModalContent(<DetailedClientInfo onClose={closeModal} />);
         break;
       case 1:
-        setModalContent(<EnterAmountModal />);
+        setModalContent(<EnterAmountModal onClose={closeModal} />);
         break;
       case 2:
         setModalContent("Modal for ordering parts");
         break;
       case 3:
-        setModalContent(<EnterAmountModal />);
+        setModalContent(<EnterAmountModal onClose={closeModal} />);
         break;
       case 4:
         setModalContent(
@@ -154,42 +166,42 @@ function ClientStatusStepper({ car, carImg, status, prePaid, postPaid }) {
     <div>
       <ul className={styles.wrapper}>
         {groupedButtons.map((group, idx) => {
-  if (areAllItemsHidden(group)) {
-    return null;
-  }
+          if (areAllItemsHidden(group)) {
+            return null;
+          }
 
-  return (
-    <ul
-      key={idx}
-      className={`${styles.boxContainer} ${
-        idx === groupedButtons.length - 1 ? "" : getStatusClass(status)
-      }`}
-      onClick={() => handleClick(idx)}
-    >
-      {group.map(({ id, title, icon, noBackground }) => {
-        const visibilityKey = categoryIdClients[id];
-        return (
-          <li
-            key={id}
-            className={`${styles.listItem} ${
-              !visibility[visibilityKey] ? styles.hidden : ""
-            }`}
-          >
-            <StepperBtn
-              value={title}
-              icon={icon}
-              isActive={isStepCompleted(id)}
-              noBackground={noBackground}
-              notificationSent={notificationSent}
-              status={status}
-            />
-          </li>
-        );
-      })}
-    </ul>
-  );
-})}
-    </ul>
+          return (
+            <ul
+              key={idx}
+              className={`${styles.boxContainer} ${
+                idx === groupedButtons.length - 1 ? "" : getStatusClass(status)
+              }`}
+              onClick={() => handleClick(idx)}
+            >
+              {group.map(({ id, title, icon, noBackground }) => {
+                const visibilityKey = categoryIdClients[id];
+                return (
+                  <li
+                    key={id}
+                    className={`${styles.listItem} ${
+                      !visibility[visibilityKey] ? styles.hidden : ""
+                    }`}
+                  >
+                    <StepperBtn
+                      value={title}
+                      icon={icon}
+                      isActive={isStepCompleted(id)}
+                      noBackground={noBackground}
+                      notificationSent={notificationSent}
+                      status={status}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          );
+        })}
+      </ul>
 
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
