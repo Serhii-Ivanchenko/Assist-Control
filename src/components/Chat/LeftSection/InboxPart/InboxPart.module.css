@@ -6,13 +6,13 @@
 
 .title {
   color: var(--light-gray);
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.25em;
 
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .emailSelect {
@@ -21,12 +21,12 @@
   gap: 10px;
   width: 100%;
   margin-bottom: 15px;
-  position: relative;
+  /* position: relative; */
 }
 
 .email {
   color: var(--txt-gray-light, #828a9e);
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -40,10 +40,10 @@
 
 .iconArrow {
   fill: var(--light-gray);
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 0;
+  right: 0; */
   cursor: pointer;
 }
 
@@ -51,6 +51,7 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-bottom: 29px;
 }
 
 .totalInbox {
@@ -68,24 +69,29 @@
 
   border-radius: 10px;
   border: 1px solid var(--main-gray);
+  color: var(--light-gray);
+  /* font-family: "Montserrat", sans-serif; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25em;
 }
 
 .numberBoxIsActive {
   border-color: var(--red);
 }
 
-.number {
+/* .number {
   color: var(--light-gray);
-  font-family: "Montserrat", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-}
+} */
 
 .text {
   color: var(--input-text);
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 16px;
   font-style: normal;
   font-weight: 600;

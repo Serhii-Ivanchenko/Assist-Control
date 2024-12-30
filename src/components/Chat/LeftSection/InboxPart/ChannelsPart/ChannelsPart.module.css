@@ -15,11 +15,11 @@
 
 .text {
   color: var(--light-gray);
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.25em;
 }
 
 .numberBox {
@@ -79,11 +79,11 @@
 
 .channelName {
   color: var(--light-gray);
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.25em;
 }
 
 .channelImg {
@@ -102,7 +102,7 @@
 
 .number {
   color: var(--CRM-modal-LightGray, #d8e1ff);
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
