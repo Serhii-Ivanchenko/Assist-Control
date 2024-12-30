@@ -10,19 +10,52 @@
 .chatsListItem {
   height: 93px;
   display: flex;
-  /* justify-content: space-between; */
-  gap: 16px;
+  align-items: center;
+  border-radius: 8px;
+
+  padding-left: 16px;
+  padding-right: 16px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.chatsListItem:hover {
+  background-color: var(--bg-input);
+}
+
+@keyframes blinkBorder {
+  0% {
+    border: 2px solid var(--red);
+  }
+  50% {
+    border: 2px solid transparent;
+  }
+  100% {
+    border: 2px solid var(--red);
+  }
+}
+
+.warningBorder {
+  animation: blinkBorder 3s infinite;
+}
+
+.chosenChat {
+  background-color: #2b3141;
+}
+.chosenChat:hover {
+  background-color: #2b3141;
 }
 
 .avatar {
   width: 40px;
   height: 40px;
-  flex-shrink: 1;
+  border-radius: 40px;
 }
 
 .managersPhoto {
   width: 30px;
   height: 30px;
+  border-radius: 30px;
 }
 
 .channelIcon {
@@ -50,18 +83,18 @@
   align-items: end;
 }
 
-.nameAndMessageBox {
-  width: 223px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .timeContainer {
   display: flex;
   flex-direction: column;
   gap: 19px;
   align-items: end;
+}
+
+.nameAndMessageBox {
+  width: 223px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .name {
@@ -70,6 +103,9 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .lastMessage {
@@ -80,7 +116,21 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  /* font-variant: small-caps; */
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+
+  width: 223px;
+  height: 32px;
+}
+
+.freshMessage {
+  color: var(--light-gray);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-weight: 600;
 }
 
 .time {
