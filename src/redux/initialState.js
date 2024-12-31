@@ -131,6 +131,8 @@ export const initialState = {
         service_book: null,
       },
       service_history: [],
+      isLoading: false,
+      error: null,
     },
   },
 
@@ -168,6 +170,42 @@ export const initialState = {
     // shelves: [],
     // places: [],
     prompts: [],
+    isLoading: false,
+    error: null,
+  },
+
+  archive: {
+    archiveData: [],
+    reasons: [
+      {
+        id: 1,
+        name: "duplicate",
+      },
+      {
+        id: 2,
+        name: "employee",
+      },
+      {
+        id: 3,
+        name: "random",
+      },
+      {
+        id: 4,
+        name: "refusal",
+      },
+      {
+        id: 5,
+        name: "did_not_visit",
+      },
+      {
+        id: 6,
+        name: "rating",
+      },
+      {
+        id: 7,
+        name: "did_not_help",
+      },
+    ],
     isLoading: false,
     error: null,
   },

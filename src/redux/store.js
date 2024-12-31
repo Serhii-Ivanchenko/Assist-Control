@@ -20,6 +20,7 @@ import settingsReducer from "./settings/slice.js";
 import warehouseReducer from "./warehouse/slice.js";
 import visibilityReducer from "./visibility/slice.js";
 import clientsReducer from "./client/slice.js";
+import archiveReducer from "./archive/slice.js";
 
 const authPersistConfig = {
   key: "authSlice",
@@ -57,6 +58,7 @@ export const store = configureStore({
     warehouse: warehouseReducer,
     visibility: persistedVisibilityReducer,
     clients: clientsReducer,
+    archive: archiveReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
