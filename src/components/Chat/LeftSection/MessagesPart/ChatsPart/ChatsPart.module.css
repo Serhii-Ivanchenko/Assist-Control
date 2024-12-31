@@ -27,13 +27,13 @@
 
 @keyframes blinkBorder {
   0% {
-    border: 2px solid var(--red);
+    border: 1px solid var(--red);
   }
   50% {
-    border: 2px solid transparent;
+    border: 1px solid transparent;
   }
   100% {
-    border: 2px solid var(--red);
+    border: 1px solid var(--red);
   }
 }
 
@@ -113,7 +113,6 @@
 .lastMessage {
   color: #828a9e;
 
-  font-variant-numeric: lining-nums proportional-nums;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -131,14 +130,12 @@
 
 .freshMessage {
   color: var(--light-gray);
-  font-variant-numeric: lining-nums proportional-nums;
   font-weight: 600;
 }
 
 .time {
   color: #828a9e;
 
-  font-variant-numeric: lining-nums proportional-nums;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
