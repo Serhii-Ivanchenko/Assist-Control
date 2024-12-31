@@ -1,0 +1,96 @@
+.searchPart {
+  position: relative;
+}
+
+.inputBox {
+  display: flex;
+  width: 364px;
+  height: 40px;
+  padding: 0 30px;
+  padding-left: 52px;
+  align-items: center;
+  /* gap: 122px; */
+  /* flex-shrink: 0; */
+
+  border-radius: 8px;
+  background: var(--bg-input);
+  /* overflow: hidden; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+
+  /* position: relative; */
+}
+
+.input {
+  height: 100%;
+  background: var(--bg-input);
+  border: none;
+  outline: none;
+  width: 304px;
+
+  color: white;
+}
+
+.input::placeholder {
+  color: #828a9e;
+
+  /* font-variant-numeric: lining-nums proportional-nums; */
+  /* font-family: Raleway; */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  /* font-variant: small-caps; */
+}
+
+.iconSearch {
+  fill: white;
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.iconArrow {
+  fill: white;
+  position: absolute;
+  right: 5px;
+
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.optionsBox {
+  background-color: var(--bg-input);
+  /* margin-top: 5px; */
+  border-radius: 8px;
+  /* padding: 8px 0; */
+  border: 1px dashed var(--input-stroke);
+  overflow: hidden;
+  position: absolute;
+  top: 107%;
+  left: 0;
+
+  width: 364px;
+  z-index: 3;
+}
+
+.option {
+  color: var(--white);
+  height: 40px;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.option:not(:last-child) {
+  border-bottom: 1px dashed var(--input-stroke);
+}
+
+.option:hover {
+  background-color: var(--bg-secondary);
+}

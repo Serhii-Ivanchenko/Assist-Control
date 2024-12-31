@@ -1,0 +1,127 @@
+.actions {
+  margin-top: 11px;
+  width: 378px;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 10px;
+  height: 41px;
+  position: relative;
+}
+
+.actionsIsChecked {
+  width: 389px;
+}
+
+.checkbox {
+  display: none;
+}
+
+.cbIcon {
+  display: none;
+}
+
+.cbMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+
+  border: 1px solid var(--white);
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.cbMarkIsChecked {
+  margin-right: 6px;
+}
+
+.checkbox:checked + .cbMark {
+  border: 1px solid var(--blue);
+  background-color: var(--blue);
+}
+
+.checkbox:checked + .cbMark > .cbIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* fill: var(--blue); */
+  fill: var(--bg-secondary);
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  color: var(--light-gray);
+  /* font-family: "Montserrat", sans-serif; */
+  /* font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal; */
+}
+
+.filter {
+  display: flex;
+  gap: 10px;
+  align-self: center;
+  margin-left: auto;
+}
+
+.text {
+  color: var(--light-gray);
+  /* font-family: "Montserrat", sans-serif; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.1875em;
+}
+
+.icon {
+  fill: var(--light-gray);
+  cursor: pointer;
+}
+
+.actionsChecked {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.select {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 2px 4px;
+  height: 21px;
+
+  border-radius: 4px;
+  background-color: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.actionsText {
+  color: var(--light-gray);
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.newLabel {
+  /* margin-right: 6px; */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -12px;
+}
