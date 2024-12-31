@@ -1,0 +1,150 @@
+.chatsList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  width: 378px;
+  margin-top: 6px;
+}
+
+.chatsListItem {
+  height: 93px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+
+  padding-left: 16px;
+  padding-right: 16px;
+  /* padding-bottom: 20px;
+  padding-top: 20px; */
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.chatsListItem:hover {
+  background-color: var(--bg-input);
+}
+
+@keyframes blinkBorder {
+  0% {
+    border: 1px solid var(--red);
+  }
+  50% {
+    border: 1px solid transparent;
+  }
+  100% {
+    border: 1px solid var(--red);
+  }
+}
+
+.warningBorder {
+  animation: blinkBorder 3s infinite;
+}
+
+.chosenChat {
+  background-color: #2b3141;
+}
+.chosenChat:hover {
+  background-color: #2b3141;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+}
+
+.managersPhoto {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+}
+
+.channelIcon {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.channelIconTF {
+  width: 16px;
+  height: 16px;
+}
+
+.avatarBox {
+  width: 40px;
+  height: 42px;
+  position: relative;
+}
+
+.managersPhotoBox {
+  display: flex;
+  gap: 11px;
+  align-items: end;
+}
+
+.timeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  align-items: end;
+}
+
+.nameAndMessageBox {
+  width: 223px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.name {
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lastMessage {
+  color: #828a9e;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+
+  width: 223px;
+  height: 33px;
+}
+
+.freshMessage {
+  color: var(--light-gray);
+  font-weight: 600;
+}
+
+.time {
+  color: #828a9e;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: lowercase;
+}
+
+.commonBox {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+}

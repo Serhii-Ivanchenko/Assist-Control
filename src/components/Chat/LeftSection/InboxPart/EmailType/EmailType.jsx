@@ -29,14 +29,14 @@ export default function EmailType() {
               {type.icon}
               <p className={css.text}>{type.text}</p>
             </div>
-            <span
+            <p
               className={`${css.numberBox} ${
                 (type.value === "" || type.value === null) &&
                 css.numberBoxHidden
               }`}
             >
-              <p className={css.number}>{type.value}</p>
-            </span>
+              {type.value}
+            </p>
           </li>
         ))}
       </ul>
