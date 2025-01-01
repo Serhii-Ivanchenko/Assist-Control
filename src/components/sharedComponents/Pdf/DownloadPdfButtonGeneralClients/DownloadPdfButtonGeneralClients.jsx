@@ -83,13 +83,14 @@ export default function DownloadPdfButtonGeneralClients() {
   
         // Умовна перевірка для значення parent
         const date = (client.parent === 0 && !isUniqueClient)
-          ? ""
-          : (client.date
-              ? new Date(client.date).toLocaleString("uk-UA", {
-                  day: "2-digit",
-                  month: "2-digit",
-                })
-              : "—");
+        ? ""
+        : (client.date
+            ? new Date(client.date).toLocaleDateString("uk-UA", {
+                day: "2-digit",
+                month: "2-digit",
+              }).split('.').reverse().join('.')
+            : "—");
+      
   
   
         tableData.push([
