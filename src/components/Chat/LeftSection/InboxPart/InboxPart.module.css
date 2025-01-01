@@ -1,4 +1,113 @@
 .inboxContainer {
   width: 266px;
+  padding: 25px 10px 25px 30px;
   background-color: var(--bg-secondary);
+}
+
+.title {
+  color: var(--light-gray);
+  /* font-family: "Montserrat", sans-serif; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25em;
+
+  margin-bottom: 5px;
+}
+
+.emailSelect {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+  /* position: relative; */
+}
+
+.email {
+  color: var(--txt-gray-light, #828a9e);
+  /* font-family: "Montserrat", sans-serif; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  width: 190px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.iconArrow {
+  fill: var(--light-gray);
+  /* position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0; */
+  cursor: pointer;
+}
+
+.totalContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 29px;
+}
+
+.totalInbox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.numberBox {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--main-gray);
+  color: var(--light-gray);
+  /* font-family: "Montserrat", sans-serif; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25em;
+}
+
+.numberBoxIsActive {
+  border-color: var(--red);
+}
+
+/* .number {
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+} */
+
+.text {
+  color: var(--input-text);
+  /* font-family: "Montserrat", sans-serif; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.textIsActive {
+  color: var(--light-gray);
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }

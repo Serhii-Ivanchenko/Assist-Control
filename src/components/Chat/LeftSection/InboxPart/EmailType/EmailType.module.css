@@ -1,0 +1,56 @@
+.typeList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* margin-top: 33px; */
+}
+
+.typeItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  cursor: pointer;
+  width: 202px;
+}
+
+.iconTextBox {
+  display: flex;
+  gap: 10px;
+  /* align-items: center; */
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  color: var(--light-gray);
+}
+
+.text {
+  color: var(--light-gray);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25em;
+}
+
+.numberBox {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--main-gray);
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.numberBoxHidden {
+  display: none;
+}

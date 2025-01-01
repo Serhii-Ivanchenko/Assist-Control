@@ -1,0 +1,115 @@
+.channelsSelect {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  width: 202px;
+  margin-bottom: 15px;
+}
+
+.textAndArrow {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.text {
+  color: var(--light-gray);
+  /* font-family: "Montserrat", sans-serif; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25em;
+}
+
+.numberBox {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--main-gray);
+
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.iconBox {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--main-gray);
+}
+
+.channelsPart {
+  margin-top: 60px;
+}
+
+.channelsList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.channelsListItem {
+  display: flex;
+  justify-content: space-between;
+  height: 46px;
+  cursor: pointer;
+}
+
+.iconAndText {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dragContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.arrowIcon {
+  fill: var(--light-gray);
+}
+
+.channelName {
+  color: var(--light-gray);
+  /* font-family: "Montserrat", sans-serif; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25em;
+}
+
+.channelImg {
+  width: 18px;
+  height: 18px;
+}
+
+.channelImgGmail {
+  height: 12px;
+}
+
+.channelImgFB {
+  width: 16px;
+  height: 16px;
+}
+
+/* .number {
+  
+} */
+
+.dragIcon {
+  color: var(--main-gray);
+}

@@ -26,6 +26,7 @@ import RatingStars from "../sharedComponents/RatingStars/RatingStars.jsx";
 import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
 
 export default function DayCarsItemCrm({ car, onDragStart }) {
+  const [isCrm, setIsCrm] = useState("record");
   const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
     useState(false);
   const visibility = useSelector(selectVisibilityRecords);
@@ -97,6 +98,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
   };
 
   const {
+    id,
     auto,
     photo_url: photoUrl,
     vin,
@@ -215,7 +217,13 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
           </div>
         )}
         <div className={styles.btnContainer}>
-          {visibility?.info && <CarDetailButton carName={car.auto} />}
+          {visibility?.info && (
+            <CarDetailButton
+              carId={id}
+              location={isCrm}
+              carName={car.auto}
+            />
+          )}
 
           {(status === "repair" ||
             status === "diagnostic" ||
@@ -256,14 +264,10 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
       </div>
       <div className={styles.crmcarsInfo}>
         <div className={styles.carInfoLeft}>
-        {visibility?.rating && (
-            <div
-            className={clsx(
-              !visibility.rating && styles.hidden
-            )}
-          >
-            <RatingStars rating={car.rating} />
-          </div>
+          {visibility?.rating && (
+            <div className={clsx(!visibility.rating && styles.hidden)}>
+              <RatingStars rating={car.rating} />
+            </div>
           )}
           {visibility?.prePayment && (
             <div
@@ -335,7 +339,9 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
               )}
             >
               <BsStopwatch size={13} color="#D5ACF3" />
-              <p className={styles.time}>{renderBookingTime(booking, styles)}</p>
+              <p className={styles.time}>
+                {renderBookingTime(booking, styles)}
+              </p>
             </div>
           )}
           {visibility?.totalPrice && (
