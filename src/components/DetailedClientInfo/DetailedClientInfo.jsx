@@ -12,7 +12,7 @@ export default function DetailedClientInfo({ onClose, carName }) {
   return (
     <div className={css.detailedClientInfoWrapper}>
       <BsXLg className={css.closeIcon} onClick={onClose} />
-      <ClientInfo />
+      <ClientInfo clientInfo={clientInfo} />
       <ServiceHistory carName={carName} />
     </div>
   );
