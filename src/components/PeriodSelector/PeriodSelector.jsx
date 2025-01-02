@@ -94,6 +94,7 @@ export default function PeriodSelector({
       // onDateEndChange={setEndDate}
       handleInputChangeBeg={handleInputChangeBeg}
       handleInputChangeEnd={handleInputChangeEnd}
+      isSingle={false}
     />
     </div>
 

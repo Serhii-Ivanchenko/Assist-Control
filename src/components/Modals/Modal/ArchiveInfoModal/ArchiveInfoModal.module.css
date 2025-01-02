@@ -1,0 +1,112 @@
+.wrapper {
+  position: relative;
+  display: flex;
+flex-direction: column;
+  width: 1360px;
+  height: 800px;
+  min-width: 480px;
+  padding: 21px 48px 4px 28px;
+  
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+
+.noResultsMessage {
+    margin-top: 20px;
+    width: fit-content;
+    margin-left: auto;        
+    margin-right: auto;
+  }
+
+
+.header {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    height: 27px;
+    margin-bottom: 25px;
+}
+
+.leftHeader {
+    display: flex;
+    gap: 13px;
+}
+
+.rightHeader {
+    display: flex;
+    align-items: center;
+}
+
+.rightHeader> :nth-child(2) {
+    margin-left: 23px;
+}
+.rightHeader> :nth-child(3) {
+  margin-left: 32px;
+}
+.rightHeader> :nth-child(4) {
+  margin-left: 20px;
+}
+
+.iconClose {
+    color: var(--input-stroke);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.closeButton {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+.active {
+    transition: color 0.3s ease;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    width: 100px;
+    height: 18px;
+    padding-left: 8px;
+  
+    border-radius: 6px;
+  }
+  
+  @media only screen and (min-width: 1850px) {
+    .title {
+      width: 137px;
+      height: 24px;
+    }
+  }
+  
+  .statusText {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.1em;
+    font-variant: small-caps;
+    text-overflow: ellipsis;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  @media only screen and (min-width: 1850px) {
+    .statusText {
+      font-size: 16px;
+    }
+  }
+  
+  .customPosition{
+    right: -48px !important;
+  }
