@@ -128,8 +128,15 @@ export default function DownloadPdfButtonGeneralClients() {
         headStyles: { fillColor: [22, 160, 133], halign: "center" },
       });
   
-      doc.save(`clients_report_${new Date().toISOString().split("T")[0]}.pdf`);
-    };
+      const now = new Date();
+
+      const day = now.getDate().toString().padStart(2, "0");
+      const month = (now.getMonth() + 1).toString().padStart(2, "0");
+      const year = now.getFullYear();
+      const time = now.toTimeString().split(" ")[0];
+      
+      doc.save(`clients_report_${day}-${month}-${year}_${time}.pdf`);
+          };
   
     generatePdf();
   };
