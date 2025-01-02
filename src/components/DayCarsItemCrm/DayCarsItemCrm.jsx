@@ -14,7 +14,7 @@ import {
 import { IoCarSportSharp } from "react-icons/io5";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
-import { formatDateTime, renderTimeinWork} from "../../utils/renderTime.jsx";
+import { formatDateTime, renderTimeinWork } from "../../utils/renderTime.jsx";
 import renderStatusCars from "../../utils/renderStatusCars.jsx";
 import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
@@ -108,7 +108,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
     name,
     phone,
     booking,
-    
+
     plate: carNumber,
   } = car;
 
@@ -139,10 +139,9 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
         </div>
       );
     }
-  
+
     return null;
   };
-
 
   return (
     <div
@@ -218,11 +217,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
         )}
         <div className={styles.btnContainer}>
           {visibility?.info && (
-            <CarDetailButton
-              carId={id}
-              location={isCrm}
-              carName={car.auto}
-            />
+            <CarDetailButton carId={id} location={isCrm} carName={car.auto} />
           )}
 
           {(status === "repair" ||

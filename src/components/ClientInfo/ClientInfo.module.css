@@ -366,14 +366,10 @@
   background-color: #202020;
 }
 
-.carCard {
+/* .carCard {
   width: 527px;
   display: flex;
   justify-content: space-between;
-  /* border: 1px solid rgba(0, 0, 0, 0.25); */
-  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);   */
-
-  /* border-radius: 8px; */
 }
 
 .carCard:not(:last-child) {
@@ -386,10 +382,9 @@
   height: 126px;
 
   border-radius: 8px;
-  /* border: solid 1px #fff; */
-}
+} */
 
-.photoAndMainCarInfo {
+/* .photoAndMainCarInfo {
   display: flex;
   gap: 29px;
 
@@ -400,10 +395,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* height: 126px; */
-}
+} */
 
-.modelAndYear {
+/* .modelAndYear {
   display: flex;
   flex-direction: column;
   gap: 7px;
@@ -413,10 +407,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  /* margin-bottom: 12px; */
-}
+} */
 
-.carName {
+/* .carName {
   color: var(--white);
   font-size: 24px;
   font-style: normal;
@@ -424,9 +417,7 @@
   line-height: normal;
 }
 
-.carIcon {
-  fill: var(--icon-gray);
-}
+
 
 .carYearBox {
   display: flex;
@@ -521,7 +512,7 @@
   font-style: normal;
   font-weight: 300;
   line-height: normal;
-}
+} */
 
 /* .btnBox{
     display: flex;
@@ -565,12 +556,15 @@
   height: 18px;
   fill: var(--white);
 }
+.carIcon {
+  fill: var(--icon-gray);
+}
 
 /* .mainContent{
     margin-right: 78px;
 } */
 
-.deleteBtn {
+/* .deleteBtn {
   margin-right: 57px;
   width: 18px;
   height: 18px;
@@ -595,7 +589,6 @@
   height: 46px;
   border-radius: 6px;
   background-color: #d9d9d9;
-  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
 }
 
 .carRegCountry {
@@ -637,4 +630,4 @@
   font-weight: 600;
 
   text-transform: uppercase;
-}
+} */

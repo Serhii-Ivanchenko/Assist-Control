@@ -15,7 +15,15 @@ const handleRejected = (state, action) => {
 const clientsSlice = createSlice({
   name: "clients",
   initialState: initialState.clients,
-  reducers: {},
+  reducers: {
+    clearClientInfo:(state) =>{
+        state.clientInfo.client = null;
+        state.clientInfo.car = null;
+      state.clientInfo.service_history = [];
+      state.error = null; 
+      state.loading = false; 
+    }
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getClientInfo.pending, handlePending)
@@ -29,4 +37,5 @@ const clientsSlice = createSlice({
       .addCase(getClientInfo.rejected, handleRejected),
 });
 
+export const { clearClientInfo } = clientsSlice.actions;
 export default clientsSlice.reducer;

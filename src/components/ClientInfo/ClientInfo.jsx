@@ -7,10 +7,10 @@ import { PiTelegramLogoLight } from "react-icons/pi";
 import { BsFiles } from "react-icons/bs";
 import { BsTelephoneOutboundFill } from "react-icons/bs";
 import { IoIosAt } from "react-icons/io";
-// import { IoCarSport } from "react-icons/io5";
+import { IoCarSport } from "react-icons/io5";
 // import { BsCalendarCheck } from "react-icons/bs";
 // import { BsTrash } from "react-icons/bs";
-// import { BsPlusCircleDotted } from "react-icons/bs";
+import { BsPlusCircleDotted } from "react-icons/bs";
 // import { IoStarSharp } from "react-icons/io5";
 // import flag from "../../assets/images/flagUa.webp";
 import toast from "react-hot-toast";
@@ -30,13 +30,13 @@ export default function ClientInfo({ clientInfo }) {
   // Client
   const client = clientInfo.client;
 
-  const clientEmail = client.email || "xxxxxxxxxxxxx";
-  const clientName = client.name || "XXXXXXXX";
-  const clientPhone = client.phone || "xxxxxxxxxx";
-  const clientBirthday = client.date_of_birth || "xxxxxxxx";
+  const clientEmail = client?.email || "xxxxxxxxxxxxx";
+  const clientName = client?.name || "XXXXXXXX";
+  const clientPhone = client?.phone || "xxxxxxxxxx";
+  const clientBirthday = client?.date_of_birth || "xxxxxxxx";
   const age = new Date() - clientBirthday || "xx";
-  const clientTotalSpent = client.total_spent;
-  const clientRating = client.rating;
+  const clientTotalSpent = client?.total_spent;
+  const clientRating = client?.rating;
 
   //Car
   const cars = clientInfo.car;
@@ -272,11 +272,19 @@ export default function ClientInfo({ clientInfo }) {
         </ul>
       </div>
 
-      {Array.isArray(cars) ? (
-        cars.map((car) => <CarsList car={car} key={car.id} />)
-      ) : (
-        <CarsList car={cars} />
-      )}
+      <div className={css.carListAndAddBtn}>
+        <ul className={css.carInfo}>
+          {Array.isArray(cars) ? (
+            cars.map((car) => <CarsList car={car} key={car?.id} />)
+          ) : (
+            <CarsList car={cars} />
+          )}
+        </ul>
+        <button type="button" className={css.addCarBtn}>
+          <BsPlusCircleDotted className={css.plus} />
+          <IoCarSport className={css.carIcon} size={20} />
+        </button>
+      </div>
 
       {/* Cars */}
 

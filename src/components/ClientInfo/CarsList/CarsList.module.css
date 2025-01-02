@@ -1,11 +1,10 @@
-.carInfo {
+/* .carInfo {
   display: flex;
   flex-direction: column;
   gap: 30px;
   height: 268px;
   overflow-y: auto;
   width: 567px;
-  /* position: relative; */
 }
 
 .carInfo::-webkit-scrollbar {
@@ -22,7 +21,7 @@
 .carInfo::-webkit-scrollbar-track {
   border-radius: 4px;
   background-color: #202020;
-}
+} */
 
 .carCard {
   width: 527px;
@@ -192,11 +191,11 @@
     display: none;
 } */
 
-.carListAndAddBtn {
+/* .carListAndAddBtn {
   position: relative;
-}
+} */
 
-.addCarBtn {
+/* .addCarBtn {
   border: none;
   display: flex;
   gap: 6px;
@@ -212,9 +211,9 @@
   position: absolute;
   bottom: 0;
   right: 0;
-}
+} */
 
-.addCarBtn:hover {
+/* .addCarBtn:hover {
   background-color: var(--green-btn-hover);
 }
 
@@ -222,7 +221,7 @@
   width: 18px;
   height: 18px;
   fill: var(--white);
-}
+} */
 
 /* .mainContent{
     margin-right: 78px;
