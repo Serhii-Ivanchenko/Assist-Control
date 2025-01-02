@@ -1,0 +1,137 @@
+.wrapper {
+  position: absolute;
+  top: 372px;
+  right: 0;
+  width: 392px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  padding: 18px 41px;
+}
+
+.header {
+  color: var(--light-gray);
+  font-family: Montserrat, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.input {
+  border-radius: 8px;
+  background: var(--bg-input);
+  height: 40px;
+  width: 100%;
+  padding: 7px 30px;
+  border: none;
+  outline: none;
+  font-weight: 400;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 1.18em;
+  color: var(--white);
+  margin-bottom: 18px;
+}
+
+.input:-webkit-autofill {
+  background-color: var(--bg-input) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  background-color: var(--bg-input) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+
+.input::placeholder {
+  color: #828a9e;
+  font-family: Raleway, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.text {
+  color: var(--light-gray);
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 6px;
+}
+
+.tagsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.labelWrapper {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.checkbox {
+  display: none;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.tagName {
+  width: 256px;
+  height: 40px;
+  padding: 7px 30px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.currentMileageText {
+  background-color: var(--current-mileage-text);
+}
+
+.midOrange {
+  background-color: var(--mid-orange);
+}
+
+.red {
+  background-color: var(--red);
+}
+
+.statusDiag {
+  background-color: var(--status-diag);
+}
+
+.statusRepair {
+  background-color: var(--status-repair);
+}
+
+.statusComplete {
+  background-color: var(--status-complete);
+}
