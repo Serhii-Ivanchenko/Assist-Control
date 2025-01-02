@@ -50,7 +50,7 @@ export default function DateSelector() {
         endDate: formatToDate(new Date(endDate)),
       };
       fetchPeriodRecords(updatedDates);
-      updateDates(updatedDates);
+      dispatch(updateDates(updatedDates));
     }
   }, [startDate, endDate, fetchPeriodRecords]);
 
@@ -79,7 +79,7 @@ export default function DateSelector() {
         endDate: formatToDate(new Date(periodEndData)),
       };
       fetchPeriodRecords(updatedDates);
-      updateDates(updatedDates);
+      dispatch(updateDates(updatedDates));
     }
   }
 
@@ -91,15 +91,16 @@ export default function DateSelector() {
 
     setPeriodEndData(newEndDate);
     setEndDate(newEndDate);
-    console.log("periodStartData", periodStartData);
 
     if (periodStartData && newEndDate) {
       const updatedDates = {
         startDate: formatToDate(new Date(periodStartData)),
         endDate: formatToDate(new Date(newEndDate)),
       };
+    console.log("updatedDates", updatedDates);
+
       fetchPeriodRecords(updatedDates);
-      updateDates(updatedDates);
+      dispatch(updateDates(updatedDates));
     }
   }
 

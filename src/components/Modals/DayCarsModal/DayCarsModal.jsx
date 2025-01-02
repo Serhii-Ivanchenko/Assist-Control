@@ -16,7 +16,6 @@ import CalendarPeriodSelector from "../../sharedComponents/CalendarPeriodSelecto
 import StatusFilter from "../../sharedComponents/StatusFilter/StatusFilter";
 import InfoSettingsVisibility from "../../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
 import TimeSortItem from "../../sharedComponents/TimeSortItem/TimeSortItem";
-import DownloadPdfButton from "../../sharedComponents/DownloadPdfButton/DownloadPdfButton";
 import { getPeriodCars } from "../../../redux/cars/operations";
 import toast from "react-hot-toast";
 import CarsSearch from "../../sharedComponents/CarsSearch/CarsSearch";
@@ -28,6 +27,7 @@ import renderStatusCars from "../../../utils/renderStatusCars";
 import { labelNamesInModal, statusesCar } from "../../../utils/dataToRender.js";
 import { selectVisibilityCar } from "../../../redux/visibility/selectors.js";
 import { toggleVisibilityCar } from "../../../redux/visibility/slice.js";
+import DownloadPdfButtonModalCar from "../../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar.jsx";
 
 export default function DayCarsModal({ onClose, isModal }) {
   const dispatch = useDispatch();
@@ -231,7 +231,7 @@ export default function DayCarsModal({ onClose, isModal }) {
             handleInputChangeBeg={handleInputChangeBeg}
             handleInputChangeEnd={handleInputChangeEnd}
           />
-          <DownloadPdfButton carsData={filteredCars()} />
+          <DownloadPdfButtonModalCar carsData={filteredCars()} />
           <InfoSettingsVisibility
           selectVisibility={selectVisibilityCar}
           toggleVisibilityAction={toggleVisibilityCar}

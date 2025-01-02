@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import clsx from "clsx";
@@ -21,6 +21,8 @@ import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton
 import styles from "./CurrentCarsItem.module.css";
 
 export default function CurrentCarsItem() {
+  const [isMonitoring, setisMonitoring] = useState("main");
+
   const dispatch = useDispatch();
   const currentCars = useSelector(selectCurrentCars);
 
@@ -110,7 +112,11 @@ export default function CurrentCarsItem() {
           <div className={styles.detailsContainer}>
             <div className={styles.btnContainer}>
               <StatusBtn car={car} />
-              <CarDetailButton carName={car.auto} />
+              <CarDetailButton
+                carId={car.id}
+                location={isMonitoring}
+                carName={car.auto}
+              />
             </div>
             <div className={styles.statusContainer}>
               <p className={clsx(styles.carStatus, className)}>

@@ -1,10 +1,12 @@
 import * as Yup from "yup";
 
 export const ServiceBookingSchema = Yup.object().shape({
-  car_number: Yup.string().matches(
-    /^[a-zA-Z0-9 ]+$/,
-    "Поле повинно містити лише латинські літери та цифри"
-  ),
+  car_number: Yup.string()
+    .matches(
+      /^[a-zA-Z0-9 ]+$/,
+      "Поле повинно містити лише латинські літери та цифри"
+    )
+    .required("Це поле повинно бути заповнене"),
   vin: Yup.string().matches(
     /^[a-zA-Z0-9]+$/,
     "Поле повинно містити лише латинські літери та цифри"

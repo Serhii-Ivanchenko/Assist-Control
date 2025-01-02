@@ -19,11 +19,14 @@ import { copyToClipboard } from "../../utils/copy.js";
 import { useSelector } from "react-redux";
 import RatingStars from "../sharedComponents/RatingStars/RatingStars.jsx";
 import { selectVisibilityCar } from "../../redux/visibility/selectors.js";
+import { useState } from "react";
 
 export default function DayCarsItem({ car, isModal }) {
   const visibility = useSelector(selectVisibilityCar);
+  const [isMonitoring, setisMonitoring] = useState("main");
 
   const {
+    id,
     auto,
     photo_url: photoUrl,
     vin,
@@ -34,7 +37,7 @@ export default function DayCarsItem({ car, isModal }) {
     client,
     plate: carNumber,
   } = car;
-
+  
   const carPhoto = photoUrl || absentAutoImg;
 
   const formatCarNumber = (number) => {
@@ -119,20 +122,22 @@ export default function DayCarsItem({ car, isModal }) {
 
         <div className={styles.btnContainer}>
           {visibility?.status && <StatusBtn car={car} />}
-          {visibility?.info && <CarDetailButton carName={car.auto} />}
+          {visibility?.info && (
+            <CarDetailButton
+              carId={id}
+              location={isMonitoring}
+              carName={car.auto}
+            />
+          )}
         </div>
       </div>
 
       <div className={clsx(styles.carsInfo, isModal && styles.modalCarsInfo)}>
         <div className={styles.carInfoLeft}>
-        {visibility?.rating && (
-            <div
-            className={clsx(
-              !visibility.rating && styles.hidden
-            )}
-          >
-            <RatingStars rating={car.rating} />
-          </div>
+          {visibility?.rating && (
+            <div className={clsx(!visibility.rating && styles.hidden)}>
+              <RatingStars rating={car.rating} />
+            </div>
           )}
 
           {visibility?.prePayment && (
@@ -183,8 +188,8 @@ export default function DayCarsItem({ car, isModal }) {
                 <p className={styles.carRegCountry}>ua</p>
               </div>
               <p className={styles.carNumber}>
-  {carNumber ? formatCarNumber(carNumber) : "хххххх"}
-</p>
+                {carNumber ? formatCarNumber(carNumber) : "хххххх"}
+              </p>
             </div>
           )}
 

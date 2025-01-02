@@ -1,10 +1,10 @@
 .chatWrapper {
     position: absolute;
-    top: 64px;
-    right: 0;
+    top: 65px;
+    right: -1px;
     width: 1645px;
     height: 967px;
-    border-radius: 12px;;
+    border-radius: 12px;
     background-color: var(--bg);
     display: flex;
     gap: 14px;
@@ -23,8 +23,8 @@
 
 .closeIcon {
     position: absolute;
-    top:15px;
-    left: 15px;
+    top: 10px;
+    left: 10px;
     color: var(--light-gray);
     cursor: pointer;
 }

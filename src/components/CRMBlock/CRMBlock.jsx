@@ -2,7 +2,7 @@ import css from "./CRMBlock.module.css";
 import DayCarsListCrm from "../DayCarsListCrm/DayCarsListCrm";
 import Column from "../Column/Column.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 import { changeCarStatus } from "../../redux/cars/operations.js";
@@ -18,6 +18,7 @@ import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
 import { toggleVisibilityRecords } from "../../redux/visibility/slice.js";
 
 export default function CRMBlock() {
+  const [isCrm, setIsCrm] = useState("record");
   const dispatch = useDispatch();
   const periodRecords = useSelector(selectPeriodRecords);
   const dates = useSelector(selectDates);
@@ -52,7 +53,7 @@ export default function CRMBlock() {
     console.log("Found item:", item);
 
     if (item) {
-      dispatch(changeCarStatus({ carId: item.id, status }))
+      dispatch(changeCarStatus({ carId: item.id, status, location: isCrm }))
         .unwrap()
         .then(() => {
           console.log("Updated status in frontend:", { ...item, status });

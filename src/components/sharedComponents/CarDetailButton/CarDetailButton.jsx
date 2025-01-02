@@ -1,13 +1,17 @@
-import Modal from '../../Modals/Modal/Modal'; 
-import DetailedClientInfo from '../../DetailedClientInfo/DetailedClientInfo'; 
-import { useState } from 'react';
-import styles from './CarDetailButton.module.css';
+import Modal from "../../Modals/Modal/Modal";
+import DetailedClientInfo from "../../DetailedClientInfo/DetailedClientInfo";
+import { useState } from "react";
+import styles from "./CarDetailButton.module.css";
+import { useDispatch } from "react-redux";
+import { getClientInfo } from "../../../redux/client/operations.js";
 
-const CarDetailButton = ({ carName }) => {
+const CarDetailButton = ({ carId, location, carName }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const openModal = () => {
     setIsModalOpen(true);
+    dispatch(getClientInfo({ carId: carId, location: location }));
   };
 
   const handleModalClose = () => {

@@ -11,13 +11,14 @@ import StatusBtn from "../sharedComponents/StatusBtn/StatusBtn";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton";
 import RatingStars from "../sharedComponents/RatingStars/RatingStars";
 import { selectVisibilityCar } from "../../redux/visibility/selectors.js";
+import { useState } from "react";
 
 export default function DayCarsItemLine({ car }) {
   const visibility = useSelector(selectVisibilityCar);
-
-
+  const [isMonitoring, setisMonitoring] = useState("main");
 
   const {
+    id,
     photo_url: photoUrl,
     complete_d,
     status,
@@ -28,7 +29,7 @@ export default function DayCarsItemLine({ car }) {
     date_s,
     client,
   } = car;
-  
+
   const formatCarNumber = (number) => {
     if (!number) return "";
     return number.replace(/\s+/g, "");
@@ -69,14 +70,10 @@ export default function DayCarsItemLine({ car }) {
         )}
       </div>
       {visibility?.rating && (
-            <div
-            className={clsx(
-              !visibility.rating && styles.hidden
-            )}
-          >
-            <RatingStars rating={car.rating} />
-          </div>
-          )}
+        <div className={clsx(!visibility.rating && styles.hidden)}>
+          <RatingStars rating={car.rating} />
+        </div>
+      )}
 
       {visibility?.status && (
         <div
@@ -149,7 +146,13 @@ export default function DayCarsItemLine({ car }) {
         )}
         <div className={styles.btnContainer}>
           {visibility?.status && <StatusBtn car={car} />}
-          {visibility?.info && <CarDetailButton carName={car.auto} />}
+          {visibility?.info && (
+            <CarDetailButton
+              carId={id}
+              location={isMonitoring}
+              carName={car.auto}
+            />
+          )}
         </div>
       </div>
     </div>

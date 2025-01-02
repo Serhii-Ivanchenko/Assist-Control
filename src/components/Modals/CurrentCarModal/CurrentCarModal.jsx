@@ -29,6 +29,7 @@ import ArchiveModal from "../ArchiveModal/ArchiveModal.jsx";
 import Modal from "../Modal/Modal.jsx";
 
 function CurrentCarModal({ onClose, car, status }) {
+  const [isMonitoring, setisMonitoring] = useState("main");
   const dispatch = useDispatch();
   const [selectedStatus, setSelectedStatus] = useState(status);
   const currentDate = useSelector(selectDate);
@@ -82,7 +83,13 @@ function CurrentCarModal({ onClose, car, status }) {
   };
 
   const handleSubmit = () => {
-    dispatch(changeCarStatus({ carId: car.id, status: selectedStatus }))
+    dispatch(
+      changeCarStatus({
+        carId: car.id,
+        status: selectedStatus,
+        location: isMonitoring,
+      })
+    )
       .then(() => {
         dispatch(getCurrentCars());
         dispatch(getCarsByDate(currentDate));

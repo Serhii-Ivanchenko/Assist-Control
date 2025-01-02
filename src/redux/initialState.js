@@ -1,5 +1,3 @@
-import { Warehouse } from "@mui/icons-material";
-
 export const initialState = {
   auth: {
     userData: {
@@ -95,32 +93,47 @@ export const initialState = {
     error: null,
   },
 
-  client: {
-    name: null,
-    phone: null,
-    email: null,
-    address: null,
-    rating: null,
-    date_of_birth: null,
-    registration_date: null,
-    last_visit: null,
-    total_spent: 0,
-    preferred_contact_method: null,
-    notes: null,
-    loyalty_program_status: null,
-    number_of_visits: null,
-    service_package: null,
-    discount_type: null,
-    emergency_service: null,
-    next_service_date: null,
-    source_of_contact: null,
-    warranty_cases: null,
-    special_offers: null,
-    referral_count: null,
-    discount_card_number: null,
-    accumulated_bonus: null,
-    related_customer_id: null,
-    company_id: null,
+  clients: {
+    clientInfo: {
+      client: {
+        id: null,
+        name: null,
+        phone: null,
+        email: null,
+        address: null,
+        rating: null,
+        status: null,
+        date_of_birth: null,
+        registration_date: null,
+        last_visit: null,
+        total_spent: 0,
+        preferred_contact_method: null,
+        notes: null,
+        loyalty_program_status: null,
+        number_of_visits: null,
+        service_package: null,
+        discount_type: null,
+        emergency_service: null,
+        next_service_date: null,
+        source_of_contact: null,
+        warranty_cases: null,
+        special_offers: null,
+        referral_count: null,
+        discount_card_number: null,
+        accumulated_bonus: null,
+        related_customer_id: null,
+        company_id: null,
+      },
+      car: {
+        plate: null,
+        year: null,
+        vin: null,
+        service_book: null,
+      },
+      service_history: [],
+      isLoading: false,
+      error: null,
+    },
   },
 
   service: {
@@ -157,6 +170,42 @@ export const initialState = {
     // shelves: [],
     // places: [],
     prompts: [],
+    isLoading: false,
+    error: null,
+  },
+
+  archive: {
+    archiveData: [],
+    reasons: [
+      {
+        id: 1,
+        name: "duplicate",
+      },
+      {
+        id: 2,
+        name: "employee",
+      },
+      {
+        id: 3,
+        name: "random",
+      },
+      {
+        id: 4,
+        name: "refusal",
+      },
+      {
+        id: 5,
+        name: "did_not_visit",
+      },
+      {
+        id: 6,
+        name: "rating",
+      },
+      {
+        id: 7,
+        name: "did_not_help",
+      },
+    ],
     isLoading: false,
     error: null,
   },
