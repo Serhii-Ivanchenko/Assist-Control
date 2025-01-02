@@ -12,7 +12,7 @@ import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSe
 import StatusFilter from "../sharedComponents/StatusFilter/StatusFilter";
 import renderStatusCommunication from "../../utils/renderStatusCommunication ";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch";
-import DownloadPdfButtonModalCar from "../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar";
+import DownloadPdfButtonGeneralClients from "../sharedComponents/Pdf/DownloadPdfButtonGeneralClients/DownloadPdfButtonGeneralClients";
 
 export default function GeneralClientsControlBarSection() {
   // Порожня функція для тимчасової передачі
@@ -38,7 +38,7 @@ export default function GeneralClientsControlBarSection() {
       </div>
       <div className={css.rightContainer}>
           <CarsSearch />
-          <DownloadPdfButtonModalCar />
+          <DownloadPdfButtonGeneralClients />
           <InfoSettingsVisibility
             selectVisibility={selectVisibilityAllClients}
             toggleVisibilityAction={toggleVisibilityAllClients}
