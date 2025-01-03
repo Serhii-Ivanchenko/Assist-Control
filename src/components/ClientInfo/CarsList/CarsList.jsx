@@ -11,13 +11,16 @@ import toast from "react-hot-toast";
 
 export default function CarsList({ car, key }) {
   const handleCopyVin = () => {
-    navigator.clipboard.writeText("VW8795218794H46J").then(() => {
+    if (!car.vin) {
+      return;
+    }
+    navigator.clipboard.writeText(car?.vin).then(() => {
       toast.success("VIN-код успішно скопійований :)", {
-        position: "top-right",
+        position: "top-center",
         duration: 5000,
         style: {
           background: "var(--bg-input)",
-          color: "var(--white)FFF",
+          color: "var(--white)",
         },
       });
     });
@@ -40,7 +43,7 @@ export default function CarsList({ car, key }) {
 
               <div className={css.carYearBox}>
                 <BsCalendarCheck className={css.yearIcon} />
-                <p className={css.carYear}>{car?.year || "xxxx"} </p>
+                <p className={css.carYear}>{car?.year || "0000"} </p>
               </div>
             </div>
 
@@ -74,7 +77,7 @@ export default function CarsList({ car, key }) {
 
           <ul className={css.carNumbers}>
             <li className={css.carNumbersItem}>
-              <p className={css.vin}>{car?.vin || "xxxxxxxxxx"}</p>
+              <p className={css.vin}>{car?.vin || "дані відсутні"}</p>
               <button
                 type="button"
                 className={css.contactsBtn}
@@ -93,7 +96,7 @@ export default function CarsList({ car, key }) {
                   />
                   <p className={css.carRegCountry}>ua</p>
                 </div>
-                <p className={css.carRegNumber}>{car?.plate || "AAxxxxAA"}</p>
+                <p className={css.carRegNumber}>{car?.plate || "AA0000AA"}</p>
               </div>
             </li>
           </ul>
