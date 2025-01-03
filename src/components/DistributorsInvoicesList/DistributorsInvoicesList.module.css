@@ -1,10 +1,10 @@
 .headerWrapper {
   display: grid;
-  grid-template-columns: 60px 81px 110px 130px 230px 106px 112px 120px 85px 57px;
+  grid-template-columns: 420px 60px 81px 110px 130px 230px 106px 112px 120px 85px 57px;
   margin-bottom: 20px;
   justify-items: center;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
   margin-right: 16px;
 }
 
@@ -60,3 +60,13 @@
   background-color: var(--main-gray);
   border-radius: 4px;
 }
+
+.hidden {
+  display: none;
+}
+
+.legtHeaderWrapper{
+border: 3px solid blue;
+width: 100%;
+}
+
