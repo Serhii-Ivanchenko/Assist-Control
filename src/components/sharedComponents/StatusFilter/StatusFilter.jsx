@@ -7,7 +7,6 @@ export default function StatusFilter({
   onStatusChange,
   renderStatus,
   isFilter,
-  containerStyle = {},
   dropdownStyle = {}, 
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +39,7 @@ export default function StatusFilter({
   }, []);
 
   return (
-    <div className={styles.statusFilter} ref={containerRef} onClick={toggleDropdown} style={containerStyle}>
+    <div className={styles.statusFilter} ref={containerRef} onClick={toggleDropdown} >
       <button className={styles.filterButton}>
         <p className={styles.statusFilterText}>{selectedStatus}</p>
         {isOpen ? (
@@ -50,17 +49,20 @@ export default function StatusFilter({
         )}
       </button>
       {isOpen && (
-        <ul className={styles.dropdownList}style={dropdownStyle}>
-          {statuses.map(({ status }) => (
-            <li key={status} onClick={(e) => { 
-              e.stopPropagation(); 
-              handleStatusSelect(status); 
-            }}>
-              {renderStatus(status, false, styles, isFilter)}
-            </li>
-          ))}
-        </ul>
-      )}
+  <ul className={styles.dropdownList} style={dropdownStyle}>
+    {statuses.map(({ status }) => (
+      <li key={status} onClick={(e) => { 
+        e.stopPropagation(); 
+        handleStatusSelect(status); 
+      }}>
+        <div className={styles.statusItemContainer}>
+          {renderStatus(status, false, styles, isFilter)}
+        </div>
+      </li>
+    ))}
+  </ul>
+)}
+
     </div>
   );
 }

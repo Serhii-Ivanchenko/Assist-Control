@@ -31,14 +31,12 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
     statusText = "ВИПАДКОВИЙ";
     background = "var(--status-gradient-archive-light-blue)";
     borderColor = "var(--glow-archive-light-blue)";
-  }
-  else if (reason_description === "дубль") {
+  } else if (reason_description === "дубль") {
     statusClass = styles.checkRepair || "";
     statusText = "ДУБЛЬ";
     background = "var(--status-gradient-diag)";
     borderColor = "var(--glow-diag)";
-  } 
-   else if (reason_description === "відмова") {
+  } else if (reason_description === "відмова") {
     statusClass = styles.violet || "";
     statusText = "ВІДМОВА";
     background = "var(--status-gradient-archive-violet)";
@@ -48,7 +46,7 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
     statusText = "НЕ ПРИЇХАВ";
     background = "var(--status-gradient-archive-violet)";
     borderColor = "var(--glow-archive-violet)";
-  }  else if (reason_description === "рейтинг") {
+  } else if (reason_description === "рейтинг") {
     statusClass = styles.violet || "";
     statusText = "РЕЙТИНГ";
     background = "var(--status-gradient-archive-violet)";
@@ -61,6 +59,8 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
   } else {
     statusText = "УТОЧНЕННЯ";
   }
+
+  console.log("Intermediate values:", { statusText, statusClass, background, borderColor });
 
   if (!icon) {
     switch (reason_description) {
@@ -82,7 +82,7 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
           <BsUiChecksGrid
             className={clsx(styles.icon, statusClass)}
             color="var(--light-gray)"
-            size={14}
+            size={13}
           />
         );
         break;
@@ -90,7 +90,8 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
         icon = null;
     }
   }
-  
+
+  console.log("Final icon:", icon);
 
   return (
     <div
@@ -109,5 +110,6 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
     </div>
   );
 };
+
 
 export default renderStatusInArchive;

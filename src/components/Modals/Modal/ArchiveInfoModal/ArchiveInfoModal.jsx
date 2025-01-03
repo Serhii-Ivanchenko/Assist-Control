@@ -102,7 +102,9 @@ export default function ArchiveInfoModal({ onClose }) {
         <div className={styles.rightHeader}>
           <StatusFilter
             onStatusChange={handleStatusChange}
-            renderStatus={renderStatusInArchive}
+            renderStatus={(reason_description) =>
+              renderStatusInArchive(reason_description, styles)
+            }
             statuses={getStatusesForFilter()}
             dropdownStyle={{ width: "185px", left: "-45px" }}
           />

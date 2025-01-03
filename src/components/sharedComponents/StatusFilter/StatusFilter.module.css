@@ -32,12 +32,13 @@
   }
 
 
+
   .dropdownList {
     display: flex;
     flex-direction: column;
     list-style: none;
     margin: 0;
-    padding: 12px 20px;
+    padding: 12px 11px 20px 0;
     position: absolute;
     top: 100%;
     left: -38px;
@@ -52,15 +53,29 @@
   
   .dropdownList li {
     cursor: pointer;
+    position: relative;
     margin-top: 8px;
     margin-bottom: 8px;
+    height: 22px;
+    width: 174px;
+    transition: color 0.3s ease;
   }
-
-  .dropdownList li:hover,
-  .dropdownList li:focus {
-    width: 100%;
+  
+  .dropdownList li::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+    z-index: -1;
+  }
+  
+  .dropdownList li:hover::before {
     background-color: var(--bg-secondary);
-}
+  }
  
   .all,
   .new,
@@ -72,17 +87,8 @@
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 20px;
-    /* padding: 1px 6px; */
-    
+    line-height: 20px;    
   }
-
- .dropdownList li {
-    cursor: pointer;
-    height: 22px;
-    width: 134px;
-  }
-  
 
   .all{
     color: var(--status-all);
@@ -138,5 +144,7 @@
     width: 17px;
     height: 17px;
   }
-
   
+  .statusItemContainer {
+    padding-left: 20px;
+  }
