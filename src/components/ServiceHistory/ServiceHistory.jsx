@@ -5,6 +5,7 @@ import { IoIosSearch } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { BsArrowDownSquareFill } from "react-icons/bs";
+
 export default function ServiceHistory({ carName, clientInfo }) {
   const [inputValue, setInputValue] = useState("");
   const [maxItemRecord, setMaxItemRecord] = useState(1);

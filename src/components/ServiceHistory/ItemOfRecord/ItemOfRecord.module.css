@@ -88,6 +88,17 @@
 .numberOfKilometers {
   color: var(--current-mileage-text);
   background: var(--current-mileage-bg);
+  max-width: 170px;
+}
+
+.mileageInput {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  max-width: 106px;
+
+  color: var(--current-mileage-text);
+  font-weight: 600;
 }
 
 .kilometersDriven {
@@ -219,6 +230,51 @@
   border-radius: 12px;
   background: #31353e;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.amountBox {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+
+  height: 20px;
+}
+
+.amountWrapper {
+  border-radius: 6px;
+  background: var(--main-gray);
+  padding: 2px 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+}
+
+.amount {
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  height: 16px;
+}
+
+.iconDollar {
+  fill: var(--green);
+}
+
+.amountInput {
+  width: 100%;
+  max-width: 50px;
+  height: 100%;
+  background-color: transparent;
+  font-size: 14px;
+  border: none;
+  outline: none;
+
+  color: var(--white);
 }
 
 /* .secondAcordion {

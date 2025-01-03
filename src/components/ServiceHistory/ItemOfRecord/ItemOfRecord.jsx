@@ -13,16 +13,46 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import userAvatar from "../../../assets/images/ava.png";
 import css from "./ItemOfRecord.module.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import RecordBtnInfo from "../RecordBtnInfo/RecordBtnInfo";
 import audio from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
 import PlayerAndTranscription from "../../sharedComponents/PlayerAndTranscription/PlayerAndTranscription";
+import { AiOutlineDollar } from "react-icons/ai";
 
 const summary =
   "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене[марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей.Також цікавить діагностика стану автомобіля після ремонту.Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!";
 
 export default function ItemOfRecord({ key, item, messages, isExpanded }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editAmount, setEditAmount] = useState(false);
+  const inputRef = useRef();
+
+  const handleEditing = (id, e) => {
+    e.stopPropagation();
+    setIsEditing(id);
+  };
+
+  const handleEditAmount = (id, e) => {
+    e.stopPropagation();
+    setEditAmount(id);
+  };
+
+  const handleClickOutside = (event) => {
+    if (inputRef.current && !inputRef.current.contains(event.target)) {
+      setIsEditing(false);
+      setEditAmount(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const startDate = item.start_date;
   const date = new Date(startDate).toLocaleDateString("uk-UA");
   const time = new Date(startDate).toLocaleTimeString([], {
@@ -78,17 +108,43 @@ export default function ItemOfRecord({ key, item, messages, isExpanded }) {
             padding: "0",
           }}
         >
+          {/* Шапочка акордеона*/}
           <div className={css.listItemWrapper}>
             <div className={css.listItem} onClick={() => toogleDialogModal()}>
               {/* Кілометраж */}
               <div className={css.kilometersWrapper}>
-                <div className={css.numberOfKilometers}>
-                  <SlSpeedometer /> <div>{item.mileage || "дані невідомі"}</div>
+                <div
+                  className={css.numberOfKilometers}
+                  onClick={(e) => handleEditing(item.service_id, e)}
+                >
+                  <SlSpeedometer />
+                  {isEditing === item.service_id ? (
+                    <input ref={inputRef} className={css.mileageInput} />
+                  ) : (
+                    <>
+                      {" "}
+                      <div>{item.mileage || "дані невідомі"}</div>
+                    </>
+                  )}
                 </div>
                 <div className={css.kilometersDriven}>
-                  <SlSpeedometer />{" "}
-                  <div>{item.newkilometrs || "дані невідомі"}</div>
+                  <SlSpeedometer /> <div>{item.newkilometrs}</div>
                 </div>
+              </div>
+
+              {/* Сума */}
+              <div
+                className={css.amountBox}
+                onClick={(e) => handleEditAmount(item.service_id, e)}
+              >
+                <AiOutlineDollar size={20} className={css.iconDollar} />
+                <span className={css.amountWrapper}>
+                  {editAmount === item.service_id ? (
+                    <input ref={inputRef} className={css.amountInput} />
+                  ) : (
+                    <p className={css.amount}>₴2 482 </p>
+                  )}
+                </span>
               </div>
 
               {/* Дата і час */}
