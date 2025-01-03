@@ -16,7 +16,7 @@ export default function ArchiveList({ carsDataArchive }) {
             </li>
           ))
         ) : (
-          <p>В архіві відсутні дані</p>
+          <p className={styles.message}>В архіві відсутні дані</p>
         )}
       </ul>
     </div>
