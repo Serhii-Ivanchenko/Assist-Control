@@ -26,6 +26,7 @@ export default function CalendarPeriodSelector({
     } else {
       // Якщо два календарі, обробляємо відповідно
       handleInputChangeBeg(date);
+      setIsOpenBeg(false);
     }
   };
 

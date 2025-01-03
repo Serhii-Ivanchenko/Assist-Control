@@ -106,7 +106,7 @@ export default function ArchiveInfoModal({ onClose }) {
               renderStatusInArchive(reason_description, styles)
             }
             statuses={getStatusesForFilter()}
-            dropdownStyle={{ width: "185px", left: "-30%" }}
+            dropdownStyle={{ width: "185px", left: "0" }}
           />
           <CalendarPeriodSelector
             periodStartData={periodStartData}
