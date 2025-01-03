@@ -4,14 +4,17 @@ import { useState } from "react";
 import styles from "./CarDetailButton.module.css";
 import { useDispatch } from "react-redux";
 import { getClientInfo } from "../../../redux/client/operations.js";
+import { clearClientInfo } from "../../../redux/client/slice.js";
 
 const CarDetailButton = ({ carId, location, carName }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const openModal = () => {
+  const openModal = async () => {
+    await dispatch(clearClientInfo());
+    await dispatch(getClientInfo({ carId: carId, location: location }));
+    console.log(carId, location);
     setIsModalOpen(true);
-    dispatch(getClientInfo({ carId: carId, location: location }));
   };
 
   const handleModalClose = () => {

@@ -5,7 +5,7 @@ import { IoIosSearch } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { BsArrowDownSquareFill } from "react-icons/bs";
-export default function ServiceHistory({ carName }) {
+export default function ServiceHistory({ carName, clientInfo }) {
   const [inputValue, setInputValue] = useState("");
   const [maxItemRecord, setMaxItemRecord] = useState(1);
   const [filteredRecords, setFilteredRecords] = useState([]); // Додаємо стан для фільтрованих записів
@@ -49,212 +49,215 @@ export default function ServiceHistory({ carName }) {
     },
   ];
 
-  const recordRace = [
-    {
-      index: "1",
-      totalkilometrs: "246750",
-      newkilometrs: "9272",
-      date: "19.06.2024",
-      time: "16:08",
-      appeal: {
-        client:
-          "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене [марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
-        menager:
-          "Привіт! Мене звати [Ім'я], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
-      },
-      diagnostic: {
-        spareParts: [
-          {
-            id: "1",
-            name: "Тормозні",
-            number: "BRK123456",
-            state: "Зношений",
-            recomendation: "Заміна",
-          },
-          {
-            id: "2",
-            name: "Тормозні",
-            number: "BRK123456",
-            state: "Зношений",
-            recomendation: "Заміна",
-          },
-          {
-            id: "3",
-            name: "Тормозні",
-            number: "BRK123456",
-            state: "Зношений",
-            recomendation: "Заміна",
-          },
-        ],
-        message:
-          "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
-      },
-      repair: {
-        fillOfRepair: [
-          {
-            isCellChecked: true,
-            nameOfDetail: "Лобове скло",
-            priceOfDetail: "3500",
-            repairName: "Заміна лобового скла",
-            repairPrice: "800",
-            id: "1",
-          },
-          {
-            isCellChecked: false,
-            nameOfDetail: "Бампер передній",
-            priceOfDetail: "4500",
-            repairName: "Установка бампера",
-            repairPrice: "1200",
-            id: "2",
-          },
-          {
-            isCellChecked: true,
-            nameOfDetail: "Капот",
-            priceOfDetail: "6000",
-            repairName: "Встановлення капота",
-            repairPrice: "1500",
-            id: "3",
-          },
-          {
-            isCellChecked: true,
-            nameOfDetail: "Крила (л + п)",
-            priceOfDetail: "4000",
-            repairName: "Встановлення крил",
-            repairPrice: "1000",
-            id: "4",
-          },
-          {
-            isCellChecked: false,
-            nameOfDetail: "Фари передні (2 шт.)",
-            priceOfDetail: "3200",
-            repairName: "Налаштування фар",
-            repairPrice: "600",
-            id: "5",
-          },
-        ],
-      },
-    },
-    {
-      index: "3",
-      totalkilometrs: "246749",
-      newkilometrs: "9272",
-      date: "18.06.2024",
-      time: "16:08",
-    },
-    {
-      index: "2",
-      totalkilometrs: "246748",
-      newkilometrs: "9272",
-      date: "17.06.2024",
-      time: "16:08",
-      appeal: {},
-      diagnostic: {},
-      repair: {
-        fillOfRepair: [
-          {
-            isCellChecked: true,
-            nameOfDetail: "Лобове скло",
-            priceOfDetail: "3500",
-            repairName: "Заміна лобового скла",
-            repairPrice: "800",
-            id: "1",
-          },
-          {
-            isCellChecked: false,
-            nameOfDetail: "Бампер передній",
-            priceOfDetail: "4500",
-            repairName: "Установка бампера",
-            repairPrice: "1200",
-            id: "2",
-          },
-          {
-            isCellChecked: true,
-            nameOfDetail: "Крила (л + п)",
-            priceOfDetail: "4000",
-            repairName: "Встановлення крил",
-            repairPrice: "1000",
-            id: "4",
-          },
-          {
-            isCellChecked: false,
-            nameOfDetail: "Фари передні (2 шт.)",
-            priceOfDetail: "3200",
-            repairName: "Налаштування фар",
-            repairPrice: "600",
-            id: "5",
-          },
-        ],
-      },
-    },
-    {
-      index: "4",
-      totalkilometrs: "246747",
-      newkilometrs: "9272",
-      date: "16.06.2024",
-      time: "16:08",
-      appeal: {
-        client:
-          "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене [марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
-        menager:
-          "Привіт! Мене звати [Ім'я], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
-      },
-      diagnostic: {
-        spareParts: [
-          {
-            id: "1",
-            name: "Тормозні колодки",
-            number: "BRK123456",
-            state: "Зношений",
-            recomendation: "Заміна",
-          },
-          {
-            id: "2",
-            name: "Тормозні колодки",
-            number: "BRK123456",
-            state: "Зношений",
-            recomendation: "Заміна",
-          },
-          {
-            id: "3",
-            name: "Тормозні колодки",
-            number: "BRK123456",
-            state: "Зношений",
-            recomendation: "Заміна",
-          },
-        ],
-        message:
-          "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
-      },
-      repair: {
-        fillOfRepair: [
-          {
-            isCellChecked: true,
-            nameOfDetail: "Лобове скло",
-            priceOfDetail: "3500",
-            repairName: "Заміна лобового скла",
-            repairPrice: "800",
-            id: "1",
-          },
-          {
-            isCellChecked: false,
-            nameOfDetail: "Бампер передній",
-            priceOfDetail: "4500",
-            repairName: "Установка бампера",
-            repairPrice: "1200",
-            id: "2",
-          },
-          {
-            isCellChecked: true,
-            nameOfDetail: "Крила (л + п)",
-            priceOfDetail: "4000",
-            repairName: "Встановлення крил",
-            repairPrice: "1000",
-            id: "4",
-          },
-        ],
-      },
-    },
-  ];
+  const recordRace = clientInfo.service_history;
+  console.log(recordRace);
+
+  //[
+  //   {
+  //     index: "1",
+  //     totalkilometrs: "246750",
+  //     newkilometrs: "9272",
+  //     date: "19.06.2024",
+  //     time: "16:08",
+  //     appeal: {
+  //       client:
+  //         "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене [марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
+  //       menager:
+  //         "Привіт! Мене звати [Ім'я], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
+  //     },
+  //     diagnostic: {
+  //       spareParts: [
+  //         {
+  //           id: "1",
+  //           name: "Тормозні",
+  //           number: "BRK123456",
+  //           state: "Зношений",
+  //           recomendation: "Заміна",
+  //         },
+  //         {
+  //           id: "2",
+  //           name: "Тормозні",
+  //           number: "BRK123456",
+  //           state: "Зношений",
+  //           recomendation: "Заміна",
+  //         },
+  //         {
+  //           id: "3",
+  //           name: "Тормозні",
+  //           number: "BRK123456",
+  //           state: "Зношений",
+  //           recomendation: "Заміна",
+  //         },
+  //       ],
+  //       message:
+  //         "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
+  //     },
+  //     repair: {
+  //       fillOfRepair: [
+  //         {
+  //           isCellChecked: true,
+  //           nameOfDetail: "Лобове скло",
+  //           priceOfDetail: "3500",
+  //           repairName: "Заміна лобового скла",
+  //           repairPrice: "800",
+  //           id: "1",
+  //         },
+  //         {
+  //           isCellChecked: false,
+  //           nameOfDetail: "Бампер передній",
+  //           priceOfDetail: "4500",
+  //           repairName: "Установка бампера",
+  //           repairPrice: "1200",
+  //           id: "2",
+  //         },
+  //         {
+  //           isCellChecked: true,
+  //           nameOfDetail: "Капот",
+  //           priceOfDetail: "6000",
+  //           repairName: "Встановлення капота",
+  //           repairPrice: "1500",
+  //           id: "3",
+  //         },
+  //         {
+  //           isCellChecked: true,
+  //           nameOfDetail: "Крила (л + п)",
+  //           priceOfDetail: "4000",
+  //           repairName: "Встановлення крил",
+  //           repairPrice: "1000",
+  //           id: "4",
+  //         },
+  //         {
+  //           isCellChecked: false,
+  //           nameOfDetail: "Фари передні (2 шт.)",
+  //           priceOfDetail: "3200",
+  //           repairName: "Налаштування фар",
+  //           repairPrice: "600",
+  //           id: "5",
+  //         },
+  //       ],
+  //     },
+  //   },
+  //   {
+  //     index: "3",
+  //     totalkilometrs: "246749",
+  //     newkilometrs: "9272",
+  //     date: "18.06.2024",
+  //     time: "16:08",
+  //   },
+  //   {
+  //     index: "2",
+  //     totalkilometrs: "246748",
+  //     newkilometrs: "9272",
+  //     date: "17.06.2024",
+  //     time: "16:08",
+  //     appeal: {},
+  //     diagnostic: {},
+  //     repair: {
+  //       fillOfRepair: [
+  //         {
+  //           isCellChecked: true,
+  //           nameOfDetail: "Лобове скло",
+  //           priceOfDetail: "3500",
+  //           repairName: "Заміна лобового скла",
+  //           repairPrice: "800",
+  //           id: "1",
+  //         },
+  //         {
+  //           isCellChecked: false,
+  //           nameOfDetail: "Бампер передній",
+  //           priceOfDetail: "4500",
+  //           repairName: "Установка бампера",
+  //           repairPrice: "1200",
+  //           id: "2",
+  //         },
+  //         {
+  //           isCellChecked: true,
+  //           nameOfDetail: "Крила (л + п)",
+  //           priceOfDetail: "4000",
+  //           repairName: "Встановлення крил",
+  //           repairPrice: "1000",
+  //           id: "4",
+  //         },
+  //         {
+  //           isCellChecked: false,
+  //           nameOfDetail: "Фари передні (2 шт.)",
+  //           priceOfDetail: "3200",
+  //           repairName: "Налаштування фар",
+  //           repairPrice: "600",
+  //           id: "5",
+  //         },
+  //       ],
+  //     },
+  //   },
+  //   {
+  //     index: "4",
+  //     totalkilometrs: "246747",
+  //     newkilometrs: "9272",
+  //     date: "16.06.2024",
+  //     time: "16:08",
+  //     appeal: {
+  //       client:
+  //         "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене [марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
+  //       menager:
+  //         "Привіт! Мене звати [Ім'я], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
+  //     },
+  //     diagnostic: {
+  //       spareParts: [
+  //         {
+  //           id: "1",
+  //           name: "Тормозні колодки",
+  //           number: "BRK123456",
+  //           state: "Зношений",
+  //           recomendation: "Заміна",
+  //         },
+  //         {
+  //           id: "2",
+  //           name: "Тормозні колодки",
+  //           number: "BRK123456",
+  //           state: "Зношений",
+  //           recomendation: "Заміна",
+  //         },
+  //         {
+  //           id: "3",
+  //           name: "Тормозні колодки",
+  //           number: "BRK123456",
+  //           state: "Зношений",
+  //           recomendation: "Заміна",
+  //         },
+  //       ],
+  //       message:
+  //         "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
+  //     },
+  //     repair: {
+  //       fillOfRepair: [
+  //         {
+  //           isCellChecked: true,
+  //           nameOfDetail: "Лобове скло",
+  //           priceOfDetail: "3500",
+  //           repairName: "Заміна лобового скла",
+  //           repairPrice: "800",
+  //           id: "1",
+  //         },
+  //         {
+  //           isCellChecked: false,
+  //           nameOfDetail: "Бампер передній",
+  //           priceOfDetail: "4500",
+  //           repairName: "Установка бампера",
+  //           repairPrice: "1200",
+  //           id: "2",
+  //         },
+  //         {
+  //           isCellChecked: true,
+  //           nameOfDetail: "Крила (л + п)",
+  //           priceOfDetail: "4000",
+  //           repairName: "Встановлення крил",
+  //           repairPrice: "1000",
+  //           id: "4",
+  //         },
+  //       ],
+  //     },
+  //   },
+  // ];
   const sortedArr = [...recordRace].sort((a, b) =>
     a.totalkilometrs > b.totalkilometrs ? -1 : 1
   );
@@ -325,7 +328,8 @@ export default function ServiceHistory({ carName }) {
                 } else {
                   return (
                     <ItemOfRecord
-                      key={item.index}
+                      // clientInfo={clientInfo}
+                      key={item.service_id}
                       item={item}
                       messages={messages}
                       isExpanded={index === 0}

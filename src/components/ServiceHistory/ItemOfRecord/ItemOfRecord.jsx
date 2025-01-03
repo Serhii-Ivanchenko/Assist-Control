@@ -22,7 +22,13 @@ import PlayerAndTranscription from "../../sharedComponents/PlayerAndTranscriptio
 const summary =
   "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене[марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей.Також цікавить діагностика стану автомобіля після ремонту.Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!";
 
-export default function ItemOfRecord({ item, messages, isExpanded }) {
+export default function ItemOfRecord({
+  key,
+  item,
+  messages,
+  isExpanded,
+  // clientInfo,
+}) {
   const [showDialogModal, setShowDialogModal] = useState(isExpanded);
 
   // const [transcription, setTranscription] = useState(false);
@@ -30,7 +36,7 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
   const [recordInfo, setRecordInfo] = useState("appeal");
 
   const [isRecordInfoOpen, setIsRecordInfoOpen] = useState(
-    Boolean(item.appeal)
+    Boolean(item.appeals)
   );
 
   // const toogleTranscription = () => setTranscription(!transcription);
@@ -52,7 +58,7 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
       : handleToogleRecordInfo(string);
 
   return (
-    <li key={item.totalkilometrs} className={css.itemOfAccardion}>
+    <li key={key} className={css.itemOfAccardion}>
       <div className={css.itemOfMarking}>
         <BsRecordCircle className={css.circle} />
         <div className={css.line}></div>
@@ -75,7 +81,7 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
             <div className={css.listItem} onClick={() => toogleDialogModal()}>
               <div className={css.kilometersWrapper}>
                 <div className={css.numberOfKilometers}>
-                  <SlSpeedometer /> <div>{item.totalkilometrs}</div>
+                  <SlSpeedometer /> <div>{item.mileage || "xxxxx"}</div>
                 </div>
                 <div className={css.kilometersDriven}>
                   <SlSpeedometer /> <div>{item.newkilometrs}</div>
@@ -110,17 +116,17 @@ export default function ItemOfRecord({ item, messages, isExpanded }) {
                 className={css.btnDownloadsItem}
                 onClick={() => handleSetRecordInfo("appeal")}
                 style={
-                  item.appeal && recordInfo === "appeal"
+                  item.appeals && recordInfo === "appeal"
                     ? { cursor: "pointer", outline: "1px solid #fff" }
-                    : !item.appeal
+                    : !item.appeals
                     ? null
                     : { cursor: "pointer" }
                 }
-                disabled={!item.appeal}
+                disabled={!item.appeals}
               >
                 <p>Звернення</p>
                 <div
-                  className={clsx(css.downloadBtn, item.appeal && css.btnBg)}
+                  className={clsx(css.downloadBtn, item.appeals && css.btnBg)}
                 >
                   <BsReceipt size={13} />
                 </div>

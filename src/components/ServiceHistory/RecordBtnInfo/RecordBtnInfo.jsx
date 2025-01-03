@@ -48,45 +48,49 @@ export default function RecordBtnInfo({ recordInfo, item }) {
     <div className={css.recordBtnInfoWrapper}>
       {/* ЗВЕРНЕННЯ */}
 
-      {item.appeal && recordInfo === "appeal" && (
-        <div className={css.infoWrapper}>
-          <div className={css.infoBtnWrapper}>
-            <button
-              className={clsx(
-                css.infoBtn,
-                !appealMsgToShow && css.nonActiveBtn,
-                !item.appeal.client && css.disabledBtn
-              )}
-              onClick={() => changeAppealMsg(true)}
-              disabled={!item.appeal.client}
-            >
-              Клієнт
-            </button>
-            <button
-              className={clsx(
-                css.infoBtn,
-                appealMsgToShow && css.nonActiveBtn,
-                !item.appeal.menager && css.disabledBtn
-              )}
-              onClick={() => changeAppealMsg(false)}
-              disabled={!item.appeal.menager}
-            >
-              Менеджер
-            </button>
+      {item.appeals &&
+        recordInfo === "appeal" &&
+        item.appeals.map((appeal, index) => (
+          <div className={css.infoWrapper} key={index}>
+            <div className={css.infoBtnWrapper}>
+              <button
+                className={clsx(
+                  css.infoBtn,
+                  !appealMsgToShow && css.nonActiveBtn,
+                  !appeal.dialog && css.disabledBtn
+                )}
+                onClick={() => changeAppealMsg(true)}
+                disabled={!appeal.dialog}
+              >
+                Клієнт
+              </button>
+              <button
+                className={clsx(
+                  css.infoBtn,
+                  appealMsgToShow && css.nonActiveBtn,
+                  !appeal.manager_response && css.disabledBtn
+                )}
+                onClick={() => changeAppealMsg(false)}
+                disabled={!appeal.manager_response}
+              >
+                Менеджер
+              </button>
+            </div>
+            {appealMsgToShow
+              ? appeal.dialog && (
+                  <div className={css.clientMsg}>{appeal.dialog}</div>
+                )
+              : appeal.manager_response && (
+                  <div className={css.wrapperOfComent}>
+                    {appeal.manager_response}
+                  </div>
+                )}
           </div>
-          {appealMsgToShow
-            ? item.appeal.client && (
-                <div className={css.clientMsg}>{item.appeal.client}</div>
-              )
-            : item.appeal.menager && (
-                <div className={css.wrapperOfComent}>{item.appeal.menager}</div>
-              )}
-        </div>
-      )}
+        ))}
 
       {/* ДІАГНОСТИКА */}
 
-      {recordInfo === "diagnostic" && item.diagnostic && (
+      {recordInfo === "diagnostic" && item.diagnostics && (
         <div className={css.infoWrapper}>
           <div className={css.infoBtnWrapper}>
             <button

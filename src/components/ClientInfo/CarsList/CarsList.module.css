@@ -1,0 +1,359 @@
+/* .carInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  height: 268px;
+  overflow-y: auto;
+  width: 567px;
+}
+
+.carInfo::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+  margin-left: 20px;
+}
+
+.carInfo::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--player-secondary-bg);
+}
+
+.carInfo::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: #202020;
+} */
+
+.carCard {
+  width: 527px;
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid rgba(0, 0, 0, 0.25); */
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);   */
+
+  /* border-radius: 8px; */
+}
+
+.carCard:not(:last-child) {
+  border-bottom: dashed 2px var(--contacts-info-bg);
+  padding-bottom: 12px;
+}
+
+.carImage {
+  width: 126px;
+  height: 126px;
+
+  border-radius: 8px;
+  /* border: solid 1px #fff; */
+}
+
+.photoAndMainCarInfo {
+  display: flex;
+  gap: 29px;
+
+  margin-bottom: 20px;
+}
+
+.mainCarInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* height: 126px; */
+}
+
+.modelAndYear {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.carNameBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* margin-bottom: 12px; */
+}
+
+.carName {
+  color: var(--white);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.carIcon {
+  fill: var(--icon-gray);
+}
+
+.carYearBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.carYear {
+  color: var(--white);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.yearIcon {
+  width: 20px;
+  height: 20px;
+  fill: var(--icon-gray);
+}
+
+.carCategoryBox {
+  display: flex;
+  gap: 67px;
+}
+
+.carCategory {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.carCategoryItem {
+  height: 46px;
+  display: flex;
+  align-items: center;
+}
+
+.carNumbers {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.carNumbersItem {
+  height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 210px;
+
+  padding: 6px 16px;
+
+  border-radius: 6px;
+  background-color: var(--contacts-info-bg);
+}
+
+.car {
+  background-color: transparent;
+  padding: 0;
+}
+
+.vin {
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.categoryVin {
+  display: flex;
+  gap: 9px;
+}
+
+.categoryCar {
+  display: flex;
+  gap: 4px;
+}
+
+.inBold {
+  color: var(--white);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.number {
+  color: var(--white);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+/* .btnBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+} */
+
+/* .addCarBtn{
+    display: none;
+} */
+
+/* .carListAndAddBtn {
+  position: relative;
+} */
+
+/* .addCarBtn {
+  border: none;
+  display: flex;
+  gap: 6px;
+  padding: 4px 6px;
+  align-items: center;
+  height: fit-content;
+
+  border-radius: 6px;
+  background-color: var(--green-btn-normal);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+} */
+
+/* .addCarBtn:hover {
+  background-color: var(--green-btn-hover);
+}
+
+.plus {
+  width: 18px;
+  height: 18px;
+  fill: var(--white);
+} */
+
+/* .mainContent{
+    margin-right: 78px;
+} */
+
+.deleteBtn {
+  margin-right: 57px;
+  width: 18px;
+  height: 18px;
+  fill: var(--icon-gray);
+  cursor: pointer;
+}
+
+.carReg {
+  display: block;
+
+  width: 217px;
+  height: 52px;
+
+  margin: 0 35px 10px;
+}
+
+.carRegContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 210px;
+  height: 46px;
+  border-radius: 6px;
+  background-color: #d9d9d9;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+}
+
+.carRegCountry {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 9px;
+
+  width: 19px;
+  height: 100%;
+
+  background-color: #00349a;
+  border-radius: 6px 0 0 6px;
+}
+
+.carRegFlag {
+  width: 12px;
+  height: 8px;
+
+  margin-top: 8px;
+}
+
+.carRegNumber {
+  color: var(--black);
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+
+  text-transform: uppercase;
+}
+
+.carRegCountry {
+  color: var(--white);
+
+  font-family: "Roboto", sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+.serviceBook {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  gap: 19px;
+
+  border-radius: 6px;
+  background-color: var(--download-pdf-btn-bg);
+
+  /* margin-top: 26px; */
+  width: fit-content;
+  height: 44px;
+}
+
+.sbBtn {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 4px 6px;
+
+  border-radius: 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+
+  color: var(--icon-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.downloadIcon {
+  fill: var(--icon-gray);
+  width: 16px;
+  height: 16px;
+}
+
+.contactsBtn {
+  border: none;
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  cursor: pointer;
+}
+
+.iconColor {
+  fill: var(--icon-gray);
+}
