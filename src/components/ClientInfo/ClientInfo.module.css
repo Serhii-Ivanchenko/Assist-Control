@@ -188,13 +188,9 @@
   width: fit-content;
 }
 
-.contactsInputPhone {
+/* .contactsInputPhone {
   width: 169px;
-}
-
-.contactsInfoItemTg {
-  width: 217px;
-}
+}*/
 
 .contactsInput {
   background-color: transparent;
@@ -206,6 +202,14 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+
+.contactsInputActive {
+  width: 235px;
+}
+
+.contactsInfoItemTg {
+  width: 278px;
 }
 
 .contactsInputEmail {

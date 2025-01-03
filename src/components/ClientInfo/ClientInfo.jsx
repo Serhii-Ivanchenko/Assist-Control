@@ -35,8 +35,8 @@ export default function ClientInfo({ clientInfo }) {
   const clientEmail = client?.email || "дані відсутні";
   const clientName = client?.name || "дані відсутні";
   const clientPhone = client?.phone || "дані відсутні";
-  const clientBirthday = client?.date_of_birth || "дані відсутні";
-  const age = new Date() - clientBirthday || "xx";
+  const clientBirthday = client?.date_of_birth;
+  const age = new Date() - clientBirthday;
   const clientTotalSpent = client?.total_spent;
   const clientRating = client?.rating;
 
@@ -147,10 +147,14 @@ export default function ClientInfo({ clientInfo }) {
                 </button>
               )}
             </div>
+            {clientBirthday ? (
+              <p className={css.dateOfBirth}>
+                {clientBirthday} ({age} р.)
+              </p>
+            ) : (
+              <p className={css.dateOfBirth}>данні відсутні</p>
+            )}
 
-            <p className={css.dateOfBirth}>
-              {clientBirthday} ({age} р.)
-            </p>
             <div className={css.legalInfo}>
               <p className={css.lIText}>Юридична інформація</p>
               <button type="button" className={css.editBtn}>
@@ -193,7 +197,7 @@ export default function ClientInfo({ clientInfo }) {
                 type="text"
                 value={phoneNum}
                 onChange={handleChangePN}
-                className={`${css.contactsInput} ${css.contactsInputPhone}`}
+                className={`${css.contactsInput} ${css.contactsInputActive}`}
                 ref={inputFocusRef}
               />
             ) : (
@@ -268,7 +272,7 @@ export default function ClientInfo({ clientInfo }) {
                 type="text"
                 value={tg}
                 onChange={handleChangeTg}
-                className={css.contactsInput}
+                className={`${css.contactsInput} ${css.contactsInfoItemTg}`}
               />
             ) : (
               <p className={css.contactsInput}>{tg}</p>

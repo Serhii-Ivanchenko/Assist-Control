@@ -32,29 +32,43 @@ export default function CarsList({ car, key }) {
     <li key={key} className={css.carCard}>
       <div className={css.mainContent}>
         <div className={css.photoAndMainCarInfo}>
-          <img src={absentAutoImg} alt="Car's Image" className={css.carImage} />
+          <img
+            src={car?.photo_url || absentAutoImg}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = absentAutoImg;
+            }}
+            alt="Car's Image"
+            className={css.carImage}
+          />
 
           <div className={css.mainCarInfo}>
             <div className={css.modelAndYear}>
               <div className={css.carNameBox}>
                 <IoCarSport className={css.carIcon} size={30} />
-                <p className={css.carName}>HONDA CIVIC</p>
+                <p className={css.carName}>{car?.model || "дані відсутні"}</p>
               </div>
 
               <div className={css.carYearBox}>
                 <BsCalendarCheck className={css.yearIcon} />
-                <p className={css.carYear}>{car?.year || "0000"} </p>
+                <p className={css.carYear}>{car?.year || "дані відсутні"} </p>
               </div>
             </div>
 
             <div className={css.serviceBook}>
-              <p className={css.sbText}>Сервісна книга</p>
-              <a href="" download={car?.service_book}>
-                <button className={css.sbBtn}>
-                  <BsDownload className={css.downloadIcon} />
-                  .pdf
-                </button>
-              </a>
+              {!car?.service_book ? (
+                <p>Сервісна книга відсутня </p>
+              ) : (
+                <>
+                  <p className={css.sbText}>Сервісна книга</p>
+                  <a href="" download={car?.service_book}>
+                    <button className={css.sbBtn}>
+                      <BsDownload className={css.downloadIcon} />
+                      .pdf
+                    </button>
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>
