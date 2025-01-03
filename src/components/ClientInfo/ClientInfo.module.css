@@ -29,7 +29,6 @@
 }
 
 .rating {
-  display: flex;
   gap: 2px;
 }
 
@@ -189,6 +188,10 @@
   width: fit-content;
 }
 
+/* .contactsInputPhone {
+  width: 169px;
+}*/
+
 .contactsInput {
   background-color: transparent;
   outline: none;
@@ -199,6 +202,25 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+
+.contactsInputActive {
+  width: 235px;
+}
+
+.contactsInfoItemTg {
+  width: 278px;
+}
+
+.contactsInputEmail {
+  width: 235px;
+}
+
+.contactsInputText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 235px;
 }
 
 .contactsBtn {
@@ -366,165 +388,6 @@
   background-color: #202020;
 }
 
-/* .carCard {
-  width: 527px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.carCard:not(:last-child) {
-  border-bottom: dashed 2px var(--contacts-info-bg);
-  padding-bottom: 12px;
-}
-
-.carImage {
-  width: 126px;
-  height: 126px;
-
-  border-radius: 8px;
-} */
-
-/* .photoAndMainCarInfo {
-  display: flex;
-  gap: 29px;
-
-  margin-bottom: 20px;
-}
-
-.mainCarInfo {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-} */
-
-/* .modelAndYear {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.carNameBox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-} */
-
-/* .carName {
-  color: var(--white);
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-
-
-.carYearBox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.carYear {
-  color: var(--white);
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.yearIcon {
-  width: 20px;
-  height: 20px;
-  fill: var(--icon-gray);
-}
-
-.carCategoryBox {
-  display: flex;
-  gap: 67px;
-}
-
-.carCategory {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.carCategoryItem {
-  height: 46px;
-  display: flex;
-  align-items: center;
-}
-
-.carNumbers {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.carNumbersItem {
-  height: 46px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 210px;
-
-  padding: 6px 16px;
-
-  border-radius: 6px;
-  background-color: var(--contacts-info-bg);
-}
-
-.car {
-  background-color: transparent;
-  padding: 0;
-}
-
-.vin {
-  color: var(--white);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.categoryVin {
-  display: flex;
-  gap: 9px;
-}
-
-.categoryCar {
-  display: flex;
-  gap: 4px;
-}
-
-.inBold {
-  color: var(--white);
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-.number {
-  color: var(--white);
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-} */
-
-/* .btnBox{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-} */
-
-/* .addCarBtn{
-    display: none;
-} */
-
 .carListAndAddBtn {
   position: relative;
 }
@@ -559,75 +422,3 @@
 .carIcon {
   fill: var(--icon-gray);
 }
-
-/* .mainContent{
-    margin-right: 78px;
-} */
-
-/* .deleteBtn {
-  margin-right: 57px;
-  width: 18px;
-  height: 18px;
-  fill: var(--icon-gray);
-  cursor: pointer;
-}
-
-.carReg {
-  display: block;
-
-  width: 217px;
-  height: 52px;
-
-  margin: 0 35px 10px;
-}
-
-.carRegContainer {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 210px;
-  height: 46px;
-  border-radius: 6px;
-  background-color: #d9d9d9;
-}
-
-.carRegCountry {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 9px;
-
-  width: 19px;
-  height: 100%;
-
-  background-color: #00349a;
-  border-radius: 6px 0 0 6px;
-}
-
-.carRegFlag {
-  width: 12px;
-  height: 8px;
-
-  margin-top: 8px;
-}
-
-.carRegNumber {
-  color: var(--black);
-
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Roboto", sans-serif;
-  font-size: 30px;
-  font-weight: 400;
-
-  text-transform: uppercase;
-}
-
-.carRegCountry {
-  color: var(--white);
-
-  font-family: "Roboto", sans-serif;
-  font-size: 9px;
-  font-weight: 600;
-
-  text-transform: uppercase;
-} */
