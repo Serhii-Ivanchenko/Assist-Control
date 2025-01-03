@@ -1,0 +1,13 @@
+
+.archiveList{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message{
+   display: block;
+   width: 170px;
+   margin-left: auto;
+   margin-right:auto ;
+}

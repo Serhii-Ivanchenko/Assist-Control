@@ -4,11 +4,14 @@ import { BsReceipt } from "react-icons/bs";
 import clsx from "clsx";
 import carImg from "../../../assets/images/car.png";
 import distrLogo from "../../../assets/images/distrImg.png";
+import { selectVisibilitySuppliers } from "../../../redux/visibility/selectors";
+import { useSelector } from "react-redux";
 
 export default function DistributorsInvoice({ arr }) {
   const [showAllInvoice, setShowAllInvoice] = useState(false);
   const [tableHeight, setTableHeight] = useState("auto");
   const tableRef = useRef(null);
+  const visibility = useSelector(selectVisibilitySuppliers);
 
   const displayedCarParts = showAllInvoice
     ? arr.carParts
@@ -41,12 +44,22 @@ export default function DistributorsInvoice({ arr }) {
           <div className={css.centerWrapper}>
             <div className={css.headerCenterWrapper}>
               <p className={css.storage}>{arr.delivered ? "Склад" : "-"}</p>
-              <p className={css.headerCenterText}>{arr.deliveryDate}</p>
-              <p className={css.headerCenterText}>{arr.carPartsQuantity} шт</p>
+              {visibility?.date && (
+                <p className={css.headerCenterText}>{arr.deliveryDate}</p>
+              )}
+              {visibility?.quantity && (
+                <p className={css.headerCenterText}>
+                  {arr.carPartsQuantity} шт
+                </p>
+              )}
             </div>
             <div className={css.subHeaderRight}>
-              <p className={css.headerCenterText}>{arr.profit} грн</p>
-              <p className={css.headerCenterText}>{arr.percent} %</p>
+              {visibility?.profit && (
+                <p className={css.headerCenterText}>{arr.profit} грн</p>
+              )}
+              {visibility?.percent && (
+                <p className={css.headerCenterText}>{arr.percent} %</p>
+              )}
             </div>
           </div>
         </div>
@@ -82,17 +95,17 @@ export default function DistributorsInvoice({ arr }) {
             return (
               <div key={index}>
                 <div className={css.stringWrapper}>
-                  <p className={css.tableText}>{arr.deliveryDate}</p>
-                  <p className={css.tableText}>{part.quantity} шт</p>
-                  <p className={css.tableText}>{part.article}</p>
-                  <p className={css.tableText}>{part.brandName}</p>
-                  <p className={css.tableText}>{part.carPartsName}</p>
-                  <p className={css.tableText}>{part.price} грн</p>
-                  <p className={css.tableText}>{part.purchaseAmount} грн</p>
-                  <p className={css.tableText}>
+                  {visibility?.date && (<p className={css.tableText}>{arr.deliveryDate}</p>)}
+                  {visibility?.quantity && (<p className={css.tableText}>{part.quantity} шт</p>)}
+                  {visibility?.article && (<p className={css.tableText}>{part.article}</p>)}
+                  {visibility?.brand && (<p className={css.tableText}>{part.brandName}</p>)}
+                  {visibility?.nomenclature && (<p className={css.tableText}>{part.carPartsName}</p>)}
+                  {visibility?.purchasePrice && (<p className={css.tableText}>{part.price} грн</p>)}
+                  {visibility?.purchaseAmount && (<p className={css.tableText}>{part.purchaseAmount} грн</p>)}
+                  {visibility?.saleAmount && (<p className={css.tableText}>
                     {part.salesAmount ? `${part.salesAmount} грн` : "Склад"}
-                  </p>
-                  <p
+                  </p>)}
+                  {visibility?.profit && (<p
                     className={clsx(
                       css.tableText,
                       !part.salesAmount && css.less
@@ -101,15 +114,15 @@ export default function DistributorsInvoice({ arr }) {
                     {part.salesAmount
                       ? `${part.salesAmount - part.quantity * part.price} грн`
                       : "!"}
-                  </p>
-                  <p
+                  </p>)}
+                  {visibility?.percent && (<p
                     className={clsx(
                       css.tableText,
                       Number(part.salesPercent) > 29 ? css.more : css.less
                     )}
                   >
                     {part.salesPercent ? `${part.salesPercent} %` : "-100 %"}
-                  </p>
+                  </p>)}
                 </div>
               </div>
             );
