@@ -1,64 +1,34 @@
-.sectionWrapper {
-  height: 172px;
-  width: 100%;
-  padding: 18px 24px;
-  border-radius: 12px;
-  background-color: var(--dark-gray);
+.buttonWrapper {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  height: 68px;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
-.topWrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+.buttonWrapper::-webkit-scrollbar {
+  width: 8px;
+  padding-top: 4px;
+  height: 100%;
 }
 
-.leftWrapper {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  margin-right: 18px;
+.buttonWrapper::-webkit-scrollbar-track {
+  background-color: var(--bg);
+  border-radius: 4px;
 }
 
-.header {
-  color: var(--light-gray);
-  font-family: Montserrat, sans-serif;
-  font-size: 20px;
+.buttonWrapper::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+}
+
+.tag {
+  padding: 4px 15px;
+  border-radius: 24px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-}
-
-.arrow {
-  cursor: pointer;
-}
-
-.glass {
-  margin-top: 6px;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.plus {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px;
-  width: 14px;
-  height: 14px;
-  border-radius: 3px;
-  background-color: var(--current-mileage-text);
-  color: var(--dark-gray);
-  margin-left: auto;
-  cursor: pointer;
-}
-
-.buttonWrapper {
-  /* margin-bottom: 18px; */
 }
 
 .bottomWrapper {
@@ -81,4 +51,154 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+.darkGreen {
+  background-color: var(--dark-green-bg);
+  color: var(--dark-green-text);
+}
+
+.midGreen {
+  background-color: var(--mid-green-bg);
+  color: var(--mid-green-text);
+}
+
+.lightGreen {
+  background-color: var(--light-green-bg);
+  color: var(--light-green-text);
+}
+
+.darkBlue {
+  background-color: var(--dark-blue-bg);
+  color: var(--dark-blue-text);
+}
+
+.midBlue {
+  background-color: var(--mid-blue-bg);
+  color: var(--mid-blue-text);
+}
+
+.lightBlue {
+  background-color: var(--light-blue-bg);
+  color: var(--light-blue-text);
+}
+
+.darkYellow {
+  background-color: var(--dark-yellow-bg);
+  color: var(--dark-yellow-text);
+}
+
+.midYellow {
+  background-color: var(--mid-yellow-bg);
+  color: var(--mid-yellow-text);
+}
+
+.lightYellow {
+  background-color: var(--light-yellow-bg);
+  color: var(--light-yellow-text);
+}
+
+.darkAqua {
+  background-color: var(--dark-aqua-bg);
+  color: var(--dark-aqua-text);
+}
+
+.midAqua {
+  background-color: var(--mid-aqua-bg);
+  color: var(--mid-aqua-text);
+}
+
+.lightAqua {
+  background-color: var(--light-aqua-bg);
+  color: var(--light-aqua-text);
+}
+
+.darkOrange {
+  background-color: var(--dark-orange-bg);
+  color: var(--dark-orange-text);
+}
+
+.midOrange {
+  background-color: var(--mid-orange-bg);
+  color: var(--mid-orange-text);
+}
+
+.lightOrange {
+  background-color: var(--light-orange-bg);
+  color: var(--light-orange-text);
+}
+
+.darkKhaki {
+  background-color: var(--dark-khaki-bg);
+  color: var(--dark-khaki-text);
+}
+
+.midKhaki {
+  background-color: var(--mid-khaki-bg);
+  color: var(--mid-khaki-text);
+}
+
+.lightKhaki {
+  background-color: var(--light-khaki-bg);
+  color: var(--light-khaki-text);
+}
+
+.darkRed {
+  background-color: var(--dark-red-bg);
+  color: var(--dark-red-text);
+}
+
+.midRed {
+  background-color: var(--mid-red-bg);
+  color: var(--mid-red-text);
+}
+
+.lightRed {
+  background-color: var(--light-red-bg);
+  color: var(--light-red-text);
+}
+
+.darkPink {
+  background-color: var(--dark-pink-bg);
+  color: var(--dark-pink-text);
+}
+
+.midPink {
+  background-color: var(--mid-pink-bg);
+  color: var(--mid-pink-text);
+}
+
+.lightPink {
+  background-color: var(--light-pink-bg);
+  color: var(--light-pink-text);
+}
+
+.darkViolet {
+  background-color: var(--dark-violet-bg);
+  color: var(--dark-violet-text);
+}
+
+.midViolet {
+  background-color: var(--mid-violet-bg);
+  color: var(--mid-violet-text);
+}
+
+.lightViolet {
+  background-color: var(--light-violet-bg);
+  color: var(--light-violet-text);
+}
+
+.darkGrey {
+  background-color: var(--dark-grey-bg);
+  color: var(--dark-grey-text);
+}
+
+.midGrey {
+  background-color: var(--mid-gray-bg);
+  color: var(--mid-gray-text);
+}
+
+.lightGrey {
+  background-color: var(--light-gray-bg);
+  color: var(--light-gray-text);
 }

@@ -1,12 +1,12 @@
 .modalWrapper {
-  position: absolute;
-  top: 372px;
-  right: 0;
+  position: fixed;
+  inset: 16px 4px auto auto;
   padding-top: 18px;
   width: 392px;
   height: auto;
   border-radius: 12px;
   background: var(--bg-secondary);
+  z-index: 200;
 }
 
 .header {
@@ -16,7 +16,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   text-align: center;
 }
 
@@ -48,7 +48,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
 .inputWrapper {
@@ -123,26 +123,152 @@
   display: none;
 }
 
-.currentMileageText {
-  background-color: var(--current-mileage-text);
+.darkGreen {
+  background-color: var(--dark-green-bg);
+  color: var(--dark-green-text);
+}
+
+.midGreen {
+  background-color: var(--mid-green-bg);
+  color: var(--mid-green-text);
+}
+
+.lightGreen {
+  background-color: var(--light-green-bg);
+  color: var(--light-green-text);
+}
+
+.darkBlue {
+  background-color: var(--dark-blue-bg);
+  color: var(--dark-blue-text);
+}
+
+.midBlue {
+  background-color: var(--mid-blue-bg);
+  color: var(--mid-blue-text);
+}
+
+.lightBlue {
+  background-color: var(--light-blue-bg);
+  color: var(--light-blue-text);
+}
+
+.darkYellow {
+  background-color: var(--dark-yellow-bg);
+  color: var(--dark-yellow-text);
+}
+
+.midYellow {
+  background-color: var(--mid-yellow-bg);
+  color: var(--mid-yellow-text);
+}
+
+.lightYellow {
+  background-color: var(--light-yellow-bg);
+  color: var(--light-yellow-text);
+}
+
+.darkAqua {
+  background-color: var(--dark-aqua-bg);
+  color: var(--dark-aqua-text);
+}
+
+.midAqua {
+  background-color: var(--mid-aqua-bg);
+  color: var(--mid-aqua-text);
+}
+
+.lightAqua {
+  background-color: var(--light-aqua-bg);
+  color: var(--light-aqua-text);
+}
+
+.darkOrange {
+  background-color: var(--dark-orange-bg);
+  color: var(--dark-orange-text);
 }
 
 .midOrange {
-  background-color: var(--mid-orange);
+  background-color: var(--mid-orange-bg);
+  color: var(--mid-orange-text);
 }
 
-.red {
-  background-color: var(--red);
+.lightOrange {
+  background-color: var(--light-orange-bg);
+  color: var(--light-orange-text);
 }
 
-.statusDiag {
-  background-color: var(--status-diag);
+.darkKhaki {
+  background-color: var(--dark-khaki-bg);
+  color: var(--dark-khaki-text);
 }
 
-.statusRepair {
-  background-color: var(--status-repair);
+.midKhaki {
+  background-color: var(--mid-khaki-bg);
+  color: var(--mid-khaki-text);
 }
 
-.statusComplete {
-  background-color: var(--status-complete);
+.lightKhaki {
+  background-color: var(--light-khaki-bg);
+  color: var(--light-khaki-text);
+}
+
+.darkRed {
+  background-color: var(--dark-red-bg);
+  color: var(--dark-red-text);
+}
+
+.midRed {
+  background-color: var(--mid-red-bg);
+  color: var(--mid-red-text);
+}
+
+.lightRed {
+  background-color: var(--light-red-bg);
+  color: var(--light-red-text);
+}
+
+.darkPink {
+  background-color: var(--dark-pink-bg);
+  color: var(--dark-pink-text);
+}
+
+.midPink {
+  background-color: var(--mid-pink-bg);
+  color: var(--mid-pink-text);
+}
+
+.lightPink {
+  background-color: var(--light-pink-bg);
+  color: var(--light-pink-text);
+}
+
+.darkViolet {
+  background-color: var(--dark-violet-bg);
+  color: var(--dark-violet-text);
+}
+
+.midViolet {
+  background-color: var(--mid-violet-bg);
+  color: var(--mid-violet-text);
+}
+
+.lightViolet {
+  background-color: var(--light-violet-bg);
+  color: var(--light-violet-text);
+}
+
+.darkGrey {
+  background-color: var(--dark-grey-bg);
+  color: var(--dark-grey-text);
+}
+
+.midGrey {
+  background-color: var(--mid-gray-bg);
+  color: var(--mid-gray-text);
+}
+
+.lightGrey {
+  background-color: var(--light-gray-bg);
+  color: var(--light-gray-text);
 }

@@ -7,59 +7,64 @@ import CreateTag from "../CreateTag/CreateTag";
 
 const tags = [
   {
-    id: 1,
+    id: "1",
     tagName: "Записи на послуги",
-    bgdColor: "currentMileageText",
+    bgdColor: "darkGreen",
+    isChecked: true,
   },
   {
-    id: 2,
+    id: "2",
     tagName: "Новий рік 2024",
     bgdColor: "midOrange",
+    isChecked: false,
   },
   {
-    id: 3,
+    id: "3",
     tagName: "Чорна п’ятниця",
-    bgdColor: "red",
+    bgdColor: "lightViolet",
+    isChecked: true,
   },
   {
-    id: 4,
+    id: "4",
     tagName: "Ремонт",
-    bgdColor: "statusDiag",
+    bgdColor: "darkPink",
+    isChecked: true,
   },
   {
-    id: 5,
+    id: "5",
     tagName: "Новий",
-    bgdColor: "statusRepair",
+    bgdColor: "lightRed",
+    isChecked: false,
   },
   {
-    id: 6,
+    id: "6",
     tagName: "Діагностика",
-    bgdColor: "statusComplete",
+    bgdColor: "lightYellow",
+    isChecked: false,
   },
 ];
 
-export default function SearchTags({ onClose }) {
+export default function SearchTags({ onClose, checkedTagsArray }) {
   const [dataToSearch, setDataToSearch] = useState("");
   const [searchedTags, setSearchedTags] = useState(tags);
-  const [isPopOverOpen, setIsPopOverOpen] = useState(false);
+  const [isCreateTagModalOpen, setIsCreateTagModalOpen] = useState(false);
   const [changedTagName, setChangedTagName] = useState("");
   const [changedTagBgd, setChangedTagBgd] = useState("");
+  const [changedTagId, setChangedTagId] = useState("");
 
   const handleOpenModal = () => {
-    setIsPopOverOpen(true);
+    setIsCreateTagModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsPopOverOpen(false);
+    setIsCreateTagModalOpen(false);
   };
 
   useEffect(() => {
     if (dataToSearch) {
-      const getVisibleTags = (tags, dataToSearch) => {
-        return tags.filter((item) =>
-          item.tagName.toLowerCase().includes(dataToSearch.toLowerCase())
-        );
-      };
+      const getVisibleTags = searchedTags.filter((item) =>
+        item.tagName.toLowerCase().includes(dataToSearch.toLowerCase())
+      );
       setSearchedTags(getVisibleTags);
     } else {
       setSearchedTags(tags);
@@ -69,6 +74,7 @@ export default function SearchTags({ onClose }) {
   const handleSubmit = (values, actions) => {
     console.log(values);
     actions.resetForm();
+    onClose();
   };
 
   const onPencilBtnClick = (id) => {
@@ -77,12 +83,12 @@ export default function SearchTags({ onClose }) {
     });
     setChangedTagName(changedTag.tagName);
     setChangedTagBgd(changedTag.bgdColor);
+    setChangedTagId(id);
     handleOpenModal();
-    // onClose();
   };
 
   const initialValues = {
-    checkedTags: [],
+    checkedTags: checkedTagsArray || [],
   };
 
   return (
@@ -100,7 +106,6 @@ export default function SearchTags({ onClose }) {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        // validationSchema={AddTagSchema}
         validateOnChange={true}
         validateOnBlur
       >
@@ -113,13 +118,13 @@ export default function SearchTags({ onClose }) {
                     <Field
                       type="checkbox"
                       name="checkedTags"
-                      value={tag.tagName}
+                      value={tag.id}
                       id={tag.tagName}
                       className={css.checkbox}
                     />
                     <label htmlFor={tag.tagName} className={css.checkboxLabel}>
                       <CheckBoxBtns
-                        isChecked={values.checkedTags.includes(tag.tagName)}
+                        isChecked={values.checkedTags.includes(tag.id)}
                       />
                       <p className={`${css.tagName} ${css[tag.bgdColor]}`}>
                         {tag.tagName}
@@ -127,26 +132,29 @@ export default function SearchTags({ onClose }) {
                     </label>
                     <BsPencil
                       className={css.icon}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         onPencilBtnClick(tag.id);
                       }}
                     />
-                    {isPopOverOpen && (
-                      <CreateTag
-                        onClose={handleCloseModal}
-                        name={changedTagName}
-                        color={changedTagBgd}
-                        isPopOverOpen={isPopOverOpen}
-                      />
-                    )}
                   </div>
                 );
               })}
             </div>
-            <button type="submit" onSubmit={handleSubmit}></button>
+            <button type="submit" className={css.submitBtn}>
+              Зберегти
+            </button>
           </Form>
         )}
       </Formik>
+      {isCreateTagModalOpen && (
+        <CreateTag
+          onClose={handleCloseModal}
+          name={changedTagName}
+          color={changedTagBgd}
+          tagId={changedTagId}
+        />
+      )}
     </div>
   );
 }

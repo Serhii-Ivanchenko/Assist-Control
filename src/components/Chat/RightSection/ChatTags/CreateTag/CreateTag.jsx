@@ -4,15 +4,39 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import BtnsCloseAndSubmit from "../../../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
 import { AddTagSchema } from "../../../../../validationSchemas/addTagSchema.js";
 const colors = [
-  "currentMileageText",
+  "darkGreen",
+  "midGreen",
+  "lightGreen",
+  "darkBlue",
+  "midBlue",
+  "lightBlue",
+  "darkYellow",
+  "midYellow",
+  "lightYellow",
+  "darkAqua",
+  "midAqua",
+  "lightAqua",
+  "darkOrange",
   "midOrange",
-  "red",
-  "statusDiag",
-  "statusRepair",
-  "statusComplete",
+  "lightOrange",
+  "darkKhaki",
+  "midKhaki",
+  "lightKhaki",
+  "darkRed",
+  "midRed",
+  "lightRed",
+  "darkPink",
+  "midPink",
+  "lightPink",
+  "darkViolet",
+  "midViolet",
+  "lightViolet",
+  "darkGrey",
+  "midGrey",
+  "lightGrey",
 ];
 
-export default function CreateTag({ name, color, onClose }) {
+export default function CreateTag({ name, color, onClose, tagId }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -25,7 +49,11 @@ export default function CreateTag({ name, color, onClose }) {
   const [bgdColor, setBgdColor] = useState(color || "");
 
   const handleSubmit = (values, actions) => {
-    console.log(values);
+    if (tagId) {
+      console.log({ ...values, id: tagId });
+    } else {
+      console.log(values);
+    }
     actions.resetForm();
     setNewTagName("");
     setBgdColor("");

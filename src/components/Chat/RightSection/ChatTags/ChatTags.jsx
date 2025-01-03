@@ -1,25 +1,67 @@
 import css from "./ChatTags.module.css";
-import { IoIosArrowUp } from "react-icons/io";
-import { FaMagnifyingGlass } from "react-icons/fa6";
-import { FaPlus } from "react-icons/fa";
 import { BsPencil } from "react-icons/bs";
-import CreateTag from "./CreateTag/CreateTag";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchTags from "./SearchTags/SearchTags";
 
+const tags = [
+  {
+    id: "1",
+    tagName: "Записи на послуги",
+    bgdColor: "darkGreen",
+    isChecked: false,
+  },
+  {
+    id: "2",
+    tagName: "Новий рік 2024",
+    bgdColor: "midOrange",
+    isChecked: true,
+  },
+  {
+    id: "3",
+    tagName: "Чорна п’ятниця",
+    bgdColor: "lightViolet",
+    isChecked: true,
+  },
+  {
+    id: "4",
+    tagName: "Ремонт",
+    bgdColor: "darkPink",
+    isChecked: true,
+  },
+  {
+    id: "5",
+    tagName: "Новий",
+    bgdColor: "lightRed",
+    isChecked: false,
+  },
+  {
+    id: "6",
+    tagName: "Діагностика",
+    bgdColor: "lightYellow",
+    isChecked: false,
+  },
+];
+
 export default function ChatTags() {
-  const [isPopOverOpen, setIsPopOverOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const [checkedTagsArray, setCheckedTagsArray] = useState([]);
+  const [checkedTagsIdArray, setCheckedTagsIdArray] = useState([]);
 
-  const handlePlusBtnClick = () => {
-    setIsPopOverOpen(true);
-  };
+  useEffect(() => {
+    const checkedTags = tags.filter((checkedTag) => {
+      return checkedTag.isChecked === true;
+    });
+    setCheckedTagsArray(checkedTags);
 
-  const handleCloseModal = () => {
-    setIsPopOverOpen(false);
-  };
+    let checkedTagsById = [];
+    checkedTags.map((item) => {
+      checkedTagsById.push(item.id);
+    });
+    setCheckedTagsIdArray(checkedTagsById);
+  }, []);
 
-  const handleChangeBtnClick = () => {
+  const handleChangeBtnClick = (event) => {
+    event.stopPropagation();
     setIsSearchModalOpen(true);
   };
 
@@ -29,29 +71,24 @@ export default function ChatTags() {
 
   return (
     <div className={css.sectionWrapper}>
-      <div className={css.topWrapper}>
-        <div className={css.leftWrapper}>
-          <h3 className={css.header}>Тегі</h3>
-          <IoIosArrowUp className={css.arrow} />
-        </div>
-        <FaMagnifyingGlass className={css.glass} />
-        <div className={css.plus} onClick={handlePlusBtnClick}>
-          <FaPlus />
-        </div>
-        {isPopOverOpen && (
-          <CreateTag
-            onClose={handleCloseModal}
-            name={null}
-            color={null}
-            isPopOverOpen={isPopOverOpen}
-          />
-        )}
+      <div className={css.buttonWrapper}>
+        {checkedTagsArray.map((tag, index) => {
+          return (
+            <p key={index} className={`${css[tag.bgdColor]} ${css.tag}`}>
+              {tag.tagName}
+            </p>
+          );
+        })}
       </div>
-      <div className={css.buttonWrapper}></div>
       <div className={css.bottomWrapper} onClick={handleChangeBtnClick}>
         <BsPencil className={css.pencil} />
         <p className={css.bottomText}>Змінтити Тегі</p>
-        {isSearchModalOpen && <SearchTags onClose={handleCloseSearchModal} />}
+        {isSearchModalOpen && (
+          <SearchTags
+            onClose={handleCloseSearchModal}
+            checkedTagsArray={checkedTagsIdArray}
+          />
+        )}
       </div>
     </div>
   );
