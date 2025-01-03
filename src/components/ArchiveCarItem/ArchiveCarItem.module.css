@@ -1,0 +1,138 @@
+.archiveContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: var(--bg-input);
+  width: 1284px;
+  min-width: 400px;
+  padding: 8px;
+  align-items: center;
+  /* gap: 129px; */
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.leftContsiner,
+.centerContsiner {
+  display: flex;
+  align-items: center;
+}
+
+.leftContsiner{
+  width: 378px;
+}
+
+.centerContsiner {
+  gap: 7px;
+}
+
+.carPhoto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 32px;
+  margin-right: 8px;
+}
+
+.carPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.timeWork {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 87px;
+  color: var(--text-gray);
+  margin-right: 15px;
+}
+
+.carNumber {
+  color: var(--white);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: normal;
+  margin-right: 15px;
+}
+
+.infoName {
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  width: 150px; /* Фіксована ширина */
+  white-space: nowrap; /* Заборона переносу тексту */
+  overflow: hidden; /* Обрізає текст, що виходить за межі контейнера */
+  text-overflow: ellipsis;
+}
+
+.violet {
+  font-size: 14px;
+  color: var(--status-archive-violet);
+}
+
+.checkRepair {
+  font-size: 14px;
+  color: var(--status-diag);
+}
+
+.red {
+  font-size: 14px;
+  color: var(--status-view-repair);
+}
+
+.lighBlue {
+  font-size: 14px;
+  color: var(--status-archive-light-blue);
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+  width: 100px;
+  height: 18px;
+  padding-left: 6px;
+
+  border-radius: 6px;
+  position: relative;
+  transition: background-color 0.3s ease, border-left 0.3s ease;
+}
+
+.title::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--glow-color);
+  filter: blur(5px);
+  z-index: 1;
+  border-radius: 0 5px 5px 0;
+}
+
+@media only screen and (min-width: 1850px) {
+  .title {
+    width: 132px;
+    height: 26px;
+  }
+}
+
+.reason {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reasonText {
+  color: var(--light-gray);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: 0.01em;
+}

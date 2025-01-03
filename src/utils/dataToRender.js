@@ -19,6 +19,17 @@ export const statusesCommunications = [
   { status: "appointment", label: "Запис" },
 ];
 
+export const statusesArchive = [
+  { reason_description: "всі", label: "Всі авто" },
+  { reason_description: "співробітник", label: "Cпівробітник" },
+  { reason_description: "випадковий", label: "Випадковий" },
+  { reason_description: "дубль", label: "Дубль" },
+  { reason_description: "відмова", label: "Відмова" },
+  { reason_description: "не приїхав", label: "Не приїхав" },
+  { reason_description: "рейтинг", label: "Рейтинг" },
+  { reason_description: "не допомогли", label: "Не допомогли" },
+];
+
 // Заголовки срм компоненті
 
 export const statusMapping = {
@@ -113,6 +124,19 @@ export const labelNamesInModal = {
   status: "Статус",
   info: "Інфо",
   prePayment: "Предоплата",
+};
+
+// Лейбл для архіву
+
+export const labelNamesInArchive = {
+  photo: "Фото",
+  name: "Ім'я",
+  carNum: "Номер машини",
+  time: "Час",
+  status: "Статус",
+  reasonRegistration: "Причина запису",
+  reasonArchived: "Причина архіву",
+  btn: "Налаштування"
 };
 
 // Лейбл для CRM - налаштування видимості

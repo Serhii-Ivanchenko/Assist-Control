@@ -113,6 +113,7 @@ export default function DateSelector() {
         endDate={endDate}
         handleInputChangeBeg={handleInputChangeBeg}
         handleInputChangeEnd={handleInputChangeEnd}
+        isSingle={false}
       />
     </div>
   );

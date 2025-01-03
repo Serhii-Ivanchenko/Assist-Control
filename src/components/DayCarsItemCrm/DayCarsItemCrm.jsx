@@ -24,13 +24,15 @@ import { useSelector } from "react-redux";
 import clsx from "clsx";
 import RatingStars from "../sharedComponents/RatingStars/RatingStars.jsx";
 import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
+import ArchiveModal from "../Modals/ArchiveModal/ArchiveModal.jsx";
 
 export default function DayCarsItemCrm({ car, onDragStart }) {
   const [isCrm, setIsCrm] = useState("record");
-  const [serviceBookingModalIsOpen, setServiceBookingModalIsOpen] =
-    useState(false);
   const visibility = useSelector(selectVisibilityRecords);
-
+  const [modalState, setModalState] = useState({
+    serviceBooking: false,
+    archive: false,
+  });
   const [isDragging, setIsDragging] = useState(false);
   const [draggingElement, setDraggingElement] = useState(null);
   const [initialX, setInitialX] = useState(0);
@@ -90,11 +92,15 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
   };
 
   const openServiceBookingModal = () => {
-    setServiceBookingModalIsOpen(true);
+    setModalState({ serviceBooking: true, archive: false });
   };
 
-  const handleModalClose = () => {
-    setServiceBookingModalIsOpen(false);
+  const openArchiveModal = () => {
+    setModalState({ serviceBooking: false, archive: true });
+  };
+
+  const closeModals = () => {
+    setModalState({ serviceBooking: false, archive: false });
   };
 
   const {
@@ -236,23 +242,26 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
             </button>
           )}
 
-          {(status === "new" || status === "complete") &&
-            visibility?.archive && (
-              <button
-                className={clsx(styles.btnSave, {
-                  [styles.hidden]: !visibility?.archive,
-                })}
-              >
-                <BsLayerBackward size={16} />
-              </button>
-            )}
-
-          {serviceBookingModalIsOpen && (
-            <Modal
-              isOpen={serviceBookingModalIsOpen}
-              onClose={handleModalClose}
+          {status === "new" || status === "complete" ? (
+            <button
+              className={clsx(styles.btnSave, {
+                [styles.hidden]: !visibility?.archive,
+              })}
+              onClick={openArchiveModal}
             >
-              <ServiceBookingModal onClose={handleModalClose} />
+              <BsLayerBackward size={16} />
+            </button>
+          ) : null}
+
+          {modalState.serviceBooking && (
+            <Modal isOpen={modalState.serviceBooking} onClose={closeModals}>
+              <ServiceBookingModal onClose={closeModals} />
+            </Modal>
+          )}
+
+          {modalState.archive && (
+            <Modal isOpen={modalState.archive} onClose={closeModals}>
+              <ArchiveModal onClose={closeModals} />
             </Modal>
           )}
         </div>

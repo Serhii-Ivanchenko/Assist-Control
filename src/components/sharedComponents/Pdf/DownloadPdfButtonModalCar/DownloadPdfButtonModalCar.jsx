@@ -104,7 +104,14 @@ export default function DownloadPdfButtonModalCar({ carsData = [], status }) {
         headStyles: { fillColor: [22, 160, 133] },
       });
 
-      doc.save(`cars_report_${selectedDate}.pdf`);
+      const now = new Date();
+
+      const day = now.getDate().toString().padStart(2, "0");
+      const month = (now.getMonth() + 1).toString().padStart(2, "0");
+      const year = now.getFullYear();
+      const time = now.toTimeString().split(" ")[0];
+      
+      doc.save(`cars_report_${day}-${month}-${year}_${time}.pdf`);
     };
 
     generatePdf();
