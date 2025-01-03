@@ -177,11 +177,6 @@ export default function DayCarsModal({ onClose, isModal }) {
     return filterCarsBySearchTerm(filteredCarsData, searchTerm);
   };
 
-  // const handleToggle = (field) => {
-  //   const newVisibility = { ...visibility, [field]: !visibility[field] };
-  //   dispatch(toggleVisibilityCar(newVisibility));
-  // };
-
   return (
     <div className={styles.containerCarModal}>
       <div className={styles.header}>
@@ -230,6 +225,7 @@ export default function DayCarsModal({ onClose, isModal }) {
             endDate={endDate}
             handleInputChangeBeg={handleInputChangeBeg}
             handleInputChangeEnd={handleInputChangeEnd}
+            isSingle={false}
           />
           <DownloadPdfButtonModalCar carsData={filteredCars()} />
           <InfoSettingsVisibility

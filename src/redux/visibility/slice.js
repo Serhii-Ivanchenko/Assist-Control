@@ -15,6 +15,16 @@ const visibilitySlice = createSlice({
       inventory: true,
       writeOff: true,
     },
+    visibilityArchive: {
+      photo: true,
+      carNum: true,
+      time: true,
+      name: true,
+      status: true,
+      reasonRegistration : true,
+      reasonArchived : true,
+      btn: true
+    },
     visibilityCar: {
       prePayment: true,
       name: true,
@@ -115,6 +125,10 @@ const visibilitySlice = createSlice({
       const { key } = action.payload;
       state.visibilityAllClients[key] = !state.visibilityAllClients[key];
     },
+    toggleVisibilityArchive: (state, action) => {
+      const { key } = action.payload;
+      state.visibilityArchive[key] = !state.visibilityArchive[key];
+    },
   },
 });
 
@@ -125,6 +139,7 @@ export const {
   toggleVisibilitySuppliers,
   toggleVisibilityClientsInWork,
   toggleVisibilityAllClients,
+  toggleVisibilityArchive
 } = visibilitySlice.actions;
 
 export default visibilitySlice.reducer;
