@@ -22,13 +22,14 @@ import PlayerAndTranscription from "../../sharedComponents/PlayerAndTranscriptio
 const summary =
   "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене[марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей.Також цікавить діагностика стану автомобіля після ремонту.Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!";
 
-export default function ItemOfRecord({
-  key,
-  item,
-  messages,
-  isExpanded,
-  // clientInfo,
-}) {
+export default function ItemOfRecord({ key, item, messages, isExpanded }) {
+  const startDate = item.start_date;
+  const date = new Date(startDate).toLocaleDateString("uk-UA");
+  const time = new Date(startDate).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   const [showDialogModal, setShowDialogModal] = useState(isExpanded);
 
   // const [transcription, setTranscription] = useState(false);
@@ -79,18 +80,22 @@ export default function ItemOfRecord({
         >
           <div className={css.listItemWrapper}>
             <div className={css.listItem} onClick={() => toogleDialogModal()}>
+              {/* Кілометраж */}
               <div className={css.kilometersWrapper}>
                 <div className={css.numberOfKilometers}>
-                  <SlSpeedometer /> <div>{item.mileage || "xxxxx"}</div>
+                  <SlSpeedometer /> <div>{item.mileage || "дані невідомі"}</div>
                 </div>
                 <div className={css.kilometersDriven}>
-                  <SlSpeedometer /> <div>{item.newkilometrs}</div>
+                  <SlSpeedometer />{" "}
+                  <div>{item.newkilometrs || "дані невідомі"}</div>
                 </div>
               </div>
+
+              {/* Дата і час */}
               <div className={css.dateWrapper}>
                 <div className={css.date}>
-                  <BsCalendar2Week /> <div>{item.date}</div>
-                  <div>{item.time}</div>
+                  <BsCalendar2Week /> <div>{date}</div>
+                  <div>{time}</div>
                 </div>
                 <button
                   className={clsx(
@@ -157,13 +162,13 @@ export default function ItemOfRecord({
                 className={css.btnDownloadsItem}
                 onClick={() => handleSetRecordInfo("repair")}
                 style={
-                  item.repair && recordInfo === "repair"
+                  item.repairs && recordInfo === "repair"
                     ? { cursor: "pointer", outline: "1px solid #fff" }
-                    : !item.repair
+                    : !item.repairs
                     ? null
                     : { cursor: "pointer" }
                 }
-                disabled={!item.repair}
+                disabled={!item.repairs}
               >
                 <p>Ремонт</p>
                 <div
