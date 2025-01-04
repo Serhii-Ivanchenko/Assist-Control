@@ -40,7 +40,7 @@ export default function RecordBtnInfo({
       : "We don't have info about this car"
   );
   // console.log("кнопка", recordInfo);
-  console.log("array", diagnostics);
+  // console.log("array", diagnostics);
 
   const firstInputRef = useRef(null);
 

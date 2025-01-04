@@ -24,7 +24,7 @@ const summary =
   "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене[марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей.Також цікавить діагностика стану автомобіля після ремонту.Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!";
 
 export default function ItemOfRecord({
-  key,
+  // key,
   item,
   messages,
   isExpanded,
@@ -33,7 +33,19 @@ export default function ItemOfRecord({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editAmount, setEditAmount] = useState(false);
+  const [totalMileAge, setTotalMileage] = useState(
+    item.mileage || "дані невідомі"
+  );
+  const [amount, setAmount] = useState("₴2 482");
   const inputRef = useRef();
+
+  const handleChangeMileage = (newM) => {
+    setTotalMileage(newM);
+  };
+
+  const handleChangeAmount = (newA) => {
+    setAmount(newA);
+  };
 
   const handleEditing = (id, e) => {
     e.stopPropagation();
@@ -59,6 +71,18 @@ export default function ItemOfRecord({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
+
+  useEffect(() => {
+    if (editAmount) {
+      inputRef.current.focus();
+    }
+  }, [editAmount]);
 
   const startDate = item.start_date;
   const date = new Date(startDate).toLocaleDateString("uk-UA");
@@ -96,7 +120,7 @@ export default function ItemOfRecord({
       : handleToogleRecordInfo(string);
 
   return (
-    <li key={key} className={css.itemOfAccardion}>
+    <li key={item.id} className={css.itemOfAccardion}>
       <div className={css.itemOfMarking}>
         <BsRecordCircle className={css.circle} />
         <div className={css.line}></div>
@@ -126,11 +150,16 @@ export default function ItemOfRecord({
                 >
                   <SlSpeedometer />
                   {isEditing === item.service_id ? (
-                    <input ref={inputRef} className={css.mileageInput} />
+                    <input
+                      ref={inputRef}
+                      className={css.mileageInput}
+                      value={totalMileAge}
+                      onChange={(e) => handleChangeMileage(e.target.value)}
+                    />
                   ) : (
                     <>
                       {" "}
-                      <div>{item.mileage || "дані невідомі"}</div>
+                      <div>{totalMileAge}</div>
                     </>
                   )}
                 </div>
@@ -147,9 +176,14 @@ export default function ItemOfRecord({
                 <AiOutlineDollar size={20} className={css.iconDollar} />
                 <span className={css.amountWrapper}>
                   {editAmount === item.service_id ? (
-                    <input ref={inputRef} className={css.amountInput} />
+                    <input
+                      ref={inputRef}
+                      className={css.amountInput}
+                      value={amount}
+                      onChange={(e) => handleChangeAmount(e.target.value)}
+                    />
                   ) : (
-                    <p className={css.amount}>₴2 482 </p>
+                    <p className={css.amount}>{amount} </p>
                   )}
                 </span>
               </div>
@@ -222,13 +256,13 @@ export default function ItemOfRecord({
                 className={css.btnDownloadsItem}
                 onClick={() => handleSetRecordInfo("repair")}
                 style={
-                  item.repairs && recordInfo === "repair"
+                  item.repair && recordInfo === "repair"
                     ? { cursor: "pointer", outline: "1px solid #fff" }
                     : !item.repairs
                     ? null
                     : { cursor: "pointer" }
                 }
-                disabled={!item.repairs}
+                disabled={!item.repair}
               >
                 <p>Ремонт</p>
                 <div

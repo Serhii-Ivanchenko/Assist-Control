@@ -52,7 +52,7 @@ export default function ServiceHistory({ carName, clientInfo }) {
   ];
 
   const recordRace = clientInfo.service_history;
-  console.log(recordRace);
+  // console.log(recordRace);
 
   const diagnostic = {
     spareParts: [
