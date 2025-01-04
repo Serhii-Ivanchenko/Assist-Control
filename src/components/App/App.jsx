@@ -35,22 +35,22 @@ const ConnectionsPage = lazy(() =>
 const RecommendationsPage = lazy(() =>
   import("../../pages/RecommendationsPage/RecommendationsPage.jsx")
 );
-const AccountingPage = lazy(() =>
-  import("../../pages/AccountingPage/AccountingPage.jsx")
-);
+// const AccountingPage = lazy(() =>
+//   import("../../pages/AccountingPage/AccountingPage.jsx")
+// );
 const ClientsPage = lazy(() =>
   import("../../pages/AccountingPage/ClientsPage/ClientsPage.jsx")
 );
-const GeneralClientsListPage = lazy(() =>
-  import(
-    "../../pages/AccountingPage/ClientsPage/GeneralClientsListPage/GeneralClientsListPage.jsx"
-  )
-);
-const ClientsListInWork = lazy(() =>
-  import(
-    "../../pages/AccountingPage/ClientsPage/ClientsListInWork/ClientsListInWork.jsx"
-  )
-);
+// const GeneralClientsListPage = lazy(() =>
+//   import(
+//     "../../pages/AccountingPage/ClientsPage/GeneralClientsListPage/GeneralClientsListPage.jsx"
+//   )
+// );
+// const ClientsListInWork = lazy(() =>
+//   import(
+//     "../../pages/AccountingPage/ClientsPage/ClientsListInWork/ClientsListInWork.jsx"
+//   )
+// );
 const DistributorsPage = lazy(() =>
   import("../../pages/AccountingPage/DistributorsPage/DistributorsPage.jsx")
 );
@@ -69,9 +69,12 @@ const Funds = lazy(() =>
 const Equipment = lazy(() =>
   import("../../pages/AccountingPage/InvoicesPage/Equipment/Equipment.jsx")
 );
-const ReportsPage = lazy(() =>
-  import("../../pages/ReportsPage/ReportsPage.jsx")
-);
+// const ReportsPage = lazy(() =>
+//   import("../../pages/ReportsPage/ReportsPage.jsx")
+// );
+
+const ReportsClientsPage = lazy(() => import('../../pages/ReportsPage/ReportsClientsPage/ReportsClientsPage.jsx'))
+
 const SettingsPage = lazy(() =>
   import("../../pages/SettingsPage/SettingsPage.jsx")
 );
@@ -123,7 +126,6 @@ export default function App() {
             <Loader />
           ) : (
             <>
-              
               <Suspense fallback={<Loader />}>
                 <Routes>
                   <Route
@@ -199,7 +201,7 @@ export default function App() {
                       />
                     }
                   />
-                  <Route
+                  {/* <Route
                     path="/accounting"
                     element={
                       <PrivateRoute
@@ -207,7 +209,7 @@ export default function App() {
                         component={<AccountingPage />}
                       />
                     }
-                  />
+                  /> */}
                   <Route
                     path="/accounting/clients"
                     element={
@@ -217,7 +219,7 @@ export default function App() {
                       />
                     }
                   />
-                  <Route
+                  {/* <Route
                     path="/accounting/clients/clients-list-general"
                     element={
                       <PrivateRoute
@@ -225,8 +227,8 @@ export default function App() {
                         component={<GeneralClientsListPage />}
                       />
                     }
-                  />
-                  <Route
+                  /> */}
+                  {/* <Route
                     path="/accounting/clients/clients-list-in-work"
                     element={
                       <PrivateRoute
@@ -234,7 +236,7 @@ export default function App() {
                         component={<ClientsListInWork />}
                       />
                     }
-                  />
+                  /> */}
                   <Route
                     path="/accounting/distributors"
                     element={
@@ -245,7 +247,7 @@ export default function App() {
                     }
                   />
                   <Route
-                    path="/accounting/invoices"
+                    path="/accounting/documents"
                     element={
                       <PrivateRoute
                         redirectTo="/login"
@@ -258,12 +260,21 @@ export default function App() {
                     <Route path="funds" element={<Funds />} />
                     <Route path="equipment" element={<Equipment />} />
                   </Route>
-                  <Route
+                  {/* <Route
                     path="/reports"
                     element={
                       <PrivateRoute
                         redirectTo="/login"
                         component={<ReportsPage />}
+                      />
+                    }
+                  /> */}
+                  <Route
+                    path="/reports/clients"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<ReportsClientsPage />}
                       />
                     }
                   />
