@@ -5,6 +5,7 @@ import { IoIosSearch } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { BsArrowDownSquareFill } from "react-icons/bs";
+import absentAuto from "../../assets/images/absentAutoImg.webp/";
 
 export default function ServiceHistory({ carName, clientInfo }) {
   const [inputValue, setInputValue] = useState("");
@@ -52,6 +53,44 @@ export default function ServiceHistory({ carName, clientInfo }) {
 
   const recordRace = clientInfo.service_history;
   console.log(recordRace);
+
+  const diagnostic = {
+    spareParts: [
+      {
+        id: "1",
+        name: "Тормозні",
+        number: "BRK123456",
+        state: "Зношений",
+        recomendation: "Заміна",
+      },
+      {
+        id: "2",
+        name: "Тормозні",
+        number: "BRK123456",
+        state: "Зношений",
+        recomendation: "Заміна",
+      },
+      {
+        id: "3",
+        name: "Тормозні",
+        number: "BRK123456",
+        state: "Зношений",
+        recomendation: "Заміна",
+      },
+    ],
+    message:
+      "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
+    photoOfBreakdown: [
+      { photo: absentAuto },
+      { photo: absentAuto },
+      { photo: absentAuto },
+      { photo: absentAuto },
+      // { photo: absentAuto },
+      // { photo: absentAuto },
+      // { photo: absentAuto },
+      // { photo: absentAuto },
+    ],
+  };
 
   //[
   //   {
@@ -334,6 +373,7 @@ export default function ServiceHistory({ carName, clientInfo }) {
                       item={item}
                       messages={messages}
                       isExpanded={index === 0}
+                      diagnostics={diagnostic}
                     />
                   );
                 }

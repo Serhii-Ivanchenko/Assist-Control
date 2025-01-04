@@ -23,7 +23,13 @@ import { AiOutlineDollar } from "react-icons/ai";
 const summary =
   "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене[марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей.Також цікавить діагностика стану автомобіля після ремонту.Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!";
 
-export default function ItemOfRecord({ key, item, messages, isExpanded }) {
+export default function ItemOfRecord({
+  key,
+  item,
+  messages,
+  isExpanded,
+  diagnostics,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [editAmount, setEditAmount] = useState(false);
   const inputRef = useRef();
@@ -196,20 +202,17 @@ export default function ItemOfRecord({ key, item, messages, isExpanded }) {
                 className={css.btnDownloadsItem}
                 onClick={() => handleSetRecordInfo("diagnostic")}
                 style={
-                  item.diagnostic && recordInfo === "diagnostic"
+                  diagnostics && recordInfo === "diagnostic"
                     ? { cursor: "pointer", outline: "1px solid #fff" }
-                    : !item.diagnostic
+                    : !diagnostics
                     ? null
                     : { cursor: "pointer" }
                 }
-                disabled={!item.diagnostic}
+                disabled={!diagnostics}
               >
                 <p>Діагностика</p>
                 <div
-                  className={clsx(
-                    css.downloadBtn,
-                    item.diagnostic && css.btnBg
-                  )}
+                  className={clsx(css.downloadBtn, diagnostics && css.btnBg)}
                 >
                   <BsUiChecksGrid size={13} />
                 </div>
@@ -261,7 +264,11 @@ export default function ItemOfRecord({ key, item, messages, isExpanded }) {
                       : css.closeRecordBtnInfoWrapper
                   )}
                 >
-                  <RecordBtnInfo recordInfo={recordInfo} item={item} />
+                  <RecordBtnInfo
+                    recordInfo={recordInfo}
+                    item={item}
+                    diagnostics={diagnostics}
+                  />
                 </div>
               </div>
             ) : null}
