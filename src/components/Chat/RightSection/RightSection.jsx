@@ -15,11 +15,25 @@ import ChatSample from "./ChatSample/ChatSample.jsx";
 import ChatNotes from "./ChatNotes/ChatNotes.jsx";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+import { FaPlus } from "react-icons/fa";
+import CreateTag from "./ChatTags/CreateTag/CreateTag.jsx";
+
 export default function RightSection() {
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+  };
+
+  const [isPopOverOpen, setIsPopOverOpen] = useState(false);
+
+  const handlePlusBtnClick = (e) => {
+    e.stopPropagation();
+    setIsPopOverOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsPopOverOpen(false);
   };
 
   return (
@@ -94,17 +108,23 @@ export default function RightSection() {
           id="panel2-header"
         >
           <div className={css.accbox}>
-            <div className={css.accboxtitle}>
-              <Typography>Тегі</Typography>
-              <ExpandMoreIcon
-                sx={{
-                  fill: "var(--light-gray)",
-                  transform:
-                    expanded === "panel2" ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "transform 0.3s",
-                }}
-              />
+            <div className={css.topWrapper}>
+              <div className={css.leftWrapper}>
+                <Typography>Теги</Typography>
+                <ExpandMoreIcon
+                  sx={{
+                    fill: "var(--light-gray)",
+                    transform:
+                      expanded === "panel2" ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.3s",
+                  }}
+                />
+              </div>
+              <div className={css.plus} onClick={handlePlusBtnClick}>
+                <FaPlus />
+              </div>
             </div>
+
             {expanded === "panel2" && (
               <AccordionDetails
               // sx={{
@@ -325,6 +345,14 @@ export default function RightSection() {
           <ChatFiles />
         </AccordionDetails> */}
       </Accordion>
+      {isPopOverOpen && (
+        <CreateTag
+          onClose={handleCloseModal}
+          name={null}
+          color={null}
+          isPopOverOpen={isPopOverOpen}
+        />
+      )}
     </div>
   );
 }
