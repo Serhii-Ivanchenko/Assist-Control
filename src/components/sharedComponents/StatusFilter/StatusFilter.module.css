@@ -38,10 +38,10 @@
     flex-direction: column;
     list-style: none;
     margin: 0;
-    padding: 12px 11px 20px 0;
+    padding: 12px 11px 12px 0;
     position: absolute;
     top: 100%;
-    left: -38px;
+    /* left: -38px; */
     width: 174px;
     background-color: var(--bg-input);
     border-radius: 12px;

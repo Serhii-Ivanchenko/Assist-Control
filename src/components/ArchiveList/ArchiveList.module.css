@@ -11,3 +11,22 @@
    margin-left: auto;
    margin-right:auto ;
 }
+
+.scrollWrapper{
+  overflow-y: scroll;
+  height: 705px; 
+}
+
+.scrollWrapper::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .scrollWrapper::-webkit-scrollbar-thumb {
+    background-color: var(--main-gray);
+    border-radius: 4px;
+  }
+  
+  .scrollWrapper::-webkit-scrollbar-track {
+    background-color: var(--bg);
+    border-radius: 4px;
+  }

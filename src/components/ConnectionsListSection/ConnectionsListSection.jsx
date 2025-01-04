@@ -8,8 +8,16 @@ import renderStatusCars from "../../utils/renderStatusCars";
 import { IoCarSportSharp } from "react-icons/io5";
 import { FiPlus } from "react-icons/fi";
 import { BsLayerBackward } from "react-icons/bs";
+import { useState } from "react";
+import ArchiveModal from "../Modals/ArchiveModal/ArchiveModal";
+import Modal from "../Modals/Modal/Modal";
 
 export default function ConnectionsListSection() {
+  const [isArchiveModalOpen, setArchiveModalOpen] = useState(false);
+
+  const openArchiveModal = () => setArchiveModalOpen(true);
+  const closeArchiveModal = () => setArchiveModalOpen(false);
+
   function renderStatus(itemStatus, css) {
     const isCommunicationStatus = [
       "all_appeal",
@@ -66,7 +74,7 @@ export default function ConnectionsListSection() {
             <div className={css.status}>{renderStatus(item.status, css)}</div>
             <div className={css.archiveBtnContainer}>
               {item.status === "missing" && (
-                <button className={css.btnSave}>
+                <button className={css.btnSave} onClick={openArchiveModal}>
                   <BsLayerBackward size={20} />
                 </button>
               )}
@@ -86,6 +94,11 @@ export default function ConnectionsListSection() {
           </div>
         </div>
       ))}
+      {isArchiveModalOpen && (
+        <Modal isOpen={isArchiveModalOpen} onClose={closeArchiveModal}>
+          <ArchiveModal onClose={closeArchiveModal} />
+        </Modal>
+      )}
     </div>
   );
 }

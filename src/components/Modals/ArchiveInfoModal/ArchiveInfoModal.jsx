@@ -1,42 +1,34 @@
 import styles from "./ArchiveInfoModal.module.css";
-
 import { MdClose } from "react-icons/md";
-
-import ArchiveList from "../../../ArchiveList/ArchiveList.jsx";
+import ArchiveList from "../../ArchiveList/ArchiveList.jsx";
 import toast from "react-hot-toast";
-import { getAllArchiveData } from "../../../../redux/archive/operations.js";
+import { getAllArchiveData } from "../../../redux/archive/operations.js";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectArchiveData } from "../../../../redux/archive/selectors.js";
-import { useDispatch } from "react-redux";
-import { selectSelectedServiceId } from "../../../../redux/auth/selectors.js";
-import CarsSearch from "../../../sharedComponents/CarsSearch/CarsSearch.jsx";
-import {
-  filterCarsBySearchTerm,
-  validateSearchTerm,
-} from "../../../../utils/filterCarsBySearchTerm.js";
-import StatusFilter from "../../../sharedComponents/StatusFilter/StatusFilter.jsx";
-import renderStatusInArchive from "../../../../utils/renderStatusInArchive.jsx";
-import {
-  labelNamesInArchive,
-  statusesArchive,
-} from "../../../../utils/dataToRender.js";
-import CalendarPeriodSelector from "../../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector.jsx";
-import DownloadPdfButtonModalCar from "../../../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar.jsx";
-import InfoSettingsVisibility from "../../../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility.jsx";
-import { selectVisibilityArchive } from "../../../../redux/visibility/selectors.js";
-import { toggleVisibilityArchive } from "../../../../redux/visibility/slice.js";
+import { useSelector, useDispatch } from "react-redux";
+import { selectArchiveData } from "../../../redux/archive/selectors.js";
+import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
+import CarsSearch from "../../sharedComponents/CarsSearch/CarsSearch.jsx";
+import { filterCarsBySearchTerm, validateSearchTerm } from "../../../utils/filterCarsBySearchTerm.js";
+import StatusFilter from "../../sharedComponents/StatusFilter/StatusFilter.jsx";
+import renderStatusInArchive from "../../../utils/renderStatusInArchive.jsx";
+import { labelNamesInArchive, statusesArchive } from "../../../utils/dataToRender.js";
+import CalendarPeriodSelector from "../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector.jsx";
+import DownloadPdfButtonModalCar from "../../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar.jsx";
+import InfoSettingsVisibility from "../../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility.jsx";
+import { selectVisibilityArchive } from "../../../redux/visibility/selectors.js";
+import { toggleVisibilityArchive } from "../../../redux/visibility/slice.js";
 
 export default function ArchiveInfoModal({ onClose }) {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const [inputError, setInputError] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("all");
+  const [periodStartData, setPeriodStartData] = useState(null);
 
   const carsDataArchive = useSelector(selectArchiveData);
   const selectedServiceId = useSelector(selectSelectedServiceId);
-
-  const [periodStartData, setPeriodStartData] = useState(null);
+  
+  const [filteredCarsData, setFilteredCarsData] = useState(carsDataArchive);
 
   useEffect(() => {
     if (!selectedServiceId) {
@@ -54,6 +46,37 @@ export default function ArchiveInfoModal({ onClose }) {
       });
   }, [dispatch, selectedServiceId]);
 
+  useEffect(() => {
+
+    let filtered = carsDataArchive;
+
+    // Фільтрація за пошуковим запитом
+    if (searchTerm) {
+      filtered = filterCarsBySearchTerm(filtered, searchTerm);
+    }
+
+    // Фільтрація за статусом
+    if (selectedStatus !== "all") {
+      filtered = filtered.filter(
+        (car) => car.reason_description === selectedStatus
+      );
+    }
+
+    // Фільтрація за датою
+    if (periodStartData) {
+      filtered = filtered.filter(
+        (car) => new Date(car.date).toLocaleDateString() === periodStartData.toLocaleDateString()
+      );
+    }
+
+    if (selectedStatus === "всі") {
+      filtered = carsDataArchive;
+    }
+
+    setFilteredCarsData(filtered);
+    console.log("Filtered cars data set:", filtered);
+  }, [carsDataArchive, searchTerm, selectedStatus, periodStartData]);
+
   const handleStatusChange = (status) => {
     setSelectedStatus(status);
   };
@@ -67,18 +90,6 @@ export default function ArchiveInfoModal({ onClose }) {
       status: status.reason_description,
       label: status.label,
     }));
-  };
-
-  const filteredCars = () => {
-    let filtered = filterCarsBySearchTerm(carsDataArchive, searchTerm);
-
-    if (selectedStatus !== "all") {
-      filtered = filtered.filter(
-        (car) => car.reason_description === selectedStatus
-      );
-    }
-
-    return filtered;
   };
 
   // Функція обробки зміни початкової дати
@@ -113,7 +124,7 @@ export default function ArchiveInfoModal({ onClose }) {
             handleInputChangeBeg={handleInputChangeBeg}
             isSingle={true}
           />
-          <DownloadPdfButtonModalCar carsData={filteredCars()} />
+          <DownloadPdfButtonModalCar carsData={filteredCarsData} />
           <InfoSettingsVisibility
             selectVisibility={selectVisibilityArchive}
             toggleVisibilityAction={toggleVisibilityArchive}
@@ -123,7 +134,7 @@ export default function ArchiveInfoModal({ onClose }) {
         </div>
       </div>
       <div>
-        <ArchiveList carsDataArchive={filteredCars()} />
+        <ArchiveList carsDataArchive={filteredCarsData} />
       </div>
     </div>
   );
