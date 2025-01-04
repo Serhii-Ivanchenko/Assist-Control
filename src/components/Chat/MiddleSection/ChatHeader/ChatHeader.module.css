@@ -1,0 +1,66 @@
+.wrapper {
+  width: 100%;
+  height: 61px;
+  padding: 10px 20px;
+
+  display: flex;
+  border-radius: 12px 12px 0px 0px;
+  background: var(--CRM-modal-SecondaryBG, #23252c);
+}
+
+.imgContainer {
+  width: 43px;
+  height: 42px;
+  position: relative;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.socialIcon {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 13px;
+}
+
+.name {
+  color: var(--CRM-modal-LightGray, #d8e1ff);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.status {
+  color: #828a9e;
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.actionsBtn {
+  display: inline-flex;
+  border: none;
+  background: transparent;
+  color: #d8e1ff;
+  cursor: pointer;
+}

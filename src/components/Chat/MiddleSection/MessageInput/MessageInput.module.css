@@ -1,0 +1,160 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 81px;
+  padding: 18px 19px 18px 22px;
+  border-radius: 12px;
+  background: var(--CRM-modal-SecondaryBG, #23252c);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--light-gray);
+  transform: scale(1.5);
+}
+
+.input {
+  display: inline-flex;
+  width: 398px;
+  height: 45px;
+  padding: 15px;
+  border-radius: 12px;
+  border: 2px solid var(--txt-gray, #5a5b6f);
+  background: #272930;
+  outline: none;
+  color: var(--light-gray);
+  transition: all 0.3s ease;
+}
+
+.input.recording {
+  border: 2px solid #3956cc;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+.micBtn {
+  position: absolute;
+  top: 32px;
+  right: 80px;
+  display: inline-flex;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transform: scale(1.1);
+  color: var(--light-gray);
+  transition: all 0.3s ease;
+}
+
+.micBtn.recording {
+  color: #3956cc;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+.recordingMessage {
+  position: absolute;
+  top: 30px;
+  left: 75px;
+  color: #3956cc;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.sendBtn {
+  display: inline-flex;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.previewContainer {
+  position: absolute;
+  top: -45px;
+  left: 10px;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.previewItem {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.removePreview {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--main-gray);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fileName {
+  font-size: 14px;
+  color: #555;
+  margin-top: 8px;
+}
