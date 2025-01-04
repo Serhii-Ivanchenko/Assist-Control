@@ -80,6 +80,10 @@
   align-items: center;
 }
 
+.leftWrapper > p {
+  font-size: 20px;
+}
+
 .plus {
   display: flex;
   align-items: center;

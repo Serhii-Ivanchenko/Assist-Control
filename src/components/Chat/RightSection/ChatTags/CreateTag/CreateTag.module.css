@@ -30,6 +30,9 @@
 }
 
 .tagExample {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
   height: 40px;
   width: 314px;
   border-radius: 8px;

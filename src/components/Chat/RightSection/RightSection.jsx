@@ -110,7 +110,7 @@ export default function RightSection() {
           <div className={css.accbox}>
             <div className={css.topWrapper}>
               <div className={css.leftWrapper}>
-                <Typography>Тегі</Typography>
+                <Typography>Теги</Typography>
                 <ExpandMoreIcon
                   sx={{
                     fill: "var(--light-gray)",

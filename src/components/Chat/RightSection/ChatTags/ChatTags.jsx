@@ -82,7 +82,7 @@ export default function ChatTags() {
       </div>
       <div className={css.bottomWrapper} onClick={handleChangeBtnClick}>
         <BsPencil className={css.pencil} />
-        <p className={css.bottomText}>Змінтити Тегі</p>
+        <p className={css.bottomText}>Змінити Теги</p>
         {isSearchModalOpen && (
           <SearchTags
             onClose={handleCloseSearchModal}
