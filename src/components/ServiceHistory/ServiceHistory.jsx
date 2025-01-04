@@ -92,6 +92,12 @@ export default function ServiceHistory({ carName, clientInfo }) {
     ],
   };
 
+  const recommendation = {
+    name: "Ремонт ходової",
+    text: "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене [марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей. Також цікавить діагностика стану автомобіля після ремонту. Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!",
+    person: "manager",
+    personName: "Шевченко А.В.",
+  };
   //[
   //   {
   //     index: "1",
@@ -374,6 +380,7 @@ export default function ServiceHistory({ carName, clientInfo }) {
                       messages={messages}
                       isExpanded={index === 0}
                       diagnostics={diagnostic}
+                      recommendation={recommendation}
                     />
                   );
                 }

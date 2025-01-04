@@ -29,6 +29,7 @@ export default function ItemOfRecord({
   messages,
   isExpanded,
   diagnostics,
+  recommendation,
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editAmount, setEditAmount] = useState(false);
@@ -240,13 +241,13 @@ export default function ItemOfRecord({
                 className={css.btnDownloadsItem}
                 onClick={() => handleSetRecordInfo("recommendation")}
                 style={
-                  item.recommendation && recordInfo === "recommendation"
+                  recommendation && recordInfo === "recommendation"
                     ? { cursor: "pointer", outline: "1px solid #fff" }
-                    : !item.recommendation
+                    : !recommendation
                     ? null
                     : { cursor: "pointer" }
                 }
-                disabled={!item.recommendation}
+                disabled={!recommendation}
               >
                 <p>Рекомендації</p>
                 <div className={css.downloadBtn}>
@@ -268,6 +269,7 @@ export default function ItemOfRecord({
                     recordInfo={recordInfo}
                     item={item}
                     diagnostics={diagnostics}
+                    recommendation={recommendation}
                   />
                 </div>
               </div>

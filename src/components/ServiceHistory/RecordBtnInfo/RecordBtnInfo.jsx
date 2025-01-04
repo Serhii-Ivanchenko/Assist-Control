@@ -14,8 +14,15 @@ import {
   TableRow,
 } from "@mui/material";
 import { BsTrash } from "react-icons/bs";
+import { FaUserTie } from "react-icons/fa6";
+import { GiAutoRepair } from "react-icons/gi";
 
-export default function RecordBtnInfo({ recordInfo, item, diagnostics }) {
+export default function RecordBtnInfo({
+  recordInfo,
+  item,
+  diagnostics,
+  recommendation,
+}) {
   const [changeRepairInput, setChangeRepairInput] = useState(false);
   const [repairRecords, setRepairRecords] = useState(
     item.repair?.fillOfRepair || []
@@ -352,6 +359,25 @@ export default function RecordBtnInfo({ recordInfo, item, diagnostics }) {
               </Table>
             </TableContainer>
           )}
+        </div>
+      )}
+      {/* Рекомендації */}
+      {recordInfo === "recommendation" && recommendation && (
+        <div className={css.recommendationBox}>
+          <div className={css.topPart}>
+            <p className={css.recName}>{recommendation.name}</p>
+            <div className={css.person}>
+              {recommendation.person === "manager" ? (
+                <FaUserTie size={18} className={css.iconPerson} />
+              ) : (
+                <GiAutoRepair size={18} className={css.iconPerson} />
+              )}
+              <p className={css.personName}>{recommendation.personName}</p>
+            </div>
+          </div>
+          <span className={css.textBox}>
+            <p className={css.text}>{recommendation.text}</p>
+          </span>
         </div>
       )}
     </div>
