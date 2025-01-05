@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 715px;
+  height: 782px;
 }
 .headerOfServiceHistory {
   display: flex;
@@ -58,26 +60,35 @@
   padding-right: 23px;
   height: 100%;
   max-height: 680px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   padding-bottom: 8px;
 }
 .higherContainer {
   max-height: 760px;
 }
-.listOfAccardion::-webkit-scrollbar {
+
+.recordsListWrapper {
+  display: flex;
+  justify-content: flex-start;
+  width: 715px;
+  overflow-y: auto;
+}
+
+.recordsListWrapper::-webkit-scrollbar {
   width: 8px;
   border-radius: 4px;
 }
-.listOfAccardion::-webkit-scrollbar-thumb {
+.recordsListWrapper::-webkit-scrollbar-thumb {
   background: var(--player-secondary-bg);
   border-radius: 4px;
   padding: 5px 0 5px 0;
 }
-.listOfAccardion::-webkit-scrollbar-track {
+.recordsListWrapper::-webkit-scrollbar-track {
   background: #202020;
   border-radius: 4px;
   padding: 5px 0 5px 0;
 }
+
 .notFoundText {
   width: 684px;
   padding-left: 44px;

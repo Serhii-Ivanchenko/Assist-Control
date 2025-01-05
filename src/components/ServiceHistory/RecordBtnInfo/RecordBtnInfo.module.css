@@ -17,13 +17,16 @@
   cursor: pointer;
   transition: color 300ms ease-in-out;
 }
+
 .infoBtn:disabled,
 .nonActiveBtn {
   color: var(--input-text);
 }
+
 .disabledBtn {
   cursor: default;
 }
+
 .infoWrapper {
   display: flex;
   flex-direction: column;
@@ -46,6 +49,7 @@
 .wrapperOfComent {
   background: var(--blue-btn-normal);
 }
+
 :global(.MuiTableContainer-root) {
   margin-top: 15px;
   border-radius: 0px !important;
@@ -54,15 +58,16 @@
   background-color: var(--bg-input) !important;
   border: 1px solid var(--light-gray-table) !important;
 }
+
 :global(.MuiTableHead-root > .MuiTableRow-root) {
   background: var(--main-gray) !important;
 }
-:global(
-    .MuiTableHead-root > .MuiTableRow-root > .MuiTableCell-root:first-child
-  ) {
+
+:global(.MuiTableHead-root > .MuiTableRow-root > .MuiTableCell-root:first-child) {
   padding: 6px 6px 6px 10px !important;
   text-align: left !important;
 }
+
 :global(.MuiTableCell-root) {
   color: var(--white) !important;
   outline: var(--light-gray-table) !important;
@@ -77,14 +82,17 @@
   display: flex;
   justify-content: space-between;
 }
+
 .repairTitle {
   font-size: 16px;
   font-weight: 600;
 }
+
 .repairBtnWrapper {
   display: flex;
   gap: 10px;
 }
+
 .editAndPrintIconWrapper {
   display: flex;
   align-items: center;
@@ -96,24 +104,30 @@
   border: none;
   cursor: pointer;
 }
-.repairTableHeaderRow > :global(.MuiTableCell-root) {
+
+.repairTableHeaderRow> :global(.MuiTableCell-root) {
   font-weight: 600 !important;
 }
+
 .repairTableHeaderCell {
   text-align: left !important;
 }
+
 .repairTableCell {
   position: relative !important;
   height: 35px !important;
   padding-left: 35px !important;
 }
+
 .priceCell {
   text-align: center !important;
 }
+
 .repairNamedCell {
   text-align: left !important;
 }
-.repairTableCell > :global(.MuiCheckbox-root) {
+
+.repairTableCell> :global(.MuiCheckbox-root) {
   position: absolute;
   top: 0;
   left: 0;
@@ -122,9 +136,11 @@
   width: 25px !important;
   padding: 0px !important;
 }
+
 .nonCheckedCheckBox {
   color: #ffffff00 !important;
 }
+
 .editInput {
   background-color: var(--main-gray);
   height: 100%;
@@ -133,15 +149,168 @@
   border: none;
   color: var(--white);
 }
+
 .editInput:focus {
   outline: none;
 }
-.repairTableCell > :global(.MuiCheckbox-root):hover {
+
+.repairTableCell> :global(.MuiCheckbox-root):hover {
   background-color: hsla(120, 100%, 25%, 0.2);
 }
+
 :global(.Mui-checked) {
   color: var(--green-btn-normal) !important;
 }
-.footerRow > :global(.MuiTableCell-root) {
+
+.footerRow> :global(.MuiTableCell-root) {
   font-weight: 600 !important;
+}
+
+.photoList {
+  display: flex;
+  gap: 16px;
+
+  margin-top: 13px;
+
+  width: max-content;
+}
+
+.img {
+  width: 140px;
+  height: 113px;
+  object-fit: cover;
+
+  border-radius: 14px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 26px;
+  height: 26px;
+
+  border-radius: 52px;
+  background-color: var(--red);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.photoItem {
+  position: relative;
+  /* width: max-content; */
+}
+
+.divForScroll {
+  width: 619px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  padding-left: 6px;
+}
+
+.divForScroll::-webkit-scrollbar {
+  height: 8px;
+  border-radius: 4px;
+}
+
+.divForScroll::-webkit-scrollbar-thumb {
+  background: var(--player-secondary-bg);
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+  height: 8px;
+}
+
+.divForScroll::-webkit-scrollbar-track {
+  background: #202020;
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+  height: 8px;
+}
+
+.topPart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 14px;
+}
+
+.recName {
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.person {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.personName {
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.textBox {
+  display: flex;
+  width: 610px;
+  height: auto;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+
+  border-radius: 0px 12px 12px 12px;
+  background-color: #4e505f;
+
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.text::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 4px;
+}
+
+.text::-webkit-scrollbar-thumb {
+  background: var(--contacts-info-bg);
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+  width: 8px;
+}
+
+.text::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+  width: 8px;
+}
+
+.text {
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  max-height: 204px;
+  overflow-x: auto;
+}
+
+.iconPerson {
+  fill: var(--light-gray);
 }
