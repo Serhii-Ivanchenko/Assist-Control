@@ -250,6 +250,7 @@
   align-items: center;
   justify-content: center;
   height: 20px;
+  gap: 2px;
 }
 
 .amount {

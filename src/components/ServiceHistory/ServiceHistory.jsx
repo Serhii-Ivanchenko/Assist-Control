@@ -85,10 +85,10 @@ export default function ServiceHistory({ carName, clientInfo }) {
       { photo: absentAuto },
       { photo: absentAuto },
       { photo: absentAuto },
-      // { photo: absentAuto },
-      // { photo: absentAuto },
-      // { photo: absentAuto },
-      // { photo: absentAuto },
+      { photo: absentAuto },
+      { photo: absentAuto },
+      { photo: absentAuto },
+      { photo: absentAuto },
     ],
   };
 

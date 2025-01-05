@@ -34,9 +34,9 @@ export default function ItemOfRecord({
   const [isEditing, setIsEditing] = useState(false);
   const [editAmount, setEditAmount] = useState(false);
   const [totalMileAge, setTotalMileage] = useState(
-    item.mileage || "дані невідомі"
+    item.mileage || "дані відсутні"
   );
-  const [amount, setAmount] = useState("₴2 482");
+  const [amount, setAmount] = useState("2 482");
   const inputRef = useRef();
 
   const handleChangeMileage = (newM) => {
@@ -175,6 +175,7 @@ export default function ItemOfRecord({
               >
                 <AiOutlineDollar size={20} className={css.iconDollar} />
                 <span className={css.amountWrapper}>
+                  <p className={css.amount}>₴</p>
                   {editAmount === item.service_id ? (
                     <input
                       ref={inputRef}
