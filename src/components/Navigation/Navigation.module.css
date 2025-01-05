@@ -3,7 +3,6 @@
     font-weight: 400;
     line-height: normal;
     font-variant: small-caps;
-  
 }
 
 @media only screen and (min-width: 1850px) {
@@ -132,7 +131,7 @@
     vertical-align: middle;
   }
 
-  .reposrClientContainer{
+  .repostClientsContainer{
     min-width: 100px;
     margin-top: 15px;
     margin-bottom: 6px;
@@ -140,24 +139,11 @@
   .activeLink {
     text-decoration: none; 
     color: var(--white);
-    
   }
-  /* 
-  .activeContainer {
-    background: var(--main-gray);
-    border-radius: 4px;
-    
-  } */
-  
-  :global(.MuiTreeItem-content .MuiTreeItem-iconContainer) {
-    display: none !important;
-    width: 0 !important;
+
+  .clientActive {
+    background: var(--bg-input);
+    height: 24px;
+    line-height: 1.5;
   }
-  
-  :global(.MuiTreeItem-content.Mui-selected) {
-    background: var(--bg-input) !important;
-  }
-  :global(.MuiTreeItem-content) {
-    padding: 2px !important;
-    margin-bottom: 6px;
-  }
+

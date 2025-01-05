@@ -14,6 +14,7 @@ import { HiOutlineCurrencyDollar } from "react-icons/hi2";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { BiSolidRightArrow, BiSolidDownArrow } from "react-icons/bi";
 import AccountingTree from "./AccountingTree/AccountingTree";
+import ReportsTree from './ReportsTree/ReportsTree';
 
 export default function Navigation() {
   const [isAccountingOpen, setIsAccountingOpen] = useState(false);
@@ -125,7 +126,7 @@ export default function Navigation() {
             Рекомендації
           </NavLink>
         </li>
-        <li className={styles.navItem}>
+        <li className={styles.navItem} >
           <div
             onClick={toggleAccounting}
             className={clsx(styles.navLink, {
@@ -156,7 +157,7 @@ export default function Navigation() {
               [styles.open]: isAccountingOpen,
             })}
           >
-            <AccountingTree />
+            <AccountingTree closeTree={() => setIsAccountingOpen(false)}/>
           </animated.div>
         </li>
 
@@ -183,24 +184,11 @@ export default function Navigation() {
           </div>
           <animated.div
             style={reportsAnimationProps}
-            className={clsx(styles.reportsTreeContainer, {
-              [styles.open]: isReportsOpen,
+            className={clsx(styles.accountingTreeContainer, {
+              [styles.open]: isAccountingOpen,
             })}
           >
-            <ul>
-              <li className={styles.reposrClientContainer}>
-                <NavLink
-                  to="/reports/clients"
-                  className={({ isActive }) =>
-                    clsx(styles.navLink, {
-                      [styles.active]: isActive,
-                    })
-                  }
-                >
-                  Клієнти
-                </NavLink>
-              </li>
-            </ul>
+            <ReportsTree closeTree={() => setIsReportsOpen(false)}/>
           </animated.div>
         </li>
 
