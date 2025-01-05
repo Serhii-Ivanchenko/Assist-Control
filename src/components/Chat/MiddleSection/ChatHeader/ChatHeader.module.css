@@ -36,7 +36,7 @@
 
 .name {
   color: var(--CRM-modal-LightGray, #d8e1ff);
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 7px;
@@ -44,7 +44,7 @@
 
 .status {
   color: #828a9e;
-  font-family: "Raleway", sans-serif;
+  /* font-family: "Raleway", sans-serif; */
   font-size: 14px;
   font-weight: 500;
 }
@@ -63,4 +63,9 @@
   background: transparent;
   color: #d8e1ff;
   cursor: pointer;
+}
+
+.actionIcon{
+  width: 18px;
+  height: 18px;
 }

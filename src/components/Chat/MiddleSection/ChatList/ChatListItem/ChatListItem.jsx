@@ -4,7 +4,7 @@ import styles from "./ChatListItem.module.css";
 function ChatListItem({ message }) {
   const { sender, avatar, author, time, text, files, audio } = message;
   const isClient = sender === "client";
-  const messageClass = isClient ? styles.clientMessage : styles.managerMessage;
+  // const messageClass = isClient ? styles.clientMessage : styles.managerMessage;
   const infoClass = isClient ? styles.userInfo : styles.managerInfo;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,7 +30,7 @@ function ChatListItem({ message }) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={messageClass}>
+      {/* <div className={messageClass}> */}
         <div className={infoClass}>
           <img className={styles.avatar} src={avatar} alt="Avatar" />
           <p className={styles.name}>{author}</p>
@@ -55,7 +55,7 @@ function ChatListItem({ message }) {
           )}
           {<p>{text}</p>}
         </div>
-      </div>
+      {/* </div> */}
 
       {isModalOpen && (
         <div className={styles.modal} onClick={closeModal}>

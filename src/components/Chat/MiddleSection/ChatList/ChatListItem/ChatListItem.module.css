@@ -20,35 +20,37 @@
 
 .name {
   color: var(--CRM-modal-LightGray, #d8e1ff);
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 16px;
   font-weight: 600;
+  line-height: 1.1875em;
 }
 
 .time {
   color: #828a9e;
-  font-family: "Raleway", sans-serif;
+  /* font-family: "Raleway", sans-serif; */
   font-size: 14px;
   font-weight: 500;
 }
 
 .message {
   /* width: 440px; */
-  margin-top: 6px;
+  /* margin-top: 6px; */
   margin-left: 45px;
-  padding: 14px 33px 16px 16px;
+  padding: 14px 16px;
   background: var(--CRM-modal-SecondaryBG, #23252c);
   border-radius: 0px 12px 12px 12px;
 }
 
-.message > p {
+.message > p,
+.messageManager > p {
   color: #fff;
 
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: normal;
+  line-height: 1.1875;
 }
 
 .managerInfo {
@@ -61,9 +63,9 @@
 
 .messageManager {
   /* width: 445px; */
-  margin-top: 6px;
+  /* margin-top: 6px; */
   margin-right: 45px;
-  padding: 14px 33px 16px 16px;
+  padding: 14px 16px;
   background: var(--CRM-modal-BlueBtnNormal, #3956cc);
   border-radius: 12px 0px 12px 12px;
 }

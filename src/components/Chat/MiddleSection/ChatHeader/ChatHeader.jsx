@@ -17,13 +17,13 @@ function ChatHeader() {
       </div>
       <div className={styles.actions}>
         <button className={styles.actionsBtn}>
-          <BsTelephone />
+          <BsTelephone className={styles.actionIcon}/>
         </button>
         <button className={styles.actionsBtn}>
-          <IoIosSearch />
+          <IoIosSearch className={styles.actionIcon}/>
         </button>
         <button className={styles.actionsBtn}>
-          <BsThreeDots />
+          <BsThreeDots className={styles.actionIcon}/>
         </button>
       </div>
     </div>

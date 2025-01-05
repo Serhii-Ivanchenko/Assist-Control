@@ -108,7 +108,7 @@ function MessageInput({ addNewMessage }) {
         className={styles.btn}
         onClick={() => fileInputRef.current.click()}
       >
-        <BsPlusCircleDotted />
+        <BsPlusCircleDotted size={24}/>
       </button>
       {previewFiles.length > 0 && (
         <div className={styles.previewContainer}>

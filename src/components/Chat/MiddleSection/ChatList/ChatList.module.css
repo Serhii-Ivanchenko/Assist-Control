@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 14px 20px 44px;
+  padding: 14px 20px;
   height: 825px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -36,7 +36,7 @@
   background: var(--CRM-modal-SecondaryBG, #23252c);
 
   color: #828a9e;
-  font-family: "Raleway", sans-serif;
+  /* font-family: "Raleway", sans-serif; */
   font-size: 14px;
   font-weight: 500;
 }
