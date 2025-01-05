@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { useSpring, animated } from "react-spring";
 import styles from "./Navigation.module.css";
@@ -19,6 +19,18 @@ import ReportsTree from './ReportsTree/ReportsTree';
 export default function Navigation() {
   const [isAccountingOpen, setIsAccountingOpen] = useState(false);
   const [isReportsOpen, setIsReportsOpen] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (
+      !location.pathname.startsWith("/accounting") &&
+      !location.pathname.startsWith("/reports")
+    ) {
+      setIsAccountingOpen(false);
+      setIsReportsOpen(false);
+    }
+  }, [location.pathname]);
 
   const accountingAnimationProps = useSpring({
     maxHeight: isAccountingOpen ? 300 : 0,
@@ -46,10 +58,12 @@ export default function Navigation() {
 
   const toggleAccounting = () => {
     setIsAccountingOpen((prev) => !prev);
+    if (!isAccountingOpen) setIsReportsOpen(false);
   };
 
   const toggleReports = () => {
     setIsReportsOpen((prev) => !prev);
+    if (!isReportsOpen) setIsAccountingOpen(false); 
   };
 
   return (
@@ -126,7 +140,7 @@ export default function Navigation() {
             Рекомендації
           </NavLink>
         </li>
-        <li className={styles.navItem} >
+        <li className={styles.navItem}>
           <div
             onClick={toggleAccounting}
             className={clsx(styles.navLink, {
@@ -157,7 +171,7 @@ export default function Navigation() {
               [styles.open]: isAccountingOpen,
             })}
           >
-            <AccountingTree closeTree={() => setIsAccountingOpen(false)}/>
+            <AccountingTree closeTree={() => setIsAccountingOpen(false)} />
           </animated.div>
         </li>
 
@@ -188,7 +202,7 @@ export default function Navigation() {
               [styles.open]: isAccountingOpen,
             })}
           >
-            <ReportsTree closeTree={() => setIsReportsOpen(false)}/>
+            <ReportsTree closeTree={() => setIsReportsOpen(false)} />
           </animated.div>
         </li>
 
