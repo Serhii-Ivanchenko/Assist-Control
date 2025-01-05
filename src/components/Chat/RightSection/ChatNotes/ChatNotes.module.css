@@ -1,6 +1,51 @@
-/* .wrapper {
-    border-radius: 12px;
+ .wrapper {
+    overflow-y: auto;
+} 
+
+.wrapper::-webkit-scrollbar {
+    width: 8px;
+    /* margin-left: -20px; */
+}
+
+.wrapper::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: var(--bg);
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: var(--main-gray);
+}
+
+.dataValue {
+    color:var(--white);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    width: 358px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-y: auto;
+    max-height: 90px;
     background: var(--bg-secondary);
-    height: 100px;
-    width: 371px;
-} */
+    outline: none;
+    border: none;
+
+}
+
+.datainput {
+    color: var(--white);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    width: 95%;
+    height: 900px;
+    resize: vertical;
+    overflow-y: auto;
+    background: var(--bg-secondary);
+    outline: none;
+    border: none;
+
+}

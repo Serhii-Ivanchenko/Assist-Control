@@ -1,11 +1,38 @@
 .rightSectionWrapper {
     width: 411px;
-    height: 967px;
+    height: 967px; 
     border-radius: 12px;
     /* border: 1px solid var(--light-gray); */
     display: flex;
     flex-direction: column;
     gap: 14px;
+   
+}
+
+.wrapper{
+width: 411px;
+display: flex;
+    flex-direction: column;
+    max-height: 100%; 
+    gap: 14px;
+    overflow-y: auto;
+     height: 100%; 
+   
+}
+
+.wrapper::-webkit-scrollbar {
+    width: 8px;
+    /* margin-left: -20px; */
+}
+
+.wrapper::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: var(--bg);
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: var(--main-gray);
 }
 
 .client {
@@ -19,7 +46,12 @@
     background: var(--bg-secondary);
     color: var(--white);
     box-shadow: none;
-    width: 411px;
+    /* width: 411px; */
+    width: 100%;
+        /* Вместо фиксированной ширины */
+        /* max-height: none; */
+        /* Убедитесь, что высота не ограничена */
+        min-height: 56px;
 }
 
 .wrapper .accordion .MuiAccordionSummary-root {
@@ -27,7 +59,7 @@
     color: var(--light-gray);
 }
 
-.rightSectionWrapper .accordionTitle {
+ .wrapper .accordionTitle {
     display: flex;
 
     width: 100%;
@@ -50,7 +82,8 @@
 .accbox {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 11px;
+   
 }
 
 .accbox > div {
@@ -66,4 +99,159 @@
 
 .accboxtitle > p {
     font-size: 20px;
+}
+
+.client{
+    padding: 26px;
+
+}
+
+.clientbox {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-bottom: 21px;
+}
+
+.photoavatar{
+    width: 50px;
+        height: 50px;
+        border-radius: 50px;
+}
+
+.clientdata{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.name{
+    color: var(-light-gray);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+}
+
+.phonebox{
+    display: flex;
+    flex-direction: row;
+    gap: 26px;
+    justify-content: center;
+    align-items:last baseline;
+}
+
+.phone{
+    color: #828A9E;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-variant: small-caps;
+}
+
+.status{
+    color:  #43A48D;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        width: 78px;
+        height: 27px;
+        padding: 4px 15px;
+        /* display: flex;
+        justify-content: center;
+        align-items: center; */
+        border-radius: 24px;
+            background: rgba(67, 164, 141, 0.08);
+        
+}
+
+.btnicon {
+    fill: var(--white);
+display: flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+        background: #2D3038;
+ box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+ border: none;
+
+}
+
+.icon {
+    fill: var(--light-gray);
+    width: 18px;
+    height: 18px;
+}
+
+.mainIcon {
+    fill: var(--light-gray);
+    width: 16px;
+    height: 16px;
+}
+
+.btnbox{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.btnaction{
+    display: flex;
+        width: 50px;
+        height: 50px;
+    
+        justify-content: center;
+        align-items: center;
+       
+        flex-shrink: 0;
+        border-radius: 12px;
+            background: #31343E;
+            border: none;
+}
+
+.iconaction {
+    width: 30px;
+        height: 30px;
+        fill : var(--light-gray);
+}
+
+.accboxicon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+    
+    
+}
+
+.editbtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+  
+    border: none;
+    background-color: var(--bg-input);
+    margin-right: 5px;
+    color: var(--light-gray);
+
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.blockflex {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: auto;
+   
 }
