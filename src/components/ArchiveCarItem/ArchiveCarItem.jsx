@@ -48,7 +48,7 @@ export default function ArchiveCarItem({ data }) {
 
   return (
     <div className={styles.archiveContainer}>
-      <div className={styles.leftContsiner}>
+      <div className={styles.leftContainer}>
         <div className={styles.carPhoto}>
           <img
             className={styles.carImg}
@@ -70,10 +70,10 @@ export default function ArchiveCarItem({ data }) {
           <p className={styles.time}>{formatDate(date)}</p>
         </div>
         <div>
-          <p className={styles.infoName}>Олександр Сидоренко</p>
+          <p className={styles.infoName}>Олександр Макаренковчук</p>
         </div>
       </div>
-      <div className={styles.centerContsiner}>
+      <div className={styles.centerContainer}>
         <div>{renderStatusInArchive(reason_description, styles)}</div>
         <div
           className={`${styles.reasonWhy} ${isPopoverVisible ? styles.active : ""}`}

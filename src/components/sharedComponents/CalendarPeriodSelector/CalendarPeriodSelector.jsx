@@ -58,7 +58,7 @@ export default function CalendarPeriodSelector({
         <div className={css.calendarBtn}>{isDateSelectedBeg && (
             <MdClose
               className={css.iconClose} 
-              size={13}
+              size={15}
               onClick={handleResetDateBeg}
             />
           )}

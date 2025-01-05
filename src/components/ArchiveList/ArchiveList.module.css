@@ -13,7 +13,7 @@
 }
 
 .scrollWrapper{
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 705px; 
 }
 
