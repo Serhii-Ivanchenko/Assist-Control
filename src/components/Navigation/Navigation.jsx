@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { useSpring, animated } from "react-spring";
 import styles from "./Navigation.module.css";
@@ -14,11 +14,25 @@ import { HiOutlineCurrencyDollar } from "react-icons/hi2";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { BiSolidRightArrow, BiSolidDownArrow } from "react-icons/bi";
 import AccountingTree from "./AccountingTree/AccountingTree";
+import ReportsTree from './ReportsTree/ReportsTree';
 
 export default function Navigation() {
   const [isAccountingOpen, setIsAccountingOpen] = useState(false);
+  const [isReportsOpen, setIsReportsOpen] = useState(false);
 
-  const animationProps = useSpring({
+  const location = useLocation();
+
+  useEffect(() => {
+    if (
+      !location.pathname.startsWith("/accounting") &&
+      !location.pathname.startsWith("/reports")
+    ) {
+      setIsAccountingOpen(false);
+      setIsReportsOpen(false);
+    }
+  }, [location.pathname]);
+
+  const accountingAnimationProps = useSpring({
     maxHeight: isAccountingOpen ? 300 : 0,
     opacity: isAccountingOpen ? 1 : 0,
     transform: isAccountingOpen ? "translateY(0)" : "translateY(-20px)",
@@ -30,8 +44,26 @@ export default function Navigation() {
     },
   });
 
+  const reportsAnimationProps = useSpring({
+    maxHeight: isReportsOpen ? 300 : 0,
+    opacity: isReportsOpen ? 1 : 0,
+    transform: isReportsOpen ? "translateY(0)" : "translateY(-20px)",
+    overflow: "hidden",
+    config: {
+      mass: 1,
+      tension: 170,
+      friction: 20,
+    },
+  });
+
   const toggleAccounting = () => {
     setIsAccountingOpen((prev) => !prev);
+    if (!isAccountingOpen) setIsReportsOpen(false);
+  };
+
+  const toggleReports = () => {
+    setIsReportsOpen((prev) => !prev);
+    if (!isReportsOpen) setIsAccountingOpen(false); 
   };
 
   return (
@@ -134,31 +166,46 @@ export default function Navigation() {
             )}
           </div>
           <animated.div
-            style={animationProps}
+            style={accountingAnimationProps}
             className={clsx(styles.accountingTreeContainer, {
               [styles.open]: isAccountingOpen,
             })}
           >
-            <AccountingTree />
+            <AccountingTree closeTree={() => setIsAccountingOpen(false)} />
           </animated.div>
         </li>
 
         <li className={styles.navItem}>
-          <NavLink
-            to="/reports"
-            className={({ isActive }) =>
-              clsx(styles.navLink, {
-                [styles.active]: isActive,
-                [styles.disabled]: true,
-              })
-            }
+          <div
+            onClick={toggleReports}
+            className={clsx(styles.navLink, {
+              [styles.active]: isReportsOpen,
+            })}
           >
-            <div className={styles.iconContainer}>
+            <div
+              className={clsx(styles.iconContainer, {
+                [styles.active]: isReportsOpen,
+              })}
+            >
               <BsJournalCheck className={styles.iconBook} />
             </div>
             Звіти
-          </NavLink>
+            {isReportsOpen ? (
+              <BiSolidDownArrow className={styles.navArrow} />
+            ) : (
+              <BiSolidRightArrow className={styles.navArrow} />
+            )}
+          </div>
+          <animated.div
+            style={reportsAnimationProps}
+            className={clsx(styles.accountingTreeContainer, {
+              [styles.open]: isAccountingOpen,
+            })}
+          >
+            <ReportsTree closeTree={() => setIsReportsOpen(false)} />
+          </animated.div>
         </li>
+
         <li className={styles.navItem}>
           <NavLink
             to="/settings"

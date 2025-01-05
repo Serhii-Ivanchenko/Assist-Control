@@ -1,0 +1,71 @@
+.treeContainer {
+    max-height: auto;
+    overflow-y: auto;
+  }
+  
+  .treeBox{
+    margin-top: 10px;
+  }
+  
+  .MuiTreeItem-label {
+    font-variant: small-caps;
+    font-size: 16px;
+  }
+  
+  .treeLabel {
+    display: flex;
+    align-items: center;
+    font-variant: small-caps;
+    font-size: 16px;
+  }
+  
+  
+  .nestedList {
+    list-style-type: disc;
+    padding-left: 8px;
+    margin-left: 8px;
+    margin-top: 10px;
+  }
+  
+  .listItem {
+    margin: 5px 0;
+    padding: 2px;
+    padding-left: 4px;
+  }
+  
+  .link {
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .activeLink {
+    text-decoration: none; 
+    color: var(--white);
+    
+  }
+  
+  :global(.MuiTreeItem-content .MuiTreeItem-iconContainer) {
+    display: none !important;
+    width: 0 !important;
+  }
+  
+  :global(.MuiTreeItem-content.Mui-selected) {
+    background: var(--bg-input) !important;
+  }
+  :global(.MuiTreeItem-content) {
+    padding: 2px !important;
+    margin-bottom: 6px;
+  }
+  
+  
+  .arrowIcon svg{
+    margin-top: 1px;
+    margin-left: 10px;
+    height: 13px;
+    width: 13px;
+    display: flex;
+    align-items: center;
+  }
+  
