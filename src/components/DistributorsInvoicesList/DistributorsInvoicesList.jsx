@@ -4,6 +4,9 @@ import css from "./DistributorsInvoicesList.module.css";
 // import { TiArrowSortedUp } from "react-icons/ti";
 import DistributorsInvoice from "./DistributorsInvoice/DistributorsInvoice";
 import SortButtonsArrow from "../sharedComponents/SortButtonsArrow/SortButtonsArrow";
+import { useSelector } from "react-redux";
+import { selectVisibilitySuppliers } from "../../redux/visibility/selectors";
+import clsx from "clsx";
 
 const dataArr = [
   {
@@ -228,6 +231,7 @@ const dataArr = [
 
 export default function DistributorsInvoicesList() {
   const [data, setData] = useState(dataArr);
+  const visibility = useSelector(selectVisibilitySuppliers);
 
   const sort = (array, key, order) => {
     return array.sort((a, b) => {
@@ -281,7 +285,12 @@ export default function DistributorsInvoicesList() {
   return (
     <div>
       <div className={css.headerWrapper}>
-        <div className={css.headerWithArrows}>
+        <div  className={css.legtHeaderWrapper}></div>
+        <div
+          className={clsx(css.headerWithArrows, {
+            [css.hidden]: !visibility?.date,
+          })}
+        >
           <p className={css.header}>Дата</p>
           <SortButtonsArrow
             orderKey="deliveryDate"
@@ -303,7 +312,11 @@ export default function DistributorsInvoicesList() {
             />
           </div> */}
         </div>
-        <div className={css.headerWithArrows}>
+        <div
+          className={clsx(css.headerWithArrows, {
+            [css.hidden]: !visibility?.quantity,
+          })}
+        >
           <p className={css.header}>Кількість</p>
           <SortButtonsArrow
             orderKey="carPartsQuantity"
@@ -325,10 +338,24 @@ export default function DistributorsInvoicesList() {
             />
           </div> */}
         </div>
-        <p className={css.header}>Артикул</p>
-        <p className={css.header}>Бренд</p>
-        <p className={css.header}>Номенклатура</p>
-        <div className={css.headerWithArrows}>
+        <p className={clsx(css.header, { [css.hidden]: !visibility?.article })}>
+          Артикул
+        </p>
+        <p className={clsx(css.header, { [css.hidden]: !visibility?.brand })}>
+          Бренд
+        </p>
+        <p
+          className={clsx(css.header, {
+            [css.hidden]: !visibility?.nomenclature,
+          })}
+        >
+          Номенклатура
+        </p>
+        <div
+          className={clsx(css.headerWithArrows, {
+            [css.hidden]: !visibility?.purchasePrice,
+          })}
+        >
           <p className={css.header}>Ціна закупки</p>
           <SortButtonsArrow
             orderKey="price"
@@ -350,7 +377,11 @@ export default function DistributorsInvoicesList() {
             />
           </div> */}
         </div>
-        <div className={css.headerWithArrows}>
+        <div
+          className={clsx(css.headerWithArrows, {
+            [css.hidden]: !visibility?.purchaseAmount,
+          })}
+        >
           <p className={css.header}>Сума закупки</p>
           <SortButtonsArrow
             orderKey="purchaseAmount"
@@ -372,7 +403,11 @@ export default function DistributorsInvoicesList() {
             />
           </div> */}
         </div>
-        <div className={css.headerWithArrows}>
+        <div
+          className={clsx(css.headerWithArrows, {
+            [css.hidden]: !visibility?.saleAmount,
+          })}
+        >
           <p className={css.header}>Сума продажу</p>
           <SortButtonsArrow
             orderKey="salesAmount"
@@ -394,7 +429,11 @@ export default function DistributorsInvoicesList() {
             />
           </div> */}
         </div>
-        <div className={css.headerWithArrows}>
+        <div
+          className={clsx(css.headerWithArrows, {
+            [css.hidden]: !visibility?.profit,
+          })}
+        >
           <p className={css.header}>Прибуток</p>
           <SortButtonsArrow
             orderKey="profit"
@@ -416,7 +455,11 @@ export default function DistributorsInvoicesList() {
             />
           </div> */}
         </div>
-        <div className={css.headerWithArrows}>
+        <div
+          className={clsx(css.headerWithArrows, {
+            [css.hidden]: !visibility?.percent,
+          })}
+        >
           <p className={css.header}>%</p>
           <SortButtonsArrow
             orderKey="percent"
