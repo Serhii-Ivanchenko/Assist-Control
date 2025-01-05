@@ -1,9 +1,11 @@
 import { BsCalendar2Week } from "react-icons/bs";
+import { MdClose } from "react-icons/md";  // Для хрестика
 import clsx from "clsx";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./CalendarPeriodSelector.module.css";
 import { useState } from "react";
+
 export default function CalendarPeriodSelector({
   renderInModal,
   handleInputChangeBeg,
@@ -14,20 +16,26 @@ export default function CalendarPeriodSelector({
 }) {
   const [isOpenBeg, setIsOpenBeg] = useState(false);
   const [isOpenEnd, setIsOpenEnd] = useState(false);
+  const [isDateSelectedBeg, setIsDateSelectedBeg] = useState(false); // Стан для визначення, чи вибрана дата
 
   const handleIconClickBeg = () => setIsOpenBeg((prev) => !prev);
   const handleIconClickEnd = () => setIsOpenEnd((prev) => !prev);
 
   const handleDateChange = (date) => {
-    // Якщо один календар, викликаємо тільки handleInputChangeBeg
     if (isSingle) {
       handleInputChangeBeg(date);
+      setIsDateSelectedBeg(true);  // Якщо дата вибрана, хрестик з'являється
       setIsOpenBeg(false);
     } else {
-      // Якщо два календарі, обробляємо відповідно
       handleInputChangeBeg(date);
       setIsOpenBeg(false);
     }
+  };
+
+  // Функція для скидання дати
+  const handleResetDateBeg = () => {
+    handleInputChangeBeg(null);
+    setIsDateSelectedBeg(false);  // Хрестик приховується
   };
 
   return (
@@ -41,14 +49,20 @@ export default function CalendarPeriodSelector({
         <DatePicker
           className={css.periodInput}
           selected={periodStartData}
-          onChange={(date) => handleDateChange(date)}  // Викликаємо універсальний метод
+          onChange={(date) => handleDateChange(date)}
           dateFormat="dd/MM/yyyy"
           open={isOpenBeg}
           onClickOutside={() => setIsOpenBeg(false)}
           popperClassName={css.leftdatePickerDropdown}
         />
-        <div className={css.calendarBtn}>
-          <BsCalendar2Week className={css.icon} onClick={handleIconClickBeg} />
+        <div className={css.calendarBtn}>{isDateSelectedBeg && (
+            <MdClose
+              className={css.iconClose} 
+              size={15}
+              onClick={handleResetDateBeg}
+            />
+          )}
+          <BsCalendar2Week size={14} className={css.icon} onClick={handleIconClickBeg} />
         </div>
       </div>
 
@@ -81,4 +95,3 @@ export default function CalendarPeriodSelector({
     </div>
   );
 }
-

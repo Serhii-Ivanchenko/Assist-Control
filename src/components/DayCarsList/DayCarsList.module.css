@@ -8,7 +8,7 @@
 }
 
 .scrollWrapper {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   -ms-overflow-style: none;
   max-height: 295px;
