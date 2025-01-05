@@ -68,3 +68,14 @@
   font-weight: 600;
   line-height: normal;
 }
+
+.iconBox {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--main-gray);
+}
