@@ -47,40 +47,43 @@ export default function ArchiveInfoModal({ onClose }) {
   }, [dispatch, selectedServiceId]);
 
   useEffect(() => {
-
-    let filtered = carsDataArchive;
-
-    // Фільтрація за пошуковим запитом
-    if (searchTerm) {
-      filtered = filterCarsBySearchTerm(filtered, searchTerm);
-    }
-
-    // Фільтрація за статусом
+    // Початково беремо всі дані
+    let filtered = [...carsDataArchive];
+  
+    // Фільтрація за статусом (якщо статус обрано, крім "all")
     if (selectedStatus !== "all") {
       filtered = filtered.filter(
         (car) => car.reason_description === selectedStatus
       );
     }
-
+  
     // Фільтрація за датою
     if (periodStartData) {
-      filtered = filtered.filter(
-        (car) => new Date(car.date).toLocaleDateString() === periodStartData.toLocaleDateString()
-      );
+      const clearTime = (date) => new Date(date.setHours(0, 0, 0, 0));
+      const selectedDate = clearTime(new Date(periodStartData));
+    
+      filtered = filtered.filter((car) => {
+        const carDate = clearTime(new Date(car.date));
+        return carDate.getTime() === selectedDate.getTime();
+      });
     }
-
-    if (selectedStatus === "всі") {
-      filtered = carsDataArchive;
+    
+  
+    // Фільтрація за пошуковим запитом (залишається активною завжди)
+    if (searchTerm) {
+      filtered = filterCarsBySearchTerm(filtered, searchTerm);
     }
-
+  
     setFilteredCarsData(filtered);
-    console.log("Filtered cars data set:", filtered);
-  }, [carsDataArchive, searchTerm, selectedStatus, periodStartData]);
+  }, [carsDataArchive, periodStartData, selectedStatus, searchTerm]);
+  
+  
+  
 
   const handleStatusChange = (status) => {
+    console.log("Status changed to:", status); // Додайте лог
     setSelectedStatus(status);
   };
-
   const handleSearch = (term) => {
     validateSearchTerm(term, setInputError, setSearchTerm);
   };
