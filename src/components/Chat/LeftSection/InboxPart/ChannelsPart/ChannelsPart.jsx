@@ -9,8 +9,8 @@ import assist from "../../../../../assets/images/ChannelsImages/logo-rect 1.png"
 import { useState } from "react";
 // import { useRef } from "react";
 import ChannelItem from "./ChannelItem/ChannelItem";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+// import { DndProvider } from "react-dnd";
+// import { HTML5Backend } from "react-dnd-html5-backend";
 
 export default function ChannelsPart() {
   const channelsList = [
@@ -23,72 +23,79 @@ export default function ChannelsPart() {
 
   const [isOpen, setIsOpen] = useState(true);
   const [channels, setChannels] = useState(channelsList);
+  const [draggedItemIndex, setDraggedItemIndex] = useState(null);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
 
-  const moveChannel = (dragIndex, hoverIndex) => {
-    setChannels((prevChannels) => {
-      const updatedItems = [...prevChannels];
-      const movedChannel = updatedItems[dragIndex];
-      updatedItems[dragIndex] = updatedItems[hoverIndex];
-      updatedItems[hoverIndex] = movedChannel;
-      // console.log("Updated list after move:", updatedItems);
-      return updatedItems;
-    });
+  const handleDragStart = (index) => {
+    setDraggedItemIndex(index);
   };
+
+  const handleDragOver = (event, index) => {
+    event.preventDefault();
+
+    // Переміщення елемента в нову позицію
+    if (index !== draggedItemIndex) {
+      const updatedItems = [...channels];
+      const [movedItem] = updatedItems.splice(draggedItemIndex, 1);
+      updatedItems.splice(index, 0, movedItem);
+      setDraggedItemIndex(index);
+      setChannels(updatedItems);
+    }
+  };
+
+  // Закінчення перетягування
+  const handleDragEnd = () => {
+    setDraggedItemIndex(null);
+  };
+
+  // const moveChannel = (dragIndex, hoverIndex) => {
+  //   setChannels((prevChannels) => {
+  //     const updatedItems = [...prevChannels];
+  //     const movedChannel = updatedItems[dragIndex];
+  //     updatedItems[dragIndex] = updatedItems[hoverIndex];
+  //     updatedItems[hoverIndex] = movedChannel;
+  //     // console.log("Updated list after move:", updatedItems);
+  //     return updatedItems;
+  //   });
+  // };
 
   // console.log("new array", channels);
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div className={css.channelsPart}>
-        <div className={css.channelsSelect} onClick={handleOpen}>
-          <div className={css.textAndArrow}>
-            <IoIosArrowDown
-              size={18}
-              className={`${css.arrowIcon} ${isOpen && css.iconRotated}`}
-            />
-            <p className={css.text}>Канали</p>
-          </div>
-          <p className={css.numberBox}>10</p>
+    // <DndProvider backend={HTML5Backend}>
+    <div className={css.channelsPart}>
+      <div className={css.channelsSelect} onClick={handleOpen}>
+        <div className={css.textAndArrow}>
+          <IoIosArrowDown
+            size={18}
+            className={`${css.arrowIcon} ${isOpen && css.iconRotated}`}
+          />
+          <p className={css.text}>Канали</p>
         </div>
-
-        {isOpen && (
-          <ul className={css.channelsList}>
-            {channels.map((channel, index) => (
-              // <li key={index} className={css.channelsListItem}>
-              //   <div className={css.iconAndText}>
-              //     <span className={css.iconBox}>
-              //       <img
-              //         src={channel.icon}
-              //         alt=""
-              //         className={`${css.channelImg} ${
-              //           channel.icon === gmail && css.channelImgGmail
-              //         } ${channel.icon === facebook && css.channelImgFB}`}
-              //       />
-              //     </span>
-              //     <p className={css.channelName}>{channel.text}</p>
-              //   </div>
-
-              //   <div className={css.dragContainer}>
-              //     <p className={css.numberBox}>{channel.value}</p>
-              //     <RxDragHandleDots2 className={css.dragIcon} ref={ref} />
-              //   </div>
-              // </li>
-              <ChannelItem
-                key={channel.id}
-                index={index}
-                channel={channel}
-                gmail={gmail}
-                facebook={facebook}
-                moveChannel={moveChannel}
-              />
-            ))}
-          </ul>
-        )}
+        <p className={css.numberBox}>10</p>
       </div>
-    </DndProvider>
+
+      {isOpen && (
+        <ul className={css.channelsList}>
+          {channels.map((channel, index) => (
+            <ChannelItem
+              key={channel.id}
+              index={index}
+              channel={channel}
+              gmail={gmail}
+              facebook={facebook}
+              // moveChannel={moveChannel}
+              handleDragEnd={handleDragEnd}
+              handleDragStart={handleDragStart}
+              handleDragOver={handleDragOver}
+            />
+          ))}
+        </ul>
+      )}
+    </div>
+    // </DndProvider>
   );
 }

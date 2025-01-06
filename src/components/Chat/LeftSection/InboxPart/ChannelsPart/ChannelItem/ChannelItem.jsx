@@ -1,7 +1,7 @@
 import css from "./ChannelItem.module.css";
 import { RxDragHandleDots2 } from "react-icons/rx";
-import { useRef } from "react";
-import { useDrag, useDrop } from "react-dnd";
+// import { useRef } from "react";
+// import { useDrag, useDrop } from "react-dnd";
 // import { useState } from "react";
 
 export default function ChannelItem({
@@ -9,34 +9,45 @@ export default function ChannelItem({
   channel,
   gmail,
   facebook,
-  moveChannel,
+  // moveChannel,
+  handleDragStart,
+  handleDragOver,
+  handleDragEnd,
 }) {
-  const ref = useRef(null);
+  // const ref = useRef(null);
   //   const [isDragActive, setIsDragActive] = useState(false);
 
-  const [, drag] = useDrag(() => {
-    // console.log("useDrag called for index:", index); // Лог для діагностики
-    return {
-      type: "ITEM",
-      item: { index },
-    };
-  });
+  // const [, drag] = useDrag(() => {
+  //   // console.log("useDrag called for index:", index); // Лог для діагностики
+  //   return {
+  //     type: "ITEM",
+  //     item: { index },
+  //   };
+  // });
 
-  const [, drop] = useDrop(() => ({
-    accept: "ITEM",
-    hover: (draggedItem) => {
-      //   console.log("Hovered over index:", index);
-      if (draggedItem.index !== index) {
-        moveChannel(draggedItem.index, index);
-        draggedItem.index = index; // Оновлюємо індекс перетягуваного елемента
-      }
-    },
-  }));
+  // const [, drop] = useDrop(() => ({
+  //   accept: "ITEM",
+  //   hover: (draggedItem) => {
+  //     //   console.log("Hovered over index:", index);
+  //     if (draggedItem.index !== index) {
+  //       moveChannel(draggedItem.index, index);
+  //       draggedItem.index = index; // Оновлюємо індекс перетягуваного елемента
+  //     }
+  //   },
+  // }));
 
-  drag(drop(ref));
+  // drag(drop(ref));
 
   return (
-    <li key={channel.id} className={css.channelsListItem} ref={ref}>
+    <li
+      key={channel.id}
+      className={css.channelsListItem}
+      // ref={ref}
+      draggable
+      onDragStart={() => handleDragStart(index)}
+      onDragOver={(event) => handleDragOver(event, index)}
+      onDragEnd={handleDragEnd}
+    >
       <div className={css.iconAndText}>
         <span className={css.iconBox}>
           <img
