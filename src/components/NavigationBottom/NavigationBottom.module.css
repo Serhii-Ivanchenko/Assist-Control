@@ -96,3 +96,18 @@
     pointer-events: none;
     color: var(--input-text);
   }
+
+.hidden {
+    display: none;
+}
+
+.listInChat{
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    gap: 0;
+}
+
+.itemInChat{
+    padding: 10px;
+}

@@ -11,7 +11,12 @@
     top: 75px;
     right: 23px;
   }
+  .chatOpen {
+    top: 90px;
+    right: 0;
+  }
 }
+
 
 .btn {
   position: relative;

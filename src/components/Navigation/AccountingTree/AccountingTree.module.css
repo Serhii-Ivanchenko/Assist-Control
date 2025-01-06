@@ -3,6 +3,13 @@
   overflow-y: auto;
 }
 
+.treeBoxOpenChat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46px;
+}
+
 .treeBox{
   margin-top: 10px;
 }

@@ -1,4 +1,5 @@
 .navItem {
+    
     font-size: 11px;
     font-weight: 400;
     line-height: normal;
@@ -19,6 +20,7 @@
     gap: 7px;
     transition: color 0.3s, background-color 0.3s;
     cursor: pointer;
+    position: relative;
 }
 
 @media only screen and (min-width: 1850px) {
@@ -147,3 +149,22 @@
     line-height: 1.5;
   }
 
+  .hidden {
+    display: none;
+  }
+
+  .navLinkChat {
+    padding: 10px;
+  }
+
+  .smallArrow {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+  }
+
+  .topNavChat{
+    gap: 0;
+  }

@@ -11,12 +11,22 @@
 
   /* flex-grow: 1; */
   flex-shrink: 0;
+  transition: width 0.5s ease-in, padding 0.5s ease-in, gap 0.5s ease-in;
+}
+.chatOpen {
+  width: 80px;
+  padding: 10px;
+  gap: 38px;
 }
 
 @media only screen and (min-width: 1850px) {
   .sidebar {
     width: 230px;
     height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
+  }
+  .chatOpen {
+    width: 106px;
+    padding: 20px;
   }
 }
 

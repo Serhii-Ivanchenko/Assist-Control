@@ -4,12 +4,16 @@ import clsx from "clsx";
 import { BsGift } from "react-icons/bs";
 import { MdOutlineStarOutline } from "react-icons/md";
 import { PiChartLineUp } from "react-icons/pi";
+import { selectIsChatOpen } from "../../redux/chat/selectors";
+import { useSelector } from "react-redux";
 
 export default function NavigationBottom() {
+  const chatIsOpen = useSelector(selectIsChatOpen);
+
   return (
     <nav className={styles.navigation}>
-        <ul className={styles.bottomNavContainer}>
-          <li className={styles.navItem}>
+        <ul className={clsx(styles.bottomNavContainer, { [styles.listInChat]: chatIsOpen })}>
+          <li className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}>
             <NavLink
               to="/bonuses"
               className={({ isActive }) =>
@@ -19,10 +23,10 @@ export default function NavigationBottom() {
               <div className={styles.iconContainer}>
                 <BsGift className={styles.iconBonus} />
               </div>
-              Мій бонус
+                <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Мій бонус</span>
             </NavLink>
           </li>
-          <li className={styles.navItem}>
+          <li className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}>
             <NavLink
               to="/rating"
               className={({ isActive }) =>
@@ -32,10 +36,10 @@ export default function NavigationBottom() {
               <div className={styles.iconContainer}>
                 <MdOutlineStarOutline className={styles.iconRating} />
               </div>
-              Рейтинг
+              <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Рейтинг</span>
             </NavLink>
           </li>
-          <li className={styles.navItem}>
+          <li className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}>
             <NavLink
               to="/proficiency"
               className={({ isActive }) =>
@@ -45,7 +49,7 @@ export default function NavigationBottom() {
               <div className={styles.iconContainer}>
                 <PiChartLineUp className={styles.iconChart} />
               </div>
-              Кваліфікація
+              <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Кваліфікація</span>
             </NavLink>
           </li>
         </ul>

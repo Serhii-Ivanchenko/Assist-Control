@@ -2,6 +2,10 @@
   width: 113px;
 }
 
+.userInfoChat{
+  margin-top: 39px;
+}
+
 @media only screen and (min-width: 1850px) {
   .userInfo {
     width: 169px;
@@ -105,4 +109,8 @@
     width: 10px;
     height: 10px;
   }
+}
+
+.hidden {
+  display: none;
 }
