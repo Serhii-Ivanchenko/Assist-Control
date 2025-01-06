@@ -37,12 +37,12 @@
   border: none;
 }
 
-button:disabled {
+.timeBtn:disabled {
   background: var(--bg-input);
   color: var(--input-stroke);
 }
 
-button:disabled:hover {
+.timeBtn:disabled:hover {
   cursor: not-allowed;
   border: none;
 }
