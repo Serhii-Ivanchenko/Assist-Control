@@ -1,5 +1,6 @@
 .userInfo {
   width: 113px;
+  transition: margin-top 0.7s ease-in-out;
 }
 
 .userInfoChat{
