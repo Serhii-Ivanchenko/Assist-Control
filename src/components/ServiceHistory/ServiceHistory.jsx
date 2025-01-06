@@ -81,14 +81,14 @@ export default function ServiceHistory({ carName, clientInfo }) {
     message:
       "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
     photoOfBreakdown: [
-      { photo: absentAuto },
-      { photo: absentAuto },
-      { photo: absentAuto },
-      { photo: absentAuto },
-      { photo: absentAuto },
-      { photo: absentAuto },
-      { photo: absentAuto },
-      { photo: absentAuto },
+      { photo: absentAuto, id: "1" },
+      { photo: absentAuto, id: "2" },
+      { photo: absentAuto, id: "3" },
+      { photo: absentAuto, id: "4" },
+      { photo: absentAuto, id: "5" },
+      { photo: absentAuto, id: "6" },
+      { photo: absentAuto, id: "7" },
+      { photo: absentAuto, id: "8" },
     ],
   };
 

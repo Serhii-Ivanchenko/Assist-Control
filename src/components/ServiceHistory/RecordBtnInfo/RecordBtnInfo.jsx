@@ -39,8 +39,14 @@ export default function RecordBtnInfo({
       ? "comment"
       : "We don't have info about this car"
   );
+
+  const [photos, setPhotos] = useState(diagnostics.photoOfBreakdown);
   // console.log("кнопка", recordInfo);
   // console.log("array", diagnostics);
+
+  const deletePhotos = (index) => {
+    setPhotos(photos.filter((_, i) => i !== index));
+  };
 
   const firstInputRef = useRef(null);
 
@@ -168,10 +174,13 @@ export default function RecordBtnInfo({
           {diagnostic === "PhotoOfBreakdown" && (
             <div className={css.divForScroll}>
               <ul className={css.photoList}>
-                {diagnostics.photoOfBreakdown.map((item, index) => (
+                {photos.map((item, index) => (
                   <li key={index} className={css.photoItem}>
                     <img src={item.photo} alt="car" className={css.img} />
-                    <span className={css.iconBox}>
+                    <span
+                      className={css.iconBox}
+                      onClick={() => deletePhotos(index)}
+                    >
                       <BsTrash className={css.icon} size={18} />
                     </span>
                   </li>
