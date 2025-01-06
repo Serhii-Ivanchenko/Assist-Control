@@ -164,9 +164,11 @@ export default function ItemOfRecord({
                     </>
                   )}
                 </div>
+
                 <div className={css.kilometersDriven}>
-                  <SlSpeedometer /> <div>{item.newkilometrs}</div>
+                  <SlSpeedometer /> <div>0 km</div>
                 </div>
+                {/* ))} */}
               </div>
 
               {/* Сума */}
