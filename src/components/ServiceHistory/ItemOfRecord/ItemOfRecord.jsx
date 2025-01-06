@@ -30,6 +30,7 @@ export default function ItemOfRecord({
   isExpanded,
   diagnostics,
   recommendation,
+  repair,
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editAmount, setEditAmount] = useState(false);
@@ -257,18 +258,16 @@ export default function ItemOfRecord({
                 className={css.btnDownloadsItem}
                 onClick={() => handleSetRecordInfo("repair")}
                 style={
-                  item.repair && recordInfo === "repair"
+                  repair && recordInfo === "repair"
                     ? { cursor: "pointer", outline: "1px solid #fff" }
-                    : !item.repairs
+                    : !repair
                     ? null
                     : { cursor: "pointer" }
                 }
-                disabled={!item.repair}
+                disabled={!repair}
               >
                 <p>Ремонт</p>
-                <div
-                  className={clsx(css.downloadBtn, item.repair && css.btnBg)}
-                >
+                <div className={clsx(css.downloadBtn, repair && css.btnBg)}>
                   <BsWrench size={13} />
                 </div>
               </button>
@@ -285,7 +284,9 @@ export default function ItemOfRecord({
                 disabled={!recommendation}
               >
                 <p>Рекомендації</p>
-                <div className={css.downloadBtn}>
+                <div
+                  className={clsx(css.downloadBtn, recommendation && css.btnBg)}
+                >
                   <BsShieldExclamation size={13} />
                 </div>
               </button>
@@ -305,6 +306,7 @@ export default function ItemOfRecord({
                     item={item}
                     diagnostics={diagnostics}
                     recommendation={recommendation}
+                    repair={repair}
                   />
                 </div>
               </div>
