@@ -1,58 +1,55 @@
  .wrapper {
-    flex-direction: column;
-    display: flex;
-    gap: 14px;
-} 
+     flex-direction: column;
+     display: flex;
+     gap: 14px;
+ }
 
-.iconAvto {
-    width: 18px;
-        height: 18px;
-        fill:var(--light-gray);
-}
+ .iconAvto {
+     width: 18px;
+     height: 18px;
+     fill: var(--light-gray);
+ }
 
-.avtoBox{
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-}
+ .avtoBox {
+     display: flex;
+     flex-direction: row;
+     gap: 8px;
+ }
 
-.dataValue {
-    color: var(--light-gray);
-font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    width: 150px;
-    height: 19px;
-    background: var(--bg-secondary);
-    outline: none;
-        border: none;
-   
-}
+ .editInput {
+     width: 160px;
+     outline: none;
+     border: none;
+     display: flex;
+     align-items: center;
+     color: var(--light-gray);
+     font-style: normal;
+     line-height: normal;
+     font-weight: 400;
+     height: 100%;
+     background-color: var(--main-gray);
+     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+ }
 
-.dataValueYear {
-    color: var(--light-gray);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    width: 50px;
-    height: 19px;
-    background: var(--bg-secondary);
-    outline: none;
-        border: none;
-   
-}
+ .dataValueYear,
+ .dataValue {
+     color: var(--light-gray);
+     font-size: 16px;
+     font-style: normal;
+     font-weight: 400;
+     line-height: 1.1875em;
+     width: auto;
+     outline: none;
+     border: none;
+ }
 
-.dataValueNum {
-    color: var(--light-gray);
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        width: 120px;
-        height: 23px;
-        background: var(--bg-secondary);
-        outline: none;
-            border: none;
-}
+ .dataValueNum {
+     color: var(--light-gray);
+     font-size: 20px;
+     font-style: normal;
+     font-weight: 400;
+     line-height: normal;
+     width: auto;
+     outline: none;
+     border: none;
+ }

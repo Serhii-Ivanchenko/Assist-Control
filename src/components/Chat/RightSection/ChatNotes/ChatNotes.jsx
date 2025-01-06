@@ -32,14 +32,19 @@ const ChatNotes = forwardRef(({ isEditable }, ref) => {
   }));
 
 return (
-    <div className={css.wrapper}>
-     
-        {isEditable ? (<textarea  name="note" value={data.note}
-          onChange={handleInputChange} className={css.datainput} />
-        ) : (<p className={css.dataValue}>{data.note}</p>)}
-
- </div>
-  )
+  <div className={css.wrapper}>
+    {isEditable ? (
+      <textarea
+        name="note"
+        value={data.note}
+        onChange={handleInputChange}
+        className={css.editInput}
+      />
+    ) : (
+      <p className={css.dataValue}>{data.note}</p>
+    )}
+  </div>
+);
 });
 
 

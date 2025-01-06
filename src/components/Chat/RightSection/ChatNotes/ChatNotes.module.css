@@ -1,51 +1,68 @@
  .wrapper {
-    overflow-y: auto;
-} 
+     overflow-y: auto;
+ }
 
-.wrapper::-webkit-scrollbar {
-    width: 8px;
-    /* margin-left: -20px; */
-}
+ .dataValue::-webkit-scrollbar {
+     width: 8px;
+ }
 
-.wrapper::-webkit-scrollbar-track {
-    border-radius: 4px;
-    background-color: var(--bg);
-}
+ .dataValue::-webkit-scrollbar-track {
+     border-radius: 4px;
+     background-color: var(--bg);
+ }
 
-.wrapper::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: var(--main-gray);
-}
+ .dataValue::-webkit-scrollbar-thumb {
+     border-radius: 4px;
+     background-color: var(--main-gray);
+ }
 
-.dataValue {
-    color:var(--white);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-    width: 358px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-y: auto;
-    max-height: 90px;
-    background: var(--bg-secondary);
-    outline: none;
-    border: none;
+ .dataValue {
+     color: var(--white);
+     font-size: 16px;
+     font-style: normal;
+     font-weight: 500;
+     line-height: normal;
+     width: 358px;
+     white-space: pre-wrap;
+     word-wrap: break-word;
+     overflow-y: auto;
+     max-height: 80px;
+     background: var(--bg-secondary);
+     outline: none;
+     border: none;
 
-}
+ }
 
-.datainput {
-    color: var(--white);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-    width: 95%;
-    height: 900px;
-    resize: vertical;
-    overflow-y: auto;
-    background: var(--bg-secondary);
-    outline: none;
-    border: none;
+ .editInput {
+     width: 100%;
+     outline: none;
+     border: none;
+     display: flex;
+     align-items: center;
+     color: var(--white);
+     font-size: 16px;
+     font-style: normal;
+     line-height: normal;
+     font-weight: 400;
+     height: 80px;
+     background-color: var(--main-gray);
+     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+     resize: none;
+     overflow-y: auto;
+     outline: none;
+     border: none;
+ }
 
-}
+  .editInput::-webkit-scrollbar {
+      width: 8px;
+  }
+
+  .editInput::-webkit-scrollbar-track {
+      border-radius: 4px;
+      background-color: var(--main-gray);
+  }
+
+  .editInput::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: var(--bg);
+  }

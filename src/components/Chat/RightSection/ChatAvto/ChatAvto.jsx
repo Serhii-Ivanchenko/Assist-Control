@@ -1,22 +1,23 @@
-import css from './ChatAvto.module.css'
-import {  IoCarSportSharp } from "react-icons/io5";
-import { forwardRef, useImperativeHandle,useState } from 'react';
+import css from "./ChatAvto.module.css";
+import { IoCarSportSharp } from "react-icons/io5";
+import { forwardRef, useImperativeHandle, useState } from "react";
 let dataAvto = {
-   id: 1,
-   avtoNum: "AR 5678 OP", 
-   avtoYear: 2001,
-   avtoType : "Honda"
- }
+  id: 1,
+  avtoNum: "AR 5678 OP",
+  avtoYear: 2001,
+  avtoType: "Honda",
+};
 
 const dataAvtoEmpty = {
   id: 1,
-  avtoNum: "Номер авто", 
+  avtoNum: "Номер авто",
   avtoYear: "Рік",
-  avtoType : "Марка авто"
-}
+  avtoType: "Марка авто",
+};
 
 const ChatAvto = forwardRef(({ isEditable }, ref) => {
-  const dataAvtoChat = dataAvto && Object.keys(dataAvto).length > 0 ? dataAvto : dataAvtoEmpty;
+  const dataAvtoChat =
+    dataAvto && Object.keys(dataAvto).length > 0 ? dataAvto : dataAvtoEmpty;
 
   const [data, setData] = useState(dataAvtoChat);
   const handleInputChange = (e) => {
@@ -30,32 +31,54 @@ const ChatAvto = forwardRef(({ isEditable }, ref) => {
     },
     resetData() {
       console.log("Данные сброшены");
-      setData(dataAvtoChat); 
+      setData(dataAvtoChat);
     },
   }));
-
 
   return (
     <div className={css.wrapper}>
       <div className={css.avtoBox}>
         <IoCarSportSharp className={css.iconAvto} />
-     
-        {isEditable ? (<input type="text" name="avtoYear" value={data.avtoYear}
-          onChange={handleInputChange} className={css.dataValueYear} />
-        ) : (<p className={css.dataValueYear}>{data.avtoYear}</p>)}
 
-        {isEditable ? (<input type="text" name="avtoType" value={data.avtoType}
-          onChange={handleInputChange} className={css.dataValue} />
-        ) : (<p className={css.dataValue}>{data.avtoType}</p>)}
+        {isEditable ? (
+          <input
+            type="text"
+            name="avtoYear"
+            value={data.avtoYear}
+            onChange={handleInputChange}
+            className={css.editInput}
+          />
+        ) : (
+          <p className={css.dataValueYear}>{data.avtoYear}</p>
+        )}
+
+        {isEditable ? (
+          <input
+            type="text"
+            name="avtoType"
+            value={data.avtoType}
+            onChange={handleInputChange}
+            className={css.editInput}
+          />
+        ) : (
+          <p className={css.dataValue}>{data.avtoType}</p>
+        )}
       </div>
-      
-      {isEditable ? (<input type="text" name="avtoNum" value={data.avtoNum}
-        onChange={handleInputChange} className={css.dataValueNum} />
-      ) : (<p className={css.dataValueNum}>{data.avtoNum}</p>)}
-    </div>
-  )
-});
 
+      {isEditable ? (
+        <input
+          type="text"
+          name="avtoNum"
+          value={data.avtoNum}
+          onChange={handleInputChange}
+          className={css.editInput}
+        />
+      ) : (
+        <p className={css.dataValueNum}>{data.avtoNum}</p>
+      )}
+    </div>
+  );
+});
 
 ChatAvto.displayName = "ChatAvto";
 export default ChatAvto;
