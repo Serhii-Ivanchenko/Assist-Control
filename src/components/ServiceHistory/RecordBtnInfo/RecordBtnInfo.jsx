@@ -13,24 +13,34 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { BsTrash } from "react-icons/bs";
+import { FaUserTie } from "react-icons/fa6";
+import { GiAutoRepair } from "react-icons/gi";
 
-export default function RecordBtnInfo({ recordInfo, item }) {
+export default function RecordBtnInfo({
+  recordInfo,
+  item,
+  diagnostics,
+  recommendation,
+}) {
   const [changeRepairInput, setChangeRepairInput] = useState(false);
   const [repairRecords, setRepairRecords] = useState(
     item.repair?.fillOfRepair || []
   );
   const [appealMsgToShow, setAppealMsgToShow] = useState(true);
   const [diagnostic, setDiagnostic] = useState(
-    !item.diagnostic
+    !diagnostics
       ? null
-      : item.diagnostic.spareParts
+      : diagnostics.spareParts
       ? "spareParts"
-      : item.diagnostic.PhotoOfBreakdown
+      : diagnostics.PhotoOfBreakdown
       ? "PhotoOfBreakdown"
-      : item.diagnostic.comment
+      : diagnostics.comment
       ? "comment"
       : "We don't have info about this car"
   );
+  // console.log("кнопка", recordInfo);
+  // console.log("array", diagnostics);
 
   const firstInputRef = useRef(null);
 
@@ -90,17 +100,17 @@ export default function RecordBtnInfo({ recordInfo, item }) {
 
       {/* ДІАГНОСТИКА */}
 
-      {recordInfo === "diagnostic" && item.diagnostics && (
+      {recordInfo === "diagnostic" && diagnostics && (
         <div className={css.infoWrapper}>
           <div className={css.infoBtnWrapper}>
             <button
               className={clsx(
                 css.infoBtn,
                 diagnostic !== "spareParts" && css.nonActiveBtn,
-                !item.diagnostic.spareParts && css.disabledBtn
+                !diagnostics.spareParts && css.disabledBtn
               )}
               onClick={() => setDiagnostic("spareParts")}
-              disabled={!item.diagnostic.spareParts}
+              disabled={!diagnostics.spareParts}
             >
               Запчастини
             </button>
@@ -108,10 +118,10 @@ export default function RecordBtnInfo({ recordInfo, item }) {
               className={clsx(
                 css.infoBtn,
                 diagnostic !== "PhotoOfBreakdown" && css.nonActiveBtn,
-                !item.diagnostic.PhotoOfBreakdown && css.disabledBtn
+                !diagnostics.photoOfBreakdown && css.disabledBtn
               )}
               onClick={() => setDiagnostic("PhotoOfBreakdown")}
-              disabled={!item.diagnostic.PhotoOfBreakdown}
+              disabled={!diagnostics.photoOfBreakdown}
             >
               Фото поломки
             </button>
@@ -119,10 +129,10 @@ export default function RecordBtnInfo({ recordInfo, item }) {
               className={clsx(
                 css.infoBtn,
                 diagnostic !== "comment" && css.nonActiveBtn,
-                !item.diagnostic.message && css.disabledBtn
+                !diagnostics.message && css.disabledBtn
               )}
               onClick={() => setDiagnostic("comment")}
-              disabled={!item.diagnostic.message}
+              disabled={!diagnostics.message}
             >
               Коментар механіка
             </button>
@@ -141,7 +151,7 @@ export default function RecordBtnInfo({ recordInfo, item }) {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {item.diagnostic.spareParts.map((item) => (
+                    {diagnostics.spareParts.map((item) => (
                       <TableRow key={`${Math.random()}`}>
                         <TableCell>{item.id}</TableCell>
                         <TableCell>{item.name}</TableCell>
@@ -155,9 +165,22 @@ export default function RecordBtnInfo({ recordInfo, item }) {
               </TableContainer>
             </div>
           )}
-          {diagnostic === "PhotoOfBreakdown" && <div></div>}
+          {diagnostic === "PhotoOfBreakdown" && (
+            <div className={css.divForScroll}>
+              <ul className={css.photoList}>
+                {diagnostics.photoOfBreakdown.map((item, index) => (
+                  <li key={index} className={css.photoItem}>
+                    <img src={item.photo} alt="car" className={css.img} />
+                    <span className={css.iconBox}>
+                      <BsTrash className={css.icon} size={18} />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           {diagnostic === "comment" && (
-            <div className={css.wrapperOfComent}>{item.diagnostic.message}</div>
+            <div className={css.wrapperOfComent}>{diagnostics.message}</div>
           )}
         </div>
       )}
@@ -336,6 +359,25 @@ export default function RecordBtnInfo({ recordInfo, item }) {
               </Table>
             </TableContainer>
           )}
+        </div>
+      )}
+      {/* Рекомендації */}
+      {recordInfo === "recommendation" && recommendation && (
+        <div className={css.recommendationBox}>
+          <div className={css.topPart}>
+            <p className={css.recName}>{recommendation.name}</p>
+            <div className={css.person}>
+              {recommendation.person === "manager" ? (
+                <FaUserTie size={18} className={css.iconPerson} />
+              ) : (
+                <GiAutoRepair size={18} className={css.iconPerson} />
+              )}
+              <p className={css.personName}>{recommendation.personName}</p>
+            </div>
+          </div>
+          <span className={css.textBox}>
+            <p className={css.text}>{recommendation.text}</p>
+          </span>
         </div>
       )}
     </div>

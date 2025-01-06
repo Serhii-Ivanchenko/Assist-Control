@@ -1,5 +1,5 @@
-import css from './ClientsPage.module.css'
+import ClientsInWorkMainComponent from '../../../components/ClientsInWorkMainComponent/ClientsInWorkMainComponent.jsx';
 
 export default function ClientsPage() {
-    return <div>ClientsPage</div>;
+  return <ClientsInWorkMainComponent />;
 };

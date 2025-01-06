@@ -47,8 +47,6 @@ input{
 }
 
 .calendarBtn {
-    width: 14px;
-    height: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,7 +56,7 @@ input{
     transform: translateY(-50%);
     cursor: pointer;
     pointer-events: auto;
-    background-color: var(--bg-input);
+    background: var(--bg-input);
     border-radius: 50%;
     border-color: transparent;
 }
@@ -113,3 +111,9 @@ input{
     outline: none; 
     border: none;
 }
+
+.iconClose {
+    cursor: pointer;
+    color: var(--light-gray);
+    margin-right: 8px;
+  }

@@ -1,11 +1,11 @@
 .rightSectionWrapper {
-    width: 411px;
-    height: 967px;
-    border-radius: 12px;
-    /* border: 1px solid var(--light-gray); */
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  width: 411px;
+  height: 967px;
+  border-radius: 12px;
+  /* border: 1px solid var(--light-gray); */
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .wrapper {
@@ -37,10 +37,8 @@
 
 .wrapper .accordionTitle {
     display: flex;
-
-    width: 100%;
-    background: var(--bg-secondary);
-
+  width: 100%;
+  background: var(--bg-secondary);
     align-items: start;
     flex-shrink: 0;
     border-radius: 12px;
@@ -52,8 +50,8 @@
     padding: 16px 19px 16px 24px;
 }
 
-.accordionTitle>div {
-    margin: 0;
+.accordionTitle > div {
+  margin: 0;
 }
 
 .accbox {
@@ -68,15 +66,44 @@
 }
 
 .accboxtitle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
 }
 
 .accboxtitle>p {
     font-size: 20px;
     line-height: 1.2em;
+}
+
+.topWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leftWrapper {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.leftWrapper > p {
+  font-size: 20px;
+}
+
+.plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background-color: var(--current-mileage-text);
+  color: var(--dark-gray);
+  cursor: pointer;
 }
 
 .client {

@@ -1,10 +1,10 @@
-import { selectVisibilitySuppliers } from "../../redux/visibility/selectors";
-import { toggleVisibilitySuppliers } from "../../redux/visibility/slice";
-import { labelNamesDistributorSection } from "../../utils/dataToRender";
+// import { selectVisibilitySuppliers } from "../../redux/visibility/selectors";
+// import { toggleVisibilitySuppliers } from "../../redux/visibility/slice";
+// import { labelNamesDistributorSection } from "../../utils/dataToRender";
 import CalendarPeriodSelector from "../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch";
 // import CarInfoSettings from "../sharedComponents/CarInfoSettings/CarInfoSettings";
-import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
+// import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
 import DownloadPdfDistributors from "../sharedComponents/Pdf/DownloadPdfDistributors/DownloadPdfDistributors";
 import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSelector";
 import TimeSortItem from "../sharedComponents/TimeSortItem/TimeSortItem";
@@ -21,12 +21,12 @@ export default function DistributorsControlBarSection() {
       <div className={css.rightContainer}>
         <CarsSearch />
         <DownloadPdfDistributors />
-        <InfoSettingsVisibility
+        {/* <InfoSettingsVisibility
           selectVisibility={selectVisibilitySuppliers}
           toggleVisibilityAction={toggleVisibilitySuppliers}
           labelNames={labelNamesDistributorSection}
           className={css.settingsContainerInCrm}
-        />
+        /> */}
       </div>
     </div>
   );

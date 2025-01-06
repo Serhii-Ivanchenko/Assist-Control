@@ -11,17 +11,17 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.leftContsiner,
-.centerContsiner {
+.leftContainer,
+.centerContainer {
   display: flex;
   align-items: center;
 }
 
-.leftContsiner{
-  width: 378px;
-}
+/* .leftContainer {
+  width: 420px;
+} */
 
-.centerContsiner {
+.centerContainer {
   gap: 7px;
 }
 
@@ -44,10 +44,17 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  width: 87px;
   color: var(--text-gray);
   margin-right: 15px;
 }
+
+.time{
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+  /* margin-top: 2px; */
+}
+
 
 .carNumber {
   color: var(--white);
@@ -56,14 +63,20 @@
   font-weight: 300;
   line-height: normal;
   margin-right: 15px;
+  width: 70px;
+}
+
+.carWrapper{
+  display: flex;
+  /* margin-top: 2px; */
 }
 
 .infoName {
   color: var(--white);
   font-size: 16px;
   font-weight: 600;
-  line-height: normal;
-  width: 150px; /* Фіксована ширина */
+  line-height: 1.1875em;
+  width: 212px; /* Фіксована ширина */
   white-space: nowrap; /* Заборона переносу тексту */
   overflow: hidden; /* Обрізає текст, що виходить за межі контейнера */
   text-overflow: ellipsis;
@@ -123,7 +136,8 @@
   }
 }
 
-.reason {
+.reason,
+.reasonWhy {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -131,8 +145,41 @@
 
 .reasonText {
   color: var(--light-gray);
-    font-size: 14px;
-    font-weight: 300;
-    line-height: normal;
-    letter-spacing: 0.01em;
+  font-size: 14px;
+  font-weight: 300;
+  /* line-height: normal;
+  letter-spacing: 0.01em; */
+}
+
+.btn{
+  display: flex;
+}
+
+.toggleButton{
+  display: flex;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.reasonWhy{
+  position: relative; }
+
+  .popover {
+  position: absolute;
+  top: 130%;
+  left: 0;
+  width: 250px;
+  background-color: var(--player-secondary-bg);
+  z-index: 100;
+  padding: 10px;
+  border-radius: 0px 12px 12px 12px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.reasonWhy:hover .popover,
+.reasonWhy.active .popover {
+  opacity: 1;
 }

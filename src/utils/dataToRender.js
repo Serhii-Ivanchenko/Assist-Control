@@ -25,9 +25,9 @@ export const statusesArchive = [
   { reason_description: "випадковий", label: "Випадковий" },
   { reason_description: "дубль", label: "Дубль" },
   { reason_description: "відмова", label: "Відмова" },
-  { reason_description: "не приїхав", label: "Не приїхав" },
+  { reason_description: "не_приїхав", label: "Не приїхав" },
   { reason_description: "рейтинг", label: "Рейтинг" },
-  { reason_description: "не допомогли", label: "Не допомогли" },
+  { reason_description: "не_допомогли", label: "Не допомогли" },
 ];
 
 // Заголовки срм компоненті

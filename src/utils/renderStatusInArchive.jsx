@@ -41,7 +41,7 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
     statusText = "ВІДМОВА";
     background = "var(--status-gradient-archive-violet)";
     borderColor = "var(--glow-archive-violet)";
-  } else if (reason_description === "не приїхав") {
+  } else if (reason_description === "не_приїхав") {
     statusClass = styles.violet || "";
     statusText = "НЕ ПРИЇХАВ";
     background = "var(--status-gradient-archive-violet)";
@@ -51,7 +51,7 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
     statusText = "РЕЙТИНГ";
     background = "var(--status-gradient-archive-violet)";
     borderColor = "var(--glow-archive-violet)";
-  } else if (reason_description === "не допомогли") {
+  } else if (reason_description === "не_допомогли") {
     statusClass = styles.red || "";
     statusText = "НЕ ДОПОМОГЛИ";
     background = "var(--status-gradient-view-repair)";
@@ -67,9 +67,9 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
       case "співробітник":
       case "випадковий":
       case "відмова":
-      case "не приїхав":
+      case "не_приїхав":
       case "рейтинг":
-      case "не допомогли":
+      case "не_допомогли":
         icon = (
           <IoIosCloseCircle
             className={clsx(styles.icon, statusClass)}

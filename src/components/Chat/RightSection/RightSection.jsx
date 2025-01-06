@@ -64,6 +64,9 @@ const data = {
   status: "Новий",
 };
 
+import { FaPlus } from "react-icons/fa";
+import CreateTag from "./ChatTags/CreateTag/CreateTag.jsx";
+
 export default function RightSection() {
   const [expanded, setExpanded] = useState(false);
   const [expandedRows, setExpandedRows] = useState([]);
@@ -134,6 +137,16 @@ export default function RightSection() {
 
   const formatPhoneNumber = (number) => {
     return number.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4");
+  const [isPopOverOpen, setIsPopOverOpen] = useState(false);
+
+  const handlePlusBtnClick = (e) => {
+    e.stopPropagation();
+    setIsPopOverOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsPopOverOpen(false);
+
   };
 
   return (
@@ -288,7 +301,8 @@ export default function RightSection() {
             id="panel2-header"
           >
             <div className={css.accbox}>
-              <div className={css.accboxtitle}>
+              <div className={css.topWrapper}>
+              <div className={css.leftWrapper}>
                 <Typography>Тегі</Typography>
                 <ExpandMoreIcon
                   sx={{
@@ -301,6 +315,10 @@ export default function RightSection() {
                   onClick={() => handleRowClick("panel2")}
                 />
               </div>
+<div className={css.plus} onClick={handlePlusBtnClick}>
+                <FaPlus />
+              </div>
+            </div>
               {expandedRows.includes("panel2") && (
                 // expanded === "panel2"
                 <AccordionDetails
@@ -315,7 +333,39 @@ export default function RightSection() {
               )}
             </div>
           </AccordionSummary>
-          {/* <AccordionDetails>
+
+//           <div className={css.accbox}>
+//             <div className={css.topWrapper}>
+//               <div className={css.leftWrapper}>
+//                 <Typography>Теги</Typography>
+//                 <ExpandMoreIcon
+//                   sx={{
+//                     fill: "var(--light-gray)",
+//                     transform:
+//                       expanded === "panel2" ? "rotate(180deg)" : "rotate(0deg)",
+//                     transition: "transform 0.3s",
+//                   }}
+//                 />
+//               </div>
+//               <div className={css.plus} onClick={handlePlusBtnClick}>
+//                 <FaPlus />
+//               </div>
+//             </div>
+
+//             {expanded === "panel2" && (
+//               <AccordionDetails
+//               // sx={{
+//               //   maxHeight: expanded === "panel2" ? "100px" : "0px",
+//               //   overflow: "hidden",
+//               //   transition: "max-height 0.3s ease",
+//               // }}
+//               >
+//                 <ChatTags />
+//               </AccordionDetails>
+//             )}
+//           </div>
+//         </AccordionSummary>
+        {/* <AccordionDetails>
           <ChatTags />
         </AccordionDetails> */}
         </Accordion>
@@ -579,8 +629,15 @@ export default function RightSection() {
           {/* <AccordionDetails >
           <ChatFiles />
         </AccordionDetails> */}
-        </Accordion>
-      </div>
+      </Accordion>
+      {isPopOverOpen && (
+        <CreateTag
+          onClose={handleCloseModal}
+          name={null}
+          color={null}
+          isPopOverOpen={isPopOverOpen}
+        />
+      )}
     </div>
   );
 }

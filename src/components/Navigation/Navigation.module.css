@@ -3,7 +3,6 @@
     font-weight: 400;
     line-height: normal;
     font-variant: small-caps;
-  
 }
 
 @media only screen and (min-width: 1850px) {
@@ -131,3 +130,20 @@
     font-size: 13px; 
     vertical-align: middle;
   }
+
+  .repostClientsContainer{
+    min-width: 100px;
+    margin-top: 15px;
+    margin-bottom: 6px;
+  }
+  .activeLink {
+    text-decoration: none; 
+    color: var(--white);
+  }
+
+  .clientActive {
+    background: var(--bg-input);
+    height: 24px;
+    line-height: 1.5;
+  }
+

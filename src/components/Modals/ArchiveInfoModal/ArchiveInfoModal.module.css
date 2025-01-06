@@ -5,7 +5,7 @@
   width: 1360px;
   height: 800px;
   min-width: 480px;
-  padding: 21px 48px 4px 28px;
+  padding: 21px 20px 4px 28px;
 
   border-radius: 12px;
   background: var(--bg-secondary);
@@ -25,6 +25,7 @@
   justify-content: space-between;
   height: 27px;
   margin-bottom: 25px;
+  padding-right: 28px;
 }
 
 .leftHeader {
@@ -78,7 +79,6 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  width: 145px;
   height: 18px;
   padding-left: 6px;
 
@@ -102,7 +102,6 @@
 
 @media only screen and (min-width: 1850px) {
   .title {
-    width: 145px;
     height: 24px;
   }
 }

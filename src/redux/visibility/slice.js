@@ -23,7 +23,6 @@ const visibilitySlice = createSlice({
       status: true,
       reasonRegistration : true,
       reasonArchived : true,
-      btn: true
     },
     visibilityCar: {
       prePayment: true,

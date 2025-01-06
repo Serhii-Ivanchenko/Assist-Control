@@ -13,22 +13,84 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import userAvatar from "../../../assets/images/ava.png";
 import css from "./ItemOfRecord.module.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import RecordBtnInfo from "../RecordBtnInfo/RecordBtnInfo";
 import audio from "../../../assets/audio/God Rest Ye Merry Gentlmen - DJ Williams.mp3";
 import PlayerAndTranscription from "../../sharedComponents/PlayerAndTranscription/PlayerAndTranscription";
+import { AiOutlineDollar } from "react-icons/ai";
 
 const summary =
   "Привіт! Мене звати [Ім'я], і я хочу записатися на ремонт свого автомобіля. У мене[марка і модель авто], і після нещодавньої аварії потрібен огляд і ремонт кузова, зокрема вирівнювання геометрії та заміна пошкоджених деталей.Також цікавить діагностика стану автомобіля після ремонту.Чи є у вас вільні дати на цьому тижні, щоб я міг під'їхати на оцінку? Дякую!";
 
 export default function ItemOfRecord({
-  key,
+  // key,
   item,
   messages,
   isExpanded,
-  // clientInfo,
+  diagnostics,
+  recommendation,
 }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editAmount, setEditAmount] = useState(false);
+  const [totalMileAge, setTotalMileage] = useState(
+    item.mileage || "дані відсутні"
+  );
+  const [amount, setAmount] = useState("2 482");
+  const inputRef = useRef();
+
+  const handleChangeMileage = (newM) => {
+    setTotalMileage(newM);
+  };
+
+  const handleChangeAmount = (newA) => {
+    setAmount(newA);
+  };
+
+  const handleEditing = (id, e) => {
+    e.stopPropagation();
+    setIsEditing(id);
+  };
+
+  const handleEditAmount = (id, e) => {
+    e.stopPropagation();
+    setEditAmount(id);
+  };
+
+  const handleClickOutside = (event) => {
+    if (inputRef.current && !inputRef.current.contains(event.target)) {
+      setIsEditing(false);
+      setEditAmount(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
+
+  useEffect(() => {
+    if (editAmount) {
+      inputRef.current.focus();
+    }
+  }, [editAmount]);
+
+  const startDate = item.start_date;
+  const date = new Date(startDate).toLocaleDateString("uk-UA");
+  const time = new Date(startDate).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   const [showDialogModal, setShowDialogModal] = useState(isExpanded);
 
   // const [transcription, setTranscription] = useState(false);
@@ -58,7 +120,7 @@ export default function ItemOfRecord({
       : handleToogleRecordInfo(string);
 
   return (
-    <li key={key} className={css.itemOfAccardion}>
+    <li key={item.id} className={css.itemOfAccardion}>
       <div className={css.itemOfMarking}>
         <BsRecordCircle className={css.circle} />
         <div className={css.line}></div>
@@ -77,20 +139,61 @@ export default function ItemOfRecord({
             padding: "0",
           }}
         >
+          {/* Шапочка акордеона*/}
           <div className={css.listItemWrapper}>
             <div className={css.listItem} onClick={() => toogleDialogModal()}>
+              {/* Кілометраж */}
               <div className={css.kilometersWrapper}>
-                <div className={css.numberOfKilometers}>
-                  <SlSpeedometer /> <div>{item.mileage || "xxxxx"}</div>
+                <div
+                  className={css.numberOfKilometers}
+                  onClick={(e) => handleEditing(item.service_id, e)}
+                >
+                  <SlSpeedometer />
+                  {isEditing === item.service_id ? (
+                    <input
+                      ref={inputRef}
+                      className={css.mileageInput}
+                      value={totalMileAge}
+                      onChange={(e) => handleChangeMileage(e.target.value)}
+                    />
+                  ) : (
+                    <>
+                      {" "}
+                      <div>{totalMileAge}</div>
+                    </>
+                  )}
                 </div>
                 <div className={css.kilometersDriven}>
                   <SlSpeedometer /> <div>{item.newkilometrs}</div>
                 </div>
               </div>
+
+              {/* Сума */}
+              <div
+                className={css.amountBox}
+                onClick={(e) => handleEditAmount(item.service_id, e)}
+              >
+                <AiOutlineDollar size={20} className={css.iconDollar} />
+                <span className={css.amountWrapper}>
+                  <p className={css.amount}>₴</p>
+                  {editAmount === item.service_id ? (
+                    <input
+                      ref={inputRef}
+                      className={css.amountInput}
+                      value={amount}
+                      onChange={(e) => handleChangeAmount(e.target.value)}
+                    />
+                  ) : (
+                    <p className={css.amount}>{amount} </p>
+                  )}
+                </span>
+              </div>
+
+              {/* Дата і час */}
               <div className={css.dateWrapper}>
                 <div className={css.date}>
-                  <BsCalendar2Week /> <div>{item.date}</div>
-                  <div>{item.time}</div>
+                  <BsCalendar2Week /> <div>{date}</div>
+                  <div>{time}</div>
                 </div>
                 <button
                   className={clsx(
@@ -135,20 +238,17 @@ export default function ItemOfRecord({
                 className={css.btnDownloadsItem}
                 onClick={() => handleSetRecordInfo("diagnostic")}
                 style={
-                  item.diagnostic && recordInfo === "diagnostic"
+                  diagnostics && recordInfo === "diagnostic"
                     ? { cursor: "pointer", outline: "1px solid #fff" }
-                    : !item.diagnostic
+                    : !diagnostics
                     ? null
                     : { cursor: "pointer" }
                 }
-                disabled={!item.diagnostic}
+                disabled={!diagnostics}
               >
                 <p>Діагностика</p>
                 <div
-                  className={clsx(
-                    css.downloadBtn,
-                    item.diagnostic && css.btnBg
-                  )}
+                  className={clsx(css.downloadBtn, diagnostics && css.btnBg)}
                 >
                   <BsUiChecksGrid size={13} />
                 </div>
@@ -159,7 +259,7 @@ export default function ItemOfRecord({
                 style={
                   item.repair && recordInfo === "repair"
                     ? { cursor: "pointer", outline: "1px solid #fff" }
-                    : !item.repair
+                    : !item.repairs
                     ? null
                     : { cursor: "pointer" }
                 }
@@ -176,13 +276,13 @@ export default function ItemOfRecord({
                 className={css.btnDownloadsItem}
                 onClick={() => handleSetRecordInfo("recommendation")}
                 style={
-                  item.recommendation && recordInfo === "recommendation"
+                  recommendation && recordInfo === "recommendation"
                     ? { cursor: "pointer", outline: "1px solid #fff" }
-                    : !item.recommendation
+                    : !recommendation
                     ? null
                     : { cursor: "pointer" }
                 }
-                disabled={!item.recommendation}
+                disabled={!recommendation}
               >
                 <p>Рекомендації</p>
                 <div className={css.downloadBtn}>
@@ -200,7 +300,12 @@ export default function ItemOfRecord({
                       : css.closeRecordBtnInfoWrapper
                   )}
                 >
-                  <RecordBtnInfo recordInfo={recordInfo} item={item} />
+                  <RecordBtnInfo
+                    recordInfo={recordInfo}
+                    item={item}
+                    diagnostics={diagnostics}
+                    recommendation={recommendation}
+                  />
                 </div>
               </div>
             ) : null}
