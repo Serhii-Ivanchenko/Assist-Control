@@ -10,7 +10,7 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
   let background;
   let borderColor;
 
-  if (reason_description === "всі") {
+  if (reason_description === "all") {
     statusClass = styles.all || "";
     statusText = "ВСІ АВТО";
     background = "var(--status-gradient-all-calls)";
@@ -60,8 +60,6 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
     statusText = "УТОЧНЕННЯ";
   }
 
-  console.log("Intermediate values:", { statusText, statusClass, background, borderColor });
-
   if (!icon) {
     switch (reason_description) {
       case "співробітник":
@@ -91,7 +89,6 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
     }
   }
 
-  console.log("Final icon:", icon);
 
   return (
     <div
