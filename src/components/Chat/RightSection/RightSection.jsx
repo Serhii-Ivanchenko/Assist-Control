@@ -137,6 +137,8 @@ export default function RightSection() {
 
   const formatPhoneNumber = (number) => {
     return number.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4");
+  };
+
   const [isPopOverOpen, setIsPopOverOpen] = useState(false);
 
   const handlePlusBtnClick = (e) => {
@@ -146,7 +148,6 @@ export default function RightSection() {
 
   const handleCloseModal = () => {
     setIsPopOverOpen(false);
-
   };
 
   return (
@@ -220,6 +221,7 @@ export default function RightSection() {
                       transform: expandedRows.includes("panel1")
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
+                      transition: "transform 0.3s",
                     }}
                     onClick={() => handleRowClick("panel1")}
                   />
@@ -292,8 +294,8 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel2") ? 172 : 56,
-              flexGrow: "1",
-              overflow: "hidden",
+              // flexGrow: "1",
+              // overflow: "hidden",
             }}
             className={css.accordionTitle}
             // expandIcon={<ExpandMoreIcon style={{fill: "var(--light-gray)"}}/>}
@@ -302,72 +304,37 @@ export default function RightSection() {
           >
             <div className={css.accbox}>
               <div className={css.topWrapper}>
-              <div className={css.leftWrapper}>
-                <Typography>Тегі</Typography>
-                <ExpandMoreIcon
-                  sx={{
-                    fill: "var(--light-gray)",
-                    transform: expandedRows.includes("panel2")
-                      ? "rotate(180deg)"
-                      : "rotate(0deg)",
-                    transition: "transform 0.3s",
-                  }}
-                  onClick={() => handleRowClick("panel2")}
-                />
+                <div className={css.leftWrapper}>
+                  <Typography>Теги</Typography>
+                  <ExpandMoreIcon
+                    sx={{
+                      fill: "var(--light-gray)",
+                      transform: expandedRows.includes("panel2")
+                        ? "rotate(180deg)"
+                        : "rotate(0deg)",
+                      transition: "transform 0.3s",
+                    }}
+                    onClick={() => handleRowClick("panel2")}
+                  />
+                </div>
+                <div className={css.plus} onClick={handlePlusBtnClick}>
+                  <FaPlus />
+                </div>
               </div>
-<div className={css.plus} onClick={handlePlusBtnClick}>
-                <FaPlus />
-              </div>
-            </div>
               {expandedRows.includes("panel2") && (
                 // expanded === "panel2"
                 <AccordionDetails
-                  sx={{
-                    maxHeight: expanded === "panel1" ? "none" : "0px",
-                    overflow: expanded === "panel1" ? "visible" : "hidden",
-                    transition: "max-height 0.3s ease",
-                  }}
+                // sx={{
+                //   maxHeight: expanded === "panel1" ? "none" : "0px",
+                //   overflow: expanded === "panel1" ? "visible" : "hidden",
+                //   transition: "max-height 0.3s ease",
+                // }}
                 >
                   <ChatTags />
                 </AccordionDetails>
               )}
             </div>
           </AccordionSummary>
-
-//           <div className={css.accbox}>
-//             <div className={css.topWrapper}>
-//               <div className={css.leftWrapper}>
-//                 <Typography>Теги</Typography>
-//                 <ExpandMoreIcon
-//                   sx={{
-//                     fill: "var(--light-gray)",
-//                     transform:
-//                       expanded === "panel2" ? "rotate(180deg)" : "rotate(0deg)",
-//                     transition: "transform 0.3s",
-//                   }}
-//                 />
-//               </div>
-//               <div className={css.plus} onClick={handlePlusBtnClick}>
-//                 <FaPlus />
-//               </div>
-//             </div>
-
-//             {expanded === "panel2" && (
-//               <AccordionDetails
-//               // sx={{
-//               //   maxHeight: expanded === "panel2" ? "100px" : "0px",
-//               //   overflow: "hidden",
-//               //   transition: "max-height 0.3s ease",
-//               // }}
-//               >
-//                 <ChatTags />
-//               </AccordionDetails>
-//             )}
-//           </div>
-//         </AccordionSummary>
-        {/* <AccordionDetails>
-          <ChatTags />
-        </AccordionDetails> */}
         </Accordion>
 
         <Accordion
@@ -404,7 +371,7 @@ export default function RightSection() {
                     transform: expandedRows.includes("panel3")
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
-                    //  transition: "transform 0.3s"
+                    transition: "transform 0.3s",
                   }}
                   onClick={() => handleRowClick("panel3")}
                 />
@@ -463,6 +430,7 @@ export default function RightSection() {
                       transform: expandedRows.includes("panel4")
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
+                      transition: "transform 0.3s",
                     }}
                     onClick={() => handleRowClick("panel4")}
                   />
@@ -546,7 +514,7 @@ export default function RightSection() {
                     transform: expandedRows.includes("panel5")
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
-                    //  transition: "transform 0.3s"
+                     transition: "transform 0.3s"
                   }}
                   onClick={() => handleRowClick("panel5")}
                 />
@@ -607,7 +575,7 @@ export default function RightSection() {
                     transform: expandedRows.includes("panel6")
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
-                    //  transition: "transform 0.3s"
+                     transition: "transform 0.3s"
                   }}
                   onClick={() => handleRowClick("panel6")}
                 />
@@ -629,15 +597,16 @@ export default function RightSection() {
           {/* <AccordionDetails >
           <ChatFiles />
         </AccordionDetails> */}
-      </Accordion>
-      {isPopOverOpen && (
-        <CreateTag
-          onClose={handleCloseModal}
-          name={null}
-          color={null}
-          isPopOverOpen={isPopOverOpen}
-        />
-      )}
+        </Accordion>
+        {isPopOverOpen && (
+          <CreateTag
+            onClose={handleCloseModal}
+            name={null}
+            color={null}
+            isPopOverOpen={isPopOverOpen}
+          />
+        )}
+      </div>
     </div>
   );
 }
