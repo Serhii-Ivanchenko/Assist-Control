@@ -1,3 +1,4 @@
+// import { useState } from "react";
 import css from "./ChannelItem.module.css";
 import { RxDragHandleDots2 } from "react-icons/rx";
 // import { useRef } from "react";
@@ -63,7 +64,9 @@ export default function ChannelItem({
 
       <div className={css.dragContainer}>
         <p className={css.numberBox}>{channel.value}</p>
-        <RxDragHandleDots2 className={css.dragIcon} />
+        <span>
+          <RxDragHandleDots2 className={css.dragIcon} />
+        </span>
       </div>
     </li>
   );

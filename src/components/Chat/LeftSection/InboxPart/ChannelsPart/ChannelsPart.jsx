@@ -29,6 +29,10 @@ export default function ChannelsPart() {
     setIsOpen(!isOpen);
   };
 
+  const totalNumber = channels.reduce((total, channel) => {
+    return total + Number(channel.value);
+  }, 0);
+
   const handleDragStart = (index) => {
     setDraggedItemIndex(index);
   };
@@ -51,21 +55,9 @@ export default function ChannelsPart() {
     setDraggedItemIndex(null);
   };
 
-  // const moveChannel = (dragIndex, hoverIndex) => {
-  //   setChannels((prevChannels) => {
-  //     const updatedItems = [...prevChannels];
-  //     const movedChannel = updatedItems[dragIndex];
-  //     updatedItems[dragIndex] = updatedItems[hoverIndex];
-  //     updatedItems[hoverIndex] = movedChannel;
-  //     // console.log("Updated list after move:", updatedItems);
-  //     return updatedItems;
-  //   });
-  // };
-
-  // console.log("new array", channels);
+  // const [showDrop, setShowDrop] = useState(false);
 
   return (
-    // <DndProvider backend={HTML5Backend}>
     <div className={css.channelsPart}>
       <div className={css.channelsSelect} onClick={handleOpen}>
         <div className={css.textAndArrow}>
@@ -75,27 +67,40 @@ export default function ChannelsPart() {
           />
           <p className={css.text}>Канали</p>
         </div>
-        <p className={css.numberBox}>10</p>
+        <p className={css.numberBox}>{totalNumber}</p>
       </div>
 
       {isOpen && (
         <ul className={css.channelsList}>
           {channels.map((channel, index) => (
-            <ChannelItem
-              key={channel.id}
-              index={index}
-              channel={channel}
-              gmail={gmail}
-              facebook={facebook}
-              // moveChannel={moveChannel}
-              handleDragEnd={handleDragEnd}
-              handleDragStart={handleDragStart}
-              handleDragOver={handleDragOver}
-            />
+            <>
+              <ChannelItem
+                key={channel.id}
+                index={index}
+                channel={channel}
+                gmail={gmail}
+                facebook={facebook}
+                // moveChannel={moveChannel}
+                handleDragEnd={handleDragEnd}
+                handleDragStart={handleDragStart}
+                handleDragOver={handleDragOver}
+              />
+              {/* <div
+                className={`${css.dropArea} ${!showDrop && css.dropAreaHidden}`}
+                onDragEnter={() => setShowDrop(true)}
+                onDragLeave={() => setShowDrop(false)}
+                onDrop={() => {
+                  index + 1;
+                  setShowDrop(false);
+                }}
+                onDragOver={(event) => handleDragOver(event, index)}
+              >
+                {" "}
+              </div> */}
+            </>
           ))}
         </ul>
       )}
     </div>
-    // </DndProvider>
   );
 }

@@ -117,3 +117,13 @@
 .iconRotated {
   transform: rotate(180deg);
 }
+
+.dropArea {
+  height: 46px;
+  opacity: 1;
+  transition: all 0.5 ease-in-out;
+}
+
+.dropAreaHidden {
+  display: none;
+}

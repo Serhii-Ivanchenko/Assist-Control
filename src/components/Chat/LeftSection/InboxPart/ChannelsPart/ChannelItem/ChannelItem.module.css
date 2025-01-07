@@ -5,6 +5,10 @@
   cursor: pointer;
 }
 
+.channelsListItem:active {
+  opacity: 1;
+}
+
 .iconAndText {
   display: flex;
   align-items: center;
