@@ -3,10 +3,11 @@
   justify-content: space-between;
   height: 46px;
   cursor: pointer;
+  /* margin-bottom: 14px; */
 }
 
 .channelsListItem:active {
-  opacity: 1;
+  opacity: 0.4;
 }
 
 .iconAndText {

@@ -57,7 +57,7 @@
 .channelsList {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  /* gap: 14px; */
 }
 
 .channelsListItem {
@@ -118,12 +118,8 @@
   transform: rotate(180deg);
 }
 
-.dropArea {
-  height: 46px;
-  opacity: 1;
-  transition: all 0.5 ease-in-out;
-}
-
-.dropAreaHidden {
-  display: none;
-}
+/* .dropPlaceholder {
+  height: 46px; /* або інша висота */
+/* background-color: lightgray; */
+/* border: 2px dashed #ccc; *
+} */

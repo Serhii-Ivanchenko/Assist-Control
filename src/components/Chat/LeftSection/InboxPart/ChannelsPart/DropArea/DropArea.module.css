@@ -1,0 +1,40 @@
+/* .dropArea {
+  width: 100%;
+  height: 46px;
+  opacity: 1;
+  transition: all 0.5 ease-in-out;
+  margin-bottom: 14px;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dropAreaHidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  height: 0;
+} */
+
+.dropArea {
+  display: block;
+  opacity: 1;
+  transition: all 0.3s ease;
+  height: 46px;
+  width: 100%;
+  margin-bottom: 14px;
+  color: transparent;
+
+  /* border: 1px solid white; */
+}
+
+.dropAreaHidden {
+  /* display: flex; /* або flex, якщо потрібно 
+  opacity: 0;
+  height: 0;
+  transition: opacity 0.3s ease; */
+  /* pointer-events: none; Забороняє взаємодію, якщо приховано */
+  /* height: 46px; */
+
+  opacity: 0;
+}

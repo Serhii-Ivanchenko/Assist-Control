@@ -6,9 +6,10 @@ import facebook from "../../../../../assets/images/ChannelsImages/Facebook_Messe
 import whatsApp from "../../../../../assets/images/ChannelsImages/WhatsApp_1.png";
 import assist from "../../../../../assets/images/ChannelsImages/logo-rect 1.png";
 // import { RxDragHandleDots2 } from "react-icons/rx";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 // import { useRef } from "react";
 import ChannelItem from "./ChannelItem/ChannelItem";
+import DropArea from "./DropArea/DropArea";
 // import { DndProvider } from "react-dnd";
 // import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -34,13 +35,25 @@ export default function ChannelsPart() {
   }, 0);
 
   const handleDragStart = (index) => {
+    console.log("start", index);
+
     setDraggedItemIndex(index);
   };
 
-  const handleDragOver = (event, index) => {
-    event.preventDefault();
+  // const handleDragOver = (event, index) => {
+  //   event.preventDefault();
 
-    // Переміщення елемента в нову позицію
+  //   // Переміщення елемента в нову позицію
+  //   if (index !== draggedItemIndex) {
+  //     const updatedItems = [...channels];
+  //     const [movedItem] = updatedItems.splice(draggedItemIndex, 1);
+  //     updatedItems.splice(index, 0, movedItem);
+  //     setDraggedItemIndex(index);
+  //     setChannels(updatedItems);
+  //   }
+  // };
+
+  const onDrop = (index) => {
     if (index !== draggedItemIndex) {
       const updatedItems = [...channels];
       const [movedItem] = updatedItems.splice(draggedItemIndex, 1);
@@ -48,14 +61,19 @@ export default function ChannelsPart() {
       setDraggedItemIndex(index);
       setChannels(updatedItems);
     }
+    // if (index !== draggedItemIndex) {
+    //   const updatedItems = [...channels];
+    //   const [movedItem] = updatedItems.splice(draggedItemIndex, 1);
+    //   updatedItems.splice(index, 0, movedItem);
+    //   setChannels(updatedItems);
+    // }
+    // setDraggedItemIndex(null);
   };
 
   // Закінчення перетягування
   const handleDragEnd = () => {
     setDraggedItemIndex(null);
   };
-
-  // const [showDrop, setShowDrop] = useState(false);
 
   return (
     <div className={css.channelsPart}>
@@ -72,10 +90,11 @@ export default function ChannelsPart() {
 
       {isOpen && (
         <ul className={css.channelsList}>
+          <DropArea onDrop={() => onDrop(0)} />
           {channels.map((channel, index) => (
-            <>
+            <Fragment key={index}>
               <ChannelItem
-                key={channel.id}
+                // key={channel.id}
                 index={index}
                 channel={channel}
                 gmail={gmail}
@@ -83,24 +102,14 @@ export default function ChannelsPart() {
                 // moveChannel={moveChannel}
                 handleDragEnd={handleDragEnd}
                 handleDragStart={handleDragStart}
-                handleDragOver={handleDragOver}
+                // handleDragOver={handleDragOver}
               />
-              {/* <div
-                className={`${css.dropArea} ${!showDrop && css.dropAreaHidden}`}
-                onDragEnter={() => setShowDrop(true)}
-                onDragLeave={() => setShowDrop(false)}
-                onDrop={() => {
-                  index + 1;
-                  setShowDrop(false);
-                }}
-                onDragOver={(event) => handleDragOver(event, index)}
-              >
-                {" "}
-              </div> */}
-            </>
+              <DropArea onDrop={() => onDrop(index)} />
+            </Fragment>
           ))}
         </ul>
       )}
+      {/* <p>active card {draggedItemIndex}</p> */}
     </div>
   );
 }

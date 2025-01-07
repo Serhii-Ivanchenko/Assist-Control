@@ -1,9 +1,5 @@
-// import { useState } from "react";
 import css from "./ChannelItem.module.css";
 import { RxDragHandleDots2 } from "react-icons/rx";
-// import { useRef } from "react";
-// import { useDrag, useDrop } from "react-dnd";
-// import { useState } from "react";
 
 export default function ChannelItem({
   index,
@@ -12,33 +8,10 @@ export default function ChannelItem({
   facebook,
   // moveChannel,
   handleDragStart,
-  handleDragOver,
+  // handleDragOver,
   handleDragEnd,
+  // handleDrop,
 }) {
-  // const ref = useRef(null);
-  //   const [isDragActive, setIsDragActive] = useState(false);
-
-  // const [, drag] = useDrag(() => {
-  //   // console.log("useDrag called for index:", index); // Лог для діагностики
-  //   return {
-  //     type: "ITEM",
-  //     item: { index },
-  //   };
-  // });
-
-  // const [, drop] = useDrop(() => ({
-  //   accept: "ITEM",
-  //   hover: (draggedItem) => {
-  //     //   console.log("Hovered over index:", index);
-  //     if (draggedItem.index !== index) {
-  //       moveChannel(draggedItem.index, index);
-  //       draggedItem.index = index; // Оновлюємо індекс перетягуваного елемента
-  //     }
-  //   },
-  // }));
-
-  // drag(drop(ref));
-
   return (
     <li
       key={channel.id}
@@ -46,8 +19,9 @@ export default function ChannelItem({
       // ref={ref}
       draggable
       onDragStart={() => handleDragStart(index)}
-      onDragOver={(event) => handleDragOver(event, index)}
+      // onDragOver={(event) => handleDragOver(event, index)}
       onDragEnd={handleDragEnd}
+      // onDrop={() => handleDrop(index)}
     >
       <div className={css.iconAndText}>
         <span className={css.iconBox}>
