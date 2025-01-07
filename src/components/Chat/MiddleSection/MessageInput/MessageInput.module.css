@@ -1,7 +1,7 @@
 .wrapper {
   position: relative;
   width: 100%;
-  height: 81px;
+  height: auto;
   padding: 18px 19px;
   border-radius: 12px;
   background: var(--CRM-modal-SecondaryBG, #23252c);
@@ -20,44 +20,56 @@
   /* transform: scale(1.5); */
 }
 
-.input {
-  display: inline-flex;
+.inputContainer {
   width: 398px;
-  height: 45px;
-  padding: 15px;
-  padding-right: 35px;
+  height: auto;
   border-radius: 12px;
   border: 2px solid var(--txt-gray, #5a5b6f);
   background: #272930;
-  outline: none;
-  color: var(--light-gray);
   transition: all 0.3s ease;
 }
 
-.input.recording {
+.inputContainer.recording {
   border: 2px solid #3956cc;
   animation: pulse 1s infinite;
 }
-/* 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 1;
-  }
-} */
+
+.input {
+  display: inline-flex;
+  width: 390px;
+  height: 45px;
+  padding: 15px;
+  padding-right: 30px;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--light-gray);
+  resize: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+}
+
+.input::-webkit-scrollbar {
+  width: 4px;
+  max-height: 45px;
+}
+
+.input::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+}
+
+.input::-webkit-scrollbar-track {
+  background-color: var(--bg);
+  border-radius: 4px;
+  margin: 10px;
+}
 
 .micBtn {
   position: absolute;
-  top: 32px;
-  right: 80px;
+  bottom: 42%;
+  right: 81px;
   display: inline-flex;
   background-color: transparent;
   border: none;
@@ -116,8 +128,9 @@
 }
 
 .previewContainer {
+  width: 100%;
   position: absolute;
-  top: -45px;
+  top: -65px;
   left: 10px;
   display: flex;
   gap: 8px;
@@ -126,8 +139,8 @@
 
 .previewItem {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
 }
 
 .previewImage {
@@ -146,16 +159,49 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  width: 10px;
-  height: 10px;
-  font-size: 8px;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .fileName {
-  font-size: 14px;
+  font-size: 9px;
   color: #555;
   margin-top: 8px;
+}
+
+.previewDoc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: #23252c;
+}
+
+.audioInsideInput {
+  position: relative;
+  width: fit-content;
+}
+
+.removePreviewDoc {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--main-gray);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

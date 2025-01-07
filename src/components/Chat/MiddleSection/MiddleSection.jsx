@@ -14,7 +14,7 @@ export default function MiddleSection() {
       avatar: defImg,
       text: "Вітаю! Чи можна записатися на діагностику електрики та двигуна?",
       time: "09:00",
-      files: null,
+      files: [{ name: "", type: "", url: "" }],
     },
     {
       sender: "manager",
@@ -22,7 +22,7 @@ export default function MiddleSection() {
       avatar: defImg,
       text: "Доброго дня, Олександре! Так, ми можемо записати вас на діагностику електрики та двигуна. Скажіть, будь ласка, який день і час вам зручні?",
       time: "09:04",
-      files: null,
+      files: [{ name: "", type: "", url: "" }],
     },
     {
       sender: "client",
@@ -30,7 +30,7 @@ export default function MiddleSection() {
       avatar: defImg,
       text: "Мені було б зручно приїхати завтра після обіду, наприклад, о 15:00. Це можливо?",
       time: "09:07",
-      files: null,
+      files: [{ name: "", type: "", url: "" }],
     },
     {
       sender: "manager",
@@ -38,7 +38,7 @@ export default function MiddleSection() {
       avatar: defImg,
       text: "Завтра о 15:00 підходить. Ми записали вас на діагностику. Адреса нашого автосервісу: вул. Центральна, 45. Якщо виникнуть додаткові питання, звертайтеся!",
       time: "09:08",
-      files: null,
+      files: [{ name: "", type: "", url: "" }],
     },
     {
       sender: "client",
@@ -46,9 +46,10 @@ export default function MiddleSection() {
       avatar: defImg,
       text: "Дуже дякую за швидку відповідь! До зустрічі",
       time: "09:10",
-      files: null,
+      files: [{ name: "", type: "", url: "" }],
     },
   ]);
+  const [inputHeight, setInputHeight] = useState(0);
 
   const addNewMessage = (newMessage) => {
     setMessages([...messages, newMessage]);
@@ -56,8 +57,11 @@ export default function MiddleSection() {
   return (
     <div className={css.middleSectionWrapper}>
       <ChatHeader />
-      <ChatList messages={messages} />
-      <MessageInput addNewMessage={addNewMessage} />
+      <ChatList messages={messages} inputHeight={inputHeight} />
+      <MessageInput
+        addNewMessage={addNewMessage}
+        setInputHeight={setInputHeight}
+      />
     </div>
   );
 }

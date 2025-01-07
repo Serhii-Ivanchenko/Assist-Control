@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
 import sendIcon from "../../../../assets/send.svg";
-import { BsMic, BsPlusCircleDotted } from "react-icons/bs";
+import { BsMic, BsStopCircle, BsPlusCircleDotted } from "react-icons/bs";
+import { IoDocumentAttachOutline } from "react-icons/io5";
 import defAvatar from "../../../../assets/images/avatar_default.png";
+import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import styles from "./MessageInput.module.css";
 
-function MessageInput({ addNewMessage }) {
+function MessageInput({ addNewMessage, setInputHeight }) {
   const [messageText, setMessageText] = useState("");
   const [previewFiles, setPreviewFiles] = useState([]);
   const [isRecording, setIsRecording] = useState(false);
@@ -13,28 +15,24 @@ function MessageInput({ addNewMessage }) {
 
   const handleSend = () => {
     if (messageText.trim() || previewFiles.length) {
-      if (messageText.trim()) {
-        const newMessage = {
-          sender: "manager",
-          author: "Ліза (менеджер)",
-          text: messageText,
-          avatar: defAvatar,
-          time: new Date().toLocaleTimeString().slice(0, 5),
-        };
-        addNewMessage(newMessage);
-        setMessageText("");
-      }
-      previewFiles.forEach((file) => {
-        const newMessage = {
-          sender: "manager",
-          author: "Ліза (менеджер)",
-          text: file.type.startsWith("image/") ? "Зображення" : file.name,
-          avatar: defAvatar,
-          time: new Date().toLocaleTimeString().slice(0, 5),
-          files: file,
-        };
-        addNewMessage(newMessage);
-      });
+      const newMessage = {
+        sender: "manager",
+        author: "Ліза (менеджер)",
+        text: messageText.trim(),
+        avatar: defAvatar,
+        time: new Date().toLocaleTimeString().slice(0, 5),
+        files: previewFiles.length
+          ? previewFiles.map(({ name, type, file, url }) => ({
+              name,
+              type,
+              file,
+              url,
+            }))
+          : undefined,
+      };
+
+      addNewMessage(newMessage);
+      setMessageText("");
       setPreviewFiles([]);
     }
   };
@@ -52,6 +50,7 @@ function MessageInput({ addNewMessage }) {
       name: file.name,
       type: file.type,
       url: file.type.startsWith("image/") ? URL.createObjectURL(file) : null,
+      file,
     }));
 
     setPreviewFiles((prev) => [...prev, ...newFiles]);
@@ -73,17 +72,18 @@ function MessageInput({ addNewMessage }) {
 
         recorder.onstop = () => {
           const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-          const newMessage = {
-            sender: "manager",
-            author: "Ліза (менеджер)",
-            text: "Аудіо-повідомлення",
-            avatar: defAvatar,
-            time: new Date().toLocaleTimeString().slice(0, 5),
-            audio: URL.createObjectURL(audioBlob),
+          const audioURL = URL.createObjectURL(audioBlob);
+
+          const newFile = {
+            name: "Записане аудіо",
+            type: "audio/wav",
+            url: audioURL,
+            file: audioBlob,
           };
-          addNewMessage(newMessage);
-          setMessageText("");
+          setPreviewFiles((prev) => [...prev, newFile]);
+
           setIsRecording(false);
+          setMessageText("");
         };
 
         recorder.start();
@@ -102,33 +102,62 @@ function MessageInput({ addNewMessage }) {
     setPreviewFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const adjustHeight = (element) => {
+    element.style.height = "auto";
+    element.style.height = `${Math.min(element.scrollHeight, 6 * 24)}px`;
+
+    if (setInputHeight) setInputHeight(element.offsetHeight);
+  };
+
   return (
     <div className={styles.wrapper}>
       <button
         className={styles.btn}
         onClick={() => fileInputRef.current.click()}
       >
-        <BsPlusCircleDotted size={24}/>
+        <BsPlusCircleDotted size={24} />
       </button>
       {previewFiles.length > 0 && (
         <div className={styles.previewContainer}>
           {previewFiles.map((file, index) => (
             <div key={index} className={styles.previewItem}>
               {file.url ? (
-                <img
-                  src={file.url}
-                  alt={`Preview ${index}`}
-                  className={styles.previewImage}
-                />
+                file.type.startsWith("image/") && (
+                  <>
+                    <img
+                      src={file.url}
+                      alt={`Preview ${index}`}
+                      className={styles.previewImage}
+                    />
+                    <button
+                      className={styles.removePreviewDoc}
+                      onClick={() => removeImagePreview(index)}
+                    >
+                      ✕
+                    </button>
+                  </>
+                )
               ) : (
-                <p className={styles.fileName}>{file.name}</p>
+                <>
+                  <div className={styles.previewDoc}>
+                    <IoDocumentAttachOutline
+                      style={{ transform: "scale(1.4)" }}
+                    />
+                    <p className={styles.fileName}>
+                      {file.name.length > 5
+                        ? `${file.name.slice(0, 5)}...`
+                        : file.name}{" "}
+                      ({file.type.split("/")[1]})
+                    </p>
+                  </div>
+                  <button
+                    className={styles.removePreviewDoc}
+                    onClick={() => removeImagePreview(index)}
+                  >
+                    ✕
+                  </button>
+                </>
               )}
-              <button
-                className={styles.removePreview}
-                onClick={() => removeImagePreview(index)}
-              >
-                ✕
-              </button>
             </div>
           ))}
         </div>
@@ -141,25 +170,59 @@ function MessageInput({ addNewMessage }) {
         multiple
         onChange={handleFileSelect}
       />
-      <input
-        type="text"
-        placeholder="Введіть повідомлення ..."
-        className={`${styles.input} ${isRecording ? styles.recording : ""}`}
-        value={messageText}
-        onChange={(e) => setMessageText(e.target.value)}
-        disabled={isRecording}
-      />
-      {isRecording && (
-        <p className={styles.recordingMessage}>
-          Йде запис голосового повідомлення
-        </p>
-      )}
-      <button
-        className={`${styles.micBtn} ${isRecording ? styles.recording : ""}`}
-        onClick={handleMicClick}
+
+      <div
+        className={`${styles.inputContainer} ${
+          isRecording ? styles.recording : ""
+        }`}
       >
-        <BsMic />
-      </button>
+        <div className={styles.textInputWrapper}>
+          <textarea
+            placeholder="Введіть повідомлення ..."
+            className={styles.input}
+            value={messageText}
+            onChange={(e) => {
+              setMessageText(e.target.value);
+              adjustHeight(e.target);
+            }}
+            rows={1}
+            disabled={isRecording}
+          />
+
+          <div className={styles.audioInsideInput}>
+            {previewFiles.map(
+              (file, index) =>
+                file.url &&
+                file.type.startsWith("audio/") && (
+                  <>
+                    <AudioPlayer
+                      key={index}
+                      audio={file.url}
+                      size="small"
+                      audioDuration="00:00"
+                      className={styles.audioPreviewInInput}
+                    />
+                    <button
+                      className={styles.removePreviewDoc}
+                      onClick={() => removeImagePreview(index)}
+                    >
+                      ✕
+                    </button>
+                  </>
+                )
+            )}
+          </div>
+        </div>
+      </div>
+
+      {!isRecording ? (
+        <BsMic className={styles.micBtn} onClick={handleMicClick} />
+      ) : (
+        <BsStopCircle
+          className={`${styles.micBtn} ${styles.recording}`}
+          onClick={handleMicClick}
+        />
+      )}
 
       <button className={styles.sendBtn} onClick={handleSend}>
         <img src={sendIcon} alt="Send" />
