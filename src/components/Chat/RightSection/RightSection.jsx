@@ -1,10 +1,12 @@
 import css from "./RightSection.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Typography,
+  AccordionActions,
+  Button,
 } from "@mui/material";
 
 import ChatAvto from "./ChatAvto/ChatAvto.jsx";
@@ -16,25 +18,79 @@ import ChatNotes from "./ChatNotes/ChatNotes.jsx";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { FaPlus } from "react-icons/fa";
-import CreateTag from "./ChatTags/CreateTag/CreateTag.jsx";
+import SearchTags from "./ChatTags/SearchTags/SearchTags.jsx";
+import { BsPencil } from "react-icons/bs";
+
+const tags = [
+  {
+    id: "1",
+    tagName: "Записи на послуги",
+    bgdColor: "darkGreen",
+    isChecked: false,
+  },
+  {
+    id: "2",
+    tagName: "Новий рік 2024",
+    bgdColor: "midOrange",
+    isChecked: true,
+  },
+  {
+    id: "3",
+    tagName: "Чорна п’ятниця",
+    bgdColor: "lightViolet",
+    isChecked: true,
+  },
+  {
+    id: "4",
+    tagName: "Ремонт",
+    bgdColor: "darkPink",
+    isChecked: true,
+  },
+  {
+    id: "5",
+    tagName: "Новий",
+    bgdColor: "lightRed",
+    isChecked: true,
+  },
+  {
+    id: "6",
+    tagName: "Діагностика",
+    bgdColor: "lightYellow",
+    isChecked: false,
+  },
+];
 
 export default function RightSection() {
   const [expanded, setExpanded] = useState(false);
+  const [tagsArr, setTagsArr] = useState(tags);
+  const [checkedTagsIdArray, setCheckedTagsIdArray] = useState([]);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [isPopOverOpen, setIsPopOverOpen] = useState(false);
+  const [isSearchTagModalOpen, setIsSearchTagModalOpen] = useState(false);
 
   const handlePlusBtnClick = (e) => {
     e.stopPropagation();
-    setIsPopOverOpen(true);
+    setIsSearchTagModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsPopOverOpen(false);
+  const handleCloseSearchTagModal = () => {
+    setIsSearchTagModalOpen(false);
   };
+
+  useEffect(() => {
+    let checkedTagsById = [];
+
+    tagsArr.map((item) => {
+      if (item.isChecked === true) {
+        checkedTagsById.push(item.id);
+      }
+    });
+    setCheckedTagsIdArray(checkedTagsById);
+    setTagsArr(tagsArr);
+  }, [tagsArr]);
 
   return (
     <div className={css.rightSectionWrapper}>
@@ -126,15 +182,35 @@ export default function RightSection() {
             </div>
 
             {expanded === "panel2" && (
-              <AccordionDetails
-              // sx={{
-              //   maxHeight: expanded === "panel2" ? "100px" : "0px",
-              //   overflow: "hidden",
-              //   transition: "max-height 0.3s ease",
-              // }}
-              >
-                <ChatTags />
-              </AccordionDetails>
+              <>
+                <AccordionDetails
+                // sx={{
+                //   maxHeight: expanded === "panel2" ? "100px" : "0px",
+                //   overflow: "hidden",
+                //   transition: "max-height 0.3s ease",
+                // }}
+                >
+                  <ChatTags
+                    tagsArray={tagsArr}
+                    checkedTagsIdArray={checkedTagsIdArray}
+                    setTagsArr={setTagsArr}
+                  />
+                </AccordionDetails>
+                <AccordionActions
+                  sx={{ justifyContent: "flex-start" }}
+                  onClick={(event) => event.stopPropagation()}
+                  onFocus={(event) => event.stopPropagation()}
+                >
+                  <Button
+                    sx={{ padding: 0 }}
+                    className={css.bottomWrapper}
+                    onClick={handlePlusBtnClick}
+                  >
+                    <BsPencil className={css.pencil} />
+                    <p className={css.bottomText}>Змінити Теги</p>
+                  </Button>
+                </AccordionActions>
+              </>
             )}
           </div>
         </AccordionSummary>
@@ -345,12 +421,12 @@ export default function RightSection() {
           <ChatFiles />
         </AccordionDetails> */}
       </Accordion>
-      {isPopOverOpen && (
-        <CreateTag
-          onClose={handleCloseModal}
-          name={null}
-          color={null}
-          isPopOverOpen={isPopOverOpen}
+      {isSearchTagModalOpen && (
+        <SearchTags
+          onClose={handleCloseSearchTagModal}
+          checkedTagsArray={checkedTagsIdArray}
+          tagsArray={tagsArr}
+          setTagsArr={setTagsArr}
         />
       )}
     </div>

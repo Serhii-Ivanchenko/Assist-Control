@@ -3,6 +3,9 @@ import css from "./CreateTag.module.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import BtnsCloseAndSubmit from "../../../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
 import { AddTagSchema } from "../../../../../validationSchemas/addTagSchema.js";
+import { nanoid } from "nanoid";
+import toast from "react-hot-toast";
+
 const colors = [
   "darkGreen",
   "midGreen",
@@ -36,7 +39,7 @@ const colors = [
   "lightGrey",
 ];
 
-export default function CreateTag({ name, color, onClose, tagId }) {
+export default function CreateTag({ onClose, changedTag, setTagsArr }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -45,14 +48,59 @@ export default function CreateTag({ name, color, onClose, tagId }) {
     }
   }, []);
 
-  const [newTagName, setNewTagName] = useState(name || "");
-  const [bgdColor, setBgdColor] = useState(color || "");
+  const createPopoverRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (
+      createPopoverRef.current &&
+      !createPopoverRef.current.contains(event.target)
+    ) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const [newTagName, setNewTagName] = useState(changedTag.tagName || "");
+  const [bgdColor, setBgdColor] = useState(changedTag.bgdColor || colors[0]);
 
   const handleSubmit = (values, actions) => {
-    if (tagId) {
-      console.log({ ...values, id: tagId });
+    if (changedTag) {
+      setTagsArr((prevTagsArr) => {
+        const updatedTagsArr = prevTagsArr.map((prevTag) => {
+          return prevTag.id === changedTag.id
+            ? { ...prevTag, ...values }
+            : prevTag;
+        });
+        return updatedTagsArr;
+      });
     } else {
-      console.log(values);
+      setTagsArr((prevTagsArr) => {
+        const existingTag = prevTagsArr.find(
+          (prevTag) =>
+            prevTag.tagName.toLowerCase() === values.tagName.toLowerCase()
+        );
+        if (existingTag) {
+          toast.error("Такий тег вже існує", {
+            position: "top-center",
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
+          return prevTagsArr;
+        } else {
+          return [
+            ...prevTagsArr,
+            { ...values, isChecked: false, id: nanoid() },
+          ];
+        }
+      });
     }
     actions.resetForm();
     setNewTagName("");
@@ -61,13 +109,13 @@ export default function CreateTag({ name, color, onClose, tagId }) {
   };
 
   const initialValues = {
-    tagName: name || newTagName,
-    bgdColor: color || bgdColor,
+    tagName: changedTag.tagName || newTagName,
+    bgdColor: changedTag.bgdColor || bgdColor,
   };
 
   return (
-    <div className={css.modalWrapper}>
-      {name ? (
+    <div className={css.modalWrapper} ref={createPopoverRef}>
+      {changedTag.tagName ? (
         <h3 className={css.header}>Редагувати тег</h3>
       ) : (
         <h3 className={css.header}>Створити тег</h3>
