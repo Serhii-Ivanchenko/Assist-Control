@@ -11,7 +11,7 @@
 
   /* flex-grow: 1; */
   flex-shrink: 0;
-  transition: width 0.5s ease-in, padding 0.5s ease-in, gap 0.5s ease-in;
+  transition: width 0.7s ease-in, padding 0.7s ease-in, gap 0.7s ease-in;
 }
 .chatOpen {
   width: 80px;
@@ -44,7 +44,12 @@
   flex-grow: 1;
   gap: 10px;
   overflow-y: auto;
-  max-height: calc(100vh - 200px); 
+  max-height: calc(100vh - 200px);
+  transition: gap 0.9s ease-in-out; 
+}
+
+.bottomContainerWithChat{
+  gap: 38px;
 }
 
 .bottomContainer.withScroll {

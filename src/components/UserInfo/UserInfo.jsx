@@ -34,17 +34,16 @@ export default function UserInfo() {
       <div className={styles.avatar}>
         <img src={avatarUrl} alt={fullName} />
       </div>
-      <h2 className={clsx(styles.name, { [styles.hidden]: chatIsOpen })}>
+      <h2 className={clsx(styles.name, { [styles.hidden]: chatIsOpen, [styles.visible]: !chatIsOpen })}>
         {fullName}
       </h2>
 
-      <div
-        className={clsx(styles.userDetails, { [styles.hidden]: chatIsOpen })}
-      >
+      <div className={clsx(styles.userDetails, { [styles.hidden]: chatIsOpen, [styles.visible]: !chatIsOpen })}>
+
         <p>{companyName}</p>
         <p>ID: {userId}</p>
       </div>
-      <div className={clsx(styles.balance, { [styles.hidden]: chatIsOpen })}
+      <div className={clsx(styles.balance, { [styles.hidden]: chatIsOpen, [styles.visible]: !chatIsOpen })}
       >
         <span className={styles.balanceText}>Баланс:</span>
         <button onClick={openModal} className={styles.balanceButton}>

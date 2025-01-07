@@ -14,7 +14,7 @@ import { HiOutlineCurrencyDollar } from "react-icons/hi2";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { BiSolidRightArrow, BiSolidDownArrow } from "react-icons/bi";
 import AccountingTree from "./AccountingTree/AccountingTree";
-import ReportsTree from './ReportsTree/ReportsTree';
+import ReportsTree from "./ReportsTree/ReportsTree";
 import { selectIsChatOpen } from "../../redux/chat/selectors";
 import { useSelector } from "react-redux";
 
@@ -66,88 +66,132 @@ export default function Navigation() {
 
   const toggleReports = () => {
     setIsReportsOpen((prev) => !prev);
-    if (!isReportsOpen) setIsAccountingOpen(false); 
+    if (!isReportsOpen) setIsAccountingOpen(false);
   };
 
   return (
     <nav className={styles.navigation}>
-      <ul className={clsx(styles.topNavContainer, { [styles.topNavChat]: chatIsOpen })}>
-      <li className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}>
+      <ul
+        className={clsx(styles.topNavContainer, {
+          [styles.topNavChat]: chatIsOpen,
+        })}
+      >
+        <li
+          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+        >
           <NavLink
             to="/main"
             className={({ isActive }) =>
               clsx(styles.navLink, {
                 [styles.active]: isActive,
                 [styles.disabled]: true,
+                [styles.navWithChat]: chatIsOpen,
               })
             }
           >
             <div className={styles.iconContainer}>
               <BsHouse className={styles.iconHome} />
             </div>
-            <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Головна</span>
+            <span className={clsx(styles.linkText, { 
+              [styles.hidden]: chatIsOpen, 
+              [styles.visible]: !chatIsOpen 
+            })}>
+              Головна
+            </span>
           </NavLink>
         </li>
-        <li className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}>
+        <li
+          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+        >
           <NavLink
             to="/video-control"
             className={({ isActive }) =>
-              clsx(styles.navLink, { [styles.active]: isActive })
+              clsx(styles.navLink, { [styles.active]: isActive, [styles.navWithChat]: chatIsOpen })
             }
           >
             <div className={styles.iconContainer}>
               <IoVideocamOutline className={styles.iconVideo} />
             </div>
-            <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Моніторинг</span>
+            <span className={clsx(styles.linkText, { 
+              [styles.hidden]: chatIsOpen, 
+              [styles.visible]: !chatIsOpen 
+            })}>
+              Моніторинг
+            </span>
           </NavLink>
         </li>
-        <li className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}>
+        <li
+          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+        >
           <NavLink
             to="/crm"
             className={({ isActive }) =>
-              clsx(styles.navLink, { [styles.active]: isActive })
+              clsx(styles.navLink, { [styles.active]: isActive, [styles.navWithChat]: chatIsOpen })
             }
           >
             <div className={styles.iconContainer}>
               <BsJournals className={styles.iconCrm} />
             </div>
-            <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Планувальник</span>
+            <span className={clsx(styles.linkText, { 
+              [styles.hidden]: chatIsOpen, 
+              [styles.visible]: !chatIsOpen 
+            })}>
+              Планувальник
+            </span>
           </NavLink>
         </li>
-        <li className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}>
+        <li
+          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+        >
           <NavLink
             to="/connections"
             className={({ isActive }) =>
-              clsx(styles.navLink, { [styles.active]: isActive })
+              clsx(styles.navLink, { [styles.active]: isActive, [styles.navWithChat]: chatIsOpen})
             }
           >
             <div className={styles.iconContainer}>
               <BsChatText className={styles.iconCrm} />
             </div>
-            <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Звернення</span>
+            <span className={clsx(styles.linkText, { 
+              [styles.hidden]: chatIsOpen, 
+              [styles.visible]: !chatIsOpen 
+            })}>
+              Звернення
+            </span>
           </NavLink>
         </li>
-        <li className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}>
+        <li
+          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+        >
           <NavLink
             to="/recommendations"
             className={({ isActive }) =>
               clsx(styles.navLink, {
                 [styles.active]: isActive,
                 [styles.disabled]: true,
+                [styles.navWithChat]: chatIsOpen
               })
             }
           >
             <div className={styles.iconContainer}>
               <IoCarSportSharp className={styles.iconAvto} />
             </div>
-            <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Рекомендації</span>
+            <span className={clsx(styles.linkText, { 
+              [styles.hidden]: chatIsOpen, 
+              [styles.visible]: !chatIsOpen 
+            })}>
+              Рекомендації
+            </span>
           </NavLink>
         </li>
-        <li className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}>
+        <li
+          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+        >
           <div
             onClick={toggleAccounting}
             className={clsx(styles.navLink, {
               [styles.active]: isAccountingOpen,
+              [styles.navWithChat]: chatIsOpen
             })}
           >
             <div
@@ -161,11 +205,24 @@ export default function Navigation() {
                 })}
               />
             </div>
-            <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Облік</span>
+            <span className={clsx(styles.linkText, { 
+              [styles.hidden]: chatIsOpen, 
+              [styles.visible]: !chatIsOpen 
+            })}>
+              Облік
+            </span>
             {isAccountingOpen ? (
-              <BiSolidDownArrow className={clsx(styles.navArrow, styles.smallArrow)} />
+              <BiSolidDownArrow
+                className={clsx(styles.navArrow, {
+                  [styles.smallArrow]: chatIsOpen,
+                })}
+              />
             ) : (
-              <BiSolidRightArrow className={clsx(styles.navArrow, styles.smallArrow)} />
+              <BiSolidRightArrow
+                className={clsx(styles.navArrow, {
+                  [styles.smallArrow]: chatIsOpen,
+                })}
+              />
             )}
           </div>
           <animated.div
@@ -178,11 +235,14 @@ export default function Navigation() {
           </animated.div>
         </li>
 
-        <li className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}>
+        <li
+          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+        >
           <div
             onClick={toggleReports}
             className={clsx(styles.navLink, {
               [styles.active]: isReportsOpen,
+              [styles.navWithChat]: chatIsOpen
             })}
           >
             <div
@@ -192,11 +252,25 @@ export default function Navigation() {
             >
               <BsJournalCheck className={styles.iconBook} />
             </div>
-            <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Звіти</span>
+            <span className={clsx(styles.linkText, { 
+              [styles.hidden]: chatIsOpen, 
+              [styles.visible]: !chatIsOpen 
+            })}>
+              Звіти
+            </span>
+
             {isReportsOpen ? (
-              <BiSolidDownArrow className={clsx(styles.navArrow, styles.smallArrow)} />
+              <BiSolidDownArrow
+                className={clsx(styles.navArrow, {
+                  [styles.smallArrow]: chatIsOpen,
+                })}
+              />
             ) : (
-              <BiSolidRightArrow className={clsx(styles.navArrow, styles.smallArrow)} />
+              <BiSolidRightArrow
+                className={clsx(styles.navArrow, {
+                  [styles.smallArrow]: chatIsOpen,
+                })}
+              />
             )}
           </div>
           <animated.div
@@ -209,17 +283,24 @@ export default function Navigation() {
           </animated.div>
         </li>
 
-        <li className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}>
+        <li
+          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+        >
           <NavLink
             to="/settings"
             className={({ isActive }) =>
-              clsx(styles.navLink, { [styles.active]: isActive })
+              clsx(styles.navLink, { [styles.active]: isActive, [styles.navWithChat]: chatIsOpen })
             }
           >
             <div className={styles.iconContainer}>
               <GiSettingsKnobs className={styles.iconSettings} />
             </div>
-            <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Налаштування</span>
+            <span className={clsx(styles.linkText, { 
+              [styles.hidden]: chatIsOpen, 
+              [styles.visible]: !chatIsOpen 
+            })}>
+              Налаштування
+            </span>
           </NavLink>
         </li>
       </ul>

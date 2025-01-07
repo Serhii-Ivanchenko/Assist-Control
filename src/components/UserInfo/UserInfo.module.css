@@ -4,7 +4,7 @@
 }
 
 .userInfoChat{
-  margin-top: 39px;
+  margin-top: 25px;
 }
 
 @media only screen and (min-width: 1850px) {
@@ -113,5 +113,15 @@
 }
 
 .hidden {
-  display: none;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.7s ease, max-height 0.9s ease; 
+}
+
+.visible {
+  opacity: 1;
+  max-height: 200px;
+  overflow: visible;
+  transition: opacity 1.9s ease, max-height 0.5s ease; 
 }

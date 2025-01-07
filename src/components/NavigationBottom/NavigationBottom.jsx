@@ -12,47 +12,90 @@ export default function NavigationBottom() {
 
   return (
     <nav className={styles.navigation}>
-        <ul className={clsx(styles.bottomNavContainer, { [styles.listInChat]: chatIsOpen })}>
-          <li className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}>
-            <NavLink
-              to="/bonuses"
-              className={({ isActive }) =>
-                clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
-              }
+      <ul
+        className={clsx(styles.bottomNavContainer, {
+          [styles.listInChat]: chatIsOpen,
+        })}
+      >
+        <li
+          className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}
+        >
+          <NavLink
+            to="/bonuses"
+            className={({ isActive }) =>
+              clsx(styles.navLink, {
+                [styles.active]: isActive,
+                [styles.disabled]: true,
+                [styles.navWithChat]: chatIsOpen,
+              })
+            }
+          >
+            <div className={styles.iconContainer}>
+              <BsGift className={styles.iconBonus} />
+            </div>
+            <span
+              className={clsx(styles.linkText, {
+                [styles.hidden]: chatIsOpen,
+                [styles.visible]: !chatIsOpen,
+              })}
             >
-              <div className={styles.iconContainer}>
-                <BsGift className={styles.iconBonus} />
-              </div>
-                <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Мій бонус</span>
-            </NavLink>
-          </li>
-          <li className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}>
-            <NavLink
-              to="/rating"
-              className={({ isActive }) =>
-                clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
-              }
+              Мій бонус
+            </span>
+          </NavLink>
+        </li>
+        <li
+          className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}
+        >
+          <NavLink
+            to="/rating"
+            className={({ isActive }) =>
+              clsx(styles.navLink, {
+                [styles.active]: isActive,
+                [styles.disabled]: true,
+                [styles.navWithChat]: chatIsOpen,
+              })
+            }
+          >
+            <div className={styles.iconContainer}>
+              <MdOutlineStarOutline className={styles.iconRating} />
+            </div>
+            <span
+              className={clsx(styles.linkText, {
+                [styles.hidden]: chatIsOpen,
+                [styles.visible]: !chatIsOpen,
+              })}
             >
-              <div className={styles.iconContainer}>
-                <MdOutlineStarOutline className={styles.iconRating} />
-              </div>
-              <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Рейтинг</span>
-            </NavLink>
-          </li>
-          <li className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}>
-            <NavLink
-              to="/proficiency"
-              className={({ isActive }) =>
-                clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
-              }
+              Рейтинг
+            </span>
+          </NavLink>
+        </li>
+        <li
+          className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}
+        >
+          <NavLink
+            to="/proficiency"
+            className={({ isActive }) =>
+              clsx(styles.navLink, {
+                [styles.active]: isActive,
+                [styles.disabled]: true,
+                [styles.navWithChat]: chatIsOpen,
+              })
+            }
+          >
+            <div className={styles.iconContainer}>
+              <PiChartLineUp className={styles.iconChart} />
+            </div>
+            <span
+              className={clsx(styles.linkText, {
+                [styles.hidden]: chatIsOpen,
+                [styles.visible]: !chatIsOpen,
+              })}
             >
-              <div className={styles.iconContainer}>
-                <PiChartLineUp className={styles.iconChart} />
-              </div>
-              <span className={clsx(styles.linkText, { [styles.hidden]: chatIsOpen })}>Кваліфікація</span>
-            </NavLink>
-          </li>
-        </ul>
+              Кваліфікація
+            </span>
+          </NavLink>
+        </li>
+      </ul>
     </nav>
   );
 }

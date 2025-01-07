@@ -14,7 +14,7 @@ export default function ReportsTree() {
   return (
   <Box
       className={clsx(styles.treeBox, { [styles.treeBoxOpenChat]: chatIsOpen })}
-      sx={{ minHeight: 0, width: chatIsOpen ? 66 : 170 }}>
+      sx={{ minHeight: 0, width: chatIsOpen ? 50 : 170 }}>
     <SimpleTreeView>
         <TreeItem
                   className={styles.treeItem}

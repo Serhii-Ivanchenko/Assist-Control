@@ -1,9 +1,12 @@
+
 .navItem {
     
     font-size: 11px;
     font-weight: 400;
     line-height: normal;
     font-variant: small-caps;
+    transition: padding 0.7s ease;
+    padding: 0;
 }
 
 @media only screen and (min-width: 1850px) {
@@ -45,6 +48,7 @@
     transition: background-color 0.3s, color 0.3s;
     background-color: var(--main-gray);
     border-radius: 50%;
+    flex-shrink: 0;
 }
 
 @media only screen and (min-width: 1850px) {
@@ -149,12 +153,9 @@
     line-height: 1.5;
   }
 
-  .hidden {
-    display: none;
-  }
-
   .navLinkChat {
     padding: 10px;
+    transition: padding 0.7s ease;
   }
 
   .smallArrow {
@@ -166,5 +167,39 @@
   }
 
   .topNavChat{
+    gap: 0;
+  }
+
+  .visible {
+    opacity: 1;
+    max-width: 200px;
+    overflow: visible;
+  }
+  
+  .hidden {
+    opacity: 0;
+    max-width: 0;
+    overflow: hidden;
+  }
+  
+  /* Стилі для тексту, який поступово розгортається */
+  .linkText {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: max-width 0.7s ease, opacity 0.7s ease;
+    opacity: 0;
+  }
+  
+  .linkText.visible {
+    max-width: 130px; 
+    opacity: 1; 
+  }
+  
+  .linkText.hidden {
+    opacity: 0;
+    max-width: 0px;
+  }
+  .navWithChat{
     gap: 0;
   }

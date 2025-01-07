@@ -6,6 +6,7 @@ import UserBar from "../UserBar/UserBar";
 import NavigationBottom from "../NavigationBottom/NavigationBottom";
 import { useLocation } from "react-router-dom";
 import { selectIsChatOpen } from "../../redux/chat/selectors";
+import clsx from "clsx";
 
 export default function SideBar() {
   const location = useLocation();
@@ -15,20 +16,24 @@ export default function SideBar() {
   const sideBarOnRegister = location.pathname === "/register";
   const sideBarOnMain = location.pathname === "/";
 
-  if (sideBarOnLogin || sideBarOnRegister || sideBarOnMain) {
-    return null; // не відображати Header
-  }
+  const shouldRender = !(sideBarOnLogin || sideBarOnRegister || sideBarOnMain);
 
   return (
-    <div className={`${styles.sidebar} ${chatIsOpen ? styles.chatOpen : ""}`}>
-      <div className={styles.topContainer}>
-        <UserBar className={styles.userBar} />
-        <UserInfo className={styles.userInfo} />
+    shouldRender && (
+      <div className={clsx(styles.sidebar, { [styles.chatOpen]: chatIsOpen })}>
+        <div className={styles.topContainer}>
+          <UserBar className={styles.userBar} />
+          <UserInfo className={styles.userInfo} />
+        </div>
+        <div
+          className={clsx(styles.bottomContainer, {
+            [styles.bottomContainerWithChat]: chatIsOpen,
+          })}
+        >
+          <Navigation />
+          <NavigationBottom />
+        </div>
       </div>
-      <div className={styles.bottomContainer}>
-        <Navigation />
-        <NavigationBottom />
-      </div>
-    </div>
+    )
   );
 }
