@@ -31,28 +31,6 @@
   line-height: 1.1875em;
 }
 
-.bottomWrapper {
-  display: flex;
-  gap: 10px;
-  margin-top: 14px;
-  cursor: pointer;
-}
-
-.pencil {
-  width: 16px;
-  height: 16px;
-  color: var(--play-btn-triangle);
-}
-
-.bottomText {
-  color: var(--play-btn-triangle);
-  font-family: Raleway, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
 .darkGreen {
   background-color: var(--dark-green-bg);
   color: var(--dark-green-text);

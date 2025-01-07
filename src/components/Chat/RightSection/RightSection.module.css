@@ -108,6 +108,27 @@
     cursor: pointer;
 }
 
+.pencil {
+  width: 16px;
+  height: 16px;
+  color: var(--play-btn-triangle);
+}
+
+.bottomWrapper {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.bottomText {
+  color: var(--play-btn-triangle);
+  font-family: Raleway, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
 .client {
     height: 172px;
     background-color: var(--bg-secondary);
