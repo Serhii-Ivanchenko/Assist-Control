@@ -20,7 +20,7 @@ export const statusesCommunications = [
 ];
 
 export const statusesArchive = [
-  { reason_description: "всі", label: "Всі авто" },
+  { reason_description: "all", label: "Всі авто" },
   { reason_description: "співробітник", label: "Cпівробітник" },
   { reason_description: "випадковий", label: "Випадковий" },
   { reason_description: "дубль", label: "Дубль" },
@@ -976,3 +976,5 @@ export const labelNamesAllClients = {
         percent: 18,
       },
     ];
+
+    

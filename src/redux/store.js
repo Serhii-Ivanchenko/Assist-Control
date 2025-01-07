@@ -23,7 +23,6 @@ import clientsReducer from "./client/slice.js";
 import archiveReducer from "./archive/slice.js";
 import chatReducer from "./chat/slice.js";
 
-
 const authPersistConfig = {
   key: "authSlice",
   storage,

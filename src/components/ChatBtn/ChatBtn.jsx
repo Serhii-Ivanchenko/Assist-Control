@@ -5,7 +5,6 @@ import Chat from "../Chat/Chat.jsx";
 import { selectIsChatOpen } from "../../redux/chat/selectors.js";
 import {closeChat, toggleChat} from "../../redux/chat/slice.js";
 
-
 export default function ChatBtn() {
   const dispatch = useDispatch();
   const chatIsOpen = useSelector(selectIsChatOpen);

@@ -2,55 +2,20 @@ import { Field, Form, Formik } from "formik";
 import css from "./SearchTags.module.css";
 import CheckBoxBtns from "../CheckBoxBtns/CheckBoxBtns";
 import { BsPencil } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { BsXLg } from "react-icons/bs";
+import { useEffect, useRef, useState } from "react";
 import CreateTag from "../CreateTag/CreateTag";
 
-const tags = [
-  {
-    id: "1",
-    tagName: "Записи на послуги",
-    bgdColor: "darkGreen",
-    isChecked: true,
-  },
-  {
-    id: "2",
-    tagName: "Новий рік 2024",
-    bgdColor: "midOrange",
-    isChecked: false,
-  },
-  {
-    id: "3",
-    tagName: "Чорна п’ятниця",
-    bgdColor: "lightViolet",
-    isChecked: true,
-  },
-  {
-    id: "4",
-    tagName: "Ремонт",
-    bgdColor: "darkPink",
-    isChecked: true,
-  },
-  {
-    id: "5",
-    tagName: "Новий",
-    bgdColor: "lightRed",
-    isChecked: false,
-  },
-  {
-    id: "6",
-    tagName: "Діагностика",
-    bgdColor: "lightYellow",
-    isChecked: false,
-  },
-];
-
-export default function SearchTags({ onClose, checkedTagsArray }) {
+export default function SearchTags({
+  onClose,
+  checkedTagsArray,
+  tagsArray,
+  setTagsArr,
+}) {
   const [dataToSearch, setDataToSearch] = useState("");
-  const [searchedTags, setSearchedTags] = useState(tags);
+  const [searchedTags, setSearchedTags] = useState(tagsArray);
   const [isCreateTagModalOpen, setIsCreateTagModalOpen] = useState(false);
-  const [changedTagName, setChangedTagName] = useState("");
-  const [changedTagBgd, setChangedTagBgd] = useState("");
-  const [changedTagId, setChangedTagId] = useState("");
+  const [changedTag, setChangedTag] = useState("");
 
   const handleOpenModal = () => {
     setIsCreateTagModalOpen(true);
@@ -60,6 +25,21 @@ export default function SearchTags({ onClose, checkedTagsArray }) {
     setIsCreateTagModalOpen(false);
   };
 
+  const popoverRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   useEffect(() => {
     if (dataToSearch) {
       const getVisibleTags = searchedTags.filter((item) =>
@@ -67,24 +47,34 @@ export default function SearchTags({ onClose, checkedTagsArray }) {
       );
       setSearchedTags(getVisibleTags);
     } else {
-      setSearchedTags(tags);
+      setSearchedTags(tagsArray);
     }
-  }, [dataToSearch]);
+  }, [dataToSearch, tagsArray]);
 
   const handleSubmit = (values, actions) => {
-    console.log(values);
+    setTagsArr((prevTagsArr) => {
+      const updatedCheckedTagsArr = prevTagsArr.map((prevTag) => {
+        return values.checkedTags.includes(prevTag.id)
+          ? { ...prevTag, isChecked: true }
+          : { ...prevTag, isChecked: false };
+      });
+      return updatedCheckedTagsArr;
+    });
     actions.resetForm();
     onClose();
   };
 
   const onPencilBtnClick = (id) => {
-    const changedTag = tags.find((tag) => {
-      return tag.id === id;
-    });
-    setChangedTagName(changedTag.tagName);
-    setChangedTagBgd(changedTag.bgdColor);
-    setChangedTagId(id);
-    handleOpenModal();
+    if (id) {
+      const changedTagById = tagsArray.find((tag) => {
+        return tag.id === id;
+      });
+      setChangedTag(changedTagById);
+      handleOpenModal();
+    } else {
+      setChangedTag("");
+      handleOpenModal();
+    }
   };
 
   const initialValues = {
@@ -92,8 +82,11 @@ export default function SearchTags({ onClose, checkedTagsArray }) {
   };
 
   return (
-    <div className={css.wrapper}>
-      <h3 className={css.header}>Теги</h3>
+    <div className={css.wrapper} ref={popoverRef}>
+      <div className={css.headerWrapper}>
+        <h3 className={css.header}>Теги</h3>
+        <BsXLg className={css.closeIcon} onClick={onClose} />
+      </div>
       <input
         type="text"
         className={css.input}
@@ -144,15 +137,21 @@ export default function SearchTags({ onClose, checkedTagsArray }) {
             <button type="submit" className={css.submitBtn}>
               Зберегти
             </button>
+            <button
+              type="button"
+              className={css.submitBtn}
+              onClick={() => onPencilBtnClick()}
+            >
+              Створити тег
+            </button>
           </Form>
         )}
       </Formik>
       {isCreateTagModalOpen && (
         <CreateTag
           onClose={handleCloseModal}
-          name={changedTagName}
-          color={changedTagBgd}
-          tagId={changedTagId}
+          changedTag={changedTag}
+          setTagsArr={setTagsArr}
         />
       )}
     </div>
