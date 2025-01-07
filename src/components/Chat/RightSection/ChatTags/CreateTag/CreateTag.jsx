@@ -109,8 +109,8 @@ export default function CreateTag({ onClose, changedTag, setTagsArr }) {
   };
 
   const initialValues = {
-    tagName: changedTag.tagName || newTagName,
-    bgdColor: changedTag.bgdColor || bgdColor,
+    tagName: newTagName,
+    bgdColor: bgdColor,
   };
 
   return (
