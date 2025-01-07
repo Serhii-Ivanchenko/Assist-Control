@@ -98,6 +98,51 @@ export default function ServiceHistory({ carName, clientInfo }) {
     person: "manager",
     personName: "Шевченко А.В.",
   };
+
+  const repair = {
+    fillOfRepair: [
+      {
+        isCellChecked: true,
+        nameOfDetail: "Лобове скло",
+        priceOfDetail: "3500",
+        repairName: "Заміна лобового скла",
+        repairPrice: "800",
+        id: "1",
+      },
+      {
+        isCellChecked: false,
+        nameOfDetail: "Бампер передній",
+        priceOfDetail: "4500",
+        repairName: "Установка бампера",
+        repairPrice: "1200",
+        id: "2",
+      },
+      {
+        isCellChecked: true,
+        nameOfDetail: "Капот",
+        priceOfDetail: "6000",
+        repairName: "Встановлення капота",
+        repairPrice: "1500",
+        id: "3",
+      },
+      {
+        isCellChecked: true,
+        nameOfDetail: "Крила (л + п)",
+        priceOfDetail: "4000",
+        repairName: "Встановлення крил",
+        repairPrice: "1000",
+        id: "4",
+      },
+      {
+        isCellChecked: false,
+        nameOfDetail: "Фари передні (2 шт.)",
+        priceOfDetail: "3200",
+        repairName: "Налаштування фар",
+        repairPrice: "600",
+        id: "5",
+      },
+    ],
+  };
   //[
   //   {
   //     index: "1",
@@ -305,8 +350,14 @@ export default function ServiceHistory({ carName, clientInfo }) {
   //   },
   // ];
   const sortedArr = [...recordRace].sort((a, b) =>
-    a.totalkilometrs > b.totalkilometrs ? -1 : 1
+    a.mileage > b.mileage ? -1 : 1
   );
+
+  // const newMileage = sortedArr.slice(1).map((item, index) => {
+  //   return sortedArr[index].mileage - item.mileage;
+  // });
+  // console.log(newMileage);
+
   const handleButtonClick = (e) => {
     e.preventDefault();
     const input = e.target.value;
@@ -318,8 +369,8 @@ export default function ServiceHistory({ carName, clientInfo }) {
       return;
     }
     // Фільтруємо записи, де у repair.fillOfRepair є значення nameOfDetail, що містить inputValue
-    const filtered = sortedArr.filter((record) =>
-      record.repair?.fillOfRepair?.some((repairItem) =>
+    const filtered = sortedArr.filter((repair) =>
+      repair?.fillOfRepair?.some((repairItem) =>
         repairItem.nameOfDetail
           .toLowerCase()
           .trim()
@@ -381,6 +432,7 @@ export default function ServiceHistory({ carName, clientInfo }) {
                       isExpanded={index === 0}
                       diagnostics={diagnostic}
                       recommendation={recommendation}
+                      repair={repair}
                     />
                   );
                 }

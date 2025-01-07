@@ -22,10 +22,11 @@ export default function RecordBtnInfo({
   item,
   diagnostics,
   recommendation,
+  repair,
 }) {
   const [changeRepairInput, setChangeRepairInput] = useState(false);
   const [repairRecords, setRepairRecords] = useState(
-    item.repair?.fillOfRepair || []
+    repair?.fillOfRepair || []
   );
   const [appealMsgToShow, setAppealMsgToShow] = useState(true);
   const [diagnostic, setDiagnostic] = useState(
@@ -226,7 +227,7 @@ export default function RecordBtnInfo({
               </div>
             )}
           </div>
-          {item.repair.fillOfRepair && (
+          {repair.fillOfRepair && (
             <TableContainer component={Paper}>
               <Table>
                 <TableHead>
