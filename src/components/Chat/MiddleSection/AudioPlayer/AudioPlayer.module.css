@@ -1,0 +1,120 @@
+.callTranscription {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: var(--contacts-info-bg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  width: 252px;
+  height: 70px;
+  border-radius: 0px 20px 20px 20px;
+}
+
+.callTranscriptionClientAndLC {
+  width: 100%;
+  height: 70px;
+  border-radius: 0px 20px 20px 20px;
+}
+
+.callTranscriptionAccounting {
+  width: 135px;
+  height: 35px;
+  display: flex;
+  padding: 5px 0;
+  align-items: center;
+  border-radius: 12px;
+  margin-right: 10px;
+}
+
+.wrapperOfUiElement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.wrapperOfUiElementClientAndLC {
+  gap: 26px;
+}
+
+.wrapperOfUiElementAccounting {
+  gap: 13px;
+}
+
+.transcriptionBtn {
+  z-index: 5;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: none;
+  background: var(--white, #fff);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.transcriptionBtClientAndLC {
+  width: 40px;
+  height: 40px;
+}
+
+.transcriptionBtAccounting {
+  width: 20px;
+  height: 20px;
+}
+
+.customSlider {
+  padding: 0px !important;
+  box-sizing: content-box !important;
+  position: absolute !important;
+  height: 100% !important;
+  border-radius: 20px !important;
+  width: 100%;
+}
+
+.customSliderAccounting {
+  border-radius: 12px;
+}
+
+:global(.MuiSlider-thumb) {
+  display: none !important;
+}
+
+:global(.MuiSlider-track) {
+  border: none !important;
+  background: var(--player-secondary-bg) !important;
+  border-radius: 20px !important;
+  border-top-left-radius: 0 !important;
+}
+
+:global(.MuiSlider-rail) {
+  cursor: ew-resize !important;
+  z-index: 3 !important;
+  height: 100% !important;
+  background-color: #ffffff00 !important;
+}
+
+.wave {
+  fill: #d9d9d9;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.time {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  z-index: 2;
+  line-height: 1;
+}
+
+.callTranscriptionClientAndLC .time {
+  font-size: 18px;
+}
+
+.callTranscriptionAccounting .time {
+  font-size: 12px;
+}
