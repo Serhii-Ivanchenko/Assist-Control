@@ -3,8 +3,6 @@ import ArchiveCarItem from "../ArchiveCarItem/ArchiveCarItem";
 
 export default function ArchiveList({ carsDataArchive }) {
 
-  
-
   return (
     <div className={styles.listContainer}>
       <div className={styles.scrollWrapper}>

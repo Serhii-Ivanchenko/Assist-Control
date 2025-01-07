@@ -5,7 +5,7 @@
 }
 
 .wrapper .accordion .MuiAccordionSummary-root {
-  background: #2d3138;
+  background: var(--bg-input);
   color: var(--white);
 }
 
@@ -144,6 +144,7 @@
   appearance: none;
   outline: none;
 }
+
 .wrapper .accordionDesc .input:focus {
   outline: 1px solid var(--light-gray);
 }

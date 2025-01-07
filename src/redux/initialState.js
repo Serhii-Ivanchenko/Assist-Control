@@ -209,4 +209,16 @@ export const initialState = {
     isLoading: false,
     error: null,
   },
+
+  chat: {
+    isChatOpen: false,
+    channels: [],
+    inbox: [],
+    messagesList: [],
+    chatMessages: [],
+    userInfo: [],
+    tags: [],
+    prompts: [],
+    selectedPrompt: null,
+  },
 };

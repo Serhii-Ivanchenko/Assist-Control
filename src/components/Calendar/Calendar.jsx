@@ -156,38 +156,42 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
       </div>
 
       <div className={css.calendargrid}>
-        {calendarWithPercent.map((item, index) => 
-          (
-          
-            <button
-              key={index}
-              onClick={() =>
-                handleDateClick(
-                  item,
-                  item.date.format("YYYY-MM-DD"),
-                  item.percent
-                )
-              }
-              disabled={isDateDisabled(item.date)}
-              style={{
-                backgroundColor: isCrm ? getButtonColorCrm(item.percent) : getButtonColor(item.percent), 
-                // border: item.date.isSame(selectedDate, "day")
-                //   ? " 1px solid var(--white)"
-                //   : "1px solid transparent",
-              }}
-              className={`calendar-day  
+        {calendarWithPercent.map((item, index) => (
+          <button
+            key={index}
+            onClick={() =>
+              handleDateClick(
+                item,
+                item.date.format("YYYY-MM-DD"),
+                item.percent
+              )
+            }
+            disabled={isDateDisabled(item.date)}
+            style={{
+              backgroundColor: isCrm
+                ? getButtonColorCrm(item.percent)
+                : getButtonColor(item.percent),
+              // border: item.date.isSame(selectedDate, "day")
+              //   ? " 1px solid var(--white)"
+              //   : "1px solid transparent",
+            }}
+            className={`calendar-day  
               ${isCrm ? "crm-width" : ""} 
-             ${!isCrm && item.date.date() > currentDate.date() ? "cursordefault" : ""} 
-              ${item.date.month() !== queryMonthDayjs.month()
+             ${
+               !isCrm && item.date.date() > currentDate.date()
+                 ? "cursordefault"
+                 : ""
+             } 
+              ${
+                item.date.month() !== queryMonthDayjs.month()
                   ? "other-month"
                   : ""
-                } 
+              } 
               ${item.date.isSame(selectedDate, "day") ? "today" : ""}`}
-            >
-              {item.date.date()}
-            </button>
-          )
-        )}
+          >
+            {item.date.date()}
+          </button>
+        ))}
       </div>
 
       <style>{`
@@ -219,6 +223,7 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
 
         .cursordefault{
         cursor: default;
+        color: var(--text-gray)
          }
 
         .other-month {

@@ -157,7 +157,7 @@ function AccordionItem({
         }}
       >
         <AccordionSummary
-          sx={{ background: "#2D3138" }}
+          sx={{ background: "var(--bg-input)" }}
           className={styles.accordionTitle}
           aria-controls={`panel${index}-content`}
           id={`panel${index}-header`}
