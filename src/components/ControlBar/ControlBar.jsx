@@ -13,7 +13,7 @@ export default function ControlBar() {
     <div className={css.wrapper}>
       <NewServiceBookingBtn />
       <Archive />
-      <SearchBar />
+      {/* <SearchBar /> */}
       <ThemeSwitcher />
       <Support />
       <PhoneCalls />
