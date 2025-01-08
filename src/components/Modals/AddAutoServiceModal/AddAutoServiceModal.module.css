@@ -127,6 +127,10 @@
   gap: 12px;
 }
 
+.isOrganization {
+  margin-top: 33px;
+}
+
 .addressWrapper {
   display: grid;
   gap: 6px;
@@ -155,9 +159,24 @@
   position: relative;
 }
 
+.text {
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 6px 20px;
+  text-align: center;
+  border-radius: 6px;
+  background-color: var(--contacts-info-bg);
+}
+
 .inputsWrapper {
-  display: flex;
+  /* display: flex;
+  gap: 22px; */
+  display: grid;
   gap: 22px;
+  grid-template-columns: auto auto;
 }
 
 .wrapper {
