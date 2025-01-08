@@ -4,7 +4,7 @@ import EmailType from "./EmailType/EmailType";
 import css from "./InboxPart.module.css";
 import { IoIosArrowDown } from "react-icons/io";
 
-export default function InboxPart() {
+export default function InboxPart({ handleFilter }) {
   // const [isActive, setIsActive] = useState(false)
 
   // const handleClick = () => {
@@ -39,7 +39,7 @@ export default function InboxPart() {
       </div>
 
       <EmailType />
-      <ChannelsPart />
+      <ChannelsPart handleFilter={handleFilter} />
     </div>
   );
 }
