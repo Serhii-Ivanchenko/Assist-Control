@@ -20,18 +20,14 @@ import ava from "../,,/../../../assets/images/ava1.png";
 import {
   BsFiles,
   BsAlarm,
-  BsFillPersonPlusFill,
   BsTelephone,
-  BsPersonPlusFill,
 } from "react-icons/bs";
 import {
   RiUserSharedFill,
-  RiUserShared2Fill,
   RiUserAddFill,
 } from "react-icons/ri";
-import { TiUserAdd } from "react-icons/ti";
+import { IoIosSearch } from "react-icons/io";
 
-import { MdPersonAddAlt1 } from "react-icons/md";
 import { BsPencil, BsXCircle } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
 import toast from "react-hot-toast";
@@ -113,6 +109,10 @@ export default function RightSection() {
   const [isEditing, setIsEditing] = useState([]);
   const chatAvtoRef = useRef(null);
   const chatNotesRef = useRef(null);
+
+  const [filters, setFilters] = useState(["", ""]); 
+  const [activeFilters, setActiveFilters] = useState([false, false]); 
+  
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -207,6 +207,51 @@ export default function RightSection() {
   }, [tagsArr]);
 
   //*TagsPart finish*//
+
+   const handleFilterToggle = (index) => (e) => {
+  e.stopPropagation(); // Остановить всплытие события
+  const newActiveFilters = [...activeFilters];
+  newActiveFilters[index] = !activeFilters[index];
+  setActiveFilters(newActiveFilters);
+
+  if (!newActiveFilters[index]) {
+    const newFilters = [...filters];
+    newFilters[index] = ""; // Сброс фильтра при отключении
+    setFilters(newFilters);
+  }
+};
+
+const handleFilterChange = (index) => (e) => {
+  const newFilters = [...filters];
+  newFilters[index] = e.target.value;
+  setFilters(newFilters);
+  };
+
+
+  const categories = [
+  { categ: 1, fullname: "Нові шаблони", shortname: "Нові" },
+  { categ: 2, fullname: "Запис на послуги", shortname: "Запис" },
+  { categ: 3, fullname: "Інформація про послуги", shortname: "Послуги" },
+  { categ: 4, fullname: "Повідомлення про затримки", shortname: "Затримка" },
+  { categ: 5, fullname: "Подяка", shortname: "Подяка" },
+];
+
+  const [activeCategory, setActiveCategory] = useState(categories[0]); // Выбрана первая категория по умолчанию
+  const [isCategory, setIsCategory] = useState(false); // Видимость справочника
+
+  
+//  const toggleCategorySelector = () => {
+//   setIsCategory((prev) => !prev);
+// };
+
+  const toggleCategorySelector = () => {
+    setIsCategory(!isCategory); 
+  };
+  
+const handleCategorySelect = (category) => {
+  setActiveCategory(category);
+  setIsCategory(false); // Закрываем справочник
+}; 
 
   return (
     <div className={css.rightSectionWrapper}>
@@ -424,6 +469,19 @@ export default function RightSection() {
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary)",
             },
+ "& .MuiAccordionSummary-root": {
+      backgroundColor: "var(--bg-secondary)", // Явно указываем фон
+    },
+    "& .MuiAccordionSummary-root:focus": {
+      backgroundColor: "var(--bg-secondary)", // Сохраняем фон при фокусе
+    },
+    "& .MuiAccordionDetails-root": {
+      backgroundColor: "var(--bg-secondary)", // Настраиваем для деталей аккордеона
+    },
+
+
+
+
             background: "none",
             color: "var(--light-gray)",
             boxShadow: "none",
@@ -453,6 +511,95 @@ export default function RightSection() {
                   }}
                   onClick={() => handleRowClick("panel3")}
                 />
+
+                {expandedRows.includes("panel3") && (
+                  <IoIosSearch
+                    style={{
+                      cursor: "pointer",
+                      color: activeFilters[0] ? "var(--current-mileage-text)" : "var(--light-gray)",
+                    position: "relative",
+                   
+                    }}
+                    onClick={handleFilterToggle(0)}
+                  />)}
+                
+                 {expandedRows.includes("panel3") &&  activeFilters[0] && (
+            <input className={css.editInput} style={{ width: "50px"}}
+              type="text"
+              // placeholder="Фільтр"
+              value={filters[0]}
+              onChange={handleFilterChange(0)}
+                /> 
+                 ) }
+
+               {/* Отображение активной категории */}
+                {expandedRows.includes("panel3") && (
+                  <div
+          className={css.categoryDisplay}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+            marginLeft: "60px",
+            position: "absolute",
+             left: "190px",
+              
+          }}
+          onClick={toggleCategorySelector} // Открываем/закрываем справочник
+        >
+          <span>{activeCategory.shortname}</span> 
+          <ExpandMoreIcon
+            sx={{
+              fill: "var(--light-gray)",
+              transform: isCategory ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s",
+              marginLeft: "4px",
+            }}
+          />
+        </div>
+)}
+      
+        {expandedRows.includes("panel3") && isCategory && (
+          <div
+            className={css.categorySelector}
+           style={{
+            position: "absolute",
+            background: "var(--bg-secondary)",
+            border: "1px solid var(--light-gray)",
+            top: "45px", 
+            left: "160px", 
+            width: "235px", 
+            borderRadius: "4px",
+            padding: "8px",
+            marginTop: "4px",
+            zIndex: 1000,
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+          }}
+            
+                  >
+            {categories.map((category) => (
+              <div
+                key={category.categ}
+                style={{
+                  padding: "4px 8px",
+                  cursor: "pointer",
+                  color: "var(--light-gray)",
+                  fontSize: "14px",
+                  backgroundColor:
+                    category.categ === activeCategory.categ ? "var(--current-mileage-text)" : "transparent",
+                }}
+                onClick={() => handleCategorySelect(category)}
+              >
+                {category.fullname} 
+              </div>
+            ))}
+          </div>
+        )}
+      
+
+
+
+
               </div>
               {expandedRows.includes("panel3") && (
                 // expanded === "panel3"
@@ -463,7 +610,7 @@ export default function RightSection() {
                 //   transition: "max-height 0.3s ease",
                 // }}
                 >
-                  <ChatSample />
+                  <ChatSample filter={filters[0]} selectedCateg={activeCategory.categ} />
                 </AccordionDetails>
               )}
             </div>
@@ -567,6 +714,16 @@ export default function RightSection() {
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary)",
             },
+            "& .MuiAccordionSummary-root": {
+      backgroundColor: "var(--bg-secondary)", // Явно указываем фон
+    },
+    "& .MuiAccordionSummary-root:focus": {
+      backgroundColor: "var(--bg-secondary)", // Сохраняем фон при фокусе
+    },
+    "& .MuiAccordionDetails-root": {
+      backgroundColor: "var(--bg-secondary)", // Настраиваем для деталей аккордеона
+    },
+
             background: "none",
             color: "var(--light-gray)",
             boxShadow: "none",
@@ -577,6 +734,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel5") ? 173 : 56,
+               "& .Mui-focusVisible": {
+              backgroundColor: "var(--bg-secondary)",
+            },
             }}
             className={css.accordionTitle}
             // expandIcon={<ExpandMoreIcon style={{fill: "var(--light-gray)"}}/>}
@@ -596,6 +756,26 @@ export default function RightSection() {
                   }}
                   onClick={() => handleRowClick("panel5")}
                 />
+
+                {expandedRows.includes("panel5") && (
+                  <IoIosSearch
+                    style={{
+                      cursor: "pointer",
+                      color: activeFilters[1] ? "var(--current-mileage-text)" : "var(--light-gray)",
+                    }}
+                    onClick={handleFilterToggle(1)}
+                  />)}
+                 {expandedRows.includes("panel5") &&  activeFilters[1] && (
+            <input className={css.editInput}
+              type="text"
+              // placeholder="Фільтр"
+              value={filters[1]}
+              onChange={handleFilterChange(1)}
+                /> 
+                 )
+                }
+
+
               </div>
               {expandedRows.includes("panel5") && (
                 // expanded === "panel5"
@@ -606,7 +786,7 @@ export default function RightSection() {
                 //   transition: "max-height 0.3s ease",
                 // }}
                 >
-                  <ChatHistoryChange />
+                  <ChatHistoryChange filter={filters[1]}/>
                 </AccordionDetails>
               )}
             </div>
