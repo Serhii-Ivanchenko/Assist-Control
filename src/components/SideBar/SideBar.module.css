@@ -16,7 +16,6 @@
 .chatOpen {
   width: 80px;
   padding: 10px;
-  gap: 38px;
 }
 
 @media only screen and (min-width: 1850px) {
@@ -45,11 +44,11 @@
   gap: 10px;
   overflow-y: auto;
   max-height: calc(100vh - 200px);
-  transition: gap 0.9s ease-in-out; 
+  transition: margin-left 0.7s ease;
 }
 
 .bottomContainerWithChat{
-  gap: 38px;
+  margin-left: 10px;
 }
 
 .bottomContainer.withScroll {

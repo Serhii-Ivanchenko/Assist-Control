@@ -105,22 +105,22 @@
     gap: 10px;
 }
 
-.listInChat{
+/* .listInChat{
     display: flex;
     align-items: center;
     margin-bottom: 60px;
     gap: 0;
     transition: margin-bottom 0.7s ease-in-out;
-}
+} */
 
-.itemInChat{
+/* .itemInChat{
     padding: 10px;
     transition: padding 0.7s ease-in-out;
-}
+} */
 
-.navWithChat{
-    gap: 0;
-  }
+/* .navWithChat{
+    justify-content: center;
+  } */
 
   .visible {
     opacity: 1;

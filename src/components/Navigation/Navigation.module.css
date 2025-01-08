@@ -1,12 +1,10 @@
 
 .navItem {
-    
     font-size: 11px;
     font-weight: 400;
     line-height: normal;
     font-variant: small-caps;
     transition: padding 0.7s ease;
-    padding: 0;
 }
 
 @media only screen and (min-width: 1850px) {
@@ -135,6 +133,15 @@
   .navArrow {
     font-size: 13px; 
     vertical-align: middle;
+  transition: all 0.7s ease;
+  }
+
+  .smallArrow {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
   }
 
   .repostClientsContainer{
@@ -151,23 +158,6 @@
     background: var(--bg-input);
     height: 24px;
     line-height: 1.5;
-  }
-
-  .navLinkChat {
-    padding: 10px;
-    transition: padding 0.7s ease;
-  }
-
-  .smallArrow {
-    position: absolute;
-    right: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 10px;
-  }
-
-  .topNavChat{
-    gap: 0;
   }
 
   .visible {
@@ -200,6 +190,4 @@
     opacity: 0;
     max-width: 0px;
   }
-  .navWithChat{
-    gap: 0;
-  }
+ 
