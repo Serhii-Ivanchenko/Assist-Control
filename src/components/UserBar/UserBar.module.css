@@ -4,6 +4,7 @@
   position: absolute;
   top: 48px;
   right: 10px;
+  transition: top 0.7s ease, right 0.7s ease; 
 }
 
 @media only screen and (min-width: 1850px) {
@@ -12,7 +13,7 @@
     right: 23px;
   }
   .chatOpen {
-    top: 77px;
+    top: 54px;
     right: 0;
   }
 }

@@ -3,9 +3,9 @@
   transition: margin-top 0.7s ease-in-out;
 }
 
-.userInfoChat{
+/* .userInfoChat{
   margin-top: 25px;
-}
+} */
 
 @media only screen and (min-width: 1850px) {
   .userInfo {
