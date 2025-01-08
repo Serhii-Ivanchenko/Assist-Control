@@ -1,47 +1,43 @@
 import css from "./ChannelItem.module.css";
 import { RxDragHandleDots2 } from "react-icons/rx";
 // import { useRef } from "react";
-// import { useDrag, useDrop } from "react-dnd";
 // import { useState } from "react";
+// import { useDraggable } from "@dnd-kit/core";
+// import { CSS } from "@dnd-kit/utilities";
 
 export default function ChannelItem({
   index,
   channel,
   gmail,
   facebook,
+  // id,
+  handleFilter,
   // moveChannel,
   handleDragStart,
   handleDragOver,
   handleDragEnd,
 }) {
-  // const ref = useRef(null);
-  //   const [isDragActive, setIsDragActive] = useState(false);
-
-  // const [, drag] = useDrag(() => {
-  //   // console.log("useDrag called for index:", index); // Лог для діагностики
-  //   return {
-  //     type: "ITEM",
-  //     item: { index },
-  //   };
+  // const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+  //   id,
   // });
 
-  // const [, drop] = useDrop(() => ({
-  //   accept: "ITEM",
-  //   hover: (draggedItem) => {
-  //     //   console.log("Hovered over index:", index);
-  //     if (draggedItem.index !== index) {
-  //       moveChannel(draggedItem.index, index);
-  //       draggedItem.index = index; // Оновлюємо індекс перетягуваного елемента
-  //     }
-  //   },
-  // }));
-
-  // drag(drop(ref));
+  // const style = {
+  //   opacity: isDragging ? 0.5 : 1,
+  //   // cursor: "move",
+  //   // ...CSS.Transform.toString(),
+  // };
+  // const ref = useRef(null);
+  //   const [isDragActive, setIsDragActive] = useState(false);
 
   return (
     <li
       key={channel.id}
       className={css.channelsListItem}
+      // style={style}
+      // ref={setNodeRef}
+      // {...listeners}
+      // {...attributes}
+      onClick={(e) => handleFilter(e, channel.type)}
       // ref={ref}
       draggable
       onDragStart={() => handleDragStart(index)}
@@ -63,7 +59,20 @@ export default function ChannelItem({
 
       <div className={css.dragContainer}>
         <p className={css.numberBox}>{channel.value}</p>
-        <RxDragHandleDots2 className={css.dragIcon} />
+        <span
+          className={css.dragIcon}
+
+          // draggable
+          // onDragStart={(event) => handleDragStart(event, index)}
+          // onDragOver={(event) => handleDragOver(event, index)}
+          // onDragEnd={(event) => handleDragEnd(event)}
+        >
+          <RxDragHandleDots2
+            className={css.dragIcon}
+            // {...listeners}
+            // {...attributes}
+          />
+        </span>
       </div>
     </li>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import css from "./ActionsPart.module.css";
 import { BsCheck } from "react-icons/bs";
 import { BsArrowDownUp } from "react-icons/bs";
@@ -7,13 +7,12 @@ import { BsTag } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
 
-export default function ActionsPart() {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleChecked = () => {
-    setIsChecked((prev) => !prev);
-  };
-
+export default function ActionsPart({
+  isChecked,
+  handleChecked,
+  allChecked,
+  handleAllChecked,
+}) {
   return (
     <div className={css.actions}>
       {isChecked && (
@@ -23,8 +22,8 @@ export default function ActionsPart() {
             name="chooseAll"
             id="chooseAll"
             className={css.checkbox}
-            // checked={isChecked}
-            // onChange={handleChecked}
+            checked={allChecked.every((item) => item)}
+            onChange={handleAllChecked}
           />
           <span className={css.cbMark}>
             <BsCheck size={16} className={css.cbIcon} />

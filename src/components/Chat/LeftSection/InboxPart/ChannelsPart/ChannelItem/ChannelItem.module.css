@@ -3,6 +3,18 @@
   justify-content: space-between;
   height: 46px;
   cursor: pointer;
+  user-select: none;
+  background-color: var(--bg-secondary);
+  /* opacity: 1 !important; */
+
+  transition: opacity 0.3s ease-in-out;
+
+  position: relative;
+}
+
+.dragged {
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
 }
 
 .iconAndText {
@@ -78,4 +90,12 @@
 
   border-radius: 10px;
   border: 1px solid var(--main-gray);
+}
+
+.dragIcon {
+  cursor: grab;
+}
+
+.dragIcon:active {
+  cursor: grabbing;
 }
