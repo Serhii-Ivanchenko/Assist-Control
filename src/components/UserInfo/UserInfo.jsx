@@ -6,10 +6,13 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import Modal from "../Modals/Modal/Modal.jsx";
 import PaymentTopUpAccountModal from "../Modals/PaymentTopUpAccountModal/PaymentTopUpAccountModal.jsx";
+import { selectIsChatOpen } from "../../redux/chat/selectors.js";
+import clsx from "clsx";
 
 export default function UserInfo() {
   const user = useSelector(selectUser);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const chatIsOpen = useSelector(selectIsChatOpen);
 
   const openModal = () => {
     setIsOpen(true);
@@ -27,23 +30,27 @@ export default function UserInfo() {
   const balance = user && user.balance !== null ? user.balance : "0";
 
   return (
-    <div className={styles.userInfo}>
+    <div className={clsx(styles.userInfo, { [styles.userInfoChat]: chatIsOpen })}>
       <div className={styles.avatar}>
         <img src={avatarUrl} alt={fullName} />
       </div>
-      <h2 className={styles.name}>{fullName}</h2>
-      <div className={styles.userDetails}>
+      <h2 className={clsx(styles.name, { [styles.hidden]: chatIsOpen, [styles.visible]: !chatIsOpen })}>
+        {fullName}
+      </h2>
+
+      <div className={clsx(styles.userDetails, { [styles.hidden]: chatIsOpen, [styles.visible]: !chatIsOpen })}>
+
         <p>{companyName}</p>
         <p>ID: {userId}</p>
       </div>
-      <div className={styles.balance}>
+      <div className={clsx(styles.balance, { [styles.hidden]: chatIsOpen, [styles.visible]: !chatIsOpen })}
+      >
         <span className={styles.balanceText}>Баланс:</span>
         <button onClick={openModal} className={styles.balanceButton}>
           <span className={styles.num}>{balance} грн</span>
           <FaChevronRight className={styles.icon} />
         </button>
 
-       
         {modalIsOpen && (
           <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
             <PaymentTopUpAccountModal onClose={handleModalClose} />

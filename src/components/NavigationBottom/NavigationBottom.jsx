@@ -4,51 +4,98 @@ import clsx from "clsx";
 import { BsGift } from "react-icons/bs";
 import { MdOutlineStarOutline } from "react-icons/md";
 import { PiChartLineUp } from "react-icons/pi";
+import { selectIsChatOpen } from "../../redux/chat/selectors";
+import { useSelector } from "react-redux";
 
 export default function NavigationBottom() {
+  const chatIsOpen = useSelector(selectIsChatOpen);
+
   return (
     <nav className={styles.navigation}>
-        <ul className={styles.bottomNavContainer}>
-          <li className={styles.navItem}>
-            <NavLink
-              to="/bonuses"
-              className={({ isActive }) =>
-                clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
-              }
+      <ul
+        className={clsx(styles.bottomNavContainer, {
+          [styles.listInChat]: chatIsOpen,
+        })}
+      >
+        <li
+          className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}
+        >
+          <NavLink
+            to="/bonuses"
+            className={({ isActive }) =>
+              clsx(styles.navLink, {
+                [styles.active]: isActive,
+                [styles.disabled]: true,
+                [styles.navWithChat]: chatIsOpen,
+              })
+            }
+          >
+            <div className={styles.iconContainer}>
+              <BsGift className={styles.iconBonus} />
+            </div>
+            <span
+              className={clsx(styles.linkText, {
+                [styles.hidden]: chatIsOpen,
+                [styles.visible]: !chatIsOpen,
+              })}
             >
-              <div className={styles.iconContainer}>
-                <BsGift className={styles.iconBonus} />
-              </div>
               Мій бонус
-            </NavLink>
-          </li>
-          <li className={styles.navItem}>
-            <NavLink
-              to="/rating"
-              className={({ isActive }) =>
-                clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
-              }
+            </span>
+          </NavLink>
+        </li>
+        <li
+          className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}
+        >
+          <NavLink
+            to="/rating"
+            className={({ isActive }) =>
+              clsx(styles.navLink, {
+                [styles.active]: isActive,
+                [styles.disabled]: true,
+                [styles.navWithChat]: chatIsOpen,
+              })
+            }
+          >
+            <div className={styles.iconContainer}>
+              <MdOutlineStarOutline className={styles.iconRating} />
+            </div>
+            <span
+              className={clsx(styles.linkText, {
+                [styles.hidden]: chatIsOpen,
+                [styles.visible]: !chatIsOpen,
+              })}
             >
-              <div className={styles.iconContainer}>
-                <MdOutlineStarOutline className={styles.iconRating} />
-              </div>
               Рейтинг
-            </NavLink>
-          </li>
-          <li className={styles.navItem}>
-            <NavLink
-              to="/proficiency"
-              className={({ isActive }) =>
-                clsx(styles.navLink, { [styles.active]: isActive, [styles.disabled]: true })
-              }
+            </span>
+          </NavLink>
+        </li>
+        <li
+          className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}
+        >
+          <NavLink
+            to="/proficiency"
+            className={({ isActive }) =>
+              clsx(styles.navLink, {
+                [styles.active]: isActive,
+                [styles.disabled]: true,
+                [styles.navWithChat]: chatIsOpen,
+              })
+            }
+          >
+            <div className={styles.iconContainer}>
+              <PiChartLineUp className={styles.iconChart} />
+            </div>
+            <span
+              className={clsx(styles.linkText, {
+                [styles.hidden]: chatIsOpen,
+                [styles.visible]: !chatIsOpen,
+              })}
             >
-              <div className={styles.iconContainer}>
-                <PiChartLineUp className={styles.iconChart} />
-              </div>
               Кваліфікація
-            </NavLink>
-          </li>
-        </ul>
+            </span>
+          </NavLink>
+        </li>
+      </ul>
     </nav>
   );
 }

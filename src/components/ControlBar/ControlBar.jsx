@@ -9,6 +9,7 @@ import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher.jsx";
 import css from "./ControlBar.module.css";
 
 export default function ControlBar() {
+  
   return (
     <div className={css.wrapper}>
       <NewServiceBookingBtn />

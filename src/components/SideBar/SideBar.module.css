@@ -11,12 +11,21 @@
 
   /* flex-grow: 1; */
   flex-shrink: 0;
+  transition: width 0.7s ease-in, padding 0.7s ease-in, gap 0.7s ease-in;
+}
+.chatOpen {
+  width: 80px;
+  padding: 10px;
 }
 
 @media only screen and (min-width: 1850px) {
   .sidebar {
     width: 230px;
     height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
+  }
+  .chatOpen {
+    width: 106px;
+    padding: 20px;
   }
 }
 
@@ -34,7 +43,12 @@
   flex-grow: 1;
   gap: 10px;
   overflow-y: auto;
-  max-height: calc(100vh - 200px); 
+  max-height: calc(100vh - 200px);
+  transition: margin-left 0.7s ease;
+}
+
+.bottomContainerWithChat{
+  margin-left: 10px;
 }
 
 .bottomContainer.withScroll {

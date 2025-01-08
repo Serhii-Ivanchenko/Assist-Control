@@ -1,25 +1,21 @@
-// import { useState } from 'react';
-import Box from '@mui/material/Box';
-import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
-import { TreeItem } from '@mui/x-tree-view/TreeItem';
-import { NavLink } from 'react-router-dom';
-// import { BiSolidRightArrow, BiSolidDownArrow } from 'react-icons/bi';
-// import clsx from 'clsx';
-import styles from './AccountingTree.module.css';
+import Box from "@mui/material/Box";
+import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
+import { TreeItem } from "@mui/x-tree-view/TreeItem";
+import { NavLink } from "react-router-dom";
+import { FaUserFriends, FaTruck, FaFileInvoice } from "react-icons/fa"; // імпортуємо іконки
+import styles from "./AccountingTree.module.css";
+import { selectIsChatOpen } from "../../../redux/chat/selectors";
+import { useSelector } from "react-redux";
+import clsx from "clsx";
 
 export default function AccountingTree() {
-  // const [expanded, setExpanded] = useState([]);
-
-  // const handleToggle = (nodeId) => {
-  //   setExpanded((prev) =>
-  //     prev.includes(nodeId)
-  //       ? prev.filter((id) => id !== nodeId)
-  //       : [...prev, nodeId]
-  //   );
-  // };
+  const chatIsOpen = useSelector(selectIsChatOpen);
 
   return (
-    <Box className={styles.treeBox} sx={{ minHeight: 0, minWidth: 170 }}>
+    <Box
+      className={clsx(styles.treeBox, { [styles.treeBoxOpenChat]: chatIsOpen })}
+      sx={{ minHeight: 0, width: chatIsOpen ? 50 : 170 }}
+    >
       <SimpleTreeView>
         <TreeItem
           className={styles.treeItem}
@@ -27,9 +23,15 @@ export default function AccountingTree() {
           label={
             <NavLink
               to="/accounting/clients"
-              className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+              className={({ isActive }) =>
+                isActive ? styles.activeLink : styles.link
+              }
             >
-              Клієнти
+              {chatIsOpen ? (
+                <FaUserFriends className={styles.icon} size={20}/>
+              ) : (
+                "Клієнти"
+              )}
             </NavLink>
           }
         />
@@ -39,9 +41,15 @@ export default function AccountingTree() {
           label={
             <NavLink
               to="/accounting/distributors"
-              className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+              className={({ isActive }) =>
+                isActive ? styles.activeLink : styles.link
+              }
             >
-              Постачальники
+              {chatIsOpen ? (
+                <FaTruck className={styles.icon} size={20}/>
+              ) : (
+                "Постачальники"
+              )}
             </NavLink>
           }
         />
@@ -51,9 +59,15 @@ export default function AccountingTree() {
           label={
             <NavLink
               to="/accounting/documents/goods"
-              className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+              className={({ isActive }) =>
+                isActive ? styles.activeLink : styles.link
+              }
             >
-              Накладні
+              {chatIsOpen ? (
+                <FaFileInvoice className={styles.icon} size={20}/>
+              ) : (
+                "Накладні"
+              )}
             </NavLink>
           }
         />
