@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   height: auto;
-  padding: 18px 19px;
+  padding: 19px;
   border-radius: 12px;
   background: var(--CRM-modal-SecondaryBG, #23252c);
 
@@ -37,7 +37,7 @@
 .input {
   display: inline-flex;
   width: 390px;
-  height: 45px;
+  /* height: 45px; */
   padding: 15px;
   padding-right: 30px;
   border: none;
@@ -45,9 +45,7 @@
   outline: none;
   color: var(--light-gray);
   resize: none;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  -ms-overflow-style: none;
+  font-size: 14px;
 }
 
 .input::-webkit-scrollbar {
@@ -187,6 +185,7 @@
 .audioInsideInput {
   position: relative;
   width: fit-content;
+  margin: 7px 5px;
 }
 
 .removePreviewDoc {

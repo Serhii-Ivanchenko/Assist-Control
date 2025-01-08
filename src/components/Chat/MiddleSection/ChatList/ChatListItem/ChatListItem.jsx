@@ -55,7 +55,7 @@ function ChatListItem({ message }) {
                 <AudioPlayer
                   key={index}
                   audio={file.url}
-                  size="small"
+                  size="big"
                   audioDuration="00:00"
                 />
               );

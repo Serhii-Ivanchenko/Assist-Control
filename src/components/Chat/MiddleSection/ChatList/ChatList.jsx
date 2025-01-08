@@ -7,7 +7,7 @@ function ChatList({ messages, inputHeight }) {
 
   useEffect(() => {
     if (wrapperRef.current) {
-      const maxWrapperHeight = 860;
+      const maxWrapperHeight = 864;
       wrapperRef.current.style.maxHeight = `${
         maxWrapperHeight - inputHeight
       }px`;
