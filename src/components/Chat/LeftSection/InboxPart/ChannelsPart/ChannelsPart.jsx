@@ -20,23 +20,51 @@ import ChannelItem from "./ChannelItem/ChannelItem";
 // import { DragOverlay } from "@dnd-kit/core";
 // import SortableOverlay from "./SortableOverlay/SortableOverlay";
 
-export default function ChannelsPart({ handleFilter }) {
+export default function ChannelsPart({
+  handleFilter,
+  chats,
+  setFilteredChats,
+}) {
   const channelsList = [
-    { icon: gmail, text: "Gmail", value: "4", id: "1", type: "gmail" },
-    { icon: telegram, text: "Telegram", value: "2", id: "2", type: "telegram" },
-    { icon: whatsApp, text: "WhatsApp", value: "2", id: "3", type: "whatsApp" },
+    {
+      icon: gmail,
+      text: "Gmail",
+      value: chats.filter((chat) => chat.type === "gmail").length,
+      id: "1",
+      type: "gmail",
+    },
+    {
+      icon: telegram,
+      text: "Telegram",
+      value: chats.filter((chat) => chat.type === "telegram").length,
+      id: "2",
+      type: "telegram",
+    },
+    {
+      icon: whatsApp,
+      text: "WhatsApp",
+      value: chats.filter((chat) => chat.type === "whatsApp").length,
+      id: "3",
+      type: "whatsApp",
+    },
     {
       icon: facebook,
       text: "Messenger",
-      value: "1",
+      value: chats.filter((chat) => chat.type === "facebook").length,
       id: "4",
       type: "facebook",
     },
-    { icon: assist, text: "MobileApp", value: "1", id: "5", type: "assist" },
+    {
+      icon: assist,
+      text: "MobileApp",
+      value: chats.filter((chat) => chat.type === "assist").length,
+      id: "5",
+      type: "assist",
+    },
     {
       icon: <BsGlobe size={14} className={css.siteIcon} />,
       text: "Site",
-      value: "1",
+      value: chats.filter((chat) => chat.type === "site").length,
       id: "6",
       type: "site",
     },
@@ -44,14 +72,15 @@ export default function ChannelsPart({ handleFilter }) {
 
   //Відкриття. закриття по кліку на канали
   const [isOpen, setIsOpen] = useState(true);
-  const handleOpen = () => {
+  const handleOpen = (e) => {
+    e.stopPropagation();
     setIsOpen(!isOpen);
   };
 
   const [channels, setChannels] = useState(channelsList);
 
   const totalChannels = channels.reduce((total, channel) => {
-    return total + Number(channel.value);
+    return total + channel.value;
   }, 0);
 
   const [isActive, setIsActive] = useState(false);
@@ -144,9 +173,16 @@ export default function ChannelsPart({ handleFilter }) {
 
   return (
     <div className={css.channelsPart}>
-      <div className={css.channelsSelect} onClick={handleOpen}>
+      <div
+        className={css.channelsSelect}
+        onClick={() => {
+          setFilteredChats(chats);
+          setIsActive(false);
+        }}
+      >
         <div className={css.textAndArrow}>
           <IoIosArrowDown
+            onClick={(e) => handleOpen(e)}
             size={18}
             className={`${css.arrowIcon} ${isOpen && css.iconRotated}`}
           />

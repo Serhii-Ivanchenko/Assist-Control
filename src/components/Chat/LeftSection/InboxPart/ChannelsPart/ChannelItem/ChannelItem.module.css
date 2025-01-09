@@ -5,6 +5,9 @@
   cursor: pointer;
   user-select: none;
   background-color: var(--bg-secondary);
+  padding-left: 30px;
+  padding-right: 10px;
+
   /* opacity: 1 !important; */
 
   transition: opacity 0.3s ease-in-out;

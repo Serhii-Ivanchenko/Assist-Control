@@ -3,14 +3,18 @@
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  width: 202px;
+  width: 242px;
   margin-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 10px;
+  cursor: pointer;
 }
 
 .textAndArrow {
   display: flex;
   gap: 10px;
   cursor: pointer;
+  /* width: 174px; */
 }
 
 .text {
@@ -20,6 +24,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: 1.25em;
+  /* width: 100%; */
 }
 
 .numberBox {

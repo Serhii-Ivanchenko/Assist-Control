@@ -82,6 +82,41 @@ export default function LeftSection() {
       read: true,
       id: "6",
     },
+    {
+      type: "telegram",
+      avatar: avatar,
+      icon: telegram,
+      name: "Дмитро Поліщук",
+      lastMessage: "Доброго ранку! Ви працюєте з автомобілями американськог...",
+      managersPhoto: avatar,
+      time: "3h ago",
+      read: true,
+      id: "7",
+    },
+    {
+      type: "facebook",
+      avatar: avatar,
+      icon: facebook,
+      name: "Анастасія Шевченко",
+      lastMessage:
+        "Доброго дня! У мене є питання щодо ремонту коробки переда...",
+      managersPhoto: avatar,
+      time: "1d ago",
+      read: true,
+      id: "8",
+    },
+    {
+      type: "facebook",
+      avatar: avatar,
+      icon: facebook,
+      name: "Анастасія Шевченко",
+      lastMessage:
+        "Доброго дня! У мене є питання щодо ремонту коробки переда...",
+      managersPhoto: avatar,
+      time: "1d ago",
+      read: true,
+      id: "9",
+    },
   ];
 
   const [filteredChats, setFilteredChats] = useState(chats);
@@ -94,7 +129,11 @@ export default function LeftSection() {
   return (
     <div className={css.leftSectionWrapper}>
       {/* LeftSection */}
-      <InboxPart handleFilter={handleFilter} />
+      <InboxPart
+        handleFilter={handleFilter}
+        chats={chats}
+        setFilteredChats={setFilteredChats}
+      />
       <MessagesPart chats={filteredChats} />
     </div>
   );
