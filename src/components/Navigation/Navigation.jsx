@@ -72,12 +72,10 @@ export default function Navigation() {
   return (
     <nav className={styles.navigation}>
       <ul
-        className={clsx(styles.topNavContainer, {
-          [styles.topNavChat]: chatIsOpen,
-        })}
+        className={styles.topNavContainer}
       >
         <li
-          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <NavLink
             to="/main"
@@ -101,7 +99,7 @@ export default function Navigation() {
           </NavLink>
         </li>
         <li
-          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <NavLink
             to="/video-control"
@@ -121,7 +119,7 @@ export default function Navigation() {
           </NavLink>
         </li>
         <li
-          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <NavLink
             to="/crm"
@@ -141,7 +139,7 @@ export default function Navigation() {
           </NavLink>
         </li>
         <li
-          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <NavLink
             to="/connections"
@@ -161,7 +159,7 @@ export default function Navigation() {
           </NavLink>
         </li>
         <li
-          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <NavLink
             to="/recommendations"
@@ -185,13 +183,12 @@ export default function Navigation() {
           </NavLink>
         </li>
         <li
-          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <div
             onClick={toggleAccounting}
             className={clsx(styles.navLink, {
               [styles.active]: isAccountingOpen,
-              [styles.navWithChat]: chatIsOpen
             })}
           >
             <div
@@ -236,13 +233,12 @@ export default function Navigation() {
         </li>
 
         <li
-          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <div
             onClick={toggleReports}
             className={clsx(styles.navLink, {
               [styles.active]: isReportsOpen,
-              [styles.navWithChat]: chatIsOpen
             })}
           >
             <div
@@ -284,7 +280,7 @@ export default function Navigation() {
         </li>
 
         <li
-          className={clsx(styles.navItem, { [styles.navLinkChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <NavLink
             to="/settings"

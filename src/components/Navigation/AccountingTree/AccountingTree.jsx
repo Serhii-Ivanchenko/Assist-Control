@@ -14,7 +14,7 @@ export default function AccountingTree() {
   return (
     <Box
       className={clsx(styles.treeBox, { [styles.treeBoxOpenChat]: chatIsOpen })}
-      sx={{ minHeight: 0, width: chatIsOpen ? 50 : 170 }}
+      sx={{ minHeight: 0, width: chatIsOpen ? 42 : 170 }}
     >
       <SimpleTreeView>
         <TreeItem

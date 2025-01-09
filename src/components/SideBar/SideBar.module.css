@@ -9,10 +9,15 @@
   background: var(--bg-secondary);
   padding: 20px 30px;
 
-  /* flex-grow: 1; */
   flex-shrink: 0;
-  transition: width 0.7s ease-in, padding 0.7s ease-in, gap 0.7s ease-in;
+  transition: 
+  width 0.7s ease-in, 
+  padding 0.7s ease-in, 
+  gap 0.7s ease-in, 
+  box-shadow 0.2s ease-in-out, 
+  transform 0.2s ease-in-out;
 }
+
 .chatOpen {
   width: 80px;
   padding: 10px;
@@ -24,10 +29,16 @@
     height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
   }
   .chatOpen {
-    width: 106px;
+    width: 111px;
     padding: 20px;
   }
 }
+  
+  .sidebar:hover,
+  .chatOpen:hover {
+    box-shadow: 0px 14px 35px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+  }
 
 .userInfo {
   position: relative;
@@ -48,7 +59,7 @@
 }
 
 .bottomContainerWithChat{
-  margin-left: 10px;
+  margin-left: 16px;
 }
 
 .bottomContainer.withScroll {

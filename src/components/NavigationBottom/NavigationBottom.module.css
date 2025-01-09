@@ -19,7 +19,7 @@
     text-decoration: none;
     color: inherit;
     gap: 7px;
-    transition: color 0.3s, background-color 0.3s;
+    transition: color 0.3s, background-color 0.3s, width 0.7s ease;
 }
 
 @media only screen and (min-width: 1850px) {
@@ -27,6 +27,10 @@
         gap: 10px;
     }
 }
+
+.navWithChat{
+    width: 42px;
+  }  
 
 .iconContainer {
     width: 28px;
@@ -104,23 +108,6 @@
     flex-direction: column;
     gap: 10px;
 }
-
-/* .listInChat{
-    display: flex;
-    align-items: center;
-    margin-bottom: 60px;
-    gap: 0;
-    transition: margin-bottom 0.7s ease-in-out;
-} */
-
-/* .itemInChat{
-    padding: 10px;
-    transition: padding 0.7s ease-in-out;
-} */
-
-/* .navWithChat{
-    justify-content: center;
-  } */
 
   .visible {
     opacity: 1;

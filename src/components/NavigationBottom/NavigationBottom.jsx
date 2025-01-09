@@ -13,12 +13,10 @@ export default function NavigationBottom() {
   return (
     <nav className={styles.navigation}>
       <ul
-        className={clsx(styles.bottomNavContainer, {
-          [styles.listInChat]: chatIsOpen,
-        })}
+        className={styles.bottomNavContainer}
       >
         <li
-          className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <NavLink
             to="/bonuses"
@@ -44,7 +42,7 @@ export default function NavigationBottom() {
           </NavLink>
         </li>
         <li
-          className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <NavLink
             to="/rating"
@@ -70,7 +68,7 @@ export default function NavigationBottom() {
           </NavLink>
         </li>
         <li
-          className={clsx(styles.navItem, { [styles.itemInChat]: chatIsOpen })}
+          className={styles.navItem}
         >
           <NavLink
             to="/proficiency"

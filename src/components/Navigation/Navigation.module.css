@@ -13,13 +13,14 @@
     }
 }
 
+
 .navLink {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: inherit;
     gap: 7px;
-    transition: color 0.3s, background-color 0.3s;
+    transition: color 0.3s, background-color 0.3s, width 0.7s ease;
     cursor: pointer;
     position: relative;
 }
@@ -28,6 +29,10 @@
     .navLink {
         gap: 10px;
     }
+}
+
+.navWithChat{
+  width: 42px;
 }
 
 .topNavContainer {

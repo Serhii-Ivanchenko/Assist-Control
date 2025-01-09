@@ -30,7 +30,7 @@ export default function UserInfo() {
   const balance = user && user.balance !== null ? user.balance : "0";
 
   return (
-    <div className={clsx(styles.userInfo, { [styles.userInfoChat]: chatIsOpen })}>
+    <div className={styles.userInfo}>
       <div className={styles.avatar}>
         <img src={avatarUrl} alt={fullName} />
       </div>
