@@ -9,8 +9,16 @@
   background: var(--bg-secondary);
   padding: 20px 30px;
 
-  /* flex-grow: 1; */
   flex-shrink: 0;
+  transition:
+    width 0.7s ease-in,
+    padding 0.7s ease-in,
+    gap 0.7s ease-in,
+}
+
+.chatOpen {
+  width: 80px;
+  padding: 10px;
 }
 
 @media only screen and (min-width: 1850px) {
@@ -18,11 +26,17 @@
     width: 230px;
     height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
   }
+
+  .chatOpen {
+    width: 111px;
+    padding: 20px;
+  }
 }
 
 .userInfo {
   position: relative;
 }
+
 .userBar {
   position: absolute;
 }
@@ -34,7 +48,17 @@
   flex-grow: 1;
   gap: 10px;
   overflow-y: auto;
-  max-height: calc(100vh - 200px); 
+  max-height: calc(100vh - 200px);
+  transition: margin-left 0.7s ease;
+}
+
+.bottomContainerWithChat {
+  /* margin-left: 14.5px; */
+  width: 71px;
+  /* display: flex
+  ; */
+  /* align-items: center; */
+  padding-left: 14.5px;
 }
 
 .bottomContainer.withScroll {
@@ -47,5 +71,5 @@
 
 .topContainer {
   flex-shrink: 0;
-    position: relative;
+  position: relative;
 }

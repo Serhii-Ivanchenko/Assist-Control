@@ -2,9 +2,16 @@
     max-height: auto;
     overflow-y: auto;
   }
+
+  .treeBoxOpenChat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
   .treeBox{
     margin-top: 10px;
+    margin-left: 2px;
   }
   
   .MuiTreeItem-label {

@@ -16,10 +16,12 @@ import Modal from "../Modals/Modal/Modal";
 
 function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInfoEditing, setIsInfoEditing] = useState(false);
   // const [isEdit, setIsEdit] = useState(false);
 
   const handlePencilBtnClick = () => {
     setIsModalOpen(true);
+    setIsInfoEditing(true);
   };
 
   const handleCloseModal = () => {
@@ -101,7 +103,10 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
             </button>
             {isModalOpen && (
               <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-                <AddAutoServiceModal onClose={handleCloseModal} />
+                <AddAutoServiceModal
+                  onClose={handleCloseModal}
+                  infoToEdit={isInfoEditing}
+                />
               </Modal>
             )}
           </div>

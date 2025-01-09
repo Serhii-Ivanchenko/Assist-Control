@@ -8,9 +8,11 @@ import Modal from "../Modals/Modal/Modal";
 
 function ServiceStationList({ activeStationId, setActiveStationId }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInfoEditing, setIsInfoEditing] = useState(false);
 
   const handleAddBtnClick = () => {
     setIsModalOpen(true);
+    setIsInfoEditing(true);
   };
 
   const handleCloseModal = () => {
@@ -62,7 +64,10 @@ function ServiceStationList({ activeStationId, setActiveStationId }) {
       </button>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-          <AddAutoServiceModal onClose={handleCloseModal} />
+          <AddAutoServiceModal
+            onClose={handleCloseModal}
+            infoToEdit={isInfoEditing}
+          />
         </Modal>
       )}
     </div>

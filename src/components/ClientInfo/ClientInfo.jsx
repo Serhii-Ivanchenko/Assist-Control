@@ -27,6 +27,7 @@ import RatingStars from "../sharedComponents/RatingStars/RatingStars";
 import CarsList from "./CarsList/CarsList";
 import { useRef } from "react";
 import { useEffect } from "react";
+import AddAutoServiceModal from "../Modals/AddAutoServiceModal/AddAutoServiceModal";
 
 export default function ClientInfo({ clientInfo }) {
   // Client
@@ -87,6 +88,26 @@ export default function ClientInfo({ clientInfo }) {
 
   const handleModalClose = () => {
     setIsOpen(false);
+  };
+
+  const [detailedInfoModalIsOpen, setDetailedInfoModalIsOpen] = useState(false);
+
+  const openDetailedInfoModal = () => {
+    setDetailedInfoModalIsOpen(true);
+  };
+
+  const handleDetailedInfoModalClose = () => {
+    setDetailedInfoModalIsOpen(false);
+  };
+
+  const [isInfoEditing, setIsInfoEditing] = useState(false);
+
+  const editInfo = () => {
+    setIsInfoEditing(true);
+  };
+
+  const notEditInfo = () => {
+    setIsInfoEditing(false);
   };
 
   const handleCopyEmail = () => {
@@ -157,12 +178,36 @@ export default function ClientInfo({ clientInfo }) {
 
             <div className={css.legalInfo}>
               <p className={css.lIText}>Юридична інформація</p>
-              <button type="button" className={css.editBtn}>
+              <button
+                type="button"
+                className={css.editBtn}
+                onClick={() => {
+                  openDetailedInfoModal(), notEditInfo();
+                }}
+              >
                 <BsEyeFill size={16} className={css.pencilIcon} />
               </button>
-              <button type="button" className={css.editBtn}>
+              <button
+                type="button"
+                className={css.editBtn}
+                onClick={() => {
+                  openDetailedInfoModal(), editInfo();
+                }}
+              >
                 <BsPencil size={16} className={css.pencilIcon} />
               </button>
+              {detailedInfoModalIsOpen && (
+                <Modal
+                  isOpen={detailedInfoModalIsOpen}
+                  onClose={handleDetailedInfoModalClose}
+                >
+                  <AddAutoServiceModal
+                    onClose={handleDetailedInfoModalClose}
+                    isOrganization={true}
+                    infoToEdit={isInfoEditing}
+                  />
+                </Modal>
+              )}
               {/* <a href="" download="">
                 <button className={css.sbBtn}>
                   <BsDownload className={css.downloadIcon} />
