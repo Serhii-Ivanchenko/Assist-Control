@@ -1,64 +1,72 @@
-
 .navItem {
-    font-size: 11px;
-    font-weight: 400;
-    line-height: normal;
-    font-variant: small-caps;
-    transition: padding 0.7s ease;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: normal;
+  font-variant: small-caps;
+  transition: padding 0.7s ease;
 }
 
 @media only screen and (min-width: 1850px) {
-    .navItem {
-        font-size: 16px;
-    }
+  .navItem {
+    font-size: 16px;
+  }
 }
 
 
 .navLink {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-    gap: 7px;
-    transition: color 0.3s, background-color 0.3s, width 0.7s ease;
-    cursor: pointer;
-    position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  gap: 7px;
+  transition: color 0.3s, background-color 0.3s, width 0.7s ease, box-shadow 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
 }
 
 @media only screen and (min-width: 1850px) {
-    .navLink {
-        gap: 10px;
-    }
+  .navLink {
+    gap: 10px;
+  }
 }
 
-.navWithChat{
+.navWithChat {
   width: 42px;
+  border-radius: 50%;
+}
+
+.navWithChat:hover {
+  /* box-shadow: 0px 14px 35px rgba(0, 0, 0, 0.08); */
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 8px, rgba(0, 0, 0, 0.5) 0px 5px 3px;
+  /* transform: translateY(-5px); */
+  transform: scale(1.07);
 }
 
 .topNavContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .iconContainer {
-    width: 28px;
-    height: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s, color 0.3s;
-    background-color: var(--main-gray);
-    border-radius: 50%;
-    flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: var(--main-gray);
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 @media only screen and (min-width: 1850px) {
-    .iconContainer {
-        width: 42px;
-        height: 42px;
-    }
+  .iconContainer {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 
@@ -69,53 +77,56 @@
 .iconHome,
 .iconBook,
 .iconPayment {
-    transition: color 0.3s;
-    color: white;
+  transition: color 0.3s;
+  color: white;
 }
 
 .iconVideo {
-    width: 14px;
-    height: 17px;
+  width: 14px;
+  height: 17px;
 }
-.iconPayment{
-    width: 18px;
-    height: 18px;
+
+.iconPayment {
+  width: 18px;
+  height: 18px;
 }
 
 @media only screen and (min-width: 1850px) {
-    .iconPayment{
-        width: 28px;
-        height: 28px;
-    }
+  .iconPayment {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 .iconSettings,
 .iconAvto {
-    width: 12px;
-    height: 12px;
+  width: 12px;
+  height: 12px;
 }
 
 @media only screen and (min-width: 1850px) {
-    .iconVideo,
-    .iconCrm,
-    .iconHome {
-        width: 19px;
-        height: 19px;
-    }
+
+  .iconVideo,
+  .iconCrm,
+  .iconHome {
+    width: 19px;
+    height: 19px;
+  }
 }
 
 @media only screen and (min-width: 1850px) {
-    .iconAvto,
-    .iconSettings,
-    .iconBook {
-        width: 18px;
-        height: 18px;
-    }
+
+  .iconAvto,
+  .iconSettings,
+  .iconBook {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .navLink.active .iconContainer,
-.iconContainerActive{
-    background-color: var(--light-gray);
+.iconContainerActive {
+  background-color: var(--light-gray);
 }
 
 .navLink.active .iconVideo,
@@ -126,73 +137,73 @@
 .navLink.active .iconBook,
 .navLink.active .iconPayment,
 .iconActive {
-    color: var(--bg-secondary);
+  color: var(--bg-secondary);
 }
 
 .disabled {
-    pointer-events: none;
-    color: var(--input-text);
-  }
+  pointer-events: none;
+  color: var(--input-text);
+}
 
 
-  .navArrow {
-    font-size: 13px; 
-    vertical-align: middle;
+.navArrow {
+  font-size: 13px;
+  vertical-align: middle;
   transition: all 0.7s ease;
-  }
+}
 
-  .smallArrow {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 10px;
-  }
+.smallArrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+}
 
-  .repostClientsContainer{
-    min-width: 100px;
-    margin-top: 15px;
-    margin-bottom: 6px;
-  }
-  .activeLink {
-    text-decoration: none; 
-    color: var(--white);
-  }
+.repostClientsContainer {
+  min-width: 100px;
+  margin-top: 15px;
+  margin-bottom: 6px;
+}
 
-  .clientActive {
-    background: var(--bg-input);
-    height: 24px;
-    line-height: 1.5;
-  }
+.activeLink {
+  text-decoration: none;
+  color: var(--white);
+}
 
-  .visible {
-    opacity: 1;
-    max-width: 200px;
-    overflow: visible;
-  }
-  
-  .hidden {
-    opacity: 0;
-    max-width: 0;
-    overflow: hidden;
-  }
-  
-  /* Стилі для тексту, який поступово розгортається */
-  .linkText {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    transition: max-width 0.7s ease, opacity 0.7s ease;
-    opacity: 0;
-  }
-  
-  .linkText.visible {
-    max-width: 130px; 
-    opacity: 1; 
-  }
-  
-  .linkText.hidden {
-    opacity: 0;
-    max-width: 0px;
-  }
- 
+.clientActive {
+  background: var(--bg-input);
+  height: 24px;
+  line-height: 1.5;
+}
+
+.visible {
+  opacity: 1;
+  max-width: 200px;
+  overflow: visible;
+}
+
+.hidden {
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+}
+
+/* Стилі для тексту, який поступово розгортається */
+.linkText {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: max-width 0.7s ease, opacity 0.7s ease;
+  opacity: 0;
+}
+
+.linkText.visible {
+  max-width: 130px;
+  opacity: 1;
+}
+
+.linkText.hidden {
+  opacity: 0;
+  max-width: 0px;
+}
