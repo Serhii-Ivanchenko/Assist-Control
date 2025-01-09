@@ -5,6 +5,8 @@ import gmail from "../../../../../assets/images/ChannelsImages/Gmail_icon_1.png"
 import facebook from "../../../../../assets/images/ChannelsImages/Facebook_Messenger_1.png";
 import whatsApp from "../../../../../assets/images/ChannelsImages/WhatsApp_1.png";
 import assist from "../../../../../assets/images/ChannelsImages/logo-rect 1.png";
+import { BsGlobe } from "react-icons/bs";
+
 import { useState } from "react";
 // import { useRef } from "react";
 import ChannelItem from "./ChannelItem/ChannelItem";
@@ -31,6 +33,13 @@ export default function ChannelsPart({ handleFilter }) {
       type: "facebook",
     },
     { icon: assist, text: "MobileApp", value: "1", id: "5", type: "assist" },
+    {
+      icon: <BsGlobe size={14} className={css.siteIcon} />,
+      text: "Site",
+      value: "1",
+      id: "6",
+      type: "site",
+    },
   ];
 
   //Відкриття. закриття по кліку на канали
@@ -40,6 +49,16 @@ export default function ChannelsPart({ handleFilter }) {
   };
 
   const [channels, setChannels] = useState(channelsList);
+
+  const totalChannels = channels.reduce((total, channel) => {
+    return total + Number(channel.value);
+  }, 0);
+
+  const [isActive, setIsActive] = useState(false);
+
+  const handleIsActive = (id) => {
+    setIsActive(id);
+  };
 
   //Функціонал бібліотеки з прикольним перетягуванням, яке хочу зробити
 
@@ -133,7 +152,7 @@ export default function ChannelsPart({ handleFilter }) {
           />
           <p className={css.text}>Канали</p>
         </div>
-        <p className={css.numberBox}>10</p>
+        <p className={css.numberBox}>{totalChannels}</p>
       </div>
 
       {isOpen && (
@@ -159,6 +178,8 @@ export default function ChannelsPart({ handleFilter }) {
               handleDragEnd={handleDragEnd}
               handleDragStart={handleDragStart}
               handleDragOver={handleDragOver}
+              isActive={isActive}
+              handleIsActive={handleIsActive}
             />
           ))}
         </ul>

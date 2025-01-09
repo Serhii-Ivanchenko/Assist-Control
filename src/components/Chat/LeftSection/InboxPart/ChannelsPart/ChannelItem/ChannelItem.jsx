@@ -16,6 +16,8 @@ export default function ChannelItem({
   handleDragStart,
   handleDragOver,
   handleDragEnd,
+  isActive,
+  handleIsActive,
 }) {
   // const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
   //   id,
@@ -32,12 +34,17 @@ export default function ChannelItem({
   return (
     <li
       key={channel.id}
-      className={css.channelsListItem}
+      className={`${css.channelsListItem} ${
+        isActive === channel.id ? css.channelsListItemActive : ""
+      }`}
       // style={style}
       // ref={setNodeRef}
       // {...listeners}
       // {...attributes}
-      onClick={(e) => handleFilter(e, channel.type)}
+      onClick={(e) => {
+        handleFilter(e, channel.type);
+        handleIsActive(channel.id);
+      }}
       // ref={ref}
       draggable
       onDragStart={() => handleDragStart(index)}
@@ -46,13 +53,17 @@ export default function ChannelItem({
     >
       <div className={css.iconAndText}>
         <span className={css.iconBox}>
-          <img
-            src={channel.icon}
-            alt=""
-            className={`${css.channelImg} ${
-              channel.icon === gmail && css.channelImgGmail
-            } ${channel.icon === facebook && css.channelImgFB}`}
-          />
+          {channel.type === "site" ? (
+            channel.icon
+          ) : (
+            <img
+              src={channel.icon}
+              alt=""
+              className={`${css.channelImg} ${
+                channel.icon === gmail && css.channelImgGmail
+              } ${channel.icon === facebook && css.channelImgFB}`}
+            />
+          )}
         </span>
         <p className={css.channelName}>{channel.text}</p>
       </div>

@@ -12,6 +12,10 @@
   position: relative;
 }
 
+.channelsListItemActive {
+  background-color: var(--bg-input);
+}
+
 .dragged {
   opacity: 0.3;
   transition: opacity 0.2s ease;

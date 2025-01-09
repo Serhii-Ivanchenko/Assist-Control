@@ -95,6 +95,7 @@
 .channelImg {
   width: 18px;
   height: 18px;
+  fill: var(--light-gray);
 }
 
 .channelImgGmail {
@@ -116,4 +117,8 @@
 
 .iconRotated {
   transform: rotate(180deg);
+}
+
+.siteIcon {
+  fill: var(--light-gray);
 }
