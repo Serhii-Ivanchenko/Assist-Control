@@ -28,6 +28,7 @@ import CarsList from "./CarsList/CarsList";
 import { useRef } from "react";
 import { useEffect } from "react";
 import AddAutoServiceModal from "../Modals/AddAutoServiceModal/AddAutoServiceModal";
+import AddCarModal from "../Modals/AddCarModal/AddCarModal";
 
 export default function ClientInfo({ clientInfo }) {
   // Client
@@ -108,6 +109,16 @@ export default function ClientInfo({ clientInfo }) {
 
   const notEditInfo = () => {
     setIsInfoEditing(false);
+  };
+
+  const [addCarModalOpen, setAddCarModalOpen] = useState(false);
+
+  const openAddCarModal = () => {
+    setAddCarModalOpen(true);
+  };
+
+  const handleAddCarModalClose = () => {
+    setAddCarModalOpen(false);
   };
 
   const handleCopyEmail = () => {
@@ -339,10 +350,19 @@ export default function ClientInfo({ clientInfo }) {
             <CarsList car={cars} />
           )}
         </ul>
-        <button type="button" className={css.addCarBtn}>
+        <button
+          type="button"
+          className={css.addCarBtn}
+          onClick={openAddCarModal}
+        >
           <BsPlusCircleDotted className={css.plus} />
           <IoCarSport className={css.carIcon} size={20} />
         </button>
+        {addCarModalOpen && (
+          <Modal isOpen={addCarModalOpen} onClose={handleAddCarModalClose}>
+            <AddCarModal onClose={handleAddCarModalClose} />
+          </Modal>
+        )}
       </div>
     </div>
   );
