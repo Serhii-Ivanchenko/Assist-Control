@@ -7,6 +7,8 @@ import { FaChevronDown, FaChevronUp, FaRedoAlt } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
 import { format } from "date-fns";
 import DotsPopover from "../sharedComponents/DotsPopover/DotsPopover";
+import { useSelector } from "react-redux";
+import { selectVisibilityArchive } from "../../redux/visibility/selectors";
 
 const archiveReasons = [
   "Клієнт не приїхав на обслуговування",
@@ -34,7 +36,12 @@ const serviceReasons = [
   "Ремонт ГБО",
 ];
 
-export default function ArchiveCarItem({ data, visiblePopovers, togglePopover }) {
+export default function ArchiveCarItem({
+  data,
+  visiblePopovers,
+  togglePopover,
+}) {
+  const visibility = useSelector(selectVisibilityArchive);
   const popoverRef = useRef(null);
   const { photo_url: photoUrl, plate, date, reason_description, id } = data;
   const carPhoto = photoUrl || absentAutoImg;
@@ -76,37 +83,47 @@ export default function ArchiveCarItem({ data, visiblePopovers, togglePopover })
   return (
     <div className={styles.archiveContainer}>
       <div className={styles.leftContainer}>
-        <div className={styles.carPhoto}>
-          <img
-            className={styles.carImg}
-            src={carPhoto}
-            alt="Car"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = absentAutoImg;
-            }}
-          />
-        </div>
-        <div className={styles.carWrapper}>
-          <p className={styles.carNumber}>
-            {plate ? formatCarNumber(plate) : "хххххх"}
-          </p>
-        </div>
-        <div className={styles.timeWork}>
-          <BsStopwatch size={13} color="#D5ACF3" />
-          <p className={styles.time}>{formatDate(date)}</p>
-        </div>
-        <div>
-          <p className={styles.infoName}>Олександр Макаренковчук</p>
-        </div>
+        {visibility?.photo && (
+          <div className={styles.carPhoto}>
+            <img
+              className={styles.carImg}
+              src={carPhoto}
+              alt="Car"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = absentAutoImg;
+              }}
+            />
+          </div>
+        )}
+        {visibility?.carNum && (
+          <div className={styles.carWrapper}>
+            <p className={styles.carNumber}>
+              {plate ? formatCarNumber(plate) : "хххххх"}
+            </p>
+          </div>
+        )}
+        {visibility?.time && (
+          <div className={styles.timeWork}>
+            <BsStopwatch size={13} color="#D5ACF3" />
+            <p className={styles.time}>{formatDate(date)}</p>
+          </div>
+        )}
+        {visibility?.name && (
+          <div>
+            <p className={styles.infoName}>Олександр Макаренковчук</p>
+          </div>
+        )}
       </div>
       <div className={styles.centerContainer}>
-        <div>{renderStatusInArchive(reason_description, styles)}</div>
-        <div
-          className={`${styles.reasonWhy} ${visiblePopovers[`popover1-${id}`] ? styles.active : ""}`}
+        {visibility?.status && (<div>{renderStatusInArchive(reason_description, styles)}</div>)}
+        {visibility?.reasonRegistration && (<div
+          className={`${styles.reasonWhy} ${
+            visiblePopovers[`popover1-${id}`] ? styles.active : ""
+          }`}
         >
           <button
-            onClick={() => togglePopover('popover1', id)}
+            onClick={() => togglePopover("popover1", id)}
             className={styles.toggleButton}
           >
             {visiblePopovers[`popover1-${id}`] ? (
@@ -122,14 +139,16 @@ export default function ArchiveCarItem({ data, visiblePopovers, togglePopover })
               <p className={styles.reasonText}>{serviceReason}</p>
             </div>
           )}
-        </div>
+        </div>)}
       </div>
-      <div
-        className={`${styles.reasonWhy} ${visiblePopovers[`popover2-${id}`] ? styles.active : ""}`}
+      {visibility?.reasonArchived &&(<div
+        className={`${styles.reasonWhy} ${
+          visiblePopovers[`popover2-${id}`] ? styles.active : ""
+        }`}
       >
         <IoIosCloseCircle color="var(--red)" />
         <button
-          onClick={() => togglePopover('popover2', id)}
+          onClick={() => togglePopover("popover2", id)}
           className={styles.toggleButton}
         >
           {visiblePopovers[`popover2-${id}`] ? (
@@ -145,11 +164,11 @@ export default function ArchiveCarItem({ data, visiblePopovers, togglePopover })
             <p className={styles.reasonText}>{archiveReason}</p>
           </div>
         )}
-      </div>
+      </div>)}
       <DotsPopover
         options={options}
         isVisible={visiblePopovers[`popover3-${id}`]}
-        togglePopover={() => togglePopover('popover3', id)}
+        togglePopover={() => togglePopover("popover3", id)}
       />
     </div>
   );
