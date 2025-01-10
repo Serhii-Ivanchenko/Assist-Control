@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import styles from "./ArchiveCarItem.module.css";
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
 import { BsPencil, BsStopwatch } from "react-icons/bs";
@@ -12,52 +12,31 @@ const archiveReasons = [
   "Клієнт не приїхав на обслуговування",
   "Клієнт скасував запис",
   "Автомобіль списаний",
+  "Автомобіль викрадений",
+  "Клієнт переніс запис",
+  "Клієнт не приїхав вчасно",
+  "Клієнт створив новий запис",
+  "Клієнт змінив плани",
+  "Не встигли прийти запчастини",
+  "Замовили нові запчаснити",
 ];
 
 const serviceReasons = [
   "Доброго дня хочу записатись на діагностику",
+  "Доброго дня хочу записатись на ремонт",
+  "Доброго дня хочу записатись на огляд після ремонту",
   "Необхідна заміна масла",
+  "Необхідно перевірити електроніку",
   "Дефект ходової частини",
+  "Заміна шин на зимові",
+  "Заміна шин на літні",
+  "Перевірка ГБО",
+  "Ремонт ГБО",
 ];
 
-export default function ArchiveCarItem({ data }) {
-  const [isPopoverVisible, setPopoverVisible] = useState(false);
-  const [isServicePopoverVisible, setServicePopoverVisible] = useState(false);
+export default function ArchiveCarItem({ data, visiblePopovers, togglePopover }) {
   const popoverRef = useRef(null);
-
-  const togglePopover = () => {
-    setPopoverVisible((prevState) => !prevState);
-    if (!isPopoverVisible) {
-      setServicePopoverVisible(false); // Закрити інший поповер
-    }
-  };
-
-  const toggleServicePopover = () => {
-    setServicePopoverVisible((prevState) => !prevState);
-    if (!isServicePopoverVisible) {
-      setPopoverVisible(false); // Закрити інший поповер
-    }
-  };
-
-  const handleClickOutside = (event) => {
-    if (popoverRef.current && !popoverRef.current.contains(event.target)) {
-      setPopoverVisible(false);
-      setServicePopoverVisible(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  const handlePopoverClick = (event) => {
-    event.stopPropagation();
-  };
-
-  const { photo_url: photoUrl, plate, date, reason_description, car_id } = data;
+  const { photo_url: photoUrl, plate, date, reason_description, id } = data;
   const carPhoto = photoUrl || absentAutoImg;
 
   const formatCarNumber = (number) => {
@@ -72,12 +51,10 @@ export default function ArchiveCarItem({ data }) {
 
   const handleEdit = () => {
     console.log("Редагувати контакт");
-    // Реалізуйте логіку редагування
   };
 
   const handleRestore = () => {
     console.log("Відновити з архіву");
-    // Реалізуйте логіку відновлення
   };
 
   const options = [
@@ -93,8 +70,8 @@ export default function ArchiveCarItem({ data }) {
     },
   ];
 
-  const archiveReason = archiveReasons[car_id % archiveReasons.length];
-  const serviceReason = serviceReasons[car_id % serviceReasons.length];
+  const archiveReason = archiveReasons[id % archiveReasons.length];
+  const serviceReason = serviceReasons[id % serviceReasons.length];
 
   return (
     <div className={styles.archiveContainer}>
@@ -126,14 +103,13 @@ export default function ArchiveCarItem({ data }) {
       <div className={styles.centerContainer}>
         <div>{renderStatusInArchive(reason_description, styles)}</div>
         <div
-          className={`${styles.reasonWhy} ${
-            isPopoverVisible ? styles.active : ""
-          }`}
-          
-          onClick={handlePopoverClick}
+          className={`${styles.reasonWhy} ${visiblePopovers[`popover1-${id}`] ? styles.active : ""}`}
         >
-          <button onClick={togglePopover} className={styles.toggleButton}>
-            {isPopoverVisible ? (
+          <button
+            onClick={() => togglePopover('popover1', id)}
+            className={styles.toggleButton}
+          >
+            {visiblePopovers[`popover1-${id}`] ? (
               <FaChevronUp size={13} color="#fff" />
             ) : (
               <FaChevronDown size={13} color="#fff" />
@@ -141,7 +117,7 @@ export default function ArchiveCarItem({ data }) {
           </button>
           <p className={styles.reasonText}>Причина запису на автосервіс</p>
 
-          {isPopoverVisible && (
+          {visiblePopovers[`popover1-${id}`] && (
             <div ref={popoverRef} className={styles.popover}>
               <p className={styles.reasonText}>{serviceReason}</p>
             </div>
@@ -149,15 +125,14 @@ export default function ArchiveCarItem({ data }) {
         </div>
       </div>
       <div
-        className={`${styles.reasonWhy} ${
-          isServicePopoverVisible ? styles.active : ""
-        }`}
-        
-        onClick={handlePopoverClick}
+        className={`${styles.reasonWhy} ${visiblePopovers[`popover2-${id}`] ? styles.active : ""}`}
       >
         <IoIosCloseCircle color="var(--red)" />
-        <button onClick={toggleServicePopover} className={styles.toggleButton}>
-          {isServicePopoverVisible ? (
+        <button
+          onClick={() => togglePopover('popover2', id)}
+          className={styles.toggleButton}
+        >
+          {visiblePopovers[`popover2-${id}`] ? (
             <FaChevronUp size={13} color="#fff" />
           ) : (
             <FaChevronDown size={13} color="#fff" />
@@ -165,13 +140,17 @@ export default function ArchiveCarItem({ data }) {
         </button>
         <p className={styles.reasonText}>Причина додавання в архів</p>
 
-        {isServicePopoverVisible && (
+        {visiblePopovers[`popover2-${id}`] && (
           <div ref={popoverRef} className={styles.popover}>
             <p className={styles.reasonText}>{archiveReason}</p>
           </div>
         )}
       </div>
-      <DotsPopover options={options} />
+      <DotsPopover
+        options={options}
+        isVisible={visiblePopovers[`popover3-${id}`]}
+        togglePopover={() => togglePopover('popover3', id)}
+      />
     </div>
   );
 }

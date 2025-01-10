@@ -76,9 +76,9 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 1.1875em;
-  width: 212px; /* Фіксована ширина */
-  white-space: nowrap; /* Заборона переносу тексту */
-  overflow: hidden; /* Обрізає текст, що виходить за межі контейнера */
+  width: 212px; 
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -149,6 +149,16 @@
   font-weight: 300;
   line-height: 1.3;
 }
+
+  .textarea{
+    color: var(--light-gray);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.3;
+  background: transparent;
+  border: none;
+  }
+  
 
 .btn{
   display: flex;

@@ -1,24 +1,20 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { IoEllipsisVertical } from "react-icons/io5";
 import styles from "./DotsPopover.module.css";
 
-function DotsPopover({ options }) {
-  const [isVisible, setIsVisible] = useState(false);
+function DotsPopover({ options, isVisible, togglePopover }) {
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
 
-  const togglePopover = () => {
-    setIsVisible(!isVisible);
-  };
-
   const handleClickOutside = (event) => {
+    // Перевірка, чи натискається за межами поповера чи кнопки
     if (
       popoverRef.current &&
       !popoverRef.current.contains(event.target) &&
       buttonRef.current &&
       !buttonRef.current.contains(event.target)
     ) {
-      setIsVisible(false);
+      togglePopover(false); // Закриваємо поповер при натисканні за межами
     }
   };
 
@@ -31,7 +27,11 @@ function DotsPopover({ options }) {
 
   return (
     <div className={styles.container}>
-      <button ref={buttonRef} className={styles.button} onClick={togglePopover}>
+      <button
+        ref={buttonRef}
+        className={styles.button}
+        onClick={() => togglePopover(!isVisible)} // Клік по кнопці для переключення стану
+      >
         <IoEllipsisVertical size={13} color="#fff" />
       </button>
 
