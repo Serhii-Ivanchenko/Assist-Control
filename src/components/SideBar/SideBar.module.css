@@ -19,6 +19,7 @@
 .chatOpen {
   width: 80px;
   padding: 10px;
+  transition: width 0.7s ease-in, padding 0.7s ease-in, gap 0.7s ease-in;
 }
 
 @media only screen and (min-width: 1850px) {
@@ -49,7 +50,8 @@
   gap: 10px;
   overflow-y: auto;
   max-height: calc(100vh - 200px);
-  transition: margin-left 0.7s ease;
+  transition: width 0.7s ease;
+  width: auto;
 }
 
 .bottomContainerWithChat {
@@ -59,6 +61,7 @@
   ; */
   /* align-items: center; */
   padding-left: 14.5px;
+  transition: width 0.7s ease;
 }
 
 .bottomContainer.withScroll {

@@ -92,7 +92,6 @@ export default function Navigation() {
             </div>
             <span className={clsx(styles.linkText, { 
               [styles.hidden]: chatIsOpen, 
-              [styles.visible]: !chatIsOpen 
             })}>
               Головна
             </span>
@@ -112,7 +111,7 @@ export default function Navigation() {
             </div>
             <span className={clsx(styles.linkText, { 
               [styles.hidden]: chatIsOpen, 
-              [styles.visible]: !chatIsOpen 
+              // [styles.visible]: !chatIsOpen 
             })}>
               Моніторинг
             </span>
@@ -132,7 +131,7 @@ export default function Navigation() {
             </div>
             <span className={clsx(styles.linkText, { 
               [styles.hidden]: chatIsOpen, 
-              [styles.visible]: !chatIsOpen 
+              // [styles.visible]: !chatIsOpen 
             })}>
               Планувальник
             </span>
@@ -152,7 +151,7 @@ export default function Navigation() {
             </div>
             <span className={clsx(styles.linkText, { 
               [styles.hidden]: chatIsOpen, 
-              [styles.visible]: !chatIsOpen 
+              // [styles.visible]: !chatIsOpen 
             })}>
               Звернення
             </span>
@@ -176,7 +175,7 @@ export default function Navigation() {
             </div>
             <span className={clsx(styles.linkText, { 
               [styles.hidden]: chatIsOpen, 
-              [styles.visible]: !chatIsOpen 
+              // [styles.visible]: !chatIsOpen 
             })}>
               Рекомендації
             </span>
@@ -204,7 +203,7 @@ export default function Navigation() {
             </div>
             <span className={clsx(styles.linkText, { 
               [styles.hidden]: chatIsOpen, 
-              [styles.visible]: !chatIsOpen 
+              // [styles.visible]: !chatIsOpen 
             })}>
               Облік
             </span>
@@ -250,7 +249,7 @@ export default function Navigation() {
             </div>
             <span className={clsx(styles.linkText, { 
               [styles.hidden]: chatIsOpen, 
-              [styles.visible]: !chatIsOpen 
+              // [styles.visible]: !chatIsOpen 
             })}>
               Звіти
             </span>
@@ -293,7 +292,7 @@ export default function Navigation() {
             </div>
             <span className={clsx(styles.linkText, { 
               [styles.hidden]: chatIsOpen, 
-              [styles.visible]: !chatIsOpen 
+              // [styles.visible]: !chatIsOpen 
             })}>
               Налаштування
             </span>
