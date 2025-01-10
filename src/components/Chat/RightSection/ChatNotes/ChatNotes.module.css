@@ -37,6 +37,7 @@
      width: 100%;
      outline: none;
      border: none;
+    border-radius: 6px;
      display: flex;
      align-items: center;
      color: var(--white);

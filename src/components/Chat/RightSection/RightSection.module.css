@@ -110,26 +110,27 @@
 }
 
 .pencil {
-  width: 16px;
-  height: 16px;
-  color: var(--play-btn-triangle);
+    width: 16px;
+    height: 16px;
+    color: var(--play-btn-triangle);
 }
 
 .bottomWrapper {
-  display: flex;
-  gap: 10px;
-  cursor: pointer;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
 }
 
 .bottomText {
-  color: var(--play-btn-triangle);
-  font-family: Raleway, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  text-transform: capitalize;
+    color: var(--play-btn-triangle);
+    font-family: Raleway, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
 }
+
 .client {
     height: 172px;
     background-color: var(--bg-secondary);
@@ -286,8 +287,9 @@
     width: 160px;
     outline: none;
     border: none;
-    /* display: flex;
-    align-items: center; */
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
     color: var(--light-gray);
     font-size: 16px;
     font-style: normal;
@@ -296,4 +298,43 @@
     height: 100%;
     background-color: var(--main-gray);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+}
+
+.categoryDisplay {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 60px;
+    position: absolute;
+    left: 190px;
+}
+
+.categorySelector {
+    position: absolute;
+    background: var(--bg-secondary);
+    border: 1px solid var(--light-gray);
+    top: 45px;
+    left: 160px;
+    width: 235px;
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 4px;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category {
+    padding: 4px 8px;
+    cursor: pointer;
+    color: var(--light-gray);
+    font-size: 14px;
+}
+
+.categoryActive {
+    background-color: var(--current-mileage-text);
+}
+
+.category:hover {
+    background-color: var(--main-gray);
 }
