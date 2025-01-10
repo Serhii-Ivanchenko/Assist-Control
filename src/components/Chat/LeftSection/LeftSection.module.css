@@ -2,7 +2,6 @@
   width: 684px;
   height: 967px;
   border-radius: 12px;
-  border: 1px solid var(--light-gray);
   display: flex;
   overflow: hidden;
 }
