@@ -30,7 +30,7 @@ export default function UserInfo() {
   const balance = user && user.balance !== null ? user.balance : "0";
 
   return (
-    <div className={styles.userInfo}>
+    <div className={clsx(styles.userInfo, {[styles.userInfoWithChat]: chatIsOpen})}>
       <div className={styles.avatar}>
         <img src={avatarUrl} alt={fullName} />
       </div>
@@ -43,7 +43,7 @@ export default function UserInfo() {
         <p>{companyName}</p>
         <p>ID: {userId}</p>
       </div>
-      <div className={clsx(styles.balance, { [styles.hidden]: chatIsOpen, [styles.visible]: !chatIsOpen })}
+      <div className={clsx(styles.balance, { [styles.hidden]: chatIsOpen, [styles.visible]: !chatIsOpen, [styles.balanceInfoWithChat]: chatIsOpen })}
       >
         <span className={styles.balanceText}>Баланс:</span>
         <button onClick={openModal} className={styles.balanceButton}>

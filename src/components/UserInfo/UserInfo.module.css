@@ -1,13 +1,23 @@
 .userInfo {
   width: 113px;
-  transition: margin-top 0.7s ease-in-out;
+  transition: width 0.9s ease;
+
+}
+.userInfoWithChat{
+  width: 71px;
+  height: 173.35px;
 }
 
 @media only screen and (min-width: 1850px) {
   .userInfo {
     width: 169px;
   }
+
+  .userInfoWithChat{
+    width: 71px;
+  }
 }
+
 
 .avatar {
   width: 44px;
@@ -59,6 +69,15 @@
 .balance {
   display: flex;
   align-items: center;
+  opacity: 1;
+  width: 169px;
+}
+
+.balanceInfoWithChat{
+opacity: 0;
+width: 0;
+transition: opacity cubic-bezier(0.075, 0.82, 0.165, 1) ease;
+
 }
 
 .balanceText {
@@ -118,6 +137,6 @@
 .visible {
   opacity: 1;
   overflow: visible;
-  transition: opacity 1.9s ease;
+  transition: opacity 0.9s ease;
   pointer-events: auto; 
 }
