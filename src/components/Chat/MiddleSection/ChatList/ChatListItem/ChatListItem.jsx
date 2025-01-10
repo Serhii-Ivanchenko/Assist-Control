@@ -51,14 +51,7 @@ function ChatListItem({ message }) {
                 />
               );
             } else if (file.type.startsWith("audio/")) {
-              return (
-                <AudioPlayer
-                  key={index}
-                  audio={file.url}
-                  size="big"
-                  audioDuration="00:00"
-                />
-              );
+              return <AudioPlayer key={index} audio={file.url} size="big" />;
             } else if (
               file.type === "application/pdf" ||
               file.type === "application/msword" ||

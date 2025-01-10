@@ -142,6 +142,19 @@ function MessageInput({ addNewMessage, setInputHeight }) {
     return () => clearInterval(timerRef.current);
   }, []);
 
+  const mimeToExtensionMap = {
+    "application/pdf": "pdf",
+    "application/msword": "doc",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+      "docx",
+    "application/vnd.ms-excel": "xls",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": "xlsx",
+    "application/x-rar-compressed": "rar",
+    "application/zip": "zip",
+    "application/x-zip-compressed": "zip",
+    "application/x-7z-compressed": "7z",
+  };
+
   return (
     <div className={styles.wrapper}>
       <button
@@ -180,7 +193,7 @@ function MessageInput({ addNewMessage, setInputHeight }) {
                       {file.name.length > 5
                         ? `${file.name.slice(0, 5)}...`
                         : file.name}{" "}
-                      ({file.type.split("/")[1]})
+                      {mimeToExtensionMap[file.type] || file.type.split("/")[1]}
                     </p>
                   </div>
                   <button
@@ -199,7 +212,7 @@ function MessageInput({ addNewMessage, setInputHeight }) {
         type="file"
         ref={fileInputRef}
         style={{ display: "none" }}
-        accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/x-rar-compressed,application/zip,application/x-zip-compressed,application/x-7z-compressed"
         multiple
         onChange={handleFileSelect}
       />
@@ -227,7 +240,6 @@ function MessageInput({ addNewMessage, setInputHeight }) {
                       <AudioPlayer
                         audio={file.url}
                         size="small"
-                        audioDuration="00:00"
                         className={styles.audioPreviewInInput}
                       />
                       <button
