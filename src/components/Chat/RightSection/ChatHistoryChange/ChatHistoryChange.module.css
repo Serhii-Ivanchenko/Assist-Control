@@ -1,31 +1,31 @@
  .wrapper {
-    /* border-radius: 12px;
+     /* border-radius: 12px;
     background: var(--bg-secondary);
     height: 100px;
     width: 371px; */
-    max-height: 100px;
- overflow-y: auto; 
+     max-height: 100px;
+     overflow-y: auto;
 
-} 
+ }
 
  .wrapper::-webkit-scrollbar {
-     width: 8px;
+     width: 2px;
  }
 
  .wrapper::-webkit-scrollbar-track {
-     border-radius: 4px;
+     border-radius: 1px;
      background-color: var(--bg);
  }
 
  .wrapper::-webkit-scrollbar-thumb {
-     border-radius: 4px;
+     border-radius: 1px;
      background-color: var(--main-gray);
  }
 
-.text {
-    color: #FFF;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-}
+ .text {
+     color: #FFF;
+     font-size: 16px;
+     font-style: normal;
+     font-weight: 500;
+     line-height: normal;
+ }

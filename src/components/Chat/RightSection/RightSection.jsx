@@ -460,17 +460,7 @@ export default function RightSection() {
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary) !important",
             },
-            // "& .MuiAccordionSummary-root": {
-            //   backgroundColor: "var(--bg-secondary)", // Явно указываем фон
-            // },
-            // "& .MuiAccordionSummary-root:focus": {
-            //   backgroundColor: "var(--bg-secondary)", // Сохраняем фон при фокусе
-            // },
-            // "& .MuiAccordionDetails-root": {
-            //   backgroundColor: "var(--bg-secondary)", // Настраиваем для деталей аккордеона
-            // },
-
-            background: "none",
+              background: "none",
             color: "var(--light-gray)",
             boxShadow: "none",
             overflow: "hidden",
@@ -677,16 +667,6 @@ export default function RightSection() {
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary) !important",
             },
-            // "& .MuiAccordionSummary-root": {
-            //   backgroundColor: "var(--bg-secondary)", // Явно указываем фон
-            // },
-            // "& .MuiAccordionSummary-root:focus": {
-            //   backgroundColor: "var(--bg-secondary)", // Сохраняем фон при фокусе
-            // },
-            // "& .MuiAccordionDetails-root": {
-            //   backgroundColor: "var(--bg-secondary)", // Настраиваем для деталей аккордеона
-            // },
-
             background: "none",
             color: "var(--light-gray)",
             boxShadow: "none",

@@ -48,7 +48,7 @@
     font-weight: 600;
     transition: height 0.3s ease-in-out;
     border-radius: 12px;
-    padding: 16px 19px 16px 24px;
+    padding: 16px 16px 16px 24px;
 }
 
 .accordionTitle>div {
@@ -285,6 +285,7 @@
 
 .editInput {
     width: 160px;
+    padding-left: 4px;
     outline: none;
     border: none;
     border-radius: 6px;

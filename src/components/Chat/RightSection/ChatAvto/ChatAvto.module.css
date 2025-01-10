@@ -18,6 +18,7 @@
 
  .editInput {
      width: 160px;
+     padding-left: 4px;
      outline: none;
      border: none;
      border-radius: 6px;
