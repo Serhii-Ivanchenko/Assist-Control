@@ -5,12 +5,14 @@ import { BsPencil } from "react-icons/bs";
 import { BsXLg } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import CreateTag from "../CreateTag/CreateTag";
+import clsx from "clsx";
 
 export default function SearchTags({
   onClose,
   checkedTagsArray,
   tagsArray,
   setTagsArr,
+  leftSectionTag,
 }) {
   const [dataToSearch, setDataToSearch] = useState("");
   const [searchedTags, setSearchedTags] = useState(tagsArray);
@@ -52,14 +54,18 @@ export default function SearchTags({
   }, [dataToSearch, tagsArray]);
 
   const handleSubmit = (values, actions) => {
-    setTagsArr((prevTagsArr) => {
-      const updatedCheckedTagsArr = prevTagsArr.map((prevTag) => {
-        return values.checkedTags.includes(prevTag.id)
-          ? { ...prevTag, isChecked: true }
-          : { ...prevTag, isChecked: false };
+    if (!checkedTagsArray) {
+      console.log(values);
+    } else {
+      setTagsArr((prevTagsArr) => {
+        const updatedCheckedTagsArr = prevTagsArr.map((prevTag) => {
+          return values.checkedTags.includes(prevTag.id)
+            ? { ...prevTag, isChecked: true }
+            : { ...prevTag, isChecked: false };
+        });
+        return updatedCheckedTagsArr;
       });
-      return updatedCheckedTagsArr;
-    });
+    }
     actions.resetForm();
     onClose();
   };
@@ -82,7 +88,13 @@ export default function SearchTags({
   };
 
   return (
-    <div className={css.wrapper} ref={popoverRef}>
+    <div
+      className={clsx(
+        css.wrapper,
+        leftSectionTag ? css.leftSectionTags : css.rightSectionTags
+      )}
+      ref={popoverRef}
+    >
       <div className={css.headerWrapper}>
         <h3 className={css.header}>Теги</h3>
         <BsXLg className={css.closeIcon} onClick={onClose} />
@@ -152,6 +164,7 @@ export default function SearchTags({
           onClose={handleCloseModal}
           changedTag={changedTag}
           setTagsArr={setTagsArr}
+          leftSectionTag={leftSectionTag}
         />
       )}
     </div>

@@ -1,13 +1,22 @@
 .modalWrapper {
-  position: fixed;
-  inset: 16px 4px auto auto;
   padding-top: 18px;
-  width: 404px;
   height: auto;
   border-radius: 12px;
   background: var(--bg-secondary);
   z-index: 2000;
   box-shadow: -8px 7px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.rightSectionModalWrapper {
+  position: fixed;
+  inset: 16px 0 auto auto;
+  width: 404px;
+}
+
+.leftSectionModalWrapper {
+  position: absolute;
+  top: 0px;
+  right: 1px;
 }
 
 .header {
@@ -41,8 +50,12 @@
   border: 1px solid var(--light-gray);
 }
 
-.wrapper {
+.rightSectionWrapper {
   padding: 18px 41px 41px 39px;
+}
+
+.leftSectionWrapper {
+  padding: 18px 25px 25px 39px;
 }
 
 .name {
