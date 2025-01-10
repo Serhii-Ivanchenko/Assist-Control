@@ -7,6 +7,8 @@ import facebook from "../../../assets/images/ChannelsImages/Facebook_Messenger_1
 import avatar from "../../../assets/images/avatar_default.png";
 import telegram from "../../../assets/images/ChannelsImages/Telegram_1.png";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useMemo } from "react";
 
 export default function LeftSection() {
   const chats = [
@@ -84,18 +86,53 @@ export default function LeftSection() {
     },
   ];
 
-  const [filteredChats, setFilteredChats] = useState(chats);
+  const [sortedChats, setSortedChats] = useState([]);
+  const [filteredChats, setFilteredChats] = useState([]);
+  const [sortOrder, setSortOrder] = useState("newFirst");
+
+  const memoizedChats = useMemo(() => chats, []);
+
+  useEffect(() => {
+    const initialSortedChats = [...memoizedChats].sort((a, b) => {
+      return new Date(b.time).getTime() - new Date(a.time).getTime(); // Новіші перші
+    });
+
+    setSortedChats(initialSortedChats);
+    setFilteredChats(initialSortedChats); // Встановлюємо відсортований список як початковий
+  }, [memoizedChats]);
 
   const handleFilter = (e, type) => {
     e.stopPropagation();
-    setFilteredChats(chats.filter((chat) => chat.type === type));
+    const filtered = sortedChats.filter((chat) => chat.type === type);
+    setFilteredChats(filtered);
+  };
+
+  const handleSort = () => {
+    const newSortOrder = sortOrder === "newFirst" ? "oldFirst" : "newFirst";
+
+    // Сортуємо весь початковий список, не впливаючи на фільтри
+    const sorted = [...memoizedChats].sort((a, b) => {
+      return newSortOrder === "newFirst"
+        ? new Date(b.time).getTime() - new Date(a.time).getTime()
+        : new Date(a.time).getTime() - new Date(b.time).getTime();
+    });
+
+    setSortedChats(sorted);
+    setSortOrder(newSortOrder);
+
+    const filtered =
+      filteredChats.length > 0
+        ? sorted.filter((chat) => chat.type === filteredChats[0].type)
+        : sorted;
+
+    setFilteredChats(filtered);
   };
 
   return (
     <div className={css.leftSectionWrapper}>
       {/* LeftSection */}
       <InboxPart handleFilter={handleFilter} />
-      <MessagesPart chats={filteredChats} />
+      <MessagesPart chats={filteredChats} handleSort={handleSort} />
     </div>
   );
 }

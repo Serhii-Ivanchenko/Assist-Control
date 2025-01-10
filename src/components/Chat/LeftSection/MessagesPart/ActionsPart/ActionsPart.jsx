@@ -29,8 +29,10 @@ export default function ActionsPart({
   allChecked,
   handleAllChecked,
   // chats,
+  handleSort,
 }) {
   const [openedActions, setOpenedActions] = useState(false);
+
   const wrapperRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -114,7 +116,7 @@ export default function ActionsPart({
         </div>
       )}
 
-      <div className={css.filter}>
+      <div className={css.filter} onClick={handleSort}>
         <BsArrowDownUp size={18} className={css.icon} />
         <p className={css.text}>Нові</p>
         <IoIosArrowDown size={20} className={css.icon} />
