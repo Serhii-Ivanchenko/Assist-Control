@@ -18,7 +18,7 @@ export default function LeftSection() {
       lastMessage:
         "Вітаю! Чи можна записатися на діагностику електрики та двигу...",
       managersPhoto: avatar,
-      time: "4m ago",
+      time: "2024-12-28T10:45:33",
       read: false,
       id: "1",
     },
@@ -30,7 +30,7 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "15m ago",
+      time: "2025-01-05T12:45:33",
       warning: true,
       read: false,
       id: "2",
@@ -43,7 +43,7 @@ export default function LeftSection() {
       lastMessage:
         "Привіт! Чи є вільні місця для запису на наступний тиждень у...",
       managersPhoto: avatar,
-      time: "15m ago",
+      time: "2025-01-10T01:45:33",
       read: true,
       id: "3",
     },
@@ -55,7 +55,7 @@ export default function LeftSection() {
       lastMessage:
         "Дякую за швидку відповідь! Я хотіла б уточнити вартість зам...",
       managersPhoto: avatar,
-      time: "2h ago",
+      time: "2024-12-28T10:45:33",
       read: true,
       id: "4",
     },
@@ -66,7 +66,7 @@ export default function LeftSection() {
       name: "Дмитро Поліщук",
       lastMessage: "Доброго ранку! Ви працюєте з автомобілями американськог...",
       managersPhoto: avatar,
-      time: "3h ago",
+      time: "2024-12-31T10:45:33",
       read: true,
       id: "5",
     },
@@ -78,7 +78,7 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "1d ago",
+      time: "2025-01-09T06:45:33",
       read: true,
       id: "6",
     },

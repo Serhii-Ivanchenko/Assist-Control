@@ -43,6 +43,7 @@ export default function MessagesPart({ chats }) {
         handleChecked={handleChecked}
         allChecked={allChecked}
         handleAllChecked={handleAllChecked}
+        chats={chats}
       />
       <ChatsPart
         chats={chats}

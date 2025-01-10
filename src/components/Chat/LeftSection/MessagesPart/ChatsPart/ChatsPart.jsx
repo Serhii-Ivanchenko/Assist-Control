@@ -21,6 +21,17 @@ export default function ChatsPart({
     setChosen(id);
   };
 
+  const time = (time) => {
+    const newTime = Date.now() - new Date(time).getTime();
+    const minutes = Math.floor(newTime / (1000 * 60));
+    const hours = Math.floor(newTime / (1000 * 60 * 60));
+    const days = Math.floor(newTime / (1000 * 60 * 60 * 24));
+
+    if (minutes < 60) return `${minutes}m ago`;
+    if (hours < 24) return `${hours}h ago`;
+    return `${days}d ago`;
+  };
+
   return (
     <div>
       <ul className={css.chatsList}>
@@ -84,7 +95,7 @@ export default function ChatsPart({
                   />
                   <BsBookmark size={18} />
                 </div>
-                <p className={css.time}>{chat.time}</p>
+                <p className={css.time}>{time(chat.time)}</p>
               </div>
             </div>
           </li>

@@ -10,7 +10,7 @@ export default function EmailType() {
   const types = [
     { icon: <BsEnvelope className={css.icon} />, text: "Email", value: "4" },
     { icon: <BsChatDots className={css.icon} />, text: "Чати", value: "6" },
-    { icon: <BsClock className={css.icon} />, text: "Відложені", value: "1" },
+    { icon: <BsClock className={css.icon} />, text: "Відкладені", value: "1" },
     {
       icon: <BsCheck2Square className={css.icon} />,
       text: "Закриті",
