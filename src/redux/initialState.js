@@ -151,11 +151,75 @@ export const initialState = {
       officePhoneNumber: null,
       headPhoneNumber: null,
     },
+    services: [],
     isLoading: false,
     error: null,
   },
 
   settings: {
+    employees: [],
+    employee: {
+      name: null,
+      phone: null,
+      address: null,
+      birthday: null,
+      position: null,
+      role: null,
+      email: null,
+      login: null,
+      password: null,
+      period: null,
+      rate: 0.0,
+      minRate: 0.0,
+      amount: 0.0,
+      sparesAmount: 0.0,
+      sparesPrice: 0.0,
+      isDisabled: false,
+      schedule: {},
+      files: {
+        passport: null, //Файл паспорта (PDF)
+        itn: null, // Файл ІПН (PDF)
+        diploma: null, // Файл диплому (PDF)
+        laborBook: null, // Файл трудової книги (PDF)
+        CV: null, // Резюме працівника (PDF)
+        contract: null, // Договір підряду (PDF)
+        employment: null, // Договір про найм (PDF)
+        agreement: null, //  Договір МВ (PDF)
+        logo: null, //  Фотографія працівника (JPEG, PNG)
+      },
+    },
+    suppliers: [],
+    supplier: {
+      supplier_d: null,
+      name: null,
+      address: null,
+      paymentCondition: null,
+      days: null,
+      owner: null,
+      code: null,
+      bill: null,
+      bank: null,
+      bankCode: null,
+      companyAddress: null,
+      managerPhone: null,
+      managerName: null,
+      officePhone: null,
+      ownerPhone: null,
+      website: null,
+      distrEmail: null,
+      login: null,
+      password: null,
+      tokenAPI: null,
+      priceEmail: null,
+      connection_instruction: null,
+      deliverySchedule: {},
+      country: null,
+      isDisabled: false,
+      rating: null,
+      cash_register: false,
+      mark_up: true,
+      basket: true,
+    },
     schedule: [],
     posts: [],
     prices: [],
