@@ -96,7 +96,10 @@ export default function ActionsPart({
             >
               <BsThreeDots size={16} className={css.icon} />
               <p className={css.actionsText}>Швидкі дії</p>
-              <BsFillCaretDownFill size={16} className={css.icon} />
+              <BsFillCaretDownFill
+                size={16}
+                className={`${css.icon} ${openedActions && css.rotated}`}
+              />
             </div>
             {openedActions && (
               <ul className={css.actionsList}>

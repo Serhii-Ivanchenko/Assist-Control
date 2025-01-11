@@ -2,7 +2,8 @@
 import ChannelsPart from "./ChannelsPart/ChannelsPart";
 import EmailType from "./EmailType/EmailType";
 import css from "./InboxPart.module.css";
-import { IoIosArrowDown } from "react-icons/io";
+// import { IoIosArrowDown } from "react-icons/io";
+import ManagersSelect from "./ManagersSelect/ManagersSelect";
 
 export default function InboxPart({ handleFilter, chats, setFilteredChats }) {
   // const [isActive, setIsActive] = useState(false)
@@ -16,10 +17,11 @@ export default function InboxPart({ handleFilter, chats, setFilteredChats }) {
       <div className={css.topPartContainer}>
         <p className={css.title}>Inbox </p>
 
-        <div className={css.emailSelect}>
+        {/* <div className={css.emailSelect}>
           <p className={css.email}>lisa@avtoatmosfera.com</p>
           <IoIosArrowDown className={css.iconArrow} size={20} />
-        </div>
+        </div> */}
+        <ManagersSelect />
 
         <div className={css.totalContainer}>
           <div className={css.totalInbox}>

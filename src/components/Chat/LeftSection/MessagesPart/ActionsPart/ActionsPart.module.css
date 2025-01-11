@@ -87,6 +87,11 @@
 .icon {
   fill: var(--light-gray);
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.rotated {
+  transform: rotate(180deg);
 }
 
 .actionsChecked {
