@@ -18,8 +18,10 @@
 
  .editInput {
      width: 160px;
+     padding-left: 4px;
      outline: none;
      border: none;
+     border-radius: 6px;
      display: flex;
      align-items: center;
      color: var(--light-gray);

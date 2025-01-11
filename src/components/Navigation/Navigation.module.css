@@ -194,16 +194,13 @@
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
-  transition: max-width 0.7s ease, opacity 0.7s ease;
-  opacity: 0;
-}
-
-.linkText.visible {
-  max-width: 130px;
+  width: 130px;
   opacity: 1;
+  transition: opacity 0.7s ease, width 0.7s ease;
 }
 
 .linkText.hidden {
   opacity: 0;
-  max-width: 0px;
+  width: 0px;
+  transition: opacity 0.7s ease, width 0.7s ease-in-out;
 }

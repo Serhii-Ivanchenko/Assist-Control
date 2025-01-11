@@ -35,8 +35,10 @@
 
  .editInput {
      width: 100%;
+     padding: 4px;
      outline: none;
      border: none;
+     border-radius: 6px;
      display: flex;
      align-items: center;
      color: var(--white);
@@ -53,16 +55,16 @@
      border: none;
  }
 
-  .editInput::-webkit-scrollbar {
-      width: 8px;
-  }
+ .editInput::-webkit-scrollbar {
+     width: 8px;
+ }
 
-  .editInput::-webkit-scrollbar-track {
-      border-radius: 4px;
-      background-color: var(--main-gray);
-  }
+ .editInput::-webkit-scrollbar-track {
+     border-radius: 4px;
+     background-color: var(--main-gray);
+ }
 
-  .editInput::-webkit-scrollbar-thumb {
-      border-radius: 4px;
-      background-color: var(--bg);
-  }
+ .editInput::-webkit-scrollbar-thumb {
+     border-radius: 4px;
+     background-color: var(--bg);
+ }
