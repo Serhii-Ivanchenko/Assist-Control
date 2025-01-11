@@ -277,7 +277,7 @@ export const updateSupplierStatus = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.patch(
-        `/sup/suppliers/status`,
+        `/sup/suppliers/status/`,
         newStatus,
         {
           headers: {
@@ -303,7 +303,7 @@ export const getSupplierData = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/sup/supplier/${supplier_id}//`,
+        `/sup/supplier/${supplier_id}/`,
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",
@@ -342,7 +342,7 @@ export const getAllSuppliers = createAsyncThunk(
   }
 );
 
-//! SCHEDULE
+//! SCHEDULE (поки немає)
 
 // Get work schedule
 export const getWorkSchedule = createAsyncThunk(
@@ -392,7 +392,7 @@ export const updateWorkSchedule = createAsyncThunk(
   }
 );
 
-//! POSTS
+//! POSTS (поки немає)
 
 // Get list of service posts
 export const getPosts = createAsyncThunk(
