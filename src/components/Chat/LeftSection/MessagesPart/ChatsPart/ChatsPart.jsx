@@ -13,7 +13,7 @@ export default function ChatsPart({
   isChecked,
   handleCheckboxChange,
   allChecked,
-  emptyList,
+  // emptyList,
 }) {
   const [chosen, setChosen] = useState(false);
 
@@ -24,91 +24,86 @@ export default function ChatsPart({
 
   const time = (time) => {
     const newTime = Date.now() - new Date(time).getTime();
+    const seconds = Math.floor(newTime / 1000);
     const minutes = Math.floor(newTime / (1000 * 60));
     const hours = Math.floor(newTime / (1000 * 60 * 60));
     const days = Math.floor(newTime / (1000 * 60 * 60 * 24));
 
+    if (seconds < 60) return "now";
     if (minutes < 60) return `${minutes}m ago`;
     if (hours < 24) return `${hours}h ago`;
     return `${days}d ago`;
   };
 
   return (
-    <div>
-      {emptyList ? (
-        "no chats"
-      ) : (
-        <ul className={css.chatsList}>
-          {chats.map((chat, index) => (
-            <li
-              key={index}
-              className={`${css.chatsListItem} ${
-                chat.warning && css.warningBorder
-              } ${chosen === chat.id && css.chosenChat}`}
-              onClick={() => handleChoose(chat.id)}
-            >
-              {isChecked && (
-                <label
-                  className={css.label}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <input
-                    type="checkbox"
-                    name="chat"
-                    id="chat"
-                    className={css.checkbox}
-                    checked={allChecked[index]}
-                    onChange={(e) => {
-                      e.stopPropagation();
-                      handleCheckboxChange(index);
-                    }}
-                  />
-                  <span className={css.cbMark}>
-                    {/* ${isChecked && css.cbMarkIsChecked} */}
-                    <BsCheck size={16} className={css.cbIcon} />
-                  </span>
-                </label>
-              )}
-
-              <div className={css.avatarBox}>
-                <img src={chat.avatar} alt="" className={css.avatar} />
-                <img
-                  src={chat.icon}
-                  alt=""
-                  className={`${css.channelIcon} ${
-                    (chat.icon === telegram || chat.icon === facebook) &&
-                    css.channelIconTF
-                  }`}
+    <div className={css.scroll}>
+      <ul className={css.chatsList}>
+        {chats.map((chat, index) => (
+          <li
+            key={index}
+            className={`${css.chatsListItem} ${
+              chat.warning && css.warningBorder
+            } ${chosen === chat.id && css.chosenChat}`}
+            onClick={() => handleChoose(chat.id)}
+          >
+            {isChecked && (
+              <label className={css.label} onClick={(e) => e.stopPropagation()}>
+                <input
+                  type="checkbox"
+                  name="chat"
+                  id="chat"
+                  className={css.checkbox}
+                  checked={allChecked[index]}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    handleCheckboxChange(index);
+                  }}
                 />
-              </div>
+                <span className={css.cbMark}>
+                  {/* ${isChecked && css.cbMarkIsChecked} */}
+                  <BsCheck size={16} className={css.cbIcon} />
+                </span>
+              </label>
+            )}
 
-              <div className={css.commonBox}>
-                <div className={css.nameAndMessageBox}>
-                  <p className={css.name}>{chat.name}</p>
-                  <p
-                    className={`${css.lastMessage} ${
-                      !chat.read && css.freshMessage
-                    }`}
-                  >
-                    {chat.lastMessage}
-                  </p>
-                </div>
-                <div className={css.timeContainer}>
-                  <div className={css.managersPhotoBox}>
-                    <img
-                      src={chat.managersPhoto}
-                      alt=""
-                      className={css.managersPhoto}
-                    />
-                    <BsBookmark size={18} />
-                  </div>
-                  <p className={css.time}>{time(chat.time)}</p>
-                </div>
+            <div className={css.avatarBox}>
+              <img src={chat.avatar} alt="" className={css.avatar} />
+              <img
+                src={chat.icon}
+                alt=""
+                className={`${css.channelIcon} ${
+                  (chat.icon === telegram || chat.icon === facebook) &&
+                  css.channelIconTF
+                }`}
+              />
+            </div>
+
+            <div className={css.commonBox}>
+              <div className={css.nameAndMessageBox}>
+                <p className={css.name}>{chat.name}</p>
+                <p
+                  className={`${css.lastMessage} ${
+                    !chat.read && css.freshMessage
+                  }`}
+                >
+                  {chat.lastMessage}
+                </p>
               </div>
-            </li>
-          ))}
-        </ul>
-      )}
+              <div className={css.timeContainer}>
+                <div className={css.managersPhotoBox}>
+                  <img
+                    src={chat.managersPhoto}
+                    alt=""
+                    className={css.managersPhoto}
+                  />
+                  <BsBookmark size={18} />
+                </div>
+                <p className={css.time}>{time(chat.time)}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

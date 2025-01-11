@@ -91,7 +91,7 @@ export default function LeftSection() {
       name: "Дмитро Поліщук",
       lastMessage: "Доброго ранку! Ви працюєте з автомобілями американськог...",
       managersPhoto: avatar,
-      time: "3h ago",
+      time: "2025-01-11T06:45:33",
       read: true,
       id: "7",
     },
@@ -103,7 +103,7 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "1d ago",
+      time: "2025-01-11T18:45:33",
       read: true,
       id: "8",
     },
@@ -115,66 +115,80 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "1d ago",
+      time: "2025-01-11T19:27:33",
       read: true,
       id: "9",
     },
   ];
 
-  const [sortedChats, setSortedChats] = useState([]);
-  const [filteredChats, setFilteredChats] = useState([]);
+  // const [sortedChats, setSortedChats] = useState([]);
+  // const [filteredChats, setFilteredChats] = useState([]);
+  const [sortedAndFilteredChats, setSortedAndFilteredChats] = useState([]);
   const [sortOrder, setSortOrder] = useState("newFirst");
+  const [activeFilter, setActiveFilter] = useState(null);
 
   const memoizedChats = useMemo(() => chats, []);
 
   useEffect(() => {
-    const initialSortedChats = [...memoizedChats].sort((a, b) => {
-      return new Date(b.time).getTime() - new Date(a.time).getTime(); // Новіші перші
-    });
+    let updatedChats = [...memoizedChats];
 
-    setSortedChats(initialSortedChats);
-    setFilteredChats([]);
-  }, [memoizedChats]);
+    // Фільтрація
+    if (activeFilter) {
+      updatedChats = updatedChats.filter((chat) => chat.type === activeFilter);
+    }
 
-  const handleSort = () => {
-    const newSortOrder = sortOrder === "newFirst" ? "oldFirst" : "newFirst";
-
-    // Сортуємо весь початковий список, не впливаючи на фільтри
-    const sorted = [...memoizedChats].sort((a, b) => {
-      return newSortOrder === "newFirst"
+    // Сортування
+    updatedChats.sort((a, b) => {
+      return sortOrder === "newFirst"
         ? new Date(b.time).getTime() - new Date(a.time).getTime()
         : new Date(a.time).getTime() - new Date(b.time).getTime();
     });
 
-    setSortedChats(sorted);
-    setSortOrder(newSortOrder);
+    setSortedAndFilteredChats(updatedChats);
+  }, [memoizedChats, sortOrder, activeFilter]);
 
-    if (filteredChats.length > 0) {
-      const activeFilterType = filteredChats[0].type; // Зберігаємо поточний фільтр
-      setFilteredChats(sorted.filter((chat) => chat.type === activeFilterType));
-    }
+  const handleSort = () => {
+    setSortOrder((prev) => (prev === "newFirst" ? "oldFirst" : "newFirst"));
+
+    // Сортуємо весь початковий список, не впливаючи на фільтри
+    // const sorted = [...memoizedChats].sort((a, b) => {
+    //   return newSortOrder === "newFirst"
+    //     ? new Date(b.time).getTime() - new Date(a.time).getTime()
+    //     : new Date(a.time).getTime() - new Date(b.time).getTime();
+    // });
+
+    // setSortedChats(sorted);
+    // setSortOrder(newSortOrder);
+
+    // if (filteredChats.length > 0) {
+    //   const activeFilterType = filteredChats[0].type; // Зберігаємо поточний фільтр
+    //   setFilteredChats(sorted.filter((chat) => chat.type === activeFilterType));
+    // } else if (filteredChats.length === 0) {
+    //   setFilteredChats([]);
+    // }
   };
 
   const handleFilter = (e, type) => {
     e.stopPropagation();
-    setFilteredChats(sortedChats.filter((chat) => chat.type === type));
+    setActiveFilter((prev) => (prev === type ? null : type)); // Скидаємо фільтр, якщо той самий
   };
 
   return (
     <div className={css.leftSectionWrapper}>
       {/* LeftSection */}
-      <InboxPart handleFilter={handleFilter} />
+      {/* <InboxPart handleFilter={handleFilter} /> */}
+
+      <InboxPart
+        handleFilter={handleFilter}
+        chats={memoizedChats}
+        setFilteredChats={setActiveFilter}
+      />
       <MessagesPart
-        chats={filteredChats.length > 0 ? filteredChats : sortedChats}
-        emptyList={filteredChats.length === 0 && filteredChats !== sortedChats}
+        chats={sortedAndFilteredChats}
+        // emptyList={filteredChats.length === 0 && filteredChats !== sortedChats}
         handleSort={handleSort}
       />
-      {/* <InboxPart
-        handleFilter={handleFilter}
-        chats={chats}
-        setFilteredChats={setFilteredChats}
-      />
-      <MessagesPart chats={filteredChats} /> */}
+      {/*<MessagesPart chats={filteredChats} /> */}
     </div>
   );
 }
