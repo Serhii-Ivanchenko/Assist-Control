@@ -2,6 +2,7 @@
 import css from "./ActionsPart.module.css";
 import { BsCheck } from "react-icons/bs";
 import { BsArrowDownUp } from "react-icons/bs";
+import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsTag } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
@@ -30,6 +31,7 @@ export default function ActionsPart({
   handleAllChecked,
   // chats,
   handleSort,
+  sortOrder,
 }) {
   const [openedActions, setOpenedActions] = useState(false);
 
@@ -122,7 +124,11 @@ export default function ActionsPart({
       <div className={css.filter} onClick={handleSort}>
         <BsArrowDownUp size={18} className={css.icon} />
         <p className={css.text}>Нові</p>
-        <IoIosArrowDown size={20} className={css.icon} />
+        {sortOrder === "newFirst" ? (
+          <IoIosArrowUp size={20} style={{ fill: "var(--light-gray)" }} />
+        ) : (
+          <IoIosArrowDown size={20} style={{ fill: "var(--light-gray)" }} />
+        )}
       </div>
     </div>
   );

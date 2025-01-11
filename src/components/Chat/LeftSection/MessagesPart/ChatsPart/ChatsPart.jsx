@@ -13,7 +13,6 @@ export default function ChatsPart({
   isChecked,
   handleCheckboxChange,
   allChecked,
-  // emptyList,
 }) {
   const [chosen, setChosen] = useState(false);
 

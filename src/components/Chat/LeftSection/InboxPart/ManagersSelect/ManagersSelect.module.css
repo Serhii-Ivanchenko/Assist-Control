@@ -44,7 +44,18 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  /* opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition: opacity 0.7s ease, transform 0.7s ease; */
 }
+
+/* .open {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+} */
 
 .option {
   display: flex;

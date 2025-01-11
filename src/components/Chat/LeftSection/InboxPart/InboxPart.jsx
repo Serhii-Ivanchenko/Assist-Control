@@ -5,7 +5,12 @@ import css from "./InboxPart.module.css";
 // import { IoIosArrowDown } from "react-icons/io";
 import ManagersSelect from "./ManagersSelect/ManagersSelect";
 
-export default function InboxPart({ handleFilter, chats, setFilteredChats }) {
+export default function InboxPart({
+  handleFilter,
+  chats,
+  setFilteredChats,
+  // setActiveFilterCategory,
+}) {
   // const [isActive, setIsActive] = useState(false)
 
   // const handleClick = () => {
@@ -42,7 +47,10 @@ export default function InboxPart({ handleFilter, chats, setFilteredChats }) {
         </div>
       </div>
 
-      <EmailType />
+      <EmailType
+        handleFilter={handleFilter}
+        // setActiveFilterCategory={setActiveFilterCategory}
+      />
       <ChannelsPart
         handleFilter={handleFilter}
         chats={chats}

@@ -6,6 +6,7 @@ import assist from "../../../assets/images/ChannelsImages/logo-rect 1.png";
 import facebook from "../../../assets/images/ChannelsImages/Facebook_Messenger_1.png";
 import avatar from "../../../assets/images/avatar_default.png";
 import telegram from "../../../assets/images/ChannelsImages/Telegram_1.png";
+import gmail from "../../../assets/images/ChannelsImages/Gmail_icon_1.png";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useMemo } from "react";
@@ -13,6 +14,7 @@ import { useMemo } from "react";
 export default function LeftSection() {
   const chats = [
     {
+      category: "chat",
       type: "whatsApp",
       avatar: avatar,
       icon: whatsApp,
@@ -25,6 +27,7 @@ export default function LeftSection() {
       id: "1",
     },
     {
+      category: "chat",
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -38,6 +41,7 @@ export default function LeftSection() {
       id: "2",
     },
     {
+      category: "chat",
       type: "telegram",
       avatar: avatar,
       icon: telegram,
@@ -50,6 +54,7 @@ export default function LeftSection() {
       id: "3",
     },
     {
+      category: "chat",
       type: "assist",
       avatar: avatar,
       icon: assist,
@@ -62,6 +67,7 @@ export default function LeftSection() {
       id: "4",
     },
     {
+      category: "chat",
       type: "telegram",
       avatar: avatar,
       icon: telegram,
@@ -73,6 +79,7 @@ export default function LeftSection() {
       id: "5",
     },
     {
+      category: "chat",
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -85,6 +92,7 @@ export default function LeftSection() {
       id: "6",
     },
     {
+      category: "chat",
       type: "telegram",
       avatar: avatar,
       icon: telegram,
@@ -96,6 +104,7 @@ export default function LeftSection() {
       id: "7",
     },
     {
+      category: "chat",
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -108,9 +117,23 @@ export default function LeftSection() {
       id: "8",
     },
     {
+      category: "chat",
       type: "facebook",
       avatar: avatar,
       icon: facebook,
+      name: "Анастасія Шевченко",
+      lastMessage:
+        "Доброго дня! У мене є питання щодо ремонту коробки переда...",
+      managersPhoto: avatar,
+      time: "2025-01-11T19:27:33",
+      read: true,
+      id: "9",
+    },
+    {
+      category: "email",
+      type: "gmail",
+      avatar: avatar,
+      icon: gmail,
       name: "Анастасія Шевченко",
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
@@ -126,6 +149,7 @@ export default function LeftSection() {
   const [sortedAndFilteredChats, setSortedAndFilteredChats] = useState([]);
   const [sortOrder, setSortOrder] = useState("newFirst");
   const [activeFilter, setActiveFilter] = useState(null);
+  const [activeFilterCategory, setActiveFilterCategory] = useState(null);
 
   const memoizedChats = useMemo(() => chats, []);
 
@@ -137,6 +161,12 @@ export default function LeftSection() {
       updatedChats = updatedChats.filter((chat) => chat.type === activeFilter);
     }
 
+    if (activeFilterCategory) {
+      updatedChats = updatedChats.filter(
+        (chat) => chat.category === activeFilterCategory
+      );
+    }
+
     // Сортування
     updatedChats.sort((a, b) => {
       return sortOrder === "newFirst"
@@ -145,32 +175,20 @@ export default function LeftSection() {
     });
 
     setSortedAndFilteredChats(updatedChats);
-  }, [memoizedChats, sortOrder, activeFilter]);
+  }, [memoizedChats, sortOrder, activeFilter, activeFilterCategory]);
 
   const handleSort = () => {
     setSortOrder((prev) => (prev === "newFirst" ? "oldFirst" : "newFirst"));
-
-    // Сортуємо весь початковий список, не впливаючи на фільтри
-    // const sorted = [...memoizedChats].sort((a, b) => {
-    //   return newSortOrder === "newFirst"
-    //     ? new Date(b.time).getTime() - new Date(a.time).getTime()
-    //     : new Date(a.time).getTime() - new Date(b.time).getTime();
-    // });
-
-    // setSortedChats(sorted);
-    // setSortOrder(newSortOrder);
-
-    // if (filteredChats.length > 0) {
-    //   const activeFilterType = filteredChats[0].type; // Зберігаємо поточний фільтр
-    //   setFilteredChats(sorted.filter((chat) => chat.type === activeFilterType));
-    // } else if (filteredChats.length === 0) {
-    //   setFilteredChats([]);
-    // }
   };
 
-  const handleFilter = (e, type) => {
+  const handleFilter = (e, type, isCategory = false) => {
     e.stopPropagation();
-    setActiveFilter((prev) => (prev === type ? null : type)); // Скидаємо фільтр, якщо той самий
+
+    if (isCategory) {
+      setActiveFilterCategory(type);
+    } else {
+      setActiveFilter(type);
+    }
   };
 
   return (
@@ -182,11 +200,13 @@ export default function LeftSection() {
         handleFilter={handleFilter}
         chats={memoizedChats}
         setFilteredChats={setActiveFilter}
+        // setActiveFilterCategory={setActiveFilterCategory}
       />
       <MessagesPart
         chats={sortedAndFilteredChats}
         // emptyList={filteredChats.length === 0 && filteredChats !== sortedChats}
         handleSort={handleSort}
+        sortOrder={sortOrder}
       />
       {/*<MessagesPart chats={filteredChats} /> */}
     </div>
