@@ -98,14 +98,8 @@ export default function LeftSection() {
     });
 
     setSortedChats(initialSortedChats);
-    setFilteredChats(initialSortedChats); // Встановлюємо відсортований список як початковий
+    setFilteredChats([]);
   }, [memoizedChats]);
-
-  const handleFilter = (e, type) => {
-    e.stopPropagation();
-    const filtered = sortedChats.filter((chat) => chat.type === type);
-    setFilteredChats(filtered);
-  };
 
   const handleSort = () => {
     const newSortOrder = sortOrder === "newFirst" ? "oldFirst" : "newFirst";
@@ -120,19 +114,26 @@ export default function LeftSection() {
     setSortedChats(sorted);
     setSortOrder(newSortOrder);
 
-    const filtered =
-      filteredChats.length > 0
-        ? sorted.filter((chat) => chat.type === filteredChats[0].type)
-        : sorted;
+    if (filteredChats.length > 0) {
+      const activeFilterType = filteredChats[0].type; // Зберігаємо поточний фільтр
+      setFilteredChats(sorted.filter((chat) => chat.type === activeFilterType));
+    }
+  };
 
-    setFilteredChats(filtered);
+  const handleFilter = (e, type) => {
+    e.stopPropagation();
+    setFilteredChats(sortedChats.filter((chat) => chat.type === type));
   };
 
   return (
     <div className={css.leftSectionWrapper}>
       {/* LeftSection */}
       <InboxPart handleFilter={handleFilter} />
-      <MessagesPart chats={filteredChats} handleSort={handleSort} />
+      <MessagesPart
+        chats={filteredChats.length > 0 ? filteredChats : sortedChats}
+        emptyList={filteredChats.length === 0 && filteredChats !== sortedChats}
+        handleSort={handleSort}
+      />
     </div>
   );
 }

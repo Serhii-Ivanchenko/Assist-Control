@@ -5,7 +5,7 @@ import ActionsPart from "./ActionsPart/ActionsPart";
 import ChatsPart from "./ChatsPart/ChatsPart";
 import { useState } from "react";
 
-export default function MessagesPart({ chats, handleSort }) {
+export default function MessagesPart({ chats, handleSort, emptyList }) {
   const [isChecked, setIsChecked] = useState(false);
   // const [allChecked, setAllChecked] = useState(false);
   const [allChecked, setAllChecked] = useState(
@@ -51,6 +51,7 @@ export default function MessagesPart({ chats, handleSort }) {
         isChecked={isChecked}
         allChecked={allChecked}
         handleCheckboxChange={handleCheckboxChange}
+        emptyList={emptyList}
       />
     </div>
   );
