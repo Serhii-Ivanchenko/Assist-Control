@@ -5,7 +5,11 @@ import { BsArrowDownUp } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsTag } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
+import { BsFillCaretUpFill } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
+import { tags } from "../../../RightSection/ChatTags/tags.js";
+import { useEffect, useState } from "react";
+import SearchTags from "../../../RightSection/ChatTags/SearchTags/SearchTags";
 
 export default function ActionsPart({
   isChecked,
@@ -13,6 +17,33 @@ export default function ActionsPart({
   allChecked,
   handleAllChecked,
 }) {
+  const [tagsArr, setTagsArr] = useState(tags);
+  const [tagsModalIsOpen, setTagsModalIsOpen] = useState(false);
+
+  const openTagsModal = (e) => {
+    e.stopPropagation();
+    setTagsModalIsOpen((prev) => !prev); 
+  };
+
+  const handleTagsModalClose = (e) => {
+    e.stopPropagation();
+    setTagsModalIsOpen(false);
+  };
+  
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest(`.${css.select}`)) {
+        setTagsModalIsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className={css.actions}>
       {isChecked && (
@@ -48,10 +79,14 @@ export default function ActionsPart({
         <p className={css.text}> Дії</p>
       ) : (
         <div className={css.actionsChecked}>
-          <div className={css.select}>
+          <div className={css.select} onClick={openTagsModal}>
             <BsTag size={16} className={css.icon} />
             <p className={css.actionsText}>Тег</p>
-            <BsFillCaretDownFill size={16} className={css.icon} />
+            {tagsModalIsOpen ? (
+              <BsFillCaretUpFill size={16} className={css.icon} />
+            ) : (
+              <BsFillCaretDownFill size={16} className={css.icon} />
+            )}
           </div>
 
           <div className={css.select}>
@@ -67,6 +102,14 @@ export default function ActionsPart({
         <p className={css.text}>Нові</p>
         <IoIosArrowDown size={20} className={css.icon} />
       </div>
+      {tagsModalIsOpen && (
+        <SearchTags
+          onClose={handleTagsModalClose}
+          tagsArray={tagsArr}
+          setTagsArr={setTagsArr}
+          leftSectionTag={true}
+        />
+      )}
     </div>
   );
 }

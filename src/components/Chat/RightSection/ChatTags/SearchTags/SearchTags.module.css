@@ -1,12 +1,22 @@
 .wrapper {
-  position: fixed;
-  inset: 16px 0 auto auto;
   z-index: 1000;
   /* width: 392px; */
   border-radius: 8px;
   background: var(--bg-secondary);
+  box-shadow: -6px 7px 10px 6px rgba(0, 0, 0, 0.25);
+}
+
+.rightSectionTags {
+  position: fixed;
+  inset: 16px 0 auto auto;
   padding: 18px 41px;
-  box-shadow: -8px 7px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.leftSectionTags {
+  position: absolute;
+  top: 34px;
+  right: 0px;
+  padding: 18px 23px;
 }
 
 .headerWrapper {
