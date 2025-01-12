@@ -21,7 +21,12 @@ export default function SideBar() {
   return (
     shouldRender && (
       <div className={clsx(styles.sidebar, { [styles.chatOpen]: chatIsOpen })}>
-        <div className={styles.topContainer}>
+        <div
+          className={
+            clsx(styles.topContainer,
+            { [styles.topContainerChatOpen]: chatIsOpen })
+          }
+        >
           <UserBar className={styles.userBar} />
           <UserInfo className={styles.userInfo} />
         </div>

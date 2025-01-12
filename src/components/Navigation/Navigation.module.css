@@ -1,6 +1,11 @@
-.navigation{
-margin-left: 5px;
+.navigation {
+  margin-left: 5px;
 }
+
+.navigationChatOpen {
+  margin-left: 0;
+}
+
 .navItem {
   font-size: 11px;
   font-weight: 400;
@@ -41,15 +46,18 @@ margin-left: 5px;
 
 .navWithChat:hover {
   /* box-shadow: 0px 14px 35px rgba(0, 0, 0, 0.08); */
-  box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 8px, rgba(0, 0, 0, 0.5) 0px 5px 3px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 8px, rgba(0, 0, 0, 0.3) 0px 5px 3px;
   /* transform: translateY(-5px); */
   transform: scale(1.07);
 }
+
 .navLink:hover .iconContainer {
   /* Стилі для контейнера іконки */
-  box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 8px, rgba(0, 0, 0, 0.5) 0px 5px 3px;
-  transform: scale(1.07); /* Збільшення іконки */
-  transition: transform 0.2s, box-shadow 0.2s; /* Плавна анімація */
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 8px, rgba(0, 0, 0, 0.3) 0px 5px 3px;
+  transform: scale(1.07);
+  /* Збільшення іконки */
+  transition: transform 0.2s, box-shadow 0.2s;
+  /* Плавна анімація */
 }
 
 .topNavContainer {
