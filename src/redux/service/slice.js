@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
-import { createService, getServiceData, updateService } from "./operations.js";
+import { createService, getAllServices, getServiceData, updateService } from "./operations.js";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -18,6 +18,12 @@ const serviceSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
+      .addCase(getAllServices.pending, handlePending)
+      .addCase(getServiceData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload.data;
+      })
+      .addCase(getServiceData.rejected, handleRejected)
       .addCase(getServiceData.pending, handlePending)
       .addCase(getServiceData.fulfilled, (state, action) => {
         state.isLoading = false;

@@ -1,5 +1,7 @@
+export const selectAllServices = (state) => state.service.services;
+
 export const selectService = (state) => state.service.data;
 
-export const selectLoding = (state) => state.service.isLoading;
+export const selectLoading = (state) => state.service.isLoading;
 
 export const selectError = (state) => state.service.error;

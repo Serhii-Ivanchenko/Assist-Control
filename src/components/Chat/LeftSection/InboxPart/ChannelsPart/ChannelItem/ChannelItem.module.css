@@ -5,17 +5,25 @@
   cursor: pointer;
   user-select: none;
   background-color: var(--bg-secondary);
+  padding-left: 30px;
+  padding-right: 10px;
+  width: 264px;
+
   /* opacity: 1 !important; */
 
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out;
 
   position: relative;
 }
 
-.dragged {
+.channelsListItemActive {
+  background-color: var(--bg-input);
+}
+
+/* .dragged {
   opacity: 0.3;
   transition: opacity 0.2s ease;
-}
+} */
 
 .iconAndText {
   display: flex;
@@ -98,4 +106,20 @@
 
 .dragIcon:active {
   cursor: grabbing;
+}
+
+.cloneDragging {
+  opacity: 1 !important;
+  z-index: 1000;
+  border-radius: 12px;
+  /* width: 266px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 1px solid white; */
+}
+
+.isDragging {
+  opacity: 0.1;
+  /* cursor: grabbing; */
 }

@@ -1,7 +1,12 @@
 .inboxContainer {
   width: 266px;
-  padding: 25px 10px 25px 30px;
+  padding: 25px 0 25px 0;
   background-color: var(--bg-secondary);
+}
+
+.topPartContainer {
+  padding-left: 30px;
+  padding-right: 10px;
 }
 
 .title {
