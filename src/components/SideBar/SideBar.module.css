@@ -7,7 +7,7 @@
   /* max-height: 100vh; */
   border-radius: 12px;
   background: var(--bg-secondary);
-  padding: 20px 30px;
+  padding: 20px 25px;
 
   flex-shrink: 0;
   transition:
@@ -75,4 +75,5 @@
 .topContainer {
   flex-shrink: 0;
   position: relative;
+  margin-left: 5px;
 }

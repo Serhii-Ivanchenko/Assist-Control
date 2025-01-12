@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./ReportsTree.module.css";
 import { selectIsChatOpen } from "../../../redux/chat/selectors";
 import { useSelector } from "react-redux";
-import { FaUserFriends } from "react-icons/fa";
+import { FaTruck, FaUserFriends } from "react-icons/fa";
 import clsx from "clsx";
 
 export default function ReportsTree() {
@@ -22,7 +22,7 @@ export default function ReportsTree() {
           itemId="clients"
           label={
             <NavLink
-              to="/accounting/clients"
+              to="/reports/clients"
               className={({ isActive }) =>
                 isActive ? styles.activeLink : styles.link
               }
@@ -35,6 +35,23 @@ export default function ReportsTree() {
             </NavLink>
           }
         />
+         <TreeItem
+                  itemId="distributors"
+                  label={
+                    <NavLink
+                      to="/reports/distributors"
+                      className={({ isActive }) =>
+                        isActive ? styles.activeLink : styles.link
+                      }
+                    >
+                      {chatIsOpen ? (
+                        <FaTruck className={styles.icon} size={20}/>
+                      ) : (
+                        "Постачальники"
+                      )}
+                    </NavLink>
+                  }
+                />
       </SimpleTreeView>
     </Box>
   );

@@ -1,3 +1,6 @@
+.navigation{
+margin-left: 5px;
+}
 .navItem {
   font-size: 11px;
   font-weight: 400;
@@ -41,6 +44,12 @@
   box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 8px, rgba(0, 0, 0, 0.5) 0px 5px 3px;
   /* transform: translateY(-5px); */
   transform: scale(1.07);
+}
+.navLink:hover .iconContainer {
+  /* Стилі для контейнера іконки */
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 8px, rgba(0, 0, 0, 0.5) 0px 5px 3px;
+  transform: scale(1.07); /* Збільшення іконки */
+  transition: transform 0.2s, box-shadow 0.2s; /* Плавна анімація */
 }
 
 .topNavContainer {
@@ -175,12 +184,6 @@
   background: var(--bg-input);
   height: 24px;
   line-height: 1.5;
-}
-
-.visible {
-  opacity: 1;
-  max-width: 200px;
-  overflow: visible;
 }
 
 .hidden {

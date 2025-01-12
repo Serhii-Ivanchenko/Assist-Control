@@ -238,20 +238,11 @@ export default function App() {
                     }
                   /> */}
                   <Route
-                    path="/accounting/distributors"
-                    element={
-                      <PrivateRoute
-                        redirectTo="/login"
-                        component={<DistributorsPage />}
-                      />
-                    }
-                  />
-                  <Route
                     path="/accounting/documents"
                     element={
                       <PrivateRoute
-                        redirectTo="/login"
-                        component={<InvoicesPage />}
+                      redirectTo="/login"
+                      component={<InvoicesPage />}
                       />
                     }
                   >
@@ -264,20 +255,29 @@ export default function App() {
                     path="/reports"
                     element={
                       <PrivateRoute
-                        redirectTo="/login"
-                        component={<ReportsPage />}
+                      redirectTo="/login"
+                      component={<ReportsPage />}
                       />
-                    }
-                  /> */}
+                      }
+                      /> */}
                   <Route
                     path="/reports/clients"
                     element={
                       <PrivateRoute
-                        redirectTo="/login"
-                        component={<ReportsClientsPage />}
+                      redirectTo="/login"
+                      component={<ReportsClientsPage />}
                       />
                     }
                   />
+                    <Route
+                      path="/reports/distributors"
+                      element={
+                        <PrivateRoute
+                          redirectTo="/login"
+                          component={<DistributorsPage />}
+                        />
+                      }
+                    />
                   <Route
                     path="/settings"
                     element={

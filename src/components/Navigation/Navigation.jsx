@@ -193,6 +193,7 @@ export default function Navigation() {
             <div
               className={clsx(styles.iconContainer, {
                 [styles.active]: isAccountingOpen,
+                [styles.navWithChat]: chatIsOpen,
               })}
             >
               <HiOutlineCurrencyDollar
@@ -243,6 +244,7 @@ export default function Navigation() {
             <div
               className={clsx(styles.iconContainer, {
                 [styles.active]: isReportsOpen,
+                [styles.navWithChat]: chatIsOpen,
               })}
             >
               <BsJournalCheck className={styles.iconBook} />
