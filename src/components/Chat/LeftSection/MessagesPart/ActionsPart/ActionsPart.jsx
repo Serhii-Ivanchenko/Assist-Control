@@ -8,7 +8,7 @@ import { BsFillCaretDownFill } from "react-icons/bs";
 import { BsFillCaretUpFill } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
 import { tags } from "../../../RightSection/ChatTags/tags.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchTags from "../../../RightSection/ChatTags/SearchTags/SearchTags";
 
 export default function ActionsPart({
@@ -20,8 +20,29 @@ export default function ActionsPart({
   const [tagsArr, setTagsArr] = useState(tags);
   const [tagsModalIsOpen, setTagsModalIsOpen] = useState(false);
 
-  const openTagsModal = () => setTagsModalIsOpen(true);
-  const handleTagsModalClose = () => setTagsModalIsOpen(false);
+  const openTagsModal = (e) => {
+    e.stopPropagation();
+    setTagsModalIsOpen((prev) => !prev); 
+  };
+
+  const handleTagsModalClose = (e) => {
+    e.stopPropagation();
+    setTagsModalIsOpen(false);
+  };
+  
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest(`.${css.select}`)) {
+        setTagsModalIsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className={css.actions}>
