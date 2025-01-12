@@ -18,6 +18,7 @@ export default function ArchiveList({ carsDataArchive }) {
       return newState;
     });
   };
+  
 
   return (
     <div className={styles.listContainer}>
@@ -27,7 +28,7 @@ export default function ArchiveList({ carsDataArchive }) {
             carsDataArchive.map((item) => (
               <li key={`${item.id}-${item.plate}-${item.date}`}>
                 <ArchiveCarItem
-                  data={item}
+                  id={item.id}
                   visiblePopovers={visiblePopovers}
                   togglePopover={togglePopover}
                 />
