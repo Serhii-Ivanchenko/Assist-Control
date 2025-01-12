@@ -13,10 +13,10 @@ import StatusFilter from "../../sharedComponents/StatusFilter/StatusFilter.jsx";
 import renderStatusInArchive from "../../../utils/renderStatusInArchive.jsx";
 import { labelNamesInArchive, statusesArchive } from "../../../utils/dataToRender.js";
 import CalendarPeriodSelector from "../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector.jsx";
-import DownloadPdfButtonModalCar from "../../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar.jsx";
 import InfoSettingsVisibility from "../../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility.jsx";
 import { selectVisibilityArchive } from "../../../redux/visibility/selectors.js";
 import { toggleVisibilityArchive } from "../../../redux/visibility/slice.js";
+import DownloadPdfButtonArchive from "../../sharedComponents/Pdf/DownloadPdfButtonArchive/DownloadPdfButtonArchive.jsx";
 
 export default function ArchiveInfoModal({ onClose }) {
   const dispatch = useDispatch();
@@ -81,7 +81,6 @@ export default function ArchiveInfoModal({ onClose }) {
   
 
   const handleStatusChange = (status) => {
-    console.log("Status changed to:", status); // Додайте лог
     setSelectedStatus(status);
   };
   const handleSearch = (term) => {
@@ -127,7 +126,8 @@ export default function ArchiveInfoModal({ onClose }) {
             handleInputChangeBeg={handleInputChangeBeg}
             isSingle={true}
           />
-          <DownloadPdfButtonModalCar carsData={filteredCarsData} />
+          <DownloadPdfButtonArchive carsData={filteredCarsData} 
+          />
           <InfoSettingsVisibility
             selectVisibility={selectVisibilityArchive}
             toggleVisibilityAction={toggleVisibilityArchive}
