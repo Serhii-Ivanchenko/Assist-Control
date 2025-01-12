@@ -10,7 +10,6 @@ import {
   deletePost,
   deleteService,
   deleteSupplier,
-  editPrices,
   editServiceNameOrPrices,
   getAllEmployees,
   getAllSuppliers,
