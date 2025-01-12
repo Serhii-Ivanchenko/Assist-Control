@@ -11,13 +11,13 @@ export default function NavigationBottom() {
   const chatIsOpen = useSelector(selectIsChatOpen);
 
   return (
-    <nav className={styles.navigation}>
-      <ul
-        className={styles.bottomNavContainer}
-      >
-        <li
-          className={styles.navItem}
-        >
+    <nav
+      className={clsx(styles.navigation, {
+        [styles.navigationChatOpen]: chatIsOpen,
+      })}
+    >
+      <ul className={styles.bottomNavContainer}>
+        <li className={styles.navItem}>
           <NavLink
             to="/bonuses"
             className={({ isActive }) =>
@@ -41,9 +41,7 @@ export default function NavigationBottom() {
             </span>
           </NavLink>
         </li>
-        <li
-          className={styles.navItem}
-        >
+        <li className={styles.navItem}>
           <NavLink
             to="/rating"
             className={({ isActive }) =>
@@ -67,9 +65,7 @@ export default function NavigationBottom() {
             </span>
           </NavLink>
         </li>
-        <li
-          className={styles.navItem}
-        >
+        <li className={styles.navItem}>
           <NavLink
             to="/proficiency"
             className={({ isActive }) =>

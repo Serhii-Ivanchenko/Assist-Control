@@ -24,12 +24,15 @@ const chatSlice = createSlice({
     closeChat: (state) => {
       state.isChatOpen = false;
     },
+     changeActualPrompt: (state, action) => {
+      state.selectedPrompt = action.payload;
+    },
     },
   // extraReducers: (builder) =>
   //     builder
   //       .addCase(),
 });
 
-export const { toggleChat, openChat, closeChat } = chatSlice.actions;
+export const { toggleChat, openChat, closeChat, changeActualPrompt } = chatSlice.actions;
 
 export default chatSlice.reducer;

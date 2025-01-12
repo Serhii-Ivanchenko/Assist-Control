@@ -1,3 +1,11 @@
+.navigation {
+  margin-left: 5px;
+}
+
+.navigationChatOpen {
+  margin-left: 0;
+}
+
 .navItem {
   font-size: 11px;
   font-weight: 400;
@@ -38,9 +46,18 @@
 
 .navWithChat:hover {
   /* box-shadow: 0px 14px 35px rgba(0, 0, 0, 0.08); */
-  box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 8px, rgba(0, 0, 0, 0.5) 0px 5px 3px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 8px, rgba(0, 0, 0, 0.3) 0px 5px 3px;
   /* transform: translateY(-5px); */
   transform: scale(1.07);
+}
+
+.navLink:hover .iconContainer {
+  /* Стилі для контейнера іконки */
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 8px, rgba(0, 0, 0, 0.3) 0px 5px 3px;
+  transform: scale(1.07);
+  /* Збільшення іконки */
+  transition: transform 0.2s, box-shadow 0.2s;
+  /* Плавна анімація */
 }
 
 .topNavContainer {
@@ -177,12 +194,6 @@
   line-height: 1.5;
 }
 
-.visible {
-  opacity: 1;
-  max-width: 200px;
-  overflow: visible;
-}
-
 .hidden {
   opacity: 0;
   max-width: 0;
@@ -194,16 +205,13 @@
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
-  transition: max-width 0.7s ease, opacity 0.7s ease;
-  opacity: 0;
-}
-
-.linkText.visible {
-  max-width: 130px;
+  width: 130px;
   opacity: 1;
+  transition: opacity 0.7s ease, width 0.7s ease;
 }
 
 .linkText.hidden {
   opacity: 0;
-  max-width: 0px;
+  width: 0px;
+  transition: opacity 0.7s ease, width 0.7s ease-in-out;
 }

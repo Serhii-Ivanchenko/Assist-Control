@@ -56,6 +56,24 @@ const calls = [
     message: null,
   },
   {
+    name: "Іван Іваненко",
+    phone: "+38 073 329 12 78",
+    date: "30 листопада 2024 р. 09:10",
+    email: "ivan-ivan",
+    problemCall: true,
+    problemRequest: false,
+    message: null,
+  },
+  {
+    name: "Іван Іваненко",
+    phone: "+38 073 329 12 78",
+    date: "30 листопада 2024 р. 09:10",
+    email: "ivan-ivan",
+    problemCall: true,
+    problemRequest: false,
+    message: null,
+  },
+  {
     name: "Петр Петренко",
     phone: "+38 073 329 12 35",
     date: "25 листопада 2024 р. 09:50",
@@ -119,44 +137,40 @@ export default function ProblemCall() {
     };
   }, [calls]);
 
-  const lastWrapperRef = useRef(null); // Ссылка на последний wrapper
-  const previousHeightRef = useRef(0); // Хранение предыдущей высоты
-  const [isInitialRender, setIsInitialRender] = useState(true); // Флаг первого рендера
-
-  const scrollToBottom = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollTo({
-        top: containerRef.current.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  };
+  const childRefs = useRef([]);
+  const renderCount = useRef(0); // Используем ref для пропуска первой обработки
 
   useEffect(() => {
-    if (!lastWrapperRef.current) return;
-
-    const observer = new ResizeObserver(() => {
-      const currentHeight = lastWrapperRef.current.offsetHeight;
-
-      if (!isInitialRender && currentHeight > previousHeightRef.current) {
-        // Скроллим вниз только если это не первый рендер
-        scrollToBottom();
+    const observer = new ResizeObserver((entries) => {
+      if (renderCount.current < childRefs.current.length) {
+        renderCount.current += 1; // Пропускаем обработку для первого рендера
+        return;
       }
+      entries.forEach((entry) => {
+        const index = childRefs.current.findIndex(
+          (ref) => ref === entry.target
+        );
+        if (index !== -1 && containerRef.current) {
+          const parent = containerRef.current;
+          const offsetTop = entry.target.offsetTop - parent.offsetTop;
 
-      // Обновляем предыдущую высоту
-      previousHeightRef.current = currentHeight;
-
-      // Сбрасываем флаг после первого рендера
-      if (isInitialRender) {
-        setIsInitialRender(false);
-      }
+          parent.scrollTo({
+            top: offsetTop,
+            behavior: "smooth",
+          });
+        }
+      });
     });
 
-    observer.observe(lastWrapperRef.current);
-
-    // Очищаем наблюдателя при размонтировании
-    return () => observer.disconnect();
-  }, [calls, isInitialRender]);
+    childRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+    return () => {
+      childRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
 
   return (
     <div className={css.sectionWrapper} ref={containerRef}>
@@ -165,7 +179,7 @@ export default function ProblemCall() {
           <div
             className={`${css.wrapper} ${isScrolled && css.wrapperScrolled}`}
             key={index}
-            ref={index === calls.length - 1 ? lastWrapperRef : null}
+            ref={(el) => (childRefs.current[index] = el)}
           >
             {call.problemCall ? (
               <h3 className={css.header}>Проблемний дзвінок</h3>

@@ -1,3 +1,11 @@
+.navigation {
+    margin-left: 5px;
+}
+
+.navigationChatOpen {
+    margin-left: 0;
+}
+
 .navItem {
     font-size: 11px;
     font-weight: 400;
@@ -28,9 +36,9 @@
     }
 }
 
-.navWithChat{
+.navWithChat {
     width: 42px;
-  }  
+}
 
 .iconContainer {
     width: 28px;
@@ -51,7 +59,7 @@
     }
 }
 
-.iconBonus{
+.iconBonus {
     transition: color 0.3s;
     color: var(--orange);
 }
@@ -79,7 +87,7 @@
         height: 22px;
     }
 
-    .iconBonus{
+    .iconBonus {
         width: 18px;
         height: 18px;
     }
@@ -97,45 +105,45 @@
 .disabled {
     pointer-events: none;
     color: var(--input-text);
-  }
+}
 
 .hidden {
     display: none;
 }
 
-.bottomNavContainer{
+.bottomNavContainer {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-  .visible {
+.visible {
     opacity: 1;
     max-width: 200px;
     overflow: visible;
-  }
-  
-  .hidden {
+}
+
+.hidden {
     opacity: 0;
     max-width: 0;
     overflow: hidden;
-  }
-  
-  /* Стилі для тексту, який поступово розгортається */
-  .linkText {
+}
+
+/* Стилі для тексту, який поступово розгортається */
+.linkText {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     transition: max-width 0.7s ease, opacity 0.7s ease;
     opacity: 0;
-  }
-  
-  .linkText.visible {
-    max-width: 130px; 
-    opacity: 1; 
-  }
-  
-  .linkText.hidden {
+}
+
+.linkText.visible {
+    max-width: 130px;
+    opacity: 1;
+}
+
+.linkText.hidden {
     opacity: 0;
     max-width: 0px;
-  }
+}

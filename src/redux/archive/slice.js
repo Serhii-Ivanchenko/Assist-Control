@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
-import { addItemToArchive, getAllArchiveData } from "./operations.js";
+import {
+  addItemToArchive,
+  getAllArchiveData,
+  returnArchiveItem,
+  updateArchiveItem,
+} from "./operations.js";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -29,7 +34,33 @@ const archiveSlice = createSlice({
         state.isLoading = false;
         // state.archiveData.push(action.payload);
       })
-      .addCase(addItemToArchive.rejected, handleRejected),
+      .addCase(addItemToArchive.rejected, handleRejected)
+      .addCase(updateArchiveItem.pending, handlePending)
+      .addCase(updateArchiveItem.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const archiveItemToEditIndex = state.archiveData.findIndex(
+          (archiveItem) => archiveItem.archive_id === action.payload.archive_id
+        );
+
+        if (
+          // action.payload.status === 200 &&
+          archiveItemToEditIndex !== -1
+        ) {
+          state.archiveData[archiveItemToEditIndex] = {
+            ...state.archiveData[archiveItemToEditIndex], // Залишаємо старі дані
+            ...action.meta.arg, // Додаємо дані, які відправляли
+          };
+        }
+      })
+      .addCase(updateArchiveItem.rejected, handleRejected)
+      .addCase(returnArchiveItem.pending, handlePending)
+      .addCase(returnArchiveItem.fulfilled, (state, action) => {
+        state.isLoading = false;
+        // state.archiveData = state.archiveData.filter(
+        //   (archiveItem) => archiveItem.archive_id === action.payload.archive_id
+        // );        
+      })
+      .addCase(returnArchiveItem.rejected, handleRejected),
 });
 
 export default archiveSlice.reducer;

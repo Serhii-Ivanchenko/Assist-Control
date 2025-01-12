@@ -11,7 +11,9 @@
   justify-content: space-between;
   height: 40px;
   cursor: pointer;
-  width: 202px;
+  width: 242px;
+  padding-left: 30px;
+  padding-right: 10px;
 }
 
 .iconTextBox {

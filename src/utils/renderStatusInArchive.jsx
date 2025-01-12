@@ -5,7 +5,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 
 const renderStatusInArchive = (reason_description, styles = {}) => {
   let icon;
-  let statusText;
+  let statusText = "";
   let statusClass = "";
   let background;
   let borderColor;
