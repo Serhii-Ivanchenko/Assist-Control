@@ -19,11 +19,11 @@ const serviceSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(getAllServices.pending, handlePending)
-      .addCase(getServiceData.fulfilled, (state, action) => {
+      .addCase(getAllServices.fulfilled, (state, action) => {
         state.isLoading = false;
         state.data = action.payload.data;
       })
-      .addCase(getServiceData.rejected, handleRejected)
+      .addCase(getAllServices.rejected, handleRejected)
       .addCase(getServiceData.pending, handlePending)
       .addCase(getServiceData.fulfilled, (state, action) => {
         state.isLoading = false;
