@@ -17,7 +17,7 @@ import ChatSample from "./ChatSample/ChatSample.jsx";
 import ChatNotes from "./ChatNotes/ChatNotes.jsx";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ava from "../,,/../../../assets/images/ava1.png";
-import { BsFiles, BsAlarm, BsTelephone } from "react-icons/bs";
+import { BsFiles, BsAlarm, BsTelephone, BsThreeDots } from "react-icons/bs";
 import { RiUserSharedFill, RiUserAddFill } from "react-icons/ri";
 import { IoIosSearch } from "react-icons/io";
 
@@ -25,6 +25,8 @@ import { BsPencil, BsXCircle } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
 import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa";
+import Modal from "../../Modals/Modal/Modal.jsx"
+import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal.jsx";
 import SearchTags from "./ChatTags/SearchTags/SearchTags.jsx";
 import clsx from "clsx";
 
@@ -56,6 +58,7 @@ const data = {
   avatar: ava,
   phonenum: "0733291217",
   status: "Новий",
+  phonenums: ["0675432109", "0502345678", "0733291217"]
 };
 
 const tags = [
@@ -106,6 +109,7 @@ export default function RightSection() {
 
   const [filters, setFilters] = useState(["", ""]);
   const [activeFilters, setActiveFilters] = useState([false, false]);
+
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -244,6 +248,67 @@ export default function RightSection() {
     setIsCategory(false); // Закрываем справочник
   };
 
+
+
+
+  const [modalOpen, setModalOpen] = useState(false); 
+  const [actionType, setActionType] = useState(""); // "add", "edit", "delete"
+  const handleOpenModal = (type) => {
+    setActionType(type);
+};
+
+// const handleCloseModal = () => {
+//   setModalOpen(false);
+// };
+
+const handleActionChange = (value) => {
+  setActionType(value);
+};
+
+// const handleDeletingChange = (value) => {
+//   setDeleting(value);
+//   };
+  
+//   useEffect(() => {
+//   const handleOutsideClick = (e) => {
+//     if (!e.target.closest(`.${css.modalContent}`)) {
+//       setModalOpen(false);
+//     }
+//   };
+//   if (modalOpen) {
+//     document.addEventListener("click", handleOutsideClick);
+//   }
+//   return () => {
+//     document.removeEventListener("click", handleOutsideClick);
+//   };
+// }, [modalOpen]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [selectedPhone, setSelectedPhone] = useState(data.phonenum);
+
+  const handlePhoneClick = () => {
+    // Проверяем, есть ли дополнительные номера
+    const otherPhones = data.phonenums.filter((phone) => phone !== data.phonenum);
+    if (otherPhones.length > 0) {
+      setIsModalOpen(true); 
+      console.log(isModalOpen);
+      console.log(otherPhones.length);
+    } else {
+      makeCall(data.phonenum); 
+    }
+  };
+
+  const makeCall = (phone) => {
+    alert(`Звонок на номер: ${phone}`);
+   
+  };
+  
+const [isModalNote, setIsModalNote] = useState(false);
+const [notificationSent, setNotificationSent] = useState(false);
+   const closeModal = () => {
+    setIsModalNote(false);
+  };
+  
   return (
     <div className={css.rightSectionWrapper}>
       <div className={css.client}>
@@ -265,10 +330,13 @@ export default function RightSection() {
           </div>
         </div>
         <div className={css.btnbox}>
-          <button className={css.btnaction}>
-            <BsTelephone className={css.iconaction} />
+          <button className={css.btnaction} onClick={handlePhoneClick} >
+            <BsTelephone className={css.iconaction} /> 
           </button>
-          <button className={css.btnaction}>
+
+
+
+          <button className={css.btnaction} onClick={ ()=>{setIsModalNote(true)}}>
             <BsAlarm className={css.iconaction} />
           </button>
           <button className={css.btnaction}>
@@ -277,8 +345,61 @@ export default function RightSection() {
           <button className={css.btnaction}>
             <RiUserAddFill className={css.iconaction} />
           </button>
+
+
+          {isModalOpen && (
+       <div
+    className={css.modalOverlay} // Задний фон модального окна
+    onClick={() => setIsModalOpen(false)} // Закрытие при клике на фон
+            >
+            
+          <div className={css.modalphone}  onClick={(e) => e.stopPropagation()}>
+           
+              {data.phonenums.map((phone, index) => (
+                <div key={index} className={css.modalitem}
+                      onClick={() => {
+                      makeCall(phone);
+                      setIsModalOpen(false);
+                    }}
+                  >
+                    {formatPhoneNumber(phone)}
+                 
+                </div>
+              ))}
+            
+              </div>
+              </div>
+       
+        )} 
+
+          
+           {isModalNote && (
+        <Modal isOpen={isModalNote} onClose={closeModal}>
+          <NotificationModal
+            onClose={closeModal}
+            time="clientTime"
+            date="clientDate"
+            comment="clientComment"
+            connectionType="clientConnection"
+            accountingModal={true}
+            service="clientService"
+            setNotificationSent={setNotificationSent}
+          />
+        </Modal>
+      )}
+
         </div>
+
+
+
+
       </div>
+
+
+
+
+
+
 
       <div className={css.wrapper}>
         <Accordion
@@ -516,6 +637,7 @@ export default function RightSection() {
 
                 {/* Отображение активной категории */}
                 {expandedRows.includes("panel3") && (
+                 
                   <div
                     className={css.categoryDisplay}
                     onClick={toggleCategorySelector} // Открываем/закрываем справочник
@@ -531,8 +653,23 @@ export default function RightSection() {
                         marginLeft: "4px",
                       }}
                     />
-                  </div>
+                    </div>
                 )}
+                {expandedRows.includes("panel3") && (
+                  < div style={{position: "absolute", left: "360px", width: "30px", height: "30px"}}>
+                    <button className={css.btnicon} 
+                      onClick={() => {
+                        handleOpenModal("");
+                        setModalOpen(true);
+                      }
+                      }>
+                      <BsThreeDots className={css.icon} />
+                    </button>
+                  
+                  </div>
+                  
+                  
+                    )}
 
                 {expandedRows.includes("panel3") && isCategory && (
                   <div className={css.categorySelector}>
@@ -550,7 +687,71 @@ export default function RightSection() {
                     ))}
                   </div>
                 )}
+
+                {expandedRows.includes("panel3") && modalOpen
+                  // && actionType === ""
+                  && (
+  <div className={css.modal}>
+    {/* <div className={css.modalContent}> */}
+                    <div className={css.modalitem}
+                      onClick={() => {
+        setActionType("add"); 
+        // setModalAddOpen(true); 
+        setModalOpen(false); 
+      }}>Додати шаблон</div>
+                    <div className={css.modalitem} onClick={() => {
+                      setActionType("edit"); 
+        // setEditing(true);
+        setModalOpen(false);
+      }}>Змінити шаблон</div>
+                    <div className={css.modalitem} onClick={() => {
+                      setActionType("delete"); 
+        // setDeleting(true);
+        setModalOpen(false);
+      }}>Видалити шаблон</div>
+                    <div className={css.modalitem} onClick={() => {
+                      setActionType("");
+                      // setModalAddOpen(false);
+                     setModalOpen(false);
+                    }}>Закрити</div>
+    {/* </div> */}
+  </div>
+              )}
+              
+                {/* {expandedRows.includes("panel3") && modalAddOpen
+                  && (
+                  <div className={css.modal}>
+                  <h3>Додати шаблон</h3>
+                    <textarea placeholder="Введите текст шаблона"></textarea>
+                    <div className={css.blockflex}>
+                      <button
+                         onClick={() => setModalAddOpen(false)} 
+                        className={css.editbtn}
+                        style={{ marginRight: "0" }}
+                      >
+                        <BsXCircle className={css.mainIcon} size={16} />{" "}
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleSaveEdit("panel3"); 
+                          setModalAddOpen(false); 
+                         }}
+                        className={css.editbtn}
+                      >
+                        {" "}
+                        <RiSave3Fill className={css.mainIcon} size={16} />{" "}
+                      </button>
+                    </div>
+                 </div>
+               )} */}
+
+
+
+
               </div>
+
+
+
               {expandedRows.includes("panel3") && (
                 // expanded === "panel3"
                 <AccordionDetails
@@ -563,6 +764,11 @@ export default function RightSection() {
                   <ChatSample
                     filter={filters[0]}
                     selectedCateg={activeCategory.categ}
+                    action={actionType}
+                    // editing={editing}
+                    // deleting={deleting}
+                    onActionChange={handleActionChange}
+                    // onDeletingChange={handleDeletingChange}
                   />
                 </AccordionDetails>
               )}

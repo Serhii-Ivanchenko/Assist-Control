@@ -1,10 +1,12 @@
 import css from './ChatSample.module.css'
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { selectSelectedPrompt } from "../../../../redux/chat/selectors.js";
 import { changeActualPrompt } from "../../../../redux/chat/slice.js"
+import { BsTrash, BsXCircle } from "react-icons/bs"; 
+import { RiSave3Fill} from "react-icons/ri"; 
 
-
-const data = [
+const datas = [
   {
     id: 1,
     categ: 1,
@@ -61,31 +63,150 @@ const data = [
       
 ];
 
-function ChatSample({ filter, selectedCateg }) {
+function ChatSample({ filter, selectedCateg, action ,onActionChange}) {
 
 
   const SelectPrompt = useSelector(selectSelectedPrompt);
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   console.log(SelectPrompt);
 
- const filteredData = data.filter(item => 
-    (selectedCateg === undefined || item.categ === selectedCateg) && // Фильтрация по категории
-    item.text.toLowerCase().includes(filter.toLowerCase()) // Фильтрация по тексту
-  );
+  // const filteredData = datas.filter(item =>
+  //   (selectedCateg === undefined || item.categ === selectedCateg) && // Фильтрация по категории
+  //   item.text.toLowerCase().includes(filter.toLowerCase()) // Фильтрация по тексту
+  // );
+
+
+
+
+  const [data, setData] = useState([]);
+
+  const [localEditing, setLocalEditing] = useState(action === "edit"? true: false); // Локальное состояние для управления
+  const [localDeleting, setLocalDeleting] = useState(action === "delete" ? true : false);
+  const [localAdding, setLocalAdding] = useState(action === "add" ? true : false);
+  const [tempText, setTempText] = useState("");
+  const [backupData, setBackupData] = useState([]);
+
+  console.log('local', localEditing, localDeleting, selectedCateg);
+  
+
+ useEffect(() => {
+    const filteredData = datas.filter(
+      (item) =>
+        (selectedCateg === undefined || item.categ === selectedCateg) && // Фильтрация по категории
+        item.text.toLowerCase().includes(filter.toLowerCase()) // Фильтрация по тексту
+    );
+    setData(filteredData);
+  }, [filter, selectedCateg]);
+
+
+ useEffect(() => {
+    setLocalEditing(action === "edit"? true: false);
+   setLocalDeleting(action === "delete" ? true : false);
+   setLocalAdding(action === "add" ? true : false);
+   if (action === "edit") {
+      setBackupData(data.map((item) => ({ ...item }))); // Сохранение резервной копии
+   };
+  }, [action]);
+
+
+const handleSaveAllChanges = () => {
+    onActionChange(""); // Сброс действия
+    setLocalEditing(false);
+  };
+
+  const handleCancelChanges = () => {
+    setData(backupData); // Восстановление данных из резервной копии
+    setLocalEditing(false);
+    onActionChange("");
+  };
+
+
+  const handleDelete = (idDel) => {
+    const updatedData = data.filter((item) => item.id !== idDel);
+          setData(updatedData);
+    onActionChange(""); 
+    setLocalDeleting(false);
+  };
+
+ const handleAdd = () => {
+    const newItem = {
+      id: Date.now(),
+      categ: selectedCateg || 1,
+      text: tempText,
+    };
+    setData([...data, newItem]);
+    setTempText("");
+    setLocalAdding(false);
+    onActionChange("");
+  };
+
 
   return (
   
       
 <div className={css.wrapper}>
-<ul className={css.items}>
-        {filteredData.map((item, index) => (
+      <ul className={css.items}>
+     {localAdding && ( <div className={css.boxInput}>
+         <textarea
+            name="note"
+            className={css.editInput}
+            value={tempText} // Используем временное состояние
+      onChange={(e) => {
+        setTempText(e.target.value); // Сохраняем текст в локальном состоянии
+      }}
+                />
+                <div className={css.boxBtn}>
+            <button className={css.btnicon} onClick={handleAdd}
+            ><RiSave3Fill className={css.icon} />
+            </button>
+
+            <button className={css.btnicon} onClick={() => {
+              setTempText(""); 
+              setLocalAdding(false); 
+              onActionChange("");
+            }}
+            >< BsXCircle className={css.icon} /></button>
+                </div>
+      </div>)}   
+
+        {data.map((item, index) => (
           <li key={index}>
+ {localEditing ? (
+      <div className={css.boxInput}>
+         <textarea
+                  name="note"
+                  className={css.editInput}
+          value={item.text}
+          onChange={(e) => {
+                    const updatedData = [...data];
+                    updatedData[index].text = e.target.value;
+                    setData(updatedData);
+                  }}
+                />
+                <div className={css.boxBtn}>
+                <button className={css.btnicon} onClick={handleSaveAllChanges}
+                  ><RiSave3Fill className={css.icon} />
+                  </button>
+                <button className={css.btnicon} onClick={handleCancelChanges}
+                  >< BsXCircle className={css.icon} />
+                  </button>
+                </div>
+      </div>
+    ) : (
+ <div className={css.boxInput}>
             <p className={css.text}
               onClick={() =>
                dispatch(changeActualPrompt(item.text))}
-            > {item.text} </p>
+                > {item.text} </p>
+       {localDeleting && (
+   <button className={css.btnicon} onClick={() => handleDelete(item.id)}><BsTrash className={css.icon}/></button>
+    )}         
+</div>
+                 )}
+            
           </li>
+           
         ))}
       </ul>
 
