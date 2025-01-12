@@ -526,15 +526,12 @@ export const getPrices = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(
-        `/v1/categories_services/prices`,
-        {
-          headers: {
-            "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
+      const response = await axiosInstance.get(`/serv/services`, {
+        headers: {
+          "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
       console.log("getPrices", response.data);
 
       return response.data;
@@ -544,8 +541,34 @@ export const getPrices = createAsyncThunk(
   }
 );
 
-// Edit prices
-export const editPrices = createAsyncThunk(
+// Get services and prices in particular category
+export const getPricesInCategory = createAsyncThunk(
+  "settings/getPricesInCategory",
+  async (category_id, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.get(
+        `/serv/categories/${category_id}/services`,
+        {
+          headers: {
+            "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      console.log("getPricesInCategory", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+
+// Update service name or prices
+export const editServiceNameOrPrices = createAsyncThunk(
   "settings/editPrices",
   async (newPrices, thunkAPI) => {
     const state = thunkAPI.getState();
@@ -574,13 +597,13 @@ export const editPrices = createAsyncThunk(
 // Create category of services
 export const createCategory = createAsyncThunk(
   "settings/createCategory",
-  async (newCategory, thunkAPI) => {
+  async (categoryName, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.post(
-        `/v1/categories_services/`,
-        newCategory,
+        `/serv/categories/`,
+        categoryName,
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",
@@ -604,10 +627,10 @@ export const updateCategoryData = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const { categoryId, ...dataToUpdate } = categoryDataToUpdate;
+      // const { categoryId, ...dataToUpdate } = categoryDataToUpdate;
       const response = await axiosInstance.patch(
-        `/v1/categories_services/${categoryId}`,
-        dataToUpdate,
+        `/serv/categories/update/`,
+        categoryDataToUpdate,
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",
@@ -657,7 +680,7 @@ export const deleteService = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.delete(
-        `/v1/services/${service_id}`,
+        `/serv/delete/?service_id=${service_id}`,
         {
           headers: {
             "X-Api-Key": "YA7NxysJ",

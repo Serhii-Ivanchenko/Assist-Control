@@ -11,11 +11,13 @@ import {
   deleteService,
   deleteSupplier,
   editPrices,
+  editServiceNameOrPrices,
   getAllEmployees,
   getAllSuppliers,
   getEmployeeData,
   getPosts,
   getPrices,
+  getPricesInCategory,
   getSupplierData,
   getWorkSchedule,
   updateCategoryData,
@@ -236,20 +238,31 @@ const settingsSlice = createSlice({
       })
       .addCase(getPrices.rejected, handleRejected)
 
-      .addCase(editPrices.pending, handlePending)
-      .addCase(editPrices.fulfilled, (state, action) => {
+      .addCase(getPricesInCategory.pending, handlePending)
+      .addCase(getPricesInCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        const pricesToEditIndex = state.posts.findIndex(
-          (service) => service.id === action.payload.id
-        );
-        state.prices[pricesToEditIndex].prices = action.payload;
+
+        state.categoryPrices = action.payload;
       })
-      .addCase(editPrices.rejected, handleRejected)
+      .addCase(getPricesInCategory.rejected, handleRejected)
+
+      .addCase(editServiceNameOrPrices.pending, handlePending)
+      .addCase(editServiceNameOrPrices.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const pricesToEditIndex = state.prices.findIndex(
+          (service) => service.service_id === action.payload.service_id
+        );
+        state.prices[pricesToEditIndex] = {
+          ...state.prices[pricesToEditIndex], // Залишаємо старі дані
+          ...action.meta.arg, // Додаємо дані, які відправляли
+        };
+      })
+      .addCase(editServiceNameOrPrices.rejected, handleRejected)
 
       .addCase(createCategory.pending, handlePending)
       .addCase(createCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.prices.push(action.payload);
+        // state.prices.push(action.payload);
       })
       .addCase(createCategory.rejected, handleRejected)
 
@@ -257,9 +270,12 @@ const settingsSlice = createSlice({
       .addCase(updateCategoryData.fulfilled, (state, action) => {
         state.isLoading = false;
         const categoryToEditIndex = state.prices.findIndex(
-          (category) => category.id === action.payload.id
+          (category) => category.category_id === action.payload.category_id
         );
-        state.prices[categoryToEditIndex].category = action.payload;
+        state.prices[categoryToEditIndex] = {
+          ...state.prices[categoryToEditIndex], // Залишаємо старі дані
+          ...action.meta.arg, // Додаємо дані, які відправляли
+        };
       })
       .addCase(updateCategoryData.rejected, handleRejected)
 
@@ -278,8 +294,8 @@ const settingsSlice = createSlice({
       .addCase(deleteService.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        state.prices = state.prices.items.filter(
-          (item) => item.id !== action.payload.id
+        state.prices = state.prices.filter(
+          (item) => item.service_id !== action.payload.service_id
         );
       })
       .addCase(deleteService.rejected, handleRejected),

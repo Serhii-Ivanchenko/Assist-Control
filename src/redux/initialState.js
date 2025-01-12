@@ -223,6 +223,7 @@ export const initialState = {
     schedule: [],
     posts: [],
     prices: [],
+    categoryPrices: [],
     isLoading: false,
     error: null,
   },
