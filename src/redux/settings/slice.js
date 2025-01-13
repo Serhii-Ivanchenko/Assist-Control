@@ -3,19 +3,24 @@ import { initialState } from "../initialState.js";
 import {
   createCategory,
   createEmployee,
+  createMarkup,
   createPost,
   createRating,
   createService,
   createSupplier,
   deleteEmployee,
+  deleteMarkup,
   deletePost,
   deleteRating,
   deleteService,
   deleteSupplier,
   editServiceNameOrPrices,
   getAllEmployees,
+  getAllMarkups,
   getAllSuppliers,
+  getDistributorMarkup,
   getEmployeeData,
+  getMarkupItemData,
   getPosts,
   getPrices,
   getPricesInCategory,
@@ -24,8 +29,10 @@ import {
   getSupplierData,
   getWorkSchedule,
   updateCategoryData,
+  updateDynamicMarkup,
   updateEmployeeData,
   updateEmployeeStatus,
+  updateFixedMarkup,
   updatePostData,
   updatePostStatus,
   updateRatingStatus,
@@ -347,7 +354,83 @@ const settingsSlice = createSlice({
           (rating) => rating.rating_id !== action.payload.rating_id
         );
       })
-      .addCase(deleteRating.rejected, handleRejected),
+      .addCase(deleteRating.rejected, handleRejected)
+
+      //! MARKUP
+      .addCase(createMarkup.pending, handlePending)
+      .addCase(createMarkup.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.markup.push(action.meta.arg);
+
+        // if (action.meta.arg.margin_type === "fixed") {
+        //   state.markup.fixed.push(action.meta.arg);
+        // }
+        // if (action.meta.arg.margin_type === "dynamic") {
+        //   state.markup.dynamic.push(action.meta.arg);
+        // }
+      })
+      .addCase(createMarkup.rejected, handleRejected)
+
+      .addCase(updateFixedMarkup.pending, handlePending)
+      .addCase(updateFixedMarkup.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const markupToEditIndex = state.markup.findIndex(
+          (markup) => markup.markup_id === action.payload.markup_id
+        );
+        state.markup[markupToEditIndex] = {
+          ...state.prices[markupToEditIndex], // Залишаємо старі дані
+          ...action.meta.arg, // Додаємо дані, які відправляли
+        };
+      })
+      .addCase(updateFixedMarkup.rejected, handleRejected)
+
+      .addCase(updateDynamicMarkup.pending, handlePending)
+      .addCase(updateDynamicMarkup.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const markupToEditIndex = state.markup.findIndex(
+          (markup) => markup.markup_id === action.payload.markup_id
+        );
+        state.markup[markupToEditIndex] = {
+          ...state.prices[markupToEditIndex], // Залишаємо старі дані
+          ...action.meta.arg, // Додаємо дані, які відправляли
+        };
+      })
+      .addCase(updateDynamicMarkup.rejected, handleRejected)
+
+      .addCase(deleteMarkup.pending, handlePending)
+      .addCase(deleteMarkup.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.markup = state.markup.filter(
+          (markup) => markup.markup_id !== action.payload.markup_id
+        );
+      })
+      .addCase(deleteMarkup.rejected, handleRejected)
+
+      .addCase(getAllMarkups.pending, handlePending)
+      .addCase(getAllMarkups.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.markup = action.payload;
+      })
+      .addCase(getAllMarkups.rejected, handleRejected)
+
+      .addCase(getMarkupItemData.pending, handlePending)
+      .addCase(getMarkupItemData.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.markupItem = action.payload;
+      })
+      .addCase(getMarkupItemData.rejected, handleRejected)
+
+      .addCase(getDistributorMarkup.pending, handlePending)
+      .addCase(getDistributorMarkup.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.distributorMarkup = action.payload;
+      })
+      .addCase(getDistributorMarkup.rejected, handleRejected),
 });
 
 export default settingsSlice.reducer;

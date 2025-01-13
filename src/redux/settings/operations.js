@@ -818,3 +818,183 @@ export const deleteRating = createAsyncThunk(
     }
   }
 );
+
+//! MARKUP
+
+// Create Markup
+export const createMarkup = createAsyncThunk(
+  "settings/createMarkup",
+  async (newMarkup, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+
+    // const { categoryId, ...serviceName } = newService;
+
+    try {
+      const response = await axiosInstance.post(`/markup/create`, newMarkup, {
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
+      console.log("createMarkup", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Update Fixed Markup
+
+export const updateFixedMarkup = createAsyncThunk(
+  "settings/updateFixedMarkup",
+  async (updatedMarkup, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const { markup_id, ...markup } = updatedMarkup;
+      const response = await axiosInstance.patch(
+        `/markup/fixed/update/${markup_id}`,
+        markup,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      console.log("updateFixedMarkup", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Update Dynamic Markup
+
+export const updateDynamicMarkup = createAsyncThunk(
+  "settings/updateDynamicMarkup",
+  async (updatedMarkup, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const { markup_id, ...markup } = updatedMarkup;
+      const response = await axiosInstance.patch(
+        `/markup/dynamic/update/${markup_id}`,
+        markup,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      console.log("updateDynamicMarkup", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Delete Markup
+export const deleteMarkup = createAsyncThunk(
+  "settings/deleteMarkup",
+  async (markupToDelete, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const { markup_id, ...markup } = markupToDelete;
+      const response = await axiosInstance.delete(
+        `/markup/delete/${markup_id}`,
+        markup,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      console.log("deleteMarkup", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Get all markups
+
+export const getAllMarkups = createAsyncThunk(
+  "settings/getAllMarkups",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.get(`/get_all_mark_up`, {
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
+      console.log("getAllMarkups", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Get markup item data
+export const getMarkupItemData = createAsyncThunk(
+  "settings/getMarkupData",
+  async (markup_id, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.get(`/markup/${markup_id}`, {
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
+      console.log("getMarkupItemData", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+//Get Markup data of particular distributor
+export const getDistributorMarkup = createAsyncThunk(
+  "settings/getDistributorMarkup",
+  async (supplier_id, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.get(
+        `/supplier/markups/${supplier_id}`,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      console.log("getDistributorMarkup", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
