@@ -6,21 +6,21 @@
      max-height: 145px;
      overflow-y: auto;
      overflow-x: hidden;
-     padding-right: 3px;
+     padding-right: 4px;
      width: 368px;
  }
 
  .wrapper::-webkit-scrollbar {
-     width: 4px;
+     width: 2px;
  }
 
  .wrapper::-webkit-scrollbar-track {
-     border-radius: 2px;
+     border-radius: 1px;
      background-color: var(--bg);
  }
 
  .wrapper::-webkit-scrollbar-thumb {
-     border-radius: 2px;
+     border-radius: 1px;
      background-color: var(--main-gray);
  }
 
@@ -41,7 +41,7 @@
  .items {
      display: flex;
      flex-direction: column;
-     width: 368px;
+     /* width: 368px; */
      gap: 14px;
  }
 
@@ -64,9 +64,10 @@
      height: 16px;
  }
 
+
  .editInput {
-     width: 160px;
-     padding-left: 4px;
+     width: 100%;
+     padding: 4px;
      outline: none;
      border: none;
      border-radius: 6px;
@@ -77,42 +78,24 @@
      font-style: normal;
      line-height: normal;
      font-weight: 400;
-     height: 100%;
+     height: 62px;
      background-color: var(--main-gray);
      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-     z-index: 2;
+     resize: none;
+     overflow-y: auto;
+     outline: none;
+     border: none;
  }
 
-  .editInput {
-      width: 100%;
-      padding: 4px;
-      outline: none;
-      border: none;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      color: var(--white);
-      font-size: 16px;
-      font-style: normal;
-      line-height: normal;
-      font-weight: 400;
-      /* height: 80px; */
-      background-color: var(--main-gray);
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-      resize: none;
-      overflow-y: auto;
-      outline: none;
-      border: none;
-  }
+ .boxInput {
+     display: flex;
+     flex-direction: row;
+     gap: 4px;
+     align-items: center;
+ }
 
-  .boxInput {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-  }
-
-  .boxBtn{ 
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
+ .boxBtn {
+     display: flex;
+     flex-direction: column;
+     gap: 4px;
+ }
