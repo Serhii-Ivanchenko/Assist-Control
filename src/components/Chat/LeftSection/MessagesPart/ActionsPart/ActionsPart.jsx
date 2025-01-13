@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import css from "./ActionsPart.module.css";
 import { BsCheck } from "react-icons/bs";
 import { BsArrowDownUp } from "react-icons/bs";
@@ -14,9 +13,7 @@ import { BsCheck2Square } from "react-icons/bs";
 import { BsBookmark } from "react-icons/bs";
 import { BsArchive } from "react-icons/bs";
 import { GrUserManager } from "react-icons/gr";
-import { useState } from "react";
 import { useRef } from "react";
-import { useEffect } from "react";
 import { tags } from "../../../RightSection/ChatTags/tags.js";
 import { useEffect, useState } from "react";
 import SearchTags from "../../../RightSection/ChatTags/SearchTags/SearchTags";
@@ -38,7 +35,6 @@ export default function ActionsPart({
   handleSort,
   sortOrder,
 }) {
-
   const [openedActions, setOpenedActions] = useState(false);
 
   const wrapperRef = useRef(null);
@@ -53,20 +49,22 @@ export default function ActionsPart({
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
 
   const [tagsArr, setTagsArr] = useState(tags);
   const [tagsModalIsOpen, setTagsModalIsOpen] = useState(false);
 
   const openTagsModal = (e) => {
     e.stopPropagation();
-    setTagsModalIsOpen((prev) => !prev); 
+    setTagsModalIsOpen((prev) => !prev);
   };
 
   const handleTagsModalClose = (e) => {
     e.stopPropagation();
     setTagsModalIsOpen(false);
   };
-  
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.target.closest(`.${css.select}`)) {
