@@ -224,6 +224,8 @@ export const initialState = {
     posts: [],
     prices: [],
     categoryPrices: [],
+    ratings: [],
+    rating: {},
     isLoading: false,
     error: null,
   },

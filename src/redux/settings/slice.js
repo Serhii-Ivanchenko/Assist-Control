@@ -4,10 +4,12 @@ import {
   createCategory,
   createEmployee,
   createPost,
+  createRating,
   createService,
   createSupplier,
   deleteEmployee,
   deletePost,
+  deleteRating,
   deleteService,
   deleteSupplier,
   editServiceNameOrPrices,
@@ -17,6 +19,8 @@ import {
   getPosts,
   getPrices,
   getPricesInCategory,
+  getRatingData,
+  getRatings,
   getSupplierData,
   getWorkSchedule,
   updateCategoryData,
@@ -24,6 +28,7 @@ import {
   updateEmployeeStatus,
   updatePostData,
   updatePostStatus,
+  updateRatingStatus,
   updateSupplierData,
   updateSupplierStatus,
   updateWorkSchedule,
@@ -297,7 +302,52 @@ const settingsSlice = createSlice({
           (item) => item.service_id !== action.payload.service_id
         );
       })
-      .addCase(deleteService.rejected, handleRejected),
+      .addCase(deleteService.rejected, handleRejected)
+
+      //! RATING
+      .addCase(createRating.pending, handlePending)
+      .addCase(createRating.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.ratings.push(action.meta.arg);
+      })
+      .addCase(createRating.rejected, handleRejected)
+
+      .addCase(updateRatingStatus.pending, handlePending)
+      .addCase(updateRatingStatus.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const ratingToEditIndex = state.ratings.findIndex(
+          (rating) => rating.rating_id === action.payload.rating_id
+        );
+        state.ratings[ratingToEditIndex].isDisabled = action.payload.isDisabled;
+      })
+      .addCase(updateRatingStatus.rejected, handleRejected)
+
+      .addCase(getRatings.pending, handlePending)
+      .addCase(getRatings.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.ratings = action.payload.ratings;
+      })
+      .addCase(getRatings.rejected, handleRejected)
+
+      .addCase(getRatingData.pending, handlePending)
+      .addCase(getRatingData.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.rating = action.payload.rating;
+      })
+      .addCase(getRatingData.rejected, handleRejected)
+
+      .addCase(deleteRating.pending, handlePending)
+      .addCase(deleteRating.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.ratings = state.ratings.filter(
+          (rating) => rating.rating_id !== action.payload.rating_id
+        );
+      })
+      .addCase(deleteRating.rejected, handleRejected),
 });
 
 export default settingsSlice.reducer;

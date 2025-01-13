@@ -566,7 +566,6 @@ export const getPricesInCategory = createAsyncThunk(
   }
 );
 
-
 // Update service name or prices
 export const editServiceNameOrPrices = createAsyncThunk(
   "settings/editPrices",
@@ -689,6 +688,129 @@ export const deleteService = createAsyncThunk(
         }
       );
       console.log("deleteService", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+//! RATING
+
+// Create Rating
+export const createRating = createAsyncThunk(
+  "settings/createRating",
+  async (newRating, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+
+    // const { categoryId, ...serviceName } = newService;
+
+    try {
+      const response = await axiosInstance.post(`/rating/create`, newRating, {
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
+      console.log("createRating", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Update Rating Status
+export const updateRatingStatus = createAsyncThunk(
+  "settings/updateRatingStatus",
+  async (newStatus, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const { rating_id, ...status } = newStatus;
+      const response = await axiosInstance.patch(
+        `/rating/${rating_id}/update-activity`,
+        status,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      console.log("updateRatingStatus", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Get Ratings List
+export const getRatings = createAsyncThunk(
+  "settings/getRatings",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.get(`/ratings_all/`, {
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
+      console.log("getRatings", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Get one rating data
+export const getRatingData = createAsyncThunk(
+  "settings/getRatingData",
+  async (rating_id, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.get(`/ratings/${rating_id}/`, {
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
+      console.log("getRatingData", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Delete Rating
+export const deleteRating = createAsyncThunk(
+  "settings/deleteRating",
+  async (rating_id, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.delete(
+        `/rating/${rating_id}/delete`,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      console.log("deleteRating", response.data);
 
       return response.data;
     } catch (error) {
