@@ -284,6 +284,7 @@ export default function ClientInfo({ clientInfo }) {
                     connectionType="clientConnection"
                     // accountingModal={true}
                     // service="clientService"
+                    // nextService="clientNextService"
                   />
                 </Modal>
               )}

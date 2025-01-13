@@ -277,7 +277,8 @@
 .nextServiceBox {
   color: var(--last-service-mileage-text);
   background-color: var(--last-service-mileage-bg);
-  width: fit-content;
+  width: 80px;
+  height: 38px;
 
   font-weight: 600;
   display: flex;
@@ -298,4 +299,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.nextServiceInput {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  max-width: 80px;
+  color: var(--last-service-mileage-text);
+  font-weight: 600;
 }
