@@ -10,7 +10,7 @@ export const getAllRecords = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/crm/get_records/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -34,7 +34,7 @@ export const getRecordsForDay = createAsyncThunk(
         `/crm/get_records/?start_date=${day}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -62,7 +62,7 @@ export const getRecordsForPeriod = createAsyncThunk(
         `/crm/get_records/?start_date=${startDate}&end_date=${endDate}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -88,7 +88,7 @@ export const createRecord = createAsyncThunk(
         recordData,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -116,7 +116,7 @@ export const updateRecordData = createAsyncThunk(
         recordDataToUpdateWithoutId,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -141,7 +141,7 @@ export const updateRecordData = createAsyncThunk(
 //         `/crm/get_mechanics_and_posts/`,
 //         {
 //           headers: {
-//             "X-Api-Key": "YA7NxysJ",
+//             // "X-Api-Key": "YA7NxysJ",
 //             "company-id": serviceId,
 //           },
 //         }
@@ -164,7 +164,7 @@ export const getServiceDataForBooking = createAsyncThunk(
         `/crm/get_mechanics_and_posts/?date=${day}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -187,7 +187,7 @@ export const getPlannedVisits = createAsyncThunk(
         `/crm/get_planner/?date=${day}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -212,7 +212,7 @@ export const getMonthlyLoad = createAsyncThunk(
         `/crm/get_calendar_load/?month_year=${month}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }

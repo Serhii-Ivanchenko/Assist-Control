@@ -23,7 +23,7 @@ export const createEmployee = createAsyncThunk(
         formData,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
             "Content-Type": "multipart/form-data",
           },
@@ -61,7 +61,7 @@ export const updateEmployeeData = createAsyncThunk(
         formData,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -86,7 +86,7 @@ export const deleteEmployee = createAsyncThunk(
         `/pers/employees/${employee_id}/delete/`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -112,7 +112,7 @@ export const updateEmployeeStatus = createAsyncThunk(
         `/pers/employees/${employee_id}/status/?isDisabled=${status}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -137,7 +137,7 @@ export const getEmployeeData = createAsyncThunk(
         `/pers/employees/${employee_id}/`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -160,7 +160,7 @@ export const getAllEmployees = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/pers/employees_all/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -193,7 +193,7 @@ export const createSupplier = createAsyncThunk(
         formData,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
             "Content-Type": "multipart/form-data",
           },
@@ -230,7 +230,7 @@ export const updateSupplierData = createAsyncThunk(
         formData,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -255,7 +255,7 @@ export const deleteSupplier = createAsyncThunk(
         `/sup/supplier/${supplier_id}/delete/`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -281,7 +281,7 @@ export const updateSupplierStatus = createAsyncThunk(
         newStatus,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -306,7 +306,7 @@ export const getSupplierData = createAsyncThunk(
         `/sup/supplier/${supplier_id}/`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -329,7 +329,7 @@ export const getAllSuppliers = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/sup/suppliers/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -353,7 +353,7 @@ export const getWorkSchedule = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/set/get_work_schedule/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -378,7 +378,7 @@ export const updateWorkSchedule = createAsyncThunk(
         workScheduleDataToUpdate,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -403,7 +403,7 @@ export const getPosts = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/set/get_posts/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -425,7 +425,7 @@ export const createPost = createAsyncThunk(
     try {
       const response = await axiosInstance.post(`/set/create_post/`, postData, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -451,7 +451,7 @@ export const updatePostStatus = createAsyncThunk(
         status,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -478,7 +478,7 @@ export const updatePostData = createAsyncThunk(
         dataToUpdate,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -503,7 +503,7 @@ export const deletePost = createAsyncThunk(
         `/set/update_post/${postId}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -528,7 +528,7 @@ export const getPrices = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/serv/services`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -552,7 +552,7 @@ export const getPricesInCategory = createAsyncThunk(
         `/serv/categories/${category_id}/services`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -580,7 +580,7 @@ export const editServiceNameOrPrices = createAsyncThunk(
         prices,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -606,7 +606,7 @@ export const createCategory = createAsyncThunk(
         categoryName,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -633,7 +633,7 @@ export const updateCategoryData = createAsyncThunk(
         categoryDataToUpdate,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -659,7 +659,7 @@ export const createService = createAsyncThunk(
     try {
       const response = await axiosInstance.post(`/v1/services/`, newService, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -683,7 +683,7 @@ export const deleteService = createAsyncThunk(
         `/serv/delete/?service_id=${service_id}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }

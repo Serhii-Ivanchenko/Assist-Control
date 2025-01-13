@@ -10,7 +10,7 @@ export const getWarehouses = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/v1/companies/tree`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -35,7 +35,7 @@ export const createWarehouse = createAsyncThunk(
         warehouseName,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -62,7 +62,7 @@ export const updateWarehouseName = createAsyncThunk(
         warehouseName,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -85,7 +85,7 @@ export const saveWarehouse = createAsyncThunk(
     try {
       const response = await axiosInstance.post(`/v1/import/warehouses/`, promptName, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -107,7 +107,7 @@ export const getPrompts = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/v1/import/warehouses/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -134,7 +134,7 @@ export const createSection = createAsyncThunk(
         sectionNumber,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -161,7 +161,7 @@ export const updateSectionName = createAsyncThunk(
         sectionName,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -184,7 +184,7 @@ export const deleteSection = createAsyncThunk(
     try {
       const response = await axiosInstance.delete(`/v1/section/${sectionId}`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -208,7 +208,7 @@ export const createRacks = createAsyncThunk(
     try {
       const response = await axiosInstance.post(`/v1/racks/`, racksNumber, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -234,7 +234,7 @@ export const updateRackName = createAsyncThunk(
         rackName,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -257,7 +257,7 @@ export const deleteRack = createAsyncThunk(
     try {
       const response = await axiosInstance.delete(`/v1/racks/${rackId}`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -281,7 +281,7 @@ export const createShelves = createAsyncThunk(
     try {
       const response = await axiosInstance.post(`/v1/shelves/`, shelvesNumber, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -307,7 +307,7 @@ export const updateShelfName = createAsyncThunk(
         shelfName,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -330,7 +330,7 @@ export const deleteShelf = createAsyncThunk(
     try {
       const response = await axiosInstance.delete(`/v1/shelves/${shelfId}`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -354,7 +354,7 @@ export const createPlaces = createAsyncThunk(
     try {
       const response = await axiosInstance.post(`/v1/places/`, placesNumber, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -380,7 +380,7 @@ export const updatePlaceName = createAsyncThunk(
         placeName,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -403,7 +403,7 @@ export const deletePlace = createAsyncThunk(
     try {
       const response = await axiosInstance.delete(`/v1/places/${placeId}`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });

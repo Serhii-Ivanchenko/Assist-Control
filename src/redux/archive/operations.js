@@ -10,7 +10,7 @@ export const getAllArchiveData = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/crm/get_all_archive_info/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -33,7 +33,7 @@ export const addItemToArchive = createAsyncThunk(
     try {
       const response = await axiosInstance.post(`/crm/in_archive/`, itemData, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -58,7 +58,7 @@ export const updateArchiveItem = createAsyncThunk(
         updatedInfo,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -84,7 +84,7 @@ export const returnArchiveItem = createAsyncThunk(
         `/crm/archive/return_archive/?archive_id=${archive_id}&status=${newStatus}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
