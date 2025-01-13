@@ -226,21 +226,21 @@
     display: flex;
     flex-direction: row;
     gap: 20px;
+    position: relative;
 }
 
 .btnaction {
     display: flex;
     width: 50px;
     height: 50px;
-
     justify-content: center;
     align-items: center;
-
     flex-shrink: 0;
     border-radius: 12px;
     background: #31343E;
     border: none;
     cursor: pointer;
+    
 }
 
 .iconaction {
@@ -308,7 +308,7 @@
     cursor: pointer;
     margin-left: 60px;
     position: absolute;
-    left: 190px;
+    left: 180px;
 }
 
 .categorySelector {
@@ -338,4 +338,74 @@
 
 .category:hover {
     background-color: var(--main-gray);
+}
+
+.modal {
+   
+             position: absolute; 
+            background: var(--bg-secondary);
+            border: 1px solid var(--light-gray);
+            top: 45px;
+             left: 260px; 
+            width: 150px;
+            border-radius: 4px;
+            padding: 4px;
+            margin-top: 4px;
+            z-index: 1000;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        
+}
+
+.modalitem {
+    padding: 4px 4px;
+    cursor: pointer;
+    color: var(--light-gray);
+    font-size: 14px;
+
+}
+
+.modalContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.modalitem:hover {
+    background-color: var(--main-gray);
+}
+
+.modalphone {
+
+position: absolute;
+    top: 10%;
+    left: 76%;
+    right: auto;
+    bottom: auto;
+    margin-right: -24%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--light-gray);
+    top: 155px;
+    left: 1720;
+    width: 120px;
+    border-radius: 4px;
+    padding: 4px;
+    margin-top: 4px;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0px;
+        left: 0px;
+        right: 0;
+        bottom: 0;
+     /* background: rgba(0, 0, 0, 0.5);  */
+    /* Прозрачный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Поверх других элементов */
 }
