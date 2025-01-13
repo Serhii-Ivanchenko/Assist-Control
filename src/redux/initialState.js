@@ -266,7 +266,7 @@ export const initialState = {
       },
       {
         id: 5,
-        name: "did_not_visit",
+        name: "no_show",
       },
       {
         id: 6,
@@ -274,7 +274,7 @@ export const initialState = {
       },
       {
         id: 7,
-        name: "did_not_help",
+        name: "no_help",
       },
     ],
     isLoading: false,
