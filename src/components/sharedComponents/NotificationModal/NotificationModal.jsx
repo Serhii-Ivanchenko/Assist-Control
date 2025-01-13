@@ -166,10 +166,19 @@ export default function NotificationModal({
                     }
                   />
                 </div>
+                <div className={css.mileageBox}>
+                  <div className={css.speedBox}>
+                    <SlSpeedometer className={css.speedIcon} />
+                    <p className={css.speedValue}>246014</p>
+                  </div>
 
-                <div className={css.speedBox}>
-                  <SlSpeedometer className={css.speedIcon} />
-                  <p className={css.speedValue}>246014</p>
+                  <div className={css.nextServiceContainer}>
+                    <p>Наступне ТО :</p>
+                    <div className={css.nextServiceBox}>
+                      <SlSpeedometer className={css.nextServiceIcon} />
+                      <p className={css.nextServiceValue}>0km</p>
+                    </div>
+                  </div>
                 </div>
               </>
             )}
