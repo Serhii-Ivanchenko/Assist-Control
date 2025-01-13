@@ -12,7 +12,7 @@ export const getClientInfo = createAsyncThunk(
         `/crm/get_info/?car_id=${carId}&location=${location}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
