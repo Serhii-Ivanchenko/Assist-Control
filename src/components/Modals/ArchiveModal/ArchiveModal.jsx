@@ -5,49 +5,49 @@ import css from "./ArchiveModal.module.css";
 
 const archiveReasons = [
   {
-    id: "співробітник",
+    id: "2",
     statusClass: css.lightBlue,
     statusText: "СПІВРОБІТНИК",
     background: "var(--status-gradient-archive-light-blue)",
     borderColor: "var(--glow-archive-light-blue)",
   },
   {
-    id: "випадковий",
+    id: "3",
     statusClass: css.lightBlue,
     statusText: "ВИПАДКОВИЙ",
     background: "var(--status-gradient-archive-light-blue)",
     borderColor: "var(--glow-archive-light-blue)",
   },
   {
-    id: "дубль",
+    id: "1",
     statusClass: css.lightBlue,
     statusText: "ДУБЛЬ",
     background: "var(--status-gradient-archive-light-blue)",
     borderColor: "var(--glow-archive-light-blue)",
   },
   {
-    id: "відмова",
+    id: "4",
     statusClass: css.violet,
     statusText: "ВІДМОВА",
     background: "var(--status-gradient-archive-violet)",
     borderColor: "var(--glow-archive-violet)",
   },
   {
-    id: "не_приїхав",
+    id: "5",
     statusClass: css.violet,
     statusText: "НЕ ПРИЇХАВ",
     background: "var(--status-gradient-archive-violet)",
     borderColor: "var(--glow-archive-violet)",
   },
   {
-    id: "рейтинг",
+    id: "6",
     statusClass: css.violet,
     statusText: "РЕЙТИНГ",
     background: "var(--status-gradient-archive-violet)",
     borderColor: "var(--glow-archive-violet)",
   },
   {
-    id: "не_допомогли",
+    id: "7",
     statusClass: css.red,
     statusText: "НЕ ДОПОМОГЛИ",
     background: "var(--status-gradient-view-repair)",
@@ -70,13 +70,13 @@ export default function ArchiveModal({ onClose }) {
       <Formik
         initialValues={{
           comment: "",
-          reasons: "",
+          reason_add: "",
         }}
         onSubmit={handleSubmit}
       >
         {({ values }) => {
           const selectedReason = archiveReasons.find(
-            (reason) => reason.id === values.reasons
+            (reason) => reason.id === values.reason_add
           );
 
           return (
@@ -89,11 +89,11 @@ export default function ArchiveModal({ onClose }) {
                 placeholder="Введіть ваш коментар..."
                 className={css.textarea}
               />
-              <label htmlFor="reasons">Оберіть причину:</label>
+              <label htmlFor="reason_add">Оберіть причину:</label>
               <Field
                 as="select"
-                id="reasons"
-                name="reasons"
+                id="reason_add"
+                name="reason_add"
                 className={`${css.select} ${
                   selectedReason ? selectedReason.statusClass : ""
                 }`}
