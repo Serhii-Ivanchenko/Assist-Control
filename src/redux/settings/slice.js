@@ -2,17 +2,30 @@ import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
 import {
   createCategory,
+  createEmployee,
   createPost,
   createService,
+  createSupplier,
+  deleteEmployee,
   deletePost,
   deleteService,
-  editPrices,
+  deleteSupplier,
+  editServiceNameOrPrices,
+  getAllEmployees,
+  getAllSuppliers,
+  getEmployeeData,
   getPosts,
   getPrices,
+  getPricesInCategory,
+  getSupplierData,
   getWorkSchedule,
   updateCategoryData,
+  updateEmployeeData,
+  updateEmployeeStatus,
   updatePostData,
   updatePostStatus,
+  updateSupplierData,
+  updateSupplierStatus,
   updateWorkSchedule,
 } from "./operations.js";
 
@@ -32,6 +45,129 @@ const settingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
+      //! EMPLOYEE
+      .addCase(createEmployee.pending, handlePending)
+      .addCase(createEmployee.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(createEmployee.rejected, handleRejected)
+
+      .addCase(updateEmployeeData.pending, handlePending)
+      .addCase(updateEmployeeData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const employeeToEditIndex = state.employees.findIndex(
+          (employee) => employee.employee_id === action.payload.employee_id
+        );
+
+        if (
+          // action.payload.status === 200 &&
+          employeeToEditIndex !== -1
+        ) {
+          state.employees[employeeToEditIndex] = {
+            ...state.employees[employeeToEditIndex], // Залишаємо старі дані
+            ...action.meta.arg, // Додаємо дані, які відправляли
+          };
+        }
+      })
+      .addCase(updateEmployeeData.rejected, handleRejected)
+
+      .addCase(deleteEmployee.pending, handlePending)
+      .addCase(deleteEmployee.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.employees = state.employees.filter(
+          (employee) => employee.employee_id !== action.payload.employee_id
+        );
+      })
+      .addCase(deleteEmployee.rejected, handleRejected)
+
+      .addCase(updateEmployeeStatus.pending, handlePending)
+      .addCase(updateEmployeeStatus.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const employeeToEditIndex = state.employees.findIndex(
+          (employee) => employee.employee_id === action.payload.employee_id
+        );
+        state.employees[employeeToEditIndex].isDisabled =
+          action.payload.isDisabled;
+      })
+      .addCase(updateEmployeeStatus.rejected, handleRejected)
+
+      .addCase(getEmployeeData.pending, handlePending)
+      .addCase(getEmployeeData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.employee = action.payload;
+      })
+      .addCase(getEmployeeData.rejected, handleRejected)
+
+      .addCase(getAllEmployees.pending, handlePending)
+      .addCase(getAllEmployees.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.employees = action.payload;
+      })
+      .addCase(getAllEmployees.rejected, handleRejected)
+
+      //! SUPPLIER
+      .addCase(createSupplier.pending, handlePending)
+      .addCase(createSupplier.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(createSupplier.rejected, handleRejected)
+
+      .addCase(updateSupplierData.pending, handlePending)
+      .addCase(updateSupplierData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const supplierToEditIndex = state.suppliers.findIndex(
+          (supplier) => supplier.supplier_id === action.payload.supplier
+        );
+
+        if (
+          // action.payload.status === 200 &&
+          supplierToEditIndex !== -1
+        ) {
+          state.suppliers[supplierToEditIndex] = {
+            ...state.suppliers[supplierToEditIndex], // Залишаємо старі дані
+            ...action.meta.arg, // Додаємо дані, які відправляли
+          };
+        }
+      })
+      .addCase(updateSupplierData.rejected, handleRejected)
+
+      .addCase(deleteSupplier.pending, handlePending)
+      .addCase(deleteSupplier.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.suppliers = state.suppliers.filter(
+          (supplier) => supplier.supplier_id !== action.payload.supplier_id
+        );
+      })
+      .addCase(deleteSupplier.rejected, handleRejected)
+
+      .addCase(updateSupplierStatus.pending, handlePending)
+      .addCase(updateSupplierStatus.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const supplierToEditIndex = state.employees.findIndex(
+          (supplier) => supplier.supplier_id === action.payload.supplier_id
+        );
+        state.employees[supplierToEditIndex].isDisabled =
+          action.payload.updated_fields.isDisabled;
+      })
+      .addCase(updateSupplierStatus.rejected, handleRejected)
+
+      .addCase(getSupplierData.pending, handlePending)
+      .addCase(getSupplierData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.supplier = action.payload.data;
+      })
+      .addCase(getSupplierData.rejected, handleRejected)
+
+      .addCase(getAllSuppliers.pending, handlePending)
+      .addCase(getAllSuppliers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.suppliers = action.payload.data;
+      })
+      .addCase(getAllSuppliers.rejected, handleRejected)
+
+      //! SCHEDULE
       .addCase(getWorkSchedule.pending, handlePending)
       .addCase(getWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -44,18 +180,23 @@ const settingsSlice = createSlice({
         state.schedule = { ...state.schedule, ...action.payload };
       })
       .addCase(updateWorkSchedule.rejected, handleRejected)
+
+      //! POSTS
+
       .addCase(getPosts.pending, handlePending)
       .addCase(getPosts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.posts = action.payload;
       })
       .addCase(getPosts.rejected, handleRejected)
+
       .addCase(createPost.pending, handlePending)
       .addCase(createPost.fulfilled, (state, action) => {
         state.isLoading = false;
         state.posts.push(action.payload);
       })
       .addCase(createPost.rejected, handleRejected)
+
       .addCase(updatePostStatus.pending, handlePending)
       .addCase(updatePostStatus.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -65,6 +206,7 @@ const settingsSlice = createSlice({
         state.posts[postToEditIndex].status = action.payload;
       })
       .addCase(updatePostStatus.rejected, handleRejected)
+
       .addCase(updatePostData.pending, handlePending)
       .addCase(updatePostData.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -74,6 +216,7 @@ const settingsSlice = createSlice({
         state.posts[postToEditIndex] = action.payload;
       })
       .addCase(updatePostData.rejected, handleRejected)
+
       .addCase(deletePost.pending, handlePending)
       .addCase(deletePost.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -83,6 +226,9 @@ const settingsSlice = createSlice({
         );
       })
       .addCase(deletePost.rejected, handleRejected)
+
+      //! PRICE PART
+
       .addCase(getPrices.pending, handlePending)
       .addCase(getPrices.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -90,30 +236,48 @@ const settingsSlice = createSlice({
         state.prices = action.payload;
       })
       .addCase(getPrices.rejected, handleRejected)
-      .addCase(editPrices.pending, handlePending)
-      .addCase(editPrices.fulfilled, (state, action) => {
+
+      .addCase(getPricesInCategory.pending, handlePending)
+      .addCase(getPricesInCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        const pricesToEditIndex = state.posts.findIndex(
-          (service) => service.id === action.payload.id
-        );
-        state.prices[pricesToEditIndex].prices = action.payload;
+
+        state.categoryPrices = action.payload;
       })
-      .addCase(editPrices.rejected, handleRejected)
+      .addCase(getPricesInCategory.rejected, handleRejected)
+
+      .addCase(editServiceNameOrPrices.pending, handlePending)
+      .addCase(editServiceNameOrPrices.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const pricesToEditIndex = state.prices.findIndex(
+          (service) => service.service_id === action.payload.service_id
+        );
+        state.prices[pricesToEditIndex] = {
+          ...state.prices[pricesToEditIndex], // Залишаємо старі дані
+          ...action.meta.arg, // Додаємо дані, які відправляли
+        };
+      })
+      .addCase(editServiceNameOrPrices.rejected, handleRejected)
+
       .addCase(createCategory.pending, handlePending)
       .addCase(createCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.prices.push(action.payload);
+        // state.prices.push(action.payload);
       })
       .addCase(createCategory.rejected, handleRejected)
+
       .addCase(updateCategoryData.pending, handlePending)
       .addCase(updateCategoryData.fulfilled, (state, action) => {
         state.isLoading = false;
         const categoryToEditIndex = state.prices.findIndex(
-          (category) => category.id === action.payload.id
+          (category) => category.category_id === action.payload.category_id
         );
-        state.prices[categoryToEditIndex].category = action.payload;
+        state.prices[categoryToEditIndex] = {
+          ...state.prices[categoryToEditIndex], // Залишаємо старі дані
+          ...action.meta.arg, // Додаємо дані, які відправляли
+        };
       })
       .addCase(updateCategoryData.rejected, handleRejected)
+
       .addCase(createService.pending, handlePending)
       .addCase(createService.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -124,12 +288,13 @@ const settingsSlice = createSlice({
         state.prices[categoryToAddNewService].items.push(action.payload);
       })
       .addCase(createService.rejected, handleRejected)
+
       .addCase(deleteService.pending, handlePending)
       .addCase(deleteService.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        state.prices = state.prices.items.filter(
-          (item) => item.id !== action.payload.id
+        state.prices = state.prices.filter(
+          (item) => item.service_id !== action.payload.service_id
         );
       })
       .addCase(deleteService.rejected, handleRejected),

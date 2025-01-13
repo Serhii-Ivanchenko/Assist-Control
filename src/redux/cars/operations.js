@@ -10,7 +10,7 @@ export const getAllCars = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/v1/data/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -30,7 +30,7 @@ export const getCurrentCars = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/v1/current/cars/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -52,7 +52,7 @@ export const getCarsByDate = createAsyncThunk(
         `/v1/current/day/cars/?date=${day}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -76,7 +76,7 @@ export const getCarsByMonth = createAsyncThunk(
         `/v1/current/month/cars/?date_str=${date}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -100,7 +100,7 @@ export const getCalendarByMonth = createAsyncThunk(
         `/v1/get_monthly_load?date=${date}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -121,7 +121,7 @@ export const getCarsForHour = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/v1/get_busyness?date=${day}`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -141,7 +141,7 @@ export const getPercentForHour = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/v1/get_load_day?date=${day}`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -164,7 +164,7 @@ export const getNewCarsRange = createAsyncThunk(
         `/v1/get_new_cars_range?start_date=${dateBeginStr}&end_date=${dateEndStr}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -192,7 +192,7 @@ export const changeCarStatus = createAsyncThunk(
           location,
         },
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -217,7 +217,7 @@ export const getPeriodCars = createAsyncThunk(
         `/v1/get_all_car/?start_date=${startDate}&end_date=${endDate}`,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }

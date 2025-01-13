@@ -2,7 +2,6 @@ import css from "./ChatTags.module.css";
 
 export default function ChatTags({ tagsArray }) {
   return (
-    // <div className={css.sectionWrapper}>
     <div className={css.buttonWrapper}>
       {tagsArray.map((tag, index) => {
         if (tag.isChecked === false) {
@@ -16,6 +15,5 @@ export default function ChatTags({ tagsArray }) {
         }
       })}
     </div>
-    // </div>
   );
 }

@@ -5,6 +5,7 @@ import BtnsCloseAndSubmit from "../../../../sharedComponents/BtnsCloseAndSubmit/
 import { AddTagSchema } from "../../../../../validationSchemas/addTagSchema.js";
 import { nanoid } from "nanoid";
 import toast from "react-hot-toast";
+import clsx from "clsx";
 
 const colors = [
   "darkGreen",
@@ -39,7 +40,12 @@ const colors = [
   "lightGrey",
 ];
 
-export default function CreateTag({ onClose, changedTag, setTagsArr }) {
+export default function CreateTag({
+  onClose,
+  changedTag,
+  setTagsArr,
+  leftSectionTag,
+}) {
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -114,7 +120,15 @@ export default function CreateTag({ onClose, changedTag, setTagsArr }) {
   };
 
   return (
-    <div className={css.modalWrapper} ref={createPopoverRef}>
+    <div
+      className={clsx(
+        css.modalWrapper,
+        leftSectionTag
+          ? css.leftSectionModalWrapper
+          : css.rightSectionModalWrapper
+      )}
+      ref={createPopoverRef}
+    >
       {changedTag.tagName ? (
         <h3 className={css.header}>Редагувати тег</h3>
       ) : (
@@ -124,7 +138,12 @@ export default function CreateTag({ onClose, changedTag, setTagsArr }) {
       <div className={css.tagExampleWrapper}>
         <p className={`${css.tagExample} ${css[bgdColor]}`}>{newTagName}</p>
       </div>
-      <div className={css.wrapper}>
+      <div
+        className={clsx(
+          css.wrapper,
+          leftSectionTag ? css.leftSectionWrapper : css.rightSectionWrapper
+        )}
+      >
         <h4 className={css.name}>Назва</h4>
         <Formik
           initialValues={initialValues}

@@ -1,21 +1,42 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../services/api.js";
 
+// Get all services
+export const getAllServices = createAsyncThunk(
+  "service/getAllServices",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.get(`/set/services_all/`, {
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
+      console.log("response data", response.data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 // Get data od particular service
 export const getServiceData = createAsyncThunk(
   "service/getServiceData",
-  async (_, thunkAPI) => {
-    // const state = thunkAPI.getState();
-    // const serviceId = state.auth.userData.selectedServiceId;
+  async (service_id, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
-      //   const response = await axiosInstance.get(`/crm/get_records/`, {
-      //     headers: {
-      //       "X-Api-Key": "YA7NxysJ",
-      //       "company-id": serviceId,
-      //     },
-      //   });
-      //   console.log("response data", response.data);
-      //   return response.data;
+      const response = await axiosInstance.get(`/set/services/${service_id}/`, {
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
+      console.log("response data", response.data);
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -26,16 +47,16 @@ export const getServiceData = createAsyncThunk(
 export const createService = createAsyncThunk(
   "service/createService",
   async (serviceData, thunkAPI) => {
-    // const state = thunkAPI.getState();
-    // const serviceId = state.auth.userData.selectedServiceId;
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.post(
-        `/set/create_service/`,
+        `/set/services/create/`,
         serviceData,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
-            // "company-id": serviceId,
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
           },
         }
       );
@@ -52,18 +73,18 @@ export const createService = createAsyncThunk(
 export const updateService = createAsyncThunk(
   "service/updateService",
   async (serviceDataToUpdate, thunkAPI) => {
-    // const state = thunkAPI.getState();
-    // const serviceId = state.auth.userData.selectedServiceId;
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const { serviceId, ...serviceDataWithoutId } = serviceDataToUpdate;
+      const { service_id, ...serviceDataWithoutId } = serviceDataToUpdate;
 
       const response = await axiosInstance.post(
-        `/set/update_service/${serviceId}`,
+        `/set/services/update/${service_id}`,
         serviceDataWithoutId,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
-            // "company-id": serviceId,
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
           },
         }
       );
@@ -75,3 +96,7 @@ export const updateService = createAsyncThunk(
     }
   }
 );
+
+// Upload logo
+
+// Update logo
