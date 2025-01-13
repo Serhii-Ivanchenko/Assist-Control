@@ -2,21 +2,58 @@
 import css from "./ActionsPart.module.css";
 import { BsCheck } from "react-icons/bs";
 import { BsArrowDownUp } from "react-icons/bs";
+import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsTag } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import { BsFillCaretUpFill } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
+
+import { BsClock } from "react-icons/bs";
+import { BsCheck2Square } from "react-icons/bs";
+import { BsBookmark } from "react-icons/bs";
+import { BsArchive } from "react-icons/bs";
+import { GrUserManager } from "react-icons/gr";
+import { useState } from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
 import { tags } from "../../../RightSection/ChatTags/tags.js";
 import { useEffect, useState } from "react";
 import SearchTags from "../../../RightSection/ChatTags/SearchTags/SearchTags";
+
+const quickActions = [
+  { icon: <BsArchive />, name: "Додати в архів" },
+  { icon: <BsBookmark />, name: "Додати в обрані" },
+  { icon: <GrUserManager />, name: "Передати іншому менеджеру" },
+  { icon: <BsCheck2Square />, name: "Закрити чат" },
+  { icon: <BsClock />, name: "Додати у відкладені" },
+];
 
 export default function ActionsPart({
   isChecked,
   handleChecked,
   allChecked,
   handleAllChecked,
+  // chats,
+  handleSort,
+  sortOrder,
 }) {
+
+  const [openedActions, setOpenedActions] = useState(false);
+
+  const wrapperRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setOpenedActions(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+
   const [tagsArr, setTagsArr] = useState(tags);
   const [tagsModalIsOpen, setTagsModalIsOpen] = useState(false);
 
@@ -89,18 +126,44 @@ export default function ActionsPart({
             )}
           </div>
 
-          <div className={css.select}>
-            <BsThreeDots size={16} className={css.icon} />
-            <p className={css.actionsText}>Швидкі дії</p>
-            <BsFillCaretDownFill size={16} className={css.icon} />
+          <div className={css.quickActionsBox} ref={wrapperRef}>
+            <div
+              className={css.select}
+              onClick={() => setOpenedActions(!openedActions)}
+            >
+              <BsThreeDots size={16} className={css.icon} />
+              <p className={css.actionsText}>Швидкі дії</p>
+              <BsFillCaretDownFill
+                size={16}
+                className={`${css.icon} ${openedActions && css.rotated}`}
+              />
+            </div>
+            {openedActions && (
+              <ul className={css.actionsList}>
+                {quickActions.map((action, index) => (
+                  <li
+                    key={index}
+                    className={css.actionsItem}
+                    onClick={() => setOpenedActions(false)}
+                  >
+                    {action.icon}
+                    <p>{action.name}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       )}
 
-      <div className={css.filter}>
+      <div className={css.filter} onClick={handleSort}>
         <BsArrowDownUp size={18} className={css.icon} />
         <p className={css.text}>Нові</p>
-        <IoIosArrowDown size={20} className={css.icon} />
+        {sortOrder === "newFirst" ? (
+          <IoIosArrowUp size={20} style={{ fill: "var(--light-gray)" }} />
+        ) : (
+          <IoIosArrowDown size={20} style={{ fill: "var(--light-gray)" }} />
+        )}
       </div>
       {tagsModalIsOpen && (
         <SearchTags
