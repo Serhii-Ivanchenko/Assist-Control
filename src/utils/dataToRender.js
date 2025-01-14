@@ -21,6 +21,7 @@ export const statusesCommunications = [
 
 export const statusesArchive = [
   { reason_description: "all", label: "Всі авто" },
+  { reason_description: "рекомендації", label: "Рекомендації" },
   { reason_description: "співробітник", label: "Cпівробітник" },
   { reason_description: "випадковий", label: "Випадковий" },
   { reason_description: "дубль", label: "Дубль" },
@@ -121,7 +122,6 @@ export const labelNamesInModal = {
   photo: "Фото",
   totalPrice: "Загальна сума",
   phoneNumber: "Телефон",
-  status: "Статус",
   info: "Інфо",
   prePayment: "Предоплата",
 };
@@ -153,7 +153,6 @@ export const labelNamesInCrm = {
   totalPrice: "Загальна сума",
   paymentBtn: "Оплатити",
   phoneNumber: "Телефон",
-  status: "Статус",
   info: "Інфо",
   createBtn: "Створити запис",
   archive: "Архів",
