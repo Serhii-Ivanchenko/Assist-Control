@@ -31,7 +31,7 @@ const authSlice = createSlice({
   reducers: {
     setSelectedServiceId: (state, action) => {
       state.userData.selectedServiceId = action.payload;
-    }
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -84,6 +84,7 @@ const authSlice = createSlice({
           ...state.userData, // Зберігаємо поточні значення
           ...action.payload, // Додаємо нові дані
         };
+        state.userData.selectedServiceId = action.payload.services[0].id;
         state.isLoading = false;
       })
       .addCase(getUserData.rejected, handleRejected)
@@ -115,6 +116,7 @@ const authSlice = createSlice({
       // })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.userData = { ...state.userData, ...action.payload };
+        state.userData.selectedServiceId = action.payload.services[0].id;
         state.isLoggedIn = true;
         state.isRefreshing = false; // Зупиняємо рефреш
         state.apiKey = action.payload.api_key; // Переконуємося, що ключ оновився
@@ -157,7 +159,7 @@ const authSlice = createSlice({
         // state.newPassword = action.payload.new_password;
         state.isLoading = false;
         state.error = null;
-  })
+      }),
 });
 
 export const { setSelectedServiceId } = authSlice.actions;
