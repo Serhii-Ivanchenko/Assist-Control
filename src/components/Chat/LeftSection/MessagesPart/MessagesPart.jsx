@@ -4,17 +4,14 @@ import css from "./MessagesPart.module.css";
 import ActionsPart from "./ActionsPart/ActionsPart";
 import ChatsPart from "./ChatsPart/ChatsPart";
 import { useState } from "react";
+import NewChatPopup from "./NewChatPopup/NewChatPopup";
 
 export default function MessagesPart({ chats, handleSort, sortOrder }) {
   const [isChecked, setIsChecked] = useState(false);
-  // const [allChecked, setAllChecked] = useState(false);
   const [allChecked, setAllChecked] = useState(
     chats.map(() => false) // Динамічне створення стану для кожного елемента
   );
-
-  // const handleAllChecked = () => {
-  //   setAllChecked((prev) => !prev);
-  // };
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleAllChecked = (event) => {
     const isChecked = event.target.checked;
@@ -32,9 +29,17 @@ export default function MessagesPart({ chats, handleSort, sortOrder }) {
     <div className={css.messagesPart}>
       <div className={css.titleBox}>
         <p className={css.title}>Повідомлення</p>
-        <button type="button" className={css.btn}>
-          <BsPencilSquare />
-        </button>
+
+        <div className={css.popupBox}>
+          <button
+            type="button"
+            className={css.btn}
+            onClick={() => setIsPopupOpen(!isPopupOpen)}
+          >
+            <BsPencilSquare />
+          </button>
+          {isPopupOpen && <NewChatPopup />}
+        </div>
       </div>
 
       <SearchByMessages />

@@ -39,7 +39,7 @@ export default function EmailType({ handleFilter }) {
     },
     {
       icon: <BsBookmark className={css.icon} />,
-      text: "Вибрані",
+      text: "Обрані",
       value: "6",
       id: "5",
       // category: "",

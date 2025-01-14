@@ -154,8 +154,8 @@ export default function ActionsPart({
         </div>
       )}
 
-      <div className={css.filter} onClick={handleSort}>
-        <BsArrowDownUp size={18} className={css.icon} />
+      <div className={css.filter}>
+        <BsArrowDownUp size={18} className={css.icon} onClick={handleSort} />
         <p className={css.text}>Нові</p>
         {sortOrder === "newFirst" ? (
           <IoIosArrowUp size={20} style={{ fill: "var(--light-gray)" }} />
