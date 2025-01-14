@@ -11,14 +11,13 @@ import {
   selectLoading,
   selectUser,
 } from "../../redux/auth/selectors.js";
-import toast, { Toaster } from "react-hot-toast";
-import { getUserData, refreshUser } from "../../redux/auth/operations.js";
+import { Toaster } from "react-hot-toast";
+import { refreshUser } from "../../redux/auth/operations.js";
 import { Navigate } from "react-router-dom";
 import firstPage from "../../utils/firstPage.js";
 import css from "./App.module.css";
 import Header from "../Header/Header.jsx";
 import SideBar from "../SideBar/SideBar.jsx";
-import { setSelectedServiceId } from "../../redux/auth/slice.js";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage.jsx"));
@@ -74,9 +73,7 @@ const Equipment = lazy(() =>
 //   import("../../pages/ReportsPage/ReportsPage.jsx")
 // );
 
-const ReportsClientsPage = lazy(() =>
-  import("../../pages/ReportsPage/ReportsClientsPage/ReportsClientsPage.jsx")
-);
+const ReportsClientsPage = lazy(() => import('../../pages/ReportsPage/ReportsClientsPage/ReportsClientsPage.jsx'))
 
 const SettingsPage = lazy(() =>
   import("../../pages/SettingsPage/SettingsPage.jsx")
@@ -108,12 +105,6 @@ export default function App() {
   const [isAuthChecked, setIsAuthChecked] = useState(false);
 
   useEffect(() => {
-    const serviceId = userData.services?.[0]?.id;
-
-    if (serviceId) {
-      dispatch(setSelectedServiceId(serviceId));
-    }
-
     const refreshUserData = async () => {
       await dispatch(refreshUser());
       setIsAuthChecked(true);
@@ -250,8 +241,8 @@ export default function App() {
                     path="/accounting/documents"
                     element={
                       <PrivateRoute
-                        redirectTo="/login"
-                        component={<InvoicesPage />}
+                      redirectTo="/login"
+                      component={<InvoicesPage />}
                       />
                     }
                   >
@@ -273,20 +264,20 @@ export default function App() {
                     path="/reports/clients"
                     element={
                       <PrivateRoute
-                        redirectTo="/login"
-                        component={<ReportsClientsPage />}
+                      redirectTo="/login"
+                      component={<ReportsClientsPage />}
                       />
                     }
                   />
-                  <Route
-                    path="/reports/distributors"
-                    element={
-                      <PrivateRoute
-                        redirectTo="/login"
-                        component={<DistributorsPage />}
-                      />
-                    }
-                  />
+                    <Route
+                      path="/reports/distributors"
+                      element={
+                        <PrivateRoute
+                          redirectTo="/login"
+                          component={<DistributorsPage />}
+                        />
+                      }
+                    />
                   <Route
                     path="/settings"
                     element={
