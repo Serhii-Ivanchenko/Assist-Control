@@ -205,6 +205,46 @@ export default function RightSection() {
     setIsCategory(false); // Закрываем справочник
   };
 
+  // width change if isScrolled * start
+  const wrapperRef = useRef(null); // Ссилка на контейнер
+  const [isScrolled, setIsScrolled] = useState(false); // Стан для перевірки наявності скролу
+
+  useEffect(() => {
+    const checkScrollbar = () => {
+      if (wrapperRef.current) {
+        const container = wrapperRef.current;
+        const scrollbarVisible =
+          container.scrollHeight > container.clientHeight;
+        setIsScrolled((prev) => {
+          if (prev !== scrollbarVisible) {
+            return scrollbarVisible;
+          }
+          return prev; // Избегаем лишнего рендеринга
+        });
+      }
+    };
+
+    // Используем ResizeObserver для изменения размеров контейнера
+    const resizeObserver = new ResizeObserver(checkScrollbar);
+    const mutationObserver = new MutationObserver(checkScrollbar); // Для добавления/удаления контента
+
+    if (wrapperRef.current) {
+      resizeObserver.observe(wrapperRef.current);
+      mutationObserver.observe(wrapperRef.current, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    checkScrollbar(); // Выполняем проверку сразу при монтировании
+
+    return () => {
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
+    };
+  }, []);
+  // width change if isScrolled * end
+
   return (
     <div className={css.rightSectionWrapper}>
       <div className={css.client}>
@@ -241,12 +281,13 @@ export default function RightSection() {
         </div>
       </div>
 
-      <div className={css.wrapper}>
+      <div className={css.wrapper} ref={wrapperRef}>
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary) !important",
@@ -334,7 +375,8 @@ export default function RightSection() {
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary)",
@@ -412,12 +454,13 @@ export default function RightSection() {
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary) !important",
             },
-              background: "none",
+            background: "none",
             color: "var(--light-gray)",
             boxShadow: "none",
             overflow: "hidden",
@@ -534,7 +577,8 @@ export default function RightSection() {
           expanded={expanded === "panel4"}
           onChange={handleChange("panel4")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary) !important",
@@ -619,7 +663,8 @@ export default function RightSection() {
           expanded={expanded === "panel5"}
           onChange={handleChange("panel5")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary) !important",
@@ -701,7 +746,8 @@ export default function RightSection() {
           expanded={expanded === "panel6"}
           onChange={handleChange("panel6")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary)",
