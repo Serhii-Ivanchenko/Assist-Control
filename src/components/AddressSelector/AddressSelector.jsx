@@ -2,27 +2,37 @@ import { useEffect, useRef, useState } from "react";
 import css from "./AddressSelector.module.css";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../redux/auth/selectors.js";
+import { selectSelectedServiceId, selectUser } from "../../redux/auth/selectors.js";
 import { setSelectedServiceId } from "../../redux/auth/slice.js";
 
 export default function AddressSelector() {
   const dispatch = useDispatch();
 
-  // const userData = useSelector(selectUser);
-  // const services = userData?.services || [];
-  const services = [
-    {
-      id: 1,
-      service_name: "AvtoAtmosfera Cherkasy",
-    },
-    {
-      id: 2,
-      service_name: "GCAR Kyiv",
-    },
-  ];
+  const userData = useSelector(selectUser);
+  const services = userData?.services || [];
+  // const selectSelectedServiceId = useSelector(selectSelectedServiceId);
+  // const services = [
+  //   {
+  //     id: 1,
+  //     service_name: "AvtoAtmosfera Cherkasy",
+  //   },
+  //   {
+  //     id: 2,
+  //     service_name: "GCAR Kyiv",
+  //   },
+  // ];
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const selectRef = useRef(null);
+
+  // useEffect(() => {
+  //   if (services.length > 0 && !userData.selectedServiceId) {
+  //     dispatch(setSelectedServiceId(services[0].id));
+  //   }
+  // }, [services, userData.selectedServiceId, dispatch]);
+
+  // console.log("selectSelectedServiceId");
+  
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -46,6 +56,7 @@ export default function AddressSelector() {
         className={css.select}
         onClick={toggleDropdown}
         onChange={handleSelectService}
+        value={userData.selectedServiceId || ""}
       >
         {services.map((service) => (
           <option key={service.id} value={service.id}>

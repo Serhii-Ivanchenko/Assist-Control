@@ -19,7 +19,7 @@ export const initialState = {
       post_index: null,
       balance: null,
       services: [],
-      selectedServiceId: 1,
+      selectedServiceId: null,
       tariff: {
         isActive: false,
         tariffName: "Demo",
