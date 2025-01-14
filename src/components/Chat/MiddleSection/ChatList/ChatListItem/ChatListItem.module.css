@@ -34,8 +34,14 @@
 }
 
 .message {
+  display: flex;
+  justify-content: flex-start;
+  width: fit-content;
+  flex-wrap: wrap;
+  gap: 10px;
   /* width: 440px; */
   /* margin-top: 6px; */
+  width: fit-content;
   margin-left: 45px;
   padding: 14px 16px;
   background: var(--CRM-modal-SecondaryBG, #23252c);
@@ -51,6 +57,9 @@
   font-style: normal;
   font-weight: 500;
   line-height: 1.1875;
+  max-width: 400px;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .managerInfo {
@@ -63,9 +72,9 @@
 
 .messageManager {
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   width: fit-content;
+  flex-wrap: wrap;
   gap: 10px;
   margin-left: auto;
   margin-right: 45px;
@@ -75,8 +84,8 @@
 }
 
 .image {
-  width: 70px;
-  height: auto;
+  width: 100px;
+  height: 100px;
   border-radius: 8px;
   margin-top: 8px;
 }
