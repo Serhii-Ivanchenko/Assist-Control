@@ -15,6 +15,7 @@ export default function LeftSection() {
   const chats = [
     {
       category: "chat",
+      // subcategory: "favourite",
       type: "whatsApp",
       avatar: avatar,
       icon: whatsApp,
@@ -28,6 +29,7 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      // subcategory: "favourite",
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -42,6 +44,7 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      // subcategory: "archive",
       type: "telegram",
       avatar: avatar,
       icon: telegram,
@@ -55,6 +58,7 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      // subcategory: "archive",
       type: "assist",
       avatar: avatar,
       icon: assist,
@@ -68,6 +72,7 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      // subcategory: "delayed",
       type: "telegram",
       avatar: avatar,
       icon: telegram,
@@ -80,6 +85,7 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      // subcategory: "archive",
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -93,6 +99,7 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      // subcategory: "archive",
       type: "telegram",
       avatar: avatar,
       icon: telegram,
@@ -105,6 +112,7 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      // subcategory: "closed",
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -118,6 +126,7 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      // subcategory: "closed",
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -131,6 +140,7 @@ export default function LeftSection() {
     },
     {
       category: "email",
+      // subcategory: "favourite",
       type: "gmail",
       avatar: avatar,
       icon: gmail,

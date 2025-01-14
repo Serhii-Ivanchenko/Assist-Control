@@ -5,6 +5,7 @@ import ActionsPart from "./ActionsPart/ActionsPart";
 import ChatsPart from "./ChatsPart/ChatsPart";
 import { useState } from "react";
 import NewChatPopup from "./NewChatPopup/NewChatPopup";
+import { useRef, useEffect } from "react";
 
 export default function MessagesPart({ chats, handleSort, sortOrder }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -12,6 +13,20 @@ export default function MessagesPart({ chats, handleSort, sortOrder }) {
     chats.map(() => false) // Динамічне створення стану для кожного елемента
   );
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const wrapperRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setIsPopupOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleAllChecked = (event) => {
     const isChecked = event.target.checked;
@@ -30,7 +45,7 @@ export default function MessagesPart({ chats, handleSort, sortOrder }) {
       <div className={css.titleBox}>
         <p className={css.title}>Повідомлення</p>
 
-        <div className={css.popupBox}>
+        <div className={css.popupBox} ref={wrapperRef}>
           <button
             type="button"
             className={css.btn}

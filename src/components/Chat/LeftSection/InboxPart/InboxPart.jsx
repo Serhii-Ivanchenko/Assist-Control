@@ -49,6 +49,8 @@ export default function InboxPart({
 
       <EmailType
         handleFilter={handleFilter}
+        chats={chats}
+
         // setActiveFilterCategory={setActiveFilterCategory}
       />
       <ChannelsPart

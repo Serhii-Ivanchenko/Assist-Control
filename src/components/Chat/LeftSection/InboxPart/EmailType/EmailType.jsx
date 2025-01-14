@@ -7,19 +7,19 @@ import { BsArchive } from "react-icons/bs";
 import css from "./EmailType.module.css";
 import { useState } from "react";
 
-export default function EmailType({ handleFilter }) {
+export default function EmailType({ handleFilter, chats }) {
   const types = [
     {
       icon: <BsEnvelope className={css.icon} />,
       text: "Email",
-      value: "4",
+      value: chats.filter((chat) => chat.category === "email").length,
       id: "1",
       category: "email",
     },
     {
       icon: <BsChatDots className={css.icon} />,
       text: "Чати",
-      value: "6",
+      value: chats.filter((chat) => chat.category === "chat").length,
       id: "2",
       category: "chat",
     },
@@ -28,28 +28,28 @@ export default function EmailType({ handleFilter }) {
       text: "Відкладені",
       value: "1",
       id: "3",
-      // category: "",
+      category: "delayed",
     },
     {
       icon: <BsCheck2Square className={css.icon} />,
       text: "Закриті",
       value: "",
       id: "4",
-      // category: "",
+      category: "closed",
     },
     {
       icon: <BsBookmark className={css.icon} />,
       text: "Обрані",
       value: "6",
       id: "5",
-      // category: "",
+      category: "chosen",
     },
     {
       icon: <BsArchive className={css.icon} />,
       text: "Архів",
       value: "",
       id: "6",
-      // category: "",
+      category: "archive",
     },
   ];
 
