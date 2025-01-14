@@ -103,7 +103,7 @@ export default function NotificationModal({
     })(),
     [comment]: "",
     ...(accountingModal && { [service]: "upsell" }),
-    ...(accountingModal && { [nextService]: "0" }),
+    ...(accountingModal && { [nextService]: "" }),
   };
 
   const handleSubmit = (values, actions) => {
