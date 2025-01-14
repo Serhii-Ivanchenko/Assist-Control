@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
 import {
+  createCashRegister,
   createCategory,
   createEmployee,
   createMarkup,
@@ -8,6 +9,7 @@ import {
   createRating,
   createService,
   createSupplier,
+  deleteCashRegister,
   deleteEmployee,
   deleteMarkup,
   deletePost,
@@ -15,9 +17,11 @@ import {
   deleteService,
   deleteSupplier,
   editServiceNameOrPrices,
+  getAllCashRegisters,
   getAllEmployees,
   getAllMarkups,
   getAllSuppliers,
+  getCashRegisterData,
   getDistributorMarkup,
   getEmployeeData,
   getMarkupItemData,
@@ -28,6 +32,8 @@ import {
   getRatings,
   getSupplierData,
   getWorkSchedule,
+  updateCashRegister,
+  updateCashRegisterStatus,
   updateCategoryData,
   updateDynamicMarkup,
   updateEmployeeData,
@@ -379,7 +385,7 @@ const settingsSlice = createSlice({
           (markup) => markup.markup_id === action.payload.markup_id
         );
         state.markup[markupToEditIndex] = {
-          ...state.prices[markupToEditIndex], // Залишаємо старі дані
+          ...state.markup[markupToEditIndex], // Залишаємо старі дані
           ...action.meta.arg, // Додаємо дані, які відправляли
         };
       })
@@ -392,7 +398,7 @@ const settingsSlice = createSlice({
           (markup) => markup.markup_id === action.payload.markup_id
         );
         state.markup[markupToEditIndex] = {
-          ...state.prices[markupToEditIndex], // Залишаємо старі дані
+          ...state.markup[markupToEditIndex], // Залишаємо старі дані
           ...action.meta.arg, // Додаємо дані, які відправляли
         };
       })
@@ -430,7 +436,69 @@ const settingsSlice = createSlice({
 
         state.distributorMarkup = action.payload;
       })
-      .addCase(getDistributorMarkup.rejected, handleRejected),
+      .addCase(getDistributorMarkup.rejected, handleRejected)
+
+      //! Cash register
+      .addCase(createCashRegister.pending, handlePending)
+      .addCase(createCashRegister.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.cashRegisters.push(action.meta.arg);
+      })
+      .addCase(createCashRegister.rejected, handleRejected)
+
+      .addCase(updateCashRegister.pending, handlePending)
+      .addCase(updateCashRegister.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const cashRegisterToEditIndex = state.cashRegisters.findIndex(
+          (cashRegister) =>
+            cashRegister.cash_register_id === action.payload.cash_register_id
+        );
+        state.cashRegisters[cashRegisterToEditIndex] = {
+          ...state.cashRegisters[cashRegisterToEditIndex], // Залишаємо старі дані
+          ...action.meta.arg, // Додаємо дані, які відправляли
+        };
+      })
+      .addCase(updateCashRegister.rejected, handleRejected)
+
+      .addCase(deleteCashRegister.pending, handlePending)
+      .addCase(deleteCashRegister.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.cashRegisters = state.cashRegisters.filter(
+          (cashRegister) =>
+            cashRegister.cash_register_id !== action.payload.cash_register_id
+        );
+      })
+      .addCase(deleteCashRegister.rejected, handleRejected)
+
+      .addCase(updateCashRegisterStatus.pending, handlePending)
+      .addCase(updateCashRegisterStatus.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const cashRegisterToEditIndex = state.cashRegisters.findIndex(
+          (cashRegister) =>
+            cashRegister.cash_register_id === action.payload.cash_register_id
+        );
+        state.cashRegisters[cashRegisterToEditIndex].isDisabled =
+          action.payload.isDisabled;
+      })
+      .addCase(updateCashRegisterStatus.rejected, handleRejected)
+
+      .addCase(getAllCashRegisters.pending, handlePending)
+      .addCase(getAllCashRegisters.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.cashRegisters = action.payload.cash_registers;
+      })
+      .addCase(getAllCashRegisters.rejected, handleRejected)
+
+      .addCase(getCashRegisterData.pending, handlePending)
+      .addCase(getCashRegisterData.fulfilled, (state, action) => {
+        state.isLoading = false;
+
+        state.cashRegisterItem = action.payload.cash_register;
+      })
+      .addCase(getCashRegisterData.rejected, handleRejected),
 });
 
 export default settingsSlice.reducer;

@@ -230,6 +230,8 @@ export const initialState = {
     markup: [],
     markupItem: {},
     distributorMarkup: [],
+    cashRegisters: [],
+    cashRegisterItem: {},
     isLoading: false,
     error: null,
   },
