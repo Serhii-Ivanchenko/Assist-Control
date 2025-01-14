@@ -5,9 +5,14 @@ import { BsCheck2Square } from "react-icons/bs";
 import { BsBookmark } from "react-icons/bs";
 import { BsArchive } from "react-icons/bs";
 import css from "./EmailType.module.css";
-import { useState } from "react";
+// import { useState } from "react";
 
-export default function EmailType({ handleFilter, chats }) {
+export default function EmailType({
+  handleFilter,
+  chats,
+  isActive,
+  setIsActive,
+}) {
   const types = [
     {
       icon: <BsEnvelope className={css.icon} />,
@@ -26,34 +31,32 @@ export default function EmailType({ handleFilter, chats }) {
     {
       icon: <BsClock className={css.icon} />,
       text: "Відкладені",
-      value: "1",
+      value: chats.filter((chat) => chat.isDelayed === true).length,
       id: "3",
       category: "delayed",
     },
     {
       icon: <BsCheck2Square className={css.icon} />,
       text: "Закриті",
-      value: "",
+      value: chats.filter((chat) => chat.isClosed === true).length,
       id: "4",
       category: "closed",
     },
     {
       icon: <BsBookmark className={css.icon} />,
       text: "Обрані",
-      value: "6",
+      value: chats.filter((chat) => chat.isChosen === true).length,
       id: "5",
       category: "chosen",
     },
     {
       icon: <BsArchive className={css.icon} />,
       text: "Архів",
-      value: "",
+      value: chats.filter((chat) => chat.archive === true).length,
       id: "6",
       category: "archive",
     },
   ];
-
-  const [isActive, setIsActive] = useState(null);
 
   return (
     <div>
