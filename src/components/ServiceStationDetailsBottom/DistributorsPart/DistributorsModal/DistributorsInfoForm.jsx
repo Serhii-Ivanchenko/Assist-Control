@@ -37,7 +37,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
   });
 
   const handleSubmit = (values) => {
-    setDistributor(values);
+    setDistributor((prev) => ({ ...prev, ...values }));
   };
 
   return (

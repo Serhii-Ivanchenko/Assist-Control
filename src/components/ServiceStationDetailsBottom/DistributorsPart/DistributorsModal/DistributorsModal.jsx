@@ -10,8 +10,16 @@ import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
 import UploadComponent from "../../../sharedComponents/UploadComponent/UploadComponent";
 import { RiSave3Fill } from "react-icons/ri";
 import styles from "./DistributorsModal.module.css";
+import { updateSupplierData } from "../../../../redux/settings/operations";
+import { useDispatch } from "react-redux";
 
-function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
+function DistributorsModal({
+  onClose,
+  distributorData,
+  onToggleDisable,
+  updateDistributors,
+}) {
+  const dispatch = useDispatch();
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [distributor, setDistributor] = useState(distributorData || {});
   const [isEditing, setIsEditing] = useState(false);
@@ -32,9 +40,27 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
     setIsEditing(false);
   };
 
-  const handleSave = () => {
-    console.log(distributor);
-    onClose();
+  const handleSave = async () => {
+    try {
+      const dataToUpdate = {
+        supplier_id: distributor.id,
+        name: distributor.name,
+        logo,
+      };
+
+      const result = await dispatch(updateSupplierData(dataToUpdate)).unwrap();
+      // console.log("Оновлення успішне:", result);
+
+      if (updateDistributors) {
+        updateDistributors(result.data);
+      }
+      onClose();
+    } catch (error) {
+      console.error(
+        "Помилка під час оновлення:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   const formRef = useRef(null);

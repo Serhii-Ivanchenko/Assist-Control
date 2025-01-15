@@ -253,12 +253,16 @@ export const updateSupplierData = createAsyncThunk(
       };
 
       const response = await axiosInstance.patch(
-        `/set/suppliers/${supplier_id}/update/`,
-        payload,
+        `/sup/suppliers/${supplier_id}/update/`,
+        {
+          logo,
+          ...dataToUpdate,
+        },
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
+            "Content-Type": "application/json",
           },
         }
       );
