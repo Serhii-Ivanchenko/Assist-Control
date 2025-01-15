@@ -204,6 +204,7 @@
 }
 
 .tableText {
+  text-align: center;
   color: var(--light-gray);
   font-size: 14px;
   font-style: normal;
