@@ -49,15 +49,34 @@ export default function MiddleSection() {
       files: [{ name: "", type: "", url: "" }],
     },
   ]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [activeSearch, setActiveSearch] = useState(false);
   const [inputHeight, setInputHeight] = useState(0);
 
   const addNewMessage = (newMessage) => {
     setMessages([...messages, newMessage]);
   };
+
+  const onFilter = (searchData) => {
+    setFilteredData(searchData);
+    setActiveSearch(true);
+  };
+
+  const onReset = () => {
+    setFilteredData(messages);
+    setActiveSearch(false);
+  };
   return (
     <div className={css.middleSectionWrapper}>
-      <ChatHeader />
-      <ChatList messages={messages} inputHeight={inputHeight} />
+      <ChatHeader
+        searchData={messages}
+        handleFilter={onFilter}
+        handleReset={onReset}
+      />
+      <ChatList
+        messages={activeSearch ? filteredData : messages}
+        inputHeight={inputHeight}
+      />
       <MessageInput
         addNewMessage={addNewMessage}
         setInputHeight={setInputHeight}
