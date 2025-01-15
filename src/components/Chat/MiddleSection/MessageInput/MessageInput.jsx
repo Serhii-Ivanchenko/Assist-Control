@@ -153,6 +153,7 @@ function MessageInput({ addNewMessage, setInputHeight }) {
     "application/zip": "zip",
     "application/x-zip-compressed": "zip",
     "application/x-7z-compressed": "7z",
+    "text/plain": "txt",
   };
 
   return (
