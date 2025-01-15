@@ -273,3 +273,61 @@
   font-weight: 600;
   line-height: normal;
 }
+
+.nextServiceBox {
+  color: var(--last-service-mileage-text);
+  background-color: var(--last-service-mileage-bg);
+  width: 80px;
+  height: 38px;
+
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 24px;
+  box-shadow: 0 4px 4px #00000040;
+  cursor: pointer;
+}
+
+.mileageBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nextServiceContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nextServiceContainer>p {
+  line-height: 1.1875em;
+  font-size: 16px;
+}
+
+.nextServiceInput {
+  background-color: transparent !important;
+  border: none;
+  outline: none;
+  max-width: 60px;
+  color: var(--last-service-mileage-text);
+  font-weight: 600;
+}
+
+.nextServiceInput:-webkit-autofill {
+  background-color: transparent !important;
+  color: var(--last-service-mileage-text) !important;
+  box-shadow: 0 0 0px 1000px var(--last-service-mileage-bg) inset !important;
+  -webkit-text-fill-color: var(--last-service-mileage-text) !important;
+}
+
+.nextServiceInput:-webkit-autofill:hover,
+.nextServiceInput:-webkit-autofill:focus {
+  background-color: transparent !important;
+  color: var(--last-service-mileage-text) !important;
+  box-shadow: 0 0 0px 1000px var(--last-service-mileage-bg) inset !important;
+  -webkit-text-fill-color: var(--last-service-mileage-text) !important;
+}
