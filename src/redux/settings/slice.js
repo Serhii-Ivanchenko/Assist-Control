@@ -51,6 +51,14 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+// універсальна функція для оновлення даних
+const updateItem = (items, payload, key = "id") => {
+  const index = items.findIndex((item) => item[key] === payload[key]);
+  if (index !== -1) {
+    items[index] = { ...items[index], ...payload };
+  }
+};
+
 const settingsSlice = createSlice({
   name: "settings",
   initialState: initialState.settings,
@@ -122,25 +130,30 @@ const settingsSlice = createSlice({
       .addCase(createSupplier.pending, handlePending)
       .addCase(createSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
+        updateItem(state.suppliers, action.payload, "supplier_id");
       })
       .addCase(createSupplier.rejected, handleRejected)
 
       .addCase(updateSupplierData.pending, handlePending)
       .addCase(updateSupplierData.fulfilled, (state, action) => {
         state.isLoading = false;
-        const supplierToEditIndex = state.suppliers.findIndex(
-          (supplier) => supplier.supplier_id === action.payload.supplier
-        );
 
-        if (
-          // action.payload.status === 200 &&
-          supplierToEditIndex !== -1
-        ) {
-          state.suppliers[supplierToEditIndex] = {
-            ...state.suppliers[supplierToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
-        }
+        // функція для оновлення даних по постачальнику
+        updateItem(state.suppliers, action.meta.arg, "supplier_id");
+
+        // const supplierToEditIndex = state.suppliers.findIndex(
+        //   (supplier) => supplier.supplier_id === action.payload.supplier
+        // );
+
+        // if (
+        //   // action.payload.status === 200 &&
+        //   supplierToEditIndex !== -1
+        // ) {
+        //   state.suppliers[supplierToEditIndex] = {
+        //     ...state.suppliers[supplierToEditIndex], // Залишаємо старі дані
+        //     ...action.meta.arg, // Додаємо дані, які відправляли
+        //   };
+        // }
       })
       .addCase(updateSupplierData.rejected, handleRejected)
 

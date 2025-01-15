@@ -227,11 +227,15 @@ export const updateSupplierData = createAsyncThunk(
 
       const response = await axiosInstance.patch(
         `/sup/suppliers/${supplier_id}/update/`,
-        formData,
+        {
+          logo,
+          ...dataToUpdate,
+        },
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
+            "Content-Type": "application/json",
           },
         }
       );

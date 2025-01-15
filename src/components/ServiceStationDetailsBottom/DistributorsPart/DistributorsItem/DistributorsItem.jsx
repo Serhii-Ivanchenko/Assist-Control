@@ -1,21 +1,64 @@
+import { useEffect, useState } from "react";
 import SwitchableBtns from "../../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
 import RatingStars from "../../../sharedComponents/RatingStars/RatingStars.jsx";
 import OptionList from "./OptionList/OptionsList.jsx";
-
-import styles from "./DistributorsItem.module.css";
-import { useState } from "react";
 import DistributorsModal from "../DistributorsModal/DistributorsModal.jsx";
 import Modal from "../../../Modals/Modal/Modal.jsx";
+import defLogo from "../../../../assets/images/distrImg.png";
+import styles from "./DistributorsItem.module.css";
+import { useDispatch } from "react-redux";
+import {
+  deleteSupplier,
+  updateSupplierStatus,
+} from "../../../../redux/settings/operations.js";
 
-function DistributorsItem({ item, onEdit, onDelete }) {
+function DistributorsItem({ item, onDelete, updateDistributors }) {
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imgError, setImgError] = useState(false);
+  const [status, setStatus] = useState(item.isDisabled);
+
+  useEffect(() => {
+    setStatus(item.isDisabled);
+  }, [item.isDisabled]);
 
   const openModal = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (updatedDistributor) => {
     setIsModalOpen(false);
+    if (updatedDistributor) {
+      updateDistributors(updatedDistributor);
+    }
+  };
+
+  const handleImageError = () => {
+    setImgError(true);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteSupplier(item.id));
+      onDelete(item.id);
+    } catch (err) {
+      console.log("error:", err);
+    }
+  };
+
+  const handleToggleStatus = async () => {
+    try {
+      const newStatus = !status;
+      await dispatch(
+        updateSupplierStatus({
+          supplierId: item.id,
+          isDisabled: newStatus,
+        })
+      );
+      setStatus(newStatus);
+    } catch (err) {
+      console.log("error:", err);
+    }
   };
 
   function formatPhoneNumber(phone) {
@@ -33,7 +76,11 @@ function DistributorsItem({ item, onEdit, onDelete }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.imgContainer}>
-        <img src={item.logo} alt={item.name} />
+        <img
+          src={imgError || !item.logo ? defLogo : item.logo}
+          alt="logo"
+          onError={handleImageError}
+        />
       </div>
       <div className={styles.infoContainer}>
         <div className={styles.nameContainer}>
@@ -53,22 +100,18 @@ function DistributorsItem({ item, onEdit, onDelete }) {
       </div>
       <div className={styles.btnsContainer}>
         <SwitchableBtns
-          isDisabled={item.isDisabled}
+          isDisabled={status}
           onEdit={() => openModal()}
-          onDelete={() => onDelete(item.id)}
-          onToggleDisable={() =>
-            onEdit(item.id, { isDisabled: !item.isDisabled })
-          }
+          onDelete={handleDelete}
+          onToggleDisable={handleToggleStatus}
         />
       </div>
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <Modal isOpen={isModalOpen} onClose={() => closeModal(item)}>
           <DistributorsModal
-            onClose={closeModal}
+            onClose={() => closeModal(item)}
             distributorData={item}
-            onToggleDisable={(newStatus) =>
-              onEdit(item.id, { isDisabled: newStatus })
-            }
+            onToggleDisable={handleToggleStatus}
           />
         </Modal>
       )}

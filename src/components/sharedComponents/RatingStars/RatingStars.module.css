@@ -34,7 +34,7 @@
   display: flex;
   /* position: relative; */
   width: 14.5px;
-  height: 14.5px;
+  height: 16.5px; /* змінила висоту, щоб половинчаста зірка не скакала*/
   transform: scale(1.1);
 }
 
