@@ -232,6 +232,7 @@ const dataArr = [
 export default function DistributorsInvoicesList() {
   const [data, setData] = useState(dataArr);
   const visibility = useSelector(selectVisibilitySuppliers);
+  const [sortOrder, setSortOrder] = useState("asc");
 
   const sort = (array, key, order) => {
     return array.sort((a, b) => {
@@ -260,21 +261,32 @@ export default function DistributorsInvoicesList() {
     });
   };
 
-  const handleSort = (key, order, func) => {
-    const sortedData = func([...data], key, order);
+  const handleSort = (key, func) => {
+    if (sortOrder === "asc") {
+      setSortOrder("desc");
+    } else {
+      setSortOrder("asc");
+    }
+    const sortedData = func([...data], key, sortOrder);
     setData(sortedData);
   };
 
-  const sortCarParts = (key, order) => {
+  const sortCarParts = (key) => {
+    if (sortOrder === "asc") {
+      setSortOrder("desc");
+    } else {
+      setSortOrder("asc");
+    }
+
     setData((prevValues) =>
       prevValues.map((value) => ({
         ...value,
         carParts: [...value.carParts].sort((a, b) => {
           if (Number(a[key]) < Number(b[key])) {
-            return order === "asc" ? -1 : 1;
+            return sortOrder === "asc" ? -1 : 1;
           }
           if (Number(a[key]) > Number(b[key])) {
-            return order === "asc" ? 1 : -1;
+            return sortOrder === "asc" ? 1 : -1;
           }
           return 0;
         }),
@@ -285,18 +297,15 @@ export default function DistributorsInvoicesList() {
   return (
     <div>
       <div className={css.headerWrapper}>
-        <div  className={css.legtHeaderWrapper}></div>
+        <div className={css.legtHeaderWrapper}></div>
         <div
           className={clsx(css.headerWithArrows, {
             [css.hidden]: !visibility?.date,
           })}
+          onClick={() => handleSort("deliveryDate", sortDates)}
         >
           <p className={css.header}>Дата</p>
-          <SortButtonsArrow
-            orderKey="deliveryDate"
-            func={sortDates}
-            handleFunc={handleSort}
-          />
+          <SortButtonsArrow />
           {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
@@ -316,13 +325,10 @@ export default function DistributorsInvoicesList() {
           className={clsx(css.headerWithArrows, {
             [css.hidden]: !visibility?.quantity,
           })}
+          onClick={() => handleSort("carPartsQuantity", sort)}
         >
           <p className={css.header}>Кількість</p>
-          <SortButtonsArrow
-            orderKey="carPartsQuantity"
-            func={sort}
-            handleFunc={handleSort}
-          />
+          <SortButtonsArrow />
           {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
@@ -355,13 +361,10 @@ export default function DistributorsInvoicesList() {
           className={clsx(css.headerWithArrows, {
             [css.hidden]: !visibility?.purchasePrice,
           })}
+          onClick={() => sortCarParts("price")}
         >
           <p className={css.header}>Ціна закупки</p>
-          <SortButtonsArrow
-            orderKey="price"
-            func={null}
-            handleFunc={sortCarParts}
-          />
+          <SortButtonsArrow />
           {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
@@ -381,13 +384,10 @@ export default function DistributorsInvoicesList() {
           className={clsx(css.headerWithArrows, {
             [css.hidden]: !visibility?.purchaseAmount,
           })}
+          onClick={() => sortCarParts("purchaseAmount")}
         >
           <p className={css.header}>Сума закупки</p>
-          <SortButtonsArrow
-            orderKey="purchaseAmount"
-            func={null}
-            handleFunc={sortCarParts}
-          />
+          <SortButtonsArrow />
           {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
@@ -407,13 +407,10 @@ export default function DistributorsInvoicesList() {
           className={clsx(css.headerWithArrows, {
             [css.hidden]: !visibility?.saleAmount,
           })}
+          onClick={() => sortCarParts("salesAmount")}
         >
           <p className={css.header}>Сума продажу</p>
-          <SortButtonsArrow
-            orderKey="salesAmount"
-            func={null}
-            handleFunc={sortCarParts}
-          />
+          <SortButtonsArrow />
           {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
@@ -433,13 +430,10 @@ export default function DistributorsInvoicesList() {
           className={clsx(css.headerWithArrows, {
             [css.hidden]: !visibility?.profit,
           })}
+          onClick={() => handleSort("profit", sort)}
         >
           <p className={css.header}>Прибуток</p>
-          <SortButtonsArrow
-            orderKey="profit"
-            func={sort}
-            handleFunc={handleSort}
-          />
+          <SortButtonsArrow />
           {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}
@@ -459,13 +453,10 @@ export default function DistributorsInvoicesList() {
           className={clsx(css.headerWithArrows, {
             [css.hidden]: !visibility?.percent,
           })}
+          onClick={() => handleSort("percent", sort)}
         >
           <p className={css.header}>%</p>
-          <SortButtonsArrow
-            orderKey="percent"
-            func={sort}
-            handleFunc={handleSort}
-          />
+          <SortButtonsArrow />
           {/* <div className={css.arrowWrapper}>
             <TiArrowSortedUp
               className={css.arrowIcon}

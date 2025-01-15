@@ -23,6 +23,7 @@
   line-height: normal;
   align-items: center;
   gap: 4px;
+  cursor: pointer;
 }
 
 /* .arrowWrapper {
@@ -65,8 +66,7 @@
   display: none;
 }
 
-.legtHeaderWrapper{
-/* border: 3px solid blue; */
-width: 100%;
+.legtHeaderWrapper {
+  /* border: 3px solid blue; */
+  width: 100%;
 }
-
