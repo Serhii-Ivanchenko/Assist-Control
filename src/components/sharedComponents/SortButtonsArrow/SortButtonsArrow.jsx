@@ -7,15 +7,15 @@ export default function SortButtonsArrow({ handleFunc, orderKey, func }) {
     <div className={css.arrowWrapper}>
       <TiArrowSortedUp
         className={css.arrowIcon}
-        onClick={() => {
-          handleFunc(orderKey, "asc", func);
-        }}
+        // onClick={() => {
+        //   handleFunc(orderKey, "asc", func);
+        // }}
       />
       <TiArrowSortedDown
         className={css.arrowIcon}
-        onClick={() => {
-          handleFunc(orderKey, "desc", func);
-        }}
+        // onClick={() => {
+        //   handleFunc(orderKey, "desc", func);
+        // }}
       />
     </div>
   );
