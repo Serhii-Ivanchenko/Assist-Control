@@ -10,12 +10,12 @@
 }
 
 .scroll::-webkit-scrollbar-track {
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: var(--bg-input);
 }
 
 .scroll::-webkit-scrollbar-thumb {
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: var(--main-gray);
 }
 

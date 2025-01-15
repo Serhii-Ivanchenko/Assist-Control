@@ -163,9 +163,9 @@
   color: var(--light-gray);
 }
 
-/* .actionsItem:not(:last-child) {
-  border-bottom: 1px dashed var(--input-stroke);
-} */
+.actionsItem:not(:last-child) {
+  border-bottom: 1px solid var(--input-stroke);
+}
 
 .actionsItem:hover {
   background-color: var(--bg-secondary);

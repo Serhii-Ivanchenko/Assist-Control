@@ -90,9 +90,9 @@
   cursor: pointer;
 }
 
-/* .option:not(:last-child) {
-  border-bottom: 1px dashed var(--input-stroke);
-} */
+.option:not(:last-child) {
+  border-bottom: 1px solid var(--input-stroke);
+}
 
 .option:hover {
   background-color: var(--bg-secondary);

@@ -75,9 +75,9 @@
   background-color: var(--bg-secondary);
 }
 
-/* .option:not(:last-child) {
-  border-bottom: dashed 1px var(--input-stroke);
-} */
+.option:not(:last-child) {
+  border-bottom: solid 1px var(--input-stroke);
+}
 
 .option:last-child {
   border-bottom-left-radius: 12px;
