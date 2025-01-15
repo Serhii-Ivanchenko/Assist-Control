@@ -72,7 +72,7 @@
 }
 
 .option:hover {
-  background-color: var(--bg-input);
+  background-color: var(--bg-secondary);
 }
 
 /* .option:not(:last-child) {
