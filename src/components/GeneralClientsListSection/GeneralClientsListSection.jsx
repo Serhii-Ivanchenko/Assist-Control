@@ -51,7 +51,7 @@ const data = [
     mark: 34000,
     paymmng: 12000,
     paymadm: 12000,
-    coeff: 1.7,
+    coeff: 1.6,
     ng: 700,
     income: 6613.83,
     percent: 23,
@@ -74,7 +74,7 @@ const data = [
     mark: 34000,
     paymmng: 12000,
     paymadm: 12000,
-    coeff: 1.7,
+    coeff: 1.4,
     ng: 700,
     income: 6613.83,
     percent: 23,
@@ -313,21 +313,27 @@ export default function GeneralClientsListSection() {
   //  const [isExpanded , setIsExpanded]= useState(true);
 
   const [displayedData, setDisplayedData] = useState(data);
+  const [sortOrder, setSortOrder] = useState("asc");
 
   const sort = (array, key, order) => {
     return array.sort((a, b) => {
-      if (Number(a[key]) < Number(b[key])) {
+      if (Number.parseFloat(a[key]) < Number.parseFloat(b[key])) {
         return order === "asc" ? -1 : 1;
       }
-      if (Number(a[key]) > Number(b[key])) {
+      if (Number.parseFloat(a[key]) > Number.parseFloat(b[key])) {
         return order === "asc" ? 1 : -1;
       }
       return 0;
     });
   };
 
-  const handleSort = (key, order, func) => {
-    const sortedData = func([...data], key, order);
+  const handleSort = (key) => {
+    if (sortOrder === "asc") {
+      setSortOrder("desc");
+    } else {
+      setSortOrder("asc");
+    }
+    const sortedData = sort([...data], key, sortOrder);
     setDisplayedData(sortedData);
   };
 
@@ -364,170 +370,217 @@ export default function GeneralClientsListSection() {
         </div> */}
         <div className={css.hederPhoto}></div>
         <div className={css.hederName}></div>
-        {visibility?.rating && (<div className={css.hederRight}></div>)}
+        {visibility?.rating && <div className={css.hederRight}></div>}
 
         {visibility?.appeal && (
-          <div className={css.titletext} style={{ marginRight: "6px" }}>
+          <div
+            className={css.titletext}
+            style={{ marginRight: "6px" }}
+            onClick={() => handleSort("connection")}
+          >
             Звернення
             <SortButtonsArrow
-              orderKey="connection"
-              func={sort}
-              handleFunc={handleSort}
+            // orderKey="connection"
+            // func={sort}
+            // handleFunc={handleSort}
             />
           </div>
         )}
-         {visibility?.repair &&(<div
-          className={css.titletext}
-          // style={{ width: "43px" }}
-          style={{ marginRight: "18px" }}
-        >
-          Ремонт
-          <SortButtonsArrow
-            orderKey="repair"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.averageCheck && (<div
-          className={css.titletext}
-          // style={{ width: "80px" }}
-          style={{ marginRight: "54px" }}
-        >
-          Ср. чек
-          <SortButtonsArrow
-            orderKey="middlecheck"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.paydesk && (<div
-          className={css.titletext}
-          //  style={{ width: "80px" }}
-          style={{ marginRight: "50px" }}
-        >
-          Каса
-          <SortButtonsArrow
-            orderKey="cash"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.workPayment &&(<div
-          className={css.titletext}
-          // style={{ width: "80px" }}
-          style={{ marginRight: "32px" }}
-        >
-          Робота{" "}
-          <SortButtonsArrow
-            orderKey="work"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.salaryMechanics && (<div
-          className={css.titletext}
-          // style={{ width: "51px" }}
-          style={{ width: "49px", marginRight: "24px" }}
-        >
-          ЗП Механіка
-          <SortButtonsArrow
-            orderKey="paymmechc"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.spareParts &&  (<div
-          className={css.titletext}
-          // style={{ width: "80px" }}
-          style={{ marginRight: "25px" }}
-        >
-          Запчастини
-          <SortButtonsArrow
-            orderKey="part"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.markUp && (<div
-          className={css.titletext}
-          // style={{ width: "80px" }}
-          style={{ marginRight: "20px" }}
-        >
-          Націнка
-          <SortButtonsArrow
-            orderKey="mark"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.salaryManager && (<div
-          className={css.titletext}
-          style={{ width: "79px", marginRight: "11px" }}
-        >
-          ЗП Менеджер
-          <SortButtonsArrow
-            orderKey="paymmng"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.salaryAdmin && (<div
-          className={css.titletext}
-          style={{ width: "49px", marginRight: "15px" }}
-        >
-          ЗП Адмін
-          <SortButtonsArrow
-            orderKey="paymadm"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.coefficient && (<div
-          className={css.titletext}
-          // style={{
-          //   width: "30px"
-          // }}
-          style={{ marginRight: "15px" }}
-        >
-          Коеф
-          <SortButtonsArrow
-            orderKey="coeff"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.NG && (<div
-          className={css.titletext}
-          // style={{ width: "30px"}}
-          style={{ marginRight: "24px" }}
-        >
-          НГ
-          <SortButtonsArrow orderKey="ng" func={sort} handleFunc={handleSort} />
-        </div>)}
-        {visibility?.profit && (<div
-          className={css.titletext}
-          // style={{ width: "75px"}}
-          style={{ marginRight: "9px" }}
-        >
-          Прибуток
-          <SortButtonsArrow
-            orderKey="income"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
-        {visibility?.percent && (<div
-          className={css.titletext}
-          // style={{ width: "30px" }}
-          style={{ marginRight: "18px" }}
-        >
-          %
-          <SortButtonsArrow
-            orderKey="percent"
-            func={sort}
-            handleFunc={handleSort}
-          />
-        </div>)}
+        {visibility?.repair && (
+          <div
+            className={css.titletext}
+            // style={{ width: "43px" }}
+            style={{ marginRight: "18px" }}
+            onClick={() => handleSort("repair")}
+          >
+            Ремонт
+            <SortButtonsArrow
+            // orderKey="repair"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.averageCheck && (
+          <div
+            className={css.titletext}
+            // style={{ width: "80px" }}
+            style={{ marginRight: "54px" }}
+            onClick={() => handleSort("middlecheck")}
+          >
+            Ср. чек
+            <SortButtonsArrow
+            // orderKey="middlecheck"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.paydesk && (
+          <div
+            className={css.titletext}
+            //  style={{ width: "80px" }}
+            style={{ marginRight: "50px" }}
+            onClick={() => handleSort("cash")}
+          >
+            Каса
+            <SortButtonsArrow
+            // orderKey="cash"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.workPayment && (
+          <div
+            className={css.titletext}
+            // style={{ width: "80px" }}
+            style={{ marginRight: "32px" }}
+            onClick={() => handleSort("work")}
+          >
+            Робота{" "}
+            <SortButtonsArrow
+            // orderKey="work"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.salaryMechanics && (
+          <div
+            className={css.titletext}
+            // style={{ width: "51px" }}
+            style={{ width: "49px", marginRight: "24px" }}
+            onClick={() => handleSort("paymmechc")}
+          >
+            ЗП Механіка
+            <SortButtonsArrow
+            // orderKey="paymmechc"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.spareParts && (
+          <div
+            className={css.titletext}
+            // style={{ width: "80px" }}
+            style={{ marginRight: "25px" }}
+            onClick={() => handleSort("parts")}
+          >
+            Запчастини
+            <SortButtonsArrow
+            // orderKey="part"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.markUp && (
+          <div
+            className={css.titletext}
+            // style={{ width: "80px" }}
+            style={{ marginRight: "20px" }}
+            onClick={() => handleSort("mark")}
+          >
+            Націнка
+            <SortButtonsArrow
+            // orderKey="mark"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.salaryManager && (
+          <div
+            className={css.titletext}
+            style={{ width: "79px", marginRight: "11px" }}
+            onClick={() => handleSort("paymmng")}
+          >
+            ЗП Менеджер
+            <SortButtonsArrow
+            // orderKey="paymmng"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.salaryAdmin && (
+          <div
+            className={css.titletext}
+            style={{ width: "49px", marginRight: "15px" }}
+            onClick={() => handleSort("paymadm")}
+          >
+            ЗП Адмін
+            <SortButtonsArrow
+            // orderKey="paymadm"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.coefficient && (
+          <div
+            className={css.titletext}
+            // style={{
+            //   width: "30px"
+            // }}
+            style={{ marginRight: "15px" }}
+            onClick={() => handleSort("coeff")}
+          >
+            Коеф
+            <SortButtonsArrow
+            // orderKey="coeff"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.NG && (
+          <div
+            className={css.titletext}
+            // style={{ width: "30px"}}
+            style={{ marginRight: "24px" }}
+            onClick={() => handleSort("ng")}
+          >
+            НГ
+            <SortButtonsArrow
+            // orderKey="ng"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.profit && (
+          <div
+            className={css.titletext}
+            // style={{ width: "75px"}}
+            style={{ marginRight: "9px" }}
+            onClick={() => handleSort("income")}
+          >
+            Прибуток
+            <SortButtonsArrow
+            // orderKey="income"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
+        {visibility?.percent && (
+          <div
+            className={css.titletext}
+            // style={{ width: "30px" }}
+            style={{ marginRight: "18px" }}
+            onClick={() => handleSort("percent")}
+          >
+            %
+            <SortButtonsArrow
+            // orderKey="percent"
+            // func={sort}
+            // handleFunc={handleSort}
+            />
+          </div>
+        )}
       </div>
 
       <div className={css.containercolumn}>
@@ -586,15 +639,16 @@ export default function GeneralClientsListSection() {
                   >
                     {item.name}
                   </div>
-                  
-                    <div className={css.ratingWrapper}>
-                      {visibility?.rating && (<RatingStars
+
+                  <div className={css.ratingWrapper}>
+                    {visibility?.rating && (
+                      <RatingStars
                         rating={item.raiting}
                         ratingGap={css.ratingGap}
                         sizestar="13px"
-                      />)}
-                    </div>
-                 
+                      />
+                    )}
+                  </div>
 
                   {visibility?.appeal && (
                     <div className={css.connection}>
@@ -604,55 +658,81 @@ export default function GeneralClientsListSection() {
                       <div className={css.chattext}>{item.connection}</div>
                     </div>
                   )}
-                   {visibility?.repair &&(<div className={css.repair}>
-                    <div className={css.wrench}>
-                      <BsWrench className={css.icon} size={13} />
+                  {visibility?.repair && (
+                    <div className={css.repair}>
+                      <div className={css.wrench}>
+                        <BsWrench className={css.icon} size={13} />
+                      </div>
+                      <div className={css.reptext}> {item.repair}</div>
                     </div>
-                    <div className={css.reptext}> {item.repair}</div>
-                  </div>)}
-                  {visibility?.averageCheck && (<div className={css.smalltext}>
-                    {item.repair === 1
-                      ? "----------"
-                      : `${formatNumber(item.middlecheck)} грн.`}
-                  </div>)}
-                  {visibility?.paydesk &&(<div className={css.smalltext}>
-                    {formatNumber(item.cash)} грн.
-                  </div>)}
-                  {visibility?.workPayment && (<div className={css.smalltext}>
-                    {formatNumber(item.work)} грн.
-                  </div>)}
-                  {visibility?.salaryMechanics && (<div className={css.minttext}>
-                    {formatNumber(item.paymmechc)}
-                  </div>)}
-                  {visibility?.spareParts &&  (<div className={css.smalltext}>
-                    {formatNumber(item.parts)} грн.
-                  </div>)}
-                  {visibility?.markUp && (<div className={css.smalltext}>
-                    {formatNumber(item.mark)} грн.
-                  </div>)}
-                  {visibility?.salaryManager && (<div className={css.minttext}>
-                    {formatNumber(item.paymmng)}
-                  </div>)}
-                  {visibility?.salaryAdmin && (<div className={css.minttext}>
-                    {formatNumber(item.paymadm)}
-                  </div>)}
-                  {visibility?.coefficient && (<div className={css.smalltext} style={{ width: "30px" }}>
-                    {item.coeff}
-                  </div>)}
-                  {visibility?.NG && (<div className={css.graytext} style={{ width: "30px" }}>
-                    {item.ng}
-                  </div>)}
-                  {visibility?.profit && (<div className={css.totalAmount}>
-                    ₴{" "}
-                    {item.income.toLocaleString("en-US", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                  </div>)}
-                  {visibility?.percent && (<div className={css.graytext} style={{ width: "30px" }}>
-                    {" "}
-                    {item.percent}{" "}
-                  </div>)}
+                  )}
+                  {visibility?.averageCheck && (
+                    <div className={css.smalltext}>
+                      {item.repair === 1
+                        ? "----------"
+                        : `${formatNumber(item.middlecheck)} грн.`}
+                    </div>
+                  )}
+                  {visibility?.paydesk && (
+                    <div className={css.smalltext}>
+                      {formatNumber(item.cash)} грн.
+                    </div>
+                  )}
+                  {visibility?.workPayment && (
+                    <div className={css.smalltext}>
+                      {formatNumber(item.work)} грн.
+                    </div>
+                  )}
+                  {visibility?.salaryMechanics && (
+                    <div className={css.minttext}>
+                      {formatNumber(item.paymmechc)}
+                    </div>
+                  )}
+                  {visibility?.spareParts && (
+                    <div className={css.smalltext}>
+                      {formatNumber(item.parts)} грн.
+                    </div>
+                  )}
+                  {visibility?.markUp && (
+                    <div className={css.smalltext}>
+                      {formatNumber(item.mark)} грн.
+                    </div>
+                  )}
+                  {visibility?.salaryManager && (
+                    <div className={css.minttext}>
+                      {formatNumber(item.paymmng)}
+                    </div>
+                  )}
+                  {visibility?.salaryAdmin && (
+                    <div className={css.minttext}>
+                      {formatNumber(item.paymadm)}
+                    </div>
+                  )}
+                  {visibility?.coefficient && (
+                    <div className={css.smalltext} style={{ width: "30px" }}>
+                      {item.coeff}
+                    </div>
+                  )}
+                  {visibility?.NG && (
+                    <div className={css.graytext} style={{ width: "30px" }}>
+                      {item.ng}
+                    </div>
+                  )}
+                  {visibility?.profit && (
+                    <div className={css.totalAmount}>
+                      ₴{" "}
+                      {item.income.toLocaleString("en-US", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </div>
+                  )}
+                  {visibility?.percent && (
+                    <div className={css.graytext} style={{ width: "30px" }}>
+                      {" "}
+                      {item.percent}{" "}
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -712,83 +792,113 @@ export default function GeneralClientsListSection() {
                             >
                               {subItem.name}
                             </div>
-                           {visibility?.rating && ( <RatingStars
-                              // style={{ width: "75px" }}
-                              rating={subItem.raiting}
-                              ratingGap={css.ratingGap}
-                              sizestar={sizestar}
-                            />)}
+                            {visibility?.rating && (
+                              <RatingStars
+                                // style={{ width: "75px" }}
+                                rating={subItem.raiting}
+                                ratingGap={css.ratingGap}
+                                sizestar={sizestar}
+                              />
+                            )}
 
-                            {visibility?.appeal && (<div className={css.connection}>
-                              <div className={css.chat}>
-                                <BsChatText className={css.icon} size={13} />
+                            {visibility?.appeal && (
+                              <div className={css.connection}>
+                                <div className={css.chat}>
+                                  <BsChatText className={css.icon} size={13} />
+                                </div>
+                                <div className={css.chattext}>
+                                  {" "}
+                                  {subItem.connection}{" "}
+                                </div>
                               </div>
-                              <div className={css.chattext}>
+                            )}
+                            {visibility?.repair && (
+                              <div className={css.repair}>
+                                <div className={css.wrench}>
+                                  <BsWrench className={css.icon} size={13} />
+                                </div>
+                                <div className={css.reptext}>
+                                  {" "}
+                                  {subItem.repair}
+                                </div>
+                              </div>
+                            )}
+                            {visibility?.averageCheck && (
+                              <div className={css.smalltext}>
+                                {subItem.repair === 1
+                                  ? "----------"
+                                  : `${formatNumber(subItem.middlecheck)} грн.`}
+                              </div>
+                            )}
+                            {visibility?.paydesk && (
+                              <div className={css.smalltext}>
+                                {formatNumber(subItem.cash)} грн.
+                              </div>
+                            )}
+                            {visibility?.workPayment && (
+                              <div className={css.smalltext}>
+                                {formatNumber(subItem.work)} грн.
+                              </div>
+                            )}
+                            {visibility?.salaryMechanics && (
+                              <div className={css.minttext}>
+                                {formatNumber(subItem.paymmechc)}
+                              </div>
+                            )}
+                            {visibility?.spareParts && (
+                              <div className={css.smalltext}>
+                                {formatNumber(subItem.parts)} грн.
+                              </div>
+                            )}
+                            {visibility?.markUp && (
+                              <div className={css.smalltext}>
+                                {formatNumber(subItem.mark)} грн.
+                              </div>
+                            )}
+                            {visibility?.salaryManager && (
+                              <div className={css.minttext}>
+                                {formatNumber(subItem.paymmng)}
+                              </div>
+                            )}
+                            {visibility?.salaryAdmin && (
+                              <div className={css.minttext}>
+                                {formatNumber(subItem.paymadm)}
+                              </div>
+                            )}
+                            {visibility?.coefficient && (
+                              <div
+                                className={css.smalltext}
+                                style={{ width: "30px" }}
+                              >
+                                {subItem.coeff}
+                              </div>
+                            )}
+                            {visibility?.NG && (
+                              <div
+                                className={css.graytext}
+                                style={{ width: "30px" }}
+                              >
                                 {" "}
-                                {subItem.connection}{" "}
+                                {subItem.ng}
                               </div>
-                            </div>)}
-                            {visibility?.repair && (<div className={css.repair}>
-                              <div className={css.wrench}>
-                                <BsWrench className={css.icon} size={13} />
+                            )}
+                            {visibility?.profit && (
+                              <div className={css.totalAmount}>
+                                ₴{" "}
+                                {subItem.income.toLocaleString("en-US", {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                })}
                               </div>
-                              <div className={css.reptext}>
-                                {" "}
-                                {subItem.repair}
+                            )}
+                            {visibility?.percent && (
+                              <div
+                                className={css.graytext}
+                                style={{ width: "30px" }}
+                              >
+                                {subItem.percent}
                               </div>
-                            </div>)}
-                            {visibility?.averageCheck && (<div className={css.smalltext}>
-                              {subItem.repair === 1
-                                ? "----------"
-                                : `${formatNumber(subItem.middlecheck)} грн.`}
-                            </div>)}
-                            {visibility?.paydesk && (<div className={css.smalltext}>
-                              {formatNumber(subItem.cash)} грн.
-                            </div>)}
-                            {visibility?.workPayment &&  (<div className={css.smalltext}>
-                              {formatNumber(subItem.work)} грн.
-                            </div>)}
-                            {visibility?.salaryMechanics && (<div className={css.minttext}>
-                              {formatNumber(subItem.paymmechc)}
-                            </div>)}
-                            {visibility?.spareParts &&(<div className={css.smalltext}>
-                              {formatNumber(subItem.parts)} грн.
-                            </div>)}
-                            {visibility?.markUp && (<div className={css.smalltext}>
-                              {formatNumber(subItem.mark)} грн.
-                            </div>)}
-                            {visibility?.salaryManager && (<div className={css.minttext}>
-                              {formatNumber(subItem.paymmng)}
-                            </div>)}
-                            {visibility?.salaryAdmin && (<div className={css.minttext}>
-                              {formatNumber(subItem.paymadm)}
-                            </div>)}
-                            {visibility?.coefficient &&  (<div
-                              className={css.smalltext}
-                              style={{ width: "30px" }}
-                            >
-                              {subItem.coeff}
-                            </div>)}
-                            {visibility?.NG && (<div
-                              className={css.graytext}
-                              style={{ width: "30px" }}
-                            >
-                              {" "}
-                              {subItem.ng}
-                            </div>)}
-                            {visibility?.profit &&(<div className={css.totalAmount}>
-                              ₴{" "}
-                              {subItem.income.toLocaleString("en-US", {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2,
-                              })}
-                            </div>)}
-                            {visibility?.percent &&  (<div
-                              className={css.graytext}
-                              style={{ width: "30px" }}
-                            >
-                              {subItem.percent}
-                            </div>)}
+                            )}
                           </div>
                         </div>
                       ))}
