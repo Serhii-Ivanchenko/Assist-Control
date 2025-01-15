@@ -303,6 +303,11 @@
   gap: 10px;
 }
 
+.nextServiceContainer>p {
+  line-height: 1.1875em;
+  font-size: 16px;
+}
+
 .nextServiceInput {
   background-color: transparent !important;
   border: none;
