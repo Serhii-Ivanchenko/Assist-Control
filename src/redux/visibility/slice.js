@@ -36,7 +36,6 @@ const visibilitySlice = createSlice({
       photo: true,
       totalPrice: true,
       phoneNumber: true,
-      status: true,
       info: true,
     },
     visibilityRecords: {
@@ -52,7 +51,6 @@ const visibilitySlice = createSlice({
       prePayment: true,
       paymentBtn: true,
       phoneNumber: true,
-      status: true,
       info: true,
       createBtn: true,
       archive: true,

@@ -17,9 +17,9 @@ export default function NavigationBottom() {
       })}
     >
       <ul className={styles.bottomNavContainer}>
-        <li className={styles.navItem}>
+      <li className={styles.navItem}>
           <NavLink
-            to="/bonuses"
+            to="/proficiency"
             className={({ isActive }) =>
               clsx(styles.navLink, {
                 [styles.active]: isActive,
@@ -29,7 +29,7 @@ export default function NavigationBottom() {
             }
           >
             <div className={styles.iconContainer}>
-              <BsGift className={styles.iconBonus} />
+              <PiChartLineUp className={styles.iconChart} />
             </div>
             <span
               className={clsx(styles.linkText, {
@@ -37,7 +37,7 @@ export default function NavigationBottom() {
                 [styles.visible]: !chatIsOpen,
               })}
             >
-              Мій бонус
+              Маркетинг
             </span>
           </NavLink>
         </li>
@@ -67,7 +67,7 @@ export default function NavigationBottom() {
         </li>
         <li className={styles.navItem}>
           <NavLink
-            to="/proficiency"
+            to="/bonuses"
             className={({ isActive }) =>
               clsx(styles.navLink, {
                 [styles.active]: isActive,
@@ -77,7 +77,7 @@ export default function NavigationBottom() {
             }
           >
             <div className={styles.iconContainer}>
-              <PiChartLineUp className={styles.iconChart} />
+              <BsGift className={styles.iconBonus} />
             </div>
             <span
               className={clsx(styles.linkText, {
@@ -85,7 +85,7 @@ export default function NavigationBottom() {
                 [styles.visible]: !chatIsOpen,
               })}
             >
-              Кваліфікація
+              Мій бонус
             </span>
           </NavLink>
         </li>
