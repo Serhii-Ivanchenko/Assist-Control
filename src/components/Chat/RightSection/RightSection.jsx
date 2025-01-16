@@ -33,14 +33,13 @@ import SearchTags from "./ChatTags/SearchTags/SearchTags.jsx";
 import { tags } from "../RightSection/ChatTags/tags.js";
 import clsx from "clsx";
 
-
 const data = {
   id: 1,
   name: "Олександр Мельник",
   avatar: ava,
   phonenum: "0733291217",
   status: "Новий",
-  phonenums: ["0675432109", "0502345678"],
+  phonenums: ["0675432109", "0502345678", "0733291217"],
 };
 
 export default function RightSection() {
@@ -185,12 +184,11 @@ export default function RightSection() {
     setIsCategory(false); // Закрываем справочник
   };
 
-const actions = [
+  const actions = [
     { id: 1, action: "add", fullname: "Додати шаблон" },
-    { id: 2, action: "edit",fullname: "Змінити шаблон" },
-    { id: 3, action: "delete",fullname: "Видалити шаблон" },
-    { id: 4, action: "",fullname: "Закрити" },
-   
+    { id: 2, action: "edit", fullname: "Змінити шаблон" },
+    { id: 3, action: "delete", fullname: "Видалити шаблон" },
+    { id: 4, action: "", fullname: "Закрити" },
   ];
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -206,37 +204,52 @@ const actions = [
 
   const handleActionChange = (value) => {
     setActionType(value);
-   setModalOpen(false);
+    setModalOpen(false);
   };
-
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const makeCall = (phone) => {
-  window.location.href = `tel:${phone}`;
+    window.location.href = `tel:${phone}`;
   };
-  
 
   const handlePhoneClick = () => {
-    if (!data.phonenums.includes(data.phonenum)) {
-      data.phonenums.push(data.phonenum);
-    };
-    if (data.phonenums.length > 1) {
-      setIsModalOpen(true); 
+    // if (!data.phonenums.includes(data.phonenum)) {
+    //   data.phonenums.push(data.phonenum);
+    // };
+    if (data.phonenums.length >= 1) {
+      setIsModalOpen(true);
     } else {
-      setIsModalOpen(false); 
+      setIsModalOpen(false);
     }
   };
 
   const staffs = [
-    { id: 1, name: "Катерина Матяш", email: "kate@avtoatmosfera.com", avatar: ava1, isActive: true, },
-    { id: 2, name: "Олена Ким", email: "kim@avtoatmosfera.com", avatar: ava1, isActive: true, },
-    { id: 3, name: "Катерина Котасонова", email: "kate.k@avtoatmosfera.com", avatar: ava1, isActive: false, },
+    {
+      id: 1,
+      name: "Катерина Матяш",
+      email: "kate@avtoatmosfera.com",
+      avatar: ava1,
+      isActive: true,
+    },
+    {
+      id: 2,
+      name: "Олена Ким",
+      email: "kim@avtoatmosfera.com",
+      avatar: ava1,
+      isActive: true,
+    },
+    {
+      id: 3,
+      name: "Катерина Котасонова",
+      email: "kate.k@avtoatmosfera.com",
+      avatar: ava1,
+      isActive: false,
+    },
   ];
 
   const [isModalStaff, setIsModalStaff] = useState(false);
   const [isModalStaffPlus, setIsModalStaffPlus] = useState(false);
- 
 
   const [isModalNote, setIsModalNote] = useState(false);
   const [notificationSent, setNotificationSent] = useState(false);
@@ -265,22 +278,34 @@ const actions = [
           </div>
         </div>
         <div className={css.btnbox}>
-          <button className={css.btnaction} onClick={ handlePhoneClick }>
+          <button className={css.btnaction} onClick={handlePhoneClick}>
             <BsTelephone className={css.iconaction} />
           </button>
 
           <button
-            className={css.btnaction} onClick={() => { setIsModalNote(true); }}>
+            className={css.btnaction}
+            onClick={() => {
+              setIsModalNote(true);
+            }}
+          >
             <BsAlarm className={css.iconaction} />
           </button>
 
-
-          <button className={css.btnaction} onClick={() => { setIsModalStaff(true); }}>
+          <button
+            className={css.btnaction}
+            onClick={() => {
+              setIsModalStaff(true);
+            }}
+          >
             <RiUserSharedFill className={css.iconaction} />
           </button>
 
-
-          <button className={css.btnaction}  onClick={() => { setIsModalStaffPlus(true); }}>
+          <button
+            className={css.btnaction}
+            onClick={() => {
+              setIsModalStaffPlus(true);
+            }}
+          >
             <RiUserAddFill className={css.iconaction} />
           </button>
 
@@ -324,82 +349,91 @@ const actions = [
             </Modal>
           )}
 
- {isModalStaff && (
+          {isModalStaff && (
             <div
               className={css.modalOverlay} // Задний фон модального окна
               onClick={() => setIsModalStaff(false)} // Закрытие при клике на фон
             >
-              <div className={css.modalstaff}
+              <div
+                className={css.modalstaffplus}
                 onClick={(e) => e.stopPropagation()}
               >
                 {staffs.map((item) => (
-                  <div  key={item.id}  className={css.modalitemstaff}
-                    onClick={() => {  console.log(item.name);
-                      setIsModalStaff(false);
-                    }}>
+                  <div
+                    key={item.id}
+                    className={css.modalitemstaff}
+                    onClick={() => {
+                      console.log(item.name);
+                      setIsModalStaffPlus(false);
+                    }}
+                  >
                     <div className={css.iconWrapper}>
                       <img
-            className={css.photoavatar}
-            src={item.avatar || ava1}
-            alt={item.name}
+                        className={css.manageravatar}
+                        src={item.avatar || ava1}
+                        alt={item.name}
                       />
-                      <span className={css.notificationBubble}
-                      style={ {backgroundColor:  item.isActive ? "var(--green)": "var(--input-text)" }}
-                      >
-                      </span>
-          </div>
+                      <span
+                        className={css.notificationBubble}
+                        style={{
+                          backgroundColor: item.isActive
+                            ? "var(--green)"
+                            : "var(--input-text)",
+                        }}
+                      ></span>
+                    </div>
                     <div className={css.modalstaffbox}>
-             <div className={css.staffname}>{item.name}</div>         
-             <div className={css.staffemail}>{item.email}</div>   
-</div>
-    
+                      <div className={css.staffname}>{item.name}</div>
+                      <div className={css.staffemail}>{item.email}</div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-
- {isModalStaffPlus && (
+          {isModalStaffPlus && (
             <div
               className={css.modalOverlay} // Задний фон модального окна
               onClick={() => setIsModalStaffPlus(false)} // Закрытие при клике на фон
             >
-              <div className={css.modalstaffplus}
+              <div
+                className={css.modalstaffplus}
                 onClick={(e) => e.stopPropagation()}
               >
                 {staffs.map((item) => (
-                  <div  key={item.id}  className={css.modalitemstaff}
-                    onClick={() => {  console.log(item.name);
+                  <div
+                    key={item.id}
+                    className={css.modalitemstaff}
+                    onClick={() => {
+                      console.log(item.name);
                       setIsModalStaffPlus(false);
-                    }}>
+                    }}
+                  >
                     <div className={css.iconWrapper}>
                       <img
-            className={css.photoavatar}
-            src={item.avatar || ava1}
-            alt={item.name}
+                        className={css.manageravatar}
+                        src={item.avatar || ava1}
+                        alt={item.name}
                       />
-                      <span className={css.notificationBubble}
-                      style={ {backgroundColor:  item.isActive ? "var(--green)": "var(--input-text)" }}
-                      >
-                      </span>
-          </div>
+                      <span
+                        className={css.notificationBubble}
+                        style={{
+                          backgroundColor: item.isActive
+                            ? "var(--green)"
+                            : "var(--input-text)",
+                        }}
+                      ></span>
+                    </div>
                     <div className={css.modalstaffbox}>
-             <div className={css.staffname}>{item.name}</div>         
-             <div className={css.staffemail}>{item.email}</div>   
-</div>
-    
+                      <div className={css.staffname}>{item.name}</div>
+                      <div className={css.staffemail}>{item.email}</div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           )}
-
-
-
-
-
-
         </div>
       </div>
 
@@ -643,52 +677,61 @@ const actions = [
                   >
                     <button
                       className={css.btnicon}
-                      onClick={() => {handleOpenModal("") }} >
+                      onClick={() => {
+                        handleOpenModal("");
+                      }}
+                    >
                       <BsThreeDots className={css.icon} />
                     </button>
                   </div>
                 )}
 
                 {expandedRows.includes("panel3") && isCategory && (
+                  <div
+                    className={css.modalOverlay} // Задний фон модального окна
+                    onClick={() => setIsCategory(false)} // Закрытие при клике на фон
+                  >
                     <div
-              className={css.modalOverlay} // Задний фон модального окна
-              onClick={() => setIsCategory(false)} // Закрытие при клике на фон
-            >
-                  <div className={css.categorySelector} onClick={(e) => e.stopPropagation()}>
-                    {categories.map((category) => (
-                      <div
-                        className={clsx(css.category, {
-                          [css.categoryActive]:
-                            category.categ === activeCategory.categ,
-                        })}
-                        key={category.categ}
-                        onClick={() => handleCategorySelect(category)}
-                      >
-                        {category.fullname}
-                      </div>
-                    ))}
+                      className={css.categorySelector}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {categories.map((category) => (
+                        <div
+                          className={clsx(css.category, {
+                            [css.categoryActive]:
+                              category.categ === activeCategory.categ,
+                          })}
+                          key={category.categ}
+                          onClick={() => handleCategorySelect(category)}
+                        >
+                          {category.fullname}
+                        </div>
+                      ))}
                     </div>
-                    </div>
+                  </div>
                 )}
 
                 {expandedRows.includes("panel3") && modalOpen && (
-                   <div
-              className={css.modalOverlay} // Задний фон модального окна
-              onClick={() => setModalOpen(false)} // Закрытие при клике на фон
-            >
-                  <div className={css.modal}  onClick={(e) => e.stopPropagation()}>
-                    {actions.map((item) => (
-                      <div className={css.modalitem}
-                        key={item.id}
-                        onClick={() => handleActionChange(item.action)}>
-                        {item.fullname}
-                      </div>
-                    ))}
+                  <div
+                    className={css.modalOverlay} // Задний фон модального окна
+                    onClick={() => setModalOpen(false)} // Закрытие при клике на фон
+                  >
+                    <div
+                      className={css.modal}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {actions.map((item) => (
+                        <div
+                          className={css.modalitem}
+                          key={item.id}
+                          onClick={() => handleActionChange(item.action)}
+                        >
+                          {item.fullname}
+                        </div>
+                      ))}
                     </div>
-                    </div>
+                  </div>
                 )}
-
-               
               </div>
 
               {expandedRows.includes("panel3") && (
@@ -772,8 +815,7 @@ const actions = [
               </div>
 
               {expandedRows.includes("panel4") && (
-                <AccordionDetails
-                >
+                <AccordionDetails>
                   <ChatNotes
                     ref={chatNotesRef}
                     isEditable={isEditing.includes("panel4")}
@@ -848,8 +890,7 @@ const actions = [
                 )}
               </div>
               {expandedRows.includes("panel5") && (
-                <AccordionDetails
-                >
+                <AccordionDetails>
                   <ChatHistoryChange filter={filters[1]} />
                 </AccordionDetails>
               )}
@@ -899,8 +940,7 @@ const actions = [
                 />
               </div>
               {expandedRows.includes("panel6") && (
-                <AccordionDetails
-                >
+                <AccordionDetails>
                   <ChatFiles />
                 </AccordionDetails>
               )}

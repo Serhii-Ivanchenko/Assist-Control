@@ -66,7 +66,7 @@ function ChatSample({ filter, selectedCateg, action, onActionChange }) {
   const SelectPrompt = useSelector(selectSelectedPrompt);
   const dispatch = useDispatch();
 
-  console.log(SelectPrompt);
+  console.log("SelectPrompt", SelectPrompt);
 
   // const filteredData = datas.filter(item =>
   //   (selectedCateg === undefined || item.categ === selectedCateg) && // Фильтрация по категории
@@ -86,7 +86,6 @@ function ChatSample({ filter, selectedCateg, action, onActionChange }) {
   );
   const [tempText, setTempText] = useState("");
   const [backupData, setBackupData] = useState([]);
-
 
   useEffect(() => {
     const filteredData = datas.filter(
