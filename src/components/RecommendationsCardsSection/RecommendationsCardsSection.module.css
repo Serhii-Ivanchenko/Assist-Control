@@ -2,6 +2,43 @@
     display: flex;
     width: 100%;
     height: 633px;
-    border: 1px solid var(--light-gray);
-    border-radius: 12px;
+    gap: 14px;
+    overflow-x: auto;
+ 
 }
+
+.columnTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 9px;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 633px;
+    gap: 14px;
+    overflow-x: auto;
+}
+
+.columnTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 9px;
+}
+
+.wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.wrapper::-webkit-scrollbar-track {
+    background: #23252C;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+    background-color: #515562;
+    border-radius: 4px;
+}
+
