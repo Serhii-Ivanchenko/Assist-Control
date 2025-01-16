@@ -25,15 +25,19 @@ import uk from "date-fns/locale/uk";
 import ScheduleTable from "../../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 import AnimatedContent from "./AnimatedContent.jsx";
 import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent.jsx";
+import { useDispatch } from "react-redux";
+import { createEmployee } from "../../../redux/settings/operations.js";
 
 registerLocale("uk", uk);
 
-export default function AddStaffMemberModal({ onClose }) {
+export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [isDateOpen, setDateOpen] = useState(false);
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
   const [photo, setPhoto] = useState(avatar);
+  const [employee, setEmployee] = useState(employeeInfo || {});
   const buttonRefs = useRef([]);
   const fileInputRef = useRef(null);
+  const dispatch = useDispatch();
 
   const handleDateButtonClick = () => setDateOpen((prev) => !prev);
 
@@ -75,21 +79,22 @@ export default function AddStaffMemberModal({ onClose }) {
     ).join("");
   };
 
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  // const [login, setLogin] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [phone, setPhone] = useState("");
 
-  const updatePhone = (e) => {
-    setPhone(e.target.value);
+  // const updatePhone = (e) => {
+  //   setPhone(e.target.value);
+  // };
+
+  const generateLogin = (values, setFieldValue) => {
+    setFieldValue("login", values.phone);
+    setFieldValue("password", generateRandomStringPassword(12));
   };
 
-  const generateLogin = () => {
-    setLogin(phone);
-    setPassword(generateRandomStringPassword(12));
-  };
-
-  const deleteLoginAndPassword = () => {
-    setLogin(""), setPassword("");
+  const deleteLoginAndPassword = (setFieldValue) => {
+    setFieldValue("login", "");
+    setFieldValue("password", "");
   };
 
   useEffect(() => {
@@ -108,37 +113,47 @@ export default function AddStaffMemberModal({ onClose }) {
   }, []);
 
   const initialValues = {
-    name: "",
-    phone: "",
-    address: "",
+    name: employee.name || "",
+    phone: employee.phone || "",
+    address: employee.address || "",
     birthday: new Date(),
-    position: "",
-    role: "",
-    email: "",
-    passport: "",
-    ID: "",
-    diploma: "",
-    laborBook: "",
-    CV: "",
-    contract: "",
-    employment: "",
-    agreement: "",
-    period: "month",
-    rate: "",
-    minRate: "",
-    amount: "",
-    sparesAmount: "",
-    sparesPrice: "",
-    profit: "",
-    schedule: "false",
+    // position: "",
+    role: employee.role || "",
+    email: employee.email || "",
+    login: employee.login || "",
+    password: employee.password || "",
+    period: "2023-2024",
+    rate: employee.rate || "",
+    minRate: employee.minRate || "",
+    amount: employee.amount || "",
+    sparesAmount: employee.sparesAmount || "",
+    sparesPrice: employee.sparesPrice || "",
+    // profit: "",
+    schedule: { monday: "9:00-18:00" },
+    files: {
+      passport: "",
+      itn: "",
+      diploma: "",
+      laborBook: "",
+      CV: "",
+      contract: "",
+      employment: "",
+      agreement: "",
+      logo: "",
+    },
   };
 
   const handleSubmit = (values, actions) => {
     const dateOnly = values.birthday
       ? values.birthday.toLocaleDateString("en-CA")
       : null;
-    const submittedValues = { ...values, birthday: dateOnly };
-    console.log(submittedValues);
+    const employeeData = {
+      ...values,
+      birthday: dateOnly,
+    };
+    const files = values.files;
+    dispatch(createEmployee({ employeeData, files }));
+    console.log(employeeData);
     actions.resetForm();
   };
 
@@ -167,8 +182,8 @@ export default function AddStaffMemberModal({ onClose }) {
                       name="phone"
                       className={`${css.input} ${css.inputPhone}`}
                       placeholder="+380733291212"
-                      value={phone}
-                      onChange={updatePhone}
+                      // value={phone}
+                      // onChange={updatePhone}
                     />
                     <button
                       type="button"
@@ -282,7 +297,7 @@ export default function AddStaffMemberModal({ onClose }) {
                     <Field
                       name="login"
                       className={css.inputLP}
-                      value={login}
+                      value={values.login}
                       readOnly
                     />
                     <BsFillPersonFill size={16} className={css.lpIcon} />
@@ -292,7 +307,7 @@ export default function AddStaffMemberModal({ onClose }) {
                     <Field
                       name="password"
                       className={css.inputLP}
-                      value={password}
+                      value={values.password}
                       readOnly
                     />
                     <BsKeyFill size={16} className={css.lpIcon} />
@@ -306,14 +321,14 @@ export default function AddStaffMemberModal({ onClose }) {
                     <button
                       type="button"
                       className={css.create}
-                      onClick={generateLogin}
+                      onClick={() => generateLogin(values, setFieldValue)}
                     >
                       Згенерувати
                     </button>
                     <button
                       type="button"
                       className={css.delete}
-                      onClick={deleteLoginAndPassword}
+                      onClick={() => deleteLoginAndPassword(setFieldValue)}
                     >
                       {" "}
                       <BsTrash size={18} />{" "}

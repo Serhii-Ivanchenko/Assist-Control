@@ -17,6 +17,7 @@
   height: 18px;
 }
 
+.btnTrash,
 .disabled {
   fill: var(--red);
 }

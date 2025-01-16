@@ -7,3 +7,5 @@ export const selectSchedule = (state) => state.settings.schedule;
 export const selectPosts = (state) => state.settings.posts;
 
 export const selectPrices = (state) => state.settings.prices;
+
+export const selectEmployees = (state) => state.settings.employees.data;
