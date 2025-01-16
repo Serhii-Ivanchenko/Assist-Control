@@ -32,13 +32,15 @@
   color: var(--light-gray);
   font-size: 16px;
   font-weight: 600;
+  line-height: 1.1875em;
   text-decoration: none;
-  transition: font-size 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
-    text-decoration 0.3s ease;
+  transition: text-decoration 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+    transform 0.3s ease;
 }
 
-.clientName:hover {
-  font-size: 18px;
+.phonePopup a:hover {
+  transform: scale(1.03);
+  text-decoration: underline;
 }
 
 .settingsList {
@@ -46,7 +48,7 @@
   width: 220px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  /* gap: 4px; */
   border: none;
   border-radius: 12px;
   background: var(--bg-input);
@@ -57,7 +59,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  border-bottom: 1px solid var(--main-gray);
+  /* border-bottom: 1px solid var(--main-gray); */
   padding: 4px 0;
   cursor: pointer;
 }
@@ -69,6 +71,10 @@
 .settingsList li:last-child {
   border: none;
   border-radius: 0 0 12px 12px;
+}
+
+.settingsList li:not(:last-child) {
+  border-bottom: solid 1px var(--input-stroke);
 }
 
 .settingsList li:hover {
