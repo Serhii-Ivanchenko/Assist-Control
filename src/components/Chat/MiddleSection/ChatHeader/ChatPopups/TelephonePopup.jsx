@@ -11,7 +11,7 @@ function TelephonePopup({ onClose }) {
           href="tel:+380123456789"
           onClick={() => onClose()}
         >
-          <TbPhoneCalling />
+          <TbPhoneCalling className={styles.phoneIcon} />
           Олександр Мельник
         </a>
       </div>
