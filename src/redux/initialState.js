@@ -40,7 +40,7 @@ export const initialState = {
 
   cars: {
     car: {
-      id: null,
+      car_id: null,
       status: null,
       photo: null,
       plate: null,

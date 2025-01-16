@@ -26,7 +26,7 @@ export default function DayCarsItem({ car, isModal }) {
   const [isMonitoring, setisMonitoring] = useState("main");
 
   const {
-    id,
+    car_id,
     auto,
     photo_url: photoUrl,
     vin,
@@ -124,7 +124,7 @@ export default function DayCarsItem({ car, isModal }) {
           {visibility?.status && <StatusBtn car={car} />}
           {visibility?.info && (
             <CarDetailButton
-              carId={id}
+              carId={car_id}
               location={isMonitoring}
               carName={car.auto}
             />

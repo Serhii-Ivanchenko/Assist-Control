@@ -181,7 +181,7 @@ export const getNewCarsRange = createAsyncThunk(
 // Change car status
 export const changeCarStatus = createAsyncThunk(
   "cars/changeCarStatus",
-  async ({ carId, status, location }, thunkAPI) => {
+  async ({ carId, status }, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
@@ -189,7 +189,6 @@ export const changeCarStatus = createAsyncThunk(
         params: {
           car_id: carId,
           status,
-          location,
         },
         headers: {
           // "X-Api-Key": "YA7NxysJ",

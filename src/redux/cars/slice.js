@@ -109,8 +109,10 @@ const carsSlice = createSlice({
       .addCase(changeCarStatus.pending, handlePending)
       .addCase(changeCarStatus.fulfilled, (state, action) => {
         state.isLoading = false;
-        const { carId, newStatus } = action.payload;
-        const carIndex = state.current.findIndex((car) => car.id === carId);
+        const { car_id, newStatus } = action.payload;
+        const carIndex = state.current.findIndex(
+          (car) => car.car_id === car_id
+        );
         if (carIndex !== -1) {
           state.current[carIndex].status = newStatus;
         }

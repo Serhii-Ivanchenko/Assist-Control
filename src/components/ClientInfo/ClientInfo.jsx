@@ -346,7 +346,7 @@ export default function ClientInfo({ clientInfo }) {
       <div className={css.carListAndAddBtn}>
         <ul className={css.carInfo}>
           {Array.isArray(cars) ? (
-            cars.map((car) => <CarsList car={car} key={car?.id} />)
+            cars.map((car) => <CarsList car={car} key={car?.car_id} />)
           ) : (
             <CarsList car={cars} />
           )}
