@@ -22,7 +22,7 @@ export const getAllServices = createAsyncThunk(
   }
 );
 
-// Get data od particular service
+// Get data of particular service
 export const getServiceData = createAsyncThunk(
   "service/getServiceData",
   async (service_id, thunkAPI) => {

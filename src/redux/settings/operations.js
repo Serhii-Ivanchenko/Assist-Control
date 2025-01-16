@@ -19,7 +19,7 @@ export const createEmployee = createAsyncThunk(
       formData.append("data", JSON.stringify(employeeData)); // Додаємо об'єкт як строку
 
       const response = await axiosInstance.post(
-        `/pers/employees/create/`,
+        `/set/employees/create/`,
         formData,
         {
           headers: {
@@ -57,7 +57,7 @@ export const updateEmployeeData = createAsyncThunk(
       formData.append("data", JSON.stringify(dataToUpdate)); // Додаємо об'єкт як строку
 
       const response = await axiosInstance.patch(
-        `/pers/employees/${employee_id}/update/`,
+        `/set/employees/${employee_id}/update/`,
         formData,
         {
           headers: {
@@ -83,7 +83,7 @@ export const deleteEmployee = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.delete(
-        `/pers/employees/${employee_id}/delete/`,
+        `/set/employees/${employee_id}/delete/`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -109,7 +109,7 @@ export const updateEmployeeStatus = createAsyncThunk(
     try {
       const { employee_id, ...status } = newStatus;
       const response = await axiosInstance.patch(
-        `/pers/employees/${employee_id}/status/?isDisabled=${status}`,
+        `/set/employees/${employee_id}/status/?isDisabled=${status}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -134,7 +134,7 @@ export const getEmployeeData = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/pers/employees/${employee_id}/`,
+        `/set/employees/${employee_id}/`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -158,7 +158,7 @@ export const getAllEmployees = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/pers/employees_all/`, {
+      const response = await axiosInstance.get(`/set/employees_all/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -189,7 +189,7 @@ export const createSupplier = createAsyncThunk(
       formData.append("data", JSON.stringify(supplierData)); // Додаємо об'єкт як строку
 
       const response = await axiosInstance.post(
-        `/sup/suppliers/create/`,
+        `/set/suppliers/create/`,
         formData,
         {
           headers: {
@@ -226,7 +226,7 @@ export const updateSupplierData = createAsyncThunk(
       formData.append("data", JSON.stringify(dataToUpdate)); // Додаємо об'єкт як строку
 
       const response = await axiosInstance.patch(
-        `/sup/suppliers/${supplier_id}/update/`,
+        `/set/suppliers/${supplier_id}/update/`,
         formData,
         {
           headers: {
@@ -252,7 +252,7 @@ export const deleteSupplier = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.delete(
-        `/sup/supplier/${supplier_id}/delete/`,
+        `/set/supplier/${supplier_id}/delete/`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -277,7 +277,7 @@ export const updateSupplierStatus = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.patch(
-        `/sup/suppliers/status/`,
+        `/set/suppliers/status/`,
         newStatus,
         {
           headers: {
@@ -303,7 +303,7 @@ export const getSupplierData = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/sup/supplier/${supplier_id}/`,
+        `/set/supplier/${supplier_id}/`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -327,7 +327,7 @@ export const getAllSuppliers = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/sup/suppliers/`, {
+      const response = await axiosInstance.get(`/set/suppliers/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -526,7 +526,7 @@ export const getPrices = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/serv/services`, {
+      const response = await axiosInstance.get(`/set/services`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -549,7 +549,7 @@ export const getPricesInCategory = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/serv/categories/${category_id}/services`,
+        `/set/categories/${category_id}/services`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -569,14 +569,13 @@ export const getPricesInCategory = createAsyncThunk(
 // Update service name or prices
 export const editServiceNameOrPrices = createAsyncThunk(
   "settings/editPrices",
-  async (newPrices, thunkAPI) => {
+  async (newData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const { service_id, ...prices } = newPrices;
       const response = await axiosInstance.patch(
-        `/v1/services/${service_id}/prices`,
-        prices,
+        `/set/services/update/`,
+        newData,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -601,7 +600,7 @@ export const createCategory = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.post(
-        `/serv/categories/`,
+        `/set/categories/`,
         categoryName,
         {
           headers: {
@@ -628,7 +627,7 @@ export const updateCategoryData = createAsyncThunk(
     try {
       // const { categoryId, ...dataToUpdate } = categoryDataToUpdate;
       const response = await axiosInstance.patch(
-        `/serv/categories/update/`,
+        `/set/categories/update/`,
         categoryDataToUpdate,
         {
           headers: {
@@ -656,7 +655,7 @@ export const createService = createAsyncThunk(
     // const { categoryId, ...serviceName } = newService;
 
     try {
-      const response = await axiosInstance.post(`/v1/services/`, newService, {
+      const response = await axiosInstance.post(`/set/services/`, newService, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -679,7 +678,7 @@ export const deleteService = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.delete(
-        `/serv/delete/?service_id=${service_id}`,
+        `/set/delete/?service_id=${service_id}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -708,12 +707,16 @@ export const createRating = createAsyncThunk(
     // const { categoryId, ...serviceName } = newService;
 
     try {
-      const response = await axiosInstance.post(`/rating/create`, newRating, {
-        headers: {
-          // "X-Api-Key": "YA7NxysJ",
-          "company-id": serviceId,
-        },
-      });
+      const response = await axiosInstance.post(
+        `/set/rating/create`,
+        newRating,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
       console.log("createRating", response.data);
 
       return response.data;
@@ -732,7 +735,7 @@ export const updateRatingStatus = createAsyncThunk(
     try {
       const { rating_id, ...status } = newStatus;
       const response = await axiosInstance.patch(
-        `/rating/${rating_id}/update-activity`,
+        `/set/rating/${rating_id}/update-activity`,
         status,
         {
           headers: {
@@ -757,7 +760,7 @@ export const getRatings = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/ratings_all/`, {
+      const response = await axiosInstance.get(`/set/ratings_all/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -779,7 +782,7 @@ export const getRatingData = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/ratings/${rating_id}/`, {
+      const response = await axiosInstance.get(`/set/ratings/${rating_id}/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -802,7 +805,7 @@ export const deleteRating = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.delete(
-        `/rating/${rating_id}/delete`,
+        `/set/rating/${rating_id}/delete`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -831,12 +834,16 @@ export const createMarkup = createAsyncThunk(
     // const { categoryId, ...serviceName } = newService;
 
     try {
-      const response = await axiosInstance.post(`/markup/create`, newMarkup, {
-        headers: {
-          // "X-Api-Key": "YA7NxysJ",
-          "company-id": serviceId,
-        },
-      });
+      const response = await axiosInstance.post(
+        `/set/markup/create`,
+        newMarkup,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
       console.log("createMarkup", response.data);
 
       return response.data;
@@ -856,7 +863,7 @@ export const updateFixedMarkup = createAsyncThunk(
     try {
       const { markup_id, ...markup } = updatedMarkup;
       const response = await axiosInstance.patch(
-        `/markup/fixed/update/${markup_id}`,
+        `/set/markup/fixed/update/${markup_id}`,
         markup,
         {
           headers: {
@@ -884,7 +891,7 @@ export const updateDynamicMarkup = createAsyncThunk(
     try {
       const { markup_id, ...markup } = updatedMarkup;
       const response = await axiosInstance.patch(
-        `/markup/dynamic/update/${markup_id}`,
+        `/set/markup/dynamic/update/${markup_id}`,
         markup,
         {
           headers: {
@@ -911,7 +918,7 @@ export const deleteMarkup = createAsyncThunk(
     try {
       const { markup_id, ...markup } = markupToDelete;
       const response = await axiosInstance.delete(
-        `/markup/delete/${markup_id}`,
+        `/set/markup/delete/${markup_id}`,
         markup,
         {
           headers: {
@@ -937,7 +944,7 @@ export const getAllMarkups = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/get_all_mark_up`, {
+      const response = await axiosInstance.get(`/set/get_all_mark_up`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -959,7 +966,7 @@ export const getMarkupItemData = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/markup/${markup_id}`, {
+      const response = await axiosInstance.get(`/set/markup/${markup_id}`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -982,7 +989,7 @@ export const getDistributorMarkup = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/supplier/markups/${supplier_id}`,
+        `/set/supplier/markups/${supplier_id}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -1009,7 +1016,7 @@ export const createCashRegister = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.post(
-        `/cashregister/create`,
+        `/set/cashregister/create`,
         cashRegisterName,
         {
           headers: {
@@ -1036,7 +1043,7 @@ export const updateCashRegister = createAsyncThunk(
     try {
       const { cash_register_id, ...cashRegister } = updatedCashRegister;
       const response = await axiosInstance.patch(
-        `/cashregister/${cash_register_id}/update`,
+        `/set/cashregister/${cash_register_id}/update`,
         cashRegister,
         {
           headers: {
@@ -1063,7 +1070,7 @@ export const deleteCashRegister = createAsyncThunk(
     try {
       const { cash_register_id, ...cashRegister } = cashRegisterToDelete;
       const response = await axiosInstance.delete(
-        `/cashregister/${cash_register_id}/delete/`,
+        `/set/cashregister/${cash_register_id}/delete/`,
         cashRegister,
         {
           headers: {
@@ -1090,7 +1097,7 @@ export const updateCashRegisterStatus = createAsyncThunk(
     try {
       const { cash_register_id, ...status } = newStatus;
       const response = await axiosInstance.patch(
-        `/cashregister/${cash_register_id}/status`,
+        `/set/cashregister/${cash_register_id}/status`,
         status,
         {
           headers: {
@@ -1115,7 +1122,7 @@ export const getAllCashRegisters = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/cashregister/list`, {
+      const response = await axiosInstance.get(`/set/cashregister/list`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -1138,7 +1145,7 @@ export const getCashRegisterData = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/cashregister/${cash_register_id}`,
+        `/set/cashregister/${cash_register_id}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
