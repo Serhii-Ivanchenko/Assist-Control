@@ -87,7 +87,6 @@ function ChatSample({ filter, selectedCateg, action, onActionChange }) {
   const [tempText, setTempText] = useState("");
   const [backupData, setBackupData] = useState([]);
 
-  console.log("local", localEditing, localDeleting, selectedCateg);
 
   useEffect(() => {
     const filteredData = datas.filter(

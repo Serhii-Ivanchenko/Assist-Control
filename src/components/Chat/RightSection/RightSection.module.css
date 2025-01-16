@@ -302,6 +302,21 @@
     z-index: 2;
 }
 
+.modalOverlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    /* background: rgba(0, 0, 0, 0.5);  */
+    /* Прозрачный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Поверх других элементов */
+}
+
 .categoryDisplay {
     display: flex;
     align-items: center;
@@ -313,16 +328,25 @@
 
 .categorySelector {
     position: absolute;
-    background: var(--bg-secondary);
-    border: 1px solid var(--light-gray);
-    top: 45px;
-    left: 160px;
+    top: 38.5%;
+        left: 82%;
+        right: auto;
+        bottom: auto;
+        margin-right: -18%;
+    /* top: 45px;
+    left: 160px; */
+     background-color: var(--bg-input);
+     border: none;
+     box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+     font-size: 16px;
+    font-weight: 400;
+    color: var(--light-gray);
+    border-radius: 12px;
     width: 235px;
-    border-radius: 4px;
     padding: 8px;
     margin-top: 4px;
     z-index: 1000;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .category {
@@ -343,16 +367,24 @@
 .modal {
    
              position: absolute; 
-            background: var(--bg-secondary);
-            border: 1px solid var(--light-gray);
-            top: 45px;
-             left: 260px; 
+            top: 38.5%;
+                left: 90%;
+                right: auto;
+                bottom: auto;
+                margin-right: -10%;
+        background-color: var(--bg-input);
+            border: none;
+            box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--light-gray);
+            border-radius: 12px;
+            /* top: 45px;
+             left: 260px;  */
             width: 150px;
-            border-radius: 4px;
-            padding: 4px;
+            padding: 4px 8px;
             margin-top: 4px;
             z-index: 1000;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         
 }
 
@@ -382,30 +414,118 @@ position: absolute;
     right: auto;
     bottom: auto;
     margin-right: -24%;
-    background: var(--bg-secondary);
-    border: 1px solid var(--light-gray);
+    background-color: var(--bg-input);
+        border: none;
+        box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--light-gray);
+        border-radius: 12px;
     top: 155px;
     left: 1720;
     width: 120px;
-    border-radius: 4px;
     padding: 4px;
     margin-top: 4px;
     z-index: 1000;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-
 }
 
-.modalOverlay {
-    position: fixed;
-    top: 0px;
-        left: 0px;
-        right: 0;
-        bottom: 0;
-     /* background: rgba(0, 0, 0, 0.5);  */
-    /* Прозрачный фон */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.modalstaff {
+
+    position: absolute;
+    top: 16%;
+    left: 78%;
+    right: auto;
+    bottom: auto;
+    margin-right: -22%;
+    background-color: var(--bg-input);
+    border: none;
+    box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--light-gray);
+    border-radius: 12px;
+    /* top: 155px;
+    left: 1720; */
+    width: 300px;
+    padding: 18px 16px;
+    margin-top: 4px;
     z-index: 1000;
-    /* Поверх других элементов */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
+
+.modalstaffplus {
+
+    position: absolute;
+    top: 16%;
+    left: 81.5%;
+    right: auto;
+    bottom: auto;
+    margin-right: -18.5%;
+    background-color: var(--bg-input);
+    border: none;
+    box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+    
+    border-radius: 12px;
+    /* top: 155px;
+    left: 1720; */
+    width: 300px;
+    padding: 18px 16px;
+    margin-top: 4px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modalitemstaff {
+   cursor: pointer;
+   display: flex;
+   flex-direction: row;
+   gap: 10px;
+}
+
+.modalstaffbox {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 250px;
+}
+
+.staffname{
+    color: var(--light-gray);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        height: 20px;
+        width: 208px;
+}
+
+.staffemail{
+    color: #828A9E;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        height: 20px;
+        width: 208px;
+}
+
+.iconWrapper{
+    position: relative;
+}
+
+.notificationBubble{
+    
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+

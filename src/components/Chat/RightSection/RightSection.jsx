@@ -16,10 +16,12 @@ import ChatTags from "./ChatTags/ChatTags.jsx";
 import ChatSample from "./ChatSample/ChatSample.jsx";
 import ChatNotes from "./ChatNotes/ChatNotes.jsx";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ava from "../,,/../../../assets/images/ava1.png";
+import ava from "../../../assets/images/ava1.png";
+import ava1 from "../../../assets/images/avatar_default.png";
 import { BsFiles, BsAlarm, BsTelephone, BsThreeDots } from "react-icons/bs";
 import { RiUserSharedFill, RiUserAddFill } from "react-icons/ri";
 import { IoIosSearch } from "react-icons/io";
+import { IoDocumentAttachOutline } from "react-icons/io5";
 
 import { BsPencil, BsXCircle } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
@@ -31,27 +33,6 @@ import SearchTags from "./ChatTags/SearchTags/SearchTags.jsx";
 import { tags } from "../RightSection/ChatTags/tags.js";
 import clsx from "clsx";
 
-//   const handleEditToggle = (event) => {
-//     event.stopPropagation(); // Останавливаем всплытие события
-//     if (isEditing) {
-//       // Вызов функции generateBackendData через реф
-//       if (detailsRef.current?.generateBackendData) {
-//         detailsRef.current.generateBackendData();
-//       }
-//       console.log("Сохранение завершено.");
-//     }
-//     setIsEditing((prev) => !prev);
-//   };
-
-// const handleCancelEdit = (event) => {
-//   event.stopPropagation();
-//   setIsEditing(false);
-
-//   // Сбрасываем данные через реф
-//   if (detailsRef.current?.resetGridData) {
-//     detailsRef.current.resetGridData();
-//   }
-// };
 
 const data = {
   id: 1,
@@ -59,7 +40,7 @@ const data = {
   avatar: ava,
   phonenum: "0733291217",
   status: "Новий",
-  phonenums: ["0675432109", "0502345678", "0733291217"],
+  phonenums: ["0675432109", "0502345678"],
 };
 
 export default function RightSection() {
@@ -195,10 +176,6 @@ export default function RightSection() {
   const [activeCategory, setActiveCategory] = useState(categories[0]); // Выбрана первая категория по умолчанию
   const [isCategory, setIsCategory] = useState(false); // Видимость справочника
 
-  //  const toggleCategorySelector = () => {
-  //   setIsCategory((prev) => !prev);
-  // };
-
   const toggleCategorySelector = () => {
     setIsCategory(!isCategory);
   };
@@ -208,10 +185,19 @@ export default function RightSection() {
     setIsCategory(false); // Закрываем справочник
   };
 
+const actions = [
+    { id: 1, action: "add", fullname: "Додати шаблон" },
+    { id: 2, action: "edit",fullname: "Змінити шаблон" },
+    { id: 3, action: "delete",fullname: "Видалити шаблон" },
+    { id: 4, action: "",fullname: "Закрити" },
+   
+  ];
+
   const [modalOpen, setModalOpen] = useState(false);
   const [actionType, setActionType] = useState(""); // "add", "edit", "delete"
   const handleOpenModal = (type) => {
     setActionType(type);
+    setModalOpen(true);
   };
 
   // const handleCloseModal = () => {
@@ -220,46 +206,37 @@ export default function RightSection() {
 
   const handleActionChange = (value) => {
     setActionType(value);
+   setModalOpen(false);
   };
 
-  // const handleDeletingChange = (value) => {
-  //   setDeleting(value);
-  //   };
-
-  //   useEffect(() => {
-  //   const handleOutsideClick = (e) => {
-  //     if (!e.target.closest(`.${css.modalContent}`)) {
-  //       setModalOpen(false);
-  //     }
-  //   };
-  //   if (modalOpen) {
-  //     document.addEventListener("click", handleOutsideClick);
-  //   }
-  //   return () => {
-  //     document.removeEventListener("click", handleOutsideClick);
-  //   };
-  // }, [modalOpen]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [selectedPhone, setSelectedPhone] = useState(data.phonenum);
+
+  const makeCall = (phone) => {
+  window.location.href = `tel:${phone}`;
+  };
+  
 
   const handlePhoneClick = () => {
-    // Проверяем, есть ли дополнительные номера
-    const otherPhones = data.phonenums.filter(
-      (phone) => phone !== data.phonenum
-    );
-    if (otherPhones.length > 0) {
-      setIsModalOpen(true);
-      console.log(isModalOpen);
-      console.log(otherPhones.length);
+    if (!data.phonenums.includes(data.phonenum)) {
+      data.phonenums.push(data.phonenum);
+    };
+    if (data.phonenums.length > 1) {
+      setIsModalOpen(true); 
     } else {
-      makeCall(data.phonenum);
+      setIsModalOpen(false); 
     }
   };
 
-  const makeCall = (phone) => {
-    alert(`Звонок на номер: ${phone}`);
-  };
+  const staffs = [
+    { id: 1, name: "Катерина Матяш", email: "kate@avtoatmosfera.com", avatar: ava1, isActive: true, },
+    { id: 2, name: "Олена Ким", email: "kim@avtoatmosfera.com", avatar: ava1, isActive: true, },
+    { id: 3, name: "Катерина Котасонова", email: "kate.k@avtoatmosfera.com", avatar: ava1, isActive: false, },
+  ];
+
+  const [isModalStaff, setIsModalStaff] = useState(false);
+  const [isModalStaffPlus, setIsModalStaffPlus] = useState(false);
+ 
 
   const [isModalNote, setIsModalNote] = useState(false);
   const [notificationSent, setNotificationSent] = useState(false);
@@ -288,22 +265,22 @@ export default function RightSection() {
           </div>
         </div>
         <div className={css.btnbox}>
-          <button className={css.btnaction} onClick={handlePhoneClick}>
+          <button className={css.btnaction} onClick={ handlePhoneClick }>
             <BsTelephone className={css.iconaction} />
           </button>
 
           <button
-            className={css.btnaction}
-            onClick={() => {
-              setIsModalNote(true);
-            }}
-          >
+            className={css.btnaction} onClick={() => { setIsModalNote(true); }}>
             <BsAlarm className={css.iconaction} />
           </button>
-          <button className={css.btnaction}>
+
+
+          <button className={css.btnaction} onClick={() => { setIsModalStaff(true); }}>
             <RiUserSharedFill className={css.iconaction} />
           </button>
-          <button className={css.btnaction}>
+
+
+          <button className={css.btnaction}  onClick={() => { setIsModalStaffPlus(true); }}>
             <RiUserAddFill className={css.iconaction} />
           </button>
 
@@ -346,6 +323,83 @@ export default function RightSection() {
               />
             </Modal>
           )}
+
+ {isModalStaff && (
+            <div
+              className={css.modalOverlay} // Задний фон модального окна
+              onClick={() => setIsModalStaff(false)} // Закрытие при клике на фон
+            >
+              <div className={css.modalstaff}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {staffs.map((item) => (
+                  <div  key={item.id}  className={css.modalitemstaff}
+                    onClick={() => {  console.log(item.name);
+                      setIsModalStaff(false);
+                    }}>
+                    <div className={css.iconWrapper}>
+                      <img
+            className={css.photoavatar}
+            src={item.avatar || ava1}
+            alt={item.name}
+                      />
+                      <span className={css.notificationBubble}
+                      style={ {backgroundColor:  item.isActive ? "var(--green)": "var(--input-text)" }}
+                      >
+                      </span>
+          </div>
+                    <div className={css.modalstaffbox}>
+             <div className={css.staffname}>{item.name}</div>         
+             <div className={css.staffemail}>{item.email}</div>   
+</div>
+    
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+
+ {isModalStaffPlus && (
+            <div
+              className={css.modalOverlay} // Задний фон модального окна
+              onClick={() => setIsModalStaffPlus(false)} // Закрытие при клике на фон
+            >
+              <div className={css.modalstaffplus}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {staffs.map((item) => (
+                  <div  key={item.id}  className={css.modalitemstaff}
+                    onClick={() => {  console.log(item.name);
+                      setIsModalStaffPlus(false);
+                    }}>
+                    <div className={css.iconWrapper}>
+                      <img
+            className={css.photoavatar}
+            src={item.avatar || ava1}
+            alt={item.name}
+                      />
+                      <span className={css.notificationBubble}
+                      style={ {backgroundColor:  item.isActive ? "var(--green)": "var(--input-text)" }}
+                      >
+                      </span>
+          </div>
+                    <div className={css.modalstaffbox}>
+             <div className={css.staffname}>{item.name}</div>         
+             <div className={css.staffemail}>{item.email}</div>   
+</div>
+    
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+
+
+
+
+
         </div>
       </div>
 
@@ -418,13 +472,7 @@ export default function RightSection() {
               </div>
 
               {expandedRows.includes("panel1") && (
-                <AccordionDetails
-                //             sx={{
-                //   maxHeight: expanded === "panel1" ? "none" : "0px",
-                //   // overflow: expanded === "panel1" ? "visible" : "hidden",
-                //   transition: "max-height 0.3s ease",
-                // }}
-                >
+                <AccordionDetails>
                   <ChatAvto
                     ref={chatAvtoRef}
                     isEditable={isEditing.includes("panel1")}
@@ -433,9 +481,6 @@ export default function RightSection() {
               )}
             </div>
           </AccordionSummary>
-          {/* <AccordionDetails > 
-          <ChatAvto />
-        </AccordionDetails> */}
         </Accordion>
 
         <Accordion
@@ -461,7 +506,6 @@ export default function RightSection() {
               // overflow: "hidden",
             }}
             className={css.accordionTitle}
-            // expandIcon={<ExpandMoreIcon style={{fill: "var(--light-gray)"}}/>}
             aria-controls="panel2-content"
             id="panel2-header"
           >
@@ -487,13 +531,7 @@ export default function RightSection() {
 
               {expandedRows.includes("panel2") && (
                 <>
-                  <AccordionDetails
-                  // sx={{
-                  //   maxHeight: expanded === "panel1" ? "none" : "0px",
-                  //   overflow: expanded === "panel1" ? "visible" : "hidden",
-                  //   transition: "max-height 0.3s ease",
-                  // }}
-                  >
+                  <AccordionDetails>
                     <ChatTags tagsArray={tagsArr} />
                   </AccordionDetails>
                   <AccordionActions
@@ -537,7 +575,6 @@ export default function RightSection() {
               height: expandedRows.includes("panel3") ? 209 : 56,
             }}
             className={css.accordionTitle}
-            // expandIcon={<ExpandMoreIcon style={{fill: "var(--light-gray)"}}/>}
             aria-controls="panel3-content"
             id="panel3-header"
           >
@@ -571,15 +608,12 @@ export default function RightSection() {
                 {expandedRows.includes("panel3") && activeFilters[0] && (
                   <input
                     className={css.editInput}
-                    // style={{ width: "50px" }}
                     type="text"
-                    // placeholder="Фільтр"
                     value={filters[0]}
                     onChange={handleFilterChange(0)}
                   />
                 )}
 
-                {/* Отображение активной категории */}
                 {expandedRows.includes("panel3") && (
                   <div
                     className={css.categoryDisplay}
@@ -609,18 +643,18 @@ export default function RightSection() {
                   >
                     <button
                       className={css.btnicon}
-                      onClick={() => {
-                        handleOpenModal("");
-                        setModalOpen(true);
-                      }}
-                    >
+                      onClick={() => {handleOpenModal("") }} >
                       <BsThreeDots className={css.icon} />
                     </button>
                   </div>
                 )}
 
                 {expandedRows.includes("panel3") && isCategory && (
-                  <div className={css.categorySelector}>
+                    <div
+              className={css.modalOverlay} // Задний фон модального окна
+              onClick={() => setIsCategory(false)} // Закрытие при клике на фон
+            >
+                  <div className={css.categorySelector} onClick={(e) => e.stopPropagation()}>
                     {categories.map((category) => (
                       <div
                         className={clsx(css.category, {
@@ -633,110 +667,42 @@ export default function RightSection() {
                         {category.fullname}
                       </div>
                     ))}
-                  </div>
+                    </div>
+                    </div>
                 )}
 
                 {expandedRows.includes("panel3") && modalOpen && (
-                  // && actionType === ""
-                  <div className={css.modal}>
-                    {/* <div className={css.modalContent}> */}
-                    <div
-                      className={css.modalitem}
-                      onClick={() => {
-                        setActionType("add");
-                        // setModalAddOpen(true);
-                        setModalOpen(false);
-                      }}
-                    >
-                      Додати шаблон
+                   <div
+              className={css.modalOverlay} // Задний фон модального окна
+              onClick={() => setModalOpen(false)} // Закрытие при клике на фон
+            >
+                  <div className={css.modal}  onClick={(e) => e.stopPropagation()}>
+                    {actions.map((item) => (
+                      <div className={css.modalitem}
+                        key={item.id}
+                        onClick={() => handleActionChange(item.action)}>
+                        {item.fullname}
+                      </div>
+                    ))}
                     </div>
-                    <div
-                      className={css.modalitem}
-                      onClick={() => {
-                        setActionType("edit");
-                        // setEditing(true);
-                        setModalOpen(false);
-                      }}
-                    >
-                      Змінити шаблон
                     </div>
-                    <div
-                      className={css.modalitem}
-                      onClick={() => {
-                        setActionType("delete");
-                        // setDeleting(true);
-                        setModalOpen(false);
-                      }}
-                    >
-                      Видалити шаблон
-                    </div>
-                    <div
-                      className={css.modalitem}
-                      onClick={() => {
-                        setActionType("");
-                        // setModalAddOpen(false);
-                        setModalOpen(false);
-                      }}
-                    >
-                      Закрити
-                    </div>
-                    {/* </div> */}
-                  </div>
                 )}
 
-                {/* {expandedRows.includes("panel3") && modalAddOpen
-                  && (
-                  <div className={css.modal}>
-                  <h3>Додати шаблон</h3>
-                    <textarea placeholder="Введите текст шаблона"></textarea>
-                    <div className={css.blockflex}>
-                      <button
-                         onClick={() => setModalAddOpen(false)} 
-                        className={css.editbtn}
-                        style={{ marginRight: "0" }}
-                      >
-                        <BsXCircle className={css.mainIcon} size={16} />{" "}
-                      </button>
-                      <button
-                        onClick={() => {
-                          handleSaveEdit("panel3"); 
-                          setModalAddOpen(false); 
-                         }}
-                        className={css.editbtn}
-                      >
-                        {" "}
-                        <RiSave3Fill className={css.mainIcon} size={16} />{" "}
-                      </button>
-                    </div>
-                 </div>
-               )} */}
+               
               </div>
 
               {expandedRows.includes("panel3") && (
-                // expanded === "panel3"
-                <AccordionDetails
-                // sx={{
-                //   maxHeight: expanded === "panel3" ? "100px" : "0px",
-                //   overflow: "hidden",
-                //   transition: "max-height 0.3s ease",
-                // }}
-                >
+                <AccordionDetails>
                   <ChatSample
                     filter={filters[0]}
                     selectedCateg={activeCategory.categ}
                     action={actionType}
-                    // editing={editing}
-                    // deleting={deleting}
                     onActionChange={handleActionChange}
-                    // onDeletingChange={handleDeletingChange}
                   />
                 </AccordionDetails>
               )}
             </div>
           </AccordionSummary>
-          {/* <AccordionDetails >
-          <ChatSample />
-        </AccordionDetails> */}
         </Accordion>
 
         <Accordion
@@ -760,7 +726,6 @@ export default function RightSection() {
               height: expandedRows.includes("panel4") ? 161 : 56,
             }}
             className={css.accordionTitle}
-            // expandIcon={<ExpandMoreIcon style={{fill: "var(--light-gray)"}}/>}
             aria-controls="panel4-content"
             id="panel4-header"
           >
@@ -808,11 +773,6 @@ export default function RightSection() {
 
               {expandedRows.includes("panel4") && (
                 <AccordionDetails
-                // sx={{
-                //   maxHeight: expanded === "panel1" ? "72px" : "0px",
-                //   overflow: "hidden",
-                //   transition: "max-height 0.3s ease",
-                // }}
                 >
                   <ChatNotes
                     ref={chatNotesRef}
@@ -888,22 +848,13 @@ export default function RightSection() {
                 )}
               </div>
               {expandedRows.includes("panel5") && (
-                // expanded === "panel5"
                 <AccordionDetails
-                // sx={{
-                //   maxHeight: expanded === "panel5" ? "100px" : "0px",
-                //   overflow: "hidden",
-                //   transition: "max-height 0.3s ease",
-                // }}
                 >
                   <ChatHistoryChange filter={filters[1]} />
                 </AccordionDetails>
               )}
             </div>
           </AccordionSummary>
-          {/* <AccordionDetails >
-          <ChatHistoryChange />
-        </AccordionDetails> */}
         </Accordion>
 
         <Accordion
@@ -922,15 +873,14 @@ export default function RightSection() {
             //   display: "none",
             // },
             overflow: "hidden",
-            minHeight: expandedRows.includes("panel6") ? 170 : 56,
+            minHeight: expandedRows.includes("panel6") ? 200 : 56,
           }}
         >
           <AccordionSummary
             sx={{
-              height: expandedRows.includes("panel6") ? 170 : 56,
+              height: expandedRows.includes("panel6") ? 200 : 56,
             }}
             className={css.accordionTitle}
-            // expandIcon={<ExpandMoreIcon style={{ fill: "var(--light-gray)", marginRight: "auto" }} />}
             aria-controls="panel6-content"
             id="panel6-header"
           >
@@ -949,22 +899,13 @@ export default function RightSection() {
                 />
               </div>
               {expandedRows.includes("panel6") && (
-                // expanded === "panel6"
                 <AccordionDetails
-                // sx={{
-                //   maxHeight: expanded === "panel6" ? "100px" : "0px",
-                //   overflow: "hidden",
-                //   transition: "max-height 0.3s ease",
-                // }}
                 >
                   <ChatFiles />
                 </AccordionDetails>
               )}
             </div>
           </AccordionSummary>
-          {/* <AccordionDetails >
-          <ChatFiles />
-        </AccordionDetails> */}
         </Accordion>
         {isSearchTagModalOpen && (
           <SearchTags
