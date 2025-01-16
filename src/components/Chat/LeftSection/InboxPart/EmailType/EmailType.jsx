@@ -79,7 +79,7 @@ export default function EmailType({
               </div>
               <p
                 className={`${css.numberBox} ${
-                  (type.value === "" || type.value === null) &&
+                  (type.value === 0 || type.value === null) &&
                   css.numberBoxHidden
                 }`}
               >
