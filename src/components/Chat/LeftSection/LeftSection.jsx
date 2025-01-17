@@ -44,7 +44,6 @@ export default function LeftSection() {
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
       time: "2025-01-05T12:45:33",
-      warning: true,
       read: false,
       id: "2",
     },
@@ -294,6 +293,16 @@ export default function LeftSection() {
     setFavourite(newChosenCount);
   };
 
+  const flashingBorder = (type) => {
+    const hasWarning = initialChats.some((chat) => {
+      const time = Date.now() - new Date(chat.time).getTime();
+      return (
+        time >= 300000 && !chat.read && (chat.type === type || type === "all")
+      );
+    });
+    return hasWarning ? css.warningBorder : "";
+  };
+
   return (
     <div className={css.leftSectionWrapper}>
       <InboxPart
@@ -303,6 +312,7 @@ export default function LeftSection() {
         setActiveFilterCategory={setActiveFilterCategory}
         setActiveFilterState={setActiveFilterState}
         categoryCounts={categoryCounts}
+        flashingBorder={flashingBorder}
       />
       <MessagesPart
         chats={sortedAndFilteredChats}

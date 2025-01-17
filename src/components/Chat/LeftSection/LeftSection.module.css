@@ -5,3 +5,19 @@
   display: flex;
   overflow: hidden;
 }
+
+@keyframes blinkBorder {
+  0% {
+    border: 1px solid var(--red);
+  }
+  50% {
+    border: 1px solid transparent;
+  }
+  100% {
+    border: 1px solid var(--red);
+  }
+}
+
+.warningBorder {
+  animation: blinkBorder 3s infinite;
+}
