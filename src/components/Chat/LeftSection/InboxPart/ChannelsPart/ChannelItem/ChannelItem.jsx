@@ -77,7 +77,7 @@ export default function ChannelItem({
       } 
         ${isDragging ? css.isDragging : ""}  `}
       onClick={(e) => {
-        handleFilter(e, channel.type);
+        handleFilter(e, channel.type, "channel");
         handleIsActive(channel.id);
       }}
       draggable

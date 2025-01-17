@@ -46,6 +46,10 @@
   line-height: normal;
 }
 
+input::placeholder {
+  color: #828a9e;
+}
+
 .userList {
   display: flex;
   flex-direction: column;

@@ -7,7 +7,12 @@ import { useState } from "react";
 import NewChatPopup from "./NewChatPopup/NewChatPopup";
 import { useRef, useEffect } from "react";
 
-export default function MessagesPart({ chats, handleSort, sortOrder }) {
+export default function MessagesPart({
+  chats,
+  handleSort,
+  sortOrder,
+  handleFavourite,
+}) {
   const [isChecked, setIsChecked] = useState(false);
   const [allChecked, setAllChecked] = useState(
     chats.map(() => false) // Динамічне створення стану для кожного елемента
@@ -72,6 +77,7 @@ export default function MessagesPart({ chats, handleSort, sortOrder }) {
         isChecked={isChecked}
         allChecked={allChecked}
         handleCheckboxChange={handleCheckboxChange}
+        handleFavourite={handleFavourite}
       />
     </div>
   );
