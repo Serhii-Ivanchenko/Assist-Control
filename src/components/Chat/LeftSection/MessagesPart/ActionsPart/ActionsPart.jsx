@@ -5,7 +5,6 @@ import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsTag } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
-import { BsFillCaretUpFill } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
 
 import { BsClock } from "react-icons/bs";
@@ -71,21 +70,6 @@ export default function ActionsPart({
     setTagsModalIsOpen(false);
   };
 
-  // useEffect(() => {
-  //   const handleClickOutside = (e) => {
-  //     if (!e.target.closest(`.${css.select}`)) {
-  //       setTagsModalIsOpen(false);
-  //       openedActions(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("click", handleClickOutside);
-
-  //   return () => {
-  //     document.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, []);
-
   return (
     <div className={css.actions}>
       {isChecked && (
@@ -125,11 +109,10 @@ export default function ActionsPart({
             <div className={css.select} onClick={openTagsModal}>
               <BsTag size={16} className={css.icon} />
               <p className={css.actionsText}>Тег</p>
-              {tagsModalIsOpen ? (
-                <BsFillCaretUpFill size={16} className={css.icon} />
-              ) : (
-                <BsFillCaretDownFill size={16} className={css.icon} />
-              )}
+              <BsFillCaretDownFill
+                size={16}
+                className={`${css.icon} ${tagsModalIsOpen && css.rotated}`}
+              />
             </div>
 
             {tagsModalIsOpen && (

@@ -9,52 +9,59 @@ import css from "./EmailType.module.css";
 
 export default function EmailType({
   handleFilter,
-  chats,
+  // chats,
   isActive,
   setIsActive,
+  categoryCounts,
 }) {
   const types = [
     {
       icon: <BsEnvelope className={css.icon} />,
       text: "Email",
-      value: chats.filter((chat) => chat.category === "email").length,
+      value: categoryCounts.email,
       id: "1",
       category: "email",
+      filterType: "category",
     },
     {
       icon: <BsChatDots className={css.icon} />,
       text: "Чати",
-      value: chats.filter((chat) => chat.category === "chat").length,
+      value: categoryCounts.chat,
       id: "2",
       category: "chat",
+      filterType: "category",
     },
     {
       icon: <BsClock className={css.icon} />,
       text: "Відкладені",
-      value: chats.filter((chat) => chat.isDelayed === true).length,
+      value: categoryCounts.delayed,
       id: "3",
       category: "delayed",
+      filterType: "state",
     },
     {
       icon: <BsCheck2Square className={css.icon} />,
       text: "Закриті",
-      value: chats.filter((chat) => chat.isClosed === true).length,
+      value: categoryCounts.closed,
       id: "4",
       category: "closed",
+      filterType: "state",
     },
     {
       icon: <BsBookmark className={css.icon} />,
       text: "Обрані",
-      value: chats.filter((chat) => chat.isChosen === true).length,
+      value: categoryCounts.chosen,
       id: "5",
       category: "chosen",
+      filterType: "state",
     },
     {
       icon: <BsArchive className={css.icon} />,
       text: "Архів",
-      value: chats.filter((chat) => chat.archive === true).length,
+      value: categoryCounts.archive,
       id: "6",
       category: "archive",
+      filterType: "state",
     },
   ];
 
@@ -69,7 +76,7 @@ export default function EmailType({
             }`}
             onClick={(e) => {
               setIsActive(type.id);
-              handleFilter(e, type.category, true);
+              handleFilter(e, type.category, type.filterType);
             }}
           >
             <div className={css.contentContainer}>
@@ -79,7 +86,7 @@ export default function EmailType({
               </div>
               <p
                 className={`${css.numberBox} ${
-                  (type.value === "" || type.value === null) &&
+                  (type.value === 0 || type.value === null) &&
                   css.numberBoxHidden
                 }`}
               >

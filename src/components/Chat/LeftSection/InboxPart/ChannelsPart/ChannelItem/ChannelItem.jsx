@@ -77,7 +77,7 @@ export default function ChannelItem({
       } 
         ${isDragging ? css.isDragging : ""}  `}
       onClick={(e) => {
-        handleFilter(e, channel.type);
+        handleFilter(e, channel.type, "channel");
         handleIsActive(channel.id);
       }}
       draggable
@@ -104,7 +104,13 @@ export default function ChannelItem({
       </div>
 
       <div className={css.dragContainer}>
-        <p className={css.numberBox}>{channel.value}</p>
+        <p
+          className={`${css.numberBox} ${
+            (channel.value === 0 || !channel.value) && css.numberBoxHidden
+          }`}
+        >
+          {channel.value}
+        </p>
         <span className={css.dragIcon}>
           <RxDragHandleDots2 className={css.dragIcon} />
         </span>
