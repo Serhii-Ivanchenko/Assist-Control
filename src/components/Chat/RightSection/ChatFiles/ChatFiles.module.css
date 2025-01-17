@@ -1,6 +1,87 @@
-/* .wrapper{
-    border-radius: 12px;
-        background: var(--bg-secondary);
-        height: 100px;
-        width: 371px;
-} */
+ .wrapper {
+     border-radius: 12px;
+     background: var(--bg-secondary);
+     height: 200px;
+     width: 371px;
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+     /* justify-content: center;
+        align-items: center; */
+     padding: 10px 0px;
+ }
+
+ .box {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     padding: 10px 12px;
+     align-items: center;
+     width: 366px;
+     height: 44px;
+     border-radius: 12px;
+     border: 1px solid #33363F;
+ }
+
+ .text {
+     color: var(--white);
+     font-size: 16px;
+     font-style: normal;
+     font-weight: 500;
+     line-height: normal;
+     width: 220px;
+
+ }
+
+ /* .btnicon {
+     display: flex;
+     width: 30px;
+     height: 30px;
+     justify-content: center;
+     align-items: center;
+     border-radius: 6px;
+     background: var(--bg-input);
+     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+     border: none;
+     cursor: pointer;
+ } */
+
+ .icon {
+     color: var(--light-gray);
+     /* fill: var(--light-gray); */
+     width: 18px;
+     height: 18px;
+     /* background: var(--bg-input); */
+ }
+
+ .iconpdf {
+     fill: var(--red);
+     width: 20px;
+     height: 22px;
+     background-color: var(--white);
+     border-radius: 2px;
+     border-top-right-radius: 8px;
+ }
+
+ .spanpdf {
+     position: absolute;
+     top: 75%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     font-size: 6px;
+     font-weight: normal;
+     color: var(--black);
+ }
+
+ .iconbox {
+     position: relative;
+     display: inline-block;
+ }
+
+ .icontext {
+     display: flex;
+     align-items: center;
+     flex-direction: row;
+     gap: 14px;
+
+ }

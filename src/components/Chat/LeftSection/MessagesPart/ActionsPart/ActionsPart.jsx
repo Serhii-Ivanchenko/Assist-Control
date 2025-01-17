@@ -36,12 +36,20 @@ export default function ActionsPart({
   sortOrder,
 }) {
   const [openedActions, setOpenedActions] = useState(false);
+  const [tagsArr, setTagsArr] = useState(tags);
+  const [tagsModalIsOpen, setTagsModalIsOpen] = useState(false);
 
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef([]);
 
   const handleClickOutside = (event) => {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+    const isOutside = wrapperRef.current.every(
+      (ref) => ref && !ref.contains(event.target)
+    );
+
+    if (isOutside) {
+      console.log("Клік поза всіма елементами");
       setOpenedActions(false);
+      setTagsModalIsOpen(false);
     }
   };
 
@@ -50,14 +58,12 @@ export default function ActionsPart({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  });
-
-  const [tagsArr, setTagsArr] = useState(tags);
-  const [tagsModalIsOpen, setTagsModalIsOpen] = useState(false);
+  }, []);
 
   const openTagsModal = (e) => {
     e.stopPropagation();
     setTagsModalIsOpen((prev) => !prev);
+    setOpenedActions(false);
   };
 
   const handleTagsModalClose = (e) => {
@@ -65,19 +71,20 @@ export default function ActionsPart({
     setTagsModalIsOpen(false);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest(`.${css.select}`)) {
-        setTagsModalIsOpen(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (e) => {
+  //     if (!e.target.closest(`.${css.select}`)) {
+  //       setTagsModalIsOpen(false);
+  //       openedActions(false);
+  //     }
+  //   };
 
-    document.addEventListener("click", handleClickOutside);
+  //   document.addEventListener("click", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // }, []);
 
   return (
     <div className={css.actions}>
@@ -114,20 +121,36 @@ export default function ActionsPart({
         <p className={css.text}> Дії</p>
       ) : (
         <div className={css.actionsChecked}>
-          <div className={css.select} onClick={openTagsModal}>
-            <BsTag size={16} className={css.icon} />
-            <p className={css.actionsText}>Тег</p>
-            {tagsModalIsOpen ? (
-              <BsFillCaretUpFill size={16} className={css.icon} />
-            ) : (
-              <BsFillCaretDownFill size={16} className={css.icon} />
+          <div ref={(el) => (wrapperRef.current[0] = el)}>
+            <div className={css.select} onClick={openTagsModal}>
+              <BsTag size={16} className={css.icon} />
+              <p className={css.actionsText}>Тег</p>
+              {tagsModalIsOpen ? (
+                <BsFillCaretUpFill size={16} className={css.icon} />
+              ) : (
+                <BsFillCaretDownFill size={16} className={css.icon} />
+              )}
+            </div>
+
+            {tagsModalIsOpen && (
+              <SearchTags
+                onClose={handleTagsModalClose}
+                tagsArray={tagsArr}
+                setTagsArr={setTagsArr}
+                leftSectionTag={true}
+              />
             )}
           </div>
-
-          <div className={css.quickActionsBox} ref={wrapperRef}>
+          <div
+            className={css.quickActionsBox}
+            ref={(el) => (wrapperRef.current[1] = el)}
+          >
             <div
               className={css.select}
-              onClick={() => setOpenedActions(!openedActions)}
+              onClick={() => {
+                setOpenedActions(!openedActions);
+                setTagsModalIsOpen(false);
+              }}
             >
               <BsThreeDots size={16} className={css.icon} />
               <p className={css.actionsText}>Швидкі дії</p>
@@ -142,7 +165,7 @@ export default function ActionsPart({
                   <li
                     key={index}
                     className={css.actionsItem}
-                    onClick={() => setOpenedActions(false)}
+                    // onClick={() => setOpenedActions(false)}
                   >
                     {action.icon}
                     <p>{action.name}</p>
@@ -154,8 +177,8 @@ export default function ActionsPart({
         </div>
       )}
 
-      <div className={css.filter} onClick={handleSort}>
-        <BsArrowDownUp size={18} className={css.icon} />
+      <div className={css.filter}>
+        <BsArrowDownUp size={18} className={css.icon} onClick={handleSort} />
         <p className={css.text}>Нові</p>
         {sortOrder === "newFirst" ? (
           <IoIosArrowUp size={20} style={{ fill: "var(--light-gray)" }} />
@@ -163,14 +186,6 @@ export default function ActionsPart({
           <IoIosArrowDown size={20} style={{ fill: "var(--light-gray)" }} />
         )}
       </div>
-      {tagsModalIsOpen && (
-        <SearchTags
-          onClose={handleTagsModalClose}
-          tagsArray={tagsArr}
-          setTagsArr={setTagsArr}
-          leftSectionTag={true}
-        />
-      )}
     </div>
   );
 }

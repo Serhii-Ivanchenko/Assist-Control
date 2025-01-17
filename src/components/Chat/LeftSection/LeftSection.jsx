@@ -15,6 +15,10 @@ export default function LeftSection() {
   const chats = [
     {
       category: "chat",
+      isChosen: true,
+      isDelayed: false,
+      isClosed: false,
+      archive: false,
       type: "whatsApp",
       avatar: avatar,
       icon: whatsApp,
@@ -28,6 +32,10 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      isChosen: true,
+      isDelayed: false,
+      isClosed: false,
+      archive: false,
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -42,6 +50,10 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      isChosen: true,
+      isDelayed: false,
+      isClosed: false,
+      archive: false,
       type: "telegram",
       avatar: avatar,
       icon: telegram,
@@ -55,6 +67,10 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      isChosen: false,
+      isDelayed: true,
+      isClosed: false,
+      archive: false,
       type: "assist",
       avatar: avatar,
       icon: assist,
@@ -68,6 +84,10 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      isChosen: true,
+      isDelayed: true,
+      isClosed: false,
+      archive: false,
       type: "telegram",
       avatar: avatar,
       icon: telegram,
@@ -80,6 +100,10 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      isChosen: false,
+      isDelayed: false,
+      isClosed: false,
+      archive: true,
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -93,6 +117,10 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      isChosen: true,
+      isDelayed: true,
+      isClosed: false,
+      archive: false,
       type: "telegram",
       avatar: avatar,
       icon: telegram,
@@ -105,6 +133,10 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      isChosen: false,
+      isDelayed: false,
+      isClosed: false,
+      archive: true,
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -118,6 +150,10 @@ export default function LeftSection() {
     },
     {
       category: "chat",
+      isChosen: false,
+      isDelayed: true,
+      isClosed: false,
+      archive: false,
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -131,6 +167,10 @@ export default function LeftSection() {
     },
     {
       category: "email",
+      isChosen: true,
+      isDelayed: false,
+      isClosed: false,
+      archive: true,
       type: "gmail",
       avatar: avatar,
       icon: gmail,
@@ -140,7 +180,7 @@ export default function LeftSection() {
       managersPhoto: avatar,
       time: "2025-01-11T19:27:33",
       read: true,
-      id: "9",
+      id: "10",
     },
   ];
 
@@ -193,22 +233,17 @@ export default function LeftSection() {
 
   return (
     <div className={css.leftSectionWrapper}>
-      {/* LeftSection */}
-      {/* <InboxPart handleFilter={handleFilter} /> */}
-
       <InboxPart
         handleFilter={handleFilter}
         chats={memoizedChats}
         setFilteredChats={setActiveFilter}
-        // setActiveFilterCategory={setActiveFilterCategory}
+        setActiveFilterCategory={setActiveFilterCategory}
       />
       <MessagesPart
         chats={sortedAndFilteredChats}
-        // emptyList={filteredChats.length === 0 && filteredChats !== sortedChats}
         handleSort={handleSort}
         sortOrder={sortOrder}
       />
-      {/*<MessagesPart chats={filteredChats} /> */}
     </div>
   );
 }

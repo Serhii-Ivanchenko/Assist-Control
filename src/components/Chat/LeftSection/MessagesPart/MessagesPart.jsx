@@ -4,17 +4,29 @@ import css from "./MessagesPart.module.css";
 import ActionsPart from "./ActionsPart/ActionsPart";
 import ChatsPart from "./ChatsPart/ChatsPart";
 import { useState } from "react";
+import NewChatPopup from "./NewChatPopup/NewChatPopup";
+import { useRef, useEffect } from "react";
 
 export default function MessagesPart({ chats, handleSort, sortOrder }) {
   const [isChecked, setIsChecked] = useState(false);
-  // const [allChecked, setAllChecked] = useState(false);
   const [allChecked, setAllChecked] = useState(
     chats.map(() => false) // Динамічне створення стану для кожного елемента
   );
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const wrapperRef = useRef(null);
 
-  // const handleAllChecked = () => {
-  //   setAllChecked((prev) => !prev);
-  // };
+  const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setIsPopupOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleAllChecked = (event) => {
     const isChecked = event.target.checked;
@@ -32,9 +44,17 @@ export default function MessagesPart({ chats, handleSort, sortOrder }) {
     <div className={css.messagesPart}>
       <div className={css.titleBox}>
         <p className={css.title}>Повідомлення</p>
-        <button type="button" className={css.btn}>
-          <BsPencilSquare />
-        </button>
+
+        <div className={css.popupBox} ref={wrapperRef}>
+          <button
+            type="button"
+            className={css.btn}
+            onClick={() => setIsPopupOpen(!isPopupOpen)}
+          >
+            <BsPencilSquare />
+          </button>
+          {isPopupOpen && <NewChatPopup />}
+        </div>
       </div>
 
       <SearchByMessages />
