@@ -25,8 +25,8 @@ import uk from "date-fns/locale/uk";
 import ScheduleTable from "../../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 import AnimatedContent from "./AnimatedContent.jsx";
 import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent.jsx";
-import { useDispatch } from "react-redux";
-import { createEmployee } from "../../../redux/settings/operations.js";
+// import { useDispatch } from "react-redux";
+// import { createEmployee } from "../../../redux/settings/operations.js";
 
 registerLocale("uk", uk);
 
@@ -37,7 +37,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [employee, setEmployee] = useState(employeeInfo || {});
   const buttonRefs = useRef([]);
   const fileInputRef = useRef(null);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleDateButtonClick = () => setDateOpen((prev) => !prev);
 
@@ -59,18 +59,6 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     }
   };
 
-  // const closePopover = () => {
-  //   setSettingsIsOpen(false);
-  // };
-
-  // const generateRandomString = (length) => {
-  //   const characters =
-  //     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  //   return Array.from({ length }, () =>
-  //     characters.charAt(Math.floor(Math.random() * characters.length))
-  //   ).join("");
-  // };
-
   const generateRandomStringPassword = (length) => {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -78,14 +66,6 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       characters.charAt(Math.floor(Math.random() * characters.length))
     ).join("");
   };
-
-  // const [login, setLogin] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [phone, setPhone] = useState("");
-
-  // const updatePhone = (e) => {
-  //   setPhone(e.target.value);
-  // };
 
   const generateLogin = (values, setFieldValue) => {
     setFieldValue("login", values.phone);
@@ -117,7 +97,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     phone: employee.phone || "",
     address: employee.address || "",
     birthday: new Date(),
-    // position: "",
+    position: employee.role || "",
     role: employee.role || "",
     email: employee.email || "",
     login: employee.login || "",
@@ -151,8 +131,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       ...values,
       birthday: dateOnly,
     };
-    const files = values.files;
-    dispatch(createEmployee({ employeeData, files }));
+    // const files = values.files;
+    // dispatch(createEmployee({ employeeData, files }));
     console.log(employeeData);
     actions.resetForm();
   };
@@ -256,9 +236,10 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                       name="position"
                       className={`${css.input} ${css.inputSelect}`}
                     >
-                      <option value="m">Механік</option>
-                      <option value="c">Кухар</option>
-                      <option value="w">Працівник</option>
+                      <option value="Механік">Механік</option>
+                      <option value="Кухар">Кухар</option>
+                      <option value="Працівник">Працівник</option>
+                      <option value="Власник">Власник</option>
                     </Field>
                     <BsFillCaretDownFill className={css.iconArrowRight} />
                   </div>
