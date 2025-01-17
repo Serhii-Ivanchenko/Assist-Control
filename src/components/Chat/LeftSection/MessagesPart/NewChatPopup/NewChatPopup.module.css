@@ -5,7 +5,8 @@
   z-index: 999;
 
   width: 255px;
-  height: 279px;
+  height: fit-content;
+  max-height: 279px;
   padding: 10px;
 
   border-radius: 12px;
@@ -38,7 +39,7 @@
   border: none;
   outline: none;
 
-  color: #828a9e;
+  color: var(--light-grey);
   font-variant-numeric: lining-nums proportional-nums;
   font-size: 14px;
   font-style: normal;
@@ -55,7 +56,8 @@ input::placeholder {
   flex-direction: column;
   gap: 13px;
 
-  height: 209px;
+  max-height: 209px;
+  height: fit-content;
   overflow: auto;
 }
 
