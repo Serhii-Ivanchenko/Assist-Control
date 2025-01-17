@@ -334,6 +334,26 @@
   fill: var(--light-gray);
 }
 
+.addBtn {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+.plusIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  color: var(--bg-secondary);
+  background-color: var(--white);
+  stroke-width: 3px;
+  cursor: pointer;
+  /* width: 30px;
+  height: 30px; */
+}
+
 .ratingAndMoney {
   display: flex;
   justify-content: space-between;
