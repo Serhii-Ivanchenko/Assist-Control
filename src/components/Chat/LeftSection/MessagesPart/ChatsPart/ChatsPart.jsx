@@ -36,15 +36,22 @@ export default function ChatsPart({
     return `${days}d ago`;
   };
 
+  const warningBorder = (time, read) => {
+    const difference = Date.now() - new Date(time).getTime();
+    if (difference >= 300000 && !read) {
+      return css.warningBorder;
+    }
+  };
+
   return (
     <div className={css.scroll}>
       <ul className={css.chatsList}>
         {chats.map((chat, index) => (
           <li
             key={index}
-            className={`${css.chatsListItem} ${
-              chat.warning && css.warningBorder
-            } ${chosen === chat.id && css.chosenChat}`}
+            className={`${css.chatsListItem} 
+           ${chosen === chat.id && css.chosenChat}
+           ${warningBorder(chat.time, chat.read)}`}
             onClick={() => handleChoose(chat.id)}
           >
             {isChecked && (
