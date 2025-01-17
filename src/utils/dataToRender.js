@@ -269,7 +269,7 @@ export const labelNamesRecomendations = {
   phoneNumber: "Телефон",
   carModelYear: "Марка-модель",
   timeForTO: "Час до ТО",
-  infoBtnnfo: "Інфо",
+  infoBtn: "Інфо",
   createBtn: "Створити запис",
   delBtn: "Видалити картку",
   notificBtn: "Сповіщення",

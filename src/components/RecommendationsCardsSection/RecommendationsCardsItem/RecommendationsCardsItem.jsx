@@ -4,52 +4,74 @@ import clsx from "clsx";
 import {
   BsPersonFill,
   BsTelephoneOutboundFill,
-  BsStopwatch,
+  BsPlusLg,
+  BsTrash,
 } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../../assets/images/flagUa.webp";
-import renderStatusCars from "../../../utils/renderStatusCars.jsx";
 import { getBackgroundStyle } from "../../../utils/getBackgroundStyle.js";
 import CarDetailButton from "../../sharedComponents/CarDetailButton/CarDetailButton.jsx";
-import StatusBtn from "../../sharedComponents/StatusBtn/StatusBtn.jsx";
 import { useSelector } from "react-redux";
 import RatingStars from "../../sharedComponents/RatingStars/RatingStars.jsx";
-import { selectVisibilityCar } from "../../../redux/visibility/selectors.js";
+import { selectVisibilityRecomendations } from "../../../redux/visibility/selectors.js";
 import { useState } from "react";
 import { FaEye } from "react-icons/fa";
+import renderStatusRecomendations from "../../../utils/renderStatusRecomendations.jsx";
+import { GiAlarmClock } from "react-icons/gi";
+import Modal from "../../Modals/Modal/Modal.jsx";
+import ServiceBookingModal from "../../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
+import ArchiveModal from "../../Modals/ArchiveModal/ArchiveModal.jsx";
 
-export default function RecommendationsCardsItem({ car}) {
-  const visibility = useSelector(selectVisibilityCar);
+export default function RecommendationsCardsItem({ car }) {
+  const visibility = useSelector(selectVisibilityRecomendations);
   const [isMonitoring, setisMonitoring] = useState("main");
+  const [modalState, setModalState] = useState({
+    serviceBooking: false,
+    archive: false,
+  });
 
   const {
     id,
     status,
     plate: carNumber,
     name,
-    car_id,
-    date,
     phone,
     auto,
     photo_url: photoUrl,
     client_rating,
     mileage,
   } = car;
-  
+
   const carPhoto = photoUrl || absentAutoImg;
 
   const formatCarNumber = (number) => {
     if (!number) return "";
     return number.replace(/\s+/g, "");
   };
+
+  const openServiceBookingModal = () => {
+    setModalState({ serviceBooking: true });
+  };
+
+  const openArchiveModal = () => {
+    setModalState({ ...modalState, archive: true });
+  };
+
+  const closeModals = () => {
+    setModalState({
+      serviceBooking: false,
+      archive: false,
+    });
+  };
+
   return (
     <div
       className={styles.dayCarsItemContainer}
       style={getBackgroundStyle(status)}
     >
       <div className={styles.userInfo}>
-        <div>{renderStatusCars(status, styles)}</div>
+        <div>{renderStatusRecomendations(status, styles)}</div>
         <div className={styles.infoCard}>
           {visibility?.name && (
             <div
@@ -59,9 +81,7 @@ export default function RecommendationsCardsItem({ car}) {
               )}
             >
               <BsPersonFill className={styles.iconHuman} color="#617651" />
-              <span className={styles.textName}>
-                {name ? name : "Гість"}
-              </span>
+              <span className={styles.textName}>{name ? name : "Гість"}</span>
             </div>
           )}
 
@@ -94,51 +114,69 @@ export default function RecommendationsCardsItem({ car}) {
             </div>
           )}
         </div>
-
-        {visibility?.vin && (
+        {visibility?.timeForTO && (
           <div
             className={clsx(
               styles.vinContainer,
-              !visibility.vin && styles.hidden
+              !visibility.timeForTO && styles.hidden
             )}
           >
-            <p className={styles.vinCode}>
-            До ТО залишилось...
-            </p>
+            <p className={styles.vinCode}>До ТО залишилось...</p>
             <button className={styles.copyButton}>
-            <FaEye size={16} />
+              <FaEye size={16} />
             </button>
           </div>
         )}
 
         <div className={styles.btnContainer}>
-          {visibility?.status && <StatusBtn car={car} />}
-          {visibility?.info && (
+          {visibility?.infoBtn && (
             <CarDetailButton
               carId={id}
               location={isMonitoring}
               carName={car.auto}
             />
           )}
+          {visibility?.createBtn && (
+            <button className={styles.plus} onClick={openServiceBookingModal}>
+              <BsPlusLg className={styles.iconPlus} />
+            </button>
+          )}
+          {modalState.serviceBooking && (
+            <Modal isOpen={modalState.serviceBooking} onClose={closeModals}>
+              <ServiceBookingModal onClose={closeModals} />
+            </Modal>
+          )}
+          {visibility?.notificBtn && (
+            <button className={styles.clockContainer}>
+              <GiAlarmClock className={styles.iconClock} size={20} />
+            </button>
+          )}
+          {visibility?.delBtn && (
+            <button
+              className={styles.clockContainer}
+              onClick={openArchiveModal}
+            >
+              <BsTrash className={styles.iconTrash} size={18} />
+            </button>
+          )}
+          {modalState.archive && (
+            <Modal isOpen={modalState.archive} onClose={closeModals}>
+              <ArchiveModal onClose={closeModals} />
+            </Modal>
+          )}
         </div>
       </div>
-
       <div className={styles.carsInfo}>
         <div className={styles.carInfoLeft}>
           {visibility?.rating && (
             <div className={clsx(!visibility.rating && styles.hidden)}>
-              <RatingStars rating={car.rating} />
+              <RatingStars rating={client_rating} />
             </div>
           )}
 
-          {visibility?.prePayment && (
-            <div
-              className={clsx(
-                styles.prevCoast,
-                !visibility.prePayment && styles.hidden
-              )}
-            >
-              <p className={styles.money}>₴ 2,200.00</p>
+          {visibility?.KP && (
+            <div className={clsx(styles.KP, !visibility.KP && styles.hidden)}>
+              <p className={styles.money}>КП</p>
             </div>
           )}
         </div>
@@ -195,18 +233,6 @@ export default function RecommendationsCardsItem({ car}) {
               <p className={styles.mileage}>{mileage ? mileage : "хххххх"}</p>
             </div>
           )}
-
-          {visibility.time && (
-            <div
-              className={clsx(
-                styles.timeWork,
-                !visibility.time && styles.hidden
-              )}
-            >
-              <BsStopwatch size={13} color="#D5ACF3" />
-            </div>
-          )}
-
           {visibility?.totalPrice && (
             <div
               className={clsx(

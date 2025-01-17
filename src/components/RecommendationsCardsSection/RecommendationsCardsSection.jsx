@@ -16,14 +16,31 @@ export default function RecommendationsCardsSection() {
     };
   });
 
+  // Функція для визначення кольору контейнера з числом
+  const getButtonColor = (carsCount) => {
+    if (carsCount >= 3) return '#DB4C20';
+    if (carsCount === 2) return '#DB8120';
+    if (carsCount === 1) return '#A97742';
+    return '#4A4A4A';
+  };
+
   return (
     <div className={css.wrapper}>
-      {carsByDate.map(({ date, cars }) => (
-        <div key={date} className={css.column}>
-          <h3 className={css.columnTitle}>{date}</h3>
-          <RecommendationsCardsList cars={cars} />
-        </div>
-      ))}
+      {carsByDate.map(({ date, cars }) => {
+        const day = date.split('-')[2];
+        const carsCount = cars.length;
+        return (
+          <div key={date} className={css.column}>
+            <div 
+              className={css.date} 
+              style={{ backgroundColor: getButtonColor(carsCount) }}
+            >
+              {day}
+            </div>
+            <RecommendationsCardsList cars={cars} />
+          </div>
+        );
+      })}
     </div>
   );
 }

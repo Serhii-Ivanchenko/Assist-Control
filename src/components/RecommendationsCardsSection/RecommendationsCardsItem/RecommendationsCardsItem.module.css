@@ -56,7 +56,7 @@
   
   @media only screen and (min-width: 1850px) {
     .title {
-      width: 137px;
+      width: 145px;
       height: 24px;
     }
   }
@@ -73,7 +73,6 @@
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   
   }
-  
   
   .checkRepair {
     font-size: 12px;
@@ -138,7 +137,7 @@
   .vinContainer {
     display: flex;
     width: 185px;
-    height: 27px;
+    height: 30px;
     padding: 3px 5px;
     margin-bottom: 5px;
     justify-content: center;
@@ -162,36 +161,93 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 21px;
-    height: 21px;
+    width: 24px;
+    height: 24px;
     border-radius: 6px;
+    padding: 4px;
     color:  var(--icon-gray);
     background: var(--main-gray);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);      border: none;
-    border-radius: 4px;
     cursor: pointer;
     margin-left: auto;    
-  }
-  
-  
+  }  
   
   @media only screen and (min-width: 1850px) {
     .vinCode {
       font-size: 14px;
+      line-height: 16px;
     }
   
     .vinContainer{
       padding: 3px 10px;
       width: 185px;
-      height: 27px;
+      height: 30px;
     }
   }
+
+  .plus{
+    width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      border: none;
+      background-color: var(--green);
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+}
+
+.iconPlus {
+      display: flex;
+        width: 14px;
+        height: 14px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
+        color: var(--green);
+        background-color: var(--white);
+        stroke-width: 2px;
+}
+.clockContainer{
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  background: var(--bg-input);
+}
+
+.iconClock{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  fill: var(--status-new);
+}
+.iconTrash{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  fill: var(--red);
+}
   
   .textName {
     color: var(--white);
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
+
+    display: block; 
+    max-width: 150px; 
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis; 
   }
   
   @media only screen and (min-width: 1850px) {
@@ -299,33 +355,16 @@
       width: 80px;
     }
   }
-  
-  /* .carBtnNumber {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    width: 13px;
-    height: 13px;
-    margin-bottom: 15px;
-  } */
-  
+
   .money {
-    display: none;
+     display: flex;
+    margin-top: auto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
   }
   
-  @media only screen and (min-width: 1850px) {
-    .money {
-      display: flex;
-      margin-top: auto;
-      color: var(--green);
-      font-size: 14px;
-      font-weight: 600;
-      line-height: normal;
-    }
-  }
-  
-  .prevCoast{
+  .KP{
     margin-top: auto;
   }
   
@@ -454,8 +493,6 @@
   .totalPay {
     margin-top: auto;
   }
-  
-  
   
   .iconWrapper{
     position: relative;
