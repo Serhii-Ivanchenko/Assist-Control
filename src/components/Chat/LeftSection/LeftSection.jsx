@@ -190,11 +190,27 @@ export default function LeftSection() {
   const [sortOrder, setSortOrder] = useState("newFirst");
   const [activeFilter, setActiveFilter] = useState(null);
   const [activeFilterCategory, setActiveFilterCategory] = useState(null);
-
+  const [activeFilterState, setActiveFilterState] = useState(null);
   const memoizedChats = useMemo(() => chats, []);
+  const [initialChats, setInitialChats] = useState(memoizedChats);
+
+  const [favourite, setFavourite] = useState(
+    initialChats.filter((chat) => chat.isChosen === true).length
+  );
+
+  const categoryCounts = useMemo(() => {
+    return {
+      email: initialChats.filter((chat) => chat.category === "email").length,
+      chat: initialChats.filter((chat) => chat.category === "chat").length,
+      delayed: initialChats.filter((chat) => chat.isDelayed === true).length,
+      closed: initialChats.filter((chat) => chat.isClosed === true).length,
+      chosen: favourite,
+      archive: initialChats.filter((chat) => chat.archive === true).length,
+    };
+  }, [initialChats, favourite]);
 
   useEffect(() => {
-    let updatedChats = [...memoizedChats];
+    let updatedChats = [...initialChats];
 
     // Фільтрація
     if (activeFilter) {
@@ -207,6 +223,23 @@ export default function LeftSection() {
       );
     }
 
+    if (activeFilterState) {
+      updatedChats = updatedChats.filter((chat) => {
+        switch (activeFilterState) {
+          case "chosen":
+            return chat.isChosen;
+          case "delayed":
+            return chat.isDelayed;
+          case "archive":
+            return chat.archive;
+          case "closed":
+            return chat.isClosed;
+          default:
+            return true;
+        }
+      });
+    }
+
     // Сортування
     updatedChats.sort((a, b) => {
       return sortOrder === "newFirst"
@@ -215,34 +248,67 @@ export default function LeftSection() {
     });
 
     setSortedAndFilteredChats(updatedChats);
-  }, [memoizedChats, sortOrder, activeFilter, activeFilterCategory]);
+  }, [
+    initialChats,
+    sortOrder,
+    activeFilter,
+    activeFilterCategory,
+    activeFilterState,
+  ]);
 
   const handleSort = () => {
     setSortOrder((prev) => (prev === "newFirst" ? "oldFirst" : "newFirst"));
   };
 
-  const handleFilter = (e, type, isCategory = false) => {
+  const handleFilter = (e, type, filterType) => {
     e.stopPropagation();
 
-    if (isCategory) {
-      setActiveFilterCategory(type);
-    } else {
-      setActiveFilter(type);
+    switch (filterType) {
+      case "category":
+        setActiveFilterCategory(type);
+        setActiveFilterState(null);
+        break;
+      case "channel":
+        setActiveFilter(type);
+        break;
+      case "state":
+        setActiveFilterState(type);
+        setActiveFilterCategory(null);
+        break;
+      default:
+        return;
     }
+  };
+
+  const handleFavourite = (e, id) => {
+    e.stopPropagation();
+
+    const updatedChats = initialChats.map((chat) =>
+      chat.id === id ? { ...chat, isChosen: !chat.isChosen } : chat
+    );
+
+    setInitialChats(updatedChats);
+
+    // Оновлюємо кількість обраних чатів
+    const newChosenCount = updatedChats.filter((chat) => chat.isChosen).length;
+    setFavourite(newChosenCount);
   };
 
   return (
     <div className={css.leftSectionWrapper}>
       <InboxPart
         handleFilter={handleFilter}
-        chats={memoizedChats}
+        chats={initialChats}
         setFilteredChats={setActiveFilter}
         setActiveFilterCategory={setActiveFilterCategory}
+        setActiveFilterState={setActiveFilterState}
+        categoryCounts={categoryCounts}
       />
       <MessagesPart
         chats={sortedAndFilteredChats}
         handleSort={handleSort}
         sortOrder={sortOrder}
+        handleFavourite={handleFavourite}
       />
     </div>
   );

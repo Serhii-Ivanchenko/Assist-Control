@@ -89,6 +89,10 @@
   line-height: normal;
 }
 
+.numberBoxHidden {
+  display: none;
+}
+
 .iconBox {
   width: 26px;
   height: 26px;

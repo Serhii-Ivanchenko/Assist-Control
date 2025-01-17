@@ -1,4 +1,5 @@
 import { BsBookmark } from "react-icons/bs";
+import { BsBookmarkFill } from "react-icons/bs";
 import telegram from "../../../../../assets/images/ChannelsImages/Telegram_1.png";
 // import whatsApp from "../../../../../assets/images/ChannelsImages/WhatsApp_1.png";
 // import assist from "../../../../../assets/images/ChannelsImages/logo-rect 1.png";
@@ -13,6 +14,7 @@ export default function ChatsPart({
   isChecked,
   handleCheckboxChange,
   allChecked,
+  handleFavourite,
 }) {
   const [chosen, setChosen] = useState(false);
 
@@ -95,7 +97,17 @@ export default function ChatsPart({
                     alt=""
                     className={css.managersPhoto}
                   />
-                  <BsBookmark size={18} />
+                  {chat.isChosen ? (
+                    <BsBookmarkFill
+                      size={18}
+                      onClick={(e) => handleFavourite(e, chat.id)}
+                    />
+                  ) : (
+                    <BsBookmark
+                      size={18}
+                      onClick={(e) => handleFavourite(e, chat.id)}
+                    />
+                  )}
                 </div>
                 <p className={css.time}>{time(chat.time)}</p>
               </div>

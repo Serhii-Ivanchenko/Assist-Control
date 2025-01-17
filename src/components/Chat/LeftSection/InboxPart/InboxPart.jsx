@@ -10,6 +10,8 @@ export default function InboxPart({
   chats,
   setFilteredChats,
   setActiveFilterCategory,
+  setActiveFilterState,
+  categoryCounts,
 }) {
   const [isActive, setIsActive] = useState(null);
 
@@ -30,6 +32,7 @@ export default function InboxPart({
               className={`${css.text} ${css.textIsActive}`}
               onClick={() => {
                 setActiveFilterCategory(null);
+                setActiveFilterState(null);
                 setIsActive(false);
               }}
             >
@@ -51,6 +54,7 @@ export default function InboxPart({
         chats={chats}
         isActive={isActive}
         setIsActive={setIsActive}
+        categoryCounts={categoryCounts}
 
         // setActiveFilterCategory={setActiveFilterCategory}
       />
