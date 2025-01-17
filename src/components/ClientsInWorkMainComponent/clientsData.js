@@ -4,7 +4,7 @@ export const clientsData = [
   {
     car_id: 1,
     status: "repair",
-    car_model: "HONDA CIVIC",
+    car_model: "VOLKSWAGEN PASSAT",
     car_img: defImg,
     isActive: true,
     pre_paid: "2000",

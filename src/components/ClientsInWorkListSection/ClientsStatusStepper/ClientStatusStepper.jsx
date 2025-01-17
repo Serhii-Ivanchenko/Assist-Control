@@ -92,7 +92,7 @@ function ClientStatusStepper({
         setModalContent(<DetailedClientInfo onClose={closeModal} />);
         break;
       case 1:
-        setModalContent("Modal for recommendation");
+        setModalContent("Modal for contact information");
         break;
       case 2:
         setModalContent("Modal for diagnostics");
