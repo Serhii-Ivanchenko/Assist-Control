@@ -24,6 +24,22 @@ export default function RecommendationsCardsSection() {
     return '#4A4A4A';
   };
 
+//   const getButtonColorCrm = (percent) => {
+//     if (percent >= 80) {
+//       return "#DB3020";
+//     } else if (percent >= 60) {
+//       return "#DB4C20";
+//     } else if (percent >= 40) {
+//       return "var(--orange)";
+//     } else if (percent >= 20) {
+//       return "var(--mid-orange)";
+//     } else if (percent > 0) {
+//       return "var( --dark-orange)";
+//     } else {
+//       return "var(--input-stroke)";
+//     }
+// };
+
   return (
     <div className={css.wrapper}>
       {carsByDate.map(({ date, cars }) => {

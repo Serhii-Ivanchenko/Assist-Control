@@ -26,11 +26,11 @@
 }
 
 .wrapper::-webkit-scrollbar-track {
-    background: #23252C;
+    background: vat( --bg-secondary);
 }
 
 .wrapper::-webkit-scrollbar-thumb {
-    background-color: #515562;
+    background: var(--main-gray);
     border-radius: 4px;
 }
 

@@ -1053,6 +1053,7 @@ export const carsInRecomendations = [
     photo_url: "https://api.assist.cam/auto/СА4500ВН.jpg",
     client_name: "Неизвестный клиент",
     client_rating: "Немає рейтингу",
+    percent: 37
   },
   {
     id: 1972,
@@ -1069,6 +1070,7 @@ export const carsInRecomendations = [
     photo_url: "https://api.assist.cam/auto/СН8757ІІ.jpg",
     client_name: "Неизвестный клиент",
     client_rating: "Немає рейтингу",
+    percent: 15
   },
   {
     id: 1973,
@@ -1084,6 +1086,7 @@ export const carsInRecomendations = [
     photo_url: "https://api.assist.cam/auto/СН6957ІІ.jpg",
     client_name: "Неизвестный клиент",
     client_rating: "Немає рейтингу",
+    percent: 23
   },
   {
     id: 1974,
@@ -1098,6 +1101,7 @@ export const carsInRecomendations = [
     company_id: 1,
     photo_url: "https://api.assist.cam/auto/КА1234АС.jpg",
     client_rating: "Немає рейтингу",
+    percent: 60
   },
   {
     id: 1975,
@@ -1112,6 +1116,7 @@ export const carsInRecomendations = [
     company_id: 1,
     photo_url: "https://api.assist.cam/auto/ВС5678ЕР.jpg",
     client_rating: "Немає рейтингу",
+    percent: 45
   },
   {
     id: 1976,
