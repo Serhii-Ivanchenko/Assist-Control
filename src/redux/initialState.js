@@ -292,7 +292,7 @@ export const initialState = {
     chatMessages: [],
     userInfo: [],
     tags: [],
-    prompts: [],
+    templates: [],
     selectedPrompt: null,
   },
 };

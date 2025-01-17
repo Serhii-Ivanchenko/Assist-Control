@@ -12,6 +12,6 @@ export const selectUserInfo = (state) => state.chat.userInfo;
 
 export const selectTags = (state) => state.chat.tags;
 
-export const selectPrompts = (state) => state.chat.prompts;
+export const selectTemplates = (state) => state.chat.templates;
 
 export const selectSelectedPrompt = (state) => state.chat.selectedPrompt;
