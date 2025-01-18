@@ -1,0 +1,13 @@
+.carsListContainer {
+    background-color: transparent;
+    box-shadow: none;
+    width: 365px;
+    min-height: 604px;
+    padding: 0;
+  }
+  
+  .crmCarList{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
