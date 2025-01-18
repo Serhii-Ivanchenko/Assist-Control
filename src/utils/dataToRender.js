@@ -1053,7 +1053,7 @@ export const carsInRecomendations = [
     photo_url: "https://api.assist.cam/auto/СА4500ВН.jpg",
     client_name: "Неизвестный клиент",
     client_rating: "Немає рейтингу",
-    percent: 37
+    percent: 37,
   },
   {
     id: 1972,
@@ -1070,7 +1070,7 @@ export const carsInRecomendations = [
     photo_url: "https://api.assist.cam/auto/СН8757ІІ.jpg",
     client_name: "Неизвестный клиент",
     client_rating: "Немає рейтингу",
-    percent: 15
+    percent: 15,
   },
   {
     id: 1973,
@@ -1086,7 +1086,7 @@ export const carsInRecomendations = [
     photo_url: "https://api.assist.cam/auto/СН6957ІІ.jpg",
     client_name: "Неизвестный клиент",
     client_rating: "Немає рейтингу",
-    percent: 23
+    percent: 23,
   },
   {
     id: 1974,
@@ -1101,7 +1101,7 @@ export const carsInRecomendations = [
     company_id: 1,
     photo_url: "https://api.assist.cam/auto/КА1234АС.jpg",
     client_rating: "Немає рейтингу",
-    percent: 60
+    percent: 60,
   },
   {
     id: 1975,
@@ -1116,7 +1116,7 @@ export const carsInRecomendations = [
     company_id: 1,
     photo_url: "https://api.assist.cam/auto/ВС5678ЕР.jpg",
     client_rating: "Немає рейтингу",
-    percent: 45
+    percent: 45,
   },
   {
     id: 1976,
@@ -1131,5 +1131,33 @@ export const carsInRecomendations = [
     company_id: 1,
     photo_url: "https://api.assist.cam/auto/СВ9876ІТ.jpg",
     client_rating: "Немає рейтингу",
-  }
+  },
+  {
+    id: 1977,
+    client_id: null,
+    status: "ТО",
+    plate: "СВ9876ІТ",
+    name: "Павло Іваненко",
+    car_id: 6210,
+    date: "2025-01-16T14:20:45",
+    auto: "Honda CR-V",
+    phone: "0931122334",
+    company_id: 1,
+    photo_url: "https://api.assist.cam/auto/СВ9876ІТ.jpg",
+    client_rating: "Немає рейтингу",
+  },
+  {
+    id: 1978,
+    client_id: null,
+    status: "ТО",
+    plate: "СВ9876ІТ",
+    name: "Павло Іваненко",
+    car_id: 6210,
+    date: "2025-01-17T14:20:45",
+    auto: "Honda CR-V",
+    phone: "0931122334",
+    company_id: 1,
+    photo_url: "https://api.assist.cam/auto/СВ9876ІТ.jpg",
+    client_rating: "Немає рейтингу",
+  },
 ];
