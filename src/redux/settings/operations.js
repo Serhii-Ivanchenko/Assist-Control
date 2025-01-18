@@ -362,13 +362,29 @@ export const getAllSuppliers = createAsyncThunk(
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
+          "Content-Type": "application/json",
         },
       });
       console.log("getAllSuppliers", response.data);
 
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      // Логування детальної інформації про помилку
+      console.error("Error during getAllSuppliers:", {
+        message: error.message,
+        code: error.code,
+        config: error.config,
+        response: error.response
+          ? {
+              status: error.response.status,
+              data: error.response.data,
+              headers: error.response.headers,
+            }
+          : null,
+      });
+
+      // Повертаємо повідомлення про помилку в reject
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
