@@ -46,7 +46,9 @@ export default function CarsList({ car, key }) {
             <div className={css.modelAndYear}>
               <div className={css.carNameBox}>
                 <IoCarSport className={css.carIcon} size={30} />
-                <p className={css.carName}>{car?.model || "дані відсутні"}</p>
+                <p className={css.carName}>
+                  {car?.car_model || "дані відсутні"}
+                </p>
               </div>
 
               <div className={css.carYearBox}>
