@@ -14,9 +14,8 @@ export default function MessagesPart({
   handleFavourite,
 }) {
   const [isChecked, setIsChecked] = useState(false);
-  const [allChecked, setAllChecked] = useState(
-    chats.map(() => false) // Динамічне створення стану для кожного елемента
-  );
+  const [allChecked, setAllChecked] = useState([]);
+  const [checkedChats, setCheckedChats] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const wrapperRef = useRef(null);
 
@@ -33,14 +32,34 @@ export default function MessagesPart({
     };
   }, []);
 
+  useEffect(() => {
+    if (chats.length > 0) {
+      setAllChecked(chats.map((chat) => ({ id: chat.id, checked: false })));
+    }
+  }, [chats]);
+
   const handleAllChecked = (event) => {
     const isChecked = event.target.checked;
-    setAllChecked(chats.map(() => isChecked));
+    setAllChecked(chats.map((chat) => ({ id: chat.id, checked: isChecked })));
   };
 
-  const handleCheckboxChange = (index) => {
-    setAllChecked(allChecked.map((item, i) => (i === index ? !item : item)));
+  const handleCheckboxChange = (id) => {
+    setAllChecked(
+      allChecked.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    );
   };
+
+  const handleChosenChats = () => {
+    setCheckedChats(allChecked.filter((chat) => chat.checked));
+  };
+
+  // const handleAddChats
+
+  useEffect(() => {
+    console.log("allchecked", allChecked);
+  }, [allChecked]);
 
   const handleChecked = () => {
     setIsChecked((prev) => !prev);

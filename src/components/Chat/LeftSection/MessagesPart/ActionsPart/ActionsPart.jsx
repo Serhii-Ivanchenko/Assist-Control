@@ -79,7 +79,9 @@ export default function ActionsPart({
             name="chooseAll"
             id="chooseAll"
             className={css.checkbox}
-            checked={allChecked.every((item) => item)}
+            checked={
+              allChecked.length > 0 && allChecked.every((item) => item.checked)
+            }
             onChange={handleAllChecked}
           />
           <span className={css.cbMark}>

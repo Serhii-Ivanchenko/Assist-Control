@@ -160,7 +160,7 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "2025-01-11T19:27:33",
+      time: "2025-01-18T16:00:33",
       read: true,
       id: "9",
     },
