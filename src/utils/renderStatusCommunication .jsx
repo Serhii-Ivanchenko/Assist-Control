@@ -4,7 +4,7 @@ import { IoCarSportSharp } from "react-icons/io5";
 import clsx from "clsx";
 import { IoIosCloseCircle } from "react-icons/io";
 
-const renderStatusCommunication = (status, complete_d, styles = {}, isFilter) => {
+const renderStatusCommunication = (status, styles = {}, isFilter) => {
   let icon;
   let statusText;
   let statusClass = "";

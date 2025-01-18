@@ -51,19 +51,20 @@ function ChatListItem({ message }) {
                 />
               );
             } else if (file.type.startsWith("audio/")) {
-              return (
-                <AudioPlayer
-                  key={index}
-                  audio={file.url}
-                  size="small"
-                  audioDuration="00:00"
-                />
-              );
+              return <AudioPlayer key={index} audio={file.url} size="big" />;
             } else if (
               file.type === "application/pdf" ||
               file.type === "application/msword" ||
               file.type ===
-                "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+              file.type === "application/vnd.ms-excel" ||
+              file.type ===
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
+              file.type === "application/x-rar-compressed" ||
+              file.type === "application/zip" ||
+              file.type === "application/x-zip-compressed" ||
+              file.type === "application/x-7z-compressed" ||
+              file.type === "text/plain"
             ) {
               return (
                 <button

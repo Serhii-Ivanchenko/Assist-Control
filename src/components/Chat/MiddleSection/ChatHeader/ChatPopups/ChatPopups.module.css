@@ -1,0 +1,102 @@
+.wrapper {
+  display: flex;
+  position: absolute;
+  top: 55px;
+  right: -20px;
+  width: fit-content;
+  border: none;
+  border-radius: 12px;
+  background: var(--bg-input);
+  box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+
+  font-weight: 400;
+}
+
+.phonePopup {
+  display: flex;
+  width: 300px;
+  height: 70px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: var(--light-gray);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.clientName {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--light-gray);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.1875em;
+  text-decoration: none;
+  transition: text-decoration 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+    transform 0.3s ease;
+}
+
+.phonePopup a:hover {
+  transform: scale(1.03);
+  text-decoration: underline;
+}
+
+.settingsList {
+  display: flex;
+  width: 220px;
+  flex-direction: column;
+  align-items: flex-start;
+  /* gap: 4px; */
+  border: none;
+  border-radius: 12px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.settingsList li {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* border-bottom: 1px solid var(--main-gray); */
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.settingsList li:first-child {
+  border-radius: 12px 12px 0 0;
+}
+
+.settingsList li:last-child {
+  border: none;
+  border-radius: 0 0 12px 12px;
+}
+
+.settingsList li:not(:last-child) {
+  border-bottom: solid 1px var(--input-stroke);
+}
+
+.settingsList li:hover {
+  background: var(--main-gray);
+}
+
+.settingsList li:hover .settingsBtn {
+  background: var(--main-gray);
+}
+
+.settingsBtn {
+  display: inline-flex;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-input);
+  width: 200px;
+  cursor: pointer;
+  border: none;
+
+  color: var(--light-gray);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}

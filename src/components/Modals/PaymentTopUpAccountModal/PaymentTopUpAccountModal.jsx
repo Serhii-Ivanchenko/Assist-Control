@@ -21,8 +21,6 @@ import { useState } from "react";
 export default function PaymentTopUpAccountModal({ onClose }) {
   const [modalPaymentDetailsIsOpen, setModalPaymentDetailsIsOpen] =
     useState(false);
-  const [paymentTopUpAccountModalIsOpen, setPaymentTopUpAccountModalIsOpen] =
-    useState(true);
 
   const [sumToPay, setSumToPay] = useState(0);
 
@@ -32,116 +30,99 @@ export default function PaymentTopUpAccountModal({ onClose }) {
 
   const closeModalPaymentDetails = () => {
     setModalPaymentDetailsIsOpen(false);
-  };
-
-  const openPaymentTopUpAccountModal = () => {
-    setPaymentTopUpAccountModalIsOpen(true);
-  };
-
-  const closePaymentTopUpAccountModal = () => {
-    setPaymentTopUpAccountModalIsOpen(false);
+    onClose();
   };
 
   const handleSubmit = (values, actions) => {
     setSumToPay(values.sum);
-    closePaymentTopUpAccountModal();
     openModalPaymentDetails();
     actions.resetForm();
   };
 
   return (
     <>
-      {paymentTopUpAccountModalIsOpen && (
-        <Modal
-          isOpen={openPaymentTopUpAccountModal}
-          onClose={closePaymentTopUpAccountModal}
+      <div className={css.paymentModal}>
+        <BsXLg className={css.closeIcon} onClick={onClose} />
+        <h3 className={css.paymentModalHeader}>Поповнити рахунок</h3>
+        <p className={css.paymentModalText}>
+          Для поповнення рахунку в сервісі AutoAssist вкажіть суму до оплати.
+        </p>
+        <Formik
+          initialValues={{
+            sum: "",
+          }}
+          validationSchema={PaymentSchema}
+          validateOnChange={true}
+          validateOnBlur={true}
+          onSubmit={handleSubmit}
         >
-          <div className={css.paymentModal}>
-            <BsXLg className={css.closeIcon} onClick={onClose} />
-            <h3 className={css.paymentModalHeader}>Поповнити рахунок</h3>
-            <p className={css.paymentModalText}>
-              Для поповнення рахунку в сервісі AutoAssist вкажіть суму до
-              оплати.
-            </p>
-            <Formik
-              initialValues={{
-                sum: "",
-              }}
-              validationSchema={PaymentSchema}
-              validateOnChange={true}
-              validateOnBlur={true}
-              onSubmit={handleSubmit}
-            >
-              <Form className={css.form}>
-                <p className={css.sumText}>Сума поповнення:</p>
-                <div className={css.wrapper}>
-                  <div className={css.currencyWrapper}>
-                    <Field
-                      name="sum"
-                      type="number"
-                      className={css.input}
-                    ></Field>
-                    <p className={css.currency}>грн</p>
-                    <ErrorMessage
-                      name="sum"
-                      component="div"
-                      className={css.errorMsg}
-                    />
-                  </div>
-                  <button type="submit" className={css.btn}>
-                    Поповнити рахунок
-                  </button>
-                </div>
-              </Form>
-            </Formik>
-            <div className={css.paymentCards}>
-              <img
-                srcSet={`${logoMasterCard} 1x, ${logoMasterCard2x} 2x`}
-                src={logoMasterCard}
-                alt="Логотип MasterCard"
-                className={css.logoMasterCard}
-              />
-              <img
-                srcSet={`${logoVisa} 1x, ${logoVisa2x} 2x`}
-                src={logoVisa}
-                alt="Логотип Visa"
-                className={css.logoVisa}
-              />
-              <img
-                srcSet={`${logoPayPal} 1x, ${logoPayPal2x} 2x`}
-                src={logoPayPal}
-                alt="Логотип PayPal"
-                className={css.logoPayPal}
-              />
-              <img
-                srcSet={`${logoPrivat} 1x, ${logoPrivat2x} 2x`}
-                src={logoPrivat}
-                alt="Логотип Приват банка"
-                className={css.logoPrivat}
-              />
-              <img
-                srcSet={`${logoMono} 1x, ${logoMono2x} 2x`}
-                src={logoMono}
-                alt="Логотип Моно банка"
-                className={css.logoMono}
-              />
-              <img
-                srcSet={`${logoCrypto} 1x, ${logoCrypto2x} 2x`}
-                src={logoCrypto}
-                alt="Логотип Crypto"
-                className={css.logoCrypto}
-              />
+          <Form className={css.form}>
+            <p className={css.sumText}>Сума поповнення:</p>
+            <div className={css.wrapper}>
+              <div className={css.currencyWrapper}>
+                <Field name="sum" type="number" className={css.input}></Field>
+                <p className={css.currency}>грн</p>
+                <ErrorMessage
+                  name="sum"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
+              <button type="submit" className={css.btn}>
+                Поповнити рахунок
+              </button>
             </div>
-          </div>
-        </Modal>
-      )}
+          </Form>
+        </Formik>
+        <div className={css.paymentCards}>
+          <img
+            srcSet={`${logoMasterCard} 1x, ${logoMasterCard2x} 2x`}
+            src={logoMasterCard}
+            alt="Логотип MasterCard"
+            className={css.logoMasterCard}
+          />
+          <img
+            srcSet={`${logoVisa} 1x, ${logoVisa2x} 2x`}
+            src={logoVisa}
+            alt="Логотип Visa"
+            className={css.logoVisa}
+          />
+          <img
+            srcSet={`${logoPayPal} 1x, ${logoPayPal2x} 2x`}
+            src={logoPayPal}
+            alt="Логотип PayPal"
+            className={css.logoPayPal}
+          />
+          <img
+            srcSet={`${logoPrivat} 1x, ${logoPrivat2x} 2x`}
+            src={logoPrivat}
+            alt="Логотип Приват банка"
+            className={css.logoPrivat}
+          />
+          <img
+            srcSet={`${logoMono} 1x, ${logoMono2x} 2x`}
+            src={logoMono}
+            alt="Логотип Моно банка"
+            className={css.logoMono}
+          />
+          <img
+            srcSet={`${logoCrypto} 1x, ${logoCrypto2x} 2x`}
+            src={logoCrypto}
+            alt="Логотип Crypto"
+            className={css.logoCrypto}
+          />
+        </div>
+      </div>
       {modalPaymentDetailsIsOpen && (
         <Modal
           isOpen={modalPaymentDetailsIsOpen}
           onClose={closeModalPaymentDetails}
           sumToPay={sumToPay}
         >
-          <PaymentDatailsModal onClose={onClose} sumToPay={sumToPay} />
+          <PaymentDatailsModal
+            onClose={closeModalPaymentDetails}
+            sumToPay={sumToPay}
+          />
         </Modal>
       )}
     </>

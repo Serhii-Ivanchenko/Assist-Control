@@ -1,0 +1,42 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 633px;
+    gap: 14px;
+    overflow: auto;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    min-height: 27px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: var(--white);
+    margin-bottom: 9px;
+    /* padding: 3px 18px; */
+    /* margin-top: 4px; */
+    font-weight: 600;
+}
+
+.wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.wrapper::-webkit-scrollbar-track {
+    background: vat( --bg-secondary);
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+    background: var(--main-gray);
+    border-radius: 4px;
+}
+
+.column{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+}

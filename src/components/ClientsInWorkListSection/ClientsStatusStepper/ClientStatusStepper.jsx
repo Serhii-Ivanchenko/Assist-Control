@@ -118,6 +118,7 @@ function ClientStatusStepper({
             accountingModal={true}
             service="clientService"
             setNotificationSent={setNotificationSent}
+            nextService="ClientInWorkNextService"
           />
         );
 

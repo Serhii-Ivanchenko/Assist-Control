@@ -26,6 +26,11 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
     statusText = "СПІВРОБІТНИК";
     background = "var(--status-gradient-archive-light-blue)";
     borderColor = "var(--glow-archive-light-blue)";
+  } else if (reason_description === "рекомендації") {
+    statusClass = styles.lighBlue || "";
+    statusText = "РЕКОМЕНДАЦІЇ";
+    background = "var(--status-gradient-archive-light-blue)";
+    borderColor = "var(--glow-archive-light-blue)";
   } else if (reason_description === "випадковий") {
     statusClass = styles.lighBlue || "";
     statusText = "ВИПАДКОВИЙ";
@@ -64,6 +69,7 @@ const renderStatusInArchive = (reason_description, styles = {}) => {
     switch (reason_description) {
       case "співробітник":
       case "випадковий":
+      case "рекомендації":
       case "відмова":
       case "не_приїхав":
       case "рейтинг":

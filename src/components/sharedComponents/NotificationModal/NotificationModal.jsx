@@ -17,6 +17,7 @@ import { BsEnvelope } from "react-icons/bs";
 import { PiTelegramLogoLight } from "react-icons/pi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { SlSpeedometer } from "react-icons/sl";
+import { useEffect, useRef } from "react";
 
 import { registerLocale } from "react-datepicker";
 import uk from "date-fns/locale/uk";
@@ -59,9 +60,13 @@ export default function NotificationModal({
   comment,
   service,
   setNotificationSent,
+  nextService,
 }) {
   const [isDateOpen, setDateOpen] = useState(false);
   const [isTimeOpen, setTimeOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const inputRef = useRef(null);
+  const focusRef = useRef(null);
 
   const handleDateButtonClick = () => setDateOpen((prev) => !prev);
   const handleTimeButtonClick = () => setTimeOpen((prev) => !prev);
@@ -98,6 +103,7 @@ export default function NotificationModal({
     })(),
     [comment]: "",
     ...(accountingModal && { [service]: "upsell" }),
+    ...(accountingModal && { [nextService]: "" }),
   };
 
   const handleSubmit = (values, actions) => {
@@ -121,6 +127,26 @@ export default function NotificationModal({
     onClose();
   };
 
+  const handleClickOutside = (event) => {
+    if (inputRef.current && !inputRef.current.contains(event.target)) {
+      setIsEditing(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isEditing && focusRef.current) {
+      focusRef.current.focus();
+    }
+  }, [isEditing]);
+
   const dateId = useId();
   const timeId = useId();
   const commentId = useId();
@@ -135,7 +161,7 @@ export default function NotificationModal({
         onSubmit={handleSubmit}
         validationSchema={Validation}
       >
-        {({ values, setFieldValue }) => (
+        {({ values, handleChange, setFieldValue }) => (
           <Form className={css.notifForm}>
             <div className={css.selectBox}>
               <Field
@@ -166,10 +192,35 @@ export default function NotificationModal({
                     }
                   />
                 </div>
+                <div className={css.mileageBox}>
+                  <div className={css.speedBox}>
+                    <SlSpeedometer className={css.speedIcon} />
+                    <p className={css.speedValue}>246014</p>
+                  </div>
 
-                <div className={css.speedBox}>
-                  <SlSpeedometer className={css.speedIcon} />
-                  <p className={css.speedValue}>246014</p>
+                  <div className={css.nextServiceContainer}>
+                    <p>Наступне ТО :</p>
+                    <div
+                      className={css.nextServiceBox}
+                      onClick={() => setIsEditing(true)}
+                      ref={inputRef}
+                    >
+                      {/* <SlSpeedometer className={css.nextServiceIcon} /> */}
+                      {isEditing ? (
+                        <Field
+                          innerRef={focusRef}
+                          name={nextService}
+                          value={values[nextService]}
+                          className={css.nextServiceInput}
+                          onChange={handleChange}
+                        />
+                      ) : (
+                        <p className={css.nextServiceValue}>
+                          {values[nextService] || "0 km"}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </>
             )}

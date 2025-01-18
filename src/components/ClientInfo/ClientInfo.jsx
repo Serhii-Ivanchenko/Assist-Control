@@ -29,6 +29,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import AddAutoServiceModal from "../Modals/AddAutoServiceModal/AddAutoServiceModal";
 import AddCarModal from "../Modals/AddCarModal/AddCarModal";
+import { FiPlus } from "react-icons/fi";
 
 export default function ClientInfo({ clientInfo }) {
   // Client
@@ -37,10 +38,12 @@ export default function ClientInfo({ clientInfo }) {
   const clientEmail = client?.email || "дані відсутні";
   const clientName = client?.name || "дані відсутні";
   const clientPhone = client?.phone || "дані відсутні";
+  const clientTg = client?.telegram || "дані відсутні";
   const clientBirthday = client?.date_of_birth;
   const age = new Date() - clientBirthday;
   const clientTotalSpent = client?.total_spent;
   const clientRating = client?.rating;
+  const clientId = client?.id || "";
 
   const formatPhoneNumber = (phone) => {
     const cleaned = phone.replace(/\D/g, "");
@@ -58,7 +61,7 @@ export default function ClientInfo({ clientInfo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [phoneNum, setPhoneNum] = useState(formatPhoneNumber(clientPhone));
   const [email, setEmail] = useState(clientEmail);
-  const [tg, setTg] = useState("ivan.petrenko");
+  const [tg, setTg] = useState(clientTg);
   const inputFocusRef = useRef();
 
   const handleChangePN = (e) => {
@@ -161,7 +164,11 @@ export default function ClientInfo({ clientInfo }) {
 
             <div className={css.nameAndEditBox}>
               <p className={css.clientName}>{clientName}</p>
-              {isEditing ? (
+              {clientId === "" ? (
+                <button className={css.addBtn}>
+                  <FiPlus className={css.plusIcon} size={24} />
+                </button>
+              ) : isEditing ? (
                 <button
                   type="button"
                   className={css.btnSave}
@@ -284,6 +291,7 @@ export default function ClientInfo({ clientInfo }) {
                     connectionType="clientConnection"
                     // accountingModal={true}
                     // service="clientService"
+                    // nextService="clientNextService"
                   />
                 </Modal>
               )}

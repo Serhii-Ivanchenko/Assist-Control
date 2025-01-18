@@ -334,6 +334,30 @@
   fill: var(--light-gray);
 }
 
+.addBtn {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+.plusIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  color: var(--white);
+  background-color: var(--green-btn-normal);
+  stroke-width: 3px;
+  cursor: pointer;
+  /* width: 30px;
+  height: 30px; */
+}
+
+.addBtn:hover .plusIcon {
+  background-color: var(--green-btn-hover);
+}
+
 .ratingAndMoney {
   display: flex;
   justify-content: space-between;

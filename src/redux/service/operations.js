@@ -10,7 +10,7 @@ export const getAllServices = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/set/services_all/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -31,7 +31,7 @@ export const getServiceData = createAsyncThunk(
     try {
       const response = await axiosInstance.get(`/set/services/${service_id}/`, {
         headers: {
-          "X-Api-Key": "YA7NxysJ",
+          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
@@ -55,7 +55,7 @@ export const createService = createAsyncThunk(
         serviceData,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
@@ -83,7 +83,7 @@ export const updateService = createAsyncThunk(
         serviceDataWithoutId,
         {
           headers: {
-            "X-Api-Key": "YA7NxysJ",
+            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }

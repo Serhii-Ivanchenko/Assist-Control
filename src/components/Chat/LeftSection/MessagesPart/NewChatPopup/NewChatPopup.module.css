@@ -1,0 +1,106 @@
+.newChatWrapper {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  z-index: 999;
+
+  width: 255px;
+  height: fit-content;
+  max-height: 279px;
+  padding: 10px;
+
+  border-radius: 12px;
+  background: var(--bg-input);
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inputBox {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  border-bottom: 1px solid #515562;
+}
+
+/*.inputIcon {
+  width: 12px;
+  height: 12px;
+} */
+
+.input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+
+  color: var(--light-grey);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+input::placeholder {
+  color: #828a9e;
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+
+  max-height: 209px;
+  height: fit-content;
+  overflow: auto;
+}
+
+.userList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.userList::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+}
+
+.userList::-webkit-scrollbar-thumb {
+  width: 8px;
+  border-radius: 4px;
+  background-color: var(--main-gray);
+  z-index: 9999;
+}
+
+.userListItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  height: 24px;
+  cursor: pointer;
+}
+
+/* .userListItem:hover {
+  background-color: var(--bg-secondary);
+} */
+
+.userPhoto {
+  width: 24px;
+  height: 24px;
+
+  border-radius: 24px;
+}
+
+.userName {
+  color: var(--light-grey);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}

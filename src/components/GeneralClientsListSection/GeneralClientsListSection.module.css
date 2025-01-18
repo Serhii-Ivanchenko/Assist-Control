@@ -33,6 +33,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 /* .titletext:first-child {
@@ -344,11 +345,10 @@
   height: 100%;
 }
 
-.hederName{
-    width: 170px;
-    height: 100%;
-  }
-
+.hederName {
+  width: 170px;
+  height: 100%;
+}
 
 .hederRight {
   height: 100%;

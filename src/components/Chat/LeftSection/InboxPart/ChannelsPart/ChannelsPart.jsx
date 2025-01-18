@@ -104,7 +104,7 @@ export default function ChannelsPart({
       <div
         className={css.channelsSelect}
         onClick={() => {
-          setFilteredChats(chats);
+          setFilteredChats(null);
           setIsActive(false);
         }}
       >

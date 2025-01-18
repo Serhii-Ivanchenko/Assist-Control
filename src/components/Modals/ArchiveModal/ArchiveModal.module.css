@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   width: 389px;
-  height: 212px;
+  height: auto;
   padding: 13px 19px 19px 19px;
   border-radius: 12px;
   background: var(--bg-secondary);
@@ -106,4 +106,52 @@
 .submitBtn:hover,
 .submitBtn:focus {
   background-color: var(--blue-btn-hover);
+}
+
+.select {
+  display: flex;
+  width: 351px;
+  height: 39px;
+  padding: 10px;
+  margin-bottom: 21px;
+  align-items: center;
+  border-radius: 0px 12px 12px 12px;
+  background: var(--player-secondary-bg);
+  outline: none;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  color: var(--CRM-modal-InputText, #767b88);
+}
+
+.select option {
+  background: var(--bg-secondary);
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.select::-ms-expand {
+  display: none;
+}
+
+.select:disabled {
+  background: var(--disabled-bg, #4a4a4a);
+  color: var(--disabled-text, #b0b0b0);
+  cursor: not-allowed;
+}
+
+.lightBlue {
+  color: var(--glow-diag);
+}
+
+.violet {
+  color: #d167e7;
+}
+
+.red {
+  color: #e76767;
 }

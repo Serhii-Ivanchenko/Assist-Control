@@ -1,4 +1,5 @@
 import { BsBookmark } from "react-icons/bs";
+import { BsBookmarkFill } from "react-icons/bs";
 import telegram from "../../../../../assets/images/ChannelsImages/Telegram_1.png";
 // import whatsApp from "../../../../../assets/images/ChannelsImages/WhatsApp_1.png";
 // import assist from "../../../../../assets/images/ChannelsImages/logo-rect 1.png";
@@ -13,6 +14,7 @@ export default function ChatsPart({
   isChecked,
   handleCheckboxChange,
   allChecked,
+  handleFavourite,
 }) {
   const [chosen, setChosen] = useState(false);
 
@@ -21,8 +23,21 @@ export default function ChatsPart({
     setChosen(id);
   };
 
+  const time = (time) => {
+    const newTime = Date.now() - new Date(time).getTime();
+    const seconds = Math.floor(newTime / 1000);
+    const minutes = Math.floor(newTime / (1000 * 60));
+    const hours = Math.floor(newTime / (1000 * 60 * 60));
+    const days = Math.floor(newTime / (1000 * 60 * 60 * 24));
+
+    if (seconds < 60) return "now";
+    if (minutes < 60) return `${minutes}m ago`;
+    if (hours < 24) return `${hours}h ago`;
+    return `${days}d ago`;
+  };
+
   return (
-    <div>
+    <div className={css.scroll}>
       <ul className={css.chatsList}>
         {chats.map((chat, index) => (
           <li
@@ -82,9 +97,19 @@ export default function ChatsPart({
                     alt=""
                     className={css.managersPhoto}
                   />
-                  <BsBookmark size={18} />
+                  {chat.isChosen ? (
+                    <BsBookmarkFill
+                      size={18}
+                      onClick={(e) => handleFavourite(e, chat.id)}
+                    />
+                  ) : (
+                    <BsBookmark
+                      size={18}
+                      onClick={(e) => handleFavourite(e, chat.id)}
+                    />
+                  )}
                 </div>
-                <p className={css.time}>{chat.time}</p>
+                <p className={css.time}>{time(chat.time)}</p>
               </div>
             </div>
           </li>

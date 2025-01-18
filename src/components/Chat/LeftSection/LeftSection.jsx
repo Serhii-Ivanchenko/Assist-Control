@@ -6,11 +6,19 @@ import assist from "../../../assets/images/ChannelsImages/logo-rect 1.png";
 import facebook from "../../../assets/images/ChannelsImages/Facebook_Messenger_1.png";
 import avatar from "../../../assets/images/avatar_default.png";
 import telegram from "../../../assets/images/ChannelsImages/Telegram_1.png";
+import gmail from "../../../assets/images/ChannelsImages/Gmail_icon_1.png";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useMemo } from "react";
 
 export default function LeftSection() {
   const chats = [
     {
+      category: "chat",
+      isChosen: true,
+      isDelayed: false,
+      isClosed: false,
+      archive: false,
       type: "whatsApp",
       avatar: avatar,
       icon: whatsApp,
@@ -18,11 +26,16 @@ export default function LeftSection() {
       lastMessage:
         "Вітаю! Чи можна записатися на діагностику електрики та двигу...",
       managersPhoto: avatar,
-      time: "4m ago",
+      time: "2024-12-28T10:45:33",
       read: false,
       id: "1",
     },
     {
+      category: "chat",
+      isChosen: true,
+      isDelayed: false,
+      isClosed: false,
+      archive: false,
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -30,12 +43,17 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "15m ago",
+      time: "2025-01-05T12:45:33",
       warning: true,
       read: false,
       id: "2",
     },
     {
+      category: "chat",
+      isChosen: true,
+      isDelayed: false,
+      isClosed: false,
+      archive: false,
       type: "telegram",
       avatar: avatar,
       icon: telegram,
@@ -43,11 +61,16 @@ export default function LeftSection() {
       lastMessage:
         "Привіт! Чи є вільні місця для запису на наступний тиждень у...",
       managersPhoto: avatar,
-      time: "15m ago",
+      time: "2025-01-10T01:45:33",
       read: true,
       id: "3",
     },
     {
+      category: "chat",
+      isChosen: false,
+      isDelayed: true,
+      isClosed: false,
+      archive: false,
       type: "assist",
       avatar: avatar,
       icon: assist,
@@ -55,22 +78,32 @@ export default function LeftSection() {
       lastMessage:
         "Дякую за швидку відповідь! Я хотіла б уточнити вартість зам...",
       managersPhoto: avatar,
-      time: "2h ago",
+      time: "2024-12-28T10:45:33",
       read: true,
       id: "4",
     },
     {
+      category: "chat",
+      isChosen: true,
+      isDelayed: true,
+      isClosed: false,
+      archive: false,
       type: "telegram",
       avatar: avatar,
       icon: telegram,
       name: "Дмитро Поліщук",
       lastMessage: "Доброго ранку! Ви працюєте з автомобілями американськог...",
       managersPhoto: avatar,
-      time: "3h ago",
+      time: "2024-12-31T10:45:33",
       read: true,
       id: "5",
     },
     {
+      category: "chat",
+      isChosen: false,
+      isDelayed: false,
+      isClosed: false,
+      archive: true,
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -78,22 +111,32 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "1d ago",
+      time: "2025-01-09T06:45:33",
       read: true,
       id: "6",
     },
     {
+      category: "chat",
+      isChosen: true,
+      isDelayed: true,
+      isClosed: false,
+      archive: false,
       type: "telegram",
       avatar: avatar,
       icon: telegram,
       name: "Дмитро Поліщук",
       lastMessage: "Доброго ранку! Ви працюєте з автомобілями американськог...",
       managersPhoto: avatar,
-      time: "3h ago",
+      time: "2025-01-11T06:45:33",
       read: true,
       id: "7",
     },
     {
+      category: "chat",
+      isChosen: false,
+      isDelayed: false,
+      isClosed: false,
+      archive: true,
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -101,11 +144,16 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "1d ago",
+      time: "2025-01-11T18:45:33",
       read: true,
       id: "8",
     },
     {
+      category: "chat",
+      isChosen: false,
+      isDelayed: true,
+      isClosed: false,
+      archive: false,
       type: "facebook",
       avatar: avatar,
       icon: facebook,
@@ -113,28 +161,155 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "1d ago",
+      time: "2025-01-11T19:27:33",
       read: true,
       id: "9",
     },
+    {
+      category: "email",
+      isChosen: true,
+      isDelayed: false,
+      isClosed: false,
+      archive: true,
+      type: "gmail",
+      avatar: avatar,
+      icon: gmail,
+      name: "Анастасія Шевченко",
+      lastMessage:
+        "Доброго дня! У мене є питання щодо ремонту коробки переда...",
+      managersPhoto: avatar,
+      time: "2025-01-11T19:27:33",
+      read: true,
+      id: "10",
+    },
   ];
 
-  const [filteredChats, setFilteredChats] = useState(chats);
+  // const [sortedChats, setSortedChats] = useState([]);
+  // const [filteredChats, setFilteredChats] = useState([]);
+  const [sortedAndFilteredChats, setSortedAndFilteredChats] = useState([]);
+  const [sortOrder, setSortOrder] = useState("newFirst");
+  const [activeFilter, setActiveFilter] = useState(null);
+  const [activeFilterCategory, setActiveFilterCategory] = useState(null);
+  const [activeFilterState, setActiveFilterState] = useState(null);
+  const memoizedChats = useMemo(() => chats, []);
+  const [initialChats, setInitialChats] = useState(memoizedChats);
 
-  const handleFilter = (e, type) => {
+  const [favourite, setFavourite] = useState(
+    initialChats.filter((chat) => chat.isChosen === true).length
+  );
+
+  const categoryCounts = useMemo(() => {
+    return {
+      email: initialChats.filter((chat) => chat.category === "email").length,
+      chat: initialChats.filter((chat) => chat.category === "chat").length,
+      delayed: initialChats.filter((chat) => chat.isDelayed === true).length,
+      closed: initialChats.filter((chat) => chat.isClosed === true).length,
+      chosen: favourite,
+      archive: initialChats.filter((chat) => chat.archive === true).length,
+    };
+  }, [initialChats, favourite]);
+
+  useEffect(() => {
+    let updatedChats = [...initialChats];
+
+    // Фільтрація
+    if (activeFilter) {
+      updatedChats = updatedChats.filter((chat) => chat.type === activeFilter);
+    }
+
+    if (activeFilterCategory) {
+      updatedChats = updatedChats.filter(
+        (chat) => chat.category === activeFilterCategory
+      );
+    }
+
+    if (activeFilterState) {
+      updatedChats = updatedChats.filter((chat) => {
+        switch (activeFilterState) {
+          case "chosen":
+            return chat.isChosen;
+          case "delayed":
+            return chat.isDelayed;
+          case "archive":
+            return chat.archive;
+          case "closed":
+            return chat.isClosed;
+          default:
+            return true;
+        }
+      });
+    }
+
+    // Сортування
+    updatedChats.sort((a, b) => {
+      return sortOrder === "newFirst"
+        ? new Date(b.time).getTime() - new Date(a.time).getTime()
+        : new Date(a.time).getTime() - new Date(b.time).getTime();
+    });
+
+    setSortedAndFilteredChats(updatedChats);
+  }, [
+    initialChats,
+    sortOrder,
+    activeFilter,
+    activeFilterCategory,
+    activeFilterState,
+  ]);
+
+  const handleSort = () => {
+    setSortOrder((prev) => (prev === "newFirst" ? "oldFirst" : "newFirst"));
+  };
+
+  const handleFilter = (e, type, filterType) => {
     e.stopPropagation();
-    setFilteredChats(chats.filter((chat) => chat.type === type));
+
+    switch (filterType) {
+      case "category":
+        setActiveFilterCategory(type);
+        setActiveFilterState(null);
+        break;
+      case "channel":
+        setActiveFilter(type);
+        break;
+      case "state":
+        setActiveFilterState(type);
+        setActiveFilterCategory(null);
+        break;
+      default:
+        return;
+    }
+  };
+
+  const handleFavourite = (e, id) => {
+    e.stopPropagation();
+
+    const updatedChats = initialChats.map((chat) =>
+      chat.id === id ? { ...chat, isChosen: !chat.isChosen } : chat
+    );
+
+    setInitialChats(updatedChats);
+
+    // Оновлюємо кількість обраних чатів
+    const newChosenCount = updatedChats.filter((chat) => chat.isChosen).length;
+    setFavourite(newChosenCount);
   };
 
   return (
     <div className={css.leftSectionWrapper}>
-      {/* LeftSection */}
       <InboxPart
         handleFilter={handleFilter}
-        chats={chats}
-        setFilteredChats={setFilteredChats}
+        chats={initialChats}
+        setFilteredChats={setActiveFilter}
+        setActiveFilterCategory={setActiveFilterCategory}
+        setActiveFilterState={setActiveFilterState}
+        categoryCounts={categoryCounts}
       />
-      <MessagesPart chats={filteredChats} />
+      <MessagesPart
+        chats={sortedAndFilteredChats}
+        handleSort={handleSort}
+        sortOrder={sortOrder}
+        handleFavourite={handleFavourite}
+      />
     </div>
   );
 }

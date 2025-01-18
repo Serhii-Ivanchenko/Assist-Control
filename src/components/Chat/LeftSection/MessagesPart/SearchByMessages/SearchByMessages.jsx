@@ -65,7 +65,7 @@ export default function SearchByMessages() {
           }
         />
         <IoIosArrowDown
-          className={css.iconArrow}
+          className={`${css.iconArrow} ${isOpen && css.rotated}`}
           size={20}
           onClick={handleOpen}
         />

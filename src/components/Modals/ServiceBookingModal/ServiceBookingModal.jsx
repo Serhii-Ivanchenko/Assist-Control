@@ -26,6 +26,7 @@ import SelectTime from "./SelectTime/SelectTime.jsx";
 import Loader from "../../Loader/Loader.jsx";
 import { selectDate } from "../../../redux/cars/selectors.js";
 import BtnsCloseAndSubmit from "../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit.jsx";
+import passport from "../../../assets/images/passport_image.png";
 
 export default function ServiceBookingModal({
   onClose,
@@ -42,11 +43,18 @@ export default function ServiceBookingModal({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownPostOpen, setIsDropdownPostOpen] = useState(false);
   const [isDropdownMechanicOpen, setIsDropdownMechanicOpen] = useState(false);
+  const [registrationCertificate, setRegistrationCertificate] =
+    useState(passport);
   const selectRef = useRef(null);
 
   const selectedServiceId = useSelector(selectSelectedServiceId);
   const { mechanics, posts, services } = useSelector(selectServiceData);
   const dayRecords = useSelector(selectDayRecords);
+
+  const handleRegistrationCertificateChange = (e) => {
+    const newCertificate = e.target.files[0];
+    setRegistrationCertificate(URL.createObjectURL(newCertificate));
+  };
 
   const [pickedDate, setPickedDate] = useState(
     recordId || carSelectDate
@@ -392,14 +400,20 @@ export default function ServiceBookingModal({
               <div className={css.addFileWrapper}>
                 <input
                   type="file"
-                  name="file"
+                  name="registrationCertificate"
                   id="file"
                   className={css.inputFile}
+                  onChange={handleRegistrationCertificateChange}
                 />
-                <BsFillCameraFill className={css.iconCamera} />
                 <label htmlFor="file" className={css.label}>
-                  + Додати фото техпаспорта
+                  <BsFillCameraFill className={css.iconCamera} />+ Додати фото
+                  техпаспорта
                 </label>
+                <img
+                  className={css.registrationCertificate}
+                  src={registrationCertificate}
+                  alt="Registration certificate"
+                />
               </div>
               <Field
                 as="textarea"

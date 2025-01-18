@@ -1,12 +1,6 @@
-.contentContainer {
+.wrapper {
+    width: 100%;
     display: flex;
-    margin-top: 8px;
+    flex-direction: column;
     gap: 14px;
-}
-
-@media only screen and (min-width: 1850px) {
-    .contentContainer {
-        margin-top: 13px;
-        gap: 14px;
-    }
 }

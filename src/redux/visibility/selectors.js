@@ -11,3 +11,5 @@ export const selectVisibilityCar = (state) => state.visibility.visibilityCar;
 export const selectVisibilityRecords = (state) => state.visibility.visibilityRecords;
 
 export const selectVisibilityArchive = (state) => state.visibility.visibilityArchive;
+
+export const selectVisibilityRecomendations = (state) => state.visibility.visibilityCarRecomendations;
