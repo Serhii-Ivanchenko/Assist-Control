@@ -196,17 +196,26 @@ export default function LeftSection() {
   const [favourite, setFavourite] = useState(
     initialChats.filter((chat) => chat.isChosen === true).length
   );
+  const [delayedChats, setDelayedChats] = useState(
+    initialChats.filter((chat) => chat.isDelayed === true).length
+  );
+  const [closedChats, setClosedChats] = useState(
+    initialChats.filter((chat) => chat.isClosed === true).length
+  );
+  const [archiveChats, setArchiveChats] = useState(
+    initialChats.filter((chat) => chat.archive === true).length
+  );
 
   const categoryCounts = useMemo(() => {
     return {
       email: initialChats.filter((chat) => chat.category === "email").length,
       chat: initialChats.filter((chat) => chat.category === "chat").length,
-      delayed: initialChats.filter((chat) => chat.isDelayed === true).length,
-      closed: initialChats.filter((chat) => chat.isClosed === true).length,
+      delayed: delayedChats,
+      closed: closedChats,
       chosen: favourite,
-      archive: initialChats.filter((chat) => chat.archive === true).length,
+      archive: archiveChats,
     };
-  }, [initialChats, favourite]);
+  }, [initialChats, favourite, delayedChats, closedChats, archiveChats]);
 
   useEffect(() => {
     let updatedChats = [...initialChats];
@@ -319,6 +328,12 @@ export default function LeftSection() {
         handleSort={handleSort}
         sortOrder={sortOrder}
         handleFavourite={handleFavourite}
+        setDelayedChats={setDelayedChats}
+        setClosedChats={setClosedChats}
+        setArchiveChats={setArchiveChats}
+        setFavourite={setFavourite}
+        setInitialChats={setInitialChats}
+        initialChats={initialChats}
       />
     </div>
   );

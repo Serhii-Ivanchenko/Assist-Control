@@ -18,11 +18,11 @@ import { useEffect, useState } from "react";
 import SearchTags from "../../../RightSection/ChatTags/SearchTags/SearchTags";
 
 const quickActions = [
-  { icon: <BsArchive />, name: "Додати в архів" },
-  { icon: <BsBookmark />, name: "Додати в обрані" },
-  { icon: <GrUserManager />, name: "Передати іншому менеджеру" },
-  { icon: <BsCheck2Square />, name: "Закрити чат" },
-  { icon: <BsClock />, name: "Додати у відкладені" },
+  { icon: <BsArchive />, name: "Додати в архів", value: "archive" },
+  { icon: <BsBookmark />, name: "Додати в обрані", value: "isChosen" },
+  { icon: <GrUserManager />, name: "Передати іншому менеджеру", value: "" },
+  { icon: <BsCheck2Square />, name: "Закрити чат", value: "isClosed" },
+  { icon: <BsClock />, name: "Додати у відкладені", value: "isDelayed" },
 ];
 
 export default function ActionsPart({
@@ -33,6 +33,7 @@ export default function ActionsPart({
   // chats,
   handleSort,
   sortOrder,
+  handleQuickActions,
 }) {
   const [openedActions, setOpenedActions] = useState(false);
   const [tagsArr, setTagsArr] = useState(tags);
@@ -150,7 +151,10 @@ export default function ActionsPart({
                   <li
                     key={index}
                     className={css.actionsItem}
-                    // onClick={() => setOpenedActions(false)}
+                    onClick={() => {
+                      handleQuickActions(action.value);
+                      setOpenedActions(false);
+                    }}
                   >
                     {action.icon}
                     <p>{action.name}</p>

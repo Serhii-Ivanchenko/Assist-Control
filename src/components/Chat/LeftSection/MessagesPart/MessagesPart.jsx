@@ -12,10 +12,16 @@ export default function MessagesPart({
   handleSort,
   sortOrder,
   handleFavourite,
+  setDelayedChats,
+  setClosedChats,
+  setArchiveChats,
+  setFavourite,
+  setInitialChats,
+  initialChats,
 }) {
   const [isChecked, setIsChecked] = useState(false);
   const [allChecked, setAllChecked] = useState([]);
-  const [checkedChats, setCheckedChats] = useState([]);
+  // const [checkedChats, setCheckedChats] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const wrapperRef = useRef(null);
 
@@ -51,11 +57,37 @@ export default function MessagesPart({
     );
   };
 
-  const handleChosenChats = () => {
-    setCheckedChats(allChecked.filter((chat) => chat.checked));
-  };
+  // useEffect(() => {
+  //   const handleChosenChats = () => {
+  //     setCheckedChats(allChecked.filter((chat) => chat.checked));
+  //   };
+  //   handleChosenChats();
+  //   // console.log("checked", checkedChats);
+  // }, [allChecked]);
 
   // const handleAddChats
+
+  const handleQuickActions = (action) => {
+    console.log("initialChats", initialChats);
+
+    const updatedChats = initialChats.map((chat) => {
+      const checkedChat = allChecked.find((item) => item.id === chat.id);
+
+      if (checkedChat && checkedChat.checked) {
+        return {
+          ...chat,
+          [action]: true,
+        };
+      }
+      return chat;
+    });
+
+    setInitialChats(updatedChats);
+    setFavourite(updatedChats.filter((chat) => chat.isChosen).length);
+    setDelayedChats(updatedChats.filter((chat) => chat.isDelayed).length);
+    setClosedChats(updatedChats.filter((chat) => chat.isClosed).length);
+    setArchiveChats(updatedChats.filter((chat) => chat.archive).length);
+  };
 
   useEffect(() => {
     console.log("allchecked", allChecked);
@@ -90,6 +122,7 @@ export default function MessagesPart({
         chats={chats}
         handleSort={handleSort}
         sortOrder={sortOrder}
+        handleQuickActions={handleQuickActions}
       />
       <ChatsPart
         chats={chats}
