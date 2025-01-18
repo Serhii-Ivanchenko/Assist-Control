@@ -36,7 +36,7 @@ function DistributorsPart() {
     const fetchData = async () => {
       try {
         const response = await dispatch(getAllSuppliers());
-        // console.log("distr data:", response.payload);
+        console.log("distr data:", response.payload);
         setDistributors(response.payload.data);
       } catch (error) {
         console.error("Error fetching data:", error);

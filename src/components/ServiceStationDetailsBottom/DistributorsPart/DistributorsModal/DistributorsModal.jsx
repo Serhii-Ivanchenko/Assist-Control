@@ -186,7 +186,7 @@ function DistributorsModal({
         </div>
         <div className={styles.authContainer}>
           <StatusToggle
-            isDisabled={distributor.isDisabled}
+            isDisabled={distributor.zsisDisabled}
             onToggleDisable={handleToggleDisable}
           />
           <AuthForm formikRef={authFormRef} />
