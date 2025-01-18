@@ -346,12 +346,16 @@
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  color: var(--bg-secondary);
-  background-color: var(--white);
+  color: var(--white);
+  background-color: var(--green-btn-normal);
   stroke-width: 3px;
   cursor: pointer;
   /* width: 30px;
   height: 30px; */
+}
+
+.addBtn:hover .plusIcon {
+  background-color: var(--green-btn-hover);
 }
 
 .ratingAndMoney {
