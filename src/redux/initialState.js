@@ -295,4 +295,11 @@ export const initialState = {
     templates: [],
     selectedPrompt: null,
   },
+
+  connections: {
+    stats: {},
+    connectionsList: [],
+    isLoading: false,
+    error: null,
+  },
 };
