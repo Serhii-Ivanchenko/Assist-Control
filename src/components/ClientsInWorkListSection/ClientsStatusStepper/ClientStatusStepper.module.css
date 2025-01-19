@@ -65,3 +65,11 @@
 .hidden {
   display: none;
 }
+
+
+.carButton {
+  width: 304px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
