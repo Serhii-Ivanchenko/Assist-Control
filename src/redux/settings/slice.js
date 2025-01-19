@@ -45,7 +45,6 @@ import {
   updateRatingStatus,
   updateSupplierData,
   updateSupplierStatus,
-  updateWorkSchedule,
 } from "./operations.js";
 
 const handlePending = (state) => {
