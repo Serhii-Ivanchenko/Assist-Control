@@ -13,7 +13,7 @@ export default function DayCarsList({ carsData, isModal, viewMode = "grid" }) {
 
   const renderCarItem = (car) => (
     <CarItemComponent
-      key={car.id}
+      key={car.car_id}
       car={car}
       isModal={isModal}
       viewMode={viewMode}

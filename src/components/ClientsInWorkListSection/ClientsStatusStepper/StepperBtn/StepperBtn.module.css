@@ -13,7 +13,7 @@
 .wrapperImg {
   display: flex;
   flex-direction: row-reverse;
-  padding: 4.5px 0 4.5px 4px;
+  padding: 4.5px 4px;
   align-items: center;
   gap: 6px;
   background: #313540;
@@ -22,20 +22,20 @@
 }
 
 .textImg {
-  width: 126px;
+  width: 84px;
   color: #fff;
-
+  text-wrap: balance;
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.iconImg {
+/* .iconImg {
   background: none;
   border-radius: 50%;
-}
+} */
 
 .text {
   color: var(--white);

@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
-import { changeCarStatus } from "../../redux/cars/operations.js";
-import { getRecordsForPeriod } from "../../redux/crm/operations.js";
+// import { changeCarStatus } from "../../redux/cars/operations.js";
+import { changeCarStatusCRM, getRecordsForPeriod } from "../../redux/crm/operations.js";
 import {
   selectDates,
   selectPeriodRecords
@@ -18,7 +18,7 @@ import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
 import { toggleVisibilityRecords } from "../../redux/visibility/slice.js";
 
 export default function CRMBlock() {
-  const [isCrm, setIsCrm] = useState("record");
+  // const [isCrm, setIsCrm] = useState("record");
   const dispatch = useDispatch();
   const periodRecords = useSelector(selectPeriodRecords);
   const dates = useSelector(selectDates);
@@ -35,9 +35,9 @@ export default function CRMBlock() {
     }
   }, [dispatch, dates]);
 
-  const handleDragStart = (e, id) => {
-    e.dataTransfer.setData("text/plain", id);
-    console.log("Drag start with ID:", id);
+  const handleDragStart = (e, car_id) => {
+    e.dataTransfer.setData("text/plain", car_id);
+    console.log("Drag start with ID:", car_id);
   };
 
   const handleDragOver = (e) => {
@@ -49,11 +49,11 @@ export default function CRMBlock() {
     const itemId = Number(e.dataTransfer.getData("text/plain"));
     console.log("Dropped item ID:", itemId, "New status:", status);
 
-    const item = periodRecords.find((item) => item.id === itemId);
+    const item = periodRecords.find((item) => item.car_id === itemId);
     console.log("Found item:", item);
 
     if (item) {
-      dispatch(changeCarStatus({ carId: item.id, status, location: isCrm }))
+      dispatch(changeCarStatusCRM({ carId: item.car_id, status }))
         .unwrap()
         .then(() => {
           console.log("Updated status in frontend:", { ...item, status });

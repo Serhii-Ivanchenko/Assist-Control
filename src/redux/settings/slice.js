@@ -9,6 +9,7 @@ import {
   createRating,
   createService,
   createSupplier,
+  createWorkSchedule,
   deleteCashRegister,
   deleteEmployee,
   deleteMarkup,
@@ -44,7 +45,6 @@ import {
   updateRatingStatus,
   updateSupplierData,
   updateSupplierStatus,
-  updateWorkSchedule,
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -189,29 +189,29 @@ const settingsSlice = createSlice({
       .addCase(getWorkSchedule.pending, handlePending)
       .addCase(getWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.schedule = action.payload;
+        state.schedule = action.payload.work_schedule;
       })
       .addCase(getWorkSchedule.rejected, handleRejected)
-      .addCase(updateWorkSchedule.pending, handlePending)
-      .addCase(updateWorkSchedule.fulfilled, (state, action) => {
+      .addCase(createWorkSchedule.pending, handlePending)
+      .addCase(createWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
         state.schedule = { ...state.schedule, ...action.payload };
       })
-      .addCase(updateWorkSchedule.rejected, handleRejected)
+      .addCase(createWorkSchedule.rejected, handleRejected)
 
       //! POSTS
 
       .addCase(getPosts.pending, handlePending)
       .addCase(getPosts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.posts = action.payload;
+        state.posts = action.payload.posts;
       })
       .addCase(getPosts.rejected, handleRejected)
 
       .addCase(createPost.pending, handlePending)
       .addCase(createPost.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.posts.push(action.payload);
+        state.posts.push(action.meta.arg);
       })
       .addCase(createPost.rejected, handleRejected)
 
