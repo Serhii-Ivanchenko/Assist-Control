@@ -22,7 +22,7 @@ function StepperBtn({
     return (
       <div className={styles.wrapperImg}>
         <p className={styles.textImg}>{value}</p>
-        <span className={styles.iconImg}>{icon}</span>
+        <span>{icon}</span>
       </div>
     );
   }
