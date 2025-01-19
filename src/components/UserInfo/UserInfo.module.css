@@ -1,18 +1,12 @@
 .userInfo {
-  width: 113px;
+  width: 169px;
   transition: margin-top 0.7s ease-in-out;
 }
 
-@media only screen and (min-width: 1850px) {
-  .userInfo {
-    width: 169px;
-  }
-}
-
 .avatar {
-  width: 44px;
-  height: 44px;
-  margin-bottom: 5px;
+  width: 66px;
+  height: 66px;
+  margin-bottom: 7.5px;
 }
 
 .avatar img {
@@ -22,38 +16,16 @@
   border-radius: 50%;
 }
 
-@media only screen and (min-width: 1850px) {
-  .avatar {
-    width: 66px;
-    height: 66px;
-    margin-bottom: 7.5px;
-  }
-}
-
 .name {
-  font-size: 11px;
+  font-size: 14px;
+  margin-bottom: 11px;
   font-weight: 400;
-  margin-bottom: 5px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .name {
-    font-size: 14px;
-    margin-bottom: 11px;
-  }
 }
 
 .userDetails {
   color: var(--text-gray);
-  font-size: 11px;
-  margin-bottom: 10px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .userDetails {
-    font-size: 16px;
-    margin-bottom: 16.4px;
-  }
+  font-size: 16px;
+  margin-bottom: 16.4px;
 }
 
 .balance {
@@ -63,28 +35,15 @@
 
 .balanceText {
   color: var(--text-gray);
-  font-size: 11px;
-  margin-right: 6px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .balanceText {
-    font-size: 14px;
-    margin-right: 17px;
-  }
+  font-size: 14px;
+  margin-right: 17px;
 }
 
 .num {
   color: var(--white);
-  font-size: 12px;
+  font-size: 17px;
+  margin-right: 24px;
   font-weight: 700;
-}
-
-@media only screen and (min-width: 1850px) {
-  .num {
-    font-size: 17px;
-    margin-right: 24px;
-  }
 }
 
 .balanceButton {
@@ -97,15 +56,8 @@
 
 .icon {
   color: white;
-  width: 4px;
-  height: 5px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .icon {
-    width: 10px;
-    height: 10px;
-  }
+  width: 10px;
+  height: 10px;
 }
 
 .hidden {
@@ -119,5 +71,5 @@
   opacity: 1;
   overflow: visible;
   transition: opacity 1.9s ease;
-  pointer-events: auto; 
+  pointer-events: auto;
 }

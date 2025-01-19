@@ -4,12 +4,6 @@
     position: relative;
 }
 
-@media only screen and (min-width: 1850px) {
-    .inputWrapper {
-        /* margin-right: 6px; */
-    }
-}
-
 .inputFilter {
     width: 158px;
     height: 27px;
