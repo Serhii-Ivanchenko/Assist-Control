@@ -31,6 +31,7 @@ import Modal from "../../Modals/Modal/Modal.jsx";
 import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal.jsx";
 import SearchTags from "./ChatTags/SearchTags/SearchTags.jsx";
 import { tags } from "../RightSection/ChatTags/tags.js";
+import PhoneModal from "./PopUp/PhoneModal/PhoneModal.jsx";
 import clsx from "clsx";
 
 const data = {
@@ -207,8 +208,8 @@ export default function RightSection() {
     setModalOpen(false);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+ const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
+const buttonRef = useRef(null);
   const makeCall = (phone) => {
     window.location.href = `tel:${phone}`;
   };
@@ -217,11 +218,10 @@ export default function RightSection() {
     // if (!data.phonenums.includes(data.phonenum)) {
     //   data.phonenums.push(data.phonenum);
     // };
-    if (data.phonenums.length >= 1) {
-      setIsModalOpen(true);
-    } else {
-      setIsModalOpen(false);
-    }
+    if (data.phonenums.length === 0) {
+      setIsPhoneModalOpen(false); 
+    } else { setIsPhoneModalOpen((prevState) => !prevState) }
+  
   };
 
   const staffs = [
@@ -278,7 +278,7 @@ export default function RightSection() {
           </div>
         </div>
         <div className={css.btnbox}>
-          <button className={css.btnaction} onClick={handlePhoneClick}>
+          <button ref={buttonRef} className={css.btnaction} onClick={handlePhoneClick}>
             <BsTelephone className={css.iconaction} />
           </button>
 
@@ -309,10 +309,22 @@ export default function RightSection() {
             <RiUserAddFill className={css.iconaction} />
           </button>
 
-          {isModalOpen && (
+          {isPhoneModalOpen && (
+            <PhoneModal
+              isOpen={isPhoneModalOpen}
+              onClose={() => setIsPhoneModalOpen(false)}
+              phoneNumbers={data.phonenums}
+               onPhoneSelect={(phone) => {
+               makeCall(phone);
+               setIsPhoneModalOpen(false); 
+              }}
+               triggerRef={buttonRef}
+            />)}
+
+          {/* {isPhoneModalOpen && (
             <div
               className={css.modalOverlay} // Задний фон модального окна
-              onClick={() => setIsModalOpen(false)} // Закрытие при клике на фон
+              onClick={() => setIsPhoneModalOpen(false)} // Закрытие при клике на фон
             >
               <div
                 className={css.modalphone}
@@ -324,7 +336,7 @@ export default function RightSection() {
                     className={css.modalitem}
                     onClick={() => {
                       makeCall(phone);
-                      setIsModalOpen(false);
+                      setIsPhoneModalOpen(false);
                     }}
                   >
                     {formatPhoneNumber(phone)}
@@ -332,7 +344,7 @@ export default function RightSection() {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
 
           {isModalNote && (
             <Modal isOpen={isModalNote} onClose={closeModal}>

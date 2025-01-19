@@ -12,8 +12,8 @@ import csscrm from "./CalendarCrm.module.css";
 
 dayjs.extend(isoWeek);
 
-export default function Calendar({ queryMonth, dataMonth, isCrm }) {
-  const css = isCrm ? csscrm : cssvideo;
+export default function Calendar({ queryMonth, dataMonth, page }) {
+  const css = page === "video" ? cssvideo : csscrm;
   let currentDate = dayjs();
   let queryMonthDayjs = dayjs(queryMonth);
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
   const endOfCalendar = endOfMonth.isoWeekday(7); // Заканчиваем неделю на воскресенье
   const [selectedDate, setSelectedDate] = useState(dayjs(carSelectDate));
 
-  if (!isCrm && selectedDate > currentDate) {
+  if (page === "video" && selectedDate > currentDate) {
       setSelectedDate(currentDate);
       dispatch(changeActualDate(currentDate.format("YYYY-MM-DD")));
 }
@@ -116,6 +116,14 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
       }
   };
 
+  const determineBackgroundColor = (page, item) => {
+  if (page === "video") return getButtonColor(item.percent);
+  if (page === "crm") return getButtonColorCrm(item.percent);
+  if (page === "recom" && item.date.date() === 15) return "var(--bg)";
+  if (page === "recom") return getButtonColorCrm(item.percent);
+  return "defaultBackgroundColor"; 
+};
+
 //   const isDateDisabled = (date) => {
 //     if (!isCrm) {
 //       return (
@@ -134,7 +142,7 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
   //   };
   
   const isDateDisabled = (date) => {
-  if (!isCrm) {
+  if (page === "video") {
     return date.isAfter(currentDate, "day");
   } else {
     return false; // Все даты кликабельны для `isCrm = true`
@@ -168,26 +176,24 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
             }
             disabled={isDateDisabled(item.date)}
             style={{
-              backgroundColor: isCrm
-                ? getButtonColorCrm(item.percent)
-                : getButtonColor(item.percent),
-              // border: item.date.isSame(selectedDate, "day")
-              //   ? " 1px solid var(--white)"
-              //   : "1px solid transparent",
+              // backgroundColor: page !== "video"
+              //   ? getButtonColorCrm(item.percent)
+              //   : getButtonColor(item.percent),
+            backgroundColor: determineBackgroundColor(page, item),
             }}
             className={`calendar-day  
-              ${isCrm ? "crm-width" : ""} 
-             ${
-               !isCrm && item.date.date() > currentDate.date()
-                 ? "cursordefault"
-                 : ""
+              ${page === "crm" || page==="recom" ? "crm-width" : ""} 
+             ${page === "video" && item.date.date() > currentDate.date()
+                 ? "cursordefault" : ""
              } 
-              ${
-                item.date.month() !== queryMonthDayjs.month()
-                  ? "other-month"
-                  : ""
+              ${item.date.month() !== queryMonthDayjs.month()
+                  ? "other-month" : ""
               } 
-              ${item.date.isSame(selectedDate, "day") ? "today" : ""}`}
+              ${item.date.isSame(selectedDate, "day") ? "today" : ""}
+              ${page === "recom" && item.date.date() === 15
+                 ? "redafter" : ""
+             } `
+            }
           >
             {item.date.date()}
           </button>
@@ -235,6 +241,27 @@ export default function Calendar({ queryMonth, dataMonth, isCrm }) {
            border: 1px solid var(--white);
            z-index: 1;
         }
+
+.redafter{
+ color: #F00;
+ border: 1px solid #F00;
+  background-color:var(--bg);
+           z-index: 1;
+}
+
+.redafter::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 3px solid #F00;
+    border-radius: 5px;
+    pointer-events: none;
+     z-index: -1;
+}
+
 .today::after {
     content: "";
     position: absolute;
