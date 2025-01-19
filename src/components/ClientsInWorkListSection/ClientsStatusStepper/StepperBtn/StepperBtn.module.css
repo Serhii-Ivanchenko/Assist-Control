@@ -24,18 +24,18 @@
 .textImg {
   width: 126px;
   color: #fff;
-
+  text-wrap: balance;
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.iconImg {
+/* .iconImg {
   background: none;
   border-radius: 50%;
-}
+} */
 
 .text {
   color: var(--white);
