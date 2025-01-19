@@ -13,7 +13,7 @@
 .wrapperImg {
   display: flex;
   flex-direction: row-reverse;
-  padding: 4.5px 0 4.5px 4px;
+  padding: 4.5px 4px;
   align-items: center;
   gap: 6px;
   background: #313540;
@@ -22,7 +22,7 @@
 }
 
 .textImg {
-  width: 126px;
+  /* width: 126px; */
   color: #fff;
   text-wrap: balance;
   font-family: "Roboto", sans-serif;
