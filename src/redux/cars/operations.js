@@ -8,7 +8,7 @@ export const getAllCars = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/v1/data/`, {
+      const response = await axiosInstance.get(`/vc/data/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -28,7 +28,7 @@ export const getCurrentCars = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/v1/current/cars/`, {
+      const response = await axiosInstance.get(`/vc/current/cars/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -49,7 +49,7 @@ export const getCarsByDate = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/v1/current/day/cars/?date=${day}`,
+        `/vc/current/day/cars/?date=${day}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -73,7 +73,7 @@ export const getCarsByMonth = createAsyncThunk(
     // const { month, year } = date;
     try {
       const response = await axiosInstance.get(
-        `/v1/current/month/cars/?date_str=${date}`,
+        `/vc/current/month/cars/?date_str=${date}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -97,7 +97,7 @@ export const getCalendarByMonth = createAsyncThunk(
     // const { month, year } = date;
     try {
       const response = await axiosInstance.get(
-        `/v1/get_monthly_load?date=${date}`,
+        `/vc/get_monthly_load?date=${date}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -119,7 +119,7 @@ export const getCarsForHour = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/v1/get_busyness?date=${day}`, {
+      const response = await axiosInstance.get(`/vc/get_busyness?date=${day}`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -139,7 +139,7 @@ export const getPercentForHour = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.get(`/v1/get_load_day?date=${day}`, {
+      const response = await axiosInstance.get(`/vc/get_load_day?date=${day}`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -161,7 +161,7 @@ export const getNewCarsRange = createAsyncThunk(
     const { dateBeginStr, dateEndStr } = date;
     try {
       const response = await axiosInstance.get(
-        `/v1/get_new_cars_range?start_date=${dateBeginStr}&end_date=${dateEndStr}`,
+        `/vc/get_new_cars_range?start_date=${dateBeginStr}&end_date=${dateEndStr}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -181,15 +181,14 @@ export const getNewCarsRange = createAsyncThunk(
 // Change car status
 export const changeCarStatus = createAsyncThunk(
   "cars/changeCarStatus",
-  async ({ carId, status, location }, thunkAPI) => {
+  async ({ carId, status }, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const response = await axiosInstance.post(`/v1/edit_status`, null, {
+      const response = await axiosInstance.post(`/vc/edit_status`, null, {
         params: {
           car_id: carId,
           status,
-          location,
         },
         headers: {
           // "X-Api-Key": "YA7NxysJ",
@@ -214,7 +213,7 @@ export const getPeriodCars = createAsyncThunk(
     const { startDate, endDate } = date;
     try {
       const response = await axiosInstance.get(
-        `/v1/get_all_car/?start_date=${startDate}&end_date=${endDate}`,
+        `/vc/get_all_car/?start_date=${startDate}&end_date=${endDate}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",

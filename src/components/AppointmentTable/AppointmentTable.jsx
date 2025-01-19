@@ -216,23 +216,23 @@ function addEmptySlots(result,  referencePosts) {
 
     if (works.length === 0) {
       fullResult.push({
-        record_id: null,
+        car_id: null,
         post_id,
-        service_name: 'empty',
+        service_name: "empty",
         stage_start: startOfDay,
         stage_end: endOfDay,
-        background: 'rgba(255, 255, 255, 0.3)',
+        background: "rgba(255, 255, 255, 0.3)",
       });
     } else {
       works.forEach(work => {
         if (work.stage_start > lastEnd) {
           fullResult.push({
-            record_id: null,
+            car_id: null,
             post_id,
-            service_name: 'empty',
+            service_name: "empty",
             stage_start: lastEnd,
-            stage_end: work.stage_start-1,
-            background: 'rgba(255, 255, 255, 0.3)',
+            stage_end: work.stage_start - 1,
+            background: "rgba(255, 255, 255, 0.3)",
           });
         }
         fullResult.push(work);
@@ -241,12 +241,12 @@ function addEmptySlots(result,  referencePosts) {
 
       if (lastEnd <= endOfDay) {
         fullResult.push({
-          record_id: null,
+          car_id: null,
           post_id,
-          service_name: 'empty',
+          service_name: "empty",
           stage_start: lastEnd,
           stage_end: endOfDay,
-          background: 'rgba(255, 255, 255, 0.3)',
+          background: "rgba(255, 255, 255, 0.3)",
         });
       }
     }

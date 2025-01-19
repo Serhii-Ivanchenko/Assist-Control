@@ -11,7 +11,7 @@ export const register = createAsyncThunk(
   "auth/register",
   async (userData, thunkAPI) => {
     try {
-      const response = await axiosInstance.post("/v1/register/", userData);
+      const response = await axiosInstance.post("/auth/register/", userData);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -24,7 +24,7 @@ export const validateEmail = createAsyncThunk(
   "auth/validateEmail",
   async (api_key, thunkAPI) => {
     try {
-      const response = await axiosInstance.get("/v1/validate-email/", {
+      const response = await axiosInstance.get("/auth/validate-email/", {
         headers: {
           "X-Api-Key": api_key,
         },
@@ -42,7 +42,10 @@ export const logIn = createAsyncThunk(
   "auth/login",
   async (userData, thunkAPI) => {
     try {
-      const response = await axiosInstance.post("/v1/authenticate/", userData);
+      const response = await axiosInstance.post(
+        "/auth/authenticate/",
+        userData
+      );
       setAuthHeader(response.data.api_key);
       localStorage.setItem("X-Api-Key", response.data.api_key);
       return response.data;
@@ -55,7 +58,7 @@ export const logIn = createAsyncThunk(
 //User logout
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    const response = await axiosInstance.get("/v1/logout/");
+    const response = await axiosInstance.get("/auth/logout/");
     clearAuthHeader();
     localStorage.removeItem("X-Api-Key");
     return response.data;
@@ -70,7 +73,7 @@ export const sendRestEmail = createAsyncThunk(
   async (userEmail, thunkAPI) => {
     try {
       const response = await axiosInstance.post(
-        "/v1/send-reset-email/",
+        "/auth/send-reset-email/",
         {},
         {
           params: {
@@ -91,7 +94,7 @@ export const resetPasswordWithEmail = createAsyncThunk(
   async ({ api_key, password }, thunkAPI) => {
     try {
       const response = await axiosInstance.post(
-        "/v1/change_password_with_mail/",
+        "/auth/change_password_with_mail/",
         { new_password: password },
         {
           headers: {
@@ -111,7 +114,7 @@ export const getUserData = createAsyncThunk(
   "auth/getUserData",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosInstance.get("/v1/user_info/");
+      const response = await axiosInstance.get("/auth/user_info/");
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -128,7 +131,7 @@ export const updateUserAvatar = createAsyncThunk(
       formData.append("file", newAvatar);
 
       const response = await axiosInstance.patch(
-        "/v1/update_photo/",
+        "/auth/update_photo/",
         formData,
         {
           headers: {
@@ -150,7 +153,7 @@ export const updateUserData = createAsyncThunk(
   async (userDataToUpdate, thunkAPI) => {
     try {
       const response = await axiosInstance.patch(
-        `/v1/user_info/`,
+        `/auth/user_info/`,
         userDataToUpdate
       );
       return response.data;
@@ -165,7 +168,7 @@ export const getTariffData = createAsyncThunk(
   "auth/getTariffInfo",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosInstance.get("/v1/plan_status/");
+      const response = await axiosInstance.get("/auth/plan_status/");
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -186,7 +189,7 @@ export const refreshUser = createAsyncThunk(
 
       setAuthHeader(apiKey); // Встановлюємо токен у заголовок
 
-      const response = await axiosInstance.get("/v1/user_info/");
+      const response = await axiosInstance.get("/auth/user_info/");
       return { ...response.data, api_key: apiKey };
     } catch (error) {
       clearAuthHeader();
@@ -202,7 +205,7 @@ export const logInWithGoogle = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axiosInstance.post(
-        "/v1/authenticate_in_google/",
+        "/auth/authenticate_in_google/",
         data
       );
       const { api_key, name, email } = response.data;
@@ -220,8 +223,8 @@ export const changePassword = createAsyncThunk(
   "auth/changePassword",
   async ({old_password, new_password}, thunkAPI) => {
     try {
-      const response = await axiosInstance.put("/v1/change_password/",null, {
-        params: { old_password, new_password }
+      const response = await axiosInstance.put("/auth/change_password/", null, {
+        params: { old_password, new_password },
       });
       return response.data;
     } catch (error) {

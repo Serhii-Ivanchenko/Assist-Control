@@ -10,16 +10,16 @@ export default function DayCarsListCrm({ records, onDragStart }) {
 
   return (
     <div className={styles.crmBlockDayCarsListContainer}>
-        <ul className={styles.crmCarList}>
-          {records.map((car) => (
-            <DayCarsItemCrm 
-              key={car.id} 
-              car={car} 
-              onDragStart={onDragStart} 
-              visibility={visibility} 
-            />
-          ))}
-        </ul>
+      <ul className={styles.crmCarList}>
+        {records.map((car) => (
+          <DayCarsItemCrm
+            key={car.car_id}
+            car={car}
+            onDragStart={onDragStart}
+            visibility={visibility}
+          />
+        ))}
+      </ul>
     </div>
   );
 }
