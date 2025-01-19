@@ -169,7 +169,7 @@ export default function LeftSection() {
       isChosen: true,
       isDelayed: false,
       isClosed: false,
-      archive: true,
+      archive: false,
       type: "gmail",
       avatar: avatar,
       icon: gmail,
@@ -193,11 +193,15 @@ export default function LeftSection() {
   const memoizedChats = useMemo(() => chats, []);
   const [initialChats, setInitialChats] = useState(memoizedChats);
 
+  const filteredChats = initialChats.filter(
+    (chat) => !chat.archive && !chat.isClosed
+  );
+
   const [favourite, setFavourite] = useState(
-    initialChats.filter((chat) => chat.isChosen === true).length
+    filteredChats.filter((chat) => chat.isChosen === true).length
   );
   const [delayedChats, setDelayedChats] = useState(
-    initialChats.filter((chat) => chat.isDelayed === true).length
+    filteredChats.filter((chat) => chat.isDelayed === true).length
   );
   const [closedChats, setClosedChats] = useState(
     initialChats.filter((chat) => chat.isClosed === true).length
@@ -208,17 +212,26 @@ export default function LeftSection() {
 
   const categoryCounts = useMemo(() => {
     return {
-      email: initialChats.filter((chat) => chat.category === "email").length,
-      chat: initialChats.filter((chat) => chat.category === "chat").length,
+      email: filteredChats.filter((chat) => chat.category === "email").length,
+      chat: filteredChats.filter((chat) => chat.category === "chat").length,
       delayed: delayedChats,
       closed: closedChats,
       chosen: favourite,
       archive: archiveChats,
     };
-  }, [initialChats, favourite, delayedChats, closedChats, archiveChats]);
+  }, [filteredChats, favourite, delayedChats, closedChats, archiveChats]);
 
   useEffect(() => {
     let updatedChats = [...initialChats];
+
+    if (
+      !activeFilterState ||
+      (activeFilterState !== "archive" && activeFilterState !== "closed")
+    ) {
+      updatedChats = updatedChats.filter(
+        (chat) => !chat.archive && !chat.isClosed
+      );
+    }
 
     // Фільтрація
     if (activeFilter) {

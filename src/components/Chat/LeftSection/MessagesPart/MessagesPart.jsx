@@ -57,16 +57,6 @@ export default function MessagesPart({
     );
   };
 
-  // useEffect(() => {
-  //   const handleChosenChats = () => {
-  //     setCheckedChats(allChecked.filter((chat) => chat.checked));
-  //   };
-  //   handleChosenChats();
-  //   // console.log("checked", checkedChats);
-  // }, [allChecked]);
-
-  // const handleAddChats
-
   const handleQuickActions = (action) => {
     console.log("initialChats", initialChats);
 
@@ -77,6 +67,15 @@ export default function MessagesPart({
         return {
           ...chat,
           [action]: true,
+
+          isChosen:
+            action === "archive" || action === "isClosed"
+              ? false
+              : chat.isChosen,
+          isDelayed:
+            action === "archive" || action === "isClosed"
+              ? false
+              : chat.isDelayed,
         };
       }
       return chat;
