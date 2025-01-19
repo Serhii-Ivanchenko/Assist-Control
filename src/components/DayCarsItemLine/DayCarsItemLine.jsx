@@ -15,7 +15,7 @@ import { useState } from "react";
 
 export default function DayCarsItemLine({ car }) {
   const visibility = useSelector(selectVisibilityCar);
-  // const [isMonitoring, setisMonitoring] = useState("main");
+  const [isMonitoring, setisMonitoring] = useState("main");
 
   const {
     car_id,
