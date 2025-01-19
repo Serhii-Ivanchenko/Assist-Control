@@ -8,7 +8,7 @@ export const createEmployee = createAsyncThunk(
   "settings/createEmployee",
   async ({ employeeData, files }, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const formData = new FormData();
       // files має бути масивом файлів
@@ -43,7 +43,7 @@ export const updateEmployeeData = createAsyncThunk(
   "settings/updateEmployeeData",
   async (employeeDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const formData = new FormData();
 
@@ -80,7 +80,7 @@ export const deleteEmployee = createAsyncThunk(
   "settings/deleteEmployee",
   async (employee_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.delete(
         `/set/employees/${employee_id}/delete/`,
@@ -105,7 +105,7 @@ export const updateEmployeeStatus = createAsyncThunk(
   "settings/updateEmployeeStatus",
   async (newStatus, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { employee_id, ...status } = newStatus;
       const response = await axiosInstance.patch(
@@ -131,7 +131,7 @@ export const getEmployeeData = createAsyncThunk(
   "settings/getEmployeeData",
   async (employee_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(
         `/set/employees/${employee_id}/`,
@@ -156,7 +156,7 @@ export const getAllEmployees = createAsyncThunk(
   "settings/getAllEmployees",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/employees_all/`, {
         headers: {
@@ -180,7 +180,7 @@ export const createSupplier = createAsyncThunk(
   "settings/createSupplier",
   async ({ supplierData, logo }, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const formData = new FormData();
 
@@ -213,7 +213,7 @@ export const updateSupplierData = createAsyncThunk(
   "settings/updateSupplierData",
   async (employeeDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const formData = new FormData();
 
@@ -249,7 +249,7 @@ export const deleteSupplier = createAsyncThunk(
   "settings/deleteSupplier",
   async (supplier_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.delete(
         `/set/supplier/${supplier_id}/delete/`,
@@ -274,7 +274,7 @@ export const updateSupplierStatus = createAsyncThunk(
   "settings/updateSupplierStatus",
   async (newStatus, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.patch(
         `/set/suppliers/status/`,
@@ -300,7 +300,7 @@ export const getSupplierData = createAsyncThunk(
   "settings/getSupplierData",
   async (supplier_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(
         `/set/supplier/${supplier_id}/`,
@@ -325,7 +325,7 @@ export const getAllSuppliers = createAsyncThunk(
   "settings/getAllSuppliers",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/suppliers/`, {
         headers: {
@@ -349,7 +349,7 @@ export const getWorkSchedule = createAsyncThunk(
   "settings/getWorkSchedule",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/get_work_schedule/`, {
         headers: {
@@ -366,16 +366,16 @@ export const getWorkSchedule = createAsyncThunk(
   }
 );
 
-// Update work schedule
-export const updateWorkSchedule = createAsyncThunk(
-  "settings/updateWorkSchedule",
-  async (workScheduleDataToUpdate, thunkAPI) => {
+// Create work schedule
+export const createWorkSchedule = createAsyncThunk(
+  "settings/createWorkSchedule",
+  async (workScheduleData, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.patch(
+      const response = await axiosInstance.post(
         `/set/set_work_schedule/`,
-        workScheduleDataToUpdate,
+        workScheduleData,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -383,7 +383,7 @@ export const updateWorkSchedule = createAsyncThunk(
           },
         }
       );
-      console.log("updateWorkSchedule", response.data);
+      console.log("createWorkSchedule", response.data);
 
       return response.data;
     } catch (error) {
@@ -392,6 +392,8 @@ export const updateWorkSchedule = createAsyncThunk(
   }
 );
 
+// Update work schedule
+
 //! POSTS (поки немає)
 
 // Get list of service posts
@@ -399,7 +401,7 @@ export const getPosts = createAsyncThunk(
   "settings/getPosts",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/get_posts/`, {
         headers: {
@@ -421,7 +423,7 @@ export const createPost = createAsyncThunk(
   "settings/createPost",
   async (postData, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(`/set/create_post/`, postData, {
         headers: {
@@ -443,7 +445,7 @@ export const updatePostStatus = createAsyncThunk(
   "settings/updatePostStatus",
   async (newStatus, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { postId, ...status } = newStatus;
       const response = await axiosInstance.patch(
@@ -470,7 +472,7 @@ export const updatePostData = createAsyncThunk(
   "settings/updatePostData",
   async (postDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { postId, ...dataToUpdate } = postDataToUpdate;
       const response = await axiosInstance.patch(
@@ -497,7 +499,7 @@ export const deletePost = createAsyncThunk(
   "settings/deletePost",
   async (postId, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.delete(
         `/set/update_post/${postId}`,
@@ -524,7 +526,7 @@ export const getPrices = createAsyncThunk(
   "settings/getPrices",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/services`, {
         headers: {
@@ -546,7 +548,7 @@ export const getPricesInCategory = createAsyncThunk(
   "settings/getPricesInCategory",
   async (category_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(
         `/set/categories/${category_id}/services`,
@@ -571,7 +573,7 @@ export const editServiceNameOrPrices = createAsyncThunk(
   "settings/editPrices",
   async (newData, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.patch(
         `/set/services/update/`,
@@ -597,7 +599,7 @@ export const createCategory = createAsyncThunk(
   "settings/createCategory",
   async (categoryName, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(
         `/set/categories/`,
@@ -623,7 +625,7 @@ export const updateCategoryData = createAsyncThunk(
   "settings/updateCategoryData",
   async (categoryDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       // const { categoryId, ...dataToUpdate } = categoryDataToUpdate;
       const response = await axiosInstance.patch(
@@ -650,7 +652,7 @@ export const createService = createAsyncThunk(
   "settings/createService",
   async (newService, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
 
     // const { categoryId, ...serviceName } = newService;
 
@@ -675,7 +677,7 @@ export const deleteService = createAsyncThunk(
   "settings/deleteService",
   async (service_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.delete(
         `/set/delete/?service_id=${service_id}`,
@@ -702,7 +704,7 @@ export const createRating = createAsyncThunk(
   "settings/createRating",
   async (newRating, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
 
     // const { categoryId, ...serviceName } = newService;
 
@@ -731,7 +733,7 @@ export const updateRatingStatus = createAsyncThunk(
   "settings/updateRatingStatus",
   async (newStatus, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { rating_id, ...status } = newStatus;
       const response = await axiosInstance.patch(
@@ -758,7 +760,7 @@ export const getRatings = createAsyncThunk(
   "settings/getRatings",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/ratings_all/`, {
         headers: {
@@ -780,7 +782,7 @@ export const getRatingData = createAsyncThunk(
   "settings/getRatingData",
   async (rating_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/ratings/${rating_id}/`, {
         headers: {
@@ -802,7 +804,7 @@ export const deleteRating = createAsyncThunk(
   "settings/deleteRating",
   async (rating_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.delete(
         `/set/rating/${rating_id}/delete`,
@@ -829,7 +831,7 @@ export const createMarkup = createAsyncThunk(
   "settings/createMarkup",
   async (newMarkup, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
 
     // const { categoryId, ...serviceName } = newService;
 
@@ -859,7 +861,7 @@ export const updateFixedMarkup = createAsyncThunk(
   "settings/updateFixedMarkup",
   async (updatedMarkup, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { markup_id, ...markup } = updatedMarkup;
       const response = await axiosInstance.patch(
@@ -887,7 +889,7 @@ export const updateDynamicMarkup = createAsyncThunk(
   "settings/updateDynamicMarkup",
   async (updatedMarkup, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { markup_id, ...markup } = updatedMarkup;
       const response = await axiosInstance.patch(
@@ -914,7 +916,7 @@ export const deleteMarkup = createAsyncThunk(
   "settings/deleteMarkup",
   async (markupToDelete, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { markup_id, ...markup } = markupToDelete;
       const response = await axiosInstance.delete(
@@ -942,7 +944,7 @@ export const getAllMarkups = createAsyncThunk(
   "settings/getAllMarkups",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/get_all_mark_up`, {
         headers: {
@@ -964,7 +966,7 @@ export const getMarkupItemData = createAsyncThunk(
   "settings/getMarkupData",
   async (markup_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/markup/${markup_id}`, {
         headers: {
@@ -986,7 +988,7 @@ export const getDistributorMarkup = createAsyncThunk(
   "settings/getDistributorMarkup",
   async (supplier_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(
         `/set/supplier/markups/${supplier_id}`,
@@ -1013,7 +1015,7 @@ export const createCashRegister = createAsyncThunk(
   "settings/createCashRegister",
   async (cashRegisterName, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(
         `/set/cashregister/create`,
@@ -1039,7 +1041,7 @@ export const updateCashRegister = createAsyncThunk(
   "settings/updateCashRegister",
   async (updatedCashRegister, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { cash_register_id, ...cashRegister } = updatedCashRegister;
       const response = await axiosInstance.patch(
@@ -1066,7 +1068,7 @@ export const deleteCashRegister = createAsyncThunk(
   "settings/deleteCashRegister",
   async (cashRegisterToDelete, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { cash_register_id, ...cashRegister } = cashRegisterToDelete;
       const response = await axiosInstance.delete(
@@ -1093,7 +1095,7 @@ export const updateCashRegisterStatus = createAsyncThunk(
   "settings/updateCashRegisterStatus",
   async (newStatus, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { cash_register_id, ...status } = newStatus;
       const response = await axiosInstance.patch(
@@ -1120,7 +1122,7 @@ export const getAllCashRegisters = createAsyncThunk(
   "settings/getAllCashRegisters",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/cashregister/list`, {
         headers: {
@@ -1142,7 +1144,7 @@ export const getCashRegisterData = createAsyncThunk(
   "settings/getCashRegisterData",
   async (cash_register_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(
         `/set/cashregister/${cash_register_id}`,

@@ -6,7 +6,7 @@ export const getWarehouses = createAsyncThunk(
   "warehouse/getWarehouses",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/companies/tree`, {
         headers: {
@@ -28,7 +28,7 @@ export const createWarehouse = createAsyncThunk(
   "warehouse/createWarehouse",
   async (warehouseName, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(
         `/set/warehouses/`,
@@ -54,7 +54,7 @@ export const updateWarehouseName = createAsyncThunk(
   "warehouse/updateWarehouseName",
   async (warehouseDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { warehouseId, ...warehouseName } = warehouseDataToUpdate;
       const response = await axiosInstance.patch(
@@ -81,7 +81,7 @@ export const saveWarehouse = createAsyncThunk(
   "warehouse/saveWarehouse",
   async (promptName, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(
         `/set/import/warehouses/`,
@@ -107,7 +107,7 @@ export const getPrompts = createAsyncThunk(
   "warehouse/getPrompts",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/import/warehouses/`, {
         headers: {
@@ -129,7 +129,7 @@ export const createSection = createAsyncThunk(
   "warehouse/createSection",
   async (createSectionData, thunkAPI) => {
     const state = thunkAPI.getState();
-      const serviceId = state.auth.userData.selectedServiceId;
+     const serviceId = state.service.selectedServiceInSettingsId;
       
       const {warehouseId, ...sectionNumber} = createSectionData;
     try {
@@ -157,7 +157,7 @@ export const updateSectionName = createAsyncThunk(
   "warehouse/updateSectionName",
   async (sectionDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { sectionId, ...sectionName } = sectionDataToUpdate;
       const response = await axiosInstance.patch(
@@ -184,7 +184,7 @@ export const deleteSection = createAsyncThunk(
   "warehouse/deleteSection",
   async (sectionId, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.delete(`/set/section/${sectionId}`, {
         headers: {
@@ -206,7 +206,7 @@ export const createRacks = createAsyncThunk(
   "warehouse/createRacks",
   async (createRacksData, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
 
     const { sectionId, ...racksNumber } = createRacksData;
     try {
@@ -230,7 +230,7 @@ export const updateRackName = createAsyncThunk(
   "warehouse/updateRackName",
   async (rackDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { rackId, ...rackName } = rackDataToUpdate;
       const response = await axiosInstance.patch(
@@ -257,7 +257,7 @@ export const deleteRack = createAsyncThunk(
   "warehouse/deleteRack",
   async (rackId, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.delete(`/set/racks/${rackId}`, {
         headers: {
@@ -279,7 +279,7 @@ export const createShelves = createAsyncThunk(
   "warehouse/createShelves",
   async (createShelfData, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
 
     const { rackId, ...shelvesNumber } = createShelfData;
     try {
@@ -307,7 +307,7 @@ export const updateShelfName = createAsyncThunk(
   "warehouse/updateShelfName",
   async (shelfDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { shelfId, ...shelfName } = shelfDataToUpdate;
       const response = await axiosInstance.patch(
@@ -334,7 +334,7 @@ export const deleteShelf = createAsyncThunk(
   "warehouse/deleteShelf",
   async (shelfId, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.delete(`/set/shelves/${shelfId}`, {
         headers: {
@@ -356,7 +356,7 @@ export const createPlaces = createAsyncThunk(
   "warehouse/createPlaces",
   async (createPlacesData, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
 
     const { shelfId, ...placesNumber } = createPlacesData;
     try {
@@ -380,7 +380,7 @@ export const updatePlaceName = createAsyncThunk(
   "warehouse/updatePlaceName",
   async (placeDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { placeId, ...placeName } = placeDataToUpdate;
       const response = await axiosInstance.patch(
@@ -407,7 +407,7 @@ export const deletePlace = createAsyncThunk(
   "warehouse/deletePlace",
   async (placeId, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.auth.userData.selectedServiceId;
+   const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.delete(`/set/places/${placeId}`, {
         headers: {
