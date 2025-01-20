@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
 // import { changeCarStatus } from "../../redux/cars/operations.js";
-import { changeCarStatusCRM, getRecordsForPeriod } from "../../redux/crm/operations.js";
 import {
-  selectDates,
-  selectPeriodRecords
-} from "../../redux/crm/selectors.js";
+  changeCarStatusCRM,
+  getRecordsForPeriod,
+} from "../../redux/crm/operations.js";
+import { selectDates, selectPeriodRecords } from "../../redux/crm/selectors.js";
 import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility.jsx";
 import { labelNamesInCrm, statusMapping } from "../../utils/dataToRender.js";
 import { borderHeaderInCrm } from "../../utils/borderHeaderInCrm.jsx";
@@ -57,17 +57,19 @@ export default function CRMBlock() {
         console.log("Статус не змінився, запит не відправлено.");
         return;
       }
-      
-      dispatch(changeCarStatusCRM({ carId: item.car_id, status })
-        .unwrap()
-        .then(() => {
-          console.log("Updated status in frontend:", { ...item, status });
-          dispatch(getRecordsForPeriod(dates));
-        })
-        .catch((error) => {
-          console.error("Error updating status:", error);
-          toast.error("Помилка при оновленні статусу: " + error.message);
-        });
+
+      dispatch(
+        changeCarStatusCRM({ carId: item.car_id, status })
+          .unwrap()
+          .then(() => {
+            console.log("Updated status in frontend:", { ...item, status });
+            dispatch(getRecordsForPeriod(dates));
+          })
+          .catch((error) => {
+            console.error("Error updating status:", error);
+            toast.error("Помилка при оновленні статусу: " + error.message);
+          })
+      );
     }
   };
 
