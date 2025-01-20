@@ -40,6 +40,7 @@ export const statusMapping = {
   complete: "Завершено",
 };
 
+
 // пробний масив для компоненту зв'язку (клієнти)
 
   export const connections = [
@@ -122,7 +123,8 @@ export const labelNamesInModal = {
   photo: "Фото",
   totalPrice: "Загальна сума",
   phoneNumber: "Телефон",
-  info: "Інфо",
+  infoBtn: "Інфо",
+  statusBtn: "Статус інфо",
   prePayment: "Предоплата",
 };
 
