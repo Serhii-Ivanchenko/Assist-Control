@@ -16,8 +16,7 @@ export default function ClientsInWorkSorterSection() {
         <TimeSortItem onSortChange={noop} />
       </div>
       <div className={css.info}>
-        <div className={css.leftContainer}>
-        <div
+          <div
             className={clsx(css.photoContainer, {
               [css.hidden]: !visibility?.photo,
             })}
@@ -40,7 +39,6 @@ export default function ClientsInWorkSorterSection() {
             className={clsx(css.sorterKP, { [css.hidden]: !visibility?.KP })}
           >
             <TimeSortItem onSortChange={noop} />
-          </div>
         </div>
         <div
           className={clsx(css.sorterPrePayment, {
