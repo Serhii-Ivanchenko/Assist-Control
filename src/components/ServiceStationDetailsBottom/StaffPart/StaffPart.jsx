@@ -1,7 +1,7 @@
 import css from "./StaffPart.module.css";
 import avatar from "../../../assets/images/avatar_default.png";
 import { BsPlusLg } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../../Modals/Modal/Modal";
 // import AddTeamMember from "../../Modals/UserSettingsModal/AddTeamMember/AddTeamMember.jsx"
 // import { IoStarSharp } from "react-icons/io5";

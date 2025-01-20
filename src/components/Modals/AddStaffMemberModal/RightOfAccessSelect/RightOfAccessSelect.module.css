@@ -10,6 +10,7 @@
   padding-top: 0;
 
   width: 170px;
+  cursor: pointer;
 }
 
 .titleText {
@@ -60,6 +61,7 @@
 
 .option {
   padding: 10px;
+  cursor: pointer;
 }
 
 .option:not(:last-child) {
