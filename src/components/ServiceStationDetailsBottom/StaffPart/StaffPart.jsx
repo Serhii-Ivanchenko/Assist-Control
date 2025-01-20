@@ -35,47 +35,47 @@ export default function StaffPart() {
   const [currentEmployee, setCurrentEmployee] = useState(null);
   const employees = useSelector(selectEmployees);
   const [members, setMembers] = useState(
-    []
-    // [
-    //   {
-    //     name: "Максим Коваленко",
-    //     role: "Власник",
-    //     phone: "+38 (073) 329 12 12",
-    //     isDisabled: false,
-    //   },
-    //   {
-    //     name: "Максим Коваленко",
-    //     role: "Кухар",
-    //     phone: "+38 (073) 329 42 42",
-    //     isDisabled: false,
-    //   },
-    //   {
-    //     name: "Максим Коваленко",
-    //     role: "Механік",
-    //     phone: "+38 (073) 329 52 52",
-    //     isDisabled: false,
-    //   },
-    //   {
-    //     name: "Максим Коваленко",
-    //     role: "Механік",
-    //     phone: "+38 (073) 329 62 62",
-    //     isDisabled: false,
-    //   },
-    //   {
-    //     name: "Максим Коваленко",
-    //     role: "Механік",
-    //     phone: "+38 (073) 329 12 12",
-    //     isDisabled: false,
-    //   },
-    // ]
+    // []
+    [
+      {
+        name: "Максим Коваленко",
+        role: "Власник",
+        phone: "+38 (073) 329 12 12",
+        isDisabled: false,
+      },
+      {
+        name: "Максим Коваленко",
+        role: "Кухар",
+        phone: "+38 (073) 329 42 42",
+        isDisabled: false,
+      },
+      {
+        name: "Максим Коваленко",
+        role: "Механік",
+        phone: "+38 (073) 329 52 52",
+        isDisabled: false,
+      },
+      {
+        name: "Максим Коваленко",
+        role: "Механік",
+        phone: "+38 (073) 329 62 62",
+        isDisabled: false,
+      },
+      {
+        name: "Максим Коваленко",
+        role: "Механік",
+        phone: "+38 (073) 329 12 12",
+        isDisabled: false,
+      },
+    ]
   );
   console.log("members", employees);
 
-  useEffect(() => {
-    if (employees && employees.length > 0) {
-      setMembers(employees);
-    }
-  }, [employees]);
+  // useEffect(() => {
+  //   if (employees && employees.length > 0) {
+  //     setMembers(employees);
+  //   }
+  // }, [employees]);
 
   const toDisable = (index) => {
     setMembers(
@@ -90,7 +90,7 @@ export default function StaffPart() {
   };
 
   const openEditModal = (employee) => {
-    console.log("Opening modal for employee:", employee);
+    // console.log("Opening modal for employee:", employee);
     setCurrentEmployee(employee);
     setIsOpen(true);
   };

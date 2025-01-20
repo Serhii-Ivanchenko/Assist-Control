@@ -25,6 +25,7 @@ import uk from "date-fns/locale/uk";
 import ScheduleTable from "../../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 import AnimatedContent from "./AnimatedContent.jsx";
 import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent.jsx";
+import RightOfAccessSelect from "./RightOfAccessSelect/RightOfAccessSelect.jsx";
 // import { useDispatch } from "react-redux";
 // import { createEmployee } from "../../../redux/settings/operations.js";
 
@@ -109,7 +110,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     sparesAmount: employee.sparesAmount || "",
     sparesPrice: employee.sparesPrice || "",
     // profit: "",
-    schedule: { monday: "9:00-18:00" },
+    schedule: true,
     files: {
       passport: "",
       itn: "",
@@ -466,6 +467,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                   />
                 </div>
               </div>
+
+              <RightOfAccessSelect />
             </div>
 
             <div className={css.salary}>

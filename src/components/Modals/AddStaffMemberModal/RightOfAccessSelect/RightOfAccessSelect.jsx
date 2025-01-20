@@ -1,0 +1,52 @@
+import { useState } from "react";
+import { BsFillCaretDownFill } from "react-icons/bs";
+import css from "./RightOfAccessSelect.module.css";
+import { BsCheck } from "react-icons/bs";
+
+export default function RightOfAccessSelect() {
+  const pages = [
+    { value: "video-control", page: "Моніторинг" },
+    { value: "crm", page: "Планувальник" },
+    { value: "connections", page: "Звернення" },
+    { value: "recommendations", page: "Рекомендації" },
+    { value: "accounting", page: "Облік" },
+    { value: "reports", page: "Звіти" },
+    { value: "settings", page: "Налаштування" },
+  ];
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className={css.container}>
+      <div className={css.titlePart} onClick={() => setIsOpen(!isOpen)}>
+        <p className={css.titleText}>Право доступу</p>
+        <BsFillCaretDownFill
+          className={`${css.iconArrow} ${isOpen && css.rotated}`}
+        />
+      </div>
+
+      {isOpen && (
+        <ul className={css.options}>
+          {pages.map((page, index) => (
+            <li key={index} className={css.option}>
+              <label className={css.label}>
+                <input
+                  type="checkbox"
+                  //   name="all"
+                  //   id="all"
+                  className={css.checkbox}
+                  // checked={selectedStatus.length === 0 || selectedStatus.includes("")}
+                  // onChange={() => handleFilter("")}
+                />
+                <span className={css.cbMark}>
+                  <BsCheck size={20} className={css.cbIcon} />
+                </span>
+                <p className={css.text}> {page.page}</p>
+              </label>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
