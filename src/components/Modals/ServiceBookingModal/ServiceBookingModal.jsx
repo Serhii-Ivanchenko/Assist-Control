@@ -63,7 +63,7 @@ export default function ServiceBookingModal({
   );
 
   const recordById = dayRecords?.find((dayRecord) => {
-    return dayRecord.id === recordId;
+    return dayRecord.car_id === recordId;
   });
 
   const toggleDropdown = (status, changeStatus) => {

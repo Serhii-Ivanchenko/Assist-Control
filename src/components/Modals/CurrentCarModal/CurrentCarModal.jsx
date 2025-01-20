@@ -29,12 +29,12 @@ import ArchiveModal from "../ArchiveModal/ArchiveModal.jsx";
 import Modal from "../Modal/Modal.jsx";
 
 function CurrentCarModal({ onClose, car, status }) {
-  const [isMonitoring, setisMonitoring] = useState("main");
+  // const [isMonitoring, setisMonitoring] = useState("main");
   const dispatch = useDispatch();
   const [selectedStatus, setSelectedStatus] = useState(status);
   const currentDate = useSelector(selectDate);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  
   const getStatusIcon = (status) => {
     switch (status) {
       case "new":
@@ -85,9 +85,9 @@ function CurrentCarModal({ onClose, car, status }) {
   const handleSubmit = () => {
     dispatch(
       changeCarStatus({
-        carId: car.id,
+        carId: car.car_id,
         status: selectedStatus,
-        location: isMonitoring,
+        // location: isMonitoring,
       })
     )
       .then(() => {

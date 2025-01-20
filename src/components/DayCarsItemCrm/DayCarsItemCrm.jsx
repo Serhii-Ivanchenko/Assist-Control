@@ -27,7 +27,7 @@ import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
 import ArchiveModal from "../Modals/ArchiveModal/ArchiveModal.jsx";
 
 export default function DayCarsItemCrm({ car, onDragStart }) {
-  const [isCrm, setIsCrm] = useState("record");
+  // const [isCrm, setIsCrm] = useState("record");
   const visibility = useSelector(selectVisibilityRecords);
   const [modalState, setModalState] = useState({
     serviceBooking: false,
@@ -40,7 +40,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
 
   const handleDragStart = (e) => {
     setIsDragging(true);
-    onDragStart(e, car.id);
+    onDragStart(e, car.car_id);
 
     // Зберігаємо початкове зміщення між курсором і позицією елемента
     const rect = e.target.getBoundingClientRect();
@@ -104,7 +104,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
   };
 
   const {
-    id,
+    car_id,
     auto,
     photo_url: photoUrl,
     vin,
@@ -155,7 +155,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
         isDragging ? styles.dragging : ""
       }`}
       style={getBackgroundStyle(status)}
-      id={car.id}
+      id={car.car_id}
       draggable
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
@@ -223,7 +223,11 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
         )}
         <div className={styles.btnContainer}>
           {visibility?.info && (
-            <CarDetailButton carId={id} location={isCrm} carName={car.auto} />
+            <CarDetailButton
+              carId={car_id}
+              // location={isCrm}
+              carName={car.auto}
+            />
           )}
 
           {(status === "repair" ||

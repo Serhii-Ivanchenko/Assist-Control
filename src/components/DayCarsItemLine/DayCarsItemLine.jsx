@@ -18,7 +18,7 @@ export default function DayCarsItemLine({ car }) {
   const [isMonitoring, setisMonitoring] = useState("main");
 
   const {
-    id,
+    car_id,
     photo_url: photoUrl,
     complete_d,
     status,
@@ -148,7 +148,7 @@ export default function DayCarsItemLine({ car }) {
           {visibility?.status && <StatusBtn car={car} />}
           {visibility?.info && (
             <CarDetailButton
-              carId={id}
+              carId={car_id}
               location={isMonitoring}
               carName={car.auto}
             />

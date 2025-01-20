@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
 import {
+  changeCarStatusCRM,
   createRecord,
   getAllRecords,
   getMonthlyLoad,
@@ -27,7 +28,7 @@ const crmSlice = createSlice({
   reducers: {
     updateDates(state, action) {
       state.dates = action.payload;
-    }
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -61,7 +62,7 @@ const crmSlice = createSlice({
         // console.log(action.payload.id);
 
         const recordToEditIndex = state.records.findIndex(
-          (record) => record.id === action.payload.id
+          (record) => record.car_id === action.payload.car_id
         );
         state.records[recordToEditIndex] = action.payload;
       })
@@ -87,7 +88,20 @@ const crmSlice = createSlice({
         state.isLoading = false;
         state.load = action.payload.load;
       })
-      .addCase(getMonthlyLoad.rejected, handleRejected),
+      .addCase(getMonthlyLoad.rejected, handleRejected)
+
+      .addCase(changeCarStatusCRM.pending, handlePending)
+      .addCase(changeCarStatusCRM.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const { car_id, newStatus } = action.payload;
+        const carIndex = state.current.findIndex(
+          (car) => car.car_id === car_id
+        );
+        if (carIndex !== -1) {
+          state.current[carIndex].status = newStatus;
+        }
+      })
+      .addCase(changeCarStatusCRM.rejected, handleRejected),
 });
 
 export const { updateDates } = crmSlice.actions;
