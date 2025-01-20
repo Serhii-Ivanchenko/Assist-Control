@@ -79,7 +79,7 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  height: 18px;
+  height: 24px;
   padding-left: 6px;
 
   border-radius: 6px;
@@ -98,12 +98,6 @@
   filter: blur(5px);
   z-index: 1;
   border-radius: 0 5px 5px 0;
-}
-
-@media only screen and (min-width: 1850px) {
-  .title {
-    height: 24px;
-  }
 }
 
 .statusText {

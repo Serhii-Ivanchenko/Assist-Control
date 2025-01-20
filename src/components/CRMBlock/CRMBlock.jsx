@@ -53,7 +53,12 @@ export default function CRMBlock() {
     console.log("Found item:", item);
 
     if (item) {
-      dispatch(changeCarStatusCRM({ carId: item.car_id, status }))
+      if (item.status === status) {
+        console.log("Статус не змінився, запит не відправлено.");
+        return;
+      }
+      
+      dispatch(changeCarStatusCRM({ carId: item.car_id, status })
         .unwrap()
         .then(() => {
           console.log("Updated status in frontend:", { ...item, status });

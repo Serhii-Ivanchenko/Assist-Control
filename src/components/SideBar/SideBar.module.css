@@ -2,36 +2,21 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
-  /* width: 230px; */
-  /* height: 641px; */
-  /* max-height: 100vh; */
+
   border-radius: 12px;
   background: var(--bg-secondary);
   padding: 20px 30px 20px 25px;
+  width: 230px;
+  height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
 
   flex-shrink: 0;
-  transition:
-    width 0.7s ease-in,
-    padding 0.7s ease-in,
-    gap 0.7s ease-in,
-}
-
-.chatOpen {
-  width: 80px;
-  padding: 10px;
   transition: width 0.7s ease-in, padding 0.7s ease-in, gap 0.7s ease-in;
 }
 
-@media only screen and (min-width: 1850px) {
-  .sidebar {
-    width: 230px;
-    height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
-  }
-
-  .chatOpen {
-    width: 111px;
-    padding: 20px;
-  }
+.chatOpen {
+  width: 111px;
+  padding: 20px;
+  transition: width 0.7s ease-in, padding 0.7s ease-in, gap 0.7s ease-in;
 }
 
 .userInfo {
@@ -55,11 +40,8 @@
 }
 
 .bottomContainerWithChat {
-  /* margin-left: 14.5px; */
   width: 71px;
-  /* display: flex
-  ; */
-  /* align-items: center; */
+
   padding-left: 14.5px;
   transition: width 0.7s ease;
 }

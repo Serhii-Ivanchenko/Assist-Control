@@ -2,14 +2,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 304px;
-  height: 55px;
-  border-radius: 8px;
+  width: 460px;
+  height: 70px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
   background-color: var(--blue);
   color: var(--white);
-  font-size: 14px;
   font-style: normal;
-  font-weight: 300;
   line-height: normal;
   border: none;
   cursor: pointer;
@@ -22,14 +22,4 @@
 .iconAvto {
   margin-left: 8px;
   color: var(--light-gray);
-}
-
-@media only screen and (min-width: 1850px) {
-  .btn {
-    width: 460px;
-    height: 70px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-  }
 }

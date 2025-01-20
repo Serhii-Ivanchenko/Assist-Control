@@ -22,6 +22,7 @@ import { GiAlarmClock } from "react-icons/gi";
 import Modal from "../../Modals/Modal/Modal.jsx";
 import ServiceBookingModal from "../../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
 import ArchiveModal from "../../Modals/ArchiveModal/ArchiveModal.jsx";
+import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal.jsx";
 
 export default function RecommendationsCardsItem({ car }) {
   const visibility = useSelector(selectVisibilityRecomendations);
@@ -29,6 +30,7 @@ export default function RecommendationsCardsItem({ car }) {
   const [modalState, setModalState] = useState({
     serviceBooking: false,
     archive: false,
+    notifications: false,
   });
 
   const {
@@ -58,10 +60,15 @@ export default function RecommendationsCardsItem({ car }) {
     setModalState({ ...modalState, archive: true });
   };
 
+  const openNotificationModal = () => {
+    setModalState({ ...modalState, notifications: true });
+  };
+
   const closeModals = () => {
     setModalState({
       serviceBooking: false,
       archive: false,
+      notifications: false,
     });
   };
 
@@ -147,9 +154,24 @@ export default function RecommendationsCardsItem({ car }) {
             </Modal>
           )}
           {visibility?.notificBtn && (
-            <button className={styles.clockContainer}>
+            <button
+              className={styles.clockContainer}
+              onClick={openNotificationModal}
+            >
               <GiAlarmClock className={styles.iconClock} size={20} />
             </button>
+          )}
+          {modalState.notifications && (
+            <Modal isOpen={modalState.notifications} onClose={closeModals}>
+              <NotificationModal onClose={closeModals} 
+               time="clientTime"
+               date="clientDate"
+               comment="clientComment"
+               connectionType="clientConnection"
+               accountingModal={true}
+               service="clientService"
+               setNotificationSent={setModalState}/>
+            </Modal>
           )}
           {visibility?.delBtn && (
             <button
