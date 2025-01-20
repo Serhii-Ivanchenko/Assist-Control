@@ -13,6 +13,7 @@ export default function ChannelsPart({
   handleFilter,
   chats,
   setFilteredChats,
+  flashingBorder,
 }) {
   const channelsList = [
     {
@@ -134,6 +135,7 @@ export default function ChannelsPart({
               isActive={isActive}
               handleIsActive={handleIsActive}
               onDragStart={handleDragStart}
+              flashingBorder={flashingBorder}
             />
           ))}
         </ul>

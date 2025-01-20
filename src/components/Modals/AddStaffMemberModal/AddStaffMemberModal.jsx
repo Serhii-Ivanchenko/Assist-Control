@@ -96,7 +96,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     name: employee.name || "",
     phone: employee.phone || "",
     address: employee.address || "",
-    birthday: new Date(),
+    birthday: employee.birthday || new Date(),
     position: employee.role || "",
     role: employee.role || "",
     email: employee.email || "",

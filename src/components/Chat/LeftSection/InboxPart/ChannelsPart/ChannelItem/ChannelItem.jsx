@@ -12,6 +12,7 @@ export default function ChannelItem({
   isActive,
   handleIsActive,
   onDragStart,
+  flashingBorder,
 }) {
   const [isDragging, setIsDragging] = useState(false);
   const [draggingElement, setDraggingElement] = useState(null);
@@ -107,7 +108,8 @@ export default function ChannelItem({
         <p
           className={`${css.numberBox} ${
             (channel.value === 0 || !channel.value) && css.numberBoxHidden
-          }`}
+          } 
+          ${flashingBorder(channel.type)}`}
         >
           {channel.value}
         </p>
