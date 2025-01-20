@@ -41,7 +41,7 @@ export default function GeneralClientsControlBarSection() {
         />
         <StatusFilter
           onStatusChange={handleStatusChange}
-          renderStatus={renderStatusCommunication}
+          renderStatus={(status) => renderStatusCommunication(status, css, isFilter)}
           statuses={statusesCommunications}
           isFilter={isFilter}
         />

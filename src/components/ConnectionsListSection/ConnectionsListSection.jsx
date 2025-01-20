@@ -28,7 +28,7 @@ export default function ConnectionsListSection() {
     ].includes(itemStatus);
 
     if (isCommunicationStatus) {
-      return renderStatusCommunication(itemStatus, false, css, false);
+      return renderStatusCommunication(itemStatus, css, false);
     }
 
     return renderStatusCars(itemStatus, false, css, false);
@@ -96,7 +96,7 @@ export default function ConnectionsListSection() {
       ))}
       {isArchiveModalOpen && (
         <Modal isOpen={isArchiveModalOpen} onClose={closeArchiveModal}>
-          <ArchiveModal onClose={closeArchiveModal} carId={car_id} location="records" />
+          <ArchiveModal onClose={closeArchiveModal} />
         </Modal>
       )}
     </div>
