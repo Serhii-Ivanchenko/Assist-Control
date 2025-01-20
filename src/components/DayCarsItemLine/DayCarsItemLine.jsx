@@ -149,7 +149,7 @@ export default function DayCarsItemLine({ car }) {
           {visibility?.info && (
             <CarDetailButton
               carId={car_id}
-              location={isMonitoring}
+              // location={isMonitoring}
               carName={car.auto}
             />
           )}

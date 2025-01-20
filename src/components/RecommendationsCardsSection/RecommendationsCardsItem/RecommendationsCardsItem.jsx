@@ -139,7 +139,7 @@ export default function RecommendationsCardsItem({ car }) {
           {visibility?.infoBtn && (
             <CarDetailButton
               carId={id}
-              location={isMonitoring}
+              // location={isMonitoring}
               carName={car.auto}
             />
           )}

@@ -88,7 +88,7 @@ function ClientStatusStepper({
   const handleClick = (idx) => {
     switch (idx) {
       case 0:
-        dispatch(getClientInfo({ carId: carId, location: isCrm }));
+        dispatch(getClientInfo({ carId: carId}));
         setModalContent(<DetailedClientInfo onClose={closeModal} />);
         break;
       case 1:
