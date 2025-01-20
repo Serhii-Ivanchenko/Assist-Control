@@ -12,11 +12,6 @@
   align-items: center;
   justify-content: space-between;
 }
-@media only screen and (min-width: 1850px) {
-  .carLineContainer {
-    justify-content: space-between;
-  }
-}
 
 .carNumber {
   color: var(--white);
@@ -25,13 +20,7 @@
   font-weight: 300;
   line-height: normal;
   width: 70px;
-  margin-right: 12px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .carNumber {
-    margin-right: 0;
-  }
+  margin-right: 0px;
 }
 
 .carPhoto {
@@ -48,14 +37,11 @@
   object-fit: cover;
 }
 
-@media only screen and (min-width: 1850px) {
-  .infoName {
-    width: 90px;
-    overflow: hidden;
-    white-space: nowrap; 
-  }
+.infoName {
+  width: 90px;
+  overflow: hidden;
+  white-space: nowrap;
 }
-
 
 .textName {
   color: var(--white);
@@ -69,18 +55,11 @@
   flex-direction: row;
   align-items: center;
   gap: 7px;
-  width: 100px;
-  height: 18px;
+  width: 137px;
+  height: 24px;
   padding-left: 8px;
 
   border-radius: 6px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .title {
-    width: 137px;
-    height: 24px;
-  }
 }
 
 .statusText {
@@ -94,39 +73,24 @@
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-/* @media only screen and (min-width: 1850px) {
-  .statusText {
-    font-size: 16px;
-  }
-} */
-
 .completed {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--status-complete);
 }
 
 .new {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--status-new);
 }
 
 .repair {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--status-repair);
 }
 
 .checkRepair {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--status-diag);
-}
-
-@media only screen and (min-width: 1850px) {
-  .checkRepair,
-  .completed,
-  .new,
-  .repair {
-    font-size: 14px;
-  }
 }
 
 .infoCar {
@@ -136,51 +100,28 @@
 }
 
 .textName {
-  display: none;
-}
-
-@media only screen and (min-width: 1850px) {
-  .textName {
-    display: flex;
-    color: var(--white);
-    font-size: 14px;
-    font-weight: 600;
-    font-size: 16px;
-  }
+  display: flex;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .nameCar {
   color: var(--white);
-  font-size: 12px;
-  font-weight: 400;
-}
-@media only screen and (min-width: 1850px) {
-  .nameCar {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 120px;
-  }
-}
+  font-size: 16px;
+  width: 140px;
 
-@media only screen and (min-width: 1850px) {
-  .nameCar {
-    /* max-width: 139px; */
-    font-size: 16px;
-    width: 140px;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
 }
 
 .btnContainer {
   display: flex;
+  align-items: center;
   gap: 8px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .btnContainer {
-    display: flex;
-    align-items: center;
-  }
 }
 
 .btnDetail {
@@ -188,113 +129,63 @@
   padding: 5px 10px;
   justify-content: center;
   align-items: center;
-  width: 52px;
-  height: 22px;
+  width: 58px;
+  height: 24px;
   border-radius: 6px;
   background-color: var(--blue);
   border: none;
   cursor: pointer;
 }
 
-@media only screen and (min-width: 1850px) {
-  .btnDetail {
-    width: 58px;
-    height: 24px;
-  }
-}
-
 .btnDetailText {
   color: var(--white);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
 }
 
-@media only screen and (min-width: 1850px) {
-  .btnDetailText {
-    font-size: 12px;
-  }
-}
-
 .timeWork {
-  display: none;
-}
-
-@media only screen and (min-width: 1850px) {
-  .timeWork {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    color: var(--text-gray);
-  }
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-gray);
 }
 
 .time {
-  font-size: 12px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .time {
-    font-size: 14px;
-  }
+  font-size: 14px;
 }
 
 .infoVin {
-  display: none;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--main-gray);
+  padding: 3px 10px;
+  width: 180px;
 }
 
-@media only screen and (min-width: 1850px) {
-  .infoVin {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    border-radius: 6px;
-    background: var(--main-gray);
-    padding: 3px 10px;
-    width: 180px;
-  }
-}
-
-.vinNum{
+.vinNum {
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
 }
 
 .totalPay {
-  display: none;
-}
-
-@media only screen and (min-width: 1850px) {
-  .totalPay {
-    display: flex;
-  }
+  display: flex;
 }
 
 .status {
-  display: none;
+  display: flex;
 }
 
-@media only screen and (min-width: 1850px) {
-  .status {
-    display: flex;
-  }
+.leftContainer,
+.rightContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-
-.rightContainer{
-  display: none;
-}
-
-@media only screen and (min-width: 1850px) {
-  .leftContainer,
-  .rightContainer{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-}
-
-.mileInfo{
+.mileInfo {
   display: flex;
   align-items: center;
   gap: 7px;

@@ -31,6 +31,7 @@ import Modal from "../../Modals/Modal/Modal.jsx";
 import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal.jsx";
 import SearchTags from "./ChatTags/SearchTags/SearchTags.jsx";
 import { tags } from "../RightSection/ChatTags/tags.js";
+import PhoneModal from "./PopUp/PhoneModal/PhoneModal.jsx";
 import clsx from "clsx";
 
 const data = {
@@ -207,8 +208,8 @@ export default function RightSection() {
     setModalOpen(false);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
+  const buttonRef = useRef(null);
   const makeCall = (phone) => {
     window.location.href = `tel:${phone}`;
   };
@@ -217,10 +218,10 @@ export default function RightSection() {
     // if (!data.phonenums.includes(data.phonenum)) {
     //   data.phonenums.push(data.phonenum);
     // };
-    if (data.phonenums.length >= 1) {
-      setIsModalOpen(true);
+    if (data.phonenums.length === 0) {
+      setIsPhoneModalOpen(false);
     } else {
-      setIsModalOpen(false);
+      setIsPhoneModalOpen((prevState) => !prevState);
     }
   };
 
@@ -278,7 +279,11 @@ export default function RightSection() {
           </div>
         </div>
         <div className={css.btnbox}>
-          <button className={css.btnaction} onClick={handlePhoneClick}>
+          <button
+            ref={buttonRef}
+            className={css.btnaction}
+            onClick={handlePhoneClick}
+          >
             <BsTelephone className={css.iconaction} />
           </button>
 
@@ -309,10 +314,23 @@ export default function RightSection() {
             <RiUserAddFill className={css.iconaction} />
           </button>
 
-          {isModalOpen && (
+          {isPhoneModalOpen && (
+            <PhoneModal
+              isOpen={isPhoneModalOpen}
+              onClose={() => setIsPhoneModalOpen(false)}
+              phoneNumbers={data.phonenums}
+              onPhoneSelect={(phone) => {
+                makeCall(phone);
+                setIsPhoneModalOpen(false);
+              }}
+              triggerRef={buttonRef}
+            />
+          )}
+
+          {/* {isPhoneModalOpen && (
             <div
               className={css.modalOverlay} // Задний фон модального окна
-              onClick={() => setIsModalOpen(false)} // Закрытие при клике на фон
+              onClick={() => setIsPhoneModalOpen(false)} // Закрытие при клике на фон
             >
               <div
                 className={css.modalphone}
@@ -324,7 +342,7 @@ export default function RightSection() {
                     className={css.modalitem}
                     onClick={() => {
                       makeCall(phone);
-                      setIsModalOpen(false);
+                      setIsPhoneModalOpen(false);
                     }}
                   >
                     {formatPhoneNumber(phone)}
@@ -332,7 +350,7 @@ export default function RightSection() {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
 
           {isModalNote && (
             <Modal isOpen={isModalNote} onClose={closeModal}>
@@ -457,6 +475,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel1") ? 127 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel1-content"
@@ -473,6 +494,7 @@ export default function RightSection() {
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
                       transition: "transform 0.3s",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleRowClick("panel1")}
                   />
@@ -536,6 +558,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel2") ? 172 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
               // flexGrow: "1",
               // overflow: "hidden",
             }}
@@ -554,6 +579,7 @@ export default function RightSection() {
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
                       transition: "transform 0.3s",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleRowClick("panel2")}
                   />
@@ -607,6 +633,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel3") ? 209 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel3-content"
@@ -622,6 +651,7 @@ export default function RightSection() {
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
                     transition: "transform 0.3s",
+                    cursor: "pointer",
                   }}
                   onClick={() => handleRowClick("panel3")}
                 />
@@ -662,6 +692,7 @@ export default function RightSection() {
                           : "rotate(0deg)",
                         transition: "transform 0.3s",
                         marginLeft: "4px",
+                        cursor: "pointer",
                       }}
                     />
                   </div>
@@ -767,6 +798,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel4") ? 161 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel4-content"
@@ -783,6 +817,7 @@ export default function RightSection() {
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
                       transition: "transform 0.3s",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleRowClick("panel4")}
                   />
@@ -848,6 +883,9 @@ export default function RightSection() {
               "& .Mui-focusVisible": {
                 backgroundColor: "var(--bg-secondary)",
               },
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             // expandIcon={<ExpandMoreIcon style={{fill: "var(--light-gray)"}}/>}
@@ -864,6 +902,7 @@ export default function RightSection() {
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
                     transition: "transform 0.3s",
+                    cursor: "pointer",
                   }}
                   onClick={() => handleRowClick("panel5")}
                 />
@@ -920,6 +959,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel6") ? 200 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel6-content"
@@ -935,6 +977,7 @@ export default function RightSection() {
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
                     transition: "transform 0.3s",
+                    cursor: "pointer",
                   }}
                   onClick={() => handleRowClick("panel6")}
                 />

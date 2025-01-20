@@ -1,7 +1,7 @@
  .wrapper {
      border-radius: 12px;
      background: var(--bg-secondary);
-     height: 200px;
+     height: 142px;
      width: 371px;
      display: flex;
      flex-direction: column;
@@ -9,6 +9,21 @@
      /* justify-content: center;
         align-items: center; */
      padding: 10px 0px;
+     overflow-y: auto;
+ }
+
+ .wrapper::-webkit-scrollbar {
+     width: 2px;
+ }
+
+ .wrapper::-webkit-scrollbar-track {
+     border-radius: 1px;
+     background-color: var(--bg);
+ }
+
+ .wrapper::-webkit-scrollbar-thumb {
+     border-radius: 1px;
+     background-color: var(--main-gray);
  }
 
  .box {
@@ -29,7 +44,7 @@
      font-style: normal;
      font-weight: 500;
      line-height: normal;
-     width: 220px;
+     width: 260px;
 
  }
 
@@ -52,10 +67,38 @@
      width: 18px;
      height: 18px;
      /* background: var(--bg-input); */
+     cursor: pointer;
  }
 
  .iconpdf {
      fill: var(--red);
+     width: 20px;
+     height: 22px;
+     background-color: var(--white);
+     border-radius: 2px;
+     border-top-right-radius: 8px;
+ }
+
+ .iconxls {
+     fill: var(--green);
+     width: 20px;
+     height: 22px;
+     background-color: var(--white);
+     border-radius: 2px;
+     border-top-right-radius: 8px;
+ }
+
+ .icondoc {
+     fill: var(--blue);
+     width: 20px;
+     height: 22px;
+     background-color: var(--white);
+     border-radius: 2px;
+     border-top-right-radius: 8px;
+ }
+
+ .icondoc {
+     fill: var(--blue);
      width: 20px;
      height: 22px;
      background-color: var(--white);

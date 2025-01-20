@@ -2,23 +2,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 285px;
-    height: 100%;
-    padding: 15px 13px 13px 11px;
-  
-    border-radius: 8px;
-    background: var(--bg-input);
-    border: 2px solid transparent;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  
-  }
-  
-  @media only screen and (min-width: 1850px) {
-    .dayCarsItemContainer {
-      width: 365px;
+    width: 365px;
       height: 100%;
       padding: 10px 18px;
-    }
+    border-radius: 8px;
+    border: 2px solid transparent;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(#2D3038, #2D3038) padding-box, var(--border-gradient-diag) border-box;
   }
 
   .userInfo {
@@ -31,7 +21,7 @@
     flex-direction: row;
     align-items: center;
     gap: 7px;
-    width: 100px;
+    max-width: 145px;
     height: 18px;
     padding-left: 8px;
     margin-bottom: 8px;
@@ -75,57 +65,29 @@
   }
   
   .checkRepair {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--status-diag);
-  }
-  
-  
-  @media only screen and (min-width: 1850px) {
-    .checkRepair{
-      font-size: 14px;
-    }
   }
   
   .icon {
     width: 12px;
     height: 12px;
     transition: width 0.3s, height 0.3s;
+    font-size: 16px;
   }
-  
-  @media only screen and (min-width: 1850px) {
-    .icon {
-      font-size: 16px;
-    }
-  }
-  
+
   .iconHuman {
-    width: 13px;
-    height: 13px;
+    width: 16px;
+    height: 16px;
   }
-  
-  
-  @media only screen and (min-width: 1850px) {
-    .iconHuman {
-      width: 16px;
-      height: 16px;
-    }
-  }
-  
-  
+
   .infoCard {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    margin-bottom: 7px;
+    gap: 6px;
+    margin-bottom: 11px;
   }
-  
-  @media only screen and (min-width: 1850px) {
-    .infoCard {
-      gap: 6px;
-      margin-bottom: 11px;
-    }
-  }
-  
+ 
   .infoName,
   .infoTel,
   .infoCar {
@@ -136,25 +98,26 @@
   
   .vinContainer {
     display: flex;
+    padding: 3px 10px;
     width: 185px;
     height: 30px;
-    padding: 3px 5px;
     margin-bottom: 25px;
     justify-content: center;
     align-items: center;
     gap: 10px;
     border-radius: 6px;
     background: var(--main-gray);
+    z-index: 2;
   }
   
   .vinCode {
     color: var(--white);
-    font-size: 10px;
-  
-      max-width: 134px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+    font-size: 14px;
+    line-height: 16px;
+    max-width: 134px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   
   .copyButton{
@@ -171,19 +134,6 @@
     cursor: pointer;
     margin-left: auto;    
   }  
-  
-  @media only screen and (min-width: 1850px) {
-    .vinCode {
-      font-size: 14px;
-      line-height: 16px;
-    }
-  
-    .vinContainer{
-      padding: 3px 10px;
-      width: 185px;
-      height: 30px;
-    }
-  }
 
   .plus{
     width: 24px;
@@ -199,15 +149,15 @@
 }
 
 .iconPlus {
-      display: flex;
-        width: 14px;
-        height: 14px;
-        justify-content: center;
-        align-items: center;
-        border-radius: 3px;
-        color: var(--green);
-        background-color: var(--white);
-        stroke-width: 2px;
+  display: flex;
+  width: 14px;
+  height: 14px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  color: var(--green);
+  background-color: var(--white);
+  stroke-width: 2px;
 }
 .clockContainer{
   width: 24px;
@@ -239,7 +189,7 @@
   
   .textName {
     color: var(--white);
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     line-height: normal;
 
@@ -249,53 +199,28 @@
     white-space: nowrap;
     text-overflow: ellipsis; 
   }
-  
-  @media only screen and (min-width: 1850px) {
-    .textName {
-      font-size: 16px;
-    }
-  }
-  
+
   .textTel {
     color: var(--text-gray);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     line-height: normal;
   }
-  
-  @media only screen and (min-width: 1850px) {
-    .textTel {
-      font-size: 14px;
-    }
-  }
-  
+
   .iconTel {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
   }
-  
-  @media only screen and (min-width: 1850px) {
-    .iconTel {
-      width: 12px;
-      height: 12px;
-    }
-  }
-  
+
   .nameCar {
     color: var(--white);
-    font-size: 12px;
+    font-size: 14px;
+    max-width: 134px;
     font-weight: 400;
     white-space: nowrap;
     overflow: hidden; 
     text-overflow: ellipsis; 
-    max-width: 120px;
-  }
-  
-  @media only screen and (min-width: 1850px) {
-    .nameCar {
-      font-size: 14px;
-      max-width: 134px;
-    }
+
   }
   
   .btnContainer {
@@ -312,17 +237,9 @@
     align-items: center;
     width: 87px;
     height: 61px;
-    margin-bottom: 20.5px;
+    margin-bottom: 12px;
   }
-  
-  
-  @media only screen and (min-width: 1850px) {
-    .carPhoto {
-      margin-bottom: 12px;
-    }
-  }
-  
-  
+
   .carPhoto img {
     width: 100%;
     height: 100%;
@@ -348,12 +265,8 @@
     justify-content: space-between;
     align-items: flex-end;
     margin-left: -36px;
-  }
-  
-  @media only screen and (min-width: 1850px) {
-    .carInfoLeft {
-      width: 80px;
-    }
+    width: 80px;
+
   }
 
   .money {
@@ -372,36 +285,21 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: end;
+    align-items: start;
     width: 96px;
   }
-  
-  @media only screen and (min-width: 1850px) {
-    .carInfoRight {
-      align-items: start;
-  
-    }
-  }
-  
+
   .carRegContainer {
     display: flex;
     align-items: center;
     width: 96px;
     height: 23px;
     gap: 3px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     border-radius: 5px;
     border: 2px solid var(--black);
     background: #D9D9D9;
   }
-  
-  
-  @media only screen and (min-width: 1850px) {
-    carRegContainer {
-      margin-bottom: 12px;
-    }
-  }
-  
   
   .carRegFlag {
     width: 5.4px;
@@ -437,24 +335,13 @@
   
   .mileInfo,
   .timeWork {
-    display: none
+    display: flex;
+    gap: 7px;
+    align-items: center;
   }
-  
-  @media only screen and (min-width: 1850px) {
-  
-    .mileInfo,
-    .timeWork {
-      display: flex;
-      gap: 7px;
-      align-items: center;
-    }
-  }
-  
-  
-  
+
   .timeWork {
     margin-top: 6px;
-  
   }
   
   .mileage {
@@ -471,25 +358,13 @@
     font-weight: 600;
     line-height: normal;
   }
-  
-  
-  
   .total {
-    margin-top: auto;
     color: var(--white);
-    font-size: 14px;
+    font-size: 16px;
+    margin-top: 12px;    
     font-weight: 600;
     line-height: normal;
   }
-  
-  @media only screen and (min-width: 1850px) {
-    .total {
-      font-size: 16px;
-      margin-top: 12px;
-  
-    }
-  }
-  
   .totalPay {
     margin-top: auto;
   }

@@ -4,21 +4,13 @@
     justify-content: center;
     align-items: center;
     /* width: 52px; */
-    height: 22px;
+    height: 24px;
   
     border-radius: 6px;
     background-color: var(--blue-btn-normal);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border: none;
     cursor: pointer;
-  }
-
-
-  @media only screen and (min-width: 1850px) {
-    .btnDetail {
-      /* width: 58px; */
-      height: 24px;
-    }
   }
 
   .btnDetail:hover{
@@ -28,14 +20,8 @@
 
   .btnDetailText {
     color: var(--white);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     line-height: normal;
   }
   
-  @media only screen and (min-width: 1850px) {
-    .btnDetailText {
-      font-size: 12px;
-  
-    }
-  }

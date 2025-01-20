@@ -44,7 +44,7 @@ export default function CalendarBlock() {
   return (
     <div className={styles.calendarContainer}>
       <div className={styles.topContainer}>
-        <CalendarPagination isCrm={false} />
+        <CalendarPagination page={'video'} />
         {isLoadingCarsByDay && <p>Завантаження інформації...</p>}
         <DayCarsList
           carsData={carsData}

@@ -49,6 +49,7 @@
     transition: height 0.3s ease-in-out;
     border-radius: 12px;
     padding: 16px 16px 16px 24px;
+    /* cursor: default; */
 }
 
 .accordionTitle>div {

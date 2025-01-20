@@ -12,11 +12,16 @@ export default function MessagesPart({
   handleSort,
   sortOrder,
   handleFavourite,
+  setDelayedChats,
+  setClosedChats,
+  setArchiveChats,
+  setFavourite,
+  setInitialChats,
+  initialChats,
 }) {
   const [isChecked, setIsChecked] = useState(false);
-  const [allChecked, setAllChecked] = useState(
-    chats.map(() => false) // Динамічне створення стану для кожного елемента
-  );
+  const [allChecked, setAllChecked] = useState([]);
+  // const [checkedChats, setCheckedChats] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const wrapperRef = useRef(null);
 
@@ -33,14 +38,59 @@ export default function MessagesPart({
     };
   }, []);
 
+  useEffect(() => {
+    if (chats.length > 0) {
+      setAllChecked(chats.map((chat) => ({ id: chat.id, checked: false })));
+    }
+  }, [chats]);
+
   const handleAllChecked = (event) => {
     const isChecked = event.target.checked;
-    setAllChecked(chats.map(() => isChecked));
+    setAllChecked(chats.map((chat) => ({ id: chat.id, checked: isChecked })));
   };
 
-  const handleCheckboxChange = (index) => {
-    setAllChecked(allChecked.map((item, i) => (i === index ? !item : item)));
+  const handleCheckboxChange = (id) => {
+    setAllChecked(
+      allChecked.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    );
   };
+
+  const handleQuickActions = (action) => {
+    console.log("initialChats", initialChats);
+
+    const updatedChats = initialChats.map((chat) => {
+      const checkedChat = allChecked.find((item) => item.id === chat.id);
+
+      if (checkedChat && checkedChat.checked) {
+        return {
+          ...chat,
+          [action]: true,
+
+          isChosen:
+            action === "archive" || action === "isClosed"
+              ? false
+              : chat.isChosen,
+          isDelayed:
+            action === "archive" || action === "isClosed"
+              ? false
+              : chat.isDelayed,
+        };
+      }
+      return chat;
+    });
+
+    setInitialChats(updatedChats);
+    setFavourite(updatedChats.filter((chat) => chat.isChosen).length);
+    setDelayedChats(updatedChats.filter((chat) => chat.isDelayed).length);
+    setClosedChats(updatedChats.filter((chat) => chat.isClosed).length);
+    setArchiveChats(updatedChats.filter((chat) => chat.archive).length);
+  };
+
+  useEffect(() => {
+    console.log("allchecked", allChecked);
+  }, [allChecked]);
 
   const handleChecked = () => {
     setIsChecked((prev) => !prev);
@@ -71,6 +121,7 @@ export default function MessagesPart({
         chats={chats}
         handleSort={handleSort}
         sortOrder={sortOrder}
+        handleQuickActions={handleQuickActions}
       />
       <ChatsPart
         chats={chats}
