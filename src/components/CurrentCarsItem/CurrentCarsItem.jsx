@@ -114,7 +114,7 @@ export default function CurrentCarsItem() {
               <StatusBtn car={car} />
               <CarDetailButton
                 carId={car.car_id}
-                location={isMonitoring}
+                // location={isMonitoring}
                 carName={car.auto}
               />
             </div>

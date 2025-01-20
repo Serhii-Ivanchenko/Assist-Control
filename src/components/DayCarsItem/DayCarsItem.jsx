@@ -125,7 +125,7 @@ export default function DayCarsItem({ car, isModal }) {
           {visibility?.info && (
             <CarDetailButton
               carId={car_id}
-              location={isMonitoring}
+              // location={isMonitoring}
               carName={car.auto}
             />
           )}

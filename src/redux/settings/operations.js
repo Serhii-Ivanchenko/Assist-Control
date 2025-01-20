@@ -10,22 +10,30 @@ export const createEmployee = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const formData = new FormData();
-      // files має бути масивом файлів
-      files.forEach((file, index) => {
-        formData.append(`files`, file); // `files` — це ключ, який сервер оброблятиме
-      });
+      // Конвертація файлів у Base64
+      const base64Files = await Promise.all(
+        files.map((file) => {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result); // Повертає Base64
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file); // Читає файл як Base64
+          });
+        })
+      );
 
-      formData.append("data", JSON.stringify(employeeData)); // Додаємо об'єкт як строку
-
+      // Створюємо об'єкт для відправки
+      const payload = {
+        ...employeeData, // Додаємо дані співробітника
+        files: base64Files, // Додаємо Base64-файли
+      };
       const response = await axiosInstance.post(
         `/set/employees/create/`,
-        formData,
+        payload,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
-            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -45,20 +53,28 @@ export const updateEmployeeData = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const formData = new FormData();
-
       const { employee_id, files, ...dataToUpdate } = employeeDataToUpdate;
 
-      // files має бути масивом файлів
-      files.forEach((file, index) => {
-        formData.append(`files`, file); // `files` — це ключ, який сервер оброблятиме
-      });
+      const base64Files = await Promise.all(
+        files.map((file) => {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result); // Повертає Base64
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file); // Читає файл як Base64
+          });
+        })
+      );
 
-      formData.append("data", JSON.stringify(dataToUpdate)); // Додаємо об'єкт як строку
+      // Створюємо об'єкт для відправки
+      const payload = {
+        ...dataToUpdate, // Додаємо дані співробітника
+        files: base64Files, // Додаємо Base64-файли
+      };
 
       const response = await axiosInstance.patch(
         `/set/employees/${employee_id}/update/`,
-        formData,
+        payload,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -109,7 +125,7 @@ export const updateEmployeeStatus = createAsyncThunk(
     try {
       const { employee_id, ...status } = newStatus;
       const response = await axiosInstance.patch(
-        `/set/employees/${employee_id}/status/?isDisabled=${status}`,
+        `/set/employees/${employee_id}/status/?status=${status}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -182,20 +198,26 @@ export const createSupplier = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const formData = new FormData();
+      const base64Logo = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result); // Повертає Base64
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(logo); // Читає файл як Base64
+      });
 
-      formData.append(`logo`, logo);
-
-      formData.append("data", JSON.stringify(supplierData)); // Додаємо об'єкт як строку
+      // Створюємо об'єкт для відправки
+      const payload = {
+        ...supplierData, // Додаємо дані співробітника
+        file: base64Logo, // Додаємо Base64-файли
+      };
 
       const response = await axiosInstance.post(
         `/set/suppliers/create/`,
-        formData,
+        payload,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
-            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -215,19 +237,24 @@ export const updateSupplierData = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const formData = new FormData();
-
       const { supplier_id, logo, ...dataToUpdate } = employeeDataToUpdate;
 
-      // files має бути масивом файлів
+      const base64Logo = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result); // Повертає Base64
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(logo); // Читає файл як Base64
+      });
 
-      formData.append(`logo`, logo);
-
-      formData.append("data", JSON.stringify(dataToUpdate)); // Додаємо об'єкт як строку
+      // Створюємо об'єкт для відправки
+      const payload = {
+        ...dataToUpdate, // Додаємо дані співробітника
+        file: base64Logo, // Додаємо Base64-файли
+      };
 
       const response = await axiosInstance.patch(
         `/set/suppliers/${supplier_id}/update/`,
-        formData,
+        payload,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -367,13 +394,39 @@ export const getWorkSchedule = createAsyncThunk(
 );
 
 // Create work schedule
-export const createWorkSchedule = createAsyncThunk(
-  "settings/createWorkSchedule",
+// export const createWorkSchedule = createAsyncThunk(
+//   "settings/createWorkSchedule",
+//   async (workScheduleData, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const response = await axiosInstance.post(
+//         `/set/set_work_schedule/`,
+//         workScheduleData,
+//         {
+//           headers: {
+//             // "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       console.log("createWorkSchedule", response.data);
+
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// Update work schedule
+export const updateWorkSchedule = createAsyncThunk(
+  "settings/updateWorkSchedule",
   async (workScheduleData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.post(
+      const response = await axiosInstance.patch(
         `/set/set_work_schedule/`,
         workScheduleData,
         {
@@ -383,7 +436,7 @@ export const createWorkSchedule = createAsyncThunk(
           },
         }
       );
-      console.log("createWorkSchedule", response.data);
+      console.log("updateWorkSchedule", response.data);
 
       return response.data;
     } catch (error) {
@@ -391,8 +444,6 @@ export const createWorkSchedule = createAsyncThunk(
     }
   }
 );
-
-// Update work schedule
 
 //! POSTS (поки немає)
 
@@ -447,10 +498,10 @@ export const updatePostStatus = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { postId, ...status } = newStatus;
+      // const { postId, ...status } = newStatus;
       const response = await axiosInstance.patch(
-        `/set/update_post_status/${postId}`,
-        status,
+        `/set/update_post_status/`,
+        newStatus,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -474,10 +525,10 @@ export const updatePostData = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { postId, ...dataToUpdate } = postDataToUpdate;
+      // const { postId, ...dataToUpdate } = postDataToUpdate;
       const response = await axiosInstance.patch(
-        `/set/update_post/${postId}`,
-        dataToUpdate,
+        `/set/update_post/`,
+        postDataToUpdate,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -501,15 +552,12 @@ export const deletePost = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.delete(
-        `/set/update_post/${postId}`,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
+      const response = await axiosInstance.delete(`/set/update_post/`, postId, {
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
       console.log("deletePost", response.data);
 
       return response.data;
