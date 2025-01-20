@@ -41,7 +41,7 @@ const data = [
   },
   {
     value: 1, maxvalue: 4, activecolor: "var(--green)",
-    noactivecolor: "var(--bg-input)", label: 16, title: "Готово"
+    noactivecolor: "var(--bg-input)",  title: "Готово"
   },
  
 ];

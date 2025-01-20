@@ -1,135 +1,66 @@
 .containercalendar {
     margin-top: 20px;
-    width: 282px;
-    min-height: 125px;
+    width: 420px;
+    min-height: 188px;
     height: auto;
-}
-
-@media only screen and (min-width: 1850px) {
-    .containercalendar {
-        margin-top: 20px;
-        width: 420px;
-        min-height: 188px;
-        height: auto;
-    }
 }
 
 .weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    height: 24px;
+    margin-bottom: 3px;
     margin-left: 0;
-    grid-column-gap: 5px;
+    grid-column-gap: 7px;
     text-align: center;
-    /* height: 20px;
-        width: 20px; */
+
     color: var(--white);
     justify-content: center;
     font-variant-numeric: lining-nums proportional-nums;
     font-family: "Roboto", sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
 }
 
-@media only screen and (min-width: 1850px) {
-    .weekdays {
-        font-size: 16px;
-        height: 24px;
-        margin-bottom: 3px;
-        margin-left: 0;
-        /* width: 24px; */
-        grid-column-gap: 7px;
-    }
-}
-
 .weekdaysday {
-    /* margin-left: 10px; */
-        grid-column-gap: 3px;
-        text-align: center;
-        /* height: 20px;
-            width: 20px; */
-        color: var(--white);
-        justify-content: center;
-        font-variant-numeric: lining-nums proportional-nums;
-        font-family: "Roboto", sans-serif;
-        font-size: 13px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: normal;
-    }
-
-@media only screen and (min-width: 1850px) {
-    .weekdaysday {
-        font-size: 16px;
-        height: 24px;
-        margin-bottom: 3px;
-        /* margin-left: 11px; */
-        /* width: 24px; */
-        grid-column-gap: 6px;
-    }
+    grid-column-gap: 6px;
+    text-align: center;
+    margin-bottom: 3px;
+    color: var(--white);
+    justify-content: center;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
 }
 
 .calendargrid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-column-gap: 5px;
-    grid-row-gap: 4px;
-}
-
-@media only screen and (min-width: 1850px) {
-    .calendargrid {
-        grid-column-gap: 7.4px;
-        grid-row-gap: 6px;
-
-    }
+    grid-column-gap: 7.4px;
+    grid-row-gap: 6px;
 }
 
 .calendar-day {
     text-align: center;
     color: var(--white);
-    width: 36px;
-    height: 18px;
+    width: 54px;
+    height: 27px;
     border-radius: 5px;
     cursor: pointer;
     font-family: "Roboto", sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
     border: none;
 }
 
-@media only screen and (min-width: 1850px) {
-    .calendar-day {
-        width: 54px;
-        height: 27px;
-        font-size: 16px;
-    }
-}
-
 .other-month {
     background-color: #f0f0f0;
     color: #999;
-}
-
-.today {
-    background-color: #4caf50;
-    color: white;
-}
-
-.today::after {
-    content: "";
-    position: absolute;
-    top: -5px;
-    /* Смещение наружу для создания внешней рамки */
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    border: 4px solid #3498db;
-    /* Цвет и ширина внешней рамки */
-    border-radius: 3px;
-    /* Повторяет закругления кнопки, если нужно */
-    pointer-events: none;
-    /* Чтобы внешняя рамка не мешала кликам */
 }

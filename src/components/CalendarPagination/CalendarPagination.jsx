@@ -34,13 +34,45 @@ function addMonths(date, months) {
   return result;
 }
 
-export default function CalendarPagination({ isCrm }) {
-  const css = isCrm ? csscrm : cssvideo;
-
+export default function CalendarPagination({ page }) {
   const dispatch = useDispatch();
-  const monthlyLoadData = useSelector(
-    isCrm ? selectMonthlyLoadCrm : selectMonthlyLoad
-  );
+
+const pageConfigs = [
+  {
+    page: "crm",
+    selector: selectMonthlyLoadCrm,
+    css: csscrm,
+    loadFunction: (dispatch, calendarMonth) => dispatch(getMonthlyLoad(calendarMonth)),
+  },
+  {
+    page: "video",
+    selector: selectMonthlyLoad,
+    css: cssvideo,
+    loadFunction: (dispatch, calendarMonth) => dispatch(getCalendarByMonth(calendarMonth)),
+  },
+  {
+    page: "recom",
+    selector: selectMonthlyLoadCrm,
+    css: csscrm,
+    loadFunction: (dispatch, calendarMonth) => dispatch(getMonthlyLoad(calendarMonth)),
+  },
+];
+
+const currentPageConfig = pageConfigs.find((config) => config.page === page);
+  const css = currentPageConfig.css;
+  const monthlyLoadData = useSelector(currentPageConfig.selector);
+ 
+  // const css = page === "video" ? cssvideo : csscrm;
+  
+  // const selectors = {
+  // video: useSelector(selectMonthlyLoad),
+  // crm: useSelector(selectMonthlyLoadCrm),
+  // recom: useSelector(selectMonthlyLoadCrm),
+  // };
+  
+  // const monthlyLoadData = selectors[page] ;
+
+  
   const currentMonth = new Date().toISOString().substring(0, 7);
   const currentDate = new Date().toISOString().substring(0, 10);
   const carSelectDate = useSelector(selectDate);
@@ -93,21 +125,41 @@ export default function CalendarPagination({ isCrm }) {
   );
   let calendarMonth = queryMonth.toISOString().substring(0, 7);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   const fetchCalendarData = async () => {
+  //     if (!selectedServiceId) {
+  //       // console.warn("Service ID is not available yet. Skipping fetch.");
+  //       return;
+  //     }
+  //     if (page==='crm') {
+  //       await dispatch(getMonthlyLoad(calendarMonth));
+  //     } else {
+  //       await dispatch(getCalendarByMonth(calendarMonth));
+  //     }
+  //   };
+
+  //   fetchCalendarData();
+  // }, [dispatch, calendarMonth, selectedServiceId, page]); // необхідно для коректної роботи вибору сервісів
+
+
+ useEffect(() => {
     const fetchCalendarData = async () => {
       if (!selectedServiceId) {
-        // console.warn("Service ID is not available yet. Skipping fetch.");
+        console.warn("Service ID is not available yet. Skipping fetch.");
         return;
       }
-      if (isCrm) {
-        await dispatch(getMonthlyLoad(calendarMonth));
-      } else {
-        await dispatch(getCalendarByMonth(calendarMonth));
+
+      try {
+        await currentPageConfig.loadFunction(dispatch, calendarMonth);
+      } catch (error) {
+        console.error("Ошибка при загрузке данных:", error);
       }
     };
 
     fetchCalendarData();
-  }, [dispatch, calendarMonth, selectedServiceId, isCrm]); // необхідно для коректної роботи вибору сервісів
+  }, [dispatch, calendarMonth, selectedServiceId]);
+
+
 
   let isCurrentMonth = currentMonth === calendarMonth ? true : false;
 
@@ -123,6 +175,9 @@ export default function CalendarPagination({ isCrm }) {
     date,
     percent,
   }));
+
+
+  console.log(monthlyLoadData);
 
   // if (actualPercent === null && monthData.length>0 ) {
   //   const resultObj = monthData.find(item => item.date === carSelectDate);
@@ -146,16 +201,16 @@ export default function CalendarPagination({ isCrm }) {
           <button
             className={css.iconstep}
             onClick={handleClickRight}
-            disabled={isCurrentMonth && !isCrm}
-            style={!isCrm ? { cursor: "default" } : { cursor: "pointer" }}
+            disabled={isCurrentMonth && page!=="crm"}
+            style={page!=="crm" ? { cursor: "default" } : { cursor: "pointer" }}
           >
             <FiChevronRight className={css.arrowIcon} />
           </button>
         </div>
-        {isCrm && (
-          <div className={css.crmblock}>
+        {page==="crm" || page==="recom" && (
+          <div className={css.crmblock} style={{width: page==="crm" ? "217px": "65px"}}>
             <p className={css.datemont}> {crmSelectDate} </p>
-            <CreateAppointmentBtn onClick={handleAppointmentBtnClick} />
+         {page==="crm" && (   <CreateAppointmentBtn onClick={handleAppointmentBtnClick} />)}
             {isModalOpen && (
               <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
                 <ServiceBookingModal
@@ -166,13 +221,14 @@ export default function CalendarPagination({ isCrm }) {
                 />
               </Modal>
             )}
+          
           </div>
         )}
       </div>
       {isLoadingForCalendar ? (
         <Loader />
       ) : (
-        <Calendar dataMonth={monthData} queryMonth={queryMonth} isCrm={isCrm} />
+        <Calendar dataMonth={monthData} queryMonth={queryMonth} page={page} />
       )}
     </div>
   );
