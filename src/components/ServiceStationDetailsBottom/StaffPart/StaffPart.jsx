@@ -9,31 +9,31 @@ import Modal from "../../Modals/Modal/Modal";
 import AddStaffMemberModal from "../../Modals/AddStaffMemberModal/AddStaffMemberModal.jsx";
 import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
 import RatingStars from "../../sharedComponents/RatingStars/RatingStars.jsx";
-import { useDispatch } from "react-redux";
-import { getAllEmployees } from "../../../redux/settings/operations.js";
-import { useSelector } from "react-redux";
-import { selectEmployees } from "../../../redux/settings/selectors.js";
+// import { useDispatch } from "react-redux";
+// import { getAllEmployees } from "../../../redux/settings/operations.js";
+// import { useSelector } from "react-redux";
+// import { selectEmployees } from "../../../redux/settings/selectors.js";
 // import { BsFillCaretDownFill } from "react-icons/bs";
 // import clsx from "clsx";
 // import { Phone } from "@mui/icons-material";
 
 export default function StaffPart() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(getAllEmployees()).unwrap();
-      } catch (error) {
-        console.error("Помилка завантаження даних:", error);
-      }
-    };
-    fetchData();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       await dispatch(getAllEmployees()).unwrap();
+  //     } catch (error) {
+  //       console.error("Помилка завантаження даних:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [dispatch]);
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState(null);
-  const employees = useSelector(selectEmployees);
+  // const employees = useSelector(selectEmployees);
   const [members, setMembers] = useState(
     // []
     [
@@ -69,7 +69,7 @@ export default function StaffPart() {
       },
     ]
   );
-  console.log("members", employees);
+  // console.log("members", employees);
 
   // useEffect(() => {
   //   if (employees && employees.length > 0) {

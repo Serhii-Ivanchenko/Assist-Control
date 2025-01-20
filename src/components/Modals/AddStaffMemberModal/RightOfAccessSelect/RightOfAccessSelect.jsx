@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import css from "./RightOfAccessSelect.module.css";
 import { BsCheck } from "react-icons/bs";
@@ -15,9 +15,23 @@ export default function RightOfAccessSelect() {
   ];
 
   const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className={css.container}>
+    <div className={css.container} ref={wrapperRef}>
       <div className={css.titlePart} onClick={() => setIsOpen(!isOpen)}>
         <p className={css.titleText}>Право доступу</p>
         <BsFillCaretDownFill
