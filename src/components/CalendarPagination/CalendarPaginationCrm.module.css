@@ -12,17 +12,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 280px;
-    /* width: 303px; */
-    /* min-width: 276px; */
-    /* height: 20px; */
-
-}
-
-@media only screen and (min-width: 1850px) {
-    .containerpagin {
-        width: 408px;
-    }
+    width: 408px;
 }
 
 .boxpagination {
@@ -30,17 +20,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 180px;
-    height: 20px;
+    width: 170px;
+    height: 19px;
     gap: 5px;
-}
-
-@media only screen and (min-width: 1850px) {
-    .boxpagination {
-        width: 170px;
-        height: 19px;
-        gap: 5px;
-    }
 }
 
 .namemonth {
@@ -52,23 +34,23 @@
     font-weight: 300;
 }
 
-.crmblock{
+.crmblock {
     display: flex;
     flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        /* gap: 10px; */
-        width: 217px;
-        height: 26px;
+    align-items: center;
+    justify-content: space-between;
+    /* gap: 10px; */
+    width: 217px;
+    height: 26px;
 }
 
 
 .iconstep {
-    stroke-width: 2px;
     stroke: var(--white);
     border: none;
-    width: 14px;
-    height: 14px;
+    stroke-width: 3px;
+    width: 18px;
+    height: 18px;
     text-align: center;
     align-items: center;
     cursor: pointer;
@@ -77,25 +59,11 @@
     cursor: pointer
 }
 
-@media only screen and (min-width: 1850px) {
-    .iconstep {
-        stroke-width: 3px;
-        width: 18px;
-        height: 18px;
-    }
-}
 
 .arrowIcon {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     stroke: var(--white);
-}
-
-@media only screen and (min-width: 1850px) {
-    .arrowIcon {
-        width: 18px;
-        height: 18px;
-    }
 }
 
 .pieIconWrapper {

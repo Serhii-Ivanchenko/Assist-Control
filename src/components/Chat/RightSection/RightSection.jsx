@@ -208,8 +208,8 @@ export default function RightSection() {
     setModalOpen(false);
   };
 
- const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
-const buttonRef = useRef(null);
+  const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
+  const buttonRef = useRef(null);
   const makeCall = (phone) => {
     window.location.href = `tel:${phone}`;
   };
@@ -219,9 +219,10 @@ const buttonRef = useRef(null);
     //   data.phonenums.push(data.phonenum);
     // };
     if (data.phonenums.length === 0) {
-      setIsPhoneModalOpen(false); 
-    } else { setIsPhoneModalOpen((prevState) => !prevState) }
-  
+      setIsPhoneModalOpen(false);
+    } else {
+      setIsPhoneModalOpen((prevState) => !prevState);
+    }
   };
 
   const staffs = [
@@ -278,7 +279,11 @@ const buttonRef = useRef(null);
           </div>
         </div>
         <div className={css.btnbox}>
-          <button ref={buttonRef} className={css.btnaction} onClick={handlePhoneClick}>
+          <button
+            ref={buttonRef}
+            className={css.btnaction}
+            onClick={handlePhoneClick}
+          >
             <BsTelephone className={css.iconaction} />
           </button>
 
@@ -314,12 +319,13 @@ const buttonRef = useRef(null);
               isOpen={isPhoneModalOpen}
               onClose={() => setIsPhoneModalOpen(false)}
               phoneNumbers={data.phonenums}
-               onPhoneSelect={(phone) => {
-               makeCall(phone);
-               setIsPhoneModalOpen(false); 
+              onPhoneSelect={(phone) => {
+                makeCall(phone);
+                setIsPhoneModalOpen(false);
               }}
-               triggerRef={buttonRef}
-            />)}
+              triggerRef={buttonRef}
+            />
+          )}
 
           {/* {isPhoneModalOpen && (
             <div
@@ -469,6 +475,9 @@ const buttonRef = useRef(null);
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel1") ? 127 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel1-content"
@@ -485,6 +494,7 @@ const buttonRef = useRef(null);
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
                       transition: "transform 0.3s",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleRowClick("panel1")}
                   />
@@ -548,6 +558,9 @@ const buttonRef = useRef(null);
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel2") ? 172 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
               // flexGrow: "1",
               // overflow: "hidden",
             }}
@@ -566,6 +579,7 @@ const buttonRef = useRef(null);
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
                       transition: "transform 0.3s",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleRowClick("panel2")}
                   />
@@ -619,6 +633,9 @@ const buttonRef = useRef(null);
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel3") ? 209 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel3-content"
@@ -634,6 +651,7 @@ const buttonRef = useRef(null);
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
                     transition: "transform 0.3s",
+                    cursor: "pointer",
                   }}
                   onClick={() => handleRowClick("panel3")}
                 />
@@ -674,6 +692,7 @@ const buttonRef = useRef(null);
                           : "rotate(0deg)",
                         transition: "transform 0.3s",
                         marginLeft: "4px",
+                        cursor: "pointer",
                       }}
                     />
                   </div>
@@ -779,6 +798,9 @@ const buttonRef = useRef(null);
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel4") ? 161 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel4-content"
@@ -795,6 +817,7 @@ const buttonRef = useRef(null);
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
                       transition: "transform 0.3s",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleRowClick("panel4")}
                   />
@@ -860,6 +883,9 @@ const buttonRef = useRef(null);
               "& .Mui-focusVisible": {
                 backgroundColor: "var(--bg-secondary)",
               },
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             // expandIcon={<ExpandMoreIcon style={{fill: "var(--light-gray)"}}/>}
@@ -876,6 +902,7 @@ const buttonRef = useRef(null);
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
                     transition: "transform 0.3s",
+                    cursor: "pointer",
                   }}
                   onClick={() => handleRowClick("panel5")}
                 />
@@ -932,6 +959,9 @@ const buttonRef = useRef(null);
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel6") ? 200 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel6-content"
@@ -947,6 +977,7 @@ const buttonRef = useRef(null);
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
                     transition: "transform 0.3s",
+                    cursor: "pointer",
                   }}
                   onClick={() => handleRowClick("panel6")}
                 />
