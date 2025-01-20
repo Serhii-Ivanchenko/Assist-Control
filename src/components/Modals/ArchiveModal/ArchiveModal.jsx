@@ -62,6 +62,12 @@ export default function ArchiveModal({ onClose, carId, location }) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
+    if (!carId) {
+      console.error("Помилка: у запису відсутній car_id");
+      toast.error("Помилка: у запису відсутній car_id");
+      return; 
+    }
+    
     const itemData = {
       car_id: carId,
       location: location,

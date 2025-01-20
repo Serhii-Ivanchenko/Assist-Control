@@ -96,7 +96,7 @@ export default function ConnectionsListSection() {
       ))}
       {isArchiveModalOpen && (
         <Modal isOpen={isArchiveModalOpen} onClose={closeArchiveModal}>
-          <ArchiveModal onClose={closeArchiveModal} />
+          <ArchiveModal onClose={closeArchiveModal} carId={car_id} location="records" />
         </Modal>
       )}
     </div>
