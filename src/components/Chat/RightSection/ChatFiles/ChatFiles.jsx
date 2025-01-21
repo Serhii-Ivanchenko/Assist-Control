@@ -33,6 +33,11 @@ function ChatFiles() {
     return `${shortName}${extension}`; // Склеиваем короткое имя и расширение
   };
 
+   const getFullName = (filePath) => {
+    const fullName = filePath.split("/").pop(); // Получаем имя файла
+    return `${fullName}`; // Склеиваем короткое имя и расширение
+  };
+
   const getFileIcon = (filePath) => {
     const extension = filePath.split(".").pop().toLowerCase(); // Получаем расширение файла
     if (["pdf"].includes(extension))
@@ -49,6 +54,7 @@ function ChatFiles() {
       {fileUrls.map((fileUrl, index) => {
         const shortName = getShortName(fileUrl); // Генерируем короткое имя файла
         const fileIcon = getFileIcon(fileUrl); // Получаем соответствующую иконку
+        const fullName = getFullName(fileUrl);
         return (
           <div
             className={css.box}
@@ -61,7 +67,7 @@ function ChatFiles() {
             </div>
             <BsDownload
               className={css.icon}
-              onClick={() => handleDownload(fileUrl, shortName)}
+              onClick={() => handleDownload(fileUrl, fullName)}
             />
           </div>
         );

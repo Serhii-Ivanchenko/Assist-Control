@@ -1,9 +1,9 @@
 import ModalWrapper from "../../ModalWrapper/ModalWrapper.jsx";
 import css from "./StaffModal.module.css";
 
-const StaffModal = ({ isOpen, onClose, staffs, onStaffSelect, offsetLeft = 0 }) => {
+const StaffModal = ({ isOpen, onClose, staffs, onStaffSelect,  triggerRef,offsetLeft = 0 }) => {
   return (
-    <ModalWrapper isOpen={isOpen} onClose={onClose}>
+    <ModalWrapper isOpen={isOpen} onClose={onClose} triggerRef={triggerRef}>
       <div
         className={css.staffModal}
         style={{ left: offsetLeft }} // Используем отступ слева

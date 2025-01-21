@@ -548,8 +548,7 @@
 }
 
 .notificationBubble {
-
-    position: absolute;
+ position: absolute;
     bottom: 4px;
     right: 0px;
     width: 10px;

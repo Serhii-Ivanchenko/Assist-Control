@@ -162,7 +162,9 @@ export default function Calendar({ queryMonth, dataMonth, page }) {
 
   const isDateDisabled = (date) => {
     if (page === "video") {
-      return date.isAfter(currentDate, "day");
+    const isCurrentMonth = date.isSame(currentDate, "month");
+    const isAfterToday = date.isAfter(currentDate, "day");
+    return isCurrentMonth && isAfterToday;
     } else {
       return false; // Все даты кликабельны для `isCrm = true`
     }
@@ -203,7 +205,7 @@ export default function Calendar({ queryMonth, dataMonth, page }) {
             className={`calendar-day  
               ${page === "crm" || page === "recom" ? "crm-width" : ""} 
              ${
-               page === "video" && item.date.date() > currentDate.date()
+               page === "video" && item.date.date() > currentDate.date() && item.date.month() === currentDate.month()
                  ? "cursordefault"
                  : ""
              } 
