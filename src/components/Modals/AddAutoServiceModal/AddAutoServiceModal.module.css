@@ -4,12 +4,20 @@
   width: 580px;
 }
 
+/* .switchWrapper {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+} */
+
 .headerWrapper {
   position: relative;
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 7px;
+  margin-bottom: 14px;
 }
 
 .changedInput {
@@ -115,10 +123,36 @@
   white-space: nowrap;
 }
 
+.uploadAvatarText {
+  color: var(--input-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}
+
 .logoImg {
   width: 102px;
   height: 100%;
   object-fit: cover;
+}
+
+.inputDisabled {
+  display: none;
+}
+
+.avatarLabel {
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.camera {
+  width: 24px;
+  height: 24px;
+  color: var(--icon-gray);
 }
 
 .form {
