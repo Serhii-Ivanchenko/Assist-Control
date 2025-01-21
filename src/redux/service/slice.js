@@ -55,4 +55,7 @@ const serviceSlice = createSlice({
       .addCase(updateService.rejected, handleRejected),
 });
 
+export const { setSelectedServiceInSettingsId } = serviceSlice.actions;
+
+
 export default serviceSlice.reducer;
