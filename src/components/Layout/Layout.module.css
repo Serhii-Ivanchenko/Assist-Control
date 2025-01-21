@@ -14,23 +14,24 @@
 
 .appContainer {
   max-width: 1850px;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  /* min-height: 1080px; */
-  height: 100vh;
-  min-height: 900px;
+  /* min-height: 900px; */
   /* max-height: 1080px; */
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 34px;
-  padding-top: 15px;
+  padding: 1.388vh 2.162vw 3.148vh;
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  background: radial-gradient(228.5px at 50% 50%,
+  background: radial-gradient(12.35vw at 50% 50%,
       rgba(81, 122, 184, 0.14) 0%,
-      transparent 100%) no-repeat 69px -550px;
+      transparent 100%) no-repeat 3.73vw -50.93vh;
+}
+
+@media only screen and (min-width: 1850.1px) {
+  .appContainer {
+    padding: 1.388vh 40px 3.148vh;
+  }
 }
 
 .appContainer::before,
@@ -43,25 +44,25 @@
 }
 
 .appContainer::before {
-  background: radial-gradient(480.5px at 50% 50%,
+  background: radial-gradient(25.97vw at 50% 50%,
       rgba(184, 112, 81, 0.2) 0%,
       transparent 100%) no-repeat;
   /* background: rgba(184, 112, 81, 0.20); */
   opacity: 0.28;
-  width: 961px;
-  height: 929px;
-  top: 483px;
-  left: 54px;
+  width: 51.95vw;
+  height: 86.02vh;
+  top: 44.72vh;
+  left: 2.92vw;
 }
 
 .appContainer::after {
-  background: radial-gradient(367.5px at 50% 50%,
+  background: radial-gradient(19.86vw at 50% 50%,
       rgba(81, 141, 184, 0.5) 0%,
       transparent 100%) no-repeat;
   /* background: rgba(81, 141, 184, 0.50); */
   opacity: 0.14;
-  width: 735px;
-  height: 711px;
-  top: 356px;
-  right: 39px;
+  width: 39.73vw;
+  height: 65.83vh;
+  top: 32.96vh;
+  right: 2.11vw;
 }
