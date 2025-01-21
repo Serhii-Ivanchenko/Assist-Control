@@ -1,24 +1,10 @@
-/* .appContainer {
-  max-width: 1252px;
-  width: 100%;
-  height: 100vh;
-  height: 795px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 20px;
-  padding-top: 4px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-} */
-
 .appContainer {
   max-width: 1850px;
   width: 100vw;
   height: 100vh;
   /* min-height: 900px; */
   /* max-height: 1080px; */
-  padding: 1.388vh 2.162vw 3.148vh;
+  padding: 1.388vh min(2.162vw, 40px) 3.148vh;
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
@@ -26,12 +12,6 @@
   background: radial-gradient(12.35vw at 50% 50%,
       rgba(81, 122, 184, 0.14) 0%,
       transparent 100%) no-repeat 3.73vw -50.93vh;
-}
-
-@media only screen and (min-width: 1850.1px) {
-  .appContainer {
-    padding: 1.388vh 40px 3.148vh;
-  }
 }
 
 .appContainer::before,
