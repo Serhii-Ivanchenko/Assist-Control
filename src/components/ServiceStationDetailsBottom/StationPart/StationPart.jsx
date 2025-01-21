@@ -2,14 +2,29 @@ import { useEffect, useRef, useState } from "react";
 import css from "./StationPart.module.css";
 import { BsPlusLg } from "react-icons/bs";
 import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns";
+import { useDispatch } from "react-redux";
+import { getPosts } from "../../../redux/settings/operations";
+import { useSelector } from "react-redux";
+import { selectPosts } from "../../../redux/settings/selectors";
 
 export default function StationPart() {
-  const [posts, setPosts] = useState([
-    { name: "ПОСТ 1", isDisabled: false, id: 1 },
-    { name: "ПОСТ 2", isDisabled: false, id: 2 },
-    { name: "ПОСТ 3", isDisabled: false, id: 3 },
-    { name: "ПОСТ 4", isDisabled: false, id: 4 },
-  ]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(getPosts());
+    };
+    fetchData();
+  });
+  const stations = useSelector(selectPosts);
+  const [posts, setPosts] = useState(
+    stations
+    // [
+    //   { name: "ПОСТ 1", isDisabled: false, id: 1 },
+    //   { name: "ПОСТ 2", isDisabled: false, id: 2 },
+    //   { name: "ПОСТ 3", isDisabled: false, id: 3 },
+    //   { name: "ПОСТ 4", isDisabled: false, id: 4 },
+    // ]
+  );
   const [newPost, setNewPost] = useState("");
   const [isEditing, setIsEditing] = useState(null);
   const [editedValue, setEditedValue] = useState({});
