@@ -253,6 +253,11 @@
   display: none;
 }
 
+.documentsWrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
 .documents {
   display: flex;
   gap: 86px;

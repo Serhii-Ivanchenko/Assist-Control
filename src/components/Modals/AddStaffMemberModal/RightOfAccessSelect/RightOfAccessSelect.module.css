@@ -3,19 +3,38 @@
 }
 
 .titlePart {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   padding-top: 0;
 
   width: 170px;
-  cursor: pointer;
+  cursor: pointer; */
+
+  display: flex;
+  width: 200px;
+  height: 55px;
+  padding: 17.5px 20px;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 10px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  appearance: none;
+  outline: none;
 }
 
-.titleText {
+/* .titleText {
   color: var(--input-text);
-}
+} */
 
 .iconArrow {
   fill: var(--light-gray);
@@ -28,7 +47,8 @@
 
 .options {
   position: absolute;
-  top: 110%;
+  width: 100%;
+  top: 56px;
   left: 0;
 
   background-color: var(--bg-input);
@@ -39,7 +59,7 @@
 
   z-index: 999;
 
-  height: 245px;
+  height: 235px;
   overflow: auto;
 }
 
@@ -62,6 +82,10 @@
 .option {
   padding: 10px;
   cursor: pointer;
+}
+
+.option:hover {
+  background-color: var(--main-gray);
 }
 
 .option:not(:last-child) {
@@ -101,11 +125,11 @@
   background-color: transparent;
 }
 
-.checkbox:checked + .cbMark {
+.checkbox:checked+.cbMark {
   border: 2px solid var(--blue);
 }
 
-.checkbox:checked + .cbMark > .cbIcon {
+.checkbox:checked+.cbMark>.cbIcon {
   display: flex;
   align-items: center;
   justify-content: center;

@@ -320,155 +320,144 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
               </div>
             </div>
 
-            <div className={css.documents}>
-              <div className={css.docColumn}>
-                <div className={css.docBox}>
-                  {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
-                    {" "}
-                    <BsFillCloudUploadFill className={css.icon} /> Паспорт
-                  </label> */}
-                  <UploadComponent title="Паспорт" name="passport" />
-                  {/* <Field type="file" name="passport" className={css.docInput} /> */}
-                  <img src={doc} alt="doc" className={css.docImage} />
-                  <img src={doc} alt="doc" className={css.docImage} />
+            <div className={css.documentsWrapper}>
+              <div className={css.documents}>
+                <div className={css.docColumn}>
+                  <div className={css.docBox}>
+                    {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
+                      {" "}
+                      <BsFillCloudUploadFill className={css.icon} /> Паспорт
+                    </label> */}
+                    <UploadComponent title="Паспорт" name="passport" />
+                    {/* <Field type="file" name="passport" className={css.docInput} /> */}
+                    <img src={doc} alt="doc" className={css.docImage} />
+                    <img src={doc} alt="doc" className={css.docImage} />
+                  </div>
+                  <div className={`${css.docBox} ${css.docBoxID}`}>
+                    {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
+                      {" "}
+                      <BsFillCloudUploadFill className={css.icon} /> ІПН
+                    </label> */}
+                    <UploadComponent title="ІПН" name="ID" />
+                    {/* <Field type="file" name="ID" className={css.docInput} /> */}
+                    <img src={doc} alt="doc" className={css.docImage} />
+                    <img src={doc} alt="doc" className={css.docImage} />
+                  </div>
                 </div>
-
-                <div className={`${css.docBox} ${css.docBoxID}`}>
-                  {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
-                    {" "}
-                    <BsFillCloudUploadFill className={css.icon} /> ІПН
-                  </label> */}
-                  <UploadComponent title="ІПН" name="ID" />
-
-                  {/* <Field type="file" name="ID" className={css.docInput} /> */}
-
-                  <img src={doc} alt="doc" className={css.docImage} />
-                  <img src={doc} alt="doc" className={css.docImage} />
+                <div className={css.docColumn}>
+                  <div className={css.docBox}>
+                    {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
+                      {" "}
+                      <BsFillCloudUploadFill className={css.icon} /> Диплом
+                    </label> */}
+                    <UploadComponent title="Диплом" name="diploma" />
+                    {/* <Field type="file" name="diploma" className={css.docInput} /> */}
+                    <img src={doc} alt="doc" className={css.docImage} />
+                    <img src={doc} alt="doc" className={css.docImage} />
+                  </div>
+                  <div className={css.docBox}>
+                    {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
+                      {" "}
+                      <BsFillCloudUploadFill className={css.icon} />
+                      Трудова
+                    </label> */}
+                    <UploadComponent title="Трудова" name="laborBook" />
+                    {/* <Field
+                      type="file"
+                      name="laborBook"
+                      className={css.docInput}
+                    /> */}
+                    <img src={doc} alt="doc" className={css.docImage} />
+                  </div>
+                  <div className={css.docBox}>
+                    {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
+                      {" "}
+                      <BsFillCloudUploadFill className={css.icon} />
+                      Резюме
+                    </label> */}
+                    <UploadComponent title="Резюме" name="CV" />
+                    {/* <Field type="file" name="CV" className={css.docInput} /> */}
+                    <img src={doc} alt="doc" className={css.docImage} />
+                  </div>
+                </div>
+                <div className={css.docColumn}>
+                  <div
+                    className={css.docBox}
+                    ref={(el) => (buttonRefs.current[0] = el)}
+                  >
+                    <label className={css.docLabel}>
+                      <BsReceipt className={css.iconAgr} />
+                      Договір підряда
+                      <BsThreeDotsVertical
+                        className={css.icon}
+                        onClick={() => toggleSettings(0)}
+                        ref={buttonRefs.current[0]}
+                      />
+                    </label>
+                    {settingsIsOpen === 0 && (
+                      <ThreeDotsModal
+                        isVisible={true}
+                        // buttonRef={buttonRefs.current[0]}
+                        // onClose={closePopover}
+                      />
+                    )}
+                    <Field type="file" name="contract" className={css.docInput} />
+                  </div>
+                  <div
+                    className={css.docBox}
+                    ref={(el) => (buttonRefs.current[1] = el)}
+                  >
+                    <label className={css.docLabel}>
+                      <BsReceipt className={css.iconAgr} />
+                      Договір про найм
+                      <BsThreeDotsVertical
+                        className={css.icon}
+                        onClick={() => toggleSettings(1)}
+                        ref={buttonRefs.current[1]}
+                      />
+                    </label>
+                    {settingsIsOpen === 1 && (
+                      <ThreeDotsModal
+                        isVisible={true}
+                        // buttonRef={buttonRefs.current[1]}
+                        // onClose={closePopover}
+                      />
+                    )}
+                    <Field
+                      type="file"
+                      name="employment"
+                      className={css.docInput}
+                    />
+                  </div>
+                  <div
+                    className={css.docBox}
+                    ref={(el) => (buttonRefs.current[2] = el)}
+                  >
+                    <label className={css.docLabel}>
+                      <BsReceipt className={css.iconAgr} />
+                      Договір МВ
+                      <BsThreeDotsVertical
+                        className={css.icon}
+                        ref={buttonRefs.current[2]}
+                        onClick={() => toggleSettings(2)}
+                      />
+                    </label>
+                    {settingsIsOpen === 2 && (
+                      <ThreeDotsModal
+                        isVisible={true}
+                        // buttonRef={buttonRefs.current[2]}
+                        // onClose={closePopover}
+                      />
+                    )}
+                    <Field
+                      type="file"
+                      name="agreement"
+                      className={css.docInput}
+                    />
+                  </div>
                 </div>
               </div>
-
-              <div className={css.docColumn}>
-                <div className={css.docBox}>
-                  {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
-                    {" "}
-                    <BsFillCloudUploadFill className={css.icon} /> Диплом
-                  </label> */}
-                  <UploadComponent title="Диплом" name="diploma" />
-                  {/* <Field type="file" name="diploma" className={css.docInput} /> */}
-                  <img src={doc} alt="doc" className={css.docImage} />
-                  <img src={doc} alt="doc" className={css.docImage} />
-                </div>
-
-                <div className={css.docBox}>
-                  {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
-                    {" "}
-                    <BsFillCloudUploadFill className={css.icon} />
-                    Трудова
-                  </label> */}
-                  <UploadComponent title="Трудова" name="laborBook" />
-                  {/* <Field
-                    type="file"
-                    name="laborBook"
-                    className={css.docInput}
-                  /> */}
-                  <img src={doc} alt="doc" className={css.docImage} />
-                </div>
-
-                <div className={css.docBox}>
-                  {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
-                    {" "}
-                    <BsFillCloudUploadFill className={css.icon} />
-                    Резюме
-                  </label> */}
-                  <UploadComponent title="Резюме" name="CV" />
-                  {/* <Field type="file" name="CV" className={css.docInput} /> */}
-                  <img src={doc} alt="doc" className={css.docImage} />
-                </div>
-              </div>
-
-              <div className={css.docColumn}>
-                <div
-                  className={css.docBox}
-                  ref={(el) => (buttonRefs.current[0] = el)}
-                >
-                  <label className={css.docLabel}>
-                    <BsReceipt className={css.iconAgr} />
-                    Договір підряда
-                    <BsThreeDotsVertical
-                      className={css.icon}
-                      onClick={() => toggleSettings(0)}
-                      ref={buttonRefs.current[0]}
-                    />
-                  </label>
-                  {settingsIsOpen === 0 && (
-                    <ThreeDotsModal
-                      isVisible={true}
-                      // buttonRef={buttonRefs.current[0]}
-                      // onClose={closePopover}
-                    />
-                  )}
-
-                  <Field type="file" name="contract" className={css.docInput} />
-                </div>
-
-                <div
-                  className={css.docBox}
-                  ref={(el) => (buttonRefs.current[1] = el)}
-                >
-                  <label className={css.docLabel}>
-                    <BsReceipt className={css.iconAgr} />
-                    Договір про найм
-                    <BsThreeDotsVertical
-                      className={css.icon}
-                      onClick={() => toggleSettings(1)}
-                      ref={buttonRefs.current[1]}
-                    />
-                  </label>
-
-                  {settingsIsOpen === 1 && (
-                    <ThreeDotsModal
-                      isVisible={true}
-                      // buttonRef={buttonRefs.current[1]}
-                      // onClose={closePopover}
-                    />
-                  )}
-
-                  <Field
-                    type="file"
-                    name="employment"
-                    className={css.docInput}
-                  />
-                </div>
-
-                <div
-                  className={css.docBox}
-                  ref={(el) => (buttonRefs.current[2] = el)}
-                >
-                  <label className={css.docLabel}>
-                    <BsReceipt className={css.iconAgr} />
-                    Договір МВ
-                    <BsThreeDotsVertical
-                      className={css.icon}
-                      ref={buttonRefs.current[2]}
-                      onClick={() => toggleSettings(2)}
-                    />
-                  </label>
-                  {settingsIsOpen === 2 && (
-                    <ThreeDotsModal
-                      isVisible={true}
-                      // buttonRef={buttonRefs.current[2]}
-                      // onClose={closePopover}
-                    />
-                  )}
-                  <Field
-                    type="file"
-                    name="agreement"
-                    className={css.docInput}
-                  />
-                </div>
-              </div>
-
-              <RightOfAccessSelect />
+                <RightOfAccessSelect />
             </div>
 
             <div className={css.salary}>
