@@ -6,8 +6,9 @@ export default function TimeSortItem({ onSortChange }) {
   const [isDescending, setIsDescending] = useState(true);
   
   const toggleSortOrder = () => {
-    setIsDescending(!isDescending);
-    onSortChange(!isDescending);
+    const newDescendingState = !isDescending;
+    setIsDescending(newDescendingState);
+    onSortChange(newDescendingState);
   };
 
   return (
