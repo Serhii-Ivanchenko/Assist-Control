@@ -11,16 +11,27 @@ import {
   deleteSupplier,
   updateSupplierStatus,
 } from "../../../../redux/settings/operations.js";
+import { getSupplierData } from "../../../../redux/settings/operations.js";
 
 function DistributorsItem({ item, onDelete, updateDistributors }) {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgError, setImgError] = useState(false);
-  const [status, setStatus] = useState(item.isDisabled);
+  const [status, setStatus] = useState(item.status);
+  const [currentDistributor, setCurrentDistributor] = useState(null);
 
   useEffect(() => {
-    setStatus(item.isDisabled);
-  }, [item.isDisabled]);
+    const getCurrentSupplier = async () => {
+      try {
+        const response = await dispatch(getSupplierData(item.id));
+        console.log("current distributor:", response.payload.data);
+        setCurrentDistributor(response.payload.data);
+      } catch (error) {
+        console.error("error fetching current distributor", error);
+      }
+    };
+    getCurrentSupplier();
+  }, [dispatch, item.id]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -107,10 +118,13 @@ function DistributorsItem({ item, onDelete, updateDistributors }) {
         />
       </div>
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={() => closeModal(item)}>
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => closeModal(currentDistributor)}
+        >
           <DistributorsModal
-            onClose={() => closeModal(item)}
-            distributorData={item}
+            onClose={() => closeModal(currentDistributor)}
+            distributorData={currentDistributor}
             onToggleDisable={handleToggleStatus}
           />
         </Modal>

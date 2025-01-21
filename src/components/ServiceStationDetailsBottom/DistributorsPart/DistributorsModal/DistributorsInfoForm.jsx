@@ -15,13 +15,13 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     bankCode: distributor.bankCode || "",
     companyAddress: distributor.companyAddress || "",
     managerPhone: distributor.managerPhone || "",
-    manager: distributor.manager || "",
+    manager: distributor.managerName || "",
     officePhone: distributor.officePhone || "",
     ownerPhone: distributor.ownerPhone || "",
   };
 
   const validationSchema = Yup.object({
-    address: Yup.string(),
+    address: Yup.string().required("Поле обов'язкове"),
     paymentCondition: Yup.string(),
     days: Yup.string(),
     owner: Yup.string(),
@@ -30,7 +30,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     bank: Yup.string(),
     bankCode: Yup.string(),
     companyAddress: Yup.string(),
-    managerPhone: Yup.string(),
+    managerPhone: Yup.string().required("Поле обов'язкове"),
     manager: Yup.string(),
     officePhone: Yup.string(),
     ownerPhone: Yup.string(),
@@ -213,7 +213,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
                   type="text"
                   name="manager"
                   placeholder="Діана"
-                  style={{ width: "83px" }}
+                  style={{ width: "158px" }}
                 />
               </label>
             </div>

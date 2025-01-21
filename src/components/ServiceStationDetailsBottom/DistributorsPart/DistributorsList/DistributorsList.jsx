@@ -5,8 +5,8 @@ function DistributorsList({ distributorsData, onDelete, updateDistributors }) {
   return (
     <div className={styles.wrapper}>
       <ul className={styles.distributorsList}>
-        {distributorsData.map((distributor, index) => (
-          <li key={index} className={styles.distributorsItem}>
+        {distributorsData.map((distributor) => (
+          <li key={distributor.id} className={styles.distributorsItem}>
             <DistributorsItem
               item={distributor}
               onDelete={onDelete}

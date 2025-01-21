@@ -12,6 +12,7 @@ import { RiSave3Fill } from "react-icons/ri";
 import styles from "./DistributorsModal.module.css";
 import { updateSupplierData } from "../../../../redux/settings/operations";
 import { useDispatch } from "react-redux";
+import defLogo from "../../../../assets/images/distrImg.png";
 
 function DistributorsModal({
   onClose,
@@ -24,14 +25,18 @@ function DistributorsModal({
   const [distributor, setDistributor] = useState(distributorData || {});
   const [isEditing, setIsEditing] = useState(false);
   const [editableName, setEditableName] = useState(distributor.name || "");
-  const [logo, setLogo] = useState(distributor.logo);
+  const [logo, setLogo] = useState(distributor.logo || defLogo);
+
   const buttonRef = useRef(null);
+  const formRef = useRef(null);
+  const authFormRef = useRef(null);
+  const scheduleRef = useRef();
 
   useEffect(() => {
     if (distributorData) {
       setDistributor(distributorData);
       setEditableName(distributorData.name || "");
-      setLogo(distributorData.logo);
+      setLogo(distributorData.logo || defLogo);
     }
   }, [distributorData]);
 
@@ -42,14 +47,53 @@ function DistributorsModal({
 
   const handleSave = async () => {
     try {
+      if (formRef.current && authFormRef.current) {
+        await formRef.current.submitForm();
+        await authFormRef.current.submitForm();
+      }
+
+      const hasChanges =
+        distributor.name !== distributorData.name ||
+        logo !== distributorData.logo ||
+        JSON.stringify(distributor.deliverySchedule) !==
+          JSON.stringify(distributorData.deliverySchedule);
+
+      if (!hasChanges) {
+        console.log("no data to update");
+        onClose();
+        return;
+      }
+
       const dataToUpdate = {
         supplier_id: distributor.id,
         name: distributor.name,
+        deliverySchedule: distributor.deliverySchedule,
         logo,
       };
 
-      const result = await dispatch(updateSupplierData(dataToUpdate)).unwrap();
-      // console.log("Оновлення успішне:", result);
+      let base64Logo = null;
+      if (logo instanceof Blob || logo instanceof File) {
+        base64Logo = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+          reader.readAsDataURL(logo);
+        });
+      } else if (typeof logo === "string") {
+        base64Logo = logo;
+      } else {
+        throw new Error("Logo must be a Blob or File.");
+      }
+
+      const updatedDataToUpdate = {
+        ...dataToUpdate,
+        file: base64Logo,
+      };
+
+      const result = await dispatch(
+        updateSupplierData(updatedDataToUpdate)
+      ).unwrap();
+      console.log("Оновлення успішне:", result);
 
       if (updateDistributors) {
         updateDistributors(result.data);
@@ -62,10 +106,6 @@ function DistributorsModal({
       );
     }
   };
-
-  const formRef = useRef(null);
-  const authFormRef = useRef(null);
-  const scheduleRef = useRef();
 
   const handleResetForm = () => {
     if (formRef.current) {
@@ -161,11 +201,12 @@ function DistributorsModal({
                   className={styles.img}
                   src={logo}
                   alt={distributor.name || "Distribution Img"}
+                  onError={() => setLogo(defLogo)}
                 />
                 <UploadComponent
                   title="Завантажити лого"
                   name="logo"
-                  setLogo={setLogo}
+                  setLogo={(newLogo) => setLogo(newLogo || defLogo)}
                 />
               </div>
             ) : (
@@ -186,7 +227,7 @@ function DistributorsModal({
         </div>
         <div className={styles.authContainer}>
           <StatusToggle
-            isDisabled={distributor.zsisDisabled}
+            isDisabled={distributor.isDisabled}
             onToggleDisable={handleToggleDisable}
           />
           <AuthForm formikRef={authFormRef} />
