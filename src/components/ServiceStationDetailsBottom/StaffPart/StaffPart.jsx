@@ -90,7 +90,7 @@ export default function StaffPart() {
   };
 
   const openEditModal = (employee) => {
-    console.log("Opening modal for employee:", employee);
+    // console.log("Opening modal for employee:", employee);
     setCurrentEmployee(employee);
     setIsOpen(true);
   };
