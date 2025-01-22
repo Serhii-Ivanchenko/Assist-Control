@@ -3,22 +3,25 @@ import css from "../AddAutoServiceModal/AddAutoServiceModal.module.css";
 import { AddServiceSchema } from "../../../validationSchemas/addServiceSchema";
 import { BsXLg } from "react-icons/bs";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsFillCameraFill } from "react-icons/bs";
 import { useRef, useState } from "react";
 import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent";
 import PopupMenu from "../../sharedComponents/PopupMenu/PopupMenu";
 import BtnsCloseAndSubmit from "../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
 import clsx from "clsx";
+// import ToggleSwitch from "./ToggleSwitch/ToggleSwitch";
 
 export default function AddAutoServiceModal({
   onClose,
   isOrganization,
   infoToEdit,
+  createClient,
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [logo, setLogo] = useState(null);
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [serviceName, setServiceName] = useState(
-    isOrganization ? "ТОВ" : "СТО назва"
+    isOrganization || createClient ? "ТОВ" : "СТО назва"
   );
   const inputRef = useRef(null);
   const buttonRef = useRef(null);
@@ -56,6 +59,11 @@ export default function AddAutoServiceModal({
     setIsInputVisible(false);
   };
 
+  const downloadAvatar = (e) => {
+    const newAvatar = e.target.files[0];
+    setLogo(URL.createObjectURL(newAvatar));
+  };
+
   const handleSubmit = (values, actions) => {
     console.log(values);
     console.log(logo);
@@ -66,6 +74,13 @@ export default function AddAutoServiceModal({
 
   return (
     <div className={css.modal}>
+      {/* {createClient && (
+        <div className={css.switchWrapper}>
+          <p className={css.labelName}>Фізічна особа</p>
+          <ToggleSwitch />
+          <p className={css.labelName}>Юридична особа</p>
+        </div>
+      )} */}
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -100,7 +115,7 @@ export default function AddAutoServiceModal({
                 >
                   <BsThreeDotsVertical className={css.dotsIcon} />
                   <div className={css.popupContainer}>
-                    {isOrganization ? (
+                    {isOrganization || createClient ? (
                       <PopupMenu
                         isOpen={isPopupOpen}
                         onClose={() => setIsPopupOpen(false)}
@@ -126,7 +141,7 @@ export default function AddAutoServiceModal({
               )}
             </div>
           </div>
-          {!isOrganization && (
+          {!isOrganization && !createClient && (
             <div className={css.logo}>
               {logo ? (
                 <img src={logo} alt="logo" className={css.logoImg} />
@@ -134,6 +149,28 @@ export default function AddAutoServiceModal({
                 <p className={css.uploadLogoText}>Завантажте логотип</p>
               )}
               <UploadComponent name={"logo"} setLogo={setLogo} />
+            </div>
+          )}
+          {createClient && (
+            <div className={css.logo}>
+              {logo ? (
+                <img src={logo} alt="logo" className={css.logoImg} />
+              ) : (
+                <div>
+                  <Field
+                    type="file"
+                    className={css.inputDisabled}
+                    id="avatar"
+                    name="avatar"
+                    onChange={downloadAvatar}
+                  />
+
+                  <label htmlFor="avatar" className={css.avatarLabel}>
+                    <BsFillCameraFill className={css.camera} />
+                    <p className={css.uploadAvatarText}>+ Додати аватар</p>
+                  </label>
+                </div>
+              )}
             </div>
           )}
           <div className={clsx(css.form, isOrganization && css.isOrganization)}>

@@ -11,12 +11,17 @@ import { BsLayerBackward } from "react-icons/bs";
 import { useState } from "react";
 import ArchiveModal from "../Modals/ArchiveModal/ArchiveModal";
 import Modal from "../Modals/Modal/Modal";
+import AddNewClientModal from "../Modals/AddNewClientModal/AddNewClientModal";
 
 export default function ConnectionsListSection() {
   const [isArchiveModalOpen, setArchiveModalOpen] = useState(false);
+  const [isCreateClientModalOpen, setIsCreateClientModalOpen] = useState(false);
 
   const openArchiveModal = () => setArchiveModalOpen(true);
   const closeArchiveModal = () => setArchiveModalOpen(false);
+
+  const openCreateClientModal = () => setIsCreateClientModalOpen(true);
+  const closeCreateClientModal = () => setIsCreateClientModalOpen(false);
 
   function renderStatus(itemStatus, css) {
     const isCommunicationStatus = [
@@ -59,7 +64,11 @@ export default function ConnectionsListSection() {
               {/* Умовний рендер кнопки, якщо clientId === null */}
               {item.clientId === null && (
                 <button className={css.plus}>
-                  <FiPlus className={css.iconPlus} size={14} />
+                  <FiPlus
+                    className={css.iconPlus}
+                    size={14}
+                    onClick={openCreateClientModal}
+                  />
                 </button>
               )}
             </div>
@@ -97,6 +106,14 @@ export default function ConnectionsListSection() {
       {isArchiveModalOpen && (
         <Modal isOpen={isArchiveModalOpen} onClose={closeArchiveModal}>
           <ArchiveModal onClose={closeArchiveModal} />
+        </Modal>
+      )}
+      {isCreateClientModalOpen && (
+        <Modal
+          isOpen={isCreateClientModalOpen}
+          onClose={closeCreateClientModal}
+        >
+          <AddNewClientModal onClose={closeCreateClientModal} />
         </Modal>
       )}
     </div>
