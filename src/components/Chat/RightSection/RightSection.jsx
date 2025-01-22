@@ -34,7 +34,7 @@ import { tags } from "../RightSection/ChatTags/tags.js";
 import PhoneModal from "./PopUp/PhoneModal/PhoneModal.jsx";
 import StaffModal from "./PopUp/StaffModal/StaffModal.jsx";
 import CategoryModal from "./PopUp/CategoryModal/CategoryModal.jsx";
-import ActionModal from "./PopUp/ActionModal/ActionModal.jsx"
+import ActionModal from "./PopUp/ActionModal/ActionModal.jsx";
 import clsx from "clsx";
 
 const data = {
@@ -186,7 +186,7 @@ export default function RightSection() {
 
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
-    setIsCategory(false); 
+    setIsCategory(false);
   };
 
   const actions = [
@@ -198,7 +198,7 @@ export default function RightSection() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [actionType, setActionType] = useState(""); // "add", "edit", "delete"
-   const triggerActionRef = useRef(null);
+  const triggerActionRef = useRef(null);
   const handleOpenModal = (type) => {
     setActionType(type);
     setModalOpen(!modalOpen);
@@ -253,16 +253,14 @@ export default function RightSection() {
   const [isModalStaff, setIsModalStaff] = useState(false);
   const staffButtonRef = useRef(null);
   const handleStaffClick = () => {
-      setIsModalStaff((prevState) => !prevState);
+    setIsModalStaff((prevState) => !prevState);
   };
-
 
   const [isModalStaffPlus, setIsModalStaffPlus] = useState(false);
   const staffButtonPlusRef = useRef(null);
   const handleStaffPlusClick = () => {
-      setIsModalStaffPlus((prevState) => !prevState);
+    setIsModalStaffPlus((prevState) => !prevState);
   };
-   
 
   const [isModalNote, setIsModalNote] = useState(false);
   const [notificationSent, setNotificationSent] = useState(false);
@@ -310,18 +308,18 @@ export default function RightSection() {
 
           <button
             className={css.btnaction}
-            ref={ staffButtonRef}
+            ref={staffButtonRef}
             // onClick={() => {
             //   setIsModalStaff(true);
             // }}
-             onClick={handleStaffClick}
+            onClick={handleStaffClick}
           >
             <RiUserSharedFill className={css.iconaction} />
           </button>
 
           <button
             className={css.btnaction}
-             ref={ staffButtonPlusRef}
+            ref={staffButtonPlusRef}
             onClick={handleStaffPlusClick}
           >
             <RiUserAddFill className={css.iconaction} />
@@ -340,7 +338,7 @@ export default function RightSection() {
             />
           )}
 
-           {isModalStaff && (
+          {isModalStaff && (
             <StaffModal
               isOpen={isModalStaff}
               onClose={() => setIsModalStaff(false)}
@@ -368,8 +366,6 @@ export default function RightSection() {
             />
           )}
 
-        
-
           {isModalNote && (
             <Modal isOpen={isModalNote} onClose={closeModal}>
               <NotificationModal
@@ -384,7 +380,6 @@ export default function RightSection() {
               />
             </Modal>
           )}
-
         </div>
       </div>
 
@@ -494,7 +489,6 @@ export default function RightSection() {
               "&:hover": {
                 cursor: "default !important",
               },
-             
             }}
             className={css.accordionTitle}
             aria-controls="panel2-content"
@@ -651,32 +645,30 @@ export default function RightSection() {
                   </div>
                 )}
 
-                
-{expandedRows.includes("panel3") && isCategory && (
-        <div>
-          <CategoryModal
-            isOpen={isCategory}
-            onClose={() => setIsCategory(false)} 
-            categories={categories}
-            activeCategory={activeCategory}
-            onSelect={handleCategorySelect} 
-            triggerRef={triggerCategoryRef} 
-          />
-        </div>
-      )}
-
- {expandedRows.includes("panel3") && modalOpen  && (
+                {expandedRows.includes("panel3") && isCategory && (
                   <div>
-            <ActionModal
-            isOpen={modalOpen}
-            onClose={() => setModalOpen(false)}
-            actions={actions}
-            onActionSelect={handleActionChange}
-            triggerRef={triggerActionRef} 
-          />
-        </div>
-      )}
+                    <CategoryModal
+                      isOpen={isCategory}
+                      onClose={() => setIsCategory(false)}
+                      categories={categories}
+                      activeCategory={activeCategory}
+                      onSelect={handleCategorySelect}
+                      triggerRef={triggerCategoryRef}
+                    />
+                  </div>
+                )}
 
+                {expandedRows.includes("panel3") && modalOpen && (
+                  <div>
+                    <ActionModal
+                      isOpen={modalOpen}
+                      onClose={() => setModalOpen(false)}
+                      actions={actions}
+                      onActionSelect={handleActionChange}
+                      triggerRef={triggerActionRef}
+                    />
+                  </div>
+                )}
               </div>
 
               {expandedRows.includes("panel3") && (

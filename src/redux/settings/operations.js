@@ -381,7 +381,7 @@ export const getWorkSchedule = createAsyncThunk(
       const response = await axiosInstance.get(`/set/get_work_schedule/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
-          "company-id": serviceId,
+          "company-id": 'serviceId',
         },
       });
       console.log("getWorkSchedule", response.data);
