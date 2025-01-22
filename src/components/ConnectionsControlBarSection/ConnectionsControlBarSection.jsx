@@ -29,7 +29,7 @@ export default function ConnectionsControlBarSection() {
       />
       <StatusFilter
         onStatusChange={handleStatusChange}
-        renderStatus={renderStatusCommunication}
+        renderStatus={(status) => renderStatusCommunication(status, css, isFilter)}
         statuses={statusesCommunications}
         isFilter={isFilter}
       />

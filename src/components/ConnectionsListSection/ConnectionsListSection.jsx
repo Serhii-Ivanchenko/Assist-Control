@@ -33,7 +33,7 @@ export default function ConnectionsListSection() {
     ].includes(itemStatus);
 
     if (isCommunicationStatus) {
-      return renderStatusCommunication(itemStatus, false, css, false);
+      return renderStatusCommunication(itemStatus, css, false);
     }
 
     return renderStatusCars(itemStatus, false, css, false);
