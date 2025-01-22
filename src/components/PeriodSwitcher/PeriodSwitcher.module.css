@@ -2,6 +2,8 @@
   background-color: inherit;
   cursor: pointer;
   border: none;
+  font-size: 16px;
+  font-size: clamp(11px, 1.481vh, 16px);
   font-weight: 400;
   font-variant: small-caps;
   color: var(--white);
