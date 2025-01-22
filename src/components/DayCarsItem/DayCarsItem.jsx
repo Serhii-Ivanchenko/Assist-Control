@@ -37,7 +37,7 @@ export default function DayCarsItem({ car, isModal }) {
     client,
     plate: carNumber,
   } = car;
-  
+
   const carPhoto = photoUrl || absentAutoImg;
 
   const formatCarNumber = (number) => {
