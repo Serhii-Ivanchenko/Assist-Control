@@ -36,7 +36,8 @@ const visibilitySlice = createSlice({
       photo: true,
       totalPrice: true,
       phoneNumber: true,
-      info: true,
+      infoBtn: true,
+      statusBtn: true
     },
     visibilityCarRecomendations: {
       name: true,
