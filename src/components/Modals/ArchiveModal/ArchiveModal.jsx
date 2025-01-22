@@ -55,7 +55,7 @@ const archiveReasons = [
   },
 ];
 
-export default function ArchiveModal({ onClose }) {
+export default function ArchiveModal({ onClose, isRecommendation }) {
   const handleSubmit = (values) => {
     console.log(values);
     onClose();
@@ -89,33 +89,39 @@ export default function ArchiveModal({ onClose }) {
                 placeholder="Введіть ваш коментар..."
                 className={css.textarea}
               />
-              <label htmlFor="reason_add">Оберіть причину:</label>
-              <Field
-                as="select"
-                id="reason_add"
-                name="reason_add"
-                className={`${css.select} ${
-                  selectedReason ? selectedReason.statusClass : ""
-                }`}
-                style={{
-                  background: selectedReason
-                    ? selectedReason.background
-                    : undefined,
-                  borderColor: selectedReason
-                    ? selectedReason.borderColor
-                    : undefined,
-                }}
-              >
-                <option value="" disabled className={css.defReason}>
-                  Оберіть причину
-                </option>
-                {archiveReasons.map((reason) => (
-                  <option key={reason.id} value={reason.id}>
-                    {reason.statusText}
-                  </option>
-                ))}
-              </Field>
 
+              {!isRecommendation ? (
+                <>
+                  <label htmlFor="reason_add">Оберіть причину:</label>
+                  <Field
+                    as="select"
+                    id="reason_add"
+                    name="reason_add"
+                    className={`${css.select} ${
+                      selectedReason ? selectedReason.statusClass : ""
+                    }`}
+                    style={{
+                      background: selectedReason
+                        ? selectedReason.background
+                        : undefined,
+                      borderColor: selectedReason
+                        ? selectedReason.borderColor
+                        : undefined,
+                    }}
+                  >
+                    <option value="" disabled className={css.defReason}>
+                      Оберіть причину
+                    </option>
+                    {archiveReasons.map((reason) => (
+                      <option key={reason.id} value={reason.id}>
+                        {reason.statusText}
+                      </option>
+                    ))}
+                  </Field>
+                </>
+              ) : (
+                <>{null}</>
+              )}
               <div className={css.btnsGroup}>
                 <button
                   type="button"
