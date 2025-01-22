@@ -13,7 +13,7 @@ export default function AddNewClientModal({ onClose }) {
       <div className={css.switchWrapper}>
         <p className={css.text}>Юридична особа</p>
         <ToggleSwitch setIsPerson={setIsPerson} />
-        <p className={css.text}>Фізічна особа</p>
+        <p className={css.text}>Фізична особа</p>
       </div>
       {isPerson ? (
         <AddNewClientPerson onClose={onClose} />
