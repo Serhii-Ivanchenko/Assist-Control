@@ -26,19 +26,55 @@ import ScheduleTable from "../../sharedComponents/ScheduleTable/ScheduleTable.js
 import AnimatedContent from "./AnimatedContent.jsx";
 import UploadComponent from "../../sharedComponents/UploadComponent/UploadComponent.jsx";
 import RightOfAccessSelect from "./RightOfAccessSelect/RightOfAccessSelect.jsx";
-// import { useDispatch } from "react-redux";
-// import { createEmployee } from "../../../redux/settings/operations.js";
+import { useDispatch } from "react-redux";
+import { createEmployee } from "../../../redux/settings/operations.js";
+import * as Yup from "yup";
 
 registerLocale("uk", uk);
+
+// const convertFileToBase64 = (file) => {
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+//     reader.onload = () => resolve(reader.result);
+//     reader.onerror = (error) => reject(error);
+//     reader.readAsDataURL(file);
+//   });
+// };
 
 export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [isDateOpen, setDateOpen] = useState(false);
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
   const [photo, setPhoto] = useState(avatar);
   const [employee, setEmployee] = useState(employeeInfo || {});
+  const [showLoginWarning, setShowLoginWarning] = useState(false);
   const buttonRefs = useRef([]);
   const fileInputRef = useRef(null);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  // const Validation = Yup.object().shape({
+  //   name: Yup.string()
+  //     .min(2, "Занадто коротке")
+  //     .max(30, "Занадто довге")
+  //     .required("Поле повинно бути заповнене"),
+  //   phone: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
+  //   address: Yup.string(),
+  //   birthday: Yup.string(),
+  //   position: Yup.string(),
+  //   role: Yup.string(),
+  //   email: Yup.string(),
+  //   login: Yup.string(),
+  //   password: Yup.string(),
+  //   period: Yup.string(),
+  //   rate: Yup.number(),
+  //   minRate: Yup.number(),
+  //   amount: Yup.number(),
+  //   sparesAmount: Yup.number(),
+  //   sparesPrice: Yup.number(),
+  //   profit: Yup.string(),
+  //   schedule: Yup.string(),
+  // });
+
+  // const loginValid = Yup.object().shape({
 
   const handleDateButtonClick = () => setDateOpen((prev) => !prev);
 
@@ -69,8 +105,20 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   };
 
   const generateLogin = (values, setFieldValue) => {
-    setFieldValue("login", values.phone);
-    setFieldValue("password", generateRandomStringPassword(12));
+    if (values.phone) {
+      setFieldValue("login", values.phone);
+      setFieldValue("password", generateRandomStringPassword(12));
+    } else {
+      return;
+    }
+  };
+
+  const handleShowLoginWarning = (values) => {
+    if (!values.phone) {
+      setShowLoginWarning(true);
+    } else {
+      setShowLoginWarning(false);
+    }
   };
 
   const deleteLoginAndPassword = (setFieldValue) => {
@@ -103,46 +151,93 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     email: employee.email || "",
     login: employee.login || "",
     password: employee.password || "",
-    period: "2023-2024",
-    rate: employee.rate || "",
-    minRate: employee.minRate || "",
-    amount: employee.amount || "",
-    sparesAmount: employee.sparesAmount || "",
-    sparesPrice: employee.sparesPrice || "",
-    // profit: "",
-    schedule: true,
+    period: "",
+    rate: employee.rate || 0.0,
+    minRate: employee.minRate || 0.0,
+    amount: employee.amount || 0.0,
+    sparesAmount: employee.sparesAmount || 0.0,
+    sparesPrice: employee.sparesPrice || 0.0,
+    // profit: 0.0,
+    status: employee.status || false,
+
+    schedule: {},
     files: {
-      passport: "",
-      itn: "",
-      diploma: "",
-      laborBook: "",
-      CV: "",
-      contract: "",
-      employment: "",
-      agreement: "",
-      logo: "",
+      passport: null,
+      itn: null,
+      diploma: null,
+      laborBook: null,
+      CV: null,
+      contract: null,
+      employment: null,
+      agreement: null,
+      logo: null,
     },
+    openSchedule: true,
   };
 
-  const handleSubmit = (values, actions) => {
+  // const initialValues = {
+  //   name: "John Doe",
+  //   phone: "+380123456789",
+  //   address: "Some Address",
+  //   birthday: "1990-01-01",
+  //   position: "Manager",
+  //   role: "Admin",
+  //   email: "john@example.com",
+  //   login: "john_doe",
+  //   password: "securePassword123",
+  //   period: "2023-2024",
+  //   rate: 5000.0,
+  //   minRate: 2000.0,
+  //   amount: 10000.0,
+  //   sparesAmount: 500.0,
+  //   sparesPrice: 100.0,
+  //   status: true,
+  //   schedule: { monday: "9:00-18:00" },
+  // };
+
+  const handleSubmit = async (values, actions) => {
     const dateOnly = values.birthday
       ? values.birthday.toLocaleDateString("en-CA")
       : null;
-    const employeeData = {
-      ...values,
-      birthday: dateOnly,
-    };
+    // const employeeData = {
+    //   ...values,
+    //   birthday: dateOnly,
+    // };
     // const files = values.files;
-    // dispatch(createEmployee({ employeeData, files }));
-    console.log(employeeData);
-    actions.resetForm();
+
+    try {
+      // const convertedFiles = {};
+      // for (const [key, file] of Object.entries(values.files)) {
+      //   if (file) {
+      //     convertedFiles[key] = await convertFileToBase64(file);
+      //   }
+      // }
+
+      // Підготовка даних для відправки
+      const employeeData = {
+        ...values,
+        birthday: dateOnly,
+        // files: convertedFiles, // Файли у форматі Base64
+      };
+      console.log("Перед відправкою:", employeeData);
+      const filesArray = Object.values(values.files).filter((file) => file);
+      await dispatch(createEmployee({ employeeData, files: filesArray }));
+      console.log(employeeData);
+      actions.resetForm();
+    } catch (error) {
+      console.error("Помилка створення працівника:", error);
+    }
   };
 
   return (
     <div className={css.modal}>
       <TfiClose onClick={onClose} className={css.closeBtn} />
 
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        // validationSchema={Validation}
+      >
         {({ values, setFieldValue }) => (
           <Form>
             <div className={css.mainInfo}>
@@ -303,7 +398,10 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     <button
                       type="button"
                       className={css.create}
-                      onClick={() => generateLogin(values, setFieldValue)}
+                      onClick={() => {
+                        generateLogin(values, setFieldValue);
+                        handleShowLoginWarning(values);
+                      }}
                     >
                       Згенерувати
                     </button>
@@ -315,6 +413,12 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                       {" "}
                       <BsTrash size={18} />{" "}
                     </button>
+
+                    {showLoginWarning && (
+                      <p className={css.loginWarning}>
+                        Заповніть спочатку поле &quot;Телефон&quot;
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -401,7 +505,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         // onClose={closePopover}
                       />
                     )}
-                    <Field type="file" name="contract" className={css.docInput} />
+                    <Field
+                      type="file"
+                      name="contract"
+                      className={css.docInput}
+                    />
                   </div>
                   <div
                     className={css.docBox}
@@ -457,7 +565,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                   </div>
                 </div>
               </div>
-                <RightOfAccessSelect />
+              <RightOfAccessSelect />
             </div>
 
             <div className={css.salary}>
@@ -566,7 +674,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                 <label className={css.scheduleLabel}>
                   <Field
                     type="checkbox"
-                    name="schedule"
+                    name="openSchedule"
                     className={css.checkbox}
                   />
                   <span className={css.checkboxSpan}>
