@@ -64,7 +64,10 @@ export default function StationPart() {
 
   const handleEditing = (postId) => {
     const postToEdit = posts.find((post) => post.id === postId);
-    setEditedValue(postToEdit);
+    setEditedValue((prev) => ({
+      ...prev,
+      [postId]: postToEdit.name_post,
+    }));
     setIsEditing(isEditing === postId ? null : postId);
   };
 
@@ -184,7 +187,7 @@ export default function StationPart() {
             <li key={post.id || `temp-${index}`} className={css.postListItem}>
               {isEditing === post.id ? (
                 <input
-                  value={editedValue[post.id] || post.name_post}
+                  value={editedValue[post.id] || ""}
                   onChange={(e) => handleChangePN(post.id, e.target.value)}
                   className={css.inputForPostName}
                   ref={inputFocusRef}
