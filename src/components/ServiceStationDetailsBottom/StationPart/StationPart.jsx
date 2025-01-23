@@ -3,46 +3,49 @@ import css from "./StationPart.module.css";
 import { BsPlusLg } from "react-icons/bs";
 import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns";
 import { useDispatch } from "react-redux";
-import { getPosts } from "../../../redux/settings/operations";
+// import { getPosts } from "../../../redux/settings/operations";
 import { useSelector } from "react-redux";
 import { selectPosts } from "../../../redux/settings/selectors";
+import { createPost } from "../../../redux/settings/operations";
 
 export default function StationPart() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(getPosts());
-    };
-    fetchData();
-  });
-  const stations = useSelector(selectPosts);
-  const [posts, setPosts] = useState(
-    stations
-    // [
-    //   { name: "ПОСТ 1", isDisabled: false, id: 1 },
-    //   { name: "ПОСТ 2", isDisabled: false, id: 2 },
-    //   { name: "ПОСТ 3", isDisabled: false, id: 3 },
-    //   { name: "ПОСТ 4", isDisabled: false, id: 4 },
-    // ]
-  );
-  const [newPost, setNewPost] = useState("");
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await dispatch(getPosts());
+  //   };
+  //   fetchData();
+  // });
+  const posts = useSelector(selectPosts);
+  console.log("posts", posts);
+
+  // const [posts, setPosts] = useState(
+  //   stations
+  // [
+  //   { name: "ПОСТ 1", isDisabled: false, id: 1 },
+  //   { name: "ПОСТ 2", isDisabled: false, id: 2 },
+  //   { name: "ПОСТ 3", isDisabled: false, id: 3 },
+  //   { name: "ПОСТ 4", isDisabled: false, id: 4 },
+  // ]
+  // );
+  const [newPostName, setNewPostName] = useState("");
   const [isEditing, setIsEditing] = useState(null);
   const [editedValue, setEditedValue] = useState({});
   const inputFocusRef = useRef();
   const scrollToTheLastItemRef = useRef();
 
   const toDisable = (index) => {
-    setPosts(
-      posts.map((post, i) =>
-        i === index ? { ...post, isDisabled: !post.isDisabled } : post
-      )
-    );
+    // setPosts(
+    //   posts.map((post, i) =>
+    //     i === index ? { ...post, isDisabled: !post.isDisabled } : post
+    //   )
+    // );
   };
 
   const handleChangePN = (newName, index) => {
-    setPosts(
-      posts.map((post, i) => (i === index ? { ...post, name: newName } : post))
-    );
+    // setPosts(
+    //   posts.map((post, i) => (i === index ? { ...post, name: newName } : post))
+    // );
   };
 
   const handleEditing = (postId) => {
@@ -58,12 +61,14 @@ export default function StationPart() {
   }, [isEditing]);
 
   const handleAddPost = () => {
-    if (newPost.trim()) {
-      setPosts([
-        ...posts,
-        { name: newPost, isDisabled: false, id: Date.now() },
-      ]);
-      setNewPost("");
+    if (newPostName.trim()) {
+      // setPosts([
+      //   ...posts,
+      //   { name: newPost, isDisabled: false, id: Date.now() },
+      // ]);
+      const newPost = { name_post: newPostName };
+      dispatch(createPost(newPost));
+      setNewPostName("");
     }
   };
 
@@ -77,7 +82,7 @@ export default function StationPart() {
   }, [posts]);
 
   const deletePost = (index) => {
-    setPosts((prevPosts) => prevPosts.filter((_, i) => i !== index));
+    // setPosts((prevPosts) => prevPosts.filter((_, i) => i !== index));
   };
 
   const handleRepeal = () => {
@@ -99,7 +104,7 @@ export default function StationPart() {
       <div className={css.divForScroll} ref={scrollToTheLastItemRef}>
         <ul className={css.postList}>
           {posts.map((post, index) => (
-            <li key={post.id} className={css.postListItem}>
+            <li key={post.id || `temp-${index}`} className={css.postListItem}>
               {isEditing === post.id ? (
                 <input
                   value={post.name}
@@ -108,7 +113,7 @@ export default function StationPart() {
                   ref={inputFocusRef}
                 />
               ) : (
-                <p className={css.postName}>{post.name}</p>
+                <p className={css.postName}>{post.name_post}</p>
               )}
 
               <SwitchableBtns
@@ -120,7 +125,7 @@ export default function StationPart() {
                 id={post.id}
                 isEditing={isEditing}
                 onRepeal={() => handleRepeal(post.id)}
-                text={post.name}
+                text={post.name_post}
               />
             </li>
           ))}
@@ -130,8 +135,8 @@ export default function StationPart() {
         <input
           placeholder="Додати новий пост..."
           className={css.addInput}
-          value={newPost}
-          onChange={(e) => setNewPost(e.target.value)}
+          value={newPostName}
+          onChange={(e) => setNewPostName(e.target.value)}
         />
         <button type="button" className={css.addBtn} onClick={handleAddPost}>
           <span className={css.plus}>
