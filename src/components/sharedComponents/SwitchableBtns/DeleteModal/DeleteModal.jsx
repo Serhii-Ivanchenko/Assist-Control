@@ -1,6 +1,11 @@
 import css from "./DeleteModal.module.css";
 
 export default function DeleteModal({ text, onClose, onDelete }) {
+  const handleDeleteClick = () => {
+    onDelete();
+    onClose();
+  };
+
   return (
     <div className={css.container}>
       <p className={css.question}>Ви дійсно бажаєте видалити {text}?</p>
@@ -14,7 +19,7 @@ export default function DeleteModal({ text, onClose, onDelete }) {
         </button>
         <button
           type="button"
-          onClick={onDelete}
+          onClick={handleDeleteClick}
           className={`${css.btn} ${css.btnDelete}`}
         >
           Видалити

@@ -234,16 +234,19 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
         birthday: dateOnly,
       };
 
-      console.log("Перед відправкою:", employeeData);
+      // console.log("Перед відправкою:", employeeData);
       // const filesArray = Object.values(values.files);
       if (employee.id) {
+        const employeeDataToUpdate = {
+          employee_id: employee.id,
+          files: base64Files,
+          ...employeeData,
+        };
+
+        console.log("дані при редагуванні", employeeDataToUpdate);
         // Якщо ID існує, оновлюємо працівника
         const response = await dispatch(
-          updateEmployeeData({
-            employee_id: employee.id,
-            files: base64Files,
-            ...employeeData,
-          })
+          updateEmployeeData(employeeDataToUpdate)
         );
         if (response.meta.requestStatus === "fulfilled") {
           toast.success("Успішно оновлено :)", {
@@ -259,11 +262,12 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
         // onClose();
         console.log("Після оновлення:", employeeData);
       } else if (employee.id === undefined) {
+        const employeeDataToCreate = { files: base64Files, ...employeeData  };
+        console.log("Перед створенням нового працівника:", employeeDataToCreate);
+
         // Якщо ID відсутнє, створюємо нового працівника
-        const response = await dispatch(
-          createEmployee({ employeeData, files: base64Files })
-        );
-        console.log("Після створення нового працівника:", employeeData);
+        const response = await dispatch(createEmployee(employeeDataToCreate));
+        console.log("Після створення нового працівника:", employeeDataToCreate);
         if (response.meta.requestStatus === "fulfilled") {
           toast.success("Успішно створено :)", {
             position: "top-center",
@@ -276,8 +280,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
           onClose();
         }
       }
-      console.log("Після відправкою:", employeeData, values.files);
-      console.log(employeeData);
+      // console.log("Після відправкою:", employeeData, values.files);
+      // console.log(employeeData);
       actions.resetForm();
       onClose();
     } catch (error) {

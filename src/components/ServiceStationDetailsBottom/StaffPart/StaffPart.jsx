@@ -25,62 +25,28 @@ import toast from "react-hot-toast";
 export default function StaffPart() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(getAllEmployees()).unwrap();
-      } catch (error) {
-        console.error("Помилка завантаження даних:", error);
-      }
-    };
-    fetchData();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       await dispatch(getAllEmployees()).unwrap();
+  //     } catch (error) {
+  //       console.error("Помилка завантаження даних:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [dispatch]);
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState(null);
   const employees = useSelector(selectEmployees);
-  const [members, setMembers] = useState(
-    []
-    // [
-    //   {
-    //     name: "Максим Коваленко",
-    //     role: "Власник",
-    //     phone: "+38 (073) 329 12 12",
-    //     isDisabled: false,
-    //   },
-    //   {
-    //     name: "Максим Коваленко",
-    //     role: "Кухар",
-    //     phone: "+38 (073) 329 42 42",
-    //     isDisabled: false,
-    //   },
-    //   {
-    //     name: "Максим Коваленко",
-    //     role: "Механік",
-    //     phone: "+38 (073) 329 52 52",
-    //     isDisabled: false,
-    //   },
-    //   {
-    //     name: "Максим Коваленко",
-    //     role: "Механік",
-    //     phone: "+38 (073) 329 62 62",
-    //     isDisabled: false,
-    //   },
-    //   {
-    //     name: "Максим Коваленко",
-    //     role: "Механік",
-    //     phone: "+38 (073) 329 12 12",
-    //     isDisabled: false,
-    //   },
-    // ]
-  );
-  console.log("members", employees);
+  // const [members, setMembers] = useState([]);
+  console.log("employees", employees);
 
-  useEffect(() => {
-    if (employees && employees.length > 0) {
-      setMembers(employees);
-    }
-  }, [employees]);
+  // useEffect(() => {
+  //   if (employees && employees.length > 0) {
+  //     setMembers(employees);
+  //   }
+  // }, [employees]);
 
   const toDisable = (id, currentStatus) => {
     // setMembers(
@@ -171,7 +137,7 @@ export default function StaffPart() {
     <div className={css.StaffPart}>
       <div className={css.divForScroll}>
         <ul className={css.teamList}>
-          {members.map((member, index) => (
+          {employees.map((member, index) => (
             <li key={index} className={css.teamListItem}>
               <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
@@ -194,7 +160,7 @@ export default function StaffPart() {
 
               <div className={css.containerForBtn}>
                 <SwitchableBtns
-                  onEdit={() => openEditModal(members[index])}
+                  onEdit={() => openEditModal(employees[index])}
                   onToggleDisable={() => toDisable(member.id, member.status)}
                   onDelete={() => deleteMember(member.id)}
                   isDisabled={member.status}

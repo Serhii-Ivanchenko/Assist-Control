@@ -74,7 +74,7 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeData.fulfilled, (state, action) => {
         state.isLoading = false;
         const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.employee_id === action.payload.employee_id
+          (employee) => employee.id === action.payload.employee_id
         );
 
         if (
@@ -94,7 +94,7 @@ const settingsSlice = createSlice({
         state.isLoading = false;
 
         state.employees = state.employees.filter(
-          (employee) => employee.employee_id !== action.payload.employee_id
+          (employee) => employee.id !== action.payload.employee_id
         );
       })
       .addCase(deleteEmployee.rejected, handleRejected)
@@ -120,7 +120,7 @@ const settingsSlice = createSlice({
       .addCase(getAllEmployees.pending, handlePending)
       .addCase(getAllEmployees.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.employees = action.payload;
+        state.employees = action.payload.data;
       })
       .addCase(getAllEmployees.rejected, handleRejected)
 
