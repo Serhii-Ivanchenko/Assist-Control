@@ -10,6 +10,7 @@ import DeleteModal from "./DeleteModal/DeleteModal";
 function SwitchableBtns({
   isDisabled,
   onEdit,
+  onSave,
   onDelete,
   onToggleDisable,
   isEditing,
@@ -27,7 +28,7 @@ function SwitchableBtns({
           <BsXCircle className={styles.btn} onClick={onRepeal} />
           <RiSave3Fill
             className={styles.btn}
-            onClick={onEdit}
+            onClick={onSave}
             style={{ transform: "scale(1.32)" }}
           />
         </>
