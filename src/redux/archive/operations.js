@@ -14,8 +14,6 @@ export const getAllArchiveData = createAsyncThunk(
           "company-id": serviceId,
         },
       });
-      console.log("getAllArchiveData", response.data);
-
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -84,14 +82,15 @@ export const returnArchiveItem = createAsyncThunk(
       const { archive_id, status } = returnedItemData;
       const response = await axiosInstance.patch(
         `/crm/archive/return_archive/`,
-        { archive_id, status },
+        null,
         {
+          params: { archive_id, status },
           headers: {
             "company-id": serviceId,
           },
         }
+       
       );
-      console.log("Відповідь сервера:", response.data);
       return response.data;
     } catch (error) {
       console.error("Помилка при запиті до сервера:", error);
