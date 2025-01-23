@@ -30,6 +30,8 @@ export const createEmployee = createAsyncThunk(
       const response = await axiosInstance.post(
         `/set/employees/create/`,
         payload,
+        // {...employeeData,
+        // files},
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -130,6 +132,8 @@ export const updateEmployeeStatus = createAsyncThunk(
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
+            "Content-Type": "application/json",
+
           },
         }
       );

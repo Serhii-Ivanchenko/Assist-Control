@@ -96,30 +96,31 @@ export default function StaffPart() {
 
     dispatch(updateEmployeeStatus({ employee_id: id, status: newStatus }))
       .unwrap()
+      // .then(() => {
+      //   // dispatch(getAllEmployees())
+      //   setMembers(members)
       .then(() => {
-        dispatch(getAllEmployees())
-          .then(() => {
-            toast.success("Успішно видалено :)", {
-              position: "top-center",
-              duration: 3000,
-              style: {
-                background: "var(--bg-input)",
-                color: "var(--white)FFF",
-              },
-            });
-          })
-          .catch((error) => {
-            console.error("Error updating user data:", error);
-            toast.error("Щось пішло не так :(", {
-              position: "top-center",
-              duration: 3000,
-              style: {
-                background: "var(--bg-input)",
-                color: "var(--white)FFF",
-              },
-            });
-          });
+        toast.success("Успішно видалено :)", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating user data:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
       });
+    // });
   };
 
   const openModal = () => {
@@ -199,6 +200,7 @@ export default function StaffPart() {
                   isDisabled={member.status}
                   showIconSave={true}
                   id={index}
+                  text={`працівника ${member.name}`}
                   // isEditing={isEditing}
                   // onRepeal={() => handleRepeal(index)}
                 />
