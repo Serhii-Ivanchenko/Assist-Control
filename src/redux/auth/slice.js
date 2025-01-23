@@ -116,7 +116,8 @@ const authSlice = createSlice({
       // })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.userData = { ...state.userData, ...action.payload };
-        state.userData.selectedServiceId = action.payload.services[0]?.id || null;
+        state.userData.selectedServiceId =
+          action.payload.services?.[0]?.id || null;
         state.isLoggedIn = true;
         state.isRefreshing = false; // Зупиняємо рефреш
         state.apiKey = action.payload.api_key; // Переконуємося, що ключ оновився
