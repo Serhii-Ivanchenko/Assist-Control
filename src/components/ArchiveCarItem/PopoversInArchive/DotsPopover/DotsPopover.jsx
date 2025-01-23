@@ -4,7 +4,7 @@ import { BsPencil } from "react-icons/bs";
 import { FaRedoAlt } from "react-icons/fa";
 import styles from "./DotsPopover.module.css";
 
-function DotsPopover({ isVisible, togglePopover }) {
+function DotsPopover({ isVisible, togglePopover, onRestore }) {
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -35,9 +35,9 @@ function DotsPopover({ isVisible, togglePopover }) {
   };
 
   const handleRestore = () => {
-    console.log("Відновити з архіву");
+    togglePopover(false);
+    onRestore();
   };
-
   return (
     <div className={styles.container}>
       <button

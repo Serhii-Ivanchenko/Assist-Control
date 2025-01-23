@@ -1,12 +1,13 @@
 import ClientsInWorkItem from "./ClientsInWorkItem/ClientsInWorkItem";
-import { clientsData } from "../ClientsInWorkMainComponent/clientsData";
 import css from "./ClientsInWorkListSection.module.css";
 
-export default function ClientsInWorkListSection() {
+export default function ClientsInWorkListSection({ clients }) {
+  console.log(clients.map(client => client.date_e));
+
   return (
     <div className={css.wrapper}>
       <ul className={css.list}>
-        {clientsData.map((item) => (
+        {clients .map((item) => (
           <li key={item.car_id}>
             <ClientsInWorkItem item={item} />
           </li>

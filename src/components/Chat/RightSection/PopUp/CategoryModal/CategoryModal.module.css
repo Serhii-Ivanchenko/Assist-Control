@@ -1,0 +1,44 @@
+.categorySelector {
+    position: absolute;
+    top: 21%;
+    left: 30%;
+    right: auto;
+    bottom: auto;
+    /* margin-right: -18%; */
+    background-color: var(--bg-input);
+    border: none;
+    box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--light-gray);
+    border-radius: 12px;
+    width: 235px;
+    margin-top: 4px;
+    z-index: 1000;
+}
+
+.category {
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--light-gray);
+}
+
+.category:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.category:last-child {
+    border-radius: 0 0 12px 12px;
+}
+
+.categoryActive {
+    background-color: var(--current-mileage-text);
+}
+
+.category:hover {
+    background-color: var(--main-gray);
+}

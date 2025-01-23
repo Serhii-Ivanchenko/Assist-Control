@@ -237,7 +237,7 @@ function CurrentCarModal({ onClose, car, status }) {
           </button>
           {isModalOpen && (
             <Modal isOpen={isModalOpen} onClose={closeArchiveModal}>
-              <ArchiveModal onClose={closeArchiveModal} />
+              <ArchiveModal onClose={closeArchiveModal} carId={car.car_id} location="main"/>
             </Modal>
           )}
           <button
