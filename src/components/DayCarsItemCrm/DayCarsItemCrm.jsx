@@ -114,7 +114,6 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
     name,
     phone,
     booking,
-
     plate: carNumber,
   } = car;
 
@@ -265,7 +264,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
 
           {modalState.archive && (
             <Modal isOpen={modalState.archive} onClose={closeModals}>
-              <ArchiveModal onClose={closeModals} />
+              <ArchiveModal onClose={closeModals} carId={car_id} location="records"/>
             </Modal>
           )}
         </div>

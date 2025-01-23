@@ -1,4 +1,3 @@
-
 import { format } from "date-fns";
 import styles from "./ArchiveCarItem.module.css";
 import absentAutoImg from "../../assets/images/absentAutoImg.webp";
@@ -11,18 +10,28 @@ import DotsPopover from "./PopoversInArchive/DotsPopover/DotsPopover";
 import ServiceReasonPopover from "./PopoversInArchive/ServiceReasonPopover/ServiceReasonPopover";
 import ArchiveReasonPopover from "./PopoversInArchive/ArchiveReasonPopover/ArchiveReasonPopover";
 import { selectArchiveData } from "../../redux/archive/selectors";
+import { useState } from "react";
+import Modal from "../Modals/Modal/Modal";
+import SelectStatusModal from "../sharedComponents/SelectStatusModal/SelectStatusModal";
 
-export default function ArchiveCarItem({
-  id,
-  visiblePopovers,
-  togglePopover,
-}) {
+export default function ArchiveCarItem({ id, visiblePopovers, togglePopover }) {
   const carsData = useSelector(selectArchiveData);
   const visibility = useSelector(selectVisibilityArchive);
-  const carData = carsData?.find(car => car.id === id);
+  const [isDotsPopoverOpen, setisDotsPopoverOpen] = useState(false);
+
+  const openDotsPopoverOpen = () => setisDotsPopoverOpen(true);
+  const closeDotsPopoverOpen = () => setisDotsPopoverOpen(false);
+
+  const carData = carsData?.find((car) => car.id === id);
 
   if (!carData) return null;
-  const { photo_url: photoUrl, plate, date, reason_description } = carData;
+  const {
+    photo_url: photoUrl,
+    plate,
+    date,
+    reason_description,
+    name
+  } = carData;
   const carPhoto = photoUrl || absentAutoImg;
 
   const formatCarNumber = (number) => {
@@ -34,9 +43,6 @@ export default function ArchiveCarItem({
     if (!dateString) return "Немає дати";
     return format(new Date(dateString), "dd.MM.yy | HH:mm");
   };
-
-  
-
 
   return (
     <div className={styles.archiveContainer}>
@@ -69,7 +75,7 @@ export default function ArchiveCarItem({
         )}
         {visibility?.name && (
           <div>
-            <p className={styles.infoName}>Олександр Макаренковчук</p>
+            <p className={styles.infoName}>{name || "Гість"}</p>
           </div>
         )}
       </div>
@@ -95,7 +101,11 @@ export default function ArchiveCarItem({
       <DotsPopover
         isVisible={visiblePopovers[`popover3-${id}`]}
         togglePopover={() => togglePopover("popover3", id)}
+        onRestore={openDotsPopoverOpen}
       />
+      <Modal isOpen={isDotsPopoverOpen} onClose={closeDotsPopoverOpen}>
+        <SelectStatusModal onClose={closeDotsPopoverOpen}  id={id}/>
+      </Modal>
     </div>
   );
 }

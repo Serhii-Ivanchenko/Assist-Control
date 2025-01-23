@@ -120,6 +120,7 @@ export default function StationPart() {
                 id={post.id}
                 isEditing={isEditing}
                 onRepeal={() => handleRepeal(post.id)}
+                text={post.name}
               />
             </li>
           ))}

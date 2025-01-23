@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ServiceStationList from "../ServiceStationList/ServiceStationList";
 import ServiceStationDetails from "../ServiceStationDetails/ServiceStationDetails";
 import styles from "./SettingMainComponent.module.css";
+import { useDispatch } from "react-redux";
+import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
+import { setSelectedServiceInSettingsId } from "../../redux/service/slice.js";
+import { useSelector } from "react-redux";
 
 function SettingMainComponent() {
   const [activeStationId, setActiveStationId] = useState(null);
+  const dispatch = useDispatch();
+  const defaultService = useSelector(selectSelectedServiceId);
+
+  useEffect(() => {
+    dispatch(setSelectedServiceInSettingsId(defaultService));
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.mainTitle}>Автосервіс</h2>

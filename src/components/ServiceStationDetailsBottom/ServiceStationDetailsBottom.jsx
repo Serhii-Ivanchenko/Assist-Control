@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ServiceNavigation from "./ServiceNavigation/ServiceNavigation";
 import css from "./ServiceStationDetailsBottom.module.css";
 import StationPart from "./StationPart/StationPart";
@@ -10,6 +10,8 @@ import DistributorsPart from "./DistributorsPart/DistributorsPart";
 import RatingPart from "./RatingPart/RatingPart";
 import CheckoutPart from "./CheckoutPart/CheckoutPart";
 import PlanPart from "./PlanPart/PlanPart";
+import { useDispatch } from "react-redux";
+import { getAllEmployees } from "../../redux/settings/operations.js";
 
 const pageComponents = {
   plan: <PlanPart />,
@@ -27,6 +29,19 @@ const pageComponents = {
 
 export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
   const [page, setPage] = useState("station");
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          await dispatch(getAllEmployees()).unwrap();
+        } catch (error) {
+          console.error("Помилка завантаження даних:", error);
+        }
+      };
+      fetchData();
+    }, [dispatch]);
 
   const getChangeablePartClass = () => {
     return page === "warehouse" ? css.noBackground : css.changeablePart;
