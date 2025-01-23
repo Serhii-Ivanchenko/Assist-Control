@@ -41,16 +41,6 @@ export const addItemToArchive = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      // if (error.response) {
-      //   console.error("❌ Сервер повернув помилку:", error.response.data);
-      //   console.error("⚠️ Статус:", error.response.status);
-      //   console.error("📄 Заголовки відповіді:", error.response.headers);
-      //   console.error("📥 Тіло відповіді:", error.response.data);
-      // } else if (error.request) {
-      //   console.error("❌ Запит відправлено, але відповіді немає:", error.request);
-      // } else {
-      //   console.error("❌ Помилка при налаштуванні запиту:", error.message);
-      // }
       return thunkAPI.rejectWithValue(error.response?.data || "Помилка сервера");
     }
   }
