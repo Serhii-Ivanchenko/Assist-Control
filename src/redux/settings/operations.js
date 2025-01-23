@@ -6,30 +6,32 @@ import { axiosInstance } from "../../services/api.js";
 // Create employee
 export const createEmployee = createAsyncThunk(
   "settings/createEmployee",
-  async ({ employeeData, files }, thunkAPI) => {
+  async (employeeData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      // Конвертація файлів у Base64
-      const base64Files = await Promise.all(
-        files.map((file) => {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result); // Повертає Base64
-            reader.onerror = (error) => reject(error);
-            reader.readAsDataURL(file); // Читає файл як Base64
-          });
-        })
-      );
+      // // Конвертація файлів у Base64
+      // const base64Files = await Promise.all(
+      //   files.map((file) => {
+      //     return new Promise((resolve, reject) => {
+      //       const reader = new FileReader();
+      //       reader.onload = () => resolve(reader.result); // Повертає Base64
+      //       reader.onerror = (error) => reject(error);
+      //       reader.readAsDataURL(file); // Читає файл як Base64
+      //     });
+      //   })
+      // );
 
-      // Створюємо об'єкт для відправки
-      const payload = {
-        ...employeeData, // Додаємо дані співробітника
-        files: base64Files, // Додаємо Base64-файли
-      };
+      // // Створюємо об'єкт для відправки
+      // const payload = {
+      //   ...employeeData, // Додаємо дані співробітника
+      //   files: base64Files, // Додаємо Base64-файли
+      // };
       const response = await axiosInstance.post(
         `/set/employees/create/`,
-        payload,
+        employeeData,
+        // {...employeeData,
+        // files},
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -123,13 +125,15 @@ export const updateEmployeeStatus = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { employee_id, ...status } = newStatus;
+      const { employee_id, status } = newStatus;
       const response = await axiosInstance.patch(
         `/set/employees/${employee_id}/status/?status=${status}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
+            "Content-Type": "application/json",
+
           },
         }
       );

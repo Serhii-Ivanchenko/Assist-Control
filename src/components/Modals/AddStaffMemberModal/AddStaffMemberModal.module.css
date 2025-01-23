@@ -189,6 +189,7 @@
 .buttons {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .delete {
@@ -247,13 +248,22 @@
   transform: translateY(-50%);
 }
 
+.loginWarning {
+  position: absolute;
+  top: 120%;
+  left: 0;
+
+  color: var(--red);
+  font-size: 12px;
+}
+
 /* DocumentPart */
 
 .docInput {
   display: none;
 }
 
-.documentsWrapper{
+.documentsWrapper {
   display: flex;
   justify-content: space-between;
 }

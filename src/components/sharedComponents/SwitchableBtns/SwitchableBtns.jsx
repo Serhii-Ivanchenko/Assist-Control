@@ -3,6 +3,9 @@ import { BsPencil, BsPower, BsTrash } from "react-icons/bs";
 import styles from "./SwitchableBtns.module.css";
 import { RiSave3Fill } from "react-icons/ri";
 import { BsXCircle } from "react-icons/bs";
+import Modal from "../../Modals/Modal/Modal";
+import { useState } from "react";
+import DeleteModal from "./DeleteModal/DeleteModal";
 
 function SwitchableBtns({
   isDisabled,
@@ -13,7 +16,10 @@ function SwitchableBtns({
   id,
   showIconSave,
   onRepeal,
+  text,
 }) {
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <div className={styles.btnsBox}>
       {showIconSave && isEditing === id ? (
@@ -28,10 +34,20 @@ function SwitchableBtns({
       ) : (
         <BsPencil className={styles.btn} onClick={onEdit} />
       )}
+
       <BsTrash
         className={`${styles.btn} ${styles.btnTrash}`}
-        onClick={onDelete}
+        onClick={() => setOpenModal(true)}
       />
+      {openModal && (
+        <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
+          <DeleteModal
+            onClose={() => setOpenModal(false)}
+            text={text}
+            onDelete={onDelete}
+          />
+        </Modal>
+      )}
       <BsPower
         className={clsx(styles.btn, {
           [styles.active]: !isDisabled,
