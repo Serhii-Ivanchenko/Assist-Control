@@ -11,7 +11,7 @@ import { BsCalendar2Week } from "react-icons/bs";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BsKeyFill } from "react-icons/bs";
 import { useState } from "react";
-import avatar from "../../../assets/images/avatar_default.png";
+// import avatar from "../../../assets/images/avatar_default.png";
 // import Modal from "../Modal/Modal";
 import ThreeDotsModal from "./ThreeDotsModal/ThreeDotsModal";
 import doc from "../../../assets/images/passport_image.png";
@@ -72,9 +72,12 @@ const roleOptions = [
 export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [isDateOpen, setDateOpen] = useState(false);
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
-  const [photo, setPhoto] = useState(avatar);
+  const [photo, setPhoto] = useState(null);
   const [employee, setEmployee] = useState(employeeInfo || {});
   const [showLoginWarning, setShowLoginWarning] = useState(false);
+  // const [logo, setLogo] = useState(null); // стан для прев'ю лого
+  // const [logoBase64, setLogoBase64] = useState(null); // стан, куди записується лого в base64
+
   const buttonRefs = useRef([]);
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
@@ -114,11 +117,13 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     }
   };
 
-  const handleFileChange = async (event) => {
+  const handleFileChange = async (event, setFieldValue) => {
     const file = event.currentTarget.files[0];
     if (file) {
       const newLogoUrl = URL.createObjectURL(file);
       setPhoto(newLogoUrl);
+
+      setFieldValue("files.logo", file);
     }
   };
 
@@ -196,10 +201,26 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       contract: null,
       employment: null,
       agreement: null,
-      logo: null,
+      logo: photo,
     },
     // openSchedule: true,
   };
+
+  // const downloadAvatar = (e) => {
+  //   const newAvatar = e.target.files[0];
+  //   setLogo(URL.createObjectURL(newAvatar)); // встановлюємо прев'ю лого
+  //   const makeBase64Logo = async () => {
+  //     const base64Logo = await new Promise((resolve, reject) => {
+  //       const reader = new FileReader();
+  //       reader.onload = () => resolve(reader.result); // Повертає Base64
+  //       reader.onerror = (error) => reject(error);
+  //       reader.readAsDataURL(newAvatar); // Читає файл як Base64
+  //     });
+
+  //     setLogoBase64(base64Logo); // записуємо в стан лого в base64, яке передаєм на бек
+  //   };
+  //   makeBase64Logo();
+  // };
 
   const handleSubmit = async (values, actions) => {
     const dateOnly = values.birthday
@@ -262,8 +283,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
         // onClose();
         console.log("Після оновлення:", employeeData);
       } else if (employee.id === undefined) {
-        const employeeDataToCreate = { files: base64Files, ...employeeData  };
-        console.log("Перед створенням нового працівника:", employeeDataToCreate);
+        const employeeDataToCreate = { files: base64Files, ...employeeData };
+        console.log(
+          "Перед створенням нового працівника:",
+          employeeDataToCreate
+        );
 
         // Якщо ID відсутнє, створюємо нового працівника
         const response = await dispatch(createEmployee(employeeDataToCreate));
@@ -338,10 +362,10 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     </button>
                     <input
                       type="file"
-                      name="photo"
+                      name="logo"
                       className={css.docInput}
                       ref={fileInputRef}
-                      onChange={handleFileChange}
+                      onChange={(e) => handleFileChange(e, setFieldValue)}
                       // multiple
                       // accept="image/*"
                     />
