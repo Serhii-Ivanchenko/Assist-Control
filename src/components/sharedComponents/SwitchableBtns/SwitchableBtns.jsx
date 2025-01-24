@@ -51,8 +51,8 @@ function SwitchableBtns({
       )}
       <BsPower
         className={clsx(styles.btn, {
-          [styles.active]: !isDisabled,
-          [styles.disabled]: isDisabled,
+          [styles.active]: isDisabled === 1,
+          [styles.disabled]: isDisabled === 0,
         })}
         onClick={onToggleDisable}
       />
