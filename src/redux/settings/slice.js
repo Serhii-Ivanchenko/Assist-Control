@@ -229,7 +229,7 @@ const settingsSlice = createSlice({
       .addCase(updatePostData.fulfilled, (state, action) => {
         state.isLoading = false;
         const postToEditIndex = state.posts.findIndex(
-          (post) => post.id === action.payload.id
+          (post) => post.id === action.payload.post_id
         );
         state.posts[postToEditIndex] = action.payload;
       })
@@ -240,7 +240,7 @@ const settingsSlice = createSlice({
         state.isLoading = false;
 
         state.posts = state.posts.filter(
-          (post) => post.id !== action.payload.id
+          (post) => post.id !== action.payload.post_id
         );
       })
       .addCase(deletePost.rejected, handleRejected)
