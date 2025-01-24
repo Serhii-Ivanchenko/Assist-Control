@@ -58,34 +58,35 @@ const archiveReasons = [
   },
 ];
 
-export default function ArchiveModal({ onClose, carId, location, isRecommendation }) {
+export default function ArchiveModal({ onClose, carId, location, isRecommendation, onSuccess }) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
     if (!carId) {
       console.error("Помилка: у запису відсутній car_id");
       toast.error("Помилка: у запису відсутній car_id");
-      return; 
+      return;
     }
     
     const itemData = {
       car_id: carId,
       location: location,
-      reason_add: Number(values.reason_add), 
+      reason_add: Number(values.reason_add),
       comment: values.comment || "",
     };
-
+  
     console.log("Дані для архівації:", itemData);
-
+  
     try {
       await dispatch(addItemToArchive(itemData)).unwrap();
       toast.success("Автомобіль успішно додано в архів!");
+      onSuccess();
       onClose();
     } catch (error) {
       toast.error(`Помилка: ${error}`);
     }
-
   };
+  
 
   return (
     <div className={css.wrapper}>
