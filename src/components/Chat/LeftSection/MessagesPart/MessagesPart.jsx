@@ -88,9 +88,9 @@ export default function MessagesPart({
     setArchiveChats(updatedChats.filter((chat) => chat.archive).length);
   };
 
-  useEffect(() => {
-    console.log("allchecked", allChecked);
-  }, [allChecked]);
+  // useEffect(() => {
+  //   console.log("allchecked", allChecked);
+  // }, [allChecked]);
 
   const handleChecked = () => {
     setIsChecked((prev) => !prev);

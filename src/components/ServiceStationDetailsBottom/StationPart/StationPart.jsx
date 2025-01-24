@@ -18,7 +18,10 @@ export default function StationPart() {
   //   fetchData();
   // });
   const posts = useSelector(selectPosts);
-  console.log("posts", posts);
+
+  useEffect(() => {
+    console.log("posts", posts);
+  }, [posts]);
 
   const [newPostName, setNewPostName] = useState("");
   const [isEditing, setIsEditing] = useState(null);
@@ -40,7 +43,7 @@ export default function StationPart() {
             color: "var(--white)FFF",
           },
         });
-        dispatch(getPosts());
+        // dispatch(getPosts());
       })
       .catch((error) => {
         console.error("Error updating user data:", error);
@@ -83,7 +86,7 @@ export default function StationPart() {
       dispatch(createPost(newPost))
         .unwrap()
         .then(() => {
-          dispatch(getPosts());
+          // dispatch(getPosts());
           setNewPostName("");
         })
         .catch((error) => {
@@ -113,7 +116,7 @@ export default function StationPart() {
             color: "var(--white)FFF",
           },
         });
-        dispatch(getPosts());
+        // dispatch(getPosts());
       })
       .catch((error) => {
         console.error("Error updating user data:", error);
@@ -146,36 +149,63 @@ export default function StationPart() {
       dispatch(updatePostData(updatedPostName))
         .unwrap()
         .then(() => {
-          dispatch(getPosts())
-            .then(() => {
-              toast.success("Назву поста успішно оновлено :)", {
-                position: "top-center",
-                duration: 3000,
-                style: {
-                  background: "var(--bg-input)",
-                  color: "var(--white)FFF",
-                },
-              });
-              setIsEditing(null);
-              setEditedValue((prev) => {
-                const newState = { ...prev };
-                delete newState[post_id];
-                return newState;
-              });
-            })
-            .catch((error) => {
-              console.error("Error updating user data:", error);
-              toast.error("Щось пішло не так :(", {
-                position: "top-center",
-                duration: 3000,
-                style: {
-                  background: "var(--bg-input)",
-                  color: "var(--white)FFF",
-                },
-              });
-            });
+          toast.success("Назву поста успішно оновлено :)", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
+          setIsEditing(null);
+          setEditedValue((prev) => {
+            const newState = { ...prev };
+            delete newState[post_id];
+            return newState;
+          });
+        })
+        .catch((error) => {
+          console.error("Error updating user data:", error);
+          toast.error("Щось пішло не так :(", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
         });
     }
+    // .then(() => {
+    //   dispatch(getPosts())
+    //     .then(() => {
+    //       toast.success("Назву поста успішно оновлено :)", {
+    //         position: "top-center",
+    //         duration: 3000,
+    //         style: {
+    //           background: "var(--bg-input)",
+    //           color: "var(--white)FFF",
+    //         },
+    //       });
+    //       setIsEditing(null);
+    //       setEditedValue((prev) => {
+    //         const newState = { ...prev };
+    //         delete newState[post_id];
+    //         return newState;
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error updating user data:", error);
+    //       toast.error("Щось пішло не так :(", {
+    //         position: "top-center",
+    //         duration: 3000,
+    //         style: {
+    //           background: "var(--bg-input)",
+    //           color: "var(--white)FFF",
+    //         },
+    //       });
+    //     });
+    // });
   };
 
   return (

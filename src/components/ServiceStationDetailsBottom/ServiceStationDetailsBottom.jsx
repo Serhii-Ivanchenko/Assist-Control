@@ -12,7 +12,6 @@ import CheckoutPart from "./CheckoutPart/CheckoutPart";
 import PlanPart from "./PlanPart/PlanPart";
 import { useDispatch } from "react-redux";
 import { getAllEmployees, getPosts } from "../../redux/settings/operations.js";
-// import(getPosts);
 import { useSelector } from "react-redux";
 import { selectedServiceInSettingsId } from "../../redux/service/selectors.js";
 
@@ -35,22 +34,24 @@ export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
   const selectedServiceInSettings = useSelector(selectedServiceInSettingsId);
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (!selectedServiceInSettings) {
-      console.warn("Service ID is not available yet. Skipping fetch.");
+      console.log("Waiting for selectedServiceInSettings to be available...");
       return;
     }
+
     const fetchData = async () => {
       try {
-        await dispatch(getPosts()).unwrap();
-        await dispatch(getAllEmployees()).unwrap();
+        console.log("Fetching data with ID:", selectedServiceInSettings);
+        await dispatch(getAllEmployees(selectedServiceInSettings)).unwrap();
+        await dispatch(getPosts(selectedServiceInSettings)).unwrap();
       } catch (error) {
         console.error("Помилка завантаження даних:", error);
       }
     };
+
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, selectedServiceInSettings]);
 
   const getChangeablePartClass = () => {
     return page === "warehouse" ? css.noBackground : css.changeablePart;
