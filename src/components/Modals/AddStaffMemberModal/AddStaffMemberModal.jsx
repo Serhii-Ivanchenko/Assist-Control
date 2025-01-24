@@ -73,6 +73,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [isDateOpen, setDateOpen] = useState(false);
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
   const [photo, setPhoto] = useState(null);
+  const [passportImg, setPassportImg] = useState(null);
   const [employee, setEmployee] = useState(employeeInfo || {});
   const [showLoginWarning, setShowLoginWarning] = useState(false);
   // const [logo, setLogo] = useState(null); // стан для прев'ю лого
@@ -193,7 +194,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     // schedule: { Понеділок: "9:00-17:00", Вівторок: "9:00-17:00" },
     selectedPages: [],
     files: {
-      passport: null,
+      passport: employee.passport || passportImg,
       itn: null,
       diploma: null,
       laborBook: null,
@@ -201,53 +202,37 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       contract: null,
       employment: null,
       agreement: null,
-      logo: photo,
+      logo: employee.logo || photo,
     },
     // openSchedule: true,
   };
-
-  // const downloadAvatar = (e) => {
-  //   const newAvatar = e.target.files[0];
-  //   setLogo(URL.createObjectURL(newAvatar)); // встановлюємо прев'ю лого
-  //   const makeBase64Logo = async () => {
-  //     const base64Logo = await new Promise((resolve, reject) => {
-  //       const reader = new FileReader();
-  //       reader.onload = () => resolve(reader.result); // Повертає Base64
-  //       reader.onerror = (error) => reject(error);
-  //       reader.readAsDataURL(newAvatar); // Читає файл як Base64
-  //     });
-
-  //     setLogoBase64(base64Logo); // записуємо в стан лого в base64, яке передаєм на бек
-  //   };
-  //   makeBase64Logo();
-  // };
 
   const handleSubmit = async (values, actions) => {
     const dateOnly = values.birthday
       ? new Date(values.birthday).toLocaleDateString("en-CA")
       : null;
-    try {
-      // const convertedFiles = {};
-      // for (const [key, file] of Object.entries(values.files)) {
-      //   if (file) {
-      //     convertedFiles[key] = await convertFileToBase64(file);
-      //   }
-      // }
 
+    try {
+      const base64Files = {};
+
+      // Обробляємо файли (перетворюємо або встановлюємо null)
+      for (const [key, file] of Object.entries(values.files)) {
+        if (file) {
+          // Якщо файл існує, перетворюємо у Base64
+          base64Files[key] = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result); // Data URL (Base64)
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file);
+          });
+        } else {
+          // Якщо файл не існує, встановлюємо null
+          base64Files[key] = null;
+        }
+      }
       const { files, ...restValues } = values;
 
-      const base64Files = files?.length
-        ? await Promise.all(
-            files.map((file) => {
-              return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = (error) => reject(error);
-                reader.readAsDataURL(file);
-              });
-            })
-          )
-        : [];
+      // console.log("Base64 файли:", base64Files);
 
       // Підготовка даних для відправки
       const employeeData = {
@@ -504,13 +489,14 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
               <div className={css.documents}>
                 <div className={css.docColumn}>
                   <div className={css.docBox}>
-                    {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
-                      {" "}
-                      <BsFillCloudUploadFill className={css.icon} /> Паспорт
-                    </label> */}
-                    <UploadComponent title="Паспорт" name="passport" />
-                    {/* <Field type="file" name="passport" className={css.docInput} /> */}
-                    <img src={doc} alt="doc" className={css.docImage} />
+                    <UploadComponent
+                      title="Паспорт"
+                      name="passport"
+                      fieldname="files.passport"
+                      setFieldValue={setFieldValue}
+                      setLogo={setPassportImg}
+                    />
+                    <img src={passportImg} alt="doc" className={css.docImage} />
                     <img src={doc} alt="doc" className={css.docImage} />
                   </div>
                   <div className={`${css.docBox} ${css.docBoxID}`}>

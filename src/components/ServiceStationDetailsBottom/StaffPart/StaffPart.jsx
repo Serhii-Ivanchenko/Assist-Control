@@ -142,7 +142,7 @@ export default function StaffPart() {
               <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                   <img
-                    src={avatar}
+                    src={member.logo || avatar}
                     alt={`user's photo`}
                     className={css.particularMemberPhoto}
                   />
