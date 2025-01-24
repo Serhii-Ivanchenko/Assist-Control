@@ -93,8 +93,6 @@ const renderStatusCommunication = (status, styles = {}, isFilter) => {
     }
   }
 
-  console.log("styles:", styles);
-
 
   return (
     <div

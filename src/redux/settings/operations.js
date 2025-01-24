@@ -556,10 +556,11 @@ export const deletePost = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.delete(`/set/update_post/`, postId, {
+      const response = await axiosInstance.delete(`/set/delete_post/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
+           "post-id": postId,
         },
       });
       console.log("deletePost", response.data);
