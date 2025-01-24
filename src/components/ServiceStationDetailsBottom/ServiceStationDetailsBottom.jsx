@@ -12,7 +12,9 @@ import CheckoutPart from "./CheckoutPart/CheckoutPart";
 import PlanPart from "./PlanPart/PlanPart";
 import { useDispatch } from "react-redux";
 import { getAllEmployees, getPosts } from "../../redux/settings/operations.js";
-import(getPosts);
+// import(getPosts);
+import { useSelector } from "react-redux";
+import { selectedServiceInSettingsId } from "../../redux/service/selectors.js";
 
 const pageComponents = {
   plan: <PlanPart />,
@@ -30,10 +32,15 @@ const pageComponents = {
 
 export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
   const [page, setPage] = useState("station");
+  const selectedServiceInSettings = useSelector(selectedServiceInSettingsId);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!selectedServiceInSettings) {
+      console.warn("Service ID is not available yet. Skipping fetch.");
+      return;
+    }
     const fetchData = async () => {
       try {
         await dispatch(getPosts()).unwrap();

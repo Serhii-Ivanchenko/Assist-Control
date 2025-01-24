@@ -19,7 +19,7 @@ const returnStatus = [
     id: "2",
     statusClass: css.lightBlue,
     statusText: "ДІАГНОСТИКА",
-    statusMapping: 'diagnostic', // Оновлено на 'diagnostic'
+    statusMapping: 'diagnostic',
     background: "var(--status-gradient-archive-light-blue)",
     borderColor: "var(--border-gradient-diag)",
   },
@@ -35,7 +35,7 @@ const returnStatus = [
     id: "4",
     statusClass: css.red,
     statusText: "ОГЛЯД ПР",
-    statusMapping: 'viewRepair',
+    statusMapping: 'view_repair',
     background: "var(--status-gradient-view-repair)",
     borderColor: "var(--border-gradient-invoices-red)",
   },
@@ -53,8 +53,6 @@ export default function SelectStatusModal({ onClose, id }) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
-    console.log("Formik values перед відправкою:", values);
-
     if (!values.status) {
       toast.error("Будь ласка, оберіть статус.");
       return;
@@ -68,14 +66,11 @@ export default function SelectStatusModal({ onClose, id }) {
     }
 
     const newStatus = selectedStatus.statusMapping;
-    console.log("Обраний статус:", newStatus);
 
     const itemData = {
       archive_id: id,
-      status: newStatus,  // Передаємо значення статусу як 'new', 'repair' тощо
+      status: newStatus,
     };
-
-    console.log("itemData перед відправкою:", itemData);
 
     try {
       await dispatch(returnArchiveItem(itemData)).unwrap();
@@ -97,7 +92,6 @@ export default function SelectStatusModal({ onClose, id }) {
         onSubmit={handleSubmit}
       >
         {({ values }) => {
-          console.log("Formik values:", values);
           const selectedStatus = returnStatus.find(
             (status) => status.id === values.status
           );
