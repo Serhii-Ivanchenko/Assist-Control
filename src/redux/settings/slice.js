@@ -40,7 +40,6 @@ import {
   updateEmployeeStatus,
   updateFixedMarkup,
   updatePostData,
-  updatePostStatus,
   updateRatingStatus,
   updateSupplierData,
   updateSupplierStatus,
@@ -211,19 +210,9 @@ const settingsSlice = createSlice({
       .addCase(createPost.pending, handlePending)
       .addCase(createPost.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.posts.push(action.meta.arg);
+        // state.posts.push(action.meta.arg);
       })
       .addCase(createPost.rejected, handleRejected)
-
-      .addCase(updatePostStatus.pending, handlePending)
-      .addCase(updatePostStatus.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const postToEditIndex = state.posts.findIndex(
-          (post) => post.id === action.payload.id
-        );
-        state.posts[postToEditIndex].status = action.payload;
-      })
-      .addCase(updatePostStatus.rejected, handleRejected)
 
       .addCase(updatePostData.pending, handlePending)
       .addCase(updatePostData.fulfilled, (state, action) => {
@@ -231,8 +220,20 @@ const settingsSlice = createSlice({
         const postToEditIndex = state.posts.findIndex(
           (post) => post.id === action.payload.post_id
         );
-        state.posts[postToEditIndex] = action.payload;
+
+        if (postToEditIndex !== -1) {
+          const currentPost = state.posts[postToEditIndex];
+
+          state.posts[postToEditIndex] = {
+            ...currentPost,
+            ...(action.payload.name_post && {
+              name_post: action.payload.name_post,
+            }),
+            ...(action.payload.status && { status: action.payload.status }),
+          };
+        }
       })
+
       .addCase(updatePostData.rejected, handleRejected)
 
       .addCase(deletePost.pending, handlePending)

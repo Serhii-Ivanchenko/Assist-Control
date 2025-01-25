@@ -82,11 +82,11 @@ export default function StationPart() {
 
   const handleAddPost = () => {
     if (newPostName.trim()) {
-      const newPost = { name_post: newPostName };
+      const newPost = { name_post: newPostName, status: 1 };
       dispatch(createPost(newPost))
         .unwrap()
         .then(() => {
-          // dispatch(getPosts());
+          dispatch(getPosts());
           setNewPostName("");
         })
         .catch((error) => {
