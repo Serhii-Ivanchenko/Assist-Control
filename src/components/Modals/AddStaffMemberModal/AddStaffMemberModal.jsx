@@ -11,7 +11,7 @@ import { BsCalendar2Week } from "react-icons/bs";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BsKeyFill } from "react-icons/bs";
 import { useState } from "react";
-// import avatar from "../../../assets/images/avatar_default.png";
+import avatar from "../../../assets/images/avatar_default.png";
 // import Modal from "../Modal/Modal";
 import ThreeDotsModal from "./ThreeDotsModal/ThreeDotsModal";
 import doc from "../../../assets/images/passport_image.png";
@@ -74,7 +74,14 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [passportImg, setPassportImg] = useState(null);
+  const [itnImg, setItnImg] = useState(null);
+  const [diplomaImg, setDiplomaImg] = useState(null);
+  const [cvImg, setCVImg] = useState(null);
+  const [contractFile, setContractFile] = useState(null);
+  const [agreementFile, setAgreementFile] = useState(null);
+  const [employmentFile, setEmploymentFile] = useState(null);
   const [employee, setEmployee] = useState(employeeInfo || {});
+  const [laborDoc, setLaborDoc] = useState(null);
   const [showLoginWarning, setShowLoginWarning] = useState(false);
   // const [logo, setLogo] = useState(null); // стан для прев'ю лого
   // const [logoBase64, setLogoBase64] = useState(null); // стан, куди записується лого в base64
@@ -173,6 +180,21 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     };
   }, []);
 
+  // useEffect(() => {
+  //   const baseUrl = "https://aps.assist.cam"; // Замість цього вкажіть свій базовий URL
+
+  //   // Використовуємо fetch для отримання зображення
+  //   fetch(`${baseUrl}/${employee.logo}`)
+  //     .then((response) => response.blob()) // Отримуємо файл як Blob
+  //     .then((blob) => {
+  //       const objectURL = URL.createObjectURL(blob); // Створюємо тимчасовий URL
+  //       setPhoto(objectURL); // Зберігаємо URL в стан
+  //     })
+  //     .catch((error) =>
+  //       console.error("Помилка при завантаженні файлу:", error)
+  //     );
+  // }, [employee.logo]);
+
   const initialValues = {
     name: employee.name || "",
     phone: employee.phone || "+380123456789",
@@ -195,13 +217,13 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     selectedPages: [],
     files: {
       passport: employee.passport || passportImg,
-      itn: null,
-      diploma: null,
-      laborBook: null,
-      CV: null,
-      contract: null,
-      employment: null,
-      agreement: null,
+      itn: employee.itn || itnImg,
+      diploma: employee.diploma || diplomaImg,
+      laborBook: employee.laborBook || laborDoc,
+      CV: employee.CV || cvImg,
+      contract: employee.contract || contractFile,
+      employment: employee.employment || employmentFile,
+      agreement: employee.agreement || agreementFile,
       logo: employee.logo || photo,
     },
     // openSchedule: true,
@@ -215,10 +237,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     try {
       const base64Files = {};
 
-      // Обробляємо файли (перетворюємо або встановлюємо null)
       for (const [key, file] of Object.entries(values.files)) {
         if (file) {
-          // Якщо файл існує, перетворюємо у Base64
           base64Files[key] = await new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result); // Data URL (Base64)
@@ -226,22 +246,16 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
             reader.readAsDataURL(file);
           });
         } else {
-          // Якщо файл не існує, встановлюємо null
           base64Files[key] = null;
         }
       }
-      const { files, ...restValues } = values;
 
-      // console.log("Base64 файли:", base64Files);
-
-      // Підготовка даних для відправки
       const employeeData = {
-        ...restValues,
+        ...values,
+        ...base64Files,
         birthday: dateOnly,
+        files: undefined,
       };
-
-      // console.log("Перед відправкою:", employeeData);
-      // const filesArray = Object.values(values.files);
       if (employee.id) {
         const employeeDataToUpdate = {
           employee_id: employee.id,
@@ -268,7 +282,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
         // onClose();
         console.log("Після оновлення:", employeeData);
       } else if (employee.id === undefined) {
-        const employeeDataToCreate = { files: base64Files, ...employeeData };
+        const employeeDataToCreate = { ...employeeData };
         console.log(
           "Перед створенням нового працівника:",
           employeeDataToCreate
@@ -355,7 +369,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                       // accept="image/*"
                     />
                     {/* <div className={css.phoneImgBox}> */}
-                    <img src={photo} alt="" className={css.phoneImg} />
+                    <img
+                      src={employee.logo || photo || avatar}
+                      alt=""
+                      className={css.phoneImg}
+                    />
                     {/* </div> */}
                   </div>
                 </div>
@@ -485,6 +503,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
               </div>
             </div>
 
+            {/* Documents */}
             <div className={css.documentsWrapper}>
               <div className={css.documents}>
                 <div className={css.docColumn}>
@@ -495,55 +514,119 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                       fieldname="files.passport"
                       setFieldValue={setFieldValue}
                       setLogo={setPassportImg}
+                      // staffModal={true}
                     />
-                    <img src={passportImg} alt="doc" className={css.docImage} />
-                    <img src={doc} alt="doc" className={css.docImage} />
+                    {/* {passportImg.map((img, index) => (
+                      <img
+                        key={index}
+                        src={(employee.passport || img) && doc}
+                        alt="doc"
+                        className={css.docImage}
+                      />
+                    ))} */}
+
+                    {passportImg || employee.passport ? (
+                      <img
+                        src={(employee.passport || passportImg) && doc}
+                        alt="doc"
+                        className={css.docImage}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </div>
                   <div className={`${css.docBox} ${css.docBoxID}`}>
-                    {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
-                      {" "}
-                      <BsFillCloudUploadFill className={css.icon} /> ІПН
-                    </label> */}
-                    <UploadComponent title="ІПН" name="ID" />
-                    {/* <Field type="file" name="ID" className={css.docInput} /> */}
-                    <img src={doc} alt="doc" className={css.docImage} />
-                    <img src={doc} alt="doc" className={css.docImage} />
+                    <UploadComponent
+                      title="ІПН"
+                      name="itn"
+                      fieldname="files.itn"
+                      setFieldValue={setFieldValue}
+                      setLogo={setItnImg}
+                      // staffModal={true}
+                    />
+                    {/* {itnImg.map((img, index) => (
+                      <img
+                        key={index}
+                        src={(employee.itn || img) && doc}
+                        alt="doc"
+                        className={css.docImage}
+                      />
+                    ))} */}
+                    {itnImg || employee.itn ? (
+                      <img
+                        src={(employee.itn || itnImg) && doc}
+                        alt="doc"
+                        className={css.docImage}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
                 <div className={css.docColumn}>
                   <div className={css.docBox}>
-                    {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
-                      {" "}
-                      <BsFillCloudUploadFill className={css.icon} /> Диплом
-                    </label> */}
-                    <UploadComponent title="Диплом" name="diploma" />
-                    {/* <Field type="file" name="diploma" className={css.docInput} /> */}
-                    <img src={doc} alt="doc" className={css.docImage} />
-                    <img src={doc} alt="doc" className={css.docImage} />
+                    <UploadComponent
+                      title="Диплом"
+                      name="diploma"
+                      fieldname="files.diploma"
+                      setFieldValue={setFieldValue}
+                      setLogo={setDiplomaImg}
+                      // staffModal={true}
+                    />
+                    {/* {diplomaImg.map((img, index) => (
+                      <img
+                        key={index}
+                        src={(employee.diploma || img) && doc}
+                        alt="doc"
+                        className={css.docImage}
+                      />
+                    ))} */}
+
+                    {diplomaImg || employee.diploma ? (
+                      <img
+                        src={(employee.diploma || diplomaImg) && doc}
+                        alt="doc"
+                        className={css.docImage}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </div>
                   <div className={css.docBox}>
-                    {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
-                      {" "}
-                      <BsFillCloudUploadFill className={css.icon} />
-                      Трудова
-                    </label> */}
-                    <UploadComponent title="Трудова" name="laborBook" />
-                    {/* <Field
-                      type="file"
+                    <UploadComponent
+                      title="Трудова"
                       name="laborBook"
-                      className={css.docInput}
-                    /> */}
-                    <img src={doc} alt="doc" className={css.docImage} />
+                      fieldname="files.laborBook"
+                      setFieldValue={setFieldValue}
+                      setLogo={setLaborDoc}
+                    />
+                    {laborDoc || employee.laborBook ? (
+                      <img
+                        src={(employee.laborBook || laborDoc) && doc}
+                        alt="doc"
+                        className={css.docImage}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </div>
                   <div className={css.docBox}>
-                    {/* <label className={`${css.docLabel} ${css.docLabelForPhoto}`}>
-                      {" "}
-                      <BsFillCloudUploadFill className={css.icon} />
-                      Резюме
-                    </label> */}
-                    <UploadComponent title="Резюме" name="CV" />
-                    {/* <Field type="file" name="CV" className={css.docInput} /> */}
-                    <img src={doc} alt="doc" className={css.docImage} />
+                    <UploadComponent
+                      title="Резюме"
+                      name="CV"
+                      fieldname="files.CV"
+                      setFieldValue={setFieldValue}
+                      setLogo={setCVImg}
+                    />
+                    {cvImg || employee.CV ? (
+                      <img
+                        src={(employee.CV || cvImg) && doc}
+                        alt="doc"
+                        className={css.docImage}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
                 <div className={css.docColumn}>
@@ -563,15 +646,20 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     {settingsIsOpen === 0 && (
                       <ThreeDotsModal
                         isVisible={true}
+                        name="contract"
+                        setFile={setContractFile}
+                        fieldname="files.contract"
+                        setFieldValue={setFieldValue}
+
                         // buttonRef={buttonRefs.current[0]}
                         // onClose={closePopover}
                       />
                     )}
-                    <Field
+                    {/* <Field
                       type="file"
                       name="contract"
                       className={css.docInput}
-                    />
+                    /> */}
                   </div>
                   <div
                     className={css.docBox}
@@ -589,15 +677,19 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     {settingsIsOpen === 1 && (
                       <ThreeDotsModal
                         isVisible={true}
+                        name="employment"
+                        setFile={setEmploymentFile}
+                        fieldname="files.employment"
+                        setFieldValue={setFieldValue}
                         // buttonRef={buttonRefs.current[1]}
                         // onClose={closePopover}
                       />
                     )}
-                    <Field
+                    {/* <Field
                       type="file"
                       name="employment"
                       className={css.docInput}
-                    />
+                    /> */}
                   </div>
                   <div
                     className={css.docBox}
@@ -615,15 +707,19 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     {settingsIsOpen === 2 && (
                       <ThreeDotsModal
                         isVisible={true}
+                        name="agreement"
+                        setFile={setAgreementFile}
+                        fieldname="files.agreement"
+                        setFieldValue={setFieldValue}
                         // buttonRef={buttonRefs.current[2]}
                         // onClose={closePopover}
                       />
                     )}
-                    <Field
+                    {/* <Field
                       type="file"
                       name="agreement"
                       className={css.docInput}
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>
@@ -635,6 +731,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
               />
             </div>
 
+            {/* Rate Part */}
             <div className={css.salary}>
               <div className={css.calculation}>
                 <div className={css.leftPart}>

@@ -8,6 +8,7 @@ export default function UploadComponent({
   setLogo,
   setFieldValue,
   fieldname,
+  staffModal,
 }) {
   const fileInputRef = useRef(null);
 
@@ -21,7 +22,11 @@ export default function UploadComponent({
     const file = event.currentTarget.files[0];
     if (file) {
       const newLogoUrl = URL.createObjectURL(file);
-      setLogo(newLogoUrl);
+      {
+        staffModal
+          ? setLogo((prevPhotos) => [...prevPhotos, file])
+          : setLogo(newLogoUrl);
+      }
 
       setFieldValue(fieldname, file);
     }
@@ -44,7 +49,7 @@ export default function UploadComponent({
         ref={fileInputRef}
         onChange={(e) => handleFileChange(e, setFieldValue)}
         multiple
-        accept="image/*"
+        // accept="image/*"
       />
     </div>
   );

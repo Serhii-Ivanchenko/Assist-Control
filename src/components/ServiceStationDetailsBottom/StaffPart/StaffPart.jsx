@@ -24,6 +24,7 @@ import toast from "react-hot-toast";
 
 export default function StaffPart() {
   const dispatch = useDispatch();
+  const baseUrl = "https://aps.assist.cam/set/employees";
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -41,6 +42,7 @@ export default function StaffPart() {
   const employees = useSelector(selectEmployees);
   // const [members, setMembers] = useState([]);
   console.log("employees", employees);
+  // const imgSrc = baseUrl / member.logo;
 
   // useEffect(() => {
   //   if (employees && employees.length > 0) {
@@ -142,12 +144,12 @@ export default function StaffPart() {
               <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                   <img
-                    src={member.logo || avatar}
+                    src={member.logo ? `${baseUrl}/${member.logo}` : avatar}
                     alt={`user's photo`}
                     className={css.particularMemberPhoto}
                   />
                 </div>
-
+                {/* {console.log(`${baseUrl}/${member.logo}`)} */}
                 <div className={css.nameBox}>
                   <p className={css.memberName}>{member.name}</p>
                   <p className={css.memberEmail}> {member.role}</p>
