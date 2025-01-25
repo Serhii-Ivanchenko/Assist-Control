@@ -449,7 +449,7 @@ export const updateWorkSchedule = createAsyncThunk(
   }
 );
 
-//! POSTS (поки немає)
+//! POSTS
 
 // Get list of service posts
 export const getPosts = createAsyncThunk(
@@ -487,33 +487,6 @@ export const createPost = createAsyncThunk(
         },
       });
       console.log("createPost", response.data);
-
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-// Update post status
-export const updatePostStatus = createAsyncThunk(
-  "settings/updatePostStatus",
-  async (newStatus, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const serviceId = state.service.selectedServiceInSettingsId;
-    try {
-      // const { postId, ...status } = newStatus;
-      const response = await axiosInstance.patch(
-        `/set/update_post_status/`,
-        newStatus,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      console.log("updatePostStatus", response.data);
 
       return response.data;
     } catch (error) {
