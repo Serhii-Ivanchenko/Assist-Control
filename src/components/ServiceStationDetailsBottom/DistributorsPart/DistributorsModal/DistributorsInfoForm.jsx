@@ -15,7 +15,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     bankCode: distributor.bankCode || "",
     companyAddress: distributor.companyAddress || "",
     managerPhone: distributor.managerPhone || "",
-    manager: distributor.managerName || "",
+    managerName: distributor.managerName || "",
     officePhone: distributor.officePhone || "",
     ownerPhone: distributor.ownerPhone || "",
   };
@@ -31,12 +31,13 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     bankCode: Yup.string(),
     companyAddress: Yup.string(),
     managerPhone: Yup.string().required("Поле обов'язкове"),
-    manager: Yup.string(),
+    managerName: Yup.string(),
     officePhone: Yup.string(),
     ownerPhone: Yup.string(),
   });
 
   const handleSubmit = (values) => {
+    console.log("Form submitted with values:", values); // Log form values here
     setDistributor((prev) => ({ ...prev, ...values }));
   };
 
@@ -211,7 +212,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
                 <Field
                   className={styles.input}
                   type="text"
-                  name="manager"
+                  name="managerName"
                   placeholder="Діана"
                   style={{ width: "158px" }}
                 />

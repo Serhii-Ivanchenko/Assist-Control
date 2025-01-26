@@ -234,6 +234,8 @@ export const createSupplier = createAsyncThunk(
 export const updateSupplierData = createAsyncThunk(
   "settings/updateSupplierData",
   async (employeeDataToUpdate, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { supplier_id, logo, ...dataToUpdate } = employeeDataToUpdate;
       let base64Logo = null;
@@ -251,26 +253,10 @@ export const updateSupplierData = createAsyncThunk(
         return thunkAPI.rejectWithValue("No changes detected.");
       }
 
-      if (logo instanceof Blob || logo instanceof File) {
-        // If logo is a Blob or File, convert it to base64
-        base64Logo = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result);
-          reader.onerror = (error) => reject(error);
-          reader.readAsDataURL(logo); // Convert to base64
-        });
-      } else if (typeof logo === "string") {
-        // If logo is a string (URL), pass it as is
-        base64Logo = logo;
-      } else {
-        // Throw an error if logo is neither a Blob/File nor a URL
-        throw new Error("Logo must be a Blob, File, or string URL.");
-      }
-
       // Create the payload to send in the request
       const payload = {
-        ...dataToUpdate, // Add other data
-        file: base64Logo, // Add the base64-encoded file or URL
+        ...dataToUpdate,
+        file: base64Logo,
       };
 
       // Make the API request
@@ -279,7 +265,7 @@ export const updateSupplierData = createAsyncThunk(
         payload,
         {
           headers: {
-            "company-id": "1",
+            "company-id": serviceId,
             "Content-Type": "application/json",
           },
         }
@@ -372,7 +358,7 @@ export const getSupplierData = createAsyncThunk(
           },
         }
       );
-      console.log("getSupplierData", response.data);
+      // console.log("getSupplierData", response.data);
 
       return response.data;
     } catch (error) {
@@ -396,7 +382,7 @@ export const getAllSuppliers = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
-      console.log("getAllSuppliers", response.data);
+      // console.log("getAllSuppliers", response.data);
 
       return response.data;
     } catch (error) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SwitchableBtns from "../../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
 import RatingStars from "../../../sharedComponents/RatingStars/RatingStars.jsx";
 import OptionList from "./OptionList/OptionsList.jsx";
@@ -19,22 +19,21 @@ function DistributorsItem({ item, onDelete, updateDistributors }) {
   const [imgError, setImgError] = useState(false);
   const [status, setStatus] = useState(item.status);
   const [currentDistributor, setCurrentDistributor] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const getCurrentSupplier = async () => {
-      try {
-        const response = await dispatch(getSupplierData(item.id));
-        console.log("current distributor:", response.payload.data);
-        setCurrentDistributor(response.payload.data);
-      } catch (error) {
-        console.error("error fetching current distributor", error);
-      }
-    };
-    getCurrentSupplier();
-  }, [dispatch, item.id]);
+  const openModal = async () => {
+    setIsLoading(true);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+    try {
+      const response = await dispatch(getSupplierData(item.id));
+      setCurrentDistributor(response.payload.data);
+      setIsModalOpen(true);
+      console.log("currentDistributor:", currentDistributor);
+    } catch (error) {
+      console.error("Error fetching current distributor:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const closeModal = (updatedDistributor) => {
@@ -122,11 +121,15 @@ function DistributorsItem({ item, onDelete, updateDistributors }) {
           isOpen={isModalOpen}
           onClose={() => closeModal(currentDistributor)}
         >
-          <DistributorsModal
-            onClose={() => closeModal(currentDistributor)}
-            distributorData={currentDistributor}
-            onToggleDisable={handleToggleStatus}
-          />
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <DistributorsModal
+              onClose={() => closeModal(currentDistributor)}
+              distributorData={currentDistributor}
+              onToggleDisable={handleToggleStatus}
+            />
+          )}
         </Modal>
       )}
     </div>

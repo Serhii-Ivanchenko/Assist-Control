@@ -26,6 +26,7 @@ function DistributorsModal({
   const [isEditing, setIsEditing] = useState(false);
   const [editableName, setEditableName] = useState(distributor.name || "");
   const [logo, setLogo] = useState(distributor.logo || defLogo);
+  const [logoBase64, setLogoBase64] = useState(null); // Тепер ми тримаємо base64 окремо
 
   const buttonRef = useRef(null);
   const formRef = useRef(null);
@@ -47,6 +48,7 @@ function DistributorsModal({
 
   const handleSave = async () => {
     try {
+      // Submit both forms
       if (formRef.current && authFormRef.current) {
         await formRef.current.submitForm();
         await authFormRef.current.submitForm();
@@ -64,35 +66,40 @@ function DistributorsModal({
         return;
       }
 
+      const makeBase64Logo = async (logoFile) => {
+        if (logoFile && logoFile instanceof File) {
+          const base64Logo = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result); // Повертає Base64
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(logoFile); // Читає файл як Base64
+          });
+          setLogoBase64(base64Logo); // записуємо base64 в стан
+          return base64Logo;
+        } else {
+          // Якщо це не файл, повертаємо як є (можливо, URL)
+          return logoFile;
+        }
+      };
+
+      const base64Logo = await makeBase64Logo(logo); // Перетворюємо логотип у Base64
+
+      // Отримуємо дані з AuthForm та DistributorsInfoForm
+      const authData = authFormRef.current?.values || {};
+      const distributorsInfoData = formRef.current?.values || {};
+
       const dataToUpdate = {
         supplier_id: distributor.id,
         name: distributor.name,
-        deliverySchedule: distributor.deliverySchedule,
-        logo,
+        deliverySchedule: distributor.deliverySchedule || {}, // Якщо немає графіка доставки, передаємо порожній об'єкт
+        logo: base64Logo, // передаємо Base64 логотип
+        authData, // передаємо дані з форми авторизації
+        distributorsInfoData, // передаємо дані з форми постачальника
       };
 
-      let base64Logo = null;
-      if (logo instanceof Blob || logo instanceof File) {
-        base64Logo = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result);
-          reader.onerror = (error) => reject(error);
-          reader.readAsDataURL(logo);
-        });
-      } else if (typeof logo === "string") {
-        base64Logo = logo;
-      } else {
-        throw new Error("Logo must be a Blob or File.");
-      }
+      console.log("Updated Payload:", dataToUpdate);
 
-      const updatedDataToUpdate = {
-        ...dataToUpdate,
-        file: base64Logo,
-      };
-
-      const result = await dispatch(
-        updateSupplierData(updatedDataToUpdate)
-      ).unwrap();
+      const result = await dispatch(updateSupplierData(dataToUpdate)).unwrap();
       console.log("Оновлення успішне:", result);
 
       if (updateDistributors) {
@@ -100,6 +107,9 @@ function DistributorsModal({
       }
       onClose();
     } catch (error) {
+      console.error("Error details:", error);
+      console.error("Error response:", error.response?.data);
+      console.error("Error message:", error.message);
       console.error(
         "Помилка під час оновлення:",
         error.response?.data || error.message
