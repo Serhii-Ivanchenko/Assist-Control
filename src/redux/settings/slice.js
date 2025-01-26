@@ -102,10 +102,10 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeStatus.fulfilled, (state, action) => {
         state.isLoading = false;
         const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.employee_id === action.payload.employee_id
+          (employee) => employee.id === action.payload.employee_id
         );
-        state.employees[employeeToEditIndex].isDisabled =
-          action.payload.isDisabled;
+
+        state.employees[employeeToEditIndex].status = action.meta.arg.status;
       })
       .addCase(updateEmployeeStatus.rejected, handleRejected)
 
