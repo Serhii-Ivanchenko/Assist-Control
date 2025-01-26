@@ -45,11 +45,11 @@ const serviceSlice = createSlice({
       .addCase(updateService.fulfilled, (state, action) => {
         state.isLoading = false;
         const serviceToEditIndex = state.services.findIndex(
-          (service) => service.id === action.payload.id
+          (service) => service.id === action.payload.data.id
         );
         state.services[serviceToEditIndex] = {
           ...state.services[serviceToEditIndex], // Залишаємо старі дані
-          ...action.meta.arg, // Додаємо дані, які відправляли
+          ...action.payload.data, // Додаємо дані, які відправляли
         };
       })
       .addCase(updateService.rejected, handleRejected),
