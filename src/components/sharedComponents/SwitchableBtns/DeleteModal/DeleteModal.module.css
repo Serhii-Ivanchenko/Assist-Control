@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 338px;
+  height: 150px;
+  background-color: var(--bg-secondary);
+  border-radius: 5px;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+}
+
+.question {
+  text-align: center;
+  line-height: 25px;
+}
+
+.btnBox {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.btn {
+  width: 130px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  color: var(--white);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnDelete {
+  background: var(--Blue, var(--blue));
+}
+
+.btnClose {
+  background-color: transparent;
+  border: 1px solid var(--white);
+}

@@ -8,4 +8,4 @@ export const selectPosts = (state) => state.settings.posts;
 
 export const selectPrices = (state) => state.settings.prices;
 
-export const selectEmployees = (state) => state.settings.employees.data;
+export const selectEmployees = (state) => state.settings.employees;

@@ -26,7 +26,7 @@ import RatingStars from "../sharedComponents/RatingStars/RatingStars.jsx";
 import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
 import ArchiveModal from "../Modals/ArchiveModal/ArchiveModal.jsx";
 
-export default function DayCarsItemCrm({ car, onDragStart }) {
+export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
   // const [isCrm, setIsCrm] = useState("record");
   const visibility = useSelector(selectVisibilityRecords);
   const [modalState, setModalState] = useState({
@@ -37,6 +37,8 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
   const [draggingElement, setDraggingElement] = useState(null);
   const [initialX, setInitialX] = useState(0);
   const [initialY, setInitialY] = useState(0);
+
+  
 
   const handleDragStart = (e) => {
     setIsDragging(true);
@@ -114,7 +116,6 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
     name,
     phone,
     booking,
-
     plate: carNumber,
   } = car;
 
@@ -148,6 +149,8 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
 
     return null;
   };
+
+  
 
   return (
     <div
@@ -265,7 +268,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
 
           {modalState.archive && (
             <Modal isOpen={modalState.archive} onClose={closeModals}>
-              <ArchiveModal onClose={closeModals} />
+              <ArchiveModal onClose={closeModals} carId={car_id} location="records"  onSuccess={onArchiveSuccess}/>
             </Modal>
           )}
         </div>
