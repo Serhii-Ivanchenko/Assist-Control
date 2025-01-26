@@ -43,7 +43,7 @@ export default function StationPart() {
             color: "var(--white)FFF",
           },
         });
-        // dispatch(getPosts());
+        dispatch(getPosts());
       })
       .catch((error) => {
         console.error("Error updating user data:", error);
