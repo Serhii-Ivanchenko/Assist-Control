@@ -51,22 +51,80 @@ export default function StaffPart() {
   // }, [employees]);
 
   const toDisable = (id, currentStatus) => {
-    // setMembers(
-    //   members.map((member, i) =>
-    //     i === index ? { ...member, isDisabled: !member.isDisabled } : member
-    //   )
-    // );
-    console.log("id", id);
-    console.log("currentStatus", currentStatus);
-
     const newStatus = currentStatus === 1 ? 0 : 1;
-    console.log("newStatus", newStatus);
 
     dispatch(updateEmployeeStatus({ employee_id: id, status: newStatus }))
       .unwrap()
-      // .then(() => {
-      //   // dispatch(getAllEmployees())
-      //   setMembers(members)
+      .then(() => {
+        toast.success("Статус успішно змінено :)", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating user data:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      });
+  };
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const openEditModal = (employee) => {
+    console.log("Opening modal for employee:", employee);
+    setCurrentEmployee(employee);
+    setIsOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setCurrentEmployee(null);
+    setIsOpen(false);
+  };
+
+  // const deleteMember = (id) => {
+  //   dispatch(deleteEmployee(id))
+  //     .unwrap()
+  //     .then(() => {
+  //       dispatch(getAllEmployees())
+  //         .then(() => {
+  //           toast.success("Успішно видалено :)", {
+  //             position: "top-center",
+  //             duration: 3000,
+  //             style: {
+  //               background: "var(--bg-input)",
+  //               color: "var(--white)FFF",
+  //             },
+  //           });
+  //         })
+  //         .catch((error) => {
+  //           console.error("Error updating user data:", error);
+  //           toast.error("Щось пішло не так :(", {
+  //             position: "top-center",
+  //             duration: 3000,
+  //             style: {
+  //               background: "var(--bg-input)",
+  //               color: "var(--white)FFF",
+  //             },
+  //           });
+  //         });
+  //     });
+  // };
+
+  const deleteMember = (id) => {
+    dispatch(deleteEmployee(id))
+      .unwrap()
       .then(() => {
         toast.success("Успішно видалено :)", {
           position: "top-center",
@@ -87,51 +145,6 @@ export default function StaffPart() {
             color: "var(--white)FFF",
           },
         });
-      });
-    // });
-  };
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const openEditModal = (employee) => {
-    console.log("Opening modal for employee:", employee);
-    setCurrentEmployee(employee);
-    setIsOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setCurrentEmployee(null);
-    setIsOpen(false);
-  };
-
-  const deleteMember = (id) => {
-    dispatch(deleteEmployee(id))
-      .unwrap()
-      .then(() => {
-        dispatch(getAllEmployees())
-          .then(() => {
-            toast.success("Успішно видалено :)", {
-              position: "top-center",
-              duration: 3000,
-              style: {
-                background: "var(--bg-input)",
-                color: "var(--white)FFF",
-              },
-            });
-          })
-          .catch((error) => {
-            console.error("Error updating user data:", error);
-            toast.error("Щось пішло не так :(", {
-              position: "top-center",
-              duration: 3000,
-              style: {
-                background: "var(--bg-input)",
-                color: "var(--white)FFF",
-              },
-            });
-          });
       });
   };
 
