@@ -2,6 +2,8 @@
   max-width: 1850px;
   width: 100vw;
   height: 100vh;
+  width: clamp(1280px, min(100vw, 100vh * 1.713), 1850px);
+  height: clamp(720px, min(100vh, 100vw / 1.713), 100vh);
   /* min-height: 900px; */
   /* max-height: 1080px; */
   padding: 1.388vh min(2.162vw, 40px) 3.148vh;
