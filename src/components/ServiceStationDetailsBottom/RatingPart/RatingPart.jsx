@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
+// import { getRatings } from "../../../redux/settings/operations.js";
+// import { selectRatings } from "../../../redux/settings/selectors.js"
 import { BsPower, BsFillCaretDownFill } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
 import css from "./RatingPart.module.css";
@@ -105,8 +109,29 @@ const data = [
 ];
 
 const RatingPart = () => {
+
+// const dispatch = useDispatch();
+//   const ratingsData = useSelector(selectRatings);
+//   const selectedServiceId = useSelector(selectSelectedServiceId);
+
   const [openAccordions, setOpenAccordions] = useState({}); // Состояние для аккордеонов
   const [editedData, setEditedData] = useState(data); // Состояние таблицы с редактируемыми данными
+
+
+//  useEffect(() => {
+//      const fetchRatingsData = async () => {
+//        if (!selectedServiceId) {
+//          return;
+//        };
+//         await dispatch(getRatings());
+       
+//      };
+
+//      fetchRatingsData();
+//    }, [dispatch,  selectedServiceId]); 
+
+//   console.log(ratingsData);
+
 
   const toggleAccordion = (recId) => {
     setOpenAccordions((prev) => ({

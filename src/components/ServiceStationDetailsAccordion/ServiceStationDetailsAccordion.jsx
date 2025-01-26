@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { BsCaretDownFill, BsPencil, BsXCircle } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
-import { getWorkSchedule } from "../../redux/settings/operations.js";
+import { getWorkSchedule, updateWorkSchedule } from "../../redux/settings/operations.js";
 import { selectSchedule } from "../../redux/settings/selectors.js"
 import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 // import { useState } from "react";
@@ -17,11 +17,13 @@ import css from "./ServiceStationDetailsAccordion.module.css";
 
 export default function ServiceStationDetailsAccordion({ onToggle }) {
   const dispatch = useDispatch();
-  const workSсheduleData = useSelector(selectSchedule);
+  const workScheduleData = useSelector(selectSchedule);
   const selectedServiceId = useSelector(selectSelectedServiceId);
 
   const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   // Реф для доступа к generateBackendData
   const detailsRef = useRef();
   const handleChange = (e, expanded) => {
@@ -32,18 +34,33 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
     onToggle(expanded);
   };
 
-  const handleEditToggle = (event) => {
-    event.stopPropagation(); // Останавливаем всплытие события
+  // const handleEditToggle = (event) => {
+  //   event.stopPropagation(); // Останавливаем всплытие события
+  //   if (isEditing) {
+  //     // Вызов функции generateBackendData через реф
+  //     if (detailsRef.current?.generateBackendData) {
+  //       detailsRef.current.generateBackendData();
+  //     }
+  //     console.log("Сохранение завершено.");
+  //   }
+  //   setIsEditing((prev) => !prev);
+  // };
+
+ const handleEditToggle = async (event) => {
+    event.stopPropagation();
+
     if (isEditing) {
-      // Вызов функции generateBackendData через реф
+      // Получаем данные из ScheduleTable через ref
       if (detailsRef.current?.generateBackendData) {
-        detailsRef.current.generateBackendData();
+        const backendData = detailsRef.current.generateBackendData();
+        console.log("Сформированные данные для бекенда:", backendData);
+
+        // Отправляем данные на бекенд
+        await handleDataSave(backendData);
       }
-      console.log("Сохранение завершено.");
     }
     setIsEditing((prev) => !prev);
   };
-
 
 const handleCancelEdit = (event) => {
   event.stopPropagation(); 
@@ -53,68 +70,54 @@ const handleCancelEdit = (event) => {
   if (detailsRef.current?.resetGridData) {
     detailsRef.current.resetGridData();
   }
-};
+  };
+  
+  const handleDataSave = async (data) => {
+    try {
+      setIsSaving(true); // Устанавливаем флаг загрузки
+
+      // Передача данных на бекенд с unwrap
+      const response = await dispatch(updateWorkSchedule(data)).unwrap();
+      
+      // Лог успешного сохранения
+      console.log("Данные успешно сохранены:", response);
+       await dispatch(getWorkSchedule(selectedServiceId)).unwrap();
+    } catch (error) {
+      // Лог ошибок
+      console.error("Ошибка при сохранении данных:", error);
+
+    } finally {
+      setIsSaving(false); // Сбрасываем флаг загрузки
+    }
+  };
+  
+
 
    useEffect(() => {
-     const fetchWorkSсheduleData = async () => {
+     const fetchWorkScheduleData = async () => {
        if (!selectedServiceId) {
          return;
        };
-        await dispatch(getWorkSchedule());
+        setIsLoading(true);
+        try {
+        await dispatch(getWorkSchedule()).unwrap();
        
-     };
+      } catch (error) {
+        console.error("Ошибка загрузки данных:", error);
+      } finally {
+        setIsLoading(false); // Сбрасываем индикатор загрузки
+      }
+    };
 
-     fetchWorkSсheduleData();
+    //     await dispatch(getWorkSchedule());
+       
+    //  };
+
+     fetchWorkScheduleData();
    }, [dispatch,  selectedServiceId]); 
 
-  console.log(workSсheduleData);
-  // const activePeriods = [
-  //   { day: "Monday", startTime: 9, endTime: 12, isActive: true },
-  //   { day: "Monday", startTime: 14, endTime: 16, isActive: true },
-  //   { day: "Wednesday", startTime: 10, endTime: 15, isActive: true },
-  //   { day: "Friday", startTime: 8, endTime: 11, isActive: true },
-  // ];
-  // const DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  // const START_HOUR = 7;
-  // const END_HOUR = 21;
-
-  // function generateGridData(activePeriods) {
-  //   const result = [];
-
-  //   // Обходим каждый день недели
-  //   for (const day of DAYS_OF_WEEK) {
-  //     // Получаем все активные периоды для текущего дня
-  //     const periodsForDay = activePeriods.filter((period) => period.day === day);
-
-  //     // Проходим по каждому часу дня
-  //     for (let hour = START_HOUR; hour < END_HOUR; hour++) {
-  //       // Проверяем, находится ли текущий час в активном периоде
-  //       const isActive = periodsForDay.some(
-  //         (period) => hour >= period.startTime && hour < period.endTime
-  //       );
-
-  //       // Добавляем ячейку в массив
-  //       result.push({
-  //         day,
-  //         hour,
-  //         isActive,
-  //       });
-  //     }
-  //   }
-
-  //   return result;
-  // }
-
-  // const initialData = generateGridData(activePeriods);
-
-  // const [data, setData] = useState(initialData);
-
-  const activePeriods = [
-    { day: "Monday", startTime: 9, endTime: 12, isActive: true },
-    { day: "Monday", startTime: 14, endTime: 16, isActive: true },
-    { day: "Wednesday", startTime: 10, endTime: 15, isActive: true },
-    { day: "Friday", startTime: 8, endTime: 11, isActive: true },
-  ];
+  console.log('workScheduleData', workScheduleData);
+ 
 
   return (
     <Accordion
@@ -201,7 +204,21 @@ const handleCancelEdit = (event) => {
           marginTop: "19px",
         }}
       >
-        <ScheduleTable ref={detailsRef} isEditing={isEditing} activePeriods={activePeriods} />
+ {!isLoading &&  workScheduleData.length > 0 && (
+   
+    <ScheduleTable
+      ref={detailsRef}
+      isEditing={isEditing}
+      activePeriods={workScheduleData}
+      onDataSave={handleDataSave}
+    />
+ 
+  )}
+
+        {/* <ScheduleTable ref={detailsRef} isEditing={isEditing}
+          //  activePeriods={activePeriods}
+           activePeriods={workScheduleData}
+          onDataSave={handleDataSave} /> */}
       </AccordionDetails>
     </Accordion>
   );

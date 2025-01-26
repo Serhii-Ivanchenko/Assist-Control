@@ -1,5 +1,5 @@
 import css from "./ScheduleTable.module.css";
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useState, useEffect } from "react";
 
 const hours = Array.from({ length: 15 }, (_, i) => i + 7); // 7:00 - 21:00
 const daysUa = [
@@ -21,31 +21,30 @@ const daysEn = [
   "Sunday",
 ];
 
-const ScheduleTable = forwardRef(({ isEditing, activePeriods }, ref) => {
-  // Генерація початкових даних для таблиці
-  const generateGridData = () => {
-    return daysEn.flatMap((day) =>
-      hours.map((hour) => ({
-        day,
-        hour,
-        isActive:
-          Array.isArray(activePeriods) &&
-          activePeriods.some(
-            (period) =>
-              period.day === day &&
-              hour >= period.startTime &&
-              hour < period.endTime
-          ),
-      }))
-    );
-  };
+const ScheduleTable = forwardRef(({ isEditing, activePeriods, onDataSave }, ref) => {
 
-  const [gridData, setGridData] = useState(generateGridData());
+  const generateGridData = (data) => {
+  return data.flatMap(({ day, times }) =>
+    Object.entries(times).map(([time, isActive]) => ({
+      day,
+      hour: parseInt(time.split(":")[0], 10), // Извлекаем час из строки вида "7:00"
+      isActive: Boolean(isActive), // Преобразуем числовое значение в логическое
+    }))
+  );
+};
+
+  const [gridData, setGridData] = useState(generateGridData(activePeriods));
   const [isSelecting, setIsSelecting] = useState(false);
+  
+useEffect(() => {
+    setGridData(generateGridData(activePeriods));
+  }, [activePeriods]);
+
+
 
    // Сброс сетки к исходным данным
   const resetGridData = () => {
-    setGridData(generateGridData());
+    setGridData(generateGridData(activePeriods));
   };
 
   // Обробка зміни стану клітинки
@@ -76,29 +75,59 @@ const ScheduleTable = forwardRef(({ isEditing, activePeriods }, ref) => {
   };
 
   // Формування масиву для бекенду
-  const generateBackendData = () => {
-    const activeCells = gridData.filter((cell) => cell.isActive);
-    const result = [];
+  // const generateBackendData = () => {
+  //   const activeCells = gridData.filter((cell) => cell.isActive);
+  //   const result = [];
 
-    activeCells.forEach(({ day, hour }) => {
-      const existingPeriod = result.find(
-        (period) => period.day === day && period.endTime === hour - 1
-      );
-      if (existingPeriod) {
-        existingPeriod.endTime = hour; // Продовжити існуючий період
-      } else {
-        result.push({ day, startTime: hour, endTime: hour, isActive: true }); // ССтвор.ємо новий період
-      }
-    });
+  //   activeCells.forEach(({ day, hour }) => {
+  //     const existingPeriod = result.find(
+  //       (period) => period.day === day && period.endTime === hour - 1
+  //     );
+  //     if (existingPeriod) {
+  //       existingPeriod.endTime = hour; // Продовжити існуючий період
+  //     } else {
+  //       result.push({ day, startTime: hour, endTime: hour, isActive: true }); // ССтвор.ємо новий період
+  //     }
+  //   });
 
-    console.log("Backend Data:", result);
-    return result;
+  //   console.log("Backend Data:", result);
+  //   return result;
+  // };
+
+const generateBackendData = () => {
+  const result = [];
+
+  gridData.forEach(({ day, hour, isActive }) => {
+    let dayData = result.find((entry) => entry.day === day);
+
+    // Если данных для дня еще нет, добавляем новый объект для этого дня
+    if (!dayData) {
+      dayData = { day, times: {} };
+      result.push(dayData);
+    }
+
+    // Формируем временной объект
+    dayData.times[`${hour}:00`] = isActive ? 1 : 0;
+  });
+
+  const backendData = { days: result };
+
+  console.log("Backend Data:", backendData);
+  return backendData;
+};
+
+  const saveData = () => {
+    const backendData =  generateBackendData() ;
+    if (onDataSave) {
+      onDataSave(backendData);
+      // setGridData(generateGridData(backendData.days));
+    }
   };
 
   useImperativeHandle(ref, () => ({
     generateBackendData,
      resetGridData,
-
+     saveData,
   }));
   return (
     <div className={css.container}>
