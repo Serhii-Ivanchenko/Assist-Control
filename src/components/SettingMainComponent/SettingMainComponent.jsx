@@ -3,18 +3,21 @@ import ServiceStationList from "../ServiceStationList/ServiceStationList";
 import ServiceStationDetails from "../ServiceStationDetails/ServiceStationDetails";
 import styles from "./SettingMainComponent.module.css";
 import { useDispatch } from "react-redux";
-import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
+// import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 import { setSelectedServiceInSettingsId } from "../../redux/service/slice.js";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { getAllServices } from "../../redux/service/operations.js";
+import {} from "../../redux/service/selectors.js";
 
 function SettingMainComponent() {
-  const [activeStationId, setActiveStationId] = useState(null);
   const dispatch = useDispatch();
-  const defaultService = useSelector(selectSelectedServiceId);
+  // const defaultService = useSelector(selectSelectedServiceId);
+  const [activeStationId, setActiveStationId] = useState(null);
 
   useEffect(() => {
-    dispatch(setSelectedServiceInSettingsId(defaultService));
-  }, []);
+    dispatch(getAllServices());
+    dispatch(setSelectedServiceInSettingsId(activeStationId));
+  }, [activeStationId]);
 
   return (
     <div className={styles.wrapper}>

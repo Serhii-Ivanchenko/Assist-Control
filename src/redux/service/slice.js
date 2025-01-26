@@ -26,7 +26,7 @@ const serviceSlice = createSlice({
       .addCase(getAllServices.fulfilled, (state, action) => {
         state.isLoading = false;
         state.services = action.payload.companies;
-        state.selectedServiceInSettingsId = action.payload.companies[0].id;
+        // state.selectedServiceInSettingsId = action.payload.companies[0].id;
       })
       .addCase(getAllServices.rejected, handleRejected)
       // .addCase(getServiceData.pending, handlePending)
@@ -47,7 +47,7 @@ const serviceSlice = createSlice({
         const serviceToEditIndex = state.services.findIndex(
           (service) => service.id === action.payload.id
         );
-        state.employees[serviceToEditIndex] = {
+        state.services[serviceToEditIndex] = {
           ...state.services[serviceToEditIndex], // Залишаємо старі дані
           ...action.meta.arg, // Додаємо дані, які відправляли
         };
@@ -56,6 +56,5 @@ const serviceSlice = createSlice({
 });
 
 export const { setSelectedServiceInSettingsId } = serviceSlice.actions;
-
 
 export default serviceSlice.reducer;
