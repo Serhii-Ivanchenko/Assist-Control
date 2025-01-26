@@ -135,6 +135,19 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     }
   };
 
+  const formatPhone = (value) => {
+    let digits = value.replace(/[^\d]/g, "");
+
+    if (digits.length >= 10) {
+      if (digits.startsWith("38")) {
+        digits = "+" + digits;
+      } else {
+        digits = "+38" + digits;
+      }
+    }
+    return digits;
+  };
+
   const generateRandomStringPassword = (length) => {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -200,7 +213,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     phone: employee.phone || "+380123456789",
     address: employee.address || "м. Київ, вул. Шевченка, 1",
     birthday: employee.birthday || new Date(),
-    position: employee.role || "Механік",
+    position: employee.position || "Механік",
     role: employee.role || "Працівник",
     email: employee.email || "ivan.ivanov@example.com",
     login: employee.login || "",
@@ -256,10 +269,12 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
         birthday: dateOnly,
         files: undefined,
       };
+
       if (employee.id) {
+        // const { files, ...restValues } = values;
+
         const employeeDataToUpdate = {
           employee_id: employee.id,
-          files: base64Files,
           ...employeeData,
         };
 
@@ -349,8 +364,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                       name="phone"
                       className={`${css.input} ${css.inputPhone}`}
                       placeholder="+380733291212"
-                      // value={phone}
-                      // onChange={updatePhone}
+                      value={formatPhone(values.phone)}
+                      onChange={(e) => setFieldValue("phone", e.target.value)}
                     />
                     <button
                       type="button"
@@ -631,7 +646,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                 </div>
                 <div className={css.docColumn}>
                   <div
-                    className={css.docBox}
+                    className={`${css.docBox} ${css.docBoxContracts}`}
                     ref={(el) => (buttonRefs.current[0] = el)}
                   >
                     <label className={css.docLabel}>
@@ -662,7 +677,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     /> */}
                   </div>
                   <div
-                    className={css.docBox}
+                    className={`${css.docBox} ${css.docBoxContracts}`}
                     ref={(el) => (buttonRefs.current[1] = el)}
                   >
                     <label className={css.docLabel}>
@@ -692,7 +707,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     /> */}
                   </div>
                   <div
-                    className={css.docBox}
+                    className={`${css.docBox} ${css.docBoxContracts}`}
                     ref={(el) => (buttonRefs.current[2] = el)}
                   >
                     <label className={css.docLabel}>

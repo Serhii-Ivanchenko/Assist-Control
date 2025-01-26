@@ -323,7 +323,12 @@
   display: flex;
   gap: 8px;
   position: relative;
-  width: fit-content;
+  width: 113px;
+  height: 22px;
+}
+
+.docBoxContracts {
+  width: 165px;
 }
 
 /* .docBoxID{

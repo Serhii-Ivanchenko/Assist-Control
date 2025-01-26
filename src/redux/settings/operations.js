@@ -57,22 +57,31 @@ export const updateEmployeeData = createAsyncThunk(
     try {
       const { employee_id, files, ...dataToUpdate } = employeeDataToUpdate;
 
-      const base64Files = await Promise.all(
-        files.map((file) => {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result); // Повертає Base64
-            reader.onerror = (error) => reject(error);
-            reader.readAsDataURL(file); // Читає файл як Base64
-          });
-        })
-      );
+
+       const base64Files = { ...files };
 
       // Створюємо об'єкт для відправки
       const payload = {
         ...dataToUpdate, // Додаємо дані співробітника
-        files: base64Files, // Додаємо Base64-файли
+        ...base64Files,  // Додаємо готові Base64-файли
       };
+
+      // const base64Files = await Promise.all(
+      //   files.map((file) => {
+      //     return new Promise((resolve, reject) => {
+      //       const reader = new FileReader();
+      //       reader.onload = () => resolve(reader.result); // Повертає Base64
+      //       reader.onerror = (error) => reject(error);
+      //       reader.readAsDataURL(file); // Читає файл як Base64
+      //     });
+      //   })
+      // );
+
+      // // Створюємо об'єкт для відправки
+      // const payload = {
+      //   ...dataToUpdate, // Додаємо дані співробітника
+      //   files: base64Files, // Додаємо Base64-файли
+      // };
 
       const response = await axiosInstance.patch(
         `/set/employees/${employee_id}/update/`,
