@@ -29,22 +29,6 @@ export default function ArchiveCarItem({ id, visiblePopovers, togglePopover }) {
   const openDotsPopover = () => setIsDotsPopoverOpen(true);
   const closeDotsPopover = () => setIsDotsPopoverOpen(false);
 
-  // Функція Редагування статусу
-  const handleStatusChange = async (newStatus) => {
-    const data = {
-      archive_id: id,
-      status: newStatus,
-    };
-  
-    try {
-      await dispatch(updateArchiveItem(data)).unwrap(); 
-    } catch (error) {
-      console.error("Помилка оновлення статусу:", error);
-    } finally {
-      setIsStatusPopoverVisible(false);
-    }
-  };
-  
   const handleClickOutside = (event) => {
     if (statusPopoverRef.current && !statusPopoverRef.current.contains(event.target)) {
       setIsStatusPopoverVisible(false);
@@ -66,12 +50,13 @@ export default function ArchiveCarItem({ id, visiblePopovers, togglePopover }) {
   };
 
   const getStatusesForFilter = () => {
-    return statusesArchiveEdit.map((status) => ({
-      status: status.reason_description,
-      label: status.label,
-    }));
+    return statusesArchiveEdit
+      .filter((status) => status.reason_description !== reason_description)
+      .map((status) => ({
+        status: status.reason_description,
+        label: status.label,
+      }));
   };
-
   const carData = carsData?.find((car) => car.id === id);
 
   if (!carData) return null;
@@ -94,6 +79,29 @@ export default function ArchiveCarItem({ id, visiblePopovers, togglePopover }) {
     return format(new Date(dateString), "dd.MM.yy | HH:mm");
   };
 
+
+
+  const handleStatusChange = async (newStatus) => {
+    const foundStatus = statusesArchiveEdit.find(
+      (status) => status.reason_description === newStatus
+    );
+  
+    const reasonAddNumber = foundStatus && foundStatus.reason_add ? Number(foundStatus.reason_add) : null;
+  
+    const data = {
+      archive_id: id,
+      reason_add: reasonAddNumber,
+    };
+  
+    try {
+      await dispatch(updateArchiveItem(data)).unwrap();
+    } catch (error) {
+      console.error("Помилка оновлення статусу:", error);
+    } finally {
+      setIsStatusPopoverVisible(false);
+    }
+  };
+  
   return (
     <div className={styles.archiveContainer}>
       <div className={styles.leftContainer}>
@@ -132,7 +140,7 @@ export default function ArchiveCarItem({ id, visiblePopovers, togglePopover }) {
       <div className={styles.centerContainer}>
         {visibility?.status && (
           <div className={styles.statusPopoverContainer} ref={statusPopoverRef}>
-            <div onClick={() => setIsStatusPopoverVisible(true)}>
+            <div>
               {renderStatusInArchive(reason_description, styles)}
             </div>
             {isStatusPopoverVisible && (
