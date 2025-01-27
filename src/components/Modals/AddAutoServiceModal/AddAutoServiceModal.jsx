@@ -6,7 +6,6 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { BsFillCameraFill } from "react-icons/bs";
 import { useRef, useState } from "react";
 import { BsFillCloudUploadFill } from "react-icons/bs";
-import PopupMenu from "../../sharedComponents/PopupMenu/PopupMenu";
 import BtnsCloseAndSubmit from "../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
@@ -14,6 +13,7 @@ import {
   createService,
   updateService,
 } from "../../../redux/service/operations.js";
+import Popup from "./Popup/popup.jsx";
 
 export default function AddAutoServiceModal({
   onClose,
@@ -92,30 +92,29 @@ export default function AddAutoServiceModal({
     };
 
     if (createAutoService) {
-      // dispatch(createService(data))
-      //   .unwrap()
-      //   .then(() => {
-      //     toast.success("Сервіс успішно створено", {
-      //       position: "top-center",
-      //       duration: 3000,
-      //       style: {
-      //         background: "var(--bg-input)",
-      //         color: "var(--white)FFF",
-      //       },
-      //     });
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
+      dispatch(createService(data))
+        .unwrap()
+        .then(() => {
+          toast.success("Сервіс успішно створено", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
+        })
+        .catch((err) => {
+          console.log(err);
 
-      //     toast.error("Щось сталося, спробуйте ще раз", {
-      //       position: "top-center",
-      //       style: {
-      //         background: "var(--bg-input)",
-      //         color: "var(--white)FFF",
-      //       },
-      //     });
-      //   });
-      console.log(data);
+          toast.error("Щось сталося, спробуйте ще раз", {
+            position: "top-center",
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
+        });
     } else if (updateAutoService) {
       dispatch(updateService({ payload: data, companyId: station.id }))
         .unwrap()
@@ -191,14 +190,11 @@ export default function AddAutoServiceModal({
                 >
                   <BsThreeDotsVertical className={css.dotsIcon} />
                   <div className={css.popupContainer}>
-                    <PopupMenu
+                    <Popup
                       isOpen={isPopupOpen}
                       onClose={() => setIsPopupOpen(false)}
                       buttonRef={buttonRef}
                       onDelete={() => {}}
-                      containerRef
-                      innerAccRef
-                      // onEdit={onEdit}
                     />
                   </div>
                 </button>
