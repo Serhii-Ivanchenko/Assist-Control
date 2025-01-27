@@ -22,8 +22,7 @@ const validationSchema = Yup.object({
 
 const AuthForm = ({ formikRef }) => {
   const handleSubmit = (values, { setSubmitting }) => {
-    console.log("Values:", values);
-
+    console.log("AuthForm Values:", values);
     setSubmitting(false);
   };
 

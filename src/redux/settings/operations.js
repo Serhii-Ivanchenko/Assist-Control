@@ -253,7 +253,7 @@ export const updateSupplierData = createAsyncThunk(
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { supplier_id, logo, ...dataToUpdate } = employeeDataToUpdate;
-      let base64Logo = null;
+      // let base64Logo = null;
 
       const currentState = thunkAPI
         .getState()
@@ -270,8 +270,9 @@ export const updateSupplierData = createAsyncThunk(
 
       // Create the payload to send in the request
       const payload = {
+        logo,
         ...dataToUpdate,
-        file: base64Logo,
+        // file: base64Logo,
       };
 
       // Make the API request

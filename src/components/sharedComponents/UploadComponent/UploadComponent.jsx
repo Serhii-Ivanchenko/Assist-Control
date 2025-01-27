@@ -9,6 +9,7 @@ export default function UploadComponent({
   setFieldValue,
   fieldname,
   staffModal,
+  setLogoBase64,
 }) {
   const fileInputRef = useRef(null);
 
@@ -21,15 +22,21 @@ export default function UploadComponent({
   const handleFileChange = async (event) => {
     const file = event.currentTarget.files[0];
     if (file) {
-      const newLogoUrl = URL.createObjectURL(file);
-      {
-        staffModal
-          ? setLogo((prevPhotos) => [...prevPhotos, file])
-          : setLogo(newLogoUrl);
-      }
-
+      const base64Logo = await makeBase64Logo(file); // Перетворюємо файл у base64
+      setLogo(base64Logo); // зберігаємо base64 значення в стані
+      setLogoBase64(base64Logo); // зберігаємо base64 значення в окремому стані (для подальшої обробки)
       setFieldValue(fieldname, file);
     }
+  };
+
+  // Функція для перетворення файлу в base64
+  const makeBase64Logo = (logoFile) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result); // Повертає Base64
+      reader.onerror = reject;
+      reader.readAsDataURL(logoFile); // Читає файл як Base64
+    });
   };
 
   return (
