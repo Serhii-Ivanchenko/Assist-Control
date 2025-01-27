@@ -14,7 +14,7 @@
 
 .scrollWrapper{
   overflow-y: auto;
-  max-height: 705px; 
+  height: 705px; 
 }
 
 .scrollWrapper::-webkit-scrollbar {

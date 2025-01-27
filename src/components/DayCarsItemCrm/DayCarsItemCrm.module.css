@@ -225,7 +225,7 @@
   width: 96px;
   height: 23px;
   gap: 3px;
-  margin-bottom: 2;
+  margin-bottom: 12px;
   border-radius: 5px;
   border: 2px solid var(--black);
   background: #d9d9d9;
@@ -266,16 +266,18 @@
 .mileInfo,
 .timeWork {
   display: flex;
-  gap: 7px;
   align-items: center;
 }
 .mileInfo {
   margin-bottom: 6px;
+  gap: 7px;
 }
 
 .timeWork {
   margin-bottom: 12px;
   margin-top: 1px;
+  gap: 5px;
+  width: 101px;
 }
 
 .mileage {
