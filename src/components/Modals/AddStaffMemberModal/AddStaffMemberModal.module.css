@@ -30,6 +30,16 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: relative;
+}
+
+.erroMessage {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  color: var(--red);
+  font-size: 13px;
 }
 
 .phoneUpload {
