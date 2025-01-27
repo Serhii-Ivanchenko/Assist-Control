@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ServiceStationItem from "../ServiceStationItem/ServiceStationItemItem";
 import { BsPlusCircleDotted } from "react-icons/bs";
 import { BsHouseFill } from "react-icons/bs";
@@ -22,6 +22,38 @@ function ServiceStationList({ activeStationId, setActiveStationId }) {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  const containerRef = useRef(null); // Ссилка на контейнер
+  const [isScrolled, setIsScrolled] = useState(false); // Стан для перевірки наявності скролу
+
+  useEffect(() => {
+    const handleResizeOrScroll = () => {
+      // Перевірка наявності вертикального скролу
+      if (containerRef.current) {
+        const hasVerticalScroll =
+          containerRef.current.scrollHeight > containerRef.current.clientHeight;
+        setIsScrolled(hasVerticalScroll);
+      }
+    };
+
+    // Викликаємо при завантаженні, зміні розміру чи скролі
+    handleResizeOrScroll();
+    window.addEventListener("resize", handleResizeOrScroll);
+    if (containerRef.current) {
+      containerRef.current.addEventListener("scroll", handleResizeOrScroll);
+    }
+
+    // Очищення ефекту
+    return () => {
+      window.removeEventListener("resize", handleResizeOrScroll);
+      if (containerRef.current) {
+        containerRef.current.removeEventListener(
+          "scroll",
+          handleResizeOrScroll
+        );
+      }
+    };
+  }, []);
 
   // const stations = useMemo(
   //   () => [
@@ -49,20 +81,26 @@ function ServiceStationList({ activeStationId, setActiveStationId }) {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.leftContainer}>
-        {stations.map((station) => (
-          <div key={station.id} className={styles.serviceStationWrapper}>
-            <ServiceStationItem
-              // id={station.id}
-              // name={station.name}
-              station={station}
-              isOpen={activeStationId === station.id}
-              onToggle={() => handleToggle(station.id)}
-              isActive={activeStationId === station.id}
-            />
-          </div>
-        ))}
+    <div className={styles.sectionWrapper}>
+      <div className={styles.wrapper} ref={containerRef}>
+        <div
+          className={`${styles.leftContainer} ${
+            isScrolled && styles.leftContainerScrolled
+          }`}
+        >
+          {stations.map((station) => (
+            <div key={station.id} className={styles.serviceStationWrapper}>
+              <ServiceStationItem
+                // id={station.id}
+                // name={station.name}
+                station={station}
+                isOpen={activeStationId === station.id}
+                onToggle={() => handleToggle(station.id)}
+                isActive={activeStationId === station.id}
+              />
+            </div>
+          ))}
+        </div>
       </div>
       <button className={styles.addBtn} onClick={handleAddBtnClick}>
         <BsPlusCircleDotted className={styles.icon} />

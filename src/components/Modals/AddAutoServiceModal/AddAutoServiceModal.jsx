@@ -25,18 +25,18 @@ export default function AddAutoServiceModal({
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [logo, setLogo] = useState(null);
   const [logoPreview, setLogoPreview] = useState(station?.logo || null);
-  const [isInputVisible, setIsInputVisible] = useState(false);
+  // const [isInputVisible, setIsInputVisible] = useState(false);
   const [serviceName, setServiceName] = useState(
     updateAutoService ? station.name : null
   );
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
   const buttonRef = useRef(null);
 
   const dispatch = useDispatch();
 
   const initialValues = {
     avatar: "",
-    name: station?.name || "",
+    companyName: station?.name || serviceName || "",
     address: station?.address || "",
     email: station?.email || "",
     fop_name: station?.fop_name || "",
@@ -56,17 +56,17 @@ export default function AddAutoServiceModal({
     setIsPopupOpen((prevState) => !prevState);
   };
 
-  const onEdit = () => {
-    setIsInputVisible(true);
-    setTimeout(() => {
-      inputRef.current?.focus(); // Фокусуємо інпут після оновлення стану
-    }, 0);
-  };
+  // const onEdit = () => {
+  //   setIsInputVisible(true);
+  //   setTimeout(() => {
+  //     inputRef.current?.focus(); // Фокусуємо інпут після оновлення стану
+  //   }, 0);
+  // };
 
-  const handleBlur = (e) => {
-    setServiceName(e.target.value);
-    setIsInputVisible(false);
-  };
+  // const handleBlur = (e) => {
+  //   setServiceName(e.target.value);
+  //   setIsInputVisible(false);
+  // };
 
   const downloadAvatar = (e) => {
     const newAvatar = e.target.files[0];
@@ -85,66 +85,37 @@ export default function AddAutoServiceModal({
   };
 
   const handleSubmit = (values, actions) => {
-    // const {
-    //   address,
-    //   email,
-    //   name,
-    //   userCode,
-    //   account,
-    //   bank,
-    //   bankDetails,
-    //   legalAddress,
-    //   managerPhone,
-    //   managerName,
-    //   officePhoneNumber,
-    //   headPhoneNumber,
-    // } = values;
-
     const data = {
       ...values,
       logo,
       name: serviceName,
-      // name: serviceName,
-      // address,
-      // logo,
-      // email,
-      // fop_name: name,
-      // ipn: userCode,
-      // iban: account,
-      // bank_name: bank,
-      // mfo_bank: bankDetails,
-      // legal_address: legalAddress,
-      // manager_phone: managerPhone,
-      // office_phone: officePhoneNumber,
-      // manager_name: managerName,
-      // director_phone: headPhoneNumber,
     };
-    console.log(data);
 
     if (createAutoService) {
-      dispatch(createService(data))
-        .unwrap()
-        .then(() => {
-          toast.success("Сервіс успішно створено", {
-            position: "top-center",
-            duration: 3000,
-            style: {
-              background: "var(--bg-input)",
-              color: "var(--white)FFF",
-            },
-          });
-        })
-        .catch((err) => {
-          console.log(err);
+      // dispatch(createService(data))
+      //   .unwrap()
+      //   .then(() => {
+      //     toast.success("Сервіс успішно створено", {
+      //       position: "top-center",
+      //       duration: 3000,
+      //       style: {
+      //         background: "var(--bg-input)",
+      //         color: "var(--white)FFF",
+      //       },
+      //     });
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
 
-          toast.error("Щось сталося, спробуйте ще раз", {
-            position: "top-center",
-            style: {
-              background: "var(--bg-input)",
-              color: "var(--white)FFF",
-            },
-          });
-        });
+      //     toast.error("Щось сталося, спробуйте ще раз", {
+      //       position: "top-center",
+      //       style: {
+      //         background: "var(--bg-input)",
+      //         color: "var(--white)FFF",
+      //       },
+      //     });
+      //   });
+      console.log(data);
     } else if (updateAutoService) {
       dispatch(updateService({ payload: data, companyId: station.id }))
         .unwrap()
@@ -187,15 +158,19 @@ export default function AddAutoServiceModal({
         <Form>
           <div className={css.headerWrapper}>
             <BsXLg className={css.closeIcon} onClick={onClose} />
-            {createClient && <p className={css.autoServiceName}>ТОВ</p>}
-            {createAutoService && (
+            {createClient && (
+              <p className={css.autoServiceName}>
+                {serviceName ? serviceName : "ТОВ"}
+              </p>
+            )}
+            {(createAutoService || updateAutoService) && (
               <p className={css.autoServiceName}>
                 {serviceName ? serviceName : "Назва СТО"}
               </p>
             )}
             {updateAutoService && (
               <div className={css.serviceNameWrapper}>
-                {isInputVisible ? (
+                {/* {isInputVisible ? (
                   <Field
                     innerRef={inputRef}
                     value={serviceName}
@@ -207,7 +182,7 @@ export default function AddAutoServiceModal({
                   ></Field>
                 ) : (
                   <p className={css.autoServiceName}>{serviceName}</p>
-                )}
+                )} */}
                 <button
                   type="button"
                   className={css.btn}
@@ -223,7 +198,7 @@ export default function AddAutoServiceModal({
                       onDelete={() => {}}
                       containerRef
                       innerAccRef
-                      onEdit={onEdit}
+                      // onEdit={onEdit}
                     />
                   </div>
                 </button>
@@ -262,30 +237,30 @@ export default function AddAutoServiceModal({
             </div>
           </div>
           <div className={css.form}>
-            {createClient ||
-              (createAutoService && (
-                <div className={css.addressWrapper}>
-                  <label htmlFor="name" className={css.labelName}>
-                    {createClient ? `Назва компанії` : `Назва СТО`}
-                  </label>
+            {/* {createClient ||
+              (createAutoService && ( */}
+            <div className={css.addressWrapper}>
+              <label htmlFor="companyName" className={css.labelName}>
+                {createClient ? `Назва компанії` : `Назва СТО`}
+              </label>
 
-                  <div className={css.fieldWithErrorWrapper}>
-                    <Field
-                      className={css.input}
-                      type="text"
-                      name="name"
-                      placeholder="Назва"
-                      value={serviceName}
-                      onChange={(e) => setServiceName(e.target.value)}
-                    />
-                    <ErrorMessage
-                      name="name"
-                      component="div"
-                      className={css.errorMsg}
-                    />
-                  </div>
-                </div>
-              ))}
+              <div className={css.fieldWithErrorWrapper}>
+                <Field
+                  className={css.input}
+                  type="text"
+                  name="companyName"
+                  placeholder="Назва"
+                  value={serviceName}
+                  onChange={(e) => setServiceName(e.target.value)}
+                />
+                <ErrorMessage
+                  name="companyName"
+                  component="div"
+                  className={css.errorMsg}
+                />
+              </div>
+            </div>
+            {/* // ))} */}
             <div className={css.addressWrapper}>
               <label htmlFor="address" className={css.labelName}>
                 Фактична адреса
@@ -445,7 +420,7 @@ export default function AddAutoServiceModal({
                     className={css.input}
                     type="text"
                     name="manager_phone"
-                    placeholder="+380671234567"
+                    placeholder="380671234567"
                   />
                   <ErrorMessage
                     name="manager_phone"
@@ -478,7 +453,7 @@ export default function AddAutoServiceModal({
                     className={css.input}
                     type="text"
                     name="office_phone"
-                    placeholder="+380671234567"
+                    placeholder="380671234567"
                   />
                   <ErrorMessage
                     name="office_phone"
@@ -496,7 +471,7 @@ export default function AddAutoServiceModal({
                     className={css.input}
                     type="text"
                     name="director_phone"
-                    placeholder="+380671234567"
+                    placeholder="380671234567"
                   />
                   <ErrorMessage
                     name="director_phone"

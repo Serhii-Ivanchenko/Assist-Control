@@ -17,7 +17,6 @@
   background: var(--main-gray);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 6px 20px;
-  /* text-align: center; */
   color: var(--light-gray);
   font-size: 16px;
   font-style: normal;
@@ -80,6 +79,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 425px;
 }
 
 .popupContainer {
@@ -101,8 +101,6 @@
 }
 
 .dotsIcon {
-  /* width: 18px;
-  height: 18px; */
   color: var(--light-gray);
 }
 
@@ -215,8 +213,6 @@
 }
 
 .inputsWrapper {
-  /* display: flex;
-  gap: 22px; */
   display: grid;
   gap: 22px;
   grid-template-columns: 1fr 1fr;
