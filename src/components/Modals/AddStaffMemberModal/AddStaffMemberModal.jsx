@@ -97,8 +97,10 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       .max(30, "Занадто довге")
       .required("Поле повинно бути заповнене"),
     phone: Yup.string()
-      .min(10, "Занадто коротке")
-      .max(30, "Занадто довге")
+      .matches(
+        /^\+380\d{9}$/,
+        "Телефон повинен відповідати формату +380123456789"
+      )
       .required("Поле повинно бути заповнене"),
     address: Yup.string(),
     birthday: Yup.string(),
@@ -383,7 +385,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     <Field
                       name="phone"
                       className={`${css.input} ${css.inputPhone}`}
-                      placeholder="+380733291212"
+                      placeholder="380733291212"
                       value={formatPhone(values.phone)}
                       onChange={(e) => setFieldValue("phone", e.target.value)}
                     />

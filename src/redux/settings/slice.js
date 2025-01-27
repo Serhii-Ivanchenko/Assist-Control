@@ -217,6 +217,7 @@ const settingsSlice = createSlice({
       .addCase(updatePostData.pending, handlePending)
       .addCase(updatePostData.fulfilled, (state, action) => {
         state.isLoading = false;
+
         const postToEditIndex = state.posts.findIndex(
           (post) => post.id === action.payload.post_id
         );
@@ -229,7 +230,9 @@ const settingsSlice = createSlice({
             ...(action.payload.name_post && {
               name_post: action.payload.name_post,
             }),
-            ...(action.payload.status && { status: action.payload.status }),
+            ...(action.payload.status !== undefined && {
+              status: action.payload.status,
+            }),
           };
         }
       })
