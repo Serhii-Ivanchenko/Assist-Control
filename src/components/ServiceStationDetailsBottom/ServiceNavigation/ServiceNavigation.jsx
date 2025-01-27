@@ -8,6 +8,11 @@ import "slick-carousel/slick/slick-theme.css";
 import "./slider.css";
 // import { IoStarSharp } from "react-icons/io5";
 import RatingStars from "../../sharedComponents/RatingStars/RatingStars";
+import { useSelector } from "react-redux";
+import {
+  selectEmployees,
+  selectPosts,
+} from "../../../redux/settings/selectors";
 
 // const GoPrevArrow = ({ onClick }) => {
 //     return(
@@ -27,6 +32,8 @@ import RatingStars from "../../sharedComponents/RatingStars/RatingStars";
 
 export default function ServiceNavigation({ page, setPage }) {
   const sliderRef = useRef(null);
+  const posts = useSelector(selectPosts);
+  const employees = useSelector(selectEmployees);
 
   const settings = {
     dots: true,
@@ -72,7 +79,7 @@ export default function ServiceNavigation({ page, setPage }) {
           })}
         >
           <p className={css.title}>ПОСТИ</p>
-          <p className={css.value}>4</p>
+          <p className={css.value}>{posts.length}</p>
         </button>
         <button
           type="button"
@@ -82,7 +89,7 @@ export default function ServiceNavigation({ page, setPage }) {
           })}
         >
           <p className={css.title}>ПЕРСОНАЛ</p>
-          <p className={css.value}>8</p>
+          <p className={css.value}>{employees.length}</p>
         </button>
         <button
           type="button"

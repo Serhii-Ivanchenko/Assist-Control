@@ -1,7 +1,7 @@
 import css from "./StaffPart.module.css";
 import avatar from "../../../assets/images/avatar_default.png";
 import { BsPlusLg } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../../Modals/Modal/Modal";
 // import AddTeamMember from "../../Modals/UserSettingsModal/AddTeamMember/AddTeamMember.jsx"
 // import { IoStarSharp } from "react-icons/io5";
@@ -9,16 +9,22 @@ import Modal from "../../Modals/Modal/Modal";
 import AddStaffMemberModal from "../../Modals/AddStaffMemberModal/AddStaffMemberModal.jsx";
 import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
 import RatingStars from "../../sharedComponents/RatingStars/RatingStars.jsx";
-// import { useDispatch } from "react-redux";
-// import { getAllEmployees } from "../../../redux/settings/operations.js";
-// import { useSelector } from "react-redux";
-// import { selectEmployees } from "../../../redux/settings/selectors.js";
+import { useDispatch } from "react-redux";
+import {
+  deleteEmployee,
+  getAllEmployees,
+  updateEmployeeStatus,
+} from "../../../redux/settings/operations.js";
+import { useSelector } from "react-redux";
+import { selectEmployees } from "../../../redux/settings/selectors.js";
+import toast from "react-hot-toast";
 // import { BsFillCaretDownFill } from "react-icons/bs";
 // import clsx from "clsx";
 // import { Phone } from "@mui/icons-material";
 
 export default function StaffPart() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const baseUrl = "https://aps.assist.cam/set/employees";
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -33,43 +39,10 @@ export default function StaffPart() {
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState(null);
-  // const employees = useSelector(selectEmployees);
-  const [members, setMembers] = useState(
-    // []
-    [
-      {
-        name: "Максим Коваленко",
-        role: "Власник",
-        phone: "+38 (073) 329 12 12",
-        isDisabled: false,
-      },
-      {
-        name: "Максим Коваленко",
-        role: "Кухар",
-        phone: "+38 (073) 329 42 42",
-        isDisabled: false,
-      },
-      {
-        name: "Максим Коваленко",
-        role: "Механік",
-        phone: "+38 (073) 329 52 52",
-        isDisabled: false,
-      },
-      {
-        name: "Максим Коваленко",
-        role: "Механік",
-        phone: "+38 (073) 329 62 62",
-        isDisabled: false,
-      },
-      {
-        name: "Максим Коваленко",
-        role: "Механік",
-        phone: "+38 (073) 329 12 12",
-        isDisabled: false,
-      },
-    ]
-  );
-  // console.log("members", employees);
+  const employees = useSelector(selectEmployees);
+  // const [members, setMembers] = useState([]);
+  console.log("employees", employees);
+  // const imgSrc = baseUrl / member.logo;
 
   // useEffect(() => {
   //   if (employees && employees.length > 0) {
@@ -77,12 +50,32 @@ export default function StaffPart() {
   //   }
   // }, [employees]);
 
-  const toDisable = (index) => {
-    setMembers(
-      members.map((member, i) =>
-        i === index ? { ...member, isDisabled: !member.isDisabled } : member
-      )
-    );
+  const toDisable = (id, currentStatus) => {
+    const newStatus = currentStatus === 1 ? 0 : 1;
+
+    dispatch(updateEmployeeStatus({ employee_id: id, status: newStatus }))
+      .unwrap()
+      .then(() => {
+        toast.success("Статус успішно змінено :)", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating user data:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      });
   };
 
   const openModal = () => {
@@ -90,7 +83,7 @@ export default function StaffPart() {
   };
 
   const openEditModal = (employee) => {
-    // console.log("Opening modal for employee:", employee);
+    console.log("Opening modal for employee:", employee);
     setCurrentEmployee(employee);
     setIsOpen(true);
   };
@@ -100,25 +93,76 @@ export default function StaffPart() {
     setIsOpen(false);
   };
 
-  const deleteMember = (index) => {
-    setMembers((prevMembers) => prevMembers.filter((_, i) => i !== index));
+  // const deleteMember = (id) => {
+  //   dispatch(deleteEmployee(id))
+  //     .unwrap()
+  //     .then(() => {
+  //       dispatch(getAllEmployees())
+  //         .then(() => {
+  //           toast.success("Успішно видалено :)", {
+  //             position: "top-center",
+  //             duration: 3000,
+  //             style: {
+  //               background: "var(--bg-input)",
+  //               color: "var(--white)FFF",
+  //             },
+  //           });
+  //         })
+  //         .catch((error) => {
+  //           console.error("Error updating user data:", error);
+  //           toast.error("Щось пішло не так :(", {
+  //             position: "top-center",
+  //             duration: 3000,
+  //             style: {
+  //               background: "var(--bg-input)",
+  //               color: "var(--white)FFF",
+  //             },
+  //           });
+  //         });
+  //     });
+  // };
+
+  const deleteMember = (id) => {
+    dispatch(deleteEmployee(id))
+      .unwrap()
+      .then(() => {
+        toast.success("Успішно видалено :)", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating user data:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      });
   };
 
   return (
     <div className={css.StaffPart}>
       <div className={css.divForScroll}>
         <ul className={css.teamList}>
-          {members.map((member, index) => (
+          {employees.map((member, index) => (
             <li key={index} className={css.teamListItem}>
               <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                   <img
-                    src={avatar}
+                    src={member.logo ? `${baseUrl}/${member.logo}` : avatar}
                     alt={`user's photo`}
                     className={css.particularMemberPhoto}
                   />
                 </div>
-
+                {/* {console.log(`${baseUrl}/${member.logo}`)} */}
                 <div className={css.nameBox}>
                   <p className={css.memberName}>{member.name}</p>
                   <p className={css.memberEmail}> {member.role}</p>
@@ -131,12 +175,13 @@ export default function StaffPart() {
 
               <div className={css.containerForBtn}>
                 <SwitchableBtns
-                  onEdit={() => openEditModal(members[index])}
-                  onToggleDisable={() => toDisable(index)}
-                  onDelete={() => deleteMember(index)}
-                  isDisabled={member.isDisabled}
+                  onEdit={() => openEditModal(employees[index])}
+                  onToggleDisable={() => toDisable(member.id, member.status)}
+                  onDelete={() => deleteMember(member.id)}
+                  isDisabled={member.status}
                   showIconSave={true}
                   id={index}
+                  text={`працівника ${member.name}`}
                   // isEditing={isEditing}
                   // onRepeal={() => handleRepeal(index)}
                 />

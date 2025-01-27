@@ -3,7 +3,7 @@ import { BsFillCaretDownFill } from "react-icons/bs";
 import css from "./RightOfAccessSelect.module.css";
 import { BsCheck } from "react-icons/bs";
 
-export default function RightOfAccessSelect() {
+export default function RightOfAccessSelect({ setFieldValue }) {
   const pages = [
     { value: "video-control", page: "Моніторинг" },
     { value: "crm", page: "Планувальник" },
@@ -15,6 +15,7 @@ export default function RightOfAccessSelect() {
   ];
 
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedPages, setSelectedPages] = useState([]);
   const wrapperRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -29,6 +30,20 @@ export default function RightOfAccessSelect() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleCheckboxChange = (value) => {
+    setSelectedPages((prevSelected) => {
+      if (prevSelected.includes(value)) {
+        return prevSelected.filter((page) => page !== value);
+      } else {
+        return [...prevSelected, value];
+      }
+    });
+  };
+
+  useEffect(() => {
+    setFieldValue("selectedPages", selectedPages);
+  }, [selectedPages, setFieldValue]);
 
   return (
     <div className={css.container} ref={wrapperRef}>
@@ -49,8 +64,9 @@ export default function RightOfAccessSelect() {
                   //   name="all"
                   //   id="all"
                   className={css.checkbox}
-                  // checked={selectedStatus.length === 0 || selectedStatus.includes("")}
-                  // onChange={() => handleFilter("")}
+                  value={page.value}
+                  checked={selectedPages.includes(page.value)}
+                  onChange={() => handleCheckboxChange(page.value)}
                 />
                 <span className={css.cbMark}>
                   <BsCheck size={20} className={css.cbIcon} />

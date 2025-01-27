@@ -24,7 +24,7 @@ import ServiceBookingModal from "../../Modals/ServiceBookingModal/ServiceBooking
 import ArchiveModal from "../../Modals/ArchiveModal/ArchiveModal.jsx";
 import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal.jsx";
 
-export default function RecommendationsCardsItem({ car }) {
+export default function RecommendationsCardsItem({ car, isRecommendation }) {
   const visibility = useSelector(selectVisibilityRecomendations);
   const [isMonitoring, setisMonitoring] = useState("main");
   const [modalState, setModalState] = useState({
@@ -163,14 +163,16 @@ export default function RecommendationsCardsItem({ car }) {
           )}
           {modalState.notifications && (
             <Modal isOpen={modalState.notifications} onClose={closeModals}>
-              <NotificationModal onClose={closeModals} 
-               time="clientTime"
-               date="clientDate"
-               comment="clientComment"
-               connectionType="clientConnection"
-               accountingModal={true}
-               service="clientService"
-               setNotificationSent={setModalState}/>
+              <NotificationModal
+                onClose={closeModals}
+                time="clientTime"
+                date="clientDate"
+                comment="clientComment"
+                connectionType="clientConnection"
+                accountingModal={true}
+                service="clientService"
+                setNotificationSent={setModalState}
+              />
             </Modal>
           )}
           {visibility?.delBtn && (
@@ -183,7 +185,10 @@ export default function RecommendationsCardsItem({ car }) {
           )}
           {modalState.archive && (
             <Modal isOpen={modalState.archive} onClose={closeModals}>
-              <ArchiveModal onClose={closeModals} />
+              <ArchiveModal
+                onClose={closeModals}
+                isRecommendation={isRecommendation}
+              />
             </Modal>
           )}
         </div>

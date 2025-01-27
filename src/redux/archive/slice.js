@@ -32,7 +32,7 @@ const archiveSlice = createSlice({
       .addCase(addItemToArchive.pending, handlePending)
       .addCase(addItemToArchive.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.archiveData.push(action.payload);
+        state.archiveData.push(action.payload);
       })
       .addCase(addItemToArchive.rejected, handleRejected)
       .addCase(updateArchiveItem.pending, handlePending)
@@ -56,9 +56,9 @@ const archiveSlice = createSlice({
       .addCase(returnArchiveItem.pending, handlePending)
       .addCase(returnArchiveItem.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.archiveData = state.archiveData.filter(
-        //   (archiveItem) => archiveItem.archive_id === action.payload.archive_id
-        // );        
+        state.archiveData = state.archiveData.filter(
+          (archiveItem) => archiveItem.archive_id !== action.payload.archive_id
+        );
       })
       .addCase(returnArchiveItem.rejected, handleRejected),
 });

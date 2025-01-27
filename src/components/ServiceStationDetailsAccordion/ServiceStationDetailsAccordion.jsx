@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef ,  useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Accordion,
   AccordionSummary,
@@ -7,11 +8,18 @@ import {
 } from "@mui/material";
 import { BsCaretDownFill, BsPencil, BsXCircle } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
+import { getWorkSchedule } from "../../redux/settings/operations.js";
+import { selectSchedule } from "../../redux/settings/selectors.js"
+import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 // import { useState } from "react";
 import ScheduleTable from "../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 import css from "./ServiceStationDetailsAccordion.module.css";
 
 export default function ServiceStationDetailsAccordion({ onToggle }) {
+  const dispatch = useDispatch();
+  const workSсheduleData = useSelector(selectSchedule);
+  const selectedServiceId = useSelector(selectSelectedServiceId);
+
   const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   // Реф для доступа к generateBackendData
@@ -47,7 +55,19 @@ const handleCancelEdit = (event) => {
   }
 };
 
+   useEffect(() => {
+     const fetchWorkSсheduleData = async () => {
+       if (!selectedServiceId) {
+         return;
+       };
+        await dispatch(getWorkSchedule());
+       
+     };
 
+     fetchWorkSсheduleData();
+   }, [dispatch,  selectedServiceId]); 
+
+  console.log(workSсheduleData);
   // const activePeriods = [
   //   { day: "Monday", startTime: 9, endTime: 12, isActive: true },
   //   { day: "Monday", startTime: 14, endTime: 16, isActive: true },
