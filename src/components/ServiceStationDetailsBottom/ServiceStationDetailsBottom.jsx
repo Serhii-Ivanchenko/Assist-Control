@@ -31,27 +31,27 @@ const pageComponents = {
 
 export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
   const [page, setPage] = useState("station");
-  const selectedServiceInSettings = useSelector(selectedServiceInSettingsId);
+  // const selectedServiceInSettings = useSelector(selectedServiceInSettingsId);
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (!selectedServiceInSettings) {
-      console.log("Waiting for selectedServiceInSettings to be available...");
-      return;
-    }
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (!selectedServiceInSettings) {
+  //     console.log("Waiting for selectedServiceInSettings to be available...");
+  //     return;
+  //   }
 
-    const fetchData = async () => {
-      try {
-        console.log("Fetching data with ID:", selectedServiceInSettings);
-        await dispatch(getAllEmployees(selectedServiceInSettings)).unwrap();
-        await dispatch(getPosts(selectedServiceInSettings)).unwrap();
-      } catch (error) {
-        console.error("Помилка завантаження даних:", error);
-      }
-    };
+  //   const fetchData = async () => {
+  //     try {
+  //       console.log("Fetching data with ID:", selectedServiceInSettings);
+  //       await dispatch(getAllEmployees(selectedServiceInSettings)).unwrap();
+  //       await dispatch(getPosts(selectedServiceInSettings)).unwrap();
+  //     } catch (error) {
+  //       console.error("Помилка завантаження даних:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [dispatch, selectedServiceInSettings]);
+  //   fetchData();
+  // }, [dispatch, selectedServiceInSettings]);
 
   const getChangeablePartClass = () => {
     return page === "warehouse" ? css.noBackground : css.changeablePart;

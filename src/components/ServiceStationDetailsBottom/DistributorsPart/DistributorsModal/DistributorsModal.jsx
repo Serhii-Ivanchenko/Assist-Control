@@ -6,7 +6,7 @@ import AuthForm from "./AuthForm/AuthForm";
 import StatusToggle from "../../../sharedComponents/StatusToggle/StatusToggle";
 import PopupConnection from "./PopupConnection/PopupConnection";
 import DistributorsInfoForm from "./DistributorsInfoForm";
-import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
+// import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
 import UploadComponent from "../../../sharedComponents/UploadComponent/UploadComponent";
 import { RiSave3Fill } from "react-icons/ri";
 import styles from "./DistributorsModal.module.css";
@@ -89,15 +89,16 @@ function DistributorsModal({
       const distributorsInfoData = formRef.current?.values || {};
 
       const dataToUpdate = {
+        ...authData, // Дані з AuthForm
+        ...distributorsInfoData, // Дані з DistributorsInfoForm
+        logo: base64Logo, // Base64 логотип
         supplier_id: distributor.id,
-        name: distributor.name,
-        deliverySchedule: distributor.deliverySchedule || {}, // Якщо немає графіка доставки, передаємо порожній об'єкт
-        logo: base64Logo, // передаємо Base64 логотип
-        authData, // передаємо дані з форми авторизації
-        distributorsInfoData, // передаємо дані з форми постачальника
+        deliverySchedule: distributor.deliverySchedule || {}, // Перевірка наявності
       };
 
       console.log("Updated Payload:", dataToUpdate);
+      console.log("JSON.stringify", JSON.stringify(dataToUpdate));
+      console.log("supplier_id", distributor.id);
 
       const result = await dispatch(updateSupplierData(dataToUpdate)).unwrap();
       console.log("Оновлення успішне:", result);
@@ -247,10 +248,10 @@ function DistributorsModal({
         </div>
       </div>
       <div className={styles.scheduleContainer}>
-        <ScheduleAccordion
+        {/* <ScheduleAccordion
           ref={scheduleRef}
           deliveryData={distributor.deliverySchedule || null}
-        />
+        /> */}
       </div>
       <div className={styles.btnGroup}>
         <button

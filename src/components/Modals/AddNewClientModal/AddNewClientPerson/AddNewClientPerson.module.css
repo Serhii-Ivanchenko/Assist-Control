@@ -2,6 +2,7 @@
   background-color: var(--bg-secondary);
   padding: 40px;
   width: 580px;
+  border-radius: 12px;
 }
 
 .headerWrapper {
@@ -31,6 +32,9 @@
 
 .avatarWrapper {
   margin-bottom: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .avatarImage {

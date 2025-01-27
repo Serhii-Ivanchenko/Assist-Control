@@ -62,27 +62,26 @@ export default function AddNewClientPerson({ onClose }) {
               <BsXLg className={css.closeIcon} onClick={onClose} />
             </div>
             <div className={css.avatarWrapper}>
-              {avatar ? (
+              {avatar && (
                 <img
                   src={avatar}
                   alt="User avatar"
                   className={css.avatarImage}
                 />
-              ) : (
-                <div>
-                  <Field
-                    type="file"
-                    id="avatar"
-                    name="avatar"
-                    className={css.disabled}
-                    onChange={downloadAvatar}
-                  />
-                  <label htmlFor="avatar" className={css.avatarLabel}>
-                    <BsFillCameraFill className={css.camera} />
-                    <p className={css.uploadAvatarText}>+ Додати аватар</p>
-                  </label>
-                </div>
               )}
+              <div>
+                <Field
+                  type="file"
+                  id="avatar"
+                  name="avatar"
+                  className={css.disabled}
+                  onChange={downloadAvatar}
+                />
+                <label htmlFor="avatar" className={css.avatarLabel}>
+                  <BsFillCameraFill className={css.camera} />
+                  <p className={css.uploadAvatarText}>+ Додати аватар</p>
+                </label>
+              </div>
             </div>
             <div className={css.formWrapper}>
               <div className={css.inputWrapper}>

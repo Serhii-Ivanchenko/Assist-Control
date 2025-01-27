@@ -31,9 +31,12 @@
 }
 
 .serviceContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  /* display: flex;
+  flex-direction: row; */
+  /* justify-content: space-between; */
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
   align-items: center;
   width: 100%;
 }
@@ -150,10 +153,13 @@
 }
 
 .closedServiceWrapper {
-  display: flex;
+  /* display: flex; */
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr auto auto auto;
   width: 518px;
   padding: 10px 20px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
 
   background-color: var(--bg-input);
@@ -173,4 +179,10 @@
   flex-direction: row;
   align-items: center;
   gap: 50px;
+}
+
+.logo {
+  height: 40px;
+  object-fit: contain;
+  overflow: hidden;
 }
