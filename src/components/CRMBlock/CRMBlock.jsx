@@ -35,6 +35,10 @@ export default function CRMBlock() {
     }
   }, [dispatch, dates]);
 
+  const handleArchiveSuccess = () => {
+    dispatch(getRecordsForPeriod(dates));
+  };
+
   const handleDragStart = (e, car_id) => {
     e.dataTransfer.setData("text/plain", car_id);
     console.log("Drag start with ID:", car_id);
@@ -128,6 +132,7 @@ export default function CRMBlock() {
                 <DayCarsListCrm
                   records={filteredRecords}
                   onDragStart={handleDragStart}
+                  onArchiveSuccess={handleArchiveSuccess}
                 />
               </Column>
             );

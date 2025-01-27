@@ -1,0 +1,22 @@
+.modal {
+  background-color: var(--bg-secondary);
+  padding-top: 40px;
+  width: 580px;
+  border-radius: 12px;
+}
+
+.switchWrapper {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.text {
+  color: var(--light-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}

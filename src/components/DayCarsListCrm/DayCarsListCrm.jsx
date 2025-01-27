@@ -3,7 +3,7 @@ import DayCarsItemCrm from "../DayCarsItemCrm/DayCarsItemCrm.jsx";
 import styles from './DayCarsListCrm.module.css';
 import { selectVisibilityCar } from "../../redux/visibility/selectors.js";
 
-export default function DayCarsListCrm({ records, onDragStart }) {
+export default function DayCarsListCrm({ records, onDragStart, onArchiveSuccess }) {
   const visibility = useSelector(selectVisibilityCar);
 
   if (records.length === 0) return null;
@@ -17,6 +17,7 @@ export default function DayCarsListCrm({ records, onDragStart }) {
             car={car}
             onDragStart={onDragStart}
             visibility={visibility}
+            onArchiveSuccess={onArchiveSuccess}
           />
         ))}
       </ul>

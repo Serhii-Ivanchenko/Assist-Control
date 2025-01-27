@@ -14,8 +14,6 @@ export const getAllArchiveData = createAsyncThunk(
           "company-id": serviceId,
         },
       });
-      console.log("getAllArchiveData", response.data);
-
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -41,7 +39,7 @@ export const addItemToArchive = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response?.data || "Помилка сервера");
     }
   }
 );
@@ -78,21 +76,24 @@ export const returnArchiveItem = createAsyncThunk(
   async (returnedItemData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
+    console.log("Отримані дані для запиту:", returnedItemData);
+
     try {
-      const { archive_id , newStatus} = returnedItemData;
+      const { archive_id, status } = returnedItemData;
       const response = await axiosInstance.patch(
-        `/crm/archive/return_archive/?archive_id=${archive_id}&status=${newStatus}`,
+        `/crm/archive/return_archive/`,
+        null,
         {
+          params: { archive_id, status },
           headers: {
-            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
           },
         }
+       
       );
-      console.log("returnArchiveItem", response.data);
-
       return response.data;
     } catch (error) {
+      console.error("Помилка при запиті до сервера:", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

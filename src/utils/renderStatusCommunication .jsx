@@ -13,7 +13,7 @@ const renderStatusCommunication = (status, styles = {}, isFilter) => {
 
   if (status === "all_appeal") {
     statusClass = styles.all || "";
-    statusText = "всі";
+    statusText = "ВСІ";
     background = "var(--status-gradient-all-calls)";
     borderColor = "var(--glow-all-calls)";
     icon = (
@@ -92,6 +92,7 @@ const renderStatusCommunication = (status, styles = {}, isFilter) => {
         icon = null;
     }
   }
+
 
   return (
     <div
