@@ -24,7 +24,7 @@ import toast from "react-hot-toast";
 
 export default function StaffPart() {
   const dispatch = useDispatch();
-  const baseUrl = "https://aps.assist.cam/developers#";
+  // const baseUrl = "https://aps.assist.cam/developers#";
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -157,7 +157,7 @@ export default function StaffPart() {
               <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                   <img
-                    src={member.logo ? `${baseUrl}/${member.logo}` : avatar}
+                    src={member.logo || avatar}
                     alt={`user's photo`}
                     className={css.particularMemberPhoto}
                   />
@@ -169,7 +169,11 @@ export default function StaffPart() {
                 </div>
               </div>
 
-              <RatingStars rating={5} ratingGap={css.ratingGap} />
+              <RatingStars
+                rating={member.rating}
+                // rating={3}
+                ratingGap={css.ratingGap}
+              />
 
               <p className={css.memberRole}> {member.phone} </p>
 

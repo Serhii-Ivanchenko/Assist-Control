@@ -35,6 +35,7 @@ import {
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import Select from "./Select/Select.jsx";
+import { ImFilePdf } from "react-icons/im";
 
 registerLocale("uk", uk);
 
@@ -268,7 +269,12 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
 
       for (const [key, file] of Object.entries(values.files)) {
         if (file) {
+          console.log("Received file:", file); // Додайте це для дебагу
           base64Files[key] = await new Promise((resolve, reject) => {
+            if (!(file instanceof Blob)) {
+              reject(new Error("Неправильний формат файлу"));
+              return;
+            }
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result); // Data URL (Base64)
             reader.onerror = (error) => reject(error);
@@ -340,7 +346,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       actions.resetForm();
       onClose();
     } catch (error) {
-      console.error("Помилка створення працівника:", error);
+      console.error("Помилка створення/oновлення працівника:", error);
       toast.error("Помилка при створенні/оновленні!", {
         position: "top-center",
         duration: 3000,
@@ -682,17 +688,18 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     ref={(el) => (buttonRefs.current[0] = el)}
                   >
                     <label className={css.docLabel}>
-                      {contractFile || employee.contract ? (
-                        <BsReceipt className={css.iconAgr} />
-                      ) : (
-                        <span style={{ width: "18px", height: "18px" }} />
-                      )}
+                      <BsReceipt className={css.iconAgr} />
                       Договір підряда
                       <BsThreeDotsVertical
                         className={css.icon}
                         onClick={() => toggleSettings(0)}
                         ref={buttonRefs.current[0]}
                       />
+                      {contractFile || employee.contract ? (
+                        <ImFilePdf className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                     </label>
                     {settingsIsOpen === 0 && (
                       <ThreeDotsModal
@@ -717,17 +724,18 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     ref={(el) => (buttonRefs.current[1] = el)}
                   >
                     <label className={css.docLabel}>
-                      {employmentFile || employee.employment ? (
-                        <BsReceipt className={css.iconAgr} />
-                      ) : (
-                        <span style={{ width: "18px", height: "18px" }} />
-                      )}
+                      <BsReceipt className={css.iconAgr} />
                       Договір про найм
                       <BsThreeDotsVertical
                         className={css.icon}
                         onClick={() => toggleSettings(1)}
                         ref={buttonRefs.current[1]}
                       />
+                      {employmentFile || employee.employment ? (
+                        <ImFilePdf className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                     </label>
                     {settingsIsOpen === 1 && (
                       <ThreeDotsModal
@@ -752,17 +760,18 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     ref={(el) => (buttonRefs.current[2] = el)}
                   >
                     <label className={css.docLabel}>
-                      {agreementFile || employee.agreement ? (
-                        <BsReceipt className={css.iconAgr} />
-                      ) : (
-                        <span style={{ width: "18px", height: "18px" }} />
-                      )}
+                      <BsReceipt className={css.iconAgr} />
                       Договір МВ
                       <BsThreeDotsVertical
                         className={css.icon}
                         ref={buttonRefs.current[2]}
                         onClick={() => toggleSettings(2)}
                       />
+                      {agreementFile || employee.agreement ? (
+                        <ImFilePdf className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                     </label>
                     {settingsIsOpen === 2 && (
                       <ThreeDotsModal
