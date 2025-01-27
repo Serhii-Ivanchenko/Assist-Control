@@ -16,7 +16,7 @@ import DotsPopover from "../PopoversInArchive/DotsPopover/DotsPopover";
 import { StatusPopover } from "../../sharedComponents/StatusPopover/StatusPopover";
 import { statusesArchiveEdit } from "../../../utils/dataToRender";
 import { useDispatch } from "react-redux";
-import { updateArchiveItem } from "../../../redux/archive/operations";
+import { getAllArchiveData, updateArchiveItem } from "../../../redux/archive/operations";
 
 export default function ArchiveCarItem({ id, visiblePopovers, togglePopover }) {
   const carsData = useSelector(selectArchiveData);
@@ -95,6 +95,7 @@ export default function ArchiveCarItem({ id, visiblePopovers, togglePopover }) {
   
     try {
       await dispatch(updateArchiveItem(data)).unwrap();
+      await dispatch(getAllArchiveData()).unwrap();
     } catch (error) {
       console.error("Помилка оновлення статусу:", error);
     } finally {

@@ -55,7 +55,7 @@ export const updateArchiveItem = createAsyncThunk(
     
     try {
       const response = await axiosInstance.patch(
-        `/crm/archive/update?archive_id=${archive_id}`, 
+        `/crm/archive/update/?archive_id=${archive_id}`, 
         { reason_add },
         {
           headers: {
