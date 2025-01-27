@@ -85,6 +85,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [employee, setEmployee] = useState(employeeInfo || {});
   const [laborDoc, setLaborDoc] = useState(null);
   const [showLoginWarning, setShowLoginWarning] = useState(false);
+  const [phone, setPhone] = useState("");
   // const [logo, setLogo] = useState(null); // стан для прев'ю лого
   // const [logoBase64, setLogoBase64] = useState(null); // стан, куди записується лого в base64
 
@@ -153,6 +154,16 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   };
 
   const formatPhone = (value) => {
+    let digits = value.replace(/[^\d]/g, "");
+
+    if (!digits.startsWith("38")) {
+      digits = "38" + digits;
+    }
+
+    return "+" + digits.slice(0, 12);
+  };
+
+  const handlePhoneInput = (value) => {
     let digits = value.replace(/[^\d]/g, "");
 
     if (digits.length >= 10) {
@@ -227,7 +238,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
 
   const initialValues = {
     name: employee.name || "",
-    phone: employee.phone || "",
+    phone: employee.phone || phone,
     address: employee.address || "м. Київ, вул. Шевченка, 1",
     birthday: employee.birthday || new Date(),
     position: employee.position || "Механік",
@@ -268,15 +279,14 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       const base64Files = {};
 
       for (const [key, file] of Object.entries(values.files)) {
-        if (file) {
-          console.log("Received file:", file); // Додайте це для дебагу
+        if (typeof file === "string" && file === employee[key]) {
+          // Якщо файл не змінювався, пропускаємо
+          continue;
+        } else if (file instanceof Blob) {
+          // Якщо це новий файл, конвертуємо його у Base64
           base64Files[key] = await new Promise((resolve, reject) => {
-            if (!(file instanceof Blob)) {
-              reject(new Error("Неправильний формат файлу"));
-              return;
-            }
             const reader = new FileReader();
-            reader.onload = () => resolve(reader.result); // Data URL (Base64)
+            reader.onload = () => resolve(reader.result);
             reader.onerror = (error) => reject(error);
             reader.readAsDataURL(file);
           });
@@ -392,8 +402,12 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                       name="phone"
                       className={`${css.input} ${css.inputPhone}`}
                       placeholder="380733291212"
-                      value={formatPhone(values.phone)}
-                      onChange={(e) => setFieldValue("phone", e.target.value)}
+                      // value={phone}
+                      onChange={(e) => {
+                        const formattedInput = handlePhoneInput(e.target.value);
+                        setPhone(formattedInput);
+                        setFieldValue("phone", formatPhone(e.target.value));
+                      }}
                     />
                     <button
                       type="button"
