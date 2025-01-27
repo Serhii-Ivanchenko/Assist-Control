@@ -136,7 +136,7 @@ export const updateEmployeeStatus = createAsyncThunk(
       console.log("company-id", serviceId);
 
       const { employee_id, status } = newStatus;
-       console.log("Переданий статус:", status);
+      console.log("Переданий статус:", status);
       const response = await axiosInstance.patch(
         `/set/employees/${employee_id}/status/?status=${status}`,
         null,

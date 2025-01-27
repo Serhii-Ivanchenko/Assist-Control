@@ -194,7 +194,7 @@ const settingsSlice = createSlice({
       .addCase(updateWorkSchedule.pending, handlePending)
       .addCase(updateWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.schedule = { ...state.schedule, ...action.payload };
+        // state.schedule = { ...state.schedule, ...action.payload };
       })
       .addCase(updateWorkSchedule.rejected, handleRejected)
 

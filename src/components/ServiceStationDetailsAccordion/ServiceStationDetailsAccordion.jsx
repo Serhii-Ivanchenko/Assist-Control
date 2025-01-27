@@ -1,4 +1,4 @@
-import { useState, useRef ,  useEffect} from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Accordion,
@@ -8,22 +8,26 @@ import {
 } from "@mui/material";
 import { BsCaretDownFill, BsPencil, BsXCircle } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
-import { getWorkSchedule, updateWorkSchedule } from "../../redux/settings/operations.js";
-import { selectSchedule } from "../../redux/settings/selectors.js"
-import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
+import {
+  getWorkSchedule,
+  updateWorkSchedule,
+} from "../../redux/settings/operations.js";
+import { selectSchedule } from "../../redux/settings/selectors.js";
+// import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 // import { useState } from "react";
 import ScheduleTable from "../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 import css from "./ServiceStationDetailsAccordion.module.css";
+import { selectedServiceInSettingsId } from "../../redux/service/selectors.js";
 
 export default function ServiceStationDetailsAccordion({ onToggle }) {
   const dispatch = useDispatch();
   const workScheduleData = useSelector(selectSchedule);
-  const selectedServiceId = useSelector(selectSelectedServiceId);
+  // const selectedServiceId = useSelector(selectedServiceInSettingsId);
 
   const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   // Реф для доступа к generateBackendData
   const detailsRef = useRef();
   const handleChange = (e, expanded) => {
@@ -46,7 +50,7 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
   //   setIsEditing((prev) => !prev);
   // };
 
- const handleEditToggle = async (event) => {
+  const handleEditToggle = async (event) => {
     event.stopPropagation();
 
     if (isEditing) {
@@ -62,62 +66,58 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
     setIsEditing((prev) => !prev);
   };
 
-const handleCancelEdit = (event) => {
-  event.stopPropagation(); 
-  setIsEditing(false);
+  const handleCancelEdit = (event) => {
+    event.stopPropagation();
+    setIsEditing(false);
 
-  // Сбрасываем данные через реф
-  if (detailsRef.current?.resetGridData) {
-    detailsRef.current.resetGridData();
-  }
+    // Сбрасываем данные через реф
+    if (detailsRef.current?.resetGridData) {
+      detailsRef.current.resetGridData();
+    }
   };
-  
+
   const handleDataSave = async (data) => {
     try {
       setIsSaving(true); // Устанавливаем флаг загрузки
 
       // Передача данных на бекенд с unwrap
       const response = await dispatch(updateWorkSchedule(data)).unwrap();
-      
+
       // Лог успешного сохранения
       console.log("Данные успешно сохранены:", response);
-       await dispatch(getWorkSchedule(selectedServiceId)).unwrap();
+      // await dispatch(getWorkSchedule(selectedServiceId)).unwrap();
     } catch (error) {
       // Лог ошибок
       console.error("Ошибка при сохранении данных:", error);
-
     } finally {
       setIsSaving(false); // Сбрасываем флаг загрузки
     }
   };
-  
 
+  //  useEffect(() => {
+  //    const fetchWorkScheduleData = async () => {
+  //      if (!selectedServiceId) {
+  //        return;
+  //      };
+  //       setIsLoading(true);
+  //       try {
+  //       await dispatch(getWorkSchedule()).unwrap();
 
-   useEffect(() => {
-     const fetchWorkScheduleData = async () => {
-       if (!selectedServiceId) {
-         return;
-       };
-        setIsLoading(true);
-        try {
-        await dispatch(getWorkSchedule()).unwrap();
-       
-      } catch (error) {
-        console.error("Ошибка загрузки данных:", error);
-      } finally {
-        setIsLoading(false); // Сбрасываем индикатор загрузки
-      }
-    };
+  //     } catch (error) {
+  //       console.error("Ошибка загрузки данных:", error);
+  //     } finally {
+  //       setIsLoading(false); // Сбрасываем индикатор загрузки
+  //     }
+  //   };
 
-    //     await dispatch(getWorkSchedule());
-       
-    //  };
+  //   //     await dispatch(getWorkSchedule());
 
-     fetchWorkScheduleData();
-   }, [dispatch,  selectedServiceId]); 
+  //   //  };
 
-  console.log('workScheduleData', workScheduleData);
- 
+  //    fetchWorkScheduleData();
+  //  }, [dispatch,  selectedServiceId]);
+
+  console.log("workScheduleData", workScheduleData);
 
   return (
     <Accordion
@@ -160,42 +160,37 @@ const handleCancelEdit = (event) => {
           Налаштування робочого графіка:
         </Typography>
 
-        {isExpanded && (
-          isEditing ? (
-              <div className={css.blockflex}> 
-                
-              <button onClick={handleCancelEdit} className={css.editbtn} style={{marginRight: "0"}} >
-                <BsXCircle className={css.mainIcon} size={21} /> </button> 
-      
-      <button
-            onClick={handleEditToggle}
-            // style={{ color: "var(--white)", marginLeft: "15px" }}
-            className={css.editbtn} style={{marginRight: "0"}}
-          > <RiSave3Fill className={css.mainIcon} size={21} /> </button> 
-          </div>
-            ) : (
-      <button
-            onClick={handleEditToggle}
-            // style={{ color: "var(--white)", marginLeft: "15px" }}
-            className={css.editbtn}
-          > <BsPencil className={css.mainIcon} /> </button> 
-              
-            )
-        
-          // <button
-          //   onClick={handleEditToggle}
-          //   // style={{ color: "var(--white)", marginLeft: "15px" }}
-          //   className={css.editbtn}
-          // >
-          //   {isEditing ? (
-          //   //  <div className={css.blockflex}> <BsXCircle className={css.mainIcon} size={21}  />
-          //       <RiSave3Fill className={css.mainIcon} size={21} />
-          //     // </div>
-          //   ) : (
-          //     <BsPencil className={css.mainIcon} />
-          //   )}
-          // </button>
-        )}
+        {isExpanded &&
+          (isEditing ? (
+            <div className={css.blockflex}>
+              <button
+                onClick={handleCancelEdit}
+                className={css.editbtn}
+                style={{ marginRight: "0" }}
+              >
+                <BsXCircle className={css.mainIcon} size={21} />{" "}
+              </button>
+
+              <button
+                onClick={handleEditToggle}
+                // style={{ color: "var(--white)", marginLeft: "15px" }}
+                className={css.editbtn}
+                style={{ marginRight: "0" }}
+              >
+                {" "}
+                <RiSave3Fill className={css.mainIcon} size={21} />{" "}
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={handleEditToggle}
+              // style={{ color: "var(--white)", marginLeft: "15px" }}
+              className={css.editbtn}
+            >
+              {" "}
+              <BsPencil className={css.mainIcon} />{" "}
+            </button>
+          ))}
       </AccordionSummary>
       <AccordionDetails
         style={{
@@ -204,16 +199,16 @@ const handleCancelEdit = (event) => {
           marginTop: "19px",
         }}
       >
- {!isLoading &&  workScheduleData.length > 0 && (
-   
-    <ScheduleTable
-      ref={detailsRef}
-      isEditing={isEditing}
-      activePeriods={workScheduleData}
-      onDataSave={handleDataSave}
-    />
- 
-  )}
+        {/* {!isLoading &&  workScheduleData.length > 0 && ( */}
+
+        <ScheduleTable
+          ref={detailsRef}
+          isEditing={isEditing}
+          activePeriods={workScheduleData}
+          onDataSave={handleDataSave}
+        />
+
+        {/* )} */}
 
         {/* <ScheduleTable ref={detailsRef} isEditing={isEditing}
           //  activePeriods={activePeriods}
