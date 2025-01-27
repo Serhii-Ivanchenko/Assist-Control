@@ -13,7 +13,7 @@ import {
   createService,
   updateService,
 } from "../../../redux/service/operations.js";
-import Popup from "./Popup/popup.jsx";
+import Popup from "./Popup/Popup.jsx";
 
 export default function AddAutoServiceModal({
   onClose,
