@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
-// import { changeCarStatus } from "../../redux/cars/operations.js";
 import {
   changeCarStatusCRM,
   getRecordsForPeriod,
@@ -16,9 +15,13 @@ import { labelNamesInCrm, statusMapping } from "../../utils/dataToRender.js";
 import { borderHeaderInCrm } from "../../utils/borderHeaderInCrm.jsx";
 import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
 import { toggleVisibilityRecords } from "../../redux/visibility/slice.js";
+import Modal from "../Modals/Modal/Modal.jsx";
+import AcceptModal from "../Modals/AcceptModal/AcceptModal.jsx";
 
 export default function CRMBlock() {
-  // const [isCrm, setIsCrm] = useState("record");
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
+  const [carToUpdate, setCarToUpdate] = useState(null); // Зберігаємо машину для оновлення статусу
+
   const dispatch = useDispatch();
   const periodRecords = useSelector(selectPeriodRecords);
   const dates = useSelector(selectDates);
@@ -62,17 +65,42 @@ export default function CRMBlock() {
         return;
       }
 
-      dispatch(changeCarStatusCRM({ carId: item.car_id, status }))
+      if (status === "complete") {
+        setCarToUpdate(item); // Зберігаємо машину, щоб змінити її статус на complete
+        setIsAcceptModalOpen(true); // Відкриваємо модальне вікно для підтвердження
+      } else {
+        dispatch(changeCarStatusCRM({ carId: item.car_id, status }))
+          .unwrap()
+          .then(() => {
+            console.log("Updated status in frontend:", { ...item, status });
+            dispatch(getRecordsForPeriod(dates));
+          })
+          .catch((error) => {
+            console.error("Error updating status:", error);
+            toast.error("Помилка при оновленні статусу: " + error.message);
+          });
+      }
+    }
+  };
+
+  const handleConfirmStatusChange = () => {
+    if (carToUpdate) {
+      dispatch(changeCarStatusCRM({ carId: carToUpdate.car_id, status: "complete" }))
         .unwrap()
         .then(() => {
-          console.log("Updated status in frontend:", { ...item, status });
+          console.log("Car status updated to complete:", carToUpdate);
           dispatch(getRecordsForPeriod(dates));
+          setIsAcceptModalOpen(false); // Закриваємо модальне вікно
         })
         .catch((error) => {
-          console.error("Error updating status:", error);
-          toast.error("Помилка при оновленні статусу: " + error.message);
+          console.error("Error confirming status change:", error);
+          toast.error("Помилка при підтвердженні зміни статусу.");
         });
     }
+  };
+
+  const handleCancelStatusChange = () => {
+    setIsAcceptModalOpen(false); // Закриваємо модальне вікно без змін
   };
 
   const getItemsForStatus = (status) => {
@@ -132,6 +160,14 @@ export default function CRMBlock() {
                   onDragStart={handleDragStart}
                   onArchiveSuccess={handleArchiveSuccess}
                 />
+                {isAcceptModalOpen && (
+                  <Modal isOpen={isAcceptModalOpen} onClose={handleCancelStatusChange}>
+                    <AcceptModal
+                      onConfirm={handleConfirmStatusChange}
+                      onCancel={handleCancelStatusChange}
+                    />
+                  </Modal>
+                )}
               </Column>
             );
           })}

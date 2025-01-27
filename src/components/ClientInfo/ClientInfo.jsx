@@ -33,7 +33,9 @@ import { FiPlus } from "react-icons/fi";
 import AddNewClientModal from "../Modals/AddNewClientModal/AddNewClientModal.jsx";
 import ClientOrganizationInfo from "../Modals/ClientInfo/ClientOrganizationInfo/ClientOrganizationInfo.jsx";
 
-export default function ClientInfo({ clientInfo }) {
+export default function ClientInfo({ clientInfo,car }) {
+  console.log(car);
+  
   // Client
   const client = clientInfo.client;
 

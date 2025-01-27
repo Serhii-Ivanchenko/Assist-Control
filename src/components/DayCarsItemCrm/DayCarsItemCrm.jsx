@@ -230,6 +230,7 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
               carId={car_id}
               // location={isCrm}
               carName={car.auto}
+              car={car} 
             />
           )}
 

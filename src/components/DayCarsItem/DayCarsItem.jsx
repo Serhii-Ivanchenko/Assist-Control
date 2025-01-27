@@ -127,6 +127,7 @@ export default function DayCarsItem({ car, isModal }) {
               carId={car_id}
               // location={isMonitoring}
               carName={car.auto}
+              car={car}
             />
           )}
         </div>

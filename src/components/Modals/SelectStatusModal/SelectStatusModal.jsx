@@ -74,6 +74,7 @@ export default function SelectStatusModal({ onClose, id }) {
 
     try {
       await dispatch(returnArchiveItem(itemData)).unwrap();
+      // dispatch(getRecordsForPeriod());
       toast.success("Запис успішно відновлено!");
       onClose();
     } catch (error) {
