@@ -102,10 +102,10 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeStatus.fulfilled, (state, action) => {
         state.isLoading = false;
         const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.employee_id === action.payload.employee_id
+          (employee) => employee.id === action.payload.employee_id
         );
-        state.employees[employeeToEditIndex].isDisabled =
-          action.payload.isDisabled;
+
+        state.employees[employeeToEditIndex].status = action.meta.arg.status;
       })
       .addCase(updateEmployeeStatus.rejected, handleRejected)
 
@@ -188,13 +188,13 @@ const settingsSlice = createSlice({
       .addCase(getWorkSchedule.pending, handlePending)
       .addCase(getWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.schedule = action.payload.work_schedule;
+        state.schedule = action.payload.days;
       })
       .addCase(getWorkSchedule.rejected, handleRejected)
       .addCase(updateWorkSchedule.pending, handlePending)
       .addCase(updateWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.schedule = { ...state.schedule, ...action.payload };
+        // state.schedule = { ...state.schedule, ...action.payload };
       })
       .addCase(updateWorkSchedule.rejected, handleRejected)
 
@@ -217,6 +217,7 @@ const settingsSlice = createSlice({
       .addCase(updatePostData.pending, handlePending)
       .addCase(updatePostData.fulfilled, (state, action) => {
         state.isLoading = false;
+
         const postToEditIndex = state.posts.findIndex(
           (post) => post.id === action.payload.post_id
         );
@@ -229,7 +230,9 @@ const settingsSlice = createSlice({
             ...(action.payload.name_post && {
               name_post: action.payload.name_post,
             }),
-            ...(action.payload.status && { status: action.payload.status }),
+            ...(action.payload.status !== undefined && {
+              status: action.payload.status,
+            }),
           };
         }
       })

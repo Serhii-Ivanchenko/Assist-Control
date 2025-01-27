@@ -2,15 +2,8 @@
   background-color: var(--bg-secondary);
   padding: 40px;
   width: 580px;
+  border-radius: 12px;
 }
-
-/* .switchWrapper {
-  display: flex;
-  margin-bottom: 10px;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
-} */
 
 .headerWrapper {
   position: relative;
@@ -56,6 +49,12 @@
 .closeIcon {
   position: absolute;
   right: 4px;
+  width: 18px;
+  height: 18px;
+  fill: var(--light-gray);
+}
+
+.closeIconCreateClient {
   width: 18px;
   height: 18px;
   fill: var(--light-gray);
@@ -155,20 +154,30 @@
   color: var(--icon-gray);
 }
 
+.cloud {
+  fill: var(--light-gray);
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.isOrganization {
-  margin-top: 33px;
-}
-
 .addressWrapper {
   display: grid;
   gap: 6px;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 374px;
+  align-items: center;
+}
+
+.addressWrapperCreateClient {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: auto 1fr 18px;
   align-items: center;
 }
 

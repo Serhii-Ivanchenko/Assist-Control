@@ -1,0 +1,79 @@
+.modal {
+  background-color: var(--bg-secondary);
+  padding: 40px;
+  width: 580px;
+  border-radius: 12px;
+}
+
+.headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.header {
+  color: var(--light-gray);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.closeIcon {
+  width: 18px;
+  height: 18px;
+  fill: var(--light-gray);
+}
+
+.closeIcon:hover {
+  cursor: pointer;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.addressWrapper {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: auto 374px;
+  align-items: center;
+}
+
+.label {
+  color: var(--light-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.input {
+  border-radius: 4px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+  padding: 6px 20px;
+  text-align: center;
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 100%;
+}
+
+.inputsWrapper {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

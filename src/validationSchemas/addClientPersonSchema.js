@@ -8,9 +8,11 @@ export const AddClientPersonSchema = Yup.object().shape({
   phoneNumber1: Yup.string()
     .matches(/^\+380\d{9}$/, "Телефон повинен мати формат +380123456789")
     .required("Це поле повинно бути заповнене"),
-  phoneNumber2: Yup.string()
-    .matches(/^\+380\d{9}$/, "Телефон повинен мати формат +380123456789")
-    .required("Це поле повинно бути заповнене"),
+  phoneNumber2: Yup.string().matches(
+    /^\+380\d{9}$/,
+    "Телефон повинен мати формат +380123456789"
+  ),
+  // .required("Це поле повинно бути заповнене"),
   email: Yup.string()
     .matches(
       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,

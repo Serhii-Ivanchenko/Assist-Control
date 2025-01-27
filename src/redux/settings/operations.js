@@ -57,22 +57,30 @@ export const updateEmployeeData = createAsyncThunk(
     try {
       const { employee_id, files, ...dataToUpdate } = employeeDataToUpdate;
 
-      const base64Files = await Promise.all(
-        files.map((file) => {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result); // Повертає Base64
-            reader.onerror = (error) => reject(error);
-            reader.readAsDataURL(file); // Читає файл як Base64
-          });
-        })
-      );
+      const base64Files = { ...files };
 
       // Створюємо об'єкт для відправки
       const payload = {
         ...dataToUpdate, // Додаємо дані співробітника
-        files: base64Files, // Додаємо Base64-файли
+        ...base64Files, // Додаємо готові Base64-файли
       };
+
+      // const base64Files = await Promise.all(
+      //   files.map((file) => {
+      //     return new Promise((resolve, reject) => {
+      //       const reader = new FileReader();
+      //       reader.onload = () => resolve(reader.result); // Повертає Base64
+      //       reader.onerror = (error) => reject(error);
+      //       reader.readAsDataURL(file); // Читає файл як Base64
+      //     });
+      //   })
+      // );
+
+      // // Створюємо об'єкт для відправки
+      // const payload = {
+      //   ...dataToUpdate, // Додаємо дані співробітника
+      //   files: base64Files, // Додаємо Base64-файли
+      // };
 
       const response = await axiosInstance.patch(
         `/set/employees/${employee_id}/update/`,
@@ -125,15 +133,18 @@ export const updateEmployeeStatus = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
+      console.log("company-id", serviceId);
+
       const { employee_id, status } = newStatus;
+      console.log("Переданий статус:", status);
       const response = await axiosInstance.patch(
         `/set/employees/${employee_id}/status/?status=${status}`,
+        null,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
             "Content-Type": "application/json",
-
           },
         }
       );
@@ -385,7 +396,7 @@ export const getWorkSchedule = createAsyncThunk(
       const response = await axiosInstance.get(`/set/get_work_schedule/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
-          "company-id": 'serviceId',
+          "company-id": serviceId,
         },
       });
       console.log("getWorkSchedule", response.data);
@@ -533,7 +544,7 @@ export const deletePost = createAsyncThunk(
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
-           "post-id": postId,
+          "post-id": postId,
         },
       });
       console.log("deletePost", response.data);
