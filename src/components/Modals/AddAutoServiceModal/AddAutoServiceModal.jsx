@@ -24,7 +24,7 @@ export default function AddAutoServiceModal({
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [logo, setLogo] = useState(null);
-  // const [logo, setLogo] = useState(station?.logo || null);
+  const [logoPreview, setLogoPreview] = useState(station?.logo || null);
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [serviceName, setServiceName] = useState(
     updateAutoService ? station.name : null
@@ -70,7 +70,7 @@ export default function AddAutoServiceModal({
 
   const downloadAvatar = (e) => {
     const newAvatar = e.target.files[0];
-    // setLogo(URL.createObjectURL(newAvatar));
+    setLogoPreview(URL.createObjectURL(newAvatar));
     const makeBase64Logo = async () => {
       const base64Logo = await new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -231,9 +231,9 @@ export default function AddAutoServiceModal({
             )}
           </div>
           <div className={css.logo}>
-            {logo && (
+            {logoPreview && (
               <img
-                src={station?.logo || logo}
+                src={logoPreview || station?.logo}
                 alt="logo"
                 className={css.logoImg}
               />

@@ -136,7 +136,7 @@ export const updateEmployeeStatus = createAsyncThunk(
       console.log("company-id", serviceId);
 
       const { employee_id, status } = newStatus;
-       console.log("Переданий статус:", status);
+      console.log("Переданий статус:", status);
       const response = await axiosInstance.patch(
         `/set/employees/${employee_id}/status/?status=${status}`,
         null,
@@ -396,7 +396,7 @@ export const getWorkSchedule = createAsyncThunk(
       const response = await axiosInstance.get(`/set/get_work_schedule/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
-          "company-id": "serviceId",
+          "company-id": serviceId,
         },
       });
       console.log("getWorkSchedule", response.data);

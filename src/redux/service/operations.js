@@ -105,7 +105,7 @@ export const updateService = createAsyncThunk(
       // };
 
       const response = await axiosInstance.patch(
-        `/set/update_company///?company_id=${companyId}`,
+        `/set/update_company/?company_id=${companyId}`,
         payload,
         {
           headers: {

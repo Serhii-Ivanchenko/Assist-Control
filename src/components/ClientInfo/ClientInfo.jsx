@@ -211,6 +211,8 @@ export default function ClientInfo({ clientInfo }) {
               <button
                 type="button"
                 className={css.editBtn}
+                onClick={openClientInfoModal}
+
                 // onClick={() => {
                 //   openDetailedInfoModal(), notEditInfo();
                 // }}
@@ -218,7 +220,7 @@ export default function ClientInfo({ clientInfo }) {
                 <BsEyeFill
                   size={16}
                   className={css.pencilIcon}
-                  onClick={openClientInfoModal}
+                  // onClick={openClientInfoModal}
                 />
               </button>
               <button
