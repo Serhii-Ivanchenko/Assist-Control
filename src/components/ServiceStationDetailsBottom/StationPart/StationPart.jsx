@@ -2,37 +2,75 @@ import { useEffect, useRef, useState } from "react";
 import css from "./StationPart.module.css";
 import { BsPlusLg } from "react-icons/bs";
 import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns";
+import { useDispatch } from "react-redux";
+import { getPosts, updatePostData } from "../../../redux/settings/operations";
+import { useSelector } from "react-redux";
+import { selectPosts } from "../../../redux/settings/selectors";
+import { createPost, deletePost } from "../../../redux/settings/operations";
+import toast from "react-hot-toast";
 
 export default function StationPart() {
-  const [posts, setPosts] = useState([
-    { name: "ПОСТ 1", isDisabled: false, id: 1 },
-    { name: "ПОСТ 2", isDisabled: false, id: 2 },
-    { name: "ПОСТ 3", isDisabled: false, id: 3 },
-    { name: "ПОСТ 4", isDisabled: false, id: 4 },
-  ]);
-  const [newPost, setNewPost] = useState("");
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await dispatch(getPosts());
+  //   };
+  //   fetchData();
+  // });
+  const posts = useSelector(selectPosts);
+
+  useEffect(() => {
+    console.log("posts", posts);
+  }, [posts]);
+
+  const [newPostName, setNewPostName] = useState("");
   const [isEditing, setIsEditing] = useState(null);
   const [editedValue, setEditedValue] = useState({});
   const inputFocusRef = useRef();
   const scrollToTheLastItemRef = useRef();
 
-  const toDisable = (index) => {
-    setPosts(
-      posts.map((post, i) =>
-        i === index ? { ...post, isDisabled: !post.isDisabled } : post
-      )
-    );
+  const toDisable = (post_id, status) => {
+    const newStatus = status === 1 ? 0 : 1;
+    const updatedPost = { post_id, status: newStatus };
+    dispatch(updatePostData(updatedPost))
+      .unwrap()
+      .then(() => {
+        toast.success("Статус успішно оновлено :)", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+        // dispatch(getPosts());
+      })
+      .catch((error) => {
+        console.error("Error updating user data:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      });
   };
 
-  const handleChangePN = (newName, index) => {
-    setPosts(
-      posts.map((post, i) => (i === index ? { ...post, name: newName } : post))
-    );
+  const handleChangePN = (post_id, newName) => {
+    setEditedValue((prev) => ({
+      ...prev,
+      [post_id]: newName,
+    }));
   };
 
   const handleEditing = (postId) => {
     const postToEdit = posts.find((post) => post.id === postId);
-    setEditedValue(postToEdit);
+    setEditedValue((prev) => ({
+      ...prev,
+      [postId]: postToEdit.name_post,
+    }));
     setIsEditing(isEditing === postId ? null : postId);
   };
 
@@ -43,12 +81,17 @@ export default function StationPart() {
   }, [isEditing]);
 
   const handleAddPost = () => {
-    if (newPost.trim()) {
-      setPosts([
-        ...posts,
-        { name: newPost, isDisabled: false, id: Date.now() },
-      ]);
-      setNewPost("");
+    if (newPostName.trim()) {
+      const newPost = { name_post: newPostName, status: 1 };
+      dispatch(createPost(newPost))
+        .unwrap()
+        .then(() => {
+          dispatch(getPosts());
+          setNewPostName("");
+        })
+        .catch((error) => {
+          console.error("Error creating post:", error);
+        });
     }
   };
 
@@ -61,21 +104,108 @@ export default function StationPart() {
     }
   }, [posts]);
 
-  const deletePost = (index) => {
-    setPosts((prevPosts) => prevPosts.filter((_, i) => i !== index));
+  const deletePostById = (id) => {
+    dispatch(deletePost(id))
+      .unwrap()
+      .then(() => {
+        toast.success("Успішно видалено :)", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+        // dispatch(getPosts());
+      })
+      .catch((error) => {
+        console.error("Error updating user data:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      });
+    // });
   };
 
-  const handleRepeal = () => {
-    if (editedValue) {
-      setPosts(
-        posts.map((post) =>
-          post.id === editedValue.id
-            ? { ...post, name: editedValue.name }
-            : post
-        )
-      );
-      setIsEditing(null);
+  const handleRepeal = (postId) => {
+    setEditedValue((prev) => {
+      const newState = { ...prev };
+      delete newState[postId];
+      return newState;
+    });
+    setIsEditing(null);
+  };
+
+  const handleSaveUpdatedData = (post_id) => {
+    const newName = editedValue[post_id];
+
+    if (newName && newName.trim()) {
+      const updatedPostName = { post_id, name_post: newName };
+      dispatch(updatePostData(updatedPostName))
+        .unwrap()
+        .then(() => {
+          toast.success("Назву поста успішно оновлено :)", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
+          setIsEditing(null);
+          setEditedValue((prev) => {
+            const newState = { ...prev };
+            delete newState[post_id];
+            return newState;
+          });
+        })
+        .catch((error) => {
+          console.error("Error updating user data:", error);
+          toast.error("Щось пішло не так :(", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
+        });
     }
+    // .then(() => {
+    //   dispatch(getPosts())
+    //     .then(() => {
+    //       toast.success("Назву поста успішно оновлено :)", {
+    //         position: "top-center",
+    //         duration: 3000,
+    //         style: {
+    //           background: "var(--bg-input)",
+    //           color: "var(--white)FFF",
+    //         },
+    //       });
+    //       setIsEditing(null);
+    //       setEditedValue((prev) => {
+    //         const newState = { ...prev };
+    //         delete newState[post_id];
+    //         return newState;
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error updating user data:", error);
+    //       toast.error("Щось пішло не так :(", {
+    //         position: "top-center",
+    //         duration: 3000,
+    //         style: {
+    //           background: "var(--bg-input)",
+    //           color: "var(--white)FFF",
+    //         },
+    //       });
+    //     });
+    // });
   };
 
   return (
@@ -84,28 +214,29 @@ export default function StationPart() {
       <div className={css.divForScroll} ref={scrollToTheLastItemRef}>
         <ul className={css.postList}>
           {posts.map((post, index) => (
-            <li key={post.id} className={css.postListItem}>
+            <li key={post.id || `temp-${index}`} className={css.postListItem}>
               {isEditing === post.id ? (
                 <input
-                  value={post.name}
-                  onChange={(e) => handleChangePN(e.target.value, index)}
+                  value={editedValue[post.id] || ""}
+                  onChange={(e) => handleChangePN(post.id, e.target.value)}
                   className={css.inputForPostName}
                   ref={inputFocusRef}
                 />
               ) : (
-                <p className={css.postName}>{post.name}</p>
+                <p className={css.postName}>{post.name_post}</p>
               )}
 
               <SwitchableBtns
                 onEdit={() => handleEditing(post.id)}
-                onToggleDisable={() => toDisable(index)}
-                onDelete={() => deletePost(index)}
-                isDisabled={post.isDisabled}
+                onSave={() => handleSaveUpdatedData(post.id)}
+                onToggleDisable={() => toDisable(post.id, post.status)}
+                onDelete={() => deletePostById(post.id)}
+                isDisabled={post.status}
                 showIconSave={true}
                 id={post.id}
                 isEditing={isEditing}
                 onRepeal={() => handleRepeal(post.id)}
-                text={post.name}
+                text={post.name_post}
               />
             </li>
           ))}
@@ -115,8 +246,8 @@ export default function StationPart() {
         <input
           placeholder="Додати новий пост..."
           className={css.addInput}
-          value={newPost}
-          onChange={(e) => setNewPost(e.target.value)}
+          value={newPostName}
+          onChange={(e) => setNewPostName(e.target.value)}
         />
         <button type="button" className={css.addBtn} onClick={handleAddPost}>
           <span className={css.plus}>

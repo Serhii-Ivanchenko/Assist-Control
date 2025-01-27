@@ -13,7 +13,7 @@ const renderStatusCars = (status, complete_d, styles = {}, isFilter) => {
 
   if (status === "all") {
     statusClass = styles.all || "";
-    statusText = "всі авто";
+    statusText = "ВСІ АВТО";
     background = "var(--status-gradient-all)";
     borderColor = "var(--glow-all)";
     icon = (

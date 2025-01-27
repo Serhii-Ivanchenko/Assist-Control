@@ -12,7 +12,7 @@ import ArchiveReasonPopover from "./PopoversInArchive/ArchiveReasonPopover/Archi
 import { selectArchiveData } from "../../redux/archive/selectors";
 import { useState } from "react";
 import Modal from "../Modals/Modal/Modal";
-import SelectStatusModal from "../sharedComponents/SelectStatusModal/SelectStatusModal";
+import SelectStatusModal from "../Modals/SelectStatusModal/SelectStatusModal";
 
 export default function ArchiveCarItem({ id, visiblePopovers, togglePopover }) {
   const carsData = useSelector(selectArchiveData);
@@ -102,6 +102,7 @@ export default function ArchiveCarItem({ id, visiblePopovers, togglePopover }) {
         isVisible={visiblePopovers[`popover3-${id}`]}
         togglePopover={() => togglePopover("popover3", id)}
         onRestore={openDotsPopoverOpen}
+        onEdit={openDotsPopoverOpen}
       />
       <Modal isOpen={isDotsPopoverOpen} onClose={closeDotsPopoverOpen}>
         <SelectStatusModal onClose={closeDotsPopoverOpen}  id={id}/>

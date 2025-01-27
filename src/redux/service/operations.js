@@ -46,22 +46,22 @@ export const getAllServices = createAsyncThunk(
 // Create new service
 export const createService = createAsyncThunk(
   "service/createService",
-  async ({ serviceData, logo }, thunkAPI) => {
+  async (payload, thunkAPI) => {
     // const state = thunkAPI.getState();
     // const serviceId = state.auth.userData.selectedServiceId;
     try {
-      const base64Logo = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result); // Повертає Base64
-        reader.onerror = (error) => reject(error);
-        reader.readAsDataURL(logo); // Читає файл як Base64
-      });
+      //   const base64Logo = await new Promise((resolve, reject) => {
+      //     const reader = new FileReader();
+      //     reader.onload = () => resolve(reader.result); // Повертає Base64
+      //     reader.onerror = (error) => reject(error);
+      //     reader.readAsDataURL(logo); // Читає файл як Base64
+      //   });
 
       // Створюємо об'єкт для відправки
-      const payload = {
-        ...serviceData, // Додаємо дані співробітника
-        file: base64Logo, // Додаємо Base64-файли
-      };
+      // const payload = {
+      //   ...serviceData, // Додаємо дані співробітника
+      //   file: base64Logo, // Додаємо Base64-файли
+      // };
       const response = await axiosInstance.post(
         `/set/create_company/`,
         payload,
@@ -84,32 +84,33 @@ export const createService = createAsyncThunk(
 // Update service data
 export const updateService = createAsyncThunk(
   "service/updateService",
-  async (serviceDataToUpdate, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const serviceId = state.service.selectedServiceInSettingsId;
+  async ({ payload, companyId }, thunkAPI) => {
+    // const state = thunkAPI.getState();
+    // const serviceId = state.service.selectedServiceInSettingsId;
+
     try {
-      const { logo, ...serviceData } = serviceDataToUpdate;
+      // const { logo, ...serviceData } = serviceDataToUpdate;
 
-      const base64Logo = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result); // Повертає Base64
-        reader.onerror = (error) => reject(error);
-        reader.readAsDataURL(logo); // Читає файл як Base64
-      });
+      // const base64Logo = await new Promise((resolve, reject) => {
+      //   const reader = new FileReader();
+      //   reader.onload = () => resolve(reader.result); // Повертає Base64
+      //   reader.onerror = (error) => reject(error);
+      //   reader.readAsDataURL(logo); // Читає файл як Base64
+      // });
 
-      // Створюємо об'єкт для відправки
-      const payload = {
-        ...serviceData, // Додаємо дані співробітника
-        file: base64Logo, // Додаємо Base64-файли
-      };
+      // // Створюємо об'єкт для відправки
+      // const payload = {
+      //   ...serviceData, // Додаємо дані співробітника
+      //   file: base64Logo, // Додаємо Base64-файли
+      // };
 
-      const response = await axiosInstance.post(
-        `/set/update_service/`,
+      const response = await axiosInstance.patch(
+        `/set/update_company/?company_id=${companyId}`,
         payload,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
+            // "company-id": serviceId,
           },
         }
       );

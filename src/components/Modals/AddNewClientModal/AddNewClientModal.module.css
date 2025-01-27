@@ -2,6 +2,7 @@
   background-color: var(--bg-secondary);
   padding-top: 40px;
   width: 580px;
+  border-radius: 12px;
 }
 
 .switchWrapper {

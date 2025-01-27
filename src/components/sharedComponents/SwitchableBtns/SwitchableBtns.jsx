@@ -10,6 +10,7 @@ import DeleteModal from "./DeleteModal/DeleteModal";
 function SwitchableBtns({
   isDisabled,
   onEdit,
+  onSave,
   onDelete,
   onToggleDisable,
   isEditing,
@@ -27,7 +28,7 @@ function SwitchableBtns({
           <BsXCircle className={styles.btn} onClick={onRepeal} />
           <RiSave3Fill
             className={styles.btn}
-            onClick={onEdit}
+            onClick={onSave}
             style={{ transform: "scale(1.32)" }}
           />
         </>
@@ -50,8 +51,8 @@ function SwitchableBtns({
       )}
       <BsPower
         className={clsx(styles.btn, {
-          [styles.active]: !isDisabled,
-          [styles.disabled]: isDisabled,
+          [styles.active]: isDisabled === 1,
+          [styles.disabled]: isDisabled === 0,
         })}
         onClick={onToggleDisable}
       />

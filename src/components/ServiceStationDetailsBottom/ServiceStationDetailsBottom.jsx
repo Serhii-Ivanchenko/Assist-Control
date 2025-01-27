@@ -11,7 +11,9 @@ import RatingPart from "./RatingPart/RatingPart";
 import CheckoutPart from "./CheckoutPart/CheckoutPart";
 import PlanPart from "./PlanPart/PlanPart";
 import { useDispatch } from "react-redux";
-import { getAllEmployees } from "../../redux/settings/operations.js";
+import { getAllEmployees, getPosts } from "../../redux/settings/operations.js";
+import { useSelector } from "react-redux";
+import { selectedServiceInSettingsId } from "../../redux/service/selectors.js";
 
 const pageComponents = {
   plan: <PlanPart />,
@@ -29,19 +31,27 @@ const pageComponents = {
 
 export default function ServiceStationDetailsBottom({ isAccordionExpanded }) {
   const [page, setPage] = useState("station");
+  const selectedServiceInSettings = useSelector(selectedServiceInSettingsId);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!selectedServiceInSettings) {
+      console.log("Waiting for selectedServiceInSettings to be available...");
+      return;
+    }
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          await dispatch(getAllEmployees()).unwrap();
-        } catch (error) {
-          console.error("Помилка завантаження даних:", error);
-        }
-      };
-      fetchData();
-    }, [dispatch]);
+    const fetchData = async () => {
+      try {
+        console.log("Fetching data with ID:", selectedServiceInSettings);
+        await dispatch(getAllEmployees(selectedServiceInSettings)).unwrap();
+        await dispatch(getPosts(selectedServiceInSettings)).unwrap();
+      } catch (error) {
+        console.error("Помилка завантаження даних:", error);
+      }
+    };
+
+    fetchData();
+  }, [dispatch, selectedServiceInSettings]);
 
   const getChangeablePartClass = () => {
     return page === "warehouse" ? css.noBackground : css.changeablePart;
