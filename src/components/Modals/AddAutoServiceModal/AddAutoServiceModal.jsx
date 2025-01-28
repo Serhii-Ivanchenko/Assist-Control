@@ -230,14 +230,14 @@ export default function AddAutoServiceModal({
                   ref={buttonRef}
                 >
                   <BsThreeDotsVertical className={css.dotsIcon} />
-                  <div className={css.popupContainer}>
-                    <Popup
-                      isOpen={isPopupOpen}
-                      onClose={() => setIsPopupOpen(false)}
-                      buttonRef={buttonRef}
-                      onDelete={openDeleteServiceModal}
-                    />
-                  </div>
+                  {/* <div className={css.popupContainer}> */}
+                  <Popup
+                    isOpen={isPopupOpen}
+                    onClose={() => setIsPopupOpen(false)}
+                    buttonRef={buttonRef}
+                    onDelete={openDeleteServiceModal}
+                  />
+                  {/* </div> */}
                 </button>
               </div>
             )}
