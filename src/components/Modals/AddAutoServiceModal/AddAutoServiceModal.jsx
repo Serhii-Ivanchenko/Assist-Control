@@ -15,6 +15,8 @@ import {
   updateService,
 } from "../../../redux/service/operations.js";
 import Popup from "./Popup/Popup.jsx";
+import Modal from "../Modal/Modal.jsx";
+import DeleteServiceModal from "../DeleteServiceModal/DeleteServiceModal.jsx";
 
 export default function AddAutoServiceModal({
   onClose,
@@ -56,6 +58,16 @@ export default function AddAutoServiceModal({
     e.stopPropagation();
     setIsPopupOpen((prevState) => !prevState);
   };
+
+  const [isDeleteServiceModalOpen, setIsDeleteServiceModalOpen] =
+    useState(false);
+
+  const openDeleteServiceModal = (e) => {
+    e.stopPropagation();
+    setIsDeleteServiceModalOpen(true);
+    // onClose();
+  };
+  const closeDeleteServiceModal = () => setIsDeleteServiceModalOpen(false);
 
   // const onEdit = () => {
   //   setIsInputVisible(true);
@@ -223,7 +235,7 @@ export default function AddAutoServiceModal({
                       isOpen={isPopupOpen}
                       onClose={() => setIsPopupOpen(false)}
                       buttonRef={buttonRef}
-                      onDelete={() => {}}
+                      onDelete={openDeleteServiceModal}
                     />
                   </div>
                 </button>
@@ -516,6 +528,14 @@ export default function AddAutoServiceModal({
           </div>
         </Form>
       </Formik>
+      {isDeleteServiceModalOpen && (
+        <Modal
+          isOpen={isDeleteServiceModalOpen}
+          onClose={closeDeleteServiceModal}
+        >
+          <DeleteServiceModal onClose={closeDeleteServiceModal} />
+        </Modal>
+      )}
     </div>
   );
 }
