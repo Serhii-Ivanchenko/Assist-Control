@@ -130,6 +130,9 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
     plate: carNumber,
   } = car;
 
+  console.log('car-car-car-car', car);
+  
+
   const carPhoto = photoUrl || absentAutoImg;
 
   const formatCarNumber = (number) => {
@@ -168,10 +171,10 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
     <div
       className={`${styles.crmBlockDayCarsItemContainer} ${
         isDragging ? styles.dragging : ""
-      }`}
+      } ${status === 'complete' && styles.cursorComplete}`}
       style={getBackgroundStyle(status)}
       id={car.car_id}
-      draggable
+      draggable={status !== "complete"}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDrag={handleDrag}
@@ -237,54 +240,47 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
           </div>
         )}
         <div className={styles.btnContainer}>
-            <CarDetailButton
-              carId={car_id}
-              // location={isCrm}
-              carName={car.auto}
-              car={car} 
-            />
+          <CarDetailButton
+            carId={car_id}
+            // location={isCrm}
+            carName={car.auto}
+            car={car}
+          />
           {(status === "repair" ||
             status === "diagnostic" ||
-            status === "complete") &&
-            <PaymentBtn />}
+            status === "complete") && <PaymentBtn />}
 
           {status === "new" && (
-            <button
-              className={styles.plus}
-              onClick={openServiceBookingModal}
-            >
+            <button className={styles.plus} onClick={openServiceBookingModal}>
               <BsPlusLg className={styles.iconPlus} />
             </button>
           )}
 
           {status === "new" || status === "complete" ? (
-            <button
-              className={styles.btnSave}
-              onClick={openArchiveModal}
-            >
+            <button className={styles.btnSave} onClick={openArchiveModal}>
               <BsLayerBackward size={16} />
             </button>
           ) : null}
           {status === "complete" && (
-                        <button
-                          className={styles.clockContainer}
-                          onClick={openNotificationModal}
-                        >
-                          <GiAlarmClock className={styles.iconClock} size={20} />
-                        </button>
-                      )}
-                       <Modal isOpen={modalState.notifications} onClose={closeModals}>
-                  <NotificationModal
-                    onClose={closeModals}
-                    time="clientTime"
-                    date="clientDate"
-                    comment="clientComment"
-                    connectionType="clientConnection"
-                    accountingModal={true}
-                    service="clientService"
-                    setNotificationSent={setModalState}
-                  />
-                </Modal>
+            <button
+              className={styles.clockContainer}
+              onClick={openNotificationModal}
+            >
+              <GiAlarmClock className={styles.iconClock} size={20} />
+            </button>
+          )}
+          <Modal isOpen={modalState.notifications} onClose={closeModals}>
+            <NotificationModal
+              onClose={closeModals}
+              time="clientTime"
+              date="clientDate"
+              comment="clientComment"
+              connectionType="clientConnection"
+              accountingModal={true}
+              service="clientService"
+              setNotificationSent={setModalState}
+            />
+          </Modal>
 
           {modalState.serviceBooking && (
             <Modal isOpen={modalState.serviceBooking} onClose={closeModals}>
@@ -294,7 +290,12 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
 
           {modalState.archive && (
             <Modal isOpen={modalState.archive} onClose={closeModals}>
-              <ArchiveModal onClose={closeModals} carId={car_id} location="records"  onSuccess={onArchiveSuccess}/>
+              <ArchiveModal
+                onClose={closeModals}
+                carId={car_id}
+                location="records"
+                onSuccess={onArchiveSuccess}
+              />
             </Modal>
           )}
         </div>
@@ -376,9 +377,7 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
               )}
             >
               <BsStopwatch size={13} color="#D5ACF3" />
-              <p className={styles.time}>
-                {renderAppointmentDate()}
-              </p>
+              <p className={styles.time}>{renderAppointmentDate()}</p>
             </div>
           )}
           {visibility?.totalPrice && (
