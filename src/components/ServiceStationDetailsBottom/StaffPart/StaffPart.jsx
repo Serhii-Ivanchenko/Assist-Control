@@ -171,7 +171,6 @@ export default function StaffPart() {
 
               <RatingStars
                 rating={member.rating}
-                // rating={3}
                 ratingGap={css.ratingGap}
               />
 

@@ -276,24 +276,50 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       : null;
 
     try {
+      // const base64Files = {};
+
+      // for (const [key, file] of Object.entries(values.files)) {
+      //   if (typeof file === "string" && file === employee[key]) {
+      //     // Якщо файл не змінювався, пропускаємо
+      //     continue;
+      //   } else if (file instanceof Blob) {
+      //     // Якщо це новий файл, конвертуємо його у Base64
+      //     base64Files[key] = await new Promise((resolve, reject) => {
+      //       const reader = new FileReader();
+      //       reader.onload = () => resolve(reader.result);
+      //       reader.onerror = (error) => reject(error);
+      //       reader.readAsDataURL(file);
+      //     });
+      //   } else {
+      //     base64Files[key] = null;
+      //   }
+      // }
       const base64Files = {};
 
       for (const [key, file] of Object.entries(values.files)) {
         if (typeof file === "string" && file === employee[key]) {
-          // Якщо файл не змінювався, пропускаємо
-          continue;
+          continue; // Якщо файл не змінювався, пропускаємо
         } else if (file instanceof Blob) {
-          // Якщо це новий файл, конвертуємо його у Base64
           base64Files[key] = await new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
+            reader.onload = () => {
+              try {
+                const base64Data = reader.result.split(",")[1];
+                resolve(base64Data);
+              } catch (error) {
+                reject(new Error(`Failed to parse Base64: ${error.message}`));
+              }
+            };
+            reader.onerror = (error) =>
+              reject(new Error(`FileReader error: ${error.message}`));
             reader.readAsDataURL(file);
           });
         } else {
           base64Files[key] = null;
         }
       }
+
+      console.log("Base64 files:", base64Files);
 
       const employeeData = {
         ...values,
