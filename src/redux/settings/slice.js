@@ -72,19 +72,19 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeData.pending, handlePending)
       .addCase(updateEmployeeData.fulfilled, (state, action) => {
         state.isLoading = false;
-        const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.id === action.payload.employee_id
-        );
+        // const employeeToEditIndex = state.employees.findIndex(
+        //   (employee) => employee.id === action.payload.employee_id
+        // );
 
-        if (
-          // action.payload.status === 200 &&
-          employeeToEditIndex !== -1
-        ) {
-          state.employees[employeeToEditIndex] = {
-            ...state.employees[employeeToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
-        }
+        // if (
+        //   // action.payload.status === 200 &&
+        //   employeeToEditIndex !== -1
+        // ) {
+        //   state.employees[employeeToEditIndex] = {
+        //     ...state.employees[employeeToEditIndex], // Залишаємо старі дані
+        //     ...action.meta.arg, // Додаємо дані, які відправляли
+        //   };
+        // }
       })
       .addCase(updateEmployeeData.rejected, handleRejected)
 
@@ -194,7 +194,7 @@ const settingsSlice = createSlice({
       .addCase(updateWorkSchedule.pending, handlePending)
       .addCase(updateWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.schedule = { ...state.schedule, ...action.payload };
+        state.schedule = action.meta.arg.days ;
       })
       .addCase(updateWorkSchedule.rejected, handleRejected)
 
