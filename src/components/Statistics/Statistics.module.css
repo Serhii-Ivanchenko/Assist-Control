@@ -1,8 +1,8 @@
 .statisticsCont {
   display: flex;
   flex-direction: column;
-  gap: min(0.757vw, 14px);
-  margin-bottom: min(1.481vh, 16px);
+  gap: clamp(9px, min(1.296vh, 0.757vw), 14px);
+  margin-bottom: clamp(10px, min(1.481vh, 0.864vw), 16px);
 }
 
 .statisticsTitle {

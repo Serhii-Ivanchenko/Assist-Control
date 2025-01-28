@@ -1,15 +1,20 @@
 .wrapper {
   display: flex;
-  width: 366px;
-  height: 74px;
-  gap: 8px;
+  padding: 8px 18px;
+  /* 
+  width: clamp(360px, min(28.162vw, 11.481vh * 4.201), 521px);
+  height: clamp(83px, min(11.481vh, 28.162vw / 4.201), 124px); */
+  width: 100%;
+  height: auto;
 
-  background-color: var(--bg-secondary);
   border: transparent;
-  border-radius: 6px;
-  padding: 5px 8px 5px 5px;
+  border-radius: 12px;
+  gap: 18px;
 
   position: relative;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  background: var(--bg-input);
 }
 
 .newStatus {
@@ -45,12 +50,21 @@
 }
 
 .viewRepairStatus {
+  fill: var(--light-gray);
+  background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
+    var(--status-gradient-view-repair) border-box;
+  border: 2px solid transparent;
   color: var(--orange);
 }
 
 .imgContainer {
   display: flex;
-  width: 64px;
+  /* width: 101px;
+  height: 104px; */
+  width: clamp(69px, min(5.459vw, 9.629vh * 0.971), 101px);
+  height: clamp(70px, min(9.629vh, 5.459vw / 0.971), 104px);
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .carInfoContainer {
@@ -61,20 +75,24 @@
 .carReg {
   color: var(--white);
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
   font-weight: 300;
+  text-transform: uppercase;
+  /* font-size: 16px; */
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
+  line-height: 1.1875em;
 }
 
 .carBrand {
   color: var(--light-gray);
   font-family: "Roboto", sans-serif;
-  font-size: 12px;
+  /* font-size: 16px; */
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 209px;
-  /* margin-top: 2px; */
+  text-transform: uppercase;
 }
 
 .carTimeStamp {
@@ -82,49 +100,68 @@
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Roboto", sans-serif;
   font-size: 15px;
+  font-size: clamp(11px, min(1.388vh, 0.81vw), 15px);
   font-weight: 700;
-
-  margin-top: 9px;
+  /* margin-top: 36px; */
+  margin-top: clamp(24px, min(3.333vh, 1.946vw), 36px);
 }
 
 .detailsContainer {
   display: flex;
   flex-direction: column-reverse;
-  gap: 20px;
+  /* gap: 49px; */
+  gap: clamp(32px, min(4.537vh, 2.648vw), 49px);
   margin-left: auto;
   align-items: flex-end;
 }
 
+/* 
 .statusContainer {
   display: flex;
   height: 26px;
   border: transparent;
   border-radius: 5px;
-}
+} */
 
 .carStatus {
   width: auto;
   height: 26px;
+  height: clamp(17px, min(2.407vh, 1.405vw), 26px);
   padding: 1px 6px;
   text-transform: uppercase;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: "Roboto", sans-serif;
   font-size: 14px;
+  font-size: clamp(12px, min(1.296vh, 0.756vw), 14px);
   font-weight: 500;
   line-height: 1.42;
   border: transparent;
   border-radius: 5px;
 
   display: inline-flex;
-  align-items: flex-end;
+  /* align-items: center; */
   justify-content: flex-end;
-  margin-bottom: 5px;
   gap: 10px;
+  gap: clamp(7px, min(0.925vh, 0.54vw), 10px);
+  position: relative;
+}
+
+.carStatus::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  filter: blur(5px);
+  border-radius: 0 5px 5px 0;
 }
 
 .newStatus .carStatus {
   color: var(--status-new);
   background: var(--current-status-gradient-new);
+  border-right: 1px solid var(--glow-new);
+  border-left: transparent;
 }
 
 .newStatus .carStatus::after {
@@ -135,6 +172,7 @@
   color: var(--status-repair);
   background: var(--current-status-gradient-repair);
   border-right: 1px solid var(--glow-repair);
+  border-left: transparent;
 }
 
 .repairStatus .carStatus::after {
@@ -145,6 +183,7 @@
   color: var(--status-diag);
   background: var(--current-status-gradient-diag);
   border-right: 1px solid var(--glow-diag);
+  border-left: transparent;
 }
 
 .checkRepairStatus .carStatus::after {
@@ -155,214 +194,31 @@
   color: var(--current-status-complete);
   background: var(--status-gradient-complete);
   border-right: 1px solid var(--glow-complete);
+  border-left: transparent;
 }
 
 .completeStatus .carStatus::after {
   background: var(--glow-complete);
 }
 
+.viewRepairStatus .carStatus {
+  color: var(--status-view-repair);
+  background: var(--current-status-gradient-view-repair);
+  border-right: 1px solid var(--glow-view-repair);
+  border-left: transparent;
+}
+
 .viewRepairStatus .carStatus::after {
   background: var(--glow-view-repair);
 }
-@media screen and (min-width: 1850px) {
-  .wrapper {
-    display: flex;
-    width: 521px;
-    height: auto;
-    padding: 8px 18px;
 
-    background: var(--bg-input);
-    border: transparent;
-    border-radius: 12px;
-    /* padding: 5px 8px 5px 5px; */
+.archiveIcon {
+  fill: var(--light-gray);
+}
 
-    gap: 18px;
-
-    position: relative;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  }
-
-  .imgContainer {
-    display: flex;
-    width: 101px;
-    height: 104px;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .carReg {
-    text-transform: uppercase;
-    font-size: 16px;
-    line-height: 1.1875em;
-  }
-
-  .carBrand {
-    text-transform: uppercase;
-    font-size: 16px;
-    /* margin-top: 1px; */
-  }
-
-  .carTimeStamp {
-    margin-top: 24px;
-  }
-
-  .detailsContainer {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 49px;
-    margin-left: auto;
-    align-items: flex-end;
-  }
-
-  .statusContainer {
-    display: flex;
-    height: 26px;
-    border: transparent;
-    border-radius: 5px;
-  }
-
-  .carStatus {
-    width: auto;
-    height: 26px;
-    padding: 1px 6px;
-    text-transform: uppercase;
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    border: transparent;
-    border-radius: 5px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-bottom: 5px;
-    gap: 10px;
-    position: relative;
-  }
-
-  .carStatus::after {
-    content: "";
-    position: absolute;
-    right: -1px;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    filter: blur(5px);
-    border-radius: 0 5px 5px 0;
-  }
-
-  .newStatus {
-    stroke: var(--light-gray);
-    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
-      var(--border-gradient-new) border-box;
-    border: 2px solid transparent;
-    color: var(--status-new);
-  }
-
-  .repairStatus {
-    fill: var(--light-gray);
-    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
-      var(--border-gradient-repair) border-box;
-    border: 2px solid transparent;
-    color: var(--status-repair);
-  }
-
-  .checkRepairStatus {
-    fill: var(--light-gray);
-    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
-      var(--border-gradient-diag) border-box;
-    border: 2px solid transparent;
-    color: var(--status-diag);
-  }
-
-  .completeStatus {
-    fill: var(--light-gray);
-    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
-      var(--border-gradient-complete) border-box;
-    border: 2px solid transparent;
-    color: var(--status-complete);
-  }
-
-  .viewRepairStatus {
-    fill: var(--light-gray);
-    background: linear-gradient(var(--bg-input), var(--bg-input)) padding-box,
-      var(--status-gradient-view-repair) border-box;
-    border: 2px solid transparent;
-    color: var(--orange);
-  }
-
-  .newStatus .carStatus {
-    color: var(--status-new);
-    background: var(--current-status-gradient-new);
-    border-right: 1px solid var(--glow-new);
-    border-left: transparent;
-  }
-
-  .repairStatus .carStatus {
-    color: var(--status-repair);
-    background: var(--current-status-gradient-repair);
-    border-right: 1px solid var(--glow-repair);
-    border-left: transparent;
-  }
-
-  .checkRepairStatus .carStatus {
-    color: var(--status-diag);
-    background: var(--current-status-gradient-diag);
-    border-right: 1px solid var(--glow-diag);
-    border-left: transparent;
-  }
-
-  .completeStatus .carStatus {
-    color: var(--current-status-complete);
-    background: var(--status-gradient-complete);
-    border-right: 1px solid var(--glow-complete);
-    border-left: transparent;
-  }
-
-  .viewRepairStatus .carStatus {
-    color: var(--status-view-repair);
-    background: var(--current-status-gradient-view-repair);
-    border-right: 1px solid var(--glow-view-repair);
-    border-left: transparent;
-  }
-
-  .carTimeStamp {
-    margin-top: 36px;
-  }
-
-  .archiveIcon {
-    fill: var(--light-gray);
-  }
-
-  .carDetails {
-    display: inline-flex;
-    padding: 5px 10px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-
-    color: var(--white);
-    background-color: var(--blue-btn-normal);
-    border: none;
-    border-radius: 6px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  .carDetails:hover {
-    background-color: var(--blue-btn-hover);
-  }
-
-  .btnContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 4px;
-  }
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 4px;
 }

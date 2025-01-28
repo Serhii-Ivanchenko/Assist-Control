@@ -2,14 +2,6 @@
     background: var(--bg-secondary);
     width: clamp(384px, min(31.135vw, 37.5vh * 1.422), 576px);
     height: clamp(270px, min(37.5vh, 31.135vw / 1.422), 405px);
-    padding: min(1.851vh, 20px) min(1.622vw, 30px) min(4.074vh, 44px);
-    border-radius: 12px;
-  }
-
-  .cameraListCont {
-    background: var(--bg-secondary);
-    width: clamp(384px, min(31.135vw, 37.5vh * 1.422), 576px);
-    height: clamp(270px, min(37.5vh, 31.135vw / 1.422), 405px);
     padding:
       clamp(13px, min(1.851vh, 1.041vw), 20px) clamp(20px, min(1.622vw, 2.777vh), 30px) clamp(29px, min(4.074vh, 2.291vw), 44px) clamp(20px, min(1.622vw, 2.777vh), 30px);
     border-radius: 12px;
@@ -17,11 +9,10 @@
 
   .camera {
     position: relative;
+    /* width: clamp(290px, min(26.875vw, 31.574vh * 1.513), 516px);
+    height: clamp(227px, min(31.574vh, 26.875vw / 1.513), 341px); */
     width: 100%;
-
-    /* height: clamp(300px, calc(300px + (41 * ((100vh - 900px) / 180))), 341px); */
-    width: clamp(290px, min(26.875vw, 31.574vh * 1.513), 516px);
-    height: clamp(227px, min(31.574vh, 26.875vw / 1.513), 341px);
+    height: 100%;
     margin-bottom: clamp(0px, calc(0px + (10 * ((100vh - 720px) / 360))), 10px);
   }
 
@@ -92,7 +83,7 @@
     /* display: block; */
     position: absolute;
     padding: 0;
-    bottom: clamp(-25px, calc(-25px + (10 * (1080px - 100vh) / 180)), -15px);
+    bottom: -25px;
     width: 100%;
     margin: 0;
     list-style: none;
@@ -104,15 +95,9 @@
     display: inline-block;
     width: 20px;
     height: 20px;
-    margin: 0 5px;
+    margin: 0 8px;
     padding: 0;
     cursor: pointer;
-  }
-
-  @media only screen and (min-width: 1850px) {
-    :global(.dots li) {
-      margin: 0 8px;
-    }
   }
 
   :global(.dots li button) {

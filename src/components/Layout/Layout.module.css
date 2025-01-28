@@ -7,6 +7,8 @@
   /* min-height: 900px; */
   /* max-height: 1080px; */
   padding: 1.388vh min(2.162vw, 40px) 3.148vh;
+  padding:
+      clamp(10px, min(1.388vh, 0.81vw), 15px) clamp(27px, min(2.162vw, 3.704vh), 40px) clamp(22px, min(3.148vh, 1.837vw), 34px) clamp(27px, min(2.162vw, 3.704vh), 40px);
   overflow: hidden;
   margin-left: auto;
   margin-right: auto;
