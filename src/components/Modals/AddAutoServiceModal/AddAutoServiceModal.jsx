@@ -69,20 +69,45 @@ export default function AddAutoServiceModal({
   //   setIsInputVisible(false);
   // };
 
-  const downloadAvatar = (e) => {
+  async function convertFileToBase64(file) {
+    if (!(file instanceof Blob)) {
+      return null; // Если файл не Blob (File), возвращаем null
+    }
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const base64Data = reader.result.split(",")[1]; // Извлекаем только Base64 часть
+          resolve(base64Data);
+        } catch (error) {
+          reject(new Error(`Failed to parse Base64: ${error.message}`));
+        }
+      };
+      reader.onerror = (error) =>
+        reject(new Error(`FileReader error: ${error.message}`));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  const downloadAvatar = async (e) => {
     const newAvatar = e.target.files[0];
     setLogoPreview(URL.createObjectURL(newAvatar));
-    const makeBase64Logo = async () => {
-      const base64Logo = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result); // Повертає Base64
-        reader.onerror = (error) => reject(error);
-        reader.readAsDataURL(newAvatar); // Читає файл як Base64
-      });
+    if (newAvatar) {
+      const base64 = await convertFileToBase64(newAvatar);
+      setLogo(base64);
+    }
+    // const makeBase64Logo = async () => {
+    //   const base64Logo = await new Promise((resolve, reject) => {
+    //     const reader = new FileReader();
+    //     reader.onload = () => resolve(reader.result); // Повертає Base64
+    //     reader.onerror = (error) => reject(error);
+    //     reader.readAsDataURL(newAvatar); // Читає файл як Base64
+    //   });
 
-      setLogo(base64Logo); // записуємо в стан лого в base64, яке передаєм на бек
-    };
-    makeBase64Logo();
+    //   setLogo(base64Logo); // записуємо в стан лого в base64, яке передаєм на бек
+    // };
+    // makeBase64Logo();
   };
 
   const handleSubmit = (values, actions) => {
