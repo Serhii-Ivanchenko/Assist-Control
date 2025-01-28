@@ -4,6 +4,7 @@
     height: 633px;
     gap: 14px;
     overflow: auto;
+    border-radius: 12px;
 }
 
 .date {

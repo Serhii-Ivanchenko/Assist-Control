@@ -40,7 +40,7 @@ export const initialState = {
 
   cars: {
     car: {
-      id: null,
+      car_id: null,
       status: null,
       photo: null,
       plate: null,
@@ -138,21 +138,23 @@ export const initialState = {
   },
 
   service: {
-    data: {
-      name: null,
-      logo: null,
-      address: null,
-      userCode: null,
-      account: null,
-      bank: null,
-      bankDetails: null,
-      legalAddress: null,
-      managerPhone: null,
-      managerName: null,
-      officePhoneNumber: null,
-      headPhoneNumber: null,
-    },
+    // data: {
+    //   id: null,
+    //   name: null,
+    //   logo: null,
+    //   address: null,
+    //   userCode: null,
+    //   account: null,
+    //   bank: null,
+    //   bankDetails: null,
+    //   legalAddress: null,
+    //   managerPhone: null,
+    //   managerName: null,
+    //   officePhoneNumber: null,
+    //   headPhoneNumber: null,
+    // },
     services: [],
+    selectedServiceInSettingsId: null,
     isLoading: false,
     error: null,
   },
@@ -294,5 +296,12 @@ export const initialState = {
     tags: [],
     prompts: [],
     selectedPrompt: null,
+  },
+
+  connections: {
+    stats: [],
+    connectionsList: [],
+    isLoading: false,
+    error: null,
   },
 };

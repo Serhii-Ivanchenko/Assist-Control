@@ -74,17 +74,10 @@ function ClientStatusStepper({
   };
 
   const groupedButtons = [
-    [
-      // {
-      //   id: "0",
-      //   title: car,
-      //   icon: <img src={carImg} alt="img" className={styles.carImage} />,
-      // },
-      buttons[0],
-      buttons[1],
-      buttons[2],
-      buttons[3],
-    ],
+    [buttons[0]],
+    [buttons[1]],
+    [buttons[2]],
+    [buttons[3]],
     [buttons[4]],
     [buttons[5], buttons[6], buttons[7]],
     [buttons[8]],
@@ -95,19 +88,28 @@ function ClientStatusStepper({
   const handleClick = (idx) => {
     switch (idx) {
       case 0:
-        dispatch(getClientInfo({ carId: carId, location: isCrm }));
+        dispatch(getClientInfo({ carId: carId}));
         setModalContent(<DetailedClientInfo onClose={closeModal} />);
         break;
       case 1:
-        setModalContent(<EnterAmountModal onClose={closeModal} />);
+        setModalContent("Modal for contact information");
         break;
       case 2:
-        setModalContent("Modal for ordering parts");
+        setModalContent("Modal for diagnostics");
         break;
       case 3:
-        setModalContent(<EnterAmountModal onClose={closeModal} />);
+        setModalContent("Modal for commercial offer");
         break;
       case 4:
+        setModalContent(<EnterAmountModal onClose={closeModal} />);
+        break;
+      case 5:
+        setModalContent("Modal for ordering parts");
+        break;
+      case 6:
+        setModalContent(<EnterAmountModal onClose={closeModal} />);
+        break;
+      case 7:
         setModalContent(
           <NotificationModal
             onClose={closeModal}

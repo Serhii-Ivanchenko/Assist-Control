@@ -2,7 +2,14 @@ import css from "./UploadComponent.module.css";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import { useRef } from "react";
 
-export default function UploadComponent({ title, name, setLogo }) {
+export default function UploadComponent({
+  title,
+  name,
+  setLogo,
+  setFieldValue,
+  fieldname,
+  staffModal,
+}) {
   const fileInputRef = useRef(null);
 
   const handleChangePhoto = () => {
@@ -15,7 +22,13 @@ export default function UploadComponent({ title, name, setLogo }) {
     const file = event.currentTarget.files[0];
     if (file) {
       const newLogoUrl = URL.createObjectURL(file);
-      setLogo(newLogoUrl);
+      {
+        staffModal
+          ? setLogo((prevPhotos) => [...prevPhotos, file])
+          : setLogo(newLogoUrl);
+      }
+
+      setFieldValue(fieldname, file);
     }
   };
 
@@ -34,9 +47,9 @@ export default function UploadComponent({ title, name, setLogo }) {
         name={name}
         className={css.docInput}
         ref={fileInputRef}
-        onChange={handleFileChange}
+        onChange={(e) => handleFileChange(e, setFieldValue)}
         multiple
-        accept="image/*"
+        // accept="image/*"
       />
     </div>
   );

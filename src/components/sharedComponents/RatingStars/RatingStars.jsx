@@ -58,8 +58,11 @@ export default function RatingStars({
   };
 
   const parsedRating =
-    rating && rating !== "Немає рейтингу" ? parseFloat(rating) : 5;
-
+    rating === 0 || rating === null
+      ? 0
+      : rating && rating !== "Немає рейтингу"
+      ? parseFloat(rating)
+      : 5;
   return (
     <div className={`${styles.rating} ${ratingGap}`}>
       {getStarElements(parsedRating)}

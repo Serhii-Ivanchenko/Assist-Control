@@ -1,98 +1,48 @@
 .containercalendar {
     margin-top: 20px;
-    width: 282px;
-    min-height: 125px;
+    width: 408px;
+    min-height: 188px;
     height: auto;
-}
-
-@media only screen and (min-width: 1850px) {
-    .containercalendar {
-        margin-top: 20px;
-        width: 408px;
-        min-height: 188px;
-        height: auto;
-    }
 }
 
 .weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    margin-left: 10px;
-    grid-column-gap: 3px;
+    font-size: 16px;
+    height: 24px;
+    margin-bottom: 3px;
+    grid-column-gap: 6px;
     text-align: center;
-    /* height: 20px;
-        width: 20px; */
     color: var(--white);
     justify-content: center;
     font-variant-numeric: lining-nums proportional-nums;
     font-family: "Roboto", sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
 }
 
-@media only screen and (min-width: 1850px) {
-    .weekdays {
-        font-size: 16px;
-        height: 24px;
-        margin-bottom: 3px;
-        /* margin-left: 12px; */
-        /* width: 24px; */
-        /* width: 52px; */
-        grid-column-gap: 6px;
-    }
-}
-
-@media only screen and (min-width: 1850px) {
-    .weekdaysday {
-        font-size: 16px;
-        height: 24px;
-        margin-bottom: 3px;
-         /* margin-left: 12px;  */
-        /* width: 24px; */
-        width: 53px;
-        grid-column-gap: 8px;
-    }
-}
-
 .calendargrid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-column-gap: 5px;
-    grid-row-gap: 4px;
-}
-
-@media only screen and (min-width: 1850px) {
-    .calendargrid {
-        grid-column-gap: 7.2px;
-        grid-row-gap: 6px;
-
-    }
+    grid-column-gap: 7.2px;
+    grid-row-gap: 6px;
 }
 
 .calendarday {
     text-align: center;
     color: var(--white);
-    width: 36px;
-    height: 18px;
+    width: 52px;
+    height: 27px;
     border-radius: 5px;
     cursor: pointer;
     font-variant-numeric: lining-nums proportional-nums;
     font-family: "Roboto", sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
     border: none;
     position: relative;
 }
-
-@media only screen and (min-width: 1850px) {
-    .calendarday {
-        width: 52px;
-        height: 27px;
-        font-size: 16px;
-    }
-}
-

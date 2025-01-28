@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Accordion,
   AccordionSummary,
@@ -7,13 +8,26 @@ import {
 } from "@mui/material";
 import { BsCaretDownFill, BsPencil, BsXCircle } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
+import {
+  // getWorkSchedule,
+  updateWorkSchedule,
+} from "../../redux/settings/operations.js";
+import { selectSchedule } from "../../redux/settings/selectors.js";
+// import { selectSelectedServiceId } from "../../redux/auth/selectors.js";
 // import { useState } from "react";
 import ScheduleTable from "../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 import css from "./ServiceStationDetailsAccordion.module.css";
+// import { selectedServiceInSettingsId } from "../../redux/service/selectors.js";
 
 export default function ServiceStationDetailsAccordion({ onToggle }) {
+  const dispatch = useDispatch();
+  const workScheduleData = useSelector(selectSchedule);
+  // const selectedServiceId = useSelector(selectedServiceInSettingsId);
+
   const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  // const [isLoading, setIsLoading] = useState(true);
   // Реф для доступа к generateBackendData
   const detailsRef = useRef();
   const handleChange = (e, expanded) => {
@@ -24,77 +38,86 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
     onToggle(expanded);
   };
 
-  const handleEditToggle = (event) => {
-    event.stopPropagation(); // Останавливаем всплытие события
+  // const handleEditToggle = (event) => {
+  //   event.stopPropagation(); // Останавливаем всплытие события
+  //   if (isEditing) {
+  //     // Вызов функции generateBackendData через реф
+  //     if (detailsRef.current?.generateBackendData) {
+  //       detailsRef.current.generateBackendData();
+  //     }
+  //     console.log("Сохранение завершено.");
+  //   }
+  //   setIsEditing((prev) => !prev);
+  // };
+
+  const handleEditToggle = async (event) => {
+    event.stopPropagation();
+
     if (isEditing) {
-      // Вызов функции generateBackendData через реф
+      // Получаем данные из ScheduleTable через ref
       if (detailsRef.current?.generateBackendData) {
-        detailsRef.current.generateBackendData();
+        const backendData = detailsRef.current.generateBackendData();
+        console.log("Сформированные данные для бекенда:", backendData);
+
+        // Отправляем данные на бекенд
+        await handleDataSave(backendData);
       }
-      console.log("Сохранение завершено.");
     }
     setIsEditing((prev) => !prev);
   };
 
+  const handleCancelEdit = (event) => {
+    event.stopPropagation();
+    setIsEditing(false);
 
-const handleCancelEdit = (event) => {
-  event.stopPropagation(); 
-  setIsEditing(false);
+    // Сбрасываем данные через реф
+    if (detailsRef.current?.resetGridData) {
+      detailsRef.current.resetGridData();
+    }
+  };
 
-  // Сбрасываем данные через реф
-  if (detailsRef.current?.resetGridData) {
-    detailsRef.current.resetGridData();
-  }
-};
+  const handleDataSave = async (data) => {
+    try {
+      setIsSaving(true); // Устанавливаем флаг загрузки
 
+      // Передача данных на бекенд с unwrap
+      const response = await dispatch(updateWorkSchedule(data)).unwrap();
 
-  // const activePeriods = [
-  //   { day: "Monday", startTime: 9, endTime: 12, isActive: true },
-  //   { day: "Monday", startTime: 14, endTime: 16, isActive: true },
-  //   { day: "Wednesday", startTime: 10, endTime: 15, isActive: true },
-  //   { day: "Friday", startTime: 8, endTime: 11, isActive: true },
-  // ];
-  // const DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  // const START_HOUR = 7;
-  // const END_HOUR = 21;
+      // Лог успешного сохранения
+      console.log("Данные успешно сохранены:", response);
+      // await dispatch(getWorkSchedule(selectedServiceId)).unwrap();
+    } catch (error) {
+      // Лог ошибок
+      console.error("Ошибка при сохранении данных:", error);
+    } finally {
+      setIsSaving(false); // Сбрасываем флаг загрузки
+    }
+  };
 
-  // function generateGridData(activePeriods) {
-  //   const result = [];
+  //  useEffect(() => {
+  //    const fetchWorkScheduleData = async () => {
+  //      if (!selectedServiceId) {
+  //        return;
+  //      };
+  //       setIsLoading(true);
+  //       try {
+  //       await dispatch(getWorkSchedule()).unwrap();
 
-  //   // Обходим каждый день недели
-  //   for (const day of DAYS_OF_WEEK) {
-  //     // Получаем все активные периоды для текущего дня
-  //     const periodsForDay = activePeriods.filter((period) => period.day === day);
-
-  //     // Проходим по каждому часу дня
-  //     for (let hour = START_HOUR; hour < END_HOUR; hour++) {
-  //       // Проверяем, находится ли текущий час в активном периоде
-  //       const isActive = periodsForDay.some(
-  //         (period) => hour >= period.startTime && hour < period.endTime
-  //       );
-
-  //       // Добавляем ячейку в массив
-  //       result.push({
-  //         day,
-  //         hour,
-  //         isActive,
-  //       });
+  //     } catch (error) {
+  //       console.error("Ошибка загрузки данных:", error);
+  //     } finally {
+  //       setIsLoading(false); // Сбрасываем индикатор загрузки
   //     }
-  //   }
+  //   };
 
-  //   return result;
-  // }
+  //   //     await dispatch(getWorkSchedule());
 
-  // const initialData = generateGridData(activePeriods);
+  //   //  };
 
-  // const [data, setData] = useState(initialData);
+  //    fetchWorkScheduleData();
+  //  }, [dispatch,  selectedServiceId]);
 
-  const activePeriods = [
-    { day: "Monday", startTime: 9, endTime: 12, isActive: true },
-    { day: "Monday", startTime: 14, endTime: 16, isActive: true },
-    { day: "Wednesday", startTime: 10, endTime: 15, isActive: true },
-    { day: "Friday", startTime: 8, endTime: 11, isActive: true },
-  ];
+  // console.log("workScheduleData", workScheduleData);
 
   return (
     <Accordion
@@ -137,42 +160,37 @@ const handleCancelEdit = (event) => {
           Налаштування робочого графіка:
         </Typography>
 
-        {isExpanded && (
-          isEditing ? (
-              <div className={css.blockflex}> 
-                
-              <button onClick={handleCancelEdit} className={css.editbtn} style={{marginRight: "0"}} >
-                <BsXCircle className={css.mainIcon} size={21} /> </button> 
-      
-      <button
-            onClick={handleEditToggle}
-            // style={{ color: "var(--white)", marginLeft: "15px" }}
-            className={css.editbtn} style={{marginRight: "0"}}
-          > <RiSave3Fill className={css.mainIcon} size={21} /> </button> 
-          </div>
-            ) : (
-      <button
-            onClick={handleEditToggle}
-            // style={{ color: "var(--white)", marginLeft: "15px" }}
-            className={css.editbtn}
-          > <BsPencil className={css.mainIcon} /> </button> 
-              
-            )
-        
-          // <button
-          //   onClick={handleEditToggle}
-          //   // style={{ color: "var(--white)", marginLeft: "15px" }}
-          //   className={css.editbtn}
-          // >
-          //   {isEditing ? (
-          //   //  <div className={css.blockflex}> <BsXCircle className={css.mainIcon} size={21}  />
-          //       <RiSave3Fill className={css.mainIcon} size={21} />
-          //     // </div>
-          //   ) : (
-          //     <BsPencil className={css.mainIcon} />
-          //   )}
-          // </button>
-        )}
+        {isExpanded &&
+          (isEditing ? (
+            <div className={css.blockflex}>
+              <button
+                onClick={handleCancelEdit}
+                className={css.editbtn}
+                style={{ marginRight: "0" }}
+              >
+                <BsXCircle className={css.mainIcon} size={21} />{" "}
+              </button>
+
+              <button
+                onClick={handleEditToggle}
+                // style={{ color: "var(--white)", marginLeft: "15px" }}
+                className={css.editbtn}
+                style={{ marginRight: "0" }}
+              >
+                {" "}
+                <RiSave3Fill className={css.mainIcon} size={21} />{" "}
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={handleEditToggle}
+              // style={{ color: "var(--white)", marginLeft: "15px" }}
+              className={css.editbtn}
+            >
+              {" "}
+              <BsPencil className={css.mainIcon} />{" "}
+            </button>
+          ))}
       </AccordionSummary>
       <AccordionDetails
         style={{
@@ -181,7 +199,21 @@ const handleCancelEdit = (event) => {
           marginTop: "19px",
         }}
       >
-        <ScheduleTable ref={detailsRef} isEditing={isEditing} activePeriods={activePeriods} />
+        {/* {!isLoading &&  workScheduleData.length > 0 && ( */}
+
+        <ScheduleTable
+          ref={detailsRef}
+          isEditing={isEditing}
+          activePeriods={workScheduleData}
+          onDataSave={handleDataSave}
+        />
+
+        {/* )} */}
+
+        {/* <ScheduleTable ref={detailsRef} isEditing={isEditing}
+          //  activePeriods={activePeriods}
+           activePeriods={workScheduleData}
+          onDataSave={handleDataSave} /> */}
       </AccordionDetails>
     </Accordion>
   );

@@ -40,7 +40,6 @@ import {
   updateEmployeeStatus,
   updateFixedMarkup,
   updatePostData,
-  updatePostStatus,
   updateRatingStatus,
   updateSupplierData,
   updateSupplierStatus,
@@ -73,19 +72,19 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeData.pending, handlePending)
       .addCase(updateEmployeeData.fulfilled, (state, action) => {
         state.isLoading = false;
-        const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.employee_id === action.payload.employee_id
-        );
+        // const employeeToEditIndex = state.employees.findIndex(
+        //   (employee) => employee.id === action.payload.employee_id
+        // );
 
-        if (
-          // action.payload.status === 200 &&
-          employeeToEditIndex !== -1
-        ) {
-          state.employees[employeeToEditIndex] = {
-            ...state.employees[employeeToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
-        }
+        // if (
+        //   // action.payload.status === 200 &&
+        //   employeeToEditIndex !== -1
+        // ) {
+        //   state.employees[employeeToEditIndex] = {
+        //     ...state.employees[employeeToEditIndex], // Залишаємо старі дані
+        //     ...action.meta.arg, // Додаємо дані, які відправляли
+        //   };
+        // }
       })
       .addCase(updateEmployeeData.rejected, handleRejected)
 
@@ -94,7 +93,7 @@ const settingsSlice = createSlice({
         state.isLoading = false;
 
         state.employees = state.employees.filter(
-          (employee) => employee.employee_id !== action.payload.employee_id
+          (employee) => employee.id !== action.payload.employee_id
         );
       })
       .addCase(deleteEmployee.rejected, handleRejected)
@@ -103,10 +102,10 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeStatus.fulfilled, (state, action) => {
         state.isLoading = false;
         const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.employee_id === action.payload.employee_id
+          (employee) => employee.id === action.payload.employee_id
         );
-        state.employees[employeeToEditIndex].isDisabled =
-          action.payload.isDisabled;
+
+        state.employees[employeeToEditIndex].status = action.meta.arg.status;
       })
       .addCase(updateEmployeeStatus.rejected, handleRejected)
 
@@ -120,7 +119,7 @@ const settingsSlice = createSlice({
       .addCase(getAllEmployees.pending, handlePending)
       .addCase(getAllEmployees.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.employees = action.payload;
+        state.employees = action.payload.data;
       })
       .addCase(getAllEmployees.rejected, handleRejected)
 
@@ -189,13 +188,13 @@ const settingsSlice = createSlice({
       .addCase(getWorkSchedule.pending, handlePending)
       .addCase(getWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.schedule = action.payload;
+        state.schedule = action.payload.days;
       })
       .addCase(getWorkSchedule.rejected, handleRejected)
       .addCase(updateWorkSchedule.pending, handlePending)
       .addCase(updateWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.schedule = { ...state.schedule, ...action.payload };
+        state.schedule = action.meta.arg.days ;
       })
       .addCase(updateWorkSchedule.rejected, handleRejected)
 
@@ -204,35 +203,40 @@ const settingsSlice = createSlice({
       .addCase(getPosts.pending, handlePending)
       .addCase(getPosts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.posts = action.payload;
+        state.posts = action.payload.posts;
       })
       .addCase(getPosts.rejected, handleRejected)
 
       .addCase(createPost.pending, handlePending)
       .addCase(createPost.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.posts.push(action.payload);
+        // state.posts.push(action.meta.arg);
       })
       .addCase(createPost.rejected, handleRejected)
-
-      .addCase(updatePostStatus.pending, handlePending)
-      .addCase(updatePostStatus.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const postToEditIndex = state.posts.findIndex(
-          (post) => post.id === action.payload.id
-        );
-        state.posts[postToEditIndex].status = action.payload;
-      })
-      .addCase(updatePostStatus.rejected, handleRejected)
 
       .addCase(updatePostData.pending, handlePending)
       .addCase(updatePostData.fulfilled, (state, action) => {
         state.isLoading = false;
+
         const postToEditIndex = state.posts.findIndex(
-          (post) => post.id === action.payload.id
+          (post) => post.id === action.payload.post_id
         );
-        state.posts[postToEditIndex] = action.payload;
+
+        if (postToEditIndex !== -1) {
+          const currentPost = state.posts[postToEditIndex];
+
+          state.posts[postToEditIndex] = {
+            ...currentPost,
+            ...(action.payload.name_post && {
+              name_post: action.payload.name_post,
+            }),
+            ...(action.payload.status !== undefined && {
+              status: action.payload.status,
+            }),
+          };
+        }
       })
+
       .addCase(updatePostData.rejected, handleRejected)
 
       .addCase(deletePost.pending, handlePending)
@@ -240,7 +244,7 @@ const settingsSlice = createSlice({
         state.isLoading = false;
 
         state.posts = state.posts.filter(
-          (post) => post.id !== action.payload.id
+          (post) => post.id !== action.payload.post_id
         );
       })
       .addCase(deletePost.rejected, handleRejected)

@@ -55,7 +55,6 @@ export const getRecordsForPeriod = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
     const { startDate, endDate } = dates;
-    console.log("dates", dates);
 
     try {
       const response = await axiosInstance.get(
@@ -218,6 +217,32 @@ export const getMonthlyLoad = createAsyncThunk(
         }
       );
       console.log("response data", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Change cat status in CRM page
+export const changeCarStatusCRM = createAsyncThunk(
+  "cars/changeCarStatusCRM",
+  async ({ carId, status }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.post(`/crm/edit_status`, null, {
+        params: {
+          car_id: carId,
+          status,
+        },
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
+      console.log("changeCarStatusCRM", response.data);
 
       return response.data;
     } catch (error) {

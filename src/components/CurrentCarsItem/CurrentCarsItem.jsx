@@ -88,7 +88,7 @@ export default function CurrentCarsItem() {
       const icon = getStatusIcon(car.status);
       const { label, className } = getStatusDetails(styles, car.status, icon);
       return (
-        <div className={clsx(styles.wrapper, className)} key={car.id}>
+        <div className={clsx(styles.wrapper, className)} key={car.car_id}>
           <div className={styles.imgContainer}>
             <img
               className={styles.carImg}
@@ -113,8 +113,8 @@ export default function CurrentCarsItem() {
             <div className={styles.btnContainer}>
               <StatusBtn car={car} />
               <CarDetailButton
-                carId={car.id}
-                location={isMonitoring}
+                carId={car.car_id}
+                // location={isMonitoring}
                 carName={car.auto}
               />
             </div>

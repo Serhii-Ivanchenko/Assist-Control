@@ -1,0 +1,44 @@
+.modal {
+    position: absolute;
+    top: 21%;
+    left: 57%;
+    right: auto;
+    bottom: auto;
+    /* margin-right: -10%; */
+    background-color: var(--bg-input);
+    border: none;
+    box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--light-gray);
+    border-radius: 12px;
+    width: 155px;
+    margin-top: 4px;
+    z-index: 1000;
+}
+
+.modalitem {
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--light-gray);
+}
+
+.modalitem:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.modalitem:last-child {
+    border-radius: 0 0 12px 12px;
+}
+
+.modalitem:not(:last-child) {
+    border-bottom: solid 1px var(--input-stroke);
+}
+
+.modalitem:hover {
+    background-color: var(--main-gray);
+}

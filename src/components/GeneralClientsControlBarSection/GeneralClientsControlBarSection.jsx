@@ -13,8 +13,11 @@ import StatusFilter from "../sharedComponents/StatusFilter/StatusFilter";
 import renderStatusCommunication from "../../utils/renderStatusCommunication ";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch";
 import DownloadPdfButtonGeneralClients from "../sharedComponents/Pdf/DownloadPdfButtonGeneralClients/DownloadPdfButtonGeneralClients";
+import { useState } from "react";
 
 export default function GeneralClientsControlBarSection() {
+  const [periodStartData, setPeriodStartData] = useState(new Date());
+  const [periodEndData, setPeriodEndData] = useState(new Date());
   // Порожня функція для тимчасової передачі
   const noop = () => {};
   const isFilter = true;
@@ -28,24 +31,31 @@ export default function GeneralClientsControlBarSection() {
       <div className={css.leftContainer}>
         <TimeSortItem onSortChange={noop} />
         <RangeTimeSelector />
-        <CalendarPeriodSelector renderInModal={true} />
+        <CalendarPeriodSelector
+          renderInModal={true}
+          periodStartData={periodStartData}
+          periodEndData={periodEndData}
+          handleInputChangeBeg={setPeriodStartData}
+          handleInputChangeEnd={setPeriodEndData}
+          isSingle={false}
+        />
         <StatusFilter
           onStatusChange={handleStatusChange}
-          renderStatus={renderStatusCommunication}
+          renderStatus={(status) => renderStatusCommunication(status, css, isFilter)}
           statuses={statusesCommunications}
           isFilter={isFilter}
         />
       </div>
       <div className={css.rightContainer}>
-          <CarsSearch />
-          <DownloadPdfButtonGeneralClients />
-          <InfoSettingsVisibility
-            selectVisibility={selectVisibilityAllClients}
-            toggleVisibilityAction={toggleVisibilityAllClients}
-            labelNames={labelNamesAllClients}
-            className={css.settingsContainerInCrm}
-          />
-        </div>
+        <CarsSearch />
+        <DownloadPdfButtonGeneralClients />
+        <InfoSettingsVisibility
+          selectVisibility={selectVisibilityAllClients}
+          toggleVisibilityAction={toggleVisibilityAllClients}
+          labelNames={labelNamesAllClients}
+          className={css.settingsContainerInCrm}
+        />
+      </div>
     </div>
   );
 }

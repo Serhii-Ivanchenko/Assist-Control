@@ -12,6 +12,7 @@ export default function InboxPart({
   setActiveFilterCategory,
   setActiveFilterState,
   categoryCounts,
+  flashingBorder,
 }) {
   const [isActive, setIsActive] = useState(null);
 
@@ -24,7 +25,7 @@ export default function InboxPart({
 
         <div className={css.totalContainer}>
           <div className={css.totalInbox}>
-            <p className={`${css.numberBox} ${css.numberBoxIsActive}`}>
+            <p className={`${css.numberBox} ${flashingBorder("all")}`}>
               {chats.length}
             </p>
             <button
@@ -62,6 +63,7 @@ export default function InboxPart({
         handleFilter={handleFilter}
         chats={chats}
         setFilteredChats={setFilteredChats}
+        flashingBorder={flashingBorder}
       />
     </div>
   );

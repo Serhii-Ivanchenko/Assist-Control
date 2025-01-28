@@ -27,13 +27,15 @@ import { BsLayerBackward } from "react-icons/bs";
 import styles from "./CurrentCarModal.module.css";
 import ArchiveModal from "../ArchiveModal/ArchiveModal.jsx";
 import Modal from "../Modal/Modal.jsx";
+import AcceptModal from "../AcceptModal/AcceptModal.jsx";
 
 function CurrentCarModal({ onClose, car, status }) {
-  const [isMonitoring, setisMonitoring] = useState("main");
+  // const [isMonitoring, setisMonitoring] = useState("main");
   const dispatch = useDispatch();
   const [selectedStatus, setSelectedStatus] = useState(status);
   const currentDate = useSelector(selectDate);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -71,7 +73,18 @@ function CurrentCarModal({ onClose, car, status }) {
   const { label, className } = getStatusDetails(styles, selectedStatus);
 
   const handleStatusChange = (e) => {
-    setSelectedStatus(e.target.value);
+    const newStatus = e.target.value;
+    if (status === "complete" && newStatus !== "complete") {
+      toast.error(
+        "Зміна статусу неможлива, зверніться в техпідтримку"
+      );
+      return;
+    }
+    setSelectedStatus(newStatus);
+
+    if (newStatus === "complete") {
+      setIsAcceptModalOpen(true);
+    }
   };
 
   const handleArchiveModal = () => {
@@ -82,12 +95,17 @@ function CurrentCarModal({ onClose, car, status }) {
     setIsModalOpen(false);
   };
 
+  const closeAcceptModal = () => {
+    setIsAcceptModalOpen(false);
+    setSelectedStatus(status);
+  };
+
   const handleSubmit = () => {
     dispatch(
       changeCarStatus({
-        carId: car.id,
+        carId: car.car_id,
         status: selectedStatus,
-        location: isMonitoring,
+        // location: isMonitoring,
       })
     )
       .then(() => {
@@ -237,7 +255,19 @@ function CurrentCarModal({ onClose, car, status }) {
           </button>
           {isModalOpen && (
             <Modal isOpen={isModalOpen} onClose={closeArchiveModal}>
-              <ArchiveModal onClose={closeArchiveModal} />
+              <ArchiveModal
+                onClose={closeArchiveModal}
+                carId={car.car_id}
+                location="main"
+              />
+            </Modal>
+          )}
+          {isAcceptModalOpen && (
+            <Modal isOpen={isAcceptModalOpen} onClose={closeAcceptModal}>
+              <AcceptModal
+                onConfirm={handleSubmit}
+                onCancel={closeAcceptModal}
+              />
             </Modal>
           )}
           <button

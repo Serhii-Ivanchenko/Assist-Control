@@ -2,7 +2,7 @@ import { useState } from "react";
 import css from "./Archive.module.css";
 import Modal from "../Modals/Modal/Modal.jsx";
 import { BsArchive } from "react-icons/bs";
-import ArchiveInfoModal from "../Modals/ArchiveInfoModal/ArchiveInfoModal.jsx";
+import ArchiveInfoModal from "./ArchiveInfoModal/ArchiveInfoModal.jsx";
 
 export default function Archive() {
   const [modalIsOpen, setIsOpen] = useState(false);

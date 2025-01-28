@@ -230,12 +230,11 @@ const AppointmentGrid = ({ data }) => {
               gridRow: postRowIndex + 2, // Смещаем на 2, чтобы учесть строки заголовков
               background: workTypeColors[item.service_name] || "#333",
             }}
-            // onClick={() => handleWorkItemClick(item.record_id, item.post_id, item.stage_end)}
             onClick={
               !isDisabled
                 ? () =>
                     handleWorkItemClick(
-                      item.record_id,
+                      item.car_id,
                       item.post_id,
                       item.stage_end
                     )

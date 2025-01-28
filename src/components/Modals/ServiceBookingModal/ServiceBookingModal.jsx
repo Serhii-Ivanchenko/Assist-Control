@@ -63,7 +63,7 @@ export default function ServiceBookingModal({
   );
 
   const recordById = dayRecords?.find((dayRecord) => {
-    return dayRecord.id === recordId;
+    return dayRecord.car_id === recordId;
   });
 
   const toggleDropdown = (status, changeStatus) => {
@@ -156,7 +156,7 @@ export default function ServiceBookingModal({
     vin: recordById?.vin || "",
     note: recordById?.note || "",
     prepayment: recordById?.prepayment || "",
-    position: postId || recordById?.post_id || posts[0]?.id_post,
+    position: postId || recordById?.post_id || posts[0]?.id,
     mechanic_id: recordById?.mechanic_id || "",
   };
 
@@ -301,8 +301,8 @@ export default function ServiceBookingModal({
                     {posts.map((post) => {
                       return (
                         <option
-                          key={post.id_post}
-                          value={post.id_post}
+                          key={post.id}
+                          value={post.id}
                           // disabled={post.status !==0}
                         >
                           {post.name_post}
@@ -429,7 +429,7 @@ export default function ServiceBookingModal({
                 />
                 <div className={css.timeWrapper}>
                   <SelectTime
-                    postId={values.position || posts[0]?.id_post}
+                    postId={values.position || posts[0]?.id}
                     setDatesArray={setDatesArray}
                     pickedDate={pickedDate}
                     recordId={recordId}

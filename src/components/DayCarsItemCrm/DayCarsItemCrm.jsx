@@ -14,7 +14,7 @@ import {
 import { IoCarSportSharp } from "react-icons/io5";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
-import { formatDateTime, renderTimeinWork } from "../../utils/renderTime.jsx";
+import { renderTimeinWork } from "../../utils/renderTime.jsx";
 import renderStatusCars from "../../utils/renderStatusCars.jsx";
 import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
@@ -25,22 +25,27 @@ import clsx from "clsx";
 import RatingStars from "../sharedComponents/RatingStars/RatingStars.jsx";
 import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
 import ArchiveModal from "../Modals/ArchiveModal/ArchiveModal.jsx";
+import { GiAlarmClock } from "react-icons/gi";
+import NotificationModal from "../sharedComponents/NotificationModal/NotificationModal.jsx";
 
-export default function DayCarsItemCrm({ car, onDragStart }) {
-  const [isCrm, setIsCrm] = useState("record");
+export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
+  // const [isCrm, setIsCrm] = useState("record");
   const visibility = useSelector(selectVisibilityRecords);
   const [modalState, setModalState] = useState({
     serviceBooking: false,
     archive: false,
+    notifications: false
   });
   const [isDragging, setIsDragging] = useState(false);
   const [draggingElement, setDraggingElement] = useState(null);
   const [initialX, setInitialX] = useState(0);
   const [initialY, setInitialY] = useState(0);
 
+  
+
   const handleDragStart = (e) => {
     setIsDragging(true);
-    onDragStart(e, car.id);
+    onDragStart(e, car.car_id);
 
     // Зберігаємо початкове зміщення між курсором і позицією елемента
     const rect = e.target.getBoundingClientRect();
@@ -99,12 +104,19 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
     setModalState({ serviceBooking: false, archive: true });
   };
 
+  const openNotificationModal = () => {
+    setModalState({
+      ...modalState,
+      notifications: true,
+    });
+  };
+
   const closeModals = () => {
-    setModalState({ serviceBooking: false, archive: false });
+    setModalState({ serviceBooking: false, archive: false, notifications: false });
   };
 
   const {
-    id,
+    car_id,
     auto,
     photo_url: photoUrl,
     vin,
@@ -113,10 +125,13 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
     complete_d,
     name,
     phone,
-    booking,
-
+    appointment_date,
+    time_slot,
     plate: carNumber,
   } = car;
+
+  console.log('car-car-car-car', car);
+  
 
   const carPhoto = photoUrl || absentAutoImg;
 
@@ -124,39 +139,42 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
     return number.replace(/\s+/g, "");
   };
 
-  const renderBookingTime = () => {
-    if (booking && Array.isArray(booking) && booking.length > 0) {
-      const { appointment_date, times } = booking[0];
-      if (appointment_date && Array.isArray(times) && times.length > 0) {
-        const formattedDateTime = formatDateTime(appointment_date, times[0]);
-        return (
-          <div className={styles.bookingRecord}>
-            <p className={styles.time}>{formattedDateTime}</p>
-          </div>
-        );
-      }
+  const renderAppointmentDate = () => {
+    if (appointment_date && time_slot) {
+      const formattedDate = new Date(appointment_date).toLocaleDateString('uk-UA', {
+        day: '2-digit',
+        month: '2-digit',
+      });
+      return (
+        <div>
+          <p className={styles.time}>
+            {formattedDate} / {time_slot}
+          </p>
+        </div>
+      );
     }
-    // Якщо `booking` пустий, відображаємо час із `renderTimeinWork`
-    if (booking && Array.isArray(booking) && booking.length === 0) {
+  
+    if (!appointment_date) {
       const timeInWork = renderTimeinWork(car.date_s);
       return (
-        <div className={styles.bookingRecord}>
+        <div>
           <p className={styles.time}>{timeInWork}</p>
         </div>
       );
     }
-
+  
     return null;
   };
+  
 
   return (
     <div
       className={`${styles.crmBlockDayCarsItemContainer} ${
         isDragging ? styles.dragging : ""
-      }`}
+      } ${status === 'complete' && styles.cursorComplete}`}
       style={getBackgroundStyle(status)}
-      id={car.id}
-      draggable
+      id={car.car_id}
+      draggable={status !== "complete"}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDrag={handleDrag}
@@ -222,36 +240,47 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
           </div>
         )}
         <div className={styles.btnContainer}>
-          {visibility?.info && (
-            <CarDetailButton carId={id} location={isCrm} carName={car.auto} />
-          )}
-
+          <CarDetailButton
+            carId={car_id}
+            // location={isCrm}
+            carName={car.auto}
+            car={car}
+          />
           {(status === "repair" ||
             status === "diagnostic" ||
-            status === "complete") &&
-            visibility?.paymentBtn && <PaymentBtn />}
+            status === "complete") && <PaymentBtn />}
 
-          {status === "new" && visibility?.createBtn && (
-            <button
-              className={clsx(styles.plus, {
-                [styles.hidden]: !visibility?.createBtn,
-              })}
-              onClick={openServiceBookingModal}
-            >
+          {status === "new" && (
+            <button className={styles.plus} onClick={openServiceBookingModal}>
               <BsPlusLg className={styles.iconPlus} />
             </button>
           )}
 
           {status === "new" || status === "complete" ? (
-            <button
-              className={clsx(styles.btnSave, {
-                [styles.hidden]: !visibility?.archive,
-              })}
-              onClick={openArchiveModal}
-            >
+            <button className={styles.btnSave} onClick={openArchiveModal}>
               <BsLayerBackward size={16} />
             </button>
           ) : null}
+          {status === "complete" && (
+            <button
+              className={styles.clockContainer}
+              onClick={openNotificationModal}
+            >
+              <GiAlarmClock className={styles.iconClock} size={20} />
+            </button>
+          )}
+          <Modal isOpen={modalState.notifications} onClose={closeModals}>
+            <NotificationModal
+              onClose={closeModals}
+              time="clientTime"
+              date="clientDate"
+              comment="clientComment"
+              connectionType="clientConnection"
+              accountingModal={true}
+              service="clientService"
+              setNotificationSent={setModalState}
+            />
+          </Modal>
 
           {modalState.serviceBooking && (
             <Modal isOpen={modalState.serviceBooking} onClose={closeModals}>
@@ -261,7 +290,12 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
 
           {modalState.archive && (
             <Modal isOpen={modalState.archive} onClose={closeModals}>
-              <ArchiveModal onClose={closeModals} />
+              <ArchiveModal
+                onClose={closeModals}
+                carId={car_id}
+                location="records"
+                onSuccess={onArchiveSuccess}
+              />
             </Modal>
           )}
         </div>
@@ -343,9 +377,7 @@ export default function DayCarsItemCrm({ car, onDragStart }) {
               )}
             >
               <BsStopwatch size={13} color="#D5ACF3" />
-              <p className={styles.time}>
-                {renderBookingTime(booking, styles)}
-              </p>
+              <p className={styles.time}>{renderAppointmentDate()}</p>
             </div>
           )}
           {visibility?.totalPrice && (

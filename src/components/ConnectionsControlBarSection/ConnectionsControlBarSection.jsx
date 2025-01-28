@@ -6,8 +6,11 @@ import renderStatusCommunication from "../../utils/renderStatusCommunication .js
 import { statusesCommunications } from "../../utils/dataToRender.js";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch.jsx";
 import DownloadPdfButtonModalCar from "../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar.jsx";
+import { useState } from "react";
 
 export default function ConnectionsControlBarSection() {
+  const [periodStartData, setPeriodStartData] = useState(new Date());
+  const [periodEndData, setPeriodEndData] = useState(new Date());
   const isFilter = true;
 
   const handleStatusChange = (status) => {
@@ -17,17 +20,23 @@ export default function ConnectionsControlBarSection() {
   return (
     <div className={css.wrapper}>
       <RangeTimeSelector />
-      <CalendarPeriodSelector />
+      <CalendarPeriodSelector
+        periodStartData={periodStartData}
+        periodEndData={periodEndData}
+        handleInputChangeBeg={setPeriodStartData}
+        handleInputChangeEnd={setPeriodEndData}
+        isSingle={false}
+      />
       <StatusFilter
         onStatusChange={handleStatusChange}
-        renderStatus={renderStatusCommunication}
+        renderStatus={(status) => renderStatusCommunication(status, css, isFilter)}
         statuses={statusesCommunications}
         isFilter={isFilter}
       />
       <div className={css.rightContainer}>
-          <CarsSearch />
-          <DownloadPdfButtonModalCar />
-        </div>
+        <CarsSearch />
+        <DownloadPdfButtonModalCar />
+      </div>
     </div>
   );
 }

@@ -12,7 +12,7 @@ const data = [
   },
   {
     value: 3, maxvalue: 8, activecolor: "var(--green)",
-    noactivecolor: "var(--bg-input)", label: 16, title: "Запис"
+    noactivecolor: "var(--bg-input)", title: "Запис"
   },
   {
     value: 0, maxvalue: 0, activecolor: "var(--status-repair)",

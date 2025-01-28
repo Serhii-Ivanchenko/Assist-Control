@@ -30,6 +30,16 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: relative;
+}
+
+.erroMessage {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  color: var(--red);
+  font-size: 13px;
 }
 
 .phoneUpload {
@@ -189,6 +199,7 @@
 .buttons {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .delete {
@@ -247,10 +258,24 @@
   transform: translateY(-50%);
 }
 
+.loginWarning {
+  position: absolute;
+  top: 120%;
+  left: 0;
+
+  color: var(--red);
+  font-size: 12px;
+}
+
 /* DocumentPart */
 
 .docInput {
   display: none;
+}
+
+.documentsWrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
 .documents {
@@ -308,7 +333,12 @@
   display: flex;
   gap: 8px;
   position: relative;
-  width: fit-content;
+  width: 113px;
+  height: 22px;
+}
+
+.docBoxContracts {
+  width: 200px;
 }
 
 /* .docBoxID{

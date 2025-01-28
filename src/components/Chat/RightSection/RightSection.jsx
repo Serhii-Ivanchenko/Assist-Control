@@ -31,6 +31,10 @@ import Modal from "../../Modals/Modal/Modal.jsx";
 import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal.jsx";
 import SearchTags from "./ChatTags/SearchTags/SearchTags.jsx";
 import { tags } from "../RightSection/ChatTags/tags.js";
+import PhoneModal from "./PopUp/PhoneModal/PhoneModal.jsx";
+import StaffModal from "./PopUp/StaffModal/StaffModal.jsx";
+import CategoryModal from "./PopUp/CategoryModal/CategoryModal.jsx";
+import ActionModal from "./PopUp/ActionModal/ActionModal.jsx";
 import clsx from "clsx";
 
 const data = {
@@ -174,6 +178,7 @@ export default function RightSection() {
 
   const [activeCategory, setActiveCategory] = useState(categories[0]); // Выбрана первая категория по умолчанию
   const [isCategory, setIsCategory] = useState(false); // Видимость справочника
+  const triggerCategoryRef = useRef(null);
 
   const toggleCategorySelector = () => {
     setIsCategory(!isCategory);
@@ -181,7 +186,7 @@ export default function RightSection() {
 
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
-    setIsCategory(false); // Закрываем справочник
+    setIsCategory(false);
   };
 
   // width change if isScrolled * start
@@ -233,22 +238,19 @@ export default function RightSection() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [actionType, setActionType] = useState(""); // "add", "edit", "delete"
+  const triggerActionRef = useRef(null);
   const handleOpenModal = (type) => {
     setActionType(type);
-    setModalOpen(true);
+    setModalOpen(!modalOpen);
   };
-
-  // const handleCloseModal = () => {
-  //   setModalOpen(false);
-  // };
 
   const handleActionChange = (value) => {
     setActionType(value);
     setModalOpen(false);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
+  const buttonRef = useRef(null);
   const makeCall = (phone) => {
     window.location.href = `tel:${phone}`;
   };
@@ -257,10 +259,10 @@ export default function RightSection() {
     // if (!data.phonenums.includes(data.phonenum)) {
     //   data.phonenums.push(data.phonenum);
     // };
-    if (data.phonenums.length >= 1) {
-      setIsModalOpen(true);
+    if (data.phonenums.length === 0) {
+      setIsPhoneModalOpen(false);
     } else {
-      setIsModalOpen(false);
+      setIsPhoneModalOpen((prevState) => !prevState);
     }
   };
 
@@ -289,7 +291,16 @@ export default function RightSection() {
   ];
 
   const [isModalStaff, setIsModalStaff] = useState(false);
+  const staffButtonRef = useRef(null);
+  const handleStaffClick = () => {
+    setIsModalStaff((prevState) => !prevState);
+  };
+
   const [isModalStaffPlus, setIsModalStaffPlus] = useState(false);
+  const staffButtonPlusRef = useRef(null);
+  const handleStaffPlusClick = () => {
+    setIsModalStaffPlus((prevState) => !prevState);
+  };
 
   const [isModalNote, setIsModalNote] = useState(false);
   const [notificationSent, setNotificationSent] = useState(false);
@@ -319,7 +330,11 @@ export default function RightSection() {
           </div>
         </div>
         <div className={css.btnbox}>
-          <button className={css.btnaction} onClick={handlePhoneClick}>
+          <button
+            ref={buttonRef}
+            className={css.btnaction}
+            onClick={handlePhoneClick}
+          >
             <BsTelephone className={css.iconaction} />
           </button>
 
@@ -334,45 +349,62 @@ export default function RightSection() {
 
           <button
             className={css.btnaction}
-            onClick={() => {
-              setIsModalStaff(true);
-            }}
+            ref={staffButtonRef}
+            // onClick={() => {
+            //   setIsModalStaff(true);
+            // }}
+            onClick={handleStaffClick}
           >
             <RiUserSharedFill className={css.iconaction} />
           </button>
 
           <button
             className={css.btnaction}
-            onClick={() => {
-              setIsModalStaffPlus(true);
-            }}
+            ref={staffButtonPlusRef}
+            onClick={handleStaffPlusClick}
           >
             <RiUserAddFill className={css.iconaction} />
           </button>
 
-          {isModalOpen && (
-            <div
-              className={css.modalOverlay} // Задний фон модального окна
-              onClick={() => setIsModalOpen(false)} // Закрытие при клике на фон
-            >
-              <div
-                className={css.modalphone}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {data.phonenums.map((phone, index) => (
-                  <div
-                    key={index}
-                    className={css.modalitem}
-                    onClick={() => {
-                      makeCall(phone);
-                      setIsModalOpen(false);
-                    }}
-                  >
-                    {formatPhoneNumber(phone)}
-                  </div>
-                ))}
-              </div>
-            </div>
+          {isPhoneModalOpen && (
+            <PhoneModal
+              isOpen={isPhoneModalOpen}
+              onClose={() => setIsPhoneModalOpen(false)}
+              phoneNumbers={data.phonenums}
+              onPhoneSelect={(phone) => {
+                makeCall(phone);
+                setIsPhoneModalOpen(false);
+              }}
+              triggerRef={buttonRef}
+            />
+          )}
+
+          {isModalStaff && (
+            <StaffModal
+              isOpen={isModalStaff}
+              onClose={() => setIsModalStaff(false)}
+              staffs={staffs}
+              onStaffSelect={(staff) => {
+                console.log(staff);
+                setIsModalStaff(false);
+              }}
+              offsetLeft={20}
+              triggerRef={staffButtonRef}
+            />
+          )}
+
+          {isModalStaffPlus && (
+            <StaffModal
+              isOpen={isModalStaffPlus}
+              onClose={() => setIsModalStaffPlus(false)}
+              staffs={staffs}
+              onStaffSelect={(staff) => {
+                console.log(staff);
+                setIsModalStaffPlus(false);
+              }}
+              offsetLeft={68}
+              triggerRef={staffButtonPlusRef}
+            />
           )}
 
           {isModalNote && (
@@ -388,92 +420,6 @@ export default function RightSection() {
                 setNotificationSent={setNotificationSent}
               />
             </Modal>
-          )}
-
-          {isModalStaff && (
-            <div
-              className={css.modalOverlay} // Задний фон модального окна
-              onClick={() => setIsModalStaff(false)} // Закрытие при клике на фон
-            >
-              <div
-                className={css.modalstaffplus}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {staffs.map((item) => (
-                  <div
-                    key={item.id}
-                    className={css.modalitemstaff}
-                    onClick={() => {
-                      console.log(item.name);
-                      setIsModalStaffPlus(false);
-                    }}
-                  >
-                    <div className={css.iconWrapper}>
-                      <img
-                        className={css.manageravatar}
-                        src={item.avatar || ava1}
-                        alt={item.name}
-                      />
-                      <span
-                        className={css.notificationBubble}
-                        style={{
-                          backgroundColor: item.isActive
-                            ? "var(--green)"
-                            : "var(--input-text)",
-                        }}
-                      ></span>
-                    </div>
-                    <div className={css.modalstaffbox}>
-                      <div className={css.staffname}>{item.name}</div>
-                      <div className={css.staffemail}>{item.email}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {isModalStaffPlus && (
-            <div
-              className={css.modalOverlay} // Задний фон модального окна
-              onClick={() => setIsModalStaffPlus(false)} // Закрытие при клике на фон
-            >
-              <div
-                className={css.modalstaffplus}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {staffs.map((item) => (
-                  <div
-                    key={item.id}
-                    className={css.modalitemstaff}
-                    onClick={() => {
-                      console.log(item.name);
-                      setIsModalStaffPlus(false);
-                    }}
-                  >
-                    <div className={css.iconWrapper}>
-                      <img
-                        className={css.manageravatar}
-                        src={item.avatar || ava1}
-                        alt={item.name}
-                      />
-                      <span
-                        className={css.notificationBubble}
-                        style={{
-                          backgroundColor: item.isActive
-                            ? "var(--green)"
-                            : "var(--input-text)",
-                        }}
-                      ></span>
-                    </div>
-                    <div className={css.modalstaffbox}>
-                      <div className={css.staffname}>{item.name}</div>
-                      <div className={css.staffemail}>{item.email}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           )}
         </div>
       </div>
@@ -499,6 +445,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel1") ? 127 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel1-content"
@@ -515,6 +464,7 @@ export default function RightSection() {
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
                       transition: "transform 0.3s",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleRowClick("panel1")}
                   />
@@ -579,8 +529,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel2") ? 172 : 56,
-              // flexGrow: "1",
-              // overflow: "hidden",
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel2-content"
@@ -597,6 +548,7 @@ export default function RightSection() {
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
                       transition: "transform 0.3s",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleRowClick("panel2")}
                   />
@@ -651,6 +603,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel3") ? 209 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel3-content"
@@ -666,6 +621,7 @@ export default function RightSection() {
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
                     transition: "transform 0.3s",
+                    cursor: "pointer",
                   }}
                   onClick={() => handleRowClick("panel3")}
                 />
@@ -695,6 +651,7 @@ export default function RightSection() {
                 {expandedRows.includes("panel3") && (
                   <div
                     className={css.categoryDisplay}
+                    ref={triggerCategoryRef}
                     onClick={toggleCategorySelector} // Открываем/закрываем справочник
                   >
                     <span>{activeCategory.shortname}</span>
@@ -706,6 +663,7 @@ export default function RightSection() {
                           : "rotate(0deg)",
                         transition: "transform 0.3s",
                         marginLeft: "4px",
+                        cursor: "pointer",
                       }}
                     />
                   </div>
@@ -720,6 +678,7 @@ export default function RightSection() {
                     }}
                   >
                     <button
+                      ref={triggerActionRef}
                       className={css.btnicon}
                       onClick={() => {
                         handleOpenModal("");
@@ -731,49 +690,27 @@ export default function RightSection() {
                 )}
 
                 {expandedRows.includes("panel3") && isCategory && (
-                  <div
-                    className={css.modalOverlay} // Задний фон модального окна
-                    onClick={() => setIsCategory(false)} // Закрытие при клике на фон
-                  >
-                    <div
-                      className={css.categorySelector}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {categories.map((category) => (
-                        <div
-                          className={clsx(css.category, {
-                            [css.categoryActive]:
-                              category.categ === activeCategory.categ,
-                          })}
-                          key={category.categ}
-                          onClick={() => handleCategorySelect(category)}
-                        >
-                          {category.fullname}
-                        </div>
-                      ))}
-                    </div>
+                  <div>
+                    <CategoryModal
+                      isOpen={isCategory}
+                      onClose={() => setIsCategory(false)}
+                      categories={categories}
+                      activeCategory={activeCategory}
+                      onSelect={handleCategorySelect}
+                      triggerRef={triggerCategoryRef}
+                    />
                   </div>
                 )}
 
                 {expandedRows.includes("panel3") && modalOpen && (
-                  <div
-                    className={css.modalOverlay} // Задний фон модального окна
-                    onClick={() => setModalOpen(false)} // Закрытие при клике на фон
-                  >
-                    <div
-                      className={css.modal}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {actions.map((item) => (
-                        <div
-                          className={css.modalitem}
-                          key={item.id}
-                          onClick={() => handleActionChange(item.action)}
-                        >
-                          {item.fullname}
-                        </div>
-                      ))}
-                    </div>
+                  <div>
+                    <ActionModal
+                      isOpen={modalOpen}
+                      onClose={() => setModalOpen(false)}
+                      actions={actions}
+                      onActionSelect={handleActionChange}
+                      triggerRef={triggerActionRef}
+                    />
                   </div>
                 )}
               </div>
@@ -812,6 +749,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel4") ? 161 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel4-content"
@@ -828,6 +768,7 @@ export default function RightSection() {
                         ? "rotate(180deg)"
                         : "rotate(0deg)",
                       transition: "transform 0.3s",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleRowClick("panel4")}
                   />
@@ -894,6 +835,9 @@ export default function RightSection() {
               "& .Mui-focusVisible": {
                 backgroundColor: "var(--bg-secondary)",
               },
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             // expandIcon={<ExpandMoreIcon style={{fill: "var(--light-gray)"}}/>}
@@ -910,6 +854,7 @@ export default function RightSection() {
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
                     transition: "transform 0.3s",
+                    cursor: "pointer",
                   }}
                   onClick={() => handleRowClick("panel5")}
                 />
@@ -957,9 +902,6 @@ export default function RightSection() {
             background: "none",
             color: "var(--light-gray)",
             boxShadow: "none",
-            // "&:before": {
-            //   display: "none",
-            // },
             overflow: "hidden",
             minHeight: expandedRows.includes("panel6") ? 200 : 56,
           }}
@@ -967,6 +909,9 @@ export default function RightSection() {
           <AccordionSummary
             sx={{
               height: expandedRows.includes("panel6") ? 200 : 56,
+              "&:hover": {
+                cursor: "default !important",
+              },
             }}
             className={css.accordionTitle}
             aria-controls="panel6-content"
@@ -982,6 +927,7 @@ export default function RightSection() {
                       ? "rotate(180deg)"
                       : "rotate(0deg)",
                     transition: "transform 0.3s",
+                    cursor: "pointer",
                   }}
                   onClick={() => handleRowClick("panel6")}
                 />

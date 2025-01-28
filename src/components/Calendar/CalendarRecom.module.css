@@ -1,0 +1,48 @@
+.containercalendar {
+    margin-top: 5px;
+    width: 408px;
+    min-height: 188px;
+    height: auto;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 16px;
+    height: 24px;
+    margin-bottom: 3px;
+    grid-column-gap: 6px;
+    text-align: center;
+    color: var(--white);
+    justify-content: center;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.calendargrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 7.2px;
+    grid-row-gap: 6px;
+}
+
+.calendarday {
+    text-align: center;
+    color: var(--white);
+    width: 52px;
+    height: 27px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    border: none;
+    position: relative;
+}

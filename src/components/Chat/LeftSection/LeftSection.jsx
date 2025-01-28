@@ -44,7 +44,6 @@ export default function LeftSection() {
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
       time: "2025-01-05T12:45:33",
-      warning: true,
       read: false,
       id: "2",
     },
@@ -161,7 +160,7 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "2025-01-11T19:27:33",
+      time: "2025-01-18T16:00:33",
       read: true,
       id: "9",
     },
@@ -170,7 +169,7 @@ export default function LeftSection() {
       isChosen: true,
       isDelayed: false,
       isClosed: false,
-      archive: true,
+      archive: false,
       type: "gmail",
       avatar: avatar,
       icon: gmail,
@@ -194,23 +193,45 @@ export default function LeftSection() {
   const memoizedChats = useMemo(() => chats, []);
   const [initialChats, setInitialChats] = useState(memoizedChats);
 
+  const filteredChats = initialChats.filter(
+    (chat) => !chat.archive && !chat.isClosed
+  );
+
   const [favourite, setFavourite] = useState(
-    initialChats.filter((chat) => chat.isChosen === true).length
+    filteredChats.filter((chat) => chat.isChosen === true).length
+  );
+  const [delayedChats, setDelayedChats] = useState(
+    filteredChats.filter((chat) => chat.isDelayed === true).length
+  );
+  const [closedChats, setClosedChats] = useState(
+    initialChats.filter((chat) => chat.isClosed === true).length
+  );
+  const [archiveChats, setArchiveChats] = useState(
+    initialChats.filter((chat) => chat.archive === true).length
   );
 
   const categoryCounts = useMemo(() => {
     return {
-      email: initialChats.filter((chat) => chat.category === "email").length,
-      chat: initialChats.filter((chat) => chat.category === "chat").length,
-      delayed: initialChats.filter((chat) => chat.isDelayed === true).length,
-      closed: initialChats.filter((chat) => chat.isClosed === true).length,
+      email: filteredChats.filter((chat) => chat.category === "email").length,
+      chat: filteredChats.filter((chat) => chat.category === "chat").length,
+      delayed: delayedChats,
+      closed: closedChats,
       chosen: favourite,
-      archive: initialChats.filter((chat) => chat.archive === true).length,
+      archive: archiveChats,
     };
-  }, [initialChats, favourite]);
+  }, [filteredChats, favourite, delayedChats, closedChats, archiveChats]);
 
   useEffect(() => {
     let updatedChats = [...initialChats];
+
+    if (
+      !activeFilterState ||
+      (activeFilterState !== "archive" && activeFilterState !== "closed")
+    ) {
+      updatedChats = updatedChats.filter(
+        (chat) => !chat.archive && !chat.isClosed
+      );
+    }
 
     // Фільтрація
     if (activeFilter) {
@@ -294,6 +315,16 @@ export default function LeftSection() {
     setFavourite(newChosenCount);
   };
 
+  const flashingBorder = (type) => {
+    const hasWarning = initialChats.some((chat) => {
+      const time = Date.now() - new Date(chat.time).getTime();
+      return (
+        time >= 300000 && !chat.read && (chat.type === type || type === "all")
+      );
+    });
+    return hasWarning ? css.warningBorder : "";
+  };
+
   return (
     <div className={css.leftSectionWrapper}>
       <InboxPart
@@ -303,12 +334,19 @@ export default function LeftSection() {
         setActiveFilterCategory={setActiveFilterCategory}
         setActiveFilterState={setActiveFilterState}
         categoryCounts={categoryCounts}
+        flashingBorder={flashingBorder}
       />
       <MessagesPart
         chats={sortedAndFilteredChats}
         handleSort={handleSort}
         sortOrder={sortOrder}
         handleFavourite={handleFavourite}
+        setDelayedChats={setDelayedChats}
+        setClosedChats={setClosedChats}
+        setArchiveChats={setArchiveChats}
+        setFavourite={setFavourite}
+        setInitialChats={setInitialChats}
+        initialChats={initialChats}
       />
     </div>
   );

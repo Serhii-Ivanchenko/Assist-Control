@@ -1,0 +1,196 @@
+.modal {
+  background-color: var(--bg-secondary);
+  padding: 40px;
+  width: 580px;
+  border-radius: 12px;
+}
+
+.headerWrapper {
+  display: flex;
+  margin-bottom: 33px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  color: var(--light-gray);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.closeIcon {
+  width: 18px;
+  height: 18px;
+  fill: var(--light-gray);
+}
+
+.closeIcon:hover {
+  cursor: pointer;
+}
+
+.avatarWrapper {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.avatarImage {
+  width: 102px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.disabled {
+  display: none;
+}
+
+.avatarLabel {
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.camera {
+  width: 24px;
+  height: 24px;
+  color: var(--icon-gray);
+}
+
+.uploadAvatarText {
+  color: var(--input-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: var(--light-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.labelWithIcon {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--light-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.envelope {
+  width: 18px;
+  height: 18px;
+}
+
+.fieldWithErrorWrapper {
+  position: relative;
+}
+
+.input {
+  border-radius: 4px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+  padding: 6px 20px;
+  text-align: center;
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 100%;
+}
+
+.input:focus {
+  border-color: var(--light-gray);
+  outline: none;
+}
+
+.input:-webkit-autofill {
+  background-color: var(--bg-input) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  background-color: var(--bg-input) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+
+.input::placeholder {
+  color: var(--input-text);
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.errorMsg {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: red;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  white-space: nowrap;
+}
+
+.phonesWrapper {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+}
+.calendarWrapper {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.calendarBox {
+  position: relative;
+}
+
+.calendarIcon {
+  fill: var(--light-gray);
+  position: absolute;
+  left: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.calendar {
+  width: 363px;
+}
+
+.btnWrapper {
+  margin-top: 16px;
+}

@@ -1,229 +1,205 @@
 .containerCarModal {
-    display: flex;
-    flex-direction: column;
-    width: 800px;
-    height: 616px;
-    position: relative;
-    background-color: var(--bg-secondary);
-    overflow: hidden;
-    border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 1360px;
+  height: 800px;
+  border-radius: 12px;
+  position: relative;
+  background-color: var(--bg-secondary);
+  overflow: hidden;
 }
-
-@media only screen and (min-width: 1850px) {
-    .containerCarModal {
-        width: 1360px;
-        height: 800px;
-        border-radius: 12px;
-    }
-}
-
-
 
 .noResultsMessage {
-    margin-top: 20px;
-    width: fit-content;
-    margin-left: auto;        
-    margin-right: auto;
-  }
-
+  margin-top: 20px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .header {
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-left: 30px;
-    margin-bottom: 25px;
-    margin-right: 98px;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-left: 30px;
+  margin-bottom: 25px;
+  margin-right: 98px;
 }
 
 .leftHeader {
-    display: flex;
-    gap: 13px;
+  display: flex;
+  gap: 13px;
 }
 
 .rightHeader {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 28px;
 }
 
-.rightHeader> :nth-child(2) {
-    margin-left: 47px;
+.rightHeader > :nth-child(2) {
+  margin-left: 47px;
 }
 
 .iconClose {
-    color: var(--input-stroke);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
+  color: var(--input-stroke);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
 }
 
 .closeButton {
-    /* width: 18px;
+  /* width: 18px;
     height: 18px; */
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .switch {
-    font-size: 17px;
-    display: inline-block;
-    width: 50px;
-    height: 27px;
-    cursor: pointer;
-    position: relative;
+  font-size: 17px;
+  display: inline-block;
+  width: 50px;
+  height: 27px;
+  cursor: pointer;
+  position: relative;
 }
 
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--bg);
-    transition: .4s;
-    border-radius: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg);
+  transition: 0.4s;
+  border-radius: 30px;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 24px;
-    width: 24px;
-    border-radius: 50%;
-    left: 2px;
-    top: 1px;
-    z-index: 1;
-    background-color: var(--input-stroke);
-    transition: .4s;
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  left: 2px;
+  top: 1px;
+  z-index: 1;
+  background-color: var(--input-stroke);
+  transition: 0.4s;
 }
 
 .iconRight {
-    color: var(--icon-gray);
-    position: absolute;
-    top: 5px;
-    left: 28px;
-    z-index: 2;
-    width: 16px;
-    height: 16px;
+  color: var(--icon-gray);
+  position: absolute;
+  top: 5px;
+  left: 28px;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
 }
 
 .iconLeft {
-    color: var(--icon-gray);
-    position: absolute;
-    top: 5px;
-    left: 6px;
-    width: 16px;
-    height: 16px;
-    z-index: 2;
+  color: var(--icon-gray);
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  width: 16px;
+  height: 16px;
+  z-index: 2;
 }
 
 .iconRight svg {
-    animation: rotate 15s linear infinite;
+  animation: rotate 15s linear infinite;
 }
 
 @keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
 
-    0% {
-        transform: rotate(0);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .iconLeft svg {
-    animation: tilt 5s linear infinite;
+  animation: tilt 5s linear infinite;
 }
 
 @keyframes tilt {
+  0% {
+    transform: rotate(0deg);
+  }
 
-    0% {
-        transform: rotate(0deg);
-    }
+  25% {
+    transform: rotate(-10deg);
+  }
 
-    25% {
-        transform: rotate(-10deg);
-    }
+  75% {
+    transform: rotate(10deg);
+  }
 
-    75% {
-        transform: rotate(10deg);
-    }
-
-    100% {
-        transform: rotate(0deg);
-    }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
-.input:checked+.slider {
-    background-color: var(--bg);
+.input:checked + .slider {
+  background-color: var(--bg);
 }
 
-.input:focus+.slider {
-    box-shadow: 0 0 1px var(--bg-input);
+.input:focus + .slider {
+  box-shadow: 0 0 1px var(--bg-input);
 }
 
-.input:checked+.slider:before {
-    transform: translateX(22px);
+.input:checked + .slider:before {
+  transform: translateX(22px);
 }
 
 .active {
-    transition: color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .filter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    padding: 5px 7px;
-    border-radius: 17px;
-    background: var(--bg-input);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    color: var(--light-gray);
-    border: none;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 5px 7px;
+  border-radius: 17px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: var(--light-gray);
+  border: none;
+  cursor: pointer;
 }
 
 .btnSettings {
-    background: transparent;
-    /* Прозорий фон */
-    border: none;
-    /* Без рамки */
-    cursor: pointer;
-    /* Змінює курсор на pointer */
-    padding: 0;
-    /* Відсутній внутрішній відступ */
-    display: flex;
-    /* Для центрування іконки */
-    align-items: center;
-    /* Вирівнювання по вертикалі */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 .iconSettings {
-    fill: white;
-    /* Білий колір іконки */
-    width: 17px;
-    /* Ширина 17 пікселів */
-    height: 17px;
-    /* Висота 17 пікселів */
+  fill: white;
+  width: 17px;
+  height: 17px;
 }
-
-

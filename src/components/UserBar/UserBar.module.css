@@ -2,22 +2,15 @@
   display: flex;
   align-items: center;
   position: absolute;
-  top: 48px;
-  right: 10px;
-  transition: top 0.7s ease, right 0.7s ease; 
+  top: 75px;
+  right: 23px;
+  transition: top 0.7s ease, right 0.7s ease;
 }
 
-@media only screen and (min-width: 1850px) {
-  .userBarContainer {
-    top: 75px;
-    right: 23px;
-  }
-  .chatOpen {
-    top: 54px;
-    right: 0;
-  }
+.chatOpen {
+  top: 54px;
+  right: 0;
 }
-
 
 .btn {
   position: relative;
@@ -33,15 +26,8 @@
 
 .iconSettings {
   stroke: white;
-  width: 13px;
-  height: 13px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .iconSetting {
-    width: 20px;
-    height: 20px;
-  }
+  width: 20px;
+  height: 20px;
 }
 
 .tooltip {
