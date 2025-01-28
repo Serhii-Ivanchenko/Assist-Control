@@ -57,18 +57,14 @@ const positionOptions = [
   { value: "Кухар", label: "Кухар" },
   { value: "Працівник", label: "Працівник" },
   { value: "Власник", label: "Власник" },
-  { value: "Менеджер", label: "Мнеджер" },
-  { value: "operator", label: "operator" },
-  { value: "mech", label: "mech" },
+  // { value: "Менеджер", label: "Мнеджер" },
 ];
 
 const roleOptions = [
   { value: "Адміністратор", label: "Адміністратор" },
   { value: "Менеджер", label: "Менеджер" },
   { value: "Працівник", label: "Працівник" },
-  { value: "Керівник відділу", label: "Керівник відділу" },
-  { value: "operator", label: "operator" },
-  { value: "mech", label: "mech" },
+  // { value: "Керівник відділу", label: "Керівник відділу" },
 ];
 
 export default function AddStaffMemberModal({ onClose, employeeInfo }) {
@@ -239,19 +235,19 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const initialValues = {
     name: employee.name || "",
     phone: employee.phone || phone,
-    address: employee.address || "м. Київ, вул. Шевченка, 1",
+    address: employee.address || "",
     birthday: employee.birthday || new Date(),
     position: employee.position || "Механік",
     role: employee.role || "Працівник",
-    email: employee.email || "ivan.ivanov@example.com",
+    email: employee.email || "",
     login: employee.login || "",
     password: employee.password || "",
     period: "",
-    rate: employee.rate || 100.0,
-    minRate: employee.minRate || 100.0,
-    amount: employee.amount || 100.0,
-    sparesAmount: employee.sparesAmount || 100.0,
-    sparesPrice: employee.sparesPrice || 100.0,
+    rate: employee.rate || 0.0,
+    minRate: employee.minRate || 0.0,
+    amount: employee.amount || 0.0,
+    sparesAmount: employee.sparesAmount || 0.0,
+    sparesPrice: employee.sparesPrice || 0.0,
     // profit: 0.0,
     status: employee.status || 1,
     // schedule: { Понеділок: "9:00-17:00", Вівторок: "9:00-17:00" },
