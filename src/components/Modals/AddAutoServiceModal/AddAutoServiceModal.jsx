@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import {
   createService,
+  getAllServices,
   updateService,
 } from "../../../redux/service/operations.js";
 import Popup from "./Popup/Popup.jsx";
@@ -103,6 +104,7 @@ export default function AddAutoServiceModal({
               color: "var(--white)FFF",
             },
           });
+          dispatch(getAllServices());
         })
         .catch((err) => {
           console.log(err);
@@ -139,6 +141,8 @@ export default function AddAutoServiceModal({
             },
           });
         });
+    } else {
+      console.log({ ...data, clientOrganization: true });
     }
     actions.resetForm();
     onClose();
