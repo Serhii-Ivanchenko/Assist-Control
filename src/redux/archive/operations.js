@@ -47,28 +47,32 @@ export const addItemToArchive = createAsyncThunk(
 // Edit item in archive
 export const updateArchiveItem = createAsyncThunk(
   "archive/updateArchiveItem",
-  async (updatedInfo, thunkAPI) => {
+  async ({ archive_id,  reason_add }, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
+
+    console.log("Updating archive item", { archive_id, reason_add });
+    
     try {
       const response = await axiosInstance.patch(
-        `/crm/archive/update/`,
-        updatedInfo,
+        `/crm/archive/update/?archive_id=${archive_id}`, 
+        { reason_add },
         {
           headers: {
-            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
+            "Content-Type": "application/json",
           },
         }
       );
-      console.log("updateArchiveItem", response.data);
-
       return response.data;
     } catch (error) {
+      console.error("Error occurred during request:", error);
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 
 // Return item from archive
 export const returnArchiveItem = createAsyncThunk(

@@ -14,7 +14,7 @@ import {
 import { IoCarSportSharp } from "react-icons/io5";
 import { SlSpeedometer } from "react-icons/sl";
 import flag from "../../assets/images/flagUa.webp";
-import { formatDateTime, renderTimeinWork } from "../../utils/renderTime.jsx";
+import { renderTimeinWork } from "../../utils/renderTime.jsx";
 import renderStatusCars from "../../utils/renderStatusCars.jsx";
 import { getBackgroundStyle } from "../../utils/getBackgroundStyle";
 import CarDetailButton from "../sharedComponents/CarDetailButton/CarDetailButton.jsx";
@@ -115,7 +115,8 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
     complete_d,
     name,
     phone,
-    booking,
+    appointment_date,
+    time_slot,
     plate: carNumber,
   } = car;
 
@@ -125,31 +126,32 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
     return number.replace(/\s+/g, "");
   };
 
-  const renderBookingTime = () => {
-    if (booking && Array.isArray(booking) && booking.length > 0) {
-      const { appointment_date, times } = booking[0];
-      if (appointment_date && Array.isArray(times) && times.length > 0) {
-        const formattedDateTime = formatDateTime(appointment_date, times[0]);
-        return (
-          <div className={styles.bookingRecord}>
-            <p className={styles.time}>{formattedDateTime}</p>
-          </div>
-        );
-      }
+  const renderAppointmentDate = () => {
+    if (appointment_date && time_slot) {
+      const formattedDate = new Date(appointment_date).toLocaleDateString('uk-UA', {
+        day: '2-digit',
+        month: '2-digit',
+      });
+      return (
+        <div>
+          <p className={styles.time}>
+            {formattedDate} / {time_slot}
+          </p>
+        </div>
+      );
     }
-    // Якщо `booking` пустий, відображаємо час із `renderTimeinWork`
-    if (booking && Array.isArray(booking) && booking.length === 0) {
+  
+    if (!appointment_date) {
       const timeInWork = renderTimeinWork(car.date_s);
       return (
-        <div className={styles.bookingRecord}>
+        <div>
           <p className={styles.time}>{timeInWork}</p>
         </div>
       );
     }
-
+  
     return null;
   };
-
   
 
   return (
@@ -351,7 +353,7 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
             >
               <BsStopwatch size={13} color="#D5ACF3" />
               <p className={styles.time}>
-                {renderBookingTime(booking, styles)}
+                {renderAppointmentDate()}
               </p>
             </div>
           )}

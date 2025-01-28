@@ -19,6 +19,8 @@ export const statusesCommunications = [
   { status: "appointment", label: "Запис" },
 ];
 
+// Статуси для архіву
+
 export const statusesArchive = [
   { reason_description: "all", label: "Всі авто" },
   { reason_description: "рекомендації", label: "Рекомендації" },
@@ -29,6 +31,17 @@ export const statusesArchive = [
   { reason_description: "не_приїхав", label: "Не приїхав" },
   { reason_description: "рейтинг", label: "Рейтинг" },
   { reason_description: "не_допомогли", label: "Не допомогли" },
+];
+
+// Статуси для редагування в архіві
+export const statusesArchiveEdit = [
+  { reason_description: "дубль", label: "Дубль", reason_add: "1" },
+  { reason_description: "співробітник", label: "Cпівробітник", reason_add: "2" },
+  { reason_description: "випадковий", label: "Випадковий", reason_add: "3" },
+  { reason_description: "відмова", label: "Відмова", reason_add: "4" },
+  { reason_description: "не_приїхав", label: "Не приїхав", reason_add: "5" },
+  { reason_description: "рейтинг", label: "Рейтинг", reason_add: "6" },
+  { reason_description: "не_допомогли", label: "Не допомогли", reason_add: "7" },
 ];
 
 // Заголовки срм компоненті

@@ -14,6 +14,7 @@ import Modal from "../Modals/Modal/Modal";
 import AddNewClientModal from "../Modals/AddNewClientModal/AddNewClientModal";
 
 export default function ConnectionsListSection() {
+  const isRecommendation = true;
   const [isArchiveModalOpen, setArchiveModalOpen] = useState(false);
   const [isCreateClientModalOpen, setIsCreateClientModalOpen] = useState(false);
 
@@ -105,7 +106,7 @@ export default function ConnectionsListSection() {
       ))}
       {isArchiveModalOpen && (
         <Modal isOpen={isArchiveModalOpen} onClose={closeArchiveModal}>
-          <ArchiveModal onClose={closeArchiveModal} />
+          <ArchiveModal onClose={closeArchiveModal} isRecommendation={isRecommendation}/>
         </Modal>
       )}
       {isCreateClientModalOpen && (

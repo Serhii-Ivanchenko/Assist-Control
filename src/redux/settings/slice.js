@@ -80,19 +80,19 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeData.pending, handlePending)
       .addCase(updateEmployeeData.fulfilled, (state, action) => {
         state.isLoading = false;
-        const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.id === action.payload.employee_id
-        );
+        // const employeeToEditIndex = state.employees.findIndex(
+        //   (employee) => employee.id === action.payload.employee_id
+        // );
 
-        if (
-          // action.payload.status === 200 &&
-          employeeToEditIndex !== -1
-        ) {
-          state.employees[employeeToEditIndex] = {
-            ...state.employees[employeeToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
-        }
+        // if (
+        //   // action.payload.status === 200 &&
+        //   employeeToEditIndex !== -1
+        // ) {
+        //   state.employees[employeeToEditIndex] = {
+        //     ...state.employees[employeeToEditIndex], // Залишаємо старі дані
+        //     ...action.meta.arg, // Додаємо дані, які відправляли
+        //   };
+        // }
       })
       .addCase(updateEmployeeData.rejected, handleRejected)
 
@@ -230,6 +230,7 @@ const settingsSlice = createSlice({
       .addCase(updatePostData.pending, handlePending)
       .addCase(updatePostData.fulfilled, (state, action) => {
         state.isLoading = false;
+
         const postToEditIndex = state.posts.findIndex(
           (post) => post.id === action.payload.post_id
         );
@@ -242,7 +243,9 @@ const settingsSlice = createSlice({
             ...(action.payload.name_post && {
               name_post: action.payload.name_post,
             }),
-            ...(action.payload.status && { status: action.payload.status }),
+            ...(action.payload.status !== undefined && {
+              status: action.payload.status,
+            }),
           };
         }
       })

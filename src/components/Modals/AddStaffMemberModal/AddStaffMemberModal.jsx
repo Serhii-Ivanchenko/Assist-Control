@@ -1,6 +1,6 @@
 import DatePicker from "react-datepicker";
 import css from "./AddStaffMemberModal.module.css";
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { BsTrash } from "react-icons/bs";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import { BsReceipt } from "react-icons/bs";
@@ -29,11 +29,13 @@ import RightOfAccessSelect from "./RightOfAccessSelect/RightOfAccessSelect.jsx";
 import { useDispatch } from "react-redux";
 import {
   createEmployee,
+  getAllEmployees,
   updateEmployeeData,
 } from "../../../redux/settings/operations.js";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import Select from "./Select/Select.jsx";
+import { ImFilePdf } from "react-icons/im";
 
 registerLocale("uk", uk);
 
@@ -83,6 +85,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [employee, setEmployee] = useState(employeeInfo || {});
   const [laborDoc, setLaborDoc] = useState(null);
   const [showLoginWarning, setShowLoginWarning] = useState(false);
+  const [phone, setPhone] = useState("");
   // const [logo, setLogo] = useState(null); // стан для прев'ю лого
   // const [logoBase64, setLogoBase64] = useState(null); // стан, куди записується лого в base64
 
@@ -95,12 +98,27 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       .min(2, "Занадто коротке")
       .max(30, "Занадто довге")
       .required("Поле повинно бути заповнене"),
-    phone: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
+    phone: Yup.string()
+      .matches(
+        /^\+380\d{9}$/,
+        "Телефон повинен відповідати формату +380123456789"
+      )
+      .required("Поле повинно бути заповнене"),
     address: Yup.string(),
     birthday: Yup.string(),
     position: Yup.string(),
     role: Yup.string(),
-    email: Yup.string(),
+    email: Yup.string()
+      .email("Неправильний формат електронної пошти")
+      .test(
+        "is-valid-domain",
+        "Поле повинно містити коректний домен (наприклад, .com, .org)",
+        (value) => {
+          if (!value) return true;
+          const domainPattern = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+          return domainPattern.test(value);
+        }
+      ),
     login: Yup.string(),
     password: Yup.string(),
     period: Yup.string(),
@@ -136,6 +154,16 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   };
 
   const formatPhone = (value) => {
+    let digits = value.replace(/[^\d]/g, "");
+
+    if (!digits.startsWith("38")) {
+      digits = "38" + digits;
+    }
+
+    return "+" + digits.slice(0, 12);
+  };
+
+  const handlePhoneInput = (value) => {
     let digits = value.replace(/[^\d]/g, "");
 
     if (digits.length >= 10) {
@@ -210,7 +238,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
 
   const initialValues = {
     name: employee.name || "",
-    phone: employee.phone || "+380123456789",
+    phone: employee.phone || phone,
     address: employee.address || "м. Київ, вул. Шевченка, 1",
     birthday: employee.birthday || new Date(),
     position: employee.position || "Механік",
@@ -248,20 +276,50 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       : null;
 
     try {
+      // const base64Files = {};
+
+      // for (const [key, file] of Object.entries(values.files)) {
+      //   if (typeof file === "string" && file === employee[key]) {
+      //     // Якщо файл не змінювався, пропускаємо
+      //     continue;
+      //   } else if (file instanceof Blob) {
+      //     // Якщо це новий файл, конвертуємо його у Base64
+      //     base64Files[key] = await new Promise((resolve, reject) => {
+      //       const reader = new FileReader();
+      //       reader.onload = () => resolve(reader.result);
+      //       reader.onerror = (error) => reject(error);
+      //       reader.readAsDataURL(file);
+      //     });
+      //   } else {
+      //     base64Files[key] = null;
+      //   }
+      // }
       const base64Files = {};
 
       for (const [key, file] of Object.entries(values.files)) {
-        if (file) {
+        if (typeof file === "string" && file === employee[key]) {
+          continue; // Якщо файл не змінювався, пропускаємо
+        } else if (file instanceof Blob) {
           base64Files[key] = await new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onload = () => resolve(reader.result); // Data URL (Base64)
-            reader.onerror = (error) => reject(error);
+            reader.onload = () => {
+              try {
+                const base64Data = reader.result.split(",")[1];
+                resolve(base64Data);
+              } catch (error) {
+                reject(new Error(`Failed to parse Base64: ${error.message}`));
+              }
+            };
+            reader.onerror = (error) =>
+              reject(new Error(`FileReader error: ${error.message}`));
             reader.readAsDataURL(file);
           });
         } else {
           base64Files[key] = null;
         }
       }
+
+      console.log("Base64 files:", base64Files);
 
       const employeeData = {
         ...values,
@@ -293,6 +351,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
             },
           });
           onClose();
+          dispatch(getAllEmployees());
+
         }
         // onClose();
         console.log("Після оновлення:", employeeData);
@@ -315,6 +375,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
               color: "var(--white)FFF",
             },
           });
+          dispatch(getAllEmployees());
           onClose();
         }
       }
@@ -323,7 +384,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       actions.resetForm();
       onClose();
     } catch (error) {
-      console.error("Помилка створення працівника:", error);
+      console.error("Помилка створення/oновлення працівника:", error);
       toast.error("Помилка при створенні/оновленні!", {
         position: "top-center",
         duration: 3000,
@@ -349,23 +410,32 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
             <div className={css.mainInfo}>
               <div className={css.column}>
                 <div className={css.iputBox}>
-                  <label className={css.label}>ПІБ</label>
+                  <label className={css.label}>ПІБ *</label>
                   <Field
                     name="name"
                     className={css.input}
                     placeholder="Блудов Олександр Анатолійович"
                   />
+                  <ErrorMessage
+                    name="name"
+                    component="span"
+                    className={css.erroMessage}
+                  />
                 </div>
 
                 <div className={css.iputBox}>
-                  <label className={css.label}>Телефон</label>
+                  <label className={css.label}>Телефон *</label>
                   <div className={css.phoneLine}>
                     <Field
                       name="phone"
                       className={`${css.input} ${css.inputPhone}`}
-                      placeholder="+380733291212"
-                      value={formatPhone(values.phone)}
-                      onChange={(e) => setFieldValue("phone", e.target.value)}
+                      placeholder="380733291212"
+                      // value={phone}
+                      onChange={(e) => {
+                        const formattedInput = handlePhoneInput(e.target.value);
+                        setPhone(formattedInput);
+                        setFieldValue("phone", formatPhone(e.target.value));
+                      }}
                     />
                     <button
                       type="button"
@@ -391,6 +461,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     />
                     {/* </div> */}
                   </div>
+                  <ErrorMessage
+                    name="phone"
+                    component="span"
+                    className={css.erroMessage}
+                  />
                 </div>
 
                 <div className={css.iputBox}>
@@ -460,6 +535,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     name="email"
                     className={css.input}
                     placeholder="birthday@gmail.com"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="span"
+                    className={css.erroMessage}
                   />
                 </div>
 
@@ -657,6 +737,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         onClick={() => toggleSettings(0)}
                         ref={buttonRefs.current[0]}
                       />
+                      {contractFile || employee.contract ? (
+                        <ImFilePdf className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                     </label>
                     {settingsIsOpen === 0 && (
                       <ThreeDotsModal
@@ -665,7 +750,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         setFile={setContractFile}
                         fieldname="files.contract"
                         setFieldValue={setFieldValue}
-
+                        onClose={() => toggleSettings(0)}
                         // buttonRef={buttonRefs.current[0]}
                         // onClose={closePopover}
                       />
@@ -688,6 +773,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         onClick={() => toggleSettings(1)}
                         ref={buttonRefs.current[1]}
                       />
+                      {employmentFile || employee.employment ? (
+                        <ImFilePdf className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                     </label>
                     {settingsIsOpen === 1 && (
                       <ThreeDotsModal
@@ -696,6 +786,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         setFile={setEmploymentFile}
                         fieldname="files.employment"
                         setFieldValue={setFieldValue}
+                        onClose={() => toggleSettings(1)}
                         // buttonRef={buttonRefs.current[1]}
                         // onClose={closePopover}
                       />
@@ -718,6 +809,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         ref={buttonRefs.current[2]}
                         onClick={() => toggleSettings(2)}
                       />
+                      {agreementFile || employee.agreement ? (
+                        <ImFilePdf className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                     </label>
                     {settingsIsOpen === 2 && (
                       <ThreeDotsModal
@@ -726,6 +822,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         setFile={setAgreementFile}
                         fieldname="files.agreement"
                         setFieldValue={setFieldValue}
+                        onClose={() => toggleSettings(2)}
                         // buttonRef={buttonRefs.current[2]}
                         // onClose={closePopover}
                       />
