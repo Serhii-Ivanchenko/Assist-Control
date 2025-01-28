@@ -351,6 +351,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
             },
           });
           onClose();
+          dispatch(getAllEmployees());
+
         }
         // onClose();
         console.log("Після оновлення:", employeeData);
