@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { getClientInfo } from "../../../redux/client/operations.js";
 import { clearClientInfo } from "../../../redux/client/slice.js";
 
-const CarDetailButton = ({ carId, carName }) => {
+const CarDetailButton = ({ carId, carName, car }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const CarDetailButton = ({ carId, carName }) => {
       </button>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-          <DetailedClientInfo onClose={handleModalClose} carName={carName} />
+          <DetailedClientInfo onClose={handleModalClose} carName={carName} car={car}  />
         </Modal>
       )}
     </div>

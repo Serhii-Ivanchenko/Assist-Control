@@ -9,7 +9,7 @@ import {
 import { BsCaretDownFill, BsPencil, BsXCircle } from "react-icons/bs";
 import { RiSave3Fill } from "react-icons/ri";
 import {
-  getWorkSchedule,
+  // getWorkSchedule,
   updateWorkSchedule,
 } from "../../redux/settings/operations.js";
 import { selectSchedule } from "../../redux/settings/selectors.js";
@@ -17,7 +17,7 @@ import { selectSchedule } from "../../redux/settings/selectors.js";
 // import { useState } from "react";
 import ScheduleTable from "../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 import css from "./ServiceStationDetailsAccordion.module.css";
-import { selectedServiceInSettingsId } from "../../redux/service/selectors.js";
+// import { selectedServiceInSettingsId } from "../../redux/service/selectors.js";
 
 export default function ServiceStationDetailsAccordion({ onToggle }) {
   const dispatch = useDispatch();
@@ -117,7 +117,7 @@ export default function ServiceStationDetailsAccordion({ onToggle }) {
   //    fetchWorkScheduleData();
   //  }, [dispatch,  selectedServiceId]);
 
-  console.log("workScheduleData", workScheduleData);
+  // console.log("workScheduleData", workScheduleData);
 
   return (
     <Accordion

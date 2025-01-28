@@ -1,226 +1,229 @@
 .rightSectionWrapper {
-    width: 411px;
-    height: 967px;
-    border-radius: 12px;
-    /* border: 1px solid var(--light-gray); */
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  width: 411px;
+  height: 967px;
+  border-radius: 12px;
+  /* border: 1px solid var(--light-gray); */
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .wrapper {
-    width: 411px;
-    display: flex;
-    flex-direction: column;
-    max-height: 781px;
-    gap: 14px;
-    overflow-y: auto;
-    height: 100%;
+  width: 411px;
+  display: flex;
+  flex-direction: column;
+  max-height: 781px;
+  gap: 14px;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .wrapper .accordion {
-    transition: min-height 0.3s ease-in-out;
+  transition: min-height 0.3s ease-in-out;
 }
 
 .wrapper::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .wrapper::-webkit-scrollbar-track {
-    border-radius: 4px;
-    background-color: var(--bg);
+  border-radius: 4px;
+  background-color: var(--bg);
 }
 
 .wrapper::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: var(--main-gray);
+  border-radius: 4px;
+  background-color: var(--main-gray);
 }
 
 .wrapper .accordionTitle {
-    display: flex;
-    width: 100%;
-    background: var(--bg-secondary);
-    align-items: start;
-    flex-shrink: 0;
-    border-radius: 12px;
-    color: var(--light-gray);
-    font-size: 20px;
-    font-weight: 600;
-    transition: height 0.3s ease-in-out;
-    border-radius: 12px;
-    padding: 16px 16px 16px 24px;
-    /* cursor: default; */
+  display: flex;
+  width: 100%;
+  background: var(--bg-secondary);
+  align-items: start;
+  flex-shrink: 0;
+  border-radius: 12px;
+  color: var(--light-gray);
+  font-size: 20px;
+  font-weight: 600;
+  transition: height 0.3s ease-in-out;
+  border-radius: 12px;
+  padding: 16px 16px 16px 24px;
 }
 
-.accordionTitle>div {
-    margin: 0;
+.accordionScrolled {
+  width: 398px;
+  transition: width 0.3s ease-in-out;
+}
+
+.accordionTitle > div {
+  margin: 0;
 }
 
 .accbox {
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
 }
 
-.accbox>div {
-    padding: 0;
+.accbox > div {
+  padding: 0;
 }
 
 .accboxtitle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }
 
-.accboxtitle>p {
-    font-size: 20px;
-    line-height: 1.2em;
+.accboxtitle > p {
+  font-size: 20px;
+  line-height: 1.2em;
 }
 
 .topWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 363px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 363px;
 }
 
 .leftWrapper {
-    display: flex;
-    gap: 16px;
-    align-items: center;
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
-.leftWrapper>p {
-    font-size: 20px;
-    line-height: 1.2em;
+.leftWrapper > p {
+  font-size: 20px;
+  line-height: 1.2em;
 }
 
 .plus {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px;
-    width: 14px;
-    height: 14px;
-    border-radius: 3px;
-    background-color: var(--current-mileage-text);
-    color: var(--dark-gray);
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background-color: var(--current-mileage-text);
+  color: var(--dark-gray);
+  cursor: pointer;
 }
 
 .pencil {
-    width: 16px;
-    height: 16px;
-    color: var(--play-btn-triangle);
+  width: 16px;
+  height: 16px;
+  color: var(--play-btn-triangle);
 }
 
 .bottomWrapper {
-    display: flex;
-    gap: 10px;
-    cursor: pointer;
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .bottomText {
-    color: var(--play-btn-triangle);
-    font-family: Raleway, sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    text-transform: capitalize;
+  color: var(--play-btn-triangle);
+  font-family: Raleway, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
 }
 
 .client {
-    height: 172px;
-    background-color: var(--bg-secondary);
-    border-radius: 12px;
-    padding: 25px 26px;
+  height: 172px;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 25px 26px;
 }
 
 .clientbox {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    margin-bottom: 19px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-bottom: 19px;
 }
 
 .photoavatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .clientdata {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .name {
-    color: var(--light-gray);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.2em;
+  color: var(--light-gray);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.2em;
 }
 
 .phonebox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .phone {
-    margin-right: 27px;
-    color: #828A9E;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.1875em;
+  margin-right: 27px;
+  color: #828a9e;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.1875em;
 }
 
 .status {
-    color: var(--current-mileage-text);
-    text-align: center;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    width: 78px;
-    height: 27px;
-    margin-right: 20px;
-    padding: 4px 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 24px;
-    background-color: var(--current-mileage-bg);
+  color: var(--current-mileage-text);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 78px;
+  height: 27px;
+  margin-right: 20px;
+  padding: 4px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  background-color: var(--current-mileage-bg);
 }
 
 .btnicon {
-    display: flex;
-    width: 30px;
-    height: 30px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-    background: var(--bg-input);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border: none;
-    cursor: pointer;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  cursor: pointer;
 }
 
 .icon {
-    fill: var(--light-gray);
-    width: 18px;
-    height: 18px;
+  fill: var(--light-gray);
+  width: 18px;
+  height: 18px;
 }
 
 .mainIcon {
-    fill: var(--light-gray);
-    width: 16px;
-    height: 16px;
+  fill: var(--light-gray);
+  width: 16px;
+  height: 16px;
 }
 
 .btnbox {
@@ -241,66 +244,64 @@
     background: #31343E;
     border: none;
     cursor: pointer;
-
 }
 
 .iconaction {
-    width: 24px;
-    height: 24px;
-    fill: var(--light-gray);
+  width: 24px;
+  height: 24px;
+  fill: var(--light-gray);
 }
 
 .accboxicon {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 368px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 368px;
 }
 
 .editbtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
 
-    border: none;
-    background-color: var(--bg-input);
-    margin-right: 5px;
-    color: var(--light-gray);
+  border: none;
+  background-color: var(--bg-input);
+  margin-right: 5px;
+  color: var(--light-gray);
 
-    width: 30px;
-    height: 30px;
-    border-radius: 6px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 .blockflex {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin-left: auto;
-
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-left: auto;
 }
 
 .editInput {
-    width: 160px;
-    padding-left: 4px;
-    outline: none;
-    border: none;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    color: var(--light-gray);
-    font-size: 16px;
-    font-style: normal;
-    line-height: normal;
-    font-weight: 400;
-    height: 100%;
-    background-color: var(--main-gray);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    z-index: 2;
+  width: 160px;
+  padding-left: 4px;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  line-height: normal;
+  font-weight: 400;
+  height: 100%;
+  background-color: var(--main-gray);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  z-index: 2;
 }
 
 .categoryDisplay {

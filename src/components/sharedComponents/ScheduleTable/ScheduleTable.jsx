@@ -37,7 +37,7 @@ const ScheduleTable = forwardRef(
     const [isSelecting, setIsSelecting] = useState(false);
 
     useEffect(() => {
-      console.log("activePeriods", activePeriods);
+      // console.log("activePeriods", activePeriods);
       setGridData(generateGridData(activePeriods));
     }, [activePeriods]);
 
