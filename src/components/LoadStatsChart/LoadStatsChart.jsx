@@ -75,7 +75,7 @@ export default function LoadStatsChart() {
 
   //  const [activeIndex, setActiveIndex] = useState(null); // Для отслеживания наведения на точку
 
-// Генерируем массив ticks
+  // Генерируем массив ticks
   const generateTicks = (dataMax) => {
     return Array.from({ length: dataMax + 2 }, (_, index) => index);
   };
@@ -189,11 +189,11 @@ export default function LoadStatsChart() {
             />
 
             <YAxis
-              domain={[0, (dataMax) => dataMax+1]}
+              domain={[0, (dataMax) => dataMax + 1]}
               dataKey="value"
               margin={{ topt: 10 }}
               tick={{ fontSize: 10 }}
-              interval={0}
+              interval={dataMax > 25 ? 2 : 0}
               //  tickCount={12}
               // tick={{ fill: "transparent" }}
               axisLine={{ fill: "transparent" }}
