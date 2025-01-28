@@ -74,6 +74,12 @@ function CurrentCarModal({ onClose, car, status }) {
 
   const handleStatusChange = (e) => {
     const newStatus = e.target.value;
+    if (status === "complete" && newStatus !== "complete") {
+      toast.error(
+        "Зміна статусу неможлива, зверніться в техпідтримку"
+      );
+      return;
+    }
     setSelectedStatus(newStatus);
 
     if (newStatus === "complete") {

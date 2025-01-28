@@ -136,32 +136,30 @@ export default function RecommendationsCardsItem({ car, isRecommendation }) {
         )}
 
         <div className={styles.btnContainer}>
-          {visibility?.infoBtn && (
-            <CarDetailButton
-              carId={id}
-              car={car}
-              // location={isMonitoring}
-              carName={car.auto}
-            />
-          )}
-          {visibility?.createBtn && (
-            <button className={styles.plus} onClick={openServiceBookingModal}>
-              <BsPlusLg className={styles.iconPlus} />
-            </button>
-          )}
+          <CarDetailButton
+            carId={id}
+            car={car}
+            // location={isMonitoring}
+            carName={car.auto}
+          />
+
+          <button className={styles.plus} onClick={openServiceBookingModal}>
+            <BsPlusLg className={styles.iconPlus} />
+          </button>
+
           {modalState.serviceBooking && (
             <Modal isOpen={modalState.serviceBooking} onClose={closeModals}>
               <ServiceBookingModal onClose={closeModals} />
             </Modal>
           )}
-          {visibility?.notificBtn && (
-            <button
-              className={styles.clockContainer}
-              onClick={openNotificationModal}
-            >
-              <GiAlarmClock className={styles.iconClock} size={20} />
-            </button>
-          )}
+
+          <button
+            className={styles.clockContainer}
+            onClick={openNotificationModal}
+          >
+            <GiAlarmClock className={styles.iconClock} size={20} />
+          </button>
+
           {modalState.notifications && (
             <Modal isOpen={modalState.notifications} onClose={closeModals}>
               <NotificationModal
@@ -176,14 +174,11 @@ export default function RecommendationsCardsItem({ car, isRecommendation }) {
               />
             </Modal>
           )}
-          {visibility?.delBtn && (
-            <button
-              className={styles.clockContainer}
-              onClick={openArchiveModal}
-            >
-              <BsTrash className={styles.iconTrash} size={18} />
-            </button>
-          )}
+
+          <button className={styles.clockContainer} onClick={openArchiveModal}>
+            <BsTrash className={styles.iconTrash} size={18} />
+          </button>
+
           {modalState.archive && (
             <Modal isOpen={modalState.archive} onClose={closeModals}>
               <ArchiveModal

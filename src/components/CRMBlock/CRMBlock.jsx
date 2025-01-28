@@ -20,7 +20,7 @@ import AcceptModal from "../Modals/AcceptModal/AcceptModal.jsx";
 
 export default function CRMBlock() {
   const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
-  const [carToUpdate, setCarToUpdate] = useState(null); // Зберігаємо машину для оновлення статусу
+  const [carToUpdate, setCarToUpdate] = useState(null);
 
   const dispatch = useDispatch();
   const periodRecords = useSelector(selectPeriodRecords);
@@ -55,19 +55,27 @@ export default function CRMBlock() {
     e.preventDefault();
     const itemId = Number(e.dataTransfer.getData("text/plain"));
     console.log("Dropped item ID:", itemId, "New status:", status);
-
+  
     const item = periodRecords.find((item) => item.car_id === itemId);
     console.log("Found item:", item);
-
+  
     if (item) {
       if (item.status === status) {
         console.log("Статус не змінився, запит не відправлено.");
         return;
       }
-
+  
+      if (item.status === "complete") {
+        // Якщо картка вже в статусі complete
+        toast.error(
+          "Зміна статусу неможлива, зверніться в технічну підтримку."
+        );
+        return;
+      }
+  
       if (status === "complete") {
-        setCarToUpdate(item); // Зберігаємо машину, щоб змінити її статус на complete
-        setIsAcceptModalOpen(true); // Відкриваємо модальне вікно для підтвердження
+        setCarToUpdate(item);
+        setIsAcceptModalOpen(true);
       } else {
         dispatch(changeCarStatusCRM({ carId: item.car_id, status }))
           .unwrap()
@@ -82,7 +90,7 @@ export default function CRMBlock() {
       }
     }
   };
-
+  
   const handleConfirmStatusChange = () => {
     if (carToUpdate) {
       dispatch(changeCarStatusCRM({ carId: carToUpdate.car_id, status: "complete" }))
@@ -90,7 +98,7 @@ export default function CRMBlock() {
         .then(() => {
           console.log("Car status updated to complete:", carToUpdate);
           dispatch(getRecordsForPeriod(dates));
-          setIsAcceptModalOpen(false); // Закриваємо модальне вікно
+          setIsAcceptModalOpen(false);
         })
         .catch((error) => {
           console.error("Error confirming status change:", error);
@@ -100,7 +108,7 @@ export default function CRMBlock() {
   };
 
   const handleCancelStatusChange = () => {
-    setIsAcceptModalOpen(false); // Закриваємо модальне вікно без змін
+    setIsAcceptModalOpen(false);
   };
 
   const getItemsForStatus = (status) => {
