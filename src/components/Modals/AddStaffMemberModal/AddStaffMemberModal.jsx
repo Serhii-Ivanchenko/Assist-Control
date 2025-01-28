@@ -1,6 +1,6 @@
 import DatePicker from "react-datepicker";
 import css from "./AddStaffMemberModal.module.css";
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { BsTrash } from "react-icons/bs";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import { BsReceipt } from "react-icons/bs";
@@ -29,6 +29,7 @@ import RightOfAccessSelect from "./RightOfAccessSelect/RightOfAccessSelect.jsx";
 import { useDispatch } from "react-redux";
 import {
   createEmployee,
+  getAllEmployees,
   updateEmployeeData,
 } from "../../../redux/settings/operations.js";
 import * as Yup from "yup";
@@ -95,12 +96,27 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       .min(2, "Занадто коротке")
       .max(30, "Занадто довге")
       .required("Поле повинно бути заповнене"),
-    phone: Yup.string().min(2, "Занадто коротке").max(30, "Занадто довге"),
+    phone: Yup.string()
+      .matches(
+        /^\+380\d{9}$/,
+        "Телефон повинен відповідати формату +380123456789"
+      )
+      .required("Поле повинно бути заповнене"),
     address: Yup.string(),
     birthday: Yup.string(),
     position: Yup.string(),
     role: Yup.string(),
-    email: Yup.string(),
+    email: Yup.string()
+      .email("Неправильний формат електронної пошти")
+      .test(
+        "is-valid-domain",
+        "Поле повинно містити коректний домен (наприклад, .com, .org)",
+        (value) => {
+          if (!value) return true;
+          const domainPattern = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+          return domainPattern.test(value);
+        }
+      ),
     login: Yup.string(),
     password: Yup.string(),
     period: Yup.string(),
@@ -210,7 +226,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
 
   const initialValues = {
     name: employee.name || "",
-    phone: employee.phone || "+380123456789",
+    phone: employee.phone || "",
     address: employee.address || "м. Київ, вул. Шевченка, 1",
     birthday: employee.birthday || new Date(),
     position: employee.position || "Механік",
@@ -315,6 +331,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
               color: "var(--white)FFF",
             },
           });
+          dispatch(getAllEmployees());
           onClose();
         }
       }
@@ -349,21 +366,26 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
             <div className={css.mainInfo}>
               <div className={css.column}>
                 <div className={css.iputBox}>
-                  <label className={css.label}>ПІБ</label>
+                  <label className={css.label}>ПІБ *</label>
                   <Field
                     name="name"
                     className={css.input}
                     placeholder="Блудов Олександр Анатолійович"
                   />
+                  <ErrorMessage
+                    name="name"
+                    component="span"
+                    className={css.erroMessage}
+                  />
                 </div>
 
                 <div className={css.iputBox}>
-                  <label className={css.label}>Телефон</label>
+                  <label className={css.label}>Телефон *</label>
                   <div className={css.phoneLine}>
                     <Field
                       name="phone"
                       className={`${css.input} ${css.inputPhone}`}
-                      placeholder="+380733291212"
+                      placeholder="380733291212"
                       value={formatPhone(values.phone)}
                       onChange={(e) => setFieldValue("phone", e.target.value)}
                     />
@@ -391,6 +413,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     />
                     {/* </div> */}
                   </div>
+                  <ErrorMessage
+                    name="phone"
+                    component="span"
+                    className={css.erroMessage}
+                  />
                 </div>
 
                 <div className={css.iputBox}>
@@ -460,6 +487,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     name="email"
                     className={css.input}
                     placeholder="birthday@gmail.com"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="span"
+                    className={css.erroMessage}
                   />
                 </div>
 
@@ -650,7 +682,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     ref={(el) => (buttonRefs.current[0] = el)}
                   >
                     <label className={css.docLabel}>
-                      <BsReceipt className={css.iconAgr} />
+                      {contractFile || employee.contract ? (
+                        <BsReceipt className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                       Договір підряда
                       <BsThreeDotsVertical
                         className={css.icon}
@@ -665,7 +701,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         setFile={setContractFile}
                         fieldname="files.contract"
                         setFieldValue={setFieldValue}
-
+                        onClose={() => toggleSettings(0)}
                         // buttonRef={buttonRefs.current[0]}
                         // onClose={closePopover}
                       />
@@ -681,7 +717,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     ref={(el) => (buttonRefs.current[1] = el)}
                   >
                     <label className={css.docLabel}>
-                      <BsReceipt className={css.iconAgr} />
+                      {employmentFile || employee.employment ? (
+                        <BsReceipt className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                       Договір про найм
                       <BsThreeDotsVertical
                         className={css.icon}
@@ -696,6 +736,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         setFile={setEmploymentFile}
                         fieldname="files.employment"
                         setFieldValue={setFieldValue}
+                        onClose={() => toggleSettings(1)}
                         // buttonRef={buttonRefs.current[1]}
                         // onClose={closePopover}
                       />
@@ -711,7 +752,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     ref={(el) => (buttonRefs.current[2] = el)}
                   >
                     <label className={css.docLabel}>
-                      <BsReceipt className={css.iconAgr} />
+                      {agreementFile || employee.agreement ? (
+                        <BsReceipt className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                       Договір МВ
                       <BsThreeDotsVertical
                         className={css.icon}
@@ -726,6 +771,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         setFile={setAgreementFile}
                         fieldname="files.agreement"
                         setFieldValue={setFieldValue}
+                        onClose={() => toggleSettings(2)}
                         // buttonRef={buttonRefs.current[2]}
                         // onClose={closePopover}
                       />
