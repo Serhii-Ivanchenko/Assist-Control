@@ -1,0 +1,96 @@
+.modal {
+  background-color: var(--bg-secondary);
+  padding: 40px;
+  width: 580px;
+  border-radius: 12px;
+}
+
+.headerWrapper {
+  display: flex;
+  margin-bottom: 33px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  color: var(--light-gray);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.closeIcon {
+  width: 18px;
+  height: 18px;
+  fill: var(--light-gray);
+}
+
+.closeIcon:hover {
+  cursor: pointer;
+}
+
+.avatarImage {
+  width: 102px;
+  height: 100%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: var(--light-gray);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.input {
+  border-radius: 4px;
+  border: 1px solid var(--input-stroke);
+  background: var(--bg-input);
+  padding: 6px 20px;
+  text-align: center;
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 100%;
+}
+
+.phonesWrapper {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.labelWithIcon {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.envelope {
+  width: 18px;
+  height: 18px;
+}
+
+.calendarWrapper {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}

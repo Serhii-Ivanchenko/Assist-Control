@@ -11,7 +11,7 @@ import BtnsCloseAndSubmit from "../../../sharedComponents/BtnsCloseAndSubmit/Btn
 import { AddClientPersonSchema } from "../../../../validationSchemas/addClientPersonSchema.js";
 
 export default function AddNewClientPerson({ onClose }) {
-  //   const [clientName, setClientName] = useState("ПІБ Клієнта");
+  const [clientName, setClientName] = useState();
   const [avatar, setAvatar] = useState(null);
   const [isDateOpen, setDateOpen] = useState(false);
 
@@ -37,7 +37,7 @@ export default function AddNewClientPerson({ onClose }) {
   const handleDateButtonClick = () => setDateOpen((prev) => !prev);
 
   const initialValues = {
-    name: "",
+    name: clientName || "",
     phoneNumber1: "",
     phoneNumber2: "",
     email: "",
@@ -58,7 +58,9 @@ export default function AddNewClientPerson({ onClose }) {
         {({ values, setFieldValue }) => (
           <Form>
             <div className={css.headerWrapper}>
-              <h3 className={css.header}>ПІБ Клієнта</h3>
+              <h3 className={css.header}>
+                {clientName ? clientName : "ПІБ Клієнта"}
+              </h3>
               <BsXLg className={css.closeIcon} onClick={onClose} />
             </div>
             <div className={css.avatarWrapper}>
@@ -94,6 +96,8 @@ export default function AddNewClientPerson({ onClose }) {
                     name="name"
                     className={css.input}
                     placeholder="Іваненко Іван Іванович"
+                    onChange={(e) => setClientName(e.target.value)}
+                    value={clientName}
                   />
                   <ErrorMessage
                     name="name"
@@ -112,7 +116,7 @@ export default function AddNewClientPerson({ onClose }) {
                       type="text"
                       name="phoneNumber1"
                       className={css.input}
-                      placeholder="+380671234567"
+                      placeholder="380671234567"
                     />
                     <ErrorMessage
                       name="phoneNumber1"
@@ -130,7 +134,7 @@ export default function AddNewClientPerson({ onClose }) {
                       type="text"
                       name="phoneNumber2"
                       className={css.input}
-                      placeholder="+380671234567"
+                      placeholder="380671234567"
                     />
                     <ErrorMessage
                       name="phoneNumber2"
