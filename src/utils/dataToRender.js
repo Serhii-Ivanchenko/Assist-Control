@@ -304,8 +304,6 @@ export const labelNamesInModal = {
   photo: "Фото",
   totalPrice: "Загальна сума",
   phoneNumber: "Телефон",
-  infoBtn: "Інфо",
-  statusBtn: "Статус інфо",
   prePayment: "Предоплата",
 };
 
@@ -334,11 +332,8 @@ export const labelNamesInCrm = {
   time: "Час",
   photo: "Фото",
   totalPrice: "Загальна сума",
-  paymentBtn: "Оплатити",
   phoneNumber: "Телефон",
-  info: "Інфо",
-  createBtn: "Створити запис",
-  archive: "Архів",
+
   prePayment: "Предоплата",
 };
 
@@ -399,7 +394,6 @@ export const labelNamesClientsInWork = {
   provider: "Постачальник",
   repair: "Ремонт",
   totalAmount: "Загальна сума",
-  notification: "Сповіщення",
 };
 
 // export const categoryNameClients = {
@@ -452,10 +446,6 @@ export const labelNamesRecomendations = {
   phoneNumber: "Телефон",
   carModelYear: "Марка-модель",
   timeForTO: "Час до ТО",
-  infoBtn: "Інфо",
-  createBtn: "Створити запис",
-  delBtn: "Видалити картку",
-  notificBtn: "Сповіщення",
   rating: "Рейтинг",
   photo: "Фото",
   carNum: "Номер машини",

@@ -5,6 +5,9 @@ import css from "./SelectStatusModal.module.css";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { returnArchiveItem } from "../../../redux/archive/operations";
+import { getRecordsForPeriod } from "../../../redux/crm/operations";
+import { useSelector } from "react-redux";
+import { selectDates } from "../../../redux/crm/selectors";
 
 const returnStatus = [
   {
@@ -51,6 +54,7 @@ const returnStatus = [
 
 export default function SelectStatusModal({ onClose, id }) {
   const dispatch = useDispatch();
+  const dates = useSelector(selectDates);
 
   const handleSubmit = async (values) => {
     if (!values.status) {
@@ -74,6 +78,7 @@ export default function SelectStatusModal({ onClose, id }) {
 
     try {
       await dispatch(returnArchiveItem(itemData)).unwrap();
+      await dispatch(getRecordsForPeriod(dates));      
       toast.success("Запис успішно відновлено!");
       onClose();
     } catch (error) {
