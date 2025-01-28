@@ -11,12 +11,12 @@ import ArchiveReasonPopover from "../PopoversInArchive/ArchiveReasonPopover/Arch
 import { selectArchiveData } from "../../../redux/archive/selectors";
 import { useEffect, useRef, useState } from "react";
 import Modal from "../../Modals/Modal/Modal";
-import SelectStatusModal from "../../Modals/SelectStatusModal/SelectStatusModal";
 import DotsPopover from "../PopoversInArchive/DotsPopover/DotsPopover";
 import { StatusPopover } from "../../sharedComponents/StatusPopover/StatusPopover";
 import { statusesArchiveEdit } from "../../../utils/dataToRender";
 import { useDispatch } from "react-redux";
 import { getAllArchiveData, updateArchiveItem } from "../../../redux/archive/operations";
+import SelectStatusModal from "../SelectStatusModal/SelectStatusModal";
 
 export default function ArchiveCarItem({ id, visiblePopovers, togglePopover }) {
   const carsData = useSelector(selectArchiveData);
