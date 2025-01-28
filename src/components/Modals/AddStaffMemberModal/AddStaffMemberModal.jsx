@@ -68,9 +68,10 @@ const roleOptions = [
 ];
 
 export default function AddStaffMemberModal({ onClose, employeeInfo }) {
+  const [employee, setEmployee] = useState(employeeInfo || {});
   const [isDateOpen, setDateOpen] = useState(false);
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
-  const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState(employee.logo || avatar);
   const [passportImg, setPassportImg] = useState(null);
   const [itnImg, setItnImg] = useState(null);
   const [diplomaImg, setDiplomaImg] = useState(null);
@@ -78,7 +79,6 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [contractFile, setContractFile] = useState(null);
   const [agreementFile, setAgreementFile] = useState(null);
   const [employmentFile, setEmploymentFile] = useState(null);
-  const [employee, setEmployee] = useState(employeeInfo || {});
   const [laborDoc, setLaborDoc] = useState(null);
   const [showLoginWarning, setShowLoginWarning] = useState(false);
   const [phone, setPhone] = useState("");
@@ -250,7 +250,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     sparesPrice: employee.sparesPrice || 0.0,
     // profit: 0.0,
     status: employee.status || 1,
-    // schedule: { Понеділок: "9:00-17:00", Вівторок: "9:00-17:00" },
+    // schedule: {},
     selectedPages: [],
     files: {
       passport: employee.passport || passportImg,
@@ -261,7 +261,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       contract: employee.contract || contractFile,
       employment: employee.employment || employmentFile,
       agreement: employee.agreement || agreementFile,
-      logo: employee.logo || photo,
+      logo: photo,
     },
     // openSchedule: true,
   };
@@ -348,7 +348,6 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
           });
           onClose();
           dispatch(getAllEmployees());
-
         }
         // onClose();
         console.log("Після оновлення:", employeeData);
@@ -451,7 +450,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     />
                     {/* <div className={css.phoneImgBox}> */}
                     <img
-                      src={employee.logo || photo || avatar}
+                      src={photo || avatar}
                       alt=""
                       className={css.phoneImg}
                     />
