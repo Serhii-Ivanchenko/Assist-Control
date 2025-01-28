@@ -35,6 +35,7 @@ import {
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import Select from "./Select/Select.jsx";
+import { ImFilePdf } from "react-icons/im";
 
 registerLocale("uk", uk);
 
@@ -84,6 +85,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [employee, setEmployee] = useState(employeeInfo || {});
   const [laborDoc, setLaborDoc] = useState(null);
   const [showLoginWarning, setShowLoginWarning] = useState(false);
+  const [phone, setPhone] = useState("");
   // const [logo, setLogo] = useState(null); // стан для прев'ю лого
   // const [logoBase64, setLogoBase64] = useState(null); // стан, куди записується лого в base64
 
@@ -152,6 +154,16 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   };
 
   const formatPhone = (value) => {
+    let digits = value.replace(/[^\d]/g, "");
+
+    if (!digits.startsWith("38")) {
+      digits = "38" + digits;
+    }
+
+    return "+" + digits.slice(0, 12);
+  };
+
+  const handlePhoneInput = (value) => {
     let digits = value.replace(/[^\d]/g, "");
 
     if (digits.length >= 10) {
@@ -226,7 +238,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
 
   const initialValues = {
     name: employee.name || "",
-    phone: employee.phone || "",
+    phone: employee.phone || phone,
     address: employee.address || "м. Київ, вул. Шевченка, 1",
     birthday: employee.birthday || new Date(),
     position: employee.position || "Механік",
@@ -264,20 +276,50 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       : null;
 
     try {
+      // const base64Files = {};
+
+      // for (const [key, file] of Object.entries(values.files)) {
+      //   if (typeof file === "string" && file === employee[key]) {
+      //     // Якщо файл не змінювався, пропускаємо
+      //     continue;
+      //   } else if (file instanceof Blob) {
+      //     // Якщо це новий файл, конвертуємо його у Base64
+      //     base64Files[key] = await new Promise((resolve, reject) => {
+      //       const reader = new FileReader();
+      //       reader.onload = () => resolve(reader.result);
+      //       reader.onerror = (error) => reject(error);
+      //       reader.readAsDataURL(file);
+      //     });
+      //   } else {
+      //     base64Files[key] = null;
+      //   }
+      // }
       const base64Files = {};
 
       for (const [key, file] of Object.entries(values.files)) {
-        if (file) {
+        if (typeof file === "string" && file === employee[key]) {
+          continue; // Якщо файл не змінювався, пропускаємо
+        } else if (file instanceof Blob) {
           base64Files[key] = await new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onload = () => resolve(reader.result); // Data URL (Base64)
-            reader.onerror = (error) => reject(error);
+            reader.onload = () => {
+              try {
+                const base64Data = reader.result.split(",")[1];
+                resolve(base64Data);
+              } catch (error) {
+                reject(new Error(`Failed to parse Base64: ${error.message}`));
+              }
+            };
+            reader.onerror = (error) =>
+              reject(new Error(`FileReader error: ${error.message}`));
             reader.readAsDataURL(file);
           });
         } else {
           base64Files[key] = null;
         }
       }
+
+      console.log("Base64 files:", base64Files);
 
       const employeeData = {
         ...values,
@@ -340,7 +382,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       actions.resetForm();
       onClose();
     } catch (error) {
-      console.error("Помилка створення працівника:", error);
+      console.error("Помилка створення/oновлення працівника:", error);
       toast.error("Помилка при створенні/оновленні!", {
         position: "top-center",
         duration: 3000,
@@ -386,8 +428,12 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                       name="phone"
                       className={`${css.input} ${css.inputPhone}`}
                       placeholder="380733291212"
-                      value={formatPhone(values.phone)}
-                      onChange={(e) => setFieldValue("phone", e.target.value)}
+                      // value={phone}
+                      onChange={(e) => {
+                        const formattedInput = handlePhoneInput(e.target.value);
+                        setPhone(formattedInput);
+                        setFieldValue("phone", formatPhone(e.target.value));
+                      }}
                     />
                     <button
                       type="button"
@@ -682,17 +728,18 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     ref={(el) => (buttonRefs.current[0] = el)}
                   >
                     <label className={css.docLabel}>
-                      {contractFile || employee.contract ? (
-                        <BsReceipt className={css.iconAgr} />
-                      ) : (
-                        <span style={{ width: "18px", height: "18px" }} />
-                      )}
+                      <BsReceipt className={css.iconAgr} />
                       Договір підряда
                       <BsThreeDotsVertical
                         className={css.icon}
                         onClick={() => toggleSettings(0)}
                         ref={buttonRefs.current[0]}
                       />
+                      {contractFile || employee.contract ? (
+                        <ImFilePdf className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                     </label>
                     {settingsIsOpen === 0 && (
                       <ThreeDotsModal
@@ -717,17 +764,18 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     ref={(el) => (buttonRefs.current[1] = el)}
                   >
                     <label className={css.docLabel}>
-                      {employmentFile || employee.employment ? (
-                        <BsReceipt className={css.iconAgr} />
-                      ) : (
-                        <span style={{ width: "18px", height: "18px" }} />
-                      )}
+                      <BsReceipt className={css.iconAgr} />
                       Договір про найм
                       <BsThreeDotsVertical
                         className={css.icon}
                         onClick={() => toggleSettings(1)}
                         ref={buttonRefs.current[1]}
                       />
+                      {employmentFile || employee.employment ? (
+                        <ImFilePdf className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                     </label>
                     {settingsIsOpen === 1 && (
                       <ThreeDotsModal
@@ -752,17 +800,18 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     ref={(el) => (buttonRefs.current[2] = el)}
                   >
                     <label className={css.docLabel}>
-                      {agreementFile || employee.agreement ? (
-                        <BsReceipt className={css.iconAgr} />
-                      ) : (
-                        <span style={{ width: "18px", height: "18px" }} />
-                      )}
+                      <BsReceipt className={css.iconAgr} />
                       Договір МВ
                       <BsThreeDotsVertical
                         className={css.icon}
                         ref={buttonRefs.current[2]}
                         onClick={() => toggleSettings(2)}
                       />
+                      {agreementFile || employee.agreement ? (
+                        <ImFilePdf className={css.iconAgr} />
+                      ) : (
+                        <span style={{ width: "18px", height: "18px" }} />
+                      )}
                     </label>
                     {settingsIsOpen === 2 && (
                       <ThreeDotsModal
