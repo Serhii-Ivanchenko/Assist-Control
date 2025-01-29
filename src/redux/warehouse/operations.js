@@ -8,7 +8,7 @@ export const getWarehouses = createAsyncThunk(
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.get(`/set/companies/tree`, {
+      const response = await axiosInstance.get(`/v1/get_all_warehouses/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,

@@ -39,7 +39,7 @@ const warehouseSlice = createSlice({
       .addCase(getWarehouses.pending, handlePending)
       .addCase(getWarehouses.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.warehouses = action.payload;
+        state.warehouses = action.payload.data;
       })
       .addCase(getWarehouses.rejected, handleRejected)
       .addCase(createWarehouse.pending, handlePending)

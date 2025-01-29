@@ -23,59 +23,103 @@ import Node from "./Node/Node";
 import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
 import CreateWarehousePop from "./CreateWarehousePop/CreateWarehousePop";
 
-const dataForTree = [
-  {
-    id: "1",
-    parent: null,
-    text: "м. Академіка павлова (Назва склада)",
-    droppable: true,
+import { useSelector } from "react-redux";
+import { selectWarehousesTree } from "../../../redux/warehouse/selectors";
+import { useDispatch } from "react-redux";
+import { getWarehouses } from "../../../redux/warehouse/operations";
 
-    data: "warehouse",
-  },
+// const dataForTree = [
+//   {
+//     id: "1",
+//     parent: null,
+//     text: "м. Академіка павлова (Назва склада)",
+//     droppable: true,
 
-  {
-    id: "2",
-    parent: "1",
-    text: "Вітрина (Назва секції)",
-    droppable: true,
-    data: "section",
-  },
+//     data: "warehouse",
+//   },
 
-  {
-    id: "3",
-    parent: "1",
-    text: "2 Поверх (Назва секції)",
-    droppable: true,
-    data: "section",
-  },
+//   {
+//     id: "2",
+//     parent: "1",
+//     text: "Вітрина (Назва секції)",
+//     droppable: true,
+//     data: "section",
+//   },
 
-  { id: "4", parent: "3", text: "Стелаж", droppable: true, data: "rack" },
-  {
-    id: "5",
-    parent: "3",
-    text: "Стелаж",
-    droppable: true,
-    data: "rack",
-  },
-  {
-    id: "6",
-    parent: "5",
-    text: "Полиця 036",
-    droppable: true,
-    data: "shelf",
-  },
+//   {
+//     id: "3",
+//     parent: "1",
+//     text: "2 Поверх (Назва секції)",
+//     droppable: true,
+//     data: "section",
+//   },
 
-  { id: "7", parent: "6", text: "Місце 0243", data: "place" },
-  { id: "8", parent: "6", text: "Місце 0244", data: "place" },
-  { id: "9", parent: "6", text: "Місце 0245", data: "place" },
-];
+//   { id: "4", parent: "3", text: "Стелаж", droppable: true, data: "rack" },
+//   {
+//     id: "5",
+//     parent: "3",
+//     text: "Стелаж",
+//     droppable: true,
+//     data: "rack",
+//   },
+//   {
+//     id: "6",
+//     parent: "5",
+//     text: "Полиця 036",
+//     droppable: true,
+//     data: "shelf",
+//   },
+
+//   { id: "7", parent: "6", text: "Місце 0243", data: "place" },
+//   { id: "8", parent: "6", text: "Місце 0244", data: "place" },
+//   { id: "9", parent: "6", text: "Місце 0245", data: "place" },
+// ];
 
 export default function WarehousePart() {
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getWarehouses());
+  // }, [dispatch]);
+  const warehouses = useSelector(selectWarehousesTree);
+  //   console.log("dataForTree", dataForTree);
+
+  const dataForTree = warehouses.map((warehouse) => {
+    return {
+      id: warehouse.id.toString(),
+      parent: null, // Склади будуть кореневими елементами
+      text: warehouse.name,
+      droppable: warehouse.total_sections > 0, // Якщо є підсекції, то елемент буде дропабельним
+      data: "warehouse",
+    };
+  });
+
+  // Додаємо секції (якщо є)
+  const sections = warehouses
+    .filter((warehouse) => warehouse.total_sections > 0)
+    .flatMap((warehouse) => {
+      const sectionsArray = [];
+      for (let i = 0; i < warehouse.total_sections; i++) {
+        sectionsArray.push({
+          id: `${warehouse.id}-${i + 1}`,
+          parent: warehouse.id.toString(), // Прив'язуємо до складу
+          text: `${warehouse.name} - Section ${i + 1}`,
+          droppable: false, // Підсекції не є дропабельними
+          data: "section",
+        });
+      }
+      return sectionsArray;
+    });
+
+  const finalTreeData = [...dataForTree, ...sections];
+
+  console.log(finalTreeData);
+
   const [isAddWhModalOpen, setAddWhModalOpen] = useState(false);
 
   const { ref, getPipeHeight, toggle, openParentIfNeeded } =
     useTreeOpenHandler();
-  const [treeData, setTreeData] = useState(dataForTree);
+
+  const [treeData, setTreeData] = useState(finalTreeData);
   const [isNewWhPopoverOpen, setNewWhPopoverOpen] = useState(false);
 
   const buttonRef = useRef(null);
