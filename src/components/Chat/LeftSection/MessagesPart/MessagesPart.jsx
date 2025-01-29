@@ -71,6 +71,8 @@ export default function MessagesPart({
           isChosen:
             action === "archive" || action === "isClosed"
               ? false
+              : action === "isChosen"
+              ? true
               : chat.isChosen,
           isDelayed:
             action === "archive" || action === "isClosed"
