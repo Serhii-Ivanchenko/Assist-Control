@@ -11,6 +11,7 @@ export default function ThreeDotsModal({
   fieldname,
   name,
   onClose,
+  file,
 }) {
   const popoverRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -57,7 +58,7 @@ export default function ThreeDotsModal({
       className={`${css.modal} ${isVisible ? css.popoverVisible : css.hidden}`}
       ref={popoverRef}
     >
-      <a href="" download="">
+      <a href="" download={file}>
         <button type="button" className={css.button}>
           {" "}
           <BsFillCloudDownloadFill className={css.icon} size={18} />
