@@ -168,7 +168,6 @@ export default function ClientInfo({ clientInfo,car }) {
             <div className={css.ratingAndMoney}>
               <RatingStars
                 rating={clientRating}
-                clientInfo={true}
                 ratingGap={css.rating}
               />
               <div className={css.moneyBox}>
