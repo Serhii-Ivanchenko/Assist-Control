@@ -124,6 +124,11 @@
 .uploadLogoContainer {
   margin-top: 19px;
 }
+.uploadLogoContainer label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 .uploadLogoContainer p {
   color: var(--input-text);
@@ -132,6 +137,14 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.downloadIcon {
+  fill: var(--light-gray);
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
 }
 
 .formContainer {

@@ -193,7 +193,7 @@ export const initialState = {
     },
     suppliers: [],
     supplier: {
-      supplier_d: null,
+      supplier_id: null,
       name: null,
       address: null,
       paymentCondition: null,
@@ -304,4 +304,5 @@ export const initialState = {
     isLoading: false,
     error: null,
   },
+  isModalOpen: false,
 };
