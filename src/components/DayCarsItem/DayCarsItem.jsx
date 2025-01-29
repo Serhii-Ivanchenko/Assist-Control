@@ -29,7 +29,6 @@ export default function DayCarsItem({ car, isModal }) {
   const [isMonitoring, setisMonitoring] = useState("main");
   const [modalState, setModalState] = useState({ notifications: false });
 
-
   const {
     car_id,
     auto,
@@ -137,31 +136,31 @@ export default function DayCarsItem({ car, isModal }) {
         <div className={styles.btnContainer}>
           <StatusBtn car={car} />
           <CarDetailButton
-              carId={car_id}
-              // location={isMonitoring}
-              carName={car.auto}
-              car={car}
-            />
+            carId={car_id}
+            // location={isMonitoring}
+            carName={car.auto}
+            car={car}
+          />
           {status === "complete" && (
-              <button
-                className={styles.clockContainer}
-                onClick={openNotificationModal}
-              >
-                <GiAlarmClock className={styles.iconClock} size={20} />
-              </button>
-            )}
-             <Modal isOpen={modalState.notifications} onClose={closeModals}>
-        <NotificationModal
-          onClose={closeModals}
-          time="clientTime"
-          date="clientDate"
-          comment="clientComment"
-          connectionType="clientConnection"
-          accountingModal={true}
-          service="clientService"
-          setNotificationSent={setModalState}
-        />
-      </Modal>  
+            <button
+              className={styles.clockContainer}
+              onClick={openNotificationModal}
+            >
+              <GiAlarmClock className={styles.iconClock} size={20} />
+            </button>
+          )}
+          <Modal isOpen={modalState.notifications} onClose={closeModals}>
+            <NotificationModal
+              onClose={closeModals}
+              time="clientTime"
+              date="clientDate"
+              comment="clientComment"
+              connectionType="clientConnection"
+              accountingModal={true}
+              service="clientService"
+              setNotificationSent={setModalState}
+            />
+          </Modal>
         </div>
       </div>
 
