@@ -103,7 +103,7 @@ export default function WarehousePart() {
           id: `${warehouse.id}-${i + 1}`,
           parent: warehouse.id.toString(), // Прив'язуємо до складу
           text: `${warehouse.name} - Section ${i + 1}`,
-          droppable: false, // Підсекції не є дропабельними
+          droppable: true,
           data: "section",
         });
       }
