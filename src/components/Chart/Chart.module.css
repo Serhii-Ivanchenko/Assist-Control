@@ -1,39 +1,22 @@
-.containerchart {
-    /* border-radius: 5px;
-    width: 310px;
-    height: 270px;
-    background: var(--bg-secondary); */
-    /* border: 1px solid var(--black); */
-    /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); */
-}
-
-@media only screen and (min-width: 1850px) {
-    .containerchart {}
-}
-
-.charttitlebox {
+.chartTitleBox {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 280px;
-    height: 28px;
+    width: 100%;
+    /* height: 28px; */
+    height: clamp(18px, min(2.592vh, 1.513vw), 28px);
 }
 
-
-@media only screen and (min-width: 1850px) {
-    .charttitlebox {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 430px;
-        height: 28px;
-    }
+.chartTitle {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: clamp(16px, 2.222vh, 24px);
+    color: var(--white);
 }
 
-.charttitleavto {
-    font-size: 14px;
+.chartTitleAuto {
+    font-size: clamp(10px, 1.296vh, 14px);
     font-weight: 300;
     color: var(--white);
     display: flex;
@@ -41,126 +24,28 @@
     gap: 13px;
 }
 
-@media only screen and (min-width: 1850px) {
-    .charttitleavto {
-        font-size: 14px;
-        color: var(--white);
-
-    }
-}
-
-.titlekolvo {
-    font-size: 18px;
+.titleNumber {
+    font-size: clamp(16px, 2.222vh, 24px);
     color: var(--play-btn-triangle);
 }
 
-@media only screen and (min-width: 1850px) {
-    .titlekolvo {
-        font-size: 24px;
-        color: var(--play-btn-triangle);
-    }
+.areaBox {
+    width: 100%;
+    /* height: 100%; */
+    /* height: clamp(246px, calc(246px + (61 * ((100vh - 900px) / 180))), 307px); */
+    /* width: clamp(384px, min(31.135vw, 37.870vh * 1.408), 430px); */
+    height: clamp(204px, min(28.425vh, 16.594vw), 307px);
+    margin-left: 0;
+    margin-top: 6px;
+    margin-top: clamp(2px, min(0.555vh, 0.324vw), 6px);
 }
 
-
-.charttitle {
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    font-size: 18px;
-    color: var(--white);
-    /* margin-bottom: 16px; */
-    /* width: 122px;
-    height: 21px; */
-    /* margin-top: 9px;
-    margin-left: 18px;
-    margin-bottom: 16px; */
-}
-
-@media only screen and (min-width: 1850px) {
-    .charttitle {
-        font-size: 24px;
-        /* margin-bottom: 24px; */
-    }
-}
-
-.areabox {
-    width: 287px;
-    height: 207px;
-    margin-left: -5px;
-}
-
-@media only screen and (min-width: 1850px) {
-    .areabox {
-        width: 430px;
-        height: 307px;
-        height: clamp(246px, calc(246px + (61 * ((100vh - 900px) / 180))), 307px);
-        margin-left: 0;
-        margin-top: 6px;
-    }
-}
-
-
-.responsecontainer {
-    /* padding-left: 15px;
-    padding-right: 15px; */
-    height: 207px;
-    width: 272px;
-
-}
-
-@media only screen and (min-width: 1850px) {
-    .responsecontainer {
-        /* padding-left: 15px;
-        padding-right: 15px; */
-        height: 315px;
-        width: 430px
-    }
-}
-
-/* .rechartsWrapper{
-    height: 184px;
-
-} */
-.popuptitle {
-    font-size: 13px;
-    font-variant: small-caps;
-    color: var(--blue-btn-inactive);
-    text-align: center;
-}
-
-.popupavto {
-    font-size: 10px;
-    color: var(--blue-btn-inactive);
-    padding-top: 3px;
-    height: 15px;
-}
-
-.kolall {
-    font-size: 16px;
-    font-weight: 600;
-    text-align: end;
-    color: var(--blue-btn-normal);
-}
-
-.kolnew {
-    font-size: 16px;
-    font-weight: 600;
-    text-align: end;
-    color: var(--play-btn-triangle);
-}
-
-.customtooltip {
+.customTooltip {
     background-color: var(--light-gray);
-    width: 48px;
-
+    /* width: 48px; */
+    width: clamp(33px, min(4.444vh, 2.594vw), 48px);
     padding: 2px 4px;
-
     border-radius: 6px;
-
-    /* border: '1px solid #ccc', */
-    /* position: absolute;
-            left: x+30;
-            
-            top: y - 35; */
     transform: translateX(-50%);
     font-weight: 400;
     font-size: 6px;
@@ -169,9 +54,37 @@
     font-style: normal;
 }
 
-.chartflex {
+.chartFlex {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.popupTitle {
+    font-size: clamp(10px, 1.296vh, 14px);
+    font-variant: small-caps;
+    color: var(--blue-btn-inactive);
+    text-align: center;
+}
+
+.popupAuto {
+    font-size: clamp(6px, 0.925vh, 10px);
+    color: var(--blue-btn-inactive);
+    padding-top: 3px;
+    line-height: 1.5em;
+}
+
+.qtyAll {
+    font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
+    font-weight: 600;
+    text-align: end;
+    color: var(--blue-btn-normal);
+}
+
+.qtyNew {
+    font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
+    font-weight: 600;
+    text-align: end;
+    color: var(--play-btn-triangle);
 }

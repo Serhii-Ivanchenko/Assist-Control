@@ -9,10 +9,10 @@
 
   .camera {
     position: relative;
-    /* width: clamp(290px, min(26.875vw, 31.574vh * 1.513), 516px);
-    height: clamp(227px, min(31.574vh, 26.875vw / 1.513), 341px); */
+    /* width: clamp(290px, min(26.875vw, 31.574vh * 1.513), 516px); */
+    height: clamp(227px, min(31.574vh, 26.875vw), 341px);
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     margin-bottom: clamp(0px, calc(0px + (10 * ((100vh - 720px) / 360))), 10px);
   }
 

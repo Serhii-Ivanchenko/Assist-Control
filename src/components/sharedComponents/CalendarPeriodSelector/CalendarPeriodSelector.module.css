@@ -7,8 +7,8 @@
 
 .periodTitle {
   color: var(--Icon-Gray);
-  font-size: 15px;
-  margin-right: 8px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
+  margin-right: clamp(5px, min(0.740vh, 0.432vw), 8px);
   font-weight: 400;
   line-height: normal;
   font-variant: small-caps;
@@ -23,7 +23,7 @@ input {
 .periodInput {
   color: var(--light-gray);
   background: transparent;
-  font-size: 14px;
+  font-size: clamp(10px, 1.296vh, 14px);
   font-weight: 400;
   line-height: normal;
   font-variant: small-caps;
@@ -48,8 +48,8 @@ input {
 }
 
 .icon {
-  width: 14px;
-  height: 14px;
+  width: clamp(9.7px, min(0.757vw, 1.296vh), 14px);
+  height: clamp(9.7px, min(0.757vw, 1.296vh), 14px);
   color: var(--light-gray);
 }
 
@@ -60,21 +60,17 @@ input {
   align-items: center;
   background-color: var(--bg-input);
   border-radius: 10px;
-  margin-right: 28px;
-  padding-left: 13px;
-  padding-right: 8px;
+  margin-right: clamp(19px, min(2.592vh, 1.513vw), 28px);
+
+  padding: 0px clamp(9px, min(0.702vw, 1.203vh), 13px) 0px clamp(5px, min(0.432vw, 0.740vh), 8px);
   height: 100%;
-  width: 163px;
+  width: clamp(112px, min(15.092vh, 8.810vw), 163px);
 }
 
 .dateWrapperModal {
   border-radius: 44px;
   margin-right: 32px;
-}
-
-.dateWrapperSection {
-  border-radius: 12px;
-  margin-right: 10px;
+  margin-right: clamp(22px, min(2.962vh, 1.729vw), 32px);
 }
 
 .dateWrapper:last-child {

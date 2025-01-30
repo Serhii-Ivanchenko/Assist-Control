@@ -32,21 +32,21 @@ const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
     }
     return (
       <div
-        className={css.customtooltip}
+        className={css.customTooltip}
         style={{
           position: "absolute",
           left: `${leftPosition}px`,
           top: `${topPosition}px`,
         }}
       >
-        <p className={css.popuptitle}>{`${label}`}</p>
-        <div className={css.chartflex}>
-          <p className={css.popupavto}>All </p>
-          <p className={css.kolall}>{`${payload[0].value} `}</p>
+        <p className={css.popupTitle}>{`${label}`}</p>
+        <div className={css.chartFlex}>
+          <p className={css.popupAuto}>All </p>
+          <p className={css.qtyAll}>{`${payload[0].value} `}</p>
         </div>
-        <div className={css.chartflex}>
-          <p className={css.popupavto}>New </p>
-          <p className={css.kolnew}>{`${payload[1].value} `}</p>
+        <div className={css.chartFlex}>
+          <p className={css.popupAuto}>New </p>
+          <p className={css.qtyNew}>{`${payload[1].value} `}</p>
         </div>
       </div>
     );
@@ -83,41 +83,6 @@ export default function Chart() {
   const handleDataChangeEnd = (newData) => {
     setDateEnd(newData);
   };
-
-  // const customActiveDot = (props) => {
-  //   const { cx, cy } = props;
-
-  //   return (
-  //     <>
-  //       <circle
-  //         cx={cx}
-  //         cy={cy}
-  //         r={7}
-  //         fill="none"
-  //         stroke="white"
-  //         strokeWidth={1}
-  //       />
-  //       <circle cx={cx} cy={cy} r={3} fill="var(--orange)" stroke="none" />
-  //     </>
-  //   );
-  // };
-
-  // const yTickFormatter = (tick) => {
-  //   if (tick >= 10) {
-  //     return "";
-  //   }
-  //   return tick;
-  // };
-
-  // useEffect(() => {
-  //   const fetchNewCarsData = async () => {
-  //     await Promise.all([
-  //       dispatch(getNewCarsRange({ dateBeginStr, dateEndStr })),
-  //     ]);
-  //   };
-
-  //   fetchNewCarsData();
-  // }, [dispatch, dateBeginStr, dateEndStr]);
 
   useEffect(() => {
     const fetchNewCarsData = async () => {
@@ -160,14 +125,14 @@ export default function Chart() {
   // let interval = data.length;
   return (
     <>
-      <div className={css.charttitlebox}>
-        <p className={css.charttitle}>Машинозаїзди</p>
-        <p className={css.charttitleavto}>
-          За період:<span className={css.titlekolvo}>{sumNewCars}</span>
+      <div className={css.chartTitleBox}>
+        <p className={css.chartTitle}>Машинозаїзди</p>
+        <p className={css.chartTitleAuto}>
+          За період:<span className={css.titleNumber}>{sumNewCars}</span>
         </p>
       </div>
-      <div className={css.areabox}>
-        <ResponsiveContainer className={css.responsecontainer}>
+      <div className={css.areaBox}>
+        <ResponsiveContainer>
           <BarChart data={data}>
             <defs>
               <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
@@ -194,7 +159,6 @@ export default function Chart() {
               </linearGradient>
             </defs>
 
-            {/* <CartesianGrid strokeDasharray="3 3" />  */}
             <CartesianGrid
               stroke="url(#linear)"
               strokeDasharray="3,3"
@@ -205,33 +169,19 @@ export default function Chart() {
             <XAxis
               dataKey="dateeng"
               interval={0}
-              //  padding={{ right: 10 }}
-              tick={{ fontSize: 10 }}
-              // tick={{ fill: 'transparent' }}
+              tick={{ fontSize: "clamp(6px, 0.925vh, 10px)" }}
               angle={-45}
               textAnchor="end"
             />
 
             <YAxis
-              // domain={[0, (dataMax) => dataMax + 1]}
               domain={[0, maxY]}
-              // domain={[0, 11]}
-              // dataKey="count"
-              //  padding={{ top: 10 }}
               allowDataOverflow={true}
-              //  tickCount={10}
-              tick={{ fontSize: 10 }}
+              tick={{ fontSize: "clamp(6px, 0.925vh, 10px)" }}
               axisLine={{ fill: "transparent" }}
               tickCount={maxY + 1}
               interval={interval}
-              // ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
-              //  axisLine={false}
-              // tickFormatter={yTickFormatter}
-              //  tickFormatter={(value) => (value / 1000).toFixed(1)}
               width={13}
-
-              // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
-              //  ticks={[0, 2, 4, 6, 8, 10]}
             />
 
             <Tooltip
@@ -252,36 +202,6 @@ export default function Chart() {
               cursor="pointer"
               onClick={handleClick}
             />
-            {/* <Area
-              type="monotone"
-              dataKey="count"
-              stroke="var(--blue)"
-              strokeWidth={3}
-              fill="url(#colorGradient)"
-              activeDot={customActiveDot} 
-              //   activeDot={{  fill: "var(--blue)"}} // Активная точка больше
-
-              //  dot={{ r: 8, fill: 'var(--white)', stroke: '#87D28D', strokeWidth: '4px' }} // Полностью закрашенные кружочки
-              //   label={({ x, y, value }) => (
-              //     <text x={x} y={y - 10} fill="#000" textAnchor="middle">
-              //       {`${value} ml`} {/* Добавляем "ml" к значению 
-              //     </text>
-              //   )}
-        // />*/}
-
-            {/* <Brush
-                        dataKey="day"
-           height={10}
-                        stroke="#87D28D8"
-                         travellerWidth={5} // Ширина ползунка
-          traveller={{ stroke: 'rgba(50, 63, 71, 0.2)', fill:'rgba(50, 63, 71, 0.2)' }}
-          startIndex={startIndex}
-          endIndex={endIndex}
-          onChange={(indexRange) => {
-            setStartIndex(indexRange.startIndex);
-            setEndIndex(indexRange.endIndex);
-          }}
-        /> */}
           </BarChart>{" "}
         </ResponsiveContainer>{" "}
       </div>
