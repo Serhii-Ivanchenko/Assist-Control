@@ -39,19 +39,6 @@ import { ImFilePdf } from "react-icons/im";
 
 registerLocale("uk", uk);
 
-// const convertFileToBase64 = (file) => {
-//   return new Promise((resolve, reject) => {
-//     if (!(file instanceof Blob)) {
-//       reject(new Error("Invalid file type. Expected Blob or File."));
-//       return;
-//     }
-//     const reader = new FileReader();
-//     reader.onload = () => resolve(reader.result);
-//     reader.onerror = (error) => reject(error);
-//     reader.readAsDataURL(file);
-//   });
-// };
-
 const positionOptions = [
   { value: "Механік", label: "Механік" },
   { value: "Кухар", label: "Кухар" },
@@ -71,7 +58,9 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [employee, setEmployee] = useState(employeeInfo || {});
   const [isDateOpen, setDateOpen] = useState(false);
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
-  const [photo, setPhoto] = useState(employee.logo || avatar);
+  const [photo, setPhoto] = useState(
+    employee.logo ? `${employee.logo}?t=${Date.now()}` : avatar
+  );
   const [passportImg, setPassportImg] = useState(null);
   const [itnImg, setItnImg] = useState(null);
   const [diplomaImg, setDiplomaImg] = useState(null);
@@ -249,8 +238,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     sparesAmount: employee.sparesAmount || 0.0,
     sparesPrice: employee.sparesPrice || 0.0,
     // profit: 0.0,
-    status: employee.status || 1,
-    // schedule: {},
+    // status: employee.status || 1,
+    // schedule: {
+    //   monday: "9:00-18:00",
+    //   tuesday: "9:00-18:00",
+    // },
     selectedPages: [],
     files: {
       passport: employee.passport || passportImg,
