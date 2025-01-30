@@ -13,6 +13,7 @@ import OptionList from "./OptionList/OptionsList.jsx";
 import DistributorsModal from "../DistributorsModal/DistributorsModal.jsx";
 import Modal from "../../../Modals/Modal/Modal.jsx";
 import styles from "./DistributorsItem.module.css";
+import toast from "react-hot-toast";
 
 function DistributorsItem({ item }) {
   const dispatch = useDispatch();
@@ -37,17 +38,32 @@ function DistributorsItem({ item }) {
     dispatch(deleteSupplier(item.id));
   }, [dispatch, item.id]);
 
-  const handleStatusToggle = useCallback(
-    (id, currentStatus) => {
-      const newStatus = currentStatus === 1 ? 0 : 1;
-      try {
-        dispatch(updateSupplierStatus({ supplier_id: id, newStatus })).unwrap();
-      } catch (err) {
-        console.error("Error updating user data:", err);
-      }
-    },
-    [dispatch]
-  );
+  const handleStatusToggle = useCallback((id, currentStatus) => {
+    const newStatus = currentStatus === 1 ? 0 : 1;
+    dispatch(updateSupplierStatus({ supplier_id: id, newStatus }))
+      .unwrap()
+      .then(() => {
+        toast.success("Статус успішно змінено :)", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating user data:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      });
+  });
 
   function formatPhoneNumber(phone) {
     const cleaned = phone.replace(/\D/g, "");

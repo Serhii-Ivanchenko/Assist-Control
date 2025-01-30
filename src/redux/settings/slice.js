@@ -175,9 +175,11 @@ const settingsSlice = createSlice({
       .addCase(updateSupplierStatus.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        state.suppliers = state.suppliers.filter(
-          (supplier) => supplier.supplier_id === action.payload.supplier_id
+        const supplierToEditIndex = state.suppliers.findIndex(
+          (supplier) => supplier.id === action.payload.supplier_id
         );
+
+        state.suppliers[supplierToEditIndex].status = action.payload.status;
       })
       .addCase(updateSupplierStatus.rejected, handleRejected)
 

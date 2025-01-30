@@ -297,7 +297,7 @@ export const updateSupplierStatus = createAsyncThunk(
     try {
       const response = await axiosInstance.patch(
         `/set/suppliers/${supplier_id}/status?status=${newStatus}`,
-        {},
+        null,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
