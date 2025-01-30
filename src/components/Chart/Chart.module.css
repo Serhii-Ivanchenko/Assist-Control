@@ -11,12 +11,12 @@
 .chartTitle {
     font-family: "Roboto", sans-serif;
     font-weight: 300;
-    font-size: clamp(16px, 2.222vh, 24px);
+    font-size: clamp(16px, min(2.222vh, 1.297vw), 24px);
     color: var(--white);
 }
 
 .chartTitleAuto {
-    font-size: clamp(10px, 1.296vh, 14px);
+    font-size: clamp(10px, min(1.296vh, 0.756vw), 14px);
     font-weight: 300;
     color: var(--white);
     display: flex;
@@ -25,7 +25,7 @@
 }
 
 .titleNumber {
-    font-size: clamp(16px, 2.222vh, 24px);
+    font-size: clamp(16px, min(2.222vh, 1.297vw), 24px);
     color: var(--play-btn-triangle);
 }
 
@@ -62,14 +62,14 @@
 }
 
 .popupTitle {
-    font-size: clamp(10px, 1.296vh, 14px);
+    font-size: clamp(10px, min(1.296vh, 0.756vw), 14px);
     font-variant: small-caps;
     color: var(--blue-btn-inactive);
     text-align: center;
 }
 
 .popupAuto {
-    font-size: clamp(6px, 0.925vh, 10px);
+    font-size: clamp(6px, min(0.925vh, 0.54vw), 10px);
     color: var(--blue-btn-inactive);
     padding-top: 3px;
     line-height: 1.5em;

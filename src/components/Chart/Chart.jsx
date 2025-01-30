@@ -169,7 +169,7 @@ export default function Chart() {
             <XAxis
               dataKey="dateeng"
               interval={0}
-              tick={{ fontSize: "clamp(6px, 0.925vh, 10px)" }}
+              tick={{ fontSize: "clamp(6px, min(0.925vh, 0.54vw), 10px)" }}
               angle={-45}
               textAnchor="end"
             />
@@ -177,7 +177,7 @@ export default function Chart() {
             <YAxis
               domain={[0, maxY]}
               allowDataOverflow={true}
-              tick={{ fontSize: "clamp(6px, 0.925vh, 10px)" }}
+              tick={{ fontSize: "clamp(6px, min(0.925vh, 0.54vw), 10px)" }}
               axisLine={{ fill: "transparent" }}
               tickCount={maxY + 1}
               interval={interval}
