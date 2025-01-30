@@ -6,59 +6,70 @@ import facebook from "../../../../../assets/images/ChannelsImages/Facebook_Messe
 import whatsApp from "../../../../../assets/images/ChannelsImages/WhatsApp_1.png";
 import assist from "../../../../../assets/images/ChannelsImages/logo-rect 1.png";
 import { BsGlobe } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChannelItem from "./ChannelItem/ChannelItem";
 
 export default function ChannelsPart({
   handleFilter,
-  chats,
+  // chats,
   setFilteredChats,
   flashingBorder,
+  categoryCounts,
 }) {
   const channelsList = [
     {
       icon: gmail,
       text: "Gmail",
-      value: chats.filter((chat) => chat.type === "gmail").length,
+      value: categoryCounts.gmail,
       id: "1",
       type: "gmail",
     },
     {
       icon: telegram,
       text: "Telegram",
-      value: chats.filter((chat) => chat.type === "telegram").length,
+      value: categoryCounts.telegram,
       id: "2",
       type: "telegram",
     },
     {
       icon: whatsApp,
       text: "WhatsApp",
-      value: chats.filter((chat) => chat.type === "whatsApp").length,
+      value: categoryCounts.whatsApp,
       id: "3",
       type: "whatsApp",
     },
     {
       icon: facebook,
       text: "Messenger",
-      value: chats.filter((chat) => chat.type === "facebook").length,
+      value: categoryCounts.facebook,
       id: "4",
       type: "facebook",
     },
     {
       icon: assist,
       text: "MobileApp",
-      value: chats.filter((chat) => chat.type === "assist").length,
+      value: categoryCounts.assist,
       id: "5",
       type: "assist",
     },
     {
       icon: <BsGlobe size={14} className={css.siteIcon} />,
       text: "Site",
-      value: chats.filter((chat) => chat.type === "site").length,
+      value: categoryCounts.site,
       id: "6",
       type: "site",
     },
   ];
+
+  const [channels, setChannels] = useState(channelsList);
+
+  useEffect(() => {
+    const updatedChannels = channelsList.map((channel) => ({
+      ...channel,
+      value: categoryCounts[channel.type] || 0, // Оновлення значення для кожного каналу
+    }));
+    setChannels(updatedChannels); // Оновлення стейту
+  }, [categoryCounts]); // Залежність від categoryCounts
 
   //Відкриття. закриття по кліку на канали
   const [isOpen, setIsOpen] = useState(true);
@@ -66,8 +77,6 @@ export default function ChannelsPart({
     e.stopPropagation();
     setIsOpen(!isOpen);
   };
-
-  const [channels, setChannels] = useState(channelsList);
 
   const totalChannels = channels.reduce((total, channel) => {
     return total + channel.value;
