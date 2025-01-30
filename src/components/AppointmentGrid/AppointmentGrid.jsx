@@ -174,7 +174,7 @@ const AppointmentGrid = ({ data }) => {
 
       {/* Заголовки для постов */}
       {data.posts.map((post) => (
-        <div key={post.id_post} className={css.gridpost}>
+        <div key={post.id} className={css.gridpost}>
           {post.name_post}
         </div>
       ))}
@@ -212,7 +212,7 @@ const AppointmentGrid = ({ data }) => {
         }`;
         // Находим индекс строки в массиве постов, где id совпадает с post_id в работе
         const postRowIndex = data.posts.findIndex(
-          (post) => post.id_post === item.post_id
+          (post) => post.id === item.post_id
         );
 
         // Проверяем, что нашли нужную строку

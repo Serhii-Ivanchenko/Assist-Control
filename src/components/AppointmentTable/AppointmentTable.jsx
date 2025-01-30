@@ -86,7 +86,7 @@ useEffect(() => {
    
   }, [dispatch, carSelectDate, selectedServiceId]);
 
-  // console.log(crmServiceData);
+   console.log(crmServiceData);
   // console.log(crmSelectVisits);
   const data = crmSelectVisits;
   const startOfDay = crmServiceData.workingHours.start_h;
@@ -134,13 +134,13 @@ useEffect(() => {
   const allPostsData = [];
 
   for (const post of referencePosts) {
-    const postData = data.find(item => item.post_id === post.id_post);
+    const postData = data.find(item => item.post_id === post.id);
     if (postData) {
       allPostsData.push(postData);
     } else {
       // Добавляем пустую запись для поста без данных
       allPostsData.push({
-        post_id: post.id_post,
+        post_id: post.id,
         cars: []
       });
     }
@@ -149,7 +149,24 @@ useEffect(() => {
   return allPostsData;
 }
 
+// function ensureAllPosts(data, referencePosts) {
+//   const allPostsData = [];
 
+//   for (const post of referencePosts) {
+//     const postData = data.find(item => item.post_id === post.id_post);
+//     if (postData) {
+//       allPostsData.push(postData);
+//     } else {
+//       // Добавляем пустую запись для поста без данных
+//       allPostsData.push({
+//         post_id: post.id_post,
+//         cars: []
+//       });
+//     }
+//   }
+
+//   return allPostsData;
+// }
   
 function splitWorkStages(data) {
   const result = [];
@@ -210,7 +227,7 @@ function addEmptySlots(result,  referencePosts) {
   // const endOfDay = 17;
 
   for (const post of referencePosts) {
-    const post_id = post.id_post;
+    const post_id = post.id;
     const works = groupedByPost[post_id] || [];
     let lastEnd = startOfDay;
 
@@ -252,9 +269,11 @@ function addEmptySlots(result,  referencePosts) {
     }
   }
 
+
+
  // Функция для сопоставления post_id в fullResult с отсортированными постами
   const postIdOrder = new Map();
-  referencePosts.forEach((post, index) => postIdOrder.set(post.id_post, index));
+  referencePosts.forEach((post, index) => postIdOrder.set(post.id, index));
 
   // Сортируем fullResult в порядке наименований постов
   fullResult.sort((a, b) => postIdOrder.get(a.post_id) - postIdOrder.get(b.post_id));
@@ -263,6 +282,74 @@ function addEmptySlots(result,  referencePosts) {
   return fullResult;
 }
 
+  
+  
+  // function addEmptySlots(result,  referencePosts) {
+//   const fullResult = [];
+//   const posts = new Set(result.map(item => item.post_id));
+//   const groupedByPost = result.reduce((acc, item) => {
+//     acc[item.post_id] = acc[item.post_id] || [];
+//     acc[item.post_id].push(item);
+//     return acc;
+//   }, {});
+
+//   // const startOfDay = 9;
+//   // const endOfDay = 17;
+
+//   for (const post of referencePosts) {
+//     const post_id = post.id_post;
+//     const works = groupedByPost[post_id] || [];
+//     let lastEnd = startOfDay;
+
+//     if (works.length === 0) {
+//       fullResult.push({
+//         car_id: null,
+//         post_id,
+//         service_name: "empty",
+//         stage_start: startOfDay,
+//         stage_end: endOfDay,
+//         background: "rgba(255, 255, 255, 0.3)",
+//       });
+//     } else {
+//       works.forEach(work => {
+//         if (work.stage_start > lastEnd) {
+//           fullResult.push({
+//             car_id: null,
+//             post_id,
+//             service_name: "empty",
+//             stage_start: lastEnd,
+//             stage_end: work.stage_start - 1,
+//             background: "rgba(255, 255, 255, 0.3)",
+//           });
+//         }
+//         fullResult.push(work);
+//         lastEnd = work.end_time+1;
+//       });
+
+//       if (lastEnd <= endOfDay) {
+//         fullResult.push({
+//           car_id: null,
+//           post_id,
+//           service_name: "empty",
+//           stage_start: lastEnd,
+//           stage_end: endOfDay,
+//           background: "rgba(255, 255, 255, 0.3)",
+//         });
+//       }
+//     }
+//   }
+  
+//  // Функция для сопоставления post_id в fullResult с отсортированными постами
+//   const postIdOrder = new Map();
+//   referencePosts.forEach((post, index) => postIdOrder.set(post.id_post, index));
+
+//   // Сортируем fullResult в порядке наименований постов
+//   fullResult.sort((a, b) => postIdOrder.get(a.post_id) - postIdOrder.get(b.post_id));
+
+
+//   return fullResult;
+// } 
+  
 
 // const totalPosts = 5;
 
