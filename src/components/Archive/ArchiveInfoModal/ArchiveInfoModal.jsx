@@ -1,6 +1,6 @@
 import styles from "./ArchiveInfoModal.module.css";
 import { MdClose } from "react-icons/md";
-import ArchiveList from "../../ArchiveList/ArchiveList.jsx";
+import ArchiveList from "../ArchiveList/ArchiveList.jsx";
 import toast from "react-hot-toast";
 import { getAllArchiveData } from "../../../redux/archive/operations.js";
 import { useEffect, useState } from "react";

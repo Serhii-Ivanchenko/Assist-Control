@@ -7,12 +7,15 @@ import StatusToggle from "../../../sharedComponents/StatusToggle/StatusToggle";
 import PopupConnection from "./PopupConnection/PopupConnection";
 import DistributorsInfoForm from "./DistributorsInfoForm";
 // import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
-import UploadComponent from "../../../sharedComponents/UploadComponent/UploadComponent";
 import { RiSave3Fill } from "react-icons/ri";
+import { BsFillCloudUploadFill } from "react-icons/bs";
 import styles from "./DistributorsModal.module.css";
-import { updateSupplierData } from "../../../../redux/settings/operations";
+import {
+  updateSupplierData,
+  createSupplier,
+} from "../../../../redux/settings/operations";
 import { useDispatch } from "react-redux";
-import defLogo from "../../../../assets/images/distrImg.png";
+import { fileToBase64 } from "../../../../utils/convertInBase64";
 
 function DistributorsModal({
   onClose,
@@ -25,8 +28,8 @@ function DistributorsModal({
   const [distributor, setDistributor] = useState(distributorData || {});
   const [isEditing, setIsEditing] = useState(false);
   const [editableName, setEditableName] = useState(distributor.name || "");
-  const [logo, setLogo] = useState(distributor.logo || defLogo);
-  const [logoBase64, setLogoBase64] = useState(null); // Тепер ми тримаємо base64 окремо
+  const [logoPreview, setLogoPreview] = useState(distributor.logo || null);
+  const [logoBase64, setLogoBase64] = useState(null);
 
   const buttonRef = useRef(null);
   const formRef = useRef(null);
@@ -37,9 +40,18 @@ function DistributorsModal({
     if (distributorData) {
       setDistributor(distributorData);
       setEditableName(distributorData.name || "");
-      setLogo(distributorData.logo || defLogo);
+      setLogoPreview(distributorData.logo || null);
     }
   }, [distributorData]);
+
+  const handleLogoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setLogoPreview(URL.createObjectURL(file));
+      const base64 = await fileToBase64(file);
+      setLogoBase64(base64);
+    }
+  };
 
   const handleSaveName = () => {
     setDistributor((prev) => ({ ...prev, name: editableName }));
@@ -54,45 +66,16 @@ function DistributorsModal({
         await authFormRef.current.submitForm();
       }
 
-      const hasChanges =
-        distributor.name !== distributorData.name ||
-        logo !== distributorData.logo ||
-        JSON.stringify(distributor.deliverySchedule) !==
-          JSON.stringify(distributorData.deliverySchedule);
-
-      if (!hasChanges) {
-        console.log("no data to update");
-        onClose();
-        return;
-      }
-
-      const makeBase64Logo = async (logoFile) => {
-        if (logoFile && logoFile instanceof File) {
-          const base64Logo = await new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result); // Повертає Base64
-            reader.onerror = (error) => reject(error);
-            reader.readAsDataURL(logoFile); // Читає файл як Base64
-          });
-          setLogoBase64(base64Logo); // записуємо base64 в стан
-          return base64Logo;
-        } else {
-          // Якщо це не файл, повертаємо як є (можливо, URL)
-          return logoFile;
-        }
-      };
-
-      const base64Logo = await makeBase64Logo(logo); // Перетворюємо логотип у Base64
-
       // Отримуємо дані з AuthForm та DistributorsInfoForm
       const authData = authFormRef.current?.values || {};
       const distributorsInfoData = formRef.current?.values || {};
 
       const dataToUpdate = {
+        supplier_id: distributor.id || "",
+        name: distributor.name || editableName,
         ...authData, // Дані з AuthForm
         ...distributorsInfoData, // Дані з DistributorsInfoForm
-        logo: base64Logo, // Base64 логотип
-        supplier_id: distributor.id,
+        logo: logoBase64, // Надсилаємо Base64
         deliverySchedule: distributor.deliverySchedule || {}, // Перевірка наявності
       };
 
@@ -100,8 +83,17 @@ function DistributorsModal({
       console.log("JSON.stringify", JSON.stringify(dataToUpdate));
       console.log("supplier_id", distributor.id);
 
-      const result = await dispatch(updateSupplierData(dataToUpdate)).unwrap();
-      console.log("Оновлення успішне:", result);
+      let result;
+
+      if (distributor.id) {
+        result = await dispatch(
+          updateSupplierData({ ...dataToUpdate, supplier_id: distributor.id })
+        ).unwrap();
+        console.log("Оновлення постачальника успішне:", result);
+      } else {
+        result = await dispatch(createSupplier(dataToUpdate)).unwrap();
+        console.log("Створення постачальника успішне:", result);
+      }
 
       if (updateDistributors) {
         updateDistributors(result.data);
@@ -112,7 +104,7 @@ function DistributorsModal({
       console.error("Error response:", error.response?.data);
       console.error("Error message:", error.message);
       console.error(
-        "Помилка під час оновлення:",
+        "Помилка під час береження:",
         error.response?.data || error.message
       );
     }
@@ -131,11 +123,11 @@ function DistributorsModal({
     if (distributorData) {
       setDistributor(distributorData);
       setEditableName(distributorData.name || "");
-      setLogo(distributorData.logo);
+      setLogoPreview(distributorData.logo || null);
     } else {
       setDistributor({});
       setEditableName("");
-      setLogo(null);
+      setLogoPreview(null);
     }
     setIsEditing(false);
     handleResetForm();
@@ -206,27 +198,32 @@ function DistributorsModal({
             </button>
           </div>
           <div className={styles.imgWrapper}>
-            {logo ? (
-              <div>
-                <img
-                  className={styles.img}
-                  src={logo}
-                  alt={distributor.name || "Distribution Img"}
-                  onError={() => setLogo(defLogo)}
-                />
-                <UploadComponent
-                  title="Завантажити лого"
-                  name="logo"
-                  setLogo={(newLogo) => setLogo(newLogo || defLogo)}
-                />
+            {logoPreview ? (
+              <div className={styles.uploadLogoContainer}>
+                <img className={styles.img} src={logoPreview} alt="Логотип" />
+                <label className={styles.uploadLabel}>
+                  <BsFillCloudUploadFill className={styles.downloadIcon} />
+                  Завантажити лого
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoUpload}
+                    hidden
+                  />
+                </label>
               </div>
             ) : (
               <div className={styles.uploadLogoContainer}>
-                <UploadComponent
-                  title="Завантажити лого"
-                  name="logo"
-                  setLogo={setLogo}
-                />
+                <label className={styles.uploadLabel}>
+                  <BsFillCloudUploadFill className={styles.downloadIcon} />
+                  Завантажити лого
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoUpload}
+                    hidden
+                  />
+                </label>
               </div>
             )}
           </div>

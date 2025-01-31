@@ -10,6 +10,7 @@ export default function ThreeDotsModal({
   setFieldValue,
   fieldname,
   name,
+  onClose,
 }) {
   const popoverRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -28,6 +29,7 @@ export default function ThreeDotsModal({
 
       setFieldValue(fieldname, file);
     }
+    onClose();
   };
 
   // const handleClickOutside = (event) => {

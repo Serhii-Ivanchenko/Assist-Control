@@ -67,7 +67,16 @@ const updateItem = (items, payload, key = "id") => {
 const settingsSlice = createSlice({
   name: "settings",
   initialState: initialState.settings,
-  reducers: {},
+  reducers: {
+    openModal: (state, action) => {
+      state.isModalOpen = true;
+      state.supplier = action.payload || null;
+    },
+    closeModal: (state) => {
+      state.isModalOpen = false;
+      state.supplier = null;
+    },
+  },
   extraReducers: (builder) =>
     builder
       //! EMPLOYEE
@@ -80,19 +89,19 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeData.pending, handlePending)
       .addCase(updateEmployeeData.fulfilled, (state, action) => {
         state.isLoading = false;
-        const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.id === action.payload.employee_id
-        );
+        // const employeeToEditIndex = state.employees.findIndex(
+        //   (employee) => employee.id === action.payload.employee_id
+        // );
 
-        if (
-          // action.payload.status === 200 &&
-          employeeToEditIndex !== -1
-        ) {
-          state.employees[employeeToEditIndex] = {
-            ...state.employees[employeeToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
-        }
+        // if (
+        //   // action.payload.status === 200 &&
+        //   employeeToEditIndex !== -1
+        // ) {
+        //   state.employees[employeeToEditIndex] = {
+        //     ...state.employees[employeeToEditIndex], // Залишаємо старі дані
+        //     ...action.meta.arg, // Додаємо дані, які відправляли
+        //   };
+        // }
       })
       .addCase(updateEmployeeData.rejected, handleRejected)
 
@@ -135,7 +144,11 @@ const settingsSlice = createSlice({
       .addCase(createSupplier.pending, handlePending)
       .addCase(createSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
-        updateItem(state.suppliers, action.payload, "supplier_id");
+        if (action.payload.supplier_id) {
+          state.suppliers.push(action.payload);
+        } else {
+          console.error("Supplier ID is undefined:", action.payload);
+        }
       })
       .addCase(createSupplier.rejected, handleRejected)
 
@@ -145,20 +158,6 @@ const settingsSlice = createSlice({
 
         // функція для оновлення даних по постачальнику
         updateItem(state.suppliers, action.meta.arg, "supplier_id");
-
-        // const supplierToEditIndex = state.suppliers.findIndex(
-        //   (supplier) => supplier.supplier_id === action.payload.supplier
-        // );
-
-        // if (
-        //   // action.payload.status === 200 &&
-        //   supplierToEditIndex !== -1
-        // ) {
-        //   state.suppliers[supplierToEditIndex] = {
-        //     ...state.suppliers[supplierToEditIndex], // Залишаємо старі дані
-        //     ...action.meta.arg, // Додаємо дані, які відправляли
-        //   };
-        // }
       })
       .addCase(updateSupplierData.rejected, handleRejected)
 
@@ -175,11 +174,12 @@ const settingsSlice = createSlice({
       .addCase(updateSupplierStatus.pending, handlePending)
       .addCase(updateSupplierStatus.fulfilled, (state, action) => {
         state.isLoading = false;
-        const supplierToEditIndex = state.employees.findIndex(
-          (supplier) => supplier.supplier_id === action.payload.supplier_id
+
+        const supplierToEditIndex = state.suppliers.findIndex(
+          (supplier) => supplier.id === action.payload.supplier_id
         );
-        state.employees[supplierToEditIndex].isDisabled =
-          action.payload.updated_fields.isDisabled;
+
+        state.suppliers[supplierToEditIndex].status = action.payload.status;
       })
       .addCase(updateSupplierStatus.rejected, handleRejected)
 
@@ -230,6 +230,7 @@ const settingsSlice = createSlice({
       .addCase(updatePostData.pending, handlePending)
       .addCase(updatePostData.fulfilled, (state, action) => {
         state.isLoading = false;
+
         const postToEditIndex = state.posts.findIndex(
           (post) => post.id === action.payload.post_id
         );
@@ -242,7 +243,9 @@ const settingsSlice = createSlice({
             ...(action.payload.name_post && {
               name_post: action.payload.name_post,
             }),
-            ...(action.payload.status && { status: action.payload.status }),
+            ...(action.payload.status !== undefined && {
+              status: action.payload.status,
+            }),
           };
         }
       })
@@ -514,5 +517,7 @@ const settingsSlice = createSlice({
       })
       .addCase(getCashRegisterData.rejected, handleRejected),
 });
+
+export const { openModal, closeModal } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

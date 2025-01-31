@@ -2,8 +2,7 @@ import * as Yup from "yup";
 
 export const AddServiceSchema = Yup.object().shape({
   logo: Yup.string(),
-  name: Yup.string(),
-  // .required("Це поле повинно бути заповнене"),
+  companyName: Yup.string().required("Це поле повинно бути заповнене"),
   address: Yup.string().required("Це поле повинно бути заповнене"),
   email: Yup.string().matches(
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -29,20 +28,20 @@ export const AddServiceSchema = Yup.object().shape({
   legal_address: Yup.string(),
   // .required("Це поле повинно бути заповнене"),
   manager_phone: Yup.string().matches(
-    /^\+380\d{9}$/,
-    "Телефон повинен мати формат +380123456789"
+    /^380\d{9}$/,
+    "Телефон повинен мати формат 380123456789"
   ),
   // .required("Це поле повинно бути заповнене"),
   manager_name: Yup.string(),
   // .required("Це поле повинно бути заповнене"),
   office_phone: Yup.string().matches(
-    /^\+380\d{9}$/,
-    "Телефон повинен мати формат +380123456789"
+    /^380\d{9}$/,
+    "Телефон повинен мати формат 380123456789"
   ),
   // .required("Це поле повинно бути заповнене"),
   director_phone: Yup.string().matches(
-    /^\+380\d{9}$/,
-    "Телефон повинен мати формат +380123456789"
+    /^380\d{9}$/,
+    "Телефон повинен мати формат 380123456789"
   ),
   // .required("Це поле повинно бути заповнене"),
 });

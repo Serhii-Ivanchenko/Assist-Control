@@ -55,36 +55,11 @@ export const updateEmployeeData = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { employee_id, files, ...dataToUpdate } = employeeDataToUpdate;
-
-      const base64Files = { ...files };
-
-      // Створюємо об'єкт для відправки
-      const payload = {
-        ...dataToUpdate, // Додаємо дані співробітника
-        ...base64Files, // Додаємо готові Base64-файли
-      };
-
-      // const base64Files = await Promise.all(
-      //   files.map((file) => {
-      //     return new Promise((resolve, reject) => {
-      //       const reader = new FileReader();
-      //       reader.onload = () => resolve(reader.result); // Повертає Base64
-      //       reader.onerror = (error) => reject(error);
-      //       reader.readAsDataURL(file); // Читає файл як Base64
-      //     });
-      //   })
-      // );
-
-      // // Створюємо об'єкт для відправки
-      // const payload = {
-      //   ...dataToUpdate, // Додаємо дані співробітника
-      //   files: base64Files, // Додаємо Base64-файли
-      // };
+      const { employee_id, ...dataToUpdate } = employeeDataToUpdate;
 
       const response = await axiosInstance.patch(
         `/set/employees/${employee_id}/update/`,
-        payload,
+        dataToUpdate,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -209,21 +184,16 @@ export const getAllEmployees = createAsyncThunk(
 // Create supplier
 export const createSupplier = createAsyncThunk(
   "settings/createSupplier",
-  async ({ supplierData, logo }, thunkAPI) => {
+  async ({ supplierData }, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const base64Logo = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result); // Повертає Base64
-        reader.onerror = (error) => reject(error);
-        reader.readAsDataURL(logo); // Читає файл як Base64
-      });
-
       // Створюємо об'єкт для відправки
       const payload = {
-        ...supplierData, // Додаємо дані співробітника
-        file: base64Logo, // Додаємо Base64-файли
+        name: supplierData.name,
+        address: supplierData.address,
+        managerPhone: supplierData.managerPhone,
+        ...supplierData,
       };
 
       const response = await axiosInstance.post(
@@ -240,7 +210,8 @@ export const createSupplier = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      console.error("Error response:", error.response?.data);
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
@@ -253,21 +224,6 @@ export const updateSupplierData = createAsyncThunk(
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { supplier_id, logo, ...dataToUpdate } = employeeDataToUpdate;
-      // let base64Logo = null;
-
-      const currentState = thunkAPI
-        .getState()
-        .settings.suppliers.find((supplier) => supplier.id === supplier_id);
-
-      if (
-        currentState &&
-        currentState.name === dataToUpdate.name &&
-        currentState.logo === logo
-      ) {
-        console.log("No changes detected. Update skipped.");
-        return thunkAPI.rejectWithValue("No changes detected.");
-      }
-
       // Create the payload to send in the request
       const payload = {
         logo,
@@ -335,13 +291,13 @@ export const deleteSupplier = createAsyncThunk(
 // Update supplier status
 export const updateSupplierStatus = createAsyncThunk(
   "settings/updateSupplierStatus",
-  async (newStatus, thunkAPI) => {
+  async ({ supplier_id, newStatus }, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.patch(
-        `/set/suppliers/status/`,
-        newStatus,
+        `/set/suppliers/${supplier_id}/status?status=${newStatus}`,
+        null,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -362,15 +318,15 @@ export const updateSupplierStatus = createAsyncThunk(
 export const getSupplierData = createAsyncThunk(
   "settings/getSupplierData",
   async (supplier_id, thunkAPI) => {
-    // const state = thunkAPI.getState();
-    // const serviceId = state.service.selectedServiceInSettingsId;
+    const state = thunkAPI.getState();
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(
         `/set/supplier/${supplier_id}/`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
-            "company-id": "1",
+            "company-id": serviceId,
           },
         }
       );

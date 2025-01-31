@@ -32,6 +32,7 @@ import AddCarModal from "../Modals/AddCarModal/AddCarModal";
 import { FiPlus } from "react-icons/fi";
 import AddNewClientModal from "../Modals/AddNewClientModal/AddNewClientModal.jsx";
 import ClientOrganizationInfo from "../Modals/ClientInfo/ClientOrganizationInfo/ClientOrganizationInfo.jsx";
+import ClientPersonInfo from "../Modals/ClientInfo/ClientPersonInfo/ClientPersonInfo.jsx";
 
 export default function ClientInfo({ clientInfo }) {
   // Client
@@ -402,7 +403,7 @@ export default function ClientInfo({ clientInfo }) {
             isOpen={clientInfoModalOpen}
             onClose={handleClientInfoModalClose}
           >
-            <ClientOrganizationInfo onClose={handleClientInfoModalClose} />
+            <ClientPersonInfo onClose={handleClientInfoModalClose} />
           </Modal>
         )}
       </div>

@@ -1,74 +1,86 @@
+import { useCallback, useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DistributorsList from "./DistributorsList/DistributorsList";
-import { BsTruck } from "react-icons/bs";
-import styles from "./DistributorsPart.module.css";
-import { useEffect, useState } from "react";
 import Modal from "../../Modals/Modal/Modal";
 import DistributorsModal from "./DistributorsModal/DistributorsModal";
-import { useDispatch } from "react-redux";
-import { getAllSuppliers } from "../../../redux/settings/operations";
+import { BsTruck } from "react-icons/bs";
+import {
+  deleteSupplier,
+  getAllSuppliers,
+  getSupplierData,
+} from "../../../redux/settings/operations";
+import {
+  selectAllSuppliers,
+  selectCurrentSupplier,
+  selectIsModalOpen,
+} from "../../../redux/settings/selectors";
+import { openModal, closeModal } from "../../../redux/settings/slice";
+import styles from "./DistributorsPart.module.css";
 
 function DistributorsPart() {
   const dispatch = useDispatch();
-  const [distributors, setDistributors] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentDistributor, setCurrentDistributor] = useState(null);
-  const [updatedDistributor, setUpdatedDistributor] = useState([]);
-
-  const handleEditDistributor = (distributor) => {
-    setCurrentDistributor(distributor);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setCurrentDistributor(null);
-  };
-
-  const handleUpdateDistributor = (updatedDistributor) => {
-    setUpdatedDistributor((prev) =>
-      prev.map((distr) =>
-        distr.id === updatedDistributor.id ? updatedDistributor : distr
-      )
-    );
-  };
+  const distributors = useSelector(selectAllSuppliers);
+  const currentDistributor = useSelector(selectCurrentSupplier);
+  const isModalOpen = useSelector(selectIsModalOpen);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await dispatch(getAllSuppliers());
-        // console.log("distr data:", response.payload);
-        setDistributors(response.payload.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    // Викликається лише один раз після монтування компонента
+    if (distributors.length === 0) {
+      dispatch(getAllSuppliers());
+    }
+  }, [dispatch, distributors.length]);
 
-    fetchData();
-  }, [dispatch, updatedDistributor]);
+  const handleEditDistributor = useCallback(
+    (currentDistributor) => {
+      dispatch(getSupplierData(currentDistributor.id));
+      dispatch(openModal(currentDistributor));
+    },
+    [dispatch]
+  );
 
-  return (
-    <div className={styles.wrapper}>
+  const handleDeleteDistributor = useCallback(
+    (currentDistributor) => {
+      dispatch(deleteSupplier(currentDistributor.id));
+    },
+    [dispatch]
+  );
+
+  const handleAddDistributor = () => {
+    dispatch(openModal(null));
+  };
+
+  const closeModalHandler = () => {
+    dispatch(closeModal());
+  };
+
+  const memoizedDistributorsList = useMemo(
+    () => (
       <DistributorsList
         distributorsData={distributors}
         onEditDistributor={handleEditDistributor}
-        onDelete={() => {}}
-        updateDistributors={handleUpdateDistributor}
+        onDelete={handleDeleteDistributor}
       />
+    ),
+    [distributors, handleDeleteDistributor, handleEditDistributor]
+  );
+
+  return (
+    <div className={styles.wrapper}>
+      {memoizedDistributorsList}
       <button
         className={styles.btn}
         type="button"
-        onClick={() => setIsModalOpen(true)}
+        onClick={handleAddDistributor}
       >
         <BsTruck />
         Додати постачальника
       </button>
 
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <Modal isOpen={isModalOpen} onClose={closeModalHandler}>
           <DistributorsModal
-            onClose={closeModal}
+            onClose={closeModalHandler}
             distributorData={currentDistributor}
-            updateDistributors={handleUpdateDistributor}
           />
         </Modal>
       )}
