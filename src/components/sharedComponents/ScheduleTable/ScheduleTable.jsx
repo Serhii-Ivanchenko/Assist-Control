@@ -41,16 +41,31 @@ const ScheduleTable = forwardRef(
         }))
       );
     };
-    const [gridData, setGridData] = useState(generateGridData(activePeriods === undefined ? emptyPeriods : activePeriods ));
+
+    console.log("isEditing", isEditing);
+
+    const [gridData, setGridData] = useState(
+      generateGridData(
+        activePeriods === undefined ? emptyPeriods : activePeriods
+      )
+    );
     const [isSelecting, setIsSelecting] = useState(false);
 
     useEffect(() => {
-      setGridData(generateGridData(activePeriods === undefined ? emptyPeriods : activePeriods));
+      setGridData(
+        generateGridData(
+          activePeriods === undefined ? emptyPeriods : activePeriods
+        )
+      );
     }, [activePeriods]);
 
     // Сброс сетки к исходным данным
     const resetGridData = () => {
-      setGridData(generateGridData(activePeriods === undefined ? emptyPeriods : activePeriods));
+      setGridData(
+        generateGridData(
+          activePeriods === undefined ? emptyPeriods : activePeriods
+        )
+      );
     };
 
     // Обробка зміни стану клітинки

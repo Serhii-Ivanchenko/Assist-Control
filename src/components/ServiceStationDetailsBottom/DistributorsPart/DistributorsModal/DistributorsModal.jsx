@@ -6,7 +6,7 @@ import AuthForm from "./AuthForm/AuthForm";
 import StatusToggle from "../../../sharedComponents/StatusToggle/StatusToggle";
 import PopupConnection from "./PopupConnection/PopupConnection";
 import DistributorsInfoForm from "./DistributorsInfoForm";
-// import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
+import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
 import { RiSave3Fill } from "react-icons/ri";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import styles from "./DistributorsModal.module.css";
@@ -27,19 +27,33 @@ function DistributorsModal({
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [distributor, setDistributor] = useState(distributorData || {});
   const [isEditing, setIsEditing] = useState(false);
-  const [editableName, setEditableName] = useState(distributor.name || "");
+  const [editableName, setEditableName] = useState(distributor?.name || "");
   const [logoPreview, setLogoPreview] = useState(distributor.logo || null);
   const [logoBase64, setLogoBase64] = useState(null);
 
   const buttonRef = useRef(null);
   const formRef = useRef(null);
   const authFormRef = useRef(null);
+
+  console.log("distributor", distributor);
+  
+  // !Для розкладу start
+
+  // Парсимо розклад для initialValues, якщо він є або передаємо туди порожній масив
+  const parsedSchedule = distributor.deliverySchedule
+    ? JSON.parse(distributor.deliverySchedule)
+    : [];
+  // const detailsRef = useRef();
   const scheduleRef = useRef();
+
+  console.log("parsedSchedule", parsedSchedule);
+
+  // !Для розкладу end
 
   useEffect(() => {
     if (distributorData) {
       setDistributor(distributorData);
-      setEditableName(distributorData.name || "");
+      setEditableName(distributorData?.name || "");
       setLogoPreview(distributorData.logo || null);
     }
   }, [distributorData]);
@@ -70,13 +84,17 @@ function DistributorsModal({
       const authData = authFormRef.current?.values || {};
       const distributorsInfoData = formRef.current?.values || {};
 
+      // генерація масиву розкладу для відправки
+      const scheduleToSend = scheduleRef.current.generateBackendData();
+      console.log("scheduleToSend during submit", scheduleToSend);
+
       const dataToUpdate = {
         supplier_id: distributor.id || "",
-        name: distributor.name || editableName,
+        name: distributor?.name || editableName,
         ...authData, // Дані з AuthForm
         ...distributorsInfoData, // Дані з DistributorsInfoForm
         logo: logoBase64, // Надсилаємо Base64
-        deliverySchedule: distributor.deliverySchedule || {}, // Перевірка наявності
+        deliverySchedule: scheduleToSend, // Перевірка наявності
       };
 
       console.log("Updated Payload:", dataToUpdate);
@@ -245,10 +263,7 @@ function DistributorsModal({
         </div>
       </div>
       <div className={styles.scheduleContainer}>
-        {/* <ScheduleAccordion
-          ref={scheduleRef}
-          deliveryData={distributor.deliverySchedule || null}
-        /> */}
+        <ScheduleAccordion ref={scheduleRef} deliveryData={parsedSchedule} />
       </div>
       <div className={styles.btnGroup}>
         <button

@@ -11,15 +11,19 @@ import styles from "./ScheduleAccordion.module.css";
 import ScheduleTable from "../../../../sharedComponents/ScheduleTable/ScheduleTable.jsx";
 
 const ScheduleAccordion = forwardRef(({ deliveryData }, ref) => {
-  const [isEditing, setIsEditing] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const handleChange = (_e, expanded) => {
+  const [isEditingSchedule, setIsEditingSchedule] = useState(false);
+
+  const handleEditToggle = (_e, expanded) => {
+    setIsEditingSchedule((prev) => !prev);
+
     setIsExpanded(expanded);
     if (expanded) {
-      setIsEditing(true);
+      // setIsEditing(true);
     } else {
-      setIsEditing(false);
+      // setIsEditing(false);
     }
   };
 
@@ -27,7 +31,7 @@ const ScheduleAccordion = forwardRef(({ deliveryData }, ref) => {
     <Accordion
       className={styles.wrapper}
       expanded={isExpanded}
-      onChange={handleChange}
+      onChange={handleEditToggle}
       disableGutters={true}
       sx={{
         background: "none",
@@ -71,7 +75,7 @@ const ScheduleAccordion = forwardRef(({ deliveryData }, ref) => {
       >
         <ScheduleTable
           ref={ref} // Forward the ref to ScheduleTable
-          isEditing={isEditing}
+          isEditing={isEditingSchedule}
           activePeriods={deliveryData}
         />
       </AccordionDetails>
