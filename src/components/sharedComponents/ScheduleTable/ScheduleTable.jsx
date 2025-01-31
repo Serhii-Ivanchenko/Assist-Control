@@ -21,6 +21,15 @@ const daysEn = [
   "Sunday",
 ];
 
+const generateEmptySchedule = () => {
+  return daysEn.map((day) => ({
+    day,
+    times: Object.fromEntries(hours.map((hour) => [`${hour}:00`, 0])),
+  }));
+};
+
+const emptyPeriods = generateEmptySchedule();
+
 const ScheduleTable = forwardRef(
   ({ isEditing, activePeriods, onDataSave }, ref) => {
     const generateGridData = (data) => {
@@ -32,19 +41,16 @@ const ScheduleTable = forwardRef(
         }))
       );
     };
-    console.log("isEditing", isEditing);
-
-    const [gridData, setGridData] = useState(generateGridData(activePeriods));
+    const [gridData, setGridData] = useState(generateGridData(activePeriods === undefined ? emptyPeriods : activePeriods ));
     const [isSelecting, setIsSelecting] = useState(false);
 
     useEffect(() => {
-      // console.log("activePeriods", activePeriods);
-      setGridData(generateGridData(activePeriods));
+      setGridData(generateGridData(activePeriods === undefined ? emptyPeriods : activePeriods));
     }, [activePeriods]);
 
     // Сброс сетки к исходным данным
     const resetGridData = () => {
-      setGridData(generateGridData(activePeriods));
+      setGridData(generateGridData(activePeriods === undefined ? emptyPeriods : activePeriods));
     };
 
     // Обробка зміни стану клітинки
