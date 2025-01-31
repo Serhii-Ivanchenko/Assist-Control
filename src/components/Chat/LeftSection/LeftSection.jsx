@@ -126,7 +126,7 @@ export default function LeftSection() {
       name: "Дмитро Поліщук",
       lastMessage: "Доброго ранку! Ви працюєте з автомобілями американськог...",
       managersPhoto: avatar,
-      time: "2025-01-29T03:44:00",
+      time: "2025-01-31T01:25:00",
       read: false,
       id: "7",
     },
@@ -209,6 +209,7 @@ export default function LeftSection() {
   const [archiveChats, setArchiveChats] = useState(
     initialChats.filter((chat) => chat.archive === true).length
   );
+  // const [flashing, setFlashing] = useState("");
 
   const categoryCounts = useMemo(() => {
     return {
@@ -323,6 +324,34 @@ export default function LeftSection() {
     setFavourite(newChosenCount);
   };
 
+  const [highlightedChats, setHighlightedChats] = useState({}); // Стан для відстеження, які чати мають рамку
+
+  // useEffect(() => {
+  //   const timers = {};
+
+  //   initialChats.some((chat) => {
+  //     if (!chat.read) {
+  //       const timeDifference = Date.now() - new Date(chat.time).getTime();
+  //       const remainingTime = 30000 - timeDifference;
+
+  //       if (remainingTime <= 0) {
+  //         // Якщо час уже вийшов, одразу додаємо рамку
+  //         setHighlightedChats((prev) => ({ ...prev, [chat.id]: true }));
+  //       } else {
+  //         // Інакше встановлюємо таймер
+  //         timers[chat.id] = setTimeout(() => {
+  //           setHighlightedChats((prev) => ({ ...prev, [chat.id]: true }));
+  //         }, remainingTime);
+  //       }
+  //     }
+  //   });
+
+  //   return () => {
+  //     // Очищення таймерів при демонтажі
+  //     Object.values(timers).forEach(clearTimeout);
+  //   };
+  // }, [initialChats]); // Спрацьовує, коли змінюється список чатів
+
   const flashingBorder = (type) => {
     const hasWarning = initialChats.some((chat) => {
       const time = Date.now() - new Date(chat.time).getTime();
@@ -332,6 +361,13 @@ export default function LeftSection() {
     });
     return hasWarning ? css.warningBorder : "";
   };
+
+  // useEffect(() => {
+  //   flashingBorder(type); // Перевіряємо наявність прострочених чатів при монтуванні
+  //   const interval = setInterval(() => flashingBorder(type), 1000); // Оновлюємо кожну секунду
+
+  //   return () => clearInterval(interval); // Очищаємо інтервал при розмонтуванні
+  // }, [initialChats, type]);
 
   return (
     <div className={css.leftSectionWrapper}>
