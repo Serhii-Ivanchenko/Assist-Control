@@ -206,21 +206,6 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const baseUrl = "https://aps.assist.cam"; // Замість цього вкажіть свій базовий URL
-
-  //   // Використовуємо fetch для отримання зображення
-  //   fetch(`${baseUrl}/${employee.logo}`)
-  //     .then((response) => response.blob()) // Отримуємо файл як Blob
-  //     .then((blob) => {
-  //       const objectURL = URL.createObjectURL(blob); // Створюємо тимчасовий URL
-  //       setPhoto(objectURL); // Зберігаємо URL в стан
-  //     })
-  //     .catch((error) =>
-  //       console.error("Помилка при завантаженні файлу:", error)
-  //     );
-  // }, [employee.logo]);
-
   const initialValues = {
     name: employee.name || "",
     phone: employee.phone || phone,
@@ -738,6 +723,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         fieldname="files.contract"
                         setFieldValue={setFieldValue}
                         onClose={() => toggleSettings(0)}
+                        file={`${employee.contract}?t=${Date.now()}`}
                         // buttonRef={buttonRefs.current[0]}
                         // onClose={closePopover}
                       />
@@ -774,6 +760,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         fieldname="files.employment"
                         setFieldValue={setFieldValue}
                         onClose={() => toggleSettings(1)}
+                        file={`${employee.employment}?t=${Date.now()}`}
+
                         // buttonRef={buttonRefs.current[1]}
                         // onClose={closePopover}
                       />
@@ -810,6 +798,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         fieldname="files.agreement"
                         setFieldValue={setFieldValue}
                         onClose={() => toggleSettings(2)}
+                        file={`${employee.agreement}?t=${Date.now()}`}
+
                         // buttonRef={buttonRefs.current[2]}
                         // onClose={closePopover}
                       />
