@@ -32,6 +32,7 @@ const ScheduleTable = forwardRef(
         }))
       );
     };
+    console.log("isEditing", isEditing);
 
     const [gridData, setGridData] = useState(generateGridData(activePeriods));
     const [isSelecting, setIsSelecting] = useState(false);
@@ -72,26 +73,6 @@ const ScheduleTable = forwardRef(
     const handleMouseUp = () => {
       setIsSelecting(false);
     };
-
-    // Формування масиву для бекенду
-    // const generateBackendData = () => {
-    //   const activeCells = gridData.filter((cell) => cell.isActive);
-    //   const result = [];
-
-    //   activeCells.forEach(({ day, hour }) => {
-    //     const existingPeriod = result.find(
-    //       (period) => period.day === day && period.endTime === hour - 1
-    //     );
-    //     if (existingPeriod) {
-    //       existingPeriod.endTime = hour; // Продовжити існуючий період
-    //     } else {
-    //       result.push({ day, startTime: hour, endTime: hour, isActive: true }); // ССтвор.ємо новий період
-    //     }
-    //   });
-
-    //   console.log("Backend Data:", result);
-    //   return result;
-    // };
 
     const generateBackendData = () => {
       const result = [];

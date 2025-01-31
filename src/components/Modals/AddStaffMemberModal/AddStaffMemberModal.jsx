@@ -36,6 +36,7 @@ import * as Yup from "yup";
 import toast from "react-hot-toast";
 import Select from "./Select/Select.jsx";
 import { ImFilePdf } from "react-icons/im";
+import { RiSave3Fill } from "react-icons/ri";
 
 registerLocale("uk", uk);
 
@@ -71,8 +72,40 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [laborDoc, setLaborDoc] = useState(null);
   const [showLoginWarning, setShowLoginWarning] = useState(false);
   const [phone, setPhone] = useState("");
-  // const [logo, setLogo] = useState(null); // стан для прев'ю лого
-  // const [logoBase64, setLogoBase64] = useState(null); // стан, куди записується лого в base64
+
+  const parsedSchedule = JSON.parse(employee.schedule);
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [scheduleToSend, setScheduleToSend] = useState(null);
+  const detailsRef = useRef();
+
+  const handleEditToggle = async (event) => {
+    // event.stopPropagation();
+
+    if (isEditing) {
+      // Получаем данные из ScheduleTable через ref
+      if (detailsRef.current?.generateBackendData) {
+        const backendData = detailsRef.current.generateBackendData();
+        console.log("Сформированные данные для бекенда:", backendData);
+
+        // Отправляем данные на бекенд
+        await setScheduleToSend(backendData);
+      }
+    }
+    setIsEditing((prev) => !prev);
+  };
+
+  const handleDataSave = (data) => {
+    try {
+      // Передача данных на бекенд с unwrap
+      setScheduleToSend(data);
+
+      // await dispatch(getWorkSchedule(selectedServiceId)).unwrap();
+    } catch (error) {
+      // Лог ошибок
+      console.error("Ошибка при сохранении данных:", error);
+    }
+  };
 
   const buttonRefs = useRef([]);
   const fileInputRef = useRef(null);
@@ -224,7 +257,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     sparesPrice: employee.sparesPrice || 0.0,
     profit: 0.0,
     // status: employee.status || 1,
-    schedule: employee.schedule || [],
+    schedule: parsedSchedule.days || [],
     selectedPages: [],
     files: {
       passport: employee.passport || passportImg,
@@ -237,24 +270,13 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       agreement: employee.agreement || agreementFile,
       logo: photo,
     },
-    openSchedule: true,
-  };
-
-  const prepareScheduleData = (scheduleArray) => {
-    const scheduleObject = {};
-
-    scheduleArray.forEach(({ day, times }) => {
-      scheduleObject[day] = times;
-    });
-
-    return scheduleObject;
+    openSchedule: false,
   };
 
   const handleSubmit = async (values, actions) => {
     const dateOnly = values.birthday
       ? new Date(values.birthday).toLocaleDateString("en-CA")
       : null;
-
     try {
       const base64Files = {};
 
@@ -282,14 +304,16 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       }
 
       console.log("Base64 files:", base64Files);
+      console.log("scheduleToSend", scheduleToSend);
 
       const employeeData = {
         ...values,
         ...base64Files,
         birthday: dateOnly,
-        schedule: Array.isArray(values.schedule)
-          ? prepareScheduleData(values.schedule)
-          : values.schedule,
+        // schedule: Array.isArray(values.schedule)
+        //   ? prepareScheduleData(values.schedule)
+        //   : values.schedule,
+        schedule: scheduleToSend,
         files: undefined,
       };
 
@@ -921,6 +945,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     type="checkbox"
                     name="openSchedule"
                     className={css.checkbox}
+                    onClick={handleEditToggle}
                   />
                   <span className={css.checkboxSpan}>
                     <BsCheckLg className={css.cbIcon} />
@@ -928,9 +953,15 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                   Графік роботи
                 </label>
                 <AnimatedContent>
-                  <ScheduleTable
+                  {/* <ScheduleTable
                     isEditing={true}
                     activePeriods={values.schedule}
+                  /> */}
+                  <ScheduleTable
+                    ref={detailsRef}
+                    isEditing={isEditing}
+                    activePeriods={initialValues.schedule}
+                    onDataSave={handleDataSave}
                   />
                 </AnimatedContent>
               </div>
