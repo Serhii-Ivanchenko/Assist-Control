@@ -166,7 +166,7 @@ const settingsSlice = createSlice({
         state.isLoading = false;
 
         state.suppliers = state.suppliers.filter(
-          (supplier) => supplier.supplier_id !== action.payload.supplier_id
+          (supplier) => supplier.id !== action.payload.supplier_id
         );
       })
       .addCase(deleteSupplier.rejected, handleRejected)
