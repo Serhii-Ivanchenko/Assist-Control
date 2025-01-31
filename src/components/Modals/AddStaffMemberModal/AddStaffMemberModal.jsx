@@ -222,12 +222,9 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     amount: employee.amount || 0.0,
     sparesAmount: employee.sparesAmount || 0.0,
     sparesPrice: employee.sparesPrice || 0.0,
-    // profit: 0.0,
+    profit: 0.0,
     // status: employee.status || 1,
-    // schedule: {
-    //   monday: "9:00-18:00",
-    //   tuesday: "9:00-18:00",
-    // },
+    schedule: employee.schedule || [],
     selectedPages: [],
     files: {
       passport: employee.passport || passportImg,
@@ -240,7 +237,17 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       agreement: employee.agreement || agreementFile,
       logo: photo,
     },
-    // openSchedule: true,
+    openSchedule: true,
+  };
+
+  const prepareScheduleData = (scheduleArray) => {
+    const scheduleObject = {};
+
+    scheduleArray.forEach(({ day, times }) => {
+      scheduleObject[day] = times;
+    });
+
+    return scheduleObject;
   };
 
   const handleSubmit = async (values, actions) => {
@@ -249,24 +256,6 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       : null;
 
     try {
-      // const base64Files = {};
-
-      // for (const [key, file] of Object.entries(values.files)) {
-      //   if (typeof file === "string" && file === employee[key]) {
-      //     // Якщо файл не змінювався, пропускаємо
-      //     continue;
-      //   } else if (file instanceof Blob) {
-      //     // Якщо це новий файл, конвертуємо його у Base64
-      //     base64Files[key] = await new Promise((resolve, reject) => {
-      //       const reader = new FileReader();
-      //       reader.onload = () => resolve(reader.result);
-      //       reader.onerror = (error) => reject(error);
-      //       reader.readAsDataURL(file);
-      //     });
-      //   } else {
-      //     base64Files[key] = null;
-      //   }
-      // }
       const base64Files = {};
 
       for (const [key, file] of Object.entries(values.files)) {
@@ -298,6 +287,9 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
         ...values,
         ...base64Files,
         birthday: dateOnly,
+        schedule: Array.isArray(values.schedule)
+          ? prepareScheduleData(values.schedule)
+          : values.schedule,
         files: undefined,
       };
 
@@ -927,7 +919,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                 <label className={css.scheduleLabel}>
                   <Field
                     type="checkbox"
-                    name="schedule"
+                    name="openSchedule"
                     className={css.checkbox}
                   />
                   <span className={css.checkboxSpan}>
@@ -936,7 +928,10 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                   Графік роботи
                 </label>
                 <AnimatedContent>
-                  <ScheduleTable isEditing={true} />
+                  <ScheduleTable
+                    isEditing={true}
+                    activePeriods={values.schedule}
+                  />
                 </AnimatedContent>
               </div>
             </div>
