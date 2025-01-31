@@ -34,7 +34,9 @@ import AddNewClientModal from "../Modals/AddNewClientModal/AddNewClientModal.jsx
 import ClientOrganizationInfo from "../Modals/ClientInfo/ClientOrganizationInfo/ClientOrganizationInfo.jsx";
 import ClientPersonInfo from "../Modals/ClientInfo/ClientPersonInfo/ClientPersonInfo.jsx";
 
-export default function ClientInfo({ clientInfo }) {
+export default function ClientInfo({ clientInfo,car }) {
+  console.log(car);
+  
   // Client
   const client = clientInfo.client;
 
@@ -166,7 +168,6 @@ export default function ClientInfo({ clientInfo }) {
             <div className={css.ratingAndMoney}>
               <RatingStars
                 rating={clientRating}
-                clientInfo={true}
                 ratingGap={css.rating}
               />
               <div className={css.moneyBox}>

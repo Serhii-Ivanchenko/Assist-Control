@@ -82,15 +82,15 @@
   max-width: 425px;
 }
 
-.popupContainer {
-  position: absolute;
-  top: -10px;
-  left: -70px;
-  z-index: 10;
+/* .popupContainer {
+  position: relative;
+  /* top: -10px;
+  left: -70px; */
+  /* z-index: 10;
   background: var(--bg-input);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
-}
+} */
 
 .btn {
   cursor: pointer;
@@ -98,6 +98,7 @@
   align-items: center;
   background: transparent;
   border: none;
+  position: relative;
 }
 
 .dotsIcon {

@@ -1,14 +1,14 @@
 import { useFormikContext } from "formik";
 import { useEffect, useState } from "react";
-import css from "./AnimatedContent.module.css"
+import css from "./AnimatedContent.module.css";
 
-export default function AnimatedContent ({ children })  {
+export default function AnimatedContent({ children }) {
   const { values } = useFormikContext(); // Отримуємо доступ до values із Formik
   const [animationInProgress, setAnimationInProgress] = useState(false);
   const [animateOnMount, setAnimateOnMount] = useState(false);
 
   useEffect(() => {
-    if (values.schedule) {
+    if (values.openSchedule) {
       setAnimationInProgress(true); // Додаємо в DOM
       setTimeout(() => setAnimateOnMount(true), 10); // Активуємо анімацію
     } else {
@@ -16,7 +16,7 @@ export default function AnimatedContent ({ children })  {
       const timeout = setTimeout(() => setAnimationInProgress(false), 300); // Видаляємо з DOM після завершення
       return () => clearTimeout(timeout);
     }
-  }, [values.schedule]);
+  }, [values.openSchedule]);
 
   return (
     animationInProgress && (
@@ -32,4 +32,4 @@ export default function AnimatedContent ({ children })  {
       </div>
     )
   );
-};
+}

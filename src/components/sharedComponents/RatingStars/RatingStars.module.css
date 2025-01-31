@@ -29,29 +29,28 @@
 }
 
 .halfStar {
-  display: flex;
-  /* position: relative; */
-  width: 14.5px;
-  height: 16.5px; /* змінила висоту, щоб половинчаста зірка не скакала*/
-  transform: scale(1.1);
+  display: inline-block;
+  position: relative;
 }
 
 .halfFilled {
   position: absolute;
-  top: -1px;
+  top: 0;
   left: 0;
-  color: var(--star-orange);
+  width: 50%;
+  overflow: hidden;
+}
+
+.halfFilled svg {
   width: 14.5px;
   height: 14.5px;
-  clip-path: inset(0 50% 0 0);
+  transform: scale(1.1);
+  color: var(--star-orange);
 }
 
 .halfEmpty {
-  position: absolute;
-  top: -1px;
-  left: 0;
-  color: var(--star-white);
   width: 14.5px;
   height: 14.5px;
-  clip-path: inset(0 0 0 50%);
+  transform: scale(1.1);
+  color: var(--star-white);
 }

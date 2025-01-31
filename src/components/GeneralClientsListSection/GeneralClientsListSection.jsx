@@ -645,7 +645,6 @@ export default function GeneralClientsListSection() {
                       <RatingStars
                         rating={item.raiting}
                         ratingGap={css.ratingGap}
-                        sizestar="13px"
                       />
                     )}
                   </div>

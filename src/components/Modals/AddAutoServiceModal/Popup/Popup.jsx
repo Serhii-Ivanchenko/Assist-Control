@@ -28,8 +28,8 @@ export default function Popup({ isOpen, onClose, buttonRef, onDelete }) {
   if (!isOpen) return null;
 
   return (
-    <button className={css.deleteBtn} onClick={onDelete} ref={popupRef}>
+    <p className={css.deleteBtn} onClick={onDelete} ref={popupRef}>
       <BsTrash size={18} /> Видалити сервіс
-    </button>
+    </p>
   );
 }

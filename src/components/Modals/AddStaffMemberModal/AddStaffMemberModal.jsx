@@ -1,15 +1,17 @@
 import DatePicker from "react-datepicker";
 import css from "./AddStaffMemberModal.module.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { BsTrash } from "react-icons/bs";
-import { BsFillCloudUploadFill } from "react-icons/bs";
-import { BsReceipt } from "react-icons/bs";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { BsCheckLg } from "react-icons/bs";
-import { BsFillCaretDownFill } from "react-icons/bs";
-import { BsCalendar2Week } from "react-icons/bs";
-import { BsFillPersonFill } from "react-icons/bs";
-import { BsKeyFill } from "react-icons/bs";
+import {
+  BsTrash,
+  BsFillCloudUploadFill,
+  BsReceipt,
+  BsThreeDotsVertical,
+  BsCheckLg,
+  BsFillCaretDownFill,
+  BsCalendar2Week,
+  BsFillPersonFill,
+  BsKeyFill,
+} from "react-icons/bs";
 import { useState } from "react";
 import avatar from "../../../assets/images/avatar_default.png";
 // import Modal from "../Modal/Modal";
@@ -39,42 +41,28 @@ import { ImFilePdf } from "react-icons/im";
 
 registerLocale("uk", uk);
 
-// const convertFileToBase64 = (file) => {
-//   return new Promise((resolve, reject) => {
-//     if (!(file instanceof Blob)) {
-//       reject(new Error("Invalid file type. Expected Blob or File."));
-//       return;
-//     }
-//     const reader = new FileReader();
-//     reader.onload = () => resolve(reader.result);
-//     reader.onerror = (error) => reject(error);
-//     reader.readAsDataURL(file);
-//   });
-// };
-
 const positionOptions = [
   { value: "Механік", label: "Механік" },
   { value: "Кухар", label: "Кухар" },
   { value: "Працівник", label: "Працівник" },
   { value: "Власник", label: "Власник" },
-  { value: "Менеджер", label: "Мнеджер" },
-  { value: "operator", label: "operator" },
-  { value: "mech", label: "mech" },
+  // { value: "Менеджер", label: "Мнеджер" },
 ];
 
 const roleOptions = [
   { value: "Адміністратор", label: "Адміністратор" },
   { value: "Менеджер", label: "Менеджер" },
   { value: "Працівник", label: "Працівник" },
-  { value: "Керівник відділу", label: "Керівник відділу" },
-  { value: "operator", label: "operator" },
-  { value: "mech", label: "mech" },
+  // { value: "Керівник відділу", label: "Керівник відділу" },
 ];
 
 export default function AddStaffMemberModal({ onClose, employeeInfo }) {
+  const [employee, setEmployee] = useState(employeeInfo || {});
   const [isDateOpen, setDateOpen] = useState(false);
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
-  const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState(
+    employee.logo ? `${employee.logo}?t=${Date.now()}` : avatar
+  );
   const [passportImg, setPassportImg] = useState(null);
   const [itnImg, setItnImg] = useState(null);
   const [diplomaImg, setDiplomaImg] = useState(null);
@@ -82,16 +70,9 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
   const [contractFile, setContractFile] = useState(null);
   const [agreementFile, setAgreementFile] = useState(null);
   const [employmentFile, setEmploymentFile] = useState(null);
-  const [employee, setEmployee] = useState(employeeInfo || {});
   const [laborDoc, setLaborDoc] = useState(null);
   const [showLoginWarning, setShowLoginWarning] = useState(false);
   const [phone, setPhone] = useState("");
-  // const [logo, setLogo] = useState(null); // стан для прев'ю лого
-  // const [logoBase64, setLogoBase64] = useState(null); // стан, куди записується лого в base64
-
-  const buttonRefs = useRef([]);
-  const fileInputRef = useRef(null);
-  const dispatch = useDispatch();
 
   const Validation = Yup.object().shape({
     name: Yup.string()
@@ -130,6 +111,23 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     profit: Yup.number(),
     // schedule: Yup.string(),
   });
+
+  // !Для розкладу start
+
+  // Парсимо розклад для initialValues, якщо він є або передаємо туди порожній масив
+  const parsedSchedule = employee.schedule ? JSON.parse(employee.schedule) : [];
+  const [isEditingSchedule, setIsEditingSchedule] = useState(false);
+  const detailsRef = useRef();
+
+  // !Для розкладу end
+
+  const handleEditToggle = async (event) => {
+    setIsEditingSchedule((prev) => !prev);
+  };
+
+  const buttonRefs = useRef([]);
+  const fileInputRef = useRef(null);
+  const dispatch = useDispatch();
 
   const handleDateButtonClick = () => setDateOpen((prev) => !prev);
 
@@ -221,40 +219,25 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const baseUrl = "https://aps.assist.cam"; // Замість цього вкажіть свій базовий URL
-
-  //   // Використовуємо fetch для отримання зображення
-  //   fetch(`${baseUrl}/${employee.logo}`)
-  //     .then((response) => response.blob()) // Отримуємо файл як Blob
-  //     .then((blob) => {
-  //       const objectURL = URL.createObjectURL(blob); // Створюємо тимчасовий URL
-  //       setPhoto(objectURL); // Зберігаємо URL в стан
-  //     })
-  //     .catch((error) =>
-  //       console.error("Помилка при завантаженні файлу:", error)
-  //     );
-  // }, [employee.logo]);
-
   const initialValues = {
     name: employee.name || "",
     phone: employee.phone || phone,
-    address: employee.address || "м. Київ, вул. Шевченка, 1",
+    address: employee.address || "",
     birthday: employee.birthday || new Date(),
     position: employee.position || "Механік",
     role: employee.role || "Працівник",
-    email: employee.email || "ivan.ivanov@example.com",
+    email: employee.email || "",
     login: employee.login || "",
     password: employee.password || "",
     period: "",
-    rate: employee.rate || 100.0,
-    minRate: employee.minRate || 100.0,
-    amount: employee.amount || 100.0,
-    sparesAmount: employee.sparesAmount || 100.0,
-    sparesPrice: employee.sparesPrice || 100.0,
-    // profit: 0.0,
-    status: employee.status || 1,
-    // schedule: { Понеділок: "9:00-17:00", Вівторок: "9:00-17:00" },
+    rate: employee.rate || 0.0,
+    minRate: employee.minRate || 0.0,
+    amount: employee.amount || 0.0,
+    sparesAmount: employee.sparesAmount || 0.0,
+    sparesPrice: employee.sparesPrice || 0.0,
+    profit: 0.0,
+    // status: employee.status || 1,
+    schedule: parsedSchedule.days,
     selectedPages: [],
     files: {
       passport: employee.passport || passportImg,
@@ -265,35 +248,16 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       contract: employee.contract || contractFile,
       employment: employee.employment || employmentFile,
       agreement: employee.agreement || agreementFile,
-      logo: employee.logo || photo,
+      logo: photo,
     },
-    // openSchedule: true,
+    openSchedule: false,
   };
 
   const handleSubmit = async (values, actions) => {
     const dateOnly = values.birthday
       ? new Date(values.birthday).toLocaleDateString("en-CA")
       : null;
-
     try {
-      // const base64Files = {};
-
-      // for (const [key, file] of Object.entries(values.files)) {
-      //   if (typeof file === "string" && file === employee[key]) {
-      //     // Якщо файл не змінювався, пропускаємо
-      //     continue;
-      //   } else if (file instanceof Blob) {
-      //     // Якщо це новий файл, конвертуємо його у Base64
-      //     base64Files[key] = await new Promise((resolve, reject) => {
-      //       const reader = new FileReader();
-      //       reader.onload = () => resolve(reader.result);
-      //       reader.onerror = (error) => reject(error);
-      //       reader.readAsDataURL(file);
-      //     });
-      //   } else {
-      //     base64Files[key] = null;
-      //   }
-      // }
       const base64Files = {};
 
       for (const [key, file] of Object.entries(values.files)) {
@@ -321,10 +285,18 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
 
       console.log("Base64 files:", base64Files);
 
+      // генерація масиву розкладу для відправки
+      const scheduleToSend = detailsRef.current.generateBackendData();
+      console.log("scheduleToSend during submit", scheduleToSend);
+
       const employeeData = {
         ...values,
         ...base64Files,
         birthday: dateOnly,
+        // schedule: Array.isArray(values.schedule)
+        //   ? prepareScheduleData(values.schedule)
+        //   : values.schedule,
+        schedule: scheduleToSend,
         files: undefined,
       };
 
@@ -352,7 +324,6 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
           });
           onClose();
           dispatch(getAllEmployees());
-
         }
         // onClose();
         console.log("Після оновлення:", employeeData);
@@ -379,8 +350,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
           onClose();
         }
       }
-      // console.log("Після відправкою:", employeeData, values.files);
-      // console.log(employeeData);
+
       actions.resetForm();
       onClose();
     } catch (error) {
@@ -455,7 +425,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                     />
                     {/* <div className={css.phoneImgBox}> */}
                     <img
-                      src={employee.logo || photo || avatar}
+                      src={photo || avatar}
                       alt=""
                       className={css.phoneImg}
                     />
@@ -751,6 +721,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         fieldname="files.contract"
                         setFieldValue={setFieldValue}
                         onClose={() => toggleSettings(0)}
+                        file={`${employee.contract}?t=${Date.now()}`}
                         // buttonRef={buttonRefs.current[0]}
                         // onClose={closePopover}
                       />
@@ -787,6 +758,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         fieldname="files.employment"
                         setFieldValue={setFieldValue}
                         onClose={() => toggleSettings(1)}
+                        file={`${employee.employment}?t=${Date.now()}`}
+
                         // buttonRef={buttonRefs.current[1]}
                         // onClose={closePopover}
                       />
@@ -823,6 +796,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                         fieldname="files.agreement"
                         setFieldValue={setFieldValue}
                         onClose={() => toggleSettings(2)}
+                        file={`${employee.agreement}?t=${Date.now()}`}
+
                         // buttonRef={buttonRefs.current[2]}
                         // onClose={closePopover}
                       />
@@ -950,8 +925,9 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                 <label className={css.scheduleLabel}>
                   <Field
                     type="checkbox"
-                    name="schedule"
+                    name="openSchedule"
                     className={css.checkbox}
+                    onClick={handleEditToggle}
                   />
                   <span className={css.checkboxSpan}>
                     <BsCheckLg className={css.cbIcon} />
@@ -959,7 +935,11 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
                   Графік роботи
                 </label>
                 <AnimatedContent>
-                  <ScheduleTable isEditing={true} />
+                  <ScheduleTable
+                    ref={detailsRef}
+                    isEditing={isEditingSchedule}
+                    activePeriods={initialValues.schedule}
+                  />
                 </AnimatedContent>
               </div>
             </div>
