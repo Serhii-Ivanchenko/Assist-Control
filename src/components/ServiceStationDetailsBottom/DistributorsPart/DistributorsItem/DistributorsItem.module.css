@@ -13,7 +13,7 @@
 
 .imgContainer {
   width: 96px;
-  height: 37.069px;
+  min-height: 37.069px;
   flex-shrink: 0;
   margin-right: 25px;
 }

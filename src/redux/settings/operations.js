@@ -223,10 +223,10 @@ export const updateSupplierData = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { supplier_id, logo, ...dataToUpdate } = employeeDataToUpdate;
+      const { supplier_id, ...dataToUpdate } = employeeDataToUpdate;
       // Create the payload to send in the request
       const payload = {
-        logo,
+        // logo,
         ...dataToUpdate,
         // file: base64Logo,
       };
@@ -297,7 +297,7 @@ export const updateSupplierStatus = createAsyncThunk(
     try {
       const response = await axiosInstance.patch(
         `/set/suppliers/${supplier_id}/status?status=${newStatus}`,
-        null,
+        {},
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -343,18 +343,18 @@ export const getSupplierData = createAsyncThunk(
 export const getAllSuppliers = createAsyncThunk(
   "settings/getAllSuppliers",
   async (_, thunkAPI) => {
-    // const state = thunkAPI.getState();
-    // const serviceId = state.service.selectedServiceInSettingsId;
+    const state = thunkAPI.getState();
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.get(`/set/suppliers/`, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
-          // "company-id": serviceId,
-          "company-id": "1",
+          "company-id": serviceId,
+          // "company-id": "1",
           "Content-Type": "application/json",
         },
       });
-      // console.log("getAllSuppliers", response.data);
+      console.log("getAllSuppliers", response.data);
 
       return response.data;
     } catch (error) {

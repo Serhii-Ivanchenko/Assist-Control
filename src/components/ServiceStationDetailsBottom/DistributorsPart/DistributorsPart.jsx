@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DistributorsList from "./DistributorsList/DistributorsList";
 import Modal from "../../Modals/Modal/Modal";
@@ -7,11 +7,9 @@ import { BsTruck } from "react-icons/bs";
 import {
   deleteSupplier,
   getAllSuppliers,
-  getSupplierData,
 } from "../../../redux/settings/operations";
 import {
   selectAllSuppliers,
-  selectCurrentSupplier,
   selectIsModalOpen,
 } from "../../../redux/settings/selectors";
 import { openModal, closeModal } from "../../../redux/settings/slice";
@@ -20,8 +18,9 @@ import styles from "./DistributorsPart.module.css";
 function DistributorsPart() {
   const dispatch = useDispatch();
   const distributors = useSelector(selectAllSuppliers);
-  const currentDistributor = useSelector(selectCurrentSupplier);
   const isModalOpen = useSelector(selectIsModalOpen);
+
+  const [selectedDistributor, setSelectedDistributor] = useState(null);
 
   useEffect(() => {
     // Викликається лише один раз після монтування компонента
@@ -31,26 +30,35 @@ function DistributorsPart() {
   }, [dispatch, distributors.length]);
 
   const handleEditDistributor = useCallback(
-    (currentDistributor) => {
-      dispatch(getSupplierData(currentDistributor.id));
-      dispatch(openModal(currentDistributor));
+    (distributor) => {
+      setSelectedDistributor(distributor);
+      dispatch(openModal());
     },
     [dispatch]
   );
 
   const handleDeleteDistributor = useCallback(
-    (currentDistributor) => {
-      dispatch(deleteSupplier(currentDistributor.id));
+    (currentDistributorId) => {
+      dispatch(deleteSupplier(currentDistributorId))
+        .unwrap()
+        .then(() => {
+          dispatch(getAllSuppliers());
+        })
+        .catch((error) => {
+          console.error("Error deleting supplier:", error);
+        });
     },
     [dispatch]
   );
 
   const handleAddDistributor = () => {
-    dispatch(openModal(null));
+    setSelectedDistributor(null);
+    dispatch(openModal());
   };
 
   const closeModalHandler = () => {
     dispatch(closeModal());
+    setSelectedDistributor(null);
   };
 
   const memoizedDistributorsList = useMemo(
@@ -76,11 +84,11 @@ function DistributorsPart() {
         Додати постачальника
       </button>
 
-      {isModalOpen && (
+      {isModalOpen && selectedDistributor && (
         <Modal isOpen={isModalOpen} onClose={closeModalHandler}>
           <DistributorsModal
             onClose={closeModalHandler}
-            distributorData={currentDistributor}
+            distributorData={selectedDistributor}
           />
         </Modal>
       )}

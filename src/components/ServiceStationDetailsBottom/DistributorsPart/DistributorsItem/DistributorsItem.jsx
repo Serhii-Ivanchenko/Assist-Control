@@ -1,11 +1,7 @@
-import { useState, useMemo, useCallback } from "react";
+import { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getSupplierData,
-  deleteSupplier,
-  updateSupplierStatus,
-} from "../../../../redux/settings/operations.js";
-import { openModal, closeModal } from "../../../../redux/settings/slice.js";
+import { updateSupplierStatus } from "../../../../redux/settings/operations.js";
+import { closeModal } from "../../../../redux/settings/slice.js";
 import { selectIsModalOpen } from "../../../../redux/settings/selectors.js";
 import SwitchableBtns from "../../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
 import RatingStars from "../../../sharedComponents/RatingStars/RatingStars.jsx";
@@ -15,28 +11,13 @@ import Modal from "../../../Modals/Modal/Modal.jsx";
 import styles from "./DistributorsItem.module.css";
 import toast from "react-hot-toast";
 
-function DistributorsItem({ item }) {
+function DistributorsItem({ item, onEdit, onDelete }) {
   const dispatch = useDispatch();
-  const [isModalReady, setIsModalReady] = useState(false);
   const isModalOpen = useSelector(selectIsModalOpen);
-
-  const openModalHandler = useCallback(() => {
-    try {
-      dispatch(getSupplierData(item.id));
-      setIsModalReady(true);
-    } catch (err) {
-      console.log("error in openModalHandler", err);
-    }
-    dispatch(openModal(item));
-  }, [dispatch, item]);
 
   const closeModalHandler = () => {
     dispatch(closeModal());
   };
-
-  const handleDelete = useCallback(() => {
-    dispatch(deleteSupplier(item.id));
-  }, [dispatch, item.id]);
 
   const handleStatusToggle = useCallback((id, currentStatus) => {
     const newStatus = currentStatus === 1 ? 0 : 1;
@@ -80,12 +61,12 @@ function DistributorsItem({ item }) {
     () => (
       <SwitchableBtns
         isDisabled={item.status}
-        onEdit={openModalHandler}
-        onDelete={handleDelete}
+        onEdit={() => onEdit(item)}
+        onDelete={() => onDelete(item.id)}
         onToggleDisable={() => handleStatusToggle(item.id, item.status)}
       />
     ),
-    [handleDelete, handleStatusToggle, item.id, item.status, openModalHandler]
+    [handleStatusToggle, item, onDelete, onEdit]
   );
 
   return (
@@ -110,7 +91,7 @@ function DistributorsItem({ item }) {
         </div>
       </div>
       <div className={styles.btnsContainer}>{statusButton}</div>
-      {isModalReady && (
+      {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModalHandler}>
           <DistributorsModal
             onClose={closeModalHandler}

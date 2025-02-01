@@ -28,7 +28,7 @@ function DistributorsModal({
   const [distributor, setDistributor] = useState(distributorData || {});
   const [isEditing, setIsEditing] = useState(false);
   const [editableName, setEditableName] = useState(distributor?.name || "");
-  const [logoPreview, setLogoPreview] = useState(distributor.logo || null);
+  const [logoPreview, setLogoPreview] = useState(distributor.logo);
   const [logoBase64, setLogoBase64] = useState(null);
 
   const buttonRef = useRef(null);
@@ -54,7 +54,11 @@ function DistributorsModal({
     if (distributorData) {
       setDistributor(distributorData);
       setEditableName(distributorData?.name || "");
-      setLogoPreview(distributorData.logo || null);
+      setLogoPreview(distributorData.logo);
+    } else {
+      setDistributor({});
+      setEditableName("");
+      setLogoPreview(null);
     }
   }, [distributorData]);
 
@@ -94,11 +98,16 @@ function DistributorsModal({
         name: distributor.name || editableName,
         ...authData,
         ...distributorsInfoData,
-        logo: logoBase64, // Надсилаємо Base64
-        deliverySchedule: scheduleToSend, // Перевірка наявності
+        logo: logoBase64
+          ? logoBase64 // Якщо є нове фото, передаємо його
+          : distributor.logo?.startsWith("http")
+          ? undefined // Якщо старий URL, не передавати нічого
+          : distributor.logo, // Якщо вже є локальне значення, залишаємо його
+        deliverySchedule: scheduleToSend,
       };
 
       console.log("Updated Payload:", dataToUpdate);
+      console.log("logoBase64", logoBase64);
       console.log("JSON.stringify", JSON.stringify(dataToUpdate));
       console.log("supplier_id", distributor.id);
 
@@ -109,6 +118,10 @@ function DistributorsModal({
           updateSupplierData({ ...dataToUpdate, supplier_id: distributor.id })
         ).unwrap();
         console.log("Оновлення постачальника успішне:", result);
+        console.log(
+          `Оновлення постачальника ${distributor.id}:`,
+          result.payload
+        );
       } else {
         if (
           !distributorsInfoData.address ||
@@ -132,7 +145,7 @@ function DistributorsModal({
       console.error("Error response:", error.response?.data);
       console.error("Error message:", error.message);
       console.error(
-        "Помилка під час береження:",
+        "Помилка під час збереження:",
         error.response?.data || error.message
       );
     }
