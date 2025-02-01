@@ -18,13 +18,7 @@ const ScheduleAccordion = forwardRef(({ deliveryData }, ref) => {
 
   const handleEditToggle = (_e, expanded) => {
     setIsEditingSchedule((prev) => !prev);
-
     setIsExpanded(expanded);
-    if (expanded) {
-      // setIsEditing(true);
-    } else {
-      // setIsEditing(false);
-    }
   };
 
   return (

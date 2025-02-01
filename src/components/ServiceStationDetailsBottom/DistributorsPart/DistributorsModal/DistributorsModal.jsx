@@ -6,29 +6,28 @@ import AuthForm from "./AuthForm/AuthForm";
 import StatusToggle from "../../../sharedComponents/StatusToggle/StatusToggle";
 import PopupConnection from "./PopupConnection/PopupConnection";
 import DistributorsInfoForm from "./DistributorsInfoForm";
-// import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
+import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
 import { RiSave3Fill } from "react-icons/ri";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import styles from "./DistributorsModal.module.css";
 import {
   updateSupplierData,
   createSupplier,
+  getAllSuppliers,
 } from "../../../../redux/settings/operations";
 import { useDispatch } from "react-redux";
 import { fileToBase64 } from "../../../../utils/convertInBase64";
+import toast from "react-hot-toast";
 
-function DistributorsModal({
-  onClose,
-  distributorData,
-  onToggleDisable,
-  updateDistributors,
-}) {
+function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
   const dispatch = useDispatch();
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [distributor, setDistributor] = useState(distributorData || {});
   const [isEditing, setIsEditing] = useState(false);
   const [editableName, setEditableName] = useState(distributor?.name || "");
-  const [logoPreview, setLogoPreview] = useState(distributor.logo);
+  const [logoPreview, setLogoPreview] = useState(
+    distributor?.logo ? `${distributor.logo}?t=${Date.now()}` : null
+  );
   const [logoBase64, setLogoBase64] = useState(null);
 
   const buttonRef = useRef(null);
@@ -64,8 +63,8 @@ function DistributorsModal({
 
   const handleLogoUpload = async (e) => {
     const file = e.target.files[0];
+    setLogoPreview(URL.createObjectURL(file));
     if (file) {
-      setLogoPreview(URL.createObjectURL(file));
       const base64 = await fileToBase64(file);
       setLogoBase64(base64);
     }
@@ -89,8 +88,8 @@ function DistributorsModal({
       const distributorsInfoData = formRef.current?.values || {};
 
       // генерація масиву розкладу для відправки
-      // const scheduleToSend = scheduleRef.current.generateBackendData();
-      // console.log("scheduleToSend during submit", scheduleToSend);
+      const scheduleToSend = scheduleRef.current.generateBackendData();
+      console.log("scheduleToSend during submit", scheduleToSend);
 
       const dataToUpdate = {
         supplier_id: distributor.id || "",
@@ -98,47 +97,81 @@ function DistributorsModal({
         name: distributor.name || editableName,
         ...authData,
         ...distributorsInfoData,
-        logo: logoBase64
-          ? logoBase64 // Якщо є нове фото, передаємо його
-          : distributor.logo?.startsWith("http")
-          ? undefined // Якщо старий URL, не передавати нічого
-          : distributor.logo, // Якщо вже є локальне значення, залишаємо його
-        // deliverySchedule: scheduleToSend,
+        logo: logoBase64,
+        // ? logoBase64 // Якщо є нове фото, передаємо його
+        // : distributor.logo?.startsWith("https")
+        // ? undefined // Якщо старий URL, не передавати нічого
+        // : distributor.logo, // Якщо вже є локальне значення, залишаємо його
+        deliverySchedule: scheduleToSend,
       };
 
       console.log("Updated Payload:", dataToUpdate);
-      console.log("logoBase64", logoBase64);
-      console.log("JSON.stringify", JSON.stringify(dataToUpdate));
-      console.log("supplier_id", distributor.id);
-
-      let result;
+      // console.log("logoBase64", logoBase64);
+      // console.log("JSON.stringify", JSON.stringify(dataToUpdate));
+      // console.log("supplier_id", distributor.id);
 
       if (distributor.id) {
-        result = await dispatch(
-          updateSupplierData({ ...dataToUpdate, supplier_id: distributor.id })
-        ).unwrap();
-        console.log("Оновлення постачальника успішне:", result);
-        console.log(
-          `Оновлення постачальника ${distributor.id}:`,
-          result.payload
-        );
+        await dispatch(
+          // updateSupplierData({ ...dataToUpdate, supplier_id: distributor.id })
+          updateSupplierData(dataToUpdate)
+        )
+          .unwrap()
+          .then(() => {
+            toast.success("Постачальника успішно оновлено :)", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+            dispatch(getAllSuppliers());
+          })
+          .catch((error) => {
+            console.error("Error updating user data:", error);
+            toast.error("Щось пішло не так :(", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+          });
       } else {
-        if (
-          !distributorsInfoData.address ||
-          !distributorsInfoData.managerPhone
-        ) {
-          console.error("Обов'язкові поля не заповнені");
-          return;
-        }
-        result = await dispatch(
-          createSupplier({ supplierData: dataToUpdate })
-        ).unwrap();
-        console.log("Створення постачальника успішне:", result);
+        // if (
+        //   !distributorsInfoData.address ||
+        //   !distributorsInfoData.managerPhone
+        // ) {
+        //   console.error("Обов'язкові поля не заповнені");
+        //   return;
+        // }
+        await dispatch(createSupplier(dataToUpdate))
+          .unwrap()
+          .then(() => {
+            toast.success("Постачальника успішно створено :)", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+            dispatch(getAllSuppliers());
+          })
+          .catch((error) => {
+            console.error("Error updating user data:", error);
+            toast.error("Щось пішло не так :(", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+          });
       }
 
-      if (updateDistributors) {
-        updateDistributors(result.data);
-      }
       onClose();
     } catch (error) {
       console.error("Error details:", error);
@@ -241,7 +274,11 @@ function DistributorsModal({
           <div className={styles.imgWrapper}>
             {logoPreview ? (
               <div className={styles.uploadLogoContainer}>
-                <img className={styles.img} src={logoPreview} alt="Логотип" />
+                <img
+                  className={styles.img}
+                  src={logoPreview || distributor?.logo}
+                  alt="Логотип"
+                />
                 <label className={styles.uploadLabel}>
                   <BsFillCloudUploadFill className={styles.downloadIcon} />
                   Завантажити лого
@@ -286,7 +323,10 @@ function DistributorsModal({
         </div>
       </div>
       <div className={styles.scheduleContainer}>
-        {/* <ScheduleAccordion ref={scheduleRef} deliveryData={parsedSchedule} /> */}
+        <ScheduleAccordion
+          ref={scheduleRef}
+          deliveryData={parsedSchedule.days}
+        />
       </div>
       <div className={styles.btnGroup}>
         <button

@@ -1,12 +1,12 @@
 // Перетворення файлів у Base64
 
 export const fileToBase64 = (file) => {
+  if (!(file instanceof Blob)) {
+    // reject(new Error("Invalid file type. Expected a Blob or File."));
+    return null;
+  }
+  
   return new Promise((resolve, reject) => {
-    if (!(file instanceof Blob)) {
-      reject(new Error("Invalid file type. Expected a Blob or File."));
-      return;
-    }
-
     const reader = new FileReader();
     reader.onload = () => {
       try {

@@ -57,12 +57,12 @@ const handleRejected = (state, action) => {
 };
 
 // універсальна функція для оновлення даних
-const updateItem = (items, payload, key = "id") => {
-  const index = items.findIndex((item) => item[key] === payload[key]);
-  if (index !== -1) {
-    items[index] = { ...items[index], ...payload };
-  }
-};
+// const updateItem = (items, payload, key = "id") => {
+//   const index = items.findIndex((item) => item[key] === payload[key]);
+//   if (index !== -1) {
+//     items[index] = { ...items[index], ...payload };
+//   }
+// };
 
 const settingsSlice = createSlice({
   name: "settings",
@@ -144,11 +144,11 @@ const settingsSlice = createSlice({
       .addCase(createSupplier.pending, handlePending)
       .addCase(createSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
-        if (action.payload.supplier_id) {
-          state.suppliers.push(action.payload);
-        } else {
-          console.error("Supplier ID is undefined:", action.payload);
-        }
+        // if (action.payload.supplier_id) {
+        //   state.suppliers.push(action.meta.arg);
+        // } else {
+        //   console.error("Supplier ID is undefined:", action.payload);
+        // }
       })
       .addCase(createSupplier.rejected, handleRejected)
 
@@ -156,15 +156,15 @@ const settingsSlice = createSlice({
       .addCase(updateSupplierData.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        // функція для оновлення даних по постачальнику
-        updateItem(state.suppliers, action.meta.arg, "supplier_id");
+        // // функція для оновлення даних по постачальнику
+        // updateItem(state.suppliers, action.meta.arg, "supplier_id");
       })
       .addCase(updateSupplierData.rejected, handleRejected)
 
       .addCase(deleteSupplier.pending, handlePending)
       .addCase(deleteSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log("Deleted supplier:", action.payload);
+        // console.log("Deleted supplier:", action.payload);
         state.suppliers = state.suppliers.filter(
           (supplier) => supplier.id !== action.payload.supplier_id
         );

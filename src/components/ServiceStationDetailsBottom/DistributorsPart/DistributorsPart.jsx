@@ -52,7 +52,7 @@ function DistributorsPart() {
   );
 
   const handleAddDistributor = () => {
-    setSelectedDistributor(null);
+    // setSelectedDistributor(null);
     dispatch(openModal());
   };
 
