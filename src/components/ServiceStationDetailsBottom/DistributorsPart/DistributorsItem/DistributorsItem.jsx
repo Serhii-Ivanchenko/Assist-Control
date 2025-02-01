@@ -46,23 +46,23 @@ function DistributorsItem({ item, onEdit, onDelete }) {
       });
   });
 
-  function formatPhoneNumber(phone) {
-    const cleaned = phone.replace(/\D/g, "");
-    if (cleaned.length !== 12) return phone;
+  // function formatPhoneNumber(phone) {
+  //   const cleaned = phone.replace(/\D/g, "");
+  //   if (cleaned.length !== 12) return phone;
 
-    const match = cleaned.match(/(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})/);
-    if (match) {
-      return `+${match[1]} (${match[2]}) ${match[3]} ${match[4]} ${match[5]}`;
-    }
+  //   const match = cleaned.match(/(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})/);
+  //   if (match) {
+  //     return `+${match[1]} (${match[2]}) ${match[3]} ${match[4]} ${match[5]}`;
+  //   }
 
-    return phone;
-  }
+  //   return phone;
+  // }
   const statusButton = useMemo(
     () => (
       <SwitchableBtns
         isDisabled={item.status}
         onEdit={() => onEdit(item)}
-        onDelete={() => onDelete(item.id)}
+        onDelete={() => onDelete(item)}
         onToggleDisable={() => handleStatusToggle(item.id, item.status)}
       />
     ),
@@ -85,7 +85,8 @@ function DistributorsItem({ item, onEdit, onDelete }) {
         <RatingStars rating={item.rating} className={styles.rating} />
         <div className={styles.contactsContainer}>
           <a className={styles.phone} href={`tel:${item.managerPhone}`}>
-            {formatPhoneNumber(item.managerPhone)}
+            {/* {formatPhoneNumber(item.managerPhone)} */}
+            {item.managerPhone}
           </a>
           <p className={styles.subText}>{item.managerName}</p>
         </div>

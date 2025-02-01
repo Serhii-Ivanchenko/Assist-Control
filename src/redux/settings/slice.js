@@ -164,7 +164,7 @@ const settingsSlice = createSlice({
       .addCase(deleteSupplier.pending, handlePending)
       .addCase(deleteSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
-
+        console.log("Deleted supplier:", action.payload);
         state.suppliers = state.suppliers.filter(
           (supplier) => supplier.id !== action.payload.supplier_id
         );
@@ -207,7 +207,7 @@ const settingsSlice = createSlice({
       .addCase(updateWorkSchedule.pending, handlePending)
       .addCase(updateWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.schedule = action.meta.arg.days ;
+        state.schedule = action.meta.arg.days;
       })
       .addCase(updateWorkSchedule.rejected, handleRejected)
 

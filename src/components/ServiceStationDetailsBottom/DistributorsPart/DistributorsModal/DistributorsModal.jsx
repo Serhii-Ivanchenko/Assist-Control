@@ -6,7 +6,7 @@ import AuthForm from "./AuthForm/AuthForm";
 import StatusToggle from "../../../sharedComponents/StatusToggle/StatusToggle";
 import PopupConnection from "./PopupConnection/PopupConnection";
 import DistributorsInfoForm from "./DistributorsInfoForm";
-import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
+// import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
 import { RiSave3Fill } from "react-icons/ri";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import styles from "./DistributorsModal.module.css";
@@ -89,8 +89,8 @@ function DistributorsModal({
       const distributorsInfoData = formRef.current?.values || {};
 
       // генерація масиву розкладу для відправки
-      const scheduleToSend = scheduleRef.current.generateBackendData();
-      console.log("scheduleToSend during submit", scheduleToSend);
+      // const scheduleToSend = scheduleRef.current.generateBackendData();
+      // console.log("scheduleToSend during submit", scheduleToSend);
 
       const dataToUpdate = {
         supplier_id: distributor.id || "",
@@ -103,7 +103,7 @@ function DistributorsModal({
           : distributor.logo?.startsWith("http")
           ? undefined // Якщо старий URL, не передавати нічого
           : distributor.logo, // Якщо вже є локальне значення, залишаємо його
-        deliverySchedule: scheduleToSend,
+        // deliverySchedule: scheduleToSend,
       };
 
       console.log("Updated Payload:", dataToUpdate);
@@ -286,7 +286,7 @@ function DistributorsModal({
         </div>
       </div>
       <div className={styles.scheduleContainer}>
-        <ScheduleAccordion ref={scheduleRef} deliveryData={parsedSchedule} />
+        {/* <ScheduleAccordion ref={scheduleRef} deliveryData={parsedSchedule} /> */}
       </div>
       <div className={styles.btnGroup}>
         <button

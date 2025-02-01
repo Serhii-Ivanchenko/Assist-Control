@@ -38,8 +38,8 @@ function DistributorsPart() {
   );
 
   const handleDeleteDistributor = useCallback(
-    (currentDistributorId) => {
-      dispatch(deleteSupplier(currentDistributorId))
+    (distributor) => {
+      dispatch(deleteSupplier(distributor.id))
         .unwrap()
         .then(() => {
           dispatch(getAllSuppliers());
@@ -84,7 +84,7 @@ function DistributorsPart() {
         Додати постачальника
       </button>
 
-      {isModalOpen && selectedDistributor && (
+      {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModalHandler}>
           <DistributorsModal
             onClose={closeModalHandler}
