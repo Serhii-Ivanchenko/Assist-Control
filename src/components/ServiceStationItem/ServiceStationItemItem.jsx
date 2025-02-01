@@ -80,7 +80,13 @@ function ServiceStationItem({ isOpen, onToggle, isActive, station }) {
               <h3 className={styles.serviceTitle}>{name}</h3>
             )} */}
 
-            <img src={station.logo} alt="Logo" className={styles.logo} />
+            {station.logo && (
+              <img
+                src={station?.logo ? `${station?.logo}?t=${Date.now()}` : null}
+                alt="Logo"
+                className={styles.logo}
+              />
+            )}
             <h3 className={styles.serviceTitle}>{station.name}</h3>
             <button className={styles.editBtn} onClick={handlePencilBtnClick}>
               {/* {isEdit ? (
