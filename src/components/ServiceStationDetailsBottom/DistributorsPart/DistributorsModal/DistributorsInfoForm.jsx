@@ -5,19 +5,19 @@ import styles from "./DistributorsModal.module.css";
 
 const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
   const initialValues = {
-    address: distributor.address || "",
-    paymentCondition: distributor.paymentCondition || "",
-    days: distributor.days || "",
-    owner: distributor.owner || "",
-    code: distributor.code || "",
-    bill: distributor.bill || "",
-    bank: distributor.bank || "",
-    bankCode: distributor.bankCode || "",
-    companyAddress: distributor.companyAddress || "",
-    managerPhone: distributor.managerPhone || "",
-    managerName: distributor.managerName || "",
-    officePhone: distributor.officePhone || "",
-    ownerPhone: distributor.ownerPhone || "",
+    address: distributor?.address || "",
+    paymentCondition: distributor?.paymentCondition || "",
+    days: distributor?.days || "",
+    owner: distributor?.owner || "",
+    code: distributor?.code || "",
+    bill: distributor?.bill || "",
+    bank: distributor?.bank || "",
+    bankCode: distributor?.bankCode || "",
+    companyAddress: distributor?.companyAddress || "",
+    managerPhone: distributor?.managerPhone || "",
+    managerName: distributor?.managerName || "",
+    officePhone: distributor?.officePhone || "",
+    ownerPhone: distributor?.ownerPhone || "",
   };
 
   const validationSchema = Yup.object({
@@ -30,14 +30,21 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     bank: Yup.string(),
     bankCode: Yup.string(),
     companyAddress: Yup.string(),
-    managerPhone: Yup.string().required("Поле обов'язкове"),
+    managerPhone: Yup.string()
+      .required("Поле обов'язкове")
+      .matches(/^\+?\d*$/, "Телефон може містити лише цифри та знак +"),
     managerName: Yup.string(),
-    officePhone: Yup.string(),
-    ownerPhone: Yup.string(),
+    officePhone: Yup.string().matches(
+      /^\+?\d*$/,
+      "Телефон може містити лише цифри та знак +"
+    ),
+    ownerPhone: Yup.string().matches(
+      /^\+?\d*$/,
+      "Телефон може містити лише цифри та знак +"
+    ),
   });
-
   const handleSubmit = (values) => {
-    console.log("Form submitted with values:", values); // Log form values here
+    console.log("Form submitted with values:", values);
     setDistributor((prev) => ({ ...prev, ...values }));
   };
 
@@ -47,6 +54,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
+      enableReinitialize={true}
     >
       {({ setFieldValue }) => (
         <Form className={styles.formContainer}>

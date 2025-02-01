@@ -207,7 +207,7 @@ export const createSupplier = createAsyncThunk(
         }
       );
       console.log("createSupplier", response.data);
-
+      console.log("Supplier ID from response:", response.data?.supplier_id);
       return response.data;
     } catch (error) {
       console.error("Error response:", error.response?.data);

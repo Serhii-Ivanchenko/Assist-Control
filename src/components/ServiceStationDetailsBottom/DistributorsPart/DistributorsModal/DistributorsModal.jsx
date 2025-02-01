@@ -36,7 +36,7 @@ function DistributorsModal({
   const authFormRef = useRef(null);
 
   console.log("distributor", distributor);
-  
+
   // !Для розкладу start
 
   // Парсимо розклад для initialValues, якщо він є або передаємо туди порожній масив
@@ -90,9 +90,10 @@ function DistributorsModal({
 
       const dataToUpdate = {
         supplier_id: distributor.id || "",
-        name: distributor?.name || editableName,
-        ...authData, // Дані з AuthForm
-        ...distributorsInfoData, // Дані з DistributorsInfoForm
+        status: distributor.status || 1,
+        name: distributor.name || editableName,
+        ...authData,
+        ...distributorsInfoData,
         logo: logoBase64, // Надсилаємо Base64
         deliverySchedule: scheduleToSend, // Перевірка наявності
       };
@@ -109,7 +110,16 @@ function DistributorsModal({
         ).unwrap();
         console.log("Оновлення постачальника успішне:", result);
       } else {
-        result = await dispatch(createSupplier(dataToUpdate)).unwrap();
+        if (
+          !distributorsInfoData.address ||
+          !distributorsInfoData.managerPhone
+        ) {
+          console.error("Обов'язкові поля не заповнені");
+          return;
+        }
+        result = await dispatch(
+          createSupplier({ supplierData: dataToUpdate })
+        ).unwrap();
         console.log("Створення постачальника успішне:", result);
       }
 
