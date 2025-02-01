@@ -84,7 +84,7 @@ const authSlice = createSlice({
           ...state.userData, // Зберігаємо поточні значення
           ...action.payload, // Додаємо нові дані
         };
-        state.userData.selectedServiceId = action.payload.services[0].id;
+        state.userData.selectedServiceId = action.payload.services[0]?.id;
         state.isLoading = false;
       })
       .addCase(getUserData.rejected, handleRejected)
