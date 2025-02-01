@@ -56,10 +56,27 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+// універсальна функція для оновлення даних
+// const updateItem = (items, payload, key = "id") => {
+//   const index = items.findIndex((item) => item[key] === payload[key]);
+//   if (index !== -1) {
+//     items[index] = { ...items[index], ...payload };
+//   }
+// };
+
 const settingsSlice = createSlice({
   name: "settings",
   initialState: initialState.settings,
-  reducers: {},
+  reducers: {
+    openModal: (state, action) => {
+      state.isModalOpen = true;
+      state.supplier = action.payload || null;
+    },
+    closeModal: (state) => {
+      state.isModalOpen = false;
+      state.supplier = null;
+    },
+  },
   extraReducers: (builder) =>
     builder
       //! EMPLOYEE
@@ -127,34 +144,29 @@ const settingsSlice = createSlice({
       .addCase(createSupplier.pending, handlePending)
       .addCase(createSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
+        // if (action.payload.supplier_id) {
+        //   state.suppliers.push(action.meta.arg);
+        // } else {
+        //   console.error("Supplier ID is undefined:", action.payload);
+        // }
       })
       .addCase(createSupplier.rejected, handleRejected)
 
       .addCase(updateSupplierData.pending, handlePending)
       .addCase(updateSupplierData.fulfilled, (state, action) => {
         state.isLoading = false;
-        const supplierToEditIndex = state.suppliers.findIndex(
-          (supplier) => supplier.supplier_id === action.payload.supplier
-        );
 
-        if (
-          // action.payload.status === 200 &&
-          supplierToEditIndex !== -1
-        ) {
-          state.suppliers[supplierToEditIndex] = {
-            ...state.suppliers[supplierToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
-        }
+        // // функція для оновлення даних по постачальнику
+        // updateItem(state.suppliers, action.meta.arg, "supplier_id");
       })
       .addCase(updateSupplierData.rejected, handleRejected)
 
       .addCase(deleteSupplier.pending, handlePending)
       .addCase(deleteSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
-
+        // console.log("Deleted supplier:", action.payload);
         state.suppliers = state.suppliers.filter(
-          (supplier) => supplier.supplier_id !== action.payload.supplier_id
+          (supplier) => supplier.id !== action.payload.supplier_id
         );
       })
       .addCase(deleteSupplier.rejected, handleRejected)
@@ -162,11 +174,12 @@ const settingsSlice = createSlice({
       .addCase(updateSupplierStatus.pending, handlePending)
       .addCase(updateSupplierStatus.fulfilled, (state, action) => {
         state.isLoading = false;
-        const supplierToEditIndex = state.employees.findIndex(
-          (supplier) => supplier.supplier_id === action.payload.supplier_id
+
+        const supplierToEditIndex = state.suppliers.findIndex(
+          (supplier) => supplier.id === action.payload.supplier_id
         );
-        state.employees[supplierToEditIndex].isDisabled =
-          action.payload.updated_fields.isDisabled;
+
+        state.suppliers[supplierToEditIndex].status = action.payload.status;
       })
       .addCase(updateSupplierStatus.rejected, handleRejected)
 
@@ -194,7 +207,7 @@ const settingsSlice = createSlice({
       .addCase(updateWorkSchedule.pending, handlePending)
       .addCase(updateWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.schedule = action.meta.arg.days ;
+        state.schedule = action.meta.arg.days;
       })
       .addCase(updateWorkSchedule.rejected, handleRejected)
 
@@ -504,5 +517,7 @@ const settingsSlice = createSlice({
       })
       .addCase(getCashRegisterData.rejected, handleRejected),
 });
+
+export const { openModal, closeModal } = settingsSlice.actions;
 
 export default settingsSlice.reducer;
