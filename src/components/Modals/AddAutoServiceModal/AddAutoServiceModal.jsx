@@ -27,7 +27,9 @@ export default function AddAutoServiceModal({
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [logo, setLogo] = useState(null);
-  const [logoPreview, setLogoPreview] = useState(station?.logo || null);
+  const [logoPreview, setLogoPreview] = useState(
+    station?.logo ? `${station?.logo}?t=${Date.now()}` : ""
+  );
   // const [isInputVisible, setIsInputVisible] = useState(false);
   const [serviceName, setServiceName] = useState(
     updateAutoService ? station.name : null
@@ -104,6 +106,7 @@ export default function AddAutoServiceModal({
 
   const downloadAvatar = async (e) => {
     const newAvatar = e.target.files[0];
+
     setLogoPreview(URL.createObjectURL(newAvatar));
     if (newAvatar) {
       const base64 = await convertFileToBase64(newAvatar);
@@ -166,6 +169,7 @@ export default function AddAutoServiceModal({
               color: "var(--white)FFF",
             },
           });
+          dispatch(getAllServices());
         })
         .catch((err) => {
           console.log(err);
@@ -244,11 +248,7 @@ export default function AddAutoServiceModal({
           </div>
           <div className={css.logo}>
             {logoPreview && (
-              <img
-                src={logoPreview || station?.logo}
-                alt="logo"
-                className={css.logoImg}
-              />
+              <img src={logoPreview} alt="logo" className={css.logoImg} />
             )}
             <div>
               <Field
