@@ -188,13 +188,11 @@ export default function LoadStatsChart() {
             <YAxis
               domain={[0, (dataMax) => dataMax + 1]}
               dataKey="value"
-              margin={{ topt: 10 }}
+              margin={{ top: 10 }}
               tick={{ fontSize: "clamp(6px, min(0.925vh, 0.54vw), 10px)" }}
               interval={dataMax > 25 ? 2 : 0}
               axisLine={{ fill: "transparent" }}
               width={15}
-              // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
-              //  ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
               ticks={generateTicks(dataMax)}
             />
 

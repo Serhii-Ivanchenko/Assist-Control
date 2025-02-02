@@ -32,7 +32,6 @@
 .areaBox {
     width: 100%;
     /* height: 100%; */
-    /* height: clamp(246px, calc(246px + (61 * ((100vh - 900px) / 180))), 307px); */
     /* width: clamp(384px, min(31.135vw, 37.870vh * 1.408), 430px); */
     height: clamp(204px, min(28.425vh, 16.594vw), 307px);
     margin-left: 0;

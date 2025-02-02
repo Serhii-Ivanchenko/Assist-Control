@@ -1,12 +1,16 @@
 .userInfo {
-  width: 169px;
+  /* width: 169px; */
   transition: margin-top 0.7s ease-in-out;
 }
 
 .avatar {
-  width: 66px;
-  height: 66px;
-  margin-bottom: 7.5px;
+  /* width: 66px;
+  height: 66px; */
+
+  width: clamp(45px, min(3.567vw, 6.111vh), 66px);
+  height: clamp(45px, min(3.567vw, 6.111vh), 66px);
+  /* margin-bottom: 7.5px; */
+  margin-bottom: clamp(5px, min(0.694vh, 0.405vw), 7.5px);
 }
 
 .avatar img {
@@ -17,32 +21,36 @@
 }
 
 .name {
-  font-size: 14px;
-  margin-bottom: 11px;
+  /* font-size: 14px; */
+  font-size: clamp(10px, 1.296vh, 14px);
+  /* margin-bottom: 11px; */
+  margin-bottom: clamp(7px, min(1.018vh, 0.595vw), 11px);
   font-weight: 400;
 }
 
 .userDetails {
   color: var(--text-gray);
-  font-size: 16px;
-  margin-bottom: 16.4px;
+  /* font-size: 16px; */
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
+  margin-bottom: clamp(12px, min(1.481vh, 0.864vw), 16px);
 }
 
 .balance {
   display: flex;
   align-items: center;
+  /* gap: 20px; */
+  gap: clamp(13px, min(1.851vh, 1.041vw), 20px);
 }
 
 .balanceText {
   color: var(--text-gray);
-  font-size: 14px;
-  margin-right: 17px;
+  /* font-size: 14px; */
+  font-size: clamp(10px, 1.296vh, 14px);
 }
 
 .num {
   color: var(--white);
-  font-size: 17px;
-  margin-right: 24px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 700;
 }
 
@@ -52,12 +60,13 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  gap: clamp(13px, min(1.851vh, 1.041vw), 20px);
 }
 
 .icon {
   color: white;
-  width: 10px;
-  height: 10px;
+  width: clamp(6px, min(0.925vh, 0.54vw), 10px);
+  height: clamp(6px, min(0.925vh, 0.54vw), 10px);
 }
 
 .hidden {

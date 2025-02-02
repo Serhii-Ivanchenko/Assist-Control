@@ -1,21 +1,34 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  /* gap: 28px; */
+
+  gap: clamp(18px, min(2.592vh, 1.514vw), 28px);
 
   border-radius: 12px;
   background: var(--bg-secondary);
-  padding: 20px 30px 20px 25px;
-  width: 230px;
-  height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
+  /* padding: 20px 30px 20px 25px; */
+
+  padding:
+    clamp(13px, min(1.851vh, 1.041vw), 20px) clamp(20px, min(1.622vw, 2.777vh), 30px) clamp(13px, min(1.851vh, 1.041vw), 20px) clamp(17px, min(1.351vw, 2.314vh), 25px);
+
+  /* width: 230px;
+  height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px); */
+
+  width: clamp(159px, min(12.433vw, 89.537vh * 0.238), 230px);
+  height: clamp(644px, min(89.538vh, 12.432vw / 0.237), 967px);
 
   flex-shrink: 0;
   transition: width 0.7s ease-in, padding 0.7s ease-in, gap 0.7s ease-in;
 }
 
 .chatOpen {
-  width: 111px;
-  padding: 20px;
+  /* width: 111px; */
+  width: clamp(76px, min(6vw, 89.537vh * 0.115), 111px);
+  height: clamp(644px, min(89.538vh, 6vw / 0.114), 967px);
+
+  /* padding: 20px; */
+  padding: clamp(13px, min(1.851vh, 1.041vw), 20px);
   transition: width 0.7s ease-in, padding 0.7s ease-in, gap 0.7s ease-in;
 }
 
@@ -33,16 +46,19 @@
   justify-content: space-between;
   flex-grow: 1;
   gap: 10px;
+  gap: clamp(6px, min(0.926vh, 0.541vw), 10px);
+
   overflow-y: auto;
-  max-height: calc(100vh - 200px);
+  /* max-height: calc(100vh - 200px); */
   transition: width 0.7s ease;
   width: auto;
 }
 
 .bottomContainerWithChat {
-  width: 71px;
-
+  /* width: 71px; */
   padding-left: 14.5px;
+  padding-left: clamp(10px, min(0.783vw, 1.343vh), 14.5px);
+
   transition: width 0.7s ease;
 }
 
@@ -57,9 +73,4 @@
 .topContainer {
   flex-shrink: 0;
   position: relative;
-  margin-left: 5px;
-}
-
-.topContainerChatOpen {
-  margin-left: 0px;
 }

@@ -1,5 +1,6 @@
 .navigation {
-  margin-left: 5px;
+  /* margin-left: 5px; */
+  margin-left: clamp(3px, min(0.463vh, 0.27vw), 5px);
 }
 
 .navigationChatOpen {
@@ -7,12 +8,12 @@
 }
 
 .navItem {
-  font-size: 16px;
+  /* font-size: 16px; */
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 400;
   line-height: normal;
   font-variant: small-caps;
   transition: padding 0.7s ease;
-  padding: 0;
 }
 
 .navLink {
@@ -21,16 +22,22 @@
   text-decoration: none;
   color: inherit;
   gap: 10px;
-  transition: color 0.3s, background-color 0.3s, width 0.7s ease;
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
+  transition: color 0.3s, background-color 0.3s, width 0.7s ease,
+    box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .navWithChat {
-  width: 42px;
+  /* width: 42px; */
+  width: clamp(29px, min(3.888vh, 2.27vw), 42px);
+  border-radius: 50%;
 }
 
 .iconContainer {
-  width: 42px;
-  height: 42px;
+  /* width: 42px;
+  height: 42px; */
+  width: clamp(29px, min(3.888vh, 2.27vw), 42px);
+  height: clamp(29px, min(3.888vh, 2.27vw), 42px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,8 +50,10 @@
 .iconBonus {
   transition: color 0.3s;
   color: var(--orange);
-  width: 18px;
-  height: 18px;
+  /* width: 18px;
+  height: 18px; */
+  width: clamp(12px, min(1.759vh, 1.027vw), 19px);
+  height: clamp(12px, min(1.759vh, 1.027vw), 19px);
 }
 
 .iconRating,
@@ -53,11 +62,8 @@
   color: white;
   width: 22px;
   height: 22px;
-}
-
-.iconChart {
-  width: 15px;
-  height: 15px;
+  width: clamp(14px, min(2.037vh, 1.189vw), 22px);
+  height: clamp(14px, min(2.037vh, 1.189vw), 22px);
 }
 
 .navLink.active .iconContainer {
@@ -81,7 +87,8 @@
 .bottomNavContainer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  /* gap: 10px; */
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
 }
 
 .visible {
