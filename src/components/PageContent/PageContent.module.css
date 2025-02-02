@@ -10,11 +10,11 @@
 
 .pagegrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: minmax(384px, clamp(384px, min(31.135vw, 37.5vh * 1.422), 576px)) 1fr;
   grid-column-gap: clamp(9px, min(1.296vh, 0.757vw), 14px);
   grid-row-gap: clamp(9px, min(1.296vh, 0.757vw), 14px);
   /* height: auto; */
   /* height: clamp(665px, calc(665px + (163 * ((100vh - 900px) / 180))), 828px); */
-  /* width: clamp(728px, min(56.865vw, 89.538vh * 1.27), 1052px); */
+  width: clamp(728px, min(56.865vw, 76.667vh * 1.27), 1052px);
   height: clamp(552px, min(76.667vh, 56.865vw / 1.27), 828px);
 }
