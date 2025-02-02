@@ -1,0 +1,74 @@
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 415px;
+  height: auto;
+  padding: 40px 20px 20px 20px;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+
+.exitBtn {
+  position: absolute;
+  top: 13px;
+  right: 19px;
+  background-color: transparent;
+  border: none;
+  color: var(--Button-grey, #4a4a4a);
+  cursor: pointer;
+}
+
+.icon {
+  scale: 2.1;
+}
+
+.text {
+  display: flex;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 21px;
+}
+
+.cancelBtn {
+  display: inline-flex;
+  width: fit-content;
+  height: 39px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: transparent;
+  outline: none;
+  border: 1px solid var(--CRM-modal-LightGray, #d8e1ff);
+  color: #fff;
+  cursor: pointer;
+}
+
+.confirmBtn {
+  display: inline-flex;
+  width: fit-content;
+  height: 39px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: none;
+  background: var(--Blue, #3956cc);
+  color: #fff;
+  cursor: pointer;
+}
+
+.confirmBtn:hover,
+.confirmBtn:focus {
+  background-color: var(--blue-btn-hover);
+}

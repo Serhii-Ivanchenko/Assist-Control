@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import toast from "react-hot-toast";
-// import { changeCarStatus } from "../../redux/cars/operations.js";
 import {
   changeCarStatusCRM,
   getRecordsForPeriod,
@@ -16,9 +15,13 @@ import { labelNamesInCrm, statusMapping } from "../../utils/dataToRender.js";
 import { borderHeaderInCrm } from "../../utils/borderHeaderInCrm.jsx";
 import { selectVisibilityRecords } from "../../redux/visibility/selectors.js";
 import { toggleVisibilityRecords } from "../../redux/visibility/slice.js";
+import Modal from "../Modals/Modal/Modal.jsx";
+import AcceptModal from "../Modals/AcceptModal/AcceptModal.jsx";
 
 export default function CRMBlock() {
-  // const [isCrm, setIsCrm] = useState("record");
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
+  const [carToUpdate, setCarToUpdate] = useState(null);
+
   const dispatch = useDispatch();
   const periodRecords = useSelector(selectPeriodRecords);
   const dates = useSelector(selectDates);
@@ -35,6 +38,10 @@ export default function CRMBlock() {
     }
   }, [dispatch, dates]);
 
+  const handleArchiveSuccess = () => {
+    dispatch(getRecordsForPeriod(dates));
+  };
+
   const handleDragStart = (e, car_id) => {
     e.dataTransfer.setData("text/plain", car_id);
     console.log("Drag start with ID:", car_id);
@@ -48,18 +55,29 @@ export default function CRMBlock() {
     e.preventDefault();
     const itemId = Number(e.dataTransfer.getData("text/plain"));
     console.log("Dropped item ID:", itemId, "New status:", status);
-
+  
     const item = periodRecords.find((item) => item.car_id === itemId);
     console.log("Found item:", item);
-
+  
     if (item) {
       if (item.status === status) {
         console.log("Статус не змінився, запит не відправлено.");
         return;
       }
-
-      dispatch(
-        changeCarStatusCRM({ carId: item.car_id, status })
+  
+      if (item.status === "complete") {
+        // Якщо картка вже в статусі complete
+        toast.error(
+          "Зміна статусу неможлива, зверніться в технічну підтримку."
+        );
+        return;
+      }
+  
+      if (status === "complete") {
+        setCarToUpdate(item);
+        setIsAcceptModalOpen(true);
+      } else {
+        dispatch(changeCarStatusCRM({ carId: item.car_id, status }))
           .unwrap()
           .then(() => {
             console.log("Updated status in frontend:", { ...item, status });
@@ -68,9 +86,29 @@ export default function CRMBlock() {
           .catch((error) => {
             console.error("Error updating status:", error);
             toast.error("Помилка при оновленні статусу: " + error.message);
-          })
-      );
+          });
+      }
     }
+  };
+  
+  const handleConfirmStatusChange = () => {
+    if (carToUpdate) {
+      dispatch(changeCarStatusCRM({ carId: carToUpdate.car_id, status: "complete" }))
+        .unwrap()
+        .then(() => {
+          console.log("Car status updated to complete:", carToUpdate);
+          dispatch(getRecordsForPeriod(dates));
+          setIsAcceptModalOpen(false);
+        })
+        .catch((error) => {
+          console.error("Error confirming status change:", error);
+          toast.error("Помилка при підтвердженні зміни статусу.");
+        });
+    }
+  };
+
+  const handleCancelStatusChange = () => {
+    setIsAcceptModalOpen(false);
   };
 
   const getItemsForStatus = (status) => {
@@ -128,7 +166,16 @@ export default function CRMBlock() {
                 <DayCarsListCrm
                   records={filteredRecords}
                   onDragStart={handleDragStart}
+                  onArchiveSuccess={handleArchiveSuccess}
                 />
+                {isAcceptModalOpen && (
+                  <Modal isOpen={isAcceptModalOpen} onClose={handleCancelStatusChange}>
+                    <AcceptModal
+                      onConfirm={handleConfirmStatusChange}
+                      onCancel={handleCancelStatusChange}
+                    />
+                  </Modal>
+                )}
               </Column>
             );
           })}

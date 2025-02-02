@@ -30,8 +30,13 @@ import { useEffect } from "react";
 import AddAutoServiceModal from "../Modals/AddAutoServiceModal/AddAutoServiceModal";
 import AddCarModal from "../Modals/AddCarModal/AddCarModal";
 import { FiPlus } from "react-icons/fi";
+import AddNewClientModal from "../Modals/AddNewClientModal/AddNewClientModal.jsx";
+import ClientOrganizationInfo from "../Modals/ClientInfo/ClientOrganizationInfo/ClientOrganizationInfo.jsx";
+import ClientPersonInfo from "../Modals/ClientInfo/ClientPersonInfo/ClientPersonInfo.jsx";
 
-export default function ClientInfo({ clientInfo }) {
+export default function ClientInfo({ clientInfo,car }) {
+  console.log(car);
+  
   // Client
   const client = clientInfo.client;
 
@@ -104,16 +109,6 @@ export default function ClientInfo({ clientInfo }) {
     setDetailedInfoModalIsOpen(false);
   };
 
-  const [isInfoEditing, setIsInfoEditing] = useState(false);
-
-  const editInfo = () => {
-    setIsInfoEditing(true);
-  };
-
-  const notEditInfo = () => {
-    setIsInfoEditing(false);
-  };
-
   const [addCarModalOpen, setAddCarModalOpen] = useState(false);
 
   const openAddCarModal = () => {
@@ -122,6 +117,26 @@ export default function ClientInfo({ clientInfo }) {
 
   const handleAddCarModalClose = () => {
     setAddCarModalOpen(false);
+  };
+
+  const [addClientModalOpen, setAddClientModalOpen] = useState(false);
+
+  const openAddClientModal = () => {
+    setAddClientModalOpen(true);
+  };
+
+  const handleAddClientModalClose = () => {
+    setAddClientModalOpen(false);
+  };
+
+  const [clientInfoModalOpen, setClientInfoModalOpen] = useState(false);
+
+  const openClientInfoModal = () => {
+    setClientInfoModalOpen(true);
+  };
+
+  const handleClientInfoModalClose = () => {
+    setClientInfoModalOpen(false);
   };
 
   const handleCopyEmail = () => {
@@ -153,7 +168,6 @@ export default function ClientInfo({ clientInfo }) {
             <div className={css.ratingAndMoney}>
               <RatingStars
                 rating={clientRating}
-                clientInfo={true}
                 ratingGap={css.rating}
               />
               <div className={css.moneyBox}>
@@ -165,7 +179,7 @@ export default function ClientInfo({ clientInfo }) {
             <div className={css.nameAndEditBox}>
               <p className={css.clientName}>{clientName}</p>
               {clientId === "" ? (
-                <button className={css.addBtn}>
+                <button className={css.addBtn} onClick={openAddClientModal}>
                   <FiPlus className={css.plusIcon} size={24} />
                 </button>
               ) : isEditing ? (
@@ -199,17 +213,23 @@ export default function ClientInfo({ clientInfo }) {
               <button
                 type="button"
                 className={css.editBtn}
-                onClick={() => {
-                  openDetailedInfoModal(), notEditInfo();
-                }}
+                onClick={openClientInfoModal}
+
+                // onClick={() => {
+                //   openDetailedInfoModal(), notEditInfo();
+                // }}
               >
-                <BsEyeFill size={16} className={css.pencilIcon} />
+                <BsEyeFill
+                  size={16}
+                  className={css.pencilIcon}
+                  // onClick={openClientInfoModal}
+                />
               </button>
               <button
                 type="button"
                 className={css.editBtn}
                 onClick={() => {
-                  openDetailedInfoModal(), editInfo();
+                  openDetailedInfoModal();
                 }}
               >
                 <BsPencil size={16} className={css.pencilIcon} />
@@ -221,8 +241,7 @@ export default function ClientInfo({ clientInfo }) {
                 >
                   <AddAutoServiceModal
                     onClose={handleDetailedInfoModalClose}
-                    isOrganization={true}
-                    infoToEdit={isInfoEditing}
+                    createClient={true}
                   />
                 </Modal>
               )}
@@ -369,6 +388,23 @@ export default function ClientInfo({ clientInfo }) {
         {addCarModalOpen && (
           <Modal isOpen={addCarModalOpen} onClose={handleAddCarModalClose}>
             <AddCarModal onClose={handleAddCarModalClose} />
+          </Modal>
+        )}
+        {addClientModalOpen && (
+          <Modal
+            isOpen={addClientModalOpen}
+            onClose={handleAddClientModalClose}
+          >
+            <AddNewClientModal onClose={handleAddClientModalClose} />
+          </Modal>
+        )}
+
+        {clientInfoModalOpen && (
+          <Modal
+            isOpen={clientInfoModalOpen}
+            onClose={handleClientInfoModalClose}
+          >
+            <ClientPersonInfo onClose={handleClientInfoModalClose} />
           </Modal>
         )}
       </div>

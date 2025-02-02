@@ -7,39 +7,182 @@ import StatusToggle from "../../../sharedComponents/StatusToggle/StatusToggle";
 import PopupConnection from "./PopupConnection/PopupConnection";
 import DistributorsInfoForm from "./DistributorsInfoForm";
 import ScheduleAccordion from "./ScheduleAccordion/ScheduleAccordion";
-import UploadComponent from "../../../sharedComponents/UploadComponent/UploadComponent";
 import { RiSave3Fill } from "react-icons/ri";
+import { BsFillCloudUploadFill } from "react-icons/bs";
 import styles from "./DistributorsModal.module.css";
+import {
+  updateSupplierData,
+  createSupplier,
+  getAllSuppliers,
+} from "../../../../redux/settings/operations";
+import { useDispatch } from "react-redux";
+import { fileToBase64 } from "../../../../utils/convertInBase64";
+import toast from "react-hot-toast";
 
 function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
+  const dispatch = useDispatch();
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [distributor, setDistributor] = useState(distributorData || {});
   const [isEditing, setIsEditing] = useState(false);
-  const [editableName, setEditableName] = useState(distributor.name || "");
-  const [logo, setLogo] = useState(distributor.logo);
+  const [editableName, setEditableName] = useState(distributor?.name || "");
+  const [logoPreview, setLogoPreview] = useState(
+    distributor?.logo ? `${distributor.logo}?t=${Date.now()}` : null
+  );
+  const [logoBase64, setLogoBase64] = useState(null);
+
   const buttonRef = useRef(null);
+  const formRef = useRef(null);
+  const authFormRef = useRef(null);
+
+  console.log("distributor", distributor);
+
+  // !Для розкладу start
+
+  // Парсимо розклад для initialValues, якщо він є або передаємо туди порожній масив
+  const parsedSchedule = distributor.deliverySchedule
+    ? JSON.parse(distributor.deliverySchedule)
+    : [];
+  // const detailsRef = useRef();
+  const scheduleRef = useRef();
+
+  console.log("parsedSchedule", parsedSchedule);
+
+  // !Для розкладу end
 
   useEffect(() => {
     if (distributorData) {
       setDistributor(distributorData);
-      setEditableName(distributorData.name || "");
-      setLogo(distributorData.logo);
+      setEditableName(distributorData?.name || "");
+      setLogoPreview(distributorData.logo);
+    } else {
+      setDistributor({});
+      setEditableName("");
+      setLogoPreview(null);
     }
   }, [distributorData]);
+
+  const handleLogoUpload = async (e) => {
+    const file = e.target.files[0];
+    setLogoPreview(URL.createObjectURL(file));
+    if (file) {
+      const base64 = await fileToBase64(file);
+      setLogoBase64(base64);
+    }
+  };
 
   const handleSaveName = () => {
     setDistributor((prev) => ({ ...prev, name: editableName }));
     setIsEditing(false);
   };
 
-  const handleSave = () => {
-    console.log(distributor);
-    onClose();
-  };
+  const handleSave = async () => {
+    try {
+      // Submit both forms
+      if (formRef.current && authFormRef.current) {
+        await formRef.current.submitForm();
+        await authFormRef.current.submitForm();
+      }
 
-  const formRef = useRef(null);
-  const authFormRef = useRef(null);
-  const scheduleRef = useRef();
+      // Отримуємо дані з AuthForm та DistributorsInfoForm
+      const authData = authFormRef.current?.values || {};
+      const distributorsInfoData = formRef.current?.values || {};
+
+      // генерація масиву розкладу для відправки
+      const scheduleToSend = scheduleRef.current.generateBackendData();
+      console.log("scheduleToSend during submit", scheduleToSend);
+
+      const dataToUpdate = {
+        supplier_id: distributor.id || "",
+        status: distributor.status || 1,
+        name: distributor.name || editableName,
+        ...authData,
+        ...distributorsInfoData,
+        logo: logoBase64,
+        // ? logoBase64 // Якщо є нове фото, передаємо його
+        // : distributor.logo?.startsWith("https")
+        // ? undefined // Якщо старий URL, не передавати нічого
+        // : distributor.logo, // Якщо вже є локальне значення, залишаємо його
+        deliverySchedule: scheduleToSend,
+      };
+
+      console.log("Updated Payload:", dataToUpdate);
+      // console.log("logoBase64", logoBase64);
+      // console.log("JSON.stringify", JSON.stringify(dataToUpdate));
+      // console.log("supplier_id", distributor.id);
+
+      if (distributor.id) {
+        await dispatch(
+          // updateSupplierData({ ...dataToUpdate, supplier_id: distributor.id })
+          updateSupplierData(dataToUpdate)
+        )
+          .unwrap()
+          .then(() => {
+            toast.success("Постачальника успішно оновлено :)", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+            dispatch(getAllSuppliers());
+          })
+          .catch((error) => {
+            console.error("Error updating user data:", error);
+            toast.error("Щось пішло не так :(", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+          });
+      } else {
+        // if (
+        //   !distributorsInfoData.address ||
+        //   !distributorsInfoData.managerPhone
+        // ) {
+        //   console.error("Обов'язкові поля не заповнені");
+        //   return;
+        // }
+        await dispatch(createSupplier(dataToUpdate))
+          .unwrap()
+          .then(() => {
+            toast.success("Постачальника успішно створено :)", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+            dispatch(getAllSuppliers());
+          })
+          .catch((error) => {
+            console.error("Error updating user data:", error);
+            toast.error("Щось пішло не так :(", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+          });
+      }
+
+      onClose();
+    } catch (error) {
+      console.error("Error details:", error);
+      console.error("Error response:", error.response?.data);
+      console.error("Error message:", error.message);
+      console.error(
+        "Помилка під час збереження:",
+        error.response?.data || error.message
+      );
+    }
+  };
 
   const handleResetForm = () => {
     if (formRef.current) {
@@ -54,11 +197,11 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
     if (distributorData) {
       setDistributor(distributorData);
       setEditableName(distributorData.name || "");
-      setLogo(distributorData.logo);
+      setLogoPreview(distributorData.logo || null);
     } else {
       setDistributor({});
       setEditableName("");
-      setLogo(null);
+      setLogoPreview(null);
     }
     setIsEditing(false);
     handleResetForm();
@@ -129,26 +272,36 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
             </button>
           </div>
           <div className={styles.imgWrapper}>
-            {logo ? (
-              <div>
+            {logoPreview ? (
+              <div className={styles.uploadLogoContainer}>
                 <img
                   className={styles.img}
-                  src={logo}
-                  alt={distributor.name || "Distribution Img"}
+                  src={logoPreview || distributor?.logo}
+                  alt="Логотип"
                 />
-                <UploadComponent
-                  title="Завантажити лого"
-                  name="logo"
-                  setLogo={setLogo}
-                />
+                <label className={styles.uploadLabel}>
+                  <BsFillCloudUploadFill className={styles.downloadIcon} />
+                  Завантажити лого
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoUpload}
+                    hidden
+                  />
+                </label>
               </div>
             ) : (
               <div className={styles.uploadLogoContainer}>
-                <UploadComponent
-                  title="Завантажити лого"
-                  name="logo"
-                  setLogo={setLogo}
-                />
+                <label className={styles.uploadLabel}>
+                  <BsFillCloudUploadFill className={styles.downloadIcon} />
+                  Завантажити лого
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoUpload}
+                    hidden
+                  />
+                </label>
               </div>
             )}
           </div>
@@ -172,7 +325,7 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
       <div className={styles.scheduleContainer}>
         <ScheduleAccordion
           ref={scheduleRef}
-          deliveryData={distributor.deliverySchedule || null}
+          deliveryData={parsedSchedule.days}
         />
       </div>
       <div className={styles.btnGroup}>

@@ -1,8 +1,15 @@
-.wrapper {
+.sectionWrapper {
   display: flex;
-  justify-content: space-between;
-  height: 921px;
   flex-direction: column;
+  height: 921px;
+  gap: 10px;
+  justify-content: space-between;
+}
+.wrapper {
+  /* display: flex; */
+  /* flex-direction: column; */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .leftContainer {
@@ -10,6 +17,26 @@
   flex-direction: column;
   height: 100%;
   gap: 14px;
+}
+
+.leftContainerScrolled {
+  width: 497px;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 8px;
+  padding-top: 4px;
+  height: auto;
+}
+
+.wrapper::-webkit-scrollbar-track {
+  background-color: var(--bg);
+  border-radius: 4px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
 }
 
 .addBtn {

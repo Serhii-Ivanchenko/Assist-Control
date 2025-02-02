@@ -71,6 +71,8 @@ export default function MessagesPart({
           isChosen:
             action === "archive" || action === "isClosed"
               ? false
+              : action === "isChosen"
+              ? true
               : chat.isChosen,
           isDelayed:
             action === "archive" || action === "isClosed"
@@ -88,9 +90,9 @@ export default function MessagesPart({
     setArchiveChats(updatedChats.filter((chat) => chat.archive).length);
   };
 
-  useEffect(() => {
-    console.log("allchecked", allChecked);
-  }, [allChecked]);
+  // useEffect(() => {
+  //   console.log("allchecked", allChecked);
+  // }, [allChecked]);
 
   const handleChecked = () => {
     setIsChecked((prev) => !prev);

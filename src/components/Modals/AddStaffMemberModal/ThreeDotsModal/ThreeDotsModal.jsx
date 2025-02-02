@@ -4,8 +4,34 @@ import { BsFillCloudUploadFill } from "react-icons/bs";
 import { useRef } from "react";
 // import { useEffect } from "react";
 
-export default function ThreeDotsModal({ isVisible }) {
+export default function ThreeDotsModal({
+  isVisible,
+  setFile,
+  setFieldValue,
+  fieldname,
+  name,
+  onClose,
+  file,
+}) {
   const popoverRef = useRef(null);
+  const fileInputRef = useRef(null);
+
+  const handleChangePhoto = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = async (event) => {
+    const file = event.currentTarget.files[0];
+    if (file) {
+      const newLogoUrl = URL.createObjectURL(file);
+      setFile(newLogoUrl);
+
+      setFieldValue(fieldname, file);
+    }
+    onClose();
+  };
 
   // const handleClickOutside = (event) => {
   //   if (
@@ -32,7 +58,7 @@ export default function ThreeDotsModal({ isVisible }) {
       className={`${css.modal} ${isVisible ? css.popoverVisible : css.hidden}`}
       ref={popoverRef}
     >
-      <a href="" download="">
+      <a href={file} download target="blank">
         <button type="button" className={css.button}>
           {" "}
           <BsFillCloudDownloadFill className={css.icon} size={18} />
@@ -40,10 +66,20 @@ export default function ThreeDotsModal({ isVisible }) {
         </button>
       </a>
 
-      <button type="button" className={css.button}>
+      <button type="button" className={css.button} onClick={handleChangePhoto}>
         <BsFillCloudUploadFill className={css.icon} size={18} />
         Завантажити підписаний{" "}
       </button>
+
+      <input
+        type="file"
+        name={name}
+        className={css.docInput}
+        ref={fileInputRef}
+        onChange={(e) => handleFileChange(e, setFieldValue)}
+        multiple
+        // accept="image/*"
+      />
     </div>
   );
 }

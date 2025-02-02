@@ -2,6 +2,7 @@
   background-color: var(--bg-secondary);
   padding: 40px;
   width: 580px;
+  border-radius: 12px;
 }
 
 .headerWrapper {
@@ -9,14 +10,13 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 7px;
+  margin-bottom: 14px;
 }
 
 .changedInput {
   background: var(--main-gray);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 6px 20px;
-  /* text-align: center; */
   color: var(--light-gray);
   font-size: 16px;
   font-style: normal;
@@ -53,6 +53,12 @@
   fill: var(--light-gray);
 }
 
+.closeIconCreateClient {
+  width: 18px;
+  height: 18px;
+  fill: var(--light-gray);
+}
+
 .closeIcon:hover {
   cursor: pointer;
 }
@@ -73,17 +79,18 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 425px;
 }
 
-.popupContainer {
-  position: absolute;
-  top: -10px;
-  left: -25px;
-  z-index: 10;
+/* .popupContainer {
+  position: relative;
+  /* top: -10px;
+  left: -70px; */
+  /* z-index: 10;
   background: var(--bg-input);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
-}
+} */
 
 .btn {
   cursor: pointer;
@@ -91,11 +98,10 @@
   align-items: center;
   background: transparent;
   border: none;
+  position: relative;
 }
 
 .dotsIcon {
-  /* width: 18px;
-  height: 18px; */
   color: var(--light-gray);
 }
 
@@ -115,10 +121,43 @@
   white-space: nowrap;
 }
 
+.uploadAvatarText {
+  color: var(--input-text);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+}
+
 .logoImg {
   width: 102px;
   height: 100%;
   object-fit: cover;
+}
+
+.inputDisabled {
+  display: none;
+}
+
+.avatarLabel {
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.camera {
+  width: 24px;
+  height: 24px;
+  color: var(--icon-gray);
+}
+
+.cloud {
+  fill: var(--light-gray);
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .form {
@@ -127,14 +166,17 @@
   gap: 12px;
 }
 
-.isOrganization {
-  margin-top: 33px;
-}
-
 .addressWrapper {
   display: grid;
   gap: 6px;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 374px;
+  align-items: center;
+}
+
+.addressWrapperCreateClient {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: auto 1fr 18px;
   align-items: center;
 }
 
@@ -172,8 +214,6 @@
 }
 
 .inputsWrapper {
-  /* display: flex;
-  gap: 22px; */
   display: grid;
   gap: 22px;
   grid-template-columns: 1fr 1fr;

@@ -94,7 +94,7 @@ const crmSlice = createSlice({
       .addCase(changeCarStatusCRM.fulfilled, (state, action) => {
         state.isLoading = false;
         const { car_id, newStatus } = action.payload;
-        const carIndex = state.current.findIndex(
+        const carIndex = state.periodRecords.findIndex(
           (car) => car.car_id === car_id
         );
         if (carIndex !== -1) {

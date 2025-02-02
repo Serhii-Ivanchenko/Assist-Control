@@ -1,13 +1,9 @@
-import { AiFillStar } from "react-icons/ai";
-import { IoStarSharp } from "react-icons/io5";
+// import { AiFillStar } from "react-icons/ai";
+// import { IoStar, IoStarHalf, IoStarSharp } from "react-icons/io5";
 import styles from "./RatingStars.module.css";
+import { BsStarFill } from "react-icons/bs";
 
-export default function RatingStars({
-  rating,
-  ratingGap,
-  sizestar,
-  clientInfo,
-}) {
+export default function RatingStars({ rating, ratingGap, sizestar }) {
   const iconSize = sizestar !== undefined ? sizestar : "14,5px";
 
   const getStarElements = (rating) => {
@@ -20,26 +16,19 @@ export default function RatingStars({
             className={styles.fullStar}
             style={{ width: iconSize, height: iconSize }}
           >
-            {clientInfo ? <IoStarSharp /> : <AiFillStar />}
+            <BsStarFill />
           </div>
         );
       } else if (rating > i - 1 && rating < i) {
         stars.push(
           <div
-            key={i}
             className={styles.halfStar}
             style={{ width: iconSize, height: iconSize }}
           >
-            {clientInfo ? (
-              <IoStarSharp className={styles.halfFilled} />
-            ) : (
-              <AiFillStar className={styles.halfFilled} />
-            )}
-            {clientInfo ? (
-              <IoStarSharp className={styles.halfEmpty} />
-            ) : (
-              <AiFillStar className={styles.halfEmpty} />
-            )}
+            <BsStarFill className={styles.halfEmpty} />
+            <div className={styles.halfFilled}>
+              <BsStarFill />
+            </div>
           </div>
         );
       } else {
@@ -49,7 +38,7 @@ export default function RatingStars({
             className={styles.emptyStar}
             style={{ width: iconSize, height: iconSize }}
           >
-            {clientInfo ? <IoStarSharp /> : <AiFillStar />}
+            {<BsStarFill />}
           </div>
         );
       }
@@ -58,8 +47,11 @@ export default function RatingStars({
   };
 
   const parsedRating =
-    rating && rating !== "Немає рейтингу" ? parseFloat(rating) : 5;
-
+    rating === 0 || rating === null
+      ? 0
+      : rating && rating !== "Немає рейтингу"
+      ? parseFloat(rating)
+      : 5;
   return (
     <div className={`${styles.rating} ${ratingGap}`}>
       {getStarElements(parsedRating)}

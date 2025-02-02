@@ -36,17 +36,13 @@ const visibilitySlice = createSlice({
       photo: true,
       totalPrice: true,
       phoneNumber: true,
-      info: true,
+      
     },
     visibilityCarRecomendations: {
       name: true,
       phoneNumber: true,
       carModelYear: true,
       timeForTO: true,
-      infoBtn: true,
-      createBtn: true,
-      delBtn: true,
-      notificBtn: true,
       rating: true,
       photo: true,
       carNum: true,
@@ -65,11 +61,7 @@ const visibilitySlice = createSlice({
       photo: true,
       totalPrice: true,
       prePayment: true,
-      paymentBtn: true,
       phoneNumber: true,
-      info: true,
-      createBtn: true,
-      archive: true,
     },
     visibilitySuppliers: {
       date: true,
@@ -93,7 +85,6 @@ const visibilitySlice = createSlice({
       provider: true,
       repair: true,
       totalAmount: true,
-      notification: true,
     },
     visibilityAllClients: {
       rating: true,

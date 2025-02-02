@@ -1,0 +1,165 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  width: 389px;
+  height: auto;
+  padding: 13px 19px 19px 19px;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+
+.exitBtn {
+  position: absolute;
+  top: 13px;
+  right: 19px;
+  background-color: transparent;
+  border: none;
+  color: var(--Button-grey, #4a4a4a);
+  cursor: pointer;
+}
+
+.icon {
+  scale: 2.1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form label {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.textarea {
+  display: flex;
+  width: 351px;
+  height: 89px;
+  padding: 10px;
+  margin-bottom: 21px;
+  align-items: flex-start;
+  outline: none;
+  border-radius: 0px 12px 12px 12px;
+  background: var(--player-secondary-bg);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  resize: none;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.textarea::-webkit-scrollbar-track {
+  background-color: var(--player-secondary-bg);
+  border-radius: 4px;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background: var(--bg);
+  border-radius: 12px;
+}
+
+.btnsGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 21px;
+}
+
+.closeBtn {
+  display: inline-flex;
+  width: fit-content;
+  height: 39px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: transparent;
+  outline: none;
+  border: 1px solid var(--CRM-modal-LightGray, #d8e1ff);
+  color: #fff;
+  cursor: pointer;
+}
+
+.submitBtn {
+  display: inline-flex;
+  width: fit-content;
+  height: 39px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: none;
+  background: var(--Blue, #3956cc);
+  color: #fff;
+  cursor: pointer;
+}
+
+.submitBtn:hover,
+.submitBtn:focus {
+  background-color: var(--blue-btn-hover);
+}
+
+.select {
+  display: flex;
+  width: 351px;
+  height: 39px;
+  padding: 10px;
+  margin-bottom: 21px;
+  align-items: center;
+  border-radius: 0px 12px 12px 12px;
+  background: var(--player-secondary-bg);
+  outline: none;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  color: var(--CRM-modal-InputText, #767b88);
+}
+
+.select option {
+  background: var(--bg-secondary);
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.select::-ms-expand {
+  display: none;
+}
+
+.select:disabled {
+  background: var(--disabled-bg, #4a4a4a);
+  color: var(--disabled-text, #b0b0b0);
+  cursor: not-allowed;
+}
+
+.lightBlue {
+  color: var(--glow-diag);
+}
+
+.violet {
+  color: var(--glow-repair);
+}
+
+.red {
+  color: var(--glow-view-repair);
+}
+
+.yellow {
+  color: var(--glow-new);
+}
+
+.green {
+  color: var(--glow-complete);
+}

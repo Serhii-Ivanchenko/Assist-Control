@@ -193,7 +193,7 @@ export const initialState = {
     },
     suppliers: [],
     supplier: {
-      supplier_d: null,
+      supplier_id: null,
       name: null,
       address: null,
       paymentCondition: null,
@@ -297,4 +297,12 @@ export const initialState = {
     prompts: [],
     selectedPrompt: null,
   },
+
+  connections: {
+    stats: [],
+    connectionsList: [],
+    isLoading: false,
+    error: null,
+  },
+  isModalOpen: false,
 };

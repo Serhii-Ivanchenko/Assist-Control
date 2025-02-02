@@ -29,36 +29,46 @@ const archiveSlice = createSlice({
         state.archiveData = action.payload;
       })
       .addCase(getAllArchiveData.rejected, handleRejected)
+
       .addCase(addItemToArchive.pending, handlePending)
       .addCase(addItemToArchive.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.archiveData.push(action.payload);
+        state.archiveData.push(action.payload);
       })
       .addCase(addItemToArchive.rejected, handleRejected)
+
       .addCase(updateArchiveItem.pending, handlePending)
       .addCase(updateArchiveItem.fulfilled, (state, action) => {
         state.isLoading = false;
         const archiveItemToEditIndex = state.archiveData.findIndex(
-          (archiveItem) => archiveItem.archive_id === action.payload.archive_id
+          (archiveItem) => archiveItem.id === action.payload.archive_id
         );
 
+        // if (
+        //   // action.payload.status === 200 &&
+        //   archiveItemToEditIndex !== -1
+        // ) {
+        //   state.archiveData[archiveItemToEditIndex] = {
+        //     ...state.archiveData[archiveItemToEditIndex], // Залишаємо старі дані
+        //     ...action.meta.arg, // Додаємо дані, які відправляли
+        //   };
+        // }
         if (
           // action.payload.status === 200 &&
           archiveItemToEditIndex !== -1
         ) {
-          state.archiveData[archiveItemToEditIndex] = {
-            ...state.archiveData[archiveItemToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
+          state.archiveData[archiveItemToEditIndex].reason_add =
+            action.meta.arg.reason_add; // Додаємо дані, які відправляли
         }
       })
       .addCase(updateArchiveItem.rejected, handleRejected)
+
       .addCase(returnArchiveItem.pending, handlePending)
       .addCase(returnArchiveItem.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.archiveData = state.archiveData.filter(
-        //   (archiveItem) => archiveItem.archive_id === action.payload.archive_id
-        // );        
+        state.archiveData = state.archiveData.filter(
+          (archiveItem) => archiveItem.archive_id !== action.payload.archive_id
+        );
       })
       .addCase(returnArchiveItem.rejected, handleRejected),
 });

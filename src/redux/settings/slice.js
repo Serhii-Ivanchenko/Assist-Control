@@ -40,7 +40,6 @@ import {
   updateEmployeeStatus,
   updateFixedMarkup,
   updatePostData,
-  updatePostStatus,
   updateRatingStatus,
   updateSupplierData,
   updateSupplierStatus,
@@ -57,10 +56,27 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+// універсальна функція для оновлення даних
+// const updateItem = (items, payload, key = "id") => {
+//   const index = items.findIndex((item) => item[key] === payload[key]);
+//   if (index !== -1) {
+//     items[index] = { ...items[index], ...payload };
+//   }
+// };
+
 const settingsSlice = createSlice({
   name: "settings",
   initialState: initialState.settings,
-  reducers: {},
+  reducers: {
+    openModal: (state, action) => {
+      state.isModalOpen = true;
+      state.supplier = action.payload || null;
+    },
+    closeModal: (state) => {
+      state.isModalOpen = false;
+      state.supplier = null;
+    },
+  },
   extraReducers: (builder) =>
     builder
       //! EMPLOYEE
@@ -73,19 +89,19 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeData.pending, handlePending)
       .addCase(updateEmployeeData.fulfilled, (state, action) => {
         state.isLoading = false;
-        const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.employee_id === action.payload.employee_id
-        );
+        // const employeeToEditIndex = state.employees.findIndex(
+        //   (employee) => employee.id === action.payload.employee_id
+        // );
 
-        if (
-          // action.payload.status === 200 &&
-          employeeToEditIndex !== -1
-        ) {
-          state.employees[employeeToEditIndex] = {
-            ...state.employees[employeeToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
-        }
+        // if (
+        //   // action.payload.status === 200 &&
+        //   employeeToEditIndex !== -1
+        // ) {
+        //   state.employees[employeeToEditIndex] = {
+        //     ...state.employees[employeeToEditIndex], // Залишаємо старі дані
+        //     ...action.meta.arg, // Додаємо дані, які відправляли
+        //   };
+        // }
       })
       .addCase(updateEmployeeData.rejected, handleRejected)
 
@@ -94,7 +110,7 @@ const settingsSlice = createSlice({
         state.isLoading = false;
 
         state.employees = state.employees.filter(
-          (employee) => employee.employee_id !== action.payload.employee_id
+          (employee) => employee.id !== action.payload.employee_id
         );
       })
       .addCase(deleteEmployee.rejected, handleRejected)
@@ -103,10 +119,10 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeStatus.fulfilled, (state, action) => {
         state.isLoading = false;
         const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.employee_id === action.payload.employee_id
+          (employee) => employee.id === action.payload.employee_id
         );
-        state.employees[employeeToEditIndex].isDisabled =
-          action.payload.isDisabled;
+
+        state.employees[employeeToEditIndex].status = action.meta.arg.status;
       })
       .addCase(updateEmployeeStatus.rejected, handleRejected)
 
@@ -120,7 +136,7 @@ const settingsSlice = createSlice({
       .addCase(getAllEmployees.pending, handlePending)
       .addCase(getAllEmployees.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.employees = action.payload;
+        state.employees = action.payload.data;
       })
       .addCase(getAllEmployees.rejected, handleRejected)
 
@@ -128,34 +144,29 @@ const settingsSlice = createSlice({
       .addCase(createSupplier.pending, handlePending)
       .addCase(createSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
+        // if (action.payload.supplier_id) {
+        //   state.suppliers.push(action.meta.arg);
+        // } else {
+        //   console.error("Supplier ID is undefined:", action.payload);
+        // }
       })
       .addCase(createSupplier.rejected, handleRejected)
 
       .addCase(updateSupplierData.pending, handlePending)
       .addCase(updateSupplierData.fulfilled, (state, action) => {
         state.isLoading = false;
-        const supplierToEditIndex = state.suppliers.findIndex(
-          (supplier) => supplier.supplier_id === action.payload.supplier
-        );
 
-        if (
-          // action.payload.status === 200 &&
-          supplierToEditIndex !== -1
-        ) {
-          state.suppliers[supplierToEditIndex] = {
-            ...state.suppliers[supplierToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
-        }
+        // // функція для оновлення даних по постачальнику
+        // updateItem(state.suppliers, action.meta.arg, "supplier_id");
       })
       .addCase(updateSupplierData.rejected, handleRejected)
 
       .addCase(deleteSupplier.pending, handlePending)
       .addCase(deleteSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
-
+        // console.log("Deleted supplier:", action.payload);
         state.suppliers = state.suppliers.filter(
-          (supplier) => supplier.supplier_id !== action.payload.supplier_id
+          (supplier) => supplier.id !== action.payload.supplier_id
         );
       })
       .addCase(deleteSupplier.rejected, handleRejected)
@@ -163,11 +174,12 @@ const settingsSlice = createSlice({
       .addCase(updateSupplierStatus.pending, handlePending)
       .addCase(updateSupplierStatus.fulfilled, (state, action) => {
         state.isLoading = false;
-        const supplierToEditIndex = state.employees.findIndex(
-          (supplier) => supplier.supplier_id === action.payload.supplier_id
+
+        const supplierToEditIndex = state.suppliers.findIndex(
+          (supplier) => supplier.id === action.payload.supplier_id
         );
-        state.employees[supplierToEditIndex].isDisabled =
-          action.payload.updated_fields.isDisabled;
+
+        state.suppliers[supplierToEditIndex].status = action.payload.status;
       })
       .addCase(updateSupplierStatus.rejected, handleRejected)
 
@@ -189,13 +201,13 @@ const settingsSlice = createSlice({
       .addCase(getWorkSchedule.pending, handlePending)
       .addCase(getWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.schedule = action.payload.work_schedule;
+        state.schedule = action.payload.days;
       })
       .addCase(getWorkSchedule.rejected, handleRejected)
       .addCase(updateWorkSchedule.pending, handlePending)
       .addCase(updateWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.schedule = { ...state.schedule, ...action.payload };
+        state.schedule = action.meta.arg.days;
       })
       .addCase(updateWorkSchedule.rejected, handleRejected)
 
@@ -211,28 +223,33 @@ const settingsSlice = createSlice({
       .addCase(createPost.pending, handlePending)
       .addCase(createPost.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.posts.push(action.meta.arg);
+        // state.posts.push(action.meta.arg);
       })
       .addCase(createPost.rejected, handleRejected)
-
-      .addCase(updatePostStatus.pending, handlePending)
-      .addCase(updatePostStatus.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const postToEditIndex = state.posts.findIndex(
-          (post) => post.id === action.payload.id
-        );
-        state.posts[postToEditIndex].status = action.payload;
-      })
-      .addCase(updatePostStatus.rejected, handleRejected)
 
       .addCase(updatePostData.pending, handlePending)
       .addCase(updatePostData.fulfilled, (state, action) => {
         state.isLoading = false;
+
         const postToEditIndex = state.posts.findIndex(
-          (post) => post.id === action.payload.id
+          (post) => post.id === action.payload.post_id
         );
-        state.posts[postToEditIndex] = action.payload;
+
+        if (postToEditIndex !== -1) {
+          const currentPost = state.posts[postToEditIndex];
+
+          state.posts[postToEditIndex] = {
+            ...currentPost,
+            ...(action.payload.name_post && {
+              name_post: action.payload.name_post,
+            }),
+            ...(action.payload.status !== undefined && {
+              status: action.payload.status,
+            }),
+          };
+        }
       })
+
       .addCase(updatePostData.rejected, handleRejected)
 
       .addCase(deletePost.pending, handlePending)
@@ -240,7 +257,7 @@ const settingsSlice = createSlice({
         state.isLoading = false;
 
         state.posts = state.posts.filter(
-          (post) => post.id !== action.payload.id
+          (post) => post.id !== action.payload.post_id
         );
       })
       .addCase(deletePost.rejected, handleRejected)
@@ -500,5 +517,7 @@ const settingsSlice = createSlice({
       })
       .addCase(getCashRegisterData.rejected, handleRejected),
 });
+
+export const { openModal, closeModal } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

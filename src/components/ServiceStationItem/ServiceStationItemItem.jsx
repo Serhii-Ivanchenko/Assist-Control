@@ -14,14 +14,13 @@ import { useState, useEffect } from "react";
 import AddAutoServiceModal from "../Modals/AddAutoServiceModal/AddAutoServiceModal";
 import Modal from "../Modals/Modal/Modal";
 
-function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
+function ServiceStationItem({ isOpen, onToggle, isActive, station }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isInfoEditing, setIsInfoEditing] = useState(false);
   // const [isEdit, setIsEdit] = useState(false);
 
-  const handlePencilBtnClick = () => {
+  const handlePencilBtnClick = (e) => {
+    e.stopPropagation();
     setIsModalOpen(true);
-    setIsInfoEditing(true);
   };
 
   const handleCloseModal = () => {
@@ -33,9 +32,9 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
     return savedInfo
       ? JSON.parse(savedInfo)
       : {
-          stationName: name,
-          email: "atmosfera-che@gmail.com",
-          address: "бул. Івана Кркача 54",
+          // stationName: station.name,
+          // email: "atmosfera-che@gmail.com",
+          // address: "бул. Івана Кркача 54",
           subscriptionStatus: "PRO",
           employees: "8",
           validUntil: "22.10.2025",
@@ -80,14 +79,16 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
             ) : (
               <h3 className={styles.serviceTitle}>{name}</h3>
             )} */}
-            <h3 className={styles.serviceTitle}>{name}</h3>
-            <button
-              className={styles.editBtn}
-              onClick={(e) => {
-                e.stopPropagation();
-                // handleEditToggle();
-              }}
-            >
+
+            {station.logo && (
+              <img
+                src={station?.logo ? `${station?.logo}?t=${Date.now()}` : null}
+                alt="Logo"
+                className={styles.logo}
+              />
+            )}
+            <h3 className={styles.serviceTitle}>{station.name}</h3>
+            <button className={styles.editBtn} onClick={handlePencilBtnClick}>
               {/* {isEdit ? (
                 <RiSave3Fill className={styles.mainIcon} size={21} />
               ) : (
@@ -96,19 +97,8 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
                   onClick={handlePencilBtnClick}
                 />
               )} */}
-              <BsPencil
-                className={styles.mainIcon}
-                onClick={handlePencilBtnClick}
-              />
+              <BsPencil className={styles.mainIcon} />
             </button>
-            {isModalOpen && (
-              <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-                <AddAutoServiceModal
-                  onClose={handleCloseModal}
-                  infoToEdit={isInfoEditing}
-                />
-              </Modal>
-            )}
           </div>
 
           <ul className={styles.infoList}>
@@ -128,7 +118,7 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
               ) : (
                 <p className={styles.infoValue}>{info.email}</p>
               )} */}
-              <p className={styles.infoValue}>{info.email}</p>
+              <p className={styles.infoValue}>{station.email}</p>
             </li>
             <li className={styles.infoItem}>
               <p className={styles.infoKey}>
@@ -145,7 +135,7 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
               ) : (
                 <p className={styles.infoValue}>{info.address}</p>
               )} */}
-              <p className={styles.infoValue}>{info.address}</p>
+              <p className={styles.infoValue}>{station.address}</p>
             </li>
             <li className={styles.infoItem}>
               <p className={styles.infoKey}>
@@ -196,8 +186,19 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
       ) : (
         <div className={styles.closedServiceWrapper} onClick={onToggle}>
           <div className={styles.closedServiceContainer}>
-            <h3 className={styles.serviceTitle}>{name}</h3>
+            <h3 className={styles.serviceTitle}>{station.name}</h3>
           </div>
+          <button className={styles.editBtn} onClick={handlePencilBtnClick}>
+            {/* {isEdit ? (
+                <RiSave3Fill className={styles.mainIcon} size={21} />
+              ) : (
+                <BsPencil
+                  className={styles.mainIcon}
+                  onClick={handlePencilBtnClick}
+                />
+              )} */}
+            <BsPencil className={styles.mainIcon} />
+          </button>
           <div className={styles.closedServiceInfo}>
             <div className={styles.subscribeStatus}>
               <BsCreditCard2Back /> PRO
@@ -212,6 +213,15 @@ function ServiceStationItem({ name, isOpen, onToggle, isActive }) {
             />
           </div>
         </div>
+      )}
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <AddAutoServiceModal
+            onClose={handleCloseModal}
+            updateAutoService={true}
+            station={station}
+          />
+        </Modal>
       )}
     </div>
   );

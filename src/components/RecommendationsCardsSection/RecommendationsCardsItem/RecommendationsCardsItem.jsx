@@ -24,7 +24,7 @@ import ServiceBookingModal from "../../Modals/ServiceBookingModal/ServiceBooking
 import ArchiveModal from "../../Modals/ArchiveModal/ArchiveModal.jsx";
 import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal.jsx";
 
-export default function RecommendationsCardsItem({ car }) {
+export default function RecommendationsCardsItem({ car, isRecommendation }) {
   const visibility = useSelector(selectVisibilityRecomendations);
   const [isMonitoring, setisMonitoring] = useState("main");
   const [modalState, setModalState] = useState({
@@ -136,54 +136,55 @@ export default function RecommendationsCardsItem({ car }) {
         )}
 
         <div className={styles.btnContainer}>
-          {visibility?.infoBtn && (
-            <CarDetailButton
-              carId={id}
-              // location={isMonitoring}
-              carName={car.auto}
-            />
-          )}
-          {visibility?.createBtn && (
-            <button className={styles.plus} onClick={openServiceBookingModal}>
-              <BsPlusLg className={styles.iconPlus} />
-            </button>
-          )}
+          <CarDetailButton
+            carId={id}
+            car={car}
+            // location={isMonitoring}
+            carName={car.auto}
+          />
+
+          <button className={styles.plus} onClick={openServiceBookingModal}>
+            <BsPlusLg className={styles.iconPlus} />
+          </button>
+
           {modalState.serviceBooking && (
             <Modal isOpen={modalState.serviceBooking} onClose={closeModals}>
               <ServiceBookingModal onClose={closeModals} />
             </Modal>
           )}
-          {visibility?.notificBtn && (
-            <button
-              className={styles.clockContainer}
-              onClick={openNotificationModal}
-            >
-              <GiAlarmClock className={styles.iconClock} size={20} />
-            </button>
-          )}
+
+          <button
+            className={styles.clockContainer}
+            onClick={openNotificationModal}
+          >
+            <GiAlarmClock className={styles.iconClock} size={20} />
+          </button>
+
           {modalState.notifications && (
             <Modal isOpen={modalState.notifications} onClose={closeModals}>
-              <NotificationModal onClose={closeModals} 
-               time="clientTime"
-               date="clientDate"
-               comment="clientComment"
-               connectionType="clientConnection"
-               accountingModal={true}
-               service="clientService"
-               setNotificationSent={setModalState}/>
+              <NotificationModal
+                onClose={closeModals}
+                time="clientTime"
+                date="clientDate"
+                comment="clientComment"
+                connectionType="clientConnection"
+                accountingModal={true}
+                service="clientService"
+                setNotificationSent={setModalState}
+              />
             </Modal>
           )}
-          {visibility?.delBtn && (
-            <button
-              className={styles.clockContainer}
-              onClick={openArchiveModal}
-            >
-              <BsTrash className={styles.iconTrash} size={18} />
-            </button>
-          )}
+
+          <button className={styles.clockContainer} onClick={openArchiveModal}>
+            <BsTrash className={styles.iconTrash} size={18} />
+          </button>
+
           {modalState.archive && (
             <Modal isOpen={modalState.archive} onClose={closeModals}>
-              <ArchiveModal onClose={closeModals} />
+              <ArchiveModal
+                onClose={closeModals}
+                isRecommendation={isRecommendation}
+              />
             </Modal>
           )}
         </div>

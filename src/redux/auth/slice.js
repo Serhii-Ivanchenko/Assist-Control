@@ -84,7 +84,7 @@ const authSlice = createSlice({
           ...state.userData, // Зберігаємо поточні значення
           ...action.payload, // Додаємо нові дані
         };
-        state.userData.selectedServiceId = action.payload.services[0].id;
+        state.userData.selectedServiceId = action.payload.services[0]?.id;
         state.isLoading = false;
       })
       .addCase(getUserData.rejected, handleRejected)
@@ -116,7 +116,8 @@ const authSlice = createSlice({
       // })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.userData = { ...state.userData, ...action.payload };
-        state.userData.selectedServiceId = action.payload.services[0].id;
+        state.userData.selectedServiceId =
+          action.payload.services?.[0]?.id || null;
         state.isLoggedIn = true;
         state.isRefreshing = false; // Зупиняємо рефреш
         state.apiKey = action.payload.api_key; // Переконуємося, що ключ оновився

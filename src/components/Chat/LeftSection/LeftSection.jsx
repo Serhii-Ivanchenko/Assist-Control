@@ -126,8 +126,8 @@ export default function LeftSection() {
       name: "Дмитро Поліщук",
       lastMessage: "Доброго ранку! Ви працюєте з автомобілями американськог...",
       managersPhoto: avatar,
-      time: "2025-01-11T06:45:33",
-      read: true,
+      time: "2025-01-29T03:44:00",
+      read: false,
       id: "7",
     },
     {
@@ -218,8 +218,16 @@ export default function LeftSection() {
       closed: closedChats,
       chosen: favourite,
       archive: archiveChats,
+      telegram: filteredChats.filter((chat) => chat.type === "telegram").length,
+      facebook: filteredChats.filter((chat) => chat.type === "facebook").length,
+      whatsApp: filteredChats.filter((chat) => chat.type === "whatsApp").length,
+      site: filteredChats.filter((chat) => chat.type === "site").length,
+      gmail: filteredChats.filter((chat) => chat.type === "gmail").length,
+      assist: filteredChats.filter((chat) => chat.type === "assist").length,
     };
   }, [filteredChats, favourite, delayedChats, closedChats, archiveChats]);
+
+  // console.log(categoryCounts.telegram);
 
   useEffect(() => {
     let updatedChats = [...initialChats];
@@ -319,7 +327,7 @@ export default function LeftSection() {
     const hasWarning = initialChats.some((chat) => {
       const time = Date.now() - new Date(chat.time).getTime();
       return (
-        time >= 300000 && !chat.read && (chat.type === type || type === "all")
+        time >= 30000 && !chat.read && (chat.type === type || type === "all")
       );
     });
     return hasWarning ? css.warningBorder : "";

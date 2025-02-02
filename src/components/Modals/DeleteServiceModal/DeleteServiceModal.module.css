@@ -1,0 +1,22 @@
+.modal {
+  position: relative;
+  background-color: var(--bg-secondary);
+  padding: 30px;
+  width: 580px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.closeIcon {
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  width: 16px;
+  height: 16px;
+  fill: var(--light-gray);
+  cursor: pointer;
+}
+
+.text {
+  font-weight: 600;
+}

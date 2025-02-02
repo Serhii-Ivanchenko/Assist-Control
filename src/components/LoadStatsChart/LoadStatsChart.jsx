@@ -71,6 +71,12 @@ export default function LoadStatsChart() {
     actualDate = currentDate;
   }
 
+  //  const [activeIndex, setActiveIndex] = useState(null); // Для отслеживания наведения на точку
+
+  // Генерируем массив ticks
+  const generateTicks = (dataMax) => {
+    return Array.from({ length: dataMax + 2 }, (_, index) => index);
+  };
 
   const customActiveDot = (props) => {
     const { cx, cy } = props;
@@ -124,6 +130,7 @@ export default function LoadStatsChart() {
   const data = filteredData.map((el) => ({ ...el, hour: el.hour + ".00" }));
   // const interval= workHours.end-workHours.start-1;
   //  console.log(workHours.end, workHours.start, interval);
+  const dataMax = Math.max(...data.map((item) => item.value));
 
   return (
     <div className={css.containerLoadStats}>
@@ -179,14 +186,16 @@ export default function LoadStatsChart() {
             />
 
             <YAxis
-              domain={[0, (dataMax) => dataMax]}
+              domain={[0, (dataMax) => dataMax + 1]}
               dataKey="value"
               margin={{ topt: 10 }}
               tick={{ fontSize: "clamp(6px, min(0.925vh, 0.54vw), 10px)" }}
-              interval={0}
+              interval={dataMax > 25 ? 2 : 0}
               axisLine={{ fill: "transparent" }}
               width={15}
-              ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+              // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
+              //  ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+              ticks={generateTicks(dataMax)}
             />
 
             <Tooltip content={<CustomTooltip />} />

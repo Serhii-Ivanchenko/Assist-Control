@@ -32,6 +32,9 @@ import NotificationModal from "../../sharedComponents/NotificationModal/Notifica
 import SearchTags from "./ChatTags/SearchTags/SearchTags.jsx";
 import { tags } from "../RightSection/ChatTags/tags.js";
 import PhoneModal from "./PopUp/PhoneModal/PhoneModal.jsx";
+import StaffModal from "./PopUp/StaffModal/StaffModal.jsx";
+import CategoryModal from "./PopUp/CategoryModal/CategoryModal.jsx";
+import ActionModal from "./PopUp/ActionModal/ActionModal.jsx";
 import clsx from "clsx";
 
 const data = {
@@ -175,6 +178,7 @@ export default function RightSection() {
 
   const [activeCategory, setActiveCategory] = useState(categories[0]); // Выбрана первая категория по умолчанию
   const [isCategory, setIsCategory] = useState(false); // Видимость справочника
+  const triggerCategoryRef = useRef(null);
 
   const toggleCategorySelector = () => {
     setIsCategory(!isCategory);
@@ -182,8 +186,48 @@ export default function RightSection() {
 
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
-    setIsCategory(false); // Закрываем справочник
+    setIsCategory(false);
   };
+
+  // width change if isScrolled * start
+  const wrapperRef = useRef(null); // Ссилка на контейнер
+  const [isScrolled, setIsScrolled] = useState(false); // Стан для перевірки наявності скролу
+
+  useEffect(() => {
+    const checkScrollbar = () => {
+      if (wrapperRef.current) {
+        const container = wrapperRef.current;
+        const scrollbarVisible =
+          container.scrollHeight > container.clientHeight;
+        setIsScrolled((prev) => {
+          if (prev !== scrollbarVisible) {
+            return scrollbarVisible;
+          }
+          return prev; // Избегаем лишнего рендеринга
+        });
+      }
+    };
+
+    // Используем ResizeObserver для изменения размеров контейнера
+    const resizeObserver = new ResizeObserver(checkScrollbar);
+    const mutationObserver = new MutationObserver(checkScrollbar); // Для добавления/удаления контента
+
+    if (wrapperRef.current) {
+      resizeObserver.observe(wrapperRef.current);
+      mutationObserver.observe(wrapperRef.current, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    checkScrollbar(); // Выполняем проверку сразу при монтировании
+
+    return () => {
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
+    };
+  }, []);
+  // width change if isScrolled * end
 
   const actions = [
     { id: 1, action: "add", fullname: "Додати шаблон" },
@@ -194,14 +238,11 @@ export default function RightSection() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [actionType, setActionType] = useState(""); // "add", "edit", "delete"
+  const triggerActionRef = useRef(null);
   const handleOpenModal = (type) => {
     setActionType(type);
-    setModalOpen(true);
+    setModalOpen(!modalOpen);
   };
-
-  // const handleCloseModal = () => {
-  //   setModalOpen(false);
-  // };
 
   const handleActionChange = (value) => {
     setActionType(value);
@@ -250,13 +291,23 @@ export default function RightSection() {
   ];
 
   const [isModalStaff, setIsModalStaff] = useState(false);
+  const staffButtonRef = useRef(null);
+  const handleStaffClick = () => {
+    setIsModalStaff((prevState) => !prevState);
+  };
+
   const [isModalStaffPlus, setIsModalStaffPlus] = useState(false);
+  const staffButtonPlusRef = useRef(null);
+  const handleStaffPlusClick = () => {
+    setIsModalStaffPlus((prevState) => !prevState);
+  };
 
   const [isModalNote, setIsModalNote] = useState(false);
   const [notificationSent, setNotificationSent] = useState(false);
   const closeModal = () => {
     setIsModalNote(false);
   };
+
 
   return (
     <div className={css.rightSectionWrapper}>
@@ -298,18 +349,19 @@ export default function RightSection() {
 
           <button
             className={css.btnaction}
-            onClick={() => {
-              setIsModalStaff(true);
-            }}
+            ref={staffButtonRef}
+            // onClick={() => {
+            //   setIsModalStaff(true);
+            // }}
+            onClick={handleStaffClick}
           >
             <RiUserSharedFill className={css.iconaction} />
           </button>
 
           <button
             className={css.btnaction}
-            onClick={() => {
-              setIsModalStaffPlus(true);
-            }}
+            ref={staffButtonPlusRef}
+            onClick={handleStaffPlusClick}
           >
             <RiUserAddFill className={css.iconaction} />
           </button>
@@ -327,30 +379,33 @@ export default function RightSection() {
             />
           )}
 
-          {/* {isPhoneModalOpen && (
-            <div
-              className={css.modalOverlay} // Задний фон модального окна
-              onClick={() => setIsPhoneModalOpen(false)} // Закрытие при клике на фон
-            >
-              <div
-                className={css.modalphone}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {data.phonenums.map((phone, index) => (
-                  <div
-                    key={index}
-                    className={css.modalitem}
-                    onClick={() => {
-                      makeCall(phone);
-                      setIsPhoneModalOpen(false);
-                    }}
-                  >
-                    {formatPhoneNumber(phone)}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )} */}
+          {isModalStaff && (
+            <StaffModal
+              isOpen={isModalStaff}
+              onClose={() => setIsModalStaff(false)}
+              staffs={staffs}
+              onStaffSelect={(staff) => {
+                console.log(staff);
+                setIsModalStaff(false);
+              }}
+              offsetLeft={20}
+              triggerRef={staffButtonRef}
+            />
+          )}
+
+          {isModalStaffPlus && (
+            <StaffModal
+              isOpen={isModalStaffPlus}
+              onClose={() => setIsModalStaffPlus(false)}
+              staffs={staffs}
+              onStaffSelect={(staff) => {
+                console.log(staff);
+                setIsModalStaffPlus(false);
+              }}
+              offsetLeft={68}
+              triggerRef={staffButtonPlusRef}
+            />
+          )}
 
           {isModalNote && (
             <Modal isOpen={isModalNote} onClose={closeModal}>
@@ -366,101 +421,16 @@ export default function RightSection() {
               />
             </Modal>
           )}
-
-          {isModalStaff && (
-            <div
-              className={css.modalOverlay} // Задний фон модального окна
-              onClick={() => setIsModalStaff(false)} // Закрытие при клике на фон
-            >
-              <div
-                className={css.modalstaffplus}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {staffs.map((item) => (
-                  <div
-                    key={item.id}
-                    className={css.modalitemstaff}
-                    onClick={() => {
-                      console.log(item.name);
-                      setIsModalStaffPlus(false);
-                    }}
-                  >
-                    <div className={css.iconWrapper}>
-                      <img
-                        className={css.manageravatar}
-                        src={item.avatar || ava1}
-                        alt={item.name}
-                      />
-                      <span
-                        className={css.notificationBubble}
-                        style={{
-                          backgroundColor: item.isActive
-                            ? "var(--green)"
-                            : "var(--input-text)",
-                        }}
-                      ></span>
-                    </div>
-                    <div className={css.modalstaffbox}>
-                      <div className={css.staffname}>{item.name}</div>
-                      <div className={css.staffemail}>{item.email}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {isModalStaffPlus && (
-            <div
-              className={css.modalOverlay} // Задний фон модального окна
-              onClick={() => setIsModalStaffPlus(false)} // Закрытие при клике на фон
-            >
-              <div
-                className={css.modalstaffplus}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {staffs.map((item) => (
-                  <div
-                    key={item.id}
-                    className={css.modalitemstaff}
-                    onClick={() => {
-                      console.log(item.name);
-                      setIsModalStaffPlus(false);
-                    }}
-                  >
-                    <div className={css.iconWrapper}>
-                      <img
-                        className={css.manageravatar}
-                        src={item.avatar || ava1}
-                        alt={item.name}
-                      />
-                      <span
-                        className={css.notificationBubble}
-                        style={{
-                          backgroundColor: item.isActive
-                            ? "var(--green)"
-                            : "var(--input-text)",
-                        }}
-                      ></span>
-                    </div>
-                    <div className={css.modalstaffbox}>
-                      <div className={css.staffname}>{item.name}</div>
-                      <div className={css.staffemail}>{item.email}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
-      <div className={css.wrapper}>
+      <div className={css.wrapper} ref={wrapperRef}>
         <Accordion
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary) !important",
@@ -543,7 +513,8 @@ export default function RightSection() {
           expanded={expanded === "panel2"}
           onChange={handleChange("panel2")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary)",
@@ -561,8 +532,6 @@ export default function RightSection() {
               "&:hover": {
                 cursor: "default !important",
               },
-              // flexGrow: "1",
-              // overflow: "hidden",
             }}
             className={css.accordionTitle}
             aria-controls="panel2-content"
@@ -618,7 +587,8 @@ export default function RightSection() {
           expanded={expanded === "panel3"}
           onChange={handleChange("panel3")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary) !important",
@@ -681,6 +651,7 @@ export default function RightSection() {
                 {expandedRows.includes("panel3") && (
                   <div
                     className={css.categoryDisplay}
+                    ref={triggerCategoryRef}
                     onClick={toggleCategorySelector} // Открываем/закрываем справочник
                   >
                     <span>{activeCategory.shortname}</span>
@@ -707,6 +678,7 @@ export default function RightSection() {
                     }}
                   >
                     <button
+                      ref={triggerActionRef}
                       className={css.btnicon}
                       onClick={() => {
                         handleOpenModal("");
@@ -718,49 +690,27 @@ export default function RightSection() {
                 )}
 
                 {expandedRows.includes("panel3") && isCategory && (
-                  <div
-                    className={css.modalOverlay} // Задний фон модального окна
-                    onClick={() => setIsCategory(false)} // Закрытие при клике на фон
-                  >
-                    <div
-                      className={css.categorySelector}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {categories.map((category) => (
-                        <div
-                          className={clsx(css.category, {
-                            [css.categoryActive]:
-                              category.categ === activeCategory.categ,
-                          })}
-                          key={category.categ}
-                          onClick={() => handleCategorySelect(category)}
-                        >
-                          {category.fullname}
-                        </div>
-                      ))}
-                    </div>
+                  <div>
+                    <CategoryModal
+                      isOpen={isCategory}
+                      onClose={() => setIsCategory(false)}
+                      categories={categories}
+                      activeCategory={activeCategory}
+                      onSelect={handleCategorySelect}
+                      triggerRef={triggerCategoryRef}
+                    />
                   </div>
                 )}
 
                 {expandedRows.includes("panel3") && modalOpen && (
-                  <div
-                    className={css.modalOverlay} // Задний фон модального окна
-                    onClick={() => setModalOpen(false)} // Закрытие при клике на фон
-                  >
-                    <div
-                      className={css.modal}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {actions.map((item) => (
-                        <div
-                          className={css.modalitem}
-                          key={item.id}
-                          onClick={() => handleActionChange(item.action)}
-                        >
-                          {item.fullname}
-                        </div>
-                      ))}
-                    </div>
+                  <div>
+                    <ActionModal
+                      isOpen={modalOpen}
+                      onClose={() => setModalOpen(false)}
+                      actions={actions}
+                      onActionSelect={handleActionChange}
+                      triggerRef={triggerActionRef}
+                    />
                   </div>
                 )}
               </div>
@@ -783,7 +733,8 @@ export default function RightSection() {
           expanded={expanded === "panel4"}
           onChange={handleChange("panel4")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary) !important",
@@ -865,7 +816,8 @@ export default function RightSection() {
           expanded={expanded === "panel5"}
           onChange={handleChange("panel5")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary) !important",
@@ -941,7 +893,8 @@ export default function RightSection() {
           expanded={expanded === "panel6"}
           onChange={handleChange("panel6")}
           disableGutters={true}
-          className={css.accordion}
+          // className={css.accordion}
+          className={`${css.accordion} ${isScrolled && css.accordionScrolled}`}
           sx={{
             "& .Mui-focusVisible": {
               backgroundColor: "var(--bg-secondary)",
@@ -949,9 +902,6 @@ export default function RightSection() {
             background: "none",
             color: "var(--light-gray)",
             boxShadow: "none",
-            // "&:before": {
-            //   display: "none",
-            // },
             overflow: "hidden",
             minHeight: expandedRows.includes("panel6") ? 200 : 56,
           }}

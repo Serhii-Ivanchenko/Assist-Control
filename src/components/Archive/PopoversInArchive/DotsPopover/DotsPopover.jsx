@@ -4,7 +4,7 @@ import { BsPencil } from "react-icons/bs";
 import { FaRedoAlt } from "react-icons/fa";
 import styles from "./DotsPopover.module.css";
 
-function DotsPopover({ isVisible, togglePopover }) {
+function DotsPopover({ isVisible, togglePopover, onRestore, onEdit }) {
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -31,13 +31,15 @@ function DotsPopover({ isVisible, togglePopover }) {
   }, [isVisible, handleClickOutside]);
 
   const handleEdit = () => {
+    togglePopover(false);
+    onEdit();
     console.log("Редагувати контакт");
   };
 
   const handleRestore = () => {
-    console.log("Відновити з архіву");
+    togglePopover(false);
+    onRestore();
   };
-
   return (
     <div className={styles.container}>
       <button

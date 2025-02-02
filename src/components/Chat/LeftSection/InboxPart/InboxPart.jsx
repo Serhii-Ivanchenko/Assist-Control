@@ -64,6 +64,7 @@ export default function InboxPart({
         chats={chats}
         setFilteredChats={setFilteredChats}
         flashingBorder={flashingBorder}
+        categoryCounts={categoryCounts}
       />
     </div>
   );

@@ -20,10 +20,14 @@ import { useSelector } from "react-redux";
 import RatingStars from "../sharedComponents/RatingStars/RatingStars.jsx";
 import { selectVisibilityCar } from "../../redux/visibility/selectors.js";
 import { useState } from "react";
+import { GiAlarmClock } from "react-icons/gi";
+import Modal from "../Modals/Modal/Modal.jsx";
+import NotificationModal from "../sharedComponents/NotificationModal/NotificationModal.jsx";
 
 export default function DayCarsItem({ car, isModal }) {
   const visibility = useSelector(selectVisibilityCar);
   const [isMonitoring, setisMonitoring] = useState("main");
+  const [modalState, setModalState] = useState({ notifications: false });
 
   const {
     car_id,
@@ -37,13 +41,22 @@ export default function DayCarsItem({ car, isModal }) {
     client,
     plate: carNumber,
   } = car;
-  
+
   const carPhoto = photoUrl || absentAutoImg;
 
   const formatCarNumber = (number) => {
     if (!number) return "";
     return number.replace(/\s+/g, "");
   };
+
+  const openNotificationModal = () => {
+    setModalState((prev) => ({ ...prev, notifications: true }));
+  };
+
+  const closeModals = () => {
+    setModalState((prev) => ({ ...prev, notifications: false }));
+  };
+
   return (
     <div
       className={clsx(
@@ -121,14 +134,33 @@ export default function DayCarsItem({ car, isModal }) {
         )}
 
         <div className={styles.btnContainer}>
-          {visibility?.status && <StatusBtn car={car} />}
-          {visibility?.info && (
-            <CarDetailButton
-              carId={car_id}
-              // location={isMonitoring}
-              carName={car.auto}
-            />
+          <StatusBtn car={car} />
+          <CarDetailButton
+            carId={car_id}
+            // location={isMonitoring}
+            carName={car.auto}
+            car={car}
+          />
+          {status === "complete" && (
+            <button
+              className={styles.clockContainer}
+              onClick={openNotificationModal}
+            >
+              <GiAlarmClock className={styles.iconClock} size={20} />
+            </button>
           )}
+          <Modal isOpen={modalState.notifications} onClose={closeModals}>
+            <NotificationModal
+              onClose={closeModals}
+              time="clientTime"
+              date="clientDate"
+              comment="clientComment"
+              connectionType="clientConnection"
+              accountingModal={true}
+              service="clientService"
+              setNotificationSent={setModalState}
+            />
+          </Modal>
         </div>
       </div>
 
