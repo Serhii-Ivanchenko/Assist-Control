@@ -27,7 +27,6 @@ import {
   getMarkupItemData,
   getPosts,
   getPrices,
-  getPricesInCategory,
   getRatingData,
   getRatings,
   getSupplierData,
@@ -35,7 +34,6 @@ import {
   updateCashRegister,
   updateCashRegisterStatus,
   updateCategory,
-  updateCategoryData,
   updateDynamicMarkup,
   updateEmployeeData,
   updateEmployeeStatus,
@@ -244,7 +242,7 @@ const settingsSlice = createSlice({
             ...(action.payload.name_post && {
               name_post: action.payload.name_post,
             }),
-            ...(action.payload.status !== undefined && {
+            ...(action.payload.status !== undefined && action.payload.status !== null && {
               status: action.payload.status,
             }),
           };
@@ -272,14 +270,6 @@ const settingsSlice = createSlice({
         state.prices = action.payload;
       })
       .addCase(getPrices.rejected, handleRejected)
-
-      // .addCase(getPricesInCategory.pending, handlePending)
-      // .addCase(getPricesInCategory.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-
-      //   state.categoryPrices = action.payload;
-      // })
-      // .addCase(getPricesInCategory.rejected, handleRejected)
 
       .addCase(updateCategory.pending, handlePending)
       .addCase(updateCategory.fulfilled, (state, action) => {
