@@ -1,8 +1,6 @@
-import { useMemo, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useMemo, useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { updateSupplierStatus } from "../../../../redux/settings/operations.js";
-import { closeModal } from "../../../../redux/settings/slice.js";
-import { selectIsModalOpen } from "../../../../redux/settings/selectors.js";
 import SwitchableBtns from "../../../sharedComponents/SwitchableBtns/SwitchableBtns.jsx";
 import RatingStars from "../../../sharedComponents/RatingStars/RatingStars.jsx";
 import OptionList from "./OptionList/OptionsList.jsx";
@@ -13,10 +11,10 @@ import toast from "react-hot-toast";
 
 function DistributorsItem({ item, onEdit, onDelete }) {
   const dispatch = useDispatch();
-  const isModalOpen = useSelector(selectIsModalOpen);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModalHandler = () => {
-    dispatch(closeModal());
+    setIsModalOpen(false);
   };
 
   const handleStatusToggle = useCallback((id, currentStatus) => {
