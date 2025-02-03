@@ -116,3 +116,19 @@
   text-underline-offset: auto;
   text-underline-position: from-font;
 }
+
+@keyframes blinkBorder {
+  0% {
+    border: 1px solid var(--red);
+  }
+  50% {
+    border: 1px solid transparent;
+  }
+  100% {
+    border: 1px solid var(--red);
+  }
+}
+
+.warningBorder {
+  animation: blinkBorder 3s infinite;
+}

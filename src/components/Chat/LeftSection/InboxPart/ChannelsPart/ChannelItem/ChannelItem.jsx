@@ -1,6 +1,6 @@
 import css from "./ChannelItem.module.css";
 import { RxDragHandleDots2 } from "react-icons/rx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ChannelItem({
   index,
@@ -12,12 +12,37 @@ export default function ChannelItem({
   isActive,
   handleIsActive,
   onDragStart,
-  flashingBorder,
+  // flashingBorder,
+  // chats,
+  sortedChats,
 }) {
   const [isDragging, setIsDragging] = useState(false);
   const [draggingElement, setDraggingElement] = useState(null);
   const [initialX, setInitialX] = useState(0);
   const [initialY, setInitialY] = useState(0);
+
+  const [hasExpiredChats, setHasExpiredChats] = useState(false);
+
+  useEffect(() => {
+    const checkExpiredChats = () => {
+      const now = Date.now();
+
+      const hasExpired = sortedChats.some(
+        (chat) =>
+          !chat.read &&
+          now - new Date(chat.time).getTime() >= 30000 &&
+          chat.type === channel.type
+      );
+
+      setHasExpiredChats(hasExpired);
+    };
+
+    checkExpiredChats();
+
+    const interval = setInterval(checkExpiredChats, 1000);
+
+    return () => clearInterval(interval);
+  }, [sortedChats, channel.type]);
 
   const handleDragStart = (e) => {
     setIsDragging(true);
@@ -108,8 +133,7 @@ export default function ChannelItem({
         <p
           className={`${css.numberBox} ${
             (channel.value === 0 || !channel.value) && css.numberBoxHidden
-          } 
-          ${flashingBorder(channel.type)}`}
+          } ${hasExpiredChats ? css.warningBorder : ""}`}
         >
           {channel.value}
         </p>

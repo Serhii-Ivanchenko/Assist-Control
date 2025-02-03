@@ -11,10 +11,10 @@ import ChannelItem from "./ChannelItem/ChannelItem";
 
 export default function ChannelsPart({
   handleFilter,
-  // chats,
   setFilteredChats,
   flashingBorder,
   categoryCounts,
+  sortedChats,
 }) {
   const channelsList = [
     {
@@ -145,6 +145,8 @@ export default function ChannelsPart({
               handleIsActive={handleIsActive}
               onDragStart={handleDragStart}
               flashingBorder={flashingBorder}
+              // chats={chats}
+              sortedChats={sortedChats}
             />
           ))}
         </ul>
