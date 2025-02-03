@@ -1,10 +1,13 @@
 import * as Yup from "yup";
 
 export const ServiceBookingSchema = Yup.object().shape({
+  phone_number: Yup.string()
+    .matches(/^380\d{9}$/, "Телефон повинен відповідати формату 380123456789")
+    .required("Це поле повинно бути заповнене"),
   car_number: Yup.string()
     .matches(
-      /^[a-zA-Z0-9 ]+$/,
-      "Поле повинно містити лише латинські літери та цифри"
+      /^[a-zA-Z0-9]+$/,
+      "Поле має містити цифри та латинські літери без пробілів"
     )
     .required("Це поле повинно бути заповнене"),
   vin: Yup.string().matches(
@@ -13,19 +16,21 @@ export const ServiceBookingSchema = Yup.object().shape({
   ),
   service_id: Yup.string().required("Це поле повинно бути заповнене"),
   prepayment: Yup.number(),
-  phone_number: Yup.string()
-    .matches(
-      /^\+380\d{9}$/,
-      "Телефон повинен відповідати формату +380123456789"
-    )
-    .required("Це поле повинно бути заповнене"),
   position: Yup.string().required("Це поле повинно бути заповнене"),
   mechanic_id: Yup.string().required("Це поле повинно бути заповнене"),
-  make_model: Yup.string()
-    .matches(
-      /^[a-zA-Z0-9 ]+$/,
-      "Поле повинно містити лише латинські літери та цифри"
-    )
-    .required("Це поле повинно бути заповнене"),
   name: Yup.string().required("Це поле повинно бути заповнене"),
+  model: Yup.string()
+    //   .matches(
+    //   /^[a-zA-Z0-9 ]+$/,
+    //   "Поле повинно містити лише латинські літери та цифри"
+    // ),
+    .required("Це поле повинно бути заповнене"),
+  make: Yup.string()
+    // .matches(
+    //   /^[a-zA-Z0-9 ]+$/,
+    //   "Поле повинно містити лише латинські літери та цифри"
+    // )
+    .required("Це поле повинно бути заповнене"),
+  year: Yup.string(),
+  note: Yup.string(),
 });
