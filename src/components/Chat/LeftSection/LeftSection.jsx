@@ -228,7 +228,7 @@ export default function LeftSection() {
     };
   }, [filteredChats, favourite, delayedChats, closedChats, archiveChats]);
 
-  console.log(categoryCounts.telegram);
+  // console.log(categoryCounts.telegram);
 
   useEffect(() => {
     let updatedChats = [...initialChats];

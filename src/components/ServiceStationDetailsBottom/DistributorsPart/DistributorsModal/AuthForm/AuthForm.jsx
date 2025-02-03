@@ -14,16 +14,15 @@ const initialValues = {
 const validationSchema = Yup.object({
   website: Yup.string(),
   distrEmail: Yup.string().email("Невірний формат e-mail"),
-  login: Yup.string().required("Поле обов'язкове"),
-  password: Yup.string().required("Поле обов'язкове"),
+  login: Yup.string(),
+  password: Yup.string(),
   tokenAPI: Yup.string(),
   priceEmail: Yup.string().email("Невірний формат e-mail"),
 });
 
 const AuthForm = ({ formikRef }) => {
   const handleSubmit = (values, { setSubmitting }) => {
-    console.log("Values:", values);
-
+    console.log("AuthForm Values:", values);
     setSubmitting(false);
   };
 
