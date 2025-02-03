@@ -91,9 +91,10 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
       if (
         !distributor.name?.trim() ||
         !distributorsInfoData.address?.trim() ||
-        !distributorsInfoData.managerPhone?.trim() ||
-        !authData.distrEmail?.trim() ||
-        !authData.priceEmail?.trim()
+        !distributorsInfoData.managerPhone?.trim()
+        // ||
+        // !authData.distrEmail?.trim() ||
+        // !authData.priceEmail?.trim()
       ) {
         toast.error("Будь ласка, заповніть всі обов'язкові поля.", {
           position: "top-center",
