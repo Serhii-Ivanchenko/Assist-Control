@@ -48,13 +48,14 @@
 }
 
 .error {
-  position: absolute;
-  top: 35px;
-  left: 155px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
   color: red;
-  font-size: 12px;
-  margin: 0;
-  padding: 0;
+  position: absolute;
+  top: 100%;
+  left: 40%;
+  white-space: nowrap;
 }
 
 .btnBox {

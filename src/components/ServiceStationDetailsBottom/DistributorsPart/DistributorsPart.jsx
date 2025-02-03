@@ -14,6 +14,7 @@ import {
 } from "../../../redux/settings/selectors";
 import { openModal, closeModal } from "../../../redux/settings/slice";
 import styles from "./DistributorsPart.module.css";
+import toast from "react-hot-toast";
 
 function DistributorsPart() {
   const dispatch = useDispatch();
@@ -29,36 +30,56 @@ function DistributorsPart() {
     }
   }, [dispatch, distributors.length]);
 
-  const handleEditDistributor = useCallback(
-    (distributor) => {
-      setSelectedDistributor(distributor);
-      dispatch(openModal());
-    },
-    [dispatch]
-  );
-
   const handleDeleteDistributor = useCallback(
     (distributor) => {
       dispatch(deleteSupplier(distributor.id))
         .unwrap()
         .then(() => {
+          toast.success("Постачальник успішно видалений :)", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
           dispatch(getAllSuppliers());
         })
         .catch((error) => {
-          console.error("Error deleting supplier:", error);
+          console.error("Error updating user data:", error);
+          toast.error("Щось пішло не так :(", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
         });
     },
     [dispatch]
   );
 
-  const handleAddDistributor = () => {
-    // setSelectedDistributor(null);
-    dispatch(openModal());
-  };
-
   const closeModalHandler = () => {
     dispatch(closeModal());
     setSelectedDistributor(null);
+  };
+
+  const handleEditDistributor = useCallback(
+    (distributor) => {
+      if (!isModalOpen) {
+        setSelectedDistributor(distributor);
+        dispatch(openModal());
+      }
+    },
+    [dispatch, isModalOpen]
+  );
+
+  const handleAddDistributor = () => {
+    if (!isModalOpen) {
+      setSelectedDistributor(null);
+      dispatch(openModal());
+    }
   };
 
   const memoizedDistributorsList = useMemo(
@@ -88,7 +109,7 @@ function DistributorsPart() {
         <Modal isOpen={isModalOpen} onClose={closeModalHandler}>
           <DistributorsModal
             onClose={closeModalHandler}
-            distributorData={selectedDistributor}
+            distributorData={selectedDistributor || null}
           />
         </Modal>
       )}
