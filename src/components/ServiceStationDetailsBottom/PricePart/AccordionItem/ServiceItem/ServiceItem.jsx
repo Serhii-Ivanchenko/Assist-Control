@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import PopupMenu from "../../../../sharedComponents/PopupMenu/PopupMenu";
 import styles from "./ServiceItem.module.css";
@@ -6,19 +6,20 @@ import styles from "./ServiceItem.module.css";
 function ServiceItem({
   id,
   serviceData,
-  onDelete,
-  innerAccRef,
-  containerRef,
-  resetPrice,
-  resetService,
-  serviceItemEdit,
-  setServiceItemEdit,
-  onUpdate,
+  // onDelete,
+  // innerAccRef,
+  // containerRef,
+  // resetPrice,
+  // resetService,
+  // serviceItemEdit,
+  // setServiceItemEdit,
+  // onUpdate,
 }) {
-  const [serviceName, setServiceName] = useState(serviceData.item);
+  const [isEdit, setIsEdit] = useState(false);
+  const [serviceName, setServiceName] = useState(serviceData.service_name);
   const [activePopupId, setActivePopupId] = useState(null);
-  const [minPrice, setMinPrice] = useState(serviceData.price?.min || "");
-  const [maxPrice, setMaxPrice] = useState(serviceData.price?.max || "");
+  const [minPrice, setMinPrice] = useState(serviceData.min_price || "");
+  const [maxPrice, setMaxPrice] = useState(serviceData.max_price || "");
   const inputRef = useRef();
   const buttonRef = useRef(null);
 
@@ -26,13 +27,14 @@ function ServiceItem({
     setActivePopupId((prev) => (prev === id ? null : id));
   };
 
-  const handleEdit = (id) => {
-    setServiceItemEdit(id);
-    setActivePopupId(null);
+  const handleEdit = () => {
+    setIsEdit(true);
+    // setServiceItemEdit(id);
+    // setActivePopupId(null);
   };
 
   const handleDelete = () => {
-    onDelete(id);
+    // onDelete(id);
   };
 
   const handleMinPriceChange = (e) => {
@@ -49,27 +51,27 @@ function ServiceItem({
     }
   };
 
-  useEffect(() => {
-    const updatedService = {
-      id: id,
-      item: serviceName,
-      price: { min: minPrice, max: maxPrice },
-    };
-    onUpdate(updatedService);
-  }, [id, serviceName, minPrice, maxPrice]);
+  // useEffect(() => {
+  //   const updatedService = {
+  //     id: id,
+  //     item: serviceName,
+  //     price: { min: minPrice, max: maxPrice },
+  //   };
+  //   onUpdate(updatedService);
+  // }, [id, serviceName, minPrice, maxPrice]);
 
-  useEffect(() => {
-    if (resetPrice || resetService) {
-      setMinPrice(serviceData.price?.min || "");
-      setMaxPrice(serviceData.price?.max || "");
-      setServiceName(serviceData.item);
-      setServiceItemEdit(false);
-    }
-  }, [resetPrice, resetService, serviceData.item]);
+  // useEffect(() => {
+  //   if (resetPrice || resetService) {
+  //     setMinPrice(serviceData.price?.min || "");
+  //     setMaxPrice(serviceData.price?.max || "");
+  //     setServiceName(serviceData.item);
+  //     setServiceItemEdit(false);
+  //   }
+  // }, [resetPrice, resetService, serviceData.item]);
 
   return (
     <>
-      {serviceItemEdit === id ? (
+      {isEdit ? (
         <div className={styles.editInputBox}>
           <input
             className={styles.editInput}
@@ -94,7 +96,7 @@ function ServiceItem({
             className={styles.input}
             value={minPrice}
             onChange={handleMinPriceChange}
-            onFocus={() => setServiceItemEdit(true)}
+            // onFocus={() => setServiceItemEdit(true)}
           />
         </div>
         <div className={styles.inputBox}>
@@ -105,7 +107,7 @@ function ServiceItem({
             className={styles.input}
             value={maxPrice}
             onChange={handleMaxPriceChange}
-            onFocus={() => setServiceItemEdit(true)}
+            // onFocus={() => setServiceItemEdit(true)}
           />
         </div>
       </div>
@@ -126,8 +128,8 @@ function ServiceItem({
             onEdit={() => handleEdit(id)}
             onDelete={handleDelete}
             buttonRef={buttonRef}
-            innerAccRef={innerAccRef}
-            containerRef={containerRef}
+            // innerAccRef={innerAccRef}
+            // containerRef={containerRef}
           />
         </div>
       )}
