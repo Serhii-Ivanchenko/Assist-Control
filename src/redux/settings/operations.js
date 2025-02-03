@@ -184,7 +184,7 @@ export const getAllEmployees = createAsyncThunk(
 // Create supplier
 export const createSupplier = createAsyncThunk(
   "settings/createSupplier",
-  async (supplierData , thunkAPI) => {
+  async (supplierData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
@@ -224,12 +224,6 @@ export const updateSupplierData = createAsyncThunk(
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const { supplier_id, ...dataToUpdate } = employeeDataToUpdate;
-      // Create the payload to send in the request
-      // const payload = {
-      //   // logo,
-      //   ...dataToUpdate,
-      //   // file: base64Logo,
-      // };
 
       // Make the API request
       const response = await axiosInstance.patch(

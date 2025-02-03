@@ -13,11 +13,15 @@ const initialValues = {
 
 const validationSchema = Yup.object({
   website: Yup.string(),
-  distrEmail: Yup.string().email("Невірний формат e-mail"),
+  distrEmail: Yup.string()
+    .email("Невірний формат e-mail")
+    .required("* Поле обов'язкове"),
   login: Yup.string(),
   password: Yup.string(),
   tokenAPI: Yup.string(),
-  priceEmail: Yup.string().email("Невірний формат e-mail"),
+  priceEmail: Yup.string()
+    .email("Невірний формат e-mail")
+    .required("* Поле обов'язкове"),
 });
 
 const AuthForm = ({ formikRef }) => {

@@ -87,7 +87,26 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
       const authData = authFormRef.current?.values || {};
       const distributorsInfoData = formRef.current?.values || {};
 
-      // генерація масиву розкладу для відправки
+      // Перевірка на заповненість обов'язкових полів
+      if (
+        !distributor.name?.trim() ||
+        !distributorsInfoData.address?.trim() ||
+        !distributorsInfoData.managerPhone?.trim() ||
+        !authData.distrEmail?.trim() ||
+        !authData.priceEmail?.trim()
+      ) {
+        toast.error("Будь ласка, заповніть всі обов'язкові поля.", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+        return; // Не відправляти дані, якщо поля не заповнені
+      }
+
+      // Генерація масиву розкладу для відправки
       const scheduleToSend = scheduleRef.current.generateBackendData();
       console.log("scheduleToSend during submit", scheduleToSend);
 
@@ -97,24 +116,14 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
         name: distributor.name || editableName,
         ...authData,
         ...distributorsInfoData,
-        logo: logoBase64,
-        // ? logoBase64 // Якщо є нове фото, передаємо його
-        // : distributor.logo?.startsWith("https")
-        // ? undefined // Якщо старий URL, не передавати нічого
-        // : distributor.logo, // Якщо вже є локальне значення, залишаємо його
+        logo: logoBase64 || distributor.logo,
         deliverySchedule: scheduleToSend,
       };
 
       console.log("Updated Payload:", dataToUpdate);
-      // console.log("logoBase64", logoBase64);
-      // console.log("JSON.stringify", JSON.stringify(dataToUpdate));
-      // console.log("supplier_id", distributor.id);
 
       if (distributor.id) {
-        await dispatch(
-          // updateSupplierData({ ...dataToUpdate, supplier_id: distributor.id })
-          updateSupplierData(dataToUpdate)
-        )
+        await dispatch(updateSupplierData(dataToUpdate))
           .unwrap()
           .then(() => {
             toast.success("Постачальника успішно оновлено :)", {
@@ -139,13 +148,6 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
             });
           });
       } else {
-        // if (
-        //   !distributorsInfoData.address ||
-        //   !distributorsInfoData.managerPhone
-        // ) {
-        //   console.error("Обов'язкові поля не заповнені");
-        //   return;
-        // }
         await dispatch(createSupplier(dataToUpdate))
           .unwrap()
           .then(() => {
@@ -160,7 +162,7 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
             dispatch(getAllSuppliers());
           })
           .catch((error) => {
-            console.error("Error updating user data:", error);
+            console.error("Error creating supplier:", error);
             toast.error("Щось пішло не так :(", {
               position: "top-center",
               duration: 3000,
@@ -173,6 +175,7 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
       }
 
       onClose();
+      console.log("Base64 Logo:", logoBase64);
     } catch (error) {
       console.error("Error details:", error);
       console.error("Error response:", error.response?.data);

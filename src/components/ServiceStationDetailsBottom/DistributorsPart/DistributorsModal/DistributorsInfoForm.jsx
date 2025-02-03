@@ -1,4 +1,4 @@
-import { Formik, Field, Form } from "formik";
+import { ErrorMessage, Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import CustomRadioBtn from "../../../CustomRadioBtn/CustomRadioBtn";
 import styles from "./DistributorsModal.module.css";
@@ -21,7 +21,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
   };
 
   const validationSchema = Yup.object({
-    address: Yup.string().required("Поле обов'язкове"),
+    address: Yup.string().required("* Поле обов'язкове"),
     paymentCondition: Yup.string(),
     days: Yup.string(),
     owner: Yup.string(),
@@ -31,7 +31,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     bankCode: Yup.string(),
     companyAddress: Yup.string(),
     managerPhone: Yup.string()
-      .required("Поле обов'язкове")
+      .required("* Поле обов'язкове")
       .matches(/^\+?\d*$/, "Телефон може містити лише цифри та знак +"),
     managerName: Yup.string(),
     officePhone: Yup.string().matches(
@@ -65,6 +65,11 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
               name="address"
               placeholder="Харків, Байрона 189 оф 27"
               className={styles.input}
+            />
+            <ErrorMessage
+              name="address"
+              component="div"
+              className={styles.errorAddress}
             />
           </div>
 
@@ -211,6 +216,11 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
                   name="managerPhone"
                   placeholder="+380671234567"
                   style={{ width: "158px" }}
+                />
+                <ErrorMessage
+                  name="managerPhone"
+                  component="div"
+                  className={styles.error}
                 />
               </label>
             </div>
