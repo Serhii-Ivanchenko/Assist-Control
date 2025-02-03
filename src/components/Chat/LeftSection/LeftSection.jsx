@@ -126,7 +126,7 @@ export default function LeftSection() {
       name: "Дмитро Поліщук",
       lastMessage: "Доброго ранку! Ви працюєте з автомобілями американськог...",
       managersPhoto: avatar,
-      time: "2025-02-04T00:34:00",
+      time: "2025-02-04T00:45:00",
       read: false,
       id: "7",
     },
