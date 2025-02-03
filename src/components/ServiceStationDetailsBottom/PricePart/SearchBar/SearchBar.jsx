@@ -18,27 +18,13 @@ function SearchBar({ searchData, onFilter, onReset }) {
       return;
     }
 
-    const matchedCategories = searchData.reduce((result, category) => {
-      const matchingServices = category.items.filter((service) =>
-        service.item.toLowerCase().includes(userQuery)
-      );
+    // Фільтруємо послуги за назвою
+    const filteredServices = searchData.filter((service) =>
+      service.service_name.toLowerCase().includes(userQuery)
+    );
+    console.log("filteredServices", filteredServices);
 
-      if (matchingServices.length > 0) {
-        result.push({
-          id: category.id,
-          category: category.category,
-          items: matchingServices,
-        });
-      }
-      return result;
-    }, []);
-
-    if (matchedCategories.length > 0) {
-      onFilter(matchedCategories);
-    } else {
-      // setIsBtnIsVisible(false);
-      onFilter([]);
-    }
+    onFilter(filteredServices);
   };
 
   const handleReset = () => {
