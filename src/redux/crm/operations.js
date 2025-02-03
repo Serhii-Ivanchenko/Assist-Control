@@ -39,7 +39,7 @@ export const getRecordsForDay = createAsyncThunk(
           },
         }
       );
-      // console.log("getRecordsForDay", response.data);
+      console.log("getRecordsForDay", response.data);
 
       return response.data;
     } catch (error) {

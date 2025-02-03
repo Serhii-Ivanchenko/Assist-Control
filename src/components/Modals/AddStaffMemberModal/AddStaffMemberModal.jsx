@@ -236,7 +236,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     sparesAmount: employee.sparesAmount || 0.0,
     sparesPrice: employee.sparesPrice || 0.0,
     profit: 0.0,
-    // status: employee.status || 1,
+    status: employee.status || 1,
     schedule: parsedSchedule.days,
     selectedPages: [],
     files: {
@@ -286,7 +286,8 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
       console.log("Base64 files:", base64Files);
 
       // генерація масиву розкладу для відправки
-      const scheduleToSend = detailsRef.current.generateBackendData();
+      const scheduleToSend =
+        detailsRef?.current?.generateBackendData?.() || null;
       console.log("scheduleToSend during submit", scheduleToSend);
 
       const employeeData = {
