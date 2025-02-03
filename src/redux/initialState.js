@@ -226,7 +226,7 @@ export const initialState = {
     schedule: [],
     posts: [],
     prices: [],
-    categoryPrices: [],
+    // categoryPrices: [],
     ratings: [],
     rating: {},
     // markup: { fixed: [], dynamic: [] },
@@ -299,8 +299,10 @@ export const initialState = {
   },
 
   connections: {
-    stats: [],
+    stats: {},
     connectionsList: [],
+    connectionsListPaginationData: {},
+    problematicContacts: [],
     isLoading: false,
     error: null,
   },

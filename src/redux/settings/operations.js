@@ -559,12 +559,15 @@ export const getPrices = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.get(`/set/services`, {
-        headers: {
-          // "X-Api-Key": "YA7NxysJ",
-          "company-id": serviceId,
-        },
-      });
+      const response = await axiosInstance.get(
+        `/set/categories_repair_service_all`,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
       console.log("getPrices", response.data);
 
       return response.data;
@@ -575,14 +578,40 @@ export const getPrices = createAsyncThunk(
 );
 
 // Get services and prices in particular category
-export const getPricesInCategory = createAsyncThunk(
-  "settings/getPricesInCategory",
-  async (category_id, thunkAPI) => {
+// export const getPricesInCategory = createAsyncThunk(
+//   "settings/getPricesInCategory",
+//   async (category_id, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const response = await axiosInstance.get(
+//         `/set/categories/${category_id}/services`,
+//         {
+//           headers: {
+//             // "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       console.log("getPricesInCategory", response.data);
+
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// Update category 
+export const updateCategory = createAsyncThunk(
+  "settings/updateCategory",
+  async (newData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.get(
-        `/set/categories/${category_id}/services`,
+      const response = await axiosInstance.patch(
+        `/set/categories/update/`,
+        newData,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -590,7 +619,7 @@ export const getPricesInCategory = createAsyncThunk(
           },
         }
       );
-      console.log("getPricesInCategory", response.data);
+      console.log("updateCategory", response.data);
 
       return response.data;
     } catch (error) {
@@ -601,13 +630,13 @@ export const getPricesInCategory = createAsyncThunk(
 
 // Update service name or prices
 export const editServiceNameOrPrices = createAsyncThunk(
-  "settings/editPrices",
+  "settings/editServiceNameOrPrices",
   async (newData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.patch(
-        `/set/services/update/`,
+        `/set/repair_services/update/`,
         newData,
         {
           headers: {
@@ -616,7 +645,7 @@ export const editServiceNameOrPrices = createAsyncThunk(
           },
         }
       );
-      console.log("editPrices", response.data);
+      console.log("editServiceNameOrPrices", response.data);
 
       return response.data;
     } catch (error) {
@@ -625,7 +654,7 @@ export const editServiceNameOrPrices = createAsyncThunk(
   }
 );
 
-// Create category of services
+// Create category
 export const createCategory = createAsyncThunk(
   "settings/createCategory",
   async (categoryName, thunkAPI) => {
@@ -651,33 +680,6 @@ export const createCategory = createAsyncThunk(
   }
 );
 
-// Update category name
-export const updateCategoryData = createAsyncThunk(
-  "settings/updateCategoryData",
-  async (categoryDataToUpdate, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const serviceId = state.service.selectedServiceInSettingsId;
-    try {
-      // const { categoryId, ...dataToUpdate } = categoryDataToUpdate;
-      const response = await axiosInstance.patch(
-        `/set/categories/update/`,
-        categoryDataToUpdate,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      console.log("updateCategoryData", response.data);
-
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
 // Create service
 export const createService = createAsyncThunk(
   "settings/createService",
@@ -685,15 +687,17 @@ export const createService = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
 
-    // const { categoryId, ...serviceName } = newService;
-
     try {
-      const response = await axiosInstance.post(`/set/services/`, newService, {
-        headers: {
-          // "X-Api-Key": "YA7NxysJ",
-          "company-id": serviceId,
-        },
-      });
+      const response = await axiosInstance.post(
+        `/set/repair_service/`,
+        newService,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
       console.log("createService", response.data);
 
       return response.data;
