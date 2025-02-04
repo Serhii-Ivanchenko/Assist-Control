@@ -1,0 +1,79 @@
+.containerltvchart {
+    border-radius: 12px;
+    width: 487px;
+    height: 337px;
+    /* padding: 10px 15px; */
+    background: var(--bg-secondary);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 337px);
+     padding: 18px 15px; 
+}
+
+
+.responseContainer {
+    height: 317px;
+    width: 457px;
+}
+
+.stattitle {
+    font-weight: 300;
+    color: var(--white);
+    width: 284px;
+        height: 28px;
+margin-bottom: 18px;
+    font-size: 24px;
+}
+
+
+.titlebox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 457px;
+        height: 40px;
+}
+
+    .areabox {
+        width: 467px;
+        height: 270px;
+        height: clamp(255px, calc(255px + (66 * ((100vh - 900px) / 180))), 270px);
+        /* margin-left: -10px; */
+    }
+
+
+.customtooltip {
+    background-color: var(--light-gray);
+    width: 60px;
+    padding: 2px 4px;
+    border-radius: 6px;
+    transform: translateX(-50%);
+    font-weight: 400;
+    font-size: 6px;
+    font-variant: smallCaps;
+    font-style: normal;
+}
+
+.popuptitle {
+    font-weight: 600;
+    font-size: 13px;
+    font-variant: small-caps;
+    color: var(--blue-btn-inactive);
+    text-align: center;
+}
+
+.popupvalue {
+    font-size: 10px;
+    font-variant: small-caps;
+    color: var(--blue-btn-inactive);
+        padding-top: 3px;
+        height: 15px;
+}
+
+.kolvalue {
+    font-size: 16px;
+    color: var(--play-btn-triangle);
+    font-size: 14px;
+        font-weight: 600;
+        text-align: end;
+}
