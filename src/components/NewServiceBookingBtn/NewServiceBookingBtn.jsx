@@ -25,8 +25,8 @@ export default function NewServiceBookingBtn() {
         <Modal isOpen={modalIsOpen} onClose={handleModalClose}>
           <ServiceBookingModal
             onClose={handleModalClose}
-            recordId={null}
-            postId={null}
+            // recordId={null}
+            // postId={null}
           />
         </Modal>
       )}

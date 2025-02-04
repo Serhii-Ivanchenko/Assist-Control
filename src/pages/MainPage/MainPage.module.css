@@ -1,12 +1,16 @@
 .contentContainer {
     display: flex;
-    margin-top: 8px;
-    gap: 14px;
+    flex-direction: column;
+    gap: 30px;
 }
 
-@media only screen and (min-width: 1850px) {
-    .contentContainer {
-        margin-top: 13px;
-        gap: 14px;
-    }
+.mainContent {
+    display: flex;
+    gap: 35px;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
 }

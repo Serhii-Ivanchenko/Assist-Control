@@ -4,6 +4,7 @@ import { ServiceBookingSchema } from "../../../validationSchemas/ServiceBookingS
 import { BsFillCameraFill } from "react-icons/bs";
 import { BsXLg } from "react-icons/bs";
 import { BsFillCaretDownFill } from "react-icons/bs";
+import { BsCaretUpFill } from "react-icons/bs";
 import SelectDate from "./SelectDate/SelectDate";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,6 +28,9 @@ import Loader from "../../Loader/Loader.jsx";
 import { selectDate } from "../../../redux/cars/selectors.js";
 import BtnsCloseAndSubmit from "../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit.jsx";
 import passport from "../../../assets/images/passport_image.png";
+import carModels from "../../../utils/output.json";
+import DatePicker from "react-datepicker";
+import Select, { components } from "react-select";
 
 export default function ServiceBookingModal({
   onClose,
@@ -43,18 +47,173 @@ export default function ServiceBookingModal({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownPostOpen, setIsDropdownPostOpen] = useState(false);
   const [isDropdownMechanicOpen, setIsDropdownMechanicOpen] = useState(false);
-  const [registrationCertificate, setRegistrationCertificate] =
-    useState(passport);
+  // const [registrationCertificate, setRegistrationCertificate] =
+  //   useState(passport);
   const selectRef = useRef(null);
 
   const selectedServiceId = useSelector(selectSelectedServiceId);
   const { mechanics, posts, services } = useSelector(selectServiceData);
   const dayRecords = useSelector(selectDayRecords);
 
-  const handleRegistrationCertificateChange = (e) => {
-    const newCertificate = e.target.files[0];
-    setRegistrationCertificate(URL.createObjectURL(newCertificate));
+  const CustomDropdownIndicator = (props) => {
+    const { menuIsOpen } = props.selectProps;
+    return (
+      <components.DropdownIndicator {...props}>
+        <BsFillCaretDownFill
+          className={`${css.btnArrowSelect} ${menuIsOpen ? css.rotated : ""}`}
+        />
+      </components.DropdownIndicator>
+    );
   };
+
+  const CustomSelect = ({ field, options, setFieldValue, placeholderName }) => {
+    const customStyles = {
+      input: (base) => ({
+        ...base,
+        color: "var(--light-gray)",
+        fontSize: "14px",
+        fontStyle: " normal",
+        fontWeight: 400,
+        lineHeight: "normal",
+      }),
+      placeholder: (provided, state) => ({
+        ...provided,
+        color: "var(--input-text)",
+        fontSize: "14px",
+        fontАamily: "Roboto, sans-serif",
+        fontStyle: "normal",
+        fontWeight: "400",
+        lineHeight: "normal",
+      }),
+      control: (provided, state) => ({
+        ...provided,
+        boxShadow: "none", // Убираем тень и синий контур при фокусе
+        outline: state.isFocused ? "1px solid #ccc" : "none", // Убираем outline (синий контур)
+        width: "288px",
+        height: "46px",
+        borderRadius: "6px",
+        border: "1px solid var(--input-stroke)",
+        backgroundColor: "var(--bg-input)",
+        paddingLeft: "20px",
+        "&:hover": {
+          border: "1px solid var(--input-stroke)",
+          outline: "none",
+        },
+        indicatorSeparator: () => ({
+          display: "none", // Убирает разделитель перед стрелкой
+        }),
+      }),
+      menu: (provided) => ({
+        ...provided,
+        backgroundColor: "var(--bg-input)",
+        borderRadius: "6px",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        className: css.customMenuList,
+      }),
+      menuList: (provided) => ({
+        ...provided,
+        maxHeight: "200px", // Ограничение высоты, чтобы появился скролл
+        overflowY: "auto", // Включаем вертикальный скролл
+      }),
+      option: (base, state) => ({
+        ...base,
+        padding: "10px",
+        backgroundColor: state.isFocused
+          ? "var(--blue-btn-normal)"
+          : "transparent",
+        color: "var(--light-gray)",
+        fontSize: "14px",
+        fontStyle: " normal",
+        fontWeight: 400,
+        lineHeight: "normal",
+      }),
+      singleValue: (base) => ({
+        ...base,
+        color: "var(--light-gray)",
+        fontSize: "14px",
+        fontStyle: " normal",
+        fontWeight: 400,
+        lineHeight: "normal",
+      }),
+    };
+
+    return (
+      <Select
+        {...field}
+        options={options}
+        classNamePrefix={css.customMenuList}
+        onChange={(selectedOption) => {
+          setFieldValue(field.name, selectedOption ? selectedOption.value : "");
+        }}
+        value={options?.find((option) => option.value === field.value) || null}
+        isSearchable
+        placeholder={placeholderName}
+        styles={customStyles}
+        components={{
+          DropdownIndicator: CustomDropdownIndicator, // Убирает стрелку
+          IndicatorSeparator: () => null, // Убирает разделитель
+          MenuList: (props) => (
+            <components.MenuList {...props} className={css.customMenuList}>
+              {props.children}
+            </components.MenuList>
+          ),
+        }}
+      />
+    );
+  };
+
+  const makeOptions = carModels.map((car) => ({
+    value: car.make,
+    label: car.make,
+  }));
+
+  const getModelOptions = (make) => {
+    const selectedCar = carModels.find(
+      (car) => car.make.toLocaleLowerCase() === make.toLocaleLowerCase()
+    );
+    if (selectedCar) {
+      return selectedCar.models.map((model) => ({
+        value: model.model_name,
+        label: model.model_name,
+      }));
+    }
+    return [];
+  };
+
+  const getYearOptions = (make, model) => {
+    if (!make || !model) {
+      return;
+    }
+    const selectedCar = carModels.find(
+      (car) => car.make.toLocaleLowerCase() === make.toLocaleLowerCase()
+    );
+    const selectedCarModel = selectedCar?.models.find(
+      (car) => model.toLocaleLowerCase() === car.model_name.toLocaleLowerCase()
+    );
+    if (selectedCarModel) {
+      const selectedCarModelConstructionInterval =
+        selectedCarModel?.construction_interval;
+      const [startDate, endDate] =
+        selectedCarModelConstructionInterval.split("- ");
+      const [startMonth, startYear] = startDate.split(".");
+      const [endMonth, endYear] = endDate.split(".");
+      const defaultEndYear = endYear ? endYear : new Date().getFullYear();
+      const yearArr = [];
+      for (let i = startYear; i <= defaultEndYear; i++) {
+        yearArr.push(i);
+      }
+      return yearArr.map((year) => ({
+        value: year,
+        label: year,
+      }));
+    }
+    return [];
+  };
+
+  // const handleRegistrationCertificateChange = (e) => {
+  //   const newCertificate = e.target.files[0];
+  //   setRegistrationCertificate(URL.createObjectURL(newCertificate));
+  // };
 
   const [pickedDate, setPickedDate] = useState(
     recordId || carSelectDate
@@ -65,6 +224,9 @@ export default function ServiceBookingModal({
   const recordById = dayRecords?.find((dayRecord) => {
     return dayRecord.car_id === recordId;
   });
+
+  console.log("dayRecords", dayRecords);
+  console.log("recordById", recordById);
 
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
@@ -148,16 +310,18 @@ export default function ServiceBookingModal({
   };
 
   const initialValues = {
-    name: recordById?.name || "",
-    phone_number: recordId ? `${"+" + recordById?.phone}` : "",
+    phone_number: recordId ? recordById?.phone : "",
     car_number: recordById?.plate || "",
-    service_id: recordById?.service_id || "",
-    make_model: recordById?.auto || "",
     vin: recordById?.vin || "",
-    note: recordById?.note || "",
+    service_id: recordById?.service_id || "",
     prepayment: recordById?.prepayment || "",
     position: postId || recordById?.post_id || posts[0]?.id,
     mechanic_id: recordById?.mechanic_id || "",
+    name: recordById?.name || "",
+    make: recordById?.make || "",
+    model: recordById?.model || "",
+    year: recordById?.year || "",
+    note: recordById?.note || "",
   };
 
   return !posts ? (
@@ -170,6 +334,7 @@ export default function ServiceBookingModal({
       ) : (
         <h3 className={css.header}>Створення запису на {pickedDate}</h3>
       )}
+      <p className={css.headerReminder}>* - Поля обов'язкові для заповнення</p>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -178,7 +343,7 @@ export default function ServiceBookingModal({
         validateOnChange={true}
         validateOnBlur
       >
-        {({ values }) => (
+        {({ values, errors, setFieldValue }) => (
           <Form className={css.form}>
             <div className={css.rightSectionWrapper}>
               <div className={css.inputWrapper}>
@@ -186,21 +351,27 @@ export default function ServiceBookingModal({
                   className={css.input}
                   type="text"
                   name="phone_number"
-                  placeholder="Телефон"
+                  placeholder="Телефон *"
                   disabled={recordId}
                 />
+
                 <ErrorMessage
                   name="phone_number"
                   component="div"
                   className={css.errorMsg}
                 />
+                {!errors.phone_number && (
+                  <p className={css.reminder}>
+                    Телефон повинен відповідати формату 380123456789
+                  </p>
+                )}
               </div>
               <div className={css.inputWrapper}>
                 <Field
                   className={css.input}
                   type="text"
                   name="car_number"
-                  placeholder="AX 2945 OP"
+                  placeholder="AX2945OP *"
                 />
                 <ErrorMessage
                   name="car_number"
@@ -241,7 +412,7 @@ export default function ServiceBookingModal({
                     }
                   >
                     <option value="" disabled hidden>
-                      Послуга
+                      Послуга *
                     </option>
                     {services.map((service) => {
                       return (
@@ -343,7 +514,7 @@ export default function ServiceBookingModal({
                     }
                   >
                     <option value="" disabled hidden>
-                      Оберіть механіка
+                      Оберіть механіка *
                     </option>
                     {mechanics.map((mechanic) => {
                       return (
@@ -376,7 +547,7 @@ export default function ServiceBookingModal({
                   className={css.input}
                   type="text"
                   name="name"
-                  placeholder="ПІБ"
+                  placeholder="ПІБ *"
                 />
                 <ErrorMessage
                   name="name"
@@ -386,18 +557,29 @@ export default function ServiceBookingModal({
               </div>
               <div className={css.inputWrapper}>
                 <Field
-                  className={css.input}
-                  type="text"
-                  name="make_model"
-                  placeholder="Марка і модель автомобіля"
+                  name="make"
+                  component={CustomSelect}
+                  placeholderName="Марка автомобіля *"
+                  options={makeOptions}
+                  setFieldValue={setFieldValue}
+                  // onChange={(selectedOption) => {
+                  //   setFieldValue(
+                  //     "make",
+                  //     selectedOption ? selectedOption.value : ""
+                  //   );
+                  //   setChosenCarMake(
+                  //     selectedOption ? selectedOption.value : ""
+                  //   );
+                  //   setFieldValue("model", ""); // Сброс модели при изменении марки
+                  // }}
                 />
                 <ErrorMessage
-                  name="make_model"
+                  name="make"
                   component="div"
                   className={css.errorMsg}
                 />
               </div>
-              <div className={css.addFileWrapper}>
+              {/* <div className={css.addFileWrapper}>
                 <input
                   type="file"
                   name="registrationCertificate"
@@ -414,13 +596,66 @@ export default function ServiceBookingModal({
                   src={registrationCertificate}
                   alt="Registration certificate"
                 />
+              </div> */}
+              <div className={css.inputWrapper}>
+                <Field
+                  name="model"
+                  component={CustomSelect}
+                  placeholderName="Модель автомобіля *"
+                  options={getModelOptions(values.make)}
+                  setFieldValue={setFieldValue}
+                  isDisabled={!values.make}
+                />
+                <ErrorMessage
+                  name="model"
+                  component="div"
+                  className={css.errorMsg}
+                />
+                {!errors.model && !values.model && (
+                  <p className={css.reminder}>
+                    Спочатку оберіть марку автомобіля
+                  </p>
+                )}
               </div>
-              <Field
-                as="textarea"
-                name="note"
-                className={css.textArea}
-                placeholder="Примітка"
-              />
+              <div className={css.wrapper}>
+                <div className={css.inputWrapper}>
+                  {/* <DatePicker
+                    className={css.input}
+                    name="year"
+                    dateFormat="yyyy"
+                    selected={startYear}
+                    onChange={(date) => setStartYear(date)}
+                    maxDate={new Date(maxYear, 11, 31)}
+                    minDate={new Date(minYear, 0, 1)}
+                    placeholderText="Рік випуску"
+                    showYearPicker
+                  /> */}
+                  <Field
+                    name="year"
+                    component={CustomSelect}
+                    placeholderName="Рік випуску"
+                    options={getYearOptions(values.make, values.model)}
+                    setFieldValue={setFieldValue}
+                    isDisabled={!values.make && !values.model}
+                  />
+                  <ErrorMessage
+                    name="year"
+                    component="div"
+                    className={css.errorMsg}
+                  />
+                  {!errors.year && !values.year && (
+                    <p className={css.reminder}>
+                      Спочатку оберіть марку та модель автомобіля
+                    </p>
+                  )}
+                </div>
+                <Field
+                  // as="textarea"
+                  name="note"
+                  className={css.input}
+                  placeholder="Примітка"
+                />
+              </div>
               <div className={css.calendar}>
                 <SelectDate
                   newDate={setNewDate}

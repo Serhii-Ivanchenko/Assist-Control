@@ -4,6 +4,7 @@ import { BsFolderPlus } from "react-icons/bs";
 import SearchBar from "./SearchBar/SearchBar";
 import Modal from "../../Modals/Modal/Modal";
 import AddCategoryModal from "./AddCategoryModal/AddCategoryModal";
+import addIdsToData from "../../../utils/addIdsToData";
 
 import styles from "./PricePart.module.css";
 import { useDispatch } from "react-redux";
@@ -22,9 +23,13 @@ export default function PricePart() {
 
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
-  //   const [isEditable, setIsEditable] = useState(false);
-  //   const [serviceItemEdit, setServiceItemEdit] = useState(null);
-  const allServices = prices.flatMap((category) => category.services);
+  const [isEditable, setIsEditable] = useState(false);
+  const [originalData, setOriginalData] = useState(prices);
+  const [editableData, setEditableData] = useState([...originalData]);
+  const [resetCategory, setResetCategory] = useState(false);
+  const [resetService, setResetService] = useState(false);
+  const [resetPrice, setResetPrice] = useState(false);
+  const [serviceItemEdit, setServiceItemEdit] = useState(null);
   const scrollToTheLastItemRef = useRef(null);
 
   useEffect(() => {
@@ -32,24 +37,43 @@ export default function PricePart() {
   }, [dispatch]);
 
   const handleFilter = (searchData) => {
-    console.log("handleFilter", searchData);
     setFilteredData(searchData);
     setActiveSearch(true);
   };
 
-  const handleNewCategory = () => {
-    console.log("handleNewCategory");
+  const handleNewCategory = (categoryName) => {
+    const newCategory = {
+      category: categoryName,
+      items: [
+        {
+          id: addIdsToData(),
+          item: "Додайте послугу",
+          price: { min: null, max: null },
+        },
+      ],
+    };
+    const updatedData = [...originalData, newCategory];
+    setEditableData(updatedData);
+    setOriginalData(updatedData);
   };
 
   const handleSaveNewData = () => {
-    console.log("handleSaveNewData");
+    setOriginalData([...editableData]);
+    setIsEditable(false);
+    setServiceItemEdit(false);
+    console.log("saving", editableData);
   };
 
-  //   const enableEditing = (id) => {};
+  const enableEditing = (id) => {
+    setIsEditable((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
-  //   const handleServiceEditing = (id) => {
-  //     setServiceItemEdit(id);
-  //   };
+  const handleServiceEditing = (id) => {
+    setServiceItemEdit(id);
+  };
 
   const handleOpenModal = () => {
     dispatch(openModal());
@@ -65,7 +89,12 @@ export default function PricePart() {
   };
 
   const handleResetData = () => {
-    console.log("handleResetData");
+    setResetPrice((prev) => !prev);
+    setResetCategory((prev) => !prev);
+    setResetService((prev) => !prev);
+    setEditableData(originalData);
+    setIsEditable(false);
+    setServiceItemEdit(false);
   };
 
   // Прокрутка до ост. елементу при додаванні
@@ -90,11 +119,10 @@ export default function PricePart() {
     <div className={styles.wrapper}>
       <div className={styles.searchContainer}>
         <SearchBar
-          searchData={allServices}
+          searchData={prices}
           onFilter={handleFilter}
           onReset={handleResetSearch}
         />
-
         <button type="button" className={styles.btn} onClick={handleOpenModal}>
           <BsFolderPlus size={18} />
           Нова група
@@ -111,20 +139,30 @@ export default function PricePart() {
         )}
       </div>
       <AccordionList
-        data={
-          activeSearch
-            ? [{ category_name: "Результати пошуку", services: filteredData }]
-            : prices
-        }
+        data={activeSearch ? filteredData : prices}
+        // data={prices}
+        isEditable={isEditable}
+        onUpdate={(updatedData) => setEditableData(updatedData)}
+        onEnableEditing={enableEditing}
+        containerRef={scrollToTheLastItemRef}
+        onReset={handleResetData}
+        resetPrice={resetPrice}
+        resetCategory={resetCategory}
+        resetService={resetService}
+        serviceItemEdit={serviceItemEdit}
+        setServiceItemEdit={handleServiceEditing}
       />
-      <div className={styles.btnGroup}>
-        <button onClick={handleResetData} className={styles.resetBtn}>
-          Відміна
-        </button>
-        <button onClick={handleSaveNewData} className={styles.btn}>
-          Зберегти
-        </button>
-      </div>
+
+      {(isEditable || serviceItemEdit) && (
+        <div className={styles.btnGroup}>
+          <button onClick={handleResetData} className={styles.resetBtn}>
+            Відміна
+          </button>
+          <button onClick={handleSaveNewData} className={styles.btn}>
+            Зберегти
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -27,6 +27,10 @@
   margin-bottom: 42px;
 }
 
+.headerReminder {
+  margin-bottom: 10px;
+}
+
 .form {
   display: flex;
   gap: 16px;
@@ -58,7 +62,8 @@
   width: 13px;
   fill: var(--icon-gray);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  pointer-events: none;
+  /* pointer-events: none; */
+  cursor: pointer;
 }
 
 .rotated {
@@ -161,6 +166,16 @@ option {
   white-space: nowrap;
 }
 
+.reminder {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  white-space: nowrap;
+}
+
 .bottomRightSectionWrapper {
   display: flex;
   flex-direction: column;
@@ -215,7 +230,7 @@ option {
 
 .textArea {
   width: 288px;
-  height: 111px;
+  height: 46px;
   padding: 15px 0 15px 10px;
   border-radius: 6px;
   border: 1px solid var(--input-stroke);
@@ -251,50 +266,17 @@ option {
   margin-top: 10px;
 }
 
-/* .closeBtn {
-  width: 95px;
-  height: 36px;
-  display: flex;
-  padding: 10px 20px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  border: 1px solid var(--light-gray);
-  color: var(--white);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  background-color: transparent;
-  outline: none;
-  cursor: pointer;
+.customMenuList::-webkit-scrollbar {
+  width: 12px;
 }
 
-.submitBtn {
-  display: flex;
-  gap: 10px;
-  padding: 10px 20px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  background: var(--green-btn-normal);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: var(--white);
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  outline: none;
-  cursor: pointer;
-  border: none;
+.customMenuList::-webkit-scrollbar-track {
+  background-color: var(--input-stroke);
+  border-radius: 4px;
 }
 
-.submitBtn:hover {
-  background-color: var(--green-btn-hover);
+.customMenuList::-webkit-scrollbar-thumb {
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
+  border: 1px solid var(--input-text);
 }
-
-.submitBtnIcon {
-  width: 13px;
-  height: 10px;
-  stroke: var(--white);
-} */

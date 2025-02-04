@@ -82,7 +82,7 @@ export default function Navigation() {
             className={({ isActive }) =>
               clsx(styles.navLink, {
                 [styles.active]: isActive,
-                [styles.disabled]: true,
+                // [styles.disabled]: true,
                 [styles.navWithChat]: chatIsOpen,
               })
             }

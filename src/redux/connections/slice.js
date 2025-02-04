@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
-import { getConnectionsList, getStats } from "./operations.js";
+import {
+  getConnectionsList,
+  getProblematicContacts,
+  getStats,
+} from "./operations.js";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -24,12 +28,22 @@ const connectionsSlice = createSlice({
         state.stats = action.payload;
       })
       .addCase(getStats.rejected, handleRejected)
+
       .addCase(getConnectionsList.pending, handlePending)
       .addCase(getConnectionsList.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.connectionsList = action.payload.items;
+        const { items, ...paginationData } = action.payload;
+        state.connectionsList = items;
+        state.connectionsListPaginationData = paginationData;
       })
-      .addCase(getConnectionsList.rejected, handleRejected),
+      .addCase(getConnectionsList.rejected, handleRejected)
+
+      .addCase(getProblematicContacts.pending, handlePending)
+      .addCase(getProblematicContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.problematicContacts = action.payload;
+      })
+      .addCase(getProblematicContacts.rejected, handleRejected),
 });
 
 export default connectionsSlice.reducer;

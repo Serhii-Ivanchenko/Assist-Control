@@ -27,14 +27,15 @@ import {
   getMarkupItemData,
   getPosts,
   getPrices,
-  getPricesInCategory,
+  // getPricesInCategory,
   getRatingData,
   getRatings,
   getSupplierData,
   getWorkSchedule,
   updateCashRegister,
   updateCashRegisterStatus,
-  updateCategoryData,
+  updateCategory,
+  // updateCategoryData,
   updateDynamicMarkup,
   updateEmployeeData,
   updateEmployeeStatus,
@@ -243,7 +244,7 @@ const settingsSlice = createSlice({
             ...(action.payload.name_post && {
               name_post: action.payload.name_post,
             }),
-            ...(action.payload.status !== undefined && {
+            ...(action.payload.status !== undefined && action.payload.status !== null && {
               status: action.payload.status,
             }),
           };
@@ -272,55 +273,49 @@ const settingsSlice = createSlice({
       })
       .addCase(getPrices.rejected, handleRejected)
 
-      .addCase(getPricesInCategory.pending, handlePending)
-      .addCase(getPricesInCategory.fulfilled, (state, action) => {
+      .addCase(updateCategory.pending, handlePending)
+      .addCase(updateCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-
-        state.categoryPrices = action.payload;
+        const categoryToEditIndex = state.prices.findIndex(
+          (category) => category.category_id === action.payload.category_id
+        );
+        state.prices[categoryToEditIndex].category_name =
+          action.payload.new_name;
       })
-      .addCase(getPricesInCategory.rejected, handleRejected)
+      .addCase(updateCategory.rejected, handleRejected)
 
       .addCase(editServiceNameOrPrices.pending, handlePending)
       .addCase(editServiceNameOrPrices.fulfilled, (state, action) => {
         state.isLoading = false;
-        const pricesToEditIndex = state.prices.findIndex(
+        const serviceToEditIndex = state.prices.findIndex(
           (service) => service.service_id === action.payload.service_id
         );
-        state.prices[pricesToEditIndex] = {
-          ...state.prices[pricesToEditIndex], // Залишаємо старі дані
-          ...action.meta.arg, // Додаємо дані, які відправляли
-        };
+        state.prices[serviceToEditIndex].service_name = action.payload.new_name;
+        state.prices[serviceToEditIndex].min_price =
+          action.payload.new_min_price;
+        state.prices[serviceToEditIndex].max_price =
+          action.payload.new_max_price;
       })
       .addCase(editServiceNameOrPrices.rejected, handleRejected)
 
       .addCase(createCategory.pending, handlePending)
       .addCase(createCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.prices.push(action.payload);
       })
       .addCase(createCategory.rejected, handleRejected)
-
-      .addCase(updateCategoryData.pending, handlePending)
-      .addCase(updateCategoryData.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const categoryToEditIndex = state.prices.findIndex(
-          (category) => category.category_id === action.payload.category_id
-        );
-        state.prices[categoryToEditIndex] = {
-          ...state.prices[categoryToEditIndex], // Залишаємо старі дані
-          ...action.meta.arg, // Додаємо дані, які відправляли
-        };
-      })
-      .addCase(updateCategoryData.rejected, handleRejected)
 
       .addCase(createService.pending, handlePending)
       .addCase(createService.fulfilled, (state, action) => {
         state.isLoading = false;
 
+        const { message, category_id, category_name, ...newServiceData } =
+          action.payload;
+
         const categoryToAddNewService = state.prices.findIndex(
-          (category) => category.id === action.payload.id
+          (category) => category.category_id === category_id
         );
-        state.prices[categoryToAddNewService].items.push(action.payload);
+
+        state.prices[categoryToAddNewService].services.push(newServiceData);
       })
       .addCase(createService.rejected, handleRejected)
 
