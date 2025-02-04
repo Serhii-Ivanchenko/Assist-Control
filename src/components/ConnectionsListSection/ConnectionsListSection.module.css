@@ -81,6 +81,21 @@
   height: 32px;
 }
 
+.name,
+.autoName,
+.dateDivider{
+font-size: 16px;
+font-weight: 600;
+line-height: 1.875em;
+}
+
+
+.dateDivider {
+  font-weight: bold;
+  color: var( --light-gray);
+  text-align: center;
+}
+
 .auto {
   display: flex;
   align-items: center;
@@ -217,12 +232,4 @@
 
 .iconAuto {
   flex-shrink: 0;
-}
-
-.dateDivider {
-  font-size: 14px;
-  font-weight: bold;
-  color: var( --light-gray-table);
-  margin-bottom: 10px;
-  text-align: center;
 }

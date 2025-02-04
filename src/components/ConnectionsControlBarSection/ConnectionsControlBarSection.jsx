@@ -6,13 +6,24 @@ import renderStatusCommunication from "../../utils/renderStatusCommunication .js
 import { statusesCommunications } from "../../utils/dataToRender.js";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch.jsx";
 import DownloadPdfButtonModalCar from "../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function ConnectionsControlBarSection({ onStatusChange }) {
-
+export default function ConnectionsControlBarSection({ onStatusChange, onStartDateChange, onEndDateChange }) {
   const [periodStartData, setPeriodStartData] = useState(new Date());
   const [periodEndData, setPeriodEndData] = useState(new Date());
   const isFilter = true;
+
+  useEffect(() => {
+    const normalizedStartDate = new Date(periodStartData);
+    normalizedStartDate.setHours(0, 0, 0, 0);
+  
+    const normalizedEndDate = new Date(periodEndData);
+    normalizedEndDate.setHours(23, 59, 59, 999);
+  
+    onStartDateChange(normalizedStartDate);
+    onEndDateChange(normalizedEndDate);
+  }, [periodStartData, periodEndData, onEndDateChange, onStartDateChange]);
+  
 
   return (
     <div className={css.wrapper}>

@@ -97,7 +97,7 @@ export default function ConnectionsListSection({ connections }) {
                     size={13}
                     color="#A97878"
                   />
-                  <p>{item.car_name || "Марка не вказана"}</p>
+                  <p className={css.autoName}>{item.car_name || "Марка не вказана"}</p>
                 </div>
                 <div className={css.status}>{renderStatus(item.status, css)}</div>
                 <div className={css.archiveBtnContainer}>

@@ -19,29 +19,42 @@ export default function ConnectionsMainComponent() {
   const connectionsList = useSelector(selectConnectionsList);
   const [selectedStatus, setSelectedStatus] = useState("ALL");
 
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
   useEffect(() => {
     dispatch(getStats("all"));
     dispatch(getConnectionsList({ page: 1 }));
   }, [dispatch]);
 
-  const filteredConnections =
-    selectedStatus === "ALL"
-      ? connectionsList
-      : connectionsList.filter((item) => item.status === selectedStatus);
+  const filteredConnections = connectionsList.filter((item) => {
+    const itemDate = new Date(item.created_at);
+    itemDate.setHours(0, 0, 0, 0);
+
+    const isStatusMatch = selectedStatus === "ALL" || item.status === selectedStatus;
+    const isDateMatch = (!startDate || !endDate) || (itemDate >= startDate && itemDate <= endDate);
+
+    return isStatusMatch && isDateMatch;
+  });
 
   return (
     <div className={css.wrapper}>
-      <ConnectionsControlBarSection onStatusChange={setSelectedStatus} />
+      <ConnectionsControlBarSection
+        onStatusChange={setSelectedStatus}
+        onStartDateChange={setStartDate}
+        onEndDateChange={setEndDate}
+      />
+
       <div className={css.upperWrapper}>
         <ConnectionsCircularPBSection />
         <HorizontalPBSection />
       </div>
 
       <div className={css.bottomWrapper}>
-        <ConnectionsListSection connections={filteredConnections}/>
-        {/* <LastConnectionSection /> */}
+        <ConnectionsListSection connections={filteredConnections.length ? filteredConnections : connectionsList} />
         <ProblemCall />
       </div>
     </div>
   );
 }
+
