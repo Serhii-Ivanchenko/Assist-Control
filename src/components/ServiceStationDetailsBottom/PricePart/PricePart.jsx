@@ -24,7 +24,6 @@ export default function PricePart() {
   const [filteredData, setFilteredData] = useState([]);
   //   const [isEditable, setIsEditable] = useState(false);
   //   const [serviceItemEdit, setServiceItemEdit] = useState(null);
-  const allServices = prices.flatMap((category) => category.services);
   const scrollToTheLastItemRef = useRef(null);
 
   useEffect(() => {
@@ -90,11 +89,11 @@ export default function PricePart() {
     <div className={styles.wrapper}>
       <div className={styles.searchContainer}>
         <SearchBar
-          searchData={allServices}
+          searchData={prices}
+          // searchData={allServices}
           onFilter={handleFilter}
           onReset={handleResetSearch}
         />
-
         <button type="button" className={styles.btn} onClick={handleOpenModal}>
           <BsFolderPlus size={18} />
           Нова група
@@ -110,13 +109,7 @@ export default function PricePart() {
           </Modal>
         )}
       </div>
-      <AccordionList
-        data={
-          activeSearch
-            ? [{ category_name: "Результати пошуку", services: filteredData }]
-            : prices
-        }
-      />
+      <AccordionList data={activeSearch ? filteredData : prices} />
       <div className={styles.btnGroup}>
         <button onClick={handleResetData} className={styles.resetBtn}>
           Відміна

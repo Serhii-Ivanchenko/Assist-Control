@@ -131,9 +131,9 @@ function AccordionItem({ item, index }) {
         <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
           <ul className={styles.accordionDesc}>
             {Array.isArray(item.services) ? (
-              item.services.map((service, index) => (
-                <li key={index}>
-                  <ServiceItem id={service.id} serviceData={service} />
+              item.services.map((service) => (
+                <li key={service.service_id}>
+                  <ServiceItem id={service.service_id} serviceData={service} />
                 </li>
               ))
             ) : (

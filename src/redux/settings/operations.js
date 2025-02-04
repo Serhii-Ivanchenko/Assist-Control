@@ -596,7 +596,7 @@ export const getPrices = createAsyncThunk(
 //   }
 // );
 
-// Update category 
+// Update category
 export const updateCategory = createAsyncThunk(
   "settings/updateCategory",
   async (newData, thunkAPI) => {
