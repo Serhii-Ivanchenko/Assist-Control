@@ -197,8 +197,9 @@ export default function ServiceBookingModal({
         selectedCarModelConstructionInterval.split("- ");
       const [startMonth, startYear] = startDate.split(".");
       const [endMonth, endYear] = endDate.split(".");
+      const defaultEndYear = endYear ? endYear : new Date().getFullYear();
       const yearArr = [];
-      for (let i = startYear; i <= endYear; i++) {
+      for (let i = startYear; i <= defaultEndYear; i++) {
         yearArr.push(i);
       }
       return yearArr.map((year) => ({
