@@ -56,7 +56,7 @@
 
 .bottomContainerWithChat {
   /* width: 71px; */
-  padding-left: 14.5px;
+  /* padding-left: 14.5px; */
   padding-left: clamp(10px, min(0.783vw, 1.343vh), 14.5px);
 
   transition: width 0.7s ease;

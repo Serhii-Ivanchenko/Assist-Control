@@ -14,7 +14,7 @@
 .title {
   font-family: "Roboto", sans-serif;
   font-size: 24px;
-  font-size: clamp(16px, 2.222vh, 24px);
+  font-size: clamp(16px, min(2.222vh, 1.297vw), 24px);
   font-weight: 300;
   line-height: 1.083em;
 }

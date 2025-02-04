@@ -1,5 +1,5 @@
 .calendarWrapper {
-    padding: 20px 20px 20px 20px; 
+    padding: clamp(13px, min(1.851vh, 1.041vw), 20px);
     display: flex;
     flex-direction: column;
     height: auto;
@@ -12,17 +12,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 280px;
-    /* width: 303px; */
-    /* min-width: 276px; */
-    /* height: 20px; */
-
-}
-
-@media only screen and (min-width: 1850px) {
-    .containerpagin {
-        width: 420px;
-    }
+    /* width: 420px; */
 }
 
 .boxpagination {
@@ -30,24 +20,20 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 180px;
-    height: 20px;
-    gap: 5px;
-}
-
-@media only screen and (min-width: 1850px) {
-    .boxpagination {
-        width: 200px;
-        height: 19px;
-        gap: 5px;
-    }
+    /* width: 200px;
+    height: 19px; */
+    /* gap: 5px; */
+    gap: clamp(3px, min(0.463vh, 0.27vw), 5px);
+    width: clamp(138px, min(10.811vw, 1.759vh * 10.527), 200px);
+    height: clamp(12px, min(1.759vh, 10.811vw / 10.526), 19px);
 }
 
 .namemonth {
     color: var(--white);
 
     font-family: "Roboto", sans-serif;
-    font-size: 18px;
+    /* font-size: 18px; */
+    font-size: clamp(12px, min(1.666vh, 0.973vw), 18px);
     font-style: normal;
     font-weight: 300;
 }
@@ -57,34 +43,23 @@
     stroke-width: 2px;
     stroke: var(--white);
     border: none;
-    width: 14px;
-    height: 14px;
+    /* width: 14px;
+    height: 14px; */
+    width: clamp(12px, min(1.666vh, 0.973vw), 18px);
+    height: clamp(12px, min(1.666vh, 0.973vw), 18px);
     text-align: center;
     align-items: center;
     cursor: pointer;
     border-radius: 50%;
     background-color: var(--input-stroke);
-}
 
-@media only screen and (min-width: 1850px) {
-    .iconstep {
-        stroke-width: 3px;
-        width: 18px;
-        height: 18px;
-    }
+    stroke-width: 3px;
 }
 
 .arrowIcon {
-    width: 14px;
-    height: 14px;
+    width: clamp(12px, min(1.666vh, 0.973vw), 18px);
+    height: clamp(12px, min(1.666vh, 0.973vw), 18px);
     stroke: var(--white);
-}
-
-@media only screen and (min-width: 1850px) {
-    .arrowIcon {
-        width: 18px;
-        height: 18px;
-    }
 }
 
 .pieIconWrapper {
