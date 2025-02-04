@@ -218,3 +218,11 @@
 .iconAuto {
   flex-shrink: 0;
 }
+
+.dateDivider {
+  font-size: 14px;
+  font-weight: bold;
+  color: var( --light-gray-table);
+  margin-bottom: 10px;
+  text-align: center;
+}

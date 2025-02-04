@@ -8,14 +8,11 @@ import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch.jsx";
 import DownloadPdfButtonModalCar from "../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar.jsx";
 import { useState } from "react";
 
-export default function ConnectionsControlBarSection() {
+export default function ConnectionsControlBarSection({ onStatusChange }) {
+
   const [periodStartData, setPeriodStartData] = useState(new Date());
   const [periodEndData, setPeriodEndData] = useState(new Date());
   const isFilter = true;
-
-  const handleStatusChange = (status) => {
-    console.log("Selected status:", status);
-  };
 
   return (
     <div className={css.wrapper}>
@@ -28,7 +25,7 @@ export default function ConnectionsControlBarSection() {
         isSingle={false}
       />
       <StatusFilter
-        onStatusChange={handleStatusChange}
+        onStatusChange={onStatusChange}
         renderStatus={(status) => renderStatusCommunication(status, css, isFilter)}
         statuses={statusesCommunications}
         isFilter={isFilter}

@@ -12,11 +12,11 @@ export const statusesCar = [
 // Статуси по клієнтах
 
 export const statusesCommunications = [
-  { status: "all_appeal", label: "Всі" },
-  { status: "new_appeal", label: "Нові" },
-  { status: "client", label: "Клієнти" },
-  { status: "missing", label: "Втрачено" },
-  { status: "appointment", label: "Запис" },
+  { status: "ALL", label: "Всі" },
+  { status: "NEW", label: "Нові" },
+  { status: "CLIENT", label: "Клієнти" },
+  { status: "LOST", label: "Втрачено" },
+  { status: "APPOINTMENT", label: "Запис" },
 ];
 
 // Статуси для архіву

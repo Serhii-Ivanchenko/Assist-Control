@@ -1,4 +1,4 @@
-import { BsWrench, BsUiChecksGrid, BsExclamationCircle } from "react-icons/bs";
+import { BsWrench, BsExclamationCircle } from "react-icons/bs";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { IoCarSportSharp } from "react-icons/io5";
 import clsx from "clsx";
@@ -11,7 +11,7 @@ const renderStatusCommunication = (status, styles = {}, isFilter) => {
   let background;
   let borderColor;
 
-  if (status === "all_appeal") {
+  if (status === "ALL") {
     statusClass = styles.all || "";
     statusText = "ВСІ";
     background = "var(--status-gradient-all-calls)";
@@ -22,22 +22,22 @@ const renderStatusCommunication = (status, styles = {}, isFilter) => {
         color="var(--light-gray)"
       />
     );
-  } else if (status === "new_appeal") {
+  } else if (status === "NEW") {
     statusClass = styles.new || "";
     statusText = isFilter ? "НОВІ" : "НОВА";
     background = "var(--status-gradient-new)";
     borderColor = "var(--glow-new)";
-  } else if (status === "client") {
+  } else if (status === "CLIENT") {
     statusClass = styles.repair || "";
     statusText = "КЛІЄНТИ";
     background = "var(--status-gradient-repair)";
     borderColor = "var(--glow-repair)";
-  } else if (status === "missing") {
+  } else if (status === "LOST") {
     statusClass = styles.viewRepair || "";
     statusText = "ВТРАЧЕНО";
     background = "var(--status-gradient-view-repair)";
     borderColor = "var(--glow-view-repair)";
-  } else if (status === "appointment") {
+  } else if (status === "APPOINTMENT") {
     statusClass = styles.completed || "";
     statusText = "ЗАПИС";
     background = "var(--status-gradient-complete)";
@@ -48,7 +48,7 @@ const renderStatusCommunication = (status, styles = {}, isFilter) => {
 
   if (!icon) {
     switch (status) {
-      case "new_appeal":
+      case "NEW":
         icon = (
           <BsExclamationCircle 
             className={clsx(styles.icon, statusClass)}
@@ -56,7 +56,7 @@ const renderStatusCommunication = (status, styles = {}, isFilter) => {
           />
         );
         break;
-      case "missing":
+      case "LOST":
         icon = (
           <IoIosCloseCircle  
             className={clsx(styles.icon, statusClass)}
@@ -64,7 +64,7 @@ const renderStatusCommunication = (status, styles = {}, isFilter) => {
           />
         );
         break;
-      case "client":
+      case "CLIENT":
         icon = (
           <BsWrench
             className={clsx(styles.icon, statusClass)}
@@ -72,15 +72,15 @@ const renderStatusCommunication = (status, styles = {}, isFilter) => {
           />
         );
         break;
-      case "diagnostic":
-        icon = (
-          <BsUiChecksGrid
-            className={clsx(styles.icon, statusClass)}
-            color="var(--light-gray)"
-          />
-        );
-        break;
-      case "appointment":
+      // case "diagnostic":
+      //   icon = (
+      //     <BsUiChecksGrid
+      //       className={clsx(styles.icon, statusClass)}
+      //       color="var(--light-gray)"
+      //     />
+      //   );
+      //   break;
+      case "APPOINTMENT":
         icon = (
           <AiFillCheckCircle
             className={clsx(styles.icon, statusClass, styles.iconComplete)}
