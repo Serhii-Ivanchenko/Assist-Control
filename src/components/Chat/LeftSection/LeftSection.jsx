@@ -27,7 +27,7 @@ export default function LeftSection() {
         "Вітаю! Чи можна записатися на діагностику електрики та двигу...",
       managersPhoto: avatar,
       time: "2024-12-28T10:45:33",
-      read: false,
+      read: true,
       id: "1",
     },
     {
@@ -43,7 +43,7 @@ export default function LeftSection() {
       lastMessage:
         "Доброго дня! У мене є питання щодо ремонту коробки переда...",
       managersPhoto: avatar,
-      time: "2025-01-05T12:45:33",
+      time: "2025-02-04T00:34:20",
       read: false,
       id: "2",
     },
@@ -126,7 +126,7 @@ export default function LeftSection() {
       name: "Дмитро Поліщук",
       lastMessage: "Доброго ранку! Ви працюєте з автомобілями американськог...",
       managersPhoto: avatar,
-      time: "2025-01-29T03:44:00",
+      time: "2025-02-04T00:45:00",
       read: false,
       id: "7",
     },
@@ -209,6 +209,7 @@ export default function LeftSection() {
   const [archiveChats, setArchiveChats] = useState(
     initialChats.filter((chat) => chat.archive === true).length
   );
+  // const [flashing, setFlashing] = useState("");
 
   const categoryCounts = useMemo(() => {
     return {
@@ -323,26 +324,34 @@ export default function LeftSection() {
     setFavourite(newChosenCount);
   };
 
-  const flashingBorder = (type) => {
-    const hasWarning = initialChats.some((chat) => {
-      const time = Date.now() - new Date(chat.time).getTime();
-      return (
-        time >= 30000 && !chat.read && (chat.type === type || type === "all")
-      );
-    });
-    return hasWarning ? css.warningBorder : "";
-  };
+  // const flashingBorder = (type) => {
+  //   const hasWarning = initialChats.some((chat) => {
+  //     const time = Date.now() - new Date(chat.time).getTime();
+  //     return (
+  //       time >= 30000 && !chat.read && (chat.type === type || type === "all")
+  //     );
+  //   });
+  //   return hasWarning ? css.warningBorder : "";
+  // };
+
+  // useEffect(() => {
+  //   flashingBorder(type); // Перевіряємо наявність прострочених чатів при монтуванні
+  //   const interval = setInterval(() => flashingBorder(type), 1000); // Оновлюємо кожну секунду
+
+  //   return () => clearInterval(interval); // Очищаємо інтервал при розмонтуванні
+  // }, [initialChats, type]);
 
   return (
     <div className={css.leftSectionWrapper}>
       <InboxPart
         handleFilter={handleFilter}
         chats={initialChats}
+        sortedChats={sortedAndFilteredChats}
         setFilteredChats={setActiveFilter}
         setActiveFilterCategory={setActiveFilterCategory}
         setActiveFilterState={setActiveFilterState}
         categoryCounts={categoryCounts}
-        flashingBorder={flashingBorder}
+        // flashingBorder={flashingBorder}
       />
       <MessagesPart
         chats={sortedAndFilteredChats}

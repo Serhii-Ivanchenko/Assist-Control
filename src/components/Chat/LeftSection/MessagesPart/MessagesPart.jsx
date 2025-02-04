@@ -23,6 +23,8 @@ export default function MessagesPart({
   const [allChecked, setAllChecked] = useState([]);
   // const [checkedChats, setCheckedChats] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
   const wrapperRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -60,13 +62,25 @@ export default function MessagesPart({
   const handleQuickActions = (action) => {
     console.log("initialChats", initialChats);
 
+    if (action === "isDelayed") {
+      setOpenModal(true);
+    }
+
+    // let shouldOpenModal = false;
+
     const updatedChats = initialChats.map((chat) => {
       const checkedChat = allChecked.find((item) => item.id === chat.id);
 
       if (checkedChat && checkedChat.checked) {
+        // if (action === "isDelayed") {
+        //   shouldOpenModal = true; // Відкриваємо модалку, але поза `map`
+        // }
+
         return {
           ...chat,
-          [action]: true,
+          isClosed: action === "isClosed" && true,
+
+          archive: action === "archive" && true,
 
           isChosen:
             action === "archive" || action === "isClosed"
@@ -74,6 +88,7 @@ export default function MessagesPart({
               : action === "isChosen"
               ? true
               : chat.isChosen,
+
           isDelayed:
             action === "archive" || action === "isClosed"
               ? false
@@ -84,10 +99,18 @@ export default function MessagesPart({
     });
 
     setInitialChats(updatedChats);
+    // if (shouldOpenModal) {
+    //   setTimeout(() => setOpenModal(true), 0); // Додаємо мікрозатримку
+    // }
+
     setFavourite(updatedChats.filter((chat) => chat.isChosen).length);
     setDelayedChats(updatedChats.filter((chat) => chat.isDelayed).length);
     setClosedChats(updatedChats.filter((chat) => chat.isClosed).length);
     setArchiveChats(updatedChats.filter((chat) => chat.archive).length);
+
+    // if (shouldOpenModal) {
+    //   setOpenModal(true);
+    // }
   };
 
   // useEffect(() => {
@@ -124,6 +147,8 @@ export default function MessagesPart({
         handleSort={handleSort}
         sortOrder={sortOrder}
         handleQuickActions={handleQuickActions}
+        openModal={openModal}
+        onClose={() => setOpenModal(false)}
       />
       <ChatsPart
         chats={chats}
