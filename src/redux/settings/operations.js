@@ -651,13 +651,13 @@ export const editServiceNameOrPrices = createAsyncThunk(
 // Create category
 export const createCategory = createAsyncThunk(
   "settings/createCategory",
-  async (categoryName, thunkAPI) => {
+  async (category_name, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(
         `/set/categories/`,
-        categoryName,
+        category_name,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",

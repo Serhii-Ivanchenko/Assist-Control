@@ -12,7 +12,7 @@ import {
   selectIsModalOpen,
   selectPrices,
 } from "../../../redux/settings/selectors";
-import { getPrices } from "../../../redux/settings/operations";
+import { createCategory, getPrices } from "../../../redux/settings/operations";
 import { openModal, closeModal } from "../../../redux/settings/slice";
 
 export default function PricePart() {
@@ -36,8 +36,17 @@ export default function PricePart() {
     setActiveSearch(true);
   };
 
-  const handleNewCategory = () => {
-    console.log("handleNewCategory");
+  const handleNewCategory = async (newCategoryName) => {
+    if (newCategoryName.trim() === "") {
+      console.log("Please enter a category name.");
+      return;
+    }
+    try {
+      await dispatch(createCategory({ category_name: newCategoryName }));
+      dispatch(getPrices());
+    } catch (err) {
+      console.log("error creating new category", err);
+    }
   };
 
   const handleSaveNewData = () => {
