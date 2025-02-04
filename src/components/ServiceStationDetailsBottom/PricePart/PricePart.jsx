@@ -99,7 +99,6 @@ export default function PricePart() {
       <div className={styles.searchContainer}>
         <SearchBar
           searchData={prices}
-          // searchData={allServices}
           onFilter={handleFilter}
           onReset={handleResetSearch}
         />
@@ -118,7 +117,10 @@ export default function PricePart() {
           </Modal>
         )}
       </div>
-      <AccordionList data={activeSearch ? filteredData : prices} />
+      <AccordionList
+        data={activeSearch ? filteredData : prices}
+        containerRef={scrollToTheLastItemRef}
+      />
       <div className={styles.btnGroup}>
         <button onClick={handleResetData} className={styles.resetBtn}>
           Відміна
