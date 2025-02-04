@@ -1,0 +1,8 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 39px;
+    justify-content: space-between;
+    border: 1px solid var(--light-gray);
+    border-radius: 12px;
+}
