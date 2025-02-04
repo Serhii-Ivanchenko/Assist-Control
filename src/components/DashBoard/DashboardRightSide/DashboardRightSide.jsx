@@ -9,8 +9,6 @@ export default function DashboardRightSide() {
     {
       title: "CRMmech",
       number: "576",
-      iconMiddle: "",
-      iconBottom: <BsPersonFill className={css.icon} size={18} />,
       numberBottom2: "237",
       numberBottom: "150 ",
     },
@@ -18,32 +16,24 @@ export default function DashboardRightSide() {
     {
       title: "MechanikAPP",
       number: "720",
-      iconMiddle: "",
-      iconBottom: <IoCarSport className={css.iconCar} size={18} />,
       numberBottom: "27020",
       numberBottom2: " ",
     },
     {
       title: "ServiceBook",
       number: "5076",
-      iconMiddle: "",
-      iconBottom: <IoCarSport className={css.iconCar} size={18} />,
       numberBottom: "7020",
       numberBottom2: " ",
     },
     {
       title: "Portal",
       number: "5206",
-      iconMiddle: <BsGlobe className={css.icon} size={18} />,
-      iconBottom: <BsPersonFill size={18} />,
       numberBottom: "7020",
       numberBottom2: " ",
     },
     {
       title: "AI менеджер",
       number: "2100",
-      iconMiddle: <FaMicrochip className={css.icon} size={18} />,
-      iconBottom: <BsPersonFill className={css.icon} size={18} />,
       numberBottom: "452",
       numberBottom2: " ",
     },
@@ -56,7 +46,13 @@ export default function DashboardRightSide() {
           <li key={index} className={css.listItem}>
             <p className={css.title}>{card.title}</p>
             <div className={css.middlePart}>
-              {card.iconMiddle}
+              {card.title === "Portal" ? (
+                <BsGlobe className={css.icon} size={18} />
+              ) : card.title === "AI менеджер" ? (
+                <FaMicrochip className={css.icon} size={18} />
+              ) : (
+                " "
+              )}
               <p className={css.number}>{card.number}</p>
               <span className={css.statisticalData}>+1.34%</span>
             </div>
@@ -67,7 +63,11 @@ export default function DashboardRightSide() {
                 ""
               )}
 
-              {card.iconBottom}
+              {card.title === "MechanikAPP" || card.title === "ServiceBook" ? (
+                <IoCarSport className={css.iconCar} size={18} />
+              ) : (
+                <BsPersonFill className={css.icon} size={18} />
+              )}
               <p
                 className={`${css.numberBottom} ${
                   card.title === "CRMmech" && css.numberBottomRed
