@@ -1,4 +1,4 @@
-import css from "./CacLtvChart.module.css"
+import css from "./CacLtvChart.module.css";
 import {
   BarChart,
   Bar,
@@ -10,17 +10,17 @@ import {
 } from "recharts";
 
 const cacLtvData = [
-  { date: '2025-01-27', cac_count: 500, ltv_count: 800 },
-  { date: '2025-01-28', cac_count: 400, ltv_count: 900 },
-  { date: '2025-01-29', cac_count: 300, ltv_count: 1000 },
-  { date: '2025-01-30', cac_count: 200, ltv_count: 700 },
-  { date: '2025-01-31', cac_count: 100, ltv_count: 700 },
-  { date: '2025-02-01', cac_count: 200, ltv_count: 800 },
-  { date: '2025-02-02', cac_count: 300, ltv_count: 900 },
-  { date: '2025-02-03', cac_count: 400, ltv_count: 1000 },
-  { date: '2025-02-04', cac_count: 500, ltv_count: 1100 },
-  { date: '2025-02-05', cac_count: 400, ltv_count: 1200 },
-]
+  { date: "2025-01-27", cac_count: 500, ltv_count: 800 },
+  { date: "2025-01-28", cac_count: 400, ltv_count: 900 },
+  { date: "2025-01-29", cac_count: 300, ltv_count: 1000 },
+  { date: "2025-01-30", cac_count: 200, ltv_count: 700 },
+  { date: "2025-01-31", cac_count: 100, ltv_count: 700 },
+  { date: "2025-02-01", cac_count: 200, ltv_count: 800 },
+  { date: "2025-02-02", cac_count: 300, ltv_count: 900 },
+  { date: "2025-02-03", cac_count: 400, ltv_count: 1000 },
+  { date: "2025-02-04", cac_count: 500, ltv_count: 1100 },
+  { date: "2025-02-05", cac_count: 400, ltv_count: 1200 },
+];
 
 const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
   if (active && payload && payload.length) {
@@ -60,50 +60,47 @@ const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
   return null;
 };
 
-
 export default function CacLtvChart() {
+  //  const carSelectDate = useSelector(selectDate);
+  //   const currentDay = new Date().toISOString().substring(0, 10);
+  //   const dispatch = useDispatch();
+  //   const newCarsData = useSelector(selectNewCars);
+  //   const currentDate = new Date();
+  //   const sevenDaysAgo = new Date(currentDate);
+  //   sevenDaysAgo.setDate(currentDate.getDate() - 7);
 
-//  const carSelectDate = useSelector(selectDate);
-//   const currentDay = new Date().toISOString().substring(0, 10);
-//   const dispatch = useDispatch();
-//   const newCarsData = useSelector(selectNewCars);
-//   const currentDate = new Date();
-//   const sevenDaysAgo = new Date(currentDate);
-//   sevenDaysAgo.setDate(currentDate.getDate() - 7);
+  //   const [dateBegin, setDateBegin] = useState(sevenDaysAgo);
+  //   const [dateEnd, setDateEnd] = useState(currentDate);
+  //   let dateBeginStr = dateBegin.toISOString().substring(0, 10);
+  //   let dateEndStr = dateEnd.toISOString().substring(0, 10);
 
-//   const [dateBegin, setDateBegin] = useState(sevenDaysAgo);
-//   const [dateEnd, setDateEnd] = useState(currentDate);
-//   let dateBeginStr = dateBegin.toISOString().substring(0, 10);
-//   let dateEndStr = dateEnd.toISOString().substring(0, 10);
+  //   const selectedServiceId = useSelector(selectSelectedServiceId);
+  //  useEffect(() => {
+  //     if (carSelectDate === null) {
+  //       dispatch(changeActualDate(currentDay));
+  //     }
+  //   }, [carSelectDate, dispatch, currentDay]);
 
-//   const selectedServiceId = useSelector(selectSelectedServiceId);
-//  useEffect(() => {
-//     if (carSelectDate === null) {
-//       dispatch(changeActualDate(currentDay));
-//     }
-//   }, [carSelectDate, dispatch, currentDay]);
+  //   const handleDataChangeBeg = (newData) => {
+  //     setDateBegin(newData);
+  //   };
 
-//   const handleDataChangeBeg = (newData) => {
-//     setDateBegin(newData);
-//   };
+  //   const handleDataChangeEnd = (newData) => {
+  //     setDateEnd(newData);
+  //   };
 
-//   const handleDataChangeEnd = (newData) => {
-//     setDateEnd(newData);
-//   };
+  //   useEffect(() => {
+  //     const fetchNewCarsData = async () => {
+  //       if (!selectedServiceId) {
+  //         // console.warn("Service ID is not available yet. Skipping fetch.");
+  //         return;
+  //       }
 
-//   useEffect(() => {
-//     const fetchNewCarsData = async () => {
-//       if (!selectedServiceId) {
-//         // console.warn("Service ID is not available yet. Skipping fetch.");
-//         return;
-//       }
+  //       await dispatch(getNewCarsRange({ dateBeginStr, dateEndStr }));
+  //     };
 
-//       await dispatch(getNewCarsRange({ dateBeginStr, dateEndStr }));
-//     };
-
-//     fetchNewCarsData();
-//   }, [dispatch, dateBeginStr, dateEndStr, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
-
+  //     fetchNewCarsData();
+  //   }, [dispatch, dateBeginStr, dateEndStr, selectedServiceId]); // необхідно для коректної роботи вибору сервісів
 
   let data = cacLtvData.map((el) => ({
     ...el,
@@ -128,24 +125,23 @@ export default function CacLtvChart() {
   //   dispatch(changeActualDate(data.date));
   // };
 
-
   return (
     <div className={css.containerchart}>
       <div className={css.charttitlebox}>
         <p className={css.charttitle}>Порівняння CAC та LTV </p>
         <div className={css.charttitlecolor}>
-        <div className={css.chartColor}>
-        <p className={css.titleCac}></p>
-        <p className={css.titletext}> -CAC</p>
-        </div>
-      <div className={css.chartColor}>
-        <p className={css.titleLtv}></p>
-        <p className={css.titletext}> -LTV</p>
-        </div>
+          <div className={css.chartColor}>
+            <p className={css.titleCac}></p>
+            <p className={css.titletext}> -CAC</p>
+          </div>
+          <div className={css.chartColor}>
+            <p className={css.titleLtv}></p>
+            <p className={css.titletext}> -LTV</p>
+          </div>
         </div>
       </div>
       <div className={css.areabox}>
-        <ResponsiveContainer className={css.responsecontainer}>
+        <ResponsiveContainer>
           <BarChart data={data}>
             <defs>
               <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
@@ -196,10 +192,10 @@ export default function CacLtvChart() {
               // domain={[0, 11]}
               // dataKey="count"
               //  padding={{ top: 10 }}
-               allowDataOverflow={true}
+              allowDataOverflow={true}
               //  tickCount={10}
               tick={{ fontSize: 10 }}
-               axisLine={{ fill: "transparent" }}
+              axisLine={{ fill: "transparent" }}
               tickCount={maxY + 1}
               interval={interval}
               // ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
@@ -207,7 +203,7 @@ export default function CacLtvChart() {
               //  tickFormatter={(value) => (value / 1000).toFixed(1)}
               width={30}
 
-                // label={{ angle: -90, position: 'insideLeft' }} 
+              // label={{ angle: -90, position: 'insideLeft' }}
               //  ticks={[0, 2, 4, 6, 8, 10]}
             />
 
@@ -229,11 +225,9 @@ export default function CacLtvChart() {
               cursor="pointer"
               // onClick={handleClick}
             />
-          
           </BarChart>{" "}
         </ResponsiveContainer>{" "}
       </div>
-</div>
+    </div>
   );
-};
-
+}

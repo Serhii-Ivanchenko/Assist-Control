@@ -1,67 +1,72 @@
 .containerchart {
-     border-radius: 12px;
+    border-radius: 12px;
     width: 487px;
     height: 337px;
-    padding: 10px 15px;
-    background: var(--bg-secondary); 
+    padding: 15px 15px;
+    background: var(--bg-secondary);
     /* border: 1px solid var(--black); */
-     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); 
-    height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 337px);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    /* height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 337px); */
 }
 
-    .charttitlebox {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 457px;
-        height: 40px;
-    }
-
-
-.charttitleavto {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    gap: 13px;
-}
-
-
-
-.charttitlecolor{
+.charttitlebox {
     display: flex;
     flex-direction: row;
-    gap:15px;
+    justify-content: space-between;
+    align-items: center;
+    /* width: 457px;
+    height: 40px; */
+    margin-bottom: 8px;
 }
-
-
 
 .charttitle {
     font-weight: 300;
     font-size: 24px;
     color: var(--white);
-   
+    line-height: 1.1667em;
 }
 
 
-    .areabox {
-        width: 457px;
-        height: 270px;
-        height: clamp(255px, calc(255px + (66 * ((100vh - 900px) / 180))), 270px);
-        margin-left: 0;
-        margin-top: 6px;
-    }
+.charttitlecolor {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.chartColor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.titleCac {
+    background-color: var(--blue-btn-normal);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.titleLtv {
+    background-color: var(--play-btn-triangle);
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.titletext {
+    background: var(--bg-secondary);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--white);
+    line-height: 1.1667em;
+}
 
 
-
-    .responsecontainer {
-        /* padding-left: 15px;
-        padding-right: 15px; */
-        height: 317px;
-        width: 457px
-    }
+.areabox {
+    /* width: 457px; */
+    height: 271px;
+    /* height: clamp(255px, calc(255px + (66 * ((100vh - 900px) / 180))), 270px); */
+}
 
 .popuptitle {
     font-size: 13px;
@@ -77,34 +82,7 @@
     height: 15px;
 }
 
-.titleCac {
-background-color: var(--blue-btn-normal);
-width: 15px;
-height: 15px;
-border-radius: 50%;
-text-align: center;
-margin-top: 1px;}
 
-.titleLtv {
-    background-color: var(--play-btn-triangle);
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    text-align: center;
-    margin-top: 1px;
-}
-
-.titletext {
-    background: var(--bg-secondary);
-    font-weight: 300;
-    font-size: 18px;
-    color: var(--white);
-}
-
-.chartColor{
-    display: flex;
-    flex-direction: row;
-}
 
 .kolcac {
     font-size: 15px;

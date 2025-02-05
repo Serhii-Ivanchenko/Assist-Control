@@ -5,23 +5,16 @@
     /* padding: 10px 15px; */
     background: var(--bg-secondary);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 337px);
-     padding: 18px 15px; 
-}
-
-
-.responseContainer {
-    height: 317px;
-    width: 457px;
+    /* height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 337px); */
+    padding: 15px 15px;
 }
 
 .stattitle {
     font-weight: 300;
     color: var(--white);
-    width: 284px;
-        height: 28px;
-margin-bottom: 18px;
+    /* width: 284px; */
     font-size: 24px;
+    line-height: 1.1667em;
 }
 
 
@@ -30,16 +23,17 @@ margin-bottom: 18px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 457px;
-        height: 40px;
+    /* width: 457px; */
+    /* height: 40px; */
+    margin-bottom: 18px;
 }
 
-    .areabox {
-        width: 467px;
-        height: 270px;
-        height: clamp(255px, calc(255px + (66 * ((100vh - 900px) / 180))), 270px);
-        /* margin-left: -10px; */
-    }
+.areabox {
+    /* width: 467px; */
+    height: 261px;
+    /* height: clamp(255px, calc(255px + (66 * ((100vh - 900px) / 180))), 270px); */
+    /* margin-left: -10px; */
+}
 
 
 .customtooltip {
@@ -66,14 +60,14 @@ margin-bottom: 18px;
     font-size: 10px;
     font-variant: small-caps;
     color: var(--blue-btn-inactive);
-        padding-top: 3px;
-        height: 15px;
+    padding-top: 3px;
+    height: 15px;
 }
 
 .kolvalue {
     font-size: 16px;
     color: var(--play-btn-triangle);
     font-size: 14px;
-        font-weight: 600;
-        text-align: end;
+    font-weight: 600;
+    text-align: end;
 }

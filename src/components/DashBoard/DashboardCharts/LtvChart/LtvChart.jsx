@@ -47,16 +47,15 @@ const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
 };
 
 export default function LtvChart() {
-
-//  let actualDate = useSelector(selectDate);
-//   const carsForHours = useSelector(selectCarsForHours);
-//   const workHours = useSelector(selectWorkHours);
+  //  let actualDate = useSelector(selectDate);
+  //   const carsForHours = useSelector(selectCarsForHours);
+  //   const workHours = useSelector(selectWorkHours);
   //   const dispatch = useDispatch();
-  
-// const currentDate = new Date().toISOString().substring(0, 10);
-// if (actualDate === null) {
-//     actualDate = currentDate;
-//   };
+
+  // const currentDate = new Date().toISOString().substring(0, 10);
+  // if (actualDate === null) {
+  //     actualDate = currentDate;
+  //   };
 
   const customActiveDot = (props) => {
     const { cx, cy } = props;
@@ -82,23 +81,22 @@ export default function LtvChart() {
     );
   };
 
-
   // const arrdata = Object.entries(carsForHours).map(([hour, value]) => ({
   //   hour,
   //   value,
   // }));
 
   const ltvData = [
-    { date: '2025-01-27', ltv_count: 1800 },
-    { date: '2025-01-28', ltv_count: 1900 },
-    { date: '2025-01-29', ltv_count: 1600 },
-    { date: '2025-01-30', ltv_count: 1700 },
-    { date: '2025-01-31', ltv_count: 1700 },
-    { date: '2025-02-01', ltv_count: 1800 },
-    { date: '2025-02-02', ltv_count: 1900 },
-    { date: '2025-02-03', ltv_count: 1500 },
-    { date: '2025-02-04', ltv_count: 1400 },
-    { date: '2025-02-05', ltv_count: 1700 },
+    { date: "2025-01-27", ltv_count: 1800 },
+    { date: "2025-01-28", ltv_count: 1900 },
+    { date: "2025-01-29", ltv_count: 1600 },
+    { date: "2025-01-30", ltv_count: 1700 },
+    { date: "2025-01-31", ltv_count: 1700 },
+    { date: "2025-02-01", ltv_count: 1800 },
+    { date: "2025-02-02", ltv_count: 1900 },
+    { date: "2025-02-03", ltv_count: 1500 },
+    { date: "2025-02-04", ltv_count: 1400 },
+    { date: "2025-02-05", ltv_count: 1700 },
   ];
 
   // const filteredData = arrdata.filter(
@@ -108,15 +106,15 @@ export default function LtvChart() {
   // // const interval= workHours.end-workHours.start-1;
   // //  console.log(workHours.end, workHours.start, interval);
   // const dataMax = Math.max(...data.map((item) => item.value));
-let data = ltvData.map((el) => ({
+  let data = ltvData.map((el) => ({
     ...el,
     dateeng: el.date.substring(8, 10) + "/" + el.date.substring(5, 7),
     // +"/" +
     // el.date.substring(0, 4),
-}));
-  
+  }));
+
   // console.log(data);
-  
+
   let interval = 0;
   const getMaxValue = (data) => Math.max(...data.map((d) => d.ltv_count));
   const maxY = getMaxValue(data);
@@ -124,22 +122,17 @@ let data = ltvData.map((el) => ({
     interval = 499;
   } else {
     interval = 249;
-  };
+  }
 
-   console.log(maxY);
+  console.log(maxY);
 
   return (
     <div className={css.containerltvchart}>
       <div className={css.titlebox}>
         <p className={css.stattitle}>Динаміка LTV</p>
-        
       </div>
       <div className={css.areabox}>
-        <ResponsiveContainer
-          // height={108}
-          // width={272}
-          className={css.responseContainer}
-        >
+        <ResponsiveContainer>
           <AreaChart data={data}>
             <defs>
               <linearGradient id="colorGradientzs" x1="0" y1="0" x2="0" y2="1">
@@ -180,21 +173,20 @@ let data = ltvData.map((el) => ({
               padding={{ right: 10 }}
               tick={{ fontSize: 10 }}
               // tickFormatter={(value) => value.slice(0, -3)}
-               angle={-45}
+              angle={-45}
               textAnchor="end"
             />
 
             <YAxis
               domain={[0, (dataMax) => dataMax + 100]}
               dataKey="ltv_count"
-              margin={{ topt: 10 }}
+              margin={{ top: 10 }}
               tick={{ fontSize: 10 }}
               interval={interval}
               tickCount={maxY + 1}
               //  tickCount={12}
               // tick={{ fill: "transparent" }}
               axisLine={{ fill: "transparent" }}
-             
               width={25}
               // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
               //  ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
@@ -215,14 +207,10 @@ let data = ltvData.map((el) => ({
               cursor="pointer"
               activeDot={customActiveDot}
               // activeDot={{  fill: "var(--blue)", border: '7px'}} // Активная точка больше
-
-              
             />
-           
           </AreaChart>{" "}
         </ResponsiveContainer>{" "}
       </div>{" "}
     </div>
   );
-};
-
+}

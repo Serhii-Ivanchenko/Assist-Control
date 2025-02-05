@@ -50,16 +50,15 @@ const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
 };
 
 export default function ClientsDynamicsChart() {
-
-//  let actualDate = useSelector(selectDate);
-//   const carsForHours = useSelector(selectCarsForHours);
-//   const workHours = useSelector(selectWorkHours);
+  //  let actualDate = useSelector(selectDate);
+  //   const carsForHours = useSelector(selectCarsForHours);
+  //   const workHours = useSelector(selectWorkHours);
   //   const dispatch = useDispatch();
-  
-// const currentDate = new Date().toISOString().substring(0, 10);
-// if (actualDate === null) {
-//     actualDate = currentDate;
-//   };
+
+  // const currentDate = new Date().toISOString().substring(0, 10);
+  // if (actualDate === null) {
+  //     actualDate = currentDate;
+  //   };
 
   const customActiveDotGreen = (props) => {
     const { cx, cy } = props;
@@ -73,13 +72,7 @@ export default function ClientsDynamicsChart() {
           stroke="var(--white)" // Белая обводка
           strokeWidth={1} // Толщина обводки 1 пиксель
         />
-        <circle
-          cx={cx}
-          cy={cy}
-          r={4}
-          fill="var(--green)"
-          stroke="none"
-        />
+        <circle cx={cx} cy={cy} r={4} fill="var(--green)" stroke="none" />
       </>
     );
   };
@@ -96,17 +89,10 @@ export default function ClientsDynamicsChart() {
           stroke="var(--white)" // Белая обводка
           strokeWidth={1} // Толщина обводки 1 пиксель
         />
-        <circle
-          cx={cx}
-          cy={cy}
-          r={4}
-          fill="var(--status-new)"
-          stroke="none"
-        />
+        <circle cx={cx} cy={cy} r={4} fill="var(--status-new)" stroke="none" />
       </>
     );
   };
-
 
   // const arrdata = Object.entries(carsForHours).map(([hour, value]) => ({
   //   hour,
@@ -114,16 +100,16 @@ export default function ClientsDynamicsChart() {
   // }));
 
   const clientData = [
-    { date: '2025-01-27', new_count: 15, all_count: 50},
-    { date: '2025-01-28', new_count: 20, all_count: 65 },
-    { date: '2025-01-29', new_count: 15, all_count: 85 },
-    { date: '2025-01-30', new_count: 20, all_count: 100 },
-    { date: '2025-01-31', new_count: 15, all_count: 120 },
-    { date: '2025-02-01', new_count: 20, all_count: 135 },
-    { date: '2025-02-02', new_count: 15, all_count: 155 },
-    { date: '2025-02-03', new_count: 20, all_count: 170 },
-    { date: '2025-02-04', new_count: 15, all_count: 190 },
-    { date: '2025-02-05', new_count: 20, all_count: 215 },
+    { date: "2025-01-27", new_count: 15, all_count: 50 },
+    { date: "2025-01-28", new_count: 20, all_count: 65 },
+    { date: "2025-01-29", new_count: 15, all_count: 85 },
+    { date: "2025-01-30", new_count: 20, all_count: 100 },
+    { date: "2025-01-31", new_count: 15, all_count: 120 },
+    { date: "2025-02-01", new_count: 20, all_count: 135 },
+    { date: "2025-02-02", new_count: 15, all_count: 155 },
+    { date: "2025-02-03", new_count: 20, all_count: 170 },
+    { date: "2025-02-04", new_count: 15, all_count: 190 },
+    { date: "2025-02-05", new_count: 20, all_count: 215 },
   ];
 
   // const filteredData = arrdata.filter(
@@ -133,41 +119,42 @@ export default function ClientsDynamicsChart() {
   // // const interval= workHours.end-workHours.start-1;
   // //  console.log(workHours.end, workHours.start, interval);
   // const dataMax = Math.max(...data.map((item) => item.value));
-let data = clientData.map((el) => ({
+  let data = clientData.map((el) => ({
     ...el,
     dateeng: el.date.substring(8, 10) + "/" + el.date.substring(5, 7),
     // +"/" +
     // el.date.substring(0, 4),
-}));
-  
-  
-   let interval = 0;
-   const getMaxValue = (data) => Math.max(...data.map((d) => d.all_count));
-   const maxY = getMaxValue(data);
-   if (maxY > 2000) {
-     interval = 499;
-   } else {
-     interval = 49;
-   };
-const generateTicks = (maxY, interval) => {
-  return Array.from({ length: Math.floor(maxY / (interval + 1)) + 1 }, (_, i) => i * (interval + 1) + 1);
-};
+  }));
+
+  let interval = 0;
+  const getMaxValue = (data) => Math.max(...data.map((d) => d.all_count));
+  const maxY = getMaxValue(data);
+  if (maxY > 2000) {
+    interval = 499;
+  } else {
+    interval = 49;
+  }
+  const generateTicks = (maxY, interval) => {
+    return Array.from(
+      { length: Math.floor(maxY / (interval + 1)) + 1 },
+      (_, i) => i * (interval + 1) + 1
+    );
+  };
 
   return (
     <div className={css.containerloadstats}>
       <div className={css.titlebox}>
         <p className={css.charttitle}>Динаміка кількості клієнтів</p>
-               <div className={css.charttitlecolor}>
-               <div className={css.chartColor}>
-               <p className={css.titleCac}></p>
-               <p className={css.titletext}> -New</p>
-               </div>
-             <div className={css.chartColor}>
-               <p className={css.titleLtv}></p>
-               <p className={css.titletext}> -All</p>
-               </div>
-               </div>
-        
+        <div className={css.charttitlecolor}>
+          <div className={css.chartColor}>
+            <p className={css.titleCac}></p>
+            <p className={css.titletext}> -New</p>
+          </div>
+          <div className={css.chartColor}>
+            <p className={css.titleLtv}></p>
+            <p className={css.titletext}> -All</p>
+          </div>
+        </div>
       </div>
       <div className={css.areabox}>
         <ResponsiveContainer
@@ -183,7 +170,7 @@ const generateTicks = (maxY, interval) => {
               </linearGradient>
             </defs> */}
 
-           <defs>
+            <defs>
               <linearGradient
                 id="linear"
                 x1="136.5"
@@ -199,7 +186,7 @@ const generateTicks = (maxY, interval) => {
                   stopOpacity="0.25"
                 />
               </linearGradient>
-            </defs> 
+            </defs>
 
             {/* <CartesianGrid strokeDasharray="3 3" />  */}
             <CartesianGrid
@@ -215,7 +202,7 @@ const generateTicks = (maxY, interval) => {
               padding={{ right: 10 }}
               tick={{ fontSize: 10 }}
               // tickFormatter={(value) => value.slice(0, -3)}
-               angle={-45}
+              angle={-45}
               textAnchor="end"
             />
 
@@ -229,39 +216,35 @@ const generateTicks = (maxY, interval) => {
               //  tickCount={11}
               // tick={{ fill: "transparent" }}
               axisLine={{ fill: "transparent" }}
-             
               width={25}
               // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
-                // ticks={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
-                ticks={generateTicks(maxY, interval)}
+              // ticks={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+              ticks={generateTicks(maxY, interval)}
             />
 
             <Tooltip content={<CustomTooltip />} />
             {/* <Tooltip contentStyle={{ backgroundColor: 'var(--white)', border: '1px solid #ccc' }} */}
 
-
             <Line
-            type="monotone"
-            dataKey="all_count"
+              type="monotone"
+              dataKey="all_count"
               stroke="var(--green)"
-             
-            strokeWidth={3}
-           dot={false}
-              cursor="pointer"
-            activeDot={customActiveDotGreen}
-          />
-
-          <Line
-            type="monotone"
-            dataKey="new_count"
-              stroke="var(--status-new)"
-            
-            strokeWidth={3}
+              strokeWidth={3}
               dot={false}
               cursor="pointer"
-            activeDot={customActiveDotYellow}
-          />
-            
+              activeDot={customActiveDotGreen}
+            />
+
+            <Line
+              type="monotone"
+              dataKey="new_count"
+              stroke="var(--status-new)"
+              strokeWidth={3}
+              dot={false}
+              cursor="pointer"
+              activeDot={customActiveDotYellow}
+            />
+
             {/* <Area
               type="monotone"
               dataKey="ltv_count"
@@ -272,11 +255,9 @@ const generateTicks = (maxY, interval) => {
               activeDot={customActiveDot}
               
             /> */}
-
-           
           </LineChart>{" "}
         </ResponsiveContainer>{" "}
       </div>{" "}
     </div>
   );
-};
+}

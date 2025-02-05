@@ -5,23 +5,8 @@
     /* padding: 10px 15px; */
     background: var(--bg-secondary);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 337px);
-    padding: 18px 15px;
-}
-
-
-.responsecontainer {
-    height: 317px;
-    width: 457px;
-}
-
-.stattitle {
-    font-weight: 300;
-    color: var(--white);
-    width: 284px;
-    height: 28px;
-    margin-bottom: 18px;
-    font-size: 24px;
+    /* height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 337px); */
+    padding: 15px 15px;
 }
 
 .titlebox {
@@ -29,16 +14,58 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 457px;
-    height: 40px;
+    /* width: 457px;
+    height: 40px; */
+    margin-bottom: 18px;
+}
+
+.charttitle {
+    font-weight: 300;
+    font-size: 24px;
+    color: var(--white);
+    line-height: 1.1667em;
+}
+
+.charttitlecolor {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.chartColor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.titleCac {
+    background-color: var(--status-new);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.titleLtv {
+    background-color: var(--green);
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.titletext {
+    background: var(--bg-secondary);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--white);
+    line-height: 1.1667em;
 }
 
 
+
 .areabox {
-    width: 467px;
-    height: 270px;
-    height: clamp(255px, calc(255px + (66 * ((100vh - 900px) / 180))), 270px);
-    margin-left: -10px;
+    /* width: 467px; */
+    height: 261px;
+    /* height: clamp(255px, calc(255px + (66 * ((100vh - 900px) / 180))), 270px); */
 }
 
 
@@ -73,59 +100,14 @@
 
 .kolnew {
     font-size: 15px;
-        font-weight: 600;
-        text-align: end;
+    font-weight: 600;
+    text-align: end;
     color: var(--status-new);
 }
 
 .kolall {
     font-size: 15px;
-        font-weight: 600;
-        text-align: end;
+    font-weight: 600;
+    text-align: end;
     color: var(--green);
-}
-
-.charttitlecolor {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-}
-
-
-
-.charttitle {
-    font-weight: 300;
-    font-size: 24px;
-    color: var(--white);
-
-}
-
-.titleCac {
-    background-color: var(--status-new);
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    text-align: center;
-    margin-top: 1px;
-}
-
-.titleLtv {
-    background-color: var(--green);
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    text-align: center;
-    margin-top: 1px;
-}
-
-.titletext {
-    background: var(--bg-secondary);
-    font-weight: 300;
-    font-size: 18px;
-    color: var(--white);
-}
-
-.chartColor {
-    display: flex;
-    flex-direction: row;
 }
