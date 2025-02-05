@@ -6,7 +6,7 @@ import { BiMessageRoundedDetail } from "react-icons/bi";
 import { HiOutlineHashtag } from "react-icons/hi";
 import { useRef, useEffect } from "react";
 
-export default function SearchByMessages() {
+export default function SearchByMessages({ setFilterByWord }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [inputValue, setInputValue] = useState("");
@@ -23,6 +23,7 @@ export default function SearchByMessages() {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+    setFilterByWord(e.target.value);
   };
 
   const wrapperRef = useRef(null);

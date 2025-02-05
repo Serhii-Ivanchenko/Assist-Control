@@ -18,6 +18,7 @@ export default function MessagesPart({
   setFavourite,
   setInitialChats,
   initialChats,
+  setFilterByWord,
 }) {
   const [isChecked, setIsChecked] = useState(false);
   const [allChecked, setAllChecked] = useState([]);
@@ -137,7 +138,7 @@ export default function MessagesPart({
         </div>
       </div>
 
-      <SearchByMessages />
+      <SearchByMessages setFilterByWord={setFilterByWord} />
       <ActionsPart
         isChecked={isChecked}
         handleChecked={handleChecked}

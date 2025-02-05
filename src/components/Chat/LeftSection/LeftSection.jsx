@@ -29,6 +29,23 @@ export default function LeftSection() {
       time: "2024-12-28T10:45:33",
       read: true,
       id: "1",
+      messages: [
+        {
+          messageId: "101",
+          text: "Вітаю! Чи можна записатися на діагностику?",
+          timestamp: "2024-12-28T10:40:00",
+        },
+        {
+          messageId: "102",
+          text: "Так, звісно! Вам зручніше зранку чи після обіду?",
+          timestamp: "2024-12-28T10:41:15",
+        },
+        {
+          messageId: "103",
+          text: "Після обіду, будь ласка.",
+          timestamp: "2024-12-28T10:42:30",
+        },
+      ],
     },
     {
       category: "chat",
@@ -46,6 +63,23 @@ export default function LeftSection() {
       time: "2025-02-04T00:34:20",
       read: false,
       id: "2",
+      messages: [
+        {
+          messageId: "201",
+          text: "Доброго дня! Підкажіть, будь ласка, щодо ремонту КПП.",
+          timestamp: "2025-02-04T00:30:00",
+        },
+        {
+          messageId: "202",
+          text: "Вітаю! У вас автомат чи механіка?",
+          timestamp: "2025-02-04T00:31:10",
+        },
+        {
+          messageId: "203",
+          text: "Автомат, 2018 року.",
+          timestamp: "2025-02-04T00:32:45",
+        },
+      ],
     },
     {
       category: "chat",
@@ -63,6 +97,23 @@ export default function LeftSection() {
       time: "2025-01-10T01:45:33",
       read: true,
       id: "3",
+      messages: [
+        {
+          messageId: "301",
+          text: "Привіт! Чи є вільні місця на наступний тиждень?",
+          timestamp: "2025-01-10T01:40:00",
+        },
+        {
+          messageId: "302",
+          text: "Так, є вівторок і четвер, який день вам зручний?",
+          timestamp: "2025-01-10T01:41:20",
+        },
+        {
+          messageId: "303",
+          text: "Вівторок, будь ласка.",
+          timestamp: "2025-01-10T01:42:50",
+        },
+      ],
     },
     {
       category: "chat",
@@ -80,6 +131,23 @@ export default function LeftSection() {
       time: "2024-12-28T10:45:33",
       read: true,
       id: "4",
+      messages: [
+        {
+          messageId: "401",
+          text: "Дякую за швидку відповідь!",
+          timestamp: "2024-12-28T10:40:00",
+        },
+        {
+          messageId: "402",
+          text: "Я хотіла б уточнити вартість заміни гальм.",
+          timestamp: "2024-12-28T10:41:30",
+        },
+        {
+          messageId: "403",
+          text: "Вартість залежить від моделі авто, можете уточнити?",
+          timestamp: "2024-12-28T10:42:50",
+        },
+      ],
     },
     {
       category: "chat",
@@ -96,6 +164,23 @@ export default function LeftSection() {
       time: "2024-12-31T10:45:33",
       read: true,
       id: "5",
+      messages: [
+        {
+          messageId: "501",
+          text: "Доброго ранку! Ви працюєте з авто з США?",
+          timestamp: "2024-12-31T10:40:00",
+        },
+        {
+          messageId: "502",
+          text: "Так, можемо зробити діагностику. Яка модель вас цікавить?",
+          timestamp: "2024-12-31T10:41:15",
+        },
+        {
+          messageId: "503",
+          text: "Ford Escape 2021 року.",
+          timestamp: "2024-12-31T10:42:30",
+        },
+      ],
     },
     {
       category: "chat",
@@ -113,6 +198,23 @@ export default function LeftSection() {
       time: "2025-01-09T06:45:33",
       read: true,
       id: "6",
+      messages: [
+        {
+          messageId: "601",
+          text: "Доброго ранку! Ви працюєте з авто з США?",
+          timestamp: "2024-12-31T10:40:00",
+        },
+        {
+          messageId: "602",
+          text: "Так, можемо зробити діагностику. Яка модель вас цікавить?",
+          timestamp: "2024-12-31T10:41:16",
+        },
+        {
+          messageId: "603",
+          text: "Ford Escape 2021 року.",
+          timestamp: "2024-12-31T10:42:30",
+        },
+      ],
     },
     {
       category: "chat",
@@ -129,6 +231,23 @@ export default function LeftSection() {
       time: "2025-02-04T00:45:00",
       read: false,
       id: "7",
+      messages: [
+        {
+          messageId: "701",
+          text: "Доброго ранку! Ви працюєте з авто з США?",
+          timestamp: "2024-12-31T10:40:00",
+        },
+        {
+          messageId: "702",
+          text: "Так, можемо зробити діагностику. Яка модель вас цікавить?",
+          timestamp: "2024-12-31T10:41:17",
+        },
+        {
+          messageId: "703",
+          text: "Ford Escape 2021 року.",
+          timestamp: "2024-12-31T10:42:30",
+        },
+      ],
     },
     {
       category: "chat",
@@ -146,6 +265,23 @@ export default function LeftSection() {
       time: "2025-01-11T18:45:33",
       read: true,
       id: "8",
+      messages: [
+        {
+          messageId: "801",
+          text: "Доброго ранку! Ви працюєте з авто з США?",
+          timestamp: "2024-12-31T10:40:00",
+        },
+        {
+          messageId: "802",
+          text: "Так, можемо зробити діагностику. Яка модель вас цікавить?",
+          timestamp: "2024-12-31T10:41:18",
+        },
+        {
+          messageId: "803",
+          text: "Ford Escape 2021 року.",
+          timestamp: "2024-12-31T10:42:30",
+        },
+      ],
     },
     {
       category: "chat",
@@ -163,6 +299,23 @@ export default function LeftSection() {
       time: "2025-01-18T16:00:33",
       read: true,
       id: "9",
+      messages: [
+        {
+          messageId: "901",
+          text: "Доброго ранку! Ви працюєте з авто з США?",
+          timestamp: "2024-12-31T10:40:00",
+        },
+        {
+          messageId: "902",
+          text: "Так, можемо зробити діагностику. Яка модель вас цікавить?",
+          timestamp: "2024-12-31T10:41:19",
+        },
+        {
+          messageId: "903",
+          text: "Ford Escape 2021 року.",
+          timestamp: "2024-12-31T10:42:30",
+        },
+      ],
     },
     {
       category: "email",
@@ -180,6 +333,23 @@ export default function LeftSection() {
       time: "2025-01-11T19:27:33",
       read: true,
       id: "10",
+      messages: [
+        {
+          messageId: "1001",
+          text: "Доброго ранку! Ви працюєте з авто з США?",
+          timestamp: "2024-12-31T10:40:00",
+        },
+        {
+          messageId: "1002",
+          text: "Так, можемо зробити діагностику. Яка модель вас цікавить?",
+          timestamp: "2024-12-31T10:41:10",
+        },
+        {
+          messageId: "1003",
+          text: "Ford Escape 2021 року.",
+          timestamp: "2024-12-31T10:42:30",
+        },
+      ],
     },
   ];
 
@@ -209,7 +379,11 @@ export default function LeftSection() {
   const [archiveChats, setArchiveChats] = useState(
     initialChats.filter((chat) => chat.archive === true).length
   );
-  // const [flashing, setFlashing] = useState("");
+  const [filterByWord, setFilterByWord] = useState("");
+
+  useEffect(() => {
+    console.log("filterByWord", filterByWord);
+  }, [filterByWord]);
 
   const categoryCounts = useMemo(() => {
     return {
@@ -270,6 +444,17 @@ export default function LeftSection() {
       });
     }
 
+    if (filterByWord && updatedChats.length > 0) {
+      updatedChats = updatedChats.map((chat) => ({
+        ...chat,
+        messages: chat.messages.filter((message) =>
+          message.text.toLowerCase().includes(filterByWord.toLowerCase())
+        ),
+      }));
+    }
+    console.log("filterByWord", filterByWord);
+    console.log(updatedChats);
+
     // Сортування
     updatedChats.sort((a, b) => {
       return sortOrder === "newFirst"
@@ -284,6 +469,7 @@ export default function LeftSection() {
     activeFilter,
     activeFilterCategory,
     activeFilterState,
+    filterByWord,
   ]);
 
   const handleSort = () => {
@@ -324,23 +510,6 @@ export default function LeftSection() {
     setFavourite(newChosenCount);
   };
 
-  // const flashingBorder = (type) => {
-  //   const hasWarning = initialChats.some((chat) => {
-  //     const time = Date.now() - new Date(chat.time).getTime();
-  //     return (
-  //       time >= 30000 && !chat.read && (chat.type === type || type === "all")
-  //     );
-  //   });
-  //   return hasWarning ? css.warningBorder : "";
-  // };
-
-  // useEffect(() => {
-  //   flashingBorder(type); // Перевіряємо наявність прострочених чатів при монтуванні
-  //   const interval = setInterval(() => flashingBorder(type), 1000); // Оновлюємо кожну секунду
-
-  //   return () => clearInterval(interval); // Очищаємо інтервал при розмонтуванні
-  // }, [initialChats, type]);
-
   return (
     <div className={css.leftSectionWrapper}>
       <InboxPart
@@ -364,6 +533,7 @@ export default function LeftSection() {
         setFavourite={setFavourite}
         setInitialChats={setInitialChats}
         initialChats={initialChats}
+        setFilterByWord={setFilterByWord}
       />
     </div>
   );
