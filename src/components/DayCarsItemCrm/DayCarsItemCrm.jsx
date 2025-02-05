@@ -128,10 +128,7 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
     appointment_date,
     time_slot,
     plate: carNumber,
-  } = car;
-
-  console.log('car-car-car-car', car);
-  
+  } = car;  
 
   const carPhoto = photoUrl || absentAutoImg;
 
