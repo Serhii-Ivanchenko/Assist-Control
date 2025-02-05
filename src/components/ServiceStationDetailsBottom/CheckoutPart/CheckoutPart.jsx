@@ -6,83 +6,91 @@ import { BsFillCaretDownFill } from "react-icons/bs";
 import clsx from "clsx";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { selectAllCashregisters } from "../../../redux/settings/selectors";
+import { useDispatch } from "react-redux";
+import { updateCashRegisterStatus } from "../../../redux/settings/operations";
 
 export default function CheckoutPart() {
+  const dispach = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const [checkouts, setCheckouts] = useState([
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-  ]);
+  // const [checkouts, setCheckouts] = useState([
+  //   {
+  //     name: "Блудов",
+  //     currency: "грн",
+  //     entrepreneur: "ФОП Блудов",
+  //     warehouse: "Склад Черкаси",
+  //     responsible: "Відповідальний ПІБ",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     name: "Блудов",
+  //     currency: "грн",
+  //     entrepreneur: "ФОП Блудов",
+  //     warehouse: "Склад Черкаси",
+  //     responsible: "Відповідальний ПІБ",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     name: "Блудов",
+  //     currency: "грн",
+  //     entrepreneur: "ФОП Блудов",
+  //     warehouse: "Склад Черкаси",
+  //     responsible: "Відповідальний ПІБ",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     name: "Блудов",
+  //     currency: "грн",
+  //     entrepreneur: "ФОП Блудов",
+  //     warehouse: "Склад Черкаси",
+  //     responsible: "Відповідальний ПІБ",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     name: "Блудов",
+  //     currency: "грн",
+  //     entrepreneur: "ФОП Блудов",
+  //     warehouse: "Склад Черкаси",
+  //     responsible: "Відповідальний ПІБ",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     name: "Блудов",
+  //     currency: "грн",
+  //     entrepreneur: "ФОП Блудов",
+  //     warehouse: "Склад Черкаси",
+  //     responsible: "Відповідальний ПІБ",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     name: "Блудов",
+  //     currency: "грн",
+  //     entrepreneur: "ФОП Блудов",
+  //     warehouse: "Склад Черкаси",
+  //     responsible: "Відповідальний ПІБ",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     name: "Блудов",
+  //     currency: "грн",
+  //     entrepreneur: "ФОП Блудов",
+  //     warehouse: "Склад Черкаси",
+  //     responsible: "Відповідальний ПІБ",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     name: "Блудов",
+  //     currency: "грн",
+  //     entrepreneur: "ФОП Блудов",
+  //     warehouse: "Склад Черкаси",
+  //     responsible: "Відповідальний ПІБ",
+  //     isDisabled: false,
+  //   },
+  // ]);
+
+  const checkouts = useSelector(selectAllCashregisters);
+
   const [newRow, setNewRow] = useState("");
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [editedValue, setEditedValue] = useState({});
@@ -105,14 +113,18 @@ export default function CheckoutPart() {
     setCheckouts((prevMembers) => prevMembers.filter((_, i) => i !== index));
   };
 
-  const toDisable = (index) => {
-    setCheckouts(
-      checkouts.map((checkout, i) =>
-        i === index
-          ? { ...checkout, isDisabled: !checkout.isDisabled }
-          : checkout
-      )
-    );
+  const toDisable = (cash_register_id, status) => {
+    // setCheckouts(
+    //   checkouts.map((checkout, i) =>
+    //     i === index
+    //       ? { ...checkout, isDisabled: !checkout.isDisabled }
+    //       : checkout
+    //   )
+    // );
+    const newStatus = status === 0 ? 1 : 0;
+    dispach(updateCashRegisterStatus(cash_register_id, newStatus));
+    console.log("cash_register_id", cash_register_id);
+    console.log("newStatus", newStatus);
   };
 
   const handleAdd = () => {
@@ -203,12 +215,13 @@ export default function CheckoutPart() {
                     <select
                       name="currency"
                       id=""
+                      value={checkout.currency}
                       className={`${css.editInfo} ${css.infoCurrency}`}
                       onClick={() => toggleDropdown(1)}
                     >
-                      <option value="">грн</option>
-                      <option value="">грн</option>
-                      <option value="">грн</option>
+                      <option value="грн">грн</option>
+                      <option value="грн2">грн</option>
+                      <option value="грн3">грн</option>
                     </select>
                     <BsFillCaretDownFill
                       className={clsx(css.icon, {
@@ -294,12 +307,13 @@ export default function CheckoutPart() {
               <SwitchableBtns
                 onEdit={() => handleEditing(index)}
                 onDelete={() => deleteCheckout(index)}
-                onToggleDisable={() => toDisable(index)}
-                isDisabled={checkout.isDisabled}
+                onToggleDisable={() => toDisable(checkout.id, checkout.status)}
+                isDisabled={checkout.status}
                 isEditing={isEditing}
                 id={index}
                 showIconSave={true}
                 onRepeal={() => handleRepeal(index)}
+                text={`касу ${checkout.name}`}
               />
             </li>
           ))}
