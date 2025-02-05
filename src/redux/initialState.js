@@ -234,7 +234,7 @@ export const initialState = {
     markupItem: {},
     distributorMarkup: [],
     cashRegisters: [],
-    cashRegisterItem: {},
+    // cashRegisterItem: {},
     isLoading: false,
     error: null,
   },
