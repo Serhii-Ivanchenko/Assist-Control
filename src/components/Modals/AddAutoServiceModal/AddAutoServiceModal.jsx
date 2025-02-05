@@ -112,17 +112,6 @@ export default function AddAutoServiceModal({
       const base64 = await convertFileToBase64(newAvatar);
       setLogo(base64);
     }
-    // const makeBase64Logo = async () => {
-    //   const base64Logo = await new Promise((resolve, reject) => {
-    //     const reader = new FileReader();
-    //     reader.onload = () => resolve(reader.result); // Повертає Base64
-    //     reader.onerror = (error) => reject(error);
-    //     reader.readAsDataURL(newAvatar); // Читає файл як Base64
-    //   });
-
-    //   setLogo(base64Logo); // записуємо в стан лого в base64, яке передаєм на бек
-    // };
-    // makeBase64Logo();
   };
 
   const handleSubmit = (values, actions) => {
