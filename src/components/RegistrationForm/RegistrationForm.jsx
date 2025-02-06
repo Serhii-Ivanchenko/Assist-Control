@@ -7,6 +7,7 @@ import { TbMailFilled } from "react-icons/tb";
 import { IoKeyOutline } from "react-icons/io5";
 import { ImEye } from "react-icons/im";
 import { ImEyeBlocked } from "react-icons/im";
+import { FaCheck } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -206,6 +207,15 @@ export default function RegistrationForm() {
                   className={css.errorMsg}
                 />
               </div>
+            </div>
+            <div className={css.privacyPolicyLinkWrapper}>
+              <div className={css.textAndIconWrapper}>
+                <FaCheck className={css.checkIcon} />
+                <p className={css.registrationlabel}>Погоджуюсь з</p>
+              </div>
+              <a href="/policy" className={css.privacyPolicyLink}>
+                Політикою конфіденційності
+              </a>
             </div>
             <button type="submit" className={css.submitButton}>
               Зареєструватись

@@ -57,7 +57,7 @@ export default function SelectTime({
       return;
     }
     const recordById = dayRecords?.find((dayRecord) => {
-      return dayRecord.id === recordId;
+      return dayRecord.car_id === recordId;
     });
 
     const bookingTime = recordById?.booking;

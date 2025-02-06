@@ -1042,13 +1042,13 @@ export const getDistributorMarkup = createAsyncThunk(
 // Create cash register
 export const createCashRegister = createAsyncThunk(
   "settings/createCashRegister",
-  async (cashRegisterName, thunkAPI) => {
+  async (cashRegisterData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(
         `/set/cashregister/create`,
-        cashRegisterName,
+        cashRegisterData,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -1080,6 +1080,7 @@ export const updateCashRegister = createAsyncThunk(
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
+            "Content-Type": "application/json"
           },
         }
       );
@@ -1095,14 +1096,12 @@ export const updateCashRegister = createAsyncThunk(
 // Delete Cash Register
 export const deleteCashRegister = createAsyncThunk(
   "settings/deleteCashRegister",
-  async (cashRegisterToDelete, thunkAPI) => {
+  async (cash_register_id, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { cash_register_id, ...cashRegister } = cashRegisterToDelete;
       const response = await axiosInstance.delete(
         `/set/cashregister/${cash_register_id}/delete/`,
-        cashRegister,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -1126,10 +1125,9 @@ export const updateCashRegisterStatus = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { cash_register_id, ...status } = newStatus;
+      const { cash_register_id, status } = newStatus;
       const response = await axiosInstance.patch(
-        `/set/cashregister/${cash_register_id}/status`,
-        status,
+        `/set/cashregister/${cash_register_id}/status?status=${status}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -1169,26 +1167,26 @@ export const getAllCashRegisters = createAsyncThunk(
 );
 
 // Get data of particular Cash Register
-export const getCashRegisterData = createAsyncThunk(
-  "settings/getCashRegisterData",
-  async (cash_register_id, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const serviceId = state.service.selectedServiceInSettingsId;
-    try {
-      const response = await axiosInstance.get(
-        `/set/cashregister/${cash_register_id}`,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      console.log("getCashRegisterData", response.data);
+// export const getCashRegisterData = createAsyncThunk(
+//   "settings/getCashRegisterData",
+//   async (cash_register_id, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const response = await axiosInstance.get(
+//         `/set/cashregister/${cash_register_id}`,
+//         {
+//           headers: {
+//             // "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       console.log("getCashRegisterData", response.data);
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );

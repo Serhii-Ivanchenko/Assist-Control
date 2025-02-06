@@ -30,13 +30,17 @@
   background-color: var(--bg-input);
 }
 
-.serviceContainer {
-  /* display: flex;
-  flex-direction: row; */
-  /* justify-content: space-between; */
+.nameAndLogoWrapper {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   gap: 10px;
+  align-items: center;
+}
+
+.serviceContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
 }
@@ -46,6 +50,8 @@
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Добавляет многоточие в конце */
 }
 
 .editBtn {
@@ -72,10 +78,13 @@
 }
 
 .infoItem {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   width: 100%;
+  gap: 50px; */
   gap: 50px;
+  display: grid;
+  grid-template-columns: 146px 243px;
 }
 
 .infoKey {
@@ -95,12 +104,15 @@
 }
 
 .infoValue {
-  display: inline-flex;
+  /* display: inline-flex; */
   color: var(--White);
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 1.1875em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .infoValueInput {
@@ -135,6 +147,7 @@
 }
 
 .subscribeStatus {
+  width: 100px;
   display: inline-flex;
   padding: 6px 15px;
   justify-content: center;
@@ -172,6 +185,7 @@
   flex-direction: row;
   align-items: center;
   gap: 20px;
+  overflow: hidden;
 }
 
 .closedServiceInfo {

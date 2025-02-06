@@ -36,7 +36,7 @@ const AppointmentGrid = ({ data }) => {
   const [modalData, setModalData] = useState(null);
   const currentDate = new Date().toISOString().substring(0, 10);
 
-  console.log(modalData);
+  console.log('modalData',modalData);
   // const handleWorkItemClick = (recordId, postId) => {
   //   setModalData({ recordId, postId });
   //   setIsModalOpen(true);

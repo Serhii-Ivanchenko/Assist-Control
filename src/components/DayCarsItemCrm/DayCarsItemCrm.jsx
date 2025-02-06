@@ -128,10 +128,7 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
     appointment_date,
     time_slot,
     plate: carNumber,
-  } = car;
-
-  console.log('car-car-car-car', car);
-  
+  } = car;  
 
   const carPhoto = photoUrl || absentAutoImg;
 
@@ -171,7 +168,7 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
     <div
       className={`${styles.crmBlockDayCarsItemContainer} ${
         isDragging ? styles.dragging : ""
-      } ${status === 'complete' && styles.cursorComplete}`}
+      } ${status === "complete" && styles.cursorComplete}`}
       style={getBackgroundStyle(status)}
       id={car.car_id}
       draggable={status !== "complete"}
@@ -284,7 +281,7 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
 
           {modalState.serviceBooking && (
             <Modal isOpen={modalState.serviceBooking} onClose={closeModals}>
-              <ServiceBookingModal onClose={closeModals} />
+              <ServiceBookingModal onClose={closeModals} recordId={car_id} />
             </Modal>
           )}
 

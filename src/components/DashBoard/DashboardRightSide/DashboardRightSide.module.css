@@ -1,8 +1,98 @@
 .wrapper {
-    display: flex;
-    width: 1004px;
-    height: 148px;
-    gap: 13px;
-    border: 1px solid var(--light-gray);
-    border-radius: 12px;
+  display: flex;
+  width: 1004px;
+  height: 148px;
+  gap: 13px;
+  /* border: 1px solid var(--light-gray); */
+  border-radius: 12px;
+}
+
+.cardsList {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 13px;
+}
+
+.listItem {
+  min-width: 168px;
+  height: 148px;
+
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+
+  border-radius: 12px;
+  background: var(--bg-input);
+}
+
+.statisticalData {
+  display: flex;
+  padding: 2px 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  border-radius: 6px;
+  background: var(--green-btn-normal);
+
+  font-size: 14px;
+  line-height: normal;
+}
+
+.title {
+  color: var(--light-gray);
+  /* font-variant-numeric: lining-nums proportional-nums; */
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  font-variant: small-caps;
+}
+
+.middlePart {
+  /* width: 100%; */
+
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 12px;
+}
+
+.number {
+  color: var(--white);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.1875em;
+}
+
+.bottomPart {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.numberBottom {
+  color: var(--light-gray);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.1em;
+}
+
+.numberBottomRed {
+  color: var(--red);
+}
+
+.icon {
+  fill: var(--light-gray);
+}
+
+.iconCar {
+  fill: var(--icon-gray);
 }
