@@ -136,9 +136,9 @@ export default function CheckoutPart() {
     if (newRow.trim()) {
       const dataToAdd = {
         name: newRow,
-        currency: "грн",
-        entrepreneur: "ФОП Блудов",
-        warehouse: "Склад Черкаси",
+        currency: "UAH ₴",
+        entrepreneur: "ФОП Назва",
+        warehouse: "Склад Назва",
         responsible: "Відповідальний ПІБ",
         status: 0,
       };
@@ -220,16 +220,6 @@ export default function CheckoutPart() {
         });
       });
   };
-
-  // const toggleDropdown = (index) => {
-  //   setActiveDropdown(activeDropdown === index ? null : index);
-  // };
-
-  // const handleBlur = (event) => {
-  //   if (!event.currentTarget.contains(event.relatedTarget)) {
-  //     setActiveDropdown(null);
-  //   }
-  // };
 
   const handleRepeal = () => {
     // if (editedValue && editedValue.index !== undefined) {
