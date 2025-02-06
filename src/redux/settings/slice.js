@@ -21,7 +21,7 @@ import {
   getAllEmployees,
   getAllMarkups,
   getAllSuppliers,
-  getCashRegisterData,
+  // getCashRegisterData,
   getDistributorMarkup,
   getEmployeeData,
   getMarkupItemData,

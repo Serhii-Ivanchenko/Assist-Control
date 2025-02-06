@@ -1080,6 +1080,7 @@ export const updateCashRegister = createAsyncThunk(
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
+            "Content-Type": "application/json"
           },
         }
       );
