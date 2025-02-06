@@ -112,6 +112,12 @@
   white-space: nowrap;
 }
 
+.btnWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .btn {
   width: 170px;
   height: 36px;
@@ -131,6 +137,15 @@
 .btn:hover {
   background-color: var(--green-btn-hover);
   box-shadow: 0px 2px 2px 0px #00000040;
+}
+
+.bottomText {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--white);
+  text-decoration: underline;
 }
 
 .paymentCards {
