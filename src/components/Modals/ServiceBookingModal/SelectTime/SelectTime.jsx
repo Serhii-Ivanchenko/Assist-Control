@@ -23,11 +23,16 @@ export default function SelectTime({
   //   { appointment_date: "14.12.2024", times: ["09:00"] },
   // ];
 
+
   const onTimeBtnClick = (time) => {
     setChosenTime((prevValues) => {
+      console.log("prevValues", prevValues);
+
       const existingDate = prevValues.find(
         (item) => item.appointment_date === pickedDate
       );
+
+      console.log("existingDate", existingDate);
 
       if (existingDate) {
         let updatedTimes = existingDate.times.includes(time)
@@ -52,23 +57,35 @@ export default function SelectTime({
     });
   };
 
-  useEffect(() => {
-    if (!recordId) {
-      return;
-    }
-    const recordById = dayRecords?.find((dayRecord) => {
-      return dayRecord.car_id === recordId;
-    });
+    useEffect(() => {
+      if (!recordId) {
+        return;
+      }
 
-    const bookingTime = recordById?.booking;
+      console.log("dayRecords", dayRecords);
+      console.log("recordId",recordId);
+      
 
-    const newArr = bookingTime?.map(({ appointment_date, times }) => ({
-      appointment_date: appointment_date.split("-").reverse().join("."),
-      times,
-    }));
 
-    setChosenTime(newArr);
-  }, [recordId]);
+      const recordById = dayRecords?.find((dayRecord) => {
+        return dayRecord.car_id === recordId;
+      });
+
+      console.log("recordById", recordById);
+
+      const bookingTime = recordById?.booking;
+
+      console.log("bookingTime", bookingTime);
+
+      const newArr = bookingTime?.map(({ appointment_date, times }) => ({
+        appointment_date: appointment_date.split("-").reverse().join("."),
+        times,
+      }));
+      console.log("newArr", newArr);
+
+      setChosenTime(newArr);
+    }, [recordId, dayRecords]);
+
 
   useEffect(() => {
     const dataForBooking = chosenTime?.map(({ appointment_date, times }) => ({
