@@ -72,7 +72,7 @@ export default function PaymentTopUpAccountModal({ onClose }) {
                 <button type="submit" className={css.btn}>
                   Поповнити рахунок
                 </button>
-                <a href="" className={css.bottomText}>
+                <a href="/usage-conditions" className={css.bottomText}>
                   Умови використання
                 </a>
               </div>

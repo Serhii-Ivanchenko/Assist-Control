@@ -213,7 +213,7 @@ export default function RegistrationForm() {
                 <FaCheck className={css.checkIcon} />
                 <p className={css.registrationlabel}>Погоджуюсь з</p>
               </div>
-              <a href="" className={css.privacyPolicyLink}>
+              <a href="/policy" className={css.privacyPolicyLink}>
                 Політикою конфіденційності
               </a>
             </div>
