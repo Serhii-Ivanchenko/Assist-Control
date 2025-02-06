@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChannelsPart from "./ChannelsPart/ChannelsPart";
 import EmailType from "./EmailType/EmailType";
 import css from "./InboxPart.module.css";
@@ -13,8 +13,28 @@ export default function InboxPart({
   setActiveFilterState,
   categoryCounts,
   flashingBorder,
+  sortedChats,
 }) {
   const [isActive, setIsActive] = useState(null);
+  const [hasExpiredChats, setHasExpiredChats] = useState(false);
+
+  useEffect(() => {
+    const checkExpiredChats = () => {
+      const now = Date.now();
+
+      const hasExpired = sortedChats.some(
+        (chat) => !chat.read && now - new Date(chat.time).getTime() >= 30000
+      );
+
+      setHasExpiredChats(hasExpired);
+    };
+
+    checkExpiredChats();
+
+    const interval = setInterval(checkExpiredChats, 1000);
+
+    return () => clearInterval(interval);
+  }, [sortedChats]);
 
   return (
     <div className={css.inboxContainer}>
@@ -25,7 +45,11 @@ export default function InboxPart({
 
         <div className={css.totalContainer}>
           <div className={css.totalInbox}>
-            <p className={`${css.numberBox} ${flashingBorder("all")}`}>
+            <p
+              className={`${css.numberBox} ${
+                hasExpiredChats ? css.warningBorder : ""
+              }`}
+            >
               {chats.length}
             </p>
             <button
@@ -64,6 +88,8 @@ export default function InboxPart({
         chats={chats}
         setFilteredChats={setFilteredChats}
         flashingBorder={flashingBorder}
+        categoryCounts={categoryCounts}
+        sortedChats={sortedChats}
       />
     </div>
   );

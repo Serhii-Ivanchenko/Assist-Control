@@ -24,31 +24,25 @@ import toast from "react-hot-toast";
 
 export default function StaffPart() {
   const dispatch = useDispatch();
-  const baseUrl = "https://aps.assist.cam/developers#";
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       await dispatch(getAllEmployees()).unwrap();
-  //     } catch (error) {
-  //       console.error("Помилка завантаження даних:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [dispatch]);
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState(null);
   const employees = useSelector(selectEmployees);
-  // const [members, setMembers] = useState([]);
   console.log("employees", employees);
-  // const imgSrc = baseUrl / member.logo;
 
-  // useEffect(() => {
-  //   if (employees && employees.length > 0) {
-  //     setMembers(employees);
-  //   }
-  // }, [employees]);
+  const [updatedPhotos, setUpdatedPhotos] = useState({});
+
+  useEffect(() => {
+    if (employees.length > 0) {
+      const newPhotos = {};
+      employees.forEach((member) => {
+        newPhotos[member.id] = member.logo
+          ? `${member.logo}?t=${Date.now()}`
+          : avatar;
+      });
+      setUpdatedPhotos(newPhotos);
+    }
+  }, [employees]);
 
   const toDisable = (id, currentStatus) => {
     const newStatus = currentStatus === 1 ? 0 : 1;
@@ -157,19 +151,18 @@ export default function StaffPart() {
               <div className={css.contentBox}>
                 <div className={css.memberPhoto}>
                   <img
-                    src={member.logo ? `${baseUrl}/${member.logo}` : avatar}
+                    src={updatedPhotos[member.id] || avatar}
                     alt={`user's photo`}
                     className={css.particularMemberPhoto}
                   />
                 </div>
-                {/* {console.log(`${baseUrl}/${member.logo}`)} */}
                 <div className={css.nameBox}>
                   <p className={css.memberName}>{member.name}</p>
                   <p className={css.memberEmail}> {member.role}</p>
                 </div>
               </div>
 
-              <RatingStars rating={5} ratingGap={css.ratingGap} />
+              <RatingStars rating={member.rating} ratingGap={css.ratingGap} />
 
               <p className={css.memberRole}> {member.phone} </p>
 

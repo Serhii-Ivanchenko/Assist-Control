@@ -124,6 +124,11 @@
 .uploadLogoContainer {
   margin-top: 19px;
 }
+.uploadLogoContainer label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 .uploadLogoContainer p {
   color: var(--input-text);
@@ -134,6 +139,14 @@
   line-height: normal;
 }
 
+.downloadIcon {
+  fill: var(--light-gray);
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+}
+
 .formContainer {
   display: flex;
   flex-direction: column;
@@ -141,6 +154,7 @@
 }
 
 .addressBox {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -296,4 +310,31 @@
 
 .scheduleContainer {
   margin: 0 auto;
+}
+
+.inputBox {
+  position: relative;
+  /* display: flex;
+  justify-content: space-between; */
+}
+
+.error {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: red;
+  position: absolute;
+  top: 100%;
+  left: 3%;
+  white-space: nowrap;
+}
+.errorAddress {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: red;
+  position: absolute;
+  top: 100%;
+  left: 26%;
+  white-space: nowrap;
 }

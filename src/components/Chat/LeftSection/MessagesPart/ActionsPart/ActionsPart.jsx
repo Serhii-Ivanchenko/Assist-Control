@@ -16,6 +16,8 @@ import { useRef } from "react";
 import { tags } from "../../../RightSection/ChatTags/tags.js";
 import { useEffect, useState } from "react";
 import SearchTags from "../../../RightSection/ChatTags/SearchTags/SearchTags";
+import Modal from "../../../../Modals/Modal/Modal.jsx";
+import NotificationModal from "../../../../sharedComponents/NotificationModal/NotificationModal.jsx";
 
 const quickActions = [
   { icon: <BsArchive />, name: "Додати в архів", value: "archive" },
@@ -34,10 +36,13 @@ export default function ActionsPart({
   handleSort,
   sortOrder,
   handleQuickActions,
+  openModal,
+  onClose,
 }) {
   const [openedActions, setOpenedActions] = useState(false);
   const [tagsArr, setTagsArr] = useState(tags);
   const [tagsModalIsOpen, setTagsModalIsOpen] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
 
   const wrapperRef = useRef([]);
 
@@ -164,6 +169,21 @@ export default function ActionsPart({
             )}
           </div>
         </div>
+      )}
+
+      {openModal && (
+        <Modal isOpen={openModal} onClose={onClose}>
+          <NotificationModal
+            accountingModal={true}
+            onClose={onClose}
+            date="chatDate"
+            time="chatTime"
+            connectionType="chatConnection"
+            comment="chatComment"
+            service="chatService"
+            nextService="chatNextService"
+          />
+        </Modal>
       )}
 
       <div className={css.filter}>

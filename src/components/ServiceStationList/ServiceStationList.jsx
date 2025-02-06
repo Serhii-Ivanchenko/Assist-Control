@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import ServiceStationItem from "../ServiceStationItem/ServiceStationItemItem";
 import { BsPlusCircleDotted } from "react-icons/bs";
 import { BsHouseFill } from "react-icons/bs";
@@ -26,7 +26,7 @@ function ServiceStationList({ activeStationId, setActiveStationId }) {
   const containerRef = useRef(null); // Ссилка на контейнер
   const [isScrolled, setIsScrolled] = useState(false); // Стан для перевірки наявності скролу
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleResizeOrScroll = () => {
       // Перевірка наявності вертикального скролу
       if (containerRef.current) {
@@ -38,21 +38,25 @@ function ServiceStationList({ activeStationId, setActiveStationId }) {
 
     // Викликаємо при завантаженні, зміні розміру чи скролі
     handleResizeOrScroll();
-    window.addEventListener("resize", handleResizeOrScroll);
-    if (containerRef.current) {
-      containerRef.current.addEventListener("scroll", handleResizeOrScroll);
-    }
+    const observer = new ResizeObserver(handleResizeOrScroll);
+    if (containerRef.current) observer.observe(containerRef.current);
 
-    // Очищення ефекту
-    return () => {
-      window.removeEventListener("resize", handleResizeOrScroll);
-      if (containerRef.current) {
-        containerRef.current.removeEventListener(
-          "scroll",
-          handleResizeOrScroll
-        );
-      }
-    };
+    return () => observer.disconnect();
+    // window.addEventListener("resize", handleResizeOrScroll);
+    // if (containerRef.current) {
+    //   containerRef.current.addEventListener("scroll", handleResizeOrScroll);
+    // }
+
+    // // Очищення ефекту
+    // return () => {
+    //   window.removeEventListener("resize", handleResizeOrScroll);
+    //   if (containerRef.current) {
+    //     containerRef.current.removeEventListener(
+    //       "scroll",
+    //       handleResizeOrScroll
+    //     );
+    //   }
+    // };
   }, []);
 
   // const stations = useMemo(

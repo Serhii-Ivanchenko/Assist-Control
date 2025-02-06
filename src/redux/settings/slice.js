@@ -21,20 +21,21 @@ import {
   getAllEmployees,
   getAllMarkups,
   getAllSuppliers,
-  getCashRegisterData,
+  // getCashRegisterData,
   getDistributorMarkup,
   getEmployeeData,
   getMarkupItemData,
   getPosts,
   getPrices,
-  getPricesInCategory,
+  // getPricesInCategory,
   getRatingData,
   getRatings,
   getSupplierData,
   getWorkSchedule,
   updateCashRegister,
   updateCashRegisterStatus,
-  updateCategoryData,
+  updateCategory,
+  // updateCategoryData,
   updateDynamicMarkup,
   updateEmployeeData,
   updateEmployeeStatus,
@@ -56,10 +57,27 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+// універсальна функція для оновлення даних
+// const updateItem = (items, payload, key = "id") => {
+//   const index = items.findIndex((item) => item[key] === payload[key]);
+//   if (index !== -1) {
+//     items[index] = { ...items[index], ...payload };
+//   }
+// };
+
 const settingsSlice = createSlice({
   name: "settings",
   initialState: initialState.settings,
-  reducers: {},
+  reducers: {
+    openModal: (state, action) => {
+      state.isModalOpen = true;
+      state.supplier = action.payload || null;
+    },
+    closeModal: (state) => {
+      state.isModalOpen = false;
+      state.supplier = null;
+    },
+  },
   extraReducers: (builder) =>
     builder
       //! EMPLOYEE
@@ -72,19 +90,19 @@ const settingsSlice = createSlice({
       .addCase(updateEmployeeData.pending, handlePending)
       .addCase(updateEmployeeData.fulfilled, (state, action) => {
         state.isLoading = false;
-        const employeeToEditIndex = state.employees.findIndex(
-          (employee) => employee.id === action.payload.employee_id
-        );
+        // const employeeToEditIndex = state.employees.findIndex(
+        //   (employee) => employee.id === action.payload.employee_id
+        // );
 
-        if (
-          // action.payload.status === 200 &&
-          employeeToEditIndex !== -1
-        ) {
-          state.employees[employeeToEditIndex] = {
-            ...state.employees[employeeToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
-        }
+        // if (
+        //   // action.payload.status === 200 &&
+        //   employeeToEditIndex !== -1
+        // ) {
+        //   state.employees[employeeToEditIndex] = {
+        //     ...state.employees[employeeToEditIndex], // Залишаємо старі дані
+        //     ...action.meta.arg, // Додаємо дані, які відправляли
+        //   };
+        // }
       })
       .addCase(updateEmployeeData.rejected, handleRejected)
 
@@ -127,34 +145,29 @@ const settingsSlice = createSlice({
       .addCase(createSupplier.pending, handlePending)
       .addCase(createSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
+        // if (action.payload.supplier_id) {
+        //   state.suppliers.push(action.meta.arg);
+        // } else {
+        //   console.error("Supplier ID is undefined:", action.payload);
+        // }
       })
       .addCase(createSupplier.rejected, handleRejected)
 
       .addCase(updateSupplierData.pending, handlePending)
       .addCase(updateSupplierData.fulfilled, (state, action) => {
         state.isLoading = false;
-        const supplierToEditIndex = state.suppliers.findIndex(
-          (supplier) => supplier.supplier_id === action.payload.supplier
-        );
 
-        if (
-          // action.payload.status === 200 &&
-          supplierToEditIndex !== -1
-        ) {
-          state.suppliers[supplierToEditIndex] = {
-            ...state.suppliers[supplierToEditIndex], // Залишаємо старі дані
-            ...action.meta.arg, // Додаємо дані, які відправляли
-          };
-        }
+        // // функція для оновлення даних по постачальнику
+        // updateItem(state.suppliers, action.meta.arg, "supplier_id");
       })
       .addCase(updateSupplierData.rejected, handleRejected)
 
       .addCase(deleteSupplier.pending, handlePending)
       .addCase(deleteSupplier.fulfilled, (state, action) => {
         state.isLoading = false;
-
+        // console.log("Deleted supplier:", action.payload);
         state.suppliers = state.suppliers.filter(
-          (supplier) => supplier.supplier_id !== action.payload.supplier_id
+          (supplier) => supplier.id !== action.payload.supplier_id
         );
       })
       .addCase(deleteSupplier.rejected, handleRejected)
@@ -162,11 +175,12 @@ const settingsSlice = createSlice({
       .addCase(updateSupplierStatus.pending, handlePending)
       .addCase(updateSupplierStatus.fulfilled, (state, action) => {
         state.isLoading = false;
-        const supplierToEditIndex = state.employees.findIndex(
-          (supplier) => supplier.supplier_id === action.payload.supplier_id
+
+        const supplierToEditIndex = state.suppliers.findIndex(
+          (supplier) => supplier.id === action.payload.supplier_id
         );
-        state.employees[supplierToEditIndex].isDisabled =
-          action.payload.updated_fields.isDisabled;
+
+        state.suppliers[supplierToEditIndex].status = action.payload.status;
       })
       .addCase(updateSupplierStatus.rejected, handleRejected)
 
@@ -194,7 +208,7 @@ const settingsSlice = createSlice({
       .addCase(updateWorkSchedule.pending, handlePending)
       .addCase(updateWorkSchedule.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.schedule = { ...state.schedule, ...action.payload };
+        state.schedule = action.meta.arg.days;
       })
       .addCase(updateWorkSchedule.rejected, handleRejected)
 
@@ -230,7 +244,7 @@ const settingsSlice = createSlice({
             ...(action.payload.name_post && {
               name_post: action.payload.name_post,
             }),
-            ...(action.payload.status !== undefined && {
+            ...(action.payload.status !== undefined && action.payload.status !== null && {
               status: action.payload.status,
             }),
           };
@@ -259,55 +273,49 @@ const settingsSlice = createSlice({
       })
       .addCase(getPrices.rejected, handleRejected)
 
-      .addCase(getPricesInCategory.pending, handlePending)
-      .addCase(getPricesInCategory.fulfilled, (state, action) => {
+      .addCase(updateCategory.pending, handlePending)
+      .addCase(updateCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-
-        state.categoryPrices = action.payload;
+        const categoryToEditIndex = state.prices.findIndex(
+          (category) => category.category_id === action.payload.category_id
+        );
+        state.prices[categoryToEditIndex].category_name =
+          action.payload.new_name;
       })
-      .addCase(getPricesInCategory.rejected, handleRejected)
+      .addCase(updateCategory.rejected, handleRejected)
 
       .addCase(editServiceNameOrPrices.pending, handlePending)
       .addCase(editServiceNameOrPrices.fulfilled, (state, action) => {
         state.isLoading = false;
-        const pricesToEditIndex = state.prices.findIndex(
+        const serviceToEditIndex = state.prices.findIndex(
           (service) => service.service_id === action.payload.service_id
         );
-        state.prices[pricesToEditIndex] = {
-          ...state.prices[pricesToEditIndex], // Залишаємо старі дані
-          ...action.meta.arg, // Додаємо дані, які відправляли
-        };
+        state.prices[serviceToEditIndex].service_name = action.payload.new_name;
+        state.prices[serviceToEditIndex].min_price =
+          action.payload.new_min_price;
+        state.prices[serviceToEditIndex].max_price =
+          action.payload.new_max_price;
       })
       .addCase(editServiceNameOrPrices.rejected, handleRejected)
 
       .addCase(createCategory.pending, handlePending)
       .addCase(createCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.prices.push(action.payload);
       })
       .addCase(createCategory.rejected, handleRejected)
-
-      .addCase(updateCategoryData.pending, handlePending)
-      .addCase(updateCategoryData.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const categoryToEditIndex = state.prices.findIndex(
-          (category) => category.category_id === action.payload.category_id
-        );
-        state.prices[categoryToEditIndex] = {
-          ...state.prices[categoryToEditIndex], // Залишаємо старі дані
-          ...action.meta.arg, // Додаємо дані, які відправляли
-        };
-      })
-      .addCase(updateCategoryData.rejected, handleRejected)
 
       .addCase(createService.pending, handlePending)
       .addCase(createService.fulfilled, (state, action) => {
         state.isLoading = false;
 
+        const { message, category_id, category_name, ...newServiceData } =
+          action.payload;
+
         const categoryToAddNewService = state.prices.findIndex(
-          (category) => category.id === action.payload.id
+          (category) => category.category_id === category_id
         );
-        state.prices[categoryToAddNewService].items.push(action.payload);
+
+        state.prices[categoryToAddNewService].services.push(newServiceData);
       })
       .addCase(createService.rejected, handleRejected)
 
@@ -447,21 +455,21 @@ const settingsSlice = createSlice({
       .addCase(createCashRegister.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        state.cashRegisters.push(action.meta.arg);
+        // state.cashRegisters.push(action.meta.arg);
       })
       .addCase(createCashRegister.rejected, handleRejected)
 
       .addCase(updateCashRegister.pending, handlePending)
       .addCase(updateCashRegister.fulfilled, (state, action) => {
         state.isLoading = false;
-        const cashRegisterToEditIndex = state.cashRegisters.findIndex(
-          (cashRegister) =>
-            cashRegister.cash_register_id === action.payload.cash_register_id
-        );
-        state.cashRegisters[cashRegisterToEditIndex] = {
-          ...state.cashRegisters[cashRegisterToEditIndex], // Залишаємо старі дані
-          ...action.meta.arg, // Додаємо дані, які відправляли
-        };
+        // const cashRegisterToEditIndex = state.cashRegisters.findIndex(
+        //   (cashRegister) =>
+        //     cashRegister.id === action.payload.cash_register_id
+        // );
+        // state.cashRegisters[cashRegisterToEditIndex] = {
+        //   ...state.cashRegisters[cashRegisterToEditIndex], // Залишаємо старі дані
+        //   ...action.meta.arg, // Додаємо дані, які відправляли
+        // };
       })
       .addCase(updateCashRegister.rejected, handleRejected)
 
@@ -471,7 +479,7 @@ const settingsSlice = createSlice({
 
         state.cashRegisters = state.cashRegisters.filter(
           (cashRegister) =>
-            cashRegister.cash_register_id !== action.payload.cash_register_id
+            cashRegister.id !== action.payload.cash_register_id
         );
       })
       .addCase(deleteCashRegister.rejected, handleRejected)
@@ -481,10 +489,10 @@ const settingsSlice = createSlice({
         state.isLoading = false;
         const cashRegisterToEditIndex = state.cashRegisters.findIndex(
           (cashRegister) =>
-            cashRegister.cash_register_id === action.payload.cash_register_id
+            cashRegister.id === action.payload.cash_register_id
         );
-        state.cashRegisters[cashRegisterToEditIndex].isDisabled =
-          action.payload.isDisabled;
+        state.cashRegisters[cashRegisterToEditIndex].status =
+          action.payload.status;
       })
       .addCase(updateCashRegisterStatus.rejected, handleRejected)
 
@@ -496,13 +504,15 @@ const settingsSlice = createSlice({
       })
       .addCase(getAllCashRegisters.rejected, handleRejected)
 
-      .addCase(getCashRegisterData.pending, handlePending)
-      .addCase(getCashRegisterData.fulfilled, (state, action) => {
-        state.isLoading = false;
+      // .addCase(getCashRegisterData.pending, handlePending)
+      // .addCase(getCashRegisterData.fulfilled, (state, action) => {
+      //   state.isLoading = false;
 
-        state.cashRegisterItem = action.payload.cash_register;
-      })
-      .addCase(getCashRegisterData.rejected, handleRejected),
+      //   state.cashRegisterItem = action.payload.cash_register;
+      // })
+      // .addCase(getCashRegisterData.rejected, handleRejected),
 });
+
+export const { openModal, closeModal } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

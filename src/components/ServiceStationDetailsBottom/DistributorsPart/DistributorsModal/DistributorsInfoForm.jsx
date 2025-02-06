@@ -1,27 +1,27 @@
-import { Formik, Field, Form } from "formik";
+import { ErrorMessage, Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import CustomRadioBtn from "../../../CustomRadioBtn/CustomRadioBtn";
 import styles from "./DistributorsModal.module.css";
 
 const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
   const initialValues = {
-    address: distributor.address || "",
-    paymentCondition: distributor.paymentCondition || "",
-    days: distributor.days || "",
-    owner: distributor.owner || "",
-    code: distributor.code || "",
-    bill: distributor.bill || "",
-    bank: distributor.bank || "",
-    bankCode: distributor.bankCode || "",
-    companyAddress: distributor.companyAddress || "",
-    managerPhone: distributor.managerPhone || "",
-    manager: distributor.manager || "",
-    officePhone: distributor.officePhone || "",
-    ownerPhone: distributor.ownerPhone || "",
+    address: distributor?.address || "",
+    paymentCondition: distributor?.paymentCondition || "",
+    days: distributor?.days || "",
+    owner: distributor?.owner || "",
+    code: distributor?.code || "",
+    bill: distributor?.bill || "",
+    bank: distributor?.bank || "",
+    bankCode: distributor?.bankCode || "",
+    companyAddress: distributor?.companyAddress || "",
+    managerPhone: distributor?.managerPhone || "",
+    managerName: distributor?.managerName || "",
+    officePhone: distributor?.officePhone || "",
+    ownerPhone: distributor?.ownerPhone || "",
   };
 
   const validationSchema = Yup.object({
-    address: Yup.string(),
+    address: Yup.string().required("* Поле обов'язкове"),
     paymentCondition: Yup.string(),
     days: Yup.string(),
     owner: Yup.string(),
@@ -30,14 +30,22 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     bank: Yup.string(),
     bankCode: Yup.string(),
     companyAddress: Yup.string(),
-    managerPhone: Yup.string(),
-    manager: Yup.string(),
-    officePhone: Yup.string(),
-    ownerPhone: Yup.string(),
+    managerPhone: Yup.string()
+      .required("* Поле обов'язкове")
+      .matches(/^\+?\d*$/, "Телефон може містити лише цифри та знак +"),
+    managerName: Yup.string(),
+    officePhone: Yup.string().matches(
+      /^\+?\d*$/,
+      "Телефон може містити лише цифри та знак +"
+    ),
+    ownerPhone: Yup.string().matches(
+      /^\+?\d*$/,
+      "Телефон може містити лише цифри та знак +"
+    ),
   });
-
   const handleSubmit = (values) => {
-    setDistributor(values);
+    console.log("Form submitted with values:", values);
+    setDistributor((prev) => ({ ...prev, ...values }));
   };
 
   return (
@@ -46,6 +54,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
+      enableReinitialize={true}
     >
       {({ setFieldValue }) => (
         <Form className={styles.formContainer}>
@@ -56,6 +65,11 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
               name="address"
               placeholder="Харків, Байрона 189 оф 27"
               className={styles.input}
+            />
+            <ErrorMessage
+              name="address"
+              component="div"
+              className={styles.errorAddress}
             />
           </div>
 
@@ -203,6 +217,11 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
                   placeholder="+380671234567"
                   style={{ width: "158px" }}
                 />
+                <ErrorMessage
+                  name="managerPhone"
+                  component="div"
+                  className={styles.error}
+                />
               </label>
             </div>
             <div className={styles.inputBox}>
@@ -211,9 +230,9 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
                 <Field
                   className={styles.input}
                   type="text"
-                  name="manager"
+                  name="managerName"
                   placeholder="Діана"
-                  style={{ width: "83px" }}
+                  style={{ width: "158px" }}
                 />
               </label>
             </div>

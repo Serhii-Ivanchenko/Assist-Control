@@ -6,7 +6,7 @@ import telegram from "../../../../../assets/images/ChannelsImages/Telegram_1.png
 import facebook from "../../../../../assets/images/ChannelsImages/Facebook_Messenger_1.png";
 // import avatar from "../../../../../assets/images/avatar_default.png";
 import css from "./ChatsPart.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BsCheck } from "react-icons/bs";
 
 export default function ChatsPart({
@@ -17,6 +17,7 @@ export default function ChatsPart({
   handleFavourite,
 }) {
   const [chosen, setChosen] = useState(false);
+  // const [allChats, setAllChats] = useState(chats);
 
   const handleChoose = (id) => {
     // setChosen(chosen === index ? null : index); // По повторному кліку вибір знімається
@@ -36,12 +37,40 @@ export default function ChatsPart({
     return `${days}d ago`;
   };
 
-  const warningBorder = (time, read) => {
-    const difference = Date.now() - new Date(time).getTime();
-    if (difference >= 300000 && !read) {
-      return css.warningBorder;
-    }
-  };
+  // const warningBorder = (time, read) => {
+  //   const difference = Date.now() - new Date(time).getTime();
+  //   if (difference >= 30000 && !read) {
+  //     return css.warningBorder;
+  //   }
+  // };
+
+  const [highlightedChats, setHighlightedChats] = useState({}); // Стан для відстеження, які чати мають рамку
+
+  useEffect(() => {
+    const timers = {};
+
+    chats.forEach((chat) => {
+      if (!chat.read) {
+        const timeDifference = Date.now() - new Date(chat.time).getTime();
+        const remainingTime = 30000 - timeDifference;
+
+        if (remainingTime <= 0) {
+          // Якщо час уже вийшов, одразу додаємо рамку
+          setHighlightedChats((prev) => ({ ...prev, [chat.id]: true }));
+        } else {
+          // Інакше встановлюємо таймер
+          timers[chat.id] = setTimeout(() => {
+            setHighlightedChats((prev) => ({ ...prev, [chat.id]: true }));
+          }, remainingTime);
+        }
+      }
+    });
+
+    return () => {
+      // Очищення таймерів при демонтажі
+      Object.values(timers).forEach(clearTimeout);
+    };
+  }, [chats]); // Спрацьовує, коли змінюється список чатів
 
   return (
     <div className={css.scroll}>
@@ -51,7 +80,7 @@ export default function ChatsPart({
             key={index}
             className={`${css.chatsListItem} 
            ${chosen === chat.id && css.chosenChat}
-           ${warningBorder(chat.time, chat.read)}`}
+           ${highlightedChats[chat.id] && css.warningBorder}`}
             onClick={() => handleChoose(chat.id)}
           >
             {isChecked && (

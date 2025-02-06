@@ -193,7 +193,7 @@ export const initialState = {
     },
     suppliers: [],
     supplier: {
-      supplier_d: null,
+      supplier_id: null,
       name: null,
       address: null,
       paymentCondition: null,
@@ -226,7 +226,7 @@ export const initialState = {
     schedule: [],
     posts: [],
     prices: [],
-    categoryPrices: [],
+    // categoryPrices: [],
     ratings: [],
     rating: {},
     // markup: { fixed: [], dynamic: [] },
@@ -234,7 +234,7 @@ export const initialState = {
     markupItem: {},
     distributorMarkup: [],
     cashRegisters: [],
-    cashRegisterItem: {},
+    // cashRegisterItem: {},
     isLoading: false,
     error: null,
   },
@@ -299,9 +299,12 @@ export const initialState = {
   },
 
   connections: {
-    stats: [],
+    stats: {},
     connectionsList: [],
+    connectionsListPaginationData: {},
+    problematicContacts: [],
     isLoading: false,
     error: null,
   },
+  isModalOpen: false,
 };

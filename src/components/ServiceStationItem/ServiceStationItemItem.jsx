@@ -80,8 +80,18 @@ function ServiceStationItem({ isOpen, onToggle, isActive, station }) {
               <h3 className={styles.serviceTitle}>{name}</h3>
             )} */}
 
-            <img src={station.logo} alt="Logo" className={styles.logo} />
-            <h3 className={styles.serviceTitle}>{station.name}</h3>
+            <div className={styles.nameAndLogoWrapper}>
+              {station.logo && (
+                <img
+                  src={
+                    station?.logo ? `${station?.logo}?t=${Date.now()}` : null
+                  }
+                  alt="Logo"
+                  className={styles.logo}
+                />
+              )}
+              <h3 className={styles.serviceTitle}>{station.name}</h3>
+            </div>
             <button className={styles.editBtn} onClick={handlePencilBtnClick}>
               {/* {isEdit ? (
                 <RiSave3Fill className={styles.mainIcon} size={21} />

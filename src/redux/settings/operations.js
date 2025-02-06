@@ -55,36 +55,11 @@ export const updateEmployeeData = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { employee_id, files, ...dataToUpdate } = employeeDataToUpdate;
-
-      const base64Files = { ...files };
-
-      // Створюємо об'єкт для відправки
-      const payload = {
-        ...dataToUpdate, // Додаємо дані співробітника
-        ...base64Files, // Додаємо готові Base64-файли
-      };
-
-      // const base64Files = await Promise.all(
-      //   files.map((file) => {
-      //     return new Promise((resolve, reject) => {
-      //       const reader = new FileReader();
-      //       reader.onload = () => resolve(reader.result); // Повертає Base64
-      //       reader.onerror = (error) => reject(error);
-      //       reader.readAsDataURL(file); // Читає файл як Base64
-      //     });
-      //   })
-      // );
-
-      // // Створюємо об'єкт для відправки
-      // const payload = {
-      //   ...dataToUpdate, // Додаємо дані співробітника
-      //   files: base64Files, // Додаємо Base64-файли
-      // };
+      const { employee_id, ...dataToUpdate } = employeeDataToUpdate;
 
       const response = await axiosInstance.patch(
         `/set/employees/${employee_id}/update/`,
-        payload,
+        dataToUpdate,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -209,26 +184,21 @@ export const getAllEmployees = createAsyncThunk(
 // Create supplier
 export const createSupplier = createAsyncThunk(
   "settings/createSupplier",
-  async ({ supplierData, logo }, thunkAPI) => {
+  async (supplierData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const base64Logo = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result); // Повертає Base64
-        reader.onerror = (error) => reject(error);
-        reader.readAsDataURL(logo); // Читає файл як Base64
-      });
-
       // Створюємо об'єкт для відправки
-      const payload = {
-        ...supplierData, // Додаємо дані співробітника
-        file: base64Logo, // Додаємо Base64-файли
-      };
+      // const payload = {
+      //   name: supplierData.name,
+      //   address: supplierData.address,
+      //   managerPhone: supplierData.managerPhone,
+      //   ...supplierData,
+      // };
 
       const response = await axiosInstance.post(
         `/set/suppliers/create/`,
-        payload,
+        supplierData,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -237,50 +207,51 @@ export const createSupplier = createAsyncThunk(
         }
       );
       console.log("createSupplier", response.data);
-
+      console.log("Supplier ID from response:", response.data?.supplier_id);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      console.error("Error response:", error.response?.data);
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
 
-// Update supplier data
+// update supplier
 export const updateSupplierData = createAsyncThunk(
   "settings/updateSupplierData",
   async (employeeDataToUpdate, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { supplier_id, logo, ...dataToUpdate } = employeeDataToUpdate;
+      const { supplier_id, ...dataToUpdate } = employeeDataToUpdate;
 
-      const base64Logo = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result); // Повертає Base64
-        reader.onerror = (error) => reject(error);
-        reader.readAsDataURL(logo); // Читає файл як Base64
-      });
-
-      // Створюємо об'єкт для відправки
-      const payload = {
-        ...dataToUpdate, // Додаємо дані співробітника
-        file: base64Logo, // Додаємо Base64-файли
-      };
-
+      // Make the API request
       const response = await axiosInstance.patch(
         `/set/suppliers/${supplier_id}/update/`,
-        payload,
+        dataToUpdate,
         {
           headers: {
-            // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
+            "Content-Type": "application/json",
           },
         }
       );
-      console.log("updateSupplierData", response.data);
 
+      console.log("updateSupplierData", response.data);
       return response.data;
     } catch (error) {
+      console.error("Error during updateSupplierData:", {
+        message: error.message,
+        code: error.code,
+        config: error.config,
+        response: error.response
+          ? {
+              status: error.response.status,
+              data: error.response.data,
+              headers: error.response.headers,
+            }
+          : null,
+      });
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -314,13 +285,13 @@ export const deleteSupplier = createAsyncThunk(
 // Update supplier status
 export const updateSupplierStatus = createAsyncThunk(
   "settings/updateSupplierStatus",
-  async (newStatus, thunkAPI) => {
+  async ({ supplier_id, newStatus }, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.patch(
-        `/set/suppliers/status/`,
-        newStatus,
+        `/set/suppliers/${supplier_id}/status?status=${newStatus}`,
+        {},
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -353,7 +324,7 @@ export const getSupplierData = createAsyncThunk(
           },
         }
       );
-      console.log("getSupplierData", response.data);
+      // console.log("getSupplierData", response.data);
 
       return response.data;
     } catch (error) {
@@ -373,13 +344,30 @@ export const getAllSuppliers = createAsyncThunk(
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
+          // "company-id": "1",
+          "Content-Type": "application/json",
         },
       });
       console.log("getAllSuppliers", response.data);
 
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      // Логування детальної інформації про помилку
+      console.error("Error during getAllSuppliers:", {
+        message: error.message,
+        code: error.code,
+        config: error.config,
+        response: error.response
+          ? {
+              status: error.response.status,
+              data: error.response.data,
+              headers: error.response.headers,
+            }
+          : null,
+      });
+
+      // Повертаємо повідомлення про помилку в reject
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
@@ -565,12 +553,15 @@ export const getPrices = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.get(`/set/services`, {
-        headers: {
-          // "X-Api-Key": "YA7NxysJ",
-          "company-id": serviceId,
-        },
-      });
+      const response = await axiosInstance.get(
+        `/set/categories_repair_service_all`,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
       console.log("getPrices", response.data);
 
       return response.data;
@@ -581,14 +572,40 @@ export const getPrices = createAsyncThunk(
 );
 
 // Get services and prices in particular category
-export const getPricesInCategory = createAsyncThunk(
-  "settings/getPricesInCategory",
-  async (category_id, thunkAPI) => {
+// export const getPricesInCategory = createAsyncThunk(
+//   "settings/getPricesInCategory",
+//   async (category_id, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const response = await axiosInstance.get(
+//         `/set/categories/${category_id}/services`,
+//         {
+//           headers: {
+//             // "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       console.log("getPricesInCategory", response.data);
+
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// Update category
+export const updateCategory = createAsyncThunk(
+  "settings/updateCategory",
+  async (newData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.get(
-        `/set/categories/${category_id}/services`,
+      const response = await axiosInstance.patch(
+        `/set/categories/update/`,
+        newData,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -596,7 +613,7 @@ export const getPricesInCategory = createAsyncThunk(
           },
         }
       );
-      console.log("getPricesInCategory", response.data);
+      console.log("updateCategory", response.data);
 
       return response.data;
     } catch (error) {
@@ -607,13 +624,13 @@ export const getPricesInCategory = createAsyncThunk(
 
 // Update service name or prices
 export const editServiceNameOrPrices = createAsyncThunk(
-  "settings/editPrices",
+  "settings/editServiceNameOrPrices",
   async (newData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.patch(
-        `/set/services/update/`,
+        `/set/repair_services/update/`,
         newData,
         {
           headers: {
@@ -622,7 +639,7 @@ export const editServiceNameOrPrices = createAsyncThunk(
           },
         }
       );
-      console.log("editPrices", response.data);
+      console.log("editServiceNameOrPrices", response.data);
 
       return response.data;
     } catch (error) {
@@ -631,16 +648,16 @@ export const editServiceNameOrPrices = createAsyncThunk(
   }
 );
 
-// Create category of services
+// Create category
 export const createCategory = createAsyncThunk(
   "settings/createCategory",
-  async (categoryName, thunkAPI) => {
+  async (category_name, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(
         `/set/categories/`,
-        categoryName,
+        category_name,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -657,33 +674,6 @@ export const createCategory = createAsyncThunk(
   }
 );
 
-// Update category name
-export const updateCategoryData = createAsyncThunk(
-  "settings/updateCategoryData",
-  async (categoryDataToUpdate, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const serviceId = state.service.selectedServiceInSettingsId;
-    try {
-      // const { categoryId, ...dataToUpdate } = categoryDataToUpdate;
-      const response = await axiosInstance.patch(
-        `/set/categories/update/`,
-        categoryDataToUpdate,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      console.log("updateCategoryData", response.data);
-
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
 // Create service
 export const createService = createAsyncThunk(
   "settings/createService",
@@ -691,15 +681,17 @@ export const createService = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
 
-    // const { categoryId, ...serviceName } = newService;
-
     try {
-      const response = await axiosInstance.post(`/set/services/`, newService, {
-        headers: {
-          // "X-Api-Key": "YA7NxysJ",
-          "company-id": serviceId,
-        },
-      });
+      const response = await axiosInstance.post(
+        `/set/repair_service/`,
+        newService,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
       console.log("createService", response.data);
 
       return response.data;
@@ -1050,13 +1042,13 @@ export const getDistributorMarkup = createAsyncThunk(
 // Create cash register
 export const createCashRegister = createAsyncThunk(
   "settings/createCashRegister",
-  async (cashRegisterName, thunkAPI) => {
+  async (cashRegisterData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(
         `/set/cashregister/create`,
-        cashRegisterName,
+        cashRegisterData,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -1088,6 +1080,7 @@ export const updateCashRegister = createAsyncThunk(
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
+            "Content-Type": "application/json"
           },
         }
       );
@@ -1103,14 +1096,12 @@ export const updateCashRegister = createAsyncThunk(
 // Delete Cash Register
 export const deleteCashRegister = createAsyncThunk(
   "settings/deleteCashRegister",
-  async (cashRegisterToDelete, thunkAPI) => {
+  async (cash_register_id, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { cash_register_id, ...cashRegister } = cashRegisterToDelete;
       const response = await axiosInstance.delete(
         `/set/cashregister/${cash_register_id}/delete/`,
-        cashRegister,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -1134,10 +1125,9 @@ export const updateCashRegisterStatus = createAsyncThunk(
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const { cash_register_id, ...status } = newStatus;
+      const { cash_register_id, status } = newStatus;
       const response = await axiosInstance.patch(
-        `/set/cashregister/${cash_register_id}/status`,
-        status,
+        `/set/cashregister/${cash_register_id}/status?status=${status}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -1177,26 +1167,26 @@ export const getAllCashRegisters = createAsyncThunk(
 );
 
 // Get data of particular Cash Register
-export const getCashRegisterData = createAsyncThunk(
-  "settings/getCashRegisterData",
-  async (cash_register_id, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const serviceId = state.service.selectedServiceInSettingsId;
-    try {
-      const response = await axiosInstance.get(
-        `/set/cashregister/${cash_register_id}`,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      console.log("getCashRegisterData", response.data);
+// export const getCashRegisterData = createAsyncThunk(
+//   "settings/getCashRegisterData",
+//   async (cash_register_id, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const response = await axiosInstance.get(
+//         `/set/cashregister/${cash_register_id}`,
+//         {
+//           headers: {
+//             // "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       console.log("getCashRegisterData", response.data);
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );

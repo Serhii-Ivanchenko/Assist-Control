@@ -7,6 +7,26 @@ function SearchBar({ searchData, onFilter, onReset }) {
   const [query, setQuery] = useState("");
   const [isBtnVisible, setIsBtnIsVisible] = useState(false);
 
+  // const handleSearch = (e) => {
+  //   const userQuery = e.target.value.toLowerCase().trim();
+  //   setQuery(userQuery);
+  //   setIsBtnIsVisible(true);
+
+  //   if (userQuery === "") {
+  //     onReset();
+  //     setIsBtnIsVisible(false);
+  //     return;
+  //   }
+
+  //   // Фільтруємо послуги за назвою
+  //   const filteredServices = searchData.filter((service) =>
+  //     service.service_name.toLowerCase().includes(userQuery)
+  //   );
+  //   console.log("filteredServices", filteredServices);
+
+  //   onFilter(filteredServices);
+  // };
+
   const handleSearch = (e) => {
     const userQuery = e.target.value.toLowerCase().trim();
     setQuery(userQuery);
@@ -19,15 +39,15 @@ function SearchBar({ searchData, onFilter, onReset }) {
     }
 
     const matchedCategories = searchData.reduce((result, category) => {
-      const matchingServices = category.items.filter((service) =>
-        service.item.toLowerCase().includes(userQuery)
+      const matchingServices = category.services.filter((service) =>
+        service.service_name.toLowerCase().includes(userQuery)
       );
 
       if (matchingServices.length > 0) {
         result.push({
-          id: category.id,
-          category: category.category,
-          items: matchingServices,
+          category_id: category.category_id,
+          category_name: category.category_name,
+          services: matchingServices,
         });
       }
       return result;
@@ -36,7 +56,6 @@ function SearchBar({ searchData, onFilter, onReset }) {
     if (matchedCategories.length > 0) {
       onFilter(matchedCategories);
     } else {
-      // setIsBtnIsVisible(false);
       onFilter([]);
     }
   };

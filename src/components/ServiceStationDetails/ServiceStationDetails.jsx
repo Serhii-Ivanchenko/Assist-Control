@@ -7,11 +7,12 @@ import { useSelector } from "react-redux";
 import { selectedServiceInSettingsId } from "../../redux/service/selectors.js";
 import { useDispatch } from "react-redux";
 import {
+  getAllCashRegisters,
   getAllEmployees,
   getPosts,
+  getPrices,
   getWorkSchedule,
 } from "../../redux/settings/operations.js";
-import { getWarehouses } from "../../redux/warehouse/operations.js";
 
 function ServiceStationDetails({ stationId }) {
   const [isAccordionExpanded, setAccordionExpanded] = useState(false);
@@ -35,7 +36,8 @@ function ServiceStationDetails({ stationId }) {
         await dispatch(getAllEmployees()).unwrap();
         await dispatch(getPosts()).unwrap();
         await dispatch(getWorkSchedule()).unwrap();
-        await dispatch(getWarehouses()).unwrap();
+        await dispatch(getAllCashRegisters()).unwrap();
+        await dispatch(getPrices()).unwrap();
       } catch (error) {
         console.error("Помилка завантаження даних:", error);
       }

@@ -207,7 +207,7 @@ const currentPageConfig = pageConfigs.find((config) => config.page === page);
             <FiChevronRight className={css.arrowIcon} />
           </button>
         </div>
-        {page==="crm" || page==="recom" && (
+        {(page==="crm" || page==="recom" )&& (
           <div className={css.crmblock} style={{width: page==="crm" ? "217px": "65px"}}>
             <p className={css.datemont}> {crmSelectDate} </p>
          {page==="crm" && (   <CreateAppointmentBtn onClick={handleAppointmentBtnClick} />)}
