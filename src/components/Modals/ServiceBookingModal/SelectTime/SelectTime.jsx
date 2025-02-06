@@ -56,6 +56,7 @@ export default function SelectTime({
     if (!recordId) {
       return;
     }
+
     const recordById = dayRecords?.find((dayRecord) => {
       return dayRecord.car_id === recordId;
     });
@@ -68,7 +69,7 @@ export default function SelectTime({
     }));
 
     setChosenTime(newArr);
-  }, [recordId]);
+  }, [recordId, dayRecords]);
 
   useEffect(() => {
     const dataForBooking = chosenTime?.map(({ appointment_date, times }) => ({

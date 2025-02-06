@@ -29,7 +29,6 @@ import { selectDate } from "../../../redux/cars/selectors.js";
 import BtnsCloseAndSubmit from "../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit.jsx";
 import passport from "../../../assets/images/passport_image.png";
 import carModels from "../../../utils/output.json";
-import DatePicker from "react-datepicker";
 import Select, { components } from "react-select";
 
 export default function ServiceBookingModal({
@@ -225,9 +224,6 @@ export default function ServiceBookingModal({
     return dayRecord.car_id === recordId;
   });
 
-  console.log("dayRecords", dayRecords);
-  console.log("recordById", recordById);
-
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
   };
@@ -360,9 +356,14 @@ export default function ServiceBookingModal({
                   component="div"
                   className={css.errorMsg}
                 />
-                {!errors.phone_number && (
+                {!errors.phone_number && !recordId && (
                   <p className={css.reminder}>
                     Телефон повинен відповідати формату 380123456789
+                  </p>
+                )}
+                {recordId && (
+                  <p className={css.reminder}>
+                    Для редагування номеру зверніться в тех підтримку
                   </p>
                 )}
               </div>
