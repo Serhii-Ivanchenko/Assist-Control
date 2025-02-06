@@ -31,6 +31,7 @@ import passport from "../../../assets/images/passport_image.png";
 import carModels from "../../../utils/output.json";
 import DatePicker from "react-datepicker";
 import Select, { components } from "react-select";
+import axios from "axios";
 
 export default function ServiceBookingModal({
   onClose,
@@ -372,6 +373,23 @@ export default function ServiceBookingModal({
                   type="text"
                   name="car_number"
                   placeholder="AX2945OP *"
+                  onChange={(e) => {
+                    const value = e.target.value.toUpperCase(); 
+                    setFieldValue("car_number", value);
+
+                    if (value.length === 8) {
+                      axios.get(
+                        `https://plate.assist.cam/search_car_by_plate/?plate=${value}`
+                      )
+                        // .then((res) => res.json())
+                        .then((data) => {
+                          console.log("Дані про авто:", data);
+                          // if (data.make) setFieldValue("make", data.make);
+                          // if (data.model) setFieldValue("model", data.model);
+                        })
+                        .catch((err) => console.error("Помилка запиту:", err));
+                    }
+                  }}
                 />
                 <ErrorMessage
                   name="car_number"
