@@ -352,7 +352,7 @@ export default function ServiceBookingModal({
                   type="text"
                   name="phone_number"
                   placeholder="Телефон *"
-                  disabled={recordId}
+                  // disabled={recordId}
                 />
 
                 <ErrorMessage
