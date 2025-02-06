@@ -26,9 +26,9 @@ export default function PricePart() {
   //   const [serviceItemEdit, setServiceItemEdit] = useState(null);
   const scrollToTheLastItemRef = useRef(null);
 
-  useEffect(() => {
-    dispatch(getPrices());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getPrices());
+  // }, [dispatch]);
 
   const handleFilter = (searchData) => {
     console.log("handleFilter", searchData);
