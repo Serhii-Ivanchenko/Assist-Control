@@ -102,7 +102,9 @@ export default function CurrentCarsItem() {
           </div>
           <div className={styles.carInfoContainer}>
             <p className={styles.carBrand}>
-              {car.auto || "Марку не визначено"}
+              {car.make && car.model
+                ? `${car.make} ${car.model}`
+                : "Марку не визначено"}{" "}
             </p>
             <h3 className={styles.carReg}>{car.plate}</h3>
             <h4 className={styles.carTimeStamp}>

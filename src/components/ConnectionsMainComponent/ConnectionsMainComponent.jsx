@@ -20,45 +20,49 @@ export default function ConnectionsMainComponent() {
   const [selectedStatus, setSelectedStatus] = useState("ALL"); 
   const [timeFilter, setTimeFilter] = useState(null);
   const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+  const [isDateChanged, setIsDateChanged] = useState(false);
 
-  const handleTimeFilterChange = (index) => {
-    let timeFilterValue = "all";
-    switch (index) {
-      case 0:
-        timeFilterValue = "day";
-        break;
-      case 1:
-        timeFilterValue = "week";
-        break;
-      case 2:
-        timeFilterValue = "month";
-        break;
-      default:
-        timeFilterValue = "all";
-    }
-    setTimeFilter(timeFilterValue);
+  useEffect(() => {
+    console.log("Current timeFilter:", timeFilter); 
+  
+    const params = {
+      page: 1,
+      per_page: 10,
+      ...(timeFilter && { date_filter: timeFilter }),
+    };
+  
+    console.log("Params sent to backend:", params); 
+    dispatch(getConnectionsList(params));
+  }, [dispatch, timeFilter]);
+  
+
+  
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+    setIsDateChanged(true);
   };
-
+  
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+    setIsDateChanged(true);
+  };
+  
   useEffect(() => {
-    console.log("Fetching stats and connections...");
-    dispatch(getStats("all"));
-    dispatch(getConnectionsList({ page: 1, end_date: endDate }));
-  }, [dispatch, endDate]);
-
-  useEffect(() => {
-    if (startDate || endDate || timeFilter) {
-      const params = {
-        page: 1,
-        start_date: startDate ? startDate.toISOString().split("T")[0] + "T00:00:00" : undefined,
-        end_date: endDate ? endDate.toISOString().split("T")[0] + "T23:59:59" : undefined,
-        date_filter: timeFilter,
-      };
-
-      console.log("Params sent to backend:", params); 
-      dispatch(getConnectionsList(params));
-    }
-  }, [dispatch, startDate, endDate, timeFilter]);
+    const params = {
+      page: 1,
+      ...(isDateChanged && startDate && {
+        start_date: startDate.toISOString().split("T")[0] + "T00:00:00",
+      }),
+      ...(isDateChanged && endDate && {
+        end_date: endDate.toISOString().split("T")[0] + "T23:59:59",
+      }),
+      ...(timeFilter && { date_filter: timeFilter }),
+    };
+  
+    console.log("Params sent to backend:", params);
+    dispatch(getConnectionsList(params));
+  }, [dispatch, startDate, endDate, timeFilter, isDateChanged]);
 
   useEffect(() => {
     console.log("Connections List from Backend:", connectionsList); 
@@ -72,13 +76,14 @@ export default function ConnectionsMainComponent() {
     <div className={css.wrapper}>
       <ConnectionsControlBarSection
         onStatusChange={setSelectedStatus}
-        onStartDateChange={setStartDate}
-        onEndDateChange={setEndDate}
-        onSelectTimeRange={handleTimeFilterChange}
+        onStartDateChange={handleStartDateChange}
+        onEndDateChange={handleEndDateChange}
+       onSelectTimeRange={(value) => setTimeFilter(() => value)}
+
         periodStartData={startDate}
         periodEndData={endDate}
-        setPeriodStartData={setStartDate}
-        setPeriodEndData={setEndDate}
+        setPeriodStartData={handleStartDateChange}
+        setPeriodEndData={handleEndDateChange}
       />
       <div className={css.upperWrapper}>
         <ConnectionsCircularPBSection />
