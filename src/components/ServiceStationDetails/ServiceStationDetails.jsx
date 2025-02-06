@@ -10,6 +10,7 @@ import {
   getAllCashRegisters,
   getAllEmployees,
   getPosts,
+  getPrices,
   getWorkSchedule,
 } from "../../redux/settings/operations.js";
 
@@ -36,6 +37,7 @@ function ServiceStationDetails({ stationId }) {
         await dispatch(getPosts()).unwrap();
         await dispatch(getWorkSchedule()).unwrap();
         await dispatch(getAllCashRegisters()).unwrap();
+        await dispatch(getPrices()).unwrap();
       } catch (error) {
         console.error("Помилка завантаження даних:", error);
       }

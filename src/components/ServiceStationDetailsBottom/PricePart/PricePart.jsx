@@ -12,7 +12,7 @@ import {
   selectIsModalOpen,
   selectPrices,
 } from "../../../redux/settings/selectors";
-import { getPrices } from "../../../redux/settings/operations";
+import { createCategory, getPrices } from "../../../redux/settings/operations";
 import { openModal, closeModal } from "../../../redux/settings/slice";
 
 export default function PricePart() {
@@ -24,12 +24,11 @@ export default function PricePart() {
   const [filteredData, setFilteredData] = useState([]);
   //   const [isEditable, setIsEditable] = useState(false);
   //   const [serviceItemEdit, setServiceItemEdit] = useState(null);
-  const allServices = prices.flatMap((category) => category.services);
   const scrollToTheLastItemRef = useRef(null);
 
-  useEffect(() => {
-    dispatch(getPrices());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getPrices());
+  // }, [dispatch]);
 
   const handleFilter = (searchData) => {
     console.log("handleFilter", searchData);
@@ -37,8 +36,17 @@ export default function PricePart() {
     setActiveSearch(true);
   };
 
-  const handleNewCategory = () => {
-    console.log("handleNewCategory");
+  const handleNewCategory = async (newCategoryName) => {
+    if (newCategoryName.trim() === "") {
+      console.log("Please enter a category name.");
+      return;
+    }
+    try {
+      await dispatch(createCategory({ category_name: newCategoryName }));
+      dispatch(getPrices());
+    } catch (err) {
+      console.log("error creating new category", err);
+    }
   };
 
   const handleSaveNewData = () => {
@@ -90,11 +98,10 @@ export default function PricePart() {
     <div className={styles.wrapper}>
       <div className={styles.searchContainer}>
         <SearchBar
-          searchData={allServices}
+          searchData={prices}
           onFilter={handleFilter}
           onReset={handleResetSearch}
         />
-
         <button type="button" className={styles.btn} onClick={handleOpenModal}>
           <BsFolderPlus size={18} />
           Нова група
@@ -111,11 +118,8 @@ export default function PricePart() {
         )}
       </div>
       <AccordionList
-        data={
-          activeSearch
-            ? [{ category_name: "Результати пошуку", services: filteredData }]
-            : prices
-        }
+        data={activeSearch ? filteredData : prices}
+        containerRef={scrollToTheLastItemRef}
       />
       <div className={styles.btnGroup}>
         <button onClick={handleResetData} className={styles.resetBtn}>
