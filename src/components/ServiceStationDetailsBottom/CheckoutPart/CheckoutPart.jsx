@@ -21,7 +21,7 @@ const currencyOptions = [
   { value: "UAH ₴", label: "UAH ₴" },
   { value: "USD $", label: "USD $" },
   { value: "EUR €", label: "EUR €" },
-  { value: "грн", label: "грн" },
+  // { value: "грн", label: "грн" },
 ];
 
 const entrepreneurOptions = [
@@ -140,7 +140,7 @@ export default function CheckoutPart() {
         entrepreneur: "ФОП Назва",
         warehouse: "Склад Назва",
         responsible: "Відповідальний ПІБ",
-        status: 0,
+        status: 1,
       };
       dispatch(createCashRegister(dataToAdd))
         .unwrap()
