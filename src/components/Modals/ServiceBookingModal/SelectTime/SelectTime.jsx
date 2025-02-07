@@ -18,21 +18,11 @@ export default function SelectTime({
   const { availability } = useSelector(selectServiceData);
   const dayRecords = useSelector(selectDayRecords);
 
-  // const newArr = [
-  //   { appointment_date: "13.12.2024", times: ["19:00"] },
-  //   { appointment_date: "14.12.2024", times: ["09:00"] },
-  // ];
-
-
   const onTimeBtnClick = (time) => {
     setChosenTime((prevValues) => {
-      console.log("prevValues", prevValues);
-
       const existingDate = prevValues.find(
         (item) => item.appointment_date === pickedDate
       );
-
-      console.log("existingDate", existingDate);
 
       if (existingDate) {
         let updatedTimes = existingDate.times.includes(time)
@@ -57,35 +47,27 @@ export default function SelectTime({
     });
   };
 
-    useEffect(() => {
-      if (!recordId) {
-        return;
-      }
+  useEffect(() => {
+    if (!recordId) {
+      return;
+    }
 
-      console.log("dayRecords", dayRecords);
-      console.log("recordId",recordId);
-      
+    const recordById = dayRecords?.find((dayRecord) => {
+      return dayRecord.car_id === recordId;
+    });
 
+    const bookingTime = recordById?.booking;
 
-      const recordById = dayRecords?.find((dayRecord) => {
-        return dayRecord.car_id === recordId;
-      });
+    const newArr = bookingTime?.map(({ appointment_date, times }) => ({
+      appointment_date: appointment_date.split("-").reverse().join("."),
+      times,
+    }));
 
-      console.log("recordById", recordById);
-
-      const bookingTime = recordById?.booking;
-
-      console.log("bookingTime", bookingTime);
-
-      const newArr = bookingTime?.map(({ appointment_date, times }) => ({
-        appointment_date: appointment_date.split("-").reverse().join("."),
-        times,
-      }));
-      console.log("newArr", newArr);
-
-      setChosenTime(newArr);
-    }, [recordId, dayRecords]);
-
+    setChosenTime((prevValues) => {
+      return newArr ? newArr : prevValues;
+    });
+    // setChosenTime(newArr);
+  }, [recordId, dayRecords]);
 
   useEffect(() => {
     const dataForBooking = chosenTime?.map(({ appointment_date, times }) => ({
