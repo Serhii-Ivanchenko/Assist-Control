@@ -20,7 +20,7 @@ import toast from "react-hot-toast";
 import {
   selectDates,
   selectDayRecords,
-  selectPeriodRecords,
+  // selectPeriodRecords,
   selectServiceData,
 } from "../../../redux/crm/selectors.js";
 import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
@@ -53,8 +53,7 @@ export default function ServiceBookingModal({
 
   const selectedServiceId = useSelector(selectSelectedServiceId);
   const { mechanics, posts, services } = useSelector(selectServiceData);
-  const dayRecords = useSelector(selectPeriodRecords);
-  console.log("dayRecords outside useEffect", dayRecords);
+  const dayRecords = useSelector(selectDayRecords);
 
   const CustomDropdownIndicator = (props) => {
     const { menuIsOpen } = props.selectProps;
