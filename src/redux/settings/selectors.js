@@ -8,6 +8,8 @@ export const selectPosts = (state) => state.settings.posts;
 
 export const selectPrices = (state) => state.settings.prices;
 
+export const selectEditedServices = (state) => state.settings.editedServices;
+
 export const selectEmployees = (state) => state.settings.employees;
 
 export const selectAllSuppliers = (state) => state.settings.suppliers;
