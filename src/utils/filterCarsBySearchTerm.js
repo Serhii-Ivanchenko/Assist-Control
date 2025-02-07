@@ -38,3 +38,19 @@ export const filterCarsBySearchTerm = (cars, searchTerm) => {
     );
   });
 };
+
+
+// функція для пошуку в Зверненях тільки по назві авто з полем car_name
+
+// Оновлена функція для пошуку в Зверненнях по назві авто та імені користувача
+export const filterBySearchConnections = (connections, searchTerm) => {
+  if (!searchTerm) return connections;
+
+  const lowerCaseSearchTerm = searchTerm.toLowerCase();
+
+  return connections.filter((connection) => {
+    const carName = connection.car_name ? connection.car_name.toLowerCase() : "";
+    const userName = connection.customer_name ? connection.customer_name.toLowerCase() : "";
+    return carName.includes(lowerCaseSearchTerm) || userName.includes(lowerCaseSearchTerm);
+  });
+};
