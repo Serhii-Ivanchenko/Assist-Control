@@ -41,17 +41,19 @@ export const getConnectionsList = createAsyncThunk(
 
       const response = await axiosInstance.get(`/appl/contacts`, {
         params: {
-          date_filter: timePeriod,
+          date_filter: String(timePeriod),
           start_date,
           end_date,
           page,
           per_page: per_page || 10,
         },
+
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
+
       console.log("getConnectionsList", response.data);
 
       return response.data;

@@ -2,15 +2,24 @@ import { useState } from "react";
 import clsx from "clsx";
 import styles from "./RangeTimeSelector.module.css";
 
-export default function RangeTimeSelector({onSelectTimeRange}) {
+export default function RangeTimeSelector({ onSelectTimeRange }) {
   const [selected, setSelected] = useState(null);
 
-  const options = ["За день", "За тиждень", "За місяць", "Весь час"];
+  const options = [
+    { label: "За день", value: "day" },
+    { label: "За тиждень", value: "week" },
+    { label: "За місяць", value: "month" },
+    { label: "Весь час", value: "all" }
+  ];
 
   const handleClick = (index) => {
     setSelected(index);
-    if (onSelectTimeRange) onSelectTimeRange(index);
+    console.log("Selected time filter:", options[index].value);
+    if (onSelectTimeRange) {
+      onSelectTimeRange(options[index].value);
+    }
   };
+  
 
   return (
     <div className={styles.wrapper}>
@@ -22,7 +31,7 @@ export default function RangeTimeSelector({onSelectTimeRange}) {
           })}
           onClick={() => handleClick(index)}
         >
-          <p className={styles.timeText}>{option}</p>
+          <p className={styles.timeText}>{option.label}</p>
         </div>
       ))}
     </div>

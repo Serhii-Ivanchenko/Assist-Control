@@ -24,7 +24,8 @@ export default function DayCarsItemLine({ car }) {
     status,
     plate,
     mileage,
-    auto,
+    make,
+    model,
     vin,
     date_s,
     client,
@@ -102,7 +103,7 @@ export default function DayCarsItemLine({ car }) {
           )}
         >
           <IoCarSportSharp size={13} color="#A97878" />
-          <span className={styles.nameCar}>{auto}</span>
+          <span className={styles.nameCar}>{make && model ? `${make} ${model}` : "Невідома модель"}</span>
         </div>
       )}
 

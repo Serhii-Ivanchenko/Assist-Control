@@ -34,14 +34,12 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
   const [modalState, setModalState] = useState({
     serviceBooking: false,
     archive: false,
-    notifications: false
+    notifications: false,
   });
   const [isDragging, setIsDragging] = useState(false);
   const [draggingElement, setDraggingElement] = useState(null);
   const [initialX, setInitialX] = useState(0);
   const [initialY, setInitialY] = useState(0);
-
-  
 
   const handleDragStart = (e) => {
     setIsDragging(true);
@@ -112,12 +110,17 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
   };
 
   const closeModals = () => {
-    setModalState({ serviceBooking: false, archive: false, notifications: false });
+    setModalState({
+      serviceBooking: false,
+      archive: false,
+      notifications: false,
+    });
   };
 
   const {
     car_id,
-    auto,
+    make,
+    model,
     photo_url: photoUrl,
     vin,
     mileage,
@@ -138,10 +141,13 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
 
   const renderAppointmentDate = () => {
     if (appointment_date && time_slot) {
-      const formattedDate = new Date(appointment_date).toLocaleDateString('uk-UA', {
-        day: '2-digit',
-        month: '2-digit',
-      });
+      const formattedDate = new Date(appointment_date).toLocaleDateString(
+        "uk-UA",
+        {
+          day: "2-digit",
+          month: "2-digit",
+        }
+      );
       return (
         <div>
           <p className={styles.time}>
@@ -150,7 +156,7 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
         </div>
       );
     }
-  
+
     if (!appointment_date) {
       const timeInWork = renderTimeinWork(car.date_s);
       return (
@@ -159,10 +165,9 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
         </div>
       );
     }
-  
+
     return null;
   };
-  
 
   return (
     <div
@@ -212,7 +217,7 @@ export default function DayCarsItemCrm({ car, onDragStart, onArchiveSuccess }) {
             >
               <IoCarSportSharp size={13} color="#A97878" />
               <span className={styles.nameCar}>
-                {auto ? auto : "Невідома модель"}
+                {make && model ? `${make} ${model}` : "Невідома модель"}
               </span>
             </div>
           )}

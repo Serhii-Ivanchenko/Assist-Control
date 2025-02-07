@@ -6,20 +6,28 @@ import renderStatusCommunication from "../../utils/renderStatusCommunication .js
 import { statusesCommunications } from "../../utils/dataToRender.js";
 import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch.jsx";
 import DownloadPdfButtonModalCar from "../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar.jsx";
-import { useState } from "react";
+import { useEffect } from "react";
 
-export default function ConnectionsControlBarSection() {
-  const [periodStartData, setPeriodStartData] = useState(new Date());
-  const [periodEndData, setPeriodEndData] = useState(new Date());
+export default function ConnectionsControlBarSection({ 
+  onStatusChange, 
+  onStartDateChange, 
+  onEndDateChange, 
+  onSelectTimeRange, 
+  periodStartData, 
+  periodEndData, 
+  setPeriodStartData, 
+  setPeriodEndData 
+}) {
   const isFilter = true;
 
-  const handleStatusChange = (status) => {
-    console.log("Selected status:", status);
-  };
+  useEffect(() => {
+    onStartDateChange(periodStartData);
+    onEndDateChange(periodEndData);
+  }, [periodStartData, periodEndData, onEndDateChange, onStartDateChange]);
 
   return (
     <div className={css.wrapper}>
-      <RangeTimeSelector />
+      <RangeTimeSelector onSelectTimeRange={onSelectTimeRange} />
       <CalendarPeriodSelector
         periodStartData={periodStartData}
         periodEndData={periodEndData}
@@ -28,7 +36,7 @@ export default function ConnectionsControlBarSection() {
         isSingle={false}
       />
       <StatusFilter
-        onStatusChange={handleStatusChange}
+        onStatusChange={onStatusChange}
         renderStatus={(status) => renderStatusCommunication(status, css, isFilter)}
         statuses={statusesCommunications}
         isFilter={isFilter}
