@@ -220,9 +220,43 @@ export default function ServiceBookingModal({
       : new Date().toLocaleDateString()
   );
 
-  const recordById = dayRecords?.find((dayRecord) => {
-    return dayRecord.car_id === recordId;
+  const [initialValues, setInitialValues] = useState({
+    phone_number: "",
+    car_number: "",
+    vin: "",
+    service_id: "",
+    prepayment: "",
+    position: postId || posts[0]?.id,
+    mechanic_id: "",
+    name: "",
+    make: "",
+    model: "",
+    year: "",
+    note: "",
   });
+
+  useEffect(() => {
+    if (!recordId) {
+      return;
+    }
+    const recordById = dayRecords?.find((dayRecord) => {
+      return dayRecord.car_id === recordId;
+    });
+    setInitialValues({
+      phone_number: recordById?.phone,
+      car_number: recordById?.plate,
+      vin: recordById?.vin,
+      service_id: recordById?.service_id,
+      prepayment: recordById?.prepayment ? recordById?.prepayment : "",
+      position: recordById?.post_id,
+      mechanic_id: recordById?.mechanic_id,
+      name: recordById?.name,
+      make: recordById?.make,
+      model: recordById?.model,
+      year: recordById?.year,
+      note: recordById?.note,
+    });
+  }, []);
 
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
@@ -303,21 +337,6 @@ export default function ServiceBookingModal({
     setBooking([]);
     actions.resetForm();
     onClose();
-  };
-
-  const initialValues = {
-    phone_number: recordId ? recordById?.phone : "",
-    car_number: recordById?.plate || "",
-    vin: recordById?.vin || "",
-    service_id: recordById?.service_id || "",
-    prepayment: recordById?.prepayment || "",
-    position: postId || recordById?.post_id || posts[0]?.id,
-    mechanic_id: recordById?.mechanic_id || "",
-    name: recordById?.name || "",
-    make: recordById?.make || "",
-    model: recordById?.model || "",
-    year: recordById?.year || "",
-    note: recordById?.note || "",
   };
 
   return !posts ? (
