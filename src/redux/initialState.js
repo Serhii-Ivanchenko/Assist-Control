@@ -241,6 +241,61 @@ export const initialState = {
 
   warehouse: {
     warehouses: [],
+    warehouse: {
+  id: null,
+  name: null,
+  address: null,
+  total_sections: null,
+  parent: null,
+  sections: [
+    {
+      id: null,
+      name: null,
+      total_racks: null,
+      parent: {
+        id: null,
+        name: null,
+        type: null,
+      },
+      racks: [
+        {
+          id: null,
+          name: null,
+          total_shelves: null,
+          parent: {
+            id: null,
+            name: null,
+            type: null,
+          },
+          shelves: [
+            {
+              id: null,
+              name: null,
+              total_places: null,
+              parent: {
+                id: null,
+                name: null,
+                type: null
+              },
+              places: [
+                {
+                  id: null,
+                  name: null,
+                  parent: {
+                    id: null,
+                    name: null,
+                    type: null
+                  }
+                },
+                
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
     // sections: [],
     // racks: [],
     // shelves: [],

@@ -24,9 +24,15 @@ import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
 import CreateWarehousePop from "./CreateWarehousePop/CreateWarehousePop";
 
 import { useSelector } from "react-redux";
-import { selectWarehousesTree } from "../../../redux/warehouse/selectors";
+import {
+  // selectOneWareHouseTree,
+  selectWarehousesTree,
+} from "../../../redux/warehouse/selectors";
 import { useDispatch } from "react-redux";
-import { getWarehouses } from "../../../redux/warehouse/operations";
+// import {
+//   getWarehouseById,
+//   getWarehouses,
+// } from "../../../redux/warehouse/operations";
 
 // const dataForTree = [
 //   {
@@ -76,50 +82,187 @@ import { getWarehouses } from "../../../redux/warehouse/operations";
 // ];
 
 export default function WarehousePart() {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getWarehouses());
-  // }, [dispatch]);
+  const dispatch = useDispatch();
   const warehouses = useSelector(selectWarehousesTree);
+  console.log("warehouses", warehouses);
+
+  // const warehouseById = useSelector(selectOneWareHouseTree) || [];
+
+  // console.log("wawarehouseByIdreho", warehouseById);
+
+  // useEffect(() => {
+  //   dispatch(getWarehouses()); // To get the list of all warehouses
+  //   if (warehouseById && warehouseById.id) {
+  //     dispatch(getWarehouseById(warehouseById.id)); // To get details of the specific warehouse
+  //   }
+  // }, [dispatch, warehouseById.id, warehouseById]);
+
   //   console.log("dataForTree", dataForTree);
 
-  const dataForTree = warehouses.map((warehouse) => {
-    return {
-      id: warehouse.id.toString(),
-      parent: null, // Склади будуть кореневими елементами
-      text: warehouse.name,
-      droppable: warehouse.total_sections > 0, // Якщо є підсекції, то елемент буде дропабельним
-      data: "warehouse",
-    };
-  });
+  // const dataForTree = warehouses.map((warehouse) => {
+  //   return {
+  //     id: warehouse.id.toString(),
+  //     parent: null, // Склади будуть кореневими елементами
+  //     text: warehouse.name,
+  //     droppable: warehouse.total_sections > 0, // Якщо є підсекції, то елемент буде дропабельним
+  //     data: "warehouse",
+  //   };
+  // });
 
-  // Додаємо секції (якщо є)
-  const sections = warehouses
-    .filter((warehouse) => warehouse.total_sections > 0)
-    .flatMap((warehouse) => {
-      const sectionsArray = [];
-      for (let i = 0; i < warehouse.total_sections; i++) {
-        sectionsArray.push({
-          id: `${warehouse.id}-${i + 1}`,
-          parent: warehouse.id.toString(), // Прив'язуємо до складу
-          text: `${warehouse.name} - Section ${i + 1}`,
-          droppable: true,
-          data: "section",
-        });
-      }
-      return sectionsArray;
+  // const dataForParticularTree = [
+  //   {
+  //     id: `w-${warehouseById.id}`,
+  //     parent: null,
+  //     text: warehouseById.name,
+  //     droppable: true,
+  //     data: "warehouse",
+  //   },
+  // ];
+
+  // warehouseById.sections.forEach((section) => {
+  //   treeData.push({
+  //     id: `s-${section.id}`,
+  //     parent: `w-${warehouseById.id}`,
+  //     text: section.name,
+  //     droppable: true,
+  //     data: "section",
+  //   });
+
+  //   section.racks.forEach((rack) => {
+  //     treeData.push({
+  //       id: `r-${rack.id}`,
+  //       parent: `s-${section.id}`,
+  //       text: rack.name,
+  //       droppable: true,
+  //       data: "rack",
+  //     });
+
+  //     rack.shelves.forEach((shelf) => {
+  //       treeData.push({
+  //         id: `sh-${shelf.id}`,
+  //         parent: `r-${rack.id}`,
+  //         text: shelf.name,
+  //         droppable: true,
+  //         data: "shelf",
+  //       });
+
+  //       shelf.places.forEach((place) => {
+  //         treeData.push({
+  //           id: `p-${place.id}`,
+  //           parent: `sh-${shelf.id}`,
+  //           text: place.name,
+  //           droppable: false,
+  //           data: "place",
+  //         });
+  //       });
+  //     });
+  //   });
+  // });
+
+  const dataForTree = warehouses.reduce((acc, warehouse) => {
+    acc.push({
+      id: `w-${warehouse.id}`,
+      parent: null,
+      text: warehouse.name,
+      droppable: true,
+      data: "warehouse",
     });
 
-  const finalTreeData = [...dataForTree, ...sections];
+    warehouse.sections.forEach((section) => {
+      acc.push({
+        id: `s-${section.id}`,
+        parent: `w-${warehouse.id}`,
+        text: section.name,
+        droppable: true,
+        data: "section",
+      });
 
-  console.log(finalTreeData);
+      section.racks.forEach((rack) => {
+        acc.push({
+          id: `r-${rack.id}`,
+          parent: `s-${section.id}`,
+          text: rack.name,
+          droppable: true,
+          data: "rack",
+        });
+
+        rack.shelves.forEach((shelf) => {
+          acc.push({
+            id: `sh-${shelf.id}`,
+            parent: `r-${rack.id}`,
+            text: shelf.name,
+            droppable: true,
+            data: "shelf",
+          });
+
+          shelf.places.forEach((place) => {
+            acc.push({
+              id: `p-${place.id}`,
+              parent: `sh-${shelf.id}`,
+              text: place.name,
+              droppable: false,
+              data: "place",
+            });
+          });
+        });
+      });
+    });
+    return acc;
+  }, []);
+
+  console.log("dataForTree", dataForTree);
+
+  const [treeData, setTreeData] = useState(dataForTree);
+
+  // setTreeData(dataForTree);
+  //   return {
+  //     id: warehouse.id.toString(),
+  //     parent: null,
+  //     text: warehouse.name,
+  //     droppable: warehouse.total_sections > 0,
+  //     data: "warehouse",
+  //   };
+  // });
+
+  // const dataForParticularTree = warehouseById.sections.map((section) => {
+  //   return {
+  //     id: `s-${section.id}`,
+  //     parent: `w-${warehouseById.id}`,
+  //     text: section.name,
+  //     droppable: true,
+  //     data: "section",
+  //   };
+  // });
+
+  // setTreeData([...dataForTree]);
+
+  // Додаємо секції (якщо є)
+  // const sections = warehouses
+  //   .filter((warehouse) => warehouse.total_sections > 0)
+  //   .flatMap((warehouse) => {
+  //     const sectionsArray = [];
+  //     for (let i = 0; i < warehouse.total_sections; i++) {
+  //       sectionsArray.push({
+  //         id: `${warehouse.id}-${i + 1}`,
+  //         parent: warehouse.id.toString(), // Прив'язуємо до складу
+  //         text: `${warehouse.name} - Section ${i + 1}`,
+  //         droppable: true,
+  //         data: "section",
+  //       });
+  //     }
+  //     return sectionsArray;
+  //   });
+
+  // const finalTreeData = [...dataForTree, ...sections];
+
+  // console.log(finalTreeData);
+  //
 
   const [isAddWhModalOpen, setAddWhModalOpen] = useState(false);
 
   const { ref, getPipeHeight, toggle, openParentIfNeeded } =
     useTreeOpenHandler();
 
-  const [treeData, setTreeData] = useState(finalTreeData);
   const [isNewWhPopoverOpen, setNewWhPopoverOpen] = useState(false);
 
   const buttonRef = useRef(null);

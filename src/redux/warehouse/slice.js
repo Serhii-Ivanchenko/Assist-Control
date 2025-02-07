@@ -11,13 +11,15 @@ import {
   deleteSection,
   deleteShelf,
   getPrompts,
-  getWarehouses,
+  // getWarehouses,
   saveWarehouse,
   updatePlaceName,
   updateRackName,
   updateSectionName,
   updateShelfName,
   updateWarehouseName,
+  // getWarehouseById
+  getAllWarehousesWithDetails
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -32,16 +34,41 @@ const handleRejected = (state, action) => {
 
 const warehouseSlice = createSlice({
   name: "warehouse",
-  initialState: initialState.warehouse,
-  reducers: {},
+  initialState:
+    initialState.warehouse,
+  // selectedWarehouse: null,
+  reducers: {
+    // setSelectedWarehouse: (state, action) => {
+    //   state.selectedWarehouse = action.payload;
+    // }
+    },
   extraReducers: (builder) =>
     builder
-      .addCase(getWarehouses.pending, handlePending)
-      .addCase(getWarehouses.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.warehouses = action.payload.data;
+      .addCase(getAllWarehousesWithDetails.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
       })
-      .addCase(getWarehouses.rejected, handleRejected)
+      .addCase(getAllWarehousesWithDetails.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.warehouses = action.payload; // Зберігаємо всі склади з повною структурою
+      })
+      .addCase(getAllWarehousesWithDetails.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      // .addCase(getWarehouses.pending, handlePending)
+      // .addCase(getWarehouses.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.warehouses = action.payload.data;
+      // })
+      // .addCase(getWarehouses.rejected, handleRejected)
+      // .addCase(getWarehouseById.pending, handlePending)
+      // .addCase(getWarehouseById.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.warehouse = action.payload;
+
+      // })
+      // .addCase(getWarehouseById.rejected, handleRejected)
       .addCase(createWarehouse.pending, handlePending)
       .addCase(createWarehouse.fulfilled, (state, action) => {
         state.isLoading = false;

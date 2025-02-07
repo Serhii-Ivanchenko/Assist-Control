@@ -13,6 +13,7 @@ import {
   getPrices,
   getWorkSchedule,
 } from "../../redux/settings/operations.js";
+import { getAllWarehousesWithDetails } from "../../redux/warehouse/operations.js";
 
 function ServiceStationDetails({ stationId }) {
   const [isAccordionExpanded, setAccordionExpanded] = useState(false);
@@ -38,6 +39,7 @@ function ServiceStationDetails({ stationId }) {
         await dispatch(getWorkSchedule()).unwrap();
         await dispatch(getAllCashRegisters()).unwrap();
         await dispatch(getPrices()).unwrap();
+        await dispatch(getAllWarehousesWithDetails()).unwrap();
       } catch (error) {
         console.error("Помилка завантаження даних:", error);
       }

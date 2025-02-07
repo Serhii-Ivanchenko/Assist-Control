@@ -1,27 +1,86 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../services/api.js";
 
-// Get warehouses
-export const getWarehouses = createAsyncThunk(
-  "warehouse/getWarehouses",
+
+export const getAllWarehousesWithDetails = createAsyncThunk(
+  "warehouse/getAllWarehousesWithDetails",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-   const serviceId = state.service.selectedServiceInSettingsId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.get(`/set/get_all_warehouses/`, {
-        headers: {
-          // "X-Api-Key": "YA7NxysJ",
-          "company-id": serviceId,
-        },
+      // 1. Отримуємо список складів
+      const warehousesResponse = await axiosInstance.get(`/set/get_all_warehouses/`, {
+        headers: { "company-id": serviceId },
       });
-      console.log("getWarehouses", response.data);
 
-      return response.data;
+      const warehouses = warehousesResponse.data.data;
+      console.log("Warehouses Response:", warehousesResponse.data.data);
+
+
+      // 2. Отримуємо деталі для кожного складу
+      const warehouseDetails = await Promise.all(
+        warehouses.map(async (warehouse) => {
+          const warehouse_id = warehouse.id
+          const detailsResponse = await axiosInstance.get(
+            `/set/get_full_tree/?warehouse_id=${warehouse_id}`,
+            { headers: { "company-id": serviceId } }
+          );
+
+          return detailsResponse.data;
+        })
+      );
+
+      console.log("Final Warehouse Data:", warehouseDetails);
+      return warehouseDetails;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
+// Get warehouses
+// export const getWarehouses = createAsyncThunk(
+//   "warehouse/getWarehouses",
+//   async (_, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//    const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const response = await axiosInstance.get(`/set/get_all_warehouses/`, {
+//         headers: {
+//           // "X-Api-Key": "YA7NxysJ",
+//           "company-id": serviceId,
+//         },
+//       });
+//       console.log("getWarehouses", response.data);
+
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// // Get warehouse by id
+// export const getWarehouseById = createAsyncThunk(
+//   "warehouse/getWarehouseById",
+//   async (warehouse_id, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//    const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const response = await axiosInstance.get(`/set/get_full_tree/${warehouse_id}`, {
+//         headers: {
+//           // "X-Api-Key": "YA7NxysJ",
+//           "company-id": serviceId,
+//         },
+//       });
+//       console.log("getWarehouseById", response.data);
+
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 // Crete Warehouse
 export const createWarehouse = createAsyncThunk(
