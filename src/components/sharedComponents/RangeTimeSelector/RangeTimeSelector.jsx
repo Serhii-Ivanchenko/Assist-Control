@@ -14,7 +14,6 @@ export default function RangeTimeSelector({ onSelectTimeRange }) {
 
   const handleClick = (index) => {
     setSelected(index);
-    console.log("Selected time filter:", options[index].value);
     if (onSelectTimeRange) {
       onSelectTimeRange(options[index].value);
     }

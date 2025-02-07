@@ -41,7 +41,7 @@ export const getConnectionsList = createAsyncThunk(
 
       const response = await axiosInstance.get(`/appl/contacts`, {
         params: {
-          date_filter: String(timePeriod),
+          date_filter:timePeriod,
           start_date,
           end_date,
           page,
