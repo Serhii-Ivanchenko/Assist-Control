@@ -89,12 +89,20 @@ export default function ConnectionsMainComponent() {
       item.status.toUpperCase() === selectedStatus.toUpperCase()
   );
 
-  // Фільтрація за датою
-  const dateFilteredConnections = statusFilteredConnections.filter((item) => {
-    const itemDate = new Date(item.created_at);
-    itemDate.setHours(0, 0, 0, 0);
-    return itemDate >= startDate && itemDate <= endDate;
-  });
+ // Фільтрація за датою
+const dateFilteredConnections = statusFilteredConnections.filter((item) => {
+  const itemDate = new Date(item.created_at);
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  // Приводимо дати до початку дня
+  itemDate.setHours(0, 0, 0, 0);
+  start.setHours(0, 0, 0, 0);
+  end.setHours(23, 59, 59, 999);
+
+  return itemDate >= start && itemDate <= end;
+});
+
 
   return (
     <div className={css.wrapper}>
