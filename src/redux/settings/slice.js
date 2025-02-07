@@ -21,7 +21,7 @@ import {
   getAllEmployees,
   getAllMarkups,
   getAllSuppliers,
-  getCashRegisterData,
+  // getCashRegisterData,
   getDistributorMarkup,
   getEmployeeData,
   getMarkupItemData,
@@ -455,21 +455,21 @@ const settingsSlice = createSlice({
       .addCase(createCashRegister.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        state.cashRegisters.push(action.meta.arg);
+        // state.cashRegisters.push(action.meta.arg);
       })
       .addCase(createCashRegister.rejected, handleRejected)
 
       .addCase(updateCashRegister.pending, handlePending)
       .addCase(updateCashRegister.fulfilled, (state, action) => {
         state.isLoading = false;
-        const cashRegisterToEditIndex = state.cashRegisters.findIndex(
-          (cashRegister) =>
-            cashRegister.cash_register_id === action.payload.cash_register_id
-        );
-        state.cashRegisters[cashRegisterToEditIndex] = {
-          ...state.cashRegisters[cashRegisterToEditIndex], // Залишаємо старі дані
-          ...action.meta.arg, // Додаємо дані, які відправляли
-        };
+        // const cashRegisterToEditIndex = state.cashRegisters.findIndex(
+        //   (cashRegister) =>
+        //     cashRegister.id === action.payload.cash_register_id
+        // );
+        // state.cashRegisters[cashRegisterToEditIndex] = {
+        //   ...state.cashRegisters[cashRegisterToEditIndex], // Залишаємо старі дані
+        //   ...action.meta.arg, // Додаємо дані, які відправляли
+        // };
       })
       .addCase(updateCashRegister.rejected, handleRejected)
 
@@ -479,7 +479,7 @@ const settingsSlice = createSlice({
 
         state.cashRegisters = state.cashRegisters.filter(
           (cashRegister) =>
-            cashRegister.cash_register_id !== action.payload.cash_register_id
+            cashRegister.id !== action.payload.cash_register_id
         );
       })
       .addCase(deleteCashRegister.rejected, handleRejected)
@@ -489,10 +489,10 @@ const settingsSlice = createSlice({
         state.isLoading = false;
         const cashRegisterToEditIndex = state.cashRegisters.findIndex(
           (cashRegister) =>
-            cashRegister.cash_register_id === action.payload.cash_register_id
+            cashRegister.id === action.payload.cash_register_id
         );
-        state.cashRegisters[cashRegisterToEditIndex].isDisabled =
-          action.payload.isDisabled;
+        state.cashRegisters[cashRegisterToEditIndex].status =
+          action.payload.status;
       })
       .addCase(updateCashRegisterStatus.rejected, handleRejected)
 
@@ -504,13 +504,13 @@ const settingsSlice = createSlice({
       })
       .addCase(getAllCashRegisters.rejected, handleRejected)
 
-      .addCase(getCashRegisterData.pending, handlePending)
-      .addCase(getCashRegisterData.fulfilled, (state, action) => {
-        state.isLoading = false;
+      // .addCase(getCashRegisterData.pending, handlePending)
+      // .addCase(getCashRegisterData.fulfilled, (state, action) => {
+      //   state.isLoading = false;
 
-        state.cashRegisterItem = action.payload.cash_register;
-      })
-      .addCase(getCashRegisterData.rejected, handleRejected),
+      //   state.cashRegisterItem = action.payload.cash_register;
+      // })
+      // .addCase(getCashRegisterData.rejected, handleRejected),
 });
 
 export const { openModal, closeModal } = settingsSlice.actions;

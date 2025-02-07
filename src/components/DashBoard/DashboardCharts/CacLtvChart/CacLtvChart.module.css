@@ -1,0 +1,118 @@
+.containerchart {
+    border-radius: 12px;
+    width: 487px;
+    height: 337px;
+    padding: 15px 15px;
+    background: var(--bg-secondary);
+    /* border: 1px solid var(--black); */
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    /* height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 337px); */
+}
+
+.charttitlebox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* width: 457px;
+    height: 40px; */
+    margin-bottom: 8px;
+}
+
+.charttitle {
+    font-weight: 300;
+    font-size: 24px;
+    color: var(--white);
+    line-height: 1.1667em;
+}
+
+
+.charttitlecolor {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.chartColor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.titleCac {
+    background-color: var(--blue-btn-normal);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.titleLtv {
+    background-color: var(--play-btn-triangle);
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.titletext {
+    background: var(--bg-secondary);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--white);
+    line-height: 1.1667em;
+}
+
+
+.areabox {
+    /* width: 457px; */
+    height: 271px;
+    /* height: clamp(255px, calc(255px + (66 * ((100vh - 900px) / 180))), 270px); */
+}
+
+.popuptitle {
+    font-size: 13px;
+    font-variant: small-caps;
+    color: var(--blue-btn-inactive);
+    text-align: center;
+}
+
+.popupvalue {
+    font-size: 10px;
+    color: var(--blue-btn-inactive);
+    padding-top: 3px;
+    height: 15px;
+}
+
+
+
+.kolcac {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: end;
+    color: var(--blue-btn-normal);
+}
+
+.kolltv {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: end;
+    color: var(--play-btn-triangle);
+}
+
+.customtooltip {
+    background-color: var(--light-gray);
+    width: 58px;
+    padding: 2px 2px;
+    border-radius: 6px;
+    transform: translateX(-50%);
+    font-weight: 400;
+    font-size: 6px;
+    font-variant: smallCaps;
+    font-style: normal;
+}
+
+.chartflex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

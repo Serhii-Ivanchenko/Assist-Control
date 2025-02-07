@@ -9,38 +9,73 @@ import styles from "./AccordionItem.module.css";
 import ServiceItem from "./ServiceItem/ServiceItem";
 import Modal from "../../../Modals/Modal/Modal";
 import AddCategoryModal from "../AddCategoryModal/AddCategoryModal";
-// import addIdsToData from "../../../../utils/addIdsToData";
 
-function AccordionItem({ item, index }) {
+function AccordionItem({
+  item,
+  id,
+  // onDelete,
+  // setLocalChanges,
+  containerRef,
+  // resetPrice,
+  // resetService,
+}) {
   const [isEdit, setIsEdit] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  // const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
-  // const [currentCategory, setCurrentCategory] = useState(item.category);
-  // const [currentServices, setCurrentServices] = useState(item);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // useEffect(() => {
-  //   console.log("отримую в AccordionItem", item);
-  // }, [item]);
+  const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState(item.category_name);
+  const [currentServices, setCurrentServices] = useState(item.services);
+  // const [serviceItemEdit, setServiceItemEdit] = useState(null);
 
   const buttonRef = useRef(null);
-  // const innerAccRef = useRef(null);
+  const innerAccRef = useRef(null);
 
-  const handleChange = () => {
-    console.log("handleChange");
+  const handleAccordionChange = () => {
     setExpanded((prev) => !prev);
   };
 
   const handleCategoryPopupToggle = (e) => {
     e.stopPropagation();
-    console.log("handleCategoryPopupToggle");
+    setIsCategoryPopupOpen((prev) => !prev);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const handleNewService = (newServiceName) => {
+    const newItem = {
+      service_id: currentServices.length + 1,
+      service_name: newServiceName,
+      min_price: null,
+      max_price: null,
+      created_at: new Date().toISOString(),
+    };
+
+    setCurrentServices((prevServices) => [...prevServices, newItem]);
   };
 
-  // Прокрутка до ост. елементу при додаванні
+  // const handleUpdateService = (updatedService) => {
+  //   setCurrentServices((prevServices) =>
+  //     prevServices.map((service) =>
+  //       service.service.id === updatedService.id ? updatedService : service
+  //     )
+  //   );
+  // };
+
+  // useEffect(() => {
+  //   const dataToUpdate = {
+  //     category_id: id,
+  //     category_name: currentCategory,
+  //     services: [
+  //       {
+  //         service_id: "",
+  //         service_name: currentServices.service_name,
+  //         max_price: "",
+  //         min_price: "",
+  //       },
+  //     ],
+  //   };
+  //   setLocalChanges(dataToUpdate);
+  // }, [currentCategory, currentServices.service_name, id]);
+
+  // // Прокрутка до ост. елементу при додаванні
   // const prevDataLengthRef = useRef(currentServices.length); // Зберігаємо попередню довжину даних
 
   // useEffect(() => {
@@ -61,7 +96,7 @@ function AccordionItem({ item, index }) {
     <div className={styles.wrapper}>
       <Accordion
         expanded={expanded}
-        onChange={handleChange}
+        onChange={handleAccordionChange}
         disableGutters={true}
         sx={{
           background: "none",
@@ -72,20 +107,24 @@ function AccordionItem({ item, index }) {
         <AccordionSummary
           sx={{ background: "var(--bg-input)" }}
           className={styles.accordionTitle}
-          aria-controls={`panel${index}-content`}
-          id={`panel${index}-header`}
+          aria-controls={`panel${id}-content`}
+          id={`panel${id}-header`}
         >
           <div className={styles.titleContent}>
             {isEdit ? (
               <input
                 type="text"
-                value={item.category_name}
-                // onChange={handleCategoryUpdate}
+                value={currentCategory}
+                onChange={(e) => setCurrentCategory(e.target.value)}
                 autoFocus
                 className={styles.editInput}
+                onBlur={() => setIsEdit(false)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") setIsEdit(false);
+                }}
               />
             ) : (
-              <p>{item.category_name}</p>
+              <p>{currentCategory}</p>
             )}
             {expanded ? (
               <TiArrowSortedUp className={styles.icon} />
@@ -100,26 +139,26 @@ function AccordionItem({ item, index }) {
               <BsThreeDotsVertical className={styles.dotsIcon} />
               <div className={styles.popupContainer}>
                 <PopupMenu
-                // isOpen={isCategoryPopupOpen}
-                // onClose={handleCategoryPopupClose}
-                // onEdit={handleCategoryEdit}
-                // onAdd={handleAddService}
-                // buttonRef={buttonRef}
-                // containerRef={containerRef}
-                // innerAccRef={innerAccRef}
+                  isOpen={isCategoryPopupOpen}
+                  onClose={() => setIsCategoryPopupOpen(false)}
+                  onEdit={() => setIsEdit(true)}
+                  onAdd={() => setIsModalOpen(true)}
+                  buttonRef={buttonRef}
+                  containerRef={containerRef}
+                  innerAccRef={innerAccRef}
                 />
                 {isModalOpen && (
                   <div onClick={(e) => e.stopPropagation()}>
                     <Modal
                       isOpen={isModalOpen}
-                      onClose={closeModal}
+                      onClose={() => setIsModalOpen(false)}
                       shouldCloseOnOverlayClick={false}
                     >
                       <AddCategoryModal
-                        onClose={closeModal}
+                        onClose={() => setIsModalOpen(false)}
                         title="Введіть назву послуги"
                         name="newService"
-                        // addNewCategory={handleNewService}
+                        addNewCategory={handleNewService}
                       />
                     </Modal>
                   </div>
@@ -131,9 +170,19 @@ function AccordionItem({ item, index }) {
         <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
           <ul className={styles.accordionDesc}>
             {Array.isArray(item.services) ? (
-              item.services.map((service, index) => (
-                <li key={index}>
-                  <ServiceItem id={service.id} serviceData={service} />
+              currentServices.map((service) => (
+                <li key={service.service_id}>
+                  <ServiceItem
+                    id={service.service_id}
+                    serviceData={service}
+                    // onDelete={onDelete}
+                    // setLocalChanges={handleUpdateService}
+                    // setServiceItemEdit={setServiceItemEdit}
+                    // containerRef={containerRef}
+                    // innerAccRef={innerAccRef}
+                    // resetPrice={resetPrice}
+                    // resetService={resetService}
+                  />
                 </li>
               ))
             ) : (
