@@ -12,20 +12,25 @@ import {
 } from "../../redux/connections/operations.js";
 import {
   selectConnectionsList,
-  selectError,
+  selectError,  selectStats 
 } from "../../redux/connections/selectors.js";
 
 export default function ConnectionsMainComponent() {
   const dispatch = useDispatch();
   const connectionsList = useSelector(selectConnectionsList);
   const error = useSelector(selectError);
+  const selectStatsData = useSelector(selectStats);
   const errorStatus = error?.status;
-  
+  const today = new Date();
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(today.getDate() - 7);
+  const monthAgo = new Date();
+  monthAgo.setDate(today.getDate() - 30);
 
   const [selectedStatus, setSelectedStatus] = useState("ALL");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
+  const [timeFilter, setTimeFilter] = useState("day");
   useEffect(() => {
     const params = {
       page: 1,
@@ -45,6 +50,7 @@ export default function ConnectionsMainComponent() {
 
     // console.log("Params sent to backend:", params);
     dispatch(getConnectionsList(params));
+    dispatch(getStats(params));
   }, [dispatch, selectedStatus, startDate, endDate]);
 
   const handleStartDateChange = (date) => {
@@ -54,6 +60,27 @@ export default function ConnectionsMainComponent() {
   const handleEndDateChange = (date) => {
     setEndDate(date);
   };
+
+  const handleTimeRange = (value) => {
+    setTimeFilter(value);
+  setEndDate(today);
+    switch (value) {
+    case "day":
+       setStartDate(today);
+       break;
+  case "week":
+        setStartDate(sevenDaysAgo);
+        break;
+  case "month":
+        setStartDate(monthAgo);
+        break;
+      case "all": 
+        setStartDate(null);
+        break;
+      default:
+        setStartDate(today);
+    };
+  }
 
   // Фільтрація за статусом
   const statusFilteredConnections = (connectionsList || []).filter(
@@ -75,13 +102,14 @@ export default function ConnectionsMainComponent() {
         onStatusChange={setSelectedStatus}
         onStartDateChange={handleStartDateChange}
         onEndDateChange={handleEndDateChange}
+        onSelectTimeRange={handleTimeRange}
         periodStartData={startDate}
         periodEndData={endDate}
         setPeriodStartData={handleStartDateChange}
         setPeriodEndData={handleEndDateChange}
       />
       <div className={css.upperWrapper}>
-        <ConnectionsCircularPBSection />
+        <ConnectionsCircularPBSection statsData={selectStatsData } />
         <HorizontalPBSection />
       </div>
       <div className={css.bottomWrapper}>
