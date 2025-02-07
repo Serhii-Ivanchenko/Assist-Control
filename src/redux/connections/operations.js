@@ -35,19 +35,18 @@ export const getConnectionsList = createAsyncThunk(
   async (queryParameters, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
-    try {
-      const { start_date, end_date, timePeriod, page, per_page } =
-        queryParameters;
 
+    const { start_date, end_date, timePeriod, page, per_page } = queryParameters;
+
+    try {
       const response = await axiosInstance.get(`/appl/contacts`, {
         params: {
-          date_filter:timePeriod,
+          date_filter: timePeriod,
           start_date,
           end_date,
           page,
           per_page: per_page || 10,
         },
-
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -56,12 +55,22 @@ export const getConnectionsList = createAsyncThunk(
 
       console.log("getConnectionsList", response.data);
 
+      if (response.data?.detail && response.data.detail.includes("Жодних контактів не знайдено за заданими параметрами.")) {
+        return { contacts: [] };
+      }
+
       return response.data;
     } catch (error) {
+      if (error.response && error.response.status === 404) {
+        console.log("No contacts found for the provided date range.");
+        return { contacts: [] }; 
+      }
+      console.error("Error Response:", error.response);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 
 // Get list of problematic Contacts
 export const getProblematicContacts = createAsyncThunk(

@@ -55,17 +55,18 @@ export default function ConnectionsMainComponent() {
   };
 
   // Фільтрація за статусом
-  const statusFilteredConnections = connectionsList.filter(
-    (item) =>
-      selectedStatus === "ALL" || item.status.toUpperCase() === selectedStatus.toUpperCase()
-  );
+const statusFilteredConnections = (connectionsList || []).filter(
+  (item) =>
+    selectedStatus === "ALL" || item.status.toUpperCase() === selectedStatus.toUpperCase()
+);
 
-  // Фільтрація за датою
-  const dateFilteredConnections = statusFilteredConnections.filter((item) => {
-    const itemDate = new Date(item.created_at);
-    itemDate.setHours(0, 0, 0, 0);
-    return itemDate >= startDate && itemDate <= endDate;
-  });
+// Фільтрація за датою
+const dateFilteredConnections = statusFilteredConnections.filter((item) => {
+  const itemDate = new Date(item.created_at);
+  itemDate.setHours(0, 0, 0, 0);
+  return itemDate >= startDate && itemDate <= endDate;
+});
+
 
   return (
     <div className={css.wrapper}>
