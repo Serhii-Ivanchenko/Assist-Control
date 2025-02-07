@@ -10,20 +10,21 @@ import {
   getConnectionsList,
   getStats,
 } from "../../redux/connections/operations.js";
-import { selectConnectionsList } from "../../redux/connections/selectors.js";
+import {
+  selectConnectionsList,
+  selectError,
+} from "../../redux/connections/selectors.js";
 
 export default function ConnectionsMainComponent() {
   const dispatch = useDispatch();
   const connectionsList = useSelector(selectConnectionsList);
+  const error = useSelector(selectError);
+  const errorStatus = error?.status;
+  
 
   const [selectedStatus, setSelectedStatus] = useState("ALL");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
-  useEffect(() => {
-    dispatch(getConnectionsList({ page: 1 }));
-    dispatch(getStats());
-  }, [dispatch]);
 
   useEffect(() => {
     const params = {
@@ -42,7 +43,7 @@ export default function ConnectionsMainComponent() {
       params.end_date = endDate.toISOString().split("T")[0];
     }
 
-    console.log("Params sent to backend:", params);
+    // console.log("Params sent to backend:", params);
     dispatch(getConnectionsList(params));
   }, [dispatch, selectedStatus, startDate, endDate]);
 
@@ -55,18 +56,18 @@ export default function ConnectionsMainComponent() {
   };
 
   // Фільтрація за статусом
-const statusFilteredConnections = (connectionsList || []).filter(
-  (item) =>
-    selectedStatus === "ALL" || item.status.toUpperCase() === selectedStatus.toUpperCase()
-);
+  const statusFilteredConnections = (connectionsList || []).filter(
+    (item) =>
+      selectedStatus === "ALL" ||
+      item.status.toUpperCase() === selectedStatus.toUpperCase()
+  );
 
-// Фільтрація за датою
-const dateFilteredConnections = statusFilteredConnections.filter((item) => {
-  const itemDate = new Date(item.created_at);
-  itemDate.setHours(0, 0, 0, 0);
-  return itemDate >= startDate && itemDate <= endDate;
-});
-
+  // Фільтрація за датою
+  const dateFilteredConnections = statusFilteredConnections.filter((item) => {
+    const itemDate = new Date(item.created_at);
+    itemDate.setHours(0, 0, 0, 0);
+    return itemDate >= startDate && itemDate <= endDate;
+  });
 
   return (
     <div className={css.wrapper}>
@@ -84,13 +85,13 @@ const dateFilteredConnections = statusFilteredConnections.filter((item) => {
         <HorizontalPBSection />
       </div>
       <div className={css.bottomWrapper}>
-        {statusFilteredConnections.length === 0 ? (
-          <div className={css.noConnectionsMessage}>
-            Не знайдено звернень за цим статусом
-          </div>
-        ) : dateFilteredConnections.length === 0 ? (
+        {errorStatus === 404 ? (
           <div className={css.noConnectionsMessage}>
             Не знайдено звернень за поточний період
+          </div>
+        ) : statusFilteredConnections.length === 0 ? (
+          <div className={css.noConnectionsMessage}>
+            Не знайдено звернень за цим статусом
           </div>
         ) : (
           <ConnectionsListSection connections={dateFilteredConnections} />
