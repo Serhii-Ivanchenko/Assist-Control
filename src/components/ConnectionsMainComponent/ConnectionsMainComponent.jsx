@@ -66,7 +66,7 @@ export default function ConnectionsMainComponent() {
 
   const handleSearch = (term) => {
     setSearchTerm(term);
-    console.log(term); // Це виведе введений термін пошуку
+    // console.log(term); // Це виведе введений термін пошуку
   };
   
 
@@ -132,7 +132,7 @@ export default function ConnectionsMainComponent() {
     if (selectedStatus !== "ALL") {
       noResultsMessage = "Не знайдено звернень за цим статусом";
     } else if (searchTerm) {
-      noResultsMessage = "Не знайдено машин за цим пошуковим запитом";
+      noResultsMessage = "Не знайдено звернень за цим пошуковим запитом";
     } else if (errorStatus === 404) {
       noResultsMessage = "Не знайдено звернень за поточний період";
     }

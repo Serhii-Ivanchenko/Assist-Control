@@ -36,7 +36,7 @@ const reference = [
 
 
 export default function ConnectionsCircularPBSection({ statsData }) {
-  console.log(statsData);
+  // console.log(statsData);
 
 
 
