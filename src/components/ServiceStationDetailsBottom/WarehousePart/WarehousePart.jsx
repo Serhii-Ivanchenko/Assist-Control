@@ -29,6 +29,10 @@ import {
   selectWarehousesTree,
 } from "../../../redux/warehouse/selectors";
 import { useDispatch } from "react-redux";
+import {
+  createWarehouse,
+  getAllWarehousesWithDetails,
+} from "../../../redux/warehouse/operations";
 // import {
 //   getWarehouseById,
 //   getWarehouses,
@@ -212,7 +216,11 @@ export default function WarehousePart() {
 
   console.log("dataForTree", dataForTree);
 
-  const [treeData, setTreeData] = useState(dataForTree);
+  // const [treeData, setTreeData] = useState(dataForTree);
+
+  // useEffect(() => {
+  //   setTreeData(dataForTree);
+  // }, [dataForTree]);
 
   // setTreeData(dataForTree);
   //   return {
@@ -287,45 +295,53 @@ export default function WarehousePart() {
 
   // Збереження данних
   const handleSaveData = () => {
-    setTreeData((prev) =>
-      prev.map((node) =>
-        tempNodeText[node.id]
-          ? { ...node, text: tempNodeText[node.id] } // Оновлюємо текст вузла, якщо він редагувався
-          : node
-      )
-    );
-    setTempNodeText({});
-    setIsEditing(false);
+    //   setTreeData((prev) =>
+    //     prev.map((node) =>
+    //       tempNodeText[node.id]
+    //         ? { ...node, text: tempNodeText[node.id] } // Оновлюємо текст вузла, якщо він редагувався
+    //         : node
+    //     )
+    //   );
+    //   setTempNodeText({});
+    //   setIsEditing(false);
   };
 
   // Додавання нового елементу
   const addNewTree = (name) => {
-    const newRoot = {
-      id: `${Date.now()}`,
-      text: name,
-      droppable: true,
-      parent: null,
-      data: "warehouse",
-    };
+    // const newRoot = {
+    //   id: `${Date.now()}`,
+    //   text: name,
+    //   droppable: true,
+    //   parent: null,
+    //   data: "warehouse",
+    // };
 
-    setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
+    // setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
+    dispatch(createWarehouse({ warehoseName: name }))
+      .unwrap()
+      .then(() => {
+        dispatch(getAllWarehousesWithDetails());
+      })
+      .catch((err) => {
+        console.error("Error creating post:", err);
+      });
   };
 
   const scrollToTheLastItemRef = useRef(null);
 
   // Прокрутка до ост. елементу при додаванні
-  useEffect(() => {
-    if (
-      treeData.length > 0 &&
-      scrollToTheLastItemRef.current &&
-      treeData[treeData.length - 1]?.data === "warehouse"
-    ) {
-      scrollToTheLastItemRef.current?.scrollTo({
-        top: scrollToTheLastItemRef.current.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  }, [treeData]);
+  // useEffect(() => {
+  //   if (
+  //     treeData.length > 0 &&
+  //     scrollToTheLastItemRef.current &&
+  //     treeData[treeData.length - 1]?.data === "warehouse"
+  //   ) {
+  //     scrollToTheLastItemRef.current?.scrollTo({
+  //       top: scrollToTheLastItemRef.current.scrollHeight,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // }, [treeData]);
 
   // Відкриття і закриття поповеру
   const handleTogglePopover = (e) => {
@@ -380,14 +396,14 @@ export default function WarehousePart() {
       start &&
       typeof destinationIndex === "number"
     ) {
-      setTreeData((treeData) => {
-        const output = reorderArray(
-          treeData,
-          treeData.indexOf(start),
-          destinationIndex
-        );
-        return output;
-      });
+      //   setTreeData((treeData) => {
+      //     const output = reorderArray(
+      //       treeData,
+      //       treeData.indexOf(start),
+      //       destinationIndex
+      //     );
+      //     return output;
+      //   });
     }
 
     if (
@@ -404,16 +420,16 @@ export default function WarehousePart() {
         (end && !end?.droppable)
       )
         return;
-      setTreeData((treeData) => {
-        const output = reorderArray(
-          treeData,
-          treeData.indexOf(start),
-          destinationIndex
-        );
-        const movedElement = output.find((el) => el.id === dragSourceId);
-        if (movedElement) movedElement.parent = dropTargetId;
-        return output;
-      });
+      // setTreeData((treeData) => {
+      //   const output = reorderArray(
+      //     treeData,
+      //     treeData.indexOf(start),
+      //     destinationIndex
+      //   );
+      //   const movedElement = output.find((el) => el.id === dragSourceId);
+      //   if (movedElement) movedElement.parent = dropTargetId;
+      //   return output;
+      // });
     }
   };
 
@@ -497,7 +513,7 @@ export default function WarehousePart() {
           <div className={css.wrapper}>
             <Tree
               ref={ref}
-              tree={treeData}
+              tree={dataForTree}
               rootId={null}
               // initialOpen={treeData.length - 1}
               classes={{
@@ -507,7 +523,7 @@ export default function WarehousePart() {
                 listItem: css.listItem,
               }}
               dragPreviewRender={(node) => <div>{node.text}</div>}
-              onDrop={handleDrop}
+              // onDrop={handleDrop}
               sort={false}
               insertDroppableFirst={false}
               enableAnimateExpand={true}
@@ -528,8 +544,8 @@ export default function WarehousePart() {
                     }
                   }}
                   isDropTarget={isDropTarget}
-                  treeData={treeData}
-                  setTreeData={setTreeData}
+                  treeData={dataForTree}
+                  // setTreeData={setTreeData}
                   isEditing={isEditing}
                   setIsEditing={setIsEditing}
                   onStartEditing={handleStartEditing}

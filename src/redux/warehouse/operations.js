@@ -82,6 +82,32 @@ export const getAllWarehousesWithDetails = createAsyncThunk(
 //   }
 // );
 
+
+// Delete entities
+export const deleteEntity = createAsyncThunk(
+  "warehouse/deleteEntity",
+  async (entities, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.service.selectedServiceInSettingsId;
+
+    try {
+      const response = await axiosInstance.delete(
+        "/set/delete_entity/",
+        // entities,
+        {
+          headers: {
+            "company-id": serviceId,
+          },
+          data: entities,
+        }
+      );
+      return response.data; // Повертаємо успішну відповідь
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data); // Повертаємо помилку, якщо є
+    }
+  }
+);
+
 // Crete Warehouse
 export const createWarehouse = createAsyncThunk(
   "warehouse/createWarehouse",
@@ -190,11 +216,12 @@ export const createSection = createAsyncThunk(
     const state = thunkAPI.getState();
      const serviceId = state.service.selectedServiceInSettingsId;
       
-      const {warehouseId, ...sectionNumber} = createSectionData;
+      const {warehouse_id, sectionNumber} = createSectionData;
     try {
       const response = await axiosInstance.post(
-        `/set/section/`,
-        sectionNumber,
+        `/set/sections/`,
+        {warehouse_id,
+        sectionNumber},
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -267,9 +294,9 @@ export const createRacks = createAsyncThunk(
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
 
-    const { sectionId, ...racksNumber } = createRacksData;
+    const { section_id, ...racksNumber } = createRacksData;
     try {
-      const response = await axiosInstance.post(`/set/racks/`, racksNumber, {
+      const response = await axiosInstance.post(`/set/racks/`, {section_id, racksNumber}, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -340,11 +367,12 @@ export const createShelves = createAsyncThunk(
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
 
-    const { rackId, ...shelvesNumber } = createShelfData;
+    const { rack_id, ...shelvesNumber } = createShelfData;
     try {
       const response = await axiosInstance.post(
         `/set/shelves/`,
-        shelvesNumber,
+       { rack_id,
+        ...shelvesNumber,},
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -417,9 +445,11 @@ export const createPlaces = createAsyncThunk(
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
 
-    const { shelfId, ...placesNumber } = createPlacesData;
+    const { shelf_id, ...placesNumber } = createPlacesData;
     try {
-      const response = await axiosInstance.post(`/set/places/`, placesNumber, {
+      const response = await axiosInstance.post(`/set/places/`,
+        {shelf_id,
+        ...placesNumber}, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,

@@ -296,10 +296,10 @@ export const initialState = {
     }
   ]
 },
-    // sections: [],
-    // racks: [],
-    // shelves: [],
-    // places: [],
+    sections: [],
+    racks: [],
+    shelves: [],
+    places: [],
     prompts: [],
     isLoading: false,
     error: null,

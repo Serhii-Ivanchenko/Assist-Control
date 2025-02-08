@@ -10,6 +10,11 @@ import { RiTableAltLine } from "react-icons/ri";
 import { RiFolder5Line } from "react-icons/ri";
 import { BiBuildingHouse } from "react-icons/bi";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+  deleteEntity,
+  getAllWarehousesWithDetails,
+} from "../../../../redux/warehouse/operations";
 
 const TREE_X_OFFSET = 40;
 
@@ -54,7 +59,7 @@ export default function Node({
   onClick,
   treeData,
   getPipeHeight,
-  setTreeData,
+  // setTreeData,
   isEditing,
   onStartEditing,
   containerRef,
@@ -65,6 +70,7 @@ export default function Node({
   const inputFocusRef = useRef(null);
   const scrollForPopover = useRef(null);
   const addNodeRef = useRef({});
+  const dispatch = useDispatch();
 
   const addNodeButtonRef = (nodeId, el) => {
     if (el && !addNodeRef.current[nodeId]) {
@@ -97,11 +103,19 @@ export default function Node({
   };
 
   // Видалення
-  const deleteChild = (id, e) => {
+  const deleteChild = (id, type, e) => {
     e.stopPropagation();
-    setTreeData((prevData) =>
-      prevData.filter((node) => node.id !== id && node.parentId !== id)
-    );
+    // setTreeData((prevData) =>
+    //   prevData.filter((node) => node.id !== id && node.parentId !== id)
+    // );
+    dispatch(deleteEntity([{ entity_type: type, entity_id: id }]))
+      .unwrap()
+      .then(() => {
+        dispatch(getAllWarehousesWithDetails());
+      })
+      .catch((err) => {
+        console.error("Error creating post:", err);
+      });
   };
 
   // Щоб не тригерилось дерево
@@ -235,7 +249,7 @@ export default function Node({
             isEditing={handleEditing}
             id={node.id}
             deleteChild={deleteChild}
-            setTreeData={setTreeData}
+            // setTreeData={setTreeData}
             node={node}
             containerRef={containerRef}
             // handleToggle={handleToggle}
