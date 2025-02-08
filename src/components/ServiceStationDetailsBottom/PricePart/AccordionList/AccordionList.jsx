@@ -3,7 +3,7 @@ import styles from "./AccordionList.module.css";
 
 function AccordionList({ data, containerRef }) {
   return (
-    <ul className={styles.wrapper}>
+    <ul className={styles.wrapper} ref={containerRef}>
       {data.map((item) => (
         <li key={item.category_id}>
           <AccordionItem

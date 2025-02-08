@@ -7,26 +7,6 @@ function SearchBar({ searchData, onFilter, onReset }) {
   const [query, setQuery] = useState("");
   const [isBtnVisible, setIsBtnIsVisible] = useState(false);
 
-  // const handleSearch = (e) => {
-  //   const userQuery = e.target.value.toLowerCase().trim();
-  //   setQuery(userQuery);
-  //   setIsBtnIsVisible(true);
-
-  //   if (userQuery === "") {
-  //     onReset();
-  //     setIsBtnIsVisible(false);
-  //     return;
-  //   }
-
-  //   // Фільтруємо послуги за назвою
-  //   const filteredServices = searchData.filter((service) =>
-  //     service.service_name.toLowerCase().includes(userQuery)
-  //   );
-  //   console.log("filteredServices", filteredServices);
-
-  //   onFilter(filteredServices);
-  // };
-
   const handleSearch = (e) => {
     const userQuery = e.target.value.toLowerCase().trim();
     setQuery(userQuery);

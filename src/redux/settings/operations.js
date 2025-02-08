@@ -628,14 +628,20 @@ export const editServiceNameOrPrices = createAsyncThunk(
   async (newData, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.service.selectedServiceInSettingsId;
+    const formattedData = {
+      service_id: newData.service_id,
+      new_name: newData.service_name, // ✅ змінюємо ключ
+      new_min_price: parseFloat(newData.min_price), // ✅ переконайся, що число
+      new_max_price: parseFloat(newData.max_price),
+    };
     try {
       const response = await axiosInstance.patch(
         `/set/repair_services/update/`,
-        newData,
+        formattedData,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
+            "company-id": String(serviceId),
           },
         }
       );
@@ -1080,7 +1086,7 @@ export const updateCashRegister = createAsyncThunk(
           headers: {
             // "X-Api-Key": "YA7NxysJ",
             "company-id": serviceId,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
         }
       );

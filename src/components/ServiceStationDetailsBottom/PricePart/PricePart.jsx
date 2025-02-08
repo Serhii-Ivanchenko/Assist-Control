@@ -1,4 +1,21 @@
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectEditedServices,
+  selectIsModalOpen,
+  selectPrices,
+} from "../../../redux/settings/selectors";
+import {
+  createCategory,
+  editServiceNameOrPrices,
+  getPrices,
+} from "../../../redux/settings/operations";
+import {
+  openModal,
+  closeModal,
+  resetEditedServices,
+} from "../../../redux/settings/slice";
+
 import AccordionList from "./AccordionList/AccordionList";
 import { BsFolderPlus } from "react-icons/bs";
 import SearchBar from "./SearchBar/SearchBar";
@@ -6,58 +23,43 @@ import Modal from "../../Modals/Modal/Modal";
 import AddCategoryModal from "./AddCategoryModal/AddCategoryModal";
 
 import styles from "./PricePart.module.css";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import {
-  selectIsModalOpen,
-  selectPrices,
-} from "../../../redux/settings/selectors";
-import { createCategory, getPrices } from "../../../redux/settings/operations";
-import { openModal, closeModal } from "../../../redux/settings/slice";
 
 export default function PricePart() {
   const dispatch = useDispatch();
   const prices = useSelector(selectPrices);
   const isModalOpen = useSelector(selectIsModalOpen);
+  const editedServices = useSelector(selectEditedServices);
 
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
-  //   const [isEditable, setIsEditable] = useState(false);
-  //   const [serviceItemEdit, setServiceItemEdit] = useState(null);
+
   const scrollToTheLastItemRef = useRef(null);
 
-  // useEffect(() => {
-  //   dispatch(getPrices());
-  // }, [dispatch]);
-
   const handleFilter = (searchData) => {
-    console.log("handleFilter", searchData);
     setFilteredData(searchData);
     setActiveSearch(true);
   };
 
-  const handleNewCategory = async (newCategoryName) => {
+  const handleNewCategory = (newCategoryName) => {
     if (newCategoryName.trim() === "") {
       console.log("Please enter a category name.");
       return;
     }
-    try {
-      await dispatch(createCategory({ category_name: newCategoryName }));
-      dispatch(getPrices());
-    } catch (err) {
-      console.log("error creating new category", err);
-    }
+    dispatch(createCategory({ category_name: newCategoryName }))
+      .unwrap()
+      .then(() => dispatch(getPrices()))
+      .catch((err) => console.log("Error creating new category", err));
   };
 
   const handleSaveNewData = () => {
-    console.log("handleSaveNewData");
+    editedServices.forEach((service) => {
+      console.log("Updating service ID:", service.service_id);
+      console.log("editServiceNameOrPrices request data:", service);
+
+      dispatch(editServiceNameOrPrices(service));
+      dispatch(getPrices());
+    });
   };
-
-  //   const enableEditing = (id) => {};
-
-  //   const handleServiceEditing = (id) => {
-  //     setServiceItemEdit(id);
-  //   };
 
   const handleOpenModal = () => {
     dispatch(openModal());
@@ -68,29 +70,30 @@ export default function PricePart() {
   };
 
   const handleResetSearch = () => {
-    setFilteredData(prices);
+    setFilteredData([...prices]);
     setActiveSearch(false);
   };
 
   const handleResetData = () => {
+    dispatch(resetEditedServices());
     console.log("handleResetData");
   };
 
   // Прокрутка до ост. елементу при додаванні
-
   const prevDataLengthRef = useRef(prices.length); // Зберігаємо попередню довжину даних
 
   useEffect(() => {
     if (
-      prices.length > prevDataLengthRef.current && // Перевіряємо, чи додано новий елемент
+      prices.length > prevDataLengthRef.current &&
       scrollToTheLastItemRef.current
     ) {
-      scrollToTheLastItemRef.current.scrollTo({
-        top: scrollToTheLastItemRef.current.scrollHeight,
-        behavior: "smooth",
+      requestAnimationFrame(() => {
+        scrollToTheLastItemRef.current.scrollTo({
+          top: scrollToTheLastItemRef.current.scrollHeight,
+          behavior: "smooth",
+        });
       });
     }
-    // Оновлюємо попередню довжину після виконання ефекту
     prevDataLengthRef.current = prices.length;
   }, [prices]);
 
