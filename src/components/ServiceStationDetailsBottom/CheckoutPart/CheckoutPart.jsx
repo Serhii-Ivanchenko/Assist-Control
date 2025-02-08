@@ -186,7 +186,17 @@ export default function CheckoutPart() {
       responsible: responsibleValue?.value || checkout.responsible,
       status: checkout.status,
     };
-    console.log("currencyValue", currencyValue);
+
+    const isChanged = Object.keys(updatedCashRegister).some(
+      (key) => updatedCashRegister[key] !== checkout[key]
+    );
+
+    if (!isChanged) {
+      console.log("Дані не змінилися, запит не відправляється.");
+      setIsEditing(null);
+      return;
+    }
+    // console.log("currencyValue", currencyValue);
     console.log("updatedCashRegister", updatedCashRegister);
     dispatch(
       updateCashRegister({ cash_register_id: id, ...updatedCashRegister })
