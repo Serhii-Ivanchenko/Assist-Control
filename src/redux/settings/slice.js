@@ -340,9 +340,12 @@ const settingsSlice = createSlice({
       .addCase(deleteService.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        state.prices = state.prices.filter(
-          (item) => item.service_id !== action.payload.service_id
-        );
+        state.prices = state.prices.map((category) => ({
+          ...category,
+          services: category.services.filter(
+            (service) => service.service_id !== action.payload.service_id
+          ),
+        }));
       })
       .addCase(deleteService.rejected, handleRejected)
 
