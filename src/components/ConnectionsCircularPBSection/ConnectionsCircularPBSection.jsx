@@ -36,7 +36,7 @@ const reference = [
 
 
 export default function ConnectionsCircularPBSection({ statsData }) {
-  console.log(statsData);
+  // console.log(statsData);
 
 
 
@@ -54,7 +54,7 @@ export default function ConnectionsCircularPBSection({ statsData }) {
    }))
    .sort((a, b) => a.id - b.id); // Сортировка по id
 
-   console.log(data);
+  //  console.log(data);
   
 
   return <div className={css.wrapper}>

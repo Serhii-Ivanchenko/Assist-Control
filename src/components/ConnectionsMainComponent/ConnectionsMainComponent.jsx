@@ -12,8 +12,10 @@ import {
 } from "../../redux/connections/operations.js";
 import {
   selectConnectionsList,
-  selectError,  selectStats 
+  selectError,
+  selectStats,
 } from "../../redux/connections/selectors.js";
+import { filterBySearchConnections } from "../../utils/filterCarsBySearchTerm.js";
 
 export default function ConnectionsMainComponent() {
   const dispatch = useDispatch();
@@ -31,6 +33,8 @@ export default function ConnectionsMainComponent() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [timeFilter, setTimeFilter] = useState("day");
+  const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     const params = {
       page: 1,
@@ -48,7 +52,6 @@ export default function ConnectionsMainComponent() {
       params.end_date = endDate.toISOString().split("T")[0];
     }
 
-    // console.log("Params sent to backend:", params);
     dispatch(getConnectionsList(params));
     dispatch(getStats(params));
   }, [dispatch, selectedStatus, startDate, endDate]);
@@ -61,40 +64,79 @@ export default function ConnectionsMainComponent() {
     setEndDate(date);
   };
 
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    // console.log(term); // Це виведе введений термін пошуку
+  };
+  
+
   const handleTimeRange = (value) => {
     setTimeFilter(value);
-  setEndDate(today);
+    setEndDate(today);
     switch (value) {
-    case "day":
-       setStartDate(today);
-       break;
-  case "week":
+      case "day":
+        setStartDate(today);
+        break;
+      case "week":
         setStartDate(sevenDaysAgo);
         break;
-  case "month":
+      case "month":
         setStartDate(monthAgo);
         break;
-      case "all": 
+      case "all":
         setStartDate(null);
         break;
       default:
         setStartDate(today);
-    };
-  }
+    }
+  };
 
   // Фільтрація за статусом
-  const statusFilteredConnections = (connectionsList || []).filter(
-    (item) =>
-      selectedStatus === "ALL" ||
-      item.status.toUpperCase() === selectedStatus.toUpperCase()
-  );
+  const filterByStatus = (connectionsList) => {
+    return connectionsList.filter(
+      (item) =>
+        selectedStatus === "ALL" ||
+        item.status.toUpperCase() === selectedStatus.toUpperCase()
+    );
+  };
 
   // Фільтрація за датою
-  const dateFilteredConnections = statusFilteredConnections.filter((item) => {
-    const itemDate = new Date(item.created_at);
-    itemDate.setHours(0, 0, 0, 0);
-    return itemDate >= startDate && itemDate <= endDate;
-  });
+  const filterByDate = (connectionsList) => {
+    return connectionsList.filter((item) => {
+      const itemDate = new Date(item.created_at);
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      itemDate.setHours(0, 0, 0, 0);
+      start.setHours(0, 0, 0, 0);
+      end.setHours(23, 59, 59, 999);
+
+      return itemDate >= start && itemDate <= end;
+    });
+  };
+
+  // Фільтрація за пошуковим терміном
+  const filterBySearch = () => {
+      return filterBySearchConnections(filteredConnections, searchTerm);
+    };
+  
+  // Застосовуємо фільтрацію по кожному критерію
+  let filteredConnections = connectionsList || [];
+  filteredConnections = filterByStatus(filteredConnections);
+  filteredConnections = filterByDate(filteredConnections);
+  filteredConnections = filterBySearch(filteredConnections);
+
+  // Визначаємо повідомлення для різних випадків
+  let noResultsMessage = null;
+  if (filteredConnections.length === 0) {
+    if (selectedStatus !== "ALL") {
+      noResultsMessage = "Не знайдено звернень за цим статусом";
+    } else if (searchTerm) {
+      noResultsMessage = "Не знайдено звернень за цим пошуковим запитом";
+    } else if (errorStatus === 404) {
+      noResultsMessage = "Не знайдено звернень за поточний період";
+    }
+  }
 
   return (
     <div className={css.wrapper}>
@@ -107,22 +149,19 @@ export default function ConnectionsMainComponent() {
         periodEndData={endDate}
         setPeriodStartData={handleStartDateChange}
         setPeriodEndData={handleEndDateChange}
+        searchTerm={searchTerm}
+        onSearch={handleSearch}
+        filteredConnections={filteredConnections}
       />
       <div className={css.upperWrapper}>
-        <ConnectionsCircularPBSection statsData={selectStatsData } />
+        <ConnectionsCircularPBSection statsData={selectStatsData} />
         <HorizontalPBSection />
       </div>
       <div className={css.bottomWrapper}>
-        {errorStatus === 404 ? (
-          <div className={css.noConnectionsMessage}>
-            Не знайдено звернень за поточний період
-          </div>
-        ) : statusFilteredConnections.length === 0 ? (
-          <div className={css.noConnectionsMessage}>
-            Не знайдено звернень за цим статусом
-          </div>
+        {noResultsMessage ? (
+          <div className={css.noConnectionsMessage}>{noResultsMessage}</div>
         ) : (
-          <ConnectionsListSection connections={dateFilteredConnections} />
+          <ConnectionsListSection connections={filteredConnections} />
         )}
         <ProblemCall />
       </div>
