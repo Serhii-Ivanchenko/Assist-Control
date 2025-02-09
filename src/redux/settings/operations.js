@@ -630,9 +630,10 @@ export const editServiceNameOrPrices = createAsyncThunk(
     const serviceId = state.service.selectedServiceInSettingsId;
     const formattedData = {
       service_id: newData.service_id,
-      new_name: newData.service_name, // ✅ змінюємо ключ
-      new_min_price: parseFloat(newData.min_price), // ✅ переконайся, що число
+      new_name: newData.service_name,
+      new_min_price: parseFloat(newData.min_price),
       new_max_price: parseFloat(newData.max_price),
+      company_id: serviceId,
     };
     try {
       const response = await axiosInstance.patch(
@@ -641,7 +642,7 @@ export const editServiceNameOrPrices = createAsyncThunk(
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
-            "company-id": String(serviceId),
+            "company-id": serviceId,
           },
         }
       );

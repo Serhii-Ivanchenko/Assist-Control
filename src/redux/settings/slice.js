@@ -302,16 +302,14 @@ const settingsSlice = createSlice({
       .addCase(editServiceNameOrPrices.pending, handlePending)
       .addCase(editServiceNameOrPrices.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.prices.forEach((category) => {
-          const service = category.services.find(
-            (s) => s.service_id === action.payload.service_id
-          );
-          if (service) {
-            service.service_name = action.payload.new_name;
-            service.min_price = action.payload.new_min_price;
-            service.max_price = action.payload.new_max_price;
-          }
-        });
+        state.prices = state.prices.map((category) => ({
+          ...category,
+          services: category.services.map((s) =>
+            s.service_id === action.payload.service_id
+              ? { ...s, ...action.payload }
+              : s
+          ),
+        }));
       })
       .addCase(editServiceNameOrPrices.rejected, handleRejected)
 

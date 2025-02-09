@@ -227,6 +227,7 @@ export const initialState = {
     posts: [],
     prices: [],
     editedServices: [],
+    editedCategory: null,
     // categoryPrices: [],
     ratings: [],
     rating: {},

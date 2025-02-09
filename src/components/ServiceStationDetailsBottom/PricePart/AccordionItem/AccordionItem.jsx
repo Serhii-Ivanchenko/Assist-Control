@@ -13,10 +13,9 @@ import { useDispatch } from "react-redux";
 import {
   createService,
   getPrices,
-  updateCategory,
 } from "../../../../redux/settings/operations";
 
-function AccordionItem({ item, id, containerRef }) {
+function AccordionItem({ item, id, containerRef, onReset, onUpdateCategory }) {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -32,7 +31,14 @@ function AccordionItem({ item, id, containerRef }) {
 
   useEffect(() => {
     setCurrentServices(item.services);
+    setIsEdit(false);
   }, [item.services]);
+
+  // useEffect(() => {
+  //   if (onReset) {
+  //     onReset(() => setCurrentCategory(item.category_name));
+  //   }
+  // }, [item.category_name, onReset]);
 
   const handleAccordionChange = () => {
     setExpanded((prev) => !prev);
@@ -43,13 +49,18 @@ function AccordionItem({ item, id, containerRef }) {
     setIsCategoryPopupOpen((prev) => !prev);
   };
 
+  // const handleSaveCategory = () => {
+  //   dispatch(
+  //     updateCategory({
+  //       category_id: item.category_id,
+  //       new_name: currentCategory,
+  //     })
+  //   );
+  //   setIsEdit(false);
+  // };
+
   const handleSaveCategory = () => {
-    dispatch(
-      updateCategory({
-        category_id: item.category_id,
-        new_name: currentCategory,
-      })
-    );
+    onUpdateCategory(item.category_id, currentCategory); // Викликаємо батьківську функцію
     setIsEdit(false);
   };
 
@@ -109,6 +120,7 @@ function AccordionItem({ item, id, containerRef }) {
                 autoFocus
                 className={styles.editInput}
                 onBlur={handleSaveCategory}
+                disabled={!isEdit}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleSaveCategory();
                 }}
