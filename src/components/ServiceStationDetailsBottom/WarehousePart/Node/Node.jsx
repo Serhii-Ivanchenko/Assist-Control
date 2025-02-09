@@ -179,10 +179,11 @@ export default function Node({
       // Прокрутка до кожного нового вузла
       const nodeElement = addNodeRef.current[node.id];
       // console.log("nodeElem", nodeElement);
-
-      nodeElement.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
+      requestAnimationFrame(() => {
+        nodeElement.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
       });
     }
   }, [node.id]);

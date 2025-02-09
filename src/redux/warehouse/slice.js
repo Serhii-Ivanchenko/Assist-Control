@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
 import {
-    createPlaces,
+  createPlaces,
   createRacks,
   createSection,
   createShelves,
@@ -35,14 +35,13 @@ const handleRejected = (state, action) => {
 
 const warehouseSlice = createSlice({
   name: "warehouse",
-  initialState:
-    initialState.warehouse,
+  initialState: initialState.warehouse,
   // selectedWarehouse: null,
   reducers: {
     // setSelectedWarehouse: (state, action) => {
     //   state.selectedWarehouse = action.payload;
     // }
-    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getAllWarehousesWithDetails.pending, (state) => {
@@ -63,7 +62,7 @@ const warehouseSlice = createSlice({
       })
       .addCase(deleteEntity.fulfilled, (state, action) => {
         state.isLoading = false;
-const deletedEntities = action.payload.deleted;
+        const deletedEntities = action.payload.deleted;
 
         deletedEntities.forEach((deletedEntity) => {
           switch (deletedEntity.entity_type) {
@@ -95,7 +94,8 @@ const deletedEntities = action.payload.deleted;
             default:
               break;
           }
-        });      })
+        });
+      })
       .addCase(deleteEntity.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
@@ -142,23 +142,23 @@ const deletedEntities = action.payload.deleted;
       .addCase(getPrompts.rejected, handleRejected)
       .addCase(createSection.pending, handlePending)
       .addCase(createSection.fulfilled, (state, action) => {
-  state.isLoading = false;
+        state.isLoading = false;
 
-//   const warehouseToAddSectionIndex = state.warehouses.findIndex(
-//     (warehouse) => warehouse.id === action.payload.warehouse_id
-//   );
+        //   const warehouseToAddSectionIndex = state.warehouses.findIndex(
+        //     (warehouse) => warehouse.id === action.payload.warehouse_id
+        //   );
 
-//   if (warehouseToAddSectionIndex !== -1) {
-//     // Перевіряємо, чи є масив sections
-//     if (!state.warehouses[warehouseToAddSectionIndex].sections) {
-//       state.warehouses[warehouseToAddSectionIndex].sections = []; // Ініціалізуємо порожній масив
-//     }
+        //   if (warehouseToAddSectionIndex !== -1) {
+        //     // Перевіряємо, чи є масив sections
+        //     if (!state.warehouses[warehouseToAddSectionIndex].sections) {
+        //       state.warehouses[warehouseToAddSectionIndex].sections = []; // Ініціалізуємо порожній масив
+        //     }
 
-//     state.warehouses[warehouseToAddSectionIndex].sections.push(action.payload);
-//   } else {
-//     console.error('Warehouse not found');
-//   }
-})
+        //     state.warehouses[warehouseToAddSectionIndex].sections.push(action.payload);
+        //   } else {
+        //     console.error('Warehouse not found');
+        //   }
+      })
       .addCase(createSection.rejected, handleRejected)
       .addCase(updateSectionName.pending, handlePending)
       .addCase(updateSectionName.fulfilled, (state, action) => {
@@ -346,34 +346,33 @@ const deletedEntities = action.payload.deleted;
       .addCase(createPlaces.fulfilled, (state, action) => {
         state.isLoading = false;
 
-      //   const warehouseToAddPlacesIndex = state.warehouses.findIndex(
-      //     (warehouse) => warehouse.id === action.payload.warehouse_id
-      //   );
+        //   const warehouseToAddPlacesIndex = state.warehouses.findIndex(
+        //     (warehouse) => warehouse.id === action.payload.warehouse_id
+        //   );
 
-      //   const sectionToAddPlacesIndex = state.warehouses[
-      //     warehouseToAddPlacesIndex
-      //   ].sections.findIndex(
-      //     (section) => section.id === action.payload.section_id
-      //   );
+        //   const sectionToAddPlacesIndex = state.warehouses[
+        //     warehouseToAddPlacesIndex
+        //   ].sections.findIndex(
+        //     (section) => section.id === action.payload.section_id
+        //   );
 
-      //   const rackToAddPlacesIndex = state.warehouses[
-      //     warehouseToAddPlacesIndex
-      //   ].sections[sectionToAddPlacesIndex].racks.findIndex(
-      //     (rack) => rack.id === action.payload.rack_id
-      //   );
-          
-      //     const shelfToAddPlacesIndex = state.warehouses[
-      //       warehouseToAddPlacesIndex
-      //     ].sections[sectionToAddPlacesIndex].racks[
-      //       rackToAddPlacesIndex
-      //     ].shelves.findIndex((shelf) => shelf.id === action.payload.shelf_id);
+        //   const rackToAddPlacesIndex = state.warehouses[
+        //     warehouseToAddPlacesIndex
+        //   ].sections[sectionToAddPlacesIndex].racks.findIndex(
+        //     (rack) => rack.id === action.payload.rack_id
+        //   );
 
+        //     const shelfToAddPlacesIndex = state.warehouses[
+        //       warehouseToAddPlacesIndex
+        //     ].sections[sectionToAddPlacesIndex].racks[
+        //       rackToAddPlacesIndex
+        //     ].shelves.findIndex((shelf) => shelf.id === action.payload.shelf_id);
 
-      //   state.warehouses[warehouseToAddPlacesIndex].sections[
-      //     sectionToAddPlacesIndex
-      //   ].racks[rackToAddPlacesIndex].shelves[shelfToAddPlacesIndex].places.push(
-      //     action.payload
-      //   );
+        //   state.warehouses[warehouseToAddPlacesIndex].sections[
+        //     sectionToAddPlacesIndex
+        //   ].racks[rackToAddPlacesIndex].shelves[shelfToAddPlacesIndex].places.push(
+        //     action.payload
+        //   );
       })
       .addCase(createPlaces.rejected, handleRejected)
       .addCase(updatePlaceName.pending, handlePending)
