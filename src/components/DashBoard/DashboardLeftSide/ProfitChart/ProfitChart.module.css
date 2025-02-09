@@ -1,0 +1,52 @@
+.containerltvchart {
+    border-radius: 6px;
+    width: 225px;
+    height: 134px;
+    /* padding: 10px 15px; */
+    background-color: #3d414b;
+    /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); */
+    /* height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 337px); */
+padding: 10px 10px 4px 10px;
+}
+
+
+.areabox {
+    height: 120px;
+}
+
+
+.customtooltip {
+    background-color: var(--light-gray);
+    width: 40px;
+    padding: 2px 4px;
+    border-radius: 6px;
+    transform: translateX(-50%);
+    font-weight: 400;
+    font-size: 6px;
+    font-variant: smallCaps;
+    font-style: normal;
+}
+
+.popuptitle {
+    font-weight: 600;
+    font-size: 13px;
+    font-variant: small-caps;
+    color: var(--blue-btn-inactive);
+    text-align: center;
+}
+
+.popupvalue {
+    font-size: 10px;
+    font-variant: small-caps;
+    color: var(--green-btn-normal);
+    padding-top: 3px;
+    height: 15px;
+}
+
+.kolvalue {
+    font-size: 16px;
+    color: var(--green-btn-normal);
+    font-size: 14px;
+    font-weight: 600;
+    text-align: end;
+}
