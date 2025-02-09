@@ -1,10 +1,12 @@
 .dayCarsListContainer {
-  width: 460px;
-  height: clamp(447px, calc(447px + (155 * ((100vh - 900px) / 180))), 602px);
-  padding-top: clamp(15px, calc(15px + (5 * ((100vh - 900px) / 180))), 20px);
-  padding-bottom: clamp(14px, calc(18px - (4 * ((100vh - 900px) / 180))), 18px);
-  padding-left: 20px;
-  padding-right: 20px;
+  /* width: 460px;
+  height: clamp(447px, calc(447px + (155 * ((100vh - 900px) / 180))), 602px); */
+
+  width: clamp(318px, min(24.865vw, 55.741vh * 0.764), 460px);
+  height: clamp(401px, min(55.741vh, 24.865vw / 0.764), 602px);
+
+  padding:
+    clamp(13px, min(1.852vh, 1.081vw), 20px) clamp(13px, min(1.852vh, 1.081vw), 20px) clamp(13px, min(1.852vh, 1.081vw), 20px) clamp(13px, min(1.852vh, 1.081vw), 20px);
   overflow: hidden;
   border-radius: 12px;
   background: var(--bg-secondary);
@@ -16,21 +18,24 @@
   overflow-x: hidden;
   -ms-overflow-style: none;
 
-  width: 424px;
+  /* width: 424px; */
+  width: clamp(290px, min(22.703vw, 55.741vh * 0.764), 420px);
   height: 100%;
-  min-height: 414px;
-  max-height: 568px;
+  /* min-height: 414px;
+  max-height: 568px; */
 }
 
 .carsList {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  /* gap: 14px; */
+  gap: clamp(10px, min(1.296vh, 0.756vw), 14px);
 }
 
 .scrollWrapper::-webkit-scrollbar {
-  width: 8px;
-  max-height: 200px;
+  /* width: 8px; */
+  width: clamp(5px, min(0.432vw, 0.741vh), 8px);
+  /* max-height: 200px; */
 }
 
 .scrollWrapper::-webkit-scrollbar-thumb {
@@ -48,18 +53,26 @@
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
+  /* gap: 12px; */
 }
 
 .modaldayCarsListContainer {
-  width: 1360px;
-  height: 740px;
-  padding: 0 20px 20px 20px;
+  /* width: 1360px;
+  height: 740px; */
+  /* padding: 0 20px 20px 20px; */
+
+  width: clamp(940px, min(73.514vw, 68.519vh * 1.838), 1360px);
+  height: clamp(493px, min(68.519vh, 73.514vw / 1.838), 740px);
+
+  padding:
+    0 clamp(13px, min(1.852vh, 1.081vw), 20px) clamp(13px, min(1.852vh, 1.081vw), 20px) clamp(13px, min(1.852vh, 1.081vw), 20px);
   box-shadow: none;
   margin-bottom: 0;
 }
 
 .modalscrollWrapper {
-  width: 1320px;
-  max-height: 720px;
+  /* width: 1320px;
+  max-height: 720px; */
+  width: clamp(913px, min(71.351vw, 66.667vh * 1.833), 1320px);
+  height: clamp(480px, min(66.667vh, 71.351vw / 1.833), 720px);
 }

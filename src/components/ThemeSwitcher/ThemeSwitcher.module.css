@@ -1,5 +1,6 @@
 .switch {
     font-size: 17px;
+    font-size: clamp(11px, min(1.574vh, 0.919vw), 17px);
     position: relative;
     display: inline-block;
     /* width: 50px;

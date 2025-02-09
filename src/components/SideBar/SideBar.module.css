@@ -10,7 +10,7 @@
   /* padding: 20px 30px 20px 25px; */
 
   padding:
-    clamp(13px, min(1.851vh, 1.041vw), 20px) clamp(20px, min(1.622vw, 2.777vh), 30px) clamp(13px, min(1.851vh, 1.041vw), 20px) clamp(17px, min(1.351vw, 2.314vh), 25px);
+    clamp(13px, min(1.851vh, 1.081vw), 20px) clamp(20px, min(1.622vw, 2.777vh), 30px) clamp(13px, min(1.851vh, 1.081vw), 20px) clamp(17px, min(1.351vw, 2.314vh), 25px);
 
   /* width: 230px;
   height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px); */
@@ -28,7 +28,7 @@
   height: clamp(644px, min(89.538vh, 6vw / 0.114), 967px);
 
   /* padding: 20px; */
-  padding: clamp(13px, min(1.851vh, 1.041vw), 20px);
+  padding: clamp(13px, min(1.851vh, 1.081vw), 20px);
   transition: width 0.7s ease-in, padding 0.7s ease-in, gap 0.7s ease-in;
 }
 

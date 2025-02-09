@@ -1,5 +1,5 @@
 .calendarWrapper {
-    padding: clamp(13px, min(1.851vh, 1.041vw), 20px);
+    padding: clamp(13px, min(1.851vh, 1.081vw), 20px);
     display: flex;
     flex-direction: column;
     height: auto;

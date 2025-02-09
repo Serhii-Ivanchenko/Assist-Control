@@ -3,7 +3,7 @@
     width: clamp(384px, min(31.135vw, 37.5vh * 1.422), 576px);
     height: clamp(270px, min(37.5vh, 31.135vw / 1.422), 405px);
     padding:
-      clamp(13px, min(1.851vh, 1.041vw), 20px) clamp(20px, min(1.622vw, 2.777vh), 30px) clamp(29px, min(4.074vh, 2.291vw), 44px) clamp(20px, min(1.622vw, 2.777vh), 30px);
+      clamp(13px, min(1.851vh, 1.081vw), 20px) clamp(20px, min(1.622vw, 2.777vh), 30px) clamp(29px, min(4.074vh, 2.291vw), 44px) clamp(20px, min(1.622vw, 2.777vh), 30px);
     border-radius: 12px;
   }
 

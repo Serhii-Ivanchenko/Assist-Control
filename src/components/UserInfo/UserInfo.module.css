@@ -39,7 +39,7 @@
   display: flex;
   align-items: center;
   /* gap: 20px; */
-  gap: clamp(13px, min(1.851vh, 1.041vw), 20px);
+  gap: clamp(13px, min(1.851vh, 1.081vw), 20px);
 }
 
 .balanceText {
@@ -60,7 +60,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: clamp(13px, min(1.851vh, 1.041vw), 20px);
+  gap: clamp(13px, min(1.851vh, 1.081vw), 20px);
 }
 
 .icon {
