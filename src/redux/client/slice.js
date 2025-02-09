@@ -33,6 +33,8 @@ const clientsSlice = createSlice({
         state.clientInfo.client = action.payload.client;
         state.clientInfo.car = action.payload.car;
         state.clientInfo.service_history = action.payload.service_history;
+        state.clientInfo.client_cars = action.payload.client_cars;
+
       })
       .addCase(getClientInfo.rejected, handleRejected),
 });

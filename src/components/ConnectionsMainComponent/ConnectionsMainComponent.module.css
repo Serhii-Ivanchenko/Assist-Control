@@ -1,14 +1,21 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
-.upperWrapper{
-    display: flex;
-    gap: 14px;
-    height: 245px;
+.upperWrapper {
+  display: flex;
+  gap: 14px;
+  height: 245px;
 }
 .bottomWrapper {
-    display: flex;
-    gap: 14px;
+  display: flex;
+  gap: 14px;
+}
+
+.noConnectionsMessage {
+  width: 1057px;
+  max-height: 652px;
+  text-align: center;
+  margin-top: 20px;
 }

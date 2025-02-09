@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import {
   selectDates,
   selectDayRecords,
+  // selectPeriodRecords,
   selectServiceData,
 } from "../../../redux/crm/selectors.js";
 import { selectSelectedServiceId } from "../../../redux/auth/selectors.js";
@@ -79,7 +80,7 @@ export default function ServiceBookingModal({
         ...provided,
         color: "var(--input-text)",
         fontSize: "14px",
-        fontАamily: "Roboto, sans-serif",
+        fontFamily: "Roboto, sans-serif",
         fontStyle: "normal",
         fontWeight: "400",
         lineHeight: "normal",
@@ -168,7 +169,7 @@ export default function ServiceBookingModal({
 
   const getModelOptions = (make) => {
     const selectedCar = carModels.find(
-      (car) => car.make.toLocaleLowerCase() === make.toLocaleLowerCase()
+      (car) => car?.make?.toLocaleLowerCase() === make.toLocaleLowerCase()
     );
     if (selectedCar) {
       return selectedCar.models.map((model) => ({
@@ -220,9 +221,45 @@ export default function ServiceBookingModal({
       : new Date().toLocaleDateString()
   );
 
-  const recordById = dayRecords?.find((dayRecord) => {
-    return dayRecord.car_id === recordId;
+  const [initialValues, setInitialValues] = useState({
+    phone_number: "",
+    car_number: "",
+    vin: "",
+    service_id: "",
+    prepayment: "",
+    position: postId || posts[0]?.id,
+    mechanic_id: "",
+    name: "",
+    make: "",
+    model: "",
+    year: "",
+    note: "",
   });
+
+  useEffect(() => {
+    if (!recordId) {
+      return;
+    }
+
+    const recordById = dayRecords?.find((dayRecord) => {
+      return dayRecord?.car_id === recordId;
+    });
+
+    setInitialValues({
+      phone_number: recordById?.phone || "",
+      car_number: recordById?.plate || "",
+      vin: recordById?.vin || "",
+      service_id: recordById?.service_id || "",
+      prepayment: recordById?.prepayment || "",
+      position: recordById?.post_id || (posts.length > 0 ? posts[0].id : ""),
+      mechanic_id: recordById?.mechanic_id || "",
+      name: recordById?.name || "",
+      make: recordById?.make || "", // Додаємо дефолтне значення
+      model: recordById?.model || "",
+      year: recordById?.year || "",
+      note: recordById?.note || "",
+    });
+  }, []);
 
   const toggleDropdown = (status, changeStatus) => {
     changeStatus(!status);
@@ -303,21 +340,6 @@ export default function ServiceBookingModal({
     setBooking([]);
     actions.resetForm();
     onClose();
-  };
-
-  const initialValues = {
-    phone_number: recordId ? recordById?.phone : "",
-    car_number: recordById?.plate || "",
-    vin: recordById?.vin || "",
-    service_id: recordById?.service_id || "",
-    prepayment: recordById?.prepayment || "",
-    position: postId || recordById?.post_id || posts[0]?.id,
-    mechanic_id: recordById?.mechanic_id || "",
-    name: recordById?.name || "",
-    make: recordById?.make || "",
-    model: recordById?.model || "",
-    year: recordById?.year || "",
-    note: recordById?.note || "",
   };
 
   return !posts ? (
@@ -563,16 +585,6 @@ export default function ServiceBookingModal({
                   placeholderName="Марка автомобіля *"
                   options={makeOptions}
                   setFieldValue={setFieldValue}
-                  // onChange={(selectedOption) => {
-                  //   setFieldValue(
-                  //     "make",
-                  //     selectedOption ? selectedOption.value : ""
-                  //   );
-                  //   setChosenCarMake(
-                  //     selectedOption ? selectedOption.value : ""
-                  //   );
-                  //   setFieldValue("model", ""); // Сброс модели при изменении марки
-                  // }}
                 />
                 <ErrorMessage
                   name="make"
@@ -580,24 +592,7 @@ export default function ServiceBookingModal({
                   className={css.errorMsg}
                 />
               </div>
-              {/* <div className={css.addFileWrapper}>
-                <input
-                  type="file"
-                  name="registrationCertificate"
-                  id="file"
-                  className={css.inputFile}
-                  onChange={handleRegistrationCertificateChange}
-                />
-                <label htmlFor="file" className={css.label}>
-                  <BsFillCameraFill className={css.iconCamera} />+ Додати фото
-                  техпаспорта
-                </label>
-                <img
-                  className={css.registrationCertificate}
-                  src={registrationCertificate}
-                  alt="Registration certificate"
-                />
-              </div> */}
+
               <div className={css.inputWrapper}>
                 <Field
                   name="model"
@@ -620,17 +615,6 @@ export default function ServiceBookingModal({
               </div>
               <div className={css.wrapper}>
                 <div className={css.inputWrapper}>
-                  {/* <DatePicker
-                    className={css.input}
-                    name="year"
-                    dateFormat="yyyy"
-                    selected={startYear}
-                    onChange={(date) => setStartYear(date)}
-                    maxDate={new Date(maxYear, 11, 31)}
-                    minDate={new Date(minYear, 0, 1)}
-                    placeholderText="Рік випуску"
-                    showYearPicker
-                  /> */}
                   <Field
                     name="year"
                     component={CustomSelect}

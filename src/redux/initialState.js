@@ -226,6 +226,7 @@ export const initialState = {
     schedule: [],
     posts: [],
     prices: [],
+    editedServices: [],
     // categoryPrices: [],
     ratings: [],
     rating: {},

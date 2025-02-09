@@ -11,7 +11,7 @@
     background-color: var(--bg-input);
     border: none;
     border-radius: 13px;
-    padding: 7px 7px 7px 45px;
+    padding: 7px 7px 7px 35px;
     color: var(--white);
     font-family: "Roboto", sans-serif;
     font-size: 13px;
@@ -20,8 +20,23 @@
     line-height: 1.18em;
 }
 
+.inputFilter:-webkit-autofill {
+    background-color: var(--bg-input) !important;
+    color: var(--white) !important;
+    box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+    -webkit-text-fill-color: var(--white) !important;
+}
+
+.inputFilter:-webkit-autofill:hover,
+.inputFilter:-webkit-autofill:focus {
+    background-color: var(--bg-input) !important;
+    color: var(--white) !important;
+    box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+    -webkit-text-fill-color: var(--white) !important;
+}
+
 .inputFilter.isHeader {
-    width: 188px;
+    width: 200px;
   }
 
 .inputFilter::placeholder {
@@ -64,3 +79,18 @@
     font-weight: 600;
     margin-top: 5px;
 }
+
+.clearButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .clearIcon {
+    font-size: 20px;
+    color: #888;
+  }
