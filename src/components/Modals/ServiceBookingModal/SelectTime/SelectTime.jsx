@@ -18,11 +18,6 @@ export default function SelectTime({
   const { availability } = useSelector(selectServiceData);
   const dayRecords = useSelector(selectDayRecords);
 
-  // const newArr = [
-  //   { appointment_date: "13.12.2024", times: ["19:00"] },
-  //   { appointment_date: "14.12.2024", times: ["09:00"] },
-  // ];
-
   const onTimeBtnClick = (time) => {
     setChosenTime((prevValues) => {
       const existingDate = prevValues.find(
@@ -56,8 +51,9 @@ export default function SelectTime({
     if (!recordId) {
       return;
     }
+
     const recordById = dayRecords?.find((dayRecord) => {
-      return dayRecord.id === recordId;
+      return dayRecord.car_id === recordId;
     });
 
     const bookingTime = recordById?.booking;
@@ -67,8 +63,11 @@ export default function SelectTime({
       times,
     }));
 
-    setChosenTime(newArr);
-  }, [recordId]);
+    setChosenTime((prevValues) => {
+      return newArr ? newArr : prevValues;
+    });
+    // setChosenTime(newArr);
+  }, [recordId, dayRecords]);
 
   useEffect(() => {
     const dataForBooking = chosenTime?.map(({ appointment_date, times }) => ({

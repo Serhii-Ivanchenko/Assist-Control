@@ -3,6 +3,17 @@
     width: 100%;
     height: 39px;
     justify-content: space-between;
-    border: 1px solid var(--light-gray);
-    border-radius: 12px;
+}
+.leftContainer{
+    display: flex;
+    gap: 50px;
+}
+
+.rightContainer{
+    display: flex;
+    align-items: center;
+}
+
+.settingsContainerInCrm{
+    right: -5px;
 }

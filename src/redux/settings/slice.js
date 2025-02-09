@@ -21,7 +21,7 @@ import {
   getAllEmployees,
   getAllMarkups,
   getAllSuppliers,
-  getCashRegisterData,
+  // getCashRegisterData,
   getDistributorMarkup,
   getEmployeeData,
   getMarkupItemData,
@@ -57,6 +57,8 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+// editedServices
+
 // універсальна функція для оновлення даних
 // const updateItem = (items, payload, key = "id") => {
 //   const index = items.findIndex((item) => item[key] === payload[key]);
@@ -69,13 +71,25 @@ const settingsSlice = createSlice({
   name: "settings",
   initialState: initialState.settings,
   reducers: {
-    openModal: (state, action) => {
+    setEditedService: (state, action) => {
+      const editedService = action.payload;
+      const index = state.editedServices.findIndex(
+        (s) => s.service_id === editedService.service_id
+      );
+      if (index !== -1) {
+        state.editedServices[index] = editedService;
+      } else {
+        state.editedServices.push(editedService);
+      }
+    },
+    resetEditedServices: (state) => {
+      state.editedServices = [];
+    },
+    openModal: (state) => {
       state.isModalOpen = true;
-      state.supplier = action.payload || null;
     },
     closeModal: (state) => {
       state.isModalOpen = false;
-      state.supplier = null;
     },
   },
   extraReducers: (builder) =>
@@ -244,9 +258,10 @@ const settingsSlice = createSlice({
             ...(action.payload.name_post && {
               name_post: action.payload.name_post,
             }),
-            ...(action.payload.status !== undefined && action.payload.status !== null && {
-              status: action.payload.status,
-            }),
+            ...(action.payload.status !== undefined &&
+              action.payload.status !== null && {
+                status: action.payload.status,
+              }),
           };
         }
       })
@@ -287,14 +302,16 @@ const settingsSlice = createSlice({
       .addCase(editServiceNameOrPrices.pending, handlePending)
       .addCase(editServiceNameOrPrices.fulfilled, (state, action) => {
         state.isLoading = false;
-        const serviceToEditIndex = state.prices.findIndex(
-          (service) => service.service_id === action.payload.service_id
-        );
-        state.prices[serviceToEditIndex].service_name = action.payload.new_name;
-        state.prices[serviceToEditIndex].min_price =
-          action.payload.new_min_price;
-        state.prices[serviceToEditIndex].max_price =
-          action.payload.new_max_price;
+        state.prices.forEach((category) => {
+          const service = category.services.find(
+            (s) => s.service_id === action.payload.service_id
+          );
+          if (service) {
+            service.service_name = action.payload.new_name;
+            service.min_price = action.payload.new_min_price;
+            service.max_price = action.payload.new_max_price;
+          }
+        });
       })
       .addCase(editServiceNameOrPrices.rejected, handleRejected)
 
@@ -323,9 +340,12 @@ const settingsSlice = createSlice({
       .addCase(deleteService.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        state.prices = state.prices.filter(
-          (item) => item.service_id !== action.payload.service_id
-        );
+        state.prices = state.prices.map((category) => ({
+          ...category,
+          services: category.services.filter(
+            (service) => service.service_id !== action.payload.service_id
+          ),
+        }));
       })
       .addCase(deleteService.rejected, handleRejected)
 
@@ -455,21 +475,21 @@ const settingsSlice = createSlice({
       .addCase(createCashRegister.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        state.cashRegisters.push(action.meta.arg);
+        // state.cashRegisters.push(action.meta.arg);
       })
       .addCase(createCashRegister.rejected, handleRejected)
 
       .addCase(updateCashRegister.pending, handlePending)
       .addCase(updateCashRegister.fulfilled, (state, action) => {
         state.isLoading = false;
-        const cashRegisterToEditIndex = state.cashRegisters.findIndex(
-          (cashRegister) =>
-            cashRegister.cash_register_id === action.payload.cash_register_id
-        );
-        state.cashRegisters[cashRegisterToEditIndex] = {
-          ...state.cashRegisters[cashRegisterToEditIndex], // Залишаємо старі дані
-          ...action.meta.arg, // Додаємо дані, які відправляли
-        };
+        // const cashRegisterToEditIndex = state.cashRegisters.findIndex(
+        //   (cashRegister) =>
+        //     cashRegister.id === action.payload.cash_register_id
+        // );
+        // state.cashRegisters[cashRegisterToEditIndex] = {
+        //   ...state.cashRegisters[cashRegisterToEditIndex], // Залишаємо старі дані
+        //   ...action.meta.arg, // Додаємо дані, які відправляли
+        // };
       })
       .addCase(updateCashRegister.rejected, handleRejected)
 
@@ -478,8 +498,7 @@ const settingsSlice = createSlice({
         state.isLoading = false;
 
         state.cashRegisters = state.cashRegisters.filter(
-          (cashRegister) =>
-            cashRegister.cash_register_id !== action.payload.cash_register_id
+          (cashRegister) => cashRegister.id !== action.payload.cash_register_id
         );
       })
       .addCase(deleteCashRegister.rejected, handleRejected)
@@ -488,11 +507,10 @@ const settingsSlice = createSlice({
       .addCase(updateCashRegisterStatus.fulfilled, (state, action) => {
         state.isLoading = false;
         const cashRegisterToEditIndex = state.cashRegisters.findIndex(
-          (cashRegister) =>
-            cashRegister.cash_register_id === action.payload.cash_register_id
+          (cashRegister) => cashRegister.id === action.payload.cash_register_id
         );
-        state.cashRegisters[cashRegisterToEditIndex].isDisabled =
-          action.payload.isDisabled;
+        state.cashRegisters[cashRegisterToEditIndex].status =
+          action.payload.status;
       })
       .addCase(updateCashRegisterStatus.rejected, handleRejected)
 
@@ -502,17 +520,18 @@ const settingsSlice = createSlice({
 
         state.cashRegisters = action.payload.cash_registers;
       })
-      .addCase(getAllCashRegisters.rejected, handleRejected)
+      .addCase(getAllCashRegisters.rejected, handleRejected),
 
-      .addCase(getCashRegisterData.pending, handlePending)
-      .addCase(getCashRegisterData.fulfilled, (state, action) => {
-        state.isLoading = false;
+  // .addCase(getCashRegisterData.pending, handlePending)
+  // .addCase(getCashRegisterData.fulfilled, (state, action) => {
+  //   state.isLoading = false;
 
-        state.cashRegisterItem = action.payload.cash_register;
-      })
-      .addCase(getCashRegisterData.rejected, handleRejected),
+  //   state.cashRegisterItem = action.payload.cash_register;
+  // })
+  // .addCase(getCashRegisterData.rejected, handleRejected),
 });
 
-export const { openModal, closeModal } = settingsSlice.actions;
+export const { setEditedService, resetEditedServices, openModal, closeModal } =
+  settingsSlice.actions;
 
 export default settingsSlice.reducer;

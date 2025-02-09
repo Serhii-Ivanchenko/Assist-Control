@@ -1,12 +1,16 @@
 import AccordionItem from "../AccordionItem/AccordionItem";
 import styles from "./AccordionList.module.css";
 
-function AccordionList({ data }) {
+function AccordionList({ data, containerRef }) {
   return (
-    <ul className={styles.wrapper}>
-      {data.map((item, index) => (
-        <li key={index}>
-          <AccordionItem item={item} index={index} />
+    <ul className={styles.wrapper} ref={containerRef}>
+      {data.map((item) => (
+        <li key={item.category_id}>
+          <AccordionItem
+            item={item}
+            id={item.category_id}
+            containerRef={containerRef}
+          />
         </li>
       ))}
     </ul>

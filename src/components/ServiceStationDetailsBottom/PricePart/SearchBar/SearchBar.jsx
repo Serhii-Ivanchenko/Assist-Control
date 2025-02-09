@@ -18,13 +18,26 @@ function SearchBar({ searchData, onFilter, onReset }) {
       return;
     }
 
-    // Фільтруємо послуги за назвою
-    const filteredServices = searchData.filter((service) =>
-      service.service_name.toLowerCase().includes(userQuery)
-    );
-    console.log("filteredServices", filteredServices);
+    const matchedCategories = searchData.reduce((result, category) => {
+      const matchingServices = category.services.filter((service) =>
+        service.service_name.toLowerCase().includes(userQuery)
+      );
 
-    onFilter(filteredServices);
+      if (matchingServices.length > 0) {
+        result.push({
+          category_id: category.category_id,
+          category_name: category.category_name,
+          services: matchingServices,
+        });
+      }
+      return result;
+    }, []);
+
+    if (matchedCategories.length > 0) {
+      onFilter(matchedCategories);
+    } else {
+      onFilter([]);
+    }
   };
 
   const handleReset = () => {

@@ -1,0 +1,121 @@
+.connectionSelect {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+
+  border-radius: 12px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  margin-bottom: 15px;
+
+  cursor: pointer;
+}
+
+.selectedValue {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.options {
+  position: absolute;
+  top: 105%;
+  left: -3px;
+  right: -3px;
+  border-radius: 12px;
+  background-color: var(--bg-input);
+  box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  max-height: 140px;
+
+  overflow: auto;
+}
+
+.options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.options::-webkit-scrollbar-track {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background-color: var(--bg-secondary);
+}
+
+.options::-webkit-scrollbar-thumb {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background-color: var(--main-gray);
+}
+
+/* .open {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+} */
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+
+  color: var(--light-gray);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  overflow: visible;
+}
+
+.option:hover {
+  background-color: var(--bg-secondary);
+}
+
+.option:not(:last-child) {
+  border-bottom: solid 1px var(--input-stroke);
+}
+
+.option:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.option:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.selectIcon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+
+  margin-left: auto;
+  fill: var(--light-gray);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.selectWrapper {
+  position: relative;
+}

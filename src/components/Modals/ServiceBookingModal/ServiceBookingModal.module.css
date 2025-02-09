@@ -109,12 +109,7 @@
 }
 
 .input:disabled {
-  color: var(--input-text);
-  font-family: Roboto, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  cursor: not-allowed;
 }
 
 .inputSelect {

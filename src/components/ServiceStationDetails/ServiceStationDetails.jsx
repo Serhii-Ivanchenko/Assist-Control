@@ -6,7 +6,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectedServiceInSettingsId } from "../../redux/service/selectors.js";
 import { useDispatch } from "react-redux";
-import { getAllEmployees, getPosts, getWorkSchedule } from "../../redux/settings/operations.js";
+import {
+  getAllCashRegisters,
+  getAllEmployees,
+  getPosts,
+  getPrices,
+  getWorkSchedule,
+} from "../../redux/settings/operations.js";
+import { getAllWarehousesWithDetails } from "../../redux/warehouse/operations.js";
 
 function ServiceStationDetails({ stationId }) {
   const [isAccordionExpanded, setAccordionExpanded] = useState(false);
@@ -15,29 +22,31 @@ function ServiceStationDetails({ stationId }) {
     setAccordionExpanded(isExpanded);
   };
 
- const selectedServiceInSettings = useSelector(selectedServiceInSettingsId);
+  const selectedServiceInSettings = useSelector(selectedServiceInSettingsId);
 
- const dispatch = useDispatch();
- useEffect(() => {
-   if (!selectedServiceInSettings) {
-     console.log("Waiting for selectedServiceInSettings to be available...");
-     return;
-   }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!selectedServiceInSettings) {
+      console.log("Waiting for selectedServiceInSettings to be available...");
+      return;
+    }
 
-   const fetchData = async () => {
-     try {
-       console.log("Fetching data with ID:", selectedServiceInSettings);
-       await dispatch(getAllEmployees()).unwrap();
-       await dispatch(getPosts()).unwrap();
+    const fetchData = async () => {
+      try {
+        console.log("Fetching data with ID:", selectedServiceInSettings);
+        await dispatch(getAllEmployees()).unwrap();
+        await dispatch(getPosts()).unwrap();
         await dispatch(getWorkSchedule()).unwrap();
-     } catch (error) {
-       console.error("Помилка завантаження даних:", error);
-     }
-   };
+        await dispatch(getAllCashRegisters()).unwrap();
+        await dispatch(getPrices()).unwrap();
+        await dispatch(getAllWarehousesWithDetails()).unwrap();
+      } catch (error) {
+        console.error("Помилка завантаження даних:", error);
+      }
+    };
 
-   fetchData();
- }, [dispatch, selectedServiceInSettings]);
-
+    fetchData();
+  }, [dispatch, selectedServiceInSettings]);
 
   return (
     <div className={styles.serviceDetailsWrapper}>

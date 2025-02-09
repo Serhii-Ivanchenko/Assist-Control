@@ -23,59 +23,254 @@ import Node from "./Node/Node";
 import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
 import CreateWarehousePop from "./CreateWarehousePop/CreateWarehousePop";
 
-const dataForTree = [
-  {
-    id: "1",
-    parent: null,
-    text: "м. Академіка павлова (Назва склада)",
-    droppable: true,
+import { useSelector } from "react-redux";
+import {
+  // selectOneWareHouseTree,
+  selectWarehousesTree,
+} from "../../../redux/warehouse/selectors";
+import { useDispatch } from "react-redux";
+import {
+  createWarehouse,
+  getAllWarehousesWithDetails,
+} from "../../../redux/warehouse/operations";
+// import {
+//   getWarehouseById,
+//   getWarehouses,
+// } from "../../../redux/warehouse/operations";
 
-    data: "warehouse",
-  },
+// const dataForTree = [
+//   {
+//     id: "1",
+//     parent: null,
+//     text: "м. Академіка павлова (Назва склада)",
+//     droppable: true,
 
-  {
-    id: "2",
-    parent: "1",
-    text: "Вітрина (Назва секції)",
-    droppable: true,
-    data: "section",
-  },
+//     data: "warehouse",
+//   },
 
-  {
-    id: "3",
-    parent: "1",
-    text: "2 Поверх (Назва секції)",
-    droppable: true,
-    data: "section",
-  },
+//   {
+//     id: "2",
+//     parent: "1",
+//     text: "Вітрина (Назва секції)",
+//     droppable: true,
+//     data: "section",
+//   },
 
-  { id: "4", parent: "3", text: "Стелаж", droppable: true, data: "rack" },
-  {
-    id: "5",
-    parent: "3",
-    text: "Стелаж",
-    droppable: true,
-    data: "rack",
-  },
-  {
-    id: "6",
-    parent: "5",
-    text: "Полиця 036",
-    droppable: true,
-    data: "shelf",
-  },
+//   {
+//     id: "3",
+//     parent: "1",
+//     text: "2 Поверх (Назва секції)",
+//     droppable: true,
+//     data: "section",
+//   },
 
-  { id: "7", parent: "6", text: "Місце 0243", data: "place" },
-  { id: "8", parent: "6", text: "Місце 0244", data: "place" },
-  { id: "9", parent: "6", text: "Місце 0245", data: "place" },
-];
+//   { id: "4", parent: "3", text: "Стелаж", droppable: true, data: "rack" },
+//   {
+//     id: "5",
+//     parent: "3",
+//     text: "Стелаж",
+//     droppable: true,
+//     data: "rack",
+//   },
+//   {
+//     id: "6",
+//     parent: "5",
+//     text: "Полиця 036",
+//     droppable: true,
+//     data: "shelf",
+//   },
+
+//   { id: "7", parent: "6", text: "Місце 0243", data: "place" },
+//   { id: "8", parent: "6", text: "Місце 0244", data: "place" },
+//   { id: "9", parent: "6", text: "Місце 0245", data: "place" },
+// ];
 
 export default function WarehousePart() {
+  const dispatch = useDispatch();
+  const warehouses = useSelector(selectWarehousesTree);
+  console.log("warehouses", warehouses);
+
+  // const warehouseById = useSelector(selectOneWareHouseTree) || [];
+
+  // console.log("wawarehouseByIdreho", warehouseById);
+
+  // useEffect(() => {
+  //   dispatch(getWarehouses()); // To get the list of all warehouses
+  //   if (warehouseById && warehouseById.id) {
+  //     dispatch(getWarehouseById(warehouseById.id)); // To get details of the specific warehouse
+  //   }
+  // }, [dispatch, warehouseById.id, warehouseById]);
+
+  //   console.log("dataForTree", dataForTree);
+
+  // const dataForTree = warehouses.map((warehouse) => {
+  //   return {
+  //     id: warehouse.id.toString(),
+  //     parent: null, // Склади будуть кореневими елементами
+  //     text: warehouse.name,
+  //     droppable: warehouse.total_sections > 0, // Якщо є підсекції, то елемент буде дропабельним
+  //     data: "warehouse",
+  //   };
+  // });
+
+  // const dataForParticularTree = [
+  //   {
+  //     id: `w-${warehouseById.id}`,
+  //     parent: null,
+  //     text: warehouseById.name,
+  //     droppable: true,
+  //     data: "warehouse",
+  //   },
+  // ];
+
+  // warehouseById.sections.forEach((section) => {
+  //   treeData.push({
+  //     id: `s-${section.id}`,
+  //     parent: `w-${warehouseById.id}`,
+  //     text: section.name,
+  //     droppable: true,
+  //     data: "section",
+  //   });
+
+  //   section.racks.forEach((rack) => {
+  //     treeData.push({
+  //       id: `r-${rack.id}`,
+  //       parent: `s-${section.id}`,
+  //       text: rack.name,
+  //       droppable: true,
+  //       data: "rack",
+  //     });
+
+  //     rack.shelves.forEach((shelf) => {
+  //       treeData.push({
+  //         id: `sh-${shelf.id}`,
+  //         parent: `r-${rack.id}`,
+  //         text: shelf.name,
+  //         droppable: true,
+  //         data: "shelf",
+  //       });
+
+  //       shelf.places.forEach((place) => {
+  //         treeData.push({
+  //           id: `p-${place.id}`,
+  //           parent: `sh-${shelf.id}`,
+  //           text: place.name,
+  //           droppable: false,
+  //           data: "place",
+  //         });
+  //       });
+  //     });
+  //   });
+  // });
+
+  const dataForTree = warehouses.reduce((acc, warehouse) => {
+    acc.push({
+      id: `w-${warehouse.id}`,
+      parent: null,
+      text: warehouse.address,
+      droppable: true,
+      data: "warehouse",
+    });
+
+    warehouse.sections.forEach((section) => {
+      acc.push({
+        id: `s-${section.id}`,
+        parent: `w-${warehouse.id}`,
+        text: section.name,
+        droppable: true,
+        data: "section",
+      });
+
+      section.racks.forEach((rack) => {
+        acc.push({
+          id: `r-${rack.id}`,
+          parent: `s-${section.id}`,
+          text: rack.name,
+          droppable: true,
+          data: "rack",
+        });
+
+        rack.shelves.forEach((shelf) => {
+          acc.push({
+            id: `sh-${shelf.id}`,
+            parent: `r-${rack.id}`,
+            text: shelf.name,
+            droppable: true,
+            data: "shelf",
+          });
+
+          shelf.places.forEach((place) => {
+            acc.push({
+              id: `p-${place.id}`,
+              parent: `sh-${shelf.id}`,
+              text: place.name,
+              droppable: false,
+              data: "place",
+            });
+          });
+        });
+      });
+    });
+    return acc;
+  }, []);
+
+  console.log("dataForTree", dataForTree);
+
+  // const [treeData, setTreeData] = useState(dataForTree);
+
+  // useEffect(() => {
+  //   setTreeData(dataForTree);
+  // }, [dataForTree]);
+
+  // setTreeData(dataForTree);
+  //   return {
+  //     id: warehouse.id.toString(),
+  //     parent: null,
+  //     text: warehouse.name,
+  //     droppable: warehouse.total_sections > 0,
+  //     data: "warehouse",
+  //   };
+  // });
+
+  // const dataForParticularTree = warehouseById.sections.map((section) => {
+  //   return {
+  //     id: `s-${section.id}`,
+  //     parent: `w-${warehouseById.id}`,
+  //     text: section.name,
+  //     droppable: true,
+  //     data: "section",
+  //   };
+  // });
+
+  // setTreeData([...dataForTree]);
+
+  // Додаємо секції (якщо є)
+  // const sections = warehouses
+  //   .filter((warehouse) => warehouse.total_sections > 0)
+  //   .flatMap((warehouse) => {
+  //     const sectionsArray = [];
+  //     for (let i = 0; i < warehouse.total_sections; i++) {
+  //       sectionsArray.push({
+  //         id: `${warehouse.id}-${i + 1}`,
+  //         parent: warehouse.id.toString(), // Прив'язуємо до складу
+  //         text: `${warehouse.name} - Section ${i + 1}`,
+  //         droppable: true,
+  //         data: "section",
+  //       });
+  //     }
+  //     return sectionsArray;
+  //   });
+
+  // const finalTreeData = [...dataForTree, ...sections];
+
+  // console.log(finalTreeData);
+  //
+
   const [isAddWhModalOpen, setAddWhModalOpen] = useState(false);
 
   const { ref, getPipeHeight, toggle, openParentIfNeeded } =
     useTreeOpenHandler();
-  const [treeData, setTreeData] = useState(dataForTree);
+
   const [isNewWhPopoverOpen, setNewWhPopoverOpen] = useState(false);
 
   const buttonRef = useRef(null);
@@ -100,45 +295,53 @@ export default function WarehousePart() {
 
   // Збереження данних
   const handleSaveData = () => {
-    setTreeData((prev) =>
-      prev.map((node) =>
-        tempNodeText[node.id]
-          ? { ...node, text: tempNodeText[node.id] } // Оновлюємо текст вузла, якщо він редагувався
-          : node
-      )
-    );
-    setTempNodeText({});
-    setIsEditing(false);
+    //   setTreeData((prev) =>
+    //     prev.map((node) =>
+    //       tempNodeText[node.id]
+    //         ? { ...node, text: tempNodeText[node.id] } // Оновлюємо текст вузла, якщо він редагувався
+    //         : node
+    //     )
+    //   );
+    //   setTempNodeText({});
+    //   setIsEditing(false);
   };
 
   // Додавання нового елементу
   const addNewTree = (name) => {
-    const newRoot = {
-      id: `${Date.now()}`,
-      text: name,
-      droppable: true,
-      parent: null,
-      data: "warehouse",
-    };
+    // const newRoot = {
+    //   id: `${Date.now()}`,
+    //   text: name,
+    //   droppable: true,
+    //   parent: null,
+    //   data: "warehouse",
+    // };
 
-    setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
+    // setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
+    dispatch(createWarehouse({ address: name }))
+      .unwrap()
+      .then(() => {
+        dispatch(getAllWarehousesWithDetails());
+      })
+      .catch((err) => {
+        console.error("Error creating post:", err);
+      });
   };
 
   const scrollToTheLastItemRef = useRef(null);
 
   // Прокрутка до ост. елементу при додаванні
-  useEffect(() => {
-    if (
-      treeData.length > 0 &&
-      scrollToTheLastItemRef.current &&
-      treeData[treeData.length - 1]?.data === "warehouse"
-    ) {
-      scrollToTheLastItemRef.current?.scrollTo({
-        top: scrollToTheLastItemRef.current.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  }, [treeData]);
+  // useEffect(() => {
+  //   if (
+  //     treeData.length > 0 &&
+  //     scrollToTheLastItemRef.current &&
+  //     treeData[treeData.length - 1]?.data === "warehouse"
+  //   ) {
+  //     scrollToTheLastItemRef.current?.scrollTo({
+  //       top: scrollToTheLastItemRef.current.scrollHeight,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // }, [treeData]);
 
   // Відкриття і закриття поповеру
   const handleTogglePopover = (e) => {
@@ -193,14 +396,14 @@ export default function WarehousePart() {
       start &&
       typeof destinationIndex === "number"
     ) {
-      setTreeData((treeData) => {
-        const output = reorderArray(
-          treeData,
-          treeData.indexOf(start),
-          destinationIndex
-        );
-        return output;
-      });
+      //   setTreeData((treeData) => {
+      //     const output = reorderArray(
+      //       treeData,
+      //       treeData.indexOf(start),
+      //       destinationIndex
+      //     );
+      //     return output;
+      //   });
     }
 
     if (
@@ -217,16 +420,16 @@ export default function WarehousePart() {
         (end && !end?.droppable)
       )
         return;
-      setTreeData((treeData) => {
-        const output = reorderArray(
-          treeData,
-          treeData.indexOf(start),
-          destinationIndex
-        );
-        const movedElement = output.find((el) => el.id === dragSourceId);
-        if (movedElement) movedElement.parent = dropTargetId;
-        return output;
-      });
+      // setTreeData((treeData) => {
+      //   const output = reorderArray(
+      //     treeData,
+      //     treeData.indexOf(start),
+      //     destinationIndex
+      //   );
+      //   const movedElement = output.find((el) => el.id === dragSourceId);
+      //   if (movedElement) movedElement.parent = dropTargetId;
+      //   return output;
+      // });
     }
   };
 
@@ -310,7 +513,7 @@ export default function WarehousePart() {
           <div className={css.wrapper}>
             <Tree
               ref={ref}
-              tree={treeData}
+              tree={dataForTree}
               rootId={null}
               // initialOpen={treeData.length - 1}
               classes={{
@@ -320,7 +523,7 @@ export default function WarehousePart() {
                 listItem: css.listItem,
               }}
               dragPreviewRender={(node) => <div>{node.text}</div>}
-              onDrop={handleDrop}
+              // onDrop={handleDrop}
               sort={false}
               insertDroppableFirst={false}
               enableAnimateExpand={true}
@@ -341,8 +544,8 @@ export default function WarehousePart() {
                     }
                   }}
                   isDropTarget={isDropTarget}
-                  treeData={treeData}
-                  setTreeData={setTreeData}
+                  treeData={dataForTree}
+                  // setTreeData={setTreeData}
                   isEditing={isEditing}
                   setIsEditing={setIsEditing}
                   onStartEditing={handleStartEditing}

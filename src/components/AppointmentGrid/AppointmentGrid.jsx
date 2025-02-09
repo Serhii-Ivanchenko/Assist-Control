@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { selectDate } from "../../redux/cars/selectors.js";
 import ServiceBookingModal from "../Modals/ServiceBookingModal/ServiceBookingModal.jsx";
 import Modal from "../Modals/Modal/Modal.jsx";
+import { getRecordsForDay } from "../../redux/crm/operations.js";
+import { useDispatch } from "react-redux";
 
 const workTypeColors = {
   new: "var(--status-gradient-new)",
@@ -35,8 +37,9 @@ const AppointmentGrid = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
   const currentDate = new Date().toISOString().substring(0, 10);
+  const dispatch = useDispatch();
 
-  console.log(modalData);
+  console.log("modalData", modalData);
   // const handleWorkItemClick = (recordId, postId) => {
   //   setModalData({ recordId, postId });
   //   setIsModalOpen(true);
@@ -62,6 +65,12 @@ const AppointmentGrid = ({ data }) => {
     setModalData(null);
     setIsModalOpen(false);
   };
+
+  console.log(carSelectDate);
+
+  useEffect(() => {
+    dispatch(getRecordsForDay(carSelectDate));
+  }, [carSelectDate]);
 
   useEffect(() => {
     if (gridRef.current) {

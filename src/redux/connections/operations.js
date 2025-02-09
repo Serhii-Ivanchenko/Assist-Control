@@ -1,7 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../services/api.js";
-
-// Get stats of connections
 export const getStats = createAsyncThunk(
   "connections/getStats",
   async (period, thunkAPI) => {
@@ -16,29 +14,30 @@ export const getStats = createAsyncThunk(
           end_date,
         },
         headers: {
-          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
       console.log("getStats", response.data);
-
       return response.data;
     } catch (error) {
+      if (error.response && error.response.status === 404) {
+        return thunkAPI.rejectWithValue({ status: 404, message: "Not found" });
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-// Get list of connections
 export const getConnectionsList = createAsyncThunk(
   "connections/getConnectionsList",
   async (queryParameters, thunkAPI) => {
     const state = thunkAPI.getState();
     const serviceId = state.auth.userData.selectedServiceId;
-    try {
-      const { start_date, end_date, timePeriod, page, per_page } =
-        queryParameters;
 
+    const { start_date, end_date, timePeriod, page, per_page } =
+      queryParameters;
+
+    try {
       const response = await axiosInstance.get(`/appl/contacts`, {
         params: {
           date_filter: timePeriod,
@@ -48,18 +47,21 @@ export const getConnectionsList = createAsyncThunk(
           per_page: per_page || 10,
         },
         headers: {
-          // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
         },
       });
-      console.log("getConnectionsList", response.data);
 
+      console.log("getConnectionsList", response.data);
       return response.data;
     } catch (error) {
+      if (error.response && error.response.status === 404) {
+        return thunkAPI.rejectWithValue({ status: 404, message: "Not found" });
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 
 // Get list of problematic Contacts
 export const getProblematicContacts = createAsyncThunk(

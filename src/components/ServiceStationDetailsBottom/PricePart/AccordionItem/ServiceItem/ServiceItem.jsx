@@ -1,73 +1,53 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import PopupMenu from "../../../../sharedComponents/PopupMenu/PopupMenu";
 import styles from "./ServiceItem.module.css";
+import { useDispatch } from "react-redux";
+import { deleteService } from "../../../../../redux/settings/operations";
+import { setEditedService } from "../../../../../redux/settings/slice";
 
-function ServiceItem({
-  id,
-  serviceData,
-  // onDelete,
-  // innerAccRef,
-  // containerRef,
-  // resetPrice,
-  // resetService,
-  // serviceItemEdit,
-  // setServiceItemEdit,
-  // onUpdate,
-}) {
+function ServiceItem({ serviceData, innerAccRef, containerRef }) {
+  const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
-  const [serviceName, setServiceName] = useState(serviceData.service_name);
   const [activePopupId, setActivePopupId] = useState(null);
-  const [minPrice, setMinPrice] = useState(serviceData.min_price || "");
-  const [maxPrice, setMaxPrice] = useState(serviceData.max_price || "");
+  const [updatedService, setUpdatedService] = useState({
+    service_id: serviceData.service_id,
+    service_name: serviceData.service_name,
+    min_price: serviceData.min_price,
+    max_price: serviceData.max_price,
+  });
+
   const inputRef = useRef();
   const buttonRef = useRef(null);
 
+  useEffect(() => {
+    setUpdatedService(serviceData);
+    setIsEdit(false);
+  }, [serviceData]);
+
   const handlePopupToggle = () => {
-    setActivePopupId((prev) => (prev === id ? null : id));
+    setActivePopupId((prev) =>
+      prev === serviceData.service_id ? null : serviceData.service_id
+    );
   };
 
   const handleEdit = () => {
     setIsEdit(true);
-    // setServiceItemEdit(id);
-    // setActivePopupId(null);
+    dispatch(setEditedService(updatedService));
   };
 
   const handleDelete = () => {
-    // onDelete(id);
+    dispatch(deleteService(serviceData.service_id));
   };
 
-  const handleMinPriceChange = (e) => {
-    const value = e.target.value;
-    if (!isNaN(value) && Number(value) >= 0) {
-      setMinPrice(value);
-    }
+  const handleChange = (e) => {
+    const newValue = {
+      ...updatedService,
+      [e.target.name]: e.target.value,
+    };
+    setUpdatedService(newValue);
+    dispatch(setEditedService(newValue));
   };
-
-  const handleMaxPriceChange = (e) => {
-    const value = e.target.value;
-    if (!isNaN(value) && Number(value) >= 0) {
-      setMaxPrice(value);
-    }
-  };
-
-  // useEffect(() => {
-  //   const updatedService = {
-  //     id: id,
-  //     item: serviceName,
-  //     price: { min: minPrice, max: maxPrice },
-  //   };
-  //   onUpdate(updatedService);
-  // }, [id, serviceName, minPrice, maxPrice]);
-
-  // useEffect(() => {
-  //   if (resetPrice || resetService) {
-  //     setMinPrice(serviceData.price?.min || "");
-  //     setMaxPrice(serviceData.price?.max || "");
-  //     setServiceName(serviceData.item);
-  //     setServiceItemEdit(false);
-  //   }
-  // }, [resetPrice, resetService, serviceData.item]);
 
   return (
     <>
@@ -76,14 +56,16 @@ function ServiceItem({
           <input
             className={styles.editInput}
             type="text"
-            value={serviceName}
-            onChange={(e) => setServiceName(e.target.value)}
+            name="service_name"
+            value={updatedService.service_name}
+            // onChange={(e) => setServiceName(e.target.value)}
             ref={inputRef}
+            onChange={handleChange}
           />
         </div>
       ) : (
         <div className={styles.inputBox}>
-          <p className={styles.text}>{serviceName}</p>
+          <p className={styles.text}>{updatedService.service_name}</p>
         </div>
       )}
 
@@ -92,10 +74,13 @@ function ServiceItem({
           <label className={styles.inputLabel}>Мін</label>
           <input
             type="number"
+            name="min_price"
             placeholder="250"
             className={styles.input}
-            value={minPrice}
-            onChange={handleMinPriceChange}
+            value={updatedService.min_price}
+            // onChange={handleMinPriceChange}
+            onChange={handleChange}
+            disabled={!isEdit}
             // onFocus={() => setServiceItemEdit(true)}
           />
         </div>
@@ -103,10 +88,13 @@ function ServiceItem({
           <label className={styles.inputLabel}>Макс</label>
           <input
             type="number"
+            name="max_price"
             placeholder="400"
             className={styles.input}
-            value={maxPrice}
-            onChange={handleMaxPriceChange}
+            value={updatedService.max_price}
+            // onChange={handleMaxPriceChange}
+            onChange={handleChange}
+            disabled={!isEdit}
             // onFocus={() => setServiceItemEdit(true)}
           />
         </div>
@@ -120,16 +108,16 @@ function ServiceItem({
         <BsThreeDotsVertical className={styles.dotsIcon} />
       </button>
 
-      {activePopupId === id && (
+      {activePopupId === serviceData.service_id && (
         <div className={styles.popupContainer}>
           <PopupMenu
             isOpen={true}
             onClose={handlePopupToggle}
-            onEdit={() => handleEdit(id)}
+            onEdit={handleEdit}
             onDelete={handleDelete}
             buttonRef={buttonRef}
-            // innerAccRef={innerAccRef}
-            // containerRef={containerRef}
+            innerAccRef={innerAccRef}
+            containerRef={containerRef}
           />
         </div>
       )}

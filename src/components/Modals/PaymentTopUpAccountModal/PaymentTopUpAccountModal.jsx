@@ -68,9 +68,14 @@ export default function PaymentTopUpAccountModal({ onClose }) {
                   className={css.errorMsg}
                 />
               </div>
-              <button type="submit" className={css.btn}>
-                Поповнити рахунок
-              </button>
+              <div className={css.btnWrapper}>
+                <button type="submit" className={css.btn}>
+                  Поповнити рахунок
+                </button>
+                <a href="/usage-conditions" className={css.bottomText}>
+                  Умови використання
+                </a>
+              </div>
             </div>
           </Form>
         </Formik>

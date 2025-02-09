@@ -1,0 +1,114 @@
+.containerloadstats {
+    border-radius: 12px;
+    width: 487px;
+    height: 337px;
+    /* padding: 10px 15px; */
+    background: var(--bg-secondary);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    /* height: clamp(323px, calc(323px + (86 * ((100vh - 900px) / 180))), 337px); */
+    padding: 15px 15px;
+}
+
+.titlebox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* width: 457px;
+    height: 40px; */
+    margin-bottom: 18px;
+}
+
+.charttitle {
+    font-weight: 300;
+    font-size: 24px;
+    color: var(--white);
+    line-height: 1.1667em;
+}
+
+.charttitlecolor {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.chartColor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.titleCac {
+    background-color: var(--red);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.titleLtv {
+    background-color: var(--green);
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.titletext {
+    background: var(--bg-secondary);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--white);
+    line-height: 1.1667em;
+}
+
+.areabox {
+    /* width: 467px; */
+    height: 261px;
+    /* height: clamp(255px, calc(255px + (66 * ((100vh - 900px) / 180))), 270px); */
+}
+
+.customtooltip {
+    background-color: var(--light-gray);
+    width: 63px;
+    padding: 2px 2px;
+    border-radius: 6px;
+    transform: translateX(-50%);
+    font-weight: 400;
+    font-size: 6px;
+    font-variant: smallCaps;
+    font-style: normal;
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.popuptitle {
+    font-weight: 600;
+    font-size: 13px;
+    font-variant: small-caps;
+    color: var(--blue-btn-inactive);
+    text-align: center;
+}
+
+.popupvalue {
+    font-weight: 400;
+    font-size: 10px;
+    font-variant: small-caps;
+    color: var(--blue-btn-inactive);
+    padding-top: 3px;
+
+}
+
+.kolchurn {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: end;
+    color: var(--red);
+}
+
+.kolret {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: end;
+    color: var(--green);
+}

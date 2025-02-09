@@ -2,133 +2,155 @@ import { useState } from "react";
 import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns";
 import css from "./CheckoutPart.module.css";
 import { BsPlusLg } from "react-icons/bs";
-import { BsFillCaretDownFill } from "react-icons/bs";
-import clsx from "clsx";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { selectAllCashregisters } from "../../../redux/settings/selectors";
+import { useDispatch } from "react-redux";
+import {
+  createCashRegister,
+  deleteCashRegister,
+  getAllCashRegisters,
+  updateCashRegister,
+  updateCashRegisterStatus,
+} from "../../../redux/settings/operations";
+import toast from "react-hot-toast";
+import CustomSelect from "./CustomSelect/CustomSelect";
+
+const currencyOptions = [
+  { value: "UAH ₴", label: "UAH ₴" },
+  { value: "USD $", label: "USD $" },
+  { value: "EUR €", label: "EUR €" },
+  // { value: "грн", label: "грн" },
+];
+
+const entrepreneurOptions = [
+  { value: "TOB Назва", label: "TOB Назва" },
+  { value: "ФОП Назва", label: "ФОП Назва" },
+  { value: "ФОП Блудов", label: "ФОП Блудов" },
+  // { value: "грн", label: "грн" },
+];
+
+const warehouseOptions = [
+  { value: "Назва складу", label: "Назва складу" },
+  { value: "Склад Черкаси", label: "Склад Черкаси" },
+  { value: "Склад Київ", label: "Склад Київ" },
+  // { value: "грн", label: "грн" },
+];
+
+const responsibleOptions = [
+  { value: "Відповідальний Ваня ", label: "Відповідальний Ваня" },
+  { value: "Відповідальний Саша", label: "Відповідальний Саша" },
+  { value: "Відповідальний Даня", label: "Відповідальний Даня" },
+  // { value: "грн", label: "грн" },
+];
 
 export default function CheckoutPart() {
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const [checkouts, setCheckouts] = useState([
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-    {
-      name: "Блудов",
-      currency: "грн",
-      entrepreneur: "ФОП Блудов",
-      warehouse: "Склад Черкаси",
-      responsible: "Відповідальний ПІБ",
-      isDisabled: false,
-    },
-  ]);
+
+  const checkouts = useSelector(selectAllCashregisters);
+
   const [newRow, setNewRow] = useState("");
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  // const [activeDropdown, setActiveDropdown] = useState(null);
   const [editedValue, setEditedValue] = useState({});
+  const [currencyValue, setCurrencyValue] = useState(null);
+  const [warehouseValue, setWarehouseValue] = useState(null);
+  const [responsibleValue, setResponsibleValue] = useState(null);
+  const [entrepreneurValue, setEntrepreneurValue] = useState(null);
+
   const inputFocusRef = useRef();
   const scrollToTheLastItemRef = useRef();
 
-  const handleEditing = (index) => {
-    const checkoutToEdit = checkouts[index];
-    setEditedValue({ ...checkoutToEdit, index });
-    setIsEditing(isEditing === index ? null : index);
+  const handleEditing = (id) => {
+    const checkoutToEdit = checkouts.find((item) => item.id === id);
+    setEditedValue((prev) => ({
+      ...prev,
+      [id]: checkoutToEdit.name,
+    }));
+    setIsEditing(isEditing === id ? null : id);
   };
 
   useEffect(() => {
-    if (isEditing) {
+    if (isEditing !== null && inputFocusRef.current) {
       inputFocusRef.current.focus();
     }
   }, [isEditing]);
 
-  const deleteCheckout = (index) => {
-    setCheckouts((prevMembers) => prevMembers.filter((_, i) => i !== index));
+  const deleteCheckout = (id) => {
+    dispatch(deleteCashRegister(id))
+      .unwrap()
+      .then(() => {
+        toast.success("Успішно видалено :)", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating user data:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      });
   };
 
-  const toDisable = (index) => {
-    setCheckouts(
-      checkouts.map((checkout, i) =>
-        i === index
-          ? { ...checkout, isDisabled: !checkout.isDisabled }
-          : checkout
-      )
-    );
+  const toDisable = (cash_register_id, status) => {
+    const newStatus = status === 0 ? 1 : 0;
+    dispatch(updateCashRegisterStatus({ cash_register_id, status: newStatus }))
+      .unwrap()
+      .then(() => {
+        toast.success("Статус успішно змінено :)", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating user data:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      });
+    console.log("cash_register_id", cash_register_id);
+    console.log("newStatus", newStatus);
   };
 
   const handleAdd = () => {
     if (newRow.trim()) {
-      setCheckouts([
-        ...checkouts,
-        {
-          name: newRow,
-          currency: "грн",
-          entrepreneur: "ФОП Блудов",
-          warehouse: "Склад Черкаси",
-          responsible: "Відповідальний ПІБ",
-          isDisabled: false,
-        },
-      ]);
-      setNewRow("");
+      const dataToAdd = {
+        name: newRow,
+        currency: "UAH ₴",
+        entrepreneur: "ФОП Назва",
+        warehouse: "Склад Назва",
+        responsible: "Відповідальний ПІБ",
+        status: 1,
+      };
+      dispatch(createCashRegister(dataToAdd))
+        .unwrap()
+        .then(() => {
+          dispatch(getAllCashRegisters());
+          setNewRow("");
+        })
+        .catch((error) => {
+          console.error("Error creating post:", error);
+        });
     }
   };
 
@@ -141,133 +163,143 @@ export default function CheckoutPart() {
     }
   }, [checkouts]);
 
-  const handleChangeName = (newName, index) => {
-    setCheckouts(
-      checkouts.map((checkout, i) =>
-        i === index ? { ...checkout, name: newName } : checkout
-      )
-    );
+  const handleChangeName = (newName, id) => {
+    setEditedValue((prev) => ({
+      ...prev,
+      [id]: newName,
+    }));
   };
 
-  const toggleDropdown = (index) => {
-    setActiveDropdown(activeDropdown === index ? null : index);
-  };
-
-  const handleBlur = (event) => {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
-      setActiveDropdown(null);
+  const handleUpdate = (id) => {
+    const checkout = checkouts.find((item) => item.id === id);
+    if (!checkout) {
+      console.error("Checkout not found for id:", id);
+      return;
     }
+
+    const updatedCashRegister = {
+      id: checkout.id,
+      name: editedValue[id] || checkout.name,
+      currency: currencyValue?.value || checkout.currency,
+      entrepreneur: entrepreneurValue?.value || checkout.entrepreneur,
+      warehouse: warehouseValue?.value || checkout.warehouse,
+      responsible: responsibleValue?.value || checkout.responsible,
+      status: checkout.status,
+    };
+
+    const isChanged = Object.keys(updatedCashRegister).some(
+      (key) => updatedCashRegister[key] !== checkout[key]
+    );
+
+    if (!isChanged) {
+      console.log("Дані не змінилися, запит не відправляється.");
+      setIsEditing(null);
+      return;
+    }
+    // console.log("currencyValue", currencyValue);
+    console.log("updatedCashRegister", updatedCashRegister);
+    dispatch(
+      updateCashRegister({ cash_register_id: id, ...updatedCashRegister })
+    )
+      .unwrap()
+      .then(() => {
+        // Отримуємо всі каси після оновлення
+        dispatch(getAllCashRegisters())
+          .unwrap()
+          .then(() => {
+            toast.success("Касу успішно оновлено :)", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+            setIsEditing(null);
+          });
+      })
+      .catch((error) => {
+        console.error("Error updating cash register:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      });
   };
 
   const handleRepeal = () => {
-    if (editedValue && editedValue.index !== undefined) {
-      setCheckouts(
-        checkouts.map((checkout, index) =>
-          index === editedValue.index
-            ? { ...checkout, name: editedValue.name }
-            : checkout
-        )
-      );
-      setIsEditing(null);
-    }
+    // if (editedValue && editedValue.index !== undefined) {
+    //   setCheckouts(
+    //     checkouts.map((checkout, index) =>
+    //       index === editedValue.index
+    //         ? { ...checkout, name: editedValue.name }
+    //         : checkout
+    //     )
+    //   );
+    setIsEditing(null);
+    // }
   };
 
   return (
-    <div className={css.checkoutPart} onBlur={handleBlur}>
+    <div className={css.checkoutPart}>
       <div className={css.divForScroll} ref={scrollToTheLastItemRef}>
         <ul className={css.checkoutPartList}>
           {checkouts.map((checkout, index) => (
             <li key={index} className={css.checkoutItem}>
-              {isEditing === index ? (
+              {isEditing === checkout.id ? (
                 <div className={css.infoPart}>
                   <div className={css.selectAndArrow}>
-                    {/* <select
-                      name="name"
-                      id=""
-                      className={`${css.editInfo} ${css.infoName}`}
-                    >
-                      <option value="1">Блудов</option>
-                      <option value="2">Блудов</option>
-                      <option value="3">Блудов</option>
-                    </select>
-                    <BsFillCaretDownFill className={css.icon} />*/}
                     <input
-                      value={checkout.name}
-                      onChange={(e) => handleChangeName(e.target.value, index)}
+                      value={editedValue[checkout.id]}
+                      onChange={(e) =>
+                        handleChangeName(e.target.value, checkout.id)
+                      }
                       className={`${css.editInput} ${css.infoName}`}
                       ref={inputFocusRef}
                     />
                   </div>
 
                   <div className={css.selectAndArrow}>
-                    <select
-                      name="currency"
-                      id=""
-                      className={`${css.editInfo} ${css.infoCurrency}`}
-                      onClick={() => toggleDropdown(1)}
-                    >
-                      <option value="">грн</option>
-                      <option value="">грн</option>
-                      <option value="">грн</option>
-                    </select>
-                    <BsFillCaretDownFill
-                      className={clsx(css.icon, {
-                        [css.rotated]: activeDropdown === 1,
-                      })}
+                    <CustomSelect
+                      options={currencyOptions}
+                      chosenOption={checkout.currency}
+                      width={css.infoCurrency}
+                      setSelectedValue={setCurrencyValue}
+                      selectedValue={currencyValue}
                     />
                   </div>
 
                   <div className={css.selectAndArrow}>
-                    <select
-                      name="entrepreneur"
-                      id=""
-                      className={`${css.editInfo} ${css.infoEnt}`}
-                      onClick={() => toggleDropdown(2)}
-                    >
-                      <option value="">ФОП Блудов</option>
-                      <option value="">ФОП Блудов</option>
-                      <option value="">ФОП Блудов</option>
-                    </select>
-                    <BsFillCaretDownFill
-                      className={clsx(css.icon, {
-                        [css.rotated]: activeDropdown === 2,
-                      })}
+                    <CustomSelect
+                      options={entrepreneurOptions}
+                      chosenOption={checkout.entrepreneur}
+                      width={css.infoEnt}
+                      setSelectedValue={setEntrepreneurValue}
+                      selectedValue={entrepreneurValue}
                     />
                   </div>
 
                   <div className={css.selectAndArrow}>
-                    <select
-                      name=" warehouse"
-                      id=""
-                      className={`${css.editInfo} ${css.infoWh}`}
-                      onClick={() => toggleDropdown(3)}
-                    >
-                      <option value="">Склад Черкаси</option>
-                      <option value="">Склад Черкаси</option>
-                      <option value="">Склад Черкаси</option>
-                    </select>
-                    <BsFillCaretDownFill
-                      className={clsx(css.icon, {
-                        [css.rotated]: activeDropdown === 3,
-                      })}
+                    <CustomSelect
+                      options={warehouseOptions}
+                      chosenOption={checkout.warehouse}
+                      width={css.infoWh}
+                      setSelectedValue={setWarehouseValue}
+                      selectedValue={warehouseValue}
                     />
                   </div>
 
                   <div className={css.selectAndArrow}>
-                    <select
-                      name="responsible"
-                      id=""
-                      className={`${css.editInfo} ${css.infoResp}`}
-                      onClick={() => toggleDropdown(4)}
-                    >
-                      <option value="">Відповідальний ПІБ</option>
-                      <option value="">Відповідальний ПІБ</option>
-                      <option value="">Відповідальний ПІБ</option>
-                    </select>
-                    <BsFillCaretDownFill
-                      className={clsx(css.icon, {
-                        [css.rotated]: activeDropdown === 4,
-                      })}
+                    <CustomSelect
+                      options={responsibleOptions}
+                      chosenOption={checkout.responsible}
+                      width={css.infoResp}
+                      setSelectedValue={setResponsibleValue}
+                      selectedValue={responsibleValue}
                     />
                   </div>
                 </div>
@@ -292,14 +324,16 @@ export default function CheckoutPart() {
               )}
 
               <SwitchableBtns
-                onEdit={() => handleEditing(index)}
-                onDelete={() => deleteCheckout(index)}
-                onToggleDisable={() => toDisable(index)}
-                isDisabled={checkout.isDisabled}
+                onEdit={() => handleEditing(checkout.id)}
+                onSave={() => handleUpdate(checkout.id)}
+                onDelete={() => deleteCheckout(checkout.id)}
+                onToggleDisable={() => toDisable(checkout.id, checkout.status)}
+                isDisabled={checkout.status}
                 isEditing={isEditing}
-                id={index}
+                id={checkout.id}
                 showIconSave={true}
                 onRepeal={() => handleRepeal(index)}
+                text={`касу ${checkout.name}`}
               />
             </li>
           ))}

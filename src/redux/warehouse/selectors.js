@@ -5,3 +5,5 @@ export const selectError = (state) => state.warehouse.error;
 export const selectWarehousesTree = (state) => state.warehouse.warehouses;
 
 export const selectPrompts = (state) => state.warehouse.prompts;
+
+// export const selectOneWareHouseTree = (state) => state.warehouse.selectedWarehouse;

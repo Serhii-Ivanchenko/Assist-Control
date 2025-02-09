@@ -31,7 +31,8 @@ export default function DayCarsItem({ car, isModal }) {
 
   const {
     car_id,
-    auto,
+    make,
+    model,
     photo_url: photoUrl,
     vin,
     mileage,
@@ -107,7 +108,9 @@ export default function DayCarsItem({ car, isModal }) {
               )}
             >
               <IoCarSportSharp size={13} color="#A97878" />
-              <span className={styles.nameCar}>{auto}</span>
+              <span className={styles.nameCar}>
+                {make && model ? `${make} ${model}` : "Невідома модель"}
+              </span>
             </div>
           )}
         </div>

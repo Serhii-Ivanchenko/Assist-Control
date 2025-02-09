@@ -9,7 +9,7 @@ import flag from "../../../assets/images/flagUa.webp";
 import { BsFiles } from "react-icons/bs";
 import toast from "react-hot-toast";
 
-export default function CarsList({ car, key }) {
+export default function CarsList({ car }) {
   const handleCopyVin = () => {
     if (!car.vin) {
       return;
@@ -29,7 +29,7 @@ export default function CarsList({ car, key }) {
   return (
     // <div className={css.carListAndAddBtn}>
     //   <ul className={css.carInfo}>
-    <li key={key} className={css.carCard}>
+    <li key={car.id || car.carId} className={css.carCard}>
       <div className={css.mainContent}>
         <div className={css.photoAndMainCarInfo}>
           <img

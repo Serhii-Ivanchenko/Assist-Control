@@ -2,6 +2,13 @@
     display: flex;
     width: 1004px;
     height: 706px;
-    border: 1px solid var(--light-gray);
+    /* border: 1px solid var(--light-gray); */
     border-radius: 12px;
+}
+
+.pagegrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 25px;
+    grid-row-gap: 31px;
 }

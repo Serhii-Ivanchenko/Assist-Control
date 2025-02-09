@@ -28,7 +28,7 @@
 .infoPart {
   display: flex;
   align-items: center;
-  gap: 33px;
+  gap: 15px;
 }
 
 .info {
@@ -78,11 +78,14 @@
 } */
 
 .infoName {
-  width: 80px;
+  width: 124px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .infoCurrency {
-  width: 51px;
+  width: 78px;
 }
 
 .infoEnt {
@@ -108,6 +111,7 @@
 .selectAndArrow {
   position: relative;
   height: 19px;
+  overflow: visible;
 }
 
 .icon {
@@ -201,6 +205,8 @@
   max-height: 520px;
   overflow-y: auto;
   margin-bottom: 20px;
+  /* scroll-padding-top: 150px; */
+  padding-bottom: 150px;
 }
 
 .divForScroll::-webkit-scrollbar {

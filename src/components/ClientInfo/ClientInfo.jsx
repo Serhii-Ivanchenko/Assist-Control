@@ -34,9 +34,9 @@ import AddNewClientModal from "../Modals/AddNewClientModal/AddNewClientModal.jsx
 import ClientOrganizationInfo from "../Modals/ClientInfo/ClientOrganizationInfo/ClientOrganizationInfo.jsx";
 import ClientPersonInfo from "../Modals/ClientInfo/ClientPersonInfo/ClientPersonInfo.jsx";
 
-export default function ClientInfo({ clientInfo,car }) {
+export default function ClientInfo({ clientInfo, car }) {
   console.log(car);
-  
+
   // Client
   const client = clientInfo.client;
 
@@ -60,7 +60,10 @@ export default function ClientInfo({ clientInfo,car }) {
   };
 
   //Car
-  const cars = clientInfo.car;
+  const carsArray = clientInfo.client_cars;
+  const particularCar = clientInfo.car;
+
+  const cars = carsArray.filter((car) => car.vin !== particularCar.vin);
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -166,10 +169,7 @@ export default function ClientInfo({ clientInfo,car }) {
 
           <div className={css.mainInfo}>
             <div className={css.ratingAndMoney}>
-              <RatingStars
-                rating={clientRating}
-                ratingGap={css.rating}
-              />
+              <RatingStars rating={clientRating} ratingGap={css.rating} />
               <div className={css.moneyBox}>
                 <AiOutlineDollar className={css.dollarIcon} />
                 <p className={css.moneyAmount}>{clientTotalSpent}</p>
@@ -360,7 +360,7 @@ export default function ClientInfo({ clientInfo,car }) {
             ) : (
               <p className={css.contactsInput}>{tg}</p>
             )}
-            <a href={`https://t.me/${tg}`} target="_blank">
+            <a href={`https://t.me/${tg.replace("@", "")}`} target="_blank">
               <button type="button" className={css.contactsBtn}>
                 <PiTelegramLogoLight className={css.iconColor} size={22} />
               </button>
@@ -371,8 +371,10 @@ export default function ClientInfo({ clientInfo,car }) {
 
       <div className={css.carListAndAddBtn}>
         <ul className={css.carInfo}>
+          <CarsList car={particularCar} />
+
           {Array.isArray(cars) ? (
-            cars.map((car) => <CarsList car={car} key={car?.car_id} />)
+            cars.map((car) => <CarsList car={car} key={car?.id} />)
           ) : (
             <CarsList car={cars} />
           )}

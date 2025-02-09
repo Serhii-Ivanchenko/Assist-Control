@@ -48,7 +48,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
 }
 
 @media screen and (max-width: 1279.98px) {
@@ -269,6 +269,38 @@
 .bottomLink {
   font-weight: 500;
   font-size: 11px;
+  color: var(--play-btn-triangle);
+  font-style: normal;
+  line-height: 1.18;
+}
+
+.privacyPolicyLinkWrapper {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+@media screen and (max-width: 767.98px) {
+  .privacyPolicyLinkWrapper {
+    flex-direction: column;
+  }
+}
+
+.textAndIconWrapper {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.checkIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.privacyPolicyLink {
+  font-weight: 500;
+  font-size: 14px;
   color: var(--play-btn-triangle);
   font-style: normal;
   line-height: 1.18;

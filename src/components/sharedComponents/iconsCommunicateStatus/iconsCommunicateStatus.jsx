@@ -1,19 +1,29 @@
-import { BsTelephoneInbound, BsTelephoneX, BsTelephoneOutbound, BsGlobe } from "react-icons/bs";
+import {
+  BsTelephoneInbound,
+  BsTelephoneX,
+  BsTelephoneOutbound,
+  BsGlobe,
+} from "react-icons/bs";
 import { PiTelegramLogoLight } from "react-icons/pi";
 import css from "./iconsCommunicateStatus.module.css";
 
-const IconsCommunicateStatus = ({ status }) => {
+const IconsCommunicateStatus = ({ status, direction }) => {
   const renderIcon = () => {
-    switch (status) {
-      case "call_incoming":
+    if (status === "phone") {
+      if (direction === "in") {
         return <BsTelephoneInbound className={css.icon} color="var(--green)" />;
-      case "call_missed":
-        return <BsTelephoneX className={css.icon} color="var(--red)" />;
-      case "call_outgoing":
+      }
+      if (direction === "out") {
         return <BsTelephoneOutbound className={css.icon} color="#728EFF" />;
+      }
+    }
+
+    switch (status) {
+      case "phone_lost":
+        return <BsTelephoneX className={css.icon} color="var(--red)" />;
       case "setting":
         return <img src="/logo-rect.png" alt="Logo" className={css.logo} />;
-      case "browser":
+      case "web":
         return (
           <div className={css.iconWrapper}>
             <BsGlobe className={css.icon} />
@@ -33,7 +43,11 @@ const IconsCommunicateStatus = ({ status }) => {
   };
 
   return (
-    <div className={`${css.iconContainer} ${status === 'setting' ? css.logoContainer : ''}`}>
+    <div
+      className={`${css.iconContainer} ${
+        status === "setting" ? css.logoContainer : ""
+      }`}
+    >
       {renderIcon()}
     </div>
   );
