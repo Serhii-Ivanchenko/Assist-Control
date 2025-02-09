@@ -11,7 +11,7 @@ import Modal from "../../Modals/Modal/Modal";
 import NewItemModal from "./NewItemModal/NewItemModal";
 import Placeholder from "./Placeholder/Placeholder";
 import { useEffect } from "react";
-
+import toast from "react-hot-toast";
 import {
   Tree,
   getDescendants,
@@ -38,53 +38,6 @@ import {
 //   getWarehouseById,
 //   getWarehouses,
 // } from "../../../redux/warehouse/operations";
-
-// const dataForTree = [
-//   {
-//     id: "1",
-//     parent: null,
-//     text: "м. Академіка павлова (Назва склада)",
-//     droppable: true,
-
-//     data: "warehouse",
-//   },
-
-//   {
-//     id: "2",
-//     parent: "1",
-//     text: "Вітрина (Назва секції)",
-//     droppable: true,
-//     data: "section",
-//   },
-
-//   {
-//     id: "3",
-//     parent: "1",
-//     text: "2 Поверх (Назва секції)",
-//     droppable: true,
-//     data: "section",
-//   },
-
-//   { id: "4", parent: "3", text: "Стелаж", droppable: true, data: "rack" },
-//   {
-//     id: "5",
-//     parent: "3",
-//     text: "Стелаж",
-//     droppable: true,
-//     data: "rack",
-//   },
-//   {
-//     id: "6",
-//     parent: "5",
-//     text: "Полиця 036",
-//     droppable: true,
-//     data: "shelf",
-//   },
-
-//   { id: "7", parent: "6", text: "Місце 0243", data: "place" },
-//   { id: "8", parent: "6", text: "Місце 0244", data: "place" },
-//   { id: "9", parent: "6", text: "Місце 0245", data: "place" },
-// ];
 
 export default function WarehousePart() {
   const dispatch = useDispatch();
@@ -335,16 +288,33 @@ export default function WarehousePart() {
       dispatch(updateEntity(dataToUpdate))
         .unwrap()
         .then(() => {
-          dispatch(getAllWarehousesWithDetails());
+          dispatch(getAllWarehousesWithDetails())
+            .unwrap()
+            .then(() => {
+              toast.success("Склад успішно оновлено :)", {
+                position: "top-center",
+                duration: 3000,
+                style: {
+                  background: "var(--bg-input)",
+                  color: "var(--white)FFF",
+                },
+              });
+              setTempNodeText({});
+              setIsEditing(false);
+            });
         })
-        .catch((err) => {
-          console.error("Error creating post:", err);
+        .catch((error) => {
+          console.error("Error updating cash register:", error);
+          toast.error("Щось пішло не так :(", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
         });
-      console.log("dataToUpdate", dataToUpdate);
     });
-
-    setTempNodeText({});
-    setIsEditing(false);
   };
 
   // Додавання нового елементу
@@ -422,11 +392,11 @@ export default function WarehousePart() {
       typeof dropTargetId === "undefined"
     )
       return;
-    const start = treeData.find((v) => v.id === dragSourceId);
-    const end = treeData.find((v) => v.id === dropTargetId);
+    const start = dataForTree.find((v) => v.id === dragSourceId);
+    const end = dataForTree.find((v) => v.id === dropTargetId);
 
-    const startDepth = calculateDepth(dragSourceId, treeData);
-    const endDepth = calculateDepth(dropTargetId, treeData);
+    const startDepth = calculateDepth(dragSourceId, dataForTree);
+    const endDepth = calculateDepth(dropTargetId, dataForTree);
 
     if (startDepth < endDepth) {
       return;
@@ -454,7 +424,7 @@ export default function WarehousePart() {
       start.data !== end.data
     ) {
       if (
-        getDescendants(treeData, dragSourceId).find(
+        getDescendants(dataForTree, dragSourceId).find(
           (el) => el.id === dropTargetId
         ) ||
         dropTargetId === dragSourceId ||
@@ -582,7 +552,7 @@ export default function WarehousePart() {
                 listItem: css.listItem,
               }}
               dragPreviewRender={(node) => <div>{node.text}</div>}
-              // onDrop={handleDrop}
+              onDrop={handleDrop}
               sort={false}
               insertDroppableFirst={false}
               enableAnimateExpand={true}
