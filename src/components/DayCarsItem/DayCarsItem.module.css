@@ -199,7 +199,8 @@
 .nameCar {
   color: var(--white);
   font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
-  max-width: 134px;
+  /* max-width: 134px; */
+  max-width: clamp(92px, min(12.407vh, 7.243vw), 134px);
   font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
@@ -239,9 +240,9 @@
 }
 
 .modalCarsInfo {
-  margin-left: -30px;
+  /* margin-left: -30px; */
 
-  /* margin-left: clamp(-30px, min(2.778vh, 1.622vw), 0px); */
+  margin-left: clamp(-60px, min(-2.778vh, -1.622vw), -30px);
 }
 
 
@@ -325,7 +326,7 @@
 
 .carNumber {
   color: var(--bg-secondary);
-  font-size: clamp(12px, min(1.389vh, 0.811vw), 15px);
+  font-size: clamp(10px, min(1.389vh, 0.811vw), 15px);
   font-weight: 600;
   line-height: normal;
   text-transform: uppercase;
