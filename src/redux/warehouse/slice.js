@@ -6,10 +6,10 @@ import {
   createSection,
   createShelves,
   createWarehouse,
-  deletePlace,
-  deleteRack,
-  deleteSection,
-  deleteShelf,
+  // deletePlace,
+  // deleteRack,
+  // deleteSection,
+  // deleteShelf,
   getPrompts,
   // getWarehouses,
   saveWarehouse,
@@ -21,6 +21,7 @@ import {
   // getWarehouseById
   getAllWarehousesWithDetails,
   deleteEntity,
+  updateEntity
 } from "./operations.js";
 
 const handlePending = (state) => {
@@ -99,7 +100,83 @@ const warehouseSlice = createSlice({
       .addCase(deleteEntity.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      }).addCase(updateEntity.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
       })
+      .addCase(updateEntity.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+
+        const updatedEntities = action.payload;
+
+        // Оновлення складу
+        if (updatedEntities.type === "warehouse") {
+          state.warehouse = {
+            ...state.warehouse,
+            ...updatedEntities.data,
+          };
+        }
+
+        // Оновлення секцій
+        if (updatedEntities.type === "section") {
+          state.warehouse.sections = state.warehouse.sections.map((section) =>
+            section.id === updatedEntities.data.id
+              ? { ...section, ...updatedEntities.data }
+              : section
+          );
+        }
+
+        // Оновлення стелажів (racks)
+        if (updatedEntities.type === "rack") {
+          state.warehouse.sections = state.warehouse.sections.map((section) => ({
+            ...section,
+            racks: section.racks.map((rack) =>
+              rack.id === updatedEntities.data.id
+                ? { ...rack, ...updatedEntities.data }
+                : rack
+            ),
+          }));
+        }
+
+        // Оновлення полиць (shelves)
+        if (updatedEntities.type === "shelf") {
+          state.warehouse.sections = state.warehouse.sections.map((section) => ({
+            ...section,
+            racks: section.racks.map((rack) => ({
+              ...rack,
+              shelves: rack.shelves.map((shelf) =>
+                shelf.id === updatedEntities.data.id
+                  ? { ...shelf, ...updatedEntities.data }
+                  : shelf
+              ),
+            })),
+          }));
+        }
+
+        // Оновлення місць (places)
+        if (updatedEntities.type === "place") {
+          state.warehouse.sections = state.warehouse.sections.map((section) => ({
+            ...section,
+            racks: section.racks.map((rack) => ({
+              ...rack,
+              shelves: rack.shelves.map((shelf) => ({
+                ...shelf,
+                places: shelf.places.map((place) =>
+                  place.id === updatedEntities.data.id
+                    ? { ...place, ...updatedEntities.data }
+                    : place
+                ),
+              })),
+            })),
+          }));
+        }
+      })
+      .addCase(updateEntity.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload || "Помилка оновлення сутності";
+      })
+  
       // .addCase(getWarehouses.pending, handlePending)
       // .addCase(getWarehouses.fulfilled, (state, action) => {
       //   state.isLoading = false;
@@ -177,20 +254,20 @@ const warehouseSlice = createSlice({
         ] = action.payload;
       })
       .addCase(updateSectionName.rejected, handleRejected)
-      .addCase(deleteSection.pending, handlePending)
-      .addCase(deleteSection.fulfilled, (state, action) => {
-        state.isLoading = false;
+      // .addCase(deleteSection.pending, handlePending)
+      // .addCase(deleteSection.fulfilled, (state, action) => {
+      //   state.isLoading = false;
 
-        const warehouseWithSectionToDeleteIndex = state.warehouses.findIndex(
-          (warehouse) => warehouse.id === action.payload.warehouse_id
-        );
+      //   const warehouseWithSectionToDeleteIndex = state.warehouses.findIndex(
+      //     (warehouse) => warehouse.id === action.payload.warehouse_id
+      //   );
 
-        state.warehouses[warehouseWithSectionToDeleteIndex].sections =
-          state.warehouses[warehouseWithSectionToDeleteIndex].sections.filter(
-            (section) => section.id !== action.payload.id
-          );
-      })
-      .addCase(deleteSection.rejected, handleRejected)
+      //   state.warehouses[warehouseWithSectionToDeleteIndex].sections =
+      //     state.warehouses[warehouseWithSectionToDeleteIndex].sections.filter(
+      //       (section) => section.id !== action.payload.id
+      //     );
+      // })
+      // .addCase(deleteSection.rejected, handleRejected)
       .addCase(createRacks.pending, handlePending)
       .addCase(createRacks.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -235,27 +312,27 @@ const warehouseSlice = createSlice({
         ].racks[rackToEditIndex] = action.payload;
       })
       .addCase(updateRackName.rejected, handleRejected)
-      .addCase(deleteRack.pending, handlePending)
-      .addCase(deleteRack.fulfilled, (state, action) => {
-        state.isLoading = false;
+      // .addCase(deleteRack.pending, handlePending)
+      // .addCase(deleteRack.fulfilled, (state, action) => {
+      //   state.isLoading = false;
 
-        const warehouseWithRackToDeleteIndex = state.warehouses.findIndex(
-          (warehouse) => warehouse.id === action.payload.warehouse_id
-        );
+      //   const warehouseWithRackToDeleteIndex = state.warehouses.findIndex(
+      //     (warehouse) => warehouse.id === action.payload.warehouse_id
+      //   );
 
-        const sectionWithRackToDeleteIndex = state.warehouses[
-          warehouseWithRackToDeleteIndex
-        ].sections.findIndex(
-          (section) => section.id === action.payload.section_id
-        );
+      //   const sectionWithRackToDeleteIndex = state.warehouses[
+      //     warehouseWithRackToDeleteIndex
+      //   ].sections.findIndex(
+      //     (section) => section.id === action.payload.section_id
+      //   );
 
-        state.warehouses[warehouseWithRackToDeleteIndex].sections[
-          sectionWithRackToDeleteIndex
-        ].racks = state.warehouses[warehouseWithRackToDeleteIndex].sections[
-          sectionWithRackToDeleteIndex
-        ].racks.filter((rack) => rack.id !== action.payload.id);
-      })
-      .addCase(deleteRack.rejected, handleRejected)
+      //   state.warehouses[warehouseWithRackToDeleteIndex].sections[
+      //     sectionWithRackToDeleteIndex
+      //   ].racks = state.warehouses[warehouseWithRackToDeleteIndex].sections[
+      //     sectionWithRackToDeleteIndex
+      //   ].racks.filter((rack) => rack.id !== action.payload.id);
+      // })
+      // .addCase(deleteRack.rejected, handleRejected)
       .addCase(createShelves.pending, handlePending)
       .addCase(createShelves.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -313,35 +390,35 @@ const warehouseSlice = createSlice({
           action.payload;
       })
       .addCase(updateShelfName.rejected, handleRejected)
-      .addCase(deleteShelf.pending, handlePending)
-      .addCase(deleteShelf.fulfilled, (state, action) => {
-        state.isLoading = false;
+      // .addCase(deleteShelf.pending, handlePending)
+      // .addCase(deleteShelf.fulfilled, (state, action) => {
+      //   state.isLoading = false;
 
-        const warehouseWithShelfToDeleteIndex = state.warehouses.findIndex(
-          (warehouse) => warehouse.id === action.payload.warehouse_id
-        );
+      //   const warehouseWithShelfToDeleteIndex = state.warehouses.findIndex(
+      //     (warehouse) => warehouse.id === action.payload.warehouse_id
+      //   );
 
-        const sectionWithShelfToDeleteIndex = state.warehouses[
-          warehouseWithShelfToDeleteIndex
-        ].sections.findIndex(
-          (section) => section.id === action.payload.section_id
-        );
+      //   const sectionWithShelfToDeleteIndex = state.warehouses[
+      //     warehouseWithShelfToDeleteIndex
+      //   ].sections.findIndex(
+      //     (section) => section.id === action.payload.section_id
+      //   );
 
-        const rackWithShelfToDeleteIndex = state.warehouses[
-          warehouseWithShelfToDeleteIndex
-        ].sections[sectionWithShelfToDeleteIndex].racks.findIndex(
-          (rack) => rack.id === action.payload.rack_id
-        );
+      //   const rackWithShelfToDeleteIndex = state.warehouses[
+      //     warehouseWithShelfToDeleteIndex
+      //   ].sections[sectionWithShelfToDeleteIndex].racks.findIndex(
+      //     (rack) => rack.id === action.payload.rack_id
+      //   );
 
-        state.warehouses[warehouseWithShelfToDeleteIndex].sections[
-          sectionWithShelfToDeleteIndex
-        ].racks[rackWithShelfToDeleteIndex].shelves = state.warehouses[
-          warehouseWithShelfToDeleteIndex
-        ].sections[sectionWithShelfToDeleteIndex].racks[
-          rackWithShelfToDeleteIndex
-        ].shelves.filter((shelf) => shelf.id !== action.payload.id);
-      })
-      .addCase(deleteShelf.rejected, handleRejected)
+      //   state.warehouses[warehouseWithShelfToDeleteIndex].sections[
+      //     sectionWithShelfToDeleteIndex
+      //   ].racks[rackWithShelfToDeleteIndex].shelves = state.warehouses[
+      //     warehouseWithShelfToDeleteIndex
+      //   ].sections[sectionWithShelfToDeleteIndex].racks[
+      //     rackWithShelfToDeleteIndex
+      //   ].shelves.filter((shelf) => shelf.id !== action.payload.id);
+      // })
+      // .addCase(deleteShelf.rejected, handleRejected)
       .addCase(createPlaces.pending, handlePending)
       .addCase(createPlaces.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -414,43 +491,43 @@ const warehouseSlice = createSlice({
         ] = action.payload;
       })
       .addCase(updatePlaceName.rejected, handleRejected)
-      .addCase(deletePlace.pending, handlePending)
-      .addCase(deletePlace.fulfilled, (state, action) => {
-        state.isLoading = false;
+      // .addCase(deletePlace.pending, handlePending)
+      // .addCase(deletePlace.fulfilled, (state, action) => {
+      //   state.isLoading = false;
 
-        const warehouseWithPlaceToDeleteIndex = state.warehouses.findIndex(
-          (warehouse) => warehouse.id === action.payload.warehouse_id
-        );
+      //   const warehouseWithPlaceToDeleteIndex = state.warehouses.findIndex(
+      //     (warehouse) => warehouse.id === action.payload.warehouse_id
+      //   );
 
-        const sectionWithPlaceToDeleteIndex = state.warehouses[
-          warehouseWithPlaceToDeleteIndex
-        ].sections.findIndex(
-          (section) => section.id === action.payload.section_id
-        );
+      //   const sectionWithPlaceToDeleteIndex = state.warehouses[
+      //     warehouseWithPlaceToDeleteIndex
+      //   ].sections.findIndex(
+      //     (section) => section.id === action.payload.section_id
+      //   );
 
-        const rackWithPlaceToDeleteIndex = state.warehouses[
-          warehouseWithPlaceToDeleteIndex
-        ].sections[sectionWithPlaceToDeleteIndex].racks.findIndex(
-          (rack) => rack.id === action.payload.rack_id
-        );
+      //   const rackWithPlaceToDeleteIndex = state.warehouses[
+      //     warehouseWithPlaceToDeleteIndex
+      //   ].sections[sectionWithPlaceToDeleteIndex].racks.findIndex(
+      //     (rack) => rack.id === action.payload.rack_id
+      //   );
 
-        const shelfWithPlaceToDeleteIndex = state.warehouses[
-          warehouseWithPlaceToDeleteIndex
-        ].sections[sectionWithPlaceToDeleteIndex].racks[
-          rackWithPlaceToDeleteIndex
-        ].shelves.findIndex((shelf) => shelf.id === action.payload.shelf_id);
+      //   const shelfWithPlaceToDeleteIndex = state.warehouses[
+      //     warehouseWithPlaceToDeleteIndex
+      //   ].sections[sectionWithPlaceToDeleteIndex].racks[
+      //     rackWithPlaceToDeleteIndex
+      //   ].shelves.findIndex((shelf) => shelf.id === action.payload.shelf_id);
 
-        state.warehouses[warehouseWithPlaceToDeleteIndex].sections[
-          sectionWithPlaceToDeleteIndex
-        ].racks[rackWithPlaceToDeleteIndex].shelves[
-          shelfWithPlaceToDeleteIndex
-        ].places = state.warehouses[warehouseWithPlaceToDeleteIndex].sections[
-          sectionWithPlaceToDeleteIndex
-        ].racks[rackWithPlaceToDeleteIndex].shelves[
-          shelfWithPlaceToDeleteIndex
-        ].places.filter((place) => place.id !== action.payload.id);
-      })
-      .addCase(deletePlace.rejected, handleRejected),
+      //   state.warehouses[warehouseWithPlaceToDeleteIndex].sections[
+      //     sectionWithPlaceToDeleteIndex
+      //   ].racks[rackWithPlaceToDeleteIndex].shelves[
+      //     shelfWithPlaceToDeleteIndex
+      //   ].places = state.warehouses[warehouseWithPlaceToDeleteIndex].sections[
+      //     sectionWithPlaceToDeleteIndex
+      //   ].racks[rackWithPlaceToDeleteIndex].shelves[
+      //     shelfWithPlaceToDeleteIndex
+      //   ].places.filter((place) => place.id !== action.payload.id);
+      // })
+      // .addCase(deletePlace.rejected, handleRejected),
 });
 
 export default warehouseSlice.reducer;

@@ -32,6 +32,7 @@ import { useDispatch } from "react-redux";
 import {
   createWarehouse,
   getAllWarehousesWithDetails,
+  updateEntity,
 } from "../../../redux/warehouse/operations";
 // import {
 //   getWarehouseById,
@@ -293,6 +294,15 @@ export default function WarehousePart() {
     setIsEditing(null);
   };
 
+  const getTypeFromNodeId = (id) => {
+    if (id.startsWith("w")) return "warehouse";
+    if (id.startsWith("s-")) return "section";
+    if (id.startsWith("r")) return "rack";
+    if (id.startsWith("sh")) return "shelf";
+    if (id.startsWith("p")) return "place";
+    return "unknown";
+  };
+
   // Збереження данних
   const handleSaveData = () => {
     //   setTreeData((prev) =>
@@ -302,8 +312,39 @@ export default function WarehousePart() {
     //         : node
     //     )
     //   );
-    //   setTempNodeText({});
-    //   setIsEditing(false);
+    const updatedNodes = Object.keys(tempNodeText).map((id) => ({
+      id,
+      text: tempNodeText[id],
+    }));
+
+    updatedNodes.forEach((node) => {
+      const dataToUpdate = [
+        {
+          entity_type: getTypeFromNodeId(node.id), // Функція, яка визначає тип
+          entity_id: node.id.slice(
+            getTypeFromNodeId(node.id) === "shelf" ? 3 : 2
+          ),
+          fields: {
+            ...(getTypeFromNodeId(node.id) === "warehouse"
+              ? { address: node.text }
+              : { name: node.text }),
+          },
+        },
+      ];
+
+      dispatch(updateEntity(dataToUpdate))
+        .unwrap()
+        .then(() => {
+          dispatch(getAllWarehousesWithDetails());
+        })
+        .catch((err) => {
+          console.error("Error creating post:", err);
+        });
+      console.log("dataToUpdate", dataToUpdate);
+    });
+
+    setTempNodeText({});
+    setIsEditing(false);
   };
 
   // Додавання нового елементу
@@ -442,33 +483,51 @@ export default function WarehousePart() {
     setAddWhModalOpen(false);
   };
 
+  const warehousesNumber = dataForTree.filter(
+    (tree) => tree.data === "warehouse"
+  ).length;
+
+  const sectionsNumber = dataForTree.filter(
+    (tree) => tree.data === "section"
+  ).length;
+
+  const racksNumber = dataForTree.filter((tree) => tree.data === "rack").length;
+
+  const shelvesNumber = dataForTree.filter(
+    (tree) => tree.data === "shelf"
+  ).length;
+
+  const placesNumber = dataForTree.filter(
+    (tree) => tree.data === "place"
+  ).length;
+
   return (
     <div className={css.warehouseContainer}>
       <div className={css.listAndButton}>
         <ul className={css.itemsList}>
           <li className={css.items}>
             <BiBuildingHouse className={css.icon} />
-            <p className={css.value}>6</p>
+            <p className={css.value}>{warehousesNumber}</p>
             <p className={css.title}>Склади</p>
           </li>
           <li className={css.items}>
             <RiDatabaseLine className={css.icon} />
-            <p className={css.value}>14</p>
+            <p className={css.value}>{sectionsNumber}</p>
             <p className={css.title}>Секції</p>
           </li>
           <li className={css.items}>
             <RiFridgeLine className={css.icon} />
-            <p className={css.value}>46</p>
+            <p className={css.value}>{racksNumber}</p>
             <p className={css.title}>Стелажі</p>
           </li>
           <li className={css.items}>
             <RiTableAltLine className={css.icon} />
-            <p className={css.value}>94</p>
+            <p className={css.value}>{shelvesNumber}</p>
             <p className={css.title}>Полиці</p>
           </li>
           <li className={css.items}>
             <RiFolder5Line className={css.icon} />
-            <p className={css.value}>116</p>
+            <p className={css.value}>{placesNumber}</p>
             <p className={css.title}>Місця</p>
           </li>
         </ul>
