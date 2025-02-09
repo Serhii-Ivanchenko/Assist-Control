@@ -111,13 +111,13 @@ export const deleteEntity = createAsyncThunk(
 // Crete Warehouse
 export const createWarehouse = createAsyncThunk(
   "warehouse/createWarehouse",
-  async (warehouseName, thunkAPI) => {
+  async (address, thunkAPI) => {
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(
         `/set/warehouses/`,
-        warehouseName,
+        address,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",

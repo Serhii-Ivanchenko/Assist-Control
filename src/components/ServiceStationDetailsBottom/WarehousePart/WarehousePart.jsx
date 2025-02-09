@@ -167,7 +167,7 @@ export default function WarehousePart() {
     acc.push({
       id: `w-${warehouse.id}`,
       parent: null,
-      text: warehouse.name,
+      text: warehouse.address,
       droppable: true,
       data: "warehouse",
     });
@@ -317,7 +317,7 @@ export default function WarehousePart() {
     // };
 
     // setTreeData((prevTreeData) => [...prevTreeData, newRoot]);
-    dispatch(createWarehouse({ warehoseName: name }))
+    dispatch(createWarehouse({ address: name }))
       .unwrap()
       .then(() => {
         dispatch(getAllWarehousesWithDetails());
