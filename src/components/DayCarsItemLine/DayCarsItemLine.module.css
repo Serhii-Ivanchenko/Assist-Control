@@ -6,9 +6,10 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   width: 1284px;
-  min-width: 400px;
+  width: clamp(888px, min(69.405vw, 118.889vh), 1284px);
+  /* min-width: 400px; */
   /* height: 48px; */
-  padding: 8px;
+  padding: clamp(5px, min(0.432vw, 0.741vh), 8px);
   align-items: center;
   justify-content: space-between;
 }
@@ -16,10 +17,11 @@
 .carNumber {
   color: var(--white);
   font-variant-numeric: lining-nums proportional-nums;
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 300;
   line-height: normal;
-  width: 70px;
+  /* width: 70px; */
+  width: clamp(48px, min(6.481vh, 3.783vw), 70px);
   margin-right: 0px;
 }
 
@@ -29,6 +31,8 @@
   align-items: center;
   width: 36px;
   height: 32px;
+  width: clamp(24px, min(1.946vw, 2.963vh * 1.125), 36px);
+  height: clamp(21px, min(2.963vh, 1.946vw / 1.125), 32px);
 }
 
 .carPhoto img {
@@ -38,14 +42,15 @@
 }
 
 .infoName {
-  width: 90px;
+  /* width: 90px; */
+  width: clamp(62px, min(8.333vh, 4.865vw), 90px);
   overflow: hidden;
   white-space: nowrap;
 }
 
 .textName {
   color: var(--white);
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 600;
   line-height: normal;
 }
@@ -54,10 +59,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 7px;
-  width: 137px;
-  height: 24px;
-  padding-left: 8px;
+  gap: clamp(4px, min(0.648vh, 0.378vw), 7px);
+  width: clamp(94px, min(7.405vw, 2.222vh * 5.708), 137px);
+  height: clamp(16px, min(2.222vh, 7.405vw / 5.708), 24px);
+  /* padding-left: 8px; */
+  padding-left: clamp(5px, min(0.432vw, 0.741vh), 8px);
 
   border-radius: 6px;
 }
@@ -65,7 +71,7 @@
 .statusText {
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 500;
   line-height: 1.1em;
   font-variant: small-caps;
@@ -74,63 +80,65 @@
 }
 
 .completed {
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   color: var(--status-complete);
 }
 
 .new {
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   color: var(--status-new);
 }
 
 .repair {
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   color: var(--status-repair);
 }
 
 .checkRepair {
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   color: var(--status-diag);
 }
 
 .infoCar {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: clamp(5px, min(0.432vw, 0.741vh), 8px);
 }
 
 .textName {
   display: flex;
   color: var(--white);
-  font-size: 14px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
 }
 
 .nameCar {
   color: var(--white);
-  font-size: 16px;
-  width: 140px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
+  /* width: 140px; */
+  width: clamp(97px, min(7.568vw, 12.963vh), 140px);
 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 120px;
+  /* max-width: 120px; */
 }
 
 .btnContainer {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: clamp(5px, min(0.432vw, 0.741vh), 8px);
 }
 
 .btnDetail {
   display: flex;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
   justify-content: center;
   align-items: center;
-  width: 58px;
-  height: 24px;
+  /* width: 58px;
+  height: 24px; */
+  width: clamp(40px, min(3.135vw, 2.222vh * 2.417), 58px);
+  height: clamp(16px, min(2.222vh, 3.135vw / 2.417), 24px);
   border-radius: 6px;
   background-color: var(--blue);
   border: none;
@@ -139,19 +147,19 @@
 
 .btnDetailText {
   color: var(--white);
-  font-size: 12px;
+  font-size: clamp(10px, min(1.111vh, 0.648vw), 12px);
   font-weight: 600;
 }
 
 .timeWork {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: clamp(4px, min(0.648vh, 0.378vw), 7px);
   color: var(--text-gray);
 }
 
 .time {
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
 }
 
 .infoVin {
@@ -160,12 +168,13 @@
   justify-content: center;
   border-radius: 6px;
   background: var(--main-gray);
-  padding: 3px 10px;
-  width: 180px;
+  padding: clamp(2px, min(0.278vh, 0.162vw), 3px) clamp(6px, min(0.925vh, 0.54vw), 10px);
+  /* width: 180px; */
+  width: clamp(124px, min(16.667vh, 9.730vw), 180px);
 }
 
 .vinNum {
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 400;
   line-height: normal;
 }
@@ -182,11 +191,11 @@
 .rightContainer {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: clamp(5px, min(0.432vw, 0.741vh), 8px);
 }
 
 .mileInfo {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: clamp(4px, min(0.648vh, 0.378vw), 7px);
 }

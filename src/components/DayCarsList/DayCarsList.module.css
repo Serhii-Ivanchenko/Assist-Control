@@ -19,7 +19,7 @@
   -ms-overflow-style: none;
 
   /* width: 424px; */
-  width: clamp(290px, min(22.703vw, 55.741vh * 0.764), 420px);
+  width: clamp(290px, min(22.703vw, 38.889vh), 420px);
   height: 100%;
   /* min-height: 414px;
   max-height: 568px; */
