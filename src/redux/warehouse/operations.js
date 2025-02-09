@@ -216,12 +216,12 @@ export const createSection = createAsyncThunk(
     const state = thunkAPI.getState();
      const serviceId = state.service.selectedServiceInSettingsId;
       
-      const {warehouse_id, sectionNumber} = createSectionData;
+      const {warehouse_id, count} = createSectionData;
     try {
       const response = await axiosInstance.post(
         `/set/sections/`,
         {warehouse_id,
-        sectionNumber},
+        count},
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -294,9 +294,9 @@ export const createRacks = createAsyncThunk(
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
 
-    const { section_id, ...racksNumber } = createRacksData;
+    const { section_id, count } = createRacksData;
     try {
-      const response = await axiosInstance.post(`/set/racks/`, {section_id, racksNumber}, {
+      const response = await axiosInstance.post(`/set/racks/`, {section_id, count}, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -367,12 +367,12 @@ export const createShelves = createAsyncThunk(
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
 
-    const { rack_id, ...shelvesNumber } = createShelfData;
+    const { rack_id, count } = createShelfData;
     try {
       const response = await axiosInstance.post(
         `/set/shelves/`,
        { rack_id,
-        ...shelvesNumber,},
+        count},
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -445,11 +445,11 @@ export const createPlaces = createAsyncThunk(
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
 
-    const { shelf_id, ...placesNumber } = createPlacesData;
+    const { shelf_id, count } = createPlacesData;
     try {
       const response = await axiosInstance.post(`/set/places/`,
         {shelf_id,
-        ...placesNumber}, {
+        count}, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,

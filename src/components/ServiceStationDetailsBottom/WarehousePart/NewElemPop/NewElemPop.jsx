@@ -14,39 +14,39 @@ import {
   getAllWarehousesWithDetails,
 } from "../../../../redux/warehouse/operations";
 
-const TextForNewBranch = ({ type }) => {
-  switch (type) {
-    case "warehouse":
-      return "Секція";
-    case "section":
-      return "Стелаж";
-    case "rack":
-      return "Полиця";
-    case "shelf":
-      return "Місце";
-    // case "place":
-    //   return ""
-    default:
-      return "Секція";
-  }
-};
+// const TextForNewBranch = ({ type }) => {
+//   switch (type) {
+//     case "warehouse":
+//       return "Секція";
+//     case "section":
+//       return "Стелаж";
+//     case "rack":
+//       return "Полиця";
+//     case "shelf":
+//       return "Місце";
+//     // case "place":
+//     //   return ""
+//     default:
+//       return "Секція";
+//   }
+// };
 
-const DataForNewBranch = ({ type }) => {
-  switch (type) {
-    case "warehouse":
-      return "section";
-    case "section":
-      return "rack";
-    case "rack":
-      return "shelf";
-    case "shelf":
-      return "place";
-    // case "place":
-    //   return ""
-    default:
-      return "warehouse";
-  }
-};
+// const DataForNewBranch = ({ type }) => {
+//   switch (type) {
+//     case "warehouse":
+//       return "section";
+//     case "section":
+//       return "rack";
+//     case "rack":
+//       return "shelf";
+//     case "shelf":
+//       return "place";
+//     // case "place":
+//     //   return ""
+//     default:
+//       return "warehouse";
+//   }
+// };
 
 export default function NewElemPop({
   icon,
@@ -60,7 +60,8 @@ export default function NewElemPop({
   // setTreeData,
   node,
   containerRef,
-  openParentIfNeeded,
+  // openParentIfNeeded,
+  // treeData,
 }) {
   const popoverRef = useRef(null);
   const dispatch = useDispatch();
@@ -114,7 +115,7 @@ export default function NewElemPop({
       dispatch(
         createSection({
           warehouse_id: node.id.slice(2),
-          sectionNumber: Number(count),
+          count: Number(count),
         })
       )
         .unwrap()
@@ -128,7 +129,7 @@ export default function NewElemPop({
       dispatch(
         createRacks({
           section_id: node.id.slice(2),
-          racksNumber: Number(count),
+          count: Number(count),
         })
       )
         .unwrap()
@@ -142,7 +143,7 @@ export default function NewElemPop({
       dispatch(
         createShelves({
           rack_id: node.id.slice(2),
-          shelvesNumber: Number(count),
+          count: Number(count),
         })
       )
         .unwrap()
@@ -156,7 +157,7 @@ export default function NewElemPop({
       dispatch(
         createPlaces({
           shelf_id: node.id.slice(3),
-          placesNumber: Number(count),
+          count: Number(count),
         })
       )
         .unwrap()
@@ -179,6 +180,12 @@ export default function NewElemPop({
     //   return updatedTree;
     // });
   };
+
+  // useEffect(() => {
+  //   if (lastAddedNodeId) {
+  //     openParentIfNeeded(lastAddedNodeId, treeData);
+  //   }
+  // }, [treeData, lastAddedNodeId, openParentIfNeeded]);
 
   // Автоматичний скролл при відкритті останнього поповера (наче працює)
   useEffect(() => {
