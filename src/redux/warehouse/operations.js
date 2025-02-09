@@ -162,31 +162,31 @@ export const createWarehouse = createAsyncThunk(
 );
 
 // Update warehouse name
-export const updateWarehouseName = createAsyncThunk(
-  "warehouse/updateWarehouseName",
-  async (warehouseDataToUpdate, thunkAPI) => {
-    const state = thunkAPI.getState();
-   const serviceId = state.service.selectedServiceInSettingsId;
-    try {
-      const { warehouseId, ...warehouseName } = warehouseDataToUpdate;
-      const response = await axiosInstance.patch(
-        `/set/warehouses/${warehouseId}`,
-        warehouseName,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      console.log("updateWarehouseName", response.data);
+// export const updateWarehouseName = createAsyncThunk(
+//   "warehouse/updateWarehouseName",
+//   async (warehouseDataToUpdate, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//    const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const { warehouseId, ...warehouseName } = warehouseDataToUpdate;
+//       const response = await axiosInstance.patch(
+//         `/set/warehouses/${warehouseId}`,
+//         warehouseName,
+//         {
+//           headers: {
+//             // "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       console.log("updateWarehouseName", response.data);
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 // Save warehouse as a prompt
 export const saveWarehouse = createAsyncThunk(
@@ -266,31 +266,31 @@ export const createSection = createAsyncThunk(
 );
 
 // Update section name
-export const updateSectionName = createAsyncThunk(
-  "warehouse/updateSectionName",
-  async (sectionDataToUpdate, thunkAPI) => {
-    const state = thunkAPI.getState();
-   const serviceId = state.service.selectedServiceInSettingsId;
-    try {
-      const { sectionId, ...sectionName } = sectionDataToUpdate;
-      const response = await axiosInstance.patch(
-        `/set/section/${sectionId}`,
-        sectionName,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      console.log("updateSectionName", response.data);
+// export const updateSectionName = createAsyncThunk(
+//   "warehouse/updateSectionName",
+//   async (sectionDataToUpdate, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//    const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const { sectionId, ...sectionName } = sectionDataToUpdate;
+//       const response = await axiosInstance.patch(
+//         `/set/section/${sectionId}`,
+//         sectionName,
+//         {
+//           headers: {
+//             // "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       console.log("updateSectionName", response.data);
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 // Delete section
 // export const deleteSection = createAsyncThunk(
@@ -339,31 +339,31 @@ export const createRacks = createAsyncThunk(
 );
 
 // Update rack name
-export const updateRackName = createAsyncThunk(
-  "warehouse/updateRackName",
-  async (rackDataToUpdate, thunkAPI) => {
-    const state = thunkAPI.getState();
-   const serviceId = state.service.selectedServiceInSettingsId;
-    try {
-      const { rackId, ...rackName } = rackDataToUpdate;
-      const response = await axiosInstance.patch(
-        `/set/racks/${rackId}`,
-        rackName,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      console.log("updateRackName", response.data);
+// export const updateRackName = createAsyncThunk(
+//   "warehouse/updateRackName",
+//   async (rackDataToUpdate, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//    const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const { rackId, ...rackName } = rackDataToUpdate;
+//       const response = await axiosInstance.patch(
+//         `/set/racks/${rackId}`,
+//         rackName,
+//         {
+//           headers: {
+//             // "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       console.log("updateRackName", response.data);
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 // Delete rack
 // export const deleteRack = createAsyncThunk(
@@ -417,31 +417,31 @@ export const createShelves = createAsyncThunk(
 );
 
 // Update shelf name
-export const updateShelfName = createAsyncThunk(
-  "warehouse/updateShelfName",
-  async (shelfDataToUpdate, thunkAPI) => {
-    const state = thunkAPI.getState();
-   const serviceId = state.service.selectedServiceInSettingsId;
-    try {
-      const { shelfId, ...shelfName } = shelfDataToUpdate;
-      const response = await axiosInstance.patch(
-        `/set/shelves/${shelfId}`,
-        shelfName,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      console.log("updateShelfName", response.data);
+// export const updateShelfName = createAsyncThunk(
+//   "warehouse/updateShelfName",
+//   async (shelfDataToUpdate, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//    const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const { shelfId, ...shelfName } = shelfDataToUpdate;
+//       const response = await axiosInstance.patch(
+//         `/set/shelves/${shelfId}`,
+//         shelfName,
+//         {
+//           headers: {
+//             // "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       console.log("updateShelfName", response.data);
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 // Delete shelves
 // export const deleteShelf = createAsyncThunk(
@@ -492,31 +492,31 @@ export const createPlaces = createAsyncThunk(
 );
 
 // Update place name
-export const updatePlaceName = createAsyncThunk(
-  "warehouse/updatePlaceName",
-  async (placeDataToUpdate, thunkAPI) => {
-    const state = thunkAPI.getState();
-   const serviceId = state.service.selectedServiceInSettingsId;
-    try {
-      const { placeId, ...placeName } = placeDataToUpdate;
-      const response = await axiosInstance.patch(
-        `/set/places/${placeId}`,
-        placeName,
-        {
-          headers: {
-            // "X-Api-Key": "YA7NxysJ",
-            "company-id": serviceId,
-          },
-        }
-      );
-      console.log("updatePlaceName", response.data);
+// export const updatePlaceName = createAsyncThunk(
+//   "warehouse/updatePlaceName",
+//   async (placeDataToUpdate, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//    const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const { placeId, ...placeName } = placeDataToUpdate;
+//       const response = await axiosInstance.patch(
+//         `/set/places/${placeId}`,
+//         placeName,
+//         {
+//           headers: {
+//             // "X-Api-Key": "YA7NxysJ",
+//             "company-id": serviceId,
+//           },
+//         }
+//       );
+//       console.log("updatePlaceName", response.data);
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 // Delete place
 // export const deletePlace = createAsyncThunk(
