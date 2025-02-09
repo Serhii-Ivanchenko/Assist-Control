@@ -1,24 +1,109 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../services/api.js";
 
-// Get warehouses
-export const getWarehouses = createAsyncThunk(
-  "warehouse/getWarehouses",
+
+export const getAllWarehousesWithDetails = createAsyncThunk(
+  "warehouse/getAllWarehousesWithDetails",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-   const serviceId = state.service.selectedServiceInSettingsId;
+    const serviceId = state.service.selectedServiceInSettingsId;
     try {
-      const response = await axiosInstance.get(`/set/companies/tree`, {
-        headers: {
-          // "X-Api-Key": "YA7NxysJ",
-          "company-id": serviceId,
-        },
+      // 1. Отримуємо список складів
+      const warehousesResponse = await axiosInstance.get(`/set/get_all_warehouses/`, {
+        headers: { "company-id": serviceId },
       });
-      console.log("getWarehouses", response.data);
 
-      return response.data;
+      const warehouses = warehousesResponse.data.data;
+      console.log("Warehouses Response:", warehousesResponse.data.data);
+
+
+      // 2. Отримуємо деталі для кожного складу
+      const warehouseDetails = await Promise.all(
+        warehouses.map(async (warehouse) => {
+          const warehouse_id = warehouse.id
+          const detailsResponse = await axiosInstance.get(
+            `/set/get_full_tree/?warehouse_id=${warehouse_id}`,
+            { headers: { "company-id": serviceId } }
+          );
+
+          return detailsResponse.data;
+        })
+      );
+
+      console.log("Final Warehouse Data:", warehouseDetails);
+      return warehouseDetails;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Get warehouses
+// export const getWarehouses = createAsyncThunk(
+//   "warehouse/getWarehouses",
+//   async (_, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//    const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const response = await axiosInstance.get(`/set/get_all_warehouses/`, {
+//         headers: {
+//           // "X-Api-Key": "YA7NxysJ",
+//           "company-id": serviceId,
+//         },
+//       });
+//       console.log("getWarehouses", response.data);
+
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// // Get warehouse by id
+// export const getWarehouseById = createAsyncThunk(
+//   "warehouse/getWarehouseById",
+//   async (warehouse_id, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//    const serviceId = state.service.selectedServiceInSettingsId;
+//     try {
+//       const response = await axiosInstance.get(`/set/get_full_tree/${warehouse_id}`, {
+//         headers: {
+//           // "X-Api-Key": "YA7NxysJ",
+//           "company-id": serviceId,
+//         },
+//       });
+//       console.log("getWarehouseById", response.data);
+
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+
+// Delete entities
+export const deleteEntity = createAsyncThunk(
+  "warehouse/deleteEntity",
+  async (entities, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.service.selectedServiceInSettingsId;
+
+    try {
+      const response = await axiosInstance.delete(
+        "/set/delete_entity/",
+        // entities,
+        {
+          headers: {
+            "company-id": serviceId,
+          },
+          data: entities,
+        }
+      );
+      return response.data; // Повертаємо успішну відповідь
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data); // Повертаємо помилку, якщо є
     }
   }
 );
@@ -26,13 +111,13 @@ export const getWarehouses = createAsyncThunk(
 // Crete Warehouse
 export const createWarehouse = createAsyncThunk(
   "warehouse/createWarehouse",
-  async (warehouseName, thunkAPI) => {
+  async (address, thunkAPI) => {
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
     try {
       const response = await axiosInstance.post(
         `/set/warehouses/`,
-        warehouseName,
+        address,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -131,11 +216,12 @@ export const createSection = createAsyncThunk(
     const state = thunkAPI.getState();
      const serviceId = state.service.selectedServiceInSettingsId;
       
-      const {warehouseId, ...sectionNumber} = createSectionData;
+      const {warehouse_id, count} = createSectionData;
     try {
       const response = await axiosInstance.post(
-        `/set/section/`,
-        sectionNumber,
+        `/set/sections/`,
+        {warehouse_id,
+        count},
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -208,9 +294,9 @@ export const createRacks = createAsyncThunk(
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
 
-    const { sectionId, ...racksNumber } = createRacksData;
+    const { section_id, count } = createRacksData;
     try {
-      const response = await axiosInstance.post(`/set/racks/`, racksNumber, {
+      const response = await axiosInstance.post(`/set/racks/`, {section_id, count}, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
@@ -281,11 +367,12 @@ export const createShelves = createAsyncThunk(
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
 
-    const { rackId, ...shelvesNumber } = createShelfData;
+    const { rack_id, count } = createShelfData;
     try {
       const response = await axiosInstance.post(
         `/set/shelves/`,
-        shelvesNumber,
+       { rack_id,
+        count},
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -358,9 +445,11 @@ export const createPlaces = createAsyncThunk(
     const state = thunkAPI.getState();
    const serviceId = state.service.selectedServiceInSettingsId;
 
-    const { shelfId, ...placesNumber } = createPlacesData;
+    const { shelf_id, count } = createPlacesData;
     try {
-      const response = await axiosInstance.post(`/set/places/`, placesNumber, {
+      const response = await axiosInstance.post(`/set/places/`,
+        {shelf_id,
+        count}, {
         headers: {
           // "X-Api-Key": "YA7NxysJ",
           "company-id": serviceId,
