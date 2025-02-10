@@ -8,7 +8,7 @@ import meta from "../../../assets/images/IconsDashboardLeftSide/Meta.png";
 import partners from "../../../assets/images/IconsDashboardLeftSide/Partners 1.png";
 import profit from "../../../assets/images/IconsDashboardLeftSide/Прибуток графік.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import  ProfitChart from "./ProfitChart/ProfitChart.jsx"
+import ProfitChart from "./ProfitChart/ProfitChart.jsx";
 
 const leftCard = [
   {
@@ -225,8 +225,8 @@ export default function DashboardLeftSide() {
                   ))}
                 </div>
               ) : (
-                  // <img src={profit} alt="" />
-                  <ProfitChart />
+                // <img src={profit} alt="" />
+                <ProfitChart />
               )}
             </div>
 

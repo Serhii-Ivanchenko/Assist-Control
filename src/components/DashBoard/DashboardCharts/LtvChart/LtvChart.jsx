@@ -124,10 +124,10 @@ export default function LtvChart() {
     interval = 249;
   }
 
-const generateTicks = (maxY, interval) => {
+  const generateTicks = (maxY, interval) => {
     return Array.from(
-      { length: Math.floor(maxY / (interval + 1)) +2 },
-      (_, i) => i * (interval + 1) 
+      { length: Math.floor(maxY / (interval + 1)) + 2 },
+      (_, i) => i * (interval + 1)
     );
   };
 
@@ -185,7 +185,7 @@ const generateTicks = (maxY, interval) => {
             />
 
             <YAxis
-              domain={[0, maxY+100]}
+              domain={[0, maxY + 100]}
               dataKey="ltv_count"
               margin={{ top: 10 }}
               tick={{ fontSize: 10 }}
@@ -195,7 +195,7 @@ const generateTicks = (maxY, interval) => {
               // tick={{ fill: "transparent" }}
               axisLine={{ fill: "transparent" }}
               width={25}
-               ticks={generateTicks(maxY, interval)}
+              ticks={generateTicks(maxY, interval)}
               // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
               //  ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
               // ticks={generateTicks(dataMax)}
