@@ -20,7 +20,6 @@ export default function CalendarBlock() {
   const selectedDate = useSelector(selectDate);
   const isLoadingCarsByDay = useSelector(selectLoadingCarsByDay);
   const selectedServiceId = useSelector(selectSelectedServiceId);
- 
 
   useEffect(() => {
     if (!selectedServiceId) {
@@ -40,18 +39,22 @@ export default function CalendarBlock() {
       });
   }, [dispatch, selectedDate, selectedServiceId]);
 
+  const handleArchiveSuccess = () => {
+    dispatch(getCarsByDate(selectedDate));
+  };
 
   return (
     <div className={styles.calendarContainer}>
       <div className={styles.topContainer}>
-        <CalendarPagination page={'video'} />
+        <CalendarPagination page={"video"} />
         {isLoadingCarsByDay && <p>Завантаження інформації...</p>}
         <DayCarsList
           carsData={carsData}
           isModal={false}
+          onArchiveSuccess={handleArchiveSuccess}
         />
       </div>
-      <DetailsBtn/>
+      <DetailsBtn />
     </div>
   );
 }

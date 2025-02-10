@@ -29,7 +29,7 @@ import ArchiveModal from "../ArchiveModal/ArchiveModal.jsx";
 import Modal from "../Modal/Modal.jsx";
 import AcceptModal from "../AcceptModal/AcceptModal.jsx";
 
-function CurrentCarModal({ onClose, car, status }) {
+function CurrentCarModal({ onClose, car, status, onArchiveSuccess }) {
   // const [isMonitoring, setisMonitoring] = useState("main");
   const dispatch = useDispatch();
   const [selectedStatus, setSelectedStatus] = useState(status);
@@ -37,6 +37,7 @@ function CurrentCarModal({ onClose, car, status }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
 
+  
   const getStatusIcon = (status) => {
     switch (status) {
       case "new":
@@ -93,6 +94,7 @@ function CurrentCarModal({ onClose, car, status }) {
 
   const closeArchiveModal = () => {
     setIsModalOpen(false);
+    onClose();
   };
 
   const closeAcceptModal = () => {
@@ -257,8 +259,12 @@ function CurrentCarModal({ onClose, car, status }) {
             <Modal isOpen={isModalOpen} onClose={closeArchiveModal}>
               <ArchiveModal
                 onClose={closeArchiveModal}
-                carId={car.car_id}
+                carId={car.id}
                 location="main"
+                onSuccess={() => {
+                  onArchiveSuccess(); // Викликаємо переданий колбек
+                  setIsModalOpen(false); // Закриваємо модалку
+                }}
               />
             </Modal>
           )}

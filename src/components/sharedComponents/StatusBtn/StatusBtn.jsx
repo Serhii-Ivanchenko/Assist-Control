@@ -5,7 +5,7 @@ import Modal from "../../Modals/Modal/Modal";
 import CurrentCarModal from "../../Modals/CurrentCarModal/CurrentCarModal";
 import styles from "./StatusBtn.module.css";
 
-function StatusBtn({ car }) {
+function StatusBtn({ car, onArchiveSuccess }) {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCar, setSelectedCar] = useState(null);
@@ -38,6 +38,7 @@ function StatusBtn({ car }) {
             status={selectedCar?.status}
             onClose={closeModal}
             onStatusChange={handleStatusChange}
+            onArchiveSuccess={onArchiveSuccess}
           />
         </Modal>
       )}

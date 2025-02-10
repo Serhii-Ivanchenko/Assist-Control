@@ -44,6 +44,11 @@ export default function CurrentCarsItem() {
       });
   }, [dispatch, selectedServiceId]);
 
+   const handleArchiveSuccess = () => {
+      dispatch(getCurrentCars());
+    };
+  
+
   const getStatusIcon = useMemo(() => {
     return (status) => {
       switch (status) {
@@ -113,7 +118,7 @@ export default function CurrentCarsItem() {
           </div>
           <div className={styles.detailsContainer}>
             <div className={styles.btnContainer}>
-              <StatusBtn car={car} />
+              <StatusBtn car={car} onArchiveSuccess={handleArchiveSuccess}/>
               <CarDetailButton
                 carId={car.car_id}
                 // location={isMonitoring}
