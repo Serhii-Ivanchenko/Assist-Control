@@ -25,77 +25,53 @@ function PopupMenu({
       onClose();
     }
   };
+
   useEffect(() => {
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
 
-  // Автоматичний скролл при відкритті останнього поповера (для категорій)
+  const scrollIntoViewIfNeeded = (popover, container) => {
+    if (!popover || !container) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const popoverRect = popover.getBoundingClientRect();
+    const extraPadding = 5;
+
+    if (popoverRect.bottom + extraPadding > containerRect.bottom) {
+      container.scrollTo({
+        top:
+          container.scrollTop +
+          (popoverRect.bottom - containerRect.bottom + extraPadding),
+        behavior: "smooth",
+      });
+    }
+
+    if (popoverRect.top - extraPadding < containerRect.top) {
+      container.scrollTo({
+        top:
+          container.scrollTop -
+          (containerRect.top - popoverRect.top + extraPadding),
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
-    if (isOpen && popupRef.current && containerRef.current) {
-      const popover = popupRef.current;
-      const container = containerRef.current;
-
-      const containerRect = container.getBoundingClientRect();
-      const popoverRect = popover.getBoundingClientRect();
-
-      const extraPadding = 5; // Додаткові пікселі для тіні
-
-      if (popoverRect.bottom + extraPadding > containerRect.bottom) {
-        container.scrollTo({
-          top:
-            container.scrollTop +
-            (popoverRect.bottom - containerRect.bottom + extraPadding),
-          behavior: "smooth",
-        });
-      }
-
-      if (popoverRect.top - extraPadding < containerRect.top) {
-        container.scrollTo({
-          top:
-            container.scrollTop -
-            (containerRect.top - popoverRect.top + extraPadding),
-          behavior: "smooth",
-        });
-      }
+    if (isOpen && popupRef.current && containerRef?.current) {
+      scrollIntoViewIfNeeded(popupRef.current, containerRef.current);
     }
   }, [isOpen, containerRef]);
 
-  // Автоматичний скролл при відкритті останнього поповера (для внутрянки акордіону)
   useEffect(() => {
-    if (isOpen && popupRef.current && innerAccRef.current) {
-      const popover = popupRef.current;
-      const container = innerAccRef.current;
-
-      const containerRect = container.getBoundingClientRect();
-      const popoverRect = popover.getBoundingClientRect();
-
-      const extraPadding = 5; // Додаткові пікселі для тіні
-
-      if (popoverRect.bottom + extraPadding > containerRect.bottom) {
-        container.scrollTo({
-          top:
-            container.scrollTop +
-            (popoverRect.bottom - containerRect.bottom + extraPadding),
-          behavior: "smooth",
-        });
-      }
-
-      if (popoverRect.top - extraPadding < containerRect.top) {
-        container.scrollTo({
-          top:
-            container.scrollTop -
-            (containerRect.top - popoverRect.top + extraPadding),
-          behavior: "smooth",
-        });
-      }
+    if (isOpen && popupRef.current && innerAccRef?.current) {
+      scrollIntoViewIfNeeded(popupRef.current, innerAccRef.current);
     }
-  }, [isOpen, popupRef, innerAccRef]);
+  }, [isOpen, innerAccRef]);
 
   if (!isOpen) return null;
 

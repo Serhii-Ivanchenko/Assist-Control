@@ -13,8 +13,10 @@ import { useDispatch } from "react-redux";
 import {
   createService,
   getPrices,
-  updateCategory,
 } from "../../../../redux/settings/operations";
+import { setEditedCategory } from "../../../../redux/settings/slice";
+import { useSelector } from "react-redux";
+import { selectEditedServices } from "../../../../redux/settings/selectors.js";
 
 function AccordionItem({ item, id, containerRef }) {
   const dispatch = useDispatch();
@@ -24,6 +26,14 @@ function AccordionItem({ item, id, containerRef }) {
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(item.category_name);
   const [currentServices, setCurrentServices] = useState(item.services);
+  const editedServices = useSelector(selectEditedServices);
+  const editedCategory = editedServices.find(
+    (c) => c.category_id === item.category_id
+  );
+
+  const displayedCategoryName = editedCategory
+    ? editedCategory.new_name
+    : item.category_name;
 
   const buttonRef = useRef(null);
   const innerAccRef = useRef(null);
@@ -32,6 +42,7 @@ function AccordionItem({ item, id, containerRef }) {
 
   useEffect(() => {
     setCurrentServices(item.services);
+    setIsEdit(false);
   }, [item.services]);
 
   const handleAccordionChange = () => {
@@ -45,7 +56,7 @@ function AccordionItem({ item, id, containerRef }) {
 
   const handleSaveCategory = () => {
     dispatch(
-      updateCategory({
+      setEditedCategory({
         category_id: item.category_id,
         new_name: currentCategory,
       })
@@ -109,12 +120,13 @@ function AccordionItem({ item, id, containerRef }) {
                 autoFocus
                 className={styles.editInput}
                 onBlur={handleSaveCategory}
+                disabled={!isEdit}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleSaveCategory();
                 }}
               />
             ) : (
-              <p>{currentCategory}</p>
+              <p>{displayedCategoryName}</p>
             )}
             {expanded ? (
               <TiArrowSortedUp className={styles.icon} />

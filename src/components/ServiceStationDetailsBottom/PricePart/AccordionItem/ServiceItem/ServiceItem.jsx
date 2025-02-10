@@ -19,6 +19,8 @@ function ServiceItem({ serviceData, innerAccRef, containerRef }) {
 
   const inputRef = useRef();
   const buttonRef = useRef(null);
+  const popupRef = useRef(null);
+  const scrollToTheLastItemRef = useRef(null);
 
   useEffect(() => {
     setUpdatedService(serviceData);
@@ -49,6 +51,20 @@ function ServiceItem({ serviceData, innerAccRef, containerRef }) {
     dispatch(setEditedService(newValue));
   };
 
+  useEffect(() => {
+    if (
+      activePopupId === serviceData.service_id &&
+      scrollToTheLastItemRef.current
+    ) {
+      requestAnimationFrame(() => {
+        scrollToTheLastItemRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+      });
+    }
+  }, [activePopupId, serviceData.service_id]);
+
   return (
     <>
       {isEdit ? (
@@ -58,9 +74,9 @@ function ServiceItem({ serviceData, innerAccRef, containerRef }) {
             type="text"
             name="service_name"
             value={updatedService.service_name}
-            // onChange={(e) => setServiceName(e.target.value)}
             ref={inputRef}
             onChange={handleChange}
+            disabled={!isEdit}
           />
         </div>
       ) : (
@@ -78,10 +94,8 @@ function ServiceItem({ serviceData, innerAccRef, containerRef }) {
             placeholder="250"
             className={styles.input}
             value={updatedService.min_price}
-            // onChange={handleMinPriceChange}
             onChange={handleChange}
             disabled={!isEdit}
-            // onFocus={() => setServiceItemEdit(true)}
           />
         </div>
         <div className={styles.inputBox}>
@@ -92,10 +106,8 @@ function ServiceItem({ serviceData, innerAccRef, containerRef }) {
             placeholder="400"
             className={styles.input}
             value={updatedService.max_price}
-            // onChange={handleMaxPriceChange}
             onChange={handleChange}
             disabled={!isEdit}
-            // onFocus={() => setServiceItemEdit(true)}
           />
         </div>
       </div>
@@ -109,7 +121,7 @@ function ServiceItem({ serviceData, innerAccRef, containerRef }) {
       </button>
 
       {activePopupId === serviceData.service_id && (
-        <div className={styles.popupContainer}>
+        <div className={styles.popupContainer} ref={popupRef}>
           <PopupMenu
             isOpen={true}
             onClose={handlePopupToggle}

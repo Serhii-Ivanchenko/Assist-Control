@@ -71,6 +71,17 @@ const settingsSlice = createSlice({
   name: "settings",
   initialState: initialState.settings,
   reducers: {
+    setEditedCategory: (state, action) => {
+      const { category_id, new_name } = action.payload;
+      const existingCategory = state.editedServices.find(
+        (c) => c.category_id === category_id
+      );
+      if (existingCategory) {
+        existingCategory.new_name = new_name;
+      } else {
+        state.editedServices.push({ category_id, new_name });
+      }
+    },
     setEditedService: (state, action) => {
       const editedService = action.payload;
       const index = state.editedServices.findIndex(
@@ -302,16 +313,14 @@ const settingsSlice = createSlice({
       .addCase(editServiceNameOrPrices.pending, handlePending)
       .addCase(editServiceNameOrPrices.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.prices.forEach((category) => {
-          const service = category.services.find(
-            (s) => s.service_id === action.payload.service_id
-          );
-          if (service) {
-            service.service_name = action.payload.new_name;
-            service.min_price = action.payload.new_min_price;
-            service.max_price = action.payload.new_max_price;
-          }
-        });
+        state.prices = state.prices.map((category) => ({
+          ...category,
+          services: category.services.map((s) =>
+            s.service_id === action.payload.service_id
+              ? { ...s, ...action.payload }
+              : s
+          ),
+        }));
       })
       .addCase(editServiceNameOrPrices.rejected, handleRejected)
 
@@ -531,7 +540,12 @@ const settingsSlice = createSlice({
   // .addCase(getCashRegisterData.rejected, handleRejected),
 });
 
-export const { setEditedService, resetEditedServices, openModal, closeModal } =
-  settingsSlice.actions;
+export const {
+  setEditedCategory,
+  setEditedService,
+  resetEditedServices,
+  openModal,
+  closeModal,
+} = settingsSlice.actions;
 
 export default settingsSlice.reducer;

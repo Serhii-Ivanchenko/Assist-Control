@@ -9,6 +9,7 @@ import {
   createCategory,
   editServiceNameOrPrices,
   getPrices,
+  updateCategory,
 } from "../../../redux/settings/operations";
 import {
   openModal,
@@ -51,15 +52,38 @@ export default function PricePart() {
       .catch((err) => console.log("Error creating new category", err));
   };
 
-  const handleSaveNewData = () => {
-    editedServices.forEach((service) => {
-      console.log("Updating service ID:", service.service_id);
-      console.log("editServiceNameOrPrices request data:", service);
+  const handleSaveNewData = async () => {
+    if (editedServices.length === 0) {
+      console.warn("Немає змін для збереження.");
+      return;
+    }
 
-      dispatch(editServiceNameOrPrices(service));
+    try {
+      await Promise.all(
+        editedServices.map((service) => {
+          if (service.service_id) {
+            return dispatch(editServiceNameOrPrices(service)).unwrap();
+            // .then(dispatch(getPrices()));
+          } else if (service.category_id) {
+            return dispatch(updateCategory(service)).unwrap();
+            // .then(dispatch(getPrices()));
+          }
+          return Promise.resolve();
+        })
+      );
+
       dispatch(getPrices());
-    });
+      dispatch(resetEditedServices());
+    } catch (error) {
+      console.error("Помилка оновлення:", error);
+    }
   };
+
+  useEffect(() => {
+    if (editedServices.length === 0) {
+      dispatch(getPrices());
+    }
+  }, [editedServices.length, dispatch]);
 
   const handleOpenModal = () => {
     dispatch(openModal());
@@ -76,7 +100,6 @@ export default function PricePart() {
 
   const handleResetData = () => {
     dispatch(resetEditedServices());
-    console.log("handleResetData");
   };
 
   // Прокрутка до ост. елементу при додаванні
@@ -123,15 +146,22 @@ export default function PricePart() {
       <AccordionList
         data={activeSearch ? filteredData : prices}
         containerRef={scrollToTheLastItemRef}
+        onReset={handleResetData}
       />
-      <div className={styles.btnGroup}>
-        <button onClick={handleResetData} className={styles.resetBtn}>
-          Відміна
-        </button>
-        <button onClick={handleSaveNewData} className={styles.btn}>
-          Зберегти
-        </button>
-      </div>
+      {editedServices.length > 0 && (
+        <div className={styles.btnGroup}>
+          <button onClick={handleResetData} className={styles.resetBtn}>
+            Відміна
+          </button>
+          <button
+            onClick={handleSaveNewData}
+            className={styles.btn}
+            disabled={editedServices.length === 0}
+          >
+            Зберегти
+          </button>
+        </div>
+      )}
     </div>
   );
 }
