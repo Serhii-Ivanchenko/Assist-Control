@@ -172,21 +172,23 @@ function AccordionItem({ item, id, containerRef }) {
         <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
           <ul ref={innerAccRef} className={styles.accordionDesc}>
             {Array.isArray(item.services) ? (
-              currentServices.map((service, index) => (
-                <li
-                  key={service.service_id}
-                  ref={
-                    index === currentServices.length - 1 ? lastServiceRef : null
-                  }
-                >
-                  <ServiceItem
-                    id={service.service_id}
-                    serviceData={service}
-                    containerRef={containerRef}
-                    innerAccRef={innerAccRef}
-                  />
-                </li>
-              ))
+              currentServices.map((service, index) => {
+                const isLast = index === currentServices.length - 1;
+                return (
+                  <li
+                    key={service.service_id}
+                    ref={isLast ? lastServiceRef : null}
+                  >
+                    <ServiceItem
+                      id={service.service_id}
+                      serviceData={service}
+                      containerRef={containerRef}
+                      innerAccRef={innerAccRef}
+                      isLast={isLast}
+                    />
+                  </li>
+                );
+              })
             ) : (
               <p>Немає послуг</p>
             )}
