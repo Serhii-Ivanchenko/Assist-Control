@@ -17,7 +17,7 @@ import {
 import { setEditedCategory } from "../../../../redux/settings/slice";
 import { useSelector } from "react-redux";
 
-function AccordionItem({ item, id, containerRef, onReset }) {
+function AccordionItem({ item, id, containerRef }) {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -45,12 +45,6 @@ function AccordionItem({ item, id, containerRef, onReset }) {
     setIsEdit(false);
   }, [item.services]);
 
-  // useEffect(() => {
-  //   if (onReset) {
-  //     onReset(() => setCurrentCategory(item.category_name));
-  //   }
-  // }, [item.category_name, onReset]);
-
   const handleAccordionChange = () => {
     setExpanded((prev) => !prev);
   };
@@ -59,16 +53,6 @@ function AccordionItem({ item, id, containerRef, onReset }) {
     e.stopPropagation();
     setIsCategoryPopupOpen((prev) => !prev);
   };
-
-  // const handleSaveCategory = () => {
-  //   dispatch(
-  //     updateCategory({
-  //       category_id: item.category_id,
-  //       new_name: currentCategory,
-  //     })
-  //   );
-  //   setIsEdit(false);
-  // };
 
   const handleSaveCategory = () => {
     dispatch(
