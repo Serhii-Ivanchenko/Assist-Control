@@ -13,6 +13,7 @@ import {
   createShelves,
   getAllWarehousesWithDetails,
 } from "../../../../redux/warehouse/operations";
+import toast from "react-hot-toast";
 
 // const TextForNewBranch = ({ type }) => {
 //   switch (type) {
@@ -120,9 +121,25 @@ export default function NewElemPop({
       )
         .unwrap()
         .then(() => {
+          toast.success("Секції успішно створено :)", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
           dispatch(getAllWarehousesWithDetails());
         })
         .catch((err) => {
+          toast.error("Проблема зі створенням секцій :( спробуйте пізніше", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
           console.error("Error creating post:", err);
         });
     } else if (node.data === "section") {
@@ -134,9 +151,25 @@ export default function NewElemPop({
       )
         .unwrap()
         .then(() => {
+          toast.success("Стелажі успішно створено :)", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
           dispatch(getAllWarehousesWithDetails());
         })
         .catch((err) => {
+          toast.error("Проблема зі створенням стелажів :( спробуйте пізніше", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
           console.error("Error creating post:", err);
         });
     } else if (node.data === "rack") {
@@ -148,9 +181,25 @@ export default function NewElemPop({
       )
         .unwrap()
         .then(() => {
+          toast.success("Полиці успішно створено :)", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
           dispatch(getAllWarehousesWithDetails());
         })
         .catch((err) => {
+          toast.error("Проблема зі створенням полиць :( спробуйте пізніше", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
           console.error("Error creating post:", err);
         });
     } else if (node.data === "shelf") {
@@ -162,9 +211,25 @@ export default function NewElemPop({
       )
         .unwrap()
         .then(() => {
+          toast.success("Місця успішно створено :)", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
           dispatch(getAllWarehousesWithDetails());
         })
         .catch((err) => {
+          toast.error("Проблема зі створенням полиць :( спробуйте пізніше", {
+            position: "top-center",
+            duration: 3000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)FFF",
+            },
+          });
           console.error("Error creating post:", err);
         });
     }

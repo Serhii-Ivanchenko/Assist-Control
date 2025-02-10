@@ -15,6 +15,7 @@ import {
   deleteEntity,
   getAllWarehousesWithDetails,
 } from "../../../../redux/warehouse/operations";
+import toast from "react-hot-toast";
 
 const TREE_X_OFFSET = 40;
 
@@ -105,16 +106,32 @@ export default function Node({
   // Видалення
   const deleteChild = (id, type, e) => {
     e.stopPropagation();
-    // setTreeData((prevData) =>
-    //   prevData.filter((node) => node.id !== id && node.parentId !== id)
-    // );
     dispatch(deleteEntity([{ entity_type: type, entity_id: id }]))
       .unwrap()
       .then(() => {
-        dispatch(getAllWarehousesWithDetails());
-      })
-      .catch((err) => {
-        console.error("Error creating post:", err);
+        dispatch(getAllWarehousesWithDetails())
+          .unwrap()
+          .then(() => {
+            toast.success("Успішно видалено :)", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+          })
+          .catch((error) => {
+            console.error("Error updating user data:", error);
+            toast.error("Щось пішло не так :(", {
+              position: "top-center",
+              duration: 3000,
+              style: {
+                background: "var(--bg-input)",
+                color: "var(--white)FFF",
+              },
+            });
+          });
       });
   };
 
