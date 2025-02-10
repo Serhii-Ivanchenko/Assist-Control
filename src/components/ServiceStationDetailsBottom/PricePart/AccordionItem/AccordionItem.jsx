@@ -170,7 +170,7 @@ function AccordionItem({ item, id, containerRef }) {
           </div>
         </AccordionSummary>
         <AccordionDetails sx={{ padding: "0 12px 0 12px" }}>
-          <ul className={styles.accordionDesc}>
+          <ul ref={innerAccRef} className={styles.accordionDesc}>
             {Array.isArray(item.services) ? (
               currentServices.map((service, index) => (
                 <li
