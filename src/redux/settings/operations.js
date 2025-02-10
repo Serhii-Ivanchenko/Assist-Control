@@ -633,7 +633,7 @@ export const editServiceNameOrPrices = createAsyncThunk(
       new_name: newData.service_name,
       new_min_price: parseFloat(newData.min_price),
       new_max_price: parseFloat(newData.max_price),
-      company_id: serviceId,
+      // company_id: serviceId,
     };
     try {
       const response = await axiosInstance.patch(

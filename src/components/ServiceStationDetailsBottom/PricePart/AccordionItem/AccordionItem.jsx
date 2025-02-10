@@ -16,6 +16,7 @@ import {
 } from "../../../../redux/settings/operations";
 import { setEditedCategory } from "../../../../redux/settings/slice";
 import { useSelector } from "react-redux";
+import { selectEditedServices } from "../../../../redux/settings/selectors.js";
 
 function AccordionItem({ item, id, containerRef }) {
   const dispatch = useDispatch();
@@ -25,10 +26,9 @@ function AccordionItem({ item, id, containerRef }) {
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(item.category_name);
   const [currentServices, setCurrentServices] = useState(item.services);
-  const editedCategory = useSelector((state) =>
-    state.settings.editedServices.find(
-      (c) => c.category_id === item.category_id
-    )
+  const editedServices = useSelector(selectEditedServices);
+  const editedCategory = editedServices.find(
+    (c) => c.category_id === item.category_id
   );
 
   const displayedCategoryName = editedCategory

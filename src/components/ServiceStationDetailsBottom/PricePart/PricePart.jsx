@@ -63,14 +63,17 @@ export default function PricePart() {
         editedServices.map((service) => {
           if (service.service_id) {
             return dispatch(editServiceNameOrPrices(service)).unwrap();
+            // .then(dispatch(getPrices()));
           } else if (service.category_id) {
             return dispatch(updateCategory(service)).unwrap();
+            // .then(dispatch(getPrices()));
           }
           return Promise.resolve();
         })
       );
 
       dispatch(getPrices());
+      dispatch(resetEditedServices());
     } catch (error) {
       console.error("Помилка оновлення:", error);
     }
