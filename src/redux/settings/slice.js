@@ -71,6 +71,17 @@ const settingsSlice = createSlice({
   name: "settings",
   initialState: initialState.settings,
   reducers: {
+    setEditedCategory: (state, action) => {
+      const { category_id, new_name } = action.payload;
+      const existingCategory = state.editedServices.find(
+        (c) => c.category_id === category_id
+      );
+      if (existingCategory) {
+        existingCategory.new_name = new_name;
+      } else {
+        state.editedServices.push({ category_id, new_name });
+      }
+    },
     setEditedService: (state, action) => {
       const editedService = action.payload;
       const index = state.editedServices.findIndex(
@@ -529,7 +540,12 @@ const settingsSlice = createSlice({
   // .addCase(getCashRegisterData.rejected, handleRejected),
 });
 
-export const { setEditedService, resetEditedServices, openModal, closeModal } =
-  settingsSlice.actions;
+export const {
+  setEditedCategory,
+  setEditedService,
+  resetEditedServices,
+  openModal,
+  closeModal,
+} = settingsSlice.actions;
 
 export default settingsSlice.reducer;

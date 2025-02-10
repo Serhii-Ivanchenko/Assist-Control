@@ -14,8 +14,10 @@ import {
   createService,
   getPrices,
 } from "../../../../redux/settings/operations";
+import { setEditedCategory } from "../../../../redux/settings/slice";
+import { useSelector } from "react-redux";
 
-function AccordionItem({ item, id, containerRef, onReset, onUpdateCategory }) {
+function AccordionItem({ item, id, containerRef, onReset }) {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -23,6 +25,15 @@ function AccordionItem({ item, id, containerRef, onReset, onUpdateCategory }) {
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(item.category_name);
   const [currentServices, setCurrentServices] = useState(item.services);
+  const editedCategory = useSelector((state) =>
+    state.settings.editedServices.find(
+      (c) => c.category_id === item.category_id
+    )
+  );
+
+  const displayedCategoryName = editedCategory
+    ? editedCategory.new_name
+    : item.category_name;
 
   const buttonRef = useRef(null);
   const innerAccRef = useRef(null);
@@ -60,7 +71,12 @@ function AccordionItem({ item, id, containerRef, onReset, onUpdateCategory }) {
   // };
 
   const handleSaveCategory = () => {
-    onUpdateCategory(item.category_id, currentCategory); // Викликаємо батьківську функцію
+    dispatch(
+      setEditedCategory({
+        category_id: item.category_id,
+        new_name: currentCategory,
+      })
+    );
     setIsEdit(false);
   };
 
@@ -126,7 +142,7 @@ function AccordionItem({ item, id, containerRef, onReset, onUpdateCategory }) {
                 }}
               />
             ) : (
-              <p>{currentCategory}</p>
+              <p>{displayedCategoryName}</p>
             )}
             {expanded ? (
               <TiArrowSortedUp className={styles.icon} />

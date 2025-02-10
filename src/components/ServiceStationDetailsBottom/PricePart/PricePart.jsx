@@ -52,7 +52,7 @@ export default function PricePart() {
       .catch((err) => console.log("Error creating new category", err));
   };
 
-  const handleSaveNewData = async (categoryId, newName) => {
+  const handleSaveNewData = async () => {
     if (editedServices.length === 0) {
       console.warn("Немає змін для збереження.");
       return;
@@ -60,16 +60,19 @@ export default function PricePart() {
 
     try {
       await Promise.all(
-        editedServices.map((service) =>
-          dispatch(editServiceNameOrPrices(service)).unwrap()
-        )
+        editedServices.map((service) => {
+          if (service.service_id) {
+            return dispatch(editServiceNameOrPrices(service)).unwrap();
+          } else if (service.category_id) {
+            return dispatch(updateCategory(service)).unwrap();
+          }
+          return Promise.resolve();
+        })
       );
-
-      dispatch(updateCategory({ category_id: categoryId, new_name: newName }));
 
       dispatch(getPrices());
     } catch (error) {
-      console.error("Помилка оновлення послуг:", error);
+      console.error("Помилка оновлення:", error);
     }
   };
 
