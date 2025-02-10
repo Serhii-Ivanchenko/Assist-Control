@@ -136,8 +136,8 @@ export default function ClientsDynamicsChart() {
   }
   const generateTicks = (maxY, interval) => {
     return Array.from(
-      { length: Math.floor(maxY / (interval + 1)) + 1 },
-      (_, i) => i * (interval + 1) + 1
+      { length: Math.floor(maxY / (interval + 1)) + 2 },
+      (_, i) => i * (interval + 1) 
     );
   };
 
@@ -212,7 +212,7 @@ export default function ClientsDynamicsChart() {
               margin={{ topt: 10 }}
               tick={{ fontSize: 10 }}
               // interval={interval}
-              tickCount={maxY + 1}
+              // tickCount={maxY + 1}
               //  tickCount={11}
               // tick={{ fill: "transparent" }}
               axisLine={{ fill: "transparent" }}
