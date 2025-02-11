@@ -2,8 +2,11 @@ import css from "./InvoicesList.module.css";
 import flag from "../../../assets/images/flagUa.webp";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
+import Modal from "../../Modals/Modal/Modal";
+import DiagnosticsModal from "../../Modals/DiagnosticsModal/DiagnosticsModal";
 
 export default function InvoicesList({ category, list }) {
+  const [openModal, setOpenModal] = useState(false);
   const containerRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
@@ -52,6 +55,7 @@ export default function InvoicesList({ category, list }) {
           } ${item.status === "completed" && css.completedBorder} 
           ${item.status === "pending" && css.pendingBorder}
           ${item.status === "rejected" && css.rejectedBorder}`}
+          onClick={() => setOpenModal(true)}
         >
           {(category === "Діагностика" ||
             category === "Погоджено" ||
@@ -149,6 +153,11 @@ export default function InvoicesList({ category, list }) {
           )}
         </li>
       ))}
+      {openModal && (
+        <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
+          {category === "Діагностика" && <DiagnosticsModal />}
+        </Modal>
+      )}
     </ul>
   );
 }
