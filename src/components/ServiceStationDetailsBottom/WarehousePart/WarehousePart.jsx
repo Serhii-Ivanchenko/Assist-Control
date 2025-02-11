@@ -410,6 +410,11 @@ export default function WarehousePart() {
 
     const startDepth = calculateDepth(dragSourceId, dataForTree);
     const endDepth = calculateDepth(dropTargetId, dataForTree);
+    console.log("startDepth", startDepth);
+    console.log("endDepth", endDepth);
+    console.log("dropTargetId", dropTargetId);
+
+    
 
     if (startDepth < endDepth) {
       return;
@@ -477,6 +482,9 @@ export default function WarehousePart() {
 
     const parentField = parentFieldMap[entityType];
 
+    console.log("parentField", parentField);
+    
+
     // const entityId = parseInt(start.id.slice(entityType === "shelf" ? 3 : 2));
 
     const dataToUpdate = [
@@ -484,7 +492,7 @@ export default function WarehousePart() {
         entity_type: entityType,
         entity_id: entityId,
         fields: {
-          [parentField]: dropTargetId.slice(entityType === "shelf" ? 3 : 2),
+          [parentField]: dropTargetId.slice(parentField === "shelf_id" ? 3 : 2),
         }, // новий parent ID
       },
     ];
