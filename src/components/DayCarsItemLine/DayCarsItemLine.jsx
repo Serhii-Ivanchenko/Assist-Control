@@ -13,7 +13,7 @@ import RatingStars from "../sharedComponents/RatingStars/RatingStars";
 import { selectVisibilityCar } from "../../redux/visibility/selectors.js";
 import { useState } from "react";
 
-export default function DayCarsItemLine({ car }) {
+export default function DayCarsItemLine({ car, onArchiveSuccess }) {
   const visibility = useSelector(selectVisibilityCar);
   const [isMonitoring, setisMonitoring] = useState("main");
 
@@ -103,7 +103,9 @@ export default function DayCarsItemLine({ car }) {
           )}
         >
           <IoCarSportSharp size={13} color="#A97878" />
-          <span className={styles.nameCar}>{make && model ? `${make} ${model}` : "Невідома модель"}</span>
+          <span className={styles.nameCar}>
+            {make && model ? `${make} ${model}` : "Невідома модель"}
+          </span>
         </div>
       )}
 
@@ -146,15 +148,14 @@ export default function DayCarsItemLine({ car }) {
           </div>
         )}
         <div className={styles.btnContainer}>
-          {visibility?.status && <StatusBtn car={car} />}
-          {visibility?.info && (
-            <CarDetailButton
-              carId={car_id}
-              car={car}
-              // location={isMonitoring}
-              carName={car.auto}
-            />
-          )}
+          <StatusBtn car={car} onArchiveSuccess={onArchiveSuccess}/>
+
+          <CarDetailButton
+            carId={car_id}
+            car={car}
+            // location={isMonitoring}
+            carName={car.auto}
+          />
         </div>
       </div>
     </div>

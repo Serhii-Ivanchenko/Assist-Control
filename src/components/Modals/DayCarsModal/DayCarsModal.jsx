@@ -44,7 +44,7 @@ export default function DayCarsModal({ onClose, isModal }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [inputError, setInputError] = useState("");
 
-  const isFilter = true; // для коректного відображенення "Нові"-"Нова"
+  const isFilter = true;
 
   const [periodStartData, setPeriodStartData] = useState(
     startDate || selectedDate || null
@@ -77,6 +77,16 @@ export default function DayCarsModal({ onClose, isModal }) {
 
     dispatch(getPeriodCars(dates));
   };
+
+  const handleArchiveSuccess = () => {
+    dispatch(
+      getPeriodCars({
+        startDate: formatToDate(periodStartData),
+        endDate: formatToDate(periodEndData),
+      })
+    );
+  };
+  
 
   function formatToDate(date) {
     if (!date || !(date instanceof Date)) {
@@ -249,7 +259,7 @@ export default function DayCarsModal({ onClose, isModal }) {
           carsData={filteredCarsData}
           viewMode={viewMode}
           isModal={isModal}
-        />
+          onArchiveSuccess={handleArchiveSuccess}        />
       )}
     </div>
   );

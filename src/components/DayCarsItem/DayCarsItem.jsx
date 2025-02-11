@@ -24,7 +24,7 @@ import { GiAlarmClock } from "react-icons/gi";
 import Modal from "../Modals/Modal/Modal.jsx";
 import NotificationModal from "../sharedComponents/NotificationModal/NotificationModal.jsx";
 
-export default function DayCarsItem({ car, isModal }) {
+export default function DayCarsItem({ car, isModal, onArchiveSuccess }) {
   const visibility = useSelector(selectVisibilityCar);
   const [isMonitoring, setisMonitoring] = useState("main");
   const [modalState, setModalState] = useState({ notifications: false });
@@ -137,12 +137,13 @@ export default function DayCarsItem({ car, isModal }) {
         )}
 
         <div className={styles.btnContainer}>
-          <StatusBtn car={car} />
+          <StatusBtn car={car} onArchiveSuccess={onArchiveSuccess}/>
           <CarDetailButton
             carId={car_id}
             // location={isMonitoring}
             carName={car.auto}
             car={car}
+            
           />
           {status === "complete" && (
             <button

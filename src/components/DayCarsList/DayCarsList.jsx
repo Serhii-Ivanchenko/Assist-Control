@@ -3,7 +3,7 @@ import DayCarsItemLine from "../DayCarsItemLine/DayCarsItemLine.jsx";
 import styles from './DayCarsList.module.css';
 import clsx from 'clsx';
 
-export default function DayCarsList({ carsData, isModal, viewMode = "grid" }) {
+export default function DayCarsList({ carsData, isModal, viewMode = "grid", onArchiveSuccess }) {
   
   const visibleCars = carsData;
 
@@ -17,6 +17,7 @@ export default function DayCarsList({ carsData, isModal, viewMode = "grid" }) {
       car={car}
       isModal={isModal}
       viewMode={viewMode}
+      onArchiveSuccess={onArchiveSuccess}
     />
   );
 
