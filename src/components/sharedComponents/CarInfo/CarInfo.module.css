@@ -8,7 +8,7 @@
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.1875em;
 }
 
 .phone {
@@ -19,7 +19,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.15em;
 }
 
 .wrapper {
@@ -65,6 +65,7 @@
   height: 3px;
   background-color: #46a9e4;
 }
+
 .flagBottom {
   height: 3px;
   background-color: #f5dd23;
@@ -72,7 +73,6 @@
 
 .numberCountry {
   color: #fff;
-  font-family: Raleway;
   font-size: 6px;
   font-style: normal;
   font-weight: 600;
@@ -94,7 +94,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.15em;
 }
 
 .carInfoWrapper {
@@ -104,10 +104,19 @@
 }
 
 .carName {
+  color: #fff;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.1667em;
+}
+
+.carYear {
+  color: #fff;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.15em;
 }
 
 .carNumbersItem {
@@ -133,7 +142,7 @@
   line-height: normal;
 }
 
-.contactsBtn {
+.copyBtn {
   border: none;
   width: 34px;
   height: 34px;

@@ -56,13 +56,13 @@ export default function CarInfo({
             <h3 className={css.carName}>
               {carMake} {carModel}
             </h3>
-            <p className={css.carName}>{carYear}</p>
+            <p className={css.carYear}>{carYear}</p>
           </div>
           <div className={css.carNumbersItem}>
             <p className={css.vin}>{vin}</p>
             <button
               type="button"
-              className={css.contactsBtn}
+              className={css.copyBtn}
               onClick={handleCopyVin}
             >
               <BsFiles className={css.iconColor} size={18} />
