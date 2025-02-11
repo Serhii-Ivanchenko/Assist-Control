@@ -1135,6 +1135,7 @@ export const updateCashRegisterStatus = createAsyncThunk(
       const { cash_register_id, status } = newStatus;
       const response = await axiosInstance.patch(
         `/set/cashregister/${cash_register_id}/status?status=${status}`,
+        null,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
