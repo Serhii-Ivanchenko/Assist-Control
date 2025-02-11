@@ -377,13 +377,26 @@ export default function WarehousePart() {
     return depth;
   };
 
-  // Перетягування
-  const reorderArray = (array, sourceIndex, targetIndex) => {
-    const newArray = [...array];
-    const element = newArray.splice(sourceIndex, 1)[0];
-    newArray.splice(targetIndex, 0, element);
-    return newArray;
+  const findWarehouseId = (nodeId, dataForTree) => {
+    let currentNode = dataForTree.find((node) => node.id === nodeId);
+
+    while (currentNode) {
+      if (getTypeFromNodeId(currentNode.id) === "warehouse") {
+        return currentNode.id; // Повертаємо ID складу
+      }
+      currentNode = dataForTree.find((node) => node.id === currentNode.parent);
+    }
+
+    return null; // Якщо склад не знайдено
   };
+
+  // Перетягування
+  // const reorderArray = (array, sourceIndex, targetIndex) => {
+  //   const newArray = [...array];
+  //   const element = newArray.splice(sourceIndex, 1)[0];
+  //   newArray.splice(targetIndex, 0, element);
+  //   return newArray;
+  // };
 
   const handleDrop = (newTree, e) => {
     const { dragSourceId, dropTargetId, destinationIndex } = e;
@@ -397,6 +410,11 @@ export default function WarehousePart() {
 
     const startDepth = calculateDepth(dragSourceId, dataForTree);
     const endDepth = calculateDepth(dropTargetId, dataForTree);
+    console.log("startDepth", startDepth);
+    console.log("endDepth", endDepth);
+    console.log("dropTargetId", dropTargetId);
+
+    
 
     if (startDepth < endDepth) {
       return;
@@ -431,18 +449,153 @@ export default function WarehousePart() {
         (end && !end?.droppable)
       )
         return;
-      // setTreeData((treeData) => {
-      //   const output = reorderArray(
-      //     treeData,
-      //     treeData.indexOf(start),
-      //     destinationIndex
-      //   );
-      //   const movedElement = output.find((el) => el.id === dragSourceId);
-      //   if (movedElement) movedElement.parent = dropTargetId;
-      //   return output;
-      // });
     }
+
+    const entityType = getTypeFromNodeId(start.id);
+    const entityId = parseInt(start.id.slice(entityType === "shelf" ? 3 : 2));
+    // const entityType = getTypeFromNodeId(start.id);
+    // const endEntityType = getTypeFromNodeId(end.id);
+
+    // if (entityType !== endEntityType) return;
+
+    // // Перевіряємо, чи один і той самий склад
+    // const startWarehouse = findWarehouseId(start.id, dataForTree);
+    // const endWarehouse = findWarehouseId(end.id, dataForTree);
+
+    // if (startWarehouse !== endWarehouse) {
+    //   toast.error("Переміщення між складами заборонено!", {
+    //     position: "top-center",
+    //     duration: 3000,
+    //     style: { background: "var(--bg-input)", color: "var(--white)FFF" },
+    //   });
+    //   return;
+    // }
+
+    // Визначаємо правильне поле для збереження parent ID
+    const parentFieldMap = {
+      warehouse: null, // склад не може бути вкладеним
+      section: "warehouse_id", // секція належить складу
+      rack: "section_id", // стелаж належить секції
+      shelf: "rack_id", // полиця належить стелажу
+      place: "shelf_id", // місце належить полиці
+    };
+
+    const parentField = parentFieldMap[entityType];
+
+    console.log("parentField", parentField);
+    
+
+    // const entityId = parseInt(start.id.slice(entityType === "shelf" ? 3 : 2));
+
+    const dataToUpdate = [
+      {
+        entity_type: entityType,
+        entity_id: entityId,
+        fields: {
+          [parentField]: dropTargetId.slice(parentField === "shelf_id" ? 3 : 2),
+        }, // новий parent ID
+      },
+    ];
+
+    // setTreeData((treeData) => {
+    //   const output = reorderArray(
+    //     treeData,
+    //     treeData.indexOf(start),
+    //     destinationIndex
+    //   );
+    //   const movedElement = output.find((el) => el.id === dragSourceId);
+    //   if (movedElement) movedElement.parent = dropTargetId;
+    //   return output;
+    // });
+
+    dispatch(updateEntity(dataToUpdate))
+      .unwrap()
+      .then(() => {
+        dispatch(getAllWarehousesWithDetails()); // Отримуємо оновлені дані
+        toast.success("Переміщення успішне!", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating entity:", error);
+        toast.error("Щось пішло не так :(", {
+          position: "top-center",
+          duration: 3000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)FFF",
+          },
+        });
+      });
   };
+
+  // const handleDrop = (newTree, e) => {
+  //   const { dragSourceId, dropTargetId, destinationIndex } = e;
+  //   if (!dragSourceId || !dropTargetId) return;
+
+  //   const start = dataForTree.find((v) => v.id === dragSourceId);
+  //   const end = dataForTree.find((v) => v.id === dropTargetId);
+
+  //   if (!start || !end) return;
+
+  //   const startDepth = calculateDepth(dragSourceId, dataForTree);
+  //   const endDepth = calculateDepth(dropTargetId, dataForTree);
+
+  //   if (startDepth < endDepth) return;
+
+  //   if (
+  //     getDescendants(dataForTree, dragSourceId).some(
+  //       (el) => el.id === dropTargetId
+  //     ) ||
+  //     dropTargetId === dragSourceId ||
+  //     (end && !end?.droppable)
+  //   )
+  //     return;
+
+  //   // 1️⃣ Формуємо запит на оновлення
+  //   const dataToUpdate = [
+  //     {
+  //       entity_type: getTypeFromNodeId(start.id),
+  //       entity_id: parseInt(
+  //         start.id.slice(getTypeFromNodeId(start.id) === "shelf" ? 3 : 2)
+  //       ),
+  //       fields: {
+  //         [`${getTypeFromNodeId(start.id)}_id`]: dropTargetId, // Оновлюємо ID батьківського елемента
+  //       },
+  //     },
+  //   ];
+
+  //   // 2️⃣ Відправляємо оновлення на бекенд
+  //   dispatch(updateEntity(dataToUpdate))
+  //     .unwrap()
+  //     .then(() => {
+  //       dispatch(getAllWarehousesWithDetails()); // Отримуємо оновлені дані
+  //       toast.success("Переміщення успішне!", {
+  //         position: "top-center",
+  //         duration: 3000,
+  //         style: {
+  //           background: "var(--bg-input)",
+  //           color: "var(--white)FFF",
+  //         },
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error updating entity:", error);
+  //       toast.error("Щось пішло не так :(", {
+  //         position: "top-center",
+  //         duration: 3000,
+  //         style: {
+  //           background: "var(--bg-input)",
+  //           color: "var(--white)FFF",
+  //         },
+  //       });
+  //     });
+  // };
 
   // Відкриття і закриття модалки
   const openModal = () => {
