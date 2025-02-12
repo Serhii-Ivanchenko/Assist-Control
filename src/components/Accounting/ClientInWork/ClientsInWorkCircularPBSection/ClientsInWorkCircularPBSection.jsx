@@ -1,6 +1,5 @@
 import css from './ClientsInWorkCircularPBSection.module.css'
-
-import CircleProgressBar from "../sharedComponents/CircleProgressBar/CircleProgressBar.jsx"
+import CircleProgressBar from "../../../sharedComponents/CircleProgressBar/CircleProgressBar.jsx"
 
 const data = [
   {

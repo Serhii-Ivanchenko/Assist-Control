@@ -1,4 +1,4 @@
-import InvoicesPart from "../../../../components/InvoicesPart/InvoicesPart";
+import InvoicesPart from "../../../../components/Accounting/Invoices/InvoicesPart/InvoicesPart.jsx";
 import css from "./Funds.module.css";
 
 export default function Funds() {

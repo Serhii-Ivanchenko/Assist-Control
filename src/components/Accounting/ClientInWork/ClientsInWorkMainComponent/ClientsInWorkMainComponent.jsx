@@ -1,10 +1,10 @@
-import ClientsInWorkCircularPBSection from "../ClientsInWorkCircularPBSection/ClientsInWorkCircularPBSection.jsx";
-import ClientsInWorkListSection from "../ClientsInWorkListSection/ClientsInWorkListSection.jsx";
-import ClientsInWorkControlBarSection from "../ClientsInWorkControlBarSection/ClientsInWorkControlBarSection.jsx";
-import ClientsInWorkSorterSection from "../ClientsInWorkSorterSection/ClientsInWorkSorterSection.jsx";
+import ClientsInWorkCircularPBSection from "../../ClientInWork/ClientsInWorkCircularPBSection/ClientsInWorkCircularPBSection.jsx";
+import ClientsInWorkControlBarSection from "../../ClientInWork/ClientsInWorkControlBarSection/ClientsInWorkControlBarSection.jsx";
+import ClientsInWorkSorterSection from "../../ClientInWork/ClientsInWorkSorterSection/ClientsInWorkSorterSection.jsx";
 import css from "./ClientsInWorkMainComponent.module.css";
 import { useState } from "react";
 import { clientsData } from "./clientsData.js";
+import ClientsInWorkListSection from "../../ClientInWork/ClientsInWorkListSection/ClientsInWorkListSection.jsx";
 
 export default function ClientsInWorkMainComponent() {
   const [sortedClients, setSortedClients] = useState(clientsData);

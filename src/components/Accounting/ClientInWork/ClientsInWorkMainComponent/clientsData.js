@@ -1,4 +1,4 @@
-import defImg from "../../assets/images/absentAutoImg.webp";
+import defImg from "../../../../assets/images/absentAutoImg.webp";
 
 export const clientsData = [
   {

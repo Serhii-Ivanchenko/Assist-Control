@@ -1,4 +1,4 @@
-import ClientsInWorkMainComponent from '../../../components/ClientsInWorkMainComponent/ClientsInWorkMainComponent.jsx';
+import ClientsInWorkMainComponent from "../../../components/Accounting/ClientInWork/ClientsInWorkMainComponent/ClientsInWorkMainComponent";
 
 export default function ClientsPage() {
   return <ClientsInWorkMainComponent />;

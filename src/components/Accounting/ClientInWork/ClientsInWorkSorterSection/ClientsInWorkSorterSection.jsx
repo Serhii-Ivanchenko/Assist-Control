@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import css from "./ClientsInWorkSorterSection.module.css";
-import TimeSortItem from "../sharedComponents/TimeSortItem/TimeSortItem";
+import TimeSortItem from "../../../sharedComponents/TimeSortItem/TimeSortItem";
 import { useSelector } from "react-redux";
-import { selectVisibilityClientsInWork } from "../../redux/visibility/selectors";
+import { selectVisibilityClientsInWork } from "../../../../redux/visibility/selectors";
 import { useState } from "react";
 
 export default function ClientsInWorkSorterSection({ clients, setSortedClients }) {

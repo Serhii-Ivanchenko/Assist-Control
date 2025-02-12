@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CalendarPeriodSelector from "../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
-import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSelector";
+import CalendarPeriodSelector from "../../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
+import RangeTimeSelector from "../../../sharedComponents/RangeTimeSelector/RangeTimeSelector";
 import css from "./InvoicesControlBar.module.css";
 
 export default function InvoicesControlBar() {

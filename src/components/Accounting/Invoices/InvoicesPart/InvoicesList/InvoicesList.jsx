@@ -1,5 +1,5 @@
 import css from "./InvoicesList.module.css";
-import flag from "../../../assets/images/flagUa.webp";
+import flag from "../../../../../assets/images/flagUa.webp";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 
