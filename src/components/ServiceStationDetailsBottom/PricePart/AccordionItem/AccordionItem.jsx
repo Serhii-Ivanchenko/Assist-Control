@@ -18,15 +18,23 @@ import { setEditedCategory } from "../../../../redux/settings/slice";
 import { useSelector } from "react-redux";
 import { selectEditedServices } from "../../../../redux/settings/selectors.js";
 
-function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
+function AccordionItem({
+  item,
+  id,
+  containerRef,
+  onCategoryEditing,
+  isCategoryEditing,
+  onServiceEditing,
+  editingServiceId,
+}) {
   const dispatch = useDispatch();
-  const [isEdit, setIsEdit] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(item.category_name);
-
   const [currentServices, setCurrentServices] = useState(item.services);
+  const [editingCategoryId, setEditingCategoryId] = useState(null);
+
   const editedServices = useSelector(selectEditedServices);
   const editedCategory = editedServices.find(
     (c) => c.category_id === item.category_id
@@ -43,11 +51,14 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
 
   useEffect(() => {
     setCurrentServices(item.services);
-    setIsEdit(false);
   }, [item.services]);
 
   const handleAccordionChange = () => {
     setExpanded((prev) => !prev);
+  };
+
+  const handleEditCategory = (categoryId) => {
+    setEditingCategoryId(categoryId);
   };
 
   const handleCategoryPopupToggle = (e) => {
@@ -56,22 +67,13 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
   };
 
   const handleSaveCategory = () => {
-    const trimmedName = currentCategory.trim();
-    if (trimmedName === item.category_name) {
-      setIsEdit(false);
-      onCategoryEditing(false);
-
-      return;
-    }
-
     dispatch(
       setEditedCategory({
         category_id: item.category_id,
-        new_name: trimmedName,
+        new_name: currentCategory,
       })
     );
     onCategoryEditing(false);
-    setIsEdit(false);
   };
 
   const handleNewService = (newServiceName) => {
@@ -122,23 +124,17 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
           id={`panel${id}-header`}
         >
           <div className={styles.titleContent}>
-            {isEdit ? (
+            {editingCategoryId === item.category_id ? (
               <input
                 type="text"
                 value={currentCategory}
                 onChange={(e) => setCurrentCategory(e.target.value)}
                 autoFocus
                 className={styles.editInput}
-                onFocus={() => onCategoryEditing(true)}
-                onBlur={() => {
-                  handleSaveCategory();
-                  // () => onCategoryEditing(false);
-                }}
+                onBlur={handleSaveCategory}
+                disabled={!isCategoryEditing}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSaveCategory();
-                    // () => onCategoryEditing(false);
-                  }
+                  if (e.key === "Enter") handleSaveCategory();
                 }}
               />
             ) : (
@@ -159,7 +155,7 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
                 <PopupMenu
                   isOpen={isCategoryPopupOpen}
                   onClose={() => setIsCategoryPopupOpen(false)}
-                  onEdit={() => setIsEdit(true)}
+                  onEdit={() => handleEditCategory(item.category_id)}
                   onAdd={() => setIsModalOpen(true)}
                   buttonRef={buttonRef}
                   containerRef={containerRef}
@@ -201,7 +197,8 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
                       containerRef={containerRef}
                       innerAccRef={innerAccRef}
                       isLast={isLast}
-                      isEdit={isEdit}
+                      onServiceEditing={onServiceEditing}
+                      editingServiceId={editingServiceId}
                     />
                   </li>
                 );

@@ -34,7 +34,7 @@ export default function PricePart() {
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [isCategoryEditing, setIsCategoryEditing] = useState(false);
-  console.log("isCategoryEditing", isCategoryEditing);
+  const [editingServiceId, setEditingServiceId] = useState(null);
 
   const scrollToTheLastItemRef = useRef(null);
 
@@ -45,6 +45,10 @@ export default function PricePart() {
 
   const handleCategoryEditing = (isEditing) => {
     setIsCategoryEditing(isEditing);
+  };
+
+  const handleServiceEditing = (serviceId) => {
+    setEditingServiceId(serviceId);
   };
 
   const handleNewCategory = (newCategoryName) => {
@@ -61,20 +65,7 @@ export default function PricePart() {
 
   const handleSaveNewData = async () => {
     setIsCategoryEditing(false);
-    const filteredServices = editedServices.filter((service) => {
-      return (
-        service.new_name?.trim() && service.new_name !== service.service_name
-      );
-    });
-
-    if (filteredServices.length === 0 || isCategoryEditing) {
-      console.log("click if edited services = 0");
-
-      console.warn("Немає змін для збереження.");
-      dispatch(resetEditedServices());
-      setIsCategoryEditing(false);
-      return;
-    }
+    setEditingServiceId(null);
 
     try {
       await Promise.all(
@@ -100,18 +91,14 @@ export default function PricePart() {
         },
       });
     } catch (error) {
-      toast.error(
-        "Помилка оновлення:",
-        {
-          position: "top-center",
-          duration: 5000,
-          style: {
-            background: "var(--bg-input)",
-            color: "var(--white)",
-          },
+      toast.error(`Помилка оновлення: ${error}`, {
+        position: "top-center",
+        duration: 5000,
+        style: {
+          background: "var(--bg-input)",
+          color: "var(--white)",
         },
-        error
-      );
+      });
     }
   };
 
@@ -180,6 +167,8 @@ export default function PricePart() {
         onReset={handleResetData}
         onCategoryEditing={handleCategoryEditing}
         isCategoryEditing={isCategoryEditing}
+        onServiceEditing={handleServiceEditing}
+        editingServiceId={editingServiceId}
       />
       {(editedServices.length > 0 || isCategoryEditing) && (
         <div className={styles.btnGroup}>

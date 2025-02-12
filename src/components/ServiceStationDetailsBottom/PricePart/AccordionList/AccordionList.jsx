@@ -1,7 +1,14 @@
 import AccordionItem from "../AccordionItem/AccordionItem";
 import styles from "./AccordionList.module.css";
 
-function AccordionList({ data, containerRef, onCategoryEditing }) {
+function AccordionList({
+  data,
+  containerRef,
+  onCategoryEditing,
+  isCategoryEditing,
+  onServiceEditing,
+  editingServiceId,
+}) {
   return (
     <ul className={styles.wrapper} ref={containerRef}>
       {data.map((item) => (
@@ -11,6 +18,9 @@ function AccordionList({ data, containerRef, onCategoryEditing }) {
             id={item.category_id}
             containerRef={containerRef}
             onCategoryEditing={onCategoryEditing}
+            isCategoryEditing={isCategoryEditing}
+            onServiceEditing={onServiceEditing}
+            editingServiceId={editingServiceId}
           />
         </li>
       ))}
