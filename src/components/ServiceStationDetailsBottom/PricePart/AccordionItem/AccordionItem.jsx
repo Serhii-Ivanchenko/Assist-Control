@@ -18,13 +18,14 @@ import { setEditedCategory } from "../../../../redux/settings/slice";
 import { useSelector } from "react-redux";
 import { selectEditedServices } from "../../../../redux/settings/selectors.js";
 
-function AccordionItem({ item, id, containerRef }) {
+function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(item.category_name);
+
   const [currentServices, setCurrentServices] = useState(item.services);
   const editedServices = useSelector(selectEditedServices);
   const editedCategory = editedServices.find(
@@ -55,12 +56,21 @@ function AccordionItem({ item, id, containerRef }) {
   };
 
   const handleSaveCategory = () => {
+    const trimmedName = currentCategory.trim();
+    if (trimmedName === item.category_name) {
+      setIsEdit(false);
+      onCategoryEditing(false);
+
+      return;
+    }
+
     dispatch(
       setEditedCategory({
         category_id: item.category_id,
-        new_name: currentCategory,
+        new_name: trimmedName,
       })
     );
+    onCategoryEditing(false);
     setIsEdit(false);
   };
 
@@ -119,10 +129,16 @@ function AccordionItem({ item, id, containerRef }) {
                 onChange={(e) => setCurrentCategory(e.target.value)}
                 autoFocus
                 className={styles.editInput}
-                onBlur={handleSaveCategory}
-                disabled={!isEdit}
+                onFocus={() => onCategoryEditing(true)}
+                onBlur={() => {
+                  handleSaveCategory();
+                  // () => onCategoryEditing(false);
+                }}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSaveCategory();
+                  if (e.key === "Enter") {
+                    handleSaveCategory();
+                    // () => onCategoryEditing(false);
+                  }
                 }}
               />
             ) : (
@@ -185,6 +201,7 @@ function AccordionItem({ item, id, containerRef }) {
                       containerRef={containerRef}
                       innerAccRef={innerAccRef}
                       isLast={isLast}
+                      isEdit={isEdit}
                     />
                   </li>
                 );
