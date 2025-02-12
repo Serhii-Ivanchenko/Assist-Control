@@ -134,12 +134,12 @@
 }
 
 .photo {
-  height: 24px;
-  width: 35px;
+  height: 52px;
+  /* width: 35px; */
 }
 
 .passportPhoto {
-  height: 22px;
+  height: 52px;
 }
 
 .reminder {
