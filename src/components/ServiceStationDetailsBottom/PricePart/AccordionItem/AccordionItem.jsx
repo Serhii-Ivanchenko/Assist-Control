@@ -59,6 +59,8 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
     const trimmedName = currentCategory.trim();
     if (trimmedName === item.category_name) {
       setIsEdit(false);
+      onCategoryEditing(false);
+
       return;
     }
 
@@ -68,7 +70,7 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
         new_name: trimmedName,
       })
     );
-    onCategoryEditing(true);
+    onCategoryEditing(false);
     setIsEdit(false);
   };
 
@@ -130,12 +132,12 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
                 onFocus={() => onCategoryEditing(true)}
                 onBlur={() => {
                   handleSaveCategory();
-                  () => onCategoryEditing(false);
+                  // () => onCategoryEditing(false);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     handleSaveCategory();
-                    () => onCategoryEditing(false);
+                    // () => onCategoryEditing(false);
                   }
                 }}
               />

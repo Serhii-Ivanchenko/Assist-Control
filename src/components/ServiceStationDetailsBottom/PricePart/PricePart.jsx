@@ -34,6 +34,7 @@ export default function PricePart() {
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [isCategoryEditing, setIsCategoryEditing] = useState(false);
+  console.log("isCategoryEditing", isCategoryEditing);
 
   const scrollToTheLastItemRef = useRef(null);
 
@@ -66,7 +67,9 @@ export default function PricePart() {
       );
     });
 
-    if (filteredServices.length === 0 && !isCategoryEditing) {
+    if (filteredServices.length === 0 || isCategoryEditing) {
+      console.log("click if edited services = 0");
+
       console.warn("Немає змін для збереження.");
       dispatch(resetEditedServices());
       setIsCategoryEditing(false);
@@ -176,17 +179,18 @@ export default function PricePart() {
         containerRef={scrollToTheLastItemRef}
         onReset={handleResetData}
         onCategoryEditing={handleCategoryEditing}
+        isCategoryEditing={isCategoryEditing}
       />
       {(editedServices.length > 0 || isCategoryEditing) && (
         <div className={styles.btnGroup}>
-          {console.log("editedServices:", editedServices)}
+          {console.log("editedServices in btn group:", editedServices)}
           <button onClick={handleResetData} className={styles.resetBtn}>
             Відміна
           </button>
           <button
             onClick={handleSaveNewData}
             className={styles.btn}
-            disabled={editedServices.length === 0}
+            // disabled={editedServices.length === 0}
           >
             Зберегти
           </button>

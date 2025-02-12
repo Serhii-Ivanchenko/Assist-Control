@@ -42,7 +42,7 @@ const ScheduleTable = forwardRef(
       );
     };
 
-    console.log("isEditing", isEditing);
+    // console.log("isEditing", isEditing);
 
     const [gridData, setGridData] = useState(
       generateGridData(
