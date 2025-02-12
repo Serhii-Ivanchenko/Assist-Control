@@ -7,11 +7,13 @@ export const AddCarSchema = Yup.object().shape({
       /^[a-zA-Z0-9]+$/,
       "Поле має містити цифри та латинські літери без пробілів"
     ),
+  make: Yup.string().required("Поле повинно бути заповнене"),
   model: Yup.string().required("Поле повинно бути заповнене"),
+  year: Yup.string().required("Поле повинно бути заповнене"),
   mileage: Yup.string().matches(/^\d+$/, "Поле повинно містити тільки цифри"),
-  year: Yup.string()
-    .matches(/^\d+$/, "Поле повинно містити тільки цифри")
-    .length(4, "Поле повинно містити 4 цифри"),
+  // year: Yup.string()
+  //   .matches(/^\d+$/, "Поле повинно містити тільки цифри")
+  //   .length(4, "Поле повинно містити 4 цифри"),
   vin: Yup.string()
     .matches(
       /^[a-zA-Z0-9]*$/,

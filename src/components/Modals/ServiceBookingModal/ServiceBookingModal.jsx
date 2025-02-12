@@ -361,7 +361,7 @@ export default function ServiceBookingModal({
         validateOnChange={true}
         validateOnBlur
       >
-        {({ values, errors, setFieldValue }) => (
+        {({ values, touched, errors, setFieldValue }) => (
           <Form className={css.form}>
             <div className={css.rightSectionWrapper}>
               <div className={css.inputWrapper}>
@@ -607,7 +607,7 @@ export default function ServiceBookingModal({
                   component="div"
                   className={css.errorMsg}
                 />
-                {!errors.model && !values.model && (
+                {!values.make && !touched.model && (
                   <p className={css.reminder}>
                     Спочатку оберіть марку автомобіля
                   </p>
@@ -628,7 +628,7 @@ export default function ServiceBookingModal({
                     component="div"
                     className={css.errorMsg}
                   />
-                  {!errors.year && !values.year && (
+                  {!values.model && !touched.year && (
                     <p className={css.reminder}>
                       Спочатку оберіть марку та модель автомобіля
                     </p>
