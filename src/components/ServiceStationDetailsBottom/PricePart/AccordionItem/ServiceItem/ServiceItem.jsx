@@ -22,7 +22,6 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
   const inputRef = useRef();
   const buttonRef = useRef(null);
   const popupRef = useRef(null);
-  // const scrollToTheLastItemRef = useRef(null);
 
   useEffect(() => {
     setUpdatedService(serviceData);
@@ -43,6 +42,7 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
   const handleEdit = () => {
     setIsEdit(true);
     dispatch(setEditedService(updatedService));
+    setActivePopupId(null);
   };
 
   const handleDelete = () => {
@@ -56,26 +56,11 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
     };
     setUpdatedService(newValue);
     dispatch(setEditedService(newValue));
+    setIsEdit(false);
   };
 
-  // useEffect(() => {
-  //   if (
-  //     activePopupId === serviceData.service_id &&
-  //     scrollToTheLastItemRef.current
-  //   ) {
-  //     requestAnimationFrame(() => {
-  //       scrollToTheLastItemRef.current.scrollIntoView({
-  //         behavior: "smooth",
-  //         block: "end",
-  //       });
-  //     });
-  //   }
-  // }, [activePopupId, serviceData.service_id]);
-
   return (
-     <div
-      className={`${styles.serviceItem} ${isExpanded && styles.expanded}`}
-    >
+    <div className={`${styles.serviceItem} ${isExpanded && styles.expanded}`}>
       {isEdit ? (
         <div className={styles.editInputBox}>
           <input
@@ -84,8 +69,9 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
             name="service_name"
             value={updatedService.service_name}
             ref={inputRef}
-            onChange={handleChange}
-            disabled={!isEdit}
+            onChange={(e) => e.target.value}
+            autoFocus
+            onBlur={handleChange}
           />
         </div>
       ) : (
@@ -133,8 +119,7 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
         <div className={styles.popupContainer} ref={popupRef}>
           <PopupMenu
             isOpen={activePopupId}
-            // isOpen={true}
-            onClose={handlePopupToggle}
+            onClose={() => setActivePopupId(null)}
             onEdit={handleEdit}
             onDelete={handleDelete}
             buttonRef={buttonRef}
