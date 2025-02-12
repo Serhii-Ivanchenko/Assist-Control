@@ -1,6 +1,6 @@
-import ClientStatusStepper from "../ClientsStatusStepper/ClientStatusStepper";
 import GetStatus from "./GetStatus";
 import styles from "./ClientsInWorkItem.module.css";
+import ClientStatusStepper from "../ClientsStatusStepper/ClientStatusStepper";
 
 function ClientsInWorkItem({ item }) {
   const formatDate = (date) => {

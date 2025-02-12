@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 import styles from "./InvoicesNavigationSection.module.css";
-import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
-import { labelNamesInvoices } from "../../utils/dataToRender";
-import { toggleVisibilityInvoices } from "../../redux/visibility/slice";
-import { selectVisibilityInvoices } from "../../redux/visibility/selectors";
+import InfoSettingsVisibility from "../../../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
+import { labelNamesInvoices } from "../../../../utils/dataToRender";
+import { toggleVisibilityInvoices } from "../../../../redux/visibility/slice";
+import { selectVisibilityInvoices } from "../../../../redux/visibility/selectors";
 
 export default function InvoicesNavigationSection() {
   

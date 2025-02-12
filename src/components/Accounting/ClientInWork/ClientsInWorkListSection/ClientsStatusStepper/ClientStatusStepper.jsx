@@ -9,17 +9,17 @@ import {
   BsWrench,
   BsAlarm,
 } from "react-icons/bs";
-import StepperBtn from "../ClientsStatusStepper/StepperBtn/StepperBtn";
 import styles from "./ClientStatusStepper.module.css";
-import Modal from "../../Modals/Modal/Modal";
-import DetailedClientInfo from "../../DetailedClientInfo/DetailedClientInfo";
-import EnterAmountModal from "../../Modals/EnterAmountModal/EnterAmountModal";
-import NotificationModal from "../../sharedComponents/NotificationModal/NotificationModal";
+import Modal from "../../../../Modals/Modal/Modal.jsx";
+import DetailedClientInfo from "../../../../DetailedClientInfo/DetailedClientInfo.jsx";
+import EnterAmountModal from "../../../../Modals/EnterAmountModal/EnterAmountModal.jsx";
+import NotificationModal from "../../../../sharedComponents/NotificationModal/NotificationModal.jsx";
 import { useSelector } from "react-redux";
-import { selectVisibilityClientsInWork } from "../../../redux/visibility/selectors";
-import { categoryIdClients } from "../../../utils/dataToRender";
+import { selectVisibilityClientsInWork } from "../../../../../redux/visibility/selectors.js";
+import { categoryIdClients } from "../../../../../utils/dataToRender.js";
 import { useDispatch } from "react-redux";
-import { getClientInfo } from "../../../redux/client/operations.js";
+import { getClientInfo } from "../../../../../redux/client/operations.js";
+import StepperBtn from "./StepperBtn/StepperBtn.jsx";
 
 function ClientStatusStepper({
   carId,
