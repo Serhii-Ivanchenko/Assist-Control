@@ -65,13 +65,13 @@ function PopupMenu({
     if (isOpen && popupRef.current && containerRef?.current) {
       scrollIntoViewIfNeeded(popupRef.current, containerRef.current);
     }
-  }, [isOpen, containerRef]);
+  }, [isOpen, containerRef, popupRef]);
 
   useEffect(() => {
     if (isOpen && popupRef.current && innerAccRef?.current) {
       scrollIntoViewIfNeeded(popupRef.current, innerAccRef.current);
     }
-  }, [isOpen, innerAccRef]);
+  }, [isOpen, innerAccRef, popupRef]);
 
   if (!isOpen) return null;
 
