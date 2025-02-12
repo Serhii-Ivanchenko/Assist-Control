@@ -22,6 +22,7 @@ import { getClientInfo } from "../../../../../redux/client/operations.js";
 import StepperBtn from "./StepperBtn/StepperBtn.jsx";
 
 function ClientStatusStepper({
+  item,
   carId,
   car,
   carImg,
@@ -87,9 +88,9 @@ function ClientStatusStepper({
   // виклик модалки на групі кнопок
   const handleClick = (idx) => {
     switch (idx) {
-      case 0:
-        dispatch(getClientInfo({ carId: carId}));
-        setModalContent(<DetailedClientInfo onClose={closeModal} />);
+      case 0:      
+        dispatch(getClientInfo({ carId: 38701 }));
+        setModalContent(<DetailedClientInfo onClose={closeModal} car={item} />);
         break;
       case 1:
         setModalContent("Modal for contact information");
