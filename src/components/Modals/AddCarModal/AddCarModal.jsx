@@ -210,7 +210,7 @@ export default function AddCarModal({ onClose }) {
         validateOnChange={true}
         validateOnBlur
       >
-        {({ values, errors, setFieldValue }) => (
+        {({ values, touched, errors, setFieldValue }) => (
           <Form>
             <div className={css.inputWrapper}>
               <div className={css.inputWithErrorWrapper}>
@@ -274,7 +274,7 @@ export default function AddCarModal({ onClose }) {
                   component="div"
                   className={css.errorMsg}
                 />
-                {!values.make && (
+                {!values.make && !touched.model && (
                   <p className={css.reminder}>
                     Спочатку оберіть марку автомобіля
                   </p>
@@ -309,7 +309,7 @@ export default function AddCarModal({ onClose }) {
                   component="div"
                   className={css.errorMsg}
                 />
-                {!values.model && (
+                {!values.model && !touched.year && (
                   <p className={css.reminder}>
                     Спочатку оберіть марку та модель автомобіля
                   </p>
