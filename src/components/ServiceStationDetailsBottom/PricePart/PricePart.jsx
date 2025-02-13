@@ -33,8 +33,10 @@ export default function PricePart() {
 
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
-  const [isCategoryEditing, setIsCategoryEditing] = useState(false);
+  const [isCategoryEditing, setIsCategoryEditing] = useState(null);
+  const [isServiceEditing, setIsServiceEditing] = useState(null);
   console.log("isCategoryEditing", isCategoryEditing);
+  console.log("isServiceEditing", isServiceEditing);
 
   const scrollToTheLastItemRef = useRef(null);
 
@@ -43,8 +45,12 @@ export default function PricePart() {
     setActiveSearch(true);
   };
 
-  const handleCategoryEditing = (isEditing) => {
-    setIsCategoryEditing(isEditing);
+  const handleCategoryEditing = (id) => {
+    setIsCategoryEditing(id);
+  };
+
+  const handleServiceEditing = (id) => {
+    setIsServiceEditing(id);
   };
 
   const handleNewCategory = (newCategoryName) => {
@@ -60,19 +66,13 @@ export default function PricePart() {
   };
 
   const handleSaveNewData = async () => {
-    setIsCategoryEditing(false);
-    const filteredServices = editedServices.filter((service) => {
-      return (
-        service.new_name?.trim() && service.new_name !== service.service_name
-      );
-    });
-
-    if (filteredServices.length === 0 || isCategoryEditing) {
-      console.log("click if edited services = 0");
+    if (editedServices.length === 0 || isCategoryEditing) {
+      console.log("click if edited services = 0", editedServices);
 
       console.warn("Немає змін для збереження.");
       dispatch(resetEditedServices());
-      setIsCategoryEditing(false);
+      setIsCategoryEditing(null);
+      setIsServiceEditing(null);
       return;
     }
 
@@ -88,17 +88,21 @@ export default function PricePart() {
         })
       );
 
-      await dispatch(getPrices()).unwrap();
+      await dispatch(getPrices())
+        .unwrap()
+        .then(
+          toast.success("Дані успішно оновлено", {
+            position: "top-center",
+            duration: 5000,
+            style: {
+              background: "var(--bg-input)",
+              color: "var(--white)",
+            },
+          }),
+          setIsServiceEditing(null),
+          setIsCategoryEditing(null)
+        );
       dispatch(resetEditedServices());
-
-      toast.success("Дані успішно оновлено", {
-        position: "top-center",
-        duration: 5000,
-        style: {
-          background: "var(--bg-input)",
-          color: "var(--white)",
-        },
-      });
     } catch (error) {
       toast.error(
         "Помилка оновлення:",
@@ -129,7 +133,8 @@ export default function PricePart() {
   };
 
   const handleResetData = () => {
-    setIsCategoryEditing(false);
+    setIsCategoryEditing(null);
+    setIsServiceEditing(null);
     dispatch(resetEditedServices());
   };
 
@@ -180,8 +185,10 @@ export default function PricePart() {
         onReset={handleResetData}
         onCategoryEditing={handleCategoryEditing}
         isCategoryEditing={isCategoryEditing}
+        isServiceEditing={isServiceEditing}
+        setIsServiceEditing={handleServiceEditing}
       />
-      {(editedServices.length > 0 || isCategoryEditing) && (
+      {(isServiceEditing || isCategoryEditing) && (
         <div className={styles.btnGroup}>
           {console.log("editedServices in btn group:", editedServices)}
           <button onClick={handleResetData} className={styles.resetBtn}>
@@ -190,7 +197,6 @@ export default function PricePart() {
           <button
             onClick={handleSaveNewData}
             className={styles.btn}
-            // disabled={editedServices.length === 0}
           >
             Зберегти
           </button>
