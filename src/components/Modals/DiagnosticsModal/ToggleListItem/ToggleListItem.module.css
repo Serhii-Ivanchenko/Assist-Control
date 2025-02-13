@@ -54,7 +54,7 @@
   content: "";
   height: 25px;
   width: 25px;
-  left: -14px;
+  left: -5px;
   bottom: -6px;
   background-color: var(--white);
   border-radius: 50%;
@@ -66,5 +66,5 @@ input:checked + .slider {
 }
 
 input:checked + .slider::before {
-  transform: translateX(44px);
+  transform: translateX(25px);
 }

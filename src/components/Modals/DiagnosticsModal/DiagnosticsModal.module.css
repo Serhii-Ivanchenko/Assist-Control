@@ -106,7 +106,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  /* line-height: normal; */
   cursor: pointer;
 
   border-radius: 6px;
@@ -114,6 +114,7 @@
 }
 
 .cancel {
+  padding: 9px 19px;
   background-color: transparent;
   border: 1px solid var(--light-gray);
 }
@@ -125,6 +126,10 @@
 
 .save:hover {
   background-color: var(--green-btn-hover);
+}
+
+.tickIcon{
+  transform: scale(1.1);
 }
 
 .cross {

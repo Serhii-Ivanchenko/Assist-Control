@@ -107,7 +107,7 @@ export default function DiagnosticsModal({ onClose }) {
           Скасувати
         </button>
         <button type="button" className={`${css.btn} ${css.save}`}>
-          <TiTick size={20} />
+          <TiTick className={css.tickIcon} />
           Зберегти
         </button>
       </div>

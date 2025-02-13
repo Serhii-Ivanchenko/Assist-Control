@@ -10,7 +10,7 @@
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.1875em;
 
   margin-bottom: 24px;
 }
@@ -34,7 +34,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.1875em;
 }
 
 .icon {
@@ -46,7 +46,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.1875em;
 }
 
 .arrivalBox {
@@ -77,7 +77,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.1875em;
 
   display: flex;
   align-items: center;

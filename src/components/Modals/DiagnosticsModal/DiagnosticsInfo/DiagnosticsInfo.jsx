@@ -13,6 +13,7 @@ export default function DiagnosticsInfo() {
         </div>
         <p className={css.infoName}>Шевченко А.В.</p>
       </div>
+
       <div className={css.infoBox}>
         <div className={css.infoKey}>
           <BsPersonLinesFill className={css.icon} size={18} />
