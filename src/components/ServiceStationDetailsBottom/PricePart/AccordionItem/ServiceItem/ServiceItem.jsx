@@ -6,9 +6,15 @@ import { useDispatch } from "react-redux";
 import { deleteService } from "../../../../../redux/settings/operations";
 import { setEditedService } from "../../../../../redux/settings/slice";
 
-function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
+function ServiceItem({
+  serviceData,
+  innerAccRef,
+  containerRef,
+  isLast,
+  setIsServiceEditing,
+  isServiceEditing,
+}) {
   const dispatch = useDispatch();
-  const [isEdit, setIsEdit] = useState(false);
   const [activePopupId, setActivePopupId] = useState(null);
   const [updatedService, setUpdatedService] = useState({
     service_id: serviceData.service_id,
@@ -23,11 +29,6 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
   const buttonRef = useRef(null);
   const popupRef = useRef(null);
 
-  useEffect(() => {
-    setUpdatedService(serviceData);
-    setIsEdit(false);
-  }, [serviceData]);
-
   const handlePopupToggle = () => {
     setActivePopupId((prev) =>
       prev === serviceData.service_id ? null : serviceData.service_id
@@ -39,11 +40,18 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
     }
   };
 
-  const handleEdit = () => {
-    setIsEdit(true);
-    dispatch(setEditedService(updatedService));
+  const handleEdit = (id) => {
+    setIsServiceEditing(id);
+    // dispatch(setEditedService(updatedService));
+    // setUpdatedService(serviceData);
     setActivePopupId(null);
   };
+
+  useEffect(() => {
+    if (updatedService.service_id !== serviceData.service_id) {
+      dispatch(setEditedService(updatedService));
+    }
+  }, [updatedService, dispatch]);
 
   const handleDelete = () => {
     dispatch(deleteService(serviceData.service_id));
@@ -56,12 +64,11 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
     };
     setUpdatedService(newValue);
     dispatch(setEditedService(newValue));
-    setIsEdit(false);
   };
 
   return (
     <div className={`${styles.serviceItem} ${isExpanded && styles.expanded}`}>
-      {isEdit ? (
+      {serviceData.service_id === isServiceEditing ? (
         <div className={styles.editInputBox}>
           <input
             className={styles.editInput}
@@ -69,9 +76,8 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
             name="service_name"
             value={updatedService.service_name}
             ref={inputRef}
-            onChange={(e) => e.target.value}
+            onChange={handleChange}
             autoFocus
-            onBlur={handleChange}
           />
         </div>
       ) : (
@@ -90,7 +96,7 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
             className={styles.input}
             value={updatedService.min_price}
             onChange={handleChange}
-            disabled={!isEdit}
+            disabled={!isServiceEditing}
           />
         </div>
         <div className={styles.inputBox}>
@@ -102,7 +108,7 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
             className={styles.input}
             value={updatedService.max_price}
             onChange={handleChange}
-            disabled={!isEdit}
+            disabled={!isServiceEditing}
           />
         </div>
       </div>
@@ -120,7 +126,7 @@ function ServiceItem({ serviceData, innerAccRef, containerRef, isLast }) {
           <PopupMenu
             isOpen={activePopupId}
             onClose={() => setActivePopupId(null)}
-            onEdit={handleEdit}
+            onEdit={() => handleEdit(serviceData.service_id)}
             onDelete={handleDelete}
             buttonRef={buttonRef}
             innerAccRef={innerAccRef}
