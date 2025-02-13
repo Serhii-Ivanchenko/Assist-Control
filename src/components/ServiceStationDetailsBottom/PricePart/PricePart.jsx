@@ -16,7 +16,6 @@ import {
   closeModal,
   resetEditedServices,
 } from "../../../redux/settings/slice";
-
 import AccordionList from "./AccordionList/AccordionList";
 import { BsFolderPlus } from "react-icons/bs";
 import SearchBar from "./SearchBar/SearchBar";
@@ -24,6 +23,7 @@ import Modal from "../../Modals/Modal/Modal";
 import AddCategoryModal from "./AddCategoryModal/AddCategoryModal";
 
 import styles from "./PricePart.module.css";
+import toast from "react-hot-toast";
 
 export default function PricePart() {
   const dispatch = useDispatch();
@@ -33,6 +33,8 @@ export default function PricePart() {
 
   const [activeSearch, setActiveSearch] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
+  const [isCategoryEditing, setIsCategoryEditing] = useState(false);
+  console.log("isCategoryEditing", isCategoryEditing);
 
   const scrollToTheLastItemRef = useRef(null);
 
@@ -41,7 +43,12 @@ export default function PricePart() {
     setActiveSearch(true);
   };
 
+  const handleCategoryEditing = (isEditing) => {
+    setIsCategoryEditing(isEditing);
+  };
+
   const handleNewCategory = (newCategoryName) => {
+    setIsCategoryEditing(true);
     if (newCategoryName.trim() === "") {
       console.log("Please enter a category name.");
       return;
@@ -53,8 +60,19 @@ export default function PricePart() {
   };
 
   const handleSaveNewData = async () => {
-    if (editedServices.length === 0) {
+    setIsCategoryEditing(false);
+    const filteredServices = editedServices.filter((service) => {
+      return (
+        service.new_name?.trim() && service.new_name !== service.service_name
+      );
+    });
+
+    if (filteredServices.length === 0 || isCategoryEditing) {
+      console.log("click if edited services = 0");
+
       console.warn("Немає змін для збереження.");
+      dispatch(resetEditedServices());
+      setIsCategoryEditing(false);
       return;
     }
 
@@ -63,27 +81,39 @@ export default function PricePart() {
         editedServices.map((service) => {
           if (service.service_id) {
             return dispatch(editServiceNameOrPrices(service)).unwrap();
-            // .then(dispatch(getPrices()));
           } else if (service.category_id) {
             return dispatch(updateCategory(service)).unwrap();
-            // .then(dispatch(getPrices()));
           }
           return Promise.resolve();
         })
       );
 
-      dispatch(getPrices());
+      await dispatch(getPrices()).unwrap();
       dispatch(resetEditedServices());
+
+      toast.success("Дані успішно оновлено", {
+        position: "top-center",
+        duration: 5000,
+        style: {
+          background: "var(--bg-input)",
+          color: "var(--white)",
+        },
+      });
     } catch (error) {
-      console.error("Помилка оновлення:", error);
+      toast.error(
+        "Помилка оновлення:",
+        {
+          position: "top-center",
+          duration: 5000,
+          style: {
+            background: "var(--bg-input)",
+            color: "var(--white)",
+          },
+        },
+        error
+      );
     }
   };
-
-  useEffect(() => {
-    if (editedServices.length === 0) {
-      dispatch(getPrices());
-    }
-  }, [editedServices.length, dispatch]);
 
   const handleOpenModal = () => {
     dispatch(openModal());
@@ -99,6 +129,7 @@ export default function PricePart() {
   };
 
   const handleResetData = () => {
+    setIsCategoryEditing(false);
     dispatch(resetEditedServices());
   };
 
@@ -147,16 +178,19 @@ export default function PricePart() {
         data={activeSearch ? filteredData : prices}
         containerRef={scrollToTheLastItemRef}
         onReset={handleResetData}
+        onCategoryEditing={handleCategoryEditing}
+        isCategoryEditing={isCategoryEditing}
       />
-      {editedServices.length > 0 && (
+      {(editedServices.length > 0 || isCategoryEditing) && (
         <div className={styles.btnGroup}>
+          {console.log("editedServices in btn group:", editedServices)}
           <button onClick={handleResetData} className={styles.resetBtn}>
             Відміна
           </button>
           <button
             onClick={handleSaveNewData}
             className={styles.btn}
-            disabled={editedServices.length === 0}
+            // disabled={editedServices.length === 0}
           >
             Зберегти
           </button>

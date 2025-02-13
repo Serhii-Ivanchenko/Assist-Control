@@ -89,13 +89,13 @@
   background-color: var(--bg-secondary);
   border-radius: 4px;
 }
-
+/* 
 .wrapper .accordionDesc li {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
+} */
 
 .wrapper .accordionDesc .text {
   width: 450px;

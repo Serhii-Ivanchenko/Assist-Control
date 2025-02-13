@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { selectVisibilityClientsInWork } from "../../redux/visibility/selectors";
-import { toggleVisibilityClientsInWork } from "../../redux/visibility/slice";
-import { labelNamesClientsInWork, statusesCar } from "../../utils/dataToRender";
-import renderStatusCars from "../../utils/renderStatusCars";
-import CalendarPeriodSelector from "../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
-import CarsSearch from "../sharedComponents/CarsSearch/CarsSearch";
-import InfoSettingsVisibility from "../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
-import DownloadPdfButtonModalCar from "../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar";
-import RangeTimeSelector from "../sharedComponents/RangeTimeSelector/RangeTimeSelector";
-import StatusFilter from "../sharedComponents/StatusFilter/StatusFilter";
+import { toggleVisibilityClientsInWork } from "../../../../redux/visibility/slice";
+import { labelNamesClientsInWork, statusesCar } from "../../../../utils/dataToRender";
+import renderStatusCars from "../../../../utils/renderStatusCars";
+import CalendarPeriodSelector from "../../../sharedComponents/CalendarPeriodSelector/CalendarPeriodSelector";
+import CarsSearch from "../../../sharedComponents/CarsSearch/CarsSearch";
+import DownloadPdfButtonModalCar from "../../../sharedComponents/Pdf/DownloadPdfButtonModalCar/DownloadPdfButtonModalCar";
+import RangeTimeSelector from "../../../sharedComponents/RangeTimeSelector/RangeTimeSelector";
+import InfoSettingsVisibility from "../../../sharedComponents/InfoSettingsVisibility/InfoSettingsVisibility";
+import StatusFilter from "../../../sharedComponents/StatusFilter/StatusFilter";
 import css from "./ClientsInWorkControlBarSection.module.css";
+import { selectVisibilityClientsInWork } from "../../../../redux/visibility/selectors";
 
 export default function ClientsInWorkControlBarSection() {
   const [periodStartData, setPeriodStartData] = useState(new Date());

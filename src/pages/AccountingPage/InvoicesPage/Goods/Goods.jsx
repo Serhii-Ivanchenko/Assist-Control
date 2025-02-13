@@ -1,5 +1,5 @@
-import InvoicesPart from "../../../../components/InvoicesPart/InvoicesPart";
-import css from "./Goods.module.css";
+import InvoicesPart from "../../../../components/Accounting/Invoices/InvoicesPart/InvoicesPart";
+// import css from "./Goods.module.css";
 
 export default function Goods() {
   const categories = [

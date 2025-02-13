@@ -1,6 +1,6 @@
-import ClientStatusStepper from "../ClientsStatusStepper/ClientStatusStepper";
 import GetStatus from "./GetStatus";
 import styles from "./ClientsInWorkItem.module.css";
+import ClientStatusStepper from "../ClientsStatusStepper/ClientStatusStepper";
 
 function ClientsInWorkItem({ item }) {
   const formatDate = (date) => {
@@ -20,6 +20,7 @@ function ClientsInWorkItem({ item }) {
         </li>
         <li className={styles.stepper}>
           <ClientStatusStepper
+            item={item}
             carId={item.car_id}
             car={item.car_model}
             carImg={item.car_img}

@@ -72,6 +72,9 @@ const settingsSlice = createSlice({
   initialState: initialState.settings,
   reducers: {
     setEditedCategory: (state, action) => {
+      if (!action.payload || Object.keys(action.payload).length === 0) {
+        return;
+      }
       const { category_id, new_name } = action.payload;
       const existingCategory = state.editedServices.find(
         (c) => c.category_id === category_id
@@ -83,6 +86,9 @@ const settingsSlice = createSlice({
       }
     },
     setEditedService: (state, action) => {
+      if (!action.payload || Object.keys(action.payload).length === 0) {
+        return;
+      }
       const editedService = action.payload;
       const index = state.editedServices.findIndex(
         (s) => s.service_id === editedService.service_id
