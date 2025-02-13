@@ -1,0 +1,105 @@
+
+  .customTable {
+    width: 100%;
+    max-height: 571px;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    overflow: auto;
+  }
+  
+  .customTable th,
+  .customTable td {
+    border: 1px solid rgba(216, 225, 255, 0.25);
+    padding: 10px 6px;
+    text-align: center;
+  }
+  
+  .headerTop {
+    height: 61px;
+    background: var(--bg-input);
+    font-weight: bold;
+  }
+  
+  .headerBottom {
+    height: 30px;
+    background: var(--bg-input);
+    font-weight: bold;
+  }
+  
+  .customTable tbody tr {
+    height: 36px;
+  }
+  
+  .noData {
+    text-align: center;
+    font-weight: bold;
+    color: #999;
+  }
+  
+  /* Ширини колонок */
+
+  .columnId {
+    width: 36px;
+  }
+  
+  .columnCode {
+    width: 77px;
+  }
+  
+  .columnBrand {
+    width: 80px;
+  }
+  
+  .columnNomenclature {
+    width: 140px;
+  }
+  
+  .columnQuantity {
+    width: 46px;
+  }
+  
+  .columnPurchasePrice {
+    width: 60px;
+  }
+  
+  .columnSellingPrice {
+    width: 70px;
+  }
+  
+  .columnSoldAmount {
+    width: 70px;
+  }
+  
+  .columnAvailability {
+    width: 50px;
+  }
+  
+  .columnPartsPurchase {
+    width: 70px;
+  }
+  
+  .columnWorkCost {
+    width: 70px;
+  }
+  
+  .columnFullName {
+    width: 111px;
+  }
+  
+  .columnPercentage {
+    width: 70px;
+  }
+  
+  .columnSalary {
+    width: 70px;
+  }
+  
+  .columnMargin {
+    width: 100px;
+  }
+  
+  .emptyCell {
+    height: 30px;
+    padding: 2px 6px;
+  }

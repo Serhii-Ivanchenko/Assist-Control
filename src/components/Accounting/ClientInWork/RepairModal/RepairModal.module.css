@@ -1,4 +1,57 @@
-.modalRepair{
-width: 1295px;
-height: 900px;
+.modalRepair {
+  display: flex;
+  flex-direction: column;
+  width: 1295px;
+  height: 900px;
+  padding: 20px;
+  /* background: var(--bg-input); */
+  background: var(--bg-secondary);
+}
+
+.infoContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.workInfo {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.date {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.links {
+  display: flex;
+  gap: 11px;
+}
+
+.link {
+  color: var(--play-btn-triangle);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+}
+
+.mechanic {
+  display: flex;
+  gap: 10px;
+}
+
+.name,
+.position {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.position {
+  font-weight: 400;
 }

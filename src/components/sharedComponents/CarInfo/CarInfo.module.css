@@ -2,17 +2,22 @@
   display: flex;
   gap: 31px;
   margin-bottom: 21px;
+  width: 416px;
 }
 
 .clientName {
+  width: 252px;
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
   line-height: 1.1875em;
-}
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;}
 
 .phone {
   width: 201px;
+  height: 35px;
   padding: 6px 16px;
   border-radius: 6px;
   background-color: var(--contacts-info-bg);
@@ -109,6 +114,11 @@
   font-style: normal;
   font-weight: 600;
   line-height: 1.1667em;
+
+  width: 193px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .carYear {

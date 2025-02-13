@@ -219,6 +219,7 @@ export const labelNamesClientsInWork = {
   provider: "Постачальник",
   repair: "Ремонт",
   totalAmount: "Загальна сума",
+  notification: "Сповіщення"
 };
 
 // export const categoryNameClients = {

@@ -20,6 +20,7 @@ import { categoryIdClients } from "../../../../../utils/dataToRender.js";
 import { useDispatch } from "react-redux";
 import { getClientInfo } from "../../../../../redux/client/operations.js";
 import StepperBtn from "./StepperBtn/StepperBtn.jsx";
+import RepairModal from "../../RepairModal/RepairModal.jsx";
 
 function ClientStatusStepper({
   item,
@@ -93,7 +94,7 @@ function ClientStatusStepper({
         setModalContent(<DetailedClientInfo onClose={closeModal} car={item} />);
         break;
       case 1:
-        setModalContent("Modal for contact information");
+        setModalContent(<RepairModal onClose={closeModal} car={item}/>);
         break;
       case 2:
         setModalContent("Modal for diagnostics");
