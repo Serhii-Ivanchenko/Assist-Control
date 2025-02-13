@@ -1,0 +1,89 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-end; */
+  align-items: end;
+}
+
+.date {
+  color: #fff;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  margin-bottom: 24px;
+}
+
+.infoBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 10px;
+}
+
+.infoKey {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.key {
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.icon {
+  fill: var(--light-gray);
+}
+
+.infoName {
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.arrivalBox {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
+  margin-bottom: 10px;
+}
+
+.arrival {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.arKey,
+.time {
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.minutes {
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.minutesTime {
+  color: var(--green);
+}

@@ -155,7 +155,9 @@ export default function InvoicesList({ category, list }) {
       ))}
       {openModal && (
         <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
-          {category === "Діагностика" && <DiagnosticsModal />}
+          {category === "Діагностика" && (
+            <DiagnosticsModal onClose={() => setOpenModal(false)} />
+          )}
         </Modal>
       )}
     </ul>
