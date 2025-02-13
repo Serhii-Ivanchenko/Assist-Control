@@ -5,6 +5,7 @@ import styles from "./StepperBtn.module.css";
 function StepperBtn({
   value,
   icon,
+  extraIcon,
   isActive,
   noBackground,
   notificationSent,
@@ -30,6 +31,7 @@ function StepperBtn({
     <div className={styles.wrapper}>
       <p className={styles.text}>{value}</p>
       <span className={iconColor}>{icon}</span>
+      {extraIcon ? <span className={styles.extraIcon}>{extraIcon}</span> : null}
     </div>
   );
 }
