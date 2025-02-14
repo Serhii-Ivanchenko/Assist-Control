@@ -1,0 +1,32 @@
+.popup {
+  z-index: 999;
+  position: absolute;
+  right: 215px;
+  display: flex;
+  min-width: 200px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border-radius: 0px 0px 6px 6px;
+  background: var(--bg-input);
+  box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+  transform: translateX(-50%);
+}
+
+.popup li {
+  width: 100%;
+  border-top: 1px solid var(--main-gray);
+  border-bottom: 1px solid var(--main-gray);
+  padding: 4px 0;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.popup li:last-child {
+  border: none;
+}
+
+
+.popup li:hover {
+  background: var(--main-gray);
+}

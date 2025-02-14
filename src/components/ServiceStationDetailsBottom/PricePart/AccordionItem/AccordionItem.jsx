@@ -18,9 +18,16 @@ import { setEditedCategory } from "../../../../redux/settings/slice";
 import { useSelector } from "react-redux";
 import { selectEditedServices } from "../../../../redux/settings/selectors.js";
 
-function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
+function AccordionItem({
+  item,
+  id,
+  containerRef,
+  onCategoryEditing,
+  isCategoryEditing,
+  isServiceEditing,
+  setIsServiceEditing,
+}) {
   const dispatch = useDispatch();
-  const [isEdit, setIsEdit] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCategoryPopupOpen, setIsCategoryPopupOpen] = useState(false);
@@ -43,7 +50,6 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
 
   useEffect(() => {
     setCurrentServices(item.services);
-    setIsEdit(false);
   }, [item.services]);
 
   const handleAccordionChange = () => {
@@ -58,8 +64,7 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
   const handleSaveCategory = () => {
     const trimmedName = currentCategory.trim();
     if (trimmedName === item.category_name) {
-      setIsEdit(false);
-      onCategoryEditing(false);
+      onCategoryEditing(null);
 
       return;
     }
@@ -70,8 +75,7 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
         new_name: trimmedName,
       })
     );
-    onCategoryEditing(false);
-    setIsEdit(false);
+    onCategoryEditing(null);
   };
 
   const handleNewService = (newServiceName) => {
@@ -122,22 +126,19 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
           id={`panel${id}-header`}
         >
           <div className={styles.titleContent}>
-            {isEdit ? (
+            {id === isCategoryEditing ? (
               <input
                 type="text"
                 value={currentCategory}
                 onChange={(e) => setCurrentCategory(e.target.value)}
                 autoFocus
                 className={styles.editInput}
-                onFocus={() => onCategoryEditing(true)}
                 onBlur={() => {
                   handleSaveCategory();
-                  // () => onCategoryEditing(false);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     handleSaveCategory();
-                    // () => onCategoryEditing(false);
                   }
                 }}
               />
@@ -159,7 +160,7 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
                 <PopupMenu
                   isOpen={isCategoryPopupOpen}
                   onClose={() => setIsCategoryPopupOpen(false)}
-                  onEdit={() => setIsEdit(true)}
+                  onEdit={() => onCategoryEditing(id)}
                   onAdd={() => setIsModalOpen(true)}
                   buttonRef={buttonRef}
                   containerRef={containerRef}
@@ -196,12 +197,12 @@ function AccordionItem({ item, id, containerRef, onCategoryEditing }) {
                     ref={isLast ? lastServiceRef : null}
                   >
                     <ServiceItem
-                      id={service.service_id}
                       serviceData={service}
                       containerRef={containerRef}
                       innerAccRef={innerAccRef}
                       isLast={isLast}
-                      isEdit={isEdit}
+                      isServiceEditing={isServiceEditing}
+                      setIsServiceEditing={setIsServiceEditing}
                     />
                   </li>
                 );

@@ -2,6 +2,7 @@
   display: flex;
   gap: 31px;
   margin-bottom: 21px;
+  align-items: center;
 }
 
 .clientName {
@@ -105,6 +106,7 @@
 
 .carInfoWrapper {
   display: flex;
+  align-items: center;
   gap: 24px;
   margin-bottom: 8px;
 }
@@ -135,10 +137,10 @@
   width: 210px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  width: 210px;
 
-  padding: 6px 16px;
+  /* padding: 6px 16px; */
 
   border-radius: 6px;
   background-color: var(--contacts-info-bg);
@@ -183,7 +185,7 @@
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.2em;
   text-decoration: underline;
 }
 
