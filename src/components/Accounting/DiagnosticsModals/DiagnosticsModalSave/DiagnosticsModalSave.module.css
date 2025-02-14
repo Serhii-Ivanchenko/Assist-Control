@@ -53,7 +53,7 @@
 }
 
 .togglesList {
-  width: 252px;
+  width: 244px;
   display: flex;
   flex-direction: column;
   gap: 31px;
@@ -106,4 +106,26 @@
 
 .tickIcon {
   transform: scale(1.1);
+}
+
+.togglesPart {
+  width: 273px;
+  height: 393px;
+  padding-top: 5px;
+
+  overflow: auto;
+}
+
+.togglesPart::-webkit-scrollbar {
+  width: 8px;
+}
+
+.togglesPart::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg);
+}
+
+.togglesPart::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--main-gray);
 }

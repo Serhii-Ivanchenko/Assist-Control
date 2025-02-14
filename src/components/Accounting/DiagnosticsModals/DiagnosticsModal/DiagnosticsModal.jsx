@@ -9,7 +9,9 @@ import DetailsPart from "./DetailsPart/DetailsPart";
 import { TiTick } from "react-icons/ti";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch } from "react-redux";
-import { getNodesAndParts } from "../../../redux/accounting/operations.js";
+// import { getNodesAndParts } from "../../../redux/accounting/operations.js";
+import CarInfo from "../../../sharedComponents/CarInfo/CarInfo.jsx";
+import { getNodesAndParts } from "../../../../redux/accounting/operations.js";
 
 export default function DiagnosticsModal({
   onClose,
