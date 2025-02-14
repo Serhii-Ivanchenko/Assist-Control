@@ -93,12 +93,12 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
 
   // виклик модалки на групі кнопок
   const handleClick = (idx, event) => {
-    setIsModalOpen(false);
-    setIsPopupOpen(false);
+    // setIsModalOpen(false);
+    // setIsPopupOpen(false);
     switch (idx) {
       case 0:
         setIsModalOpen(true);
-        dispatch(getClientInfo({ carId: 38701 }));
+        dispatch(getClientInfo({ carId: 77188 }));
         setModalContent(<DetailedClientInfo onClose={closeModal} car={item} />);
         break;
       case 1:
@@ -130,8 +130,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
             top: rect.bottom + window.scrollY,
           });
         }
-        setIsPopupOpen(true);
-        console.log("Popup position:", popupPosition);
+        setIsPopupOpen((prev) => !prev);
         break;
 
       case 7:
@@ -215,7 +214,6 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
               onClick={(event) => {
                 handleClick(idx, event);
               }}
-              ref={popupRef}
             >
               {group.map(({ id, title, icon, extraIcon, noBackground }) => {
                 const visibilityKey = categoryIdClients[id];
@@ -227,6 +225,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
                     }`}
                   >
                     <StepperBtn
+                      ref={buttonRef}
                       value={title}
                       icon={icon}
                       extraIcon={extraIcon}
@@ -248,6 +247,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
           isOpen={isPopupOpen}
           onClose={() => setIsPopupOpen(false)}
           buttonRef={buttonRef}
+          popupRef={popupRef}
         />
       )}
 

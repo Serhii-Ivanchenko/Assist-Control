@@ -1,8 +1,12 @@
 import styles from "./RecievedPartsPopup.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-export default function RecievedPartsPopup({ isOpen, onClose, buttonRef }) {
-  const popupRef = useRef(null);
+export default function RecievedPartsPopup({
+  isOpen,
+  onClose,
+  buttonRef,
+  popupRef,
+}) {
 
   const handleClickOutside = (event) => {
     if (
