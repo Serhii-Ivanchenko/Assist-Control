@@ -8,6 +8,8 @@ import ChosenPointCategoriesListItem from "./ChosenPointCategoriesListItem/Chose
 import DetailsPart from "./DetailsPart/DetailsPart";
 import { TiTick } from "react-icons/ti";
 import { RxCross1 } from "react-icons/rx";
+import { useDispatch } from "react-redux";
+import { getNodesAndParts } from "../../../redux/accounting/operations.js";
 
 const togglePoints = [
   { label: "Двигун", checked: false, id: "1" },
@@ -23,6 +25,11 @@ export default function DiagnosticsModal({ onClose }) {
   const [chosenPoints, setChosenPoints] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
   const [categoryForDetailsPart, setCategoryForDetailsPart] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getNodesAndParts());
+  }, []);
 
   useEffect(() => {
     console.log("chosenPoints", chosenPoints);
