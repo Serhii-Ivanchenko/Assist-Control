@@ -1,0 +1,164 @@
+.subHeader {
+  display: grid;
+  grid-template-columns: 65px 93px 74px 85px 136px 157px 110px 110px 119px 110px 110px 40px 22px 22px 22px;
+  margin-bottom: 20px;
+  padding: 16px;
+  background-color: var(--bg-input);
+  justify-items: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.quantityWrapper {
+  display: flex;
+  /* align-items: center; */
+}
+
+.quantityBtn {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.quantityIcon {
+  color: var(--white);
+}
+
+.quantity {
+  width: 30px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  color: var(--white);
+  text-align: center;
+  height: 16px;
+}
+
+.subHeaderDate {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.tableHeaderText {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.pencilWrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.pencilIcon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.minusIcon {
+  width: 22px;
+  height: 22px;
+  fill: #ff3b30;
+  cursor: pointer;
+}
+
+.table {
+  overflow: hidden;
+  transition: height 0.5s ease;
+  /* Анимация изменения высоты */
+}
+
+.stringWrapper {
+  display: grid;
+  grid-template-columns: 65px 93px 74px 85px 136px 157px 110px 110px 119px 110px 110px 40px;
+  margin-bottom: 20px;
+  justify-items: center;
+  /* align-items: center; */
+  padding-left: 16px;
+  /* height: 20px; */
+  overflow: hidden;
+}
+
+.tableDate {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.tableText {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.wrapper {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
+}
+
+.glassIconWrapper {
+  width: 20px;
+  height: 20px;
+  background-color: var(--main-gray);
+  border-radius: 50%;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.glassIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.checkboxWrapper {
+  display: flex;
+  /* align-items: center; */
+  gap: 6px;
+}
+
+.checkboxInput {
+  display: none;
+}
+
+.checkboxIcon {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+
+.showMoreBtn {
+  height: 31px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background-color: var(--input-stroke);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-left: auto;
+}

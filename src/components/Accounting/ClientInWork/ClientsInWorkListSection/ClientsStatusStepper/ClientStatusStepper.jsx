@@ -21,7 +21,7 @@ import { categoryIdClients } from "../../../../../utils/dataToRender.js";
 import { useDispatch } from "react-redux";
 import { getClientInfo } from "../../../../../redux/client/operations.js";
 import StepperBtn from "./StepperBtn/StepperBtn.jsx";
-import RecievedPartsPopup from "./RecievedPartsPopup/RecievedPartsPopup.jsx";
+import CommercialOfferModal from "../../CommercialOfferModal/CommercialOfferModal.jsx";
 
 function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const visibility = useSelector(selectVisibilityClientsInWork);
@@ -97,8 +97,8 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
     // setIsPopupOpen(false);
     switch (idx) {
       case 0:
+        dispatch(getClientInfo({ carId: 38701 }));
         setIsModalOpen(true);
-        dispatch(getClientInfo({ carId: 77188 }));
         setModalContent(<DetailedClientInfo onClose={closeModal} car={item} />);
         break;
       case 1:
@@ -111,7 +111,8 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         break;
       case 3:
         setIsModalOpen(true);
-        setModalContent("Modal for commercial offer");
+
+        setModalContent(<CommercialOfferModal onClose={closeModal} />);
         break;
       case 4:
         setIsModalOpen(true);

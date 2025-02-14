@@ -219,6 +219,7 @@ export default function AddNewClientPerson({ onClose }) {
                 onClose={onClose}
                 btnSave={"Зберегти"}
                 handleSubmit={handleSubmit}
+                btnClose={"Закрити"}
               />
             </div>
           </Form>
