@@ -3,23 +3,18 @@ import css from "./ToggleListItem.module.css";
 export default function ToggleListItem({
   point,
   handleCheckboxChange,
-  checked,
-  // setChosenPoints,
-  // chosenPoints,
+  disabled,
+  chosenPoints,
 }) {
-  // const handleCheckboxChange = (event) => {
-  //   const isChecked = event.target.value;
-  //   setChosenPoints()
-  // };
-
   return (
     <li className={css.listItem}>
       <p className={css.label}>{point.label}</p>
       <label className={css.toggleSwitch}>
         <input
           type="checkbox"
-          checked={() => checked(point.id)}
+          checked={chosenPoints.some((p) => p.id === point.id)}
           onChange={(e) => handleCheckboxChange(e, point.id, point.label)}
+          disabled={disabled}
         />
         <span className={css.slider}></span>
       </label>

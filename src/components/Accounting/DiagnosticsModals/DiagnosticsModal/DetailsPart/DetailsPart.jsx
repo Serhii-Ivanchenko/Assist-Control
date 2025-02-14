@@ -1,3 +1,4 @@
+import { useState } from "react";
 import css from "./DetailsPart.module.css";
 import { BsWrench } from "react-icons/bs";
 
@@ -209,6 +210,16 @@ const categoriesWithSubcategories = [
 ];
 
 export default function DetailsPart({ title }) {
+  const [isChosen, setIsChosen] = useState(false);
+
+  const handleChosenLeft = (id) => {
+    setIsChosen(isChosen === id ? false : id);
+  };
+
+  const handleChosenRight = (id) => {
+    setIsChosen(isChosen === id ? false : id);
+  };
+
   return (
     <>
       <div className={css.title}>
@@ -223,13 +234,25 @@ export default function DetailsPart({ title }) {
                 <li className={css.detailsItem} key={index}>
                   <p className={css.subcategoryName}>{category.name}</p>
                   <div className={css.buttons}>
-                    <div className={`${css.btn} ${css.btnRed}`}>
+                    <button
+                      type="button"
+                      className={`${css.btn} ${
+                        isChosen === category.id && css.btnRed
+                      }`}
+                      onClick={() => handleChosenLeft(category.id)}
+                    >
                       <BsWrench size={18} className={css.icon} />
-                    </div>
-                    <div className={css.btn}>
+                    </button>
+                    <button
+                      type="button"
+                      className={`${css.btn} ${
+                        isChosen === category.id && css.btnRed
+                      }`}
+                      onClick={() => handleChosenRight(category.id)}
+                    >
                       {" "}
                       <BsWrench size={18} className={css.icon} />
-                    </div>
+                    </button>
                   </div>
                 </li>
               ))

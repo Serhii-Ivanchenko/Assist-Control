@@ -4,17 +4,16 @@ import css from "./DiagnosticsModalSave.module.css";
 import car from "../../../../assets/images/car.png";
 import { RxCross1 } from "react-icons/rx";
 import ToggleListItem from "../DiagnosticsModal/ToggleListItem/ToggleListItem";
+import SavedInfoTable from "./SavedInfoTable/SavedInfoTable";
+import { TiTick } from "react-icons/ti";
 
 export default function DiagnosticsModalSave({
   onClose,
   togglePoints,
-  // chosenPoints,
+  setOpenModalSave,
+  openModalSave,
+  chosenPoints,
 }) {
-  // const checked = (id) => {
-  //   // chosenPoints.map((item) => (item.id === id ? true : false));
-  //   chosenPoints.includes(id);
-  // };
-
   return (
     <div className={css.modalWrapper}>
       <RxCross1 className={css.cross} onClick={onClose} />
@@ -34,7 +33,7 @@ export default function DiagnosticsModalSave({
           />
         </div>
 
-        <DiagnosticsInfo />
+        <DiagnosticsInfo time="23" />
       </div>
 
       <div className={css.modalBottomPart}>
@@ -44,13 +43,38 @@ export default function DiagnosticsModalSave({
               <ToggleListItem
                 point={point}
                 key={index}
+                disabled={true}
                 // checked={checked}
                 // setChosenPoints={setChosenPoints}
-                // chosenPoints={chosenPoints}
+                chosenPoints={chosenPoints}
                 // handleCheckboxChange={handleCheckboxChange}
               />
             ))}
           </ul>
+        </div>
+        <div>
+          <SavedInfoTable />
+
+          <div className={css.btnBox}>
+            <button
+              type="button"
+              className={`${css.btn} ${css.cancel}`}
+              onClick={() => setOpenModalSave(!openModalSave)}
+            >
+              Скасувати
+            </button>
+            <button
+              type="button"
+              className={`${css.btn} ${css.save}`}
+              // onClick={() => {
+              //   // setOpenModalSave(true);
+              //   // setIsReadOnly(true);
+              // }}
+            >
+              <TiTick className={css.tickIcon} />
+              Зберегти
+            </button>
+          </div>
         </div>
       </div>
     </div>

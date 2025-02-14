@@ -16,6 +16,7 @@ export default function DiagnosticsModal({
   togglePoints,
   chosenPoints,
   setChosenPoints,
+  setIsReadOnly,
 }) {
   // const [chosenPoints, setChosenPoints] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
@@ -35,16 +36,10 @@ export default function DiagnosticsModal({
   }, [chosenPoints]);
 
   const handleCheckboxChange = (event, id, label) => {
-    // if (isReadOnly) {
-    //   return;
-    // }
-
     setChosenPoints((prevPoints) => {
       if (event.target.checked) {
-        // Додаємо новий об'єкт у масив
         return [...prevPoints, { id, label }];
       } else {
-        // Видаляємо об'єкт із масиву, якщо чекбокс знято
         return prevPoints.filter((point) => point.id !== id);
       }
     });
@@ -80,9 +75,11 @@ export default function DiagnosticsModal({
                 point={point}
                 key={index}
                 // setChosenPoints={setChosenPoints}
-                // chosenPoints={chosenPoints}
+                chosenPoints={chosenPoints}
                 handleCheckboxChange={handleCheckboxChange}
-                // checked=""
+                // isReadOnly={isReadOnly}
+                disabled={false}
+                // checked={checked}
               />
             ))}
           </ul>
@@ -114,7 +111,7 @@ export default function DiagnosticsModal({
           className={`${css.btn} ${css.save}`}
           onClick={() => {
             setOpenModalSave(true);
-            // setIsReadOnly(true);
+            setIsReadOnly(true);
           }}
         >
           <TiTick className={css.tickIcon} />

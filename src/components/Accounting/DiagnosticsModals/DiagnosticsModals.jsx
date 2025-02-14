@@ -15,7 +15,7 @@ const togglePoints = [
 export default function DiagnosticsModals({ onClose }) {
   const [openModalSave, setOpenModalSave] = useState(false);
   const [chosenPoints, setChosenPoints] = useState([]);
-  // const [isReadOnly, setIsReadOnly] = useState(false);
+  const [isReadOnly, setIsReadOnly] = useState(false);
 
   return (
     <>
@@ -23,7 +23,9 @@ export default function DiagnosticsModals({ onClose }) {
         <DiagnosticsModalSave
           onClose={onClose}
           togglePoints={togglePoints}
-          //   chosenPoints={chosenPoints}
+          setOpenModalSave={setOpenModalSave}
+          openModalSave={openModalSave}
+          chosenPoints={chosenPoints}
         />
       ) : (
         <DiagnosticsModal
@@ -32,6 +34,8 @@ export default function DiagnosticsModals({ onClose }) {
           togglePoints={togglePoints}
           setChosenPoints={setChosenPoints}
           chosenPoints={chosenPoints}
+          setIsReadOnly={setIsReadOnly}
+          isReadOnly={isReadOnly}
         />
       )}
     </>
