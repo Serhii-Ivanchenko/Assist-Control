@@ -1,5 +1,5 @@
 import css from "./CommercialOfferModal.module.css";
-import { BsXLg } from "react-icons/bs";
+import { BsWrench, BsXLg } from "react-icons/bs";
 import { TiSpanner } from "react-icons/ti";
 import { BsPersonLinesFill } from "react-icons/bs";
 import carImg from "../../../../assets/images/car.png";
@@ -13,7 +13,7 @@ import BtnsCloseAndSubmit from "../../../sharedComponents/BtnsCloseAndSubmit/Btn
 import { BsCaretRightFill } from "react-icons/bs";
 import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
-import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
+// import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
 
 const dataArr = {
   diagnostic_id: 88,
@@ -337,7 +337,7 @@ export default function CommercialOfferModal({ onClose }) {
           <p className={css.date}>{formattedDate}</p>
           <p className={css.link}>Діагностика № </p>
           <div className={css.mechanicWrapper}>
-            <TiSpanner className={css.spannerIcon} />
+            <BsWrench className={css.spannerIcon} />
             <p className={css.mechanicText}>Механік:</p>
             <p className={css.mechanicName}>{data.mechanic.mechanic_name}</p>
           </div>
@@ -354,7 +354,7 @@ export default function CommercialOfferModal({ onClose }) {
           <SortButtonsArrow />
         </div>
         <div className={css.headerWithArrows}>
-          <p>Наявність</p>
+          <p className={css.tableHeaderText}>Наявність</p>
           <SortButtonsArrow />
         </div>
         <p className={css.tableHeaderText}>Кількість</p>
@@ -370,13 +370,13 @@ export default function CommercialOfferModal({ onClose }) {
           <SortButtonsArrow />
         </div>
         <p className={css.tableHeaderText}>Склад</p>
-        <p>Сума закупки</p>
+        <p className={css.tableHeaderText}>Сума закупки</p>
         <div className={css.headerWithArrows}>
-          <p>Прибуток</p>
+          <p className={css.tableHeaderText}>Прибуток</p>
           <SortButtonsArrow />
         </div>
         <div className={css.headerWithArrows}>
-          <p>%</p>
+          <p className={css.tableHeaderText}>%</p>
           <SortButtonsArrow />
         </div>
       </div>

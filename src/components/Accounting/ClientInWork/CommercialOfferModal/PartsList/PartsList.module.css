@@ -34,7 +34,7 @@
   background-color: transparent;
   font-size: 14px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 300;
   line-height: normal;
   color: var(--white);
   text-align: center;
@@ -45,6 +45,13 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
+  line-height: normal;
+}
+
+.tableHeaderText {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
   line-height: normal;
 }
 
@@ -68,7 +75,8 @@
 
 .table {
   overflow: hidden;
-  transition: height 0.5s ease; /* Анимация изменения высоты */
+  transition: height 0.5s ease;
+  /* Анимация изменения высоты */
 }
 
 .stringWrapper {
@@ -80,6 +88,13 @@
   padding-left: 16px;
   /* height: 20px; */
   overflow: hidden;
+}
+
+.tableDate {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .tableText {

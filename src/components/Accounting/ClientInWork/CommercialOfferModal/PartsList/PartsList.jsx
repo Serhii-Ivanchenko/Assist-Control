@@ -138,8 +138,8 @@ export default function PartsList({
     <div>
       <div className={css.subHeader}>
         <p className={css.subHeaderDate}>{date}</p>
-        <p className={css.subHeaderDate}>{arr.needed_quantity} шт</p>
-        <p></p>
+        <p className={css.subHeaderDate}></p>
+        <p className={css.tableHeaderText}>{arr.needed_quantity} шт</p>
         <p className={css.tableHeaderText}>{arr.code}</p>
         <p className={css.tableHeaderText}>{arr.brand}</p>
         <p className={css.tableHeaderText}>{arr.node_name}</p>
@@ -176,7 +176,7 @@ export default function PartsList({
             {displayedCarParts.map((part) => {
               return (
                 <div key={part.id} className={css.stringWrapper}>
-                  <p className={css.tableText}>{part.date}</p>
+                  <p className={css.tableDate}>{part.date}</p>
                   <p className={css.tableText}>{part.availability} шт</p>
                   <div className={css.quantityWrapper}>
                     <button type="button" className={css.quantityBtn}>
@@ -210,7 +210,7 @@ export default function PartsList({
                   <p></p>
                   <p></p>
                   <div className={css.wrapper}>
-                    <p>
+                    <p className={css.tableText}>
                       {part.supplier.toLowerCase() === "харків"
                         ? "Наявність"
                         : part.supplier}
@@ -244,7 +244,7 @@ export default function PartsList({
                         <FaRegSquare className={css.checkboxIcon} />
                       )}
                     </label>
-                    <p>{part.price}</p>
+                    <p className={css.tableText}>{part.price}</p>
                   </div>
                   <p>{part.profit}</p>
                   <p>{part.percent}</p>
