@@ -2,11 +2,10 @@
   display: flex;
   gap: 31px;
   margin-bottom: 21px;
-  width: 416px;
 }
 
 .clientName {
-  width: 252px;
+  max-width: 252px;
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
@@ -16,6 +15,8 @@
   text-overflow: ellipsis;}
 
 .phone {
+  display: flex;
+  justify-content: center;
   width: 201px;
   height: 35px;
   padding: 6px 16px;
@@ -115,7 +116,7 @@
   font-weight: 600;
   line-height: 1.1667em;
 
-  width: 193px;
+  max-width: 255px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
