@@ -20,6 +20,7 @@ import { categoryIdClients } from "../../../../../utils/dataToRender.js";
 import { useDispatch } from "react-redux";
 import { getClientInfo } from "../../../../../redux/client/operations.js";
 import StepperBtn from "./StepperBtn/StepperBtn.jsx";
+import CommercialOfferModal from "../../CommercialOfferModal/CommercialOfferModal.jsx";
 
 function ClientStatusStepper({
   item,
@@ -88,7 +89,7 @@ function ClientStatusStepper({
   // виклик модалки на групі кнопок
   const handleClick = (idx) => {
     switch (idx) {
-      case 0:      
+      case 0:
         dispatch(getClientInfo({ carId: 38701 }));
         setModalContent(<DetailedClientInfo onClose={closeModal} car={item} />);
         break;
@@ -99,7 +100,7 @@ function ClientStatusStepper({
         setModalContent("Modal for diagnostics");
         break;
       case 3:
-        setModalContent("Modal for commercial offer");
+        setModalContent(<CommercialOfferModal onClose={closeModal} />);
         break;
       case 4:
         setModalContent(<EnterAmountModal onClose={closeModal} />);
