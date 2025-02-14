@@ -194,6 +194,7 @@ export default function CreateTag({
               onClose={onClose}
               handleSubmit={handleSubmit}
               btnSave={"Зберегти"}
+              btnClose={"Закрити"}
             />
           </Form>
         </Formik>

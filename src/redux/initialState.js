@@ -361,5 +361,17 @@ export const initialState = {
     isLoading: false,
     error: null,
   },
+
+  accounting: {
+    stats: [],
+    clientsList: [],
+    clientContact: {},
+    nodesAndPartsForDiagnostics: [],
+    diagnostics: {},
+    commercialOffer: {},
+    order: {},
+    repair: {},
+    invoices: {},
+  },
   isModalOpen: false,
 };

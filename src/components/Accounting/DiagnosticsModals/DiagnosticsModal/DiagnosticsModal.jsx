@@ -8,7 +8,8 @@ import ChosenPointCategoriesListItem from "./ChosenPointCategoriesListItem/Chose
 import DetailsPart from "./DetailsPart/DetailsPart";
 import { TiTick } from "react-icons/ti";
 import { RxCross1 } from "react-icons/rx";
-import CarInfo from "../../../sharedComponents/CarInfo/CarInfo";
+import { useDispatch } from "react-redux";
+import { getNodesAndParts } from "../../../redux/accounting/operations.js";
 
 export default function DiagnosticsModal({
   onClose,
@@ -22,6 +23,11 @@ export default function DiagnosticsModal({
   const [openDetails, setOpenDetails] = useState(false);
   // const [isReadOnly, setIsReadOnly] = useState(false);
   const [categoryForDetailsPart, setCategoryForDetailsPart] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getNodesAndParts());
+  }, []);
 
   useEffect(() => {
     console.log("chosenPoints", chosenPoints);

@@ -3,8 +3,10 @@ import clsx from "clsx";
 import styles from "./StepperBtn.module.css";
 
 function StepperBtn({
+  ref,
   value,
   icon,
+  extraIcon,
   isActive,
   noBackground,
   notificationSent,
@@ -27,9 +29,10 @@ function StepperBtn({
     );
   }
   return (
-    <div className={styles.wrapper}>
+    <div ref={ref} className={styles.wrapper}>
       <p className={styles.text}>{value}</p>
       <span className={iconColor}>{icon}</span>
+      {extraIcon ? <span className={styles.extraIcon}>{extraIcon}</span> : null}
     </div>
   );
 }

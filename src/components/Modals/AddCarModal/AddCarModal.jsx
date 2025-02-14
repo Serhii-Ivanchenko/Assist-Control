@@ -354,6 +354,7 @@ export default function AddCarModal({ onClose }) {
               onClose={onClose}
               handleSubmit={handleSubmit}
               btnSave={"Зберегти"}
+              btnClose={"Закрити"}
             />
           </Form>
         )}
