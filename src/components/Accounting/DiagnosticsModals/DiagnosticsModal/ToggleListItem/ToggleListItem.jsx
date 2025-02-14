@@ -3,6 +3,7 @@ import css from "./ToggleListItem.module.css";
 export default function ToggleListItem({
   point,
   handleCheckboxChange,
+  checked,
   // setChosenPoints,
   // chosenPoints,
 }) {
@@ -17,7 +18,7 @@ export default function ToggleListItem({
       <label className={css.toggleSwitch}>
         <input
           type="checkbox"
-          // checked={point.checked}
+          checked={() => checked(point.id)}
           onChange={(e) => handleCheckboxChange(e, point.id, point.label)}
         />
         <span className={css.slider}></span>

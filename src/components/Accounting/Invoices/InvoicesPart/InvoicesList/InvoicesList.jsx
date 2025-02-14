@@ -3,12 +3,15 @@ import flag from "../../../../../assets/images/flagUa.webp";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 import Modal from "../../../../Modals/Modal/Modal";
-import DiagnosticsModal from "../../../../Modals/DiagnosticsModal/DiagnosticsModal";
+// import DiagnosticsModal from "../../../../Modals/DiagnosticsModal/DiagnosticsModal";
+// import DiagnosticsModalSave from "../../../../Modals/DiagnosticsModal/DiagnosticsModalSave/DiagnosticsModalSave";
+import DiagnosticsModals from "../../../DiagnosticsModals/DiagnosticsModals";
 // import Modal from "../../Modals/Modal/Modal";
 // import DiagnosticsModal from "../../Modals/DiagnosticsModal/DiagnosticsModal";
 
 export default function InvoicesList({ category, list }) {
   const [openModal, setOpenModal] = useState(false);
+  // const [openModalSave, setOpenModalSave] = useState(false);
   const containerRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
@@ -156,10 +159,26 @@ export default function InvoicesList({ category, list }) {
         </li>
       ))}
       {openModal && (
-        <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
-          {category === "Діагностика" && (
-            <DiagnosticsModal onClose={() => setOpenModal(false)} />
-          )}
+        <Modal
+          isOpen={openModal}
+          onClose={() => {
+            setOpenModal(false);
+            // setOpenModalSave(false);
+          }}
+        >
+          {
+            category === "Діагностика" && (
+              <DiagnosticsModals onClose={() => setOpenModal(false)} />
+            )
+            // (openModalSave ? (
+            //   <DiagnosticsModalSave onClose={() => setOpenModal(false)} />
+            // ) : (
+            //   <DiagnosticsModal
+            //     onClose={() => setOpenModal(false)}
+            //     setOpenModalSave={setOpenModalSave}
+            //   />
+            // ))
+          }
         </Modal>
       )}
     </ul>

@@ -1,6 +1,6 @@
-import CarInfo from "../../sharedComponents/CarInfo/CarInfo";
+// import CarInfo from "../../sharedComponents/CarInfo/CarInfo";
 import css from "./DiagnosticsModal.module.css";
-import car from "../../../assets/images/car.png";
+import car from "../../../../assets/images/car.png";
 import DiagnosticsInfo from "./DiagnosticsInfo/DiagnosticsInfo";
 import ToggleListItem from "./ToggleListItem/ToggleListItem";
 import { useEffect, useState } from "react";
@@ -8,20 +8,18 @@ import ChosenPointCategoriesListItem from "./ChosenPointCategoriesListItem/Chose
 import DetailsPart from "./DetailsPart/DetailsPart";
 import { TiTick } from "react-icons/ti";
 import { RxCross1 } from "react-icons/rx";
+import CarInfo from "../../../sharedComponents/CarInfo/CarInfo";
 
-const togglePoints = [
-  { label: "Двигун", checked: false, id: "1" },
-  { label: "Приводні ремені", checked: false, id: "2" },
-  { label: "Тех рідини", checked: false, id: "3" },
-  { label: "Рульове", checked: false, id: "4" },
-  { label: "Ходова", checked: false, id: "5" },
-  { label: "Гальма", checked: false, id: "6" },
-  { label: "Вихлопна", checked: false, id: "7" },
-];
-
-export default function DiagnosticsModal({ onClose }) {
-  const [chosenPoints, setChosenPoints] = useState([]);
+export default function DiagnosticsModal({
+  onClose,
+  setOpenModalSave,
+  togglePoints,
+  chosenPoints,
+  setChosenPoints,
+}) {
+  // const [chosenPoints, setChosenPoints] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
+  // const [isReadOnly, setIsReadOnly] = useState(false);
   const [categoryForDetailsPart, setCategoryForDetailsPart] = useState("");
 
   useEffect(() => {
@@ -37,6 +35,10 @@ export default function DiagnosticsModal({ onClose }) {
   }, [chosenPoints]);
 
   const handleCheckboxChange = (event, id, label) => {
+    // if (isReadOnly) {
+    //   return;
+    // }
+
     setChosenPoints((prevPoints) => {
       if (event.target.checked) {
         // Додаємо новий об'єкт у масив
@@ -80,6 +82,7 @@ export default function DiagnosticsModal({ onClose }) {
                 // setChosenPoints={setChosenPoints}
                 // chosenPoints={chosenPoints}
                 handleCheckboxChange={handleCheckboxChange}
+                // checked=""
               />
             ))}
           </ul>
@@ -106,7 +109,14 @@ export default function DiagnosticsModal({ onClose }) {
         <button type="button" className={`${css.btn} ${css.cancel}`}>
           Скасувати
         </button>
-        <button type="button" className={`${css.btn} ${css.save}`}>
+        <button
+          type="button"
+          className={`${css.btn} ${css.save}`}
+          onClick={() => {
+            setOpenModalSave(true);
+            // setIsReadOnly(true);
+          }}
+        >
           <TiTick className={css.tickIcon} />
           Зберегти
         </button>
