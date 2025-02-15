@@ -1,5 +1,4 @@
 .calendarWrapper {
-    /* padding: 20px 20px 20px 20px; */
     display: flex;
     flex-direction: column;
     height: auto;
@@ -12,7 +11,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    /* width: 408px; */
 }
 
 .boxpagination {
@@ -20,11 +18,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    /* width: 170px;
-    height: 19px; */
     width: clamp(117px, min(9.189vw, 1.759vh * 8.947), 170px);
     height: clamp(12px, min(1.759vh, 9.189vw / 8.947), 19px);
-    /* gap: 5px; */
     gap: clamp(3px, min(0.463vh, 0.27vw), 5px);
 }
 
@@ -32,7 +27,6 @@
     color: var(--white);
 
     font-family: "Roboto", sans-serif;
-    /* font-size: 16px; */
     font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
     font-style: normal;
     font-weight: 300;
@@ -42,10 +36,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* justify-content: space-between; */
-    gap: 10px;
-    /* width: 217px;
-    height: 26px; */
+    gap: clamp(6px, min(0.926vh, 0.541vw), 10px);
 }
 
 
@@ -53,8 +44,6 @@
     stroke: var(--white);
     border: none;
     stroke-width: 3px;
-    /* width: 18px;
-    height: 18px; */
     width: clamp(12px, min(1.666vh, 0.973vw), 18px);
     height: clamp(12px, min(1.666vh, 0.973vw), 18px);
     text-align: center;
@@ -67,8 +56,6 @@
 
 
 .arrowIcon {
-    /* width: 18px;
-    height: 18px; */
     width: clamp(12px, min(1.666vh, 0.973vw), 18px);
     height: clamp(12px, min(1.666vh, 0.973vw), 18px);
     stroke: var(--white);

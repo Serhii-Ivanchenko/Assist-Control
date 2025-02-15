@@ -1,7 +1,9 @@
 .crmCalendarContainer {
-    width: 430px;
-    height: 307px;
-    padding: 20px 11px;
+    /* width: 430px;
+    height: 307px; */
+    width: clamp(297px, min(23.243vw, 28.426vh * 1.401), 430px);
+    height: clamp(204px, min(28.426vh, 23.243vw / 1.400), 307px);
+    padding: clamp(13px, min(1.851vh, 1.081vw), 20px) clamp(7px, min(0.595vw, 1.018vh), 11px);
     border-radius: 12px;
-        background: var(--bg-secondary);
+    background: var(--bg-secondary);
 }

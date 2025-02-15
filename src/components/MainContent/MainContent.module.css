@@ -1,5 +1,5 @@
 .mainContainer {
   display: flex;
   /* gap: 14px; */
-  gap: min(0.757vw, 14px);
+  gap: clamp(9px, min(1.296vh, 0.757vw), 14px);
 }

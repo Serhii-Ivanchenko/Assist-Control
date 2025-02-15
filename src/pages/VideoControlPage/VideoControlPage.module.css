@@ -1,16 +1,4 @@
-.videoControlMainContainer{
-}
+.videoControlMainContainer {}
 
-.mainContent{
-  display: flex;
-  margin-top: 8px;
-  gap: 14px;
-  /* height: 100%; */
-}
-
-@media only screen and (min-width: 1850px) {
-  .mainContent {
-      margin-top: 13px;
-      gap: 14px;
-    }
+.mainContent {
 }

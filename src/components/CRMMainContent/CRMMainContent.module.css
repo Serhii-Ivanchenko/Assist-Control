@@ -1,5 +1,5 @@
 .mainContent {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: clamp(13px, min(1.852vh, 1.081vw), 20px)
 }

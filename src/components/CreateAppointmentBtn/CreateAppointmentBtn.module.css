@@ -2,16 +2,18 @@
 
 .btn {
     display: flex;
-    width: 147px;
-    height: 26px;
-    /* padding: 3px 10px; */
+    /* width: 147px;
+    height: 26px; */
+    width: clamp(101px, min(7.946vw, 2.407vh * 5.654), 147px);
+    height: clamp(17px, min(2.407vh, 7.946vw / 5.654), 26px);
     justify-content: center;
     align-items: center;
     gap: 4px;
+    gap: clamp(9px, min(0.216vw, 0.370vh), 4px);
     border-radius: 6px;
     background: var(--green);
     color: var(--white);
-    font-size: 14px;
+    font-size: clamp(2px, min(0.757vw, 1.296vh), 14px);
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -19,14 +21,14 @@
     border: transparent;
 }
 
- .icon {
-     display: flex;
-     width: 14px;
-     height: 14px;
-     justify-content: center;
-     align-items: center;
-     border-radius: 3px;
-     color: var(--green);
-     background-color: var(--white);
-     stroke-width: 2px;
- }
+.icon {
+    display: flex;
+    width: clamp(9px, min(0.757vw, 1.296vh), 14px);
+    height: clamp(9px, min(0.757vw, 1.296vh), 14px);
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    color: var(--green);
+    background-color: var(--white);
+    stroke-width: 2px;
+}
