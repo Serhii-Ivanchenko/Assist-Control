@@ -60,65 +60,65 @@
 /* Ширини колонок */
 
 .columnId {
-  width: 36px;
+  width: 41px;
 }
 
 .columnCode {
-  width: 85px;
+  width: 112px;
 }
 
 .columnBrand {
-  width: 80px;
+  width: 103px;
 }
 
 .columnNomenclature {
-  width: 156px;
+  width: 175px;
 }
 
 .columnQuantity {
-  width: 48px;
+  width: 50px;
 }
 
 .columnPurchasePrice {
-  width: 60px;
+  width: 75px;
 }
 
 .columnSellingPrice {
-  width: 70px;
+  width: 83px;
 }
 
 .columnSoldAmount {
-  width: 70px;
+  width: 83px;
 }
 
 .columnAvailability {
-  width: 50px;
+  width: 60px;
 }
 
 .columnPartsPurchase {
-  width: 70px;
+  width: 105px;
 }
 
 .columnWorkCost {
-  width: 70px;
+  width: 84px;
 }
 
 .columnPosition {
-  width: calc(130px + 40px + 40px);
+  width: calc(150px + 55px + 70px);
 }
 
-.percentColumn,
+/* .percentColumn,
 .columnPercentage {
   width: 40px;
-}
+} */
 
-.salaryColumn,
+/* .salaryColumn,
 .columnSalary {
   width: 40px;
-}
+} */
 
 .columnPercentage {
-  width: 50px;
+  width: 55px;
 }
 
 .columnSalary {
@@ -126,7 +126,7 @@
 }
 
 .columnMargin {
-  width: 60px;
+  width: 66px;
 }
 
 .emptyCell {
@@ -134,7 +134,7 @@
   padding: 2px 6px;
 }
 .nameColumn {
-  width: 130px;
+  width: 150px;
 }
 
 .deleteIcon {
@@ -144,7 +144,7 @@
 
   position: absolute;
   top: 50%;
-  right: 0px;
+  right: -3px;
 }
 
 .deleteIcon:hover {

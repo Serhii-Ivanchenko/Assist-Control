@@ -2,16 +2,17 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 1295px;
+  width: 1395px;
   height: 900px;
   padding: 20px;
   background: var(--bg-secondary);
+  border-radius: 12px;
 }
 
-.title{
+.title {
   font-size: 20px;
-font-weight: 600;
-line-height: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .infoContainer {
@@ -32,7 +33,7 @@ line-height: normal;
 .date {
   font-size: 20px;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.15em;
 }
 
 .links {
@@ -44,7 +45,7 @@ line-height: normal;
   color: var(--play-btn-triangle);
   font-size: 15px;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.2em;
   text-decoration: underline;
 }
 
@@ -57,7 +58,7 @@ line-height: normal;
 .position {
   font-size: 16px;
   font-weight: 600;
-  line-height: normal;
+  line-height: 1.1875em;
 }
 
 .position {
@@ -109,7 +110,9 @@ line-height: normal;
   color: var(--red);
 }
 
-.btnPayment, .btnDone, .btnCancel {
+.btnPayment,
+.btnDone,
+.btnCancel {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -126,13 +129,13 @@ line-height: normal;
   line-height: normal;
 }
 
-.rightContainer{
+.rightContainer {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.btnCancel{
+.btnCancel {
   background: transparent;
   border: 1px solid var(--light-gray);
   margin-right: 10px;

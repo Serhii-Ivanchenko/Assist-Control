@@ -55,8 +55,8 @@ const TableRepair = ({ data, onDelete }) => {
             <th className={styles.columnPurchasePrice}>Ціна закупки</th>
             <th className={styles.columnSellingPrice}>Ціна продажу</th>
             <th className={styles.columnSoldAmount}>Сума продажу</th>
-            <th className={styles.columnAvailability}>Наяв</th>
-            <th className={styles.columnPartsPurchase}>Закупка Запчастин</th>
+            <th className={styles.columnAvailability}>Наяв-ність</th>
+            <th className={styles.columnPartsPurchase}>Націнка запчастини</th>
             <th className={styles.columnWorkCost}>Вартість робіт</th>
             <th className={styles.columnPosition} colSpan={3}>
               Механік
