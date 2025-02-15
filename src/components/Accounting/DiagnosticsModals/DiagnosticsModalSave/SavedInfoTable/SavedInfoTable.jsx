@@ -69,7 +69,7 @@ export default function SavedInfoTable() {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>№</TableCell>
+                    <TableCell className={css.firstHeaderCell}>№</TableCell>
                     <TableCell>Назва</TableCell>
                     {/* <TableCell>Номер</TableCell> */}
                     <TableCell>Стан</TableCell>
