@@ -48,7 +48,7 @@
   border-top-left-radius: 8px !important;
   border-top-right-radius: 8px !important;
   background-color: var(--bg-input) !important;
-  border: 1px solid var(--light-gray-table) !important;
+  border: 1px solid var(--main-gray) !important;
 }
 
 :global(.MuiTableCell-root) {
@@ -61,7 +61,7 @@
   text-align: center !important;
 }
 
-.repairTableCell > :global(.MuiCheckbox-root) {
+.repairTableCell> :global(.MuiCheckbox-root) {
   position: absolute;
   top: 0;
   left: 0;
@@ -74,3 +74,9 @@
 :global(.MuiTableHead-root > .MuiTableRow-root) {
   background: var(--main-gray) !important;
 }
+
+/* .firstHeaderCell {
+  border-top:none !important;
+  border-left: none !important;
+
+} */

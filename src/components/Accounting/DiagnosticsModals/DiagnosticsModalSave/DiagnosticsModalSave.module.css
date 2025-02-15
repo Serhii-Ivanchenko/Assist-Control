@@ -111,6 +111,7 @@
 .togglesPart {
   width: 273px;
   height: 393px;
+  height: 100%;
   padding-top: 5px;
 
   overflow: auto;

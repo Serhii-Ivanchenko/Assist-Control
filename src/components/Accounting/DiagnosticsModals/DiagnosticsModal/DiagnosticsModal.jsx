@@ -117,7 +117,11 @@ export default function DiagnosticsModal({
         </div>
       </div>
       <div className={css.btnBox}>
-        <button type="button" className={`${css.btn} ${css.cancel}`}>
+        <button
+          type="button"
+          className={`${css.btn} ${css.cancel}`}
+          onClick={onClose}
+        >
           Скасувати
         </button>
         <button
