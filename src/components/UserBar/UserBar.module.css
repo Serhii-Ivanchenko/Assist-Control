@@ -3,7 +3,7 @@
   align-items: center;
   position: absolute;
   top: 75px;
-  right: 23px;
+  right: 0px;
   transition: top 0.7s ease, right 0.7s ease;
 }
 
@@ -28,6 +28,9 @@
   stroke: white;
   width: 20px;
   height: 20px;
+
+  width: clamp(13px, min(1.081vw, 1.852vh), 20px);
+  height: clamp(13px, min(1.081vw, 1.852vh), 20px);
 }
 
 .tooltip {

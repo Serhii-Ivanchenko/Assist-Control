@@ -1,38 +1,31 @@
 .containercalendar {
-    margin-top: 20px;
-    width: 420px;
-    min-height: 188px;
+    margin-top: clamp(13px, min(1.851vh, 1.081vw), 20px);
+    /* width: 420px; */
+    /* min-height: 188px; */
     height: auto;
 }
 
 .weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    height: 24px;
-    margin-bottom: 3px;
-    margin-left: 0;
-    grid-column-gap: 7px;
+    /* height: 24px; */
+    height: clamp(16px, min(2.222vh, 1.297vw), 24px);
+    /* margin-bottom: 3px; */
+    margin-bottom: clamp(2px, min(0.277vh, 0.162vw), 3px);
+    /* grid-column-gap: 7px; */
+    grid-column-gap: clamp(4px, min(0.648vh, 0.378vw), 7px);
     text-align: center;
-
-    color: var(--white);
-    justify-content: center;
-    font-variant-numeric: lining-nums proportional-nums;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
 }
 
 .weekdaysday {
-    grid-column-gap: 6px;
+    /* grid-column-gap: 6px; */
     text-align: center;
-    margin-bottom: 3px;
+    /* margin-bottom: 3px; */
     color: var(--white);
     justify-content: center;
-    font-variant-numeric: lining-nums proportional-nums;
     font-family: "Roboto", sans-serif;
-    font-size: 16px;
+    /* font-size: 16px; */
+    font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
     font-style: normal;
     font-weight: 300;
     line-height: normal;
@@ -41,26 +34,62 @@
 .calendargrid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-column-gap: 7.4px;
-    grid-row-gap: 6px;
+    /* grid-column-gap: 7.4px; */
+    grid-column-gap: clamp(4px, min(0.685vh, 0.4vw), 7.4px);
+    /* grid-row-gap: 6px; */
+    grid-row-gap: clamp(4px, min(0.555vh, 0.324vw), 6px);
+
 }
 
-.calendar-day {
+.calendarDay {
     text-align: center;
     color: var(--white);
-    width: 54px;
-    height: 27px;
+    /* width: 54px; */
+    /* height: 27px; */
+    width: clamp(37px, min(2.919vw, 2.5vh * 2), 54px);
+    height: clamp(18px, min(2.5vh, 2.919vw / 2), 27px);
     border-radius: 5px;
     cursor: pointer;
     font-family: "Roboto", sans-serif;
-    font-size: 16px;
+    /* font-size: 16px; */
+    font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
     font-style: normal;
     font-weight: 300;
     line-height: normal;
     border: none;
+    position: relative;
 }
 
 .other-month {
     background-color: #f0f0f0;
     color: #999;
+}
+
+.cursorDefault {
+    cursor: default;
+    color: var(--text-gray)
+}
+
+.otherMonth {
+    background-color: var(--input-stroke);
+    color: var(--text-gray);
+    cursor: default;
+}
+
+.today {
+    border: 1px solid var(--white);
+    z-index: 1;
+}
+
+.today::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: clamp(2px, min(0.277vh, 0.162vw), 3px) solid var(--white);
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: -1;
 }

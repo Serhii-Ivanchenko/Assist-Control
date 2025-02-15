@@ -37,42 +37,44 @@ function addMonths(date, months) {
 export default function CalendarPagination({ page }) {
   const dispatch = useDispatch();
 
-const pageConfigs = [
-  {
-    page: "crm",
-    selector: selectMonthlyLoadCrm,
-    css: csscrm,
-    loadFunction: (dispatch, calendarMonth) => dispatch(getMonthlyLoad(calendarMonth)),
-  },
-  {
-    page: "video",
-    selector: selectMonthlyLoad,
-    css: cssvideo,
-    loadFunction: (dispatch, calendarMonth) => dispatch(getCalendarByMonth(calendarMonth)),
-  },
-  {
-    page: "recom",
-    selector: selectMonthlyLoadCrm,
-    css: csscrm,
-    loadFunction: (dispatch, calendarMonth) => dispatch(getMonthlyLoad(calendarMonth)),
-  },
-];
+  const pageConfigs = [
+    {
+      page: "crm",
+      selector: selectMonthlyLoadCrm,
+      css: csscrm,
+      loadFunction: (dispatch, calendarMonth) =>
+        dispatch(getMonthlyLoad(calendarMonth)),
+    },
+    {
+      page: "video",
+      selector: selectMonthlyLoad,
+      css: cssvideo,
+      loadFunction: (dispatch, calendarMonth) =>
+        dispatch(getCalendarByMonth(calendarMonth)),
+    },
+    {
+      page: "recom",
+      selector: selectMonthlyLoadCrm,
+      css: csscrm,
+      loadFunction: (dispatch, calendarMonth) =>
+        dispatch(getMonthlyLoad(calendarMonth)),
+    },
+  ];
 
-const currentPageConfig = pageConfigs.find((config) => config.page === page);
+  const currentPageConfig = pageConfigs.find((config) => config.page === page);
   const css = currentPageConfig.css;
   const monthlyLoadData = useSelector(currentPageConfig.selector);
- 
+
   // const css = page === "video" ? cssvideo : csscrm;
-  
+
   // const selectors = {
   // video: useSelector(selectMonthlyLoad),
   // crm: useSelector(selectMonthlyLoadCrm),
   // recom: useSelector(selectMonthlyLoadCrm),
   // };
-  
+
   // const monthlyLoadData = selectors[page] ;
 
-  
   const currentMonth = new Date().toISOString().substring(0, 7);
   const currentDate = new Date().toISOString().substring(0, 10);
   const carSelectDate = useSelector(selectDate);
@@ -141,8 +143,7 @@ const currentPageConfig = pageConfigs.find((config) => config.page === page);
   //   fetchCalendarData();
   // }, [dispatch, calendarMonth, selectedServiceId, page]); // необхідно для коректної роботи вибору сервісів
 
-
- useEffect(() => {
+  useEffect(() => {
     const fetchCalendarData = async () => {
       if (!selectedServiceId) {
         console.warn("Service ID is not available yet. Skipping fetch.");
@@ -159,8 +160,6 @@ const currentPageConfig = pageConfigs.find((config) => config.page === page);
     fetchCalendarData();
   }, [dispatch, calendarMonth, selectedServiceId]);
 
-
-
   let isCurrentMonth = currentMonth === calendarMonth ? true : false;
 
   let crmSelectDate = carSelectDate
@@ -175,7 +174,6 @@ const currentPageConfig = pageConfigs.find((config) => config.page === page);
     date,
     percent,
   }));
-
 
   console.log(monthlyLoadData);
 
@@ -201,16 +199,23 @@ const currentPageConfig = pageConfigs.find((config) => config.page === page);
           <button
             className={css.iconstep}
             onClick={handleClickRight}
-            disabled={isCurrentMonth && page!=="crm"}
-            style={page!=="crm" ? { cursor: "default" } : { cursor: "pointer" }}
+            disabled={isCurrentMonth && page !== "crm"}
+            style={
+              page !== "crm" ? { cursor: "default" } : { cursor: "pointer" }
+            }
           >
             <FiChevronRight className={css.arrowIcon} />
           </button>
         </div>
-        {(page==="crm" || page==="recom" )&& (
-          <div className={css.crmblock} style={{width: page==="crm" ? "217px": "65px"}}>
+        {(page === "crm" || page === "recom") && (
+          <div
+            className={css.crmblock}
+            // style={{ width: page === "crm" ? "217px" : "65px" }}
+          >
             <p className={css.datemont}> {crmSelectDate} </p>
-         {page==="crm" && (   <CreateAppointmentBtn onClick={handleAppointmentBtnClick} />)}
+            {page === "crm" && (
+              <CreateAppointmentBtn onClick={handleAppointmentBtnClick} />
+            )}
             {isModalOpen && (
               <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
                 <ServiceBookingModal
@@ -221,7 +226,6 @@ const currentPageConfig = pageConfigs.find((config) => config.page === page);
                 />
               </Modal>
             )}
-          
           </div>
         )}
       </div>

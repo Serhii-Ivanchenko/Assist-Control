@@ -2,26 +2,20 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 304px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .calendarContainer {
-    width: 460px;
-    height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px);
-  }
+  /* width: 460px; */
+  /* height: clamp(804px, calc(804px + (163 * ((100vh - 900px) / 180))), 967px); */
+  width: clamp(318px, min(24.865vw, 89.537vh * 0.476), 460px);
+  height: clamp(644px, min(89.538vh, 24.865vw / 0.475), 967px);
 }
 
 .topContainer {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-}
+  /* gap: 14px; */
+  gap: clamp(9px, min(1.296vh, 0.756vw), 14px);
 
-@media only screen and (min-width: 1850px) {
-  .topContainer {
-    max-height: 883px;
-    overflow: hidden;
-    margin-bottom: 14px;
-  }
+
+  max-height: 883px;
+  overflow: hidden;
+  margin-bottom: clamp(9px, min(1.296vh, 0.756vw), 14px);
 }

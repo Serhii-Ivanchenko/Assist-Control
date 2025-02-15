@@ -1,10 +1,5 @@
 .wrapper {
     display: flex;
-    gap: 6px;
-}
-
-@media only screen and (min-width: 1850px) {
-  .wrapper {
-    gap: 0;
-  }
+    gap: min(0.54vw, 10px);
+    /* gap: 10px; */
 }
