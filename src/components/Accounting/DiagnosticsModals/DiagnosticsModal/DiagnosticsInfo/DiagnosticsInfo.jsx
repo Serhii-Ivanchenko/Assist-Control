@@ -2,7 +2,7 @@ import css from "./DiagnosticsInfo.module.css";
 import { BsWrench } from "react-icons/bs";
 import { BsPersonLinesFill } from "react-icons/bs";
 
-export default function DiagnosticsInfo() {
+export default function DiagnosticsInfo({ time }) {
   return (
     <div className={css.wrapper}>
       <p className={css.date}>03.02.2025</p>
@@ -32,7 +32,7 @@ export default function DiagnosticsInfo() {
         </div>
       </div>
       <p className={css.minutes}>
-        <span className={css.minutesTime}>--</span>хв
+        <span className={css.minutesTime}>{time || "--"}</span>хв
       </p>
     </div>
   );

@@ -1,0 +1,82 @@
+.tableWrapper {
+  display: flex;
+  width: 638px;
+  height: 307px;
+  padding: 15px 14px 30px 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 19px;
+
+  border-radius: 6px;
+  background: var(--bg-input);
+
+  margin-bottom: 42px;
+}
+
+.infoBtnWrapper {
+  display: flex;
+  gap: 23px;
+}
+
+.infoBtn {
+  color: var(--input-text);
+  border: none;
+  background: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration-line: underline;
+  cursor: pointer;
+  transition: color 300ms ease-in-out;
+}
+
+.infoBtn:disabled,
+.nonActiveBtn {
+  color: var(--white);
+}
+
+.disabledBtn {
+  cursor: default;
+}
+
+.sparePartsTableWrapper {
+  width: 609px;
+}
+
+:global(.MuiTableContainer-root) {
+  margin-top: 19px;
+  border-radius: 0px !important;
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  background-color: var(--bg-input) !important;
+  border: 1px solid var(--main-gray) !important;
+}
+
+:global(.MuiTableCell-root) {
+  color: var(--white) !important;
+  outline: var(--light-gray-table) !important;
+  border: 1px solid var(--light-gray-table) !important;
+  padding: 6px !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+}
+
+.repairTableCell> :global(.MuiCheckbox-root) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0px;
+  border-right: 1px solid var(--light-gray-table);
+  width: 25px !important;
+  padding: 0px !important;
+}
+
+:global(.MuiTableHead-root > .MuiTableRow-root) {
+  background: var(--main-gray) !important;
+}
+
+/* .firstHeaderCell {
+  border-top:none !important;
+  border-left: none !important;
+
+} */

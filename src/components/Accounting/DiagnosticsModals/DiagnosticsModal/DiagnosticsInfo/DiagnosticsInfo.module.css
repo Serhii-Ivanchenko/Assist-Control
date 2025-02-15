@@ -25,7 +25,7 @@
 
 .infoKey {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   gap: 10px;
 }
 
@@ -86,4 +86,5 @@
 
 .minutesTime {
   color: var(--green);
+  font-weight: 700;
 }

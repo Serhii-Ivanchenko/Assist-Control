@@ -1,3 +1,4 @@
+import { useState } from "react";
 import css from "./DetailsPart.module.css";
 import { BsWrench } from "react-icons/bs";
 
@@ -5,52 +6,167 @@ const categoriesWithSubcategories = [
   {
     label: "Система запалювання",
     categ: [
-      { name: "Система розподілу запалювання", id: "1" },
-      { name: "Свічки запалювання", id: "2" },
-      { name: "Індукційний котел", id: "3" },
-      { name: "Датчик обертів колінвала", id: "4" },
-      { name: "Модуль запалювання", id: "5" },
+      {
+        name: "Система розподілу запалювання",
+        id: "11",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Свічки запалювання",
+        id: "21",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Індукційний котел",
+        id: "31",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Датчик обертів колінвала",
+        id: "41",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Модуль запалювання",
+        id: "51",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
     ],
   },
   {
     label: "Система подачі пального",
     categ: [
-      { name: "Фільтр пального", id: "1" },
-      { name: "Насос подачі пального", id: "2" },
-      { name: "Паливна рейка", id: "3" },
-      { name: "Форсунки", id: "4" },
-      { name: "Рел насоса пального", id: "5" },
+      {
+        name: "Фільтр пального",
+        id: "12",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Насос подачі пального",
+        id: "22",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Паливна рейка",
+        id: "32",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      { name: "Форсунки", id: "42", isChosenLeft: false, isChosenRight: false },
+      {
+        name: "Рел насоса пального",
+        id: "52",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
     ],
   },
   {
     label: "ГРМ (газорозподільний механізм)",
     categ: [
-      { name: "Ремінь ГРМ", id: "1" },
-      { name: "Ланцюг ГРМ", id: "2" },
-      { name: "Ролики натягувачі", id: "3" },
-      { name: "Кільця клапанів", id: "4" },
-      { name: "Корпус ГРМ", id: "5" },
+      {
+        name: "Ремінь ГРМ",
+        id: "15",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Ланцюг ГРМ",
+        id: "25",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Ролики натягувачі",
+        id: "35",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Кільця клапанів",
+        id: "45",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Корпус ГРМ",
+        id: "55",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
     ],
   },
   {
     label: "Система охолодження",
     categ: [
-      { name: "Радіатор", id: "1" },
-      { name: "Помпа", id: "2" },
-      { name: "Термостат", id: "3" },
-      { name: "Трубопроводи охолодження", id: "4" },
-      { name: "Контур охолодження", id: "5" },
-      { name: "Реле вентилятора", id: "6" },
+      { name: "Радіатор", id: "18", isChosenLeft: false, isChosenRight: false },
+      { name: "Помпа", id: "28", isChosenLeft: false, isChosenRight: false },
+      {
+        name: "Термостат",
+        id: "38",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Трубопроводи охолодження",
+        id: "47",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Контур охолодження",
+        id: "57",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Реле вентилятора",
+        id: "67",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
     ],
   },
   {
     label: "Турбонаддув",
     categ: [
-      { name: "Турбокомпресор", id: "1" },
-      { name: "Інтеркулер", id: "2" },
-      { name: "Вихлопна труба турбонаддува", id: "3" },
-      { name: "Паливний насос турбонаддува", id: "4" },
-      { name: "Робочий вал турбонаддува", id: "5" },
+      {
+        name: "Турбокомпресор",
+        id: "14",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Інтеркулер",
+        id: "24",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Вихлопна труба турбонаддува",
+        id: "3444",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Паливний насос турбонаддува",
+        id: "44",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
+      {
+        name: "Робочий вал турбонаддува",
+        id: "59",
+        isChosenLeft: false,
+        isChosenRight: false,
+      },
     ],
   },
   {
@@ -209,6 +325,40 @@ const categoriesWithSubcategories = [
 ];
 
 export default function DetailsPart({ title }) {
+  // const [isChosenLeft, setIsChosenLeft] = useState(false);
+  // const [isChosenRight, setIsChosenRight] = useState(false);
+  const [spares, setSpares] = useState(categoriesWithSubcategories);
+
+  const handleChosenLeft = (id) => {
+    // setIsChosenLeft(id);
+    setSpares(
+      spares.map((category) => ({
+        ...category,
+        categ: category.categ.map((spare) =>
+          spare.id === id
+            ? { ...spare, isChosenLeft: !spare.isChosenLeft }
+            : spare
+        ),
+      }))
+    );
+
+    // const handleChosenRight = (id) => {
+    // setIsChosenRight(id);
+  };
+
+  const handleChosenRight = (id) => {
+    setSpares(
+      spares.map((category) => ({
+        ...category,
+        categ: category.categ.map((spare) =>
+          spare.id === id
+            ? { ...spare, isChosenRight: !spare.isChosenRight }
+            : spare
+        ),
+      }))
+    );
+  };
+
   return (
     <>
       <div className={css.title}>
@@ -217,19 +367,31 @@ export default function DetailsPart({ title }) {
         <p className={css.sides}>П</p>
       </div>
       <ul className={css.detailsList}>
-        {categoriesWithSubcategories.map((cat) =>
+        {spares.map((cat) =>
           cat.label === title
             ? cat.categ.map((category, index) => (
                 <li className={css.detailsItem} key={index}>
                   <p className={css.subcategoryName}>{category.name}</p>
                   <div className={css.buttons}>
-                    <div className={`${css.btn} ${css.btnRed}`}>
+                    <button
+                      type="button"
+                      className={`${css.btn} ${
+                        category.isChosenLeft === true && css.btnRed
+                      }`}
+                      onClick={() => handleChosenLeft(category.id)}
+                    >
                       <BsWrench size={18} className={css.icon} />
-                    </div>
-                    <div className={css.btn}>
+                    </button>
+                    <button
+                      type="button"
+                      className={`${css.btn} ${
+                        category.isChosenRight && css.btnRed
+                      }`}
+                      onClick={() => handleChosenRight(category.id)}
+                    >
                       {" "}
                       <BsWrench size={18} className={css.icon} />
-                    </div>
+                    </button>
                   </div>
                 </li>
               ))
