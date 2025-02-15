@@ -1,0 +1,173 @@
+.customTableWrapper{
+  display: block;
+  width: 100%;
+  max-height: 571px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
+.customTable {
+  display: block;
+  width: 100%;
+  position: relative;
+  max-height: 100%;
+  table-layout: auto;
+}
+
+.customTableWrapper::-webkit-scrollbar {
+  width: 8px; /* Зменшуємо товщину скролу */
+}
+
+.customTableWrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(216, 225, 255, 0.25);
+  border-radius: 10px;
+}
+
+.customTableWrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.customTable th,
+.customTable td {
+  border: 1px solid rgba(216, 225, 255, 0.25);
+  padding: 10px 6px;
+  text-align: center;
+}
+
+.headerTop {
+  height: 61px;
+  background: var(--bg-input);
+  font-weight: bold;
+}
+
+.headerBottom {
+  height: 30px;
+  background: var(--bg-input);
+  font-weight: bold;
+}
+
+.customTable tbody tr {
+  height: 36px;
+}
+
+.noData {
+  text-align: center;
+  font-weight: bold;
+  color: #999;
+}
+
+/* Ширини колонок */
+
+.columnId {
+  width: 41px;
+}
+
+.columnCode {
+  width: 112px;
+}
+
+.columnBrand {
+  width: 103px;
+}
+
+.columnNomenclature {
+  width: 175px;
+}
+
+.columnQuantity {
+  width: 50px;
+}
+
+.columnPurchasePrice {
+  width: 75px;
+}
+
+.columnSellingPrice {
+  width: 83px;
+}
+
+.columnSoldAmount {
+  width: 83px;
+}
+
+.columnAvailability {
+  width: 60px;
+}
+
+.columnPartsPurchase {
+  width: 105px;
+}
+
+.columnWorkCost {
+  width: 84px;
+}
+
+.columnPosition {
+  width: calc(150px + 55px + 70px);
+}
+
+/* .percentColumn,
+.columnPercentage {
+  width: 40px;
+} */
+
+/* .salaryColumn,
+.columnSalary {
+  width: 40px;
+} */
+
+.columnPercentage {
+  width: 55px;
+}
+
+.columnSalary {
+  width: 70px;
+}
+
+.columnMargin {
+  width: 66px;
+}
+
+.emptyCell {
+  height: 30px;
+  padding: 2px 6px;
+}
+.nameColumn {
+  width: 150px;
+}
+
+.deleteIcon {
+  cursor: pointer;
+  color: #d54e4f;
+  transform: translateY(-50%);
+
+  position: absolute;
+  top: 50%;
+  right: -3px;
+}
+
+.deleteIcon:hover {
+  color: #ff0000;
+}
+
+.rowWrapper {
+  position: relative;
+}
+
+.columnDelete,
+.deleteColumn {
+  width: 15px !important;
+  visibility: hidden;
+}
+
+.rowWrapper:hover .columnDelete {
+  visibility: visible;
+  border: none;
+}
+
+.headerTop .columnDelete,
+.headerBottom .columnDelete {
+  visibility: hidden;
+  border: none;
+}
