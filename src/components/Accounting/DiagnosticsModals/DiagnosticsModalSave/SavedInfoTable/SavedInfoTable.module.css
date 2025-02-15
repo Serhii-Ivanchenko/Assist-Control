@@ -40,6 +40,11 @@
 
 .sparePartsTableWrapper {
   width: 609px;
+  border-radius: 10px !important;
+}
+
+:global(.MuiTable-root) {
+  border: 1px solid var(--light-gray-table) !important;
 }
 
 :global(.MuiTableContainer-root) {
@@ -48,20 +53,32 @@
   border-top-left-radius: 8px !important;
   border-top-right-radius: 8px !important;
   background-color: var(--bg-input) !important;
-  border: 1px solid var(--main-gray) !important;
+  /* border: 1px solid var(--light-gray-table) !important; */
+  /* border-collapse: none !important; */
 }
 
 :global(.MuiTableCell-root) {
   color: var(--white) !important;
   outline: var(--light-gray-table) !important;
-  border: 1px solid var(--light-gray-table) !important;
+  /* border: 1px solid rgb(194, 199, 213) !important; */
   padding: 6px !important;
   font-size: 16px !important;
   font-weight: 400 !important;
   text-align: center !important;
+  border-top: none;
+  border-bottom: none;
 }
 
-.repairTableCell> :global(.MuiCheckbox-root) {
+:global(.MuiTableCell-root):not(:last-child) {
+  border-right: 1px solid var(--light-gray-table) !important;
+}
+
+/* ::first-line {
+  border-top-left-radius: 10px !important;
+  /* border: 1px solid rgb(194, 199, 213) !important; 
+} */
+
+.repairTableCell > :global(.MuiCheckbox-root) {
   position: absolute;
   top: 0;
   left: 0;
@@ -80,3 +97,12 @@
   border-left: none !important;
 
 } */
+
+:global(.MuiTableRow-root):not(:last-child) {
+  border-bottom: 1px solid var(--light-gray-table);
+  /* border-bottom: none; */
+}
+
+:global(.MuiTableRow-root):last-child {
+  border-bottom: none !important;
+}
