@@ -20,6 +20,7 @@ export default function DiagnosticsModals({ onClose }) {
   const [openModalSave, setOpenModalSave] = useState(false);
   const [chosenPoints, setChosenPoints] = useState([]);
   const [isReadOnly, setIsReadOnly] = useState(false);
+  const [chosenSpares, setChosenSpares] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function DiagnosticsModals({ onClose }) {
           setOpenModalSave={setOpenModalSave}
           openModalSave={openModalSave}
           chosenPoints={chosenPoints}
+          chosenSpares={chosenSpares}
         />
       ) : (
         <DiagnosticsModal
@@ -47,6 +49,8 @@ export default function DiagnosticsModals({ onClose }) {
           chosenPoints={chosenPoints}
           setIsReadOnly={setIsReadOnly}
           isReadOnly={isReadOnly}
+          setChosenSpares={setChosenSpares}
+          chosenSpares={chosenSpares}
         />
       )}
     </>

@@ -20,6 +20,8 @@ export default function DiagnosticsModal({
   chosenPoints,
   setChosenPoints,
   setIsReadOnly,
+  setChosenSpares,
+  chosenSpares,
 }) {
   // const [chosenPoints, setChosenPoints] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
@@ -41,7 +43,11 @@ export default function DiagnosticsModal({
       setCategoryForDetailsPart("");
       setOpenDetails(false);
     }
-  }, [chosenPoints]);
+
+    if (chosenPoints.every((point) => point.label !== categoryForDetailsPart)) {
+      setOpenDetails(false);
+    }
+  }, [chosenPoints, categoryForDetailsPart]);
 
   const handleCheckboxChange = (event, id, label) => {
     setChosenPoints((prevPoints) => {
@@ -112,6 +118,8 @@ export default function DiagnosticsModal({
             <DetailsPart
               title={categoryForDetailsPart}
               togglePoints={togglePoints}
+              setChosenSpares={setChosenSpares}
+              chosenSpares={chosenSpares}
             />
           )}
         </div>

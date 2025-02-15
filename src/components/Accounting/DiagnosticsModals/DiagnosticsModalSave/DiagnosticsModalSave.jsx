@@ -13,6 +13,7 @@ export default function DiagnosticsModalSave({
   setOpenModalSave,
   openModalSave,
   chosenPoints,
+  chosenSpares,
 }) {
   return (
     <div className={css.modalWrapper}>
@@ -53,7 +54,7 @@ export default function DiagnosticsModalSave({
           </ul>
         </div>
         <div>
-          <SavedInfoTable />
+          <SavedInfoTable chosenSpares={chosenSpares} />
 
           <div className={css.btnBox}>
             <button

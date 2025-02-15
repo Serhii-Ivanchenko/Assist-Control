@@ -12,8 +12,13 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-export default function SavedInfoTable() {
+export default function SavedInfoTable({ chosenSpares }) {
   const [diagnostic, setDiagnostic] = useState("spareParts");
+
+  const chosenSparesWithSides = chosenSpares.map((spare) => ({
+    ...spare,
+    name: `${spare.name} ${spare.side === "left" ? "(лівий)" : "(правий)"}`,
+  }));
 
   return (
     <div className={css.tableWrapper}>
@@ -77,15 +82,15 @@ export default function SavedInfoTable() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {/* {diagnostics.spareParts.map((item) => ( */}
-                  <TableRow key={`${Math.random()}`}>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    {/* <TableCell></TableCell> */}
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                  </TableRow>
-                  {/* ))} */}
+                  {chosenSparesWithSides.map((item, index) => (
+                    <TableRow key={`${Math.random()}`}>
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>{item.name}</TableCell>
+                      {/* <TableCell></TableCell> */}
+                      <TableCell>Критично</TableCell>
+                      <TableCell>Не вказано</TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </TableContainer>
