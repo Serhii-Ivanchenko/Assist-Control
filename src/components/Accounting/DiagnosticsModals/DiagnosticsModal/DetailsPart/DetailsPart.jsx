@@ -327,15 +327,26 @@ import { BsWrench } from "react-icons/bs";
 export default function DetailsPart({ title, togglePoints }) {
   // const [isChosenLeft, setIsChosenLeft] = useState(false);
   // const [isChosenRight, setIsChosenRight] = useState(false);
-  const [spares, setSpares] = useState(togglePoints);
+
+  const newSparesArray = togglePoints.map((spare) => ({
+    ...spare,
+    parts: spare.parts.map((part) => ({
+      ...part,
+      isChosenLeft: false,
+      isChosenRight: false,
+    })),
+  }));
+  console.log("newSparesArray", newSparesArray);
+
+  const [spares, setSpares] = useState(newSparesArray);
 
   const handleChosenLeft = (id) => {
     // setIsChosenLeft(id);
     setSpares(
       spares.map((category) => ({
         ...category,
-        categ: category.categ.map((spare) =>
-          spare.id === id
+        parts: category.parts.map((spare) =>
+          spare.part_id === id
             ? { ...spare, isChosenLeft: !spare.isChosenLeft }
             : spare
         ),
@@ -350,8 +361,8 @@ export default function DetailsPart({ title, togglePoints }) {
     setSpares(
       spares.map((category) => ({
         ...category,
-        categ: category.categ.map((spare) =>
-          spare.id === id
+        parts: category.parts.map((spare) =>
+          spare.part_id === id
             ? { ...spare, isChosenRight: !spare.isChosenRight }
             : spare
         ),
@@ -376,9 +387,9 @@ export default function DetailsPart({ title, togglePoints }) {
                     <button
                       type="button"
                       className={`${css.btn} ${
-                        category.isChosenLeft === true && css.btnRed
+                        category.isChosenLeft && css.btnRed
                       }`}
-                      onClick={() => handleChosenLeft(category.id)}
+                      onClick={() => handleChosenLeft(category.part_id)}
                     >
                       <BsWrench size={18} className={css.icon} />
                     </button>
@@ -387,7 +398,7 @@ export default function DetailsPart({ title, togglePoints }) {
                       className={`${css.btn} ${
                         category.isChosenRight && css.btnRed
                       }`}
-                      onClick={() => handleChosenRight(category.id)}
+                      onClick={() => handleChosenRight(category.part_id)}
                     >
                       {" "}
                       <BsWrench size={18} className={css.icon} />
