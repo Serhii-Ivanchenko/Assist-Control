@@ -102,12 +102,18 @@ export default function DiagnosticsModal({
                 openDetails={openDetails}
                 setCategoryForDetailsPart={setCategoryForDetailsPart}
                 chosenPoints={chosenPoints}
+                togglePoints={togglePoints}
               />
             ))}
           </ul>
         </div>
         <div className={css.detailsPart}>
-          {openDetails && <DetailsPart title={categoryForDetailsPart} />}
+          {openDetails && (
+            <DetailsPart
+              title={categoryForDetailsPart}
+              togglePoints={togglePoints}
+            />
+          )}
         </div>
       </div>
       <div className={css.btnBox}>

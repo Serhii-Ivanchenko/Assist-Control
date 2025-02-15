@@ -95,6 +95,9 @@
 
 .categoriesList {
   height: 389px;
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
 }
 
 .detailsPart {
