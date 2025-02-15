@@ -44,10 +44,9 @@ export default function CurrentCarsItem() {
       });
   }, [dispatch, selectedServiceId]);
 
-   const handleArchiveSuccess = () => {
-      dispatch(getCurrentCars());
-    };
-  
+  const handleArchiveSuccess = () => {
+    dispatch(getCurrentCars());
+  };
 
   const getStatusIcon = useMemo(() => {
     return (status) => {
@@ -88,52 +87,84 @@ export default function CurrentCarsItem() {
     };
   }, []);
 
+  const parseRenderTime = (timeStr) => {
+    if (!timeStr) return Infinity; // Якщо значення немає, ставимо максимальне
+
+    // Перевіряємо, чи є в рядку "д" (дні)
+    if (timeStr.includes("д")) {
+      const match = timeStr.match(/(\d+)\s*д\s*(\d{1,2}):(\d{2})/);
+      if (!match) return Infinity;
+
+      const days = parseInt(match[1], 10);
+      const hours = parseInt(match[2], 10);
+      const minutes = parseInt(match[3], 10);
+
+      return days * 1440 + hours * 60 + minutes; // Перетворюємо у хвилини
+    } else {
+      // Формат без днів: "01:48"
+      const match = timeStr.match(/(\d{1,2}):(\d{2})/);
+      if (!match) return Infinity;
+
+      const hours = parseInt(match[1], 10);
+      const minutes = parseInt(match[2], 10);
+
+      return hours * 60 + minutes; // Тільки години і хвилини
+    }
+  };
+
   const renderedCars = useMemo(() => {
-    return currentCars?.map((car) => {
-      const icon = getStatusIcon(car.status);
-      const { label, className } = getStatusDetails(styles, car.status, icon);
-      return (
-        <div className={clsx(styles.wrapper, className)} key={car.car_id}>
-          <div className={styles.imgContainer}>
-            <img
-              className={styles.carImg}
-              src={car?.photo_url || absentAutoImg}
-              alt="Car image"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = absentAutoImg;
-              }}
-            />
-          </div>
-          <div className={styles.carInfoContainer}>
-            <p className={styles.carBrand}>
-              {car.make && car.model
-                ? `${car.make} ${car.model}`
-                : "Марку не визначено"}{" "}
-            </p>
-            <h3 className={styles.carReg}>{car.plate}</h3>
-            <h4 className={styles.carTimeStamp}>
-              {renderTime(car.complete_d, car.date_s)}
-            </h4>
-          </div>
-          <div className={styles.detailsContainer}>
-            <div className={styles.btnContainer}>
-              <StatusBtn car={car} onArchiveSuccess={handleArchiveSuccess}/>
-              <CarDetailButton
-                carId={car.car_id}
-                // location={isMonitoring}
-                carName={car.auto}
+    return currentCars
+      ?.slice()
+      .sort((a, b) => {
+        const timeA = parseRenderTime(renderTime(a.complete_d, a.date_s));
+        const timeB = parseRenderTime(renderTime(b.complete_d, b.date_s));
+        return timeA - timeB; // Сортуємо за зростанням
+      })
+      .map((car) => {
+        const icon = getStatusIcon(car.status);
+        const { label, className } = getStatusDetails(styles, car.status, icon);
+        return (
+          <div className={clsx(styles.wrapper, className)} key={car.car_id}>
+            <div className={styles.imgContainer}>
+              <img
+                className={styles.carImg}
+                src={car?.photo_url || absentAutoImg}
+                alt="Car image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = absentAutoImg;
+                }}
               />
             </div>
-            <div className={styles.statusContainer}>
-              <p className={clsx(styles.carStatus, className)}>
-                {icon} {label}
+            <div className={styles.carInfoContainer}>
+              <p className={styles.carBrand}>
+                {car.make && car.model
+                  ? `${car.make} ${car.model}`
+                  : "Марку не визначено"}{" "}
               </p>
+              <h3 className={styles.carReg}>{car.plate}</h3>
+              <h4 className={styles.carTimeStamp}>
+                {renderTime(car.complete_d, car.date_s)}
+              </h4>
+            </div>
+            <div className={styles.detailsContainer}>
+              <div className={styles.btnContainer}>
+                <StatusBtn car={car} onArchiveSuccess={handleArchiveSuccess} />
+                <CarDetailButton
+                  carId={car.car_id}
+                  // location={isMonitoring}
+                  carName={car.auto}
+                />
+              </div>
+              <div className={styles.statusContainer}>
+                <p className={clsx(styles.carStatus, className)}>
+                  {icon} {label}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      );
-    });
+        );
+      });
   }, [currentCars, getStatusIcon]);
 
   return <>{renderedCars}</>;

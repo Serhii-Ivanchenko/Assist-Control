@@ -21,6 +21,8 @@ import { categoryIdClients } from "../../../../../utils/dataToRender.js";
 import { useDispatch } from "react-redux";
 import { getClientInfo } from "../../../../../redux/client/operations.js";
 import StepperBtn from "./StepperBtn/StepperBtn.jsx";
+import RepairModal from "../../RepairModal/RepairModal.jsx";
+import RecievedPartsPopup from "./RecievedPartsPopup/RecievedPartsPopup.jsx";
 import CommercialOfferModal from "../../CommercialOfferModal/CommercialOfferModal.jsx";
 
 function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
@@ -136,7 +138,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
 
       case 7:
         setIsModalOpen(true);
-        setModalContent("Modal for repair");
+        setModalContent(<RepairModal onClose={closeModal} car={item}/>);
         break;
       case 8:
         setIsModalOpen(true);

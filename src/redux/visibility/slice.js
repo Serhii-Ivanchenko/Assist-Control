@@ -85,6 +85,7 @@ const visibilitySlice = createSlice({
       provider: true,
       repair: true,
       totalAmount: true,
+      notification: true,
     },
     visibilityAllClients: {
       rating: true,
