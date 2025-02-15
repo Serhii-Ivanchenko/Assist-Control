@@ -49,10 +49,16 @@ export default function DownloadPdfButtonRepair({ carsData}) {
         "Бренд",
         "Номенклатура",
         "Кількість",
+        "Ціна закупки",
+        "Ціна продажу",
+        "Сума продажу",
         "Наявність",
-        "Ціна, грн",
-        "Сума, грн",
-        "Механік",
+        "Націнка запчастини",
+        "Вартість робіт",
+        "Маржа",
+        "ПІБ Механіка",
+        "% Механіка",
+        "ЗП Механіа"
       ].filter(Boolean);
   
       const tableData = carsData.map((car) => {
@@ -62,12 +68,18 @@ export default function DownloadPdfButtonRepair({ carsData}) {
           car.brand || "-",
           car.nomenclature || "—",
           car.quantity || "—",
-          car.availability || "—",
+          car.purchasePrice || "—",
           car.sellingPrice || "—",
           car.soldAmount || "—",
-          car.mechanic?.fullName || "—",
+          car.availability || "—",
+          car.partsPurchase || "—",
+          car.workCost || "—",
+          car.margin || "—",
+          car.mechanic ? car.mechanic.fullName : "—",
+          car.mechanic ? car.mechanic.percentage : "—",
+          car.mechanic ? car.mechanic.salary : "—",
         ];
-
+  
         return row;
       });
   
@@ -85,17 +97,18 @@ export default function DownloadPdfButtonRepair({ carsData}) {
       });
   
       const now = new Date();
-
+  
       const day = now.getDate().toString().padStart(2, "0");
       const month = (now.getMonth() + 1).toString().padStart(2, "0");
       const year = now.getFullYear();
       const time = now.toTimeString().split(" ")[0];
-      
+  
       doc.save(`repair_report_${day}-${month}-${year}_${time}.pdf`);
-          };
+    };
   
     generatePdf();
   };
+  
   
 
   return (
