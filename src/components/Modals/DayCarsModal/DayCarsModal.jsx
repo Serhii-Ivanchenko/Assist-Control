@@ -217,6 +217,7 @@ export default function DayCarsModal({ onClose, isModal }) {
               value={searchTerm}
               onChange={handleSearch}
               error={inputError}
+              placeholderText={'Пошук по номеру авто'}
             />
           </div>
           <TimeSortItem onSortChange={setSortDescending} />
@@ -239,10 +240,10 @@ export default function DayCarsModal({ onClose, isModal }) {
           />
           <DownloadPdfButtonModalCar carsData={filteredCars()} />
           <InfoSettingsVisibility
-          selectVisibility={selectVisibilityCar}
-          toggleVisibilityAction={toggleVisibilityCar}
-          labelNames={labelNamesInModal}
-        />
+            selectVisibility={selectVisibilityCar}
+            toggleVisibilityAction={toggleVisibilityCar}
+            labelNames={labelNamesInModal}
+          />
         </div>
       </div>
       <button className={styles.closeButton} onClick={onClose}>
@@ -259,7 +260,8 @@ export default function DayCarsModal({ onClose, isModal }) {
           carsData={filteredCarsData}
           viewMode={viewMode}
           isModal={isModal}
-          onArchiveSuccess={handleArchiveSuccess}        />
+          onArchiveSuccess={handleArchiveSuccess}
+        />
       )}
     </div>
   );

@@ -512,6 +512,7 @@ export default function AddAutoServiceModal({
                 onClose={onClose}
                 handleSubmit={handleSubmit}
                 btnSave={"Зберегти"}
+                btnClose={"Закрити"}
               />
             </div>
           </div>

@@ -110,6 +110,7 @@ export default function ArchiveInfoModal({ onClose }) {
             value={searchTerm}
             onChange={handleSearch}
             error={inputError}
+            placeholderText={"Пошук по номеру авто"}
           />
         </div>
         <div className={styles.rightHeader}>
@@ -126,8 +127,7 @@ export default function ArchiveInfoModal({ onClose }) {
             handleInputChangeBeg={handleInputChangeBeg}
             isSingle={true}
           />
-          <DownloadPdfButtonArchive carsData={filteredCarsData} 
-          />
+          <DownloadPdfButtonArchive carsData={filteredCarsData} />
           <InfoSettingsVisibility
             selectVisibility={selectVisibilityArchive}
             toggleVisibilityAction={toggleVisibilityArchive}
