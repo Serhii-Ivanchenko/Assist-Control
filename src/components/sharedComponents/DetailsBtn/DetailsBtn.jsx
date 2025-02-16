@@ -16,7 +16,7 @@ export default function DetailsBtn({ carsData }) {
   };
 
   return (
-    <div className={styles.btnContainer}>
+    <>
       <button className={styles.btn} onClick={handleDetailsBtnClick}>
         Авто в роботі
         <IoCarSportSharp className={styles.iconAvto} />
@@ -31,6 +31,6 @@ export default function DetailsBtn({ carsData }) {
           />
         </Modal>
       )}
-    </div>
+    </>
   );
 }

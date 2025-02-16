@@ -2,23 +2,28 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 398px;
-    height: 100%;
-    padding: 10px 18px;
+  /* width: 398px; */
+  height: 100%;
+  width: clamp(275px, min(21.514vw, 36.852vh), 398px);
+  /* height: clamp(401px, min(55.741vh, 24.865vw / 0.764), 602px); */
+  /* padding: 10px 18px; */
+  padding:
+    clamp(6px, min(0.926vh, 0.541vw), 10px) clamp(12px, min(1.667vh, 0.973vw), 18px);
   border-radius: 8px;
   background: var(--bg-input);
   border: 2px solid transparent;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
 }
 
 
 .modalDayCarsItemContainer {
   display: flex;
   width: 380px;
+  width: clamp(262px, min(20.541vw, 35.185vh), 380px);
   height: auto;
-  padding: 10px 18px;
-  gap: 12px;
+  padding:
+    clamp(6px, min(0.926vh, 0.541vw), 10px) clamp(12px, min(1.667vh, 0.973vw), 18px);
+  gap: clamp(8px, min(1.111vh, 0.649vw), 12px);
   border-radius: 8px;
   border: 2px solid transparent;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -34,11 +39,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 7px;
-  width: 137px;
-  height: 24px;
-  padding-left: 8px;
-  margin-bottom: 8px;
+  gap: clamp(4px, min(0.648vh, 0.378vw), 7px);
+  /* width: 137px;
+  height: 24px; */
+  width: clamp(94px, min(7.405vw, 2.222vh * 5.708), 137px);
+  height: clamp(16px, min(2.222vh, 7.405vw / 5.708), 24px);
+  padding-left: clamp(5px, min(0.432vw, 0.741vh), 8px);
+  margin-bottom: clamp(5px, min(0.432vw, 0.741vh), 8px);
 
   border-radius: 6px;
   position: relative;
@@ -50,7 +57,8 @@
   position: absolute;
   left: -1px;
   top: 0;
-  width: 4px;
+  /* width: 4px; */
+  width: clamp(2px, min(0.216vw, 0.370vh), 4px);
   height: 100%;
   background-color: var(--glow-color);
   filter: blur(5px);
@@ -61,7 +69,7 @@
 .statusText {
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 500;
   line-height: 1.43em;
   font-variant: small-caps;
@@ -72,129 +80,137 @@
 }
 
 
-.viewRepair{
-  font-size: 14px;
+.viewRepair {
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   color: var(--status-view-repair);
 }
 
 .completed {
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   color: var(--status-complete);
 }
 
 
 .new {
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   color: var(--status-new);
 }
 
 .repair {
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   color: var(--status-repair);
 }
 
 .checkRepair {
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   color: var(--status-diag);
 }
 
 .icon {
-  width: 12px;
-  height: 12px;
+  /* width: 12px;
+  height: 12px; */
+  width: clamp(8px, min(1.111vh, 0.649vw), 12px);
+  height: clamp(8px, min(1.111vh, 0.649vw), 12px);
   transition: width 0.3s, height 0.3s;
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
 }
 
 .iconHuman {
-  width: 16px;
-  height: 16px;
+  width: clamp(12px, min(1.481vh, 0.864vw), 16px);
+  height: clamp(12px, min(1.481vh, 0.864vw), 16px);
 }
 
 .infoCard {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 11px;
+  gap: clamp(4px, min(0.555vh, 0.324vw), 6px);
+  margin-bottom: clamp(7px, min(1.019vh, 0.594vw), 11px);
 }
 
 .infoName,
 .infoTel,
 .infoCar {
   display: flex;
-  gap: 8px;
+  gap: clamp(5px, min(0.432vw, 0.741vh), 8px);
   align-items: center;
 }
 
 .vinContainer {
   display: flex;
-  padding: 3px 10px;
-  width: 185px;
-  height: 27px;
-  margin-bottom: 5px;
+  /* padding: 3px 10px; */
+  padding: clamp(2px, min(0.278vh, 0.162vw), 3px) clamp(6px, min(0.925vh, 0.54vw), 10px);
+  /* width: 185px;
+  height: 27px; */
+  width: clamp(128px, min(10vw, 2.5vh * 6.852), 185px);
+  height: clamp(18px, min(2.5vh, 10vw / 6.852), 27px);
+  margin-bottom: clamp(3px, min(0.27vw, 0.463vh), 5px);
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
   border-radius: 6px;
   background: var(--main-gray);
 }
 
 .vinCode {
   color: var(--white);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   max-width: 134px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.copyButton{
+.copyButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 21px;
-  height: 21px;
+  /* width: 21px;
+  height: 21px; */
+  width: clamp(14px, min(1.944vh, 1.135vw), 21px);
+  height: clamp(14px, min(1.944vh, 1.135vw), 21px);
   border-radius: 6px;
-  color:  var(--icon-gray);
+  color: var(--icon-gray);
   background: var(--main-gray);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);      border: none;
-  border-radius: 4px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
   cursor: pointer;
-  margin-left: auto;    
+  margin-left: auto;
 }
 
 .textName {
   color: var(--white);
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 600;
   line-height: normal;
 }
 
 .textTel {
   color: var(--text-gray);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 600;
   line-height: normal;
 }
 
 .iconTel {
-  width: 12px;
-  height: 12px;
+  width: clamp(8px, min(1.111vh, 0.649vw), 12px);
+  height: clamp(8px, min(1.111vh, 0.649vw), 12px);
 }
 
 .nameCar {
   color: var(--white);
-  font-size: 14px;
-  max-width: 134px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
+  /* max-width: 134px; */
+  max-width: clamp(92px, min(12.407vh, 7.243vw), 134px);
   font-weight: 400;
   white-space: nowrap;
-  overflow: hidden; 
-  text-overflow: ellipsis; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btnContainer {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: clamp(2px, min(0.216vw, 0.370vh), 4px);
   margin-top: auto;
 
 }
@@ -203,9 +219,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 87px;
-  height: 61px;
-  margin-bottom: 12px;
+  /* width: 87px;
+  height: 61px; */
+  width: clamp(60px, min(4.703vw, 5.648vh * 1.426), 87px);
+  height: clamp(40px, min(5.648vh, 4.703vw / 1.426), 61px);
+  margin-bottom: clamp(8px, min(1.111vh, 0.649vw), 12px);
 }
 
 .carPhoto img {
@@ -213,17 +231,18 @@
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
-
 }
 
 .carsInfo {
   position: relative;
   display: flex;
-  gap: 11px;
+  gap: clamp(7px, min(1.018vh, 0.595vw), 11px);
 }
 
-.modalCarsInfo{
-  margin-left: -30px;
+.modalCarsInfo {
+  /* margin-left: -30px; */
+
+  margin-left: clamp(-60px, min(-2.778vh, -1.622vw), -30px);
 }
 
 
@@ -232,7 +251,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  width: 80px;
+  /* width: 80px; */
+  width: clamp(55px, min(7.407vh, 4.324vw), 80px);
 }
 
 /* .carBtnNumber {
@@ -245,17 +265,17 @@
   margin-bottom: 15px;
 } */
 
-  .money {
-    display: flex;
-    margin-top: auto;
-    color: var(--green);
-    font-size: 14px;
-    font-weight: 600;
-    line-height: normal;
-  }
+.money {
+  display: flex;
+  margin-top: auto;
+  color: var(--green);
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
+  font-weight: 600;
+  line-height: normal;
+}
 
 
-.prevCoast{
+.prevCoast {
   margin-top: auto;
 }
 
@@ -265,26 +285,32 @@
   justify-content: space-between;
   align-items: start;
   width: 96px;
+  width: clamp(55px, min(8.889vh, 5.189vw), 96px);
 }
+
 .carRegContainer {
   display: flex;
   align-items: center;
   width: 96px;
   height: 23px;
-  gap: 3px;
-  margin-bottom: 12px;
+  width: clamp(66px, min(5.189vw, 2.129vh * 4.174), 96px);
+  height: clamp(15px, min(2.129vh, 5.189vw / 4.174), 23px);
+  gap: clamp(2px, min(0.278vh, 0.162vw), 3px);
+  margin-bottom: clamp(8px, min(1.111vh, 0.649vw), 12px);
   border-radius: 5px;
   border: 2px solid var(--black);
   background: #D9D9D9;
 }
 
 .carRegFlag {
-  width: 5.4px;
-  height: 3.6px;
+  width: 6px;
+  height: 4px;
+  width: clamp(4px, min(0.324vw, 0.37vh * 1.5), 6px);
+  height: clamp(2px, min(0.37vh, 0.324vw / 1.5), 4px);
 }
 
 .carRegCountrys {
-  padding: 4px 1.5px;
+  padding: clamp(2px, min(0.37vh, 0.324vw), 4px) clamp(1px, min(0.139vh, 0.081vw), 1.5px);
   height: 100%;
   border-radius: 4px 0px 0px 4px;
   background: #00349A;
@@ -292,7 +318,7 @@
 
 .carRegCountry {
   color: var(--white);
-  font-size: 4px;
+  font-size: clamp(2px, min(0.216vw, 0.370vh), 4px);
   font-style: normal;
   font-weight: 600;
   text-transform: uppercase;
@@ -300,38 +326,38 @@
 
 .carNumber {
   color: var(--bg-secondary);
-  font-size: 15px;
+  font-size: clamp(10px, min(1.389vh, 0.811vw), 15px);
   font-weight: 600;
   line-height: normal;
   text-transform: uppercase;
 }
 
 .carRegFlag {
-  margin-bottom: 4px;
+  margin-bottom: clamp(2px, min(0.216vw, 0.370vh), 4px);
 }
 
-  .mileInfo,
-  .timeWork {
-    display: flex;
-    gap: 7px;
-    align-items: center;
-  }
+.mileInfo,
+.timeWork {
+  display: flex;
+  gap: clamp(4px, min(0.648vh, 0.378vw), 7px);
+  align-items: center;
+}
 
 .timeWork {
-  margin-top: 6px;
+  margin-top: clamp(4px, min(0.555vh, 0.324vw), 6px);
 }
 
 .mileage {
   align-items: center;
   color: var(--mint);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 600;
   line-height: normal;
 }
 
 .time {
   color: var(--text-gray);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 600;
   line-height: normal;
 }
@@ -341,17 +367,15 @@
   color: var(--white);
   font-weight: 600;
   line-height: normal;
-  font-size: 16px;
-  margin-top: 12px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
+  margin-top: clamp(8px, min(1.111vh, 0.649vw), 12px);
 }
 
 .totalPay {
   margin-top: auto;
 }
 
-
-
-.iconWrapper{
+.iconWrapper {
   position: relative;
 }
 
@@ -359,9 +383,11 @@
   display: none;
 }
 
-.clockContainer{
-  width: 24px;
-  height: 24px;
+.clockContainer {
+  /* width: 24px;
+  height: 24px; */
+  width: clamp(16px, min(1.297vw, 2.222vh), 24px);
+  height: clamp(16px, min(1.297vw, 2.222vh), 24px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -372,7 +398,7 @@
   background: var(--bg-input);
 }
 
-.iconClock{
+.iconClock {
   display: flex;
   justify-content: center;
   align-items: center;

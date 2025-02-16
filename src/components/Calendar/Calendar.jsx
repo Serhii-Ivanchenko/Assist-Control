@@ -162,9 +162,9 @@ export default function Calendar({ queryMonth, dataMonth, page }) {
 
   const isDateDisabled = (date) => {
     if (page === "video") {
-    const isCurrentMonth = date.isSame(currentDate, "month");
-    const isAfterToday = date.isAfter(currentDate, "day");
-    return isCurrentMonth && isAfterToday;
+      const isCurrentMonth = date.isSame(currentDate, "month");
+      const isAfterToday = date.isAfter(currentDate, "day");
+      return isCurrentMonth && isAfterToday;
     } else {
       return false; // Все даты кликабельны для `isCrm = true`
     }
@@ -202,98 +202,28 @@ export default function Calendar({ queryMonth, dataMonth, page }) {
               //   : getButtonColor(item.percent),
               backgroundColor: determineBackgroundColor(page, item),
             }}
-            className={`calendar-day  
-              ${page === "crm" || page === "recom" ? "crm-width" : ""} 
+            className={`${css.calendarDay} 
              ${
-               page === "video" && item.date.date() > currentDate.date() && item.date.month() === currentDate.month()
-                 ? "cursordefault"
+               page === "video" &&
+               item.date.date() > currentDate.date() &&
+               item.date.month() === currentDate.month()
+                 ? css.cursorDefault
                  : ""
              } 
               ${
                 item.date.month() !== queryMonthDayjs.month()
-                  ? "other-month"
+                  ? css.otherMonth
                   : ""
               } 
-              ${item.date.isSame(selectedDate, "day") ? "today" : ""}
+              ${item.date.isSame(selectedDate, "day") ? css.today : ""}
               ${
-                page === "recom" && item.date.date() === 15 ? "redafter" : ""
+                page === "recom" && item.date.date() === 15 ? css.redAfter : ""
               } `}
           >
             {item.date.date()}
           </button>
         ))}
       </div>
-
-      <style>{`
-        
-         .calendar-day {
-          text-align: center;
-          color: var(--white);
-         width: 54px;
-          height: 27px;
-          font-size: 16px;
-          border-radius: 5px;
-          cursor: pointer;
-          font-variant-numeric: lining-nums proportional-nums;
-          font-family: "Roboto", sans-serif;
-          font-style: normal;
-          font-weight: 300;
-          line-height: normal;
-          border:none;
-          position: relative;
-        }
-
-          .crm-width { width: 52px;}
-
-        .cursordefault{
-        cursor: default;
-        color: var(--text-gray)
-         }
-
-        .other-month {
-          background-color: var(--input-stroke);
-         color: var(--text-gray);
-          cursor: default;
-        }
-        .today {
-           border: 1px solid var(--white);
-           z-index: 1;
-        }
-
-.redafter{
- color: #F00;
- border: 1px solid #F00;
-  background-color:var(--bg);
-           z-index: 1;
-}
-
-.redafter::after {
-    content: "";
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    border: 3px solid #F00;
-    border-radius: 5px;
-    pointer-events: none;
-     z-index: -1;
-}
-
-.today::after {
-    content: "";
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    border: 3px solid var(--white);
-    border-radius: 5px;
-    pointer-events: none;
-     z-index: -1;
-}
-
-      `}</style>
     </div>
   );
 }

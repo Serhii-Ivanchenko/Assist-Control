@@ -1,6 +1,10 @@
 .btn {
-    width: 27px;
-    height: 27px;
+    /* width: 27px;
+    height: 27px; */
+    /* width: min(1.459vw, 27px);
+        height: min(2.5vh, 27px); */
+    width: clamp(18px, min(1.459vw, 2.5vh), 27px);
+    height: clamp(18px, min(1.459vw, 2.5vh), 27px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,27 +16,17 @@
 
 .icon {
     color: var(--light-gray);
+    /* width: min(0.757vw, 14px);
+        height: min(1.296vh, 14px); */
+    /* width: 14px;
+    height: 14px; */
+    width: clamp(9.7px, min(0.757vw, 1.296vh), 14px);
+    height: clamp(9.7px, min(0.757vw, 1.296vh), 14px);
 }
 
 .tooltip {
     position: relative;
 }
-
-@media only screen and (min-width: 1850px) {
-    .tooltip {
-        margin-right: 9px;
-    }
-}
-
-/* .tooltip .tooltipContent::after {
-    content: " ";
-    position: absolute;
-    top: -45%;
-    left: 43%;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent var(--main-gray) transparent;
-} */
 
 .tooltip .tooltipContent {
     font-size: 10px;

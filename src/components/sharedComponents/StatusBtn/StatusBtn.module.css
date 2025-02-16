@@ -1,9 +1,10 @@
 .carDetails {
   display: flex;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
   justify-content: center;
   align-items: center;
-  height: 24px;
+  width: clamp(41px, min(3.189vw, 2.222vh * 2.458), 59px);
+  height: clamp(16px, min(2.222vh, 3.189vw / 2.458), 24px);
 
   color: var(--white);
   background-color: var(--green-btn-normal);
@@ -12,7 +13,8 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   font-family: "Roboto", sans-serif;
-  font-size: 12px;
+  /* font-size: 12px; */
+  font-size: clamp(10px, min(1.111vh, 0.648vw), 12px);
   font-weight: 600;
   line-height: 1.17em;
 

@@ -1,8 +1,10 @@
 .containerCarModal {
   display: flex;
   flex-direction: column;
-  width: 1360px;
-  height: 800px;
+  /* width: 1360px;
+  height: 800px; */
+  width: clamp(940px, min(73.514vw, 74.074vh * 1.7), 1360px);
+  height: clamp(533px, min(74.074vh, 73.514vw / 1.7), 800px);
   border-radius: 12px;
   position: relative;
   background-color: var(--bg-secondary);
@@ -10,7 +12,8 @@
 }
 
 .noResultsMessage {
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  margin-top: clamp(13px, min(1.852vh, 1.081vw), 20px);
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
@@ -20,26 +23,27 @@
   display: flex;
   text-align: center;
   justify-content: space-between;
-  margin-top: 20px;
-  margin-left: 30px;
-  margin-bottom: 25px;
-  margin-right: 98px;
+  padding: 20px 98px 25px 30px;
+  padding: clamp(13px, min(1.852vh, 1.081vw), 20px) clamp(67px, min(9.074vh, 5.297vw), 98px) clamp(16px, min(2.315vh, 1.351vw), 25px) clamp(20px, min(2.777vh, 1.622vw), 30px);
 }
 
 .leftHeader {
   display: flex;
-  gap: 13px;
+  gap: clamp(10px, min(1.296vh, 0.756vw), 14px);
 }
 
 .rightHeader {
   display: flex;
   align-items: center;
-  gap: 20px;
+  /* gap: 20px; */
+  gap: clamp(13px, min(1.852vh, 1.081vw), 20px);
   height: 28px;
+  height: clamp(18px, min(2.592vh, 1.513vw), 28px);
 }
 
-.rightHeader > :nth-child(2) {
+.rightHeader> :nth-child(2) {
   margin-left: 47px;
+  margin-left: clamp(32px, min(4.352vh, 2.54vw), 47px);
 }
 
 .iconClose {
@@ -49,7 +53,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: clamp(20px, min(2.777vh, 1.622vw), 30px);
+
 }
 
 .closeButton {
@@ -65,9 +70,12 @@
 
 .switch {
   font-size: 17px;
+  font-size: clamp(11px, min(1.574vh, 0.919vw), 17px);
   display: inline-block;
-  width: 50px;
-  height: 27px;
+  /* width: 50px;
+  height: 27px; */
+  width: clamp(30px, min(2.703vw, 2.5vh * 1.85), 50px);
+  height: clamp(18px, min(2.5vh, 2.703vw / 1.85), 27px);
   cursor: pointer;
   position: relative;
 }
@@ -92,11 +100,15 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 24px;
-  width: 24px;
+  /* height: 24px;
+  width: 24px; */
+  width: clamp(16px, min(1.297vw, 2.222vh), 24px);
+  height: clamp(16px, min(1.297vw, 2.222vh), 24px);
   border-radius: 50%;
-  left: 2px;
-  top: 1px;
+  /* left: 2px;
+  top: 1px; */
+  left: clamp(2px, min(0.108vw, 0.092vh * 1.2), 3px);
+  top: clamp(1px, min(0.092vh, 0.054vw * 1.1), 2px);
   z-index: 1;
   background-color: var(--input-stroke);
   transition: 0.4s;
@@ -105,20 +117,36 @@
 .iconRight {
   color: var(--icon-gray);
   position: absolute;
-  top: 5px;
-  left: 28px;
+  /* top: 5px;
+  left: 28px; */
+  top: clamp(3px,
+      calc(clamp(16px, min(2.5vh, 2.703vw / 1.85), 27px) * 0.2),
+      6px);
+  left: clamp(19px,
+      calc(clamp(30px, min(2.703vw, 2.5vh * 1.85), 50px) * 0.57),
+      28px);
   z-index: 2;
-  width: 16px;
-  height: 16px;
+  /* width: 16px;
+  height: 16px; */
+  width: clamp(11px, min(0.865vw, 1.481vh), 16px);
+  height: clamp(11px, min(0.865vw, 1.481vh), 16px);
 }
 
 .iconLeft {
   color: var(--icon-gray);
   position: absolute;
-  top: 5px;
-  left: 6px;
-  width: 16px;
-  height: 16px;
+  /* top: 5px;
+  left: 6px; */
+  top: clamp(3px,
+      calc(clamp(16px, min(2.5vh, 2.703vw / 1.85), 27px) * 0.2),
+      6px);
+  left: clamp(6px,
+      calc(clamp(30px, min(2.703vw, 2.5vh * 1.85), 50px) * 0.1),
+      10px);
+  /* width: 16px;
+  height: 16px; */
+  width: clamp(11px, min(0.865vw, 1.481vh), 16px);
+  height: clamp(11px, min(0.865vw, 1.481vh), 16px);
   z-index: 2;
 }
 
@@ -158,16 +186,19 @@
   }
 }
 
-.input:checked + .slider {
+.input:checked+.slider {
   background-color: var(--bg);
 }
 
-.input:focus + .slider {
+.input:focus+.slider {
   box-shadow: 0 0 1px var(--bg-input);
 }
 
-.input:checked + .slider:before {
-  transform: translateX(22px);
+.input:checked+.slider:before {
+  /* transform: translateX(22px); */
+  transform: translateX(clamp(14px,
+        calc(clamp(30px, min(2.703vw, 2.5vh * 1.85), 50px) * 0.44),
+        22px));
 }
 
 .active {
@@ -178,10 +209,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  padding: 5px 7px;
-  border-radius: 17px;
+  /* width: 28px;
+  height: 28px; */
+  width: clamp(18px, min(2.592vh, 1.513vw), 28px);
+  height: clamp(18px, min(2.592vh, 1.513vw), 28px);
+  /* padding: 5px 7px; */
+  border-radius: 50%;
   background: var(--bg-input);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   color: var(--light-gray);
@@ -200,6 +233,6 @@
 
 .iconSettings {
   fill: white;
-  width: 17px;
-  height: 17px;
+  width: clamp(11px, min(0.865vw, 1.481vh), 16px);
+  height: clamp(11px, min(0.865vw, 1.481vh), 16px);
 }

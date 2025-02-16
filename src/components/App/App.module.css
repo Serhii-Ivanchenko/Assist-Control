@@ -1,16 +1,7 @@
-.wrapper{
-
-}
-
 .pagesContent {
     display: flex;
-    margin-top: 8px;
-    gap: 14px;
-}
-
-@media only screen and (min-width: 1850px) {
-    .pagesContent {
-        margin-top: 13px;
-        gap: 14px;
-    }
+    margin-top: 13px;
+    margin-top: min(1.204vh, 13px);
+    /* gap: 14px; */
+    gap: min(0.757vw, 14px);
 }

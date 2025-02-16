@@ -39,16 +39,16 @@ const CustomTooltip = ({ active, payload, label, coordinate, viewBox }) => {
     }
     return (
       <div
-        className={css.customtooltip}
+        className={css.customTooltip}
         style={{
           position: "absolute",
           left: `${leftPosition}px`,
           top: `${topPosition}px`,
         }}
       >
-        <p className={css.popuptitle}>{`${label}`}</p>
-        <p className={css.popupavto}>
-          Авто <span className={css.kolavto}>{`${payload[0].value} `}</span>
+        <p className={css.popupTitle}>{`${label}`}</p>
+        <p className={css.popupAuto}>
+          Авто <span className={css.qtyAuto}>{`${payload[0].value} `}</span>
         </p>
       </div>
     );
@@ -70,8 +70,6 @@ export default function LoadStatsChart() {
   if (actualDate === null) {
     actualDate = currentDate;
   }
-  // const [startIndex, setStartIndex] = useState(startDay);
-  //     const [endIndex, setEndIndex] = useState(endDay);
 
   //  const [activeIndex, setActiveIndex] = useState(null); // Для отслеживания наведения на точку
 
@@ -135,15 +133,14 @@ export default function LoadStatsChart() {
   const dataMax = Math.max(...data.map((item) => item.value));
 
   return (
-    <div className={css.containerloadstats}>
-      <div className={css.titlebox}>
-        <p className={css.stattitle}>Завантаження сервісу</p>
-        <p className={css.statpercent}>{actualPercent}%</p>
+    <div className={css.containerLoadStats}>
+      <div className={css.titleBox}>
+        <p className={css.statTitle}>Завантаження сервісу</p>
+        <p className={css.statPercent}>{actualPercent}%</p>
       </div>
-      <div className={css.areabox}>
+      <div className={css.areaBox}>
         <ResponsiveContainer
-          // height={108}
-          // width={272}
+
           className={css.responseContainer}
         >
           <AreaChart data={data}>
@@ -184,30 +181,22 @@ export default function LoadStatsChart() {
               dataKey="hour"
               interval={0}
               padding={{ right: 10 }}
-              tick={{ fontSize: 10 }}
+              tick={{ fontSize: "clamp(6px, min(0.925vh, 0.54vw), 10px)" }}
               tickFormatter={(value) => value.slice(0, -3)}
             />
 
             <YAxis
               domain={[0, (dataMax) => dataMax + 1]}
               dataKey="value"
-              margin={{ topt: 10 }}
-              tick={{ fontSize: 10 }}
+              margin={{ top: 10 }}
+              tick={{ fontSize: "clamp(6px, min(0.925vh, 0.54vw), 10px)" }}
               interval={dataMax > 25 ? 2 : 0}
-              //  tickCount={12}
-              // tick={{ fill: "transparent" }}
               axisLine={{ fill: "transparent" }}
-              //  tickFormatter={(value) => (value / 1000).toFixed(1)}
               width={15}
-              // label={{ angle: -90, position: 'insideLeft' }} unit={' L'}
-              //  ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
               ticks={generateTicks(dataMax)}
             />
 
             <Tooltip content={<CustomTooltip />} />
-            {/* <Tooltip contentStyle={{ backgroundColor: 'var(--white)', border: '1px solid #ccc' }} */}
-
-            {/* /> */}
 
             <Area
               type="monotone"
@@ -217,38 +206,8 @@ export default function LoadStatsChart() {
               fill="url(#colorGradientzs)"
               cursor="pointer"
               activeDot={customActiveDot}
-              // activeDot={{  fill: "var(--blue)", border: '7px'}} // Активная точка больше
-
-              //  dot={{ r: 8, fill: 'var(--white)', stroke: '#87D28D', strokeWidth: '4px' }} // Полностью закрашенные кружочки
-              //   label={({ x, y, value }) => (
-              //     <text x={x} y={y - 10} fill="#000" textAnchor="middle">
-              //       {`${value} ml`} {/* Добавляем "ml" к значению */}
-              //     </text>
-              //   )}
             />
-            {/* 
-                    <Brush
-          dataKey="name"
-          height={30}
-          stroke="#8884d8"
-          startIndex={startIndex}
-          endIndex={data.length - 1}
-          onChange={(indexRange) => setStartIndex(indexRange.startIndex)}
-        /> */}
-
-            {/* <Brush
-                        dataKey="day"
-           height={10}
-                        stroke="#87D28D8"
-                         travellerWidth={5} // Ширина ползунка
-          traveller={{ stroke: 'rgba(50, 63, 71, 0.2)', fill:'rgba(50, 63, 71, 0.2)' }}
-          startIndex={startIndex}
-          endIndex={endIndex}
-          onChange={(indexRange) => {
-            setStartIndex(indexRange.startIndex);
-            setEndIndex(indexRange.endIndex);
-          }}
-        /> */}
+            
           </AreaChart>{" "}
         </ResponsiveContainer>{" "}
       </div>{" "}
