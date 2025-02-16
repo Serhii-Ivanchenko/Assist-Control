@@ -20,7 +20,7 @@
     background-color: var(--bg-input);
 
     color: var(--white);
-    font-size: clamp(13px, 1.481vh, 16px);
+    font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
     font-style: normal;
     font-weight: 400;
 

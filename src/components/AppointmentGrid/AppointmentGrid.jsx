@@ -162,7 +162,7 @@ const AppointmentGrid = ({ data }) => {
       {/* Слой сетки с ячейками и пунктирными линиями */}
       <div
         className={css.overlayGrid}
-        style={{ height: `${(rowCount + 1) * 65}px` }}
+        // style={{ height: `${(rowCount + 1) * 65}px` }}  
       >
         {Array.from({ length: rowCount }).map((_, rowIndex) =>
           Array.from({ length: columnCount }).map((_, colIndex) => (
@@ -194,7 +194,7 @@ const AppointmentGrid = ({ data }) => {
           className={css.currenttimeline}
           style={{
             height: `${gridHeight}px`,
-            left: `calc(100px - ${
+            left: `calc(clamp(69px, min(5.405vw, 9.259vh), 100px) - ${
               linePosition * koeffWidth
             }px + ${linePosition}%)`,
             //  `${linePosition}%`

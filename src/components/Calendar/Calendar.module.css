@@ -25,7 +25,7 @@
     justify-content: center;
     font-family: "Roboto", sans-serif;
     /* font-size: 16px; */
-    font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
+    font-size: clamp(12px, min(1.481vh, 0.864vw), );
     font-style: normal;
     font-weight: 300;
     line-height: normal;
@@ -51,7 +51,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-family: "Roboto", sans-serif;
-    /* font-size: 16px; */
+    /* font-size: ; */
     font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
     font-style: normal;
     font-weight: 300;

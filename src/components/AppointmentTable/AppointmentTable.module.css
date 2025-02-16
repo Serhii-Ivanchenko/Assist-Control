@@ -1,7 +1,8 @@
 .apptablecontainer {
-    width: 1097px;
-    height: 352px;
+    width: clamp(759px, min(59.297vw, 33.981vh * 2.989), 1097px);
+    height: clamp(244px, min(33.981vh, 59.297vw / 2.989), 367px);
     border-radius: 12px;
     background: var(--bg-secondary);
-    padding: 13px;
+    padding: clamp(8.5px, min(1.204vh, 0.703vw), 13px);
+
 }
