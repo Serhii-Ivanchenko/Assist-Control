@@ -11,6 +11,16 @@ import {
   TableRow,
 } from "@mui/material";
 import { useState } from "react";
+import car from "../../../../../assets/images/carListImg.webp";
+import { BsTrash } from "react-icons/bs";
+
+const recommendation = {
+  name: "Ремонт ходової",
+  message:
+    "Проведено попередній огляд авто. Виявлено деформацію передньогокрила та бампера. Для відновлення геометрії кузова та заміни пошкоджених деталей потрібно приблизно 3 дні. Рекомендую додатково перевірити ходову частину після ремонту. Очікуємо доставку деталей на наступний тиждень, після чого можна буде узгодити точну дату завершення робіт.",
+  person: "manager",
+  personName: "Шевченко А.В.",
+};
 
 export default function SavedInfoTable({ chosenSpares }) {
   const [diagnostic, setDiagnostic] = useState("spareParts");
@@ -70,7 +80,10 @@ export default function SavedInfoTable({ chosenSpares }) {
         </div>
         {diagnostic === "spareParts" && (
           <div className={css.sparePartsTableWrapper}>
-            <TableContainer component={Paper}>
+            <TableContainer
+              component={Paper}
+              style={{ maxHeight: "225px", overflow: "auto" }}
+            >
               <Table>
                 <TableHead>
                   <TableRow>
@@ -83,7 +96,10 @@ export default function SavedInfoTable({ chosenSpares }) {
                 </TableHead>
                 <TableBody>
                   {chosenSparesWithSides.map((item, index) => (
-                    <TableRow key={`${Math.random()}`}>
+                    <TableRow
+                      key={`${Math.random()}`}
+                      // style={{ display: "table", width: "100%" }}
+                    >
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>{item.name}</TableCell>
                       {/* <TableCell></TableCell> */}
@@ -101,12 +117,12 @@ export default function SavedInfoTable({ chosenSpares }) {
             <ul className={css.photoList}>
               {/* {photos.map((item, index) => ( */}
               <li className={css.photoItem}>
-                <img src="" alt="car" className={css.img} />
+                <img src={car} alt="car" className={css.img} />
                 <span
                   className={css.iconBox}
                   //   onClick={() => deletePhotos(index)}
                 >
-                  {/* <BsTrash className={css.icon} size={18} /> */}
+                  <BsTrash className={css.icon} size={18} />
                 </span>
               </li>
               {/* ))} */}
@@ -114,7 +130,7 @@ export default function SavedInfoTable({ chosenSpares }) {
           </div>
         )}
         {diagnostic === "comment" && (
-          <div className={css.wrapperOfComent}></div>
+          <div className={css.wrapperOfComent}>{recommendation.message}</div>
         )}
       </div>
     </div>

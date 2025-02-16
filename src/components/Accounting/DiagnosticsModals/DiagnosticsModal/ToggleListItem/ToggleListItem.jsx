@@ -5,6 +5,7 @@ export default function ToggleListItem({
   handleCheckboxChange,
   disabled,
   chosenPoints,
+  modalSave,
 }) {
   return (
     <li className={css.listItem}>
@@ -18,7 +19,9 @@ export default function ToggleListItem({
           }
           disabled={disabled}
         />
-        <span className={css.slider}></span>
+        <span
+          className={`${css.slider} ${modalSave && css.sliderForSecondModal}`}
+        ></span>
       </label>
     </li>
   );

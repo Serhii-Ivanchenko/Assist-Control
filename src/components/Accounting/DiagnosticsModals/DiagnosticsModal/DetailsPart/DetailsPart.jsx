@@ -7,19 +7,24 @@ export default function DetailsPart({
   togglePoints,
   setChosenSpares,
   chosenSpares,
+  spares,
+  setSpares,
 }) {
-  const [spares, setSpares] = useState([]);
-
   useEffect(() => {
-    const newSparesArray = togglePoints.map((spare) => ({
-      ...spare,
-      parts: spare.parts.map((part) => ({
-        ...part,
-        isChosenLeft: false,
-        isChosenRight: false,
-      })),
-    }));
-    setSpares(newSparesArray);
+    if (spares.length === 0 && togglePoints.length > 0) {
+      setSpares((prevSpares) =>
+        prevSpares.length > 0
+          ? prevSpares
+          : togglePoints.map((spare) => ({
+              ...spare,
+              parts: spare.parts.map((part) => ({
+                ...part,
+                isChosenLeft: false,
+                isChosenRight: false,
+              })),
+            }))
+      );
+    }
   }, [togglePoints]);
 
   const toggleSpareSelection = (id, side) => {

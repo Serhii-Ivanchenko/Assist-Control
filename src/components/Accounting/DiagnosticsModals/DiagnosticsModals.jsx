@@ -21,6 +21,8 @@ export default function DiagnosticsModals({ onClose }) {
   const [chosenPoints, setChosenPoints] = useState([]);
   const [isReadOnly, setIsReadOnly] = useState(false);
   const [chosenSpares, setChosenSpares] = useState([]);
+  const [spares, setSpares] = useState([]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,6 +53,8 @@ export default function DiagnosticsModals({ onClose }) {
           isReadOnly={isReadOnly}
           setChosenSpares={setChosenSpares}
           chosenSpares={chosenSpares}
+          spares={spares}
+          setSpares={setSpares}
         />
       )}
     </>

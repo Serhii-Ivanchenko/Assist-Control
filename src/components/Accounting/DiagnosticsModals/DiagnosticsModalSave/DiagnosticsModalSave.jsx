@@ -49,6 +49,7 @@ export default function DiagnosticsModalSave({
                 // setChosenPoints={setChosenPoints}
                 chosenPoints={chosenPoints}
                 // handleCheckboxChange={handleCheckboxChange}
+                modalSave={true}
               />
             ))}
           </ul>

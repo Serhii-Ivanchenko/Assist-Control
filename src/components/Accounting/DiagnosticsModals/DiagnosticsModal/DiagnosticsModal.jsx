@@ -22,6 +22,8 @@ export default function DiagnosticsModal({
   setIsReadOnly,
   setChosenSpares,
   chosenSpares,
+  spares,
+  setSpares,
 }) {
   // const [chosenPoints, setChosenPoints] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
@@ -120,6 +122,8 @@ export default function DiagnosticsModal({
               togglePoints={togglePoints}
               setChosenSpares={setChosenSpares}
               chosenSpares={chosenSpares}
+              spares={spares}
+              setSpares={setSpares}
             />
           )}
         </div>
