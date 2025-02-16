@@ -33,35 +33,35 @@ export default function ItemOfRecord({
   repair,
 }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editAmount, setEditAmount] = useState(false);
+  // const [editAmount, setEditAmount] = useState(false);
   const [totalMileAge, setTotalMileage] = useState(
     item.mileage || "дані відсутні"
   );
-  const [amount, setAmount] = useState("2 482");
+  // const [amount, setAmount] = useState("2 482");
   const inputRef = useRef();
 
   const handleChangeMileage = (newM) => {
     setTotalMileage(newM);
   };
 
-  const handleChangeAmount = (newA) => {
-    setAmount(newA);
-  };
+  // const handleChangeAmount = (newA) => {
+  //   setAmount(newA);
+  // };
 
   const handleEditing = (id, e) => {
     e.stopPropagation();
     setIsEditing(id);
   };
 
-  const handleEditAmount = (id, e) => {
-    e.stopPropagation();
-    setEditAmount(id);
-  };
+  // const handleEditAmount = (id, e) => {
+  //   e.stopPropagation();
+  //   setEditAmount(id);
+  // };
 
   const handleClickOutside = (event) => {
     if (inputRef.current && !inputRef.current.contains(event.target)) {
       setIsEditing(false);
-      setEditAmount(false);
+      // setEditAmount(false);
     }
   };
 
@@ -79,11 +79,11 @@ export default function ItemOfRecord({
     }
   }, [isEditing]);
 
-  useEffect(() => {
-    if (editAmount) {
-      inputRef.current.focus();
-    }
-  }, [editAmount]);
+  // useEffect(() => {
+  //   if (editAmount) {
+  //     inputRef.current.focus();
+  //   }
+  // }, [editAmount]);
 
   const startDate = item.start_date;
   const date = new Date(startDate).toLocaleDateString("uk-UA");
@@ -174,21 +174,21 @@ export default function ItemOfRecord({
               {/* Сума */}
               <div
                 className={css.amountBox}
-                onClick={(e) => handleEditAmount(item.service_id, e)}
+                // onClick={(e) => handleEditAmount(item.service_id, e)}
               >
                 <AiOutlineDollar size={20} className={css.iconDollar} />
                 <span className={css.amountWrapper}>
                   <p className={css.amount}>₴</p>
-                  {editAmount === item.service_id ? (
+                  {/* {editAmount === item.service_id ? (
                     <input
                       ref={inputRef}
                       className={css.amountInput}
                       value={amount}
                       onChange={(e) => handleChangeAmount(e.target.value)}
                     />
-                  ) : (
-                    <p className={css.amount}>{amount} </p>
-                  )}
+                  ) : ( */}
+                  <p className={css.amount}>2 482 </p>
+                  {/* )} */}
                 </span>
               </div>
 

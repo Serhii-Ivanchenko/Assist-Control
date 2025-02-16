@@ -152,7 +152,7 @@ export default function RecordBtnInfo({
                     <TableRow>
                       <TableCell>№</TableCell>
                       <TableCell>Назва</TableCell>
-                      <TableCell>Номер</TableCell>
+                      {/* <TableCell>Номер</TableCell> */}
                       <TableCell>Стан</TableCell>
                       <TableCell>Рекомендація</TableCell>
                     </TableRow>
@@ -162,7 +162,7 @@ export default function RecordBtnInfo({
                       <TableRow key={`${Math.random()}`}>
                         <TableCell>{item.id}</TableCell>
                         <TableCell>{item.name}</TableCell>
-                        <TableCell>{item.number}</TableCell>
+                        {/* <TableCell>{item.number}</TableCell> */}
                         <TableCell>{item.state}</TableCell>
                         <TableCell>{item.recomendation}</TableCell>
                       </TableRow>
