@@ -100,33 +100,41 @@ export default function DiagnosticsModal({
             ))}
           </ul>
         </div>
-        <div className={css.categoriesPart}>
-          <ul className={css.categoriesList}>
-            {chosenPoints.map((point) => (
-              <ChosenPointCategoriesListItem
-                key={point.id}
-                point={point}
-                setOpenDetails={setOpenDetails}
-                openDetails={openDetails}
-                setCategoryForDetailsPart={setCategoryForDetailsPart}
-                chosenPoints={chosenPoints}
-                togglePoints={togglePoints}
-              />
-            ))}
-          </ul>
-        </div>
-        <div className={css.detailsPart}>
-          {openDetails && (
-            <DetailsPart
-              title={categoryForDetailsPart}
-              togglePoints={togglePoints}
-              setChosenSpares={setChosenSpares}
-              chosenSpares={chosenSpares}
-              spares={spares}
-              setSpares={setSpares}
-            />
-          )}
-        </div>
+        {chosenPoints.length > 0 ? (
+          <>
+            <div className={css.categoriesPart}>
+              <ul className={css.categoriesList}>
+                {chosenPoints.map((point) => (
+                  <ChosenPointCategoriesListItem
+                    key={point.id}
+                    point={point}
+                    setOpenDetails={setOpenDetails}
+                    openDetails={openDetails}
+                    setCategoryForDetailsPart={setCategoryForDetailsPart}
+                    chosenPoints={chosenPoints}
+                    togglePoints={togglePoints}
+                  />
+                ))}
+              </ul>
+            </div>
+            <div className={css.detailsPart}>
+              {openDetails && (
+                <DetailsPart
+                  title={categoryForDetailsPart}
+                  togglePoints={togglePoints}
+                  setChosenSpares={setChosenSpares}
+                  chosenSpares={chosenSpares}
+                  spares={spares}
+                  setSpares={setSpares}
+                />
+              )}
+            </div>
+          </>
+        ) : (
+          <p className={css.defaultMessage}>
+            Для вибору запчастин оберіть категорію
+          </p>
+        )}
       </div>
       <div className={css.btnBox}>
         <button

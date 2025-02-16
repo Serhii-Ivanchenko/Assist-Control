@@ -166,3 +166,12 @@
   fill: var(--input-stroke);
   cursor: pointer;
 }
+
+.defaultMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-gray);
+  width: 724px;
+  height: 100%;
+}
