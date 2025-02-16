@@ -1,0 +1,21 @@
+.billingRow {
+  display: grid;
+  grid-template-columns: 126px 80px 128px 154px 1fr 117px 113px 27px;
+  padding: 10px;
+}
+
+.date,
+.amount,
+.partNumber,
+.brand,
+.item,
+.itemPrice,
+.itemsSum {
+  padding: 10px;
+}
+
+.approveCheckbox input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}

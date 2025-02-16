@@ -1,0 +1,41 @@
+.billingTable {
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+.billingHeader {
+  display: grid;
+  grid-template-columns: 135px 91px 129px 155px 1fr 111px 92px 60px;
+  background: transparent;
+  color: #fff;
+  font-weight: bold;
+  padding: 12px 0;
+  text-align: start;
+}
+
+.billingHeader p {
+  color: #fff;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.billingRow {
+  display: grid;
+  border-radius: 4px;
+  background: var(--CRM-modal-InputBG, #2d3038);
+  grid-template-columns: 116px 91px 129px 155px 1fr 111px 92px 60px;
+}
+
+.billingRow p {
+  grid-column: 2 / 3;
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+}

@@ -1,0 +1,98 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-end; */
+  align-items: end;
+}
+
+.date {
+  color: #fff;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.1875em;
+
+  margin-bottom: 24px;
+}
+
+.infoBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 10px;
+}
+
+.infoKey {
+  display: flex;
+  /* align-items: center; */
+  gap: 10px;
+}
+
+.key {
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.1875em;
+}
+
+.icon {
+  fill: var(--light-gray);
+}
+
+.infoName {
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.1875em;
+}
+
+.selectBox {
+  display: flex;
+  gap: 16px;
+}
+
+.selectWrapper {
+  display: inline-flex;
+  height: 39px;
+  padding: 10px 10px 10px 16px;
+  align-items: center;
+  border-radius: 12px;
+  background: var(--CRM-modal-InputBG, #2d3038);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.selectWrapper select {
+  appearance: none;
+  background: transparent;
+
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  outline: none;
+
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.selectWrapper select option {
+  display: flex;
+  width: 143px;
+  background: #2d3038;
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.arrowIcon {
+  pointer-events: none;
+  color: #fff;
+}
