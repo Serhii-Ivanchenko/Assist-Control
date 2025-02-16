@@ -42,7 +42,7 @@ import {
 export default function WarehousePart() {
   const dispatch = useDispatch();
   const warehouses = useSelector(selectWarehousesTree);
-  console.log("warehouses", warehouses);
+  // console.log("warehouses", warehouses);
 
   const dataForTree = warehouses.reduce((acc, warehouse) => {
     acc.push({
@@ -95,7 +95,7 @@ export default function WarehousePart() {
     return acc;
   }, []);
 
-  console.log("dataForTree", dataForTree);
+  // console.log("dataForTree", dataForTree);
 
   const [isAddWhModalOpen, setAddWhModalOpen] = useState(false);
 
@@ -228,17 +228,17 @@ export default function WarehousePart() {
   };
 
   // Обчислення глибини,щоб елемент не можна було перетягнути вниз
-  const calculateDepth = (nodeId, tree) => {
-    let depth = 0;
-    let currentNode = tree.find((node) => node.id === nodeId);
+  // const calculateDepth = (nodeId, tree) => {
+  //   let depth = 0;
+  //   let currentNode = tree.find((node) => node.id === nodeId);
 
-    while (currentNode && currentNode.parent) {
-      depth += 1;
-      currentNode = tree.find((node) => node.id === currentNode.parent);
-    }
+  //   while (currentNode && currentNode.parent) {
+  //     depth += 1;
+  //     currentNode = tree.find((node) => node.id === currentNode.parent);
+  //   }
 
-    return depth;
-  };
+  //   return depth;
+  // };
 
   const findWarehouseId = (nodeId, dataForTree) => {
     let currentNode = dataForTree.find((node) => node.id === nodeId);
@@ -271,11 +271,11 @@ export default function WarehousePart() {
     const start = dataForTree.find((v) => v.id === dragSourceId);
     const end = dataForTree.find((v) => v.id === dropTargetId);
 
-    const startDepth = calculateDepth(dragSourceId, dataForTree);
-    const endDepth = calculateDepth(dropTargetId, dataForTree);
-    console.log("startDepth", startDepth);
-    console.log("endDepth", endDepth);
-    console.log("dropTargetId", dropTargetId);
+    // const startDepth = calculateDepth(dragSourceId, dataForTree);
+    // const endDepth = calculateDepth(dropTargetId, dataForTree);
+    // console.log("startDepth", startDepth);
+    // console.log("endDepth", endDepth);
+    // console.log("dropTargetId", dropTargetId);
 
     // if (startDepth < endDepth) {
     //   toast.error("Переміщення сюди неможливе", {
@@ -453,7 +453,7 @@ export default function WarehousePart() {
 
     const parentField = parentFieldMap[entityType];
 
-    console.log("parentField", parentField);
+    // console.log("parentField", parentField);
 
     // const entityId = parseInt(start.id.slice(entityType === "shelf" ? 3 : 2));
 
