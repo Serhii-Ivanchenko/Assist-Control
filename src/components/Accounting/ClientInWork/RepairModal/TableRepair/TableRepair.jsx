@@ -8,8 +8,8 @@ import Modal from "../../../../Modals/Modal/Modal";
 
 const TableRepair = ({ data, onDelete }) => {
   const [hoveredRow, setHoveredRow] = useState(null);
-  const [showDeleteModal, setShowDeleteModal] = useState(false); // Стан для показу модального вікна
-  const [rowToDelete, setRowToDelete] = useState(null); // Стан для вибору рядка для видалення
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [rowToDelete, setRowToDelete] = useState(null);
 
   const handleMouseEnter = (rowId) => {
     setHoveredRow(rowId);
@@ -20,12 +20,12 @@ const TableRepair = ({ data, onDelete }) => {
   };
 
   const handleDelete = (rowId) => {
-    setRowToDelete(rowId); // Зберігаємо ідентифікатор рядка для видалення
-    setShowDeleteModal(true); // Відкриваємо модальне вікно
+    setRowToDelete(rowId); 
+    setShowDeleteModal(true);
   };
 
   const handleModalClose = () => {
-    setShowDeleteModal(false); // Закриваємо модальне вікно
+    setShowDeleteModal(false);
   };
 
   const handleConfirmDelete = () => {
