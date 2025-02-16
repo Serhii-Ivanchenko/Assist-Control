@@ -15,7 +15,8 @@ const RepairModal = ({ car, onClose }) => {
   const [price, setPrice] = useState(0);
   const [remainingAmount, setRemainingAmount] = useState(0);
   const [isDiagnosticsModalOpen, setIsDiagnosticsModalOpen] = useState(false);
-  const [isCommercialOfferModalOpen, setIsCommercialOfferModalOpen] = useState(false); // Додаємо стан для КП модалки
+  const [isCommercialOfferModalOpen, setIsCommercialOfferModalOpen] =
+    useState(false); // Додаємо стан для КП модалки
 
   useEffect(() => {
     const newPrice = data.reduce(
@@ -68,13 +69,13 @@ const RepairModal = ({ car, onClose }) => {
 
   return (
     <div className={styles.modalRepair}>
+      <p className={styles.title}>Ремонт № 345</p>
+
       <div className={styles.infoContainer}>
         <div>
           <CarInfo {...carInfo} />
         </div>
-        <div>
-          <p className={styles.title}>Ремонт № 345</p>
-        </div>
+        <div></div>
         <div className={styles.workInfo}>
           <div className={styles.date}>03.02.2025</div>
           <div className={styles.links}>
@@ -93,10 +94,7 @@ const RepairModal = ({ car, onClose }) => {
             >
               Діагностика № 345
             </button>
-            <button
-              className={styles.link}
-              onClick={openCommercialOfferModal}
-            >
+            <button className={styles.link} onClick={openCommercialOfferModal}>
               КП № 345
             </button>
           </div>
@@ -131,7 +129,6 @@ const RepairModal = ({ car, onClose }) => {
             />
           </div>
           <button className={styles.btnPayment}>
-            {" "}
             <BsCheckLg size={16} color="white" />
             Оплата
           </button>

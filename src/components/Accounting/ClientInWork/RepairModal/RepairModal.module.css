@@ -1,5 +1,4 @@
 .modalRepair {
-  position: relative;
   display: flex;
   flex-direction: column;
   width: 1395px;
@@ -10,9 +9,8 @@
 }
 
 .title {
-  position: absolute;
-  top: 20px;
-  right: 44%;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 20px;
   font-weight: 600;
   line-height: normal;
