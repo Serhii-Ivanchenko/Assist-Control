@@ -1,0 +1,61 @@
+.modal {
+  position: relative;
+  padding: 40px;
+  background-color: var(--dark-gray);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 12px;
+  align-items: end;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 13px;
+  height: 13px;
+  fill: var(--light-gray);
+  cursor: pointer;
+}
+
+.wrapper {
+  display: flex;
+  gap: 10px;
+  padding: 10px 20px;
+  align-items: center;
+  background-color: var(--bg-input);
+  border: 1px solid var(--bg-secondary);
+}
+
+.icon {
+  height: 20px;
+  width: 20px;
+}
+
+.headerText {
+  font-weight: 600;
+  width: 426px;
+}
+
+.text {
+  font-size: 20px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.floor {
+  width: 386px;
+}
+
+.rack {
+  width: 338px;
+}
+
+.shelf {
+  width: 298px;
+}
+
+.place {
+  width: 258px;
+}
