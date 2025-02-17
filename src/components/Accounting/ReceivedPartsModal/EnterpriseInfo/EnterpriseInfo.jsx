@@ -32,11 +32,11 @@ export default function EnterpriseInfo() {
           <TiArrowSortedDown className={styles.arrowIcon} />
         </div>
 
-        <div className={styles.selectWrapper}>
+        <div className={styles.selectCashDesk}>
           <select onClick={(e) => e.stopPropagation()}>
-            <option>Каса 1</option>
-            <option>Каса 2</option>
-            <option>Каса 3</option>
+            <option>Склад 1</option>
+            <option>Склад 2</option>
+            <option>Склад 3</option>
           </select>
           <TiArrowSortedDown className={styles.arrowIcon} />
         </div>

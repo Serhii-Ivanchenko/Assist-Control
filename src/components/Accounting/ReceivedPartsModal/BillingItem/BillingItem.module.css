@@ -1,21 +1,85 @@
 .billingRow {
   display: grid;
   grid-template-columns: 126px 80px 128px 154px 1fr 117px 113px 27px;
-  padding: 10px;
+  padding: 20px;
+  align-items: center;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
-.date,
+.date {
+  font-weight: 400;
+}
+
 .amount,
 .partNumber,
 .brand,
 .item,
-.itemPrice,
-.itemsSum {
-  padding: 10px;
+.itemPrice {
+  font-weight: 300;
 }
 
-.approveCheckbox input {
+.itemsSum {
+  font-weight: 600;
+}
+
+.itemPrice,
+.itemsSum {
+  color: var(--CRM-modal-LightGray, #d8e1ff);
+}
+
+/* .approveCheckbox input {
   width: 18px;
   height: 18px;
   cursor: pointer;
+} */
+
+.customCheckbox {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.customCheckbox input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.customCheckbox span {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  border: 2px solid #d8e1ff;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* .customCheckbox input:checked + span {
+  background-color: #4caf50;
+  border-color: #4caf50;
+} */
+
+.customCheckbox span::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.customCheckbox input:checked + span::before {
+  opacity: 1;
 }

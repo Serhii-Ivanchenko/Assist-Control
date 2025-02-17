@@ -39,10 +39,21 @@
   flex-direction: column;
 }
 
+.distrInfo {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.distrInfo img {
+  width: 31px;
+  height: 31px;
+}
+
 .distributorName {
   display: inline-flex;
   color: #fff;
-  margin: 0 auto;
+
   font-family: "Roboto", sans-serif;
   font-size: 22px;
   font-style: normal;
@@ -78,6 +89,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-bottom: 40px;
 }
 
 .totalSum {
@@ -189,7 +201,7 @@ input:focus {
 .btnsContainer {
   display: flex;
 
-  margin-top: 111px;
+  margin-top: auto;
   justify-content: flex-end;
 }
 

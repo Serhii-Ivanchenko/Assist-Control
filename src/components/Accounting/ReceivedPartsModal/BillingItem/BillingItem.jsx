@@ -11,7 +11,10 @@ function BillingItem({ date, quantity, code, brand, name, price, total }) {
       <p className={styles.itemPrice}>{price} грн</p>
       <p className={styles.itemsSum}>{total} грн</p>
       <p className={styles.approveCheckbox}>
-        <input type="checkbox" />
+        <label className={styles.customCheckbox}>
+          <input type="checkbox" />
+          <span></span>
+        </label>
       </p>
     </div>
   );

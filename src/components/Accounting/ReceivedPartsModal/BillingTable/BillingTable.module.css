@@ -1,13 +1,15 @@
 .billingTable {
   width: 100%;
   max-width: 1000px;
+  height: 100%;
   margin: 20px auto;
   overflow: hidden;
 }
 
 .billingHeader {
   display: grid;
-  grid-template-columns: 135px 91px 129px 155px 1fr 111px 92px 60px;
+  margin-left: 10px;
+  grid-template-columns: 125px 90px 125px 157px 1fr 115px 107px 60px;
   background: transparent;
   color: #fff;
   font-weight: bold;
@@ -27,6 +29,8 @@
 
 .billingRow {
   display: grid;
+  align-items: center;
+  height: 47px;
   border-radius: 4px;
   background: var(--CRM-modal-InputBG, #2d3038);
   grid-template-columns: 116px 91px 129px 155px 1fr 111px 92px 60px;

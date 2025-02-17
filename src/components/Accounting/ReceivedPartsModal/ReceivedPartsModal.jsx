@@ -7,6 +7,7 @@ import CarInfo from "../../sharedComponents/CarInfo/CarInfo";
 import styles from "./ReceivedPartsModal.module.css";
 import EnterpriseInfo from "./EnterpriseInfo/EnterpriseInfo";
 import BillingTable from "./BillingTable/BillingTable";
+import distrLogo from "../../../assets/images/distr_logo_invoice.png";
 
 const dataArr = {
   diagnostic_id: 88,
@@ -40,7 +41,7 @@ const dataArr = {
     parts: [
       {
         id: 1,
-        date: "2025-02-06",
+        date: " 05.02",
         availability: 2,
         code: "P363101",
         brand: "FRENKIT",
@@ -49,7 +50,7 @@ const dataArr = {
       },
       {
         id: 2,
-        date: "2025-02-06",
+        date: "06.02",
         availability: 1,
         code: "B200023",
         brand: "BOSCH",
@@ -58,7 +59,7 @@ const dataArr = {
       },
       {
         id: 3,
-        date: "2025-02-06",
+        date: "07.02",
         availability: 4,
         code: "A110500",
         brand: "ATE",
@@ -67,7 +68,7 @@ const dataArr = {
       },
       {
         id: 4,
-        date: "2025-02-06",
+        date: "08.02",
         availability: 5,
         code: "L300045",
         brand: "LUK",
@@ -76,7 +77,7 @@ const dataArr = {
       },
       {
         id: 5,
-        date: "2025-02-06",
+        date: "09.02",
         availability: 3,
         code: "M998877",
         brand: "MANN",
@@ -113,7 +114,11 @@ function ReceivedPartsModal({ onClose }) {
           <EnterpriseInfo />
         </div>
         <div className={styles.invoiceList}>
-          <p className={styles.distributorName}>GRS PARTS</p>
+          <div className={styles.distrInfo}>
+            <img src={distrLogo} />
+            <p className={styles.distributorName}>GRS PARTS</p>
+          </div>
+
           <div className={styles.billingTable}>
             <BillingTable supplier={dataArr.supplier} />
 
