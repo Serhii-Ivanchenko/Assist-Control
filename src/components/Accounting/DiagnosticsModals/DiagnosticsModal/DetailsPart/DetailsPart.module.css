@@ -53,6 +53,9 @@
   justify-content: space-between;
   align-items: center;
 }
+.btnAlone {
+  justify-content: end;
+}
 
 .btn {
   display: flex;

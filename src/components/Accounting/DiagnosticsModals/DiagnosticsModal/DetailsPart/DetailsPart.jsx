@@ -10,6 +10,8 @@ export default function DetailsPart({
   spares,
   setSpares,
 }) {
+  // const twoSides
+
   useEffect(() => {
     if (spares.length === 0 && togglePoints.length > 0) {
       setSpares((prevSpares) =>
@@ -17,11 +19,11 @@ export default function DetailsPart({
           ? prevSpares
           : togglePoints.map((spare) => ({
               ...spare,
-              parts: spare.parts.map((part) => ({
-                ...part,
-                isChosenLeft: false,
-                isChosenRight: false,
-              })),
+              parts: spare.parts.map((part) =>
+                spare.name.includes("Гальма")
+                  ? { ...part, isChosenLeft: false, isChosenRight: false }
+                  : part
+              ),
             }))
       );
     }
@@ -65,8 +67,12 @@ export default function DetailsPart({
     <>
       <div className={css.title}>
         <p className={css.name}>{title}</p>
-        <p className={`${css.sides} ${css.sideL}`}>Л</p>
-        <p className={css.sides}>П</p>
+        {title.includes("Гальма") && (
+          <>
+            <p className={`${css.sides} ${css.sideL}`}>Л</p>
+            <p className={css.sides}>П</p>
+          </>
+        )}
       </div>
       <ul className={css.detailsList}>
         {spares.map((cat) =>
@@ -74,34 +80,63 @@ export default function DetailsPart({
             ? cat.parts.map((category, index) => (
                 <li className={css.detailsItem} key={index}>
                   <p className={css.subcategoryName}>{category.name}</p>
-                  <div className={css.buttons}>
-                    <button
-                      type="button"
-                      className={`${css.btn} ${
-                        category.isChosenLeft && css.btnRed
-                      }`}
-                      onClick={() => {
-                        toggleSpareSelection(category.part_id, "isChosenLeft");
-                        // handleChosenLeft(category.part_id);
-                        // handleSaveSpares();
-                      }}
-                    >
-                      <BsWrench size={18} className={css.icon} />
-                    </button>
-                    <button
-                      type="button"
-                      className={`${css.btn} ${
-                        category.isChosenRight && css.btnRed
-                      }`}
-                      onClick={() => {
-                        toggleSpareSelection(category.part_id, "isChosenRight");
-                        // handleChosenRight(category.part_id);
-                        // handleSaveSpares();
-                      }}
-                    >
-                      {" "}
-                      <BsWrench size={18} className={css.icon} />
-                    </button>
+                  <div
+                    className={`${css.buttons} ${
+                      !title.includes("Гальма") && css.btnAlone
+                    }`}
+                  >
+                    {title.includes("Гальма") ? (
+                      <>
+                        <button
+                          type="button"
+                          className={`${css.btn} ${
+                            category.isChosenLeft && css.btnRed
+                          }`}
+                          onClick={() => {
+                            toggleSpareSelection(
+                              category.part_id,
+                              "isChosenLeft"
+                            );
+                            // handleChosenLeft(category.part_id);
+                            // handleSaveSpares();
+                          }}
+                        >
+                          <BsWrench size={18} className={css.icon} />
+                        </button>
+                        <button
+                          type="button"
+                          className={`${css.btn} ${
+                            category.isChosenRight && css.btnRed
+                          }`}
+                          onClick={() => {
+                            toggleSpareSelection(
+                              category.part_id,
+                              "isChosenRight"
+                            );
+                            // handleChosenRight(category.part_id);
+                            // handleSaveSpares();
+                          }}
+                        >
+                          {" "}
+                          <BsWrench size={18} className={css.icon} />
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        type="button"
+                        className={`${css.btn} ${
+                          category.isChosenRight && css.btnRed
+                        }`}
+                        onClick={() => {
+                          toggleSpareSelection(category.part_id, "");
+                          // handleChosenRight(category.part_id);
+                          // handleSaveSpares();
+                        }}
+                      >
+                        {" "}
+                        <BsWrench size={18} className={css.icon} />
+                      </button>
+                    )}
                   </div>
                 </li>
               ))
