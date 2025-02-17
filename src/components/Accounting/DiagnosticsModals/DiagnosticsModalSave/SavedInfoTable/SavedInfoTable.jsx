@@ -82,7 +82,7 @@ export default function SavedInfoTable({ chosenSpares }) {
           <div className={css.sparePartsTableWrapper}>
             <TableContainer
               component={Paper}
-              style={{ maxHeight: "225px", overflow: "auto" }}
+              style={{ maxHeight: "280px", overflow: "auto" }}
             >
               <Table>
                 <TableHead>

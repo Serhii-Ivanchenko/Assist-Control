@@ -1,8 +1,8 @@
 .tableWrapper {
   display: flex;
   width: 638px;
-  height: 307px;
-  padding: 15px 14px 30px 14px;
+  height: 350px;
+  padding: 15px 14px 15px 14px;
   flex-direction: column;
   align-items: flex-start;
   gap: 19px;
@@ -10,7 +10,7 @@
   border-radius: 6px;
   background: var(--bg-input);
 
-  margin-bottom: 42px;
+  margin-bottom: 14px;
 }
 
 .infoBtnWrapper {
