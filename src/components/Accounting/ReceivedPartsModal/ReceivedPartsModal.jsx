@@ -84,6 +84,52 @@ const dataArr = {
         part_name: "Масляний фільтр",
         price: 600,
       },
+      {
+        id: 1,
+        date: " 05.02",
+        availability: 2,
+        code: "P363101",
+        brand: "FRENKIT",
+        part_name: "Гальмівний циліндр",
+        price: 1200,
+      },
+      {
+        id: 2,
+        date: "06.02",
+        availability: 1,
+        code: "B200023",
+        brand: "BOSCH",
+        part_name: "Гальмівні колодки",
+        price: 1800,
+      },
+      {
+        id: 3,
+        date: "07.02",
+        availability: 4,
+        code: "A110500",
+        brand: "ATE",
+        part_name: "Гальмівний диск",
+        price: 2500,
+      },
+      {
+        id: 4,
+        date: "08.02",
+        availability: 5,
+        code: "L300045",
+        brand: "LUK",
+        part_name: "Комплект щеплення",
+        price: 8700,
+      },
+      {
+        id: 5,
+        date: "09.02",
+        availability: 3,
+        code: "M998877",
+        brand: "MANN",
+        part_name: "Масляний фільтр",
+        price: 600,
+      },
+      
     ],
   },
 };
@@ -119,46 +165,46 @@ function ReceivedPartsModal({ onClose }) {
             <p className={styles.distributorName}>GRS PARTS</p>
           </div>
 
-          <div className={styles.billingTable}>
-            <BillingTable supplier={dataArr.supplier} />
+          {/* <div className={styles.billingTable}> */}
+          <BillingTable supplier={dataArr.supplier} />
 
-            <div className={styles.sumContainer}>
-              <div className={styles.totalSum}>
-                <p className={styles.sumTitle}>Сума</p>
-                <p className={styles.sum}>
-                  {" "}
-                  <BsReceipt /> 4 610 грн
-                </p>
-              </div>
-
-              <div className={styles.prePaid}>
-                <p>Аванс</p>
-                <input value="2000" readOnly />
-              </div>
-
-              <div className={styles.postPaid}>
-                <p>Борг</p>
-                <input value="2610" readOnly />
-              </div>
+          <div className={styles.sumContainer}>
+            <div className={styles.totalSum}>
+              <p className={styles.sumTitle}>Сума</p>
+              <p className={styles.sum}>
+                {" "}
+                <BsReceipt /> 4 610 грн
+              </p>
             </div>
-            <div className={styles.btnsContainer}>
-              <button className={styles.payBtn}>
-                <FaCheck />
-                Сплатити постачальнику
-              </button>
-              <button className={styles.pdfBtn}>
-                <BsDownload />
-                .pdf
-              </button>
-              <button className={styles.resetBtn}>Скасувати</button>
-              <button className={styles.btn}>
-                <FaCheck />
-                Отримано
-              </button>
+
+            <div className={styles.prePaid}>
+              <p>Аванс</p>
+              <input value="2000" readOnly />
             </div>
+
+            <div className={styles.postPaid}>
+              <p>Борг</p>
+              <input value="2610" readOnly />
+            </div>
+          </div>
+          <div className={styles.btnsContainer}>
+            <button className={styles.payBtn}>
+              <FaCheck />
+              Сплатити постачальнику
+            </button>
+            <button className={styles.pdfBtn}>
+              <BsDownload />
+              .pdf
+            </button>
+            <button className={styles.resetBtn}>Скасувати</button>
+            <button className={styles.btn}>
+              <FaCheck />
+              Отримано
+            </button>
           </div>
         </div>
       </div>
+      {/* </div> */}
     </>
   );
 }

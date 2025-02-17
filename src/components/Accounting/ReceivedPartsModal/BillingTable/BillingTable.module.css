@@ -2,18 +2,18 @@
   width: 100%;
   max-width: 1000px;
   height: 100%;
-  margin: 20px auto;
+  margin: 0px auto 20px;
   overflow: hidden;
 }
 
 .billingHeader {
   display: grid;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   grid-template-columns: 125px 90px 125px 157px 1fr 115px 107px 60px;
   background: transparent;
   color: #fff;
   font-weight: bold;
-  padding: 12px 0;
+  padding: 12px 10px;
   text-align: start;
 }
 
@@ -41,5 +41,6 @@
   padding: 10px;
   text-align: center;
   color: #fff;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 600;
 }

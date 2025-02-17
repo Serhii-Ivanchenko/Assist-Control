@@ -43,6 +43,7 @@
   display: flex;
   gap: 10px;
   justify-content: center;
+  margin-bottom: 27px;
 }
 
 .distrInfo img {
@@ -59,10 +60,9 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-bottom: 27px;
 }
 
-.billingHeader {
+/* .billingHeader {
   display: flex;
   width: 989px;
   justify-content: space-around;
@@ -83,7 +83,7 @@
   flex-direction: column;
   padding-left: 35px;
   gap: 12px;
-}
+} */
 
 .sumContainer {
   display: flex;

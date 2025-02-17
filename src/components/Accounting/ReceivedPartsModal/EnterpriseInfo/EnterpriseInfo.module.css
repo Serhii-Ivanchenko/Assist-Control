@@ -7,12 +7,12 @@
 
 .date {
   color: #fff;
-  font-size: 32px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
-  line-height: 1.1875em;
+  line-height: 1.15em;
 
-  margin-bottom: 24px;
+  margin-bottom: 9px;
 }
 
 .infoBox {

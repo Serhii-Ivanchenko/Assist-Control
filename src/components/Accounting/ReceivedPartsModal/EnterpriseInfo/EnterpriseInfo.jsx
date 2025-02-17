@@ -26,7 +26,7 @@ export default function EnterpriseInfo() {
         <div className={styles.selectWrapper}>
           <select onClick={(e) => e.stopPropagation()}>
             <option>ФОП Блудов</option>
-            <option>ФОП Блудов</option>
+            <option>ФОП Макаренковчук</option>
             <option>ФОП Блудов</option>
           </select>
           <TiArrowSortedDown className={styles.arrowIcon} />
