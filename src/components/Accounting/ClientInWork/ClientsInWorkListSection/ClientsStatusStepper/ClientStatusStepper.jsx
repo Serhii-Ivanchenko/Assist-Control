@@ -14,6 +14,7 @@ import styles from "./ClientStatusStepper.module.css";
 import Modal from "../../../../Modals/Modal/Modal.jsx";
 import DetailedClientInfo from "../../../../DetailedClientInfo/DetailedClientInfo.jsx";
 import EnterAmountModal from "../../../../Modals/EnterAmountModal/EnterAmountModal.jsx";
+import PaymentModal from "../../PaymentModal/PaymentModal.jsx"
 import NotificationModal from "../../../../sharedComponents/NotificationModal/NotificationModal.jsx";
 import { useSelector } from "react-redux";
 import { selectVisibilityClientsInWork } from "../../../../../redux/visibility/selectors.js";
@@ -115,7 +116,8 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         break;
       case 4:
         setIsModalOpen(true);
-        setModalContent(<EnterAmountModal onClose={closeModal} />);
+        // setModalContent(<EnterAmountModal onClose={closeModal} />);
+        setModalContent(<PaymentModal onClose={closeModal} />);
         break;
       case 5:
         setIsModalOpen(true);
