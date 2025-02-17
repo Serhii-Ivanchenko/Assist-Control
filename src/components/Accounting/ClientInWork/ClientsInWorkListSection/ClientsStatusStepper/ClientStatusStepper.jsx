@@ -25,6 +25,7 @@ import RepairModal from "../../RepairModal/RepairModal.jsx";
 import RecievedPartsPopup from "./RecievedPartsPopup/RecievedPartsPopup.jsx";
 import CommercialOfferModal from "../../CommercialOfferModal/CommercialOfferModal.jsx";
 import DiagnosticsModals from "../../../DiagnosticsModals/DiagnosticsModals.jsx";
+import ReceivedPartsModal from "../../../ReceivedPartsModal/ReceivedPartsModal.jsx";
 
 function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const visibility = useSelector(selectVisibilityClientsInWork);
@@ -123,7 +124,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         break;
       case 5:
         setIsModalOpen(true);
-        setModalContent("Modal for ordered");
+        setModalContent(<ReceivedPartsModal onClose={closeModal} />);
         break;
       case 6:
         console.log("Opening popup...");
