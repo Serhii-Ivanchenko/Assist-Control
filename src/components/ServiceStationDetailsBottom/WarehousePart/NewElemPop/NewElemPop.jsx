@@ -61,11 +61,13 @@ export default function NewElemPop({
   // setTreeData,
   node,
   containerRef,
-  // openParentIfNeeded,
-  // treeData,
+  openParentIfNeeded,
+  treeData,
+  open,
 }) {
   const popoverRef = useRef(null);
   const dispatch = useDispatch();
+  const [lastAddedParentId, setLastAddedParentId] = useState(null);
 
   // Відкриття і закриття модалки
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -98,6 +100,7 @@ export default function NewElemPop({
   const addNewBranch = (count) => {
     if (count <= 0) return;
 
+    const parentId = node.id;
     // const newBranches = Array.from({ length: count }).map((_, index) => {
     //   const branchText = TextForNewBranch({ type: node.data });
     //   const branchData = DataForNewBranch({ type: node.data });
@@ -129,7 +132,11 @@ export default function NewElemPop({
               color: "var(--white)FFF",
             },
           });
-          dispatch(getAllWarehousesWithDetails());
+          dispatch(getAllWarehousesWithDetails()).then(() => {
+            setTimeout(() => {
+              open(parentId);
+            }, 0);
+          });
         })
         .catch((err) => {
           toast.error("Проблема зі створенням секцій :( спробуйте пізніше", {
@@ -159,7 +166,11 @@ export default function NewElemPop({
               color: "var(--white)FFF",
             },
           });
-          dispatch(getAllWarehousesWithDetails());
+          dispatch(getAllWarehousesWithDetails()).then(() => {
+            setTimeout(() => {
+              open(parentId);
+            }, 0);
+          });
         })
         .catch((err) => {
           toast.error("Проблема зі створенням стелажів :( спробуйте пізніше", {
@@ -189,7 +200,11 @@ export default function NewElemPop({
               color: "var(--white)FFF",
             },
           });
-          dispatch(getAllWarehousesWithDetails());
+          dispatch(getAllWarehousesWithDetails()).then(() => {
+            setTimeout(() => {
+              open(parentId);
+            }, 0);
+          });
         })
         .catch((err) => {
           toast.error("Проблема зі створенням полиць :( спробуйте пізніше", {
@@ -219,7 +234,11 @@ export default function NewElemPop({
               color: "var(--white)FFF",
             },
           });
-          dispatch(getAllWarehousesWithDetails());
+          dispatch(getAllWarehousesWithDetails()).then(() => {
+            setTimeout(() => {
+              open(parentId);
+            }, 0);
+          });
         })
         .catch((err) => {
           toast.error("Проблема зі створенням полиць :( спробуйте пізніше", {
@@ -247,11 +266,11 @@ export default function NewElemPop({
   };
 
   // useEffect(() => {
-  //   if (lastAddedNodeId) {
-  //     openParentIfNeeded(lastAddedNodeId, treeData);
+  //   if (lastAddedParentId && treeData.length > 0) {
+  //     openParentIfNeeded(lastAddedParentId, treeData);
+  //     setLastAddedParentId(null); // Скидаємо значення
   //   }
-  // }, [treeData, lastAddedNodeId, openParentIfNeeded]);
-
+  // }, [treeData, lastAddedParentId]);
   // Автоматичний скролл при відкритті останнього поповера (наче працює)
   useEffect(() => {
     if (isVisible === node.id && popoverRef.current && containerRef.current) {

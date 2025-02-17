@@ -99,7 +99,7 @@ export default function WarehousePart() {
 
   const [isAddWhModalOpen, setAddWhModalOpen] = useState(false);
 
-  const { ref, getPipeHeight, toggle, openParentIfNeeded } =
+  const { ref, getPipeHeight, toggle, openParentIfNeeded, open } =
     useTreeOpenHandler();
 
   const [isNewWhPopoverOpen, setNewWhPopoverOpen] = useState(false);
@@ -630,7 +630,7 @@ export default function WarehousePart() {
                   openParentIfNeeded={openParentIfNeeded}
                   tempNodeText={tempNodeText}
                   setTempNodeText={setTempNodeText}
-                  setExpandedNodes={setExpandedNodes}
+                  open={open}
                 />
               )}
               expandedIds={expandedNodes}
