@@ -1,7 +1,7 @@
 .customTableWrapper{
   display: block;
   width: 100%;
-  max-height: 571px;
+  max-height: 560px;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -137,19 +137,29 @@
   width: 150px;
 }
 
-.deleteIcon {
-  cursor: pointer;
-  color: #d54e4f;
-  transform: translateY(-50%);
-
+.deleteIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: var(--red); 
   position: absolute;
   top: 50%;
   right: -3px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
-.deleteIcon:hover {
-  color: #ff0000;
+.deleteIconContainer:hover {
+  background-color: #ff0000; 
 }
+
+.deleteIcon {
+  color: var(-white);
+}
+
 
 .rowWrapper {
   position: relative;
