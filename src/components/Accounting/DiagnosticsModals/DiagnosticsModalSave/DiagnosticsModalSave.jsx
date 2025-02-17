@@ -13,6 +13,7 @@ export default function DiagnosticsModalSave({
   setOpenModalSave,
   openModalSave,
   chosenPoints,
+  chosenSpares,
 }) {
   return (
     <div className={css.modalWrapper}>
@@ -48,12 +49,13 @@ export default function DiagnosticsModalSave({
                 // setChosenPoints={setChosenPoints}
                 chosenPoints={chosenPoints}
                 // handleCheckboxChange={handleCheckboxChange}
+                modalSave={true}
               />
             ))}
           </ul>
         </div>
         <div>
-          <SavedInfoTable />
+          <SavedInfoTable chosenSpares={chosenSpares} />
 
           <div className={css.btnBox}>
             <button

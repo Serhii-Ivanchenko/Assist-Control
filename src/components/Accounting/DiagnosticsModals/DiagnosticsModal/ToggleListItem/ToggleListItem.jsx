@@ -5,18 +5,23 @@ export default function ToggleListItem({
   handleCheckboxChange,
   disabled,
   chosenPoints,
+  modalSave,
 }) {
   return (
     <li className={css.listItem}>
-      <p className={css.label}>{point.label}</p>
+      <p className={css.label}>{point.name}</p>
       <label className={css.toggleSwitch}>
         <input
           type="checkbox"
-          checked={chosenPoints.some((p) => p.id === point.id)}
-          onChange={(e) => handleCheckboxChange(e, point.id, point.label)}
+          checked={chosenPoints.some((p) => p.id === point.category_id)}
+          onChange={(e) =>
+            handleCheckboxChange(e, point.category_id, point.name)
+          }
           disabled={disabled}
         />
-        <span className={css.slider}></span>
+        <span
+          className={`${css.slider} ${modalSave && css.sliderForSecondModal}`}
+        ></span>
       </label>
     </li>
   );
