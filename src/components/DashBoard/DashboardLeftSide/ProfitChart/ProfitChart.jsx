@@ -104,7 +104,7 @@ export default function ProfitChart() {
   // console.log(data);
 
   //   let interval = 0;
-  const getMaxValue = (data) => Math.max(...data.map((d) => d.ltv_count));
+  const getMaxValue = (data) => Math.max(...data.map((d) => d.p_count));
   const maxY = getMaxValue(data);
   //   if (maxY > 2000) {
   //     interval = 499;

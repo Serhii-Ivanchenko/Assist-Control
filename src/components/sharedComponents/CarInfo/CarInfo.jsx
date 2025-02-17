@@ -30,7 +30,7 @@ export default function CarInfo({
   };
 
   return (
-    <>
+    <div className={css.containercarinfo}>
       <div className={css.headerWrapper}>
         <h3 className={css.clientName}>{clientName}</h3>
         <p className={css.phone}>{clientPhone}</p>
@@ -74,6 +74,6 @@ export default function CarInfo({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
