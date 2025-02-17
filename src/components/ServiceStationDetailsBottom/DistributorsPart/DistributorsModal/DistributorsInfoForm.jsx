@@ -1,9 +1,19 @@
 import { ErrorMessage, Formik, Field, Form } from "formik";
 import * as Yup from "yup";
+import { CiSquarePlus } from "react-icons/ci";
 import CustomRadioBtn from "../../../CustomRadioBtn/CustomRadioBtn";
 import styles from "./DistributorsModal.module.css";
+import { useState } from "react";
 
 const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
+  const [managers, setManagers] = useState(
+    distributor?.managers || [{ name: "", phone: "", position: "" }]
+  );
+
+  const addManager = () => {
+    setManagers([...managers, { name: "", phone: "", position: "" }]);
+  };
+
   const initialValues = {
     address: distributor?.address || "",
     paymentCondition: distributor?.paymentCondition || "",
@@ -14,10 +24,11 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     bank: distributor?.bank || "",
     bankCode: distributor?.bankCode || "",
     companyAddress: distributor?.companyAddress || "",
-    managerPhone: distributor?.managerPhone || "",
-    managerName: distributor?.managerName || "",
-    officePhone: distributor?.officePhone || "",
-    ownerPhone: distributor?.ownerPhone || "",
+    // managerPhone: distributor?.managerPhone || "",
+    // managerName: distributor?.managerName || "",
+    // officePhone: distributor?.officePhone || "",
+    // ownerPhone: distributor?.ownerPhone || "",
+    managers: managers,
   };
 
   const validationSchema = Yup.object({
@@ -30,17 +41,27 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     bank: Yup.string(),
     bankCode: Yup.string(),
     companyAddress: Yup.string(),
-    managerPhone: Yup.string()
-      .required("* Поле обов'язкове")
-      .matches(/^\+?\d*$/, "Телефон може містити лише цифри та знак +"),
-    managerName: Yup.string(),
-    officePhone: Yup.string().matches(
-      /^\+?\d*$/,
-      "Телефон може містити лише цифри та знак +"
-    ),
-    ownerPhone: Yup.string().matches(
-      /^\+?\d*$/,
-      "Телефон може містити лише цифри та знак +"
+    // managerPhone: Yup.string()
+    //   .required("* Поле обов'язкове")
+    //   .matches(/^\+?\d*$/, "Телефон може містити лише цифри та знак +"),
+    // managerName: Yup.string(),
+    // officePhone: Yup.string().matches(
+    //   /^\+?\d*$/,
+    //   "Телефон може містити лише цифри та знак +"
+    // ),
+    // ownerPhone: Yup.string().matches(
+    //   /^\+?\d*$/,
+    //   "Телефон може містити лише цифри та знак +"
+    // ),
+    managers: Yup.array().of(
+      Yup.object({
+        phone: Yup.string().matches(
+          /^\+?\d*$/,
+          "Телефон може містити лише цифри та знак +"
+        ),
+        name: Yup.string(),
+        position: Yup.string(),
+      })
     ),
   });
   const handleSubmit = (values) => {
@@ -56,7 +77,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
       onSubmit={handleSubmit}
       enableReinitialize={true}
     >
-      {({ setFieldValue }) => (
+      {({ values, setFieldValue }) => (
         <Form className={styles.formContainer}>
           <div className={styles.addressBox}>
             <label className={styles.label}>Фактична адреса</label>
@@ -206,7 +227,70 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
             </label>
           </div>
 
-          <div className={styles.rowContainer}>
+          {values.managers.map((_, index) => (
+            <div key={index} className={styles.rowContainer}>
+              <div className={styles.inputBox}>
+                <label className={styles.label}>
+                  Телефон
+                  <Field
+                    className={styles.input}
+                    type="tel"
+                    name={`managers[${index}].phone`}
+                    placeholder="+380671234567"
+                    style={{ width: "158px" }}
+                  />
+                </label>
+                <ErrorMessage
+                  name={`managers[${index}].phone`}
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+              <div className={styles.inputBox}>
+                <label className={styles.label}>
+                  Ім&apos;я
+                  <Field
+                    className={styles.input}
+                    type="text"
+                    name={`managers[${index}].name`}
+                    placeholder="Діана"
+                    style={{ width: "158px" }}
+                  />
+                </label>
+                <ErrorMessage
+                  name={`managers[${index}].name`}
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+              <div className={styles.inputBox}>
+                <label className={styles.label}>
+                  Посада
+                  <Field
+                    className={styles.input}
+                    type="tel"
+                    name={`managers[${index}].position`}
+                    placeholder="Менеджер"
+                    style={{ width: "158px" }}
+                  />
+                </label>
+                <ErrorMessage
+                  name={`managers[${index}].position`}
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+              <button
+                type="button"
+                onClick={addManager}
+                className={styles.addBtn}
+              >
+                <CiSquarePlus style={{ transform: "scale(1.3)" }} />
+              </button>
+            </div>
+          ))}
+
+          {/* <div className={styles.rowContainer}>
             <div className={styles.inputBox}>
               <label className={styles.label}>
                 Телефон менеджера
@@ -263,7 +347,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
                 />
               </label>
             </div>
-          </div>
+          </div> */}
         </Form>
       )}
     </Formik>
