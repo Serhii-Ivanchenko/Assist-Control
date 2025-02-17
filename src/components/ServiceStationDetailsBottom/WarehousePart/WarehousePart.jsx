@@ -222,7 +222,7 @@ export default function WarehousePart() {
 
   const [isAddWhModalOpen, setAddWhModalOpen] = useState(false);
 
-  const { ref, getPipeHeight, toggle, openParentIfNeeded } =
+  const { ref, getPipeHeight, toggle, openParentIfNeeded, open } =
     useTreeOpenHandler();
 
   const [isNewWhPopoverOpen, setNewWhPopoverOpen] = useState(false);
@@ -414,8 +414,6 @@ export default function WarehousePart() {
     console.log("endDepth", endDepth);
     console.log("dropTargetId", dropTargetId);
 
-    
-
     if (startDepth < endDepth) {
       return;
     }
@@ -483,7 +481,6 @@ export default function WarehousePart() {
     const parentField = parentFieldMap[entityType];
 
     console.log("parentField", parentField);
-    
 
     // const entityId = parseInt(start.id.slice(entityType === "shelf" ? 3 : 2));
 
@@ -735,6 +732,7 @@ export default function WarehousePart() {
                   openParentIfNeeded={openParentIfNeeded}
                   tempNodeText={tempNodeText}
                   setTempNodeText={setTempNodeText}
+                  open={open}
                 />
               )}
             />
