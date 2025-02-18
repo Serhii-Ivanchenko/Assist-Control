@@ -13,13 +13,13 @@ export default function DiagnosticsModalSave({
   setOpenModalSave,
   openModalSave,
   chosenPoints,
+  chosenSpares,
 }) {
   return (
     <div className={css.modalWrapper}>
       <RxCross1 className={css.cross} onClick={onClose} />
       <p className={css.modalTitle}>Діагностика № 1</p>
       <div className={css.modalTopPart}>
-        <div>
           <CarInfo
             clientName="Іван Петренко"
             clientPhone="+38 073 329 12 17"
@@ -31,8 +31,6 @@ export default function DiagnosticsModalSave({
             vin="VW8795218794H46J"
             mileage="284563"
           />
-        </div>
-
         <DiagnosticsInfo time="23" />
       </div>
 
@@ -48,12 +46,13 @@ export default function DiagnosticsModalSave({
                 // setChosenPoints={setChosenPoints}
                 chosenPoints={chosenPoints}
                 // handleCheckboxChange={handleCheckboxChange}
+                modalSave={true}
               />
             ))}
           </ul>
         </div>
         <div>
-          <SavedInfoTable />
+          <SavedInfoTable chosenSpares={chosenSpares} />
 
           <div className={css.btnBox}>
             <button

@@ -86,7 +86,7 @@
   position: relative;
   /* top: -10px;
   left: -70px; */
-  /* z-index: 10;
+/* z-index: 10;
   background: var(--bg-input);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
@@ -224,6 +224,12 @@
   flex-direction: column;
 }
 
+.rowContainer {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
 .input {
   border-radius: 4px;
   border: 1px solid var(--input-stroke);
@@ -238,9 +244,33 @@
   width: 100%;
 }
 
+.contactsInput {
+  width: 146px;
+  padding: 6px 14.5px;
+}
+
 .input:focus {
   border-color: var(--light-gray);
   outline: none;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* min-width: 33px;
+  height: 33px; */
+  padding: 7.5px;
+  border-radius: 6px;
+  background: var(--CRM-modal-InputBG, #2d3038);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  cursor: pointer;
+  color: #c1c1c1;
+}
+
+.plusIcon {
+  transform: scale(1.8)
 }
 
 .input:-webkit-autofill {

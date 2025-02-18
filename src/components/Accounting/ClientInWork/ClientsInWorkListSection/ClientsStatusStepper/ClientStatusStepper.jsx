@@ -14,6 +14,7 @@ import styles from "./ClientStatusStepper.module.css";
 import Modal from "../../../../Modals/Modal/Modal.jsx";
 import DetailedClientInfo from "../../../../DetailedClientInfo/DetailedClientInfo.jsx";
 import EnterAmountModal from "../../../../Modals/EnterAmountModal/EnterAmountModal.jsx";
+import PaymentModal from "../../PaymentModal/PaymentModal.jsx"
 import NotificationModal from "../../../../sharedComponents/NotificationModal/NotificationModal.jsx";
 import { useSelector } from "react-redux";
 import { selectVisibilityClientsInWork } from "../../../../../redux/visibility/selectors.js";
@@ -25,6 +26,8 @@ import RepairModal from "../../RepairModal/RepairModal.jsx";
 import RecievedPartsPopup from "./RecievedPartsPopup/RecievedPartsPopup.jsx";
 import CommercialOfferModal from "../../CommercialOfferModal/CommercialOfferModal.jsx";
 import DiagnosticsModals from "../../../DiagnosticsModals/DiagnosticsModals.jsx";
+import ReceivedPartsModal from "../../../ReceivedPartsModal/ReceivedPartsModal.jsx";
+import PaymentDistrModal from "../../PaymentDistrModal/PaymentDistrModal.jsx";
 
 function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const visibility = useSelector(selectVisibilityClientsInWork);
@@ -119,11 +122,12 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         break;
       case 4:
         setIsModalOpen(true);
-        setModalContent(<EnterAmountModal onClose={closeModal} />);
+        // setModalContent(<EnterAmountModal onClose={closeModal} />);
+        setModalContent(<PaymentModal onClose={closeModal} />);
         break;
       case 5:
         setIsModalOpen(true);
-        setModalContent("Modal for ordered");
+        setModalContent(<ReceivedPartsModal onClose={closeModal} />);
         break;
       case 6:
         console.log("Opening popup...");
@@ -143,7 +147,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         break;
       case 8:
         setIsModalOpen(true);
-        setModalContent(<EnterAmountModal onClose={closeModal} />);
+        setModalContent(<PaymentDistrModal onClose={closeModal} />);
         break;
       case 9:
         setIsModalOpen(true);

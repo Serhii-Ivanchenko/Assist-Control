@@ -67,6 +67,7 @@ export default function Node({
   openParentIfNeeded,
   tempNodeText,
   setTempNodeText,
+  open,
 }) {
   const inputFocusRef = useRef(null);
   const scrollForPopover = useRef(null);
@@ -273,6 +274,7 @@ export default function Node({
             // handleToggle={handleToggle}
             openParentIfNeeded={openParentIfNeeded}
             treeData={treeData}
+            open={open}
           />
         </div>
       </div>
