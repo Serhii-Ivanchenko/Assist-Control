@@ -3,6 +3,7 @@
   justify-content: flex-end;
   gap: 20px;
   margin-top: 4px;
+  margin-right: 10px;
 }
 
 .statusToggle {
