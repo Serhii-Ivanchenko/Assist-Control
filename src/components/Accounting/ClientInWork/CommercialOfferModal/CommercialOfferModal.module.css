@@ -9,7 +9,7 @@
 
 .topWrapper {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   margin-bottom: 30px;
 }
 
@@ -18,7 +18,8 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-left: 205px;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 .closeIcon {
@@ -73,7 +74,7 @@
   flex-direction: column;
   margin-top: 6px;
   align-items: end;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
 
 .date {
@@ -214,6 +215,7 @@
 
 .btn {
   display: flex;
+  align-items: center;
   gap: 10px;
   padding: 10px 20px;
   border-radius: 6px;
@@ -245,6 +247,11 @@
   border: none;
   outline: none;
   cursor: pointer; */
+}
+
+.approvalBtn {
+  width: 273px;
+  justify-content: center;
 }
 
 .notSubmitted {

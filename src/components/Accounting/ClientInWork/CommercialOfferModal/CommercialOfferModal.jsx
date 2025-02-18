@@ -314,21 +314,22 @@ export default function CommercialOfferModal({ onClose }) {
   return (
     <div className={css.modal}>
       <BsXLg className={css.closeIcon} onClick={onClose} />
+      <p className={css.offerNumber}>КП № </p>
+
       <div className={css.topWrapper}>
-        <div>
-          <CarInfo
-            clientName={data.client.client_name}
-            clientPhone={data.client.phone}
-            carImg={carImg}
-            carNumber={data.car.car_number}
-            carMake={data.car.make}
-            carModel={data.car.model}
-            carYear={data.car.year}
-            vin={data.car.vin}
-            mileage={data.car.mileage}
-          />
-        </div>
-        <p className={css.offerNumber}>КП № </p>
+        {/* <div> */}
+        <CarInfo
+          clientName={data.client.client_name}
+          clientPhone={data.client.phone}
+          carImg={carImg}
+          carNumber={data.car.car_number}
+          carMake={data.car.make}
+          carModel={data.car.model}
+          carYear={data.car.year}
+          vin={data.car.vin}
+          mileage={data.car.mileage}
+        />
+        {/* </div> */}
         <div className={css.rightSectionWrapper}>
           <p className={css.date}>{formattedDate}</p>
           <button className={css.link}>Діагностика № </button>
@@ -417,12 +418,13 @@ export default function CommercialOfferModal({ onClose }) {
               type="button"
               className={clsx(
                 css.btn,
+                css.approvalBtn,
                 sentForApproval ? css.submitted : css.notSubmitted
               )}
               onClick={() => setIsPopupOpen(true)}
             >
               <FaCheck />
-              Відправити на узгодження
+              {approval ? approval : "Відправити на узгодження"}
               <BsCaretRightFill />
             </button>
             {isPopupOpen && (

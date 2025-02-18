@@ -198,7 +198,7 @@
   padding: 2px;
   font-family: "Roboto", sans-serif;
   color: var(--white);
-  background-color: transparent;
+  background-color: var(--main-gray);
   border: none;
   outline: none;
   text-align: center;
