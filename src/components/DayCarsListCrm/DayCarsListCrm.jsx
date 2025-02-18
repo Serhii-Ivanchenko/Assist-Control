@@ -9,7 +9,7 @@ export default function DayCarsListCrm({ records, onDragStart, onArchiveSuccess 
   if (records.length === 0) return null;
 
   return (
-    <div className={styles.crmBlockDayCarsListContainer}>
+    // <div className={styles.crmBlockDayCarsListContainer}>
       <ul className={styles.crmCarList}>
         {records.map((car) => (
           <DayCarsItemCrm
@@ -21,6 +21,6 @@ export default function DayCarsListCrm({ records, onDragStart, onArchiveSuccess 
           />
         ))}
       </ul>
-    </div>
+    // </div>
   );
 }

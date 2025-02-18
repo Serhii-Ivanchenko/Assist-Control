@@ -1,5 +1,5 @@
 .droppableColumn {
-    width: 365px;
+    width: clamp(252px, min(19.730vw, 33.796vh), 365px);
     background-color: transparent;
     display: flex;
     flex-direction: column;

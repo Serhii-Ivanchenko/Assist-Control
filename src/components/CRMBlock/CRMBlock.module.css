@@ -1,31 +1,35 @@
 .container {
-    width: 1514px;
-    height: 580px;
+    /* width: 1514px;
+    height: 580px; */
+    width: clamp(1055px, min(82.486vw, 53.704vh * 2.631), 1526px);
+    height: clamp(386px, min(53.704vh, 82.486vw / 2.631), 580px);
 }
 
 .headersContainer {
     display: flex;
     flex-direction: row;
-    margin-bottom: 25px;
-    gap: 6px;
+    align-items: center;
+    /* margin-bottom: 25px; */
+    margin-bottom: clamp(16px, min(2.315vh, 1.351vw), 25px);
+    gap: clamp(4px, min(0.555vh, 0.324vw), 6px);
 }
 
 .columnsContainer {
     display: flex;
-    max-height: 480px;
+    max-height: clamp(320px, min(44.444vh, 25.946vw), 480px);
     overflow-y: auto;
 }
 
 .columnsInnerContainer {
     display: flex;
     width: 100%;
-    gap: 11px;
-    height: fit-content;
-    
+    /* gap: 11px; */
+    gap: clamp(7px, min(1.019vh, 0.595vw), 11px);
+    /* height: fit-content; */
 }
 
 .columnsContainer::-webkit-scrollbar {
-    width: 8px;
+    width: clamp(4px, 0.432vw, 8px);
 }
 
 .columnsContainer::-webkit-scrollbar-track {
@@ -45,18 +49,18 @@
 }
 
 .statusHeader {
-    width: 370px;
-    height: 61px;
+    width: clamp(256px, min(20vw, 5.649vh * 6.066), 370px);
+    height: clamp(40px, min(5.649vh, 20vw / 6.066), 61px);
     color: white;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: clamp(12px, min(1.666vh, 0.973vw), 18px);
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
-    padding: 21px 38px 19px 39px;
+    padding: clamp(13px, min(1.851vh, 1.081vw), 20px) clamp(26px, min(2.054vw, 3.519vh), 38px);
 }
 
 .firstStatus {
@@ -70,23 +74,22 @@
 
 .carCount {
     margin-left: auto;
-    font-size: 16px;
+    font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
     color: var(--white);
 }
 
 .svgIcon {
+    /* width: 12px;
+    height: 61px; */
+    width: clamp(8px, min(0.649vw, 5.649vh * 0.197), 12px);
+    height: clamp(40px, min(5.649vh, 0.649vw / 0.197), 61px);
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
 }
 
-.btnSettings{
-    margin-top: 20px;
-    /* margin-left: 8px; */
-}
-
 .settingsContainerInCrm {
     right: 0 !important;
     top: 50px !important;
-  }
+}

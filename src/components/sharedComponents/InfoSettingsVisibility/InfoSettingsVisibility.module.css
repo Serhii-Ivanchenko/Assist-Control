@@ -20,10 +20,10 @@
 .settingsContainer {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: clamp(12px, min(1.481vh, 0.864vw), 16px);
     align-items: flex-start;
-    width: 218px;
-    padding: 13px 16px;
+    /* width: clamp(150px, min(11.784vw, 20.185vh), 218px); */
+    padding: clamp(8.5px, min(1.204vh, 0.703vw), 13px) clamp(12px, min(1.481vh, 0.864vw), 16px);
     background: #2C2D31;
     border-radius: 12px;
    

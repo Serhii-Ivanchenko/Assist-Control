@@ -4,6 +4,6 @@
     width: clamp(1055px, min(82.486vw, 33.981vh * 4.158), 1526px);
     height: clamp(244px, min(33.981vh, 82.486vw / 4.158), 367px);
     display: flex;
-    gap: clamp(9px, min(1.296vh, 0.757vw), 14px);;
+    gap: clamp(9px, min(1.296vh, 0.757vw), 14px);
     /* padding-bottom: 15px; */
 }

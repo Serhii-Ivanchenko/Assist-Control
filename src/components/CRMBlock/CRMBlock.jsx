@@ -141,14 +141,12 @@ export default function CRMBlock() {
             </div>
           );
         })}
-        <div className={css.btnSettings}>
           <InfoSettingsVisibility
             selectVisibility={selectVisibilityRecords}
             toggleVisibilityAction={toggleVisibilityRecords}
             labelNames={labelNamesInCrm}
             className={css.settingsContainerInCrm}
           />
-        </div>
       </div>
 
       <div className={css.columnsContainer}>
