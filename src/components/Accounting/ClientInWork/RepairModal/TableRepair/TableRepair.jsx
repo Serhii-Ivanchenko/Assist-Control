@@ -5,6 +5,7 @@ import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import { useState } from "react";
 import { HiMiniMinusCircle } from "react-icons/hi2";
 import ava1 from "../../../../../assets/images/avatar_default.png";
+import { HiMinus } from "react-icons/hi2";
 import DeleteModal from "../../../../sharedComponents/SwitchableBtns/DeleteModal/DeleteModal";
 import Modal from "../../../../Modals/Modal/Modal";
 import MechanicPopover from "../MechanicPopover/MechanicPopover";
@@ -202,11 +203,15 @@ const TableRepair = ({ data, onDelete }) => {
                 <td className={styles.columnMargin}>{row.margin}</td>
                 {hoveredRow === row.id && (
                   <td className={styles.columnDelete}>
-                    <HiMiniMinusCircle
-                      size={20}
+                    <div
+                      className={styles.deleteIconContainer}
                       onClick={() => handleDelete(row.id)}
-                      className={styles.deleteIcon}
-                    />
+                    >
+                      <HiMinus 
+                        size={16}
+                        className={styles.deleteIcon}
+                      />
+                    </div>
                   </td>
                 )}
               </tr>
