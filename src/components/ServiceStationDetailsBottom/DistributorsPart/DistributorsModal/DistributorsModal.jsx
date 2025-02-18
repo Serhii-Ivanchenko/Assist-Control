@@ -90,8 +90,9 @@ function DistributorsModal({ onClose, distributorData, onToggleDisable }) {
       // Перевірка на заповненість обов'язкових полів
       if (
         !distributor.name?.trim() ||
-        !distributorsInfoData.address?.trim() ||
-        !distributorsInfoData.managerPhone?.trim()
+        !distributorsInfoData.address?.trim()
+        // ||
+        // !distributorsInfoData.managerPhone?.trim()
         // ||
         // !authData.distrEmail?.trim() ||
         // !authData.priceEmail?.trim()

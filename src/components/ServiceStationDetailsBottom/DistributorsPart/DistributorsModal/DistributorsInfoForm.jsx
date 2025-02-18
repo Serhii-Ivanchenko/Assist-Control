@@ -6,12 +6,12 @@ import styles from "./DistributorsModal.module.css";
 import { useState } from "react";
 
 const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
-  const [managers, setManagers] = useState(
-    distributor?.managers || [{ name: "", phone: "", position: "" }]
+  const [contacts, setContacts] = useState(
+    distributor?.contacts || [{ name: "", phone: "", position: "" }]
   );
 
   const addManager = () => {
-    setManagers([...managers, { name: "", phone: "", position: "" }]);
+    setContacts([...contacts, { name: "", phone: "", position: "" }]);
   };
 
   const initialValues = {
@@ -28,7 +28,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     // managerName: distributor?.managerName || "",
     // officePhone: distributor?.officePhone || "",
     // ownerPhone: distributor?.ownerPhone || "",
-    managers: managers,
+    contacts: contacts,
   };
 
   const validationSchema = Yup.object({
@@ -53,7 +53,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     //   /^\+?\d*$/,
     //   "Телефон може містити лише цифри та знак +"
     // ),
-    managers: Yup.array().of(
+    contacts: Yup.array().of(
       Yup.object({
         phone: Yup.string().matches(
           /^\+?\d*$/,
@@ -227,21 +227,20 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
             </label>
           </div>
 
-          {values.managers.map((_, index) => (
+          {values.contacts.map((_, index) => (
             <div key={index} className={styles.rowContainer}>
               <div className={styles.inputBox}>
                 <label className={styles.label}>
                   Телефон
                   <Field
-                    className={styles.input}
+                    className={`${styles.input} ${styles.contactsInput}`}
                     type="tel"
-                    name={`managers[${index}].phone`}
+                    name={`contacts[${index}].phone`}
                     placeholder="+380671234567"
-                    style={{ width: "158px" }}
                   />
                 </label>
                 <ErrorMessage
-                  name={`managers[${index}].phone`}
+                  name={`contacts[${index}].phone`}
                   component="div"
                   className={styles.error}
                 />
@@ -250,15 +249,14 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
                 <label className={styles.label}>
                   Ім&apos;я
                   <Field
-                    className={styles.input}
+                    className={`${styles.input} ${styles.contactsInput}`}
                     type="text"
-                    name={`managers[${index}].name`}
+                    name={`contacts[${index}].name`}
                     placeholder="Діана"
-                    style={{ width: "158px" }}
                   />
                 </label>
                 <ErrorMessage
-                  name={`managers[${index}].name`}
+                  name={`contacts[${index}].name`}
                   component="div"
                   className={styles.error}
                 />
@@ -267,15 +265,14 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
                 <label className={styles.label}>
                   Посада
                   <Field
-                    className={styles.input}
+                    className={`${styles.input} ${styles.contactsInput}`}
                     type="tel"
-                    name={`managers[${index}].position`}
+                    name={`contacts[${index}].position`}
                     placeholder="Менеджер"
-                    style={{ width: "158px" }}
                   />
                 </label>
                 <ErrorMessage
-                  name={`managers[${index}].position`}
+                  name={`contacts[${index}].position`}
                   component="div"
                   className={styles.error}
                 />
@@ -285,7 +282,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
                 onClick={addManager}
                 className={styles.addBtn}
               >
-                <CiSquarePlus style={{ transform: "scale(1.3)" }} />
+                <CiSquarePlus className={styles.plusIcon} />
               </button>
             </div>
           ))}

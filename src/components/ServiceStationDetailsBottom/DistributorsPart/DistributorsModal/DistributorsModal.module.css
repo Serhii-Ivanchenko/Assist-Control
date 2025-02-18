@@ -124,6 +124,7 @@
 .uploadLogoContainer {
   margin-top: 19px;
 }
+
 .uploadLogoContainer label {
   display: flex;
   align-items: center;
@@ -238,6 +239,10 @@
   font-size: 16px;
 }
 
+.contactsInput {
+  width: 158px;
+}
+
 .input:-webkit-autofill {
   background-color: var(--bg-input) !important;
   color: var(--light-gray) !important;
@@ -272,6 +277,10 @@
   border: none;
   cursor: pointer;
   color: #c1c1c1;
+}
+
+.plusIcon {
+  transform: scale(1.8)
 }
 
 .btnGroup {
@@ -343,6 +352,7 @@
   left: 3%;
   white-space: nowrap;
 }
+
 .errorAddress {
   font-family: "Roboto", sans-serif;
   font-weight: 500;
