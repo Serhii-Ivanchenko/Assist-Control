@@ -143,7 +143,6 @@ function ReceivedPartsModal({ onClose }) {
         <RxCross1 className={styles.cross} onClick={onClose} />
         <p className={styles.title}>Надходження товару №0000</p>
         <div className={styles.invoiceHeader}>
-          <div>
             <CarInfo
               clientName={data.client.client_name}
               clientPhone={data.client.phone}
@@ -155,8 +154,6 @@ function ReceivedPartsModal({ onClose }) {
               vin={data.car.vin}
               mileage={data.car.mileage}
             />
-          </div>
-
           <EnterpriseInfo />
         </div>
         <div className={styles.invoiceList}>

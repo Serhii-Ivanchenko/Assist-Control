@@ -23,33 +23,28 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
-    line-height: normal;
+    line-height: 1.15em;
     margin-bottom: 45px;
 }
 
 .topsection {
     display: flex;
     flex-direction: row;
-    height: 190px;
     justify-content: space-between;
     margin-bottom: 55px;
 }
 
-
 .toprigthsection {
     display: flex;
     flex-direction: column;
-    margin-top: 6px;
     align-items: flex-end;
-
-
 }
 
 .date {
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
-    line-height: normal;
+    line-height: 1.1875em;
     margin-bottom: 25px;
 }
 
@@ -59,26 +54,19 @@
     line-height: normal;
     color: var(--play-btn-triangle);
     text-decoration: underline;
-    margin-bottom: 19px;
+    margin-bottom: 15px;
 }
 
-.mechanicWrapper {
+.managerWrapper {
     display: flex;
     gap: 10px;
     margin-bottom: 19px;
 }
 
-.spannerIcon {
-    width: 18px;
-    height: 18px;
-    /* transform: rotateY(180deg); */
-}
-
 .mechanicText {
     font-size: 16px;
     font-style: normal;
-    line-height: 1, 1875em;
-
+    line-height: 1.1875em;
 }
 
 .mechanicName {
@@ -86,13 +74,6 @@
     font-style: normal;
     font-weight: 600;
     line-height: 1.1875em;
-
-}
-
-.managerWrapper {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 19px;
 }
 
 .personIcon {
@@ -103,6 +84,7 @@
 .dictionary {
     display: flex;
     flex-direction: row;
+    gap: 16px;
 }
 
 .customSelectWrapper {
@@ -190,17 +172,17 @@
     border-bottom-left-radius: 12px;
     border-top-left-radius: 12px;
     height: 40px;
-    margin-left: 18px;
 }
 
 .bottomsection {
     display: flex;
     flex-direction: row;
-    gap: 42px;
+    /* gap: 42px; */
+    justify-content: space-between;
 }
 
 .bottomfirst {
-    width: 220px;
+    /* width: 220px; */
 }
 
 .bottomsecond {
@@ -222,9 +204,8 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    line-height: 1.15em;
     text-align: right;
-
 }
 
 .editbtn {
@@ -234,14 +215,13 @@
     margin-left: auto;
     margin-right: 16px;
     border: none;
-    background-color: var(--bg-input);
+    background-color: transparent;
 
     color: var(--white);
 
     width: 18px;
     height: 18px;
     border-radius: 6px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     cursor: pointer;
 }
 
@@ -255,6 +235,7 @@
 .datavalue {
     display: flex;
     align-items: center;
+    justify-content: center;
     color: var(--light-gray);
     font-size: 16px;
     font-style: normal;
@@ -263,32 +244,33 @@
     height: 40px;
     width: 122px;
     padding: 10px 20px;
-    justify-content: center;
-    align-items: center;
+
     outline: none;
     border-radius: 12px;
     border: 1px solid var(--calendar-gray);
     background: var(--bg-input);
 }
 
-.datavaluesum{
+.datavaluesum {
     color: #DBA266;
+    font-weight: 600;
     padding: 10px 6px;
+    border: none;
+    background: rgba(164, 112, 67, 0.08);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .bottomthird {
     display: flex;
     flex-direction: row;
-    align-items: last baseline;
+    align-items: end;
 }
 
 .btnclose {
     margin-left: 24px;
     display: flex;
-
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
     width: 97px;
     height: 36px;
 
@@ -304,25 +286,18 @@
 
     font-style: normal;
     font-weight: 600;
-
 }
 
 .iconsave {
-    display: flex;
-    width: 16px;
-    height: 16px;
-    justify-content: center;
-    align-items: center;
-    background: var(--green);
-    color: var(--white);
+    transform: scale(1.7)
 }
 
 .btnsave {
     margin-left: 10px;
     width: fit-content;
+    width: 97px;
     height: 36px;
     display: flex;
-    padding: 10px 20px;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -339,12 +314,13 @@
 
     font-style: normal;
     font-weight: 600;
-
 }
 
 .btnPdf {
     display: flex;
-    padding: 10px 17px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
     width: 82px;
     height: 36px;
 
@@ -352,9 +328,7 @@
     background: var(--bg-input);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border: none;
-    text-align: center;
-    justify-content: center;
-    gap: 7px;
+
     cursor: pointer;
 }
 
@@ -366,25 +340,25 @@
     line-height: normal;
 }
 
-.distrblock{
-    margin-top: 22px;
+.distrblock {
     display: flex;
     flex-direction: row;
     gap: 9px;
     align-items: center;
+    margin-top: 19px;
 }
 
-.distrname{
+.distrname {
     color: var(--white);
-        font-size: 22px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.distrimg{
-            width: 60px;
-            height: 31px;
+.distrimg {
+    /* width: 60px; */
+    height: 31px;
 }
 
 input[type="number"]::-webkit-outer-spin-button,

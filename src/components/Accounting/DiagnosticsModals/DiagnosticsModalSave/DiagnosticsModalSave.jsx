@@ -20,7 +20,6 @@ export default function DiagnosticsModalSave({
       <RxCross1 className={css.cross} onClick={onClose} />
       <p className={css.modalTitle}>Діагностика № 1</p>
       <div className={css.modalTopPart}>
-        <div>
           <CarInfo
             clientName="Іван Петренко"
             clientPhone="+38 073 329 12 17"
@@ -32,8 +31,6 @@ export default function DiagnosticsModalSave({
             vin="VW8795218794H46J"
             mileage="284563"
           />
-        </div>
-
         <DiagnosticsInfo time="23" />
       </div>
 

@@ -1,14 +1,19 @@
-import CarInfo from "../../../sharedComponents/CarInfo/CarInfo.jsx"  
+import CarInfo from "../../../sharedComponents/CarInfo/CarInfo.jsx";
 
-import  { useState  } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsXLg } from "react-icons/bs";
-import { BsPersonLinesFill,  BsFillCaretDownFill, BsCurrencyDollar, BsPencil, BsCheck, BsDownload } from "react-icons/bs";
+import {
+  BsPersonLinesFill,
+  BsFillCaretDownFill,
+  BsCurrencyDollar,
+  BsPencil,
+  BsCheck,
+  BsDownload,
+} from "react-icons/bs";
 import carImg from "../../../../assets/images/car.png";
-import css from "./PaymentModal.module.css"
-
+import css from "./PaymentModal.module.css";
 
 const datakp = {
- 
   car: {
     car_id: 66967,
     make: "AUDI",
@@ -30,7 +35,6 @@ const datakp = {
   },
 };
 
-
 const cash = [
   { id: 1, name: "Каса1" },
   { id: 2, name: "Каса2" },
@@ -42,7 +46,6 @@ const cash = [
 const paytype = [
   { id: 1, name: "Оплата покупця" },
   { id: 2, name: "Повернення покупцю" },
- 
 ];
 
 const avtoservice = [
@@ -54,194 +57,177 @@ const avtoservice = [
 ];
 
 const data = {
-  id:1,
+  id: 1,
   commercId: 1,
   cash: 1,
   avtoservice: 1,
   paytype: 1,
   sumpay: 0,
- sumkp: 20000 ,
-}
-
+  sumkp: 20000,
+};
 
 const date = new Date();
 
-  
-  const day = String(date.getDate()).padStart(2, "0"); // "06"
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // "02" (месяцы начинаются с 0)
-  const year = date.getFullYear(); // 2025
+const day = String(date.getDate()).padStart(2, "0"); // "06"
+const month = String(date.getMonth() + 1).padStart(2, "0"); // "02" (месяцы начинаются с 0)
+const year = date.getFullYear(); // 2025
 
-  const formattedDate = `${day}.${month}.${year}`;
-
+const formattedDate = `${day}.${month}.${year}`;
 
 export default function PaymentModal({ onClose }) {
-
   const [editedData, setEditedData] = useState(data);
   const [isEditing, setIsEditing] = useState(false);
-  
-  const handleEditToggle =  () => {
- setIsEditing((prev) => !prev);
+
+  // автоматичний фокус інпуту суми
+  const inputRef = useRef();
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
+
+  const handleEditToggle = () => {
+    setIsEditing((prev) => !prev);
   };
 
   const handleSelectChange = (field, value) => {
-  setEditedData((prev) => ({
-    ...prev,
-    [field]: value,
-  }));
-  };
-  
-   const handleInputChange = (e) => {
-     const  value  = e.target.value;
-    const numericValue =parseFloat(value);
-    setEditedData((prev) => ({ ...prev,sumpay: numericValue }));
+    setEditedData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
-  
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    const numericValue = parseFloat(value);
+    setEditedData((prev) => ({ ...prev, sumpay: numericValue }));
+  };
+
   const renderSelect = (field, value, dictionary, width) => {
-  
-
-  return (
-    <div className={css.customSelectWrapper} style={{ width }} >
-      {field === "cash" && <BsCurrencyDollar className={css.dollar} />}
-      <select
-        className={`${css.customSelect} ${field === "cash" ? css.cashSelect : ""}`}
-        value={value}
-        onChange={(e) => handleSelectChange(field, e.target.value)} 
-style={{ width }}
-      >
-        {dictionary.map((item) => (
-          <option key={item.id} value={item.id} className={css.dictionoption}>
-            {item.name}
-          </option>
-        ))}
-      </select>
-      <BsFillCaretDownFill className={css.customSelectIcon} />
-    </div>
-  );
-};
-
+    return (
+      <div className={css.customSelectWrapper} style={{ width }}>
+        {field === "cash" && <BsCurrencyDollar className={css.dollar} />}
+        <select
+          className={`${css.customSelect} ${
+            field === "cash" ? css.cashSelect : ""
+          }`}
+          value={value}
+          onChange={(e) => handleSelectChange(field, e.target.value)}
+          style={{ width }}
+        >
+          {dictionary.map((item) => (
+            <option key={item.id} value={item.id} className={css.dictionoption}>
+              {item.name}
+            </option>
+          ))}
+        </select>
+        <BsFillCaretDownFill className={css.customSelectIcon} />
+      </div>
+    );
+  };
 
   return (
     <div className={css.container}>
-        <BsXLg className={css.closeIcon} onClick={onClose} />
-          <p className={css.title}>Надходження №</p>
+      <BsXLg className={css.closeIcon} onClick={onClose} />
+      <p className={css.title}>Надходження №</p>
       <div className={css.topsection}>
         <CarInfo
-        clientName={datakp.client.client_name}
-            clientPhone={datakp.client.phone}
-            carImg={carImg}
-            carNumber={datakp.car.car_number}
-            carMake={datakp.car.make}
-            carModel={datakp.car.model}
-            carYear={datakp.car.year}
-            vin={datakp.car.vin}
-            mileage={datakp.car.mileage}
-        />   
+          clientName={datakp.client.client_name}
+          clientPhone={datakp.client.phone}
+          carImg={carImg}
+          carNumber={datakp.car.car_number}
+          carMake={datakp.car.make}
+          carModel={datakp.car.model}
+          carYear={datakp.car.year}
+          vin={datakp.car.vin}
+          mileage={datakp.car.mileage}
+        />
         <div className={css.toprigthsection}>
           <p className={css.date}>{formattedDate}</p>
           <p className={css.link}>КП № </p>
-          
+
           <div className={css.managerWrapper}>
             <BsPersonLinesFill className={css.personIcon} />
             <p className={css.mechanicText}>Менеджер:</p>
             <p className={css.mechanicName}>{datakp.manager.manager_name}</p>
           </div>
 
-              <div className={css.dictionary}>
-                  <div style={{  }}>
-                     {renderSelect(
-                      "avtoservice",
-                      editedData.avtoservice,
-                      avtoservice, 160
-                    )}
-                  </div>
-                  <div style={{ }}>
-                     {renderSelect(
-                      "cash",
-                      editedData.cash,
-                      cash, 120
-                    )}
-                  </div>
-              </div>
+          <div className={css.dictionary}>
+            <div style={{}}>
+              {renderSelect(
+                "avtoservice",
+                editedData.avtoservice,
+                avtoservice,
+                160
+              )}
+            </div>
+            <div style={{}}>
+              {renderSelect("cash", editedData.cash, cash, 120)}
+            </div>
+          </div>
         </div>
-      </div> 
+      </div>
       <div className={css.bottomsection}>
         <div className={css.bottomfirst}>
-          {renderSelect(
-                      "paytype",
-                      editedData.paytype,
-                      paytype, 200
-                    )}
-          </div>
+          {renderSelect("paytype", editedData.paytype, paytype, 200)}
+        </div>
         <div className={css.bottomsecond}>
           <div className={css.blocksecond}>
             <p className={css.titlefield}>Сума</p>
             {isEditing ? (
-      <input
-        name="sumpay"
-       type="number"
-  min={0}
-  value={editedData.sumpay }
-        onChange={handleInputChange}
-        className={css.datavalue}
-      />
-    ) : (
-      <p className={css.datavalue}>{editedData.sumpay}</p>
-    )}
-            <button
-              onClick={handleEditToggle}
-              className={css.editbtn}
-            >
+              <input
+                ref={inputRef}
+                name="sumpay"
+                type="number"
+                min={0}
+                value={editedData.sumpay}
+                onChange={handleInputChange}
+                className={css.datavalue}
+              />
+            ) : (
+              <p className={css.datavalue}>{editedData.sumpay}</p>
+            )}
+            <button onClick={handleEditToggle} className={css.editbtn}>
               {" "}
               <BsPencil className={css.mainIcon} />{" "}
             </button>
           </div>
 
- <div className={css.blocksecond}>
+          <div className={css.blocksecond}>
             <p className={css.titlefield}>Ремонт</p>
-           
-      <p className={css.datavalue}>{editedData.sumkp}</p>
-   
+
+            <p className={css.datavalue}>{editedData.sumkp}</p>
           </div>
-<div className={css.blocksecond}>
+          <div className={css.blocksecond}>
             <p className={css.titlefield}>Залишок</p>
-           
-      <p className={css.datavalue}>{(editedData.sumpay-editedData.sumkp)}</p>
-   
+
+            <p className={css.datavalue}>
+              {editedData.sumpay - editedData.sumkp}
+            </p>
           </div>
-
-
-
         </div>
         <div className={css.bottomthird}>
-
-          <button className={css.btnPdf} >
-                <BsDownload size={16} color="var(--icon-gray)" />
-                <span className={css.btnPdfText}>.pdf</span>
-              </button>
-           <button
-          className={css.btnclose}
-          type="button"
-          onClick={() => onClose()}
-        >
-         Закрити
-        </button>
-        <button
-          className={css.btnsave}
-          type="button"
-          // onClick={() => }
-        >
-          <BsCheck className={css.iconsave} />
-          Внести
-        </button>
-
-
-          </div>
-
+          <button className={css.btnPdf}>
+            <BsDownload size={16} color="var(--icon-gray)" />
+            <span className={css.btnPdfText}>.pdf</span>
+          </button>
+          <button
+            className={css.btnclose}
+            type="button"
+            onClick={() => onClose()}
+          >
+            Закрити
+          </button>
+          <button
+            className={css.btnsave}
+            type="button"
+            // onClick={() => }
+          >
+            <BsCheck className={css.iconsave} />
+            Внести
+          </button>
+        </div>
       </div>
-
-
     </div>
-  )
-};
-
+  );
+}
