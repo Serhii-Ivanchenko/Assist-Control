@@ -14,7 +14,6 @@ import { BsCaretRightFill } from "react-icons/bs";
 import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
 import DownloadPdfButtonKP from "../../../sharedComponents/Pdf/DownloadPdfButtonKP/DownloadPdfButtonKP";
-// import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
 import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
 // import Modal from "../../../Modals/Modal/Modal";
 // import WarehouseAvailabilityModal from "./WarehouseAvailabilityModal/WarehouseAvailabilityModal";
@@ -232,7 +231,7 @@ export default function CommercialOfferModal({ onClose }) {
   const [nodesPrices, setNodesPrices] = useState(data.nodes);
   // console.log(approval);
 
-  console.log(totalOrder);
+  console.log("totalOrder", totalOrder);
 
   const correctedTotalOrder = (nodeId) => {
     const updatedItems = Object.fromEntries(

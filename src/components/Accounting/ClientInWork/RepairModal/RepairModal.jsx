@@ -74,7 +74,7 @@ const RepairModal = ({ car, onClose }) => {
       <p className={styles.title}>Ремонт № 345</p>
 
       <div className={styles.infoContainer}>
-          <CarInfo {...carInfo} />
+        <CarInfo {...carInfo} />
         {/* <div></div> */}
         <div className={styles.workInfo}>
           <div className={styles.date}>03.02.2025</div>
@@ -114,9 +114,9 @@ const RepairModal = ({ car, onClose }) => {
       <div className={styles.tableContainer}>
         <TableRepair data={data} onDelete={handleDelete} />
         <div className={styles.iconContainer}>
-  <HiPlus className={styles.iconPlus} />
-</div>
+          <HiPlus className={styles.iconPlus} />
         </div>
+      </div>
       <div className={styles.bottomInfoContainer}>
         <div className={styles.leftContainer}>
           <div className={styles.repairPrice}>

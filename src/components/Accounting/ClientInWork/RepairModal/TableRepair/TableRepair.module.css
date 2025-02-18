@@ -141,13 +141,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background-color: var(--red); 
   position: absolute;
   top: 50%;
-  right: -3px;
+  right: -1px;
   transform: translateY(-50%);
   cursor: pointer;
 }
@@ -158,6 +158,7 @@
 
 .deleteIcon {
   color: var(-white);
+  stroke-width: 2px;
 }
 
 

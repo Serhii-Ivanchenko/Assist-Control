@@ -136,7 +136,7 @@ const TableRepair = ({ data, onDelete }) => {
                       onClick={() => handleDelete(row.id)}
                     >
                       <HiMinus 
-                        size={18}
+                        size={16}
                         className={styles.deleteIcon}
                       />
                     </div>
