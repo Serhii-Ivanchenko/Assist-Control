@@ -135,6 +135,7 @@
 }
 .nameColumn {
   width: 150px;
+  position: relative;
 }
 
 .deleteIcon {
@@ -170,4 +171,13 @@
 .headerBottom .columnDelete {
   visibility: hidden;
   border: none;
+}
+
+.arrowIcon {
+  position: absolute;
+  bottom: 30%;
+  right: 2%;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: transform 0.3s ease-in-out;
 }
