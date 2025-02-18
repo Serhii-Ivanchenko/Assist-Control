@@ -10,7 +10,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
     distributor?.contacts || [{ name: "", phone: "", position: "" }]
   );
 
-  const addManager = () => {
+  const addContact = () => {
     setContacts([...contacts, { name: "", phone: "", position: "" }]);
   };
 
@@ -279,7 +279,7 @@ const DistributorsInfoForm = ({ distributor, setDistributor, formikRef }) => {
               </div>
               <button
                 type="button"
-                onClick={addManager}
+                onClick={addContact}
                 className={styles.addBtn}
               >
                 <CiSquarePlus className={styles.plusIcon} />
