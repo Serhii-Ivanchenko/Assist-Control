@@ -50,9 +50,9 @@
   background: var(--blue-btn-normal);
 }
 
-:global(.MuiTable-root) {
+/* :global(.MuiTable-root) {
   border: 1px solid var(--light-gray-table) !important;
-}
+} */
 
 :global(.MuiTableContainer-root) {
   margin-top: 15px;
@@ -61,7 +61,10 @@
   border-top-right-radius: 8px !important;
   background-color: var(--bg-input) !important;
   /* border: 1px solid var(--light-gray-table) !important; */
+  overflow-x: visible;
   border: none;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
 }
 
 :global(.MuiTableHead-root > .MuiTableRow-root) {
@@ -95,6 +98,8 @@
 
 :global(.MuiTableRow-root):not(:last-child) {
   border-bottom: 1px solid var(--light-gray-table);
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
 }
 
 :global(.MuiTableRow-root):last-child {
@@ -336,4 +341,48 @@
 
 .iconPerson {
   fill: var(--light-gray);
+}
+
+.recHeaderCell {
+  width: 131px;
+  border-top-right-radius: 10px !important;
+}
+
+.firstHeaderCell {
+  width: 38px;
+  border-top-left-radius: 10px !important;
+}
+
+.nameHeaderCell {
+  width: 440px;
+}
+
+.scrollableBody {
+  max-height: 249px;
+  width: 619px;
+  overflow: auto;
+}
+
+.scrollableBody::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 4px;
+}
+
+.scrollableBody::-webkit-scrollbar-thumb {
+  background: var(--player-secondary-bg);
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+  width: 6px;
+}
+
+.scrollableBody::-webkit-scrollbar-track {
+  background: #202020;
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+  width: 6px;
+}
+
+.sparePartsTableWrapper {
+  width: 609px;
+  border-radius: 10px !important;
 }

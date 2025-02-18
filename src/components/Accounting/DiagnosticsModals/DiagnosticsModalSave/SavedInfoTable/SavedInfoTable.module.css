@@ -204,7 +204,7 @@
 }
 
 .scrollableBody {
-  height: 249px;
+  max-height: 249px;
   width: 619px;
   overflow: auto;
 }
