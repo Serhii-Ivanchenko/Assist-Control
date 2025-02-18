@@ -1,6 +1,6 @@
 import CarInfo from "../../../sharedComponents/CarInfo/CarInfo.jsx";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsXLg } from "react-icons/bs";
 import {
   BsPersonLinesFill,
@@ -80,6 +80,14 @@ const formatAmount = (amount) => {
 export default function PaymentDistrModal({ onClose }) {
   const [editedData, setEditedData] = useState(data);
   const [isEditing, setIsEditing] = useState(false);
+
+  // автоматичний фокус інпуту суми
+  const inputRef = useRef();
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
 
   const handleEditToggle = () => {
     setIsEditing((prev) => !prev);
@@ -175,6 +183,7 @@ export default function PaymentDistrModal({ onClose }) {
             <p className={css.titlefield}>Оплата</p>
             {isEditing ? (
               <input
+                ref={inputRef}
                 name="sumpay"
                 type="number"
                 min={0}
