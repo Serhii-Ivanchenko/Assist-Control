@@ -74,10 +74,8 @@ const RepairModal = ({ car, onClose }) => {
       <p className={styles.title}>Ремонт № 345</p>
 
       <div className={styles.infoContainer}>
-        <div>
           <CarInfo {...carInfo} />
-        </div>
-        <div></div>
+        {/* <div></div> */}
         <div className={styles.workInfo}>
           <div className={styles.date}>03.02.2025</div>
           <div className={styles.links}>

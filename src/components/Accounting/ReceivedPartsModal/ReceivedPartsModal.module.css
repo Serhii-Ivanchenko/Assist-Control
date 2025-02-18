@@ -1,0 +1,284 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 1102px;
+  height: auto;
+  border-radius: 12px;
+  background: var(--CRM-modal-SecondaryBG, #23252c);
+  padding: 42px 46px;
+}
+
+.title {
+  margin: 0 auto 49px;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.invoiceHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 57px;
+}
+
+.cross {
+  position: absolute;
+  right: 25px;
+  top: 30px;
+  /* width: 13px;
+	height: 13px; */
+  fill: var(--input-stroke);
+  cursor: pointer;
+}
+
+.invoiceList {
+  display: flex;
+  flex-direction: column;
+}
+
+.distrInfo {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 27px;
+}
+
+.distrInfo img {
+  width: 31px;
+  height: 31px;
+}
+
+.distributorName {
+  display: inline-flex;
+  color: #fff;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* .billingHeader {
+  display: flex;
+  width: 989px;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.billingHeader p {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.billingList {
+  display: flex;
+  flex-direction: column;
+  padding-left: 35px;
+  gap: 12px;
+} */
+
+.sumContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.totalSum {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 38px;
+  align-items: center;
+}
+
+.sumTitle {
+  color: var(--CRM-modal-LightGray, #d8e1ff);
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.sum {
+  display: flex;
+  height: 31px;
+  width: 126px;
+  padding: 6px 14px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  background: rgba(164, 112, 67, 0.08);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: #dba266;
+
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.prePaid {
+  display: flex;
+  gap: 23px;
+  margin-bottom: 25px;
+  align-items: center;
+}
+
+.prePaid input {
+  display: flex;
+  height: 39px;
+  width: 122px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--CRM-modal-InputStroke, #4a4a4a);
+  background: var(--CRM-modal-InputBG, #2d3038);
+
+  color: var(--CRM-modal-StatusComplete, #53c178);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+}
+
+.postPaid {
+  display: flex;
+  gap: 23px;
+  align-items: center;
+}
+
+.postPaid input {
+  display: flex;
+  height: 39px;
+  width: 122px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--CRM-modal-InputStroke, #4a4a4a);
+  background: var(--CRM-modal-InputBG, #2d3038);
+
+  color: var(--CRM-modal-VisitDateText, #d54e4f);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+}
+
+.postPaid p,
+.prePaid p {
+  color: var(--CRM-modal-LightGray, #d8e1ff);
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+input:focus {
+  outline: none;
+}
+
+.btnsContainer {
+  display: flex;
+
+  margin-top: auto;
+  justify-content: flex-end;
+}
+
+.payBtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 10px 20px;
+  gap: 10px;
+  margin-right: 90px;
+
+  color: var(--white);
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: var(--CRM-modal-InputBG, #2d3038);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.pdfBtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 10px 20px;
+  gap: 10px;
+  margin-right: 28px;
+
+  color: var(--Icon-Gray, #c7c7c7);
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  background: #2d3038;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.resetBtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 10px 20px;
+  margin-right: 10px;
+
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--CRM-modal-LightGray, #d8e1ff);
+
+  color: var(--white);
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 10px 20px;
+  gap: 10px;
+
+  border: transparent;
+  border-radius: 6px;
+  background: var(--green);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--green-btn-hover);
+}
+
+.checkIcon {
+  transform: scale(1.3);
+}

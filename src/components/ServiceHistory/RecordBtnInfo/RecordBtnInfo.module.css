@@ -50,32 +50,55 @@
   background: var(--blue-btn-normal);
 }
 
+:global(.MuiTable-root) {
+  border: 1px solid var(--light-gray-table) !important;
+}
+
 :global(.MuiTableContainer-root) {
   margin-top: 15px;
   border-radius: 0px !important;
   border-top-left-radius: 8px !important;
   border-top-right-radius: 8px !important;
   background-color: var(--bg-input) !important;
-  border: 1px solid var(--light-gray-table) !important;
+  /* border: 1px solid var(--light-gray-table) !important; */
+  border: none;
 }
 
 :global(.MuiTableHead-root > .MuiTableRow-root) {
   background: var(--main-gray) !important;
 }
 
-:global(.MuiTableHead-root > .MuiTableRow-root > .MuiTableCell-root:first-child) {
+:global(
+    .MuiTableHead-root > .MuiTableRow-root > .MuiTableCell-root:first-child
+  ) {
   padding: 6px 6px 6px 10px !important;
   text-align: left !important;
 }
 
 :global(.MuiTableCell-root) {
   color: var(--white) !important;
-  outline: var(--light-gray-table) !important;
-  border: 1px solid var(--light-gray-table) !important;
+  /* outline: var(--light-gray-table) !important; */
+  /* border: 1px solid var(--light-gray-table) !important; */
   padding: 6px !important;
   font-size: 16px !important;
   font-weight: 400 !important;
   text-align: center !important;
+
+  border-top: none;
+  border-bottom: none;
+  border: none;
+}
+
+:global(.MuiTableCell-root):not(:last-child) {
+  border-right: 1px solid var(--light-gray-table) !important;
+}
+
+:global(.MuiTableRow-root):not(:last-child) {
+  border-bottom: 1px solid var(--light-gray-table);
+}
+
+:global(.MuiTableRow-root):last-child {
+  border-bottom: none !important;
 }
 
 .repairHeader {
@@ -105,7 +128,7 @@
   cursor: pointer;
 }
 
-.repairTableHeaderRow> :global(.MuiTableCell-root) {
+.repairTableHeaderRow > :global(.MuiTableCell-root) {
   font-weight: 600 !important;
 }
 
@@ -127,7 +150,7 @@
   text-align: left !important;
 }
 
-.repairTableCell> :global(.MuiCheckbox-root) {
+.repairTableCell > :global(.MuiCheckbox-root) {
   position: absolute;
   top: 0;
   left: 0;
@@ -154,7 +177,7 @@
   outline: none;
 }
 
-.repairTableCell> :global(.MuiCheckbox-root):hover {
+.repairTableCell > :global(.MuiCheckbox-root):hover {
   background-color: hsla(120, 100%, 25%, 0.2);
 }
 
@@ -162,7 +185,7 @@
   color: var(--green-btn-normal) !important;
 }
 
-.footerRow> :global(.MuiTableCell-root) {
+.footerRow > :global(.MuiTableCell-root) {
   font-weight: 600 !important;
 }
 

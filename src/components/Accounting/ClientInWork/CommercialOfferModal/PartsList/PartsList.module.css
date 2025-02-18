@@ -9,6 +9,14 @@
   border-radius: 4px;
 }
 
+.isEditing {
+  grid-template-columns: 65px 93px 74px 85px 136px 157px 110px 110px 119px 110px 110px 40px 25px 25px 22px;
+}
+
+.notEditing {
+  grid-template-columns: 65px 93px 74px 85px 136px 157px 110px 110px 119px 110px 110px 40px 25px 22px;
+}
+
 .quantityWrapper {
   display: flex;
   /* align-items: center; */
@@ -81,7 +89,7 @@
 
 .stringWrapper {
   display: grid;
-  grid-template-columns: 65px 93px 74px 85px 136px 157px 110px 110px 119px 110px 110px 40px;
+  grid-template-columns: 65px 93px 74px 85px 136px 157px 110px 110px 119px 22px 88px 110px 40px;
   margin-bottom: 20px;
   justify-items: center;
   /* align-items: center; */
@@ -102,6 +110,14 @@
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+}
+
+.partName {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* количество отображаемых строк */
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .wrapper {
@@ -125,12 +141,6 @@
 .glassIcon {
   width: 12px;
   height: 12px;
-}
-
-.checkboxWrapper {
-  display: flex;
-  /* align-items: center; */
-  gap: 6px;
 }
 
 .checkboxInput {
@@ -161,4 +171,35 @@
   cursor: pointer;
   margin-bottom: 20px;
   margin-left: auto;
+}
+
+.nameWithOption {
+  position: relative;
+}
+
+.tooltip {
+  position: fixed;
+  background-color: var(--bg-input);
+  width: 200px;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  pointer-events: none;
+  /* Щоб тултіп не блокував події курсора */
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.workPrice {
+  width: 80px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 2px;
+  font-family: "Roboto", sans-serif;
+  color: var(--white);
+  background-color: var(--main-gray);
+  border: none;
+  outline: none;
+  text-align: center;
 }
