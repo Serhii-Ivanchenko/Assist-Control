@@ -10,7 +10,16 @@
 .topWrapper {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+}
+
+.offerNumber {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 .closeIcon {
@@ -29,7 +38,10 @@
   height: 39px;
   border-radius: 12px;
   overflow: hidden;
-  margin-top: auto;
+  margin-bottom: 40px;
+  width: 160px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .original {
@@ -62,6 +74,7 @@
   flex-direction: column;
   margin-top: 6px;
   align-items: end;
+  /* margin-left: auto; */
 }
 
 .date {
@@ -78,6 +91,10 @@
   color: var(--play-btn-triangle);
   text-decoration: underline;
   margin-bottom: 13px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .mechanicWrapper {
@@ -95,7 +112,7 @@
 .mechanicText {
   font-size: 16px;
   font-style: normal;
-  line-height: 1,1875em;
+  line-height: 1, 1875em;
 }
 
 .mechanicName {
@@ -118,11 +135,11 @@
 
 .tableHeaderWrapper {
   display: grid;
-  grid-template-columns: 65px 93px 74px 85px 136px 157px 110px 110px 119px 110px 110px 40px;
+  grid-template-columns: 65px 93px 74px 85px 130px 157px 110px 110px 119px 110px 110px 40px;
   justify-items: center;
   align-items: center;
   margin-bottom: 14px;
-  margin-left: 15px;
+  margin-left: 21px;
 }
 
 .headerWithArrows {
@@ -172,6 +189,10 @@
 }
 
 .bottomTextWrapper {
+  display: grid;
+  grid-template-columns: 625px 110px 110px 119px 110px 110px 40px;
+  justify-items: center;
+  align-items: center;
   margin-bottom: 64px;
 }
 
@@ -194,6 +215,7 @@
 
 .btn {
   display: flex;
+  align-items: center;
   gap: 10px;
   padding: 10px 20px;
   border-radius: 6px;
@@ -211,7 +233,7 @@
 
 .btnWithPopup {
   position: relative;
-  display: flex;
+  /* display: flex;
   gap: 10px;
   padding: 10px 20px;
   border-radius: 6px;
@@ -224,7 +246,12 @@
   line-height: normal;
   border: none;
   outline: none;
-  cursor: pointer;
+  cursor: pointer; */
+}
+
+.approvalBtn {
+  width: 273px;
+  justify-content: center;
 }
 
 .notSubmitted {
