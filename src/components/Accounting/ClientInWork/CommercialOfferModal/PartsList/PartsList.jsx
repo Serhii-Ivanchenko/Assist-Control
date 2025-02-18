@@ -46,26 +46,34 @@ export default function PartsList({
   const handleCheckboxChange = (partId, checked, price, profit, node_id) => {
     setOrder((prev) => ({
       ...prev,
+
       [partId]: {
-        quantity: prev[partId]?.quantity || (checked ? 1 : 0),
+        quantity: prev[partId]?.quantity || 1,
         selected: checked,
         price,
         profit,
         node_id,
       },
     }));
-    setTotalOrder((prev) => ({
-      ...prev,
-      [partId]: {
-        quantity: prev[partId]?.quantity || (checked ? 1 : 0),
-        selected: checked,
-        price,
-        profit,
-        node_id,
-        work_price: workPrice,
-        sale_price: salePrice,
-      },
-    }));
+
+    setTotalOrder((prev) => {
+      if (!checked) {
+        const { [partId]: _, ...rest } = prev; // Видаляємо елемент, якщо unchecked
+        return rest;
+      }
+      return {
+        ...prev,
+        [partId]: {
+          quantity: prev[partId]?.quantity || 1,
+          selected: checked,
+          price,
+          profit,
+          node_id,
+          work_price: workPrice,
+          sale_price: salePrice,
+        },
+      };
+    });
   };
 
   const handleQuantityChange = (partId, value) => {

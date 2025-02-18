@@ -13,6 +13,7 @@ import BtnsCloseAndSubmit from "../../../sharedComponents/BtnsCloseAndSubmit/Btn
 import { BsCaretRightFill } from "react-icons/bs";
 import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
+import DownloadPdfButtonKP from "../../../sharedComponents/Pdf/DownloadPdfButtonKP/DownloadPdfButtonKP";
 import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
 // import Modal from "../../../Modals/Modal/Modal";
 // import WarehouseAvailabilityModal from "./WarehouseAvailabilityModal/WarehouseAvailabilityModal";
@@ -230,7 +231,7 @@ export default function CommercialOfferModal({ onClose }) {
   const [nodesPrices, setNodesPrices] = useState(data.nodes);
   // console.log(approval);
 
-  console.log(totalOrder);
+  console.log("totalOrder", totalOrder);
 
   const correctedTotalOrder = (nodeId) => {
     const updatedItems = Object.fromEntries(
@@ -410,7 +411,7 @@ export default function CommercialOfferModal({ onClose }) {
         <p>{totalProfit ? totalProfit : 0} грн</p>
         <p></p>
       </div>
-      <p className={css.prdBtn}>PDF Btn</p>
+      <DownloadPdfButtonKP carsData={dataArr} />
       <div className={css.bottomWrapper}>
         <div className={css.btnWrapper}>
           <div className={css.btnWithPopup}>
