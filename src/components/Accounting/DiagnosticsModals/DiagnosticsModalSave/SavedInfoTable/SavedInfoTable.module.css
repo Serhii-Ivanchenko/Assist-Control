@@ -43,9 +43,10 @@
   border-radius: 10px !important;
 }
 
-/* :global(.MuiTable-root) {
-  border: 1px solid var(--light-gray-table) !important;
-} */
+:global(.MuiTable-root) {
+  /* border: 1px solid var(--light-gray-table) !important; */
+  border: none !important;
+}
 
 :global(.MuiTableContainer-root) {
   margin-top: 19px;
@@ -56,6 +57,9 @@
   /* border: 1px solid var(--light-gray-table) !important; */
   /* border-collapse: none !important; */
   /* max-height: 200px; */
+  overflow-x: visible !important;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
 }
 
 :global(.MuiTableCell-root) {
@@ -102,6 +106,9 @@
 :global(.MuiTableRow-root):not(:last-child) {
   border-bottom: 1px solid var(--light-gray-table);
   /* border-bottom: none; */
+  width: 609px;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
 }
 
 :global(.MuiTableRow-root):last-child {
@@ -196,15 +203,41 @@
   overflow: auto;
 }
 
-/* .scrollableBody {
-  height: 200px;
+.scrollableBody {
+  height: 249px;
+  width: 619px;
   overflow: auto;
-} */
+}
 
 .firstHeaderCell {
   width: 38px;
+  border-top-left-radius: 10px !important;
 }
 
 .nameHeaderCell {
   width: 440px;
+}
+
+.scrollableBody::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 4px;
+}
+
+.scrollableBody::-webkit-scrollbar-thumb {
+  background: var(--player-secondary-bg);
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+  width: 6px;
+}
+
+.scrollableBody::-webkit-scrollbar-track {
+  background: #202020;
+  border-radius: 4px;
+  padding: 5px 0 5px 0;
+  width: 6px;
+}
+
+.recHeaderCell {
+  width: 131px;
+  border-top-right-radius: 10px !important;
 }

@@ -28,6 +28,11 @@
   margin-right: 33px;
 }
 
+.onlyName {
+  width: 100%;
+  margin-right: 0;
+}
+
 .sideL {
   margin-right: 59px;
 }
@@ -40,6 +45,10 @@
   align-items: center;
   gap: 53px;
   flex-shrink: 0;
+}
+
+.detailsItemFotItemWithOneBtn {
+  gap: 40px;
 }
 
 .detailsItem:nth-child(2n + 2) {
@@ -55,6 +64,7 @@
 }
 .btnAlone {
   justify-content: end;
+  width: 40px;
 }
 
 .btn {
@@ -88,6 +98,10 @@
   font-variant: small-caps;
 
   width: 147px;
+}
+
+.subcategoryNameWithOneBtn {
+  width: 221px;
 }
 
 .detailsList {

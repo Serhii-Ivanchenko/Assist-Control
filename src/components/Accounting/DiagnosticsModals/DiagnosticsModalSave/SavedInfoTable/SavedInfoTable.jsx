@@ -69,7 +69,7 @@ export default function SavedInfoTable({ chosenSpares }) {
           <div className={css.sparePartsTableWrapper}>
             <TableContainer
               component={Paper}
-              style={{ maxHeight: "280px", overflow: "auto" }}
+              // style={{ maxHeight: "280px", overflow: "auto" }}
             >
               <Table>
                 <TableHead>
@@ -78,29 +78,35 @@ export default function SavedInfoTable({ chosenSpares }) {
                     <TableCell className={css.nameHeaderCell}>Назва</TableCell>
                     {/* <TableCell>Номер</TableCell> */}
                     {/* <TableCell>Стан</TableCell> */}
-                    <TableCell>Рекомендація</TableCell>
+                    <TableCell className={css.recHeaderCell}>
+                      Рекомендація
+                    </TableCell>
                   </TableRow>
                 </TableHead>
               </Table>
               <Table>
-                <TableBody>
-                  {chosenSparesWithSides.map((item, index) => (
-                    <TableRow
-                      key={`${Math.random()}`}
-                      // style={{ display: "table", width: "100%" }}
-                    >
-                      <TableCell TableCell className={css.firstHeaderCell}>
-                        {index + 1}
-                      </TableCell>
-                      <TableCell className={css.nameHeaderCell}>
-                        {item.name}
-                      </TableCell>
-                      {/* <TableCell></TableCell> */}
-                      {/* <TableCell>Критично</TableCell> */}
-                      <TableCell>Під заміну</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
+                <div className={css.scrollableBody}>
+                  <TableBody style={{ maxHeight: "280px", overflow: "auto" }}>
+                    {chosenSparesWithSides.map((item, index) => (
+                      <TableRow
+                        key={`${Math.random()}`}
+                        // style={{ display: "table", width: "100%" }}
+                      >
+                        <TableCell className={css.firstHeaderCell}>
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className={css.nameHeaderCell}>
+                          {item.name}
+                        </TableCell>
+                        {/* <TableCell></TableCell> */}
+                        {/* <TableCell>Критично</TableCell> */}
+                        <TableCell className={css.recHeaderCell}>
+                          Під заміну
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </div>
               </Table>
             </TableContainer>
           </div>

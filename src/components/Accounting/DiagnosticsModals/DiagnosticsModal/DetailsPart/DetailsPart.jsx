@@ -10,8 +10,6 @@ export default function DetailsPart({
   spares,
   setSpares,
 }) {
-  // const twoSides
-
   useEffect(() => {
     if (spares.length === 0 && togglePoints.length > 0) {
       setSpares((prevSpares) =>
@@ -64,11 +62,13 @@ export default function DetailsPart({
     console.log("chosenSpares", chosenSpares);
   }, [spares, chosenSpares]);
 
+  const twoBtns = title.includes("Гальма");
+
   return (
     <>
       <div className={css.title}>
-        <p className={css.name}>{title}</p>
-        {title.includes("Гальма") && (
+        <p className={`${css.name} ${!twoBtns && css.onlyName}`}>{title}</p>
+        {twoBtns && (
           <>
             <p className={`${css.sides} ${css.sideL}`}>Л</p>
             <p className={css.sides}>П</p>
@@ -79,14 +79,21 @@ export default function DetailsPart({
         {spares.map((cat) =>
           cat.name === title
             ? cat.parts.map((category, index) => (
-                <li className={css.detailsItem} key={index}>
-                  <p className={css.subcategoryName}>{category.name}</p>
-                  <div
-                    className={`${css.buttons} ${
-                      !title.includes("Гальма") && css.btnAlone
+                <li
+                  className={`${css.detailsItem} ${
+                    !twoBtns && css.detailsItemFotItemWithOneBtn
+                  }`}
+                  key={index}
+                >
+                  <p
+                    className={`${css.subcategoryName} ${
+                      !twoBtns && css.subcategoryNameWithOneBtn
                     }`}
                   >
-                    {title.includes("Гальма") ? (
+                    {category.name}
+                  </p>
+                  <div className={`${css.buttons} ${!twoBtns && css.btnAlone}`}>
+                    {twoBtns ? (
                       <>
                         <button
                           type="button"
