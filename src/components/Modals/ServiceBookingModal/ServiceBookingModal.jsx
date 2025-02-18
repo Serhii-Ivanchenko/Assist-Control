@@ -662,6 +662,7 @@ export default function ServiceBookingModal({
                   onClose={onClose}
                   handleSubmit={handleSubmit}
                   btnSave={"Зберегти"}
+                  btnClose={"Закрити"}
                 />
               </div>
             </div>

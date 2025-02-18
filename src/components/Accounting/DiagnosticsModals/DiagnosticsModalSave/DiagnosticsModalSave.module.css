@@ -1,0 +1,132 @@
+.modalWrapper {
+  width: 1000px;
+  height: 704px;
+  flex-shrink: 0;
+  padding: 14px 35px 35px 35px;
+
+  border-radius: 12px;
+  background: var(--bg-secondary);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.modalTitle {
+  color: #fff;
+
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.modalTopPart {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  width: 100%;
+
+  margin-bottom: 36px;
+}
+
+.cross {
+  position: absolute;
+  right: 25px;
+  top: 30px;
+  /* width: 13px;
+  height: 13px; */
+  fill: var(--input-stroke);
+  cursor: pointer;
+}
+
+.modalBottomPart {
+  display: flex;
+  /* align-items: end; */
+  justify-content: space-between;
+  width: 100%;
+
+  /* height: 475px; */
+  /* margin-bottom: 36px; */
+}
+
+.togglesList {
+  width: 244px;
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
+
+  height: 389px;
+}
+
+.btnBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  height: 36px;
+
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  /* line-height: normal; */
+  cursor: pointer;
+
+  border-radius: 6px;
+  border: none;
+}
+
+.cancel {
+  padding: 9px 19px;
+  background-color: transparent;
+  border: 1px solid var(--light-gray);
+}
+
+.save {
+  background: var(--green-btn-normal);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.save:hover {
+  background-color: var(--green-btn-hover);
+}
+
+.tickIcon {
+  transform: scale(1.1);
+}
+
+.togglesPart {
+  width: 273px;
+  height: 393px;
+  height: 100%;
+  padding-top: 5px;
+
+  overflow: auto;
+}
+
+.togglesPart::-webkit-scrollbar {
+  width: 8px;
+}
+
+.togglesPart::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg);
+}
+
+.togglesPart::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--main-gray);
+}

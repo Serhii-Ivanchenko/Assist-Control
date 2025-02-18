@@ -1,5 +1,5 @@
 .navigation {
-  margin-left: 5px;
+  margin-left: clamp(3px, min(0.463vh, 0.27vw), 5px);
 }
 
 .navigationChatOpen {
@@ -7,7 +7,7 @@
 }
 
 .navItem {
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 400;
   line-height: normal;
   font-variant: small-caps;
@@ -19,7 +19,7 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
-  gap: 10px;
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
   transition: color 0.3s, background-color 0.3s, width 0.7s ease,
     box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
   cursor: pointer;
@@ -27,7 +27,8 @@
 }
 
 .navWithChat {
-  width: 42px;
+  /* width: 42px; */
+  width: clamp(29px, min(3.888vh, 2.27vw), 42px);
   border-radius: 50%;
 }
 
@@ -45,13 +46,17 @@
 .topNavContainer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
   flex-shrink: 0;
 }
 
 .iconContainer {
-  width: 42px;
-  height: 42px;
+  /* width: 42px;
+  height: 42px; */
+  width: clamp(29px, min(3.888vh, 2.27vw), 42px);
+  height: clamp(29px, min(3.888vh, 2.27vw), 42px);
+
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,22 +78,30 @@
 }
 
 .iconPayment {
-  width: 28px;
-  height: 28px;
+  /* width: 28px;
+  height: 28px; */
+
+  width: clamp(18px, min(2.592vh, 1.513vw), 28px);
+  height: clamp(18px, min(2.592vh, 1.513vw), 28px);
 }
 
 .iconVideo,
 .iconCrm,
 .iconHome {
-  width: 19px;
-  height: 19px;
+  /* width: 19px;
+  height: 19px; */
+
+  width: clamp(12px, min(1.759vh, 1.027vw), 19px);
+  height: clamp(12px, min(1.759vh, 1.027vw), 19px);
 }
 
 .iconAvto,
 .iconSettings,
 .iconBook {
-  width: 18px;
-  height: 18px;
+  /* width: 18px;
+  height: 18px; */
+  width: clamp(12px, min(1.759vh, 1.027vw), 19px);
+  height: clamp(12px, min(1.759vh, 1.027vw), 19px);
 }
 
 .navLink.active .iconContainer,
@@ -113,7 +126,8 @@
 }
 
 .navArrow {
-  font-size: 13px;
+  /* font-size: 13px; */
+  font-size: clamp(10px, min(1.296vh, 0.756vw), 14px);
   vertical-align: middle;
   transition: all 0.7s ease;
 }
@@ -123,7 +137,8 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 10px;
+  /* font-size: 10px; */
+  font-size: clamp(6px, min(0.925vh, 0.54vw), 10px);
 }
 
 .repostClientsContainer {
@@ -155,6 +170,7 @@
   white-space: nowrap;
   overflow: hidden;
   width: 130px;
+  width: clamp(89px, min(12.037vh, 7.027vw), 130px);
   opacity: 1;
   transition: opacity 0.7s ease, width 0.7s ease;
 }

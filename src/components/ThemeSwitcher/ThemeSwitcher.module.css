@@ -1,9 +1,14 @@
 .switch {
     font-size: 17px;
+    font-size: clamp(11px, min(1.574vh, 0.919vw), 17px);
     position: relative;
     display: inline-block;
-    width: 50px;
+    /* width: 50px;
     height: 27px;
+    width: min(2.703vw, 50px);
+    height: min(2.5vh, 27px); */
+    width: clamp(30px, min(2.703vw, 2.5vh * 1.85), 50px);
+    height: clamp(18px, min(2.5vh, 2.703vw / 1.85), 27px);
     cursor: pointer;
 }
 
@@ -27,75 +32,50 @@
 .slider:before {
     position: absolute;
     content: "";
-    height: 24px;
-    width: 24px;
+    /* width: 24px;
+    height: 24px;  */
+    /* width: min(1.297vw, 24px);
+    height: min(2.222vh, 24px); */
+    width: clamp(16px, min(1.297vw, 2.222vh), 24px);
+    height: clamp(16px, min(1.297vw, 2.222vh), 24px);
     border-radius: 50%;
-    left: 2px;
-    top: 1px;
+    left: clamp(2px, min(0.108vw, 0.092vh * 1.2), 3px);
+    top: clamp(1px, min(0.092vh, 0.054vw * 1.1), 2px);
     z-index: 1;
     background-color: var(--main-gray);
-    transition: .4s;
+    transition: 0.4s;
 }
 
 .sun {
     color: var(--light-gray);
     position: absolute;
-    top: 5px;
-    left: 28px;
+
+    top: clamp(3px,
+            calc(clamp(16px, min(2.5vh, 2.703vw / 1.85), 27px) * 0.2),
+            6px);
+    left: clamp(19px,
+            calc(clamp(30px, min(2.703vw, 2.5vh * 1.85), 50px) * 0.57),
+            28px);
     z-index: 2;
-    width: 16px;
-    height: 16px;
+    width: clamp(11px, min(0.865vw, 1.481vh), 16px);
+    height: clamp(11px, min(0.865vw, 1.481vh), 16px);
 }
 
 .moon {
     color: #A4A4A4;
     position: absolute;
-    top: 5px;
-    left: 6px;
-    width: 16px;
-    height: 16px;
+
+    top: clamp(3px,
+            calc(clamp(16px, min(2.5vh, 2.703vw / 1.85), 27px) * 0.2),
+            6px);
+    left: clamp(6px,
+            calc(clamp(30px, min(2.703vw, 2.5vh * 1.85), 50px) * 0.1),
+            10px);
     z-index: 2;
+    width: clamp(11px, min(0.865vw, 1.481vh), 16px);
+    height: clamp(11px, min(0.865vw, 1.481vh), 16px);
 }
 
-/* .switch:hover */
-.sun svg {
-    animation: rotate 15s linear infinite;
-}
-
-@keyframes rotate {
-
-    0% {
-        transform: rotate(0);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-/* .switch:hover */
-.moon svg {
-    animation: tilt 5s linear infinite;
-}
-
-@keyframes tilt {
-
-    0% {
-        transform: rotate(0deg);
-    }
-
-    25% {
-        transform: rotate(-10deg);
-    }
-
-    75% {
-        transform: rotate(10deg);
-    }
-
-    100% {
-        transform: rotate(0deg);
-    }
-}
 
 .input:checked+.slider {
     background-color: var(--bg-input);
@@ -106,29 +86,14 @@
 }
 
 .input:checked+.slider:before {
-    transform: translateX(22px);
+    transform: translateX(clamp(14px,
+                calc(clamp(30px, min(2.703vw, 2.5vh * 1.85), 50px) * 0.44),
+                22px));
 }
 
 .tooltip {
     position: relative;
 }
-
-@media only screen and (min-width: 1850px) {
-    .tooltip {
-        margin-right: 12px;
-    }
-}
-
-/* 
-.tooltip .tooltipContent::after {
-    content: " ";
-    position: absolute;
-    top: -45%;
-    left: 43%;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent var(--main-gray) transparent;
-} */
 
 .tooltip .tooltipContent {
     font-size: 10px;

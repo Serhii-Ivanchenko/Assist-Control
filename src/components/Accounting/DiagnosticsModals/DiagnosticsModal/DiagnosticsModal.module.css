@@ -48,7 +48,29 @@
   flex-direction: column;
   gap: 31px;
 
-  height: 389px;
+  height: 387px;
+}
+
+.togglesPart {
+  width: 334px;
+  height: 392px;
+  padding-top: 5px;
+
+  overflow: auto;
+}
+
+.togglesPart::-webkit-scrollbar {
+  width: 8px;
+}
+
+.togglesPart::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: var(--bg);
+}
+
+.togglesPart::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--main-gray);
 }
 
 .categoriesPart {
@@ -73,6 +95,9 @@
 
 .categoriesList {
   height: 389px;
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
 }
 
 .detailsPart {
@@ -128,7 +153,7 @@
   background-color: var(--green-btn-hover);
 }
 
-.tickIcon{
+.tickIcon {
   transform: scale(1.1);
 }
 
@@ -140,4 +165,14 @@
   height: 13px; */
   fill: var(--input-stroke);
   cursor: pointer;
+}
+
+.defaultMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-gray);
+  width: 724px;
+  height: 100%;
+  font-size: 20px;
 }
