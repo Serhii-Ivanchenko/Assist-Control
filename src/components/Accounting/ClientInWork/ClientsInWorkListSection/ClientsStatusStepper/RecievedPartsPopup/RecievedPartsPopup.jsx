@@ -1,5 +1,7 @@
 import styles from "./RecievedPartsPopup.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ReceivedPartsModal from "../../../../../Accounting/ReceivedPartsModal/ReceivedPartsModal";
+import Modal from "../../../../../Modals/Modal/Modal";
 
 export default function RecievedPartsPopup({
   isOpen,
@@ -7,6 +9,7 @@ export default function RecievedPartsPopup({
   buttonRef,
   popupRef,
 }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClickOutside = (event) => {
     if (
@@ -38,11 +41,17 @@ export default function RecievedPartsPopup({
   return (
     <div className={styles.wrapper} ref={popupRef}>
       <ul className={styles.popup}>
-        <li>Запчастина 1</li>
-        <li>Запчастина 2</li>
-        <li>Запчастина 3</li>
-        <li>Запчастина 4</li>
+        <li onClick={() => setIsModalOpen(true)}>Накладна 1</li>
+        <li onClick={() => setIsModalOpen(true)}>Накладна 2</li>
+        <li onClick={() => setIsModalOpen(true)}>Накладна 3</li>
+        <li onClick={() => setIsModalOpen(true)}>Накладна 4</li>
       </ul>
+
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <ReceivedPartsModal onClose={() => setIsModalOpen(false)} />
+        </Modal>
+      )}
     </div>
   );
 }

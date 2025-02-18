@@ -129,7 +129,6 @@ const dataArr = {
         part_name: "Масляний фільтр",
         price: 600,
       },
-      
     ],
   },
 };
@@ -143,17 +142,17 @@ function ReceivedPartsModal({ onClose }) {
         <RxCross1 className={styles.cross} onClick={onClose} />
         <p className={styles.title}>Надходження товару №0000</p>
         <div className={styles.invoiceHeader}>
-            <CarInfo
-              clientName={data.client.client_name}
-              clientPhone={data.client.phone}
-              carImg={carImg}
-              carNumber={data.car.car_number}
-              carMake={data.car.make}
-              carModel={data.car.model}
-              carYear={data.car.year}
-              vin={data.car.vin}
-              mileage={data.car.mileage}
-            />
+          <CarInfo
+            clientName={data.client.client_name}
+            clientPhone={data.client.phone}
+            carImg={carImg}
+            carNumber={data.car.car_number}
+            carMake={data.car.make}
+            carModel={data.car.model}
+            carYear={data.car.year}
+            vin={data.car.vin}
+            mileage={data.car.mileage}
+          />
           <EnterpriseInfo />
         </div>
         <div className={styles.invoiceList}>
@@ -185,7 +184,7 @@ function ReceivedPartsModal({ onClose }) {
             </div>
           </div>
           <div className={styles.btnsContainer}>
-            <button className={styles.payBtn}>
+            <button className={styles.payBtn} onClick={onClose}>
               <FaCheck />
               Сплатити постачальнику
             </button>
@@ -193,8 +192,10 @@ function ReceivedPartsModal({ onClose }) {
               <BsDownload />
               .pdf
             </button>
-            <button className={styles.resetBtn}>Скасувати</button>
-            <button className={styles.btn}>
+            <button className={styles.resetBtn} onClick={onClose}>
+              Скасувати
+            </button>
+            <button className={styles.btn} onClick={onClose}>
               <FaCheck />
               Отримано
             </button>

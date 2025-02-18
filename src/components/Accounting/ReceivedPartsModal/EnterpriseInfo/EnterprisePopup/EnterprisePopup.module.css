@@ -1,0 +1,74 @@
+.wrapper {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  min-width: 115px;
+  max-width: 155px;
+  width: fit-content;
+  border: none;
+  border-radius: 12px;
+  background: var(--bg-input);
+  box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+  font-weight: 400;
+  z-index: 1000;
+}
+
+.settingsList {
+  display: flex;
+  width: 100%;
+  padding: 0 5px;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border: none;
+  border-radius: 12px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.settingsList li {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid var(--main-gray);
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.settingsList li:first-child {
+  border-radius: 12px 12px 0 0;
+}
+
+.settingsList li:last-child {
+  border: none;
+  border-radius: 0 0 12px 12px;
+}
+
+.settingsList li:not(:last-child) {
+  border-bottom: solid 1px var(--input-stroke);
+}
+
+.settingsList li:hover {
+  background: var(--main-gray);
+}
+
+.settingsList li:hover .settingsBtn {
+  background: var(--main-gray);
+}
+
+.settingsBtn {
+  display: inline-flex;
+  padding: 10px 15px;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-input);
+  width: fit-content;
+  cursor: pointer;
+  border: none;
+
+  color: var(--light-gray);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}

@@ -90,6 +90,7 @@
   flex-direction: column;
   align-items: flex-end;
   margin-bottom: 40px;
+  margin-right: 28px;
 }
 
 .totalSum {
@@ -202,6 +203,7 @@ input:focus {
   display: flex;
 
   margin-top: auto;
+  margin-right: 28px;
   justify-content: flex-end;
 }
 
