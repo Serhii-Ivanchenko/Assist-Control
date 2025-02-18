@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import css from "./DetailsPart.module.css";
 import { BsWrench } from "react-icons/bs";
 
@@ -22,7 +22,7 @@ export default function DetailsPart({
               parts: spare.parts.map((part) =>
                 spare.name.includes("Гальма")
                   ? { ...part, isChosenLeft: false, isChosenRight: false }
-                  : part
+                  : { ...part, isChosen: false }
               ),
             }))
       );
@@ -51,6 +51,7 @@ export default function DetailsPart({
         const selected = [];
         if (part.isChosenLeft) selected.push({ ...part, side: "left" });
         if (part.isChosenRight) selected.push({ ...part, side: "right" });
+        if (part.isChosen) selected.push(part);
         return selected;
       })
     );
@@ -125,10 +126,10 @@ export default function DetailsPart({
                       <button
                         type="button"
                         className={`${css.btn} ${
-                          category.isChosenRight && css.btnRed
+                          category.isChosen && css.btnRed
                         }`}
                         onClick={() => {
-                          toggleSpareSelection(category.part_id, "");
+                          toggleSpareSelection(category.part_id, "isChosen");
                           // handleChosenRight(category.part_id);
                           // handleSaveSpares();
                         }}

@@ -8,7 +8,7 @@ import SavedInfoTable from "./SavedInfoTable/SavedInfoTable";
 import { TiTick } from "react-icons/ti";
 
 export default function DiagnosticsModalSave({
-  onClose,
+  // onClose,
   togglePoints,
   setOpenModalSave,
   openModalSave,

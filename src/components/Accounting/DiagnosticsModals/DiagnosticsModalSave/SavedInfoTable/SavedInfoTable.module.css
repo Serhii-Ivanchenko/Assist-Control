@@ -43,9 +43,9 @@
   border-radius: 10px !important;
 }
 
-:global(.MuiTable-root) {
+/* :global(.MuiTable-root) {
   border: 1px solid var(--light-gray-table) !important;
-}
+} */
 
 :global(.MuiTableContainer-root) {
   margin-top: 19px;
@@ -200,3 +200,11 @@
   height: 200px;
   overflow: auto;
 } */
+
+.firstHeaderCell {
+  width: 38px;
+}
+
+.nameHeaderCell {
+  width: 440px;
+}

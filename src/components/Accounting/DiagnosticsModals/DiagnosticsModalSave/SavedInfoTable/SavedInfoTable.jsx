@@ -27,53 +27,40 @@ export default function SavedInfoTable({ chosenSpares }) {
 
   const chosenSparesWithSides = chosenSpares.map((spare) => ({
     ...spare,
-    name: `${spare.name} ${spare.side === "left" ? "(лівий)" : "(правий)"}`,
+    name: `${spare.name} ${
+      spare.side === "left"
+        ? "(лівий)"
+        : spare.side === "right"
+        ? "(правий)"
+        : " "
+    }`,
   }));
 
   return (
     <div className={css.tableWrapper}>
-      {/* <p>SavedInfoTable</p> */}
       <div className={css.infoWrapper}>
         <div className={css.infoBtnWrapper}>
           <button
-            // className={clsx(
-            //   css.infoBtn
-            //   // diagnostic !== "spareParts" && css.nonActiveBtn,
-            //   // !diagnostics.spareParts && css.disabledBtn
-            // )}
             className={clsx(css.infoBtn, {
               [css.nonActiveBtn]: diagnostic === "spareParts",
             })}
             onClick={() => setDiagnostic("spareParts")}
-            // disabled={!diagnostics.spareParts}
           >
             Запчастини
           </button>
           <button
-            // className={clsx(
-            //   css.infoBtn
-            //   // diagnostic !== "PhotoOfBreakdown" && css.nonActiveBtn,
-            //   // !diagnostics.photoOfBreakdown && css.disabledBtn
-            // )}
             className={clsx(css.infoBtn, {
               [css.nonActiveBtn]: diagnostic === "PhotoOfBreakdown",
             })}
             onClick={() => setDiagnostic("PhotoOfBreakdown")}
-            // disabled={!diagnostics.photoOfBreakdown}
           >
             Фото поломки
           </button>
           <button
-            // className={clsx(
-            //   css.infoBtn
-            //   // diagnostic !== "comment" && css.nonActiveBtn,
-            //   // !diagnostics.message && css.disabledBtn
-            // )}
             className={clsx(css.infoBtn, {
               [css.nonActiveBtn]: diagnostic === "comment",
             })}
             onClick={() => setDiagnostic("comment")}
-            // disabled={!diagnostics.message}
           >
             Коментар механіка
           </button>
@@ -88,23 +75,29 @@ export default function SavedInfoTable({ chosenSpares }) {
                 <TableHead>
                   <TableRow>
                     <TableCell className={css.firstHeaderCell}>№</TableCell>
-                    <TableCell>Назва</TableCell>
+                    <TableCell className={css.nameHeaderCell}>Назва</TableCell>
                     {/* <TableCell>Номер</TableCell> */}
-                    <TableCell>Стан</TableCell>
+                    {/* <TableCell>Стан</TableCell> */}
                     <TableCell>Рекомендація</TableCell>
                   </TableRow>
                 </TableHead>
+              </Table>
+              <Table>
                 <TableBody>
                   {chosenSparesWithSides.map((item, index) => (
                     <TableRow
                       key={`${Math.random()}`}
                       // style={{ display: "table", width: "100%" }}
                     >
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>{item.name}</TableCell>
+                      <TableCell TableCell className={css.firstHeaderCell}>
+                        {index + 1}
+                      </TableCell>
+                      <TableCell className={css.nameHeaderCell}>
+                        {item.name}
+                      </TableCell>
                       {/* <TableCell></TableCell> */}
-                      <TableCell>Критично</TableCell>
-                      <TableCell>Не вказано</TableCell>
+                      {/* <TableCell>Критично</TableCell> */}
+                      <TableCell>Під заміну</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
