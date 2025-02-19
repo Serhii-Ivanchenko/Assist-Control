@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import css from "./DetailsPart.module.css";
 import { BsWrench } from "react-icons/bs";
 
@@ -17,11 +17,11 @@ export default function DetailsPart({
           ? prevSpares
           : togglePoints.map((spare) => ({
               ...spare,
-              parts: spare.parts.map((part) => ({
-                ...part,
-                isChosenLeft: false,
-                isChosenRight: false,
-              })),
+              parts: spare.parts.map((part) =>
+                spare.name.includes("Гальма")
+                  ? { ...part, isChosenLeft: false, isChosenRight: false }
+                  : { ...part, isChosen: false }
+              ),
             }))
       );
     }
@@ -49,6 +49,7 @@ export default function DetailsPart({
         const selected = [];
         if (part.isChosenLeft) selected.push({ ...part, side: "left" });
         if (part.isChosenRight) selected.push({ ...part, side: "right" });
+        if (part.isChosen) selected.push(part);
         return selected;
       })
     );
@@ -61,47 +62,89 @@ export default function DetailsPart({
     console.log("chosenSpares", chosenSpares);
   }, [spares, chosenSpares]);
 
+  const twoBtns = title.includes("Гальма");
+
   return (
     <>
       <div className={css.title}>
-        <p className={css.name}>{title}</p>
-        <p className={`${css.sides} ${css.sideL}`}>Л</p>
-        <p className={css.sides}>П</p>
+        <p className={`${css.name} ${!twoBtns && css.onlyName}`}>{title}</p>
+        {twoBtns && (
+          <>
+            <p className={`${css.sides} ${css.sideL}`}>Л</p>
+            <p className={css.sides}>П</p>
+          </>
+        )}
       </div>
       <ul className={css.detailsList}>
         {spares.map((cat) =>
           cat.name === title
             ? cat.parts.map((category, index) => (
-                <li className={css.detailsItem} key={index}>
-                  <p className={css.subcategoryName}>{category.name}</p>
-                  <div className={css.buttons}>
-                    <button
-                      type="button"
-                      className={`${css.btn} ${
-                        category.isChosenLeft && css.btnRed
-                      }`}
-                      onClick={() => {
-                        toggleSpareSelection(category.part_id, "isChosenLeft");
-                        // handleChosenLeft(category.part_id);
-                        // handleSaveSpares();
-                      }}
-                    >
-                      <BsWrench size={18} className={css.icon} />
-                    </button>
-                    <button
-                      type="button"
-                      className={`${css.btn} ${
-                        category.isChosenRight && css.btnRed
-                      }`}
-                      onClick={() => {
-                        toggleSpareSelection(category.part_id, "isChosenRight");
-                        // handleChosenRight(category.part_id);
-                        // handleSaveSpares();
-                      }}
-                    >
-                      {" "}
-                      <BsWrench size={18} className={css.icon} />
-                    </button>
+                <li
+                  className={`${css.detailsItem} ${
+                    !twoBtns && css.detailsItemFotItemWithOneBtn
+                  }`}
+                  key={index}
+                >
+                  <p
+                    className={`${css.subcategoryName} ${
+                      !twoBtns && css.subcategoryNameWithOneBtn
+                    }`}
+                  >
+                    {category.name}
+                  </p>
+                  <div className={`${css.buttons} ${!twoBtns && css.btnAlone}`}>
+                    {twoBtns ? (
+                      <>
+                        <button
+                          type="button"
+                          className={`${css.btn} ${
+                            category.isChosenLeft && css.btnRed
+                          }`}
+                          onClick={() => {
+                            toggleSpareSelection(
+                              category.part_id,
+                              "isChosenLeft"
+                            );
+                            // handleChosenLeft(category.part_id);
+                            // handleSaveSpares();
+                          }}
+                        >
+                          <BsWrench size={18} className={css.icon} />
+                        </button>
+                        <button
+                          type="button"
+                          className={`${css.btn} ${
+                            category.isChosenRight && css.btnRed
+                          }`}
+                          onClick={() => {
+                            toggleSpareSelection(
+                              category.part_id,
+                              "isChosenRight"
+                            );
+                            // handleChosenRight(category.part_id);
+                            // handleSaveSpares();
+                          }}
+                        >
+                          {" "}
+                          <BsWrench size={18} className={css.icon} />
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        type="button"
+                        className={`${css.btn} ${
+                          category.isChosen && css.btnRed
+                        }`}
+                        onClick={() => {
+                          toggleSpareSelection(category.part_id, "isChosen");
+                          // handleChosenRight(category.part_id);
+                          // handleSaveSpares();
+                        }}
+                      >
+                        {" "}
+                        <BsWrench size={18} className={css.icon} />
+                      </button>
+                    )}
                   </div>
                 </li>
               ))

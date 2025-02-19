@@ -6,14 +6,19 @@ import carImg from "../../../../assets/images/car.png";
 import SortButtonsArrow from "../../../sharedComponents/SortButtonsArrow/SortButtonsArrow";
 import PartsList from "./PartsList/PartsList";
 import CarInfo from "../../../sharedComponents/CarInfo/CarInfo";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
 import BtnsCloseAndSubmit from "../../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
-import { BsCaretRightFill } from "react-icons/bs";
+import { BsCaretRightFill, BsCaretUpFill } from "react-icons/bs";
 import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
-// import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
+import DownloadPdfButtonKP from "../../../sharedComponents/Pdf/DownloadPdfButtonKP/DownloadPdfButtonKP";
+import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
+import { useDispatch } from "react-redux";
+import { getCommercialOfferData } from "../../../../redux/accounting/operations.js";
+// import Modal from "../../../Modals/Modal/Modal";
+// import WarehouseAvailabilityModal from "./WarehouseAvailabilityModal/WarehouseAvailabilityModal";
 
 const dataArr = {
   diagnostic_id: 88,
@@ -219,25 +224,38 @@ const dataArr = {
 export default function CommercialOfferModal({ onClose }) {
   const data = useMemo(() => dataArr, []);
   const [totalOrder, setTotalOrder] = useState({});
-  const [sentForApproval, setSentForApproval] = useState(false);
-  const [approved, setApproved] = useState(false);
-  const [pay, setPay] = useState(false);
-  const [makeOrder, setMakeOrder] = useState(false);
+  const [nodesArr, setNodesArr] = useState(data.nodes);
+  // const [sentForApproval, setSentForApproval] = useState(false);
+  // const [approved, setApproved] = useState(false);
+  // const [pay, setPay] = useState(false);
+  // const [makeOrder, setMakeOrder] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  console.log(totalOrder);
+  const [approval, setApproval] = useState("");
+  const buttonRef = useRef(null);
+
+  // backend request
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCommercialOfferData());
+  }, [dispatch]);
+
+  //
+
+  console.log("totalOrder", totalOrder);
 
   const correctedTotalOrder = (nodeId) => {
     const updatedItems = Object.fromEntries(
-      Object.entries(totalOrder).map(([key, value]) => [
-        key,
-        value.node_id === nodeId ? { ...value, selected: false } : { ...value },
-      ])
+      Object.entries(totalOrder).filter(
+        ([_, value]) => value.node_id !== nodeId
+      )
     );
     setTotalOrder(updatedItems);
+    setNodesArr((prev) => {
+      return prev.filter((item) => item.node_id !== nodeId);
+    });
   };
 
-  // const [sortOrder, setSortOrder] = useState("asc");
-  // const [data, setData] = useState(dataArr);
   const date = new Date(data.created_at);
 
   // Получаем день, месяц и год
@@ -248,94 +266,61 @@ export default function CommercialOfferModal({ onClose }) {
   // Собираем итоговую строку в формате "dd.mm.yyyy"
   const formattedDate = `${day}.${month}.${year}`;
 
-  // const sort = (array, key, order) => {
-  //   return array.sort((a, b) => {
-  //     if (Number(a[key]) < Number(b[key])) {
-  //       return order === "asc" ? -1 : 1;
-  //     }
-  //     if (Number(a[key]) > Number(b[key])) {
-  //       return order === "asc" ? 1 : -1;
-  //     }
-  //     return 0;
-  //   });
+  // const totalWorkPrice = nodesPrices.reduce((acc, item) => {
+  //   return acc + Number(item.work_price);
+  // }, 0);
+
+  // const totalSalePrice = nodesPrices.reduce((acc, item) => {
+  //   return acc + Number(item.sale_price);
+  // }, 0);
+
+  const totalWorkPrice = 0;
+  const totalSalePrice = 0;
+
+  const totalSum = Object.values(totalOrder).reduce((sum, item) => {
+    if (item.selected && item.quantity > 0) {
+      return sum + item.price * item.quantity;
+    }
+    return sum;
+  }, 0);
+
+  const totalProfit = Object.values(totalOrder).reduce((sum, item) => {
+    if (item.selected && item.quantity > 0) {
+      return sum + item.profit * item.quantity;
+    }
+    return sum;
+  }, 0);
+
+  // const changedWorkPrices = (price, nodeId) => {
+  //   console.log("workprice", price);
+  //   console.log("nodeId", nodeId);
   // };
 
-  // const sortDates = (array, key, order) => {
-  //   return array.sort((a, b) => {
-  //     const dateA = a[key].split(".").reverse().join(".");
-  //     const dateB = b[key].split(".").reverse().join(".");
-
-  //     if (dateA < dateB) {
-  //       return order === "asc" ? -1 : 1;
-  //     }
-  //     if (dateA > dateB) {
-  //       return order === "asc" ? 1 : -1;
-  //     }
-  //     return 0;
-  //   });
-  // };
-
-  // const handleSort = (key, func) => {
-  //   if (sortOrder === "asc") {
-  //     setSortOrder("desc");
-  //   } else {
-  //     setSortOrder("asc");
-  //   }
-  //   const sortedData = func([...data], key, sortOrder);
-  //   setData(sortedData);
-  // };
-
-  // const sortCarParts = (key) => {
-  //   if (sortOrder === "asc") {
-  //     setSortOrder("desc");
-  //   } else {
-  //     setSortOrder("asc");
-  //   }
-
-  //   setData((prevValues) =>
-  //     prevValues.nodes.map((value) => ({
-  //       ...value,
-  //       parts: [...value.parts].sort((a, b) => {
-  //         if (a[key] < b[key]) {
-  //           return sortOrder === "asc" ? -1 : 1;
-  //         }
-  //         if (a[key] > b[key]) {
-  //           return sortOrder === "asc" ? 1 : -1;
-  //         }
-  //         return 0;
-  //       }),
-  //     }))
-  //   );
+  // const changedSalePrices = (price, nodeId) => {
+  //   console.log("saleprice", price);
+  //   console.log("nodeId", nodeId);
   // };
 
   return (
     <div className={css.modal}>
       <BsXLg className={css.closeIcon} onClick={onClose} />
+      <p className={css.offerNumber}>КП № </p>
+
       <div className={css.topWrapper}>
-        <div>
-          <CarInfo
-            clientName={data.client.client_name}
-            clientPhone={data.client.phone}
-            carImg={carImg}
-            carNumber={data.car.car_number}
-            carMake={data.car.make}
-            carModel={data.car.model}
-            carYear={data.car.year}
-            vin={data.car.vin}
-            mileage={data.car.mileage}
-          />
-        </div>
-        <div className={css.centerWrapper}>
-          <button type="button" className={css.original}>
-            Орігінал
-          </button>
-          <button type="button" className={css.analogue}>
-            Аналог
-          </button>
-        </div>
+        <CarInfo
+          clientName={data.client.client_name}
+          clientPhone={data.client.phone}
+          carImg={carImg}
+          carNumber={data.car.car_number}
+          carMake={data.car.make}
+          carModel={data.car.model}
+          carYear={data.car.year}
+          vin={data.car.vin}
+          mileage={data.car.mileage}
+        />
         <div className={css.rightSectionWrapper}>
           <p className={css.date}>{formattedDate}</p>
-          <p className={css.link}>Діагностика № </p>
+          <button className={css.link}>Діагностика № </button>
           <div className={css.mechanicWrapper}>
             <BsWrench className={css.spannerIcon} />
             <p className={css.mechanicText}>Механік:</p>
@@ -347,6 +332,14 @@ export default function CommercialOfferModal({ onClose }) {
             <p className={css.mechanicName}>{data.manager.manager_name}</p>
           </div>
         </div>
+      </div>
+      <div className={css.centerWrapper}>
+        <button type="button" className={css.original}>
+          Орігінал
+        </button>
+        <button type="button" className={css.analogue}>
+          Аналог
+        </button>
       </div>
       <div className={css.tableHeaderWrapper}>
         <div className={css.headerWithArrows}>
@@ -381,7 +374,7 @@ export default function CommercialOfferModal({ onClose }) {
         </div>
       </div>
       <div className={css.table}>
-        {data.nodes.map((item) => {
+        {nodesArr.map((item) => {
           return (
             <PartsList
               key={item.node_id}
@@ -396,37 +389,50 @@ export default function CommercialOfferModal({ onClose }) {
       <FiPlusCircle className={css.addIcon} />
       <div className={css.bottomTextWrapper}>
         <p></p>
+        <p>{totalWorkPrice ? totalWorkPrice : 0} грн</p>
+        <p>{totalSalePrice ? totalSalePrice : 0} грн</p>
         <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
+        <p>{totalSum ? totalSum : 0} грн</p>
+        <p>{totalProfit ? totalProfit : 0} грн</p>
         <p></p>
       </div>
-      <p className={css.prdBtn}>PDF Btn</p>
+      <DownloadPdfButtonKP carsData={dataArr} />
       <div className={css.bottomWrapper}>
         <div className={css.btnWrapper}>
-          <button
-            type="button"
-            className={clsx(
-              css.btnWithPopup,
-              sentForApproval ? css.submitted : css.notSubmitted
+          <div className={css.btnWithPopup}>
+            <button
+              type="button"
+              className={clsx(
+                css.btn,
+                css.approvalBtn,
+                css.notSubmitted
+                // sentForApproval ? css.submitted : css.notSubmitted
+              )}
+              onClick={() => setIsPopupOpen(!isPopupOpen)}
+              ref={buttonRef}
+            >
+              <FaCheck />
+              {approval ? approval : "Відправити на узгодження"}
+              <BsCaretRightFill
+                className={`${css.arrowIcon} ${isPopupOpen ? css.rotated : ""}`}
+              />
+            </button>
+            {isPopupOpen && (
+              <ComOfferPopup
+                onClose={() => setIsPopupOpen(false)}
+                setApproval={setApproval}
+                buttonRef={buttonRef}
+                isOpen={isPopupOpen}
+              />
             )}
-            onClick={() => setIsPopupOpen(true)}
-          >
-            <FaCheck />
-            Відправити на узгодження
-            <BsCaretRightFill />
-          </button>
-          {/* {isPopupOpen && (
-            <ComOfferPopup onClose={() => setIsPopupOpen(false)} />
-          )} */}
+          </div>
           <FaArrowRightLong />
           <button
             type="button"
             className={clsx(
               css.btn,
-              approved ? css.submitted : css.notSubmitted
+              css.notSubmitted
+              // approved ? css.submitted : css.notSubmitted
             )}
           >
             <FaCheck />
@@ -435,7 +441,11 @@ export default function CommercialOfferModal({ onClose }) {
           <FaArrowRightLong />
           <button
             type="button"
-            className={clsx(css.btn, pay ? css.submitted : css.notSubmitted)}
+            className={clsx(
+              css.btn,
+              css.notSubmitted
+              // pay ? css.submitted : css.notSubmitted
+            )}
           >
             <FaCheck />
             Оплата
@@ -445,7 +455,8 @@ export default function CommercialOfferModal({ onClose }) {
             type="button"
             className={clsx(
               css.btn,
-              makeOrder ? css.submitted : css.notSubmitted
+              css.notSubmitted
+              // makeOrder ? css.submitted : css.notSubmitted
             )}
           >
             <FaCheck />

@@ -8,6 +8,11 @@ import { FaRegCheckSquare } from "react-icons/fa";
 import { FaRegSquare } from "react-icons/fa";
 import { BsCaretDownFill } from "react-icons/bs";
 import { BsCaretRightFill } from "react-icons/bs";
+import { RiSave3Fill } from "react-icons/ri";
+import WarehouseAvailabilityModal from "../WarehouseAvailabilityModal/WarehouseAvailabilityModal";
+import Modal from "../../../../Modals/Modal/Modal";
+import clsx from "clsx";
+import DeletePartModal from "../DeletePartModal/DeletePartModal";
 
 export default function PartsList({
   arr,
@@ -19,6 +24,14 @@ export default function PartsList({
   const [closeAllParts, setCloseAllParts] = useState(false);
   const [tableHeight, setTableHeight] = useState("auto");
   const [order, setOrder] = useState({});
+  const [warehouseModalOpen, setWarehouseModalOpen] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+  const [workPrice, setWorkPrice] = useState(arr.work_price);
+  const [salePrice, setSalePrice] = useState(arr.sale_price);
+  const [isEditing, setIsEditing] = useState(false);
+  const [deletePartModalOpen, setDeletePartModalOpen] = useState(false);
+  const [nodeIdForDelete, setNodeIdForDelete] = useState("");
   const tableRef = useRef(null);
 
   const displayedCarParts = showAllParts ? arr.parts : arr.parts.slice(0, 3);
@@ -30,81 +43,91 @@ export default function PartsList({
     }
   }, [showAllParts, displayedCarParts]);
 
-  const lineHeight = arr.parts.length > 2 ? "284px" : "auto";
+  const lineHeight = arr.parts.length > 2 ? "160px" : "auto";
 
-  const handleCheckboxChange = (availId, checked, price, profit, node_id) => {
+  const handleCheckboxChange = (partId, checked, price, profit, node_id) => {
     setOrder((prev) => ({
       ...prev,
-      [availId]: {
-        quantity: prev[availId]?.quantity || (checked ? 1 : 0),
+
+      [partId]: {
+        quantity: prev[partId]?.quantity || 1,
         selected: checked,
         price,
         profit,
         node_id,
       },
     }));
-    setTotalOrder((prev) => ({
-      ...prev,
-      [availId]: {
-        quantity: prev[availId]?.quantity || (checked ? 1 : 0),
-        selected: checked,
-        price,
-        profit,
-        node_id,
-      },
-    }));
+
+    setTotalOrder((prev) => {
+      if (!checked) {
+        const { [partId]: _, ...rest } = prev; // Видаляємо елемент, якщо unchecked
+        return rest;
+      }
+      return {
+        ...prev,
+        [partId]: {
+          quantity: prev[partId]?.quantity || 1,
+          selected: checked,
+          price,
+          profit,
+          node_id,
+          work_price: workPrice,
+          sale_price: salePrice,
+        },
+      };
+    });
   };
 
-  const handleQuantityChange = (availId, value) => {
+  const handleQuantityChange = (partId, value) => {
     const newQuantity = parseInt(value, 10) || 0;
     setOrder((prev) => ({
       ...prev,
-      [availId]: {
-        ...prev[availId],
+      [partId]: {
+        ...prev[partId],
         quantity: newQuantity,
       },
     }));
     setTotalOrder((prev) => ({
       ...prev,
-      [availId]: {
-        ...prev[availId],
+      [partId]: {
+        ...prev[partId],
         quantity: newQuantity,
       },
     }));
   };
 
-  const handleIncrement = (availId) => {
-    const current = order[availId]?.quantity || 0;
+  const handleIncrement = (partId) => {
+    const current = order[partId]?.quantity || 0;
     setOrder((prev) => ({
       ...prev,
-      [availId]: {
-        ...prev[availId],
+      [partId]: {
+        ...prev[partId],
         quantity: current + 1,
       },
     }));
     setTotalOrder((prev) => ({
       ...prev,
-      [availId]: {
-        ...prev[availId],
+      [partId]: {
+        ...prev[partId],
         quantity: current + 1,
       },
     }));
   };
 
-  const handleDecrement = (availId) => {
-    const current = order[availId]?.quantity || 0;
+  const handleDecrement = (partId) => {
+    const current = order[partId]?.quantity || 0;
     if (current > 0) {
       setOrder((prev) => ({
         ...prev,
-        [availId]: {
-          ...prev[availId],
+        [partId]: {
+          ...prev[partId],
           quantity: current - 1,
         },
       }));
       setTotalOrder((prev) => ({
         ...prev,
-        [availId]: {
-          ...prev[availId],
+        [partId]: {
+          ...prev[partId],
           quantity: current - 1,
         },
       }));
@@ -121,17 +144,28 @@ export default function PartsList({
     return item.selected ? sum + Number(item.quantity * item.price) : sum;
   }, 0);
 
-  const onMinusBtnClick = (nodeId) => {
-    const updatedItems = Object.entries(order).reduce((acc, [key, value]) => {
-      acc[key] = { ...value, selected: false };
-      return acc;
-    }, {});
-    setOrder(updatedItems);
-    correctedTotalOrder(nodeId);
-  };
-
   const handleHeightChange = () => {
     setCloseAllParts(!closeAllParts);
+  };
+
+  const handleMouseEnter = (e) => {
+    setIsTooltipVisible(true);
+    updateTooltipPosition(e);
+  };
+
+  const handleMouseMove = (e) => {
+    updateTooltipPosition(e);
+  };
+
+  const handleMouseLeave = () => {
+    setIsTooltipVisible(false);
+  };
+
+  const updateTooltipPosition = (e) => {
+    setTooltipPosition({
+      x: e.clientX - 300, // Зміщення тултіпу від курсора по X
+      y: e.clientY - 70, // Зміщення тултіпу від курсора по Y
+    });
   };
 
   return (
@@ -144,22 +178,56 @@ export default function PartsList({
         <p className={css.tableHeaderText}>{arr.brand}</p>
         <p className={css.tableHeaderText}>{arr.node_name}</p>
         <div className={css.pencilWrapper}>
-          <p className={css.tableHeaderText}>{arr.work_price} грн</p>
-          {/* <BsPencil className={css.pencilIcon} /> */}
+          {isEditing ? (
+            <input
+              type="text"
+              value={workPrice}
+              className={`${css.workPrice} ${css.tableHeaderText}`}
+              onChange={(e) => setWorkPrice(e.target.value)}
+            />
+          ) : (
+            <p className={css.tableHeaderText}>{workPrice} грн</p>
+          )}
         </div>
         <div className={css.pencilWrapper}>
-          <p className={css.tableHeaderText}>{arr.sale_price} грн</p>
-          {/* <BsPencil className={css.pencilIcon} /> */}
+          {isEditing ? (
+            <input
+              type="text"
+              value={salePrice}
+              className={`${css.workPrice} ${css.tableHeaderText}`}
+              onChange={(e) => setSalePrice(e.target.value)}
+            />
+          ) : (
+            <p className={css.tableHeaderText}>{salePrice} грн</p>
+          )}
         </div>
         <p></p>
         <p>{totalPurchaseAmount ? totalPurchaseAmount.toFixed(2) : 0}</p>
         <p>{totalProfit ? totalProfit : 0}</p>
         <p></p>
-        <BsPencil className={css.pencilIcon} />
-        <FiMinusCircle
-          className={css.minusIcon}
-          onClick={() => onMinusBtnClick(arr.node_id)}
-        />
+        <div className={css.iconsWrapper}>
+          {isEditing ? (
+            <RiSave3Fill
+              className={css.saveIcon}
+              onClick={() => setIsEditing(!isEditing)}
+            />
+          ) : (
+            <BsPencil
+              className={css.pencilIcon}
+              onClick={() => setIsEditing(!isEditing)}
+            />
+          )}
+
+          {isEditing && (
+            <FiMinusCircle
+              className={css.minusIcon}
+              onClick={() => {
+                setDeletePartModalOpen(true);
+                setNodeIdForDelete(arr.node_id);
+              }}
+            />
+          )}
+        </div>
         {closeAllParts ? (
           <BsCaretRightFill onClick={handleHeightChange} />
         ) : (
@@ -206,7 +274,27 @@ export default function PartsList({
                   </div>
                   <p className={css.tableText}>{part.code}</p>
                   <p className={css.tableText}>{part.brand}</p>
-                  <p className={css.tableText}>{part.part_name}</p>
+                  <div
+                    className={css.nameWithOption}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <p className={`${css.tableText} ${css.partName}`}>
+                      {part.part_name}
+                    </p>
+                    {isTooltipVisible && (
+                      <div
+                        className={css.tooltip}
+                        style={{
+                          top: `${tooltipPosition.y}px`,
+                          left: `${tooltipPosition.x}px`,
+                        }}
+                      >
+                        {part.part_name}
+                      </div>
+                    )}
+                  </div>
                   <p></p>
                   <p></p>
                   <div className={css.wrapper}>
@@ -217,35 +305,38 @@ export default function PartsList({
                     </p>
                     {part.supplier.toLowerCase() === "харків" && (
                       <p className={css.glassIconWrapper}>
-                        <FaMagnifyingGlass className={css.glassIcon} />
+                        <FaMagnifyingGlass
+                          className={css.glassIcon}
+                          onClick={() => setWarehouseModalOpen(true)}
+                        />
                       </p>
                     )}
                   </div>
-                  <div className={css.checkboxWrapper}>
-                    <label className={css.checkboxIcon}>
-                      <input
-                        type="checkbox"
-                        name="checkbox"
-                        className={css.checkboxInput}
-                        checked={order[part.id]?.selected || false}
-                        onChange={(e) =>
-                          handleCheckboxChange(
-                            part.id,
-                            e.target.checked,
-                            part.price,
-                            part.profit,
-                            arr.node_id
-                          )
-                        }
-                      />
-                      {order[part.id]?.selected ? (
-                        <FaRegCheckSquare className={css.checkboxIcon} />
-                      ) : (
-                        <FaRegSquare className={css.checkboxIcon} />
-                      )}
-                    </label>
-                    <p className={css.tableText}>{part.price}</p>
-                  </div>
+                  {/* <div className={css.checkboxWrapper}> */}
+                  <label className={css.checkboxIcon}>
+                    <input
+                      type="checkbox"
+                      name="checkbox"
+                      className={css.checkboxInput}
+                      checked={order[part.id]?.selected || false}
+                      onChange={(e) =>
+                        handleCheckboxChange(
+                          part.id,
+                          e.target.checked,
+                          part.price,
+                          part.profit,
+                          arr.node_id
+                        )
+                      }
+                    />
+                    {order[part.id]?.selected ? (
+                      <FaRegCheckSquare className={css.checkboxIcon} />
+                    ) : (
+                      <FaRegSquare className={css.checkboxIcon} />
+                    )}
+                  </label>
+                  <p className={css.tableText}>{part.price}</p>
+                  {/* </div> */}
                   <p>{part.profit}</p>
                   <p>{part.percent}</p>
                 </div>
@@ -261,6 +352,30 @@ export default function PartsList({
             </button>
           )}
         </>
+      )}
+      {warehouseModalOpen && (
+        <Modal
+          isOpen={warehouseModalOpen}
+          onClose={() => setWarehouseModalOpen(false)}
+        >
+          <WarehouseAvailabilityModal
+            onClose={() => setWarehouseModalOpen(false)}
+          />
+        </Modal>
+      )}
+      {deletePartModalOpen && (
+        <Modal
+          isOpen={deletePartModalOpen}
+          onClose={() => setDeletePartModalOpen(false)}
+        >
+          <DeletePartModal
+            onClose={() => setDeletePartModalOpen(false)}
+            order={order}
+            setOrder={setOrder}
+            correctedTotalOrder={correctedTotalOrder}
+            nodeId={nodeIdForDelete}
+          />
+        </Modal>
       )}
     </div>
   );

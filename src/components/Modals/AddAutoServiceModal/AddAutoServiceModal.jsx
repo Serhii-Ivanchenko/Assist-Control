@@ -1,11 +1,14 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "../AddAutoServiceModal/AddAutoServiceModal.module.css";
 import { AddServiceSchema } from "../../../validationSchemas/addServiceSchema";
-import { BsXLg } from "react-icons/bs";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { BsFillCameraFill } from "react-icons/bs";
+import { CiSquarePlus } from "react-icons/ci";
+import {
+  BsXLg,
+  BsThreeDotsVertical,
+  BsFillCameraFill,
+  BsFillCloudUploadFill,
+} from "react-icons/bs";
 import { useRef, useState } from "react";
-import { BsFillCloudUploadFill } from "react-icons/bs";
 import BtnsCloseAndSubmit from "../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
@@ -39,6 +42,15 @@ export default function AddAutoServiceModal({
 
   const dispatch = useDispatch();
 
+  // contacts inputs
+  const [contacts, setContacts] = useState(
+    station?.contacts || [{ name: "", phone: "", position: "" }]
+  );
+
+  const addContact = () => {
+    setContacts([...contacts, { name: "", phone: "", position: "" }]);
+  };
+
   const initialValues = {
     avatar: "",
     companyName: station?.name || serviceName || "",
@@ -50,10 +62,11 @@ export default function AddAutoServiceModal({
     bank_name: station?.bank_name || "",
     mfo_bank: station?.mfo_bank || "",
     legal_address: station?.legal_address || "",
-    manager_phone: station?.manager_phone || "",
-    manager_name: station?.manager_name || "",
-    office_phone: station?.office_phone || "",
-    director_phone: station?.director_phone || "",
+    // manager_phone: station?.manager_phone || "",
+    // manager_name: station?.manager_name || "",
+    // office_phone: station?.office_phone || "",
+    // director_phone: station?.director_phone || "",
+    contacts: contacts,
   };
 
   const handleThreeDotsBtnClick = (e) => {
@@ -188,22 +201,23 @@ export default function AddAutoServiceModal({
         validateOnChange={true}
         validateOnBlur
       >
-        <Form>
-          <div className={css.headerWrapper}>
-            <BsXLg className={css.closeIcon} onClick={onClose} />
-            {createClient && (
-              <p className={css.autoServiceName}>
-                {serviceName ? serviceName : "ТОВ"}
-              </p>
-            )}
-            {(createAutoService || updateAutoService) && (
-              <p className={css.autoServiceName}>
-                {serviceName ? serviceName : "Назва СТО"}
-              </p>
-            )}
-            {updateAutoService && (
-              <div className={css.serviceNameWrapper}>
-                {/* {isInputVisible ? (
+        {({ values }) => (
+          <Form>
+            <div className={css.headerWrapper}>
+              <BsXLg className={css.closeIcon} onClick={onClose} />
+              {createClient && (
+                <p className={css.autoServiceName}>
+                  {serviceName ? serviceName : "ТОВ"}
+                </p>
+              )}
+              {(createAutoService || updateAutoService) && (
+                <p className={css.autoServiceName}>
+                  {serviceName ? serviceName : "Назва СТО"}
+                </p>
+              )}
+              {updateAutoService && (
+                <div className={css.serviceNameWrapper}>
+                  {/* {isInputVisible ? (
                   <Field
                     innerRef={inputRef}
                     value={serviceName}
@@ -216,226 +230,226 @@ export default function AddAutoServiceModal({
                 ) : (
                   <p className={css.autoServiceName}>{serviceName}</p>
                 )} */}
-                <button
-                  type="button"
-                  className={css.btn}
-                  onClick={handleThreeDotsBtnClick}
-                  ref={buttonRef}
-                >
-                  <BsThreeDotsVertical className={css.dotsIcon} />
-                  {/* <div className={css.popupContainer}> */}
-                  <Popup
-                    isOpen={isPopupOpen}
-                    onClose={() => setIsPopupOpen(false)}
-                    buttonRef={buttonRef}
-                    onDelete={openDeleteServiceModal}
-                  />
-                  {/* </div> */}
-                </button>
-              </div>
-            )}
-          </div>
-          <div className={css.logo}>
-            {logoPreview && (
-              <img src={logoPreview} alt="logo" className={css.logoImg} />
-            )}
-            <div>
-              <Field
-                type="file"
-                className={css.inputDisabled}
-                id="avatar"
-                name="avatar"
-                onChange={downloadAvatar}
-              />
-              <label htmlFor="avatar" className={css.avatarLabel}>
-                {createClient ? (
-                  <>
-                    <BsFillCameraFill className={css.camera} />
-                    <p className={css.uploadAvatarText}>+ Додати аватар</p>
-                  </>
-                ) : (
-                  <>
-                    <BsFillCloudUploadFill className={css.cloud} />
-                    <p className={css.uploadLogoText}>Завантажте логотип</p>
-                  </>
-                )}
-              </label>
+                  <button
+                    type="button"
+                    className={css.btn}
+                    onClick={handleThreeDotsBtnClick}
+                    ref={buttonRef}
+                  >
+                    <BsThreeDotsVertical className={css.dotsIcon} />
+                    {/* <div className={css.popupContainer}> */}
+                    <Popup
+                      isOpen={isPopupOpen}
+                      onClose={() => setIsPopupOpen(false)}
+                      buttonRef={buttonRef}
+                      onDelete={openDeleteServiceModal}
+                    />
+                    {/* </div> */}
+                  </button>
+                </div>
+              )}
             </div>
-          </div>
-          <div className={css.form}>
-            {/* {createClient ||
+            <div className={css.logo}>
+              {logoPreview && (
+                <img src={logoPreview} alt="logo" className={css.logoImg} />
+              )}
+              <div>
+                <Field
+                  type="file"
+                  className={css.inputDisabled}
+                  id="avatar"
+                  name="avatar"
+                  onChange={downloadAvatar}
+                />
+                <label htmlFor="avatar" className={css.avatarLabel}>
+                  {createClient ? (
+                    <>
+                      <BsFillCameraFill className={css.camera} />
+                      <p className={css.uploadAvatarText}>+ Додати аватар</p>
+                    </>
+                  ) : (
+                    <>
+                      <BsFillCloudUploadFill className={css.cloud} />
+                      <p className={css.uploadLogoText}>Завантажте логотип</p>
+                    </>
+                  )}
+                </label>
+              </div>
+            </div>
+            <div className={css.form}>
+              {/* {createClient ||
               (createAutoService && ( */}
-            <div className={css.addressWrapper}>
-              <label htmlFor="companyName" className={css.labelName}>
-                {createClient ? `Назва компанії` : `Назва СТО`}
-              </label>
+              <div className={css.addressWrapper}>
+                <label htmlFor="companyName" className={css.labelName}>
+                  {createClient ? `Назва компанії` : `Назва СТО`}
+                </label>
 
-              <div className={css.fieldWithErrorWrapper}>
-                <Field
-                  className={css.input}
-                  type="text"
-                  name="companyName"
-                  placeholder="Назва"
-                  value={serviceName}
-                  onChange={(e) => setServiceName(e.target.value)}
-                />
-                <ErrorMessage
-                  name="companyName"
-                  component="div"
-                  className={css.errorMsg}
-                />
-              </div>
-            </div>
-            {/* // ))} */}
-            <div className={css.addressWrapper}>
-              <label htmlFor="address" className={css.labelName}>
-                Фактична адреса
-              </label>
-              <div className={css.fieldWithErrorWrapper}>
-                <Field
-                  className={css.input}
-                  type="text"
-                  name="address"
-                  placeholder="Харків, Байрона 189 оф 27"
-                />
-                <ErrorMessage
-                  name="address"
-                  component="div"
-                  className={css.errorMsg}
-                />
-              </div>
-            </div>
-            <div className={css.addressWrapper}>
-              <label htmlFor="email" className={css.labelName}>
-                Email
-              </label>
-              <div className={css.fieldWithErrorWrapper}>
-                <Field
-                  className={css.input}
-                  type="text"
-                  name="email"
-                  placeholder="service@mail.com"
-                />
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  className={css.errorMsg}
-                />
-              </div>
-            </div>
-            <div className={css.inputsWrapper}>
-              <div className={css.wrapper}>
-                <label htmlFor="fop_name" className={css.label}>
-                  ПІБ ФОП
-                </label>
                 <div className={css.fieldWithErrorWrapper}>
                   <Field
                     className={css.input}
                     type="text"
-                    name="fop_name"
-                    placeholder="Іваненко Іван Іванович"
+                    name="companyName"
+                    placeholder="Назва"
+                    value={serviceName}
+                    onChange={(e) => setServiceName(e.target.value)}
                   />
                   <ErrorMessage
-                    name="fop_name"
+                    name="companyName"
                     component="div"
                     className={css.errorMsg}
                   />
                 </div>
               </div>
-              <div className={css.wrapper}>
-                <label htmlFor="ipn" className={css.label}>
-                  ІПН
+              {/* // ))} */}
+              <div className={css.addressWrapper}>
+                <label htmlFor="address" className={css.labelName}>
+                  Фактична адреса
                 </label>
                 <div className={css.fieldWithErrorWrapper}>
                   <Field
                     className={css.input}
                     type="text"
-                    name="ipn"
-                    placeholder="1385446843"
+                    name="address"
+                    placeholder="Харків, Байрона 189 оф 27"
                   />
                   <ErrorMessage
-                    name="ipn"
+                    name="address"
                     component="div"
                     className={css.errorMsg}
                   />
                 </div>
               </div>
-            </div>
-            <div className={css.wrapper}>
-              <label htmlFor="iban" className={css.label}>
-                Рахунок IBAN
-              </label>
-              <div className={css.fieldWithErrorWrapper}>
-                <Field
-                  className={css.input}
-                  type="text"
-                  name="iban"
-                  placeholder="UA123456789012345678901234567"
-                />
-                <ErrorMessage
-                  name="iban"
-                  component="div"
-                  className={css.errorMsg}
-                />
-              </div>
-            </div>
-            <div className={css.inputsWrapper}>
-              <div className={css.wrapper}>
-                <label htmlFor="bank_name" className={css.label}>
-                  Банк
+              <div className={css.addressWrapper}>
+                <label htmlFor="email" className={css.labelName}>
+                  Email
                 </label>
                 <div className={css.fieldWithErrorWrapper}>
                   <Field
                     className={css.input}
                     type="text"
-                    name="bank_name"
-                    placeholder="ПриватБанк"
+                    name="email"
+                    placeholder="service@mail.com"
                   />
                   <ErrorMessage
-                    name="bank_name"
+                    name="email"
                     component="div"
                     className={css.errorMsg}
                   />
                 </div>
               </div>
+              <div className={css.inputsWrapper}>
+                <div className={css.wrapper}>
+                  <label htmlFor="fop_name" className={css.label}>
+                    ПІБ ФОП
+                  </label>
+                  <div className={css.fieldWithErrorWrapper}>
+                    <Field
+                      className={css.input}
+                      type="text"
+                      name="fop_name"
+                      placeholder="Іваненко Іван Іванович"
+                    />
+                    <ErrorMessage
+                      name="fop_name"
+                      component="div"
+                      className={css.errorMsg}
+                    />
+                  </div>
+                </div>
+                <div className={css.wrapper}>
+                  <label htmlFor="ipn" className={css.label}>
+                    ІПН
+                  </label>
+                  <div className={css.fieldWithErrorWrapper}>
+                    <Field
+                      className={css.input}
+                      type="text"
+                      name="ipn"
+                      placeholder="1385446843"
+                    />
+                    <ErrorMessage
+                      name="ipn"
+                      component="div"
+                      className={css.errorMsg}
+                    />
+                  </div>
+                </div>
+              </div>
               <div className={css.wrapper}>
-                <label htmlFor="mfo_bank" className={css.label}>
-                  МФО банку
+                <label htmlFor="iban" className={css.label}>
+                  Рахунок IBAN
                 </label>
                 <div className={css.fieldWithErrorWrapper}>
                   <Field
                     className={css.input}
                     type="text"
-                    name="mfo_bank"
-                    placeholder="305299"
+                    name="iban"
+                    placeholder="UA123456789012345678901234567"
                   />
                   <ErrorMessage
-                    name="mfo_bank"
+                    name="iban"
                     component="div"
                     className={css.errorMsg}
                   />
                 </div>
               </div>
-            </div>
-            <div className={css.wrapper}>
-              <label htmlFor="legal_address" className={css.label}>
-                Юридична адреса
-              </label>
-              <div className={css.fieldWithErrorWrapper}>
-                <Field
-                  className={css.input}
-                  type="text"
-                  name="legal_address"
-                  placeholder="м. Київ, вул. Шевченка, буд. 10"
-                />
-                <ErrorMessage
-                  name="legal_address"
-                  component="div"
-                  className={css.errorMsg}
-                />
+              <div className={css.inputsWrapper}>
+                <div className={css.wrapper}>
+                  <label htmlFor="bank_name" className={css.label}>
+                    Банк
+                  </label>
+                  <div className={css.fieldWithErrorWrapper}>
+                    <Field
+                      className={css.input}
+                      type="text"
+                      name="bank_name"
+                      placeholder="ПриватБанк"
+                    />
+                    <ErrorMessage
+                      name="bank_name"
+                      component="div"
+                      className={css.errorMsg}
+                    />
+                  </div>
+                </div>
+                <div className={css.wrapper}>
+                  <label htmlFor="mfo_bank" className={css.label}>
+                    МФО банку
+                  </label>
+                  <div className={css.fieldWithErrorWrapper}>
+                    <Field
+                      className={css.input}
+                      type="text"
+                      name="mfo_bank"
+                      placeholder="305299"
+                    />
+                    <ErrorMessage
+                      name="mfo_bank"
+                      component="div"
+                      className={css.errorMsg}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className={css.wrapper}>
+              <div className={css.wrapper}>
+                <label htmlFor="legal_address" className={css.label}>
+                  Юридична адреса
+                </label>
+                <div className={css.fieldWithErrorWrapper}>
+                  <Field
+                    className={css.input}
+                    type="text"
+                    name="legal_address"
+                    placeholder="м. Київ, вул. Шевченка, буд. 10"
+                  />
+                  <ErrorMessage
+                    name="legal_address"
+                    component="div"
+                    className={css.errorMsg}
+                  />
+                </div>
+              </div>
+              {/* <div className={css.wrapper}>
               <label htmlFor="manager_phone" className={css.label}>
                 Телефон менеджера
               </label>
@@ -468,8 +482,8 @@ export default function AddAutoServiceModal({
                   />
                 </div>
               </div>
-            </div>
-            <div className={css.inputsWrapper}>
+            </div> */}
+              {/* <div className={css.inputsWrapper}>
               <div className={css.wrapper}>
                 <label htmlFor="office_phone" className={css.label}>
                   Телефон офіс
@@ -506,17 +520,77 @@ export default function AddAutoServiceModal({
                   />
                 </div>
               </div>
+            </div> */}
+              {values.contacts.map((_, index) => (
+                <div key={index} className={css.rowContainer}>
+                  <div className={css.fieldWithErrorWrapper}>
+                    <label className={css.label}>
+                      Телефон
+                      <Field
+                        className={`${css.input} ${css.contactsInput}`}
+                        type="tel"
+                        name={`contacts[${index}].phone`}
+                        placeholder="+380671234567"
+                      />
+                    </label>
+                    <ErrorMessage
+                      name={`contacts[${index}].phone`}
+                      component="div"
+                      className={css.errorMsg}
+                    />
+                  </div>
+                  <div className={css.fieldWithErrorWrapper}>
+                    <label className={css.label}>
+                      Ім&apos;я
+                      <Field
+                        className={`${css.input} ${css.contactsInput}`}
+                        type="text"
+                        name={`contacts[${index}].name`}
+                        placeholder="Діана"
+                      />
+                    </label>
+                    <ErrorMessage
+                      name={`contacts[${index}].name`}
+                      component="div"
+                      className={css.errorMsg}
+                    />
+                  </div>
+                  <div className={css.fieldWithErrorWrapper}>
+                    <label className={css.label}>
+                      Посада
+                      <Field
+                        className={`${css.input} ${css.contactsInput}`}
+                        type="tel"
+                        name={`contacts[${index}].position`}
+                        placeholder="Менеджер"
+                      />
+                    </label>
+                    <ErrorMessage
+                      name={`contacts[${index}].position`}
+                      component="div"
+                      className={css.errorMsg}
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={addContact}
+                    className={css.addBtn}
+                  >
+                    <CiSquarePlus className={css.plusIcon} />
+                  </button>
+                </div>
+              ))}
+              <div className={css.btnWrapper}>
+                <BtnsCloseAndSubmit
+                  onClose={onClose}
+                  handleSubmit={handleSubmit}
+                  btnSave={"Зберегти"}
+                  btnClose={"Закрити"}
+                />
+              </div>
             </div>
-            <div className={css.btnWrapper}>
-              <BtnsCloseAndSubmit
-                onClose={onClose}
-                handleSubmit={handleSubmit}
-                btnSave={"Зберегти"}
-                btnClose={"Закрити"}
-              />
-            </div>
-          </div>
-        </Form>
+          </Form>
+        )}
       </Formik>
       {isDeleteServiceModalOpen && (
         <Modal

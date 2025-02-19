@@ -2,7 +2,7 @@ import clsx from "clsx";
 import styles from "./TableRepair.module.css";
 import { BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
 import { useState } from "react";
-import { HiMiniMinusCircle } from "react-icons/hi2";
+import { HiMinus } from "react-icons/hi2";
 import DeleteModal from "../../../../sharedComponents/SwitchableBtns/DeleteModal/DeleteModal";
 import Modal from "../../../../Modals/Modal/Modal";
 
@@ -20,7 +20,7 @@ const TableRepair = ({ data, onDelete }) => {
   };
 
   const handleDelete = (rowId) => {
-    setRowToDelete(rowId); 
+    setRowToDelete(rowId);
     setShowDeleteModal(true);
   };
 
@@ -36,7 +36,10 @@ const TableRepair = ({ data, onDelete }) => {
   return (
     <div className={styles.customTableWrapper}>
       {showDeleteModal && (
-        <Modal isOpen={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
+        <Modal
+          isOpen={showDeleteModal}
+          onClose={() => setShowDeleteModal(false)}
+        >
           <DeleteModal
             text="дані"
             onClose={handleModalClose}
@@ -94,10 +97,16 @@ const TableRepair = ({ data, onDelete }) => {
                 <td className={styles.columnId}>{row.id}</td>
                 <td className={styles.columnCode}>{row.code}</td>
                 <td className={styles.columnBrand}>{row.brand}</td>
-                <td className={styles.columnNomenclature}>{row.nomenclature}</td>
+                <td className={styles.columnNomenclature}>
+                  {row.nomenclature}
+                </td>
                 <td className={styles.columnQuantity}>{row.quantity}</td>
-                <td className={styles.columnPurchasePrice}>{row.purchasePrice}</td>
-                <td className={styles.columnSellingPrice}>{row.sellingPrice}</td>
+                <td className={styles.columnPurchasePrice}>
+                  {row.purchasePrice}
+                </td>
+                <td className={styles.columnSellingPrice}>
+                  {row.sellingPrice}
+                </td>
                 <td className={styles.columnSoldAmount}>{row.soldAmount}</td>
                 <td className={styles.columnAvailability}>
                   {row.availability === "Є" ? (
@@ -108,21 +117,29 @@ const TableRepair = ({ data, onDelete }) => {
                     "-"
                   )}
                 </td>
-                <td className={styles.columnPartsPurchase}>{row.partsPurchase}</td>
+                <td className={styles.columnPartsPurchase}>
+                  {row.partsPurchase}
+                </td>
                 <td className={styles.columnWorkCost}>{row.workCost}</td>
                 <td className={clsx(styles.columnPosition, styles.nameColumn)}>
                   {row.mechanic.fullName}
                 </td>
-                <td className={styles.columnPercentage}>{row.mechanic.percentage}%</td>
+                <td className={styles.columnPercentage}>
+                  {row.mechanic.percentage}%
+                </td>
                 <td className={styles.columnSalary}>{row.mechanic.salary}</td>
                 <td className={styles.columnMargin}>{row.margin}</td>
                 {hoveredRow === row.id && (
                   <td className={styles.columnDelete}>
-                    <HiMiniMinusCircle
-                      size={20}
+                    <div
+                      className={styles.deleteIconContainer}
                       onClick={() => handleDelete(row.id)}
-                      className={styles.deleteIcon}
-                    />
+                    >
+                      <HiMinus 
+                        size={16}
+                        className={styles.deleteIcon}
+                      />
+                    </div>
                   </td>
                 )}
               </tr>
