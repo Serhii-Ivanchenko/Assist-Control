@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Modal from "../../../Modals/Modal/Modal";
 import DiagnosticsModals from "../../DiagnosticsModals/DiagnosticsModals";
 import CommercialOfferModal from "../CommercialOfferModal/CommercialOfferModal";
+import { HiPlus } from "react-icons/hi2";
 
 const RepairModal = ({ car, onClose }) => {
   const [data, setData] = useState(repairData);
@@ -16,7 +17,7 @@ const RepairModal = ({ car, onClose }) => {
   const [remainingAmount, setRemainingAmount] = useState(0);
   const [isDiagnosticsModalOpen, setIsDiagnosticsModalOpen] = useState(false);
   const [isCommercialOfferModalOpen, setIsCommercialOfferModalOpen] =
-    useState(false); // Додаємо стан для КП модалки
+    useState(false);
 
   useEffect(() => {
     const newPrice = data.reduce(
@@ -38,6 +39,7 @@ const RepairModal = ({ car, onClose }) => {
   const openDiagnosticsModal = () => {
     console.log("Open Diagnostics Modal triggered");
     setIsDiagnosticsModalOpen(true);
+    onClose();
   };
 
   const closeDiagnosticsModal = () => {
@@ -72,7 +74,7 @@ const RepairModal = ({ car, onClose }) => {
       <p className={styles.title}>Ремонт № 345</p>
 
       <div className={styles.infoContainer}>
-          <CarInfo {...carInfo} />
+        <CarInfo {...carInfo} />
         {/* <div></div> */}
         <div className={styles.workInfo}>
           <div className={styles.date}>03.02.2025</div>
@@ -111,6 +113,9 @@ const RepairModal = ({ car, onClose }) => {
       </div>
       <div className={styles.tableContainer}>
         <TableRepair data={data} onDelete={handleDelete} />
+        <div className={styles.iconContainer}>
+          <HiPlus className={styles.iconPlus} />
+        </div>
       </div>
       <div className={styles.bottomInfoContainer}>
         <div className={styles.leftContainer}>
