@@ -1,20 +1,28 @@
 .popup {
   position: absolute;
-  padding: 10px;
   background-color: var(--bg-input);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
   align-items: start;
   width: 100%;
   top: 40px;
 }
 
 .text {
+  padding: 15px;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   cursor: pointer;
+  width: 100%;
+}
+
+.text:hover {
+  background-color: var(--dark-gray);
+}
+
+.border {
+  border-bottom: 1px solid var(--input-stroke);
 }
