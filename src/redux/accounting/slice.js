@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
-import { getNodesAndParts } from "./operations.js";
+import { getCommercialOfferData, getNodesAndParts } from "./operations.js";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -24,7 +24,15 @@ const AccountingSlice = createSlice({
         state.isLoading = false;
         state.nodesAndPartsForDiagnostics = action.payload;
       })
-      .addCase(getNodesAndParts.rejected, handleRejected),
+      .addCase(getNodesAndParts.rejected, handleRejected)
+
+      //! COMMERCIAL OFFER
+      .addCase(getCommercialOfferData.pending, handlePending)
+      .addCase(getCommercialOfferData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.commercialOfferData = action.payload;
+      })
+      .addCase(getCommercialOfferData.rejected, handleRejected),
 });
 
 export default AccountingSlice.reducer;

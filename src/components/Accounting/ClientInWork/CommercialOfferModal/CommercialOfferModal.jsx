@@ -6,7 +6,7 @@ import carImg from "../../../../assets/images/car.png";
 import SortButtonsArrow from "../../../sharedComponents/SortButtonsArrow/SortButtonsArrow";
 import PartsList from "./PartsList/PartsList";
 import CarInfo from "../../../sharedComponents/CarInfo/CarInfo";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
 import BtnsCloseAndSubmit from "../../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
@@ -15,6 +15,8 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
 import DownloadPdfButtonKP from "../../../sharedComponents/Pdf/DownloadPdfButtonKP/DownloadPdfButtonKP";
 import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
+import { useDispatch } from "react-redux";
+import { getCommercialOfferData } from "../../../../redux/accounting/operations.js";
 // import Modal from "../../../Modals/Modal/Modal";
 // import WarehouseAvailabilityModal from "./WarehouseAvailabilityModal/WarehouseAvailabilityModal";
 
@@ -230,6 +232,15 @@ export default function CommercialOfferModal({ onClose }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [approval, setApproval] = useState("");
   const buttonRef = useRef(null);
+
+  // backend request
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCommercialOfferData());
+  }, [dispatch]);
+
+  //
 
   console.log("totalOrder", totalOrder);
 

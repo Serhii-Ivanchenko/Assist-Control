@@ -368,10 +368,11 @@ export const initialState = {
     clientContact: {},
     nodesAndPartsForDiagnostics: [],
     diagnostics: {},
-    commercialOffer: {},
+    commercialOfferData: {},
     order: {},
     repair: {},
     invoices: {},
   },
+
   isModalOpen: false,
 };
