@@ -2,9 +2,11 @@
   position: absolute;
   top: 40px;
   left: 0;
-  min-width: 115px;
+  /* min-width: 115px;
   max-width: 155px;
-  width: fit-content;
+  width: fit-content; */
+  min-width: fit-content;
+  width: 100%;
   border: none;
   border-radius: 12px;
   background: var(--bg-input);
@@ -17,7 +19,7 @@
 .settingsList {
   display: flex;
   width: 100%;
-  padding: 0 5px;
+  /* padding: 0 5px; */
   flex-direction: column;
   align-items: flex-start;
 
@@ -71,4 +73,6 @@
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
+  text-wrap: nowrap;
 }
+

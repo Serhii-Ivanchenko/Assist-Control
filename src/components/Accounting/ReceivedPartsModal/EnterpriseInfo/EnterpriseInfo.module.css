@@ -95,6 +95,9 @@
 }
 
 .arrowIcon {
-  pointer-events: none;
-  color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.rotated {
+  transform: rotate(180deg);
 }

@@ -38,7 +38,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const buttonRef = useRef(null);
-  const popupRef = useRef(null);
+  // const popupRef = useRef(null);
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
 
   const popupIcon = isPopupOpen ? <TiArrowSortedUp /> : <TiArrowSortedDown />;
@@ -131,15 +131,16 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         setModalContent("Recieved Modal");
         break;
       case 6:
-        console.log("Opening popup...");
-        if (event.currentTarget) {
-          buttonRef.current = event.currentTarget;
-          const rect = buttonRef.current.getBoundingClientRect();
-          setPopupPosition({
-            top: rect.bottom + window.scrollY,
-          });
-        }
-        setIsPopupOpen(true);
+        // console.log("Opening popup...");
+        // if (event.currentTarget) {
+        //   buttonRef.current = event.currentTarget;
+        //   const rect = buttonRef.current.getBoundingClientRect();
+        //   setPopupPosition({
+        //     top: rect.bottom + window.scrollY,
+        //   });
+        // }
+        // setIsPopupOpen(true);
+        setIsPopupOpen((prev) => !prev);
         break;
 
       case 7:
@@ -256,7 +257,9 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
           isOpen={isPopupOpen}
           onClose={() => setIsPopupOpen(false)}
           buttonRef={buttonRef}
-          popupRef={popupRef}
+          setModalContent={setModalContent}
+          setIsModalOpen={setIsModalOpen}
+          // popupRef={popupRef}
         />
       )}
 

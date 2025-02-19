@@ -85,7 +85,7 @@ const dataArr = {
         price: 600,
       },
       {
-        id: 1,
+        id: 6,
         date: " 05.02",
         availability: 2,
         code: "P363101",
@@ -94,7 +94,7 @@ const dataArr = {
         price: 1200,
       },
       {
-        id: 2,
+        id: 7,
         date: "06.02",
         availability: 1,
         code: "B200023",
@@ -103,7 +103,7 @@ const dataArr = {
         price: 1800,
       },
       {
-        id: 3,
+        id: 8,
         date: "07.02",
         availability: 4,
         code: "A110500",
@@ -112,7 +112,7 @@ const dataArr = {
         price: 2500,
       },
       {
-        id: 4,
+        id: 9,
         date: "08.02",
         availability: 5,
         code: "L300045",
@@ -121,7 +121,7 @@ const dataArr = {
         price: 8700,
       },
       {
-        id: 5,
+        id: 10,
         date: "09.02",
         availability: 3,
         code: "M998877",

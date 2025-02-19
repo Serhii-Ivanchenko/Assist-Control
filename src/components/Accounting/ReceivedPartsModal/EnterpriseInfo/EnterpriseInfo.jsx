@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import styles from "./EnterpriseInfo.module.css";
-import { BsWrench, BsPersonLinesFill } from "react-icons/bs";
-import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
+import { BsWrench, BsPersonLinesFill, BsCaretDownFill } from "react-icons/bs";
+// import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import EnterprisePopup from "./EnterprisePopup/EnterprisePopup";
 
 const enterprises = ["ФОП Блудов", "ТОВ Ремонт", "ПП Автосервіс"];
@@ -14,32 +14,37 @@ export default function EnterpriseInfo() {
   const [enterprisePopupOpen, setEnterprisePopupOpen] = useState(false);
   const [storagePopupOpen, setStoragePopupOpen] = useState(false);
 
-  const [arrowsState, setArrowsState] = useState({
-    enterpriseArrow: false,
-    storageArrow: false,
-  });
+  const enterpriseButtonRef = useRef(null);
+  const storageButtonRef = useRef(null);
 
-  const buttonRef = useRef(null);
-
-  const handleClick = (type, e) => {
-    e.stopPropagation();
-    setArrowsState((prevState) => {
-      if (type === "enterprise") {
-        return { ...prevState, enterpriseArrow: !prevState.enterpriseArrow };
-      } else if (type === "storage") {
-        return { ...prevState, storageArrow: !prevState.storageArrow };
-      }
-      return prevState;
-    });
-
-    if (type === "enterprise") {
-      setStoragePopupOpen(false);
-      setEnterprisePopupOpen((prev) => !prev);
-    } else if (type === "storage") {
-      setEnterprisePopupOpen(false);
-      setStoragePopupOpen((prev) => !prev);
-    }
+  const handleClickEnterpriseBtn = () => {
+    setStoragePopupOpen(false);
+    setEnterprisePopupOpen((prev) => !prev);
   };
+
+  const handleClickStorageBtn = () => {
+    setEnterprisePopupOpen(false);
+    setStoragePopupOpen((prev) => !prev);
+  };
+  // const handleClick = (type, e) => {
+  //   e.stopPropagation();
+  //   setArrowsState((prevState) => {
+  //     if (type === "enterprise") {
+  //       return { ...prevState, enterpriseArrow: !prevState.enterpriseArrow };
+  //     } else if (type === "storage") {
+  //       return { ...prevState, storageArrow: !prevState.storageArrow };
+  //     }
+  //     return prevState;
+  //   });
+
+  //   if (type === "enterprise") {
+  //     setStoragePopupOpen(false);
+  //     setEnterprisePopupOpen((prev) => !prev);
+  //   } else if (type === "storage") {
+  //     setEnterprisePopupOpen(false);
+  //     setStoragePopupOpen((prev) => !prev);
+  //   }
+  // };
 
   const handleSelectTitle = (type, title) => {
     if (type === "enterprise") {
@@ -49,10 +54,6 @@ export default function EnterpriseInfo() {
     }
     setEnterprisePopupOpen(false);
     setStoragePopupOpen(false);
-    setArrowsState({
-      enterpriseArrow: false,
-      storageArrow: false,
-    });
   };
 
   return (
@@ -77,46 +78,49 @@ export default function EnterpriseInfo() {
       </div>
 
       <div className={styles.selectBox}>
-        <div ref={buttonRef} className={styles.popupContainer}>
+        <div className={styles.popupContainer}>
           <button
+            ref={enterpriseButtonRef}
             className={styles.select}
-            onClick={(e) => handleClick("enterprise", e)}
+            onClick={handleClickEnterpriseBtn}
           >
             {selectedEnterprise}
-            {arrowsState.enterpriseArrow ? (
-              <TiArrowSortedUp />
-            ) : (
-              <TiArrowSortedDown />
-            )}
+
+            <BsCaretDownFill
+              className={`${styles.arrowIcon} ${
+                enterprisePopupOpen ? styles.rotated : ""
+              }`}
+            />
           </button>
           {enterprisePopupOpen && (
             <EnterprisePopup
               onClose={() => setEnterprisePopupOpen(false)}
               options={enterprises}
               isOpen
-              buttonRef={buttonRef}
+              buttonRef={enterpriseButtonRef}
               onSelect={(title) => handleSelectTitle("enterprise", title)}
             />
           )}
         </div>
-        <div ref={buttonRef} className={styles.popupContainer}>
+        <div className={styles.popupContainer}>
           <button
+            ref={storageButtonRef}
             className={styles.select}
-            onClick={(e) => handleClick("storage", e)}
+            onClick={handleClickStorageBtn}
           >
             {selectedStorage}
-            {arrowsState.storageArrow ? (
-              <TiArrowSortedUp />
-            ) : (
-              <TiArrowSortedDown />
-            )}
+            <BsCaretDownFill
+              className={`${styles.arrowIcon} ${
+                storagePopupOpen ? styles.rotated : ""
+              }`}
+            />
           </button>
           {storagePopupOpen && (
             <EnterprisePopup
               onClose={() => setStoragePopupOpen(false)}
               options={storages}
               isOpen
-              buttonRef={buttonRef}
+              buttonRef={storageButtonRef}
               onSelect={(title) => handleSelectTitle("storage", title)}
             />
           )}
