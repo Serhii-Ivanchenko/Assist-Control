@@ -1,14 +1,14 @@
 .billingTable {
-  width: 1040px;
+  width: 1030px;
   height: 100%;
 
-  padding-right: 10px;
+  /* padding-right: 10px; */
 }
 
 .scrollContainer {
-  width: 1040px;
+  width: 1030px;
   max-height: 200px;
-  padding-right: 10px;
+  /* padding-right: 10px; */
   margin-top: 20px;
   margin-bottom: 40px;
   overflow-y: scroll;
