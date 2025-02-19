@@ -2,16 +2,16 @@ import React from "react";
 import clsx from "clsx";
 import styles from "./StepperBtn.module.css";
 
-function StepperBtn({
-  ref,
-  value,
-  icon,
-  extraIcon,
-  isActive,
-  noBackground,
-  notificationSent,
-  status,
-}) {
+const StepperBtn = React.forwardRef((props, ref) => {
+  const {
+    value,
+    icon,
+    extraIcon,
+    isActive,
+    noBackground,
+    notificationSent,
+    status,
+  } = props;
   const iconColor = clsx(styles.icon, {
     [styles.active]: isActive,
     [styles.inactive]: !isActive,
@@ -35,6 +35,8 @@ function StepperBtn({
       {extraIcon ? <span className={styles.extraIcon}>{extraIcon}</span> : null}
     </div>
   );
-}
+});
+
+StepperBtn.displayName = "StepperBtn";
 
 export default StepperBtn;

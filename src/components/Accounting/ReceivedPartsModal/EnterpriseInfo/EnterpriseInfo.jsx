@@ -1,22 +1,44 @@
 import { useRef, useState } from "react";
 import styles from "./EnterpriseInfo.module.css";
 import { BsWrench, BsPersonLinesFill } from "react-icons/bs";
-import { TiArrowSortedDown } from "react-icons/ti";
+import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import EnterprisePopup from "./EnterprisePopup/EnterprisePopup";
 
 const enterprises = ["ФОП Блудов", "ТОВ Ремонт", "ПП Автосервіс"];
 const storages = ["Склад 1", "Склад 2", "Склад 3"];
 
 export default function EnterpriseInfo() {
-  const [popupType, setPopupType] = useState(null);
-  const [selectedEnterprise, setSelectedEnterprise] = useState("ФОП Блудов");
-  const [selectedStorage, setSelectedStorage] = useState("Склад 1");
+  const [selectedEnterprise, setSelectedEnterprise] = useState(enterprises[0]);
+  const [selectedStorage, setSelectedStorage] = useState(storages[0]);
+
+  const [enterprisePopupOpen, setEnterprisePopupOpen] = useState(false);
+  const [storagePopupOpen, setStoragePopupOpen] = useState(false);
+
+  const [arrowsState, setArrowsState] = useState({
+    enterpriseArrow: false,
+    storageArrow: false,
+  });
 
   const buttonRef = useRef(null);
 
   const handleClick = (type, e) => {
     e.stopPropagation();
-    setPopupType((prevType) => (prevType === type ? null : type));
+    setArrowsState((prevState) => {
+      if (type === "enterprise") {
+        return { ...prevState, enterpriseArrow: !prevState.enterpriseArrow };
+      } else if (type === "storage") {
+        return { ...prevState, storageArrow: !prevState.storageArrow };
+      }
+      return prevState;
+    });
+
+    if (type === "enterprise") {
+      setStoragePopupOpen(false);
+      setEnterprisePopupOpen((prev) => !prev);
+    } else if (type === "storage") {
+      setEnterprisePopupOpen(false);
+      setStoragePopupOpen((prev) => !prev);
+    }
   };
 
   const handleSelectTitle = (type, title) => {
@@ -25,7 +47,12 @@ export default function EnterpriseInfo() {
     } else if (type === "storage") {
       setSelectedStorage(title);
     }
-    setPopupType(null);
+    setEnterprisePopupOpen(false);
+    setStoragePopupOpen(false);
+    setArrowsState({
+      enterpriseArrow: false,
+      storageArrow: false,
+    });
   };
 
   return (
@@ -56,11 +83,15 @@ export default function EnterpriseInfo() {
             onClick={(e) => handleClick("enterprise", e)}
           >
             {selectedEnterprise}
-            <TiArrowSortedDown className={styles.arrowIcon} />
+            {arrowsState.enterpriseArrow ? (
+              <TiArrowSortedUp />
+            ) : (
+              <TiArrowSortedDown />
+            )}
           </button>
-          {popupType === "enterprise" && (
+          {enterprisePopupOpen && (
             <EnterprisePopup
-              onClose={() => setPopupType(null)}
+              onClose={() => setEnterprisePopupOpen(false)}
               options={enterprises}
               isOpen
               buttonRef={buttonRef}
@@ -74,11 +105,15 @@ export default function EnterpriseInfo() {
             onClick={(e) => handleClick("storage", e)}
           >
             {selectedStorage}
-            <TiArrowSortedDown className={styles.arrowIcon} />
+            {arrowsState.storageArrow ? (
+              <TiArrowSortedUp />
+            ) : (
+              <TiArrowSortedDown />
+            )}
           </button>
-          {popupType === "storage" && (
+          {storagePopupOpen && (
             <EnterprisePopup
-              onClose={() => setPopupType(null)}
+              onClose={() => setStoragePopupOpen(false)}
               options={storages}
               isOpen
               buttonRef={buttonRef}

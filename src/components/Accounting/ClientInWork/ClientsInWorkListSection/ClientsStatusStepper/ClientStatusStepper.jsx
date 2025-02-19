@@ -41,6 +41,8 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const popupRef = useRef(null);
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
 
+  const popupIcon = isPopupOpen ? <TiArrowSortedUp /> : <TiArrowSortedDown />;
+
   // Масив кнопок
   const buttons = [
     {
@@ -57,7 +59,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
       id: 6,
       title: "Отримано",
       icon: <BsUiChecks />,
-      extraIcon: <TiArrowSortedUp />,
+      extraIcon: popupIcon,
     },
     { id: 7, title: "Ремонт", icon: <BsWrench /> },
     { id: 8, title: postPaid, icon: <BsCurrencyDollar /> },
@@ -137,7 +139,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
             top: rect.bottom + window.scrollY,
           });
         }
-        setIsPopupOpen((prev) => !prev);
+        setIsPopupOpen(true);
         break;
 
       case 7:

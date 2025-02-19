@@ -33,7 +33,7 @@ function EnterprisePopup({ isOpen, onClose, options, buttonRef, onSelect }) {
             <button
               className={styles.settingsBtn}
               onClick={() => {
-                onClose;
+                onClose();
                 onSelect(option);
               }}
             >
