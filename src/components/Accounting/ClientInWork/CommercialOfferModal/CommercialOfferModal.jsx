@@ -10,7 +10,7 @@ import { useMemo, useRef, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
 import BtnsCloseAndSubmit from "../../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
-import { BsCaretRightFill } from "react-icons/bs";
+import { BsCaretRightFill, BsCaretUpFill } from "react-icons/bs";
 import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
 import DownloadPdfButtonKP from "../../../sharedComponents/Pdf/DownloadPdfButtonKP/DownloadPdfButtonKP";
@@ -397,12 +397,12 @@ export default function CommercialOfferModal({ onClose }) {
                 css.notSubmitted
                 // sentForApproval ? css.submitted : css.notSubmitted
               )}
-              onClick={() => setIsPopupOpen(true)}
+              onClick={() => setIsPopupOpen(!isPopupOpen)}
               ref={buttonRef}
             >
               <FaCheck />
               {approval ? approval : "Відправити на узгодження"}
-              <BsCaretRightFill />
+              {isPopupOpen ? <BsCaretUpFill /> : <BsCaretRightFill />}
             </button>
             {isPopupOpen && (
               <ComOfferPopup
