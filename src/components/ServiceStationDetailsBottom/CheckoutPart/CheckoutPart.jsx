@@ -58,7 +58,8 @@ export default function CheckoutPart() {
   const [warehouseValue, setWarehouseValue] = useState(null);
   const [responsibleValue, setResponsibleValue] = useState(null);
   const [entrepreneurValue, setEntrepreneurValue] = useState(null);
-
+  const isFirstDataLoad = useRef(true);
+  const [checkoutsLength, setCheckoutsLength] = useState(checkouts.length);
   const inputFocusRef = useRef();
   const scrollToTheLastItemRef = useRef();
 
@@ -154,14 +155,32 @@ export default function CheckoutPart() {
     }
   };
 
+  // useEffect(() => {
+  //   if (checkouts.length > 0) {
+  //     scrollToTheLastItemRef.current?.scrollTo({
+  //       top: scrollToTheLastItemRef.current.scrollHeight,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // }, [checkouts]);
+
   useEffect(() => {
-    if (checkouts.length > 0) {
-      scrollToTheLastItemRef.current?.scrollTo({
-        top: scrollToTheLastItemRef.current.scrollHeight,
-        behavior: "smooth",
+    if (isFirstDataLoad.current && checkouts.length > 0) {
+      isFirstDataLoad.current = false;
+      setCheckoutsLength(checkouts.length);
+      return;
+    }
+
+    if (checkouts.length > checkoutsLength) {
+      requestAnimationFrame(() => {
+        scrollToTheLastItemRef.current?.scrollTo({
+          top: scrollToTheLastItemRef.current.scrollHeight,
+          behavior: "smooth",
+        });
       });
     }
-  }, [checkouts]);
+    setCheckoutsLength(checkouts.length);
+  }, [checkouts, checkoutsLength]);
 
   const handleChangeName = (newName, id) => {
     setEditedValue((prev) => ({
