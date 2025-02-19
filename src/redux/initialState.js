@@ -178,6 +178,7 @@ export const initialState = {
       sparesAmount: 0.0,
       sparesPrice: 0.0,
       isDisabled: false,
+      selectedPages: [],
       schedule: {},
       files: {
         passport: null, //Файл паспорта (PDF)
