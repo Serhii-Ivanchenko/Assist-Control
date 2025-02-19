@@ -238,7 +238,7 @@ export default function AddStaffMemberModal({ onClose, employeeInfo }) {
     profit: 0.0,
     status: employee.status || 1,
     schedule: parsedSchedule.days,
-    selectedPages: [],
+    selectedPages: employee.selectedPages || [],
     files: {
       passport: employee.passport || passportImg,
       itn: employee.itn || itnImg,

@@ -5,13 +5,9 @@ import SwitchableBtns from "../../sharedComponents/SwitchableBtns/SwitchableBtns
 import { useDispatch } from "react-redux";
 import { getPosts, updatePostData } from "../../../redux/settings/operations";
 import { useSelector } from "react-redux";
-import {
-  selectIsLoading,
-  selectPosts,
-} from "../../../redux/settings/selectors";
+import { selectPosts } from "../../../redux/settings/selectors";
 import { createPost, deletePost } from "../../../redux/settings/operations";
 import toast from "react-hot-toast";
-import Loader from "../../Loader/Loader";
 
 export default function StationPart() {
   const dispatch = useDispatch();
@@ -22,7 +18,6 @@ export default function StationPart() {
   //   fetchData();
   // });
   const posts = useSelector(selectPosts);
-  const loading = useSelector(selectIsLoading);
 
   useEffect(() => {
     console.log("posts", posts);
@@ -31,6 +26,7 @@ export default function StationPart() {
   const [newPostName, setNewPostName] = useState("");
   const [isEditing, setIsEditing] = useState(null);
   const [editedValue, setEditedValue] = useState({});
+  const isFirstDataLoad = useRef(true);
   const [postsLength, setPostsLength] = useState(posts.length);
   const inputFocusRef = useRef();
   const scrollToTheLastItemRef = useRef();
@@ -102,18 +98,22 @@ export default function StationPart() {
   };
 
   useEffect(() => {
-    if (!loading && scrollToTheLastItemRef.current && posts.length) {
-      const isAddingNewItem = posts.length > postsLength;
+    if (isFirstDataLoad.current && posts.length > 0) {
+      isFirstDataLoad.current = false;
+      setPostsLength(posts.length);
+      return;
+    }
 
-      if (isAddingNewItem) {
+    if (posts.length > postsLength) {
+      requestAnimationFrame(() => {
         scrollToTheLastItemRef.current?.scrollTo({
           top: scrollToTheLastItemRef.current.scrollHeight,
           behavior: "smooth",
         });
-      }
-      setPostsLength(posts.length);
+      });
     }
-  }, [posts, postsLength, loading]);
+    setPostsLength(posts.length);
+  }, [posts, postsLength]);
 
   const deletePostById = (id) => {
     dispatch(deletePost(id))
@@ -191,11 +191,6 @@ export default function StationPart() {
 
   return (
     <div className={css.stationPart}>
-      {/* {loading ? (
-        // <Loader />
-        " "
-      ) : (
-        <> */}
       <p className={css.title}>Назва поста</p>
       <div className={css.divForScroll} ref={scrollToTheLastItemRef}>
         <ul className={css.postList}>
@@ -242,8 +237,6 @@ export default function StationPart() {
           Додати
         </button>
       </div>
-      {/* </>
-      )} */}
     </div>
   );
 }
