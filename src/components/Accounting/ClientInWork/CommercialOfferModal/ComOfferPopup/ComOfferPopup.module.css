@@ -7,6 +7,7 @@
   align-items: start;
   width: 100%;
   top: -145px;
+  box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25) !important;
 }
 
 .text {
@@ -20,7 +21,15 @@
 }
 
 .text:hover {
-  background-color: var(--dark-gray);
+  background-color: var(--main-gray);
+}
+
+.text:last-child {
+  border-radius: 0 0 12px 12px;  
+}
+
+.text:first-child {
+  border-radius: 12px 12px 0 0;
 }
 
 .border {

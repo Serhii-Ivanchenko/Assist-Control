@@ -402,7 +402,9 @@ export default function CommercialOfferModal({ onClose }) {
             >
               <FaCheck />
               {approval ? approval : "Відправити на узгодження"}
-              {isPopupOpen ? <BsCaretUpFill /> : <BsCaretRightFill />}
+              <BsCaretRightFill
+                className={`${css.arrowIcon} ${isPopupOpen ? css.rotated : ""}`}
+              />
             </button>
             {isPopupOpen && (
               <ComOfferPopup
