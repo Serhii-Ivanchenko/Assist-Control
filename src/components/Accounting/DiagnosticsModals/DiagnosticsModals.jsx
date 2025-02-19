@@ -16,7 +16,7 @@ import { selectCategories } from "../../../redux/accounting/selectors";
 //   { label: "Вихлопна", checked: false, id: "7" },
 // ];
 
-export default function DiagnosticsModals({ onClose }) {
+export default function DiagnosticsModals({ onClose, isRepairModal }) {
   const [openModalSave, setOpenModalSave] = useState(false);
   const [chosenPoints, setChosenPoints] = useState([]);
   const [isReadOnly, setIsReadOnly] = useState(false);
@@ -33,7 +33,7 @@ export default function DiagnosticsModals({ onClose }) {
 
   return (
     <>
-      {openModalSave ? (
+      {openModalSave || isRepairModal ? (
         <DiagnosticsModalSave
           onClose={onClose}
           togglePoints={togglePoints}

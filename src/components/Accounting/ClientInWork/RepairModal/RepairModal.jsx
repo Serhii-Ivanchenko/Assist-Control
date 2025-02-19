@@ -6,17 +6,12 @@ import TableRepair from "./TableRepair/TableRepair";
 import DownloadPdfButtonRepair from "../../../sharedComponents/Pdf/DownloadPdfButtonRepair/DownloadPdfButtonRepair";
 import { MdClose } from "react-icons/md";
 import { useEffect, useState } from "react";
-import Modal from "../../../Modals/Modal/Modal";
-import DiagnosticsModals from "../../DiagnosticsModals/DiagnosticsModals";
-import CommercialOfferModal from "../CommercialOfferModal/CommercialOfferModal";
 import { HiPlus } from "react-icons/hi2";
 
-const RepairModal = ({ car, onClose }) => {
+const RepairModal = ({ car, onClose, onOpenCommercialOfferModal, onOpenDiagnosticsModalSave }) => {
   const [data, setData] = useState(repairData);
   const [price, setPrice] = useState(0);
   const [remainingAmount, setRemainingAmount] = useState(0);
-  const [isDiagnosticsModalOpen, setIsDiagnosticsModalOpen] = useState(false);
-  const [isCommercialOfferModalOpen, setIsCommercialOfferModalOpen] =
     useState(false);
 
   useEffect(() => {
@@ -36,26 +31,6 @@ const RepairModal = ({ car, onClose }) => {
     setData(updatedData);
   };
 
-  const openDiagnosticsModal = () => {
-    console.log("Open Diagnostics Modal triggered");
-    setIsDiagnosticsModalOpen(true);
-    onClose();
-  };
-
-  const closeDiagnosticsModal = () => {
-    console.log("Close Diagnostics Modal triggered");
-    setIsDiagnosticsModalOpen(false);
-  };
-
-  const openCommercialOfferModal = () => {
-    console.log("Open Commercial Offer Modal triggered");
-    setIsCommercialOfferModalOpen(true);
-  };
-
-  const closeCommercialOfferModal = () => {
-    console.log("Close Commercial Offer Modal triggered");
-    setIsCommercialOfferModalOpen(false);
-  };
 
   const carInfo = {
     clientName: car.client_name,
@@ -87,14 +62,11 @@ const RepairModal = ({ car, onClose }) => {
             </button>
             <button
               className={styles.link}
-              onClick={() => {
-                console.log("Diagnostics button clicked");
-                openDiagnosticsModal();
-              }}
+              onClick={onOpenDiagnosticsModalSave}
             >
               Діагностика № 345
             </button>
-            <button className={styles.link} onClick={openCommercialOfferModal}>
+            <button className={styles.link} onClick={onOpenCommercialOfferModal}>
               КП № 345
             </button>
           </div>
@@ -149,16 +121,6 @@ const RepairModal = ({ car, onClose }) => {
       <button className={styles.closeButton} onClick={onClose}>
         <MdClose color="var(--input-stroke)" size={22} />
       </button>
-      {isDiagnosticsModalOpen && (
-        <Modal onClose={closeDiagnosticsModal}>
-          <DiagnosticsModals />
-        </Modal>
-      )}
-      {isCommercialOfferModalOpen && (
-        <Modal onClose={closeCommercialOfferModal}>
-          <CommercialOfferModal />
-        </Modal>
-      )}
     </div>
   );
 };

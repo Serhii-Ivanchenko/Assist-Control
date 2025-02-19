@@ -14,7 +14,7 @@ import styles from "./ClientStatusStepper.module.css";
 import Modal from "../../../../Modals/Modal/Modal.jsx";
 import DetailedClientInfo from "../../../../DetailedClientInfo/DetailedClientInfo.jsx";
 import EnterAmountModal from "../../../../Modals/EnterAmountModal/EnterAmountModal.jsx";
-import PaymentModal from "../../PaymentModal/PaymentModal.jsx"
+import PaymentModal from "../../PaymentModal/PaymentModal.jsx";
 import NotificationModal from "../../../../sharedComponents/NotificationModal/NotificationModal.jsx";
 import { useSelector } from "react-redux";
 import { selectVisibilityClientsInWork } from "../../../../../redux/visibility/selectors.js";
@@ -143,7 +143,14 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
 
       case 7:
         setIsModalOpen(true);
-        setModalContent(<RepairModal onClose={closeModal} car={item} />);
+        setModalContent(
+          <RepairModal
+            onClose={closeModal}
+            car={item}
+            onOpenCommercialOfferModal={openCommercialOfferModal}
+            onOpenDiagnosticsModalSave={openDiagnosticsModal}
+          />
+        );
         break;
       case 8:
         setIsModalOpen(true);
@@ -176,6 +183,32 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const closeModal = () => {
     setIsModalOpen(false);
     setModalContent(null);
+  };
+  // Функції для перемикання модалок у RepairModal
+  const openRepairModal = () => {
+    setModalContent(
+      <RepairModal
+        onClose={closeModal}
+        car={item}
+        onOpenCommercialOfferModal={() => openCommercialOfferModal()}
+        onOpenDiagnosticsModalSave={() => openDiagnosticsModal()}
+      />
+    );
+  };
+  const openCommercialOfferModal = () => {
+    setModalContent(
+      <CommercialOfferModal
+        onClose={openRepairModal}
+      />
+    );
+  };
+  const openDiagnosticsModal = () => {
+    setModalContent(
+      <DiagnosticsModals
+        onClose={openRepairModal}
+        isRepairModal={true}
+      />
+    );
   };
 
   // Ось тут додаємо класи для статусу

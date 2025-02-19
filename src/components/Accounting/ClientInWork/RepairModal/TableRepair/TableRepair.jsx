@@ -194,13 +194,6 @@ const TableRepair = ({ data, onDelete }) => {
                     />
                   )}
                 </td>
-
-                <td className={styles.columnPercentage}>
-                  {row.mechanic.percentage}%
-                </td>
-                <td className={clsx(styles.columnPosition, styles.nameColumn)}>
-                  {row.mechanic.fullName}
-                </td>
                 <td className={styles.columnPercentage}>
                   {row.mechanic.percentage}%
                 </td>

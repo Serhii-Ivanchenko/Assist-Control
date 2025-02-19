@@ -16,7 +16,7 @@
 }
 
 .customTableWrapper::-webkit-scrollbar {
-  width: 8px; /* Зменшуємо товщину скролу */
+  width: 8px;
 }
 
 .customTableWrapper::-webkit-scrollbar-thumb {
