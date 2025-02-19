@@ -72,6 +72,8 @@ export default function Node({
   const inputFocusRef = useRef(null);
   const scrollForPopover = useRef(null);
   const addNodeRef = useRef({});
+  // const prevNodesRef = useRef(new Set());
+
   const dispatch = useDispatch();
 
   const addNodeButtonRef = (nodeId, el) => {
@@ -96,11 +98,6 @@ export default function Node({
 
   // Зміна назви
   const changeName = (newName, id) => {
-    // setTreeData(
-    //   treeData.map((node) =>
-    //     node.id === id ? { ...node, text: newName } : node
-    //   )
-    // );
     setTempNodeText((prev) => ({ ...prev, [id]: newName }));
   };
 
@@ -162,11 +159,6 @@ export default function Node({
     setIsOpen(false);
   };
 
-  // console.log(
-  //   `Pipe height for ${node.parent}:`,
-  //   getPipeHeight(node.parent, treeData)
-  // );
-
   const addButtonRef = (el) => {
     if (el && !buttonRefs.current.includes(el)) {
       buttonRefs.current[node.id] = el;
@@ -192,19 +184,21 @@ export default function Node({
   }, []);
 
   // Автоматичний скролл для гілочок дерева
-  useEffect(() => {
-    if (addNodeRef.current[node.id]) {
-      // Прокрутка до кожного нового вузла
-      const nodeElement = addNodeRef.current[node.id];
-      // console.log("nodeElem", nodeElement);
-      requestAnimationFrame(() => {
-        nodeElement.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
-      });
-    }
-  }, [node.id]);
+  // useEffect(() => {
+  //   if (!prevNodesRef.current.has(node.id) && addNodeRef.current[node.id]) {
+  //     const nodeElement = addNodeRef.current[node.id];
+
+  //     requestAnimationFrame(() => {
+  //       nodeElement.scrollIntoView({
+  //         behavior: "smooth",
+  //         block: "nearest",
+  //       });
+  //     });
+
+  //     // Додаємо новий вузол у список відомих
+  //     prevNodesRef.current.add(node.id);
+  //   }
+  // }, [node.id]);
 
   return (
     <div
