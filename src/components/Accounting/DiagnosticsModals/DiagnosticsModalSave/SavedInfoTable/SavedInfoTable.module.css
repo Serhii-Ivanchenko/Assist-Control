@@ -60,6 +60,7 @@
   overflow-x: visible !important;
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
+  box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.35) !important;
 }
 
 :global(.MuiTableCell-root) {
@@ -83,7 +84,7 @@
   /* border: 1px solid rgb(194, 199, 213) !important; 
 } */
 
-.repairTableCell > :global(.MuiCheckbox-root) {
+.repairTableCell> :global(.MuiCheckbox-root) {
   position: absolute;
   top: 0;
   left: 0;
