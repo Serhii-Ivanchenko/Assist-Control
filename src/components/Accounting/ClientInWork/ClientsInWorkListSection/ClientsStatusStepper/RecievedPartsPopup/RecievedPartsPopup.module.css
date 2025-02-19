@@ -1,7 +1,7 @@
 .popup {
   z-index: 999;
   position: absolute;
-  right: 215px;
+  right: 255px;
   display: flex;
   min-width: 200px;
   flex-direction: column;
@@ -9,7 +9,7 @@
   gap: 4px;
   border-radius: 0px 0px 6px 6px;
   background: var(--bg-input);
-  box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+  box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.35);
   transform: translateX(-50%);
 }
 
