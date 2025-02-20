@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BsReceipt,
   BsUiRadiosGrid,
@@ -27,6 +27,7 @@ import RecievedPartsPopup from "./RecievedPartsPopup/RecievedPartsPopup.jsx";
 import CommercialOfferModal from "../../CommercialOfferModal/CommercialOfferModal.jsx";
 import DiagnosticsModals from "../../../DiagnosticsModals/DiagnosticsModals.jsx";
 import PaymentDistrModal from "../../PaymentDistrModal/PaymentDistrModal.jsx";
+import { getCommercialOfferData } from "../../../../../redux/accounting/operations.js";
 
 function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const visibility = useSelector(selectVisibilityClientsInWork);
@@ -69,6 +70,12 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
       noBackground: true,
     },
   ];
+
+  // backend request
+
+  useEffect(() => {
+    dispatch(getCommercialOfferData());
+  }, [dispatch]);
 
   // визнчення кольору іконок степера
   const [completedSteps, setCompletedSteps] = useState(() => {
