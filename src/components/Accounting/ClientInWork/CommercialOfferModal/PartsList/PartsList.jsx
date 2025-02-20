@@ -43,10 +43,6 @@ export default function PartsList({
     ? sortedPartsArray
     : sortedPartsArray.slice(0, 3);
 
-  // const sortedDisplayedCarParts = [...displayedCarParts].sort(
-  //   (a, b) => a.details.price - b.details.price
-  // );
-
   useEffect(() => {
     // Вычисляем высоту содержимого при изменении состояния
     if (tableRef.current) {

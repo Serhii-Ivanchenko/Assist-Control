@@ -3,3 +3,5 @@ export const selectCategories = (state) =>
 
 export const selectCommercialOfferData = (state) =>
   state.accounting.commercialOfferData;
+
+export const selectCOLoading = (state) => state.accounting.isCOLoading;

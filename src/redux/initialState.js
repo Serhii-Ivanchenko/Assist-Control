@@ -373,6 +373,9 @@ export const initialState = {
     order: {},
     repair: {},
     invoices: {},
+    error: null,
+    isLoading: null,
+    isCOLoading: null,
   },
 
   isModalOpen: false,

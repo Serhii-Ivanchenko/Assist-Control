@@ -27,9 +27,12 @@ const AccountingSlice = createSlice({
       .addCase(getNodesAndParts.rejected, handleRejected)
 
       //! COMMERCIAL OFFER
-      .addCase(getCommercialOfferData.pending, handlePending)
+      .addCase(getCommercialOfferData.pending, (state, action) => {
+        state.isCOLoading = true;
+        state.error = null;
+      })
       .addCase(getCommercialOfferData.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isCOLoading = false;
         state.commercialOfferData = action.payload;
       })
       .addCase(getCommercialOfferData.rejected, handleRejected),

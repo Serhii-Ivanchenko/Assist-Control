@@ -8,7 +8,7 @@ export const getNodesAndParts = createAsyncThunk(
   "accounting/getNodesAndParts",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.service.selectedServiceInSettingsId;
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(`/mb/categories_with_parts`, {
         headers: {
@@ -32,11 +32,12 @@ export const getCommercialOfferData = createAsyncThunk(
   "accounting/getCommercialOfferData",
   async (diagnostic_id, thunkAPI) => {
     const state = thunkAPI.getState();
-    const serviceId = state.service.selectedServiceInSettingsId;
+    const serviceId = state.auth.userData.selectedServiceId;
     try {
+      console.log("serviceId", serviceId);
+
       const response = await axiosInstance.get(
-        // `/dia/get_found_parts_by_diagnostic/${diagnostic_id}`,
-        `/dia/get_found_parts_by_diagnostic/67b5cba169bee23d3bbcbd1d`,
+        `/dia/get_found_parts_by_diagnostic/${diagnostic_id}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
