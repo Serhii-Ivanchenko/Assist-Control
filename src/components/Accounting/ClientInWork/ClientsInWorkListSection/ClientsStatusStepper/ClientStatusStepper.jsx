@@ -73,9 +73,9 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
 
   // backend request
 
-  useEffect(() => {
-    dispatch(getCommercialOfferData());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getCommercialOfferData());
+  // }, [dispatch]);
 
   // визнчення кольору іконок степера
   const [completedSteps, setCompletedSteps] = useState(() => {
@@ -124,8 +124,8 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         setModalContent(<DiagnosticsModals onClose={closeModal} />);
         break;
       case 3:
+        dispatch(getCommercialOfferData());
         setIsModalOpen(true);
-
         setModalContent(<CommercialOfferModal onClose={closeModal} />);
         break;
       case 4:

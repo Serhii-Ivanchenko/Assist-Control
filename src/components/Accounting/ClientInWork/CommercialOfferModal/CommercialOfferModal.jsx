@@ -15,8 +15,6 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
 import DownloadPdfButtonKP from "../../../sharedComponents/Pdf/DownloadPdfButtonKP/DownloadPdfButtonKP";
 import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
-import { useDispatch } from "react-redux";
-import { getCommercialOfferData } from "../../../../redux/accounting/operations.js";
 import { useSelector } from "react-redux";
 import { selectCommercialOfferData } from "../../../../redux/accounting/selectors.js";
 // import Modal from "../../../Modals/Modal/Modal";
@@ -237,12 +235,6 @@ export default function CommercialOfferModal({ onClose }) {
   const info = useSelector(selectCommercialOfferData);
   console.log("info", info);
 
-  // backend request
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCommercialOfferData());
-  }, [dispatch]);
 
   //
 
