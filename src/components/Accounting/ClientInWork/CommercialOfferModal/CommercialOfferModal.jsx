@@ -15,8 +15,8 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
 import DownloadPdfButtonKP from "../../../sharedComponents/Pdf/DownloadPdfButtonKP/DownloadPdfButtonKP";
 import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
-import { useDispatch } from "react-redux";
-import { getCommercialOfferData } from "../../../../redux/accounting/operations.js";
+import { useSelector } from "react-redux";
+import { selectCommercialOfferData } from "../../../../redux/accounting/selectors.js";
 // import Modal from "../../../Modals/Modal/Modal";
 // import WarehouseAvailabilityModal from "./WarehouseAvailabilityModal/WarehouseAvailabilityModal";
 
@@ -232,17 +232,13 @@ export default function CommercialOfferModal({ onClose }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [approval, setApproval] = useState("");
   const buttonRef = useRef(null);
+  const info = useSelector(selectCommercialOfferData);
+  console.log("info", info);
 
-  // backend request
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCommercialOfferData());
-  }, [dispatch]);
 
   //
 
-  console.log("totalOrder", totalOrder);
+  // console.log("totalOrder", totalOrder);
 
   const correctedTotalOrder = (nodeId) => {
     const updatedItems = Object.fromEntries(
@@ -251,9 +247,9 @@ export default function CommercialOfferModal({ onClose }) {
       )
     );
     setTotalOrder(updatedItems);
-    setNodesArr((prev) => {
-      return prev.filter((item) => item.node_id !== nodeId);
-    });
+    // setNodesArr((prev) => {
+    //   return prev.filter((item) => item.node_id !== nodeId);
+    // });
   };
 
   const date = new Date(data.created_at);
@@ -308,28 +304,30 @@ export default function CommercialOfferModal({ onClose }) {
 
       <div className={css.topWrapper}>
         <CarInfo
-          clientName={data.client.client_name}
-          clientPhone={data.client.phone}
-          carImg={carImg}
-          carNumber={data.car.car_number}
-          carMake={data.car.make}
-          carModel={data.car.model}
-          carYear={data.car.year}
-          vin={data.car.vin}
-          mileage={data.car.mileage}
+          clientName={info.client.name}
+          clientPhone={info.client.phone}
+          // carImg={carImg}
+          carNumber={info.plate}
+          carMake={info.make}
+          carModel={info.model}
+          carYear={info.year}
+          vin={info.vin}
+          mileage={"---------"}
         />
         <div className={css.rightSectionWrapper}>
           <p className={css.date}>{formattedDate}</p>
-          <button className={css.link}>Діагностика № </button>
+          <button className={css.link}>
+            Діагностика № {info.diagnostic_id}
+          </button>
           <div className={css.mechanicWrapper}>
             <BsWrench className={css.spannerIcon} />
             <p className={css.mechanicText}>Механік:</p>
-            <p className={css.mechanicName}>{data.mechanic.mechanic_name}</p>
+            <p className={css.mechanicName}>{info.mechanic.name}</p>
           </div>
           <div className={css.managerWrapper}>
             <BsPersonLinesFill className={css.personIcon} />
             <p className={css.mechanicText}>Менеджер:</p>
-            <p className={css.mechanicName}>{data.manager.manager_name}</p>
+            <p className={css.mechanicName}>{"-----------"}</p>
           </div>
         </div>
       </div>
@@ -374,12 +372,12 @@ export default function CommercialOfferModal({ onClose }) {
         </div>
       </div>
       <div className={css.table}>
-        {nodesArr.map((item) => {
+        {info.positions[0].position.map((item, index) => {
           return (
             <PartsList
-              key={item.node_id}
+              key={index}
               arr={item}
-              date={data.repair_date}
+              date={"------"}
               setTotalOrder={setTotalOrder}
               correctedTotalOrder={correctedTotalOrder}
             />

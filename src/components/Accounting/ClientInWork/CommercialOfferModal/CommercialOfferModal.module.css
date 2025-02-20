@@ -74,7 +74,6 @@
   flex-direction: column;
   margin-top: 6px;
   align-items: end;
-  /* margin-left: auto; */
 }
 
 .date {
@@ -135,8 +134,9 @@
 
 .tableHeaderWrapper {
   display: grid;
-  grid-template-columns: 65px 93px 74px 85px 130px 157px 110px 110px 119px 110px 110px 40px;
-  justify-items: center;
+  grid-template-columns: 65px 93px 74px 96px 130px 157px 110px 110px 119px 110px 110px 40px;
+  /* justify-items: center; */
+  gap: 5px;
   align-items: center;
   margin-bottom: 14px;
   margin-left: 21px;
@@ -183,7 +183,7 @@
   width: 22px;
   height: 22px;
   fill: #34c759;
-  margin-left: 1220px;
+  margin-left: 1320px;
   margin-bottom: 17px;
   cursor: pointer;
 }
