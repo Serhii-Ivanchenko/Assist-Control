@@ -26,6 +26,8 @@ export default function StationPart() {
   const [newPostName, setNewPostName] = useState("");
   const [isEditing, setIsEditing] = useState(null);
   const [editedValue, setEditedValue] = useState({});
+  const isFirstDataLoad = useRef(true);
+  const [postsLength, setPostsLength] = useState(posts.length);
   const inputFocusRef = useRef();
   const scrollToTheLastItemRef = useRef();
 
@@ -96,13 +98,22 @@ export default function StationPart() {
   };
 
   useEffect(() => {
-    if (posts.length > 0) {
-      scrollToTheLastItemRef.current?.scrollTo({
-        top: scrollToTheLastItemRef.current.scrollHeight,
-        behavior: "smooth",
+    if (isFirstDataLoad.current && posts.length > 0) {
+      isFirstDataLoad.current = false;
+      setPostsLength(posts.length);
+      return;
+    }
+
+    if (posts.length > postsLength) {
+      requestAnimationFrame(() => {
+        scrollToTheLastItemRef.current?.scrollTo({
+          top: scrollToTheLastItemRef.current.scrollHeight,
+          behavior: "smooth",
+        });
       });
     }
-  }, [posts]);
+    setPostsLength(posts.length);
+  }, [posts, postsLength]);
 
   const deletePostById = (id) => {
     dispatch(deletePost(id))
@@ -176,36 +187,6 @@ export default function StationPart() {
           });
         });
     }
-    // .then(() => {
-    //   dispatch(getPosts())
-    //     .then(() => {
-    //       toast.success("Назву поста успішно оновлено :)", {
-    //         position: "top-center",
-    //         duration: 3000,
-    //         style: {
-    //           background: "var(--bg-input)",
-    //           color: "var(--white)FFF",
-    //         },
-    //       });
-    //       setIsEditing(null);
-    //       setEditedValue((prev) => {
-    //         const newState = { ...prev };
-    //         delete newState[post_id];
-    //         return newState;
-    //       });
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error updating user data:", error);
-    //       toast.error("Щось пішло не так :(", {
-    //         position: "top-center",
-    //         duration: 3000,
-    //         style: {
-    //           background: "var(--bg-input)",
-    //           color: "var(--white)FFF",
-    //         },
-    //       });
-    //     });
-    // });
   };
 
   return (

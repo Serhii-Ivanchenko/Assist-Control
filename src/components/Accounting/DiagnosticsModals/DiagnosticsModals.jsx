@@ -31,6 +31,10 @@ export default function DiagnosticsModals({ onClose, isRepairModal }) {
 
   const togglePoints = useSelector(selectCategories);
 
+  useEffect(() => {
+    console.log("spares", spares);
+  });
+
   return (
     <>
       {openModalSave || isRepairModal ? (

@@ -150,24 +150,38 @@ export default function RecordBtnInfo({
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>№</TableCell>
-                      <TableCell>Назва</TableCell>
+                      <TableCell className={css.firstHeaderCell}>№</TableCell>
+                      <TableCell className={css.nameHeaderCell}>
+                        Назва
+                      </TableCell>
                       {/* <TableCell>Номер</TableCell> */}
-                      <TableCell>Стан</TableCell>
-                      <TableCell>Рекомендація</TableCell>
+                      {/* <TableCell>Стан</TableCell> */}
+                      <TableCell className={css.recHeaderCell}>
+                        Рекомендація
+                      </TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>
-                    {diagnostics.spareParts.map((item) => (
-                      <TableRow key={`${Math.random()}`}>
-                        <TableCell>{item.id}</TableCell>
-                        <TableCell>{item.name}</TableCell>
-                        {/* <TableCell>{item.number}</TableCell> */}
-                        <TableCell>{item.state}</TableCell>
-                        <TableCell>{item.recomendation}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
+                </Table>
+                <Table>
+                  <div className={css.scrollableBody}>
+                    <TableBody>
+                      {diagnostics.spareParts.map((item) => (
+                        <TableRow key={`${Math.random()}`}>
+                          <TableCell className={css.firstHeaderCell}>
+                            {item.id}
+                          </TableCell>
+                          <TableCell className={css.nameHeaderCell}>
+                            {item.name}
+                          </TableCell>
+                          {/* <TableCell></TableCell> */}
+                          {/* <TableCell>Критично</TableCell> */}
+                          <TableCell className={css.recHeaderCell}>
+                            {item.recomendation}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </div>
                 </Table>
               </TableContainer>
             </div>

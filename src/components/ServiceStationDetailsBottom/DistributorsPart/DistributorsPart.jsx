@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DistributorsList from "./DistributorsList/DistributorsList";
 import Modal from "../../Modals/Modal/Modal";
@@ -22,6 +22,11 @@ function DistributorsPart() {
   const isModalOpen = useSelector(selectIsModalOpen);
 
   const [selectedDistributor, setSelectedDistributor] = useState(null);
+  const isFirstDataLoad = useRef(true);
+  const [distributorsLength, setDistributorsLength] = useState(
+    distributors.length
+  );
+  const scrollToTheLastItemRef = useRef();
 
   useEffect(() => {
     // Викликається лише один раз після монтування компонента
@@ -93,8 +98,26 @@ function DistributorsPart() {
     [distributors, handleDeleteDistributor, handleEditDistributor]
   );
 
+  useEffect(() => {
+    if (isFirstDataLoad.current && distributors.length > 0) {
+      isFirstDataLoad.current = false;
+      setDistributorsLength(distributors.length);
+      return;
+    }
+
+    if (distributors.length > distributorsLength) {
+      requestAnimationFrame(() => {
+        scrollToTheLastItemRef.current?.scrollTo({
+          top: scrollToTheLastItemRef.current.scrollHeight,
+          behavior: "smooth",
+        });
+      });
+    }
+    setDistributorsLength(distributors.length);
+  }, [distributors, distributorsLength]);
+
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={scrollToTheLastItemRef}>
       {memoizedDistributorsList}
       <button
         className={styles.btn}

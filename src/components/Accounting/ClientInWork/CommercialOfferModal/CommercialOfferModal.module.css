@@ -256,3 +256,11 @@
 .submitted {
   background-color: var(--green-btn-normal);
 }
+
+.arrowIcon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.rotated {
+  transform: rotate(-90deg);
+}

@@ -6,15 +6,17 @@ import carImg from "../../../../assets/images/car.png";
 import SortButtonsArrow from "../../../sharedComponents/SortButtonsArrow/SortButtonsArrow";
 import PartsList from "./PartsList/PartsList";
 import CarInfo from "../../../sharedComponents/CarInfo/CarInfo";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
 import BtnsCloseAndSubmit from "../../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
-import { BsCaretRightFill } from "react-icons/bs";
+import { BsCaretRightFill, BsCaretUpFill } from "react-icons/bs";
 import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
 import DownloadPdfButtonKP from "../../../sharedComponents/Pdf/DownloadPdfButtonKP/DownloadPdfButtonKP";
 import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
+import { useDispatch } from "react-redux";
+import { getCommercialOfferData } from "../../../../redux/accounting/operations.js";
 // import Modal from "../../../Modals/Modal/Modal";
 // import WarehouseAvailabilityModal from "./WarehouseAvailabilityModal/WarehouseAvailabilityModal";
 
@@ -222,49 +224,36 @@ const dataArr = {
 export default function CommercialOfferModal({ onClose }) {
   const data = useMemo(() => dataArr, []);
   const [totalOrder, setTotalOrder] = useState({});
-  const [sentForApproval, setSentForApproval] = useState(false);
-  const [approved, setApproved] = useState(false);
-  const [pay, setPay] = useState(false);
-  const [makeOrder, setMakeOrder] = useState(false);
+  const [nodesArr, setNodesArr] = useState(data.nodes);
+  // const [sentForApproval, setSentForApproval] = useState(false);
+  // const [approved, setApproved] = useState(false);
+  // const [pay, setPay] = useState(false);
+  // const [makeOrder, setMakeOrder] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [approval, setApproval] = useState("");
-  const [nodesPrices, setNodesPrices] = useState(data.nodes);
-  // console.log(approval);
+  const buttonRef = useRef(null);
+
+  // backend request
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCommercialOfferData());
+  }, [dispatch]);
+
+  //
 
   console.log("totalOrder", totalOrder);
 
   const correctedTotalOrder = (nodeId) => {
     const updatedItems = Object.fromEntries(
-      Object.entries(totalOrder).map(([key, value]) => [
-        key,
-        value.node_id === nodeId ? { ...value, selected: false } : { ...value },
-      ])
+      Object.entries(totalOrder).filter(
+        ([_, value]) => value.node_id !== nodeId
+      )
     );
     setTotalOrder(updatedItems);
-  };
-
-  const correctedWorkPriceInTotalOrder = (nodeId, price) => {
-    const updatedItems = Object.fromEntries(
-      Object.entries(totalOrder).map(([key, value]) => [
-        key,
-        value.node_id === nodeId
-          ? { ...value, work_price: price }
-          : { ...value },
-      ])
-    );
-    setTotalOrder(updatedItems);
-  };
-
-  const correctedSalePriceInTotalOrder = (nodeId, price) => {
-    const updatedItems = Object.fromEntries(
-      Object.entries(totalOrder).map(([key, value]) => [
-        key,
-        value.node_id === nodeId
-          ? { ...value, work_price: price }
-          : { ...value },
-      ])
-    );
-    setTotalOrder(updatedItems);
+    setNodesArr((prev) => {
+      return prev.filter((item) => item.node_id !== nodeId);
+    });
   };
 
   const date = new Date(data.created_at);
@@ -318,7 +307,6 @@ export default function CommercialOfferModal({ onClose }) {
       <p className={css.offerNumber}>КП № </p>
 
       <div className={css.topWrapper}>
-        {/* <div> */}
         <CarInfo
           clientName={data.client.client_name}
           clientPhone={data.client.phone}
@@ -330,7 +318,6 @@ export default function CommercialOfferModal({ onClose }) {
           vin={data.car.vin}
           mileage={data.car.mileage}
         />
-        {/* </div> */}
         <div className={css.rightSectionWrapper}>
           <p className={css.date}>{formattedDate}</p>
           <button className={css.link}>Діагностика № </button>
@@ -387,7 +374,7 @@ export default function CommercialOfferModal({ onClose }) {
         </div>
       </div>
       <div className={css.table}>
-        {data.nodes.map((item) => {
+        {nodesArr.map((item) => {
           return (
             <PartsList
               key={item.node_id}
@@ -395,8 +382,6 @@ export default function CommercialOfferModal({ onClose }) {
               date={data.repair_date}
               setTotalOrder={setTotalOrder}
               correctedTotalOrder={correctedTotalOrder}
-              correctedWorkPriceInTotalOrder={correctedWorkPriceInTotalOrder}
-              correctedSalePriceInTotalOrder={correctedSalePriceInTotalOrder}
             />
           );
         })}
@@ -420,18 +405,24 @@ export default function CommercialOfferModal({ onClose }) {
               className={clsx(
                 css.btn,
                 css.approvalBtn,
-                sentForApproval ? css.submitted : css.notSubmitted
+                css.notSubmitted
+                // sentForApproval ? css.submitted : css.notSubmitted
               )}
-              onClick={() => setIsPopupOpen(true)}
+              onClick={() => setIsPopupOpen(!isPopupOpen)}
+              ref={buttonRef}
             >
               <FaCheck />
               {approval ? approval : "Відправити на узгодження"}
-              <BsCaretRightFill />
+              <BsCaretRightFill
+                className={`${css.arrowIcon} ${isPopupOpen ? css.rotated : ""}`}
+              />
             </button>
             {isPopupOpen && (
               <ComOfferPopup
                 onClose={() => setIsPopupOpen(false)}
                 setApproval={setApproval}
+                buttonRef={buttonRef}
+                isOpen={isPopupOpen}
               />
             )}
           </div>
@@ -440,7 +431,8 @@ export default function CommercialOfferModal({ onClose }) {
             type="button"
             className={clsx(
               css.btn,
-              approved ? css.submitted : css.notSubmitted
+              css.notSubmitted
+              // approved ? css.submitted : css.notSubmitted
             )}
           >
             <FaCheck />
@@ -449,7 +441,11 @@ export default function CommercialOfferModal({ onClose }) {
           <FaArrowRightLong />
           <button
             type="button"
-            className={clsx(css.btn, pay ? css.submitted : css.notSubmitted)}
+            className={clsx(
+              css.btn,
+              css.notSubmitted
+              // pay ? css.submitted : css.notSubmitted
+            )}
           >
             <FaCheck />
             Оплата
@@ -459,7 +455,8 @@ export default function CommercialOfferModal({ onClose }) {
             type="button"
             className={clsx(
               css.btn,
-              makeOrder ? css.submitted : css.notSubmitted
+              css.notSubmitted
+              // makeOrder ? css.submitted : css.notSubmitted
             )}
           >
             <FaCheck />

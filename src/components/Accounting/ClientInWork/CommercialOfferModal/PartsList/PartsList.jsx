@@ -8,17 +8,17 @@ import { FaRegCheckSquare } from "react-icons/fa";
 import { FaRegSquare } from "react-icons/fa";
 import { BsCaretDownFill } from "react-icons/bs";
 import { BsCaretRightFill } from "react-icons/bs";
+import { RiSave3Fill } from "react-icons/ri";
 import WarehouseAvailabilityModal from "../WarehouseAvailabilityModal/WarehouseAvailabilityModal";
 import Modal from "../../../../Modals/Modal/Modal";
 import clsx from "clsx";
+import DeletePartModal from "../DeletePartModal/DeletePartModal";
 
 export default function PartsList({
   arr,
   date,
   setTotalOrder,
   correctedTotalOrder,
-  correctedWorkPriceInTotalOrder,
-  correctedSalePriceInTotalOrder,
 }) {
   const [showAllParts, setShowAllParts] = useState(false);
   const [closeAllParts, setCloseAllParts] = useState(false);
@@ -30,6 +30,8 @@ export default function PartsList({
   const [workPrice, setWorkPrice] = useState(arr.work_price);
   const [salePrice, setSalePrice] = useState(arr.sale_price);
   const [isEditing, setIsEditing] = useState(false);
+  const [deletePartModalOpen, setDeletePartModalOpen] = useState(false);
+  const [nodeIdForDelete, setNodeIdForDelete] = useState("");
   const tableRef = useRef(null);
 
   const displayedCarParts = showAllParts ? arr.parts : arr.parts.slice(0, 3);
@@ -142,25 +144,6 @@ export default function PartsList({
     return item.selected ? sum + Number(item.quantity * item.price) : sum;
   }, 0);
 
-  const handleWorkPriceChange = (newPrice, nodeId) => {
-    setWorkPrice(newPrice);
-    // correctedWorkPriceInTotalOrder(nodeId, workPrice);
-  };
-
-  const handleSalePriceChange = (newPrice, nodeId) => {
-    setSalePrice(newPrice);
-    // correctedSalePriceInTotalOrder(nodeId, salePrice);
-  };
-
-  const onMinusBtnClick = (nodeId) => {
-    const updatedItems = Object.entries(order).reduce((acc, [key, value]) => {
-      acc[key] = { ...value, selected: false };
-      return acc;
-    }, {});
-    setOrder(updatedItems);
-    correctedTotalOrder(nodeId);
-  };
-
   const handleHeightChange = () => {
     setCloseAllParts(!closeAllParts);
   };
@@ -187,12 +170,7 @@ export default function PartsList({
 
   return (
     <div>
-      <div
-        className={clsx(
-          css.subHeader,
-          isEditing ? css.isEditing : css.notEditing
-        )}
-      >
+      <div className={css.subHeader}>
         <p className={css.subHeaderDate}>{date}</p>
         <p className={css.subHeaderDate}></p>
         <p className={css.tableHeaderText}>{arr.needed_quantity} шт</p>
@@ -205,10 +183,7 @@ export default function PartsList({
               type="text"
               value={workPrice}
               className={`${css.workPrice} ${css.tableHeaderText}`}
-              onChange={(e) =>
-                handleWorkPriceChange(e.target.value, arr.node_id)
-              }
-              onBlur={() => setIsEditing(false)}
+              onChange={(e) => setWorkPrice(e.target.value)}
             />
           ) : (
             <p className={css.tableHeaderText}>{workPrice} грн</p>
@@ -220,10 +195,7 @@ export default function PartsList({
               type="text"
               value={salePrice}
               className={`${css.workPrice} ${css.tableHeaderText}`}
-              onChange={(e) =>
-                handleSalePriceChange(e.target.value, arr.node_id)
-              }
-              onBlur={() => setIsEditing(false)}
+              onChange={(e) => setSalePrice(e.target.value)}
             />
           ) : (
             <p className={css.tableHeaderText}>{salePrice} грн</p>
@@ -233,17 +205,29 @@ export default function PartsList({
         <p>{totalPurchaseAmount ? totalPurchaseAmount.toFixed(2) : 0}</p>
         <p>{totalProfit ? totalProfit : 0}</p>
         <p></p>
-        <BsPencil
-          className={css.pencilIcon}
-          onClick={() => setIsEditing(!isEditing)}
-        />
-        {isEditing && (
-          <FiMinusCircle
-            className={css.minusIcon}
-            onClick={() => onMinusBtnClick(arr.node_id)}
-          />
-        )}
+        <div className={css.iconsWrapper}>
+          {isEditing ? (
+            <RiSave3Fill
+              className={css.saveIcon}
+              onClick={() => setIsEditing(!isEditing)}
+            />
+          ) : (
+            <BsPencil
+              className={css.pencilIcon}
+              onClick={() => setIsEditing(!isEditing)}
+            />
+          )}
 
+          {isEditing && (
+            <FiMinusCircle
+              className={css.minusIcon}
+              onClick={() => {
+                setDeletePartModalOpen(true);
+                setNodeIdForDelete(arr.node_id);
+              }}
+            />
+          )}
+        </div>
         {closeAllParts ? (
           <BsCaretRightFill onClick={handleHeightChange} />
         ) : (
@@ -376,6 +360,20 @@ export default function PartsList({
         >
           <WarehouseAvailabilityModal
             onClose={() => setWarehouseModalOpen(false)}
+          />
+        </Modal>
+      )}
+      {deletePartModalOpen && (
+        <Modal
+          isOpen={deletePartModalOpen}
+          onClose={() => setDeletePartModalOpen(false)}
+        >
+          <DeletePartModal
+            onClose={() => setDeletePartModalOpen(false)}
+            order={order}
+            setOrder={setOrder}
+            correctedTotalOrder={correctedTotalOrder}
+            nodeId={nodeIdForDelete}
           />
         </Modal>
       )}
