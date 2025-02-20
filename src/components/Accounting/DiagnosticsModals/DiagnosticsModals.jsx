@@ -45,6 +45,7 @@ export default function DiagnosticsModals({ onClose, isRepairModal }) {
           openModalSave={openModalSave}
           chosenPoints={chosenPoints}
           chosenSpares={chosenSpares}
+          isRepairModal={isRepairModal}
         />
       ) : (
         <DiagnosticsModal

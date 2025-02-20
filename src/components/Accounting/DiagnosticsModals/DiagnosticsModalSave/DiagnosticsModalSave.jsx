@@ -8,18 +8,28 @@ import SavedInfoTable from "./SavedInfoTable/SavedInfoTable";
 import { TiTick } from "react-icons/ti";
 
 export default function DiagnosticsModalSave({
-  // onClose,
+  onClose,
   togglePoints,
   setOpenModalSave,
   openModalSave,
   chosenPoints,
   chosenSpares,
+  isRepairModal
 }) {
+
+  const handleClose = () => {
+    if (isRepairModal) {
+      onClose(); // Повертає RepairModal
+    } else {
+     setOpenModalSave(!openModalSave)
+    }
+  };
+
   return (
     <div className={css.modalWrapper}>
       <RxCross1
         className={css.cross}
-        onClick={() => setOpenModalSave(!openModalSave)}
+        onClick={handleClose}
       />
       <p className={css.modalTitle}>Діагностика № 1</p>
       <div className={css.modalTopPart}>
@@ -61,7 +71,7 @@ export default function DiagnosticsModalSave({
             <button
               type="button"
               className={`${css.btn} ${css.cancel}`}
-              onClick={() => setOpenModalSave(!openModalSave)}
+              onClick={handleClose}
             >
               Скасувати
             </button>
