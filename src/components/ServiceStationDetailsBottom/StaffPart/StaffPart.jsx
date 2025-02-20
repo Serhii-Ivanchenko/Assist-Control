@@ -12,7 +12,6 @@ import RatingStars from "../../sharedComponents/RatingStars/RatingStars.jsx";
 import { useDispatch } from "react-redux";
 import {
   deleteEmployee,
-  getAllEmployees,
   updateEmployeeStatus,
 } from "../../../redux/settings/operations.js";
 import { useSelector } from "react-redux";

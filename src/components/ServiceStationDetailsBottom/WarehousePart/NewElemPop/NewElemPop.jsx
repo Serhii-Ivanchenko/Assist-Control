@@ -15,40 +15,6 @@ import {
 } from "../../../../redux/warehouse/operations";
 import toast from "react-hot-toast";
 
-// const TextForNewBranch = ({ type }) => {
-//   switch (type) {
-//     case "warehouse":
-//       return "Секція";
-//     case "section":
-//       return "Стелаж";
-//     case "rack":
-//       return "Полиця";
-//     case "shelf":
-//       return "Місце";
-//     // case "place":
-//     //   return ""
-//     default:
-//       return "Секція";
-//   }
-// };
-
-// const DataForNewBranch = ({ type }) => {
-//   switch (type) {
-//     case "warehouse":
-//       return "section";
-//     case "section":
-//       return "rack";
-//     case "rack":
-//       return "shelf";
-//     case "shelf":
-//       return "place";
-//     // case "place":
-//     //   return ""
-//     default:
-//       return "warehouse";
-//   }
-// };
-
 export default function NewElemPop({
   icon,
   addText,
@@ -58,16 +24,12 @@ export default function NewElemPop({
   id,
   deleteChild,
   onClose,
-  // setTreeData,
   node,
   containerRef,
-  openParentIfNeeded,
-  treeData,
   open,
 }) {
   const popoverRef = useRef(null);
   const dispatch = useDispatch();
-  const [lastAddedParentId, setLastAddedParentId] = useState(null);
 
   // Відкриття і закриття модалки
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -91,28 +53,12 @@ export default function NewElemPop({
     onClose();
   };
 
-  // const deleteRow = (e) => {
-  //   deleteChild(id, type, e);
-  //   onClose();
-  // };
-
   // Додавання нових гілочок
   const addNewBranch = (count) => {
     if (count <= 0) return;
 
     const parentId = node.id;
-    // const newBranches = Array.from({ length: count }).map((_, index) => {
-    //   const branchText = TextForNewBranch({ type: node.data });
-    //   const branchData = DataForNewBranch({ type: node.data });
 
-    //   return {
-    //     id: `${Date.now()}  - ${index}`,
-    //     text: `${branchText} ${index + 1}`,
-    //     droppable: true,
-    //     parent: node.id,
-    //     data: branchData,
-    //   };
-    // });
     console.log("id", node.id);
 
     if (node.data === "warehouse") {
@@ -252,25 +198,8 @@ export default function NewElemPop({
           console.error("Error creating post:", err);
         });
     }
-
-    // console.log(newBranches);
-
-    // setTreeData((prevTreeData) => {
-    //   const updatedTree = [...prevTreeData, ...newBranches];
-    //   // Відкриття батьківської гілки після додавання
-    // newBranches.forEach((newNode) =>
-    //   openParentIfNeeded(newNode.id, updatedTree)
-    // );
-    //   return updatedTree;
-    // });
   };
 
-  // useEffect(() => {
-  //   if (lastAddedParentId && treeData.length > 0) {
-  //     openParentIfNeeded(lastAddedParentId, treeData);
-  //     setLastAddedParentId(null); // Скидаємо значення
-  //   }
-  // }, [treeData, lastAddedParentId]);
   // Автоматичний скролл при відкритті останнього поповера (наче працює)
   useEffect(() => {
     if (isVisible === node.id && popoverRef.current && containerRef.current) {

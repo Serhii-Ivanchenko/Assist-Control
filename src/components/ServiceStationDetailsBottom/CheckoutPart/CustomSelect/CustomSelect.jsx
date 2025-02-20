@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import clsx from "clsx";
 import { useRef } from "react";
@@ -11,9 +11,43 @@ export default function CustomSelect({
   width,
   selectedValue,
   setSelectedValue,
+  isOpen,
+  setIsOpen,
+  containerRef,
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef(null);
+  const optionsRef = useRef(null);
+  // const [isOpen, setIsOpen] = useState(false);
   //   const [selectedValue, setSelectedValue] = useState(null);
+
+  useEffect(() => {
+    if (isOpen && containerRef?.current && optionsRef?.current) {
+      const container = containerRef.current;
+      const popover = optionsRef.current;
+
+      const containerRect = container.getBoundingClientRect();
+      const popoverRect = popover.getBoundingClientRect();
+
+      const extraPadding = 5; // Додаткові пікселі для тіні
+
+      // Перевіряємо, чи поповер виходить за межі контейнера
+      if (popoverRect.bottom > containerRect.bottom + extraPadding) {
+        container.scrollTo({
+          top:
+            container.scrollTop + // поточний скрол
+            (popoverRect.bottom - containerRect.bottom + extraPadding), // відстань, яку потрібно прокрутити
+          behavior: "smooth",
+        });
+      } else if (popoverRect.top < containerRect.top - extraPadding) {
+        container.scrollTo({
+          top:
+            container.scrollTop - // поточний скрол
+            (containerRect.top - popoverRect.top + extraPadding), // відстань, яку потрібно прокрутити
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [isOpen, containerRef, wrapperRef]);
 
   const handleOptionClick = (option) => {
     setSelectedValue(option);
@@ -28,8 +62,6 @@ export default function CustomSelect({
 
   //   const selectedOption =
   //     options.find((type) => type.value === field.value) || options[0];
-
-  const wrapperRef = useRef(null);
 
   const handleClickOutside = (event) => {
     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -59,7 +91,7 @@ export default function CustomSelect({
         />
       </div>
       {isOpen && (
-        <div className={css.options}>
+        <div className={css.options} ref={optionsRef}>
           {options.map((option) => (
             <div
               key={option.value}
