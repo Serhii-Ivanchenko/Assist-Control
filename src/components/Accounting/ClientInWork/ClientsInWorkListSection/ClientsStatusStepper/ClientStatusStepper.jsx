@@ -149,8 +149,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
           <RepairModal
             onClose={closeModal}
             car={item}
-            onOpenCommercialOfferModal={openCommercialOfferModal}
-            onOpenDiagnosticsModalSave={openDiagnosticsModal}
+            setModalContent={setModalContent}
           />
         );
         break;
@@ -185,32 +184,6 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const closeModal = () => {
     setIsModalOpen(false);
     setModalContent(null);
-  };
-  // Функції для перемикання модалок у RepairModal
-  const openRepairModal = () => {
-    setModalContent(
-      <RepairModal
-        onClose={closeModal}
-        car={item}
-        onOpenCommercialOfferModal={() => openCommercialOfferModal()}
-        onOpenDiagnosticsModalSave={() => openDiagnosticsModal()}
-      />
-    );
-  };
-  const openCommercialOfferModal = () => {
-    setModalContent(
-      <CommercialOfferModal
-        onClose={openRepairModal}
-      />
-    );
-  };
-  const openDiagnosticsModal = () => {
-    setModalContent(
-      <DiagnosticsModals
-        onClose={openRepairModal}
-        isRepairModal={true}
-      />
-    );
   };
 
   // Ось тут додаємо класи для статусу

@@ -7,12 +7,41 @@ import DownloadPdfButtonRepair from "../../../sharedComponents/Pdf/DownloadPdfBu
 import { MdClose } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { HiPlus } from "react-icons/hi2";
+import CommercialOfferModal from "../CommercialOfferModal/CommercialOfferModal.jsx";
+import DiagnosticsModals from "../../DiagnosticsModals/DiagnosticsModals.jsx";
 
-const RepairModal = ({ car, onClose, onOpenCommercialOfferModal, onOpenDiagnosticsModalSave }) => {
+const RepairModal = ({
+  car,
+  onClose,
+  // onOpenCommercialOfferModal,
+  // onOpenDiagnosticsModalSave,
+  setModalContent,
+}) => {
   const [data, setData] = useState(repairData);
   const [price, setPrice] = useState(0);
   const [remainingAmount, setRemainingAmount] = useState(0);
-    useState(false);
+  useState(false);
+
+  // Функції для перемикання модалок у RepairModal
+  const openRepairModal = () => {
+    setModalContent(
+      <RepairModal
+        onClose={onClose}
+        car={car}
+        setModalContent={setModalContent}
+      />
+    );
+  };
+
+  const openCommercialOfferModal = () => {
+    setModalContent(<CommercialOfferModal onClose={openRepairModal} />);
+  };
+  const openDiagnosticsModal = () => {
+    setModalContent(
+      <DiagnosticsModals onClose={openRepairModal} isRepairModal={true} />
+    );
+  };
+  //
 
   useEffect(() => {
     const newPrice = data.reduce(
@@ -30,7 +59,6 @@ const RepairModal = ({ car, onClose, onOpenCommercialOfferModal, onOpenDiagnosti
     const updatedData = data.filter((item) => item.id !== id);
     setData(updatedData);
   };
-
 
   const carInfo = {
     clientName: car.client_name,
@@ -62,11 +90,16 @@ const RepairModal = ({ car, onClose, onOpenCommercialOfferModal, onOpenDiagnosti
             </button>
             <button
               className={styles.link}
-              onClick={onOpenDiagnosticsModalSave}
+              // onClick={onOpenDiagnosticsModalSave}
+              onClick={openDiagnosticsModal}
             >
               Діагностика № 345
             </button>
-            <button className={styles.link} onClick={onOpenCommercialOfferModal}>
+            <button
+              className={styles.link}
+              // onClick={onOpenCommercialOfferModal}
+              onClick={openCommercialOfferModal}
+            >
               КП № 345
             </button>
           </div>

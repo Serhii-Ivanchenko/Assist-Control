@@ -1,6 +1,11 @@
 import clsx from "clsx";
 import styles from "./TableRepair.module.css";
-import { BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
+import {
+  BsCaretDownFill,
+  BsCaretUpFill,
+  BsCheckCircleFill,
+  BsXCircleFill,
+} from "react-icons/bs";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import { useState } from "react";
 import ava1 from "../../../../../assets/images/avatar_default.png";
@@ -15,7 +20,6 @@ const TableRepair = ({ data, onDelete }) => {
   const [rowToDelete, setRowToDelete] = useState(null);
   const [openModalForRow, setOpenModalForRow] = useState({});
   const [selectedMechanics, setSelectedMechanics] = useState({});
-  
 
   const staffs = [
     {
@@ -61,7 +65,7 @@ const TableRepair = ({ data, onDelete }) => {
   // Реалізація зміни механіка
   const handleArrowClick = (rowId) => {
     setOpenModalForRow((prev) => ({
-      ...prev,
+      // ...prev,
       [rowId]: !prev[rowId],
     }));
   };
@@ -78,7 +82,9 @@ const TableRepair = ({ data, onDelete }) => {
   };
 
   const handlePopoverClose = () => {
-    setOpenModalForRow((prev) => Object.fromEntries(Object.keys(prev).map((key) => [key, false])));
+    setOpenModalForRow((prev) =>
+      Object.fromEntries(Object.keys(prev).map((key) => [key, false]))
+    );
   };
 
   return (
@@ -169,20 +175,25 @@ const TableRepair = ({ data, onDelete }) => {
                   {row.partsPurchase}
                 </td>
                 <td className={styles.columnWorkCost}>{row.workCost}</td>
-                <td className={clsx(styles.columnPosition, styles.nameColumn)} onClick={() => handleArrowClick(row.id)}>
+                <td
+                  className={clsx(styles.columnPosition, styles.nameColumn)}
+                  onClick={() => handleArrowClick(row.id)}
+                >
                   {selectedMechanics[row.id]
                     ? selectedMechanics[row.id].name
                     : row.mechanic.fullName}
-                  <span
-                    className={styles.arrowIcon}
-                    
-                  >
+                  <span className={styles.arrowIcon}>
                     {openModalForRow[row.id] ? (
-                      <BiSolidUpArrow size={8} />
+                      <BsCaretUpFill size={10} />
                     ) : (
-                      <BiSolidDownArrow size={8} />
+                      <BsCaretDownFill size={10} />
                     )}
                   </span>
+                  {/* <BsCaretDownFill
+                    className={`${styles.arrowIcon} ${
+                      openModalForRow[row.id] ? styles.rotated : ""
+                    }`}
+                  /> */}
                   {openModalForRow[row.id] && (
                     <MechanicPopover
                       isOpen={openModalForRow[row.id]}
@@ -205,10 +216,7 @@ const TableRepair = ({ data, onDelete }) => {
                       className={styles.deleteIconContainer}
                       onClick={() => handleDelete(row.id)}
                     >
-                      <HiMinus 
-                        size={16}
-                        className={styles.deleteIcon}
-                      />
+                      <HiMinus size={16} className={styles.deleteIcon} />
                     </div>
                   </td>
                 )}
