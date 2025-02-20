@@ -1,0 +1,158 @@
+.modal {
+  position: relative;
+  padding: 24px 35px 53px 53px;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+
+.closeIcon {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 13px;
+  height: 13px;
+  fill: var(--input-stroke);
+  cursor: pointer;
+}
+
+.header {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+  margin-bottom: 23px;
+}
+
+.topWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 75px;
+}
+
+.rightWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.date {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 9px;
+}
+
+.link {
+  color: var(--play-btn-triangle);
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+  margin-bottom: 13px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.mechanicWrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.spannerIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.mechanicText {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.mechanicName {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.managerWrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.topBtnWrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.btnWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px 10px 16px;
+  border-radius: 12px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  height: 39px;
+}
+
+.arrowIcon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.tableHeaderWrapper {
+  display: grid;
+  grid-template-columns: 100px 65px 80px 110px 110px 200px 110px 110px 105px 130px;
+  align-items: center;
+  justify-items: center;
+  margin-bottom: 20px;
+  margin-left: 335px;
+}
+
+.tableHeader {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.table {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 400px;
+  padding-right: 6px;
+  margin-bottom: 50px;
+}
+
+.table::-webkit-scrollbar {
+  width: 8px;
+  padding-top: 4px;
+  height: 760px;
+}
+
+.table::-webkit-scrollbar-track {
+  background: var(--bg-input);
+  border-radius: 4px;
+}
+
+.table::-webkit-scrollbar-thumb {
+  background-color: var(--main-gray);
+  border-radius: 4px;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}

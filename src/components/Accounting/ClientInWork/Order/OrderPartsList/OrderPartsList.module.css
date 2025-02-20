@@ -1,0 +1,174 @@
+.subHeader {
+  height: 47px;
+  padding: 7px 10px;
+  border-radius: 4px;
+  background: var(--bg-input);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.infoWrapper {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 138px;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  max-width: 42px;
+}
+
+.mechanicName {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.sumBtn {
+  display: flex;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background-color: rgba(164, 112, 67, 0.08);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: #dba266;
+  border: none;
+  outline: none;
+}
+
+.sumIcon {
+  width: 18px;
+  height: 18px;
+  color: #dba266;
+}
+
+.subHeaderDate {
+  margin-right: 42px;
+}
+
+.subHeaderText {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.checkIcon {
+  width: 18px;
+  height: 18px;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.iconDisabled {
+  display: none;
+}
+
+.supplierLink {
+  display: flex;
+  padding: 5px 14px;
+  gap: 10px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  border-radius: 27px;
+  background: var(--main-gray);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: "Roboto", sans-serif;
+  color: var(--white);
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 40px;
+  margin-right: 25px;
+}
+
+.stringWrapper {
+  display: grid;
+  grid-template-columns: 100px 65px 80px 110px 110px 200px 110px 110px 105px;
+  /* align-items: center; */
+  justify-items: center;
+  margin-bottom: 13px;
+  margin-left: 335px;
+}
+
+.tableHeader {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.option {
+  position: relative;
+}
+
+.partName {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* количество отображаемых строк */
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: fixed;
+  background-color: var(--bg-secondary);
+  color: var(--white);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  /* Щоб тултіп не блокував події курсора */
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  width: 200px;
+}
+
+.minusIcon {
+  width: 22px;
+  height: 22px;
+  fill: #ff3b30;
+  cursor: pointer;
+}
+
+.addIcon {
+  width: 22px;
+  height: 22px;
+  fill: #34c759;
+  margin-right: 158px;
+  margin-left: auto;
+  margin-bottom: 17px;
+  cursor: pointer;
+  display: flex;
+}
+
+.payBtn {
+  display: flex;
+  padding: 10px 20px;
+  gap: 10px;
+  border-radius: 6px;
+  background: var(--bg-input);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: "Roboto", sans-serif;
+  color: var(--white);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

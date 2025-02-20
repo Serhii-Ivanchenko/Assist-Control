@@ -1,0 +1,29 @@
+.popup {
+  position: absolute;
+  background-color: var(--bg-input);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  top: 40px;
+  left: 2px;
+}
+
+.text {
+  padding: 15px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+  width: 100%;
+}
+
+.text:hover {
+  background-color: var(--dark-gray);
+}
+
+.border {
+  border-bottom: 1px solid var(--input-stroke);
+}
