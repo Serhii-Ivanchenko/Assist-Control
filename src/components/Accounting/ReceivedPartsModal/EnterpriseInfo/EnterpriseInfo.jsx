@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import styles from "./EnterpriseInfo.module.css";
 import { BsWrench, BsPersonLinesFill, BsCaretDownFill } from "react-icons/bs";
-// import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import EnterprisePopup from "./EnterprisePopup/EnterprisePopup";
 
 const enterprises = ["ФОП Блудов", "ТОВ Ремонт", "ПП Автосервіс"];
@@ -26,25 +25,6 @@ export default function EnterpriseInfo() {
     setEnterprisePopupOpen(false);
     setStoragePopupOpen((prev) => !prev);
   };
-  // const handleClick = (type, e) => {
-  //   e.stopPropagation();
-  //   setArrowsState((prevState) => {
-  //     if (type === "enterprise") {
-  //       return { ...prevState, enterpriseArrow: !prevState.enterpriseArrow };
-  //     } else if (type === "storage") {
-  //       return { ...prevState, storageArrow: !prevState.storageArrow };
-  //     }
-  //     return prevState;
-  //   });
-
-  //   if (type === "enterprise") {
-  //     setStoragePopupOpen(false);
-  //     setEnterprisePopupOpen((prev) => !prev);
-  //   } else if (type === "storage") {
-  //     setEnterprisePopupOpen(false);
-  //     setStoragePopupOpen((prev) => !prev);
-  //   }
-  // };
 
   const handleSelectTitle = (type, title) => {
     if (type === "enterprise") {
