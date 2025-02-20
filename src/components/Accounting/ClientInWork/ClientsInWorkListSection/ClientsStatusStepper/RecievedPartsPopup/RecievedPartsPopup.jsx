@@ -36,7 +36,11 @@ export default function RecievedPartsPopup({
   const handleModalOpen = () => {
     setIsModalOpen(true);
     setModalContent(
-      <ReceivedPartsModal onClose={() => setIsModalOpen(false)} />
+      <ReceivedPartsModal
+        onClose={() => setIsModalOpen(false)}
+        setIsModalOpen={setIsModalOpen}
+        setModalContent={setModalContent}
+      />
     );
   };
 
