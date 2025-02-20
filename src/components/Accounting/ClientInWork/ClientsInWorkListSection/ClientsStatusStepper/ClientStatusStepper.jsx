@@ -145,7 +145,13 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
 
       case 7:
         setIsModalOpen(true);
-        setModalContent(<RepairModal onClose={closeModal} car={item} />);
+        setModalContent(
+          <RepairModal
+            onClose={closeModal}
+            car={item}
+            setModalContent={setModalContent}
+          />
+        );
         break;
       case 8:
         setIsModalOpen(true);
