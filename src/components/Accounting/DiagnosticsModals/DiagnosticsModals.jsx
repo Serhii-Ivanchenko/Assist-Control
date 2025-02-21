@@ -34,7 +34,7 @@ export default function DiagnosticsModals({ onClose, isRepairModal, diagId }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNodesAndParts()).unwrap();
-    dispatch(getDiagnostic(diagId));
+    diagId && dispatch(getDiagnostic(diagId));
   }, []);
 
   const togglePoints = useSelector(selectCategories);
@@ -42,10 +42,6 @@ export default function DiagnosticsModals({ onClose, isRepairModal, diagId }) {
   const user = useSelector(selectUser);
   console.log("diagnosticsData", diagnosticsData);
   const loading = useSelector(selectDiagLoading);
-
-  // const diagId = null;
-  // const diagId = diagnosticsData.diagnostic_id;
-  // console.log("diagId", diagId);
 
   useEffect(() => {
     console.log("spares", spares);
