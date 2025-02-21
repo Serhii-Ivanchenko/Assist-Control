@@ -6,6 +6,7 @@ import { RxCross1 } from "react-icons/rx";
 import ToggleListItem from "../DiagnosticsModal/ToggleListItem/ToggleListItem";
 import SavedInfoTable from "./SavedInfoTable/SavedInfoTable";
 import { TiTick } from "react-icons/ti";
+// import Loader from "../../../Loader/Loader";
 
 export default function DiagnosticsModalSave({
   // onClose,
@@ -14,27 +15,56 @@ export default function DiagnosticsModalSave({
   openModalSave,
   chosenPoints,
   chosenSpares,
+  diagnosticsData,
+  onClose,
+  diagId,
+  // loading,
 }) {
+  // const diagId = diagnosticsData.diagnostic_id;
+  const client = diagnosticsData?.client;
+  const date = new Date(diagnosticsData?.created_at).toLocaleDateString(
+    "uk-UA"
+  );
+  const parts = diagnosticsData?.parts;
+
+  const handleClose = () => {
+    if (diagId) {
+      console.log("diagId", diagId);
+
+      onClose();
+    } else {
+      setOpenModalSave(!openModalSave);
+    }
+  };
+
+  // const spares = diagId ? parts : chosenSpares;
+
   return (
     <div className={css.modalWrapper}>
-      <RxCross1
-        className={css.cross}
-        onClick={() => setOpenModalSave(!openModalSave)}
-      />
+      {/* {loading ? (
+        <Loader />
+      ) : (
+        <> */}
+      <RxCross1 className={css.cross} onClick={handleClose} />
       <p className={css.modalTitle}>Діагностика № 1</p>
       <div className={css.modalTopPart}>
-          <CarInfo
-            clientName="Іван Петренко"
-            clientPhone="+38 073 329 12 17"
-            carImg={car}
-            carNumber="CA 6864 CO"
-            carMake="HONDA"
-            carModel="CIVIC"
-            carYear="2001"
-            vin="VW8795218794H46J"
-            mileage="284563"
-          />
-        <DiagnosticsInfo time="23" />
+        <CarInfo
+          clientName={client?.name || "дані відсутні"}
+          clientPhone={client?.phone || "дані відсутні"}
+          carImg={diagnosticsData?.photo_url || car}
+          carNumber={diagnosticsData?.plate || "дані відсутні"}
+          carMake={diagnosticsData?.make || "дані відсутні"}
+          carModel={diagnosticsData?.model || "дані відсутні"}
+          carYear={diagnosticsData?.year || "дані відсутні"}
+          vin={diagnosticsData?.vin || "дані відсутні"}
+          mileage={diagnosticsData?.mileage || "- - - -"}
+        />
+        <DiagnosticsInfo
+          time="23"
+          mechName={diagnosticsData?.mechanic?.name || "дані відсутні"}
+          managerName=" - - - - "
+          createdAt={date || "дані відсутні"}
+        />
       </div>
 
       <div className={css.modalBottomPart}>
@@ -55,16 +85,22 @@ export default function DiagnosticsModalSave({
           </ul>
         </div>
         <div>
-          <SavedInfoTable chosenSpares={chosenSpares} />
+          <SavedInfoTable
+            chosenSpares={chosenSpares}
+            parts={parts}
+            diagId={diagId}
+          />
 
           <div className={css.btnBox}>
-            <button
-              type="button"
-              className={`${css.btn} ${css.cancel}`}
-              onClick={() => setOpenModalSave(!openModalSave)}
-            >
-              Скасувати
-            </button>
+            {!diagId && (
+              <button
+                type="button"
+                className={`${css.btn} ${css.cancel}`}
+                onClick={() => setOpenModalSave(!openModalSave)}
+              >
+                Скасувати
+              </button>
+            )}
             <button
               type="button"
               className={`${css.btn} ${css.save}`}
@@ -79,6 +115,8 @@ export default function DiagnosticsModalSave({
           </div>
         </div>
       </div>
+      {/* </>
+      )} */}
     </div>
   );
 }

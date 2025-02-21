@@ -2,9 +2,16 @@ import DiagnosticsModalSave from "./DiagnosticsModalSave/DiagnosticsModalSave";
 import DiagnosticsModal from "./DiagnosticsModal/DiagnosticsModal";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getNodesAndParts } from "../../../redux/accounting/operations";
+import {
+  getDiagnostic,
+  getNodesAndParts,
+} from "../../../redux/accounting/operations";
 import { useSelector } from "react-redux";
-import { selectCategories } from "../../../redux/accounting/selectors";
+import {
+  selectCategories,
+  selectDiagLoading,
+  selectDiagnostics,
+} from "../../../redux/accounting/selectors";
 
 // const togglePoints = [
 //   { label: "Двигун", checked: false, id: "1" },
@@ -24,12 +31,19 @@ export default function DiagnosticsModals({ onClose, isRepairModal }) {
   const [spares, setSpares] = useState([]);
 
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getNodesAndParts());
+    dispatch(getNodesAndParts()).unwrap();
+    dispatch(getDiagnostic());
   }, []);
 
   const togglePoints = useSelector(selectCategories);
+  const diagnosticsData = useSelector(selectDiagnostics);
+  console.log("diagnosticsData", diagnosticsData);
+  const loading = useSelector(selectDiagLoading);
+
+  // const diagId = null;
+  const diagId = diagnosticsData.diagnostic_id;
+  console.log("diagId", diagId);
 
   useEffect(() => {
     console.log("spares", spares);
@@ -37,7 +51,7 @@ export default function DiagnosticsModals({ onClose, isRepairModal }) {
 
   return (
     <>
-      {openModalSave || isRepairModal ? (
+      {openModalSave || isRepairModal || diagId ? (
         <DiagnosticsModalSave
           onClose={onClose}
           togglePoints={togglePoints}
@@ -45,6 +59,9 @@ export default function DiagnosticsModals({ onClose, isRepairModal }) {
           openModalSave={openModalSave}
           chosenPoints={chosenPoints}
           chosenSpares={chosenSpares}
+          diagnosticsData={diagnosticsData}
+          diagId={diagId}
+          loading={loading}
         />
       ) : (
         <DiagnosticsModal
@@ -59,6 +76,8 @@ export default function DiagnosticsModals({ onClose, isRepairModal }) {
           chosenSpares={chosenSpares}
           spares={spares}
           setSpares={setSpares}
+          diagnosticsData={diagnosticsData}
+          loading={loading}
         />
       )}
     </>
