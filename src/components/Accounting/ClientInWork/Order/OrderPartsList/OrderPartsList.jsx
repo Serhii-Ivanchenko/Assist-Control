@@ -67,7 +67,7 @@ export default function OrderPartsList({ arr }) {
             <img src={arr.logo} alt="logo" className={css.logo} />
             <p>{arr.supplier}</p>
           </div>
-          <button type="button" className={`${css.mechanicName} ${css.sumBtn}`}>
+          <button type="button" className={css.sumBtn}>
             <BsReceipt className={css.sumIcon} />
             {totalSum} грн
           </button>
@@ -95,7 +95,7 @@ export default function OrderPartsList({ arr }) {
         )}
         {totalQuantity > 0 && (
           <a
-            href="http://"
+            href="http://eshop.elit.ua"
             target="_blank"
             rel="noopener noreferrer"
             className={css.supplierLink}

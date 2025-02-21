@@ -1,16 +1,22 @@
 .popup {
   position: absolute;
-  background-color: var(--bg-input);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  width: 100%;
   top: 40px;
-  left: 2px;
+  left: 0;
+  /* min-width: 115px;
+  max-width: 155px;
+  width: fit-content; */
+  min-width: fit-content;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background: var(--bg-input);
+  box-shadow: -1px 3px 18px 7px rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+  font-weight: 400;
+  z-index: 1000;
 }
 
-.text {
+/* .text {
   padding: 15px;
   font-size: 14px;
   font-style: normal;
@@ -18,12 +24,25 @@
   line-height: normal;
   cursor: pointer;
   width: 100%;
+} */
+.text {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid var(--main-gray);
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.text:first-child {
+  border-radius: 12px 12px 0 0;
+}
+
+.text:last-child {
+  border: none;
+  border-radius: 0 0 12px 12px;
 }
 
 .text:hover {
-  background-color: var(--dark-gray);
-}
-
-.border {
-  border-bottom: 1px solid var(--input-stroke);
+  background: var(--main-gray);
 }

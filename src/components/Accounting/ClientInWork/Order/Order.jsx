@@ -11,6 +11,9 @@ import {
 import carImg from "../../../../assets/images/car.png";
 import BtnsCloseAndSubmit from "../../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
 import OrderPartsList from "./OrderPartsList/OrderPartsList";
+import logo1 from "../../../../assets/images/distr_logo_invoice.png";
+import logo2 from "../../../../assets/images/distrImg.png";
+import logo3 from "../../../../assets/images/distr_logo_invoice.png";
 import { useRef, useState } from "react";
 import OrderPopup from "./OrderPopup/OrderPopup";
 import clsx from "clsx";
@@ -23,7 +26,7 @@ const data = [
     date: "03.02",
     ordered_quantity: "7",
     address: "",
-    logo: "../../../../assets/images/distr_logo_invoice.png",
+    logo: logo1,
     parts: [
       {
         availability: "Харків 1",
@@ -63,7 +66,7 @@ const data = [
   {
     supplier: "Elit.ua",
     id: 2,
-    logo: "../../../../assets/images/distrImg.png",
+    logo: logo2,
     invoice_sum: "5200",
     date: "01.02",
     ordered_quantity: "2",
@@ -100,7 +103,7 @@ const data = [
     date: "03.02",
     ordered_quantity: "7",
     address: "",
-    logo: "../../../../assets/images/distr_logo_invoice.png",
+    logo: logo3,
     parts: [
       {
         availability: "Харків 1",
@@ -247,15 +250,15 @@ export default function Order({ onClose }) {
       </div>
       <div className={css.tableHeaderWrapper}>
         <p className={css.tableHeader}>Склад</p>
-        <p>Дата</p>
-        <p>Кількість</p>
-        <p>Артикул</p>
-        <p>Бренд</p>
-        <p>Номенклатура</p>
-        <p>Ціна закупки</p>
-        <p>Сума закупки</p>
-        <p>Відправлено</p>
-        <p>Кабінет постачальника</p>
+        <p className={css.tableHeader}>Дата</p>
+        <p className={css.tableHeader}>Кількість</p>
+        <p className={css.tableHeader}>Артикул</p>
+        <p className={css.tableHeader}>Бренд</p>
+        <p className={css.tableHeader}>Номенклатура</p>
+        <p className={css.tableHeader}>Ціна закупки</p>
+        <p className={css.tableHeader}>Сума закупки</p>
+        <p className={css.tableHeader}>Відправлено</p>
+        <p className={css.tableHeader}>Кабінет постачальника</p>
       </div>
       <div className={css.table}>
         {data.map((item, index) => {

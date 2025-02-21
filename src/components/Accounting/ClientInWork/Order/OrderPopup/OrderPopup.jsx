@@ -37,7 +37,7 @@ export default function OrderPopup({
       {arr.map((item, index) => (
         <p
           key={index}
-          className={`${css.text} ${css.border}`}
+          className={`${css.text}`}
           onClick={() => {
             onSelect(item);
             onClose();

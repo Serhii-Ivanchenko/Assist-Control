@@ -26,14 +26,18 @@
   max-width: 42px;
 }
 
-.mechanicName {
+/* .mechanicName {
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-}
+} */
 
 .sumBtn {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
   display: flex;
   gap: 10px;
   padding: 6px 14px;
@@ -88,16 +92,16 @@
   color: var(--white);
   text-decoration: none;
   cursor: pointer;
-  margin-left: 40px;
-  margin-right: 25px;
+  margin-left: 65px;
+  /* margin-right: 25px; */
 }
 
 .stringWrapper {
   display: grid;
   grid-template-columns: 100px 65px 80px 110px 110px 200px 110px 110px 105px;
-  /* align-items: center; */
+  align-items: center;
   justify-items: center;
-  margin-bottom: 13px;
+  margin-bottom: 6px;
   margin-left: 335px;
 }
 
@@ -115,7 +119,8 @@
 .partName {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* количество отображаемых строк */
+  -webkit-line-clamp: 2;
+  /* количество отображаемых строк */
   overflow: hidden;
   cursor: pointer;
 }
@@ -137,19 +142,27 @@
 .minusIcon {
   width: 22px;
   height: 22px;
-  fill: #ff3b30;
+  fill: var(--red);
   cursor: pointer;
+}
+
+.minusIcon:hover {
+  fill: var(--glow-view-repair);
 }
 
 .addIcon {
   width: 22px;
   height: 22px;
-  fill: #34c759;
+  fill: var(--green-btn-normal);
   margin-right: 158px;
   margin-left: auto;
   margin-bottom: 17px;
   cursor: pointer;
   display: flex;
+}
+
+.addIcon:hover {
+  fill: var(--green-btn-hover);
 }
 
 .payBtn {
