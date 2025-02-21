@@ -166,7 +166,7 @@ export default function InvoicesList({ category, list }) {
             // setOpenModalSave(false);
           }}
         >
-          {
+          {/* {
             category === "Діагностика" && (
               <DiagnosticsModals onClose={() => setOpenModal(false)} />
             )
@@ -178,7 +178,7 @@ export default function InvoicesList({ category, list }) {
             //     setOpenModalSave={setOpenModalSave}
             //   />
             // ))
-          }
+          } */}
         </Modal>
       )}
     </ul>

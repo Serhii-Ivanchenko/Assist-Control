@@ -108,7 +108,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
     [buttons[9]],
   ];
 
-  // const diagId = "67b777dca876c8394c69cba0";
+  // const diagId = "67b85a5dd14e2f13c06d7704";
   const diagId = null;
 
   // виклик модалки на групі кнопок
@@ -126,7 +126,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         setModalContent("Modal for contact information");
         break;
       case 2:
-        diagId && dispatch(getDiagnostic(diagId));
+        // diagId && dispatch(getDiagnostic(diagId));
 
         setIsModalOpen(true);
         setModalContent(
