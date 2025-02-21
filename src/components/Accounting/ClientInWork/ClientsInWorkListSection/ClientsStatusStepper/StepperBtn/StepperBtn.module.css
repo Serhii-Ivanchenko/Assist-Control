@@ -8,6 +8,7 @@
   background: #313540;
   cursor: pointer;
   line-height: 1.1875em;
+  position: relative;
 }
 
 .wrapperImg {

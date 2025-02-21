@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BsReceipt,
   BsUiRadiosGrid,
@@ -14,7 +14,7 @@ import styles from "./ClientStatusStepper.module.css";
 import Modal from "../../../../Modals/Modal/Modal.jsx";
 import DetailedClientInfo from "../../../../DetailedClientInfo/DetailedClientInfo.jsx";
 import EnterAmountModal from "../../../../Modals/EnterAmountModal/EnterAmountModal.jsx";
-import PaymentModal from "../../PaymentModal/PaymentModal.jsx"
+import PaymentModal from "../../PaymentModal/PaymentModal.jsx";
 import NotificationModal from "../../../../sharedComponents/NotificationModal/NotificationModal.jsx";
 import { useSelector } from "react-redux";
 import { selectVisibilityClientsInWork } from "../../../../../redux/visibility/selectors.js";
@@ -26,8 +26,11 @@ import RepairModal from "../../RepairModal/RepairModal.jsx";
 import RecievedPartsPopup from "./RecievedPartsPopup/RecievedPartsPopup.jsx";
 import CommercialOfferModal from "../../CommercialOfferModal/CommercialOfferModal.jsx";
 import DiagnosticsModals from "../../../DiagnosticsModals/DiagnosticsModals.jsx";
-import ReceivedPartsModal from "../../../ReceivedPartsModal/ReceivedPartsModal.jsx";
 import PaymentDistrModal from "../../PaymentDistrModal/PaymentDistrModal.jsx";
+import {
+  getCommercialOfferData,
+  getDiagnostic,
+} from "../../../../../redux/accounting/operations.js";
 
 function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const visibility = useSelector(selectVisibilityClientsInWork);
@@ -39,8 +42,10 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const buttonRef = useRef(null);
-  const popupRef = useRef(null);
+  // const popupRef = useRef(null);
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
+
+  const popupIcon = isPopupOpen ? <TiArrowSortedUp /> : <TiArrowSortedDown />;
 
   // Масив кнопок
   const buttons = [
@@ -58,7 +63,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
       id: 6,
       title: "Отримано",
       icon: <BsUiChecks />,
-      extraIcon: <TiArrowSortedUp />,
+      extraIcon: popupIcon,
     },
     { id: 7, title: "Ремонт", icon: <BsWrench /> },
     { id: 8, title: postPaid, icon: <BsCurrencyDollar /> },
@@ -68,6 +73,12 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
       noBackground: true,
     },
   ];
+
+  // backend request
+
+  // useEffect(() => {
+  //   dispatch(getCommercialOfferData());
+  // }, [dispatch]);
 
   // визнчення кольору іконок степера
   const [completedSteps, setCompletedSteps] = useState(() => {
@@ -97,6 +108,9 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
     [buttons[9]],
   ];
 
+  // const diagId = "67b777dca876c8394c69cba0";
+  const diagId = null;
+
   // виклик модалки на групі кнопок
   const handleClick = (idx, event) => {
     // setIsModalOpen(false);
@@ -112,12 +126,16 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         setModalContent("Modal for contact information");
         break;
       case 2:
+        diagId && dispatch(getDiagnostic(diagId));
+
         setIsModalOpen(true);
-        setModalContent(<DiagnosticsModals onClose={closeModal} />);
+        setModalContent(
+          <DiagnosticsModals diagId={diagId} onClose={closeModal} />
+        );
         break;
       case 3:
+        dispatch(getCommercialOfferData("67b777dca876c8394c69cba0"));
         setIsModalOpen(true);
-
         setModalContent(<CommercialOfferModal onClose={closeModal} />);
         break;
       case 4:
@@ -127,23 +145,30 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         break;
       case 5:
         setIsModalOpen(true);
-        setModalContent(<ReceivedPartsModal onClose={closeModal} />);
+        setModalContent("Recieved Modal");
         break;
       case 6:
-        console.log("Opening popup...");
-        if (event.currentTarget) {
-          buttonRef.current = event.currentTarget;
-          const rect = buttonRef.current.getBoundingClientRect();
-          setPopupPosition({
-            top: rect.bottom + window.scrollY,
-          });
-        }
+        // console.log("Opening popup...");
+        // if (event.currentTarget) {
+        //   buttonRef.current = event.currentTarget;
+        //   const rect = buttonRef.current.getBoundingClientRect();
+        //   setPopupPosition({
+        //     top: rect.bottom + window.scrollY,
+        //   });
+        // }
+        // setIsPopupOpen(true);
         setIsPopupOpen((prev) => !prev);
         break;
 
       case 7:
         setIsModalOpen(true);
-        setModalContent(<RepairModal onClose={closeModal} car={item} />);
+        setModalContent(
+          <RepairModal
+            onClose={closeModal}
+            car={item}
+            setModalContent={setModalContent}
+          />
+        );
         break;
       case 8:
         setIsModalOpen(true);
@@ -255,7 +280,9 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
           isOpen={isPopupOpen}
           onClose={() => setIsPopupOpen(false)}
           buttonRef={buttonRef}
-          popupRef={popupRef}
+          setModalContent={setModalContent}
+          setIsModalOpen={setIsModalOpen}
+          // popupRef={popupRef}
         />
       )}
 

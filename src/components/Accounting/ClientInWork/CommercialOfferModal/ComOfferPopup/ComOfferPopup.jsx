@@ -1,10 +1,38 @@
+import { useEffect, useRef } from "react";
 import css from "./ComOfferPopup.module.css";
 
-export default function ComOfferPopup({ onClose, setApproval }) {
+export default function ComOfferPopup({
+  onClose,
+  setApproval,
+  isOpen,
+  buttonRef,
+}) {
+  const popupRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (
+      popupRef.current &&
+      !popupRef.current.contains(event.target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target)
+    ) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <div className={css.popup}>
+    <div className={css.popup} ref={popupRef}>
       <p
-        className={css.text}
+        className={`${css.text} ${css.border}`}
         onClick={() => {
           setApproval("Особисте підтвердження");
           onClose();
@@ -13,7 +41,7 @@ export default function ComOfferPopup({ onClose, setApproval }) {
         Особисте підтвердження
       </p>
       <p
-        className={css.text}
+        className={`${css.text} ${css.border}`}
         onClick={() => {
           setApproval("Додаток");
           onClose();

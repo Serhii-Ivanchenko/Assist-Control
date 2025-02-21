@@ -6,14 +6,21 @@ import carImg from "../../../../assets/images/car.png";
 import SortButtonsArrow from "../../../sharedComponents/SortButtonsArrow/SortButtonsArrow";
 import PartsList from "./PartsList/PartsList";
 import CarInfo from "../../../sharedComponents/CarInfo/CarInfo";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
 import BtnsCloseAndSubmit from "../../../sharedComponents/BtnsCloseAndSubmit/BtnsCloseAndSubmit";
-import { BsCaretRightFill } from "react-icons/bs";
+import { BsCaretRightFill, BsCaretUpFill } from "react-icons/bs";
 import { FaArrowRightLong } from "react-icons/fa6";
 import clsx from "clsx";
+import DownloadPdfButtonKP from "../../../sharedComponents/Pdf/DownloadPdfButtonKP/DownloadPdfButtonKP";
 import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
+import { useSelector } from "react-redux";
+import {
+  selectCOLoading,
+  selectCommercialOfferData,
+} from "../../../../redux/accounting/selectors.js";
+import Loader from "../../../Loader/Loader.jsx";
 // import Modal from "../../../Modals/Modal/Modal";
 // import WarehouseAvailabilityModal from "./WarehouseAvailabilityModal/WarehouseAvailabilityModal";
 
@@ -221,49 +228,32 @@ const dataArr = {
 export default function CommercialOfferModal({ onClose }) {
   const data = useMemo(() => dataArr, []);
   const [totalOrder, setTotalOrder] = useState({});
-  const [sentForApproval, setSentForApproval] = useState(false);
-  const [approved, setApproved] = useState(false);
-  const [pay, setPay] = useState(false);
-  const [makeOrder, setMakeOrder] = useState(false);
+  const [nodesArr, setNodesArr] = useState(data.nodes);
+  // const [sentForApproval, setSentForApproval] = useState(false);
+  // const [approved, setApproved] = useState(false);
+  // const [pay, setPay] = useState(false);
+  // const [makeOrder, setMakeOrder] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [approval, setApproval] = useState("");
-  const [nodesPrices, setNodesPrices] = useState(data.nodes);
-  // console.log(approval);
+  const buttonRef = useRef(null);
+  const info = useSelector(selectCommercialOfferData);
+  const loading = useSelector(selectCOLoading);
+  console.log("info", info);
 
-  console.log(totalOrder);
+  //
+
+  // console.log("totalOrder", totalOrder);
 
   const correctedTotalOrder = (nodeId) => {
     const updatedItems = Object.fromEntries(
-      Object.entries(totalOrder).map(([key, value]) => [
-        key,
-        value.node_id === nodeId ? { ...value, selected: false } : { ...value },
-      ])
+      Object.entries(totalOrder).filter(
+        ([_, value]) => value.node_id !== nodeId
+      )
     );
     setTotalOrder(updatedItems);
-  };
-
-  const correctedWorkPriceInTotalOrder = (nodeId, price) => {
-    const updatedItems = Object.fromEntries(
-      Object.entries(totalOrder).map(([key, value]) => [
-        key,
-        value.node_id === nodeId
-          ? { ...value, work_price: price }
-          : { ...value },
-      ])
-    );
-    setTotalOrder(updatedItems);
-  };
-
-  const correctedSalePriceInTotalOrder = (nodeId, price) => {
-    const updatedItems = Object.fromEntries(
-      Object.entries(totalOrder).map(([key, value]) => [
-        key,
-        value.node_id === nodeId
-          ? { ...value, work_price: price }
-          : { ...value },
-      ])
-    );
-    setTotalOrder(updatedItems);
+    // setNodesArr((prev) => {
+    //   return prev.filter((item) => item.node_id !== nodeId);
+    // });
   };
 
   const date = new Date(data.created_at);
@@ -315,162 +305,179 @@ export default function CommercialOfferModal({ onClose }) {
     <div className={css.modal}>
       <BsXLg className={css.closeIcon} onClick={onClose} />
       <p className={css.offerNumber}>КП № </p>
-
-      <div className={css.topWrapper}>
-        {/* <div> */}
-        <CarInfo
-          clientName={data.client.client_name}
-          clientPhone={data.client.phone}
-          carImg={carImg}
-          carNumber={data.car.car_number}
-          carMake={data.car.make}
-          carModel={data.car.model}
-          carYear={data.car.year}
-          vin={data.car.vin}
-          mileage={data.car.mileage}
-        />
-        {/* </div> */}
-        <div className={css.rightSectionWrapper}>
-          <p className={css.date}>{formattedDate}</p>
-          <button className={css.link}>Діагностика № </button>
-          <div className={css.mechanicWrapper}>
-            <BsWrench className={css.spannerIcon} />
-            <p className={css.mechanicText}>Механік:</p>
-            <p className={css.mechanicName}>{data.mechanic.mechanic_name}</p>
-          </div>
-          <div className={css.managerWrapper}>
-            <BsPersonLinesFill className={css.personIcon} />
-            <p className={css.mechanicText}>Менеджер:</p>
-            <p className={css.mechanicName}>{data.manager.manager_name}</p>
-          </div>
-        </div>
-      </div>
-      <div className={css.centerWrapper}>
-        <button type="button" className={css.original}>
-          Орігінал
-        </button>
-        <button type="button" className={css.analogue}>
-          Аналог
-        </button>
-      </div>
-      <div className={css.tableHeaderWrapper}>
-        <div className={css.headerWithArrows}>
-          <p className={css.tableHeaderText}>Дата</p>
-          <SortButtonsArrow />
-        </div>
-        <div className={css.headerWithArrows}>
-          <p className={css.tableHeaderText}>Наявність</p>
-          <SortButtonsArrow />
-        </div>
-        <p className={css.tableHeaderText}>Кількість</p>
-        <p className={css.tableHeaderText}>Артикул</p>
-        <p className={css.tableHeaderText}>Бренд</p>
-        <p className={css.tableHeaderText}>Номенклатура</p>
-        <div className={css.headerWithArrows}>
-          <p className={css.tableHeaderText}>Ціна роботи</p>
-          <SortButtonsArrow />
-        </div>
-        <div className={css.headerWithArrows}>
-          <p className={css.tableHeaderText}>Ціна продажу</p>
-          <SortButtonsArrow />
-        </div>
-        <p className={css.tableHeaderText}>Склад</p>
-        <p className={css.tableHeaderText}>Сума закупки</p>
-        <div className={css.headerWithArrows}>
-          <p className={css.tableHeaderText}>Прибуток</p>
-          <SortButtonsArrow />
-        </div>
-        <div className={css.headerWithArrows}>
-          <p className={css.tableHeaderText}>%</p>
-          <SortButtonsArrow />
-        </div>
-      </div>
-      <div className={css.table}>
-        {data.nodes.map((item) => {
-          return (
-            <PartsList
-              key={item.node_id}
-              arr={item}
-              date={data.repair_date}
-              setTotalOrder={setTotalOrder}
-              correctedTotalOrder={correctedTotalOrder}
-              correctedWorkPriceInTotalOrder={correctedWorkPriceInTotalOrder}
-              correctedSalePriceInTotalOrder={correctedSalePriceInTotalOrder}
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className={css.topWrapper}>
+            <CarInfo
+              clientName={info.client.name}
+              clientPhone={info.client.phone}
+              // carImg={carImg}
+              carNumber={info.plate}
+              carMake={info.make}
+              carModel={info.model}
+              carYear={info.year}
+              vin={info.vin}
+              mileage={"---------"}
             />
-          );
-        })}
-      </div>
-      <FiPlusCircle className={css.addIcon} />
-      <div className={css.bottomTextWrapper}>
-        <p></p>
-        <p>{totalWorkPrice ? totalWorkPrice : 0} грн</p>
-        <p>{totalSalePrice ? totalSalePrice : 0} грн</p>
-        <p></p>
-        <p>{totalSum ? totalSum : 0} грн</p>
-        <p>{totalProfit ? totalProfit : 0} грн</p>
-        <p></p>
-      </div>
-      <p className={css.prdBtn}>PDF Btn</p>
-      <div className={css.bottomWrapper}>
-        <div className={css.btnWrapper}>
-          <div className={css.btnWithPopup}>
-            <button
-              type="button"
-              className={clsx(
-                css.btn,
-                css.approvalBtn,
-                sentForApproval ? css.submitted : css.notSubmitted
-              )}
-              onClick={() => setIsPopupOpen(true)}
-            >
-              <FaCheck />
-              {approval ? approval : "Відправити на узгодження"}
-              <BsCaretRightFill />
-            </button>
-            {isPopupOpen && (
-              <ComOfferPopup
-                onClose={() => setIsPopupOpen(false)}
-                setApproval={setApproval}
-              />
-            )}
+            <div className={css.rightSectionWrapper}>
+              <p className={css.date}>{formattedDate}</p>
+              <button className={css.link}>
+                Діагностика № {info.diagnostic_id}
+              </button>
+              <div className={css.mechanicWrapper}>
+                <BsWrench className={css.spannerIcon} />
+                <p className={css.mechanicText}>Механік:</p>
+                <p className={css.mechanicName}>{info.mechanic.name}</p>
+              </div>
+              <div className={css.managerWrapper}>
+                <BsPersonLinesFill className={css.personIcon} />
+                <p className={css.mechanicText}>Менеджер:</p>
+                <p className={css.mechanicName}>{"-----------"}</p>
+              </div>
+            </div>
           </div>
-          <FaArrowRightLong />
-          <button
-            type="button"
-            className={clsx(
-              css.btn,
-              approved ? css.submitted : css.notSubmitted
-            )}
-          >
-            <FaCheck />
-            Узгоджено
-          </button>
-          <FaArrowRightLong />
-          <button
-            type="button"
-            className={clsx(css.btn, pay ? css.submitted : css.notSubmitted)}
-          >
-            <FaCheck />
-            Оплата
-          </button>
-          <FaArrowRightLong />
-          <button
-            type="button"
-            className={clsx(
-              css.btn,
-              makeOrder ? css.submitted : css.notSubmitted
-            )}
-          >
-            <FaCheck />
-            Замовити у постачальника
-          </button>
-        </div>
-        <BtnsCloseAndSubmit
-          btnSave={"Зберегти"}
-          btnClose={"Скасувати"}
-          onClose={onClose}
-        />
-      </div>
+          <div className={css.centerWrapper}>
+            <button type="button" className={css.original}>
+              Орігінал
+            </button>
+            <button type="button" className={css.analogue}>
+              Аналог
+            </button>
+          </div>
+          <div className={css.tableHeaderWrapper}>
+            <div className={css.headerWithArrows}>
+              <p className={css.tableHeaderText}>Дата</p>
+              <SortButtonsArrow />
+            </div>
+            <div className={css.headerWithArrows}>
+              <p className={css.tableHeaderText}>Наявність</p>
+              <SortButtonsArrow />
+            </div>
+            <p className={css.tableHeaderText}>Кількість</p>
+            <p className={css.tableHeaderText}>Артикул</p>
+            <p className={css.tableHeaderText}>Бренд</p>
+            <p className={css.tableHeaderText}>Номенклатура</p>
+            <div className={css.headerWithArrows}>
+              <p className={css.tableHeaderText}>Ціна роботи</p>
+              <SortButtonsArrow />
+            </div>
+            <div className={css.headerWithArrows}>
+              <p className={css.tableHeaderText}>Ціна продажу</p>
+              <SortButtonsArrow />
+            </div>
+            <p className={css.tableHeaderText}>Склад</p>
+            <p className={css.tableHeaderText}>Сума закупки</p>
+            <div className={css.headerWithArrows}>
+              <p className={css.tableHeaderText}>Прибуток</p>
+              <SortButtonsArrow />
+            </div>
+            <div className={css.headerWithArrows}>
+              <p className={css.tableHeaderText}>%</p>
+              <SortButtonsArrow />
+            </div>
+          </div>
+          <div className={css.table}>
+            {info.positions[0].position.map((item, index) => {
+              return (
+                <PartsList
+                  key={index}
+                  arr={item}
+                  date={"------"}
+                  setTotalOrder={setTotalOrder}
+                  correctedTotalOrder={correctedTotalOrder}
+                />
+              );
+            })}
+          </div>
+          <FiPlusCircle className={css.addIcon} />
+          <div className={css.bottomTextWrapper}>
+            <p></p>
+            <p>{totalWorkPrice ? totalWorkPrice : 0} грн</p>
+            <p>{totalSalePrice ? totalSalePrice : 0} грн</p>
+            <p></p>
+            <p>{totalSum ? totalSum : 0} грн</p>
+            <p>{totalProfit ? totalProfit : 0} грн</p>
+            <p></p>
+          </div>
+          <DownloadPdfButtonKP carsData={dataArr} />
+          <div className={css.bottomWrapper}>
+            <div className={css.btnWrapper}>
+              <div className={css.btnWithPopup}>
+                <button
+                  type="button"
+                  className={clsx(
+                    css.btn,
+                    css.approvalBtn,
+                    css.notSubmitted
+                    // sentForApproval ? css.submitted : css.notSubmitted
+                  )}
+                  onClick={() => setIsPopupOpen(!isPopupOpen)}
+                  ref={buttonRef}
+                >
+                  <FaCheck />
+                  {approval ? approval : "Відправити на узгодження"}
+                  <BsCaretRightFill
+                    className={`${css.arrowIcon} ${
+                      isPopupOpen ? css.rotated : ""
+                    }`}
+                  />
+                </button>
+                {isPopupOpen && (
+                  <ComOfferPopup
+                    onClose={() => setIsPopupOpen(false)}
+                    setApproval={setApproval}
+                    buttonRef={buttonRef}
+                    isOpen={isPopupOpen}
+                  />
+                )}
+              </div>
+              <FaArrowRightLong />
+              <button
+                type="button"
+                className={clsx(
+                  css.btn,
+                  css.notSubmitted
+                  // approved ? css.submitted : css.notSubmitted
+                )}
+              >
+                <FaCheck />
+                Узгоджено
+              </button>
+              <FaArrowRightLong />
+              <button
+                type="button"
+                className={clsx(
+                  css.btn,
+                  css.notSubmitted
+                  // pay ? css.submitted : css.notSubmitted
+                )}
+              >
+                <FaCheck />
+                Оплата
+              </button>
+              <FaArrowRightLong />
+              <button
+                type="button"
+                className={clsx(
+                  css.btn,
+                  css.notSubmitted
+                  // makeOrder ? css.submitted : css.notSubmitted
+                )}
+              >
+                <FaCheck />
+                Замовити у постачальника
+              </button>
+            </div>
+            <BtnsCloseAndSubmit
+              btnSave={"Зберегти"}
+              btnClose={"Скасувати"}
+              onClose={onClose}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

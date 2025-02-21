@@ -161,3 +161,22 @@
   border: none;
   cursor: pointer;
 }
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--status-complete);
+  margin-left: auto;
+  margin-right: 8px;
+  margin-top: 10px;
+}
+
+.iconPlus {
+  color: var(--white); 
+  font-size: 14px;
+  stroke-width: 2px;
+}

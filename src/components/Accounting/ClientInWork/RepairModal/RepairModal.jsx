@@ -6,17 +6,42 @@ import TableRepair from "./TableRepair/TableRepair";
 import DownloadPdfButtonRepair from "../../../sharedComponents/Pdf/DownloadPdfButtonRepair/DownloadPdfButtonRepair";
 import { MdClose } from "react-icons/md";
 import { useEffect, useState } from "react";
-import Modal from "../../../Modals/Modal/Modal";
-import DiagnosticsModals from "../../DiagnosticsModals/DiagnosticsModals";
-import CommercialOfferModal from "../CommercialOfferModal/CommercialOfferModal";
+import { HiPlus } from "react-icons/hi2";
+import CommercialOfferModal from "../CommercialOfferModal/CommercialOfferModal.jsx";
+import DiagnosticsModals from "../../DiagnosticsModals/DiagnosticsModals.jsx";
 
-const RepairModal = ({ car, onClose }) => {
+const RepairModal = ({
+  car,
+  onClose,
+  // onOpenCommercialOfferModal,
+  // onOpenDiagnosticsModalSave,
+  setModalContent,
+}) => {
   const [data, setData] = useState(repairData);
   const [price, setPrice] = useState(0);
   const [remainingAmount, setRemainingAmount] = useState(0);
-  const [isDiagnosticsModalOpen, setIsDiagnosticsModalOpen] = useState(false);
-  const [isCommercialOfferModalOpen, setIsCommercialOfferModalOpen] =
-    useState(false); // Додаємо стан для КП модалки
+  useState(false);
+
+  // Функції для перемикання модалок у RepairModal
+  const openRepairModal = () => {
+    setModalContent(
+      <RepairModal
+        onClose={onClose}
+        car={car}
+        setModalContent={setModalContent}
+      />
+    );
+  };
+
+  const openCommercialOfferModal = () => {
+    setModalContent(<CommercialOfferModal onClose={openRepairModal} />);
+  };
+  const openDiagnosticsModal = () => {
+    setModalContent(
+      <DiagnosticsModals onClose={openRepairModal} isRepairModal={true} />
+    );
+  };
+  //
 
   useEffect(() => {
     const newPrice = data.reduce(
@@ -33,26 +58,6 @@ const RepairModal = ({ car, onClose }) => {
   const handleDelete = (id) => {
     const updatedData = data.filter((item) => item.id !== id);
     setData(updatedData);
-  };
-
-  const openDiagnosticsModal = () => {
-    console.log("Open Diagnostics Modal triggered");
-    setIsDiagnosticsModalOpen(true);
-  };
-
-  const closeDiagnosticsModal = () => {
-    console.log("Close Diagnostics Modal triggered");
-    setIsDiagnosticsModalOpen(false);
-  };
-
-  const openCommercialOfferModal = () => {
-    console.log("Open Commercial Offer Modal triggered");
-    setIsCommercialOfferModalOpen(true);
-  };
-
-  const closeCommercialOfferModal = () => {
-    console.log("Close Commercial Offer Modal triggered");
-    setIsCommercialOfferModalOpen(false);
   };
 
   const carInfo = {
@@ -72,7 +77,7 @@ const RepairModal = ({ car, onClose }) => {
       <p className={styles.title}>Ремонт № 345</p>
 
       <div className={styles.infoContainer}>
-          <CarInfo {...carInfo} />
+        <CarInfo {...carInfo} />
         {/* <div></div> */}
         <div className={styles.workInfo}>
           <div className={styles.date}>03.02.2025</div>
@@ -85,14 +90,16 @@ const RepairModal = ({ car, onClose }) => {
             </button>
             <button
               className={styles.link}
-              onClick={() => {
-                console.log("Diagnostics button clicked");
-                openDiagnosticsModal();
-              }}
+              // onClick={onOpenDiagnosticsModalSave}
+              onClick={openDiagnosticsModal}
             >
               Діагностика № 345
             </button>
-            <button className={styles.link} onClick={openCommercialOfferModal}>
+            <button
+              className={styles.link}
+              // onClick={onOpenCommercialOfferModal}
+              onClick={openCommercialOfferModal}
+            >
               КП № 345
             </button>
           </div>
@@ -111,6 +118,9 @@ const RepairModal = ({ car, onClose }) => {
       </div>
       <div className={styles.tableContainer}>
         <TableRepair data={data} onDelete={handleDelete} />
+        <div className={styles.iconContainer}>
+          <HiPlus className={styles.iconPlus} />
+        </div>
       </div>
       <div className={styles.bottomInfoContainer}>
         <div className={styles.leftContainer}>
@@ -144,16 +154,6 @@ const RepairModal = ({ car, onClose }) => {
       <button className={styles.closeButton} onClick={onClose}>
         <MdClose color="var(--input-stroke)" size={22} />
       </button>
-      {isDiagnosticsModalOpen && (
-        <Modal onClose={closeDiagnosticsModal}>
-          <DiagnosticsModals />
-        </Modal>
-      )}
-      {isCommercialOfferModalOpen && (
-        <Modal onClose={closeCommercialOfferModal}>
-          <CommercialOfferModal />
-        </Modal>
-      )}
     </div>
   );
 };

@@ -8,17 +8,17 @@ import { FaRegCheckSquare } from "react-icons/fa";
 import { FaRegSquare } from "react-icons/fa";
 import { BsCaretDownFill } from "react-icons/bs";
 import { BsCaretRightFill } from "react-icons/bs";
+import { RiSave3Fill } from "react-icons/ri";
 import WarehouseAvailabilityModal from "../WarehouseAvailabilityModal/WarehouseAvailabilityModal";
 import Modal from "../../../../Modals/Modal/Modal";
 import clsx from "clsx";
+import DeletePartModal from "../DeletePartModal/DeletePartModal";
 
 export default function PartsList({
   arr,
   date,
   setTotalOrder,
   correctedTotalOrder,
-  correctedWorkPriceInTotalOrder,
-  correctedSalePriceInTotalOrder,
 }) {
   const [showAllParts, setShowAllParts] = useState(false);
   const [closeAllParts, setCloseAllParts] = useState(false);
@@ -27,12 +27,21 @@ export default function PartsList({
   const [warehouseModalOpen, setWarehouseModalOpen] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-  const [workPrice, setWorkPrice] = useState(arr.work_price);
-  const [salePrice, setSalePrice] = useState(arr.sale_price);
+  const [workPrice, setWorkPrice] = useState("--------");
+  const [salePrice, setSalePrice] = useState("------");
   const [isEditing, setIsEditing] = useState(false);
+  const [deletePartModalOpen, setDeletePartModalOpen] = useState(false);
+  const [nodeIdForDelete, setNodeIdForDelete] = useState("");
   const tableRef = useRef(null);
+  console.log("arr", arr);
 
-  const displayedCarParts = showAllParts ? arr.parts : arr.parts.slice(0, 3);
+  const sortedPartsArray = [...arr.data[0].parts].sort(
+    (a, b) => a.details.price - b.details.price
+  );
+
+  const displayedCarParts = showAllParts
+    ? sortedPartsArray
+    : sortedPartsArray.slice(0, 3);
 
   useEffect(() => {
     // Вычисляем высоту содержимого при изменении состояния
@@ -41,31 +50,39 @@ export default function PartsList({
     }
   }, [showAllParts, displayedCarParts]);
 
-  const lineHeight = arr.parts.length > 2 ? "160px" : "auto";
+  const lineHeight = arr.data[0].parts.length > 2 ? "160px" : "auto";
 
   const handleCheckboxChange = (partId, checked, price, profit, node_id) => {
     setOrder((prev) => ({
       ...prev,
+
       [partId]: {
-        quantity: prev[partId]?.quantity || (checked ? 1 : 0),
+        quantity: prev[partId]?.quantity || 1,
         selected: checked,
         price,
         profit,
         node_id,
       },
     }));
-    setTotalOrder((prev) => ({
-      ...prev,
-      [partId]: {
-        quantity: prev[partId]?.quantity || (checked ? 1 : 0),
-        selected: checked,
-        price,
-        profit,
-        node_id,
-        work_price: workPrice,
-        sale_price: salePrice,
-      },
-    }));
+
+    setTotalOrder((prev) => {
+      if (!checked) {
+        const { [partId]: _, ...rest } = prev; // Видаляємо елемент, якщо unchecked
+        return rest;
+      }
+      return {
+        ...prev,
+        [partId]: {
+          quantity: prev[partId]?.quantity || 1,
+          selected: checked,
+          price,
+          profit,
+          node_id,
+          work_price: workPrice,
+          sale_price: salePrice,
+        },
+      };
+    });
   };
 
   const handleQuantityChange = (partId, value) => {
@@ -134,25 +151,6 @@ export default function PartsList({
     return item.selected ? sum + Number(item.quantity * item.price) : sum;
   }, 0);
 
-  const handleWorkPriceChange = (newPrice, nodeId) => {
-    setWorkPrice(newPrice);
-    // correctedWorkPriceInTotalOrder(nodeId, workPrice);
-  };
-
-  const handleSalePriceChange = (newPrice, nodeId) => {
-    setSalePrice(newPrice);
-    // correctedSalePriceInTotalOrder(nodeId, salePrice);
-  };
-
-  const onMinusBtnClick = (nodeId) => {
-    const updatedItems = Object.entries(order).reduce((acc, [key, value]) => {
-      acc[key] = { ...value, selected: false };
-      return acc;
-    }, {});
-    setOrder(updatedItems);
-    correctedTotalOrder(nodeId);
-  };
-
   const handleHeightChange = () => {
     setCloseAllParts(!closeAllParts);
   };
@@ -179,28 +177,20 @@ export default function PartsList({
 
   return (
     <div>
-      <div
-        className={clsx(
-          css.subHeader,
-          isEditing ? css.isEditing : css.notEditing
-        )}
-      >
-        <p className={css.subHeaderDate}>{date}</p>
+      <div className={css.subHeader}>
+        <p className={css.subHeaderDate}>{"------"}</p>
         <p className={css.subHeaderDate}></p>
-        <p className={css.tableHeaderText}>{arr.needed_quantity} шт</p>
-        <p className={css.tableHeaderText}>{arr.code}</p>
-        <p className={css.tableHeaderText}>{arr.brand}</p>
-        <p className={css.tableHeaderText}>{arr.node_name}</p>
+        <p className={css.tableHeaderText}>{"--------"} шт</p>
+        <p className={css.tableHeaderText}>{"------"}</p>
+        <p className={css.tableHeaderText}>{"-----"}</p>
+        <p className={css.tableHeaderText}>{arr.part_name}</p>
         <div className={css.pencilWrapper}>
           {isEditing ? (
             <input
               type="text"
               value={workPrice}
               className={`${css.workPrice} ${css.tableHeaderText}`}
-              onChange={(e) =>
-                handleWorkPriceChange(e.target.value, arr.node_id)
-              }
-              onBlur={() => setIsEditing(false)}
+              onChange={(e) => setWorkPrice(e.target.value)}
             />
           ) : (
             <p className={css.tableHeaderText}>{workPrice} грн</p>
@@ -212,10 +202,7 @@ export default function PartsList({
               type="text"
               value={salePrice}
               className={`${css.workPrice} ${css.tableHeaderText}`}
-              onChange={(e) =>
-                handleSalePriceChange(e.target.value, arr.node_id)
-              }
-              onBlur={() => setIsEditing(false)}
+              onChange={(e) => setSalePrice(e.target.value)}
             />
           ) : (
             <p className={css.tableHeaderText}>{salePrice} грн</p>
@@ -225,17 +212,29 @@ export default function PartsList({
         <p>{totalPurchaseAmount ? totalPurchaseAmount.toFixed(2) : 0}</p>
         <p>{totalProfit ? totalProfit : 0}</p>
         <p></p>
-        <BsPencil
-          className={css.pencilIcon}
-          onClick={() => setIsEditing(!isEditing)}
-        />
-        {isEditing && (
-          <FiMinusCircle
-            className={css.minusIcon}
-            onClick={() => onMinusBtnClick(arr.node_id)}
-          />
-        )}
+        <div className={css.iconsWrapper}>
+          {isEditing ? (
+            <RiSave3Fill
+              className={css.saveIcon}
+              onClick={() => setIsEditing(!isEditing)}
+            />
+          ) : (
+            <BsPencil
+              className={css.pencilIcon}
+              onClick={() => setIsEditing(!isEditing)}
+            />
+          )}
 
+          {isEditing && (
+            <FiMinusCircle
+              className={css.minusIcon}
+              onClick={() => {
+                setDeletePartModalOpen(true);
+                // setNodeIdForDelete(arr.node_id);
+              }}
+            />
+          )}
+        </div>
         {closeAllParts ? (
           <BsCaretRightFill onClick={handleHeightChange} />
         ) : (
@@ -249,11 +248,11 @@ export default function PartsList({
             className={css.table}
             style={{ height: showAllParts ? tableHeight : lineHeight }}
           >
-            {displayedCarParts.map((part) => {
+            {displayedCarParts.map((part, index) => {
               return (
-                <div key={part.id} className={css.stringWrapper}>
-                  <p className={css.tableDate}>{part.date}</p>
-                  <p className={css.tableText}>{part.availability} шт</p>
+                <div key={index} className={css.stringWrapper}>
+                  <p className={css.tableDate}>{"----"}</p>
+                  <p className={css.tableText}>{"------"} шт</p>
                   <div className={css.quantityWrapper}>
                     <button type="button" className={css.quantityBtn}>
                       <FiMinusCircle
@@ -281,7 +280,7 @@ export default function PartsList({
                     </button>
                   </div>
                   <p className={css.tableText}>{part.code}</p>
-                  <p className={css.tableText}>{part.brand}</p>
+                  <p className={css.tableText}>{part.details.brand}</p>
                   <div
                     className={css.nameWithOption}
                     onMouseEnter={handleMouseEnter}
@@ -289,7 +288,7 @@ export default function PartsList({
                     onMouseLeave={handleMouseLeave}
                   >
                     <p className={`${css.tableText} ${css.partName}`}>
-                      {part.part_name}
+                      {arr.part_name}
                     </p>
                     {isTooltipVisible && (
                       <div
@@ -299,7 +298,7 @@ export default function PartsList({
                           left: `${tooltipPosition.x}px`,
                         }}
                       >
-                        {part.part_name}
+                        {arr.part_name}
                       </div>
                     )}
                   </div>
@@ -307,18 +306,18 @@ export default function PartsList({
                   <p></p>
                   <div className={css.wrapper}>
                     <p className={css.tableText}>
-                      {part.supplier.toLowerCase() === "харків"
+                      {/* {part.supplier.toLowerCase() === "харків"
                         ? "Наявність"
-                        : part.supplier}
+                        : part.supplier} */}
                     </p>
-                    {part.supplier.toLowerCase() === "харків" && (
+                    {/* {part.supplier.toLowerCase() === "харків" && (
                       <p className={css.glassIconWrapper}>
                         <FaMagnifyingGlass
                           className={css.glassIcon}
                           onClick={() => setWarehouseModalOpen(true)}
                         />
                       </p>
-                    )}
+                    )} */}
                   </div>
                   {/* <div className={css.checkboxWrapper}> */}
                   <label className={css.checkboxIcon}>
@@ -343,15 +342,15 @@ export default function PartsList({
                       <FaRegSquare className={css.checkboxIcon} />
                     )}
                   </label>
-                  <p className={css.tableText}>{part.price}</p>
+                  <p className={css.tableText}>{part.details.price}</p>
                   {/* </div> */}
-                  <p>{part.profit}</p>
-                  <p>{part.percent}</p>
+                  <p>{"-----"}</p>
+                  <p>{"------"}</p>
                 </div>
               );
             })}
           </div>
-          {arr.parts.length > 3 && (
+          {arr.data[0].parts.length > 3 && (
             <button
               onClick={() => setShowAllParts(!showAllParts)}
               className={css.showMoreBtn}
@@ -368,6 +367,20 @@ export default function PartsList({
         >
           <WarehouseAvailabilityModal
             onClose={() => setWarehouseModalOpen(false)}
+          />
+        </Modal>
+      )}
+      {deletePartModalOpen && (
+        <Modal
+          isOpen={deletePartModalOpen}
+          onClose={() => setDeletePartModalOpen(false)}
+        >
+          <DeletePartModal
+            onClose={() => setDeletePartModalOpen(false)}
+            order={order}
+            setOrder={setOrder}
+            correctedTotalOrder={correctedTotalOrder}
+            nodeId={nodeIdForDelete}
           />
         </Modal>
       )}

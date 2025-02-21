@@ -178,6 +178,7 @@ export const initialState = {
       sparesAmount: 0.0,
       sparesPrice: 0.0,
       isDisabled: false,
+      selectedPages: [],
       schedule: {},
       files: {
         passport: null, //Файл паспорта (PDF)
@@ -367,11 +368,18 @@ export const initialState = {
     clientsList: [],
     clientContact: {},
     nodesAndPartsForDiagnostics: [],
-    diagnostics: {},
+    diagnostic: {},
+    commercialOfferData: {},
     commercialOffer: {},
+    commercialOfferId: null,
     order: {},
     repair: {},
     invoices: {},
+    error: null,
+    isLoading: null,
+    isCOLoading: null,
+    isDiagLoading: null,
   },
+
   isModalOpen: false,
 };

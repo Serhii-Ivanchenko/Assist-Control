@@ -1,7 +1,7 @@
 .customTableWrapper{
   display: block;
   width: 100%;
-  max-height: 571px;
+  max-height: 560px;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -16,7 +16,7 @@
 }
 
 .customTableWrapper::-webkit-scrollbar {
-  width: 8px; /* Зменшуємо товщину скролу */
+  width: 8px;
 }
 
 .customTableWrapper::-webkit-scrollbar-thumb {
@@ -135,21 +135,33 @@
 }
 .nameColumn {
   width: 150px;
+  position: relative;
+}
+
+.deleteIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--red); 
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.deleteIconContainer:hover {
+  background-color: #ff0000; 
 }
 
 .deleteIcon {
-  cursor: pointer;
-  color: #d54e4f;
-  transform: translateY(-50%);
-
-  position: absolute;
-  top: 50%;
-  right: -3px;
+  color: var(-white);
+  stroke-width: 2px;
 }
 
-.deleteIcon:hover {
-  color: #ff0000;
-}
 
 .rowWrapper {
   position: relative;
@@ -170,4 +182,17 @@
 .headerBottom .columnDelete {
   visibility: hidden;
   border: none;
+}
+
+.arrowIcon {
+  position: absolute;
+  bottom: 30%;
+  right: 2%;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.rotated {
+  transform: rotate(180deg);
 }

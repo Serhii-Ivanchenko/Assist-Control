@@ -28,6 +28,11 @@
   margin-right: 33px;
 }
 
+.onlyName {
+  width: 100%;
+  margin-right: 0;
+}
+
 .sideL {
   margin-right: 59px;
 }
@@ -42,6 +47,10 @@
   flex-shrink: 0;
 }
 
+.detailsItemFotItemWithOneBtn {
+  gap: 40px;
+}
+
 .detailsItem:nth-child(2n + 2) {
   background-color: #30333e;
 }
@@ -52,6 +61,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.btnAlone {
+  justify-content: end;
+  width: 40px;
 }
 
 .btn {
@@ -85,6 +98,10 @@
   font-variant: small-caps;
 
   width: 147px;
+}
+
+.subcategoryNameWithOneBtn {
+  width: 221px;
 }
 
 .detailsList {

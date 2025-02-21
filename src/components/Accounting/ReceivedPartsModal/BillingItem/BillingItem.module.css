@@ -1,6 +1,6 @@
 .billingRow {
   display: grid;
-  grid-template-columns: 126px 80px 128px 154px 1fr 117px 113px 27px;
+  grid-template-columns: 115px 88px 125px 154px 1fr 120px 100px 15px;
   padding: 7px 20px;
   align-items: center;
 

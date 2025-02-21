@@ -1,7 +1,7 @@
 import css from "./StaffPart.module.css";
 import avatar from "../../../assets/images/avatar_default.png";
 import { BsPlusLg } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Modal from "../../Modals/Modal/Modal";
 // import AddTeamMember from "../../Modals/UserSettingsModal/AddTeamMember/AddTeamMember.jsx"
 // import { IoStarSharp } from "react-icons/io5";
@@ -12,7 +12,6 @@ import RatingStars from "../../sharedComponents/RatingStars/RatingStars.jsx";
 import { useDispatch } from "react-redux";
 import {
   deleteEmployee,
-  getAllEmployees,
   updateEmployeeStatus,
 } from "../../../redux/settings/operations.js";
 import { useSelector } from "react-redux";
@@ -24,10 +23,13 @@ import toast from "react-hot-toast";
 
 export default function StaffPart() {
   const dispatch = useDispatch();
-
+  const employees = useSelector(selectEmployees);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState(null);
-  const employees = useSelector(selectEmployees);
+  const isFirstDataLoad = useRef(true);
+  const scrollToTheLastItemRef = useRef();
+  const [staffLength, setStaffLength] = useState(employees.length);
+
   console.log("employees", employees);
 
   const [updatedPhotos, setUpdatedPhotos] = useState({});
@@ -43,6 +45,24 @@ export default function StaffPart() {
       setUpdatedPhotos(newPhotos);
     }
   }, [employees]);
+
+  useEffect(() => {
+    if (isFirstDataLoad.current && employees.length > 0) {
+      isFirstDataLoad.current = false;
+      setStaffLength(employees.length);
+      return;
+    }
+
+    if (employees.length > staffLength) {
+      requestAnimationFrame(() => {
+        scrollToTheLastItemRef.current?.scrollTo({
+          top: scrollToTheLastItemRef.current.scrollHeight,
+          behavior: "smooth",
+        });
+      });
+    }
+    setStaffLength(employees.length);
+  }, [employees, staffLength]);
 
   const toDisable = (id, currentStatus) => {
     const newStatus = currentStatus === 1 ? 0 : 1;
@@ -144,7 +164,7 @@ export default function StaffPart() {
 
   return (
     <div className={css.StaffPart}>
-      <div className={css.divForScroll}>
+      <div className={css.divForScroll} ref={scrollToTheLastItemRef}>
         <ul className={css.teamList}>
           {employees.map((member, index) => (
             <li key={index} className={css.teamListItem}>

@@ -15,12 +15,26 @@
   margin-bottom: 9px;
 }
 
+.linkBtn {
+  display: inline-flex;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 13px;
+
+  color: var(--CRM-modal-PlayBtnTriangle, #00a3ff);
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .infoBox {
   display: flex;
   align-items: center;
   gap: 10px;
 
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .infoKey {
@@ -54,76 +68,36 @@
   gap: 16px;
 }
 
-.selectWrapper {
-  display: inline-flex;
-  height: 39px;
-  width: fit-content;
-  padding: 10px 10px 10px 16px;
-  align-items: center;
-  border-radius: 12px;
-  background: var(--CRM-modal-InputBG, #2d3038);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+.popupContainer {
+  position: relative;
 }
 
-.selectCashDesk {
+.select {
   display: inline-flex;
-  height: 39px;
-  width: fit-content;
   padding: 10px 10px 10px 16px;
   align-items: center;
-  border-radius: 12px;
-  background: var(--CRM-modal-InputBG, #2d3038);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.selectWrapper select {
-  min-width: 105px;
-  width: max-content;
-
-  appearance: none;
-  background: transparent;
+  gap: 10px;
 
   border: none;
-  cursor: pointer;
-  outline: none;
+  border-radius: 12px;
+  background: var(--CRM-modal-InputBG, #2d3038);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: fit-content;
 
+  cursor: pointer;
   color: #fff;
+
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-}
-
-.selectCashDesk select {
-  min-width: 65px;
-  width: max-content;
-
-  appearance: none;
-  background: transparent;
-
-  border: none;
-  cursor: pointer;
-  outline: none;
-
-  color: #fff;
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-.selectWrapper select option,
-.selectCashDesk select option {
-  display: flex;
-  background: #2d3038;
-  color: white;
-  font-size: 16px;
-  padding: 10px;
 }
 
 .arrowIcon {
-  pointer-events: none;
-  color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.rotated {
+  transform: rotate(180deg);
 }

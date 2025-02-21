@@ -58,9 +58,14 @@ export default function CheckoutPart() {
   const [warehouseValue, setWarehouseValue] = useState(null);
   const [responsibleValue, setResponsibleValue] = useState(null);
   const [entrepreneurValue, setEntrepreneurValue] = useState(null);
-
+  const isFirstDataLoad = useRef(true);
+  const [checkoutsLength, setCheckoutsLength] = useState(checkouts.length);
   const inputFocusRef = useRef();
   const scrollToTheLastItemRef = useRef();
+  const [isOpenCurrency, setIsOpenCurrency] = useState(false);
+  const [isOpenWarehouse, setIsOpenWarehouse] = useState(false);
+  const [isOpenResponsible, setIsOpenResponsible] = useState(false);
+  const [isOpenEntrepreneur, setIsOpenEntrepreneur] = useState(false);
 
   const handleEditing = (id) => {
     const checkoutToEdit = checkouts.find((item) => item.id === id);
@@ -154,14 +159,32 @@ export default function CheckoutPart() {
     }
   };
 
+  // useEffect(() => {
+  //   if (checkouts.length > 0) {
+  //     scrollToTheLastItemRef.current?.scrollTo({
+  //       top: scrollToTheLastItemRef.current.scrollHeight,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // }, [checkouts]);
+
   useEffect(() => {
-    if (checkouts.length > 0) {
-      scrollToTheLastItemRef.current?.scrollTo({
-        top: scrollToTheLastItemRef.current.scrollHeight,
-        behavior: "smooth",
+    if (isFirstDataLoad.current && checkouts.length > 0) {
+      isFirstDataLoad.current = false;
+      setCheckoutsLength(checkouts.length);
+      return;
+    }
+
+    if (checkouts.length > checkoutsLength) {
+      requestAnimationFrame(() => {
+        scrollToTheLastItemRef.current?.scrollTo({
+          top: scrollToTheLastItemRef.current.scrollHeight,
+          behavior: "smooth",
+        });
       });
     }
-  }, [checkouts]);
+    setCheckoutsLength(checkouts.length);
+  }, [checkouts, checkoutsLength]);
 
   const handleChangeName = (newName, id) => {
     setEditedValue((prev) => ({
@@ -246,7 +269,16 @@ export default function CheckoutPart() {
 
   return (
     <div className={css.checkoutPart}>
-      <div className={css.divForScroll} ref={scrollToTheLastItemRef}>
+      <div
+        className={`${css.divForScroll} ${
+          (isOpenCurrency ||
+            isOpenEntrepreneur ||
+            isOpenResponsible ||
+            isOpenWarehouse) &&
+          css.divForScrollForEditing
+        }`}
+        ref={scrollToTheLastItemRef}
+      >
         <ul className={css.checkoutPartList}>
           {checkouts.map((checkout, index) => (
             <li key={index} className={css.checkoutItem}>
@@ -270,6 +302,9 @@ export default function CheckoutPart() {
                       width={css.infoCurrency}
                       setSelectedValue={setCurrencyValue}
                       selectedValue={currencyValue}
+                      isOpen={isOpenCurrency}
+                      setIsOpen={setIsOpenCurrency}
+                      containerRef={scrollToTheLastItemRef}
                     />
                   </div>
 
@@ -280,6 +315,9 @@ export default function CheckoutPart() {
                       width={css.infoEnt}
                       setSelectedValue={setEntrepreneurValue}
                       selectedValue={entrepreneurValue}
+                      isOpen={isOpenEntrepreneur}
+                      setIsOpen={setIsOpenEntrepreneur}
+                      containerRef={scrollToTheLastItemRef}
                     />
                   </div>
 
@@ -290,6 +328,9 @@ export default function CheckoutPart() {
                       width={css.infoWh}
                       setSelectedValue={setWarehouseValue}
                       selectedValue={warehouseValue}
+                      isOpen={isOpenWarehouse}
+                      setIsOpen={setIsOpenWarehouse}
+                      containerRef={scrollToTheLastItemRef}
                     />
                   </div>
 
@@ -300,6 +341,9 @@ export default function CheckoutPart() {
                       width={css.infoResp}
                       setSelectedValue={setResponsibleValue}
                       selectedValue={responsibleValue}
+                      isOpen={isOpenResponsible}
+                      setIsOpen={setIsOpenResponsible}
+                      containerRef={scrollToTheLastItemRef}
                     />
                   </div>
                 </div>

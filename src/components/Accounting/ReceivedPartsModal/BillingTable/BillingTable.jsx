@@ -16,18 +16,20 @@ function BillingTable({ supplier }) {
       <div className={styles.billingRow}>
         <p>7 шт</p>
       </div>
-      {supplier.parts.map((part) => (
-        <BillingItem
-          key={part.id}
-          date={part.date}
-          quantity={part.availability}
-          code={part.code}
-          brand={part.brand}
-          name={part.part_name}
-          price={part.price}
-          total={part.price * part.availability}
-        />
-      ))}
+      <div className={styles.scrollContainer}>
+        {supplier.parts.map((part) => (
+          <BillingItem
+            key={part.id}
+            date={part.date}
+            quantity={part.availability}
+            code={part.code}
+            brand={part.brand}
+            name={part.part_name}
+            price={part.price}
+            total={part.price * part.availability}
+          />
+        ))}
+      </div>
     </div>
   );
 }

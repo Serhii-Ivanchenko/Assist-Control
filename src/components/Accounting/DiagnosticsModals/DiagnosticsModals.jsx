@@ -2,9 +2,16 @@ import DiagnosticsModalSave from "./DiagnosticsModalSave/DiagnosticsModalSave";
 import DiagnosticsModal from "./DiagnosticsModal/DiagnosticsModal";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getNodesAndParts } from "../../../redux/accounting/operations";
+import {
+  getDiagnostic,
+  getNodesAndParts,
+} from "../../../redux/accounting/operations";
 import { useSelector } from "react-redux";
-import { selectCategories } from "../../../redux/accounting/selectors";
+import {
+  selectCategories,
+  selectDiagLoading,
+  selectDiagnostic,
+} from "../../../redux/accounting/selectors";
 
 // const togglePoints = [
 //   { label: "Двигун", checked: false, id: "1" },
@@ -16,7 +23,7 @@ import { selectCategories } from "../../../redux/accounting/selectors";
 //   { label: "Вихлопна", checked: false, id: "7" },
 // ];
 
-export default function DiagnosticsModals({ onClose }) {
+export default function DiagnosticsModals({ onClose, isRepairModal, diagId }) {
   const [openModalSave, setOpenModalSave] = useState(false);
   const [chosenPoints, setChosenPoints] = useState([]);
   const [isReadOnly, setIsReadOnly] = useState(false);
@@ -24,16 +31,27 @@ export default function DiagnosticsModals({ onClose }) {
   const [spares, setSpares] = useState([]);
 
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getNodesAndParts());
+    dispatch(getNodesAndParts()).unwrap();
+    // dispatch(getDiagnostic());
   }, []);
 
   const togglePoints = useSelector(selectCategories);
+  const diagnosticsData = useSelector(selectDiagnostic);
+  console.log("diagnosticsData", diagnosticsData);
+  const loading = useSelector(selectDiagLoading);
+
+  // const diagId = null;
+  // const diagId = diagnosticsData.diagnostic_id;
+  // console.log("diagId", diagId);
+
+  useEffect(() => {
+    console.log("spares", spares);
+  });
 
   return (
     <>
-      {openModalSave ? (
+      {openModalSave || isRepairModal || diagId ? (
         <DiagnosticsModalSave
           onClose={onClose}
           togglePoints={togglePoints}
@@ -41,6 +59,9 @@ export default function DiagnosticsModals({ onClose }) {
           openModalSave={openModalSave}
           chosenPoints={chosenPoints}
           chosenSpares={chosenSpares}
+          diagnosticsData={diagnosticsData}
+          diagId={diagId}
+          loading={loading}
         />
       ) : (
         <DiagnosticsModal
@@ -55,6 +76,8 @@ export default function DiagnosticsModals({ onClose }) {
           chosenSpares={chosenSpares}
           spares={spares}
           setSpares={setSpares}
+          diagnosticsData={diagnosticsData}
+          loading={loading}
         />
       )}
     </>

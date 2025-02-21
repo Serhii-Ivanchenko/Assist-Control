@@ -22,58 +22,47 @@ const recommendation = {
   personName: "Шевченко А.В.",
 };
 
-export default function SavedInfoTable({ chosenSpares }) {
+export default function SavedInfoTable({ chosenSpares, parts, diagId }) {
   const [diagnostic, setDiagnostic] = useState("spareParts");
 
   const chosenSparesWithSides = chosenSpares.map((spare) => ({
     ...spare,
-    name: `${spare.name} ${spare.side === "left" ? "(лівий)" : "(правий)"}`,
+    name: `${spare.name} ${
+      spare.side === "left"
+        ? "(лівий)"
+        : spare.side === "right"
+        ? "(правий)"
+        : " "
+    }`,
   }));
+
+  const spares = diagId ? parts : chosenSparesWithSides;
 
   return (
     <div className={css.tableWrapper}>
-      {/* <p>SavedInfoTable</p> */}
       <div className={css.infoWrapper}>
         <div className={css.infoBtnWrapper}>
           <button
-            // className={clsx(
-            //   css.infoBtn
-            //   // diagnostic !== "spareParts" && css.nonActiveBtn,
-            //   // !diagnostics.spareParts && css.disabledBtn
-            // )}
             className={clsx(css.infoBtn, {
               [css.nonActiveBtn]: diagnostic === "spareParts",
             })}
             onClick={() => setDiagnostic("spareParts")}
-            // disabled={!diagnostics.spareParts}
           >
             Запчастини
           </button>
           <button
-            // className={clsx(
-            //   css.infoBtn
-            //   // diagnostic !== "PhotoOfBreakdown" && css.nonActiveBtn,
-            //   // !diagnostics.photoOfBreakdown && css.disabledBtn
-            // )}
             className={clsx(css.infoBtn, {
               [css.nonActiveBtn]: diagnostic === "PhotoOfBreakdown",
             })}
             onClick={() => setDiagnostic("PhotoOfBreakdown")}
-            // disabled={!diagnostics.photoOfBreakdown}
           >
             Фото поломки
           </button>
           <button
-            // className={clsx(
-            //   css.infoBtn
-            //   // diagnostic !== "comment" && css.nonActiveBtn,
-            //   // !diagnostics.message && css.disabledBtn
-            // )}
             className={clsx(css.infoBtn, {
               [css.nonActiveBtn]: diagnostic === "comment",
             })}
             onClick={() => setDiagnostic("comment")}
-            // disabled={!diagnostics.message}
           >
             Коментар механіка
           </button>
@@ -82,32 +71,44 @@ export default function SavedInfoTable({ chosenSpares }) {
           <div className={css.sparePartsTableWrapper}>
             <TableContainer
               component={Paper}
-              style={{ maxHeight: "280px", overflow: "auto" }}
+              // style={{ maxHeight: "280px", overflow: "auto" }}
             >
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell className={css.firstHeaderCell}>№</TableCell>
-                    <TableCell>Назва</TableCell>
+                    <TableCell className={css.nameHeaderCell}>Назва</TableCell>
                     {/* <TableCell>Номер</TableCell> */}
-                    <TableCell>Стан</TableCell>
-                    <TableCell>Рекомендація</TableCell>
+                    {/* <TableCell>Стан</TableCell> */}
+                    <TableCell className={css.recHeaderCell}>
+                      Рекомендація
+                    </TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  {chosenSparesWithSides.map((item, index) => (
-                    <TableRow
-                      key={`${Math.random()}`}
-                      // style={{ display: "table", width: "100%" }}
-                    >
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>{item.name}</TableCell>
-                      {/* <TableCell></TableCell> */}
-                      <TableCell>Критично</TableCell>
-                      <TableCell>Не вказано</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
+              </Table>
+              <Table>
+                <div className={css.scrollableBody}>
+                  <TableBody style={{ maxHeight: "280px", overflow: "auto" }}>
+                    {spares.map((item, index) => (
+                      <TableRow
+                        key={`${Math.random()}`}
+                        // style={{ display: "table", width: "100%" }}
+                      >
+                        <TableCell className={css.firstHeaderCell}>
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className={css.nameHeaderCell}>
+                          {diagId ? item.part_name : item.name}
+                        </TableCell>
+                        {/* <TableCell></TableCell> */}
+                        {/* <TableCell>Критично</TableCell> */}
+                        <TableCell className={css.recHeaderCell}>
+                          {item.comment || "Під заміну"}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </div>
               </Table>
             </TableContainer>
           </div>
