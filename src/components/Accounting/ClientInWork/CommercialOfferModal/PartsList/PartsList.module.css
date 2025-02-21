@@ -10,6 +10,14 @@
   border-radius: 4px;
 }
 
+.createCp {
+  grid-template-columns: 65px 93px 74px 96px 136px 157px 110px 110px 119px 110px 110px 40px 50px 22px;
+}
+
+.existedCp {
+  grid-template-columns: 65px 74px 96px 136px 157px 110px 110px 119px 110px 110px 40px 50px;
+}
+
 .quantityWrapper {
   display: flex;
 }
@@ -178,8 +186,13 @@
 }
 
 .nameWithOption {
-  position: relative;
+  /* position: relative; */
 }
+
+/* .nameWithOption:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+} */
 
 .tooltip {
   position: fixed;
@@ -193,6 +206,9 @@
   /* Щоб тултіп не блокував події курсора */
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  /* visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s; */
 }
 
 .workPrice {

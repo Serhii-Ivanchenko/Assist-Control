@@ -3,8 +3,15 @@
   position: relative;
   background-color: var(--dark-gray);
   border-radius: 12px;
-  width: 1459px;
   height: 1036px;
+}
+
+.modalCreateCP {
+  width: 1459px;
+}
+
+.modalExistedCp {
+  width: 1335px;
 }
 
 .topWrapper {
@@ -142,6 +149,14 @@
   margin-left: 21px;
 }
 
+.createCp {
+  grid-template-columns: 65px 93px 74px 96px 130px 157px 110px 110px 119px 110px 110px 40px;
+}
+
+.existedCp {
+  grid-template-columns: 65px 74px 96px 130px 157px 110px 110px 119px 110px 110px 40px;
+}
+
 .headerWithArrows {
   display: flex;
   gap: 4px;
@@ -183,17 +198,31 @@
   width: 22px;
   height: 22px;
   fill: #34c759;
-  margin-left: 1320px;
   margin-bottom: 17px;
   cursor: pointer;
 }
 
+.addIconCreateCp {
+  margin-left: 1320px;
+}
+
+.addIconExistedCp {
+  margin-left: 1227px;
+}
+
 .bottomTextWrapper {
   display: grid;
-  grid-template-columns: 625px 110px 110px 119px 110px 110px 40px;
   justify-items: center;
   align-items: center;
   margin-bottom: 64px;
+}
+
+.bottomTextWrapperCreateCp {
+  grid-template-columns: 656px 110px 110px 119px 110px 110px 40px;
+}
+
+.bottomTextWrapperExistedCp {
+  grid-template-columns: 573px 110px 110px 119px 110px 110px 40px;
 }
 
 .bottomWrapper {

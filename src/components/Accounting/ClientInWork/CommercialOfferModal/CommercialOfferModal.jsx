@@ -18,9 +18,12 @@ import ComOfferPopup from "./ComOfferPopup/ComOfferPopup";
 import { useSelector } from "react-redux";
 import {
   selectCOLoading,
+  selectCommercialOffer,
   selectCommercialOfferData,
 } from "../../../../redux/accounting/selectors.js";
 import Loader from "../../../Loader/Loader.jsx";
+import { selectUser } from "../../../../redux/auth/selectors.js";
+import PartsListExistedComOffer from "./PartsList/PartsListExistedComOffer.jsx";
 // import Modal from "../../../Modals/Modal/Modal";
 // import WarehouseAvailabilityModal from "./WarehouseAvailabilityModal/WarehouseAvailabilityModal";
 
@@ -226,9 +229,8 @@ const dataArr = {
 };
 
 export default function CommercialOfferModal({ onClose }) {
-  const data = useMemo(() => dataArr, []);
+  // const data = useMemo(() => dataArr, []);
   const [totalOrder, setTotalOrder] = useState({});
-  const [nodesArr, setNodesArr] = useState(data.nodes);
   // const [sentForApproval, setSentForApproval] = useState(false);
   // const [approved, setApproved] = useState(false);
   // const [pay, setPay] = useState(false);
@@ -236,13 +238,18 @@ export default function CommercialOfferModal({ onClose }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [approval, setApproval] = useState("");
   const buttonRef = useRef(null);
-  const info = useSelector(selectCommercialOfferData);
+  const data = useSelector(selectCommercialOfferData);
+  const info = useMemo(() => data, []);
   const loading = useSelector(selectCOLoading);
+  const managerInfo = useSelector(selectUser);
+  const createdCommercialOffer = useSelector(selectCommercialOffer);
+  const [cpId, setcpId] = useState(false);
+  console.log("createdCommercialOffer", createdCommercialOffer);
   console.log("info", info);
 
   //
 
-  // console.log("totalOrder", totalOrder);
+  console.log("totalOrder", totalOrder);
 
   const correctedTotalOrder = (nodeId) => {
     const updatedItems = Object.fromEntries(
@@ -302,7 +309,9 @@ export default function CommercialOfferModal({ onClose }) {
   // };
 
   return (
-    <div className={css.modal}>
+    <div
+      className={clsx(css.modal, cpId ? css.modalExistedCp : css.modalCreateCP)}
+    >
       <BsXLg className={css.closeIcon} onClick={onClose} />
       <p className={css.offerNumber}>КП № </p>
       {loading ? (
@@ -311,30 +320,41 @@ export default function CommercialOfferModal({ onClose }) {
         <>
           <div className={css.topWrapper}>
             <CarInfo
-              clientName={info.client.name}
-              clientPhone={info.client.phone}
+              clientName={
+                cpId ? createdCommercialOffer.client.name : info.client.name
+              }
+              clientPhone={
+                cpId ? createdCommercialOffer.client.phone : info.client.phone
+              }
               // carImg={carImg}
-              carNumber={info.plate}
-              carMake={info.make}
-              carModel={info.model}
-              carYear={info.year}
-              vin={info.vin}
+              carNumber={cpId ? createdCommercialOffer.car.plate : info.plate}
+              carMake={cpId ? createdCommercialOffer.car.make : info.make}
+              carModel={cpId ? createdCommercialOffer.car.model : info.model}
+              carYear={cpId ? createdCommercialOffer.car.year : info.year}
+              vin={cpId ? createdCommercialOffer.car.vin : info.vin}
               mileage={"---------"}
             />
             <div className={css.rightSectionWrapper}>
-              <p className={css.date}>{formattedDate}</p>
+              <p className={css.date}>{cpId ? "ДАТА КП" : formattedDate}</p>
               <button className={css.link}>
-                Діагностика № {info.diagnostic_id}
+                Діагностика №{" "}
+                {cpId
+                  ? createdCommercialOffer.diagnostic_id
+                  : info.diagnostic_id}
               </button>
               <div className={css.mechanicWrapper}>
                 <BsWrench className={css.spannerIcon} />
                 <p className={css.mechanicText}>Механік:</p>
-                <p className={css.mechanicName}>{info.mechanic.name}</p>
+                <p className={css.mechanicName}>
+                  {cpId
+                    ? createdCommercialOffer.mechanic.name
+                    : info.mechanic.name}
+                </p>
               </div>
               <div className={css.managerWrapper}>
                 <BsPersonLinesFill className={css.personIcon} />
                 <p className={css.mechanicText}>Менеджер:</p>
-                <p className={css.mechanicName}>{"-----------"}</p>
+                <p className={css.mechanicName}>{managerInfo.name}</p>
               </div>
             </div>
           </div>
@@ -346,59 +366,106 @@ export default function CommercialOfferModal({ onClose }) {
               Аналог
             </button>
           </div>
-          <div className={css.tableHeaderWrapper}>
-            <div className={css.headerWithArrows}>
+          <div
+            className={clsx(
+              css.tableHeaderWrapper,
+              cpId ? css.existedCp : css.createCp
+            )}
+          >
+            {cpId ? (
               <p className={css.tableHeaderText}>Дата</p>
-              <SortButtonsArrow />
-            </div>
-            <div className={css.headerWithArrows}>
-              <p className={css.tableHeaderText}>Наявність</p>
-              <SortButtonsArrow />
-            </div>
+            ) : (
+              <div className={css.headerWithArrows}>
+                <p className={css.tableHeaderText}>Дата</p>
+                <SortButtonsArrow />
+              </div>
+            )}
+            {!cpId && (
+              <div className={css.headerWithArrows}>
+                <p className={css.tableHeaderText}>Наявність</p>
+                <SortButtonsArrow />
+              </div>
+            )}
             <p className={css.tableHeaderText}>Кількість</p>
             <p className={css.tableHeaderText}>Артикул</p>
             <p className={css.tableHeaderText}>Бренд</p>
             <p className={css.tableHeaderText}>Номенклатура</p>
-            <div className={css.headerWithArrows}>
+            {cpId ? (
               <p className={css.tableHeaderText}>Ціна роботи</p>
-              <SortButtonsArrow />
-            </div>
-            <div className={css.headerWithArrows}>
+            ) : (
+              <div className={css.headerWithArrows}>
+                <p className={css.tableHeaderText}>Ціна роботи</p>
+                <SortButtonsArrow />
+              </div>
+            )}
+            {cpId ? (
               <p className={css.tableHeaderText}>Ціна продажу</p>
-              <SortButtonsArrow />
-            </div>
+            ) : (
+              <div className={css.headerWithArrows}>
+                <p className={css.tableHeaderText}>Ціна продажу</p>
+                <SortButtonsArrow />
+              </div>
+            )}
             <p className={css.tableHeaderText}>Склад</p>
             <p className={css.tableHeaderText}>Сума закупки</p>
-            <div className={css.headerWithArrows}>
+            {cpId ? (
               <p className={css.tableHeaderText}>Прибуток</p>
-              <SortButtonsArrow />
-            </div>
-            <div className={css.headerWithArrows}>
+            ) : (
+              <div className={css.headerWithArrows}>
+                <p className={css.tableHeaderText}>Прибуток</p>
+                <SortButtonsArrow />
+              </div>
+            )}
+            {cpId ? (
               <p className={css.tableHeaderText}>%</p>
-              <SortButtonsArrow />
+            ) : (
+              <div className={css.headerWithArrows}>
+                <p className={css.tableHeaderText}>%</p>
+                <SortButtonsArrow />
+              </div>
+            )}
+          </div>
+          {cpId ? (
+            <div className={css.table}>
+              {createdCommercialOffer.parts.map((item, index) => {
+                return <PartsListExistedComOffer key={index} data={item} />;
+              })}
             </div>
-          </div>
-          <div className={css.table}>
-            {info.positions[0].position.map((item, index) => {
-              return (
-                <PartsList
-                  key={index}
-                  arr={item}
-                  date={"------"}
-                  setTotalOrder={setTotalOrder}
-                  correctedTotalOrder={correctedTotalOrder}
-                />
-              );
-            })}
-          </div>
-          <FiPlusCircle className={css.addIcon} />
-          <div className={css.bottomTextWrapper}>
+          ) : (
+            <div className={css.table}>
+              {info.positions[0].position.map((item, index) => {
+                return (
+                  <PartsList
+                    key={index}
+                    arr={item}
+                    date={"------"}
+                    setTotalOrder={setTotalOrder}
+                    correctedTotalOrder={correctedTotalOrder}
+                  />
+                );
+              })}
+            </div>
+          )}
+          <FiPlusCircle
+            className={clsx(
+              css.addIcon,
+              cpId ? css.addIconExistedCp : css.addIconCreateCp
+            )}
+          />
+          <div
+            className={clsx(
+              css.bottomTextWrapper,
+              cpId
+                ? css.bottomTextWrapperExistedCp
+                : css.bottomTextWrapperCreateCp
+            )}
+          >
             <p></p>
             <p>{totalWorkPrice ? totalWorkPrice : 0} грн</p>
             <p>{totalSalePrice ? totalSalePrice : 0} грн</p>
             <p></p>
-            <p>{totalSum ? totalSum : 0} грн</p>
-            <p>{totalProfit ? totalProfit : 0} грн</p>
+            <p>{totalSum ? totalSum.toFixed(2) : 0} грн</p>
+            <p>{totalProfit ? totalProfit.toFixed(2) : 0} грн</p>
             <p></p>
           </div>
           <DownloadPdfButtonKP carsData={dataArr} />

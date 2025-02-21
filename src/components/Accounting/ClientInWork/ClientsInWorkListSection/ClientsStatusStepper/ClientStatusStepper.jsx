@@ -27,7 +27,11 @@ import RecievedPartsPopup from "./RecievedPartsPopup/RecievedPartsPopup.jsx";
 import CommercialOfferModal from "../../CommercialOfferModal/CommercialOfferModal.jsx";
 import DiagnosticsModals from "../../../DiagnosticsModals/DiagnosticsModals.jsx";
 import PaymentDistrModal from "../../PaymentDistrModal/PaymentDistrModal.jsx";
-import { getCommercialOfferData } from "../../../../../redux/accounting/operations.js";
+import {
+  getCommercialOffer,
+  getCommercialOfferData,
+} from "../../../../../redux/accounting/operations.js";
+import { selectCommercialOfferId } from "../../../../../redux/accounting/selectors.js";
 
 function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const visibility = useSelector(selectVisibilityClientsInWork);
@@ -36,6 +40,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const [notificationSent, setNotificationSent] = useState(false);
   const dispatch = useDispatch();
   const [isCrm, setIsCrm] = useState("record");
+  const offerId = useSelector(selectCommercialOfferId);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const buttonRef = useRef(null);
@@ -124,6 +129,11 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         setModalContent(<DiagnosticsModals onClose={closeModal} />);
         break;
       case 3:
+        // if (offerId) {
+        //   dispatch(getCommercialOffer("67b835c9d903bf65ca07db7c"));
+        // } else {
+        //   dispatch(getCommercialOfferData("67b777dca876c8394c69cba0"));
+        // }
         dispatch(getCommercialOfferData("67b777dca876c8394c69cba0"));
         setIsModalOpen(true);
         setModalContent(<CommercialOfferModal onClose={closeModal} />);

@@ -33,6 +33,7 @@ export default function PartsList({
   const [deletePartModalOpen, setDeletePartModalOpen] = useState(false);
   const [nodeIdForDelete, setNodeIdForDelete] = useState("");
   const tableRef = useRef(null);
+
   console.log("arr", arr);
 
   const sortedPartsArray = [...arr.data[0].parts].sort(
@@ -52,7 +53,7 @@ export default function PartsList({
 
   const lineHeight = arr.data[0].parts.length > 2 ? "160px" : "auto";
 
-  const handleCheckboxChange = (partId, checked, price, profit, node_id) => {
+  const handleCheckboxChange = (partId, checked, price, profit) => {
     setOrder((prev) => ({
       ...prev,
 
@@ -61,7 +62,7 @@ export default function PartsList({
         selected: checked,
         price,
         profit,
-        node_id,
+        // node_id,
       },
     }));
 
@@ -77,7 +78,7 @@ export default function PartsList({
           selected: checked,
           price,
           profit,
-          node_id,
+          // node_id,
           work_price: workPrice,
           sale_price: salePrice,
         },
@@ -177,7 +178,7 @@ export default function PartsList({
 
   return (
     <div>
-      <div className={css.subHeader}>
+      <div className={`${css.subHeader} ${css.createCp}`}>
         <p className={css.subHeaderDate}>{"------"}</p>
         <p className={css.subHeaderDate}></p>
         <p className={css.tableHeaderText}>{"--------"} шт</p>
@@ -210,7 +211,7 @@ export default function PartsList({
         </div>
         <p></p>
         <p>{totalPurchaseAmount ? totalPurchaseAmount.toFixed(2) : 0}</p>
-        <p>{totalProfit ? totalProfit : 0}</p>
+        <p>{totalProfit ? totalProfit.toFixed(2) : 0}</p>
         <p></p>
         <div className={css.iconsWrapper}>
           {isEditing ? (
@@ -257,25 +258,27 @@ export default function PartsList({
                     <button type="button" className={css.quantityBtn}>
                       <FiMinusCircle
                         className={css.quantityIcon}
-                        onClick={() => handleDecrement(part.id)}
+                        onClick={() => handleDecrement(part.partId)}
                       />
                     </button>
                     <input
                       type="text"
                       className={css.quantity}
-                      value={order[part.id]?.quantity || 0}
+                      value={order[part.partId]?.quantity || 0}
                       onChange={(e) =>
-                        handleQuantityChange(part.id, e.target.value)
+                        handleQuantityChange(part.partId, e.target.value)
                       }
                     />
                     <button
                       type="button"
-                      disabled={order[part.id]?.quantity >= part.availability}
+                      disabled={
+                        order[part.partId]?.quantity >= part.availability
+                      }
                       className={css.quantityBtn}
                     >
                       <FiPlusCircle
                         className={css.quantityIcon}
-                        onClick={() => handleIncrement(part.id)}
+                        onClick={() => handleIncrement(part.partId)}
                       />
                     </button>
                   </div>
@@ -309,6 +312,7 @@ export default function PartsList({
                       {/* {part.supplier.toLowerCase() === "харків"
                         ? "Наявність"
                         : part.supplier} */}
+                      {part.supplier}
                     </p>
                     {/* {part.supplier.toLowerCase() === "харків" && (
                       <p className={css.glassIconWrapper}>
@@ -325,18 +329,18 @@ export default function PartsList({
                       type="checkbox"
                       name="checkbox"
                       className={css.checkboxInput}
-                      checked={order[part.id]?.selected || false}
+                      checked={order[part.partId]?.selected || false}
                       onChange={(e) =>
                         handleCheckboxChange(
-                          part.id,
+                          part.partId,
                           e.target.checked,
                           part.price,
-                          part.profit,
-                          arr.node_id
+                          part.profit
+                          // arr.node_id
                         )
                       }
                     />
-                    {order[part.id]?.selected ? (
+                    {order[part.partId]?.selected ? (
                       <FaRegCheckSquare className={css.checkboxIcon} />
                     ) : (
                       <FaRegSquare className={css.checkboxIcon} />
@@ -344,8 +348,13 @@ export default function PartsList({
                   </label>
                   <p className={css.tableText}>{part.details.price}</p>
                   {/* </div> */}
-                  <p>{"-----"}</p>
-                  <p>{"------"}</p>
+                  <p>
+                    {(
+                      (Number(part.details.price) * part.margin_percent) /
+                      100
+                    ).toFixed(2)}
+                  </p>
+                  <p>{part.margin_percent}</p>
                 </div>
               );
             })}
