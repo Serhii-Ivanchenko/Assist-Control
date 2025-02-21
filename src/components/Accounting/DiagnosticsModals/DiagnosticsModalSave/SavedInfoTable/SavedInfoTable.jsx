@@ -22,7 +22,7 @@ const recommendation = {
   personName: "Шевченко А.В.",
 };
 
-export default function SavedInfoTable({ chosenSpares }) {
+export default function SavedInfoTable({ chosenSpares, parts, diagId }) {
   const [diagnostic, setDiagnostic] = useState("spareParts");
 
   const chosenSparesWithSides = chosenSpares.map((spare) => ({
@@ -35,6 +35,8 @@ export default function SavedInfoTable({ chosenSpares }) {
         : " "
     }`,
   }));
+
+  const spares = diagId ? parts : chosenSparesWithSides;
 
   return (
     <div className={css.tableWrapper}>
@@ -87,7 +89,7 @@ export default function SavedInfoTable({ chosenSpares }) {
               <Table>
                 <div className={css.scrollableBody}>
                   <TableBody style={{ maxHeight: "280px", overflow: "auto" }}>
-                    {chosenSparesWithSides.map((item, index) => (
+                    {spares.map((item, index) => (
                       <TableRow
                         key={`${Math.random()}`}
                         // style={{ display: "table", width: "100%" }}
@@ -96,12 +98,12 @@ export default function SavedInfoTable({ chosenSpares }) {
                           {index + 1}
                         </TableCell>
                         <TableCell className={css.nameHeaderCell}>
-                          {item.name}
+                          {diagId ? item.part_name : item.name}
                         </TableCell>
                         {/* <TableCell></TableCell> */}
                         {/* <TableCell>Критично</TableCell> */}
                         <TableCell className={css.recHeaderCell}>
-                          Під заміну
+                          {item.comment || "Під заміну"}
                         </TableCell>
                       </TableRow>
                     ))}

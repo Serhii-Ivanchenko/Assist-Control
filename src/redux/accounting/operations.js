@@ -33,8 +33,8 @@ export const getDiagnostic = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        // `/dia/get_diagnostic/${diagnostic_id}`,
-        `/dia/get_diagnostic/67b777dca876c8394c69cba0`,
+        `/dia/get_diagnostic/${diagnostic_id}`,
+        // `/dia/get_diagnostic/67b777dca876c8394c69cba0`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
