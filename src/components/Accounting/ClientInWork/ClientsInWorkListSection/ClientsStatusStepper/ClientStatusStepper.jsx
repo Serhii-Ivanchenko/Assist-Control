@@ -110,7 +110,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   ];
 
   // const diagId = "67b85a5dd14e2f13c06d7704";
-  const diagId = null;
+     const diagId = null;
 
   // виклик модалки на групі кнопок
   const handleClick = (idx, event) => {
@@ -135,7 +135,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         );
         break;
       case 3:
-        dispatch(getCommercialOfferData("67b777dca876c8394c69cba0"));
+        dispatch(getCommercialOfferData("67b85a5dd14e2f13c06d7704"));
         setIsModalOpen(true);
         setModalContent(<CommercialOfferModal onClose={closeModal} />);
         break;
