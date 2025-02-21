@@ -1,6 +1,6 @@
 import CarInfo from "../../../sharedComponents/CarInfo/CarInfo.jsx";
 
-import PopUp from "../PopUp/PopUp.jsx"
+import PopUp from "../PopUp/PopUp.jsx";
 import { useEffect, useRef, useState } from "react";
 import { BsXLg } from "react-icons/bs";
 import {
@@ -89,7 +89,7 @@ export default function PaymentModal({ onClose }) {
 
   const handleEditToggle = () => {
     setIsEditing((prev) => !prev);
-    setEditedData((prev) => ({ ...prev, sumpay: prev.sumpay ||0 }));  
+    setEditedData((prev) => ({ ...prev, sumpay: prev.sumpay || 0 }));
   };
 
   //  const handleSelectChange = (field, value) => {
@@ -101,7 +101,7 @@ export default function PaymentModal({ onClose }) {
 
   const handleInputChange = (e) => {
     const value = e.target.value;
-    const numericValue = parseFloat(value) ;
+    const numericValue = parseFloat(value);
     setEditedData((prev) => ({ ...prev, sumpay: numericValue }));
   };
 
@@ -128,7 +128,10 @@ export default function PaymentModal({ onClose }) {
   //   );
   // };
 
-  const [activeService, setActiveService] = useState( avtoservice.find((service) => service.id === editedData.avtoservice) || avtoservice[0]); 
+  const [activeService, setActiveService] = useState(
+    avtoservice.find((service) => service.id === editedData.avtoservice) ||
+      avtoservice[0]
+  );
   const [isAvtoservice, setIsAvtoservice] = useState(false); // Видимость справочника
   const triggerAvtoserviceRef = useRef(null);
 
@@ -141,7 +144,9 @@ export default function PaymentModal({ onClose }) {
     setIsAvtoservice(false);
   };
 
-  const [activeCash, setActiveCash] = useState( cash.find((cashitem) => cashitem.id === editedData.cash) || cash[0]); 
+  const [activeCash, setActiveCash] = useState(
+    cash.find((cashitem) => cashitem.id === editedData.cash) || cash[0]
+  );
   const [isCash, setIsCash] = useState(false); // Видимость справочника
   const triggerCashRef = useRef(null);
 
@@ -154,8 +159,9 @@ export default function PaymentModal({ onClose }) {
     setIsCash(false);
   };
 
-
-   const [activePayType, setActivePayType] = useState( paytype.find((typeitem) => typeitem.id === editedData.paytype) || cash[0]); 
+  const [activePayType, setActivePayType] = useState(
+    paytype.find((typeitem) => typeitem.id === editedData.paytype) || cash[0]
+  );
   const [isPayType, setIsPayType] = useState(false); // Видимость справочника
   const triggerPayTypeRef = useRef(null);
 
@@ -194,141 +200,86 @@ export default function PaymentModal({ onClose }) {
             <p className={css.mechanicName}>{datakp.manager.manager_name}</p>
           </div>
 
-         
           <div className={css.selectWrapper}>
             <div
-                    className={css.serviceDisplay}
-                    ref={triggerAvtoserviceRef}
-                    onClick={toggleAvtoserviceSelector} // Открываем/закрываем справочник
-                  >
-                    <span>{activeService.name}</span>
-                    <BsFillCaretDownFill className={css.customSelectIcon}
-                      style={{
-                        fill: "var(--light-gray)",
-                        transform: isAvtoservice
-                          ? "rotate(180deg)"
-                          : "rotate(0deg)",
-                        transition: "transform 0.3s",
-                        // marginLeft: "4px",
-                        cursor: "pointer",
-                      }}
-                    />
-            </div>
-            
-            {isAvtoservice && (
-              <div>
-                <PopUp
-                  isOpen={isAvtoservice}
-                  onClose={() => setIsAvtoservice(false)}
-                  service={avtoservice}
-                  activeService={activeService}
-                  onSelect={handleAvtoserviceSelect}
-                  triggerRef={triggerAvtoserviceRef}
-                  top={275}
-                  left={569}
-                  width={200}
-                  bckgr={"var(--current-mileage-text)"}
-                />
-
-              </div>)}
-
-            {/* <div style={{}}>
-              {renderSelect(
-                "avtoservice",
-                editedData.avtoservice,
-                avtoservice,
-                160
-              )}
-            </div> */}
-
-<div
-                    className={css.cashDisplay}
-                    ref={triggerCashRef}
-                    onClick={toggleCashSelector} // Открываем/закрываем справочник
+              className={css.serviceDisplay}
+              ref={triggerAvtoserviceRef}
+              onClick={toggleAvtoserviceSelector} // Открываем/закрываем справочник
             >
-              <BsCurrencyDollar className={css.dollar} /> 
-                    <span>{activeCash.name}</span>
-                    <BsFillCaretDownFill className={css.customSelectIcon}
-                      style={{
-                        fill: "var(--light-gray)",
-                        transform: isCash
-                          ? "rotate(180deg)"
-                          : "rotate(0deg)",
-                        transition: "transform 0.3s",
-                        // marginLeft: "4px",
-                        cursor: "pointer",
-                      }}
-                    />
-            </div>
-            
-            {isCash && (
-              <div>
-
+              <span>{activeService.name}</span>
+              <BsFillCaretDownFill
+                className={`${css.customSelectIcon} ${
+                  isAvtoservice ? css.rotated : ""
+                }`}
+              />
+              {isAvtoservice && (
+                <div>
                   <PopUp
-                  isOpen={isCash}
-                  onClose={() => setIsCash(false)}
-                  service={cash}
-                  activeService={activeCash}
-                  onSelect={handleCashSelect}
-                  triggerRef={triggerCashRef}
-                  top={275}
-                  left={786}
-                  width={120}
-                  bckgr={"var(--current-mileage-text)"}
-                />
-
-              </div>)}
-
-
-             {/* <div style={{}}>
-              {renderSelect("cash", editedData.cash, cash, 120)}
-            </div>  */}
-
+                    isOpen={isAvtoservice}
+                    onClose={() => setIsAvtoservice(false)}
+                    service={avtoservice}
+                    activeService={activeService}
+                    onSelect={handleAvtoserviceSelect}
+                    triggerRef={triggerAvtoserviceRef}
+                  />
+                </div>
+              )}
             </div>
-         
+
+            <div
+              className={css.cashDisplay}
+              ref={triggerCashRef}
+              onClick={toggleCashSelector} // Открываем/закрываем справочник
+            >
+              <BsCurrencyDollar className={css.dollar} />
+              <span>{activeCash.name}</span>
+              <BsFillCaretDownFill
+                className={`${css.customSelectIcon} ${
+                  isCash ? css.rotated : ""
+                }`}
+              />
+              {isCash && (
+                <div>
+                  <PopUp
+                    isOpen={isCash}
+                    onClose={() => setIsCash(false)}
+                    service={cash}
+                    activeService={activeCash}
+                    onSelect={handleCashSelect}
+                    triggerRef={triggerCashRef}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
       <div className={css.bottomsection}>
         <div className={css.bottomfirst}>
-
- 
-            <div
-                    className={css.payTypeDisplay}
-                    ref={triggerPayTypeRef}
-                    onClick={togglePayTypeSelector} // Открываем/закрываем справочник
-                  >
-                    <span>{activePayType.name}</span>
-                    <BsFillCaretDownFill className={css.customSelectIcon}
-                      style={{
-                        fill: "var(--light-gray)",
-                        transform: isPayType
-                          ? "rotate(180deg)"
-                          : "rotate(0deg)",
-                        transition: "transform 0.3s",
-                        // marginLeft: "4px",
-                        cursor: "pointer",
-                      }}
-                    />
-            </div>
-            
+          <div
+            className={css.payTypeDisplay}
+            ref={triggerPayTypeRef}
+            onClick={togglePayTypeSelector} // Открываем/закрываем справочник
+          >
+            <span>{activePayType.name}</span>
+            <BsFillCaretDownFill
+              className={`${css.customSelectIcon} ${
+                isPayType ? css.rotated : ""
+              }`}
+            />
             {isPayType && (
-            <div>
-               <PopUp
+              <div>
+                <PopUp
                   isOpen={isPayType}
                   onClose={() => setIsPayType(false)}
                   service={paytype}
                   activeService={activePayType}
                   onSelect={handlePayTypeSelect}
                   triggerRef={triggerPayTypeRef}
-                  top={378}
-                  left={50}
-                  width={200}
-                  bckgr={"var(--current-mileage-text)"}
                 />
-                
-              </div>)}
-
-          {/* {renderSelect("paytype", editedData.paytype, paytype, 200)} */}
+              </div>
+            )}
+          </div>
         </div>
         <div className={css.bottomsecond}>
           <div className={css.blocksecond}>
