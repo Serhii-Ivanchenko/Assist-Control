@@ -99,7 +99,7 @@ export default function DiagnosticsModalSave({
                   <button
                     type="button"
                     className={`${css.btn} ${css.cancel}`}
-                    onClick={() => setOpenModalSave(!openModalSave)}
+                    onClick={handleClose}
                   >
                     Скасувати
                   </button>
