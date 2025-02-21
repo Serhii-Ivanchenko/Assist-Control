@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BsReceipt,
   BsUiRadiosGrid,
@@ -28,6 +28,10 @@ import CommercialOfferModal from "../../CommercialOfferModal/CommercialOfferModa
 import DiagnosticsModals from "../../../DiagnosticsModals/DiagnosticsModals.jsx";
 import PaymentDistrModal from "../../PaymentDistrModal/PaymentDistrModal.jsx";
 import Order from "../../Order/Order.jsx";
+import {
+  getCommercialOfferData,
+  getDiagnostic,
+} from "../../../../../redux/accounting/operations.js";
 
 function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const visibility = useSelector(selectVisibilityClientsInWork);
@@ -71,6 +75,12 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
     },
   ];
 
+  // backend request
+
+  // useEffect(() => {
+  //   dispatch(getCommercialOfferData());
+  // }, [dispatch]);
+
   // визнчення кольору іконок степера
   const [completedSteps, setCompletedSteps] = useState(() => {
     if (status === "complete") {
@@ -99,6 +109,9 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
     [buttons[9]],
   ];
 
+  // const diagId = "67b85a5dd14e2f13c06d7704";
+  const diagId = null;
+
   // виклик модалки на групі кнопок
   const handleClick = (idx, event) => {
     // setIsModalOpen(false);
@@ -114,12 +127,16 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         setModalContent("Modal for contact information");
         break;
       case 2:
+        // diagId && dispatch(getDiagnostic(diagId));
+
         setIsModalOpen(true);
-        setModalContent(<DiagnosticsModals onClose={closeModal} />);
+        setModalContent(
+          <DiagnosticsModals diagId={diagId} onClose={closeModal} />
+        );
         break;
       case 3:
+        dispatch(getCommercialOfferData("67b777dca876c8394c69cba0"));
         setIsModalOpen(true);
-
         setModalContent(<CommercialOfferModal onClose={closeModal} />);
         break;
       case 4:
@@ -146,7 +163,13 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
 
       case 7:
         setIsModalOpen(true);
-        setModalContent(<RepairModal onClose={closeModal} car={item} />);
+        setModalContent(
+          <RepairModal
+            onClose={closeModal}
+            car={item}
+            setModalContent={setModalContent}
+          />
+        );
         break;
       case 8:
         setIsModalOpen(true);

@@ -14,7 +14,6 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import {
   Tree,
-  getDescendants,
   MultiBackend,
   getBackendOptions,
 } from "@minoru/react-dnd-treeview";
@@ -24,20 +23,13 @@ import useTreeOpenHandler from "./useTreeOpenHandler/useTreeOpenHandler";
 import CreateWarehousePop from "./CreateWarehousePop/CreateWarehousePop";
 
 import { useSelector } from "react-redux";
-import {
-  // selectOneWareHouseTree,
-  selectWarehousesTree,
-} from "../../../redux/warehouse/selectors";
+import { selectWarehousesTree } from "../../../redux/warehouse/selectors";
 import { useDispatch } from "react-redux";
 import {
   createWarehouse,
   getAllWarehousesWithDetails,
   updateEntity,
 } from "../../../redux/warehouse/operations";
-// import {
-//   getWarehouseById,
-//   getWarehouses,
-// } from "../../../redux/warehouse/operations";
 
 export default function WarehousePart() {
   const dispatch = useDispatch();
@@ -95,26 +87,19 @@ export default function WarehousePart() {
     return acc;
   }, []);
 
-  // console.log("dataForTree", dataForTree);
-
   const [isAddWhModalOpen, setAddWhModalOpen] = useState(false);
-
   const { ref, getPipeHeight, toggle, openParentIfNeeded, open } =
     useTreeOpenHandler();
-
   const [isNewWhPopoverOpen, setNewWhPopoverOpen] = useState(false);
-
   const buttonRef = useRef(null);
+  const isFirstDataLoad = useRef(true);
+  const [warehousesLength, setWarehousesLength] = useState(warehouses.length);
 
   const [expandedNodes, setExpandedNodes] = useState([]);
 
   // Редагування гілочок
   const [isEditing, setIsEditing] = useState(false);
   const [tempNodeText, setTempNodeText] = useState({});
-
-  // const handleStopEditing = () => {
-  //   setIsEditing(false);
-  // };
 
   const handleStartEditing = (nodeId) => {
     setIsEditing(nodeId);
@@ -204,18 +189,23 @@ export default function WarehousePart() {
   const scrollToTheLastItemRef = useRef(null);
 
   // Прокрутка до ост. елементу при додаванні
-  // useEffect(() => {
-  //   if (
-  //     treeData.length > 0 &&
-  //     scrollToTheLastItemRef.current &&
-  //     treeData[treeData.length - 1]?.data === "warehouse"
-  //   ) {
-  //     scrollToTheLastItemRef.current?.scrollTo({
-  //       top: scrollToTheLastItemRef.current.scrollHeight,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // }, [treeData]);
+  useEffect(() => {
+    if (isFirstDataLoad.current && warehouses.length > 0) {
+      isFirstDataLoad.current = false;
+      setWarehousesLength(warehouses.length);
+      return;
+    }
+
+    if (warehouses.length > warehousesLength) {
+      requestAnimationFrame(() => {
+        scrollToTheLastItemRef.current?.scrollTo({
+          top: scrollToTheLastItemRef.current.scrollHeight,
+          behavior: "smooth",
+        });
+      });
+    }
+    setWarehousesLength(warehouses.length);
+  }, [warehouses, warehousesLength]);
 
   // Відкриття і закриття поповеру
   const handleTogglePopover = (e) => {
@@ -226,19 +216,6 @@ export default function WarehousePart() {
   const handleClosePopover = () => {
     setNewWhPopoverOpen(false);
   };
-
-  // Обчислення глибини,щоб елемент не можна було перетягнути вниз
-  // const calculateDepth = (nodeId, tree) => {
-  //   let depth = 0;
-  //   let currentNode = tree.find((node) => node.id === nodeId);
-
-  //   while (currentNode && currentNode.parent) {
-  //     depth += 1;
-  //     currentNode = tree.find((node) => node.id === currentNode.parent);
-  //   }
-
-  //   return depth;
-  // };
 
   const findWarehouseId = (nodeId, dataForTree) => {
     let currentNode = dataForTree.find((node) => node.id === nodeId);
@@ -253,16 +230,8 @@ export default function WarehousePart() {
     return null; // Якщо склад не знайдено
   };
 
-  // Перетягування
-  // const reorderArray = (array, sourceIndex, targetIndex) => {
-  //   const newArray = [...array];
-  //   const element = newArray.splice(sourceIndex, 1)[0];
-  //   newArray.splice(targetIndex, 0, element);
-  //   return newArray;
-  // };
-
   const handleDrop = (newTree, e) => {
-    const { dragSourceId, dropTargetId, destinationIndex } = e;
+    const { dragSourceId, dropTargetId } = e;
     if (
       typeof dragSourceId === "undefined" ||
       typeof dropTargetId === "undefined"
@@ -270,125 +239,6 @@ export default function WarehousePart() {
       return;
     const start = dataForTree.find((v) => v.id === dragSourceId);
     const end = dataForTree.find((v) => v.id === dropTargetId);
-
-    // const startDepth = calculateDepth(dragSourceId, dataForTree);
-    // const endDepth = calculateDepth(dropTargetId, dataForTree);
-    // console.log("startDepth", startDepth);
-    // console.log("endDepth", endDepth);
-    // console.log("dropTargetId", dropTargetId);
-
-    // if (startDepth < endDepth) {
-    //   toast.error("Переміщення сюди неможливе", {
-    //     position: "top-center",
-    //     duration: 3000,
-    //     style: {
-    //       background: "var(--bg-input)",
-    //       color: "var(--white)",
-    //     },
-    //   });
-    //   return;
-    // }
-
-    // if (
-    //   start?.parent === dropTargetId &&
-    //   typeof destinationIndex === "number"
-    // ) {
-    //   //   setTreeData((treeData) => {
-    //   //     const output = reorderArray(
-    //   //       treeData,
-    //   //       treeData.indexOf(start),
-    //   //       destinationIndex
-    //   //     );
-    //   //     return output;
-    //   //   });
-    //   toast.error("Переміщення сюди неможливе", {
-    //     position: "top-center",
-    //     duration: 3000,
-    //     style: {
-    //       background: "var(--bg-input)",
-    //       color: "var(--white)",
-    //     },
-    //   });
-
-    //   return;
-    // }
-
-    // // const parentOfStart = dataForTree.find((v) => v.id === start?.parent);
-    // // console.log("parentOfStart", parentOfStart);
-
-    // // if (parentOfStart && parentOfStart.parent === dropTargetId) {
-    // //   console.log("dropTargetId", dropTargetId);
-    // //   console.log("parentOfStart.parent", parentOfStart.parent);
-
-    // //   toast.error("Переміщення сюди неможливе", {
-    // //     position: "top-center",
-    // //     duration: 3000,
-    // //     style: {
-    // //       background: "var(--bg-input)",
-    // //       color: "var(--white)",
-    // //     },
-    // //   });
-    // //   return;
-    // // }
-
-    // if (
-    //   start?.parent !== dropTargetId &&
-    //   start &&
-    //   end &&
-    //   typeof destinationIndex === "number" &&
-    //   start.data !== end.data
-    // ) {
-    //   if (
-    //     getDescendants(dataForTree, dragSourceId).find(
-    //       (el) => el.id === dropTargetId
-    //     ) ||
-    //     dropTargetId === dragSourceId ||
-    //     (end && !end?.droppable)
-    //   ) {
-    //     toast.error("Переміщення сюди неможливе", {
-    //       position: "top-center",
-    //       duration: 3000,
-    //       style: {
-    //         background: "var(--bg-input)",
-    //         color: "var(--white)",
-    //       },
-    //     });
-    //     return;
-    //   }
-    // }
-
-    // const entityType = getTypeFromNodeId(start.id);
-    // const endEntityType = getTypeFromNodeId(end.id);
-
-    // if (entityType !== "warehouse" && entityType !== endEntityType) {
-    //   toast.error("Переміщення на інший рівень заборонене!", {
-    //     position: "top-center",
-    //     duration: 3000,
-    //     style: {
-    //       background: "var(--bg-input)",
-    //       color: "var(--white)",
-    //     },
-    //   });
-    //   return;
-    // }
-
-    // const entityType = getTypeFromNodeId(start.id);
-    // const endEntityType = getTypeFromNodeId(end.id);
-
-    // if (entityType !== endEntityType) return;
-
-    // // Перевіряємо, чи один і той самий склад
-    // const startWarehouse = findWarehouseId(start.id, dataForTree);
-    // const endWarehouse = findWarehouseId(end.id, dataForTree);
-
-    // if (startWarehouse !== endWarehouse) {
-    //   toast.error("Переміщення між складами заборонено!", {
-    //     position: "top-center",
-    //     duration: 3000,
-    //     style: { background: "var(--bg-input)", color: "var(--white)FFF" },
-    //   });
-    //   return;
-    // }
 
     const entityType = getTypeFromNodeId(start.id);
     const endEntityType = getTypeFromNodeId(end.id);
