@@ -9,17 +9,18 @@ import { TiTick } from "react-icons/ti";
 import Loader from "../../../Loader/Loader";
 
 export default function DiagnosticsModalSave({
-  // onClose,
+  onClose,
   togglePoints,
   setOpenModalSave,
   openModalSave,
   chosenPoints,
   chosenSpares,
+  isRepairModal,
   diagnosticsData,
-  onClose,
   diagId,
   loading,
-}) {
+}) 
+ {
   // const diagId = diagnosticsData.diagnostic_id;
   const client = diagnosticsData?.client;
   const date = new Date(diagnosticsData?.created_at).toLocaleDateString(
@@ -30,13 +31,15 @@ export default function DiagnosticsModalSave({
   const handleClose = () => {
     if (diagId) {
       console.log("diagId", diagId);
-
       onClose();
-    } else {
+    } 
+    if (isRepairModal) {
+      onClose(); // Повертає RepairModal
+    }else {
       setOpenModalSave(!openModalSave);
     }
   };
-
+  
   // const spares = diagId ? parts : chosenSpares;
 
   return (

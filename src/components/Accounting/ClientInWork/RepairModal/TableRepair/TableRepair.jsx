@@ -6,7 +6,6 @@ import {
   BsCheckCircleFill,
   BsXCircleFill,
 } from "react-icons/bs";
-import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import { useState } from "react";
 import ava1 from "../../../../../assets/images/avatar_default.png";
 import { HiMinus } from "react-icons/hi2";
@@ -67,6 +66,8 @@ const TableRepair = ({ data, onDelete }) => {
     setOpenModalForRow((prev) => ({
       // ...prev,
       [rowId]: !prev[rowId],
+      // [rowId]: prev?.[rowId] === undefined ? true : !prev[rowId]
+
     }));
   };
 
@@ -177,23 +178,17 @@ const TableRepair = ({ data, onDelete }) => {
                 <td className={styles.columnWorkCost}>{row.workCost}</td>
                 <td
                   className={clsx(styles.columnPosition, styles.nameColumn)}
-                  onClick={() => handleArrowClick(row.id)}
                 >
                   {selectedMechanics[row.id]
                     ? selectedMechanics[row.id].name
                     : row.mechanic.fullName}
-                  <span className={styles.arrowIcon}>
+                  <span className={styles.arrowIcon} onClick={() => handleArrowClick(row.id)}>
                     {openModalForRow[row.id] ? (
                       <BsCaretUpFill size={10} />
                     ) : (
                       <BsCaretDownFill size={10} />
                     )}
                   </span>
-                  {/* <BsCaretDownFill
-                    className={`${styles.arrowIcon} ${
-                      openModalForRow[row.id] ? styles.rotated : ""
-                    }`}
-                  /> */}
                   {openModalForRow[row.id] && (
                     <MechanicPopover
                       isOpen={openModalForRow[row.id]}

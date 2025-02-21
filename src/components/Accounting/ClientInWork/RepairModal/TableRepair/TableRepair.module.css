@@ -193,6 +193,6 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.rotated {
+/* .rotated {
   transform: rotate(180deg);
-}
+} */
