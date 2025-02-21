@@ -32,6 +32,10 @@ import {
   getCommercialOfferData,
 } from "../../../../../redux/accounting/operations.js";
 import { selectCommercialOfferId } from "../../../../../redux/accounting/selectors.js";
+import Order from "../../Order/Order.jsx";
+import {
+  getDiagnostic,
+} from "../../../../../redux/accounting/operations.js";
 
 function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const visibility = useSelector(selectVisibilityClientsInWork);
@@ -110,6 +114,9 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
     [buttons[9]],
   ];
 
+  const diagId = "67b85a5dd14e2f13c06d7704";
+  // const diagId = null;
+
   // виклик модалки на групі кнопок
   const handleClick = (idx, event) => {
     // setIsModalOpen(false);
@@ -125,8 +132,12 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         setModalContent("Modal for contact information");
         break;
       case 2:
+        // diagId && dispatch(getDiagnostic(diagId));
+
         setIsModalOpen(true);
-        setModalContent(<DiagnosticsModals onClose={closeModal} />);
+        setModalContent(
+          <DiagnosticsModals diagId={diagId} onClose={closeModal} />
+        );
         break;
       case 3:
         // if (offerId) {
@@ -134,7 +145,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         // } else {
         //   dispatch(getCommercialOfferData("67b777dca876c8394c69cba0"));
         // }
-        dispatch(getCommercialOfferData("67b777dca876c8394c69cba0"));
+        dispatch(getCommercialOfferData("67b85a5dd14e2f13c06d7704"));
         setIsModalOpen(true);
         setModalContent(<CommercialOfferModal onClose={closeModal} />);
         break;
@@ -145,7 +156,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         break;
       case 5:
         setIsModalOpen(true);
-        setModalContent("Recieved Modal");
+        setModalContent(<Order onClose={closeModal} />);
         break;
       case 6:
         // console.log("Opening popup...");

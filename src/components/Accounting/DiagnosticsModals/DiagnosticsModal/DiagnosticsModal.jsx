@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 // import { getNodesAndParts } from "../../../redux/accounting/operations.js";
 import CarInfo from "../../../sharedComponents/CarInfo/CarInfo.jsx";
 import { getNodesAndParts } from "../../../../redux/accounting/operations.js";
+// import Loader from "../../../Loader/Loader.jsx";
 
 export default function DiagnosticsModal({
   onClose,
@@ -24,12 +25,26 @@ export default function DiagnosticsModal({
   chosenSpares,
   spares,
   setSpares,
+  diagnosticsData,
+  // loading,
+  managerName,
 }) {
   // const [chosenPoints, setChosenPoints] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
   // const [isReadOnly, setIsReadOnly] = useState(false);
   const [categoryForDetailsPart, setCategoryForDetailsPart] = useState("");
   const dispatch = useDispatch();
+
+  // const diagId = diagnosticsData.diagnostic_id;
+  const client = diagnosticsData?.client;
+  const date = diagnosticsData.created_at
+    ? new Date(diagnosticsData?.created_at).toLocaleDateString("uk-UA")
+    : new Date().toLocaleDateString("uk-UA");
+
+  console.log(
+    "date",
+    new Date(diagnosticsData?.created_at).toLocaleDateString("uk-UA")
+  );
 
   useEffect(() => {
     dispatch(getNodesAndParts());
@@ -63,21 +78,30 @@ export default function DiagnosticsModal({
 
   return (
     <div className={css.modalWrapper}>
+      {/* {loading ? (
+        <Loader />
+      ) : (
+        <> */}
       <RxCross1 className={css.cross} onClick={onClose} />
       <p className={css.modalTitle}>Діагностика № 1</p>
       <div className={css.modalTopPart}>
-          <CarInfo
-            clientName="Іван Петренко"
-            clientPhone="+38 073 329 12 17"
-            carImg={car}
-            carNumber="CA 6864 CO"
-            carMake="HONDA"
-            carModel="CIVIC"
-            carYear="2001"
-            vin="VW8795218794H46J"
-            mileage="284563"
-          />
-        <DiagnosticsInfo />
+        <CarInfo
+          clientName={client?.name || "дані відсутні"}
+          clientPhone={client?.phone || "дані відсутні"}
+          carImg={diagnosticsData?.photo_url || car}
+          carNumber={diagnosticsData?.plate || "дані відсутні"}
+          carMake={diagnosticsData?.make || "дані відсутні"}
+          carModel={diagnosticsData?.model || "дані відсутні"}
+          carYear={diagnosticsData?.year || "дані відсутні"}
+          vin={diagnosticsData?.vin || "дані відсутні"}
+          mileage={diagnosticsData?.mileage || "- - - -"}
+        />
+        <DiagnosticsInfo
+          // time="23"
+          mechName={diagnosticsData?.mechanic?.name || "дані відсутні"}
+          managerName={managerName}
+          createdAt={date}
+        />
       </div>
 
       <div className={css.modalBottomPart}>
@@ -153,6 +177,8 @@ export default function DiagnosticsModal({
           Зберегти
         </button>
       </div>
+      {/* </>
+      )} */}
     </div>
   );
 }
