@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
-import { getCommercialOfferData, getNodesAndParts } from "./operations.js";
+import {
+  createCommercialOffer,
+  getCommercialOffer,
+  getCommercialOfferData,
+  getDiagnostic,
+  getNodesAndParts,
+} from "./operations.js";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -26,6 +32,16 @@ const AccountingSlice = createSlice({
       })
       .addCase(getNodesAndParts.rejected, handleRejected)
 
+      .addCase(getDiagnostic.pending, (state, action) => {
+        state.isDiagLoading = true;
+        state.error = null;
+      })
+      .addCase(getDiagnostic.fulfilled, (state, action) => {
+        state.isDiagLoading = false;
+        state.diagnostic = action.payload;
+      })
+      .addCase(getDiagnostic.rejected, handleRejected)
+
       //! COMMERCIAL OFFER
       .addCase(getCommercialOfferData.pending, (state, action) => {
         state.isCOLoading = true;
@@ -35,7 +51,24 @@ const AccountingSlice = createSlice({
         state.isCOLoading = false;
         state.commercialOfferData = action.payload;
       })
-      .addCase(getCommercialOfferData.rejected, handleRejected),
+      .addCase(getCommercialOfferData.rejected, handleRejected)
+
+      .addCase(createCommercialOffer.pending, handlePending)
+      .addCase(createCommercialOffer.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.commercialOfferId = action.payload.commercial_id;
+      })
+      .addCase(createCommercialOffer.rejected, handleRejected)
+
+      .addCase(getCommercialOffer.pending, (state, action) => {
+        state.isCOLoading = true;
+        state.error = null;
+      })
+      .addCase(getCommercialOffer.fulfilled, (state, action) => {
+        state.isCOLoading = false;
+        state.commercialOffer = action.payload;
+      })
+      .addCase(getCommercialOffer.rejected, handleRejected),
 });
 
 export default AccountingSlice.reducer;
