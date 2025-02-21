@@ -229,7 +229,7 @@ const dataArr = {
 };
 
 export default function CommercialOfferModal({ onClose }) {
-  // const data = useMemo(() => dataArr, []);
+  const data = useMemo(() => dataArr, []);
   const [totalOrder, setTotalOrder] = useState({});
   // const [sentForApproval, setSentForApproval] = useState(false);
   // const [approved, setApproved] = useState(false);
@@ -238,8 +238,7 @@ export default function CommercialOfferModal({ onClose }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [approval, setApproval] = useState("");
   const buttonRef = useRef(null);
-  const data = useSelector(selectCommercialOfferData);
-  const info = useMemo(() => data, []);
+  const info = useSelector(selectCommercialOfferData);
   const loading = useSelector(selectCOLoading);
   const managerInfo = useSelector(selectUser);
   const createdCommercialOffer = useSelector(selectCommercialOffer);

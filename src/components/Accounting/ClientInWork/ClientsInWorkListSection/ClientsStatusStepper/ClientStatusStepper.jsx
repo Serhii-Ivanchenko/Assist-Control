@@ -134,7 +134,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         // } else {
         //   dispatch(getCommercialOfferData("67b777dca876c8394c69cba0"));
         // }
-        dispatch(getCommercialOfferData("67b777dca876c8394c69cba0"));
+        dispatch(getCommercialOfferData("67b85a5dd14e2f13c06d7704"));
         setIsModalOpen(true);
         setModalContent(<CommercialOfferModal onClose={closeModal} />);
         break;
