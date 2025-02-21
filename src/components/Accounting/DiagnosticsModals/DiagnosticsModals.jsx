@@ -12,6 +12,7 @@ import {
   selectDiagLoading,
   selectDiagnostic,
 } from "../../../redux/accounting/selectors";
+import { selectUser } from "../../../redux/auth/selectors";
 
 // const togglePoints = [
 //   { label: "Двигун", checked: false, id: "1" },
@@ -33,11 +34,12 @@ export default function DiagnosticsModals({ onClose, isRepairModal, diagId }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNodesAndParts()).unwrap();
-    // dispatch(getDiagnostic());
+    dispatch(getDiagnostic(diagId));
   }, []);
 
   const togglePoints = useSelector(selectCategories);
   const diagnosticsData = useSelector(selectDiagnostic);
+  const user = useSelector(selectUser);
   console.log("diagnosticsData", diagnosticsData);
   const loading = useSelector(selectDiagLoading);
 
@@ -62,6 +64,7 @@ export default function DiagnosticsModals({ onClose, isRepairModal, diagId }) {
           diagnosticsData={diagnosticsData}
           diagId={diagId}
           loading={loading}
+          managerName={user.name}
         />
       ) : (
         <DiagnosticsModal
@@ -78,6 +81,7 @@ export default function DiagnosticsModals({ onClose, isRepairModal, diagId }) {
           setSpares={setSpares}
           diagnosticsData={diagnosticsData}
           loading={loading}
+          managerName={user.name}
         />
       )}
     </>

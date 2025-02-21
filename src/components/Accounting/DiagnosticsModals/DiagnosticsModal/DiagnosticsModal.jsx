@@ -27,6 +27,7 @@ export default function DiagnosticsModal({
   setSpares,
   diagnosticsData,
   // loading,
+  managerName,
 }) {
   // const [chosenPoints, setChosenPoints] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
@@ -36,8 +37,13 @@ export default function DiagnosticsModal({
 
   // const diagId = diagnosticsData.diagnostic_id;
   const client = diagnosticsData?.client;
-  const date = new Date(diagnosticsData?.created_at).toLocaleDateString(
-    "uk-UA"
+  const date = diagnosticsData.created_at
+    ? new Date(diagnosticsData?.created_at).toLocaleDateString("uk-UA")
+    : new Date().toLocaleDateString("uk-UA");
+
+  console.log(
+    "date",
+    new Date(diagnosticsData?.created_at).toLocaleDateString("uk-UA")
   );
 
   useEffect(() => {
@@ -93,8 +99,8 @@ export default function DiagnosticsModal({
         <DiagnosticsInfo
           // time="23"
           mechName={diagnosticsData?.mechanic?.name || "дані відсутні"}
-          managerName=" - - - - "
-          createdAt={date || "дані відсутні"}
+          managerName={managerName}
+          createdAt={date}
         />
       </div>
 

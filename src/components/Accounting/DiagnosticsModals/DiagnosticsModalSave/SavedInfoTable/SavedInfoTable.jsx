@@ -36,7 +36,7 @@ export default function SavedInfoTable({ chosenSpares, parts, diagId }) {
     }`,
   }));
 
-  const spares = diagId ? parts : chosenSparesWithSides;
+  // const spares = diagId ? parts : chosenSparesWithSides;
 
   return (
     <div className={css.tableWrapper}>
@@ -89,24 +89,38 @@ export default function SavedInfoTable({ chosenSpares, parts, diagId }) {
               <Table>
                 <div className={css.scrollableBody}>
                   <TableBody style={{ maxHeight: "280px", overflow: "auto" }}>
-                    {spares.map((item, index) => (
-                      <TableRow
-                        key={`${Math.random()}`}
-                        // style={{ display: "table", width: "100%" }}
-                      >
-                        <TableCell className={css.firstHeaderCell}>
-                          {index + 1}
-                        </TableCell>
-                        <TableCell className={css.nameHeaderCell}>
-                          {diagId ? item.part_name : item.name}
-                        </TableCell>
-                        {/* <TableCell></TableCell> */}
-                        {/* <TableCell>Критично</TableCell> */}
-                        <TableCell className={css.recHeaderCell}>
-                          {item.comment || "Під заміну"}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    {diagId
+                      ? Array.isArray(parts) && parts.length > 0
+                        ? parts.map((item, index) => (
+                            <TableRow key={index}>
+                              <TableCell className={css.firstHeaderCell}>
+                                {index + 1}
+                              </TableCell>
+                              <TableCell className={css.nameHeaderCell}>
+                                {item.part_name}
+                              </TableCell>
+                              <TableCell className={css.recHeaderCell}>
+                                {item.comment}
+                              </TableCell>
+                            </TableRow>
+                          ))
+                        : ""
+                      : Array.isArray(chosenSparesWithSides) &&
+                        chosenSparesWithSides.length > 0
+                      ? chosenSparesWithSides.map((item, index) => (
+                          <TableRow key={index}>
+                            <TableCell className={css.firstHeaderCell}>
+                              {index + 1}
+                            </TableCell>
+                            <TableCell className={css.nameHeaderCell}>
+                              {item.name}
+                            </TableCell>
+                            <TableCell className={css.recHeaderCell}>
+                              {"Під заміну"}
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      : ""}
                   </TableBody>
                 </div>
               </Table>

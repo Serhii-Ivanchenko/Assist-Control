@@ -10,6 +10,8 @@ export default function DiagnosticsInfo({
   arrival,
   leaving,
 }) {
+  console.log("createdAt", createdAt);
+
   return (
     <div className={css.wrapper}>
       <p className={css.date}>{createdAt}</p>
