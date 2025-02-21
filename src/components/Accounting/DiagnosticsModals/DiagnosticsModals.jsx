@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import {
   selectCategories,
   selectDiagLoading,
-  selectDiagnostics,
+  selectDiagnostic,
 } from "../../../redux/accounting/selectors";
 
 // const togglePoints = [
@@ -23,7 +23,7 @@ import {
 //   { label: "Вихлопна", checked: false, id: "7" },
 // ];
 
-export default function DiagnosticsModals({ onClose, isRepairModal }) {
+export default function DiagnosticsModals({ onClose, isRepairModal, diagId }) {
   const [openModalSave, setOpenModalSave] = useState(false);
   const [chosenPoints, setChosenPoints] = useState([]);
   const [isReadOnly, setIsReadOnly] = useState(false);
@@ -33,17 +33,17 @@ export default function DiagnosticsModals({ onClose, isRepairModal }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNodesAndParts()).unwrap();
-    dispatch(getDiagnostic());
+    // dispatch(getDiagnostic());
   }, []);
 
   const togglePoints = useSelector(selectCategories);
-  const diagnosticsData = useSelector(selectDiagnostics);
+  const diagnosticsData = useSelector(selectDiagnostic);
   console.log("diagnosticsData", diagnosticsData);
   const loading = useSelector(selectDiagLoading);
 
   // const diagId = null;
-  const diagId = diagnosticsData.diagnostic_id;
-  console.log("diagId", diagId);
+  // const diagId = diagnosticsData.diagnostic_id;
+  // console.log("diagId", diagId);
 
   useEffect(() => {
     console.log("spares", spares);

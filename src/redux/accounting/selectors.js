@@ -14,4 +14,4 @@ export const selectDiagLoading = (state) => state.accounting.isDiagLoading;
 export const selectCommercialOfferId = (state) =>
   state.accounting.commercialOfferId;
 
-export const selectDiagnostics = (state) => state.accounting.diagnostic
+export const selectDiagnostic = (state) => state.accounting.diagnostic
