@@ -27,6 +27,7 @@ import RecievedPartsPopup from "./RecievedPartsPopup/RecievedPartsPopup.jsx";
 import CommercialOfferModal from "../../CommercialOfferModal/CommercialOfferModal.jsx";
 import DiagnosticsModals from "../../../DiagnosticsModals/DiagnosticsModals.jsx";
 import PaymentDistrModal from "../../PaymentDistrModal/PaymentDistrModal.jsx";
+import Order from "../../Order/Order.jsx";
 import {
   getCommercialOfferData,
   getDiagnostic,
@@ -145,7 +146,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         break;
       case 5:
         setIsModalOpen(true);
-        setModalContent("Recieved Modal");
+        setModalContent(<Order onClose={closeModal} />);
         break;
       case 6:
         // console.log("Opening popup...");
