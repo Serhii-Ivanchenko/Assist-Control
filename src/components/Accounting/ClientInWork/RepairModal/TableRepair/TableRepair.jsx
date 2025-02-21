@@ -67,7 +67,6 @@ const TableRepair = ({ data, onDelete }) => {
       // ...prev,
       [rowId]: !prev[rowId],
       // [rowId]: prev?.[rowId] === undefined ? true : !prev[rowId]
-
     }));
   };
 
@@ -176,29 +175,31 @@ const TableRepair = ({ data, onDelete }) => {
                   {row.partsPurchase}
                 </td>
                 <td className={styles.columnWorkCost}>{row.workCost}</td>
-                <td
-                  className={clsx(styles.columnPosition, styles.nameColumn)}
-                >
-                  {selectedMechanics[row.id]
-                    ? selectedMechanics[row.id].name
-                    : row.mechanic.fullName}
-                  <span className={styles.arrowIcon} onClick={() => handleArrowClick(row.id)}>
+                <td className={clsx(styles.columnPosition, styles.nameColumn)}>
+                  <span className={styles.mechanicName}>
+                    {selectedMechanics[row.id]
+                      ? selectedMechanics[row.id].name
+                      : row.mechanic.fullName}
+                  </span>
+                  <span
+                    className={styles.arrowIcon}
+                    onClick={() => handleArrowClick(row.id)}
+                  >
                     {openModalForRow[row.id] ? (
-                      <BsCaretUpFill size={10} />
+                      <BsCaretUpFill size={15} />
                     ) : (
-                      <BsCaretDownFill size={10} />
+                      <BsCaretDownFill size={15} />
                     )}
                   </span>
-                  {openModalForRow[row.id] && (
-                    <MechanicPopover
-                      isOpen={openModalForRow[row.id]}
-                      onClose={handlePopoverClose}
-                      staffs={staffs}
-                      onStaffSelect={(staff) =>
-                        handleMechanicSelect(row.id, staff)
-                      }
-                    />
-                  )}
+
+                  <MechanicPopover
+                    isOpen={openModalForRow[row.id]}
+                    onClose={() => handlePopoverClose(row.id)}
+                    staffs={staffs}
+                    onStaffSelect={(staff) =>
+                      handleMechanicSelect(row.id, staff)
+                    }
+                  />
                 </td>
                 <td className={styles.columnPercentage}>
                   {row.mechanic.percentage}%

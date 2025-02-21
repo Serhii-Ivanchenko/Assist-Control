@@ -5,12 +5,11 @@ import css from "./MechanicPopover.module.css";
 const MechanicPopover = ({ isOpen, staffs, onStaffSelect, onClose }) => {
   const popoverRef = useRef(null);
 
-  // Анімація відкриття/закриття
   const transitions = useTransition(isOpen, {
-    from: { opacity: 0, transform: "translateY(-10px)" },
-    enter: { opacity: 1, transform: "translateY(0px)" },
-    leave: { opacity: 0, transform: "translateY(-10px)" },
-    config: { tension: 200, friction: 20 },
+    from: { opacity: 0, transform: "translateY(-20px)"},
+    enter: { opacity: 1, transform: "translateY(0px)"},
+    leave: { opacity: 0, transform: "translateY(-20px)", },
+    config: { tension: 150, friction: 20, duration: 120 },
   });
 
   useEffect(() => {
