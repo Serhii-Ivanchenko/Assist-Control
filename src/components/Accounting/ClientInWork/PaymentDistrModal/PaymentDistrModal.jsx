@@ -12,7 +12,7 @@ import {
   BsReceipt,
 } from "react-icons/bs";
 import carImg from "../../../../assets/images/car.png";
-import distrImg from "../../../../assets/images/distrImg.png";
+// import distrImg from "../../../../assets/images/distrImg.png";
 import css from "./PaymentDistrModal.module.css";
 
 const datakp = {
@@ -77,7 +77,7 @@ const formatAmount = (amount) => {
   return Math.round(amount).toLocaleString("ru-RU");
 };
 
-export default function PaymentDistrModal({ onClose, distrData }) {
+export default function PaymentDistrModal({ distributor, onClose }) {
   const [editedData, setEditedData] = useState(data);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -285,11 +285,11 @@ export default function PaymentDistrModal({ onClose, distrData }) {
 
           <div className={css.distrblock}>
             <img
-              src={distrData?.url || distrImg}
+              src={distributor?.logo}
               alt="distr image"
               className={css.distrimg}
             />
-            <p className={css.distrname}>{distrData?.name || "BUSMARKET"}</p>
+            <p className={css.distrname}>{distributor?.distributor}</p>
           </div>
         </div>
         <div className={css.bottomsecond}>
