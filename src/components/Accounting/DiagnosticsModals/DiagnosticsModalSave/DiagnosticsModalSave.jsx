@@ -7,6 +7,10 @@ import ToggleListItem from "../DiagnosticsModal/ToggleListItem/ToggleListItem";
 import SavedInfoTable from "./SavedInfoTable/SavedInfoTable";
 import { TiTick } from "react-icons/ti";
 import Loader from "../../../Loader/Loader";
+import { useDispatch } from "react-redux";
+import { createDiagnostic } from "../../../../redux/accounting/operations";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function DiagnosticsModalSave({
   // onClose,
@@ -20,13 +24,46 @@ export default function DiagnosticsModalSave({
   diagId,
   loading,
   managerName,
+  dataToSend,
 }) {
+  const [isLoading, setIsLoading] = useState(false);
+
   // const diagId = diagnosticsData.diagnostic_id;
   const client = diagnosticsData?.client;
   const date = diagnosticsData.created_at
     ? new Date(diagnosticsData?.created_at).toLocaleDateString("uk-UA")
     : new Date().toLocaleDateString("uk-UA");
   const parts = diagnosticsData?.parts;
+
+  const dispatch = useDispatch();
+
+  const handleDispatchData = async () => {
+    try {
+      setIsLoading(true);
+      await dispatch(createDiagnostic(dataToSend));
+      toast.success("Всі запчастини успішно знайдені :)", {
+        position: "top-center",
+        duration: 3000,
+        style: {
+          background: "var(--bg-input)",
+          color: "var(--white)",
+        },
+      });
+    } catch (error) {
+      console.error("Error updating user data:", error);
+      toast.error("Щось пішло не так :(", {
+        position: "top-center",
+        duration: 3000,
+        style: {
+          background: "var(--bg-input)",
+          color: "var(--white)",
+        },
+      });
+    } finally {
+      setIsLoading(false);
+      onClose();
+    }
+  };
 
   const handleClose = () => {
     if (diagId) {
@@ -68,65 +105,73 @@ export default function DiagnosticsModalSave({
         />
       </div>
 
-      <div className={css.modalBottomPart}>
-        <div className={css.togglesPart}>
-          <ul className={css.togglesList}>
-            {togglePoints.map((point, index) => (
-              <ToggleListItem
-                point={point}
-                key={index}
-                disabled={true}
-                // checked={checked}
-                // setChosenPoints={setChosenPoints}
-                chosenPoints={chosenPoints}
-                // handleCheckboxChange={handleCheckboxChange}
-                modalSave={true}
-              />
-            ))}
-          </ul>
+      {isLoading ? (
+        <div className={css.loadingMessage}>
+          <p>Запит виконується... </p>
+          <p>Ще трошки і все буде готово :) </p>
         </div>
-        <div>
-          <SavedInfoTable
-            chosenSpares={chosenSpares}
-            parts={parts}
-            diagId={diagId}
-          />
+      ) : (
+        <div className={css.modalBottomPart}>
+          <div className={css.togglesPart}>
+            <ul className={css.togglesList}>
+              {togglePoints.map((point, index) => (
+                <ToggleListItem
+                  point={point}
+                  key={index}
+                  disabled={true}
+                  // checked={checked}
+                  // setChosenPoints={setChosenPoints}
+                  chosenPoints={chosenPoints}
+                  // handleCheckboxChange={handleCheckboxChange}
+                  modalSave={true}
+                />
+              ))}
+            </ul>
+          </div>
+          <div>
+            <SavedInfoTable
+              chosenSpares={chosenSpares}
+              parts={parts}
+              diagId={diagId}
+            />
 
-          <div className={css.btnBox}>
-            {diagId ? (
-              <button
-                type="button"
-                className={`${css.btn} ${css.cancel}`}
-                onClick={onClose}
-              >
-                Закрити
-              </button>
-            ) : (
-              <>
+            <div className={css.btnBox}>
+              {diagId ? (
                 <button
                   type="button"
                   className={`${css.btn} ${css.cancel}`}
-                  onClick={() => setOpenModalSave(!openModalSave)}
+                  onClick={onClose}
                 >
-                  Скасувати
+                  Закрити
                 </button>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    className={`${css.btn} ${css.cancel}`}
+                    onClick={() => setOpenModalSave(!openModalSave)}
+                  >
+                    Скасувати
+                  </button>
 
-                <button
-                  type="button"
-                  className={`${css.btn} ${css.save}`}
-                  // onClick={() => {
-                  //   // setOpenModalSave(true);
-                  //   // setIsReadOnly(true);
-                  // }}
-                >
-                  <TiTick className={css.tickIcon} />
-                  Зберегти
-                </button>
-              </>
-            )}
+                  <button
+                    type="button"
+                    className={`${css.btn} ${css.save}`}
+                    onClick={handleDispatchData}
+                    // onClick={() => {
+                    //   // setOpenModalSave(true);
+                    //   // setIsReadOnly(true);
+                    // }}
+                  >
+                    <TiTick className={css.tickIcon} />
+                    Зберегти
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {/* </>
       )} */}
     </div>

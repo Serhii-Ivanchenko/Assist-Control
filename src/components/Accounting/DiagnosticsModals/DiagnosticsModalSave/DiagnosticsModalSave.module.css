@@ -130,3 +130,14 @@
   border-radius: 4px;
   background-color: var(--main-gray);
 }
+
+.loadingMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-gray);
+  height: 100%;
+  font-size: 24px;
+}

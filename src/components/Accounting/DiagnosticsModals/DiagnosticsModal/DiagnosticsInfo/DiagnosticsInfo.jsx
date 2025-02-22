@@ -7,6 +7,7 @@ export default function DiagnosticsInfo({
   mechName,
   createdAt,
   managerName,
+  postTime,
   arrival,
   leaving,
 }) {
@@ -30,19 +31,24 @@ export default function DiagnosticsInfo({
         </div>
         <p className={css.infoName}>{managerName}</p>
       </div>
-      <div className={css.arrivalBox}>
-        <div className={css.arrival}>
-          <p className={css.arKey}>Заїзд</p>
-          <p className={css.time}>{arrival || "-- : --"}</p>
-        </div>
-        <div className={css.arrival}>
+      {/* <div className={css.arrivalBox}> */}
+      <div className={css.arrival}>
+        <p className={css.arKey}>На посту</p>
+        <p className={css.minutes}>
+          <span className={css.minutesTime}>{postTime || "--"}</span>хв
+        </p>
+      </div>
+      {/* <div className={css.arrival}>
           <p className={css.arKey}>Виїзд</p>
           <p className={css.time}>{leaving || "-- : --"}</p>
         </div>
+      </div> */}
+      <div className={`${css.arrival} ${css.work}`}>
+        <p className={css.arKey}>Робота</p>
+        <p className={css.minutes}>
+          <span className={css.minutesTime}>{time || "--"}</span>хв
+        </p>
       </div>
-      <p className={css.minutes}>
-        <span className={css.minutesTime}>{time || "--"}</span>хв
-      </p>
     </div>
   );
 }

@@ -43,6 +43,38 @@ export default function DiagnosticsModals({ onClose, isRepairModal, diagId }) {
   console.log("diagnosticsData", diagnosticsData);
   const loading = useSelector(selectDiagLoading);
 
+  const nodes = spares
+    .map((spare) => {
+      const chosenParts = spare.parts.filter(
+        (part) =>
+          part.isChosen === true ||
+          part.isChosenRight === true ||
+          part.isChosenLeft === true
+      );
+
+      return chosenParts.length > 0
+        ? {
+            node_name: spare.name,
+            parts: chosenParts.map((part) => ({
+              part_name: part.name,
+              comment: "Заміна",
+              audio_file: "",
+              photo_file: "",
+            })),
+          }
+        : null;
+    })
+    .filter((category) => category !== null);
+  console.log("dataToSend", nodes);
+
+  const dataToSend = {
+    car_id: 99444,
+    mechanic_id: 168,
+    nodes: nodes,
+  };
+
+  console.log("dataToSend", dataToSend);
+
   useEffect(() => {
     console.log("spares", spares);
   });
@@ -61,6 +93,7 @@ export default function DiagnosticsModals({ onClose, isRepairModal, diagId }) {
           diagId={diagId}
           loading={loading}
           managerName={user.name}
+          dataToSend={dataToSend}
         />
       ) : (
         <DiagnosticsModal
