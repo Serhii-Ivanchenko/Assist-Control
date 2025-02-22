@@ -8,8 +8,11 @@ import styles from "./ReceivedPartsModal.module.css";
 import EnterpriseInfo from "./EnterpriseInfo/EnterpriseInfo";
 import BillingTable from "./BillingTable/BillingTable";
 import distrLogo from "../../../assets/images/distr_logo_invoice.png";
+import PaymentDistrModal from "../ClientInWork/PaymentDistrModal/PaymentDistrModal";
 
 const dataArr = {
+  distributor: "GRS PARTS",
+  logo: distrLogo,
   diagnostic_id: 88,
   created_at: "2025-02-06T12:57:00",
   repair_date: "05.02",
@@ -133,8 +136,18 @@ const dataArr = {
   },
 };
 
-function ReceivedPartsModal({ onClose }) {
+function ReceivedPartsModal({ onClose, setIsModalOpen, setModalContent }) {
   const data = useMemo(() => dataArr, []);
+
+  const handleOpenPaymentModal = () => {
+    setIsModalOpen(true);
+    setModalContent(
+      <PaymentDistrModal
+        distributor={dataArr}
+        onClose={() => setIsModalOpen(false)}
+      />
+    );
+  };
 
   return (
     <>
@@ -157,18 +170,16 @@ function ReceivedPartsModal({ onClose }) {
         </div>
         <div className={styles.invoiceList}>
           <div className={styles.distrInfo}>
-            <img src={distrLogo} />
-            <p className={styles.distributorName}>GRS PARTS</p>
+            <img src={dataArr.logo} />
+            <p className={styles.distributorName}>{dataArr.distributor}</p>
           </div>
 
-          {/* <div className={styles.billingTable}> */}
           <BillingTable supplier={dataArr.supplier} />
 
           <div className={styles.sumContainer}>
             <div className={styles.totalSum}>
               <p className={styles.sumTitle}>Сума</p>
               <p className={styles.sum}>
-                {" "}
                 <BsReceipt /> 4 610 грн
               </p>
             </div>
@@ -184,7 +195,7 @@ function ReceivedPartsModal({ onClose }) {
             </div>
           </div>
           <div className={styles.btnsContainer}>
-            <button className={styles.payBtn} onClick={onClose}>
+            <button className={styles.payBtn} onClick={handleOpenPaymentModal}>
               <FaCheck />
               Сплатити постачальнику
             </button>
@@ -202,7 +213,6 @@ function ReceivedPartsModal({ onClose }) {
           </div>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 }

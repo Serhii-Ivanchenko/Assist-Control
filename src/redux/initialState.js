@@ -369,6 +369,7 @@ export const initialState = {
     clientContact: {},
     nodesAndPartsForDiagnostics: [],
     diagnostic: {},
+    diagnosticId: null,
     commercialOfferData: {},
     commercialOffer: {},
     commercialOfferId: null,

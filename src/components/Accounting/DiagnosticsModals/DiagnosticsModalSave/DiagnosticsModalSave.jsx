@@ -19,13 +19,13 @@ export default function DiagnosticsModalSave({
   diagnosticsData,
   diagId,
   loading,
-}) 
- {
+  managerName,
+}) {
   // const diagId = diagnosticsData.diagnostic_id;
   const client = diagnosticsData?.client;
-  const date = new Date(diagnosticsData?.created_at).toLocaleDateString(
-    "uk-UA"
-  );
+  const date = diagnosticsData.created_at
+    ? new Date(diagnosticsData?.created_at).toLocaleDateString("uk-UA")
+    : new Date().toLocaleDateString("uk-UA");
   const parts = diagnosticsData?.parts;
 
   const handleClose = () => {
@@ -44,66 +44,75 @@ export default function DiagnosticsModalSave({
 
   return (
     <div className={css.modalWrapper}>
-      {loading ? (
+      {/* {loading ? (
         <Loader />
       ) : (
-        <>
-          <RxCross1 className={css.cross} onClick={handleClose} />
-          <p className={css.modalTitle}>Діагностика № 1</p>
-          <div className={css.modalTopPart}>
-            <CarInfo
-              clientName={client?.name || "дані відсутні"}
-              clientPhone={client?.phone || "дані відсутні"}
-              carImg={diagnosticsData?.photo_url || car}
-              carNumber={diagnosticsData?.plate || "дані відсутні"}
-              carMake={diagnosticsData?.make || "дані відсутні"}
-              carModel={diagnosticsData?.model || "дані відсутні"}
-              carYear={diagnosticsData?.year || "дані відсутні"}
-              vin={diagnosticsData?.vin || "дані відсутні"}
-              mileage={diagnosticsData?.mileage || "- - - -"}
-            />
-            <DiagnosticsInfo
-              time="23"
-              mechName={diagnosticsData?.mechanic?.name || "дані відсутні"}
-              managerName=" - - - - "
-              createdAt={date || "дані відсутні"}
-            />
-          </div>
+        <> */}
+      <RxCross1 className={css.cross} onClick={handleClose} />
+      <p className={css.modalTitle}>Діагностика № 1</p>
+      <div className={css.modalTopPart}>
+        <CarInfo
+          clientName={client?.name || "дані відсутні"}
+          clientPhone={client?.phone || "дані відсутні"}
+          carImg={diagnosticsData?.photo_url || car}
+          carNumber={diagnosticsData?.plate || "дані відсутні"}
+          carMake={diagnosticsData?.make || "дані відсутні"}
+          carModel={diagnosticsData?.model || "дані відсутні"}
+          carYear={diagnosticsData?.year || "дані відсутні"}
+          vin={diagnosticsData?.vin || "дані відсутні"}
+          mileage={diagnosticsData?.mileage || "- - - -"}
+        />
+        <DiagnosticsInfo
+          // time=""
+          mechName={diagnosticsData?.mechanic?.name || "дані відсутні"}
+          managerName={managerName}
+          createdAt={date}
+        />
+      </div>
 
-          <div className={css.modalBottomPart}>
-            <div className={css.togglesPart}>
-              <ul className={css.togglesList}>
-                {togglePoints.map((point, index) => (
-                  <ToggleListItem
-                    point={point}
-                    key={index}
-                    disabled={true}
-                    // checked={checked}
-                    // setChosenPoints={setChosenPoints}
-                    chosenPoints={chosenPoints}
-                    // handleCheckboxChange={handleCheckboxChange}
-                    modalSave={true}
-                  />
-                ))}
-              </ul>
-            </div>
-            <div>
-              <SavedInfoTable
-                chosenSpares={chosenSpares}
-                parts={parts}
-                diagId={diagId}
+      <div className={css.modalBottomPart}>
+        <div className={css.togglesPart}>
+          <ul className={css.togglesList}>
+            {togglePoints.map((point, index) => (
+              <ToggleListItem
+                point={point}
+                key={index}
+                disabled={true}
+                // checked={checked}
+                // setChosenPoints={setChosenPoints}
+                chosenPoints={chosenPoints}
+                // handleCheckboxChange={handleCheckboxChange}
+                modalSave={true}
               />
+            ))}
+          </ul>
+        </div>
+        <div>
+          <SavedInfoTable
+            chosenSpares={chosenSpares}
+            parts={parts}
+            diagId={diagId}
+          />
 
-              <div className={css.btnBox}>
-                {!diagId && (
-                  <button
-                    type="button"
-                    className={`${css.btn} ${css.cancel}`}
-                    onClick={handleClose}
-                  >
-                    Скасувати
-                  </button>
-                )}
+          <div className={css.btnBox}>
+            {diagId ? (
+              <button
+                type="button"
+                className={`${css.btn} ${css.cancel}`}
+                onClick={onClose}
+              >
+                Закрити
+              </button>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  className={`${css.btn} ${css.cancel}`}
+                  onClick={() => setOpenModalSave(!openModalSave)}
+                >
+                  Скасувати
+                </button>
+
                 <button
                   type="button"
                   className={`${css.btn} ${css.save}`}
@@ -115,11 +124,13 @@ export default function DiagnosticsModalSave({
                   <TiTick className={css.tickIcon} />
                   Зберегти
                 </button>
-              </div>
-            </div>
+              </>
+            )}
           </div>
-        </>
-      )}
+        </div>
+      </div>
+      {/* </>
+      )} */}
     </div>
   );
 }
