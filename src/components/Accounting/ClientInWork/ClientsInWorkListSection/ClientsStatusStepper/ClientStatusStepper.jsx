@@ -109,8 +109,8 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
     [buttons[9]],
   ];
 
-  // const diagId = "67b85a5dd14e2f13c06d7704";
-     const diagId = null;
+  // const diagId = "67b91c9480e393fd9def6323";
+  const diagId = null;
 
   // виклик модалки на групі кнопок
   const handleClick = (idx, event) => {
