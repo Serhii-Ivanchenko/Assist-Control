@@ -35,7 +35,7 @@ const RepairModal = ({
   };
 
   const openCommercialOfferModal = () => {
-    dispatch(getCommercialOfferData("67b5cba169bee23d3bbcbd1d"))
+    dispatch(getCommercialOfferData("67b85a5dd14e2f13c06d7704"));
     setModalContent(<CommercialOfferModal onClose={openRepairModal} />);
   };
   const openDiagnosticsModal = () => {

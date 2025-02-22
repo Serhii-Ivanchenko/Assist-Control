@@ -32,14 +32,13 @@ export default function DiagnosticsModalSave({
     if (diagId) {
       console.log("diagId", diagId);
       onClose();
-    } 
-    if (isRepairModal) {
+    } else if (isRepairModal) {
       onClose(); // Повертає RepairModal
-    }else {
+    } else {
       setOpenModalSave(!openModalSave);
     }
   };
-  
+
   // const spares = diagId ? parts : chosenSpares;
 
   return (
