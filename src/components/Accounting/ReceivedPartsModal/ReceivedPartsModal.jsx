@@ -12,7 +12,7 @@ import PaymentDistrModal from "../ClientInWork/PaymentDistrModal/PaymentDistrMod
 
 const dataArr = {
   distributor: "GRS PARTS",
-  distributor_logo: distrLogo,
+  logo: distrLogo,
   diagnostic_id: 88,
   created_at: "2025-02-06T12:57:00",
   repair_date: "05.02",
@@ -170,7 +170,7 @@ function ReceivedPartsModal({ onClose, setIsModalOpen, setModalContent }) {
         </div>
         <div className={styles.invoiceList}>
           <div className={styles.distrInfo}>
-            <img src={dataArr.distributor_logo} />
+            <img src={dataArr.logo} />
             <p className={styles.distributorName}>{dataArr.distributor}</p>
           </div>
 
