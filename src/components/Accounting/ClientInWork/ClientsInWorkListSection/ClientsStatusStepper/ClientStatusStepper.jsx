@@ -13,7 +13,7 @@ import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
 import styles from "./ClientStatusStepper.module.css";
 import Modal from "../../../../Modals/Modal/Modal.jsx";
 import DetailedClientInfo from "../../../../DetailedClientInfo/DetailedClientInfo.jsx";
-import EnterAmountModal from "../../../../Modals/EnterAmountModal/EnterAmountModal.jsx";
+// import EnterAmountModal from "../../../../Modals/EnterAmountModal/EnterAmountModal.jsx";
 import PaymentModal from "../../PaymentModal/PaymentModal.jsx";
 import NotificationModal from "../../../../sharedComponents/NotificationModal/NotificationModal.jsx";
 import { useSelector } from "react-redux";
@@ -48,8 +48,6 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const buttonRef = useRef(null);
-  // const popupRef = useRef(null);
-  const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
 
   const popupIcon = isPopupOpen ? <TiArrowSortedUp /> : <TiArrowSortedDown />;
 
@@ -118,9 +116,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   // const diagId = null;
 
   // виклик модалки на групі кнопок
-  const handleClick = (idx, event) => {
-    // setIsModalOpen(false);
-    // setIsPopupOpen(false);
+  const handleClick = (idx) => {
     switch (idx) {
       case 0:
         dispatch(getClientInfo({ carId: 38701 }));
@@ -159,15 +155,6 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         setModalContent(<Order onClose={closeModal} />);
         break;
       case 6:
-        // console.log("Opening popup...");
-        // if (event.currentTarget) {
-        //   buttonRef.current = event.currentTarget;
-        //   const rect = buttonRef.current.getBoundingClientRect();
-        //   setPopupPosition({
-        //     top: rect.bottom + window.scrollY,
-        //   });
-        // }
-        // setIsPopupOpen(true);
         setIsPopupOpen((prev) => !prev);
         break;
 
@@ -293,7 +280,6 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
           buttonRef={buttonRef}
           setModalContent={setModalContent}
           setIsModalOpen={setIsModalOpen}
-          // popupRef={popupRef}
         />
       )}
 

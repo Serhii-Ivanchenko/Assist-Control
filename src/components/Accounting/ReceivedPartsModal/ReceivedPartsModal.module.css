@@ -41,25 +41,25 @@
 
 .distrInfo {
   display: flex;
-  gap: 10px;
   justify-content: center;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 27px;
 }
 
 .distrInfo img {
-  width: 31px;
+  /* width: 31px; */
   height: 31px;
 }
 
 .distributorName {
   display: inline-flex;
   color: #fff;
-
   font-family: "Roboto", sans-serif;
   font-size: 22px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  line-height: 31px;
 }
 
 /* .billingHeader {

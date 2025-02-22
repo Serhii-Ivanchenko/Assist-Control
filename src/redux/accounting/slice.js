@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../initialState.js";
 import {
   createCommercialOffer,
+  createDiagnostic,
+  getClientsInWork,
   getCommercialOffer,
   getCommercialOfferData,
   getDiagnostic,
@@ -24,6 +26,14 @@ const AccountingSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
+      // ! Clients in work list
+      .addCase(getClientsInWork.pending, handlePending)
+      .addCase(getClientsInWork.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.clientsList = action.payload.cars;
+      })
+      .addCase(getClientsInWork.rejected, handleRejected)
+
       //! DIAGNOSTICS
       .addCase(getNodesAndParts.pending, handlePending)
       .addCase(getNodesAndParts.fulfilled, (state, action) => {
@@ -40,7 +50,17 @@ const AccountingSlice = createSlice({
         state.isDiagLoading = false;
         state.diagnostic = action.payload;
       })
-      .addCase(getDiagnostic.rejected, handleRejected)
+      .addCase(getDiagnostic.rejected, (state, action) => {
+        state.isDiagLoading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(createDiagnostic.pending, handlePending)
+      .addCase(createDiagnostic.fulfilled, (state, action) => {
+        state.isDiagLoading = false;
+        state.diagnosticId = action.payload.diagnostic_id;
+      })
+      .addCase(createDiagnostic.rejected, handleRejected)
 
       //! COMMERCIAL OFFER
       .addCase(getCommercialOfferData.pending, (state, action) => {
@@ -51,7 +71,10 @@ const AccountingSlice = createSlice({
         state.isCOLoading = false;
         state.commercialOfferData = action.payload;
       })
-      .addCase(getCommercialOfferData.rejected, handleRejected)
+      .addCase(getCommercialOfferData.rejected, (state, action) => {
+        state.isCOLoading = false;
+        state.error = action.payload;
+      })
 
       .addCase(createCommercialOffer.pending, handlePending)
       .addCase(createCommercialOffer.fulfilled, (state, action) => {
@@ -68,7 +91,10 @@ const AccountingSlice = createSlice({
         state.isCOLoading = false;
         state.commercialOffer = action.payload;
       })
-      .addCase(getCommercialOffer.rejected, handleRejected),
+      .addCase(getCommercialOffer.rejected, (state, action) => {
+        state.isCOLoading = false;
+        state.error = action.payload;
+      }),
 });
 
 export default AccountingSlice.reducer;

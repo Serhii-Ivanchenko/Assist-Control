@@ -1,6 +1,30 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../services/api.js";
 
+// ! Clients in work list
+
+// Get list of all clients in work
+export const getClientsInWork = createAsyncThunk(
+  "accounting/getClientsInWork",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.get(`/acc/get_all_cars`, {
+        headers: {
+          // "X-Api-Key": "YA7NxysJ",
+          "company-id": serviceId,
+        },
+      });
+      console.log("getClientsInWork", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 // ! Diagnostics
 
 // Get Nodes and Parts list
@@ -33,8 +57,8 @@ export const getDiagnostic = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/dia/get_diagnostic/${diagnostic_id}`,
-        // `/dia/get_diagnostic/67b777dca876c8394c69cba0`,
+        `/acc/get_diagnostic/${diagnostic_id}`,
+        // `/acc/get_diagnostic/67b777dca876c8394c69cba0`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -43,6 +67,32 @@ export const getDiagnostic = createAsyncThunk(
         }
       );
       console.log("getDiagnostic", response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Create diagnostic
+export const createDiagnostic = createAsyncThunk(
+  "accounting/createDiagnostic",
+  async (diagnosticData, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const serviceId = state.auth.userData.selectedServiceId;
+    try {
+      const response = await axiosInstance.post(
+        `/acc/add_diagnostic_with_status_company`,
+        diagnosticData,
+        {
+          headers: {
+            // "X-Api-Key": "YA7NxysJ",
+            "company-id": serviceId,
+          },
+        }
+      );
+      console.log("createDiagnostic", response.data);
 
       return response.data;
     } catch (error) {
@@ -61,7 +111,7 @@ export const getCommercialOfferData = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/dia/get_found_parts_by_diagnostic/${diagnostic_id}`,
+        `/acc/get_found_parts_by_diagnostic/${diagnostic_id}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
@@ -88,7 +138,7 @@ export const createCommercialOffer = createAsyncThunk(
       const { diagnostic_id, commercialOfferData } = data;
 
       const response = await axiosInstance.post(
-        `/dia/create_commercial_offer/`,
+        `/acc/create_commercial_offer/`,
         commercialOfferData,
         {
           headers: {
@@ -115,7 +165,7 @@ export const getCommercialOffer = createAsyncThunk(
     const serviceId = state.auth.userData.selectedServiceId;
     try {
       const response = await axiosInstance.get(
-        `/dia/get_commercial_offer/${commercialOfferId}`,
+        `/acc/get_commercial_offer/${commercialOfferId}`,
         {
           headers: {
             // "X-Api-Key": "YA7NxysJ",
