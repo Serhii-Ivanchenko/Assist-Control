@@ -228,7 +228,7 @@ const dataArr = {
   ],
 };
 
-export default function CommercialOfferModal({ onClose }) {
+export default function CommercialOfferModal({ onClose, offerId }) {
   const data = useMemo(() => dataArr, []);
   const [totalOrder, setTotalOrder] = useState({});
   // const [sentForApproval, setSentForApproval] = useState(false);
@@ -242,7 +242,7 @@ export default function CommercialOfferModal({ onClose }) {
   const loading = useSelector(selectCOLoading);
   const managerInfo = useSelector(selectUser);
   const createdCommercialOffer = useSelector(selectCommercialOffer);
-  const [cpId, setcpId] = useState(false);
+  // const [offerId, setOfferId] = useState(false);
   console.log("createdCommercialOffer", createdCommercialOffer);
   console.log("info", info);
 
@@ -309,7 +309,10 @@ export default function CommercialOfferModal({ onClose }) {
 
   return (
     <div
-      className={clsx(css.modal, cpId ? css.modalExistedCp : css.modalCreateCP)}
+      className={clsx(
+        css.modal,
+        offerId ? css.modalExistedCp : css.modalCreateCP
+      )}
     >
       <BsXLg className={css.closeIcon} onClick={onClose} />
       <p className={css.offerNumber}>КП № </p>
@@ -320,24 +323,28 @@ export default function CommercialOfferModal({ onClose }) {
           <div className={css.topWrapper}>
             <CarInfo
               clientName={
-                cpId ? createdCommercialOffer.client.name : info.client.name
+                offerId ? createdCommercialOffer.client.name : info.client.name
               }
               clientPhone={
-                cpId ? createdCommercialOffer.client.phone : info.client.phone
+                offerId
+                  ? createdCommercialOffer.client.phone
+                  : info.client.phone
               }
               // carImg={carImg}
-              carNumber={cpId ? createdCommercialOffer.car.plate : info.plate}
-              carMake={cpId ? createdCommercialOffer.car.make : info.make}
-              carModel={cpId ? createdCommercialOffer.car.model : info.model}
-              carYear={cpId ? createdCommercialOffer.car.year : info.year}
-              vin={cpId ? createdCommercialOffer.car.vin : info.vin}
+              carNumber={
+                offerId ? createdCommercialOffer.car.plate : info.plate
+              }
+              carMake={offerId ? createdCommercialOffer.car.make : info.make}
+              carModel={offerId ? createdCommercialOffer.car.model : info.model}
+              carYear={offerId ? createdCommercialOffer.car.year : info.year}
+              vin={offerId ? createdCommercialOffer.car.vin : info.vin}
               mileage={"---------"}
             />
             <div className={css.rightSectionWrapper}>
-              <p className={css.date}>{cpId ? "ДАТА КП" : formattedDate}</p>
+              <p className={css.date}>{offerId ? "ДАТА КП" : formattedDate}</p>
               <button className={css.link}>
                 Діагностика №{" "}
-                {cpId
+                {offerId
                   ? createdCommercialOffer.diagnostic_id
                   : info.diagnostic_id}
               </button>
@@ -345,7 +352,7 @@ export default function CommercialOfferModal({ onClose }) {
                 <BsWrench className={css.spannerIcon} />
                 <p className={css.mechanicText}>Механік:</p>
                 <p className={css.mechanicName}>
-                  {cpId
+                  {offerId
                     ? createdCommercialOffer.mechanic.name
                     : info.mechanic.name}
                 </p>
@@ -357,6 +364,7 @@ export default function CommercialOfferModal({ onClose }) {
               </div>
             </div>
           </div>
+
           <div className={css.centerWrapper}>
             <button type="button" className={css.original}>
               Орігінал
@@ -365,13 +373,14 @@ export default function CommercialOfferModal({ onClose }) {
               Аналог
             </button>
           </div>
+
           <div
             className={clsx(
               css.tableHeaderWrapper,
-              cpId ? css.existedCp : css.createCp
+              offerId ? css.existedCp : css.createCp
             )}
           >
-            {cpId ? (
+            {offerId ? (
               <p className={css.tableHeaderText}>Дата</p>
             ) : (
               <div className={css.headerWithArrows}>
@@ -379,7 +388,7 @@ export default function CommercialOfferModal({ onClose }) {
                 <SortButtonsArrow />
               </div>
             )}
-            {!cpId && (
+            {!offerId && (
               <div className={css.headerWithArrows}>
                 <p className={css.tableHeaderText}>Наявність</p>
                 <SortButtonsArrow />
@@ -389,7 +398,7 @@ export default function CommercialOfferModal({ onClose }) {
             <p className={css.tableHeaderText}>Артикул</p>
             <p className={css.tableHeaderText}>Бренд</p>
             <p className={css.tableHeaderText}>Номенклатура</p>
-            {cpId ? (
+            {offerId ? (
               <p className={css.tableHeaderText}>Ціна роботи</p>
             ) : (
               <div className={css.headerWithArrows}>
@@ -397,7 +406,7 @@ export default function CommercialOfferModal({ onClose }) {
                 <SortButtonsArrow />
               </div>
             )}
-            {cpId ? (
+            {offerId ? (
               <p className={css.tableHeaderText}>Ціна продажу</p>
             ) : (
               <div className={css.headerWithArrows}>
@@ -407,7 +416,7 @@ export default function CommercialOfferModal({ onClose }) {
             )}
             <p className={css.tableHeaderText}>Склад</p>
             <p className={css.tableHeaderText}>Сума закупки</p>
-            {cpId ? (
+            {offerId ? (
               <p className={css.tableHeaderText}>Прибуток</p>
             ) : (
               <div className={css.headerWithArrows}>
@@ -415,7 +424,7 @@ export default function CommercialOfferModal({ onClose }) {
                 <SortButtonsArrow />
               </div>
             )}
-            {cpId ? (
+            {offerId ? (
               <p className={css.tableHeaderText}>%</p>
             ) : (
               <div className={css.headerWithArrows}>
@@ -424,7 +433,8 @@ export default function CommercialOfferModal({ onClose }) {
               </div>
             )}
           </div>
-          {cpId ? (
+
+          {offerId ? (
             <div className={css.table}>
               {createdCommercialOffer.parts.map((item, index) => {
                 return <PartsListExistedComOffer key={index} data={item} />;
@@ -448,13 +458,14 @@ export default function CommercialOfferModal({ onClose }) {
           <FiPlusCircle
             className={clsx(
               css.addIcon,
-              cpId ? css.addIconExistedCp : css.addIconCreateCp
+              offerId ? css.addIconExistedCp : css.addIconCreateCp
             )}
           />
+
           <div
             className={clsx(
               css.bottomTextWrapper,
-              cpId
+              offerId
                 ? css.bottomTextWrapperExistedCp
                 : css.bottomTextWrapperCreateCp
             )}
@@ -467,7 +478,9 @@ export default function CommercialOfferModal({ onClose }) {
             <p>{totalProfit ? totalProfit.toFixed(2) : 0} грн</p>
             <p></p>
           </div>
+
           <DownloadPdfButtonKP carsData={dataArr} />
+
           <div className={css.bottomWrapper}>
             <div className={css.btnWrapper}>
               <div className={css.btnWithPopup}>

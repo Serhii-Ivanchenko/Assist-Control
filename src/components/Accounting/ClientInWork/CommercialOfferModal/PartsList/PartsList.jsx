@@ -171,8 +171,8 @@ export default function PartsList({
 
   const updateTooltipPosition = (e) => {
     setTooltipPosition({
-      x: e.clientX - 300, // Зміщення тултіпу від курсора по X
-      y: e.clientY - 70, // Зміщення тултіпу від курсора по Y
+      x: e.clientX - 320, // Зміщення тултіпу від курсора по X
+      y: e.clientY + 10, // Зміщення тултіпу від курсора по Y
     });
   };
 

@@ -33,9 +33,7 @@ import {
 } from "../../../../../redux/accounting/operations.js";
 import { selectCommercialOfferId } from "../../../../../redux/accounting/selectors.js";
 import Order from "../../Order/Order.jsx";
-import {
-  getDiagnostic,
-} from "../../../../../redux/accounting/operations.js";
+import { getDiagnostic } from "../../../../../redux/accounting/operations.js";
 
 function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const visibility = useSelector(selectVisibilityClientsInWork);
@@ -44,7 +42,11 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const [notificationSent, setNotificationSent] = useState(false);
   const dispatch = useDispatch();
   const [isCrm, setIsCrm] = useState("record");
-  const offerId = useSelector(selectCommercialOfferId);
+  // const offerId = "67b85c01d14e2f13c06d7706";
+  const offerId = null;
+
+  const diagId = "67b85a5dd14e2f13c06d7704";
+  // const diagId = null;
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const buttonRef = useRef(null);
@@ -112,9 +114,6 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
     [buttons[9]],
   ];
 
-  const diagId = "67b85a5dd14e2f13c06d7704";
-  // const diagId = null;
-
   // виклик модалки на групі кнопок
   const handleClick = (idx) => {
     switch (idx) {
@@ -136,14 +135,16 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
         );
         break;
       case 3:
-        // if (offerId) {
-        //   dispatch(getCommercialOffer("67b835c9d903bf65ca07db7c"));
-        // } else {
-        //   dispatch(getCommercialOfferData("67b777dca876c8394c69cba0"));
-        // }
-        dispatch(getCommercialOfferData("67b85a5dd14e2f13c06d7704"));
+        if (offerId) {
+          dispatch(getCommercialOffer(offerId));
+        } else {
+          dispatch(getCommercialOfferData(diagId));
+        }
+        // dispatch(getCommercialOfferData("67b85a5dd14e2f13c06d7704"));
         setIsModalOpen(true);
-        setModalContent(<CommercialOfferModal onClose={closeModal} />);
+        setModalContent(
+          <CommercialOfferModal offerId={offerId} onClose={closeModal} />
+        );
         break;
       case 4:
         setIsModalOpen(true);
