@@ -1,16 +1,45 @@
 import clsx from "clsx";
 import styles from "./TableRepair.module.css";
-import { BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
+import {
+  BsCaretDownFill,
+  BsCaretUpFill,
+  BsCheckCircleFill,
+  BsXCircleFill,
+} from "react-icons/bs";
+import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import { useState } from "react";
+import ava1 from "../../../../../assets/images/avatar_default.png";
 import { HiMinus } from "react-icons/hi2";
 import DeleteModal from "../../../../sharedComponents/SwitchableBtns/DeleteModal/DeleteModal";
 import Modal from "../../../../Modals/Modal/Modal";
+import MechanicPopover from "../MechanicPopover/MechanicPopover";
 
 const TableRepair = ({ data, onDelete }) => {
   const [hoveredRow, setHoveredRow] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [rowToDelete, setRowToDelete] = useState(null);
+  const [openModalForRow, setOpenModalForRow] = useState({});
+  const [selectedMechanics, setSelectedMechanics] = useState({});
 
+  const staffs = [
+    {
+      id: 1,
+      name: "Євген Коваль",
+      avatar: ava1,
+    },
+    {
+      id: 2,
+      name: "Олег Авраменко",
+      avatar: ava1,
+    },
+    {
+      id: 3,
+      name: "Микола Тисовий",
+      avatar: ava1,
+    },
+  ];
+
+  // Реалізація видалення рядка
   const handleMouseEnter = (rowId) => {
     setHoveredRow(rowId);
   };
@@ -31,6 +60,31 @@ const TableRepair = ({ data, onDelete }) => {
   const handleConfirmDelete = () => {
     onDelete(rowToDelete);
     setShowDeleteModal(false);
+  };
+
+  // Реалізація зміни механіка
+  const handleArrowClick = (rowId) => {
+    setOpenModalForRow((prev) => ({
+      // ...prev,
+      [rowId]: !prev[rowId],
+    }));
+  };
+
+  const handleMechanicSelect = (rowId, staff) => {
+    setSelectedMechanics((prev) => ({
+      ...prev,
+      [rowId]: staff,
+    }));
+    setOpenModalForRow((prev) => ({
+      ...prev,
+      [rowId]: false,
+    }));
+  };
+
+  const handlePopoverClose = () => {
+    setOpenModalForRow((prev) =>
+      Object.fromEntries(Object.keys(prev).map((key) => [key, false]))
+    );
   };
 
   return (
@@ -121,8 +175,35 @@ const TableRepair = ({ data, onDelete }) => {
                   {row.partsPurchase}
                 </td>
                 <td className={styles.columnWorkCost}>{row.workCost}</td>
-                <td className={clsx(styles.columnPosition, styles.nameColumn)}>
-                  {row.mechanic.fullName}
+                <td
+                  className={clsx(styles.columnPosition, styles.nameColumn)}
+                  onClick={() => handleArrowClick(row.id)}
+                >
+                  {selectedMechanics[row.id]
+                    ? selectedMechanics[row.id].name
+                    : row.mechanic.fullName}
+                  <span className={styles.arrowIcon}>
+                    {openModalForRow[row.id] ? (
+                      <BsCaretUpFill size={10} />
+                    ) : (
+                      <BsCaretDownFill size={10} />
+                    )}
+                  </span>
+                  {/* <BsCaretDownFill
+                    className={`${styles.arrowIcon} ${
+                      openModalForRow[row.id] ? styles.rotated : ""
+                    }`}
+                  /> */}
+                  {openModalForRow[row.id] && (
+                    <MechanicPopover
+                      isOpen={openModalForRow[row.id]}
+                      onClose={handlePopoverClose}
+                      staffs={staffs}
+                      onStaffSelect={(staff) =>
+                        handleMechanicSelect(row.id, staff)
+                      }
+                    />
+                  )}
                 </td>
                 <td className={styles.columnPercentage}>
                   {row.mechanic.percentage}%
@@ -135,10 +216,7 @@ const TableRepair = ({ data, onDelete }) => {
                       className={styles.deleteIconContainer}
                       onClick={() => handleDelete(row.id)}
                     >
-                      <HiMinus 
-                        size={16}
-                        className={styles.deleteIcon}
-                      />
+                      <HiMinus size={16} className={styles.deleteIcon} />
                     </div>
                   </td>
                 )}

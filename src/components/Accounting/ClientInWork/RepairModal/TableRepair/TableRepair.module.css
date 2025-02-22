@@ -16,7 +16,7 @@
 }
 
 .customTableWrapper::-webkit-scrollbar {
-  width: 8px; /* Зменшуємо товщину скролу */
+  width: 8px;
 }
 
 .customTableWrapper::-webkit-scrollbar-thumb {
@@ -135,6 +135,7 @@
 }
 .nameColumn {
   width: 150px;
+  position: relative;
 }
 
 .deleteIconContainer {
@@ -181,4 +182,17 @@
 .headerBottom .columnDelete {
   visibility: hidden;
   border: none;
+}
+
+.arrowIcon {
+  position: absolute;
+  bottom: 30%;
+  right: 2%;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.rotated {
+  transform: rotate(180deg);
 }

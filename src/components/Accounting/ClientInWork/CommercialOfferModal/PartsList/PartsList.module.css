@@ -1,17 +1,17 @@
 .subHeader {
   display: grid;
-  grid-template-columns: 65px 93px 74px 85px 136px 157px 110px 110px 119px 110px 110px 40px 50px 22px;
+  grid-template-columns: 65px 93px 74px 96px 136px 157px 110px 110px 119px 110px 110px 40px 50px 22px;
   margin-bottom: 20px;
   padding: 16px;
   background-color: var(--bg-input);
-  justify-items: center;
+  /* justify-items: center; */
+  gap: 5px;
   align-items: center;
   border-radius: 4px;
 }
 
 .quantityWrapper {
   display: flex;
-  /* align-items: center; */
 }
 
 .quantityBtn {
@@ -93,12 +93,11 @@
 
 .stringWrapper {
   display: grid;
-  grid-template-columns: 65px 93px 74px 85px 136px 157px 110px 110px 119px 22px 88px 110px 40px;
+  grid-template-columns: 65px 93px 74px 96px 136px 157px 110px 110px 119px 22px 88px 110px 40px;
   margin-bottom: 20px;
-  justify-items: center;
-  /* align-items: center; */
+  /* justify-items: center; */
+  gap: 5px;
   padding-left: 16px;
-  /* height: 20px; */
   overflow: hidden;
 }
 

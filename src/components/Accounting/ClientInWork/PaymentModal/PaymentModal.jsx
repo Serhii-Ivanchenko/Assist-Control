@@ -1,5 +1,6 @@
 import CarInfo from "../../../sharedComponents/CarInfo/CarInfo.jsx";
 
+import PopUp from "../PopUp/PopUp.jsx";
 import { useEffect, useRef, useState } from "react";
 import { BsXLg } from "react-icons/bs";
 import {
@@ -88,14 +89,15 @@ export default function PaymentModal({ onClose }) {
 
   const handleEditToggle = () => {
     setIsEditing((prev) => !prev);
+    setEditedData((prev) => ({ ...prev, sumpay: prev.sumpay || 0 }));
   };
 
-  const handleSelectChange = (field, value) => {
-    setEditedData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
+  //  const handleSelectChange = (field, value) => {
+  //    setEditedData((prev) => ({
+  //      ...prev,
+  //      [field]: value,
+  //    }));
+  //  };
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -103,27 +105,73 @@ export default function PaymentModal({ onClose }) {
     setEditedData((prev) => ({ ...prev, sumpay: numericValue }));
   };
 
-  const renderSelect = (field, value, dictionary, width) => {
-    return (
-      <div className={css.customSelectWrapper} style={{ width }}>
-        {field === "cash" && <BsCurrencyDollar className={css.dollar} />}
-        <select
-          className={`${css.customSelect} ${
-            field === "cash" ? css.cashSelect : ""
-          }`}
-          value={value}
-          onChange={(e) => handleSelectChange(field, e.target.value)}
-          style={{ width }}
-        >
-          {dictionary.map((item) => (
-            <option key={item.id} value={item.id} className={css.dictionoption}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-        <BsFillCaretDownFill className={css.customSelectIcon} />
-      </div>
-    );
+  // const renderSelect = (field, value, dictionary, width) => {
+  //   return (
+  //     <div className={css.customSelectWrapper} style={{ width }}>
+  //       {field === "cash" && <BsCurrencyDollar className={css.dollar} />}
+  //       <select
+  //         className={`${css.customSelect} ${
+  //           field === "cash" ? css.cashSelect : ""
+  //         }`}
+  //         value={value}
+  //         onChange={(e) => handleSelectChange(field, e.target.value)}
+  //         style={{ width }}
+  //       >
+  //         {dictionary.map((item) => (
+  //           <option key={item.id} value={item.id} className={css.dictionoption}>
+  //             {item.name}
+  //           </option>
+  //         ))}
+  //       </select>
+  //       <BsFillCaretDownFill className={css.customSelectIcon} />
+  //     </div>
+  //   );
+  // };
+
+  const [activeService, setActiveService] = useState(
+    avtoservice.find((service) => service.id === editedData.avtoservice) ||
+      avtoservice[0]
+  );
+  const [isAvtoservice, setIsAvtoservice] = useState(false); // Видимость справочника
+  const triggerAvtoserviceRef = useRef(null);
+
+  const toggleAvtoserviceSelector = () => {
+    setIsAvtoservice(!isAvtoservice);
+  };
+
+  const handleAvtoserviceSelect = (idService) => {
+    setActiveService(idService);
+    setIsAvtoservice(false);
+  };
+
+  const [activeCash, setActiveCash] = useState(
+    cash.find((cashitem) => cashitem.id === editedData.cash) || cash[0]
+  );
+  const [isCash, setIsCash] = useState(false); // Видимость справочника
+  const triggerCashRef = useRef(null);
+
+  const toggleCashSelector = () => {
+    setIsCash(!isCash);
+  };
+
+  const handleCashSelect = (idCash) => {
+    setActiveCash(idCash);
+    setIsCash(false);
+  };
+
+  const [activePayType, setActivePayType] = useState(
+    paytype.find((typeitem) => typeitem.id === editedData.paytype) || cash[0]
+  );
+  const [isPayType, setIsPayType] = useState(false); // Видимость справочника
+  const triggerPayTypeRef = useRef(null);
+
+  const togglePayTypeSelector = () => {
+    setIsPayType(!isPayType);
+  };
+
+  const handlePayTypeSelect = (idPayType) => {
+    setActivePayType(idPayType);
+    setIsPayType(false);
   };
 
   return (
@@ -152,24 +200,86 @@ export default function PaymentModal({ onClose }) {
             <p className={css.mechanicName}>{datakp.manager.manager_name}</p>
           </div>
 
-          <div className={css.dictionary}>
-            <div style={{}}>
-              {renderSelect(
-                "avtoservice",
-                editedData.avtoservice,
-                avtoservice,
-                160
+          <div className={css.selectWrapper}>
+            <div
+              className={css.serviceDisplay}
+              ref={triggerAvtoserviceRef}
+              onClick={toggleAvtoserviceSelector} // Открываем/закрываем справочник
+            >
+              <span>{activeService.name}</span>
+              <BsFillCaretDownFill
+                className={`${css.customSelectIcon} ${
+                  isAvtoservice ? css.rotated : ""
+                }`}
+              />
+              {isAvtoservice && (
+                <div>
+                  <PopUp
+                    isOpen={isAvtoservice}
+                    onClose={() => setIsAvtoservice(false)}
+                    service={avtoservice}
+                    activeService={activeService}
+                    onSelect={handleAvtoserviceSelect}
+                    triggerRef={triggerAvtoserviceRef}
+                  />
+                </div>
               )}
             </div>
-            <div style={{}}>
-              {renderSelect("cash", editedData.cash, cash, 120)}
+
+            <div
+              className={css.cashDisplay}
+              ref={triggerCashRef}
+              onClick={toggleCashSelector} // Открываем/закрываем справочник
+            >
+              <BsCurrencyDollar className={css.dollar} />
+              <span>{activeCash.name}</span>
+              <BsFillCaretDownFill
+                className={`${css.customSelectIcon} ${
+                  isCash ? css.rotated : ""
+                }`}
+              />
+              {isCash && (
+                <div>
+                  <PopUp
+                    isOpen={isCash}
+                    onClose={() => setIsCash(false)}
+                    service={cash}
+                    activeService={activeCash}
+                    onSelect={handleCashSelect}
+                    triggerRef={triggerCashRef}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
       <div className={css.bottomsection}>
         <div className={css.bottomfirst}>
-          {renderSelect("paytype", editedData.paytype, paytype, 200)}
+          <div
+            className={css.payTypeDisplay}
+            ref={triggerPayTypeRef}
+            onClick={togglePayTypeSelector} // Открываем/закрываем справочник
+          >
+            <span>{activePayType.name}</span>
+            <BsFillCaretDownFill
+              className={`${css.customSelectIcon} ${
+                isPayType ? css.rotated : ""
+              }`}
+            />
+            {isPayType && (
+              <div>
+                <PopUp
+                  isOpen={isPayType}
+                  onClose={() => setIsPayType(false)}
+                  service={paytype}
+                  activeService={activePayType}
+                  onSelect={handlePayTypeSelect}
+                  triggerRef={triggerPayTypeRef}
+                />
+              </div>
+            )}
+          </div>
         </div>
         <div className={css.bottomsecond}>
           <div className={css.blocksecond}>
@@ -202,7 +312,7 @@ export default function PaymentModal({ onClose }) {
             <p className={css.titlefield}>Залишок</p>
 
             <p className={css.datavalue}>
-              {editedData.sumpay - editedData.sumkp}
+              {(editedData.sumpay || 0) - editedData.sumkp}
             </p>
           </div>
         </div>
