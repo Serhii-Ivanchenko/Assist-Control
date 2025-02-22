@@ -9,14 +9,14 @@ import { TiTick } from "react-icons/ti";
 import Loader from "../../../Loader/Loader";
 
 export default function DiagnosticsModalSave({
-  // onClose,
+  onClose,
   togglePoints,
   setOpenModalSave,
   openModalSave,
   chosenPoints,
   chosenSpares,
+  isRepairModal,
   diagnosticsData,
-  onClose,
   diagId,
   loading,
   managerName,
@@ -31,8 +31,9 @@ export default function DiagnosticsModalSave({
   const handleClose = () => {
     if (diagId) {
       console.log("diagId", diagId);
-
       onClose();
+    } else if (isRepairModal) {
+      onClose(); // Повертає RepairModal
     } else {
       setOpenModalSave(!openModalSave);
     }

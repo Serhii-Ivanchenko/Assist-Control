@@ -9,18 +9,19 @@ import { useEffect, useState } from "react";
 import { HiPlus } from "react-icons/hi2";
 import CommercialOfferModal from "../CommercialOfferModal/CommercialOfferModal.jsx";
 import DiagnosticsModals from "../../DiagnosticsModals/DiagnosticsModals.jsx";
+import { useDispatch } from "react-redux";
+import { getCommercialOfferData } from "../../../../redux/accounting/operations.js";
 
 const RepairModal = ({
   car,
   onClose,
-  // onOpenCommercialOfferModal,
-  // onOpenDiagnosticsModalSave,
   setModalContent,
 }) => {
   const [data, setData] = useState(repairData);
   const [price, setPrice] = useState(0);
   const [remainingAmount, setRemainingAmount] = useState(0);
   useState(false);
+  const dispatch = useDispatch();
 
   // Функції для перемикання модалок у RepairModal
   const openRepairModal = () => {
@@ -34,6 +35,7 @@ const RepairModal = ({
   };
 
   const openCommercialOfferModal = () => {
+    dispatch(getCommercialOfferData("67b85a5dd14e2f13c06d7704"));
     setModalContent(<CommercialOfferModal onClose={openRepairModal} />);
   };
   const openDiagnosticsModal = () => {
@@ -41,7 +43,7 @@ const RepairModal = ({
       <DiagnosticsModals onClose={openRepairModal} isRepairModal={true} />
     );
   };
-  //
+// Прорахунок інпутів суми і боргу
 
   useEffect(() => {
     const newPrice = data.reduce(
@@ -78,7 +80,6 @@ const RepairModal = ({
 
       <div className={styles.infoContainer}>
         <CarInfo {...carInfo} />
-        {/* <div></div> */}
         <div className={styles.workInfo}>
           <div className={styles.date}>03.02.2025</div>
           <div className={styles.links}>
@@ -90,14 +91,12 @@ const RepairModal = ({
             </button>
             <button
               className={styles.link}
-              // onClick={onOpenDiagnosticsModalSave}
               onClick={openDiagnosticsModal}
             >
               Діагностика № 345
             </button>
             <button
               className={styles.link}
-              // onClick={onOpenCommercialOfferModal}
               onClick={openCommercialOfferModal}
             >
               КП № 345

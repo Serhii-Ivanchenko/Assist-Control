@@ -6,7 +6,6 @@ import {
   BsCheckCircleFill,
   BsXCircleFill,
 } from "react-icons/bs";
-import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import { useState } from "react";
 import ava1 from "../../../../../assets/images/avatar_default.png";
 import { HiMinus } from "react-icons/hi2";
@@ -67,6 +66,7 @@ const TableRepair = ({ data, onDelete }) => {
     setOpenModalForRow((prev) => ({
       // ...prev,
       [rowId]: !prev[rowId],
+      // [rowId]: prev?.[rowId] === undefined ? true : !prev[rowId]
     }));
   };
 
@@ -175,35 +175,31 @@ const TableRepair = ({ data, onDelete }) => {
                   {row.partsPurchase}
                 </td>
                 <td className={styles.columnWorkCost}>{row.workCost}</td>
-                <td
-                  className={clsx(styles.columnPosition, styles.nameColumn)}
-                  onClick={() => handleArrowClick(row.id)}
-                >
-                  {selectedMechanics[row.id]
-                    ? selectedMechanics[row.id].name
-                    : row.mechanic.fullName}
-                  <span className={styles.arrowIcon}>
+                <td className={clsx(styles.columnPosition, styles.nameColumn)}>
+                  <span className={styles.mechanicName}>
+                    {selectedMechanics[row.id]
+                      ? selectedMechanics[row.id].name
+                      : row.mechanic.fullName}
+                  </span>
+                  <span
+                    className={styles.arrowIcon}
+                    onClick={() => handleArrowClick(row.id)}
+                  >
                     {openModalForRow[row.id] ? (
-                      <BsCaretUpFill size={10} />
+                      <BsCaretUpFill size={15} />
                     ) : (
-                      <BsCaretDownFill size={10} />
+                      <BsCaretDownFill size={15} />
                     )}
                   </span>
-                  {/* <BsCaretDownFill
-                    className={`${styles.arrowIcon} ${
-                      openModalForRow[row.id] ? styles.rotated : ""
-                    }`}
-                  /> */}
-                  {openModalForRow[row.id] && (
-                    <MechanicPopover
-                      isOpen={openModalForRow[row.id]}
-                      onClose={handlePopoverClose}
-                      staffs={staffs}
-                      onStaffSelect={(staff) =>
-                        handleMechanicSelect(row.id, staff)
-                      }
-                    />
-                  )}
+
+                  <MechanicPopover
+                    isOpen={openModalForRow[row.id]}
+                    onClose={() => handlePopoverClose(row.id)}
+                    staffs={staffs}
+                    onStaffSelect={(staff) =>
+                      handleMechanicSelect(row.id, staff)
+                    }
+                  />
                 </td>
                 <td className={styles.columnPercentage}>
                   {row.mechanic.percentage}%

@@ -185,6 +185,7 @@
 }
 
 .arrowIcon {
+  display: flex;
   position: absolute;
   bottom: 30%;
   right: 2%;
@@ -193,6 +194,8 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.rotated {
-  transform: rotate(180deg);
+.mechanicName {
+  display: inline-block;
+  width: 122px;
+  white-space: wrap;
 }
