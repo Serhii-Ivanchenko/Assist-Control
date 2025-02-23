@@ -118,6 +118,7 @@ function ClientStatusStepper({ item, carId, car, carImg, status, postPaid }) {
   const handleClick = (idx) => {
     switch (idx) {
       case 0:
+        // dispatch(getClientInfo({ carId: carId }));
         dispatch(getClientInfo({ carId: 38701 }));
         setIsModalOpen(true);
         setModalContent(<DetailedClientInfo onClose={closeModal} car={item} />);

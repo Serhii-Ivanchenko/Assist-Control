@@ -14,7 +14,7 @@ function ClientsInWorkItem({ item }) {
   return (
     <div className={styles.wrapper}>
       <ul className={styles.itemsList}>
-        <li className={styles.date}>{formatDate(item.date_e)}</li>
+        <li className={styles.date}>{formatDate(item.date)}</li>
         <li className={styles.status}>
           <GetStatus status={item.status} />
         </li>
@@ -22,8 +22,8 @@ function ClientsInWorkItem({ item }) {
           <ClientStatusStepper
             item={item}
             carId={item.car_id}
-            car={item.car_model}
-            carImg={item.car_img}
+            car={item.model}
+            carImg={item.photo_url}
             status={item.status}
             prePaid={item.pre_paid}
             postPaid={item.post_paid}
