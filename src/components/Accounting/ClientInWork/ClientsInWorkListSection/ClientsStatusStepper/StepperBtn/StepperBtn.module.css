@@ -23,7 +23,8 @@
 }
 
 .textImg {
-  width: 84px;
+  min-width: 84px;
+  max-width: 150px;
   color: #fff;
   text-wrap: balance;
   font-family: "Roboto", sans-serif;

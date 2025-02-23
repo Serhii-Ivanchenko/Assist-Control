@@ -22,7 +22,7 @@ function ClientsInWorkItem({ item }) {
           <ClientStatusStepper
             item={item}
             carId={item.car_id}
-            car={item.model}
+            car={` ${item.make} ${item.model}`}
             carImg={item.photo_url}
             status={item.status}
             prePaid={item.pre_paid}
