@@ -60,8 +60,6 @@
 .iconChart {
   transition: color 0.3s;
   color: white;
-  width: 22px;
-  height: 22px;
   width: clamp(14px, min(2.037vh, 1.189vw), 22px);
   height: clamp(14px, min(2.037vh, 1.189vw), 22px);
 }

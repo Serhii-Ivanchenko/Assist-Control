@@ -71,7 +71,7 @@ export default function ServiceBookingModal({
       input: (base) => ({
         ...base,
         color: "var(--light-gray)",
-        fontSize: "14px",
+        fontSize: "clamp(9px, min(1.296vh, 0.756vw), 14px)",
         fontStyle: " normal",
         fontWeight: 400,
         lineHeight: "normal",
@@ -79,7 +79,7 @@ export default function ServiceBookingModal({
       placeholder: (provided, state) => ({
         ...provided,
         color: "var(--input-text)",
-        fontSize: "14px",
+        fontSize: "clamp(9px, min(1.296vh, 0.756vw), 14px)",
         fontFamily: "Roboto, sans-serif",
         fontStyle: "normal",
         fontWeight: "400",
@@ -89,12 +89,12 @@ export default function ServiceBookingModal({
         ...provided,
         boxShadow: "none", // Убираем тень и синий контур при фокусе
         outline: state.isFocused ? "1px solid #ccc" : "none", // Убираем outline (синий контур)
-        width: "288px",
-        height: "46px",
+        width: "clamp(199px, min(15.568vw, 4.260vh * 6.261), 288px)",
+        height: "clamp(30px, min(4.260vh, 15.568vw / 6.261), 46px)",
         borderRadius: "6px",
         border: "1px solid var(--input-stroke)",
         backgroundColor: "var(--bg-input)",
-        paddingLeft: "20px",
+        paddingLeft: "clamp(13px, min(1.851vh, 1.081vw), 20px)",
         "&:hover": {
           border: "1px solid var(--input-stroke)",
           outline: "none",
@@ -112,17 +112,17 @@ export default function ServiceBookingModal({
       }),
       menuList: (provided) => ({
         ...provided,
-        maxHeight: "200px", // Ограничение высоты, чтобы появился скролл
+        maxHeight: "clamp(138px, min(10.811vw, 18.519vh), 200px)", // Ограничение высоты, чтобы появился скролл
         overflowY: "auto", // Включаем вертикальный скролл
       }),
       option: (base, state) => ({
         ...base,
-        padding: "10px",
+        padding: "clamp(6px, min(0.926vh, 0.541vw), 10px)",
         backgroundColor: state.isFocused
           ? "var(--blue-btn-normal)"
           : "transparent",
         color: "var(--light-gray)",
-        fontSize: "14px",
+        fontSize: "clamp(9px, min(1.296vh, 0.756vw), 14px)",
         fontStyle: " normal",
         fontWeight: 400,
         lineHeight: "normal",
@@ -130,7 +130,7 @@ export default function ServiceBookingModal({
       singleValue: (base) => ({
         ...base,
         color: "var(--light-gray)",
-        fontSize: "14px",
+        fontSize: "clamp(9px, min(1.296vh, 0.756vw), 14px)",
         fontStyle: " normal",
         fontWeight: 400,
         lineHeight: "normal",

@@ -1,19 +1,19 @@
 .wrapper {
   display: flex;
-  gap: 10px;
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
   justify-content: flex-end;
 }
 
 .closeBtn {
   display: flex;
-  height: 36px;
-  padding: 10px 20px;
+  width: clamp(66px, min(5.189vw, 3.333vh * 2.667), 96px);
+  height: clamp(24px, min(3.333vh, 5.189vw / 2.667), 36px);
   justify-content: center;
   align-items: center;
   border-radius: 6px;
   border: 1px solid var(--light-gray);
   color: var(--white);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -24,15 +24,16 @@
 
 .submitBtn {
   display: flex;
-  gap: 10px;
-  padding: 10px 20px;
+  width: clamp(86px, min(6.757vw, 3.333vh * 3.472), 125px);
+  height: clamp(24px, min(3.333vh, 6.757vw / 3.472), 36px);
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
   justify-content: center;
   align-items: center;
   border-radius: 6px;
   background: var(--green-btn-normal);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   color: var(--white);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -46,7 +47,6 @@
 }
 
 .submitBtnIcon {
-  width: 13px;
-  height: 10px;
+  width: clamp(9px, min(1.296vh, 0.756vw), 14px);
   stroke: var(--white);
 }

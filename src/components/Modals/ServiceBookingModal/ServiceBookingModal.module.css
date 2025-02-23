@@ -1,17 +1,17 @@
 .serviceBookingModal {
   position: relative;
-  width: 660px;
-  padding: 28px 34px;
+  width: clamp(456px, min(35.676vw, 61.111vh), 660px);
+  padding: clamp(18px, min(2.592vh, 1.513vw), 28px) clamp(22px, min(3.148vh, 1.837vw), 34px);
   border-radius: 12px;
   background-color: var(--bg-secondary);
 }
 
 .closeIcon {
   position: absolute;
-  top: 25px;
-  right: 25px;
-  width: 18px;
-  height: 18px;
+  top: clamp(16px, min(2.315vh, 1.351vw), 25px);
+  right: clamp(16px, min(2.315vh, 1.351vw), 25px);
+  width: clamp(12px, min(1.667vh, 0.973vw), 18px);
+  height: clamp(12px, min(1.667vh, 0.973vw), 18px);
   fill: var(--input-stroke);
 }
 
@@ -20,34 +20,34 @@
 }
 
 .header {
-  font-size: 20px;
+  font-size: clamp(13px, min(1.851vh, 1.081vw), 20px);
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin-bottom: 42px;
+  margin-bottom: clamp(29px, min(3.888vh, 2.27vw), 42px);
 }
 
 .headerReminder {
-  margin-bottom: 10px;
+  margin-bottom: clamp(6px, min(0.926vh, 0.541vw), 10px);
 }
 
 .form {
   display: flex;
-  gap: 16px;
+  gap: clamp(12px, min(1.481vh, 0.864vw), 16px);
 }
 
 .rightSectionWrapper {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  margin-bottom: 76px;
+  gap: clamp(20px, min(2.777vh, 1.622vw), 30px);
+  margin-bottom: clamp(50px, min(7.037vh, 4.108vw), 76px);
   justify-content: flex-start;
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: clamp(13px, min(1.851vh, 1.081vw), 20px);
 }
 
 .inputWrapper {
@@ -56,10 +56,10 @@
 
 .btnArrowSelect {
   position: absolute;
-  right: 21px;
-  top: 16px;
+  right: clamp(14px, min(1.944vh, 1.135vw), 21px);
+  top: clamp(12px, min(1.481vh, 0.864vw), 16px);
   fill: white;
-  width: 13px;
+  width: clamp(8.5px, min(1.204vh, 0.703vw), 13px);
   fill: var(--icon-gray);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   /* pointer-events: none; */
@@ -71,14 +71,14 @@
 }
 
 .input {
-  width: 288px;
-  height: 46px;
+  width: clamp(199px, min(15.568vw, 4.260vh * 6.261), 288px);
+  height: clamp(30px, min(4.260vh, 15.568vw / 6.261), 46px);
   border-radius: 6px;
   border: 1px solid var(--input-stroke);
   background-color: var(--bg-input);
-  padding-left: 20px;
+  padding-left: clamp(13px, min(1.851vh, 1.081vw), 20px);
   color: var(--light-gray);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -102,7 +102,7 @@
 .input::placeholder {
   color: var(--input-text);
   font-family: Roboto, sans-serif;
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -113,14 +113,14 @@
 }
 
 .inputSelect {
-  width: 288px;
-  height: 46px;
+  width: clamp(199px, min(15.568vw, 4.260vh * 6.261), 288px);
+  height: clamp(30px, min(4.260vh, 15.568vw / 6.261), 46px);
   border-radius: 6px;
   border: 1px solid var(--input-stroke);
   background-color: var(--bg-input);
-  padding-left: 20px;
+  padding-left: clamp(13px, min(1.851vh, 1.081vw), 20px);
   color: var(--light-gray);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -128,14 +128,14 @@
 }
 
 .placeholder {
-  width: 288px;
-  height: 46px;
+  width: clamp(199px, min(15.568vw, 4.260vh * 6.261), 288px);
+  height: clamp(30px, min(4.260vh, 15.568vw / 6.261), 46px);
   border-radius: 6px;
   border: 1px solid var(--input-stroke);
   background-color: var(--bg-input);
-  padding-left: 20px;
+  padding-left: clamp(13px, min(1.851vh, 1.081vw), 20px);
   color: var(--input-text);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -144,7 +144,7 @@
 
 option {
   color: var(--light-gray);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -164,7 +164,7 @@ option {
 .reminder {
   font-family: "Roboto", sans-serif;
   font-weight: 500;
-  font-size: 11px;
+  font-size: clamp(7px, min(1.019vh, 0.595vw), 11px);
   position: absolute;
   top: 100%;
   left: 0;
@@ -174,14 +174,14 @@ option {
 .bottomRightSectionWrapper {
   display: flex;
   flex-direction: column;
-  gap: 36px;
-  margin-top: 35px;
+  gap: clamp(24px, min(3.333vh, 1.946vw), 36px);
+  margin-top: clamp(23px, min(3.241vh, 1.892vw), 35px);
 }
 
 .leftSectionWrapper {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: clamp(20px, min(2.777vh, 1.622vw), 30px);
   justify-content: flex-start;
 }
 
@@ -189,9 +189,9 @@ option {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 288px;
-  height: 46px;
-  gap: 8px;
+  width: clamp(199px, min(15.568vw, 4.260vh * 6.261), 288px);
+  height: clamp(30px, min(4.260vh, 15.568vw / 6.261), 46px);
+  gap: clamp(5px, min(0.432vw, 0.741vh), 8px);
 }
 
 .inputFile {
@@ -199,8 +199,8 @@ option {
 }
 
 .iconCamera {
-  width: 24px;
-  height: 24px;
+  width: clamp(16px, min(1.297vw, 2.222vh), 24px);
+  height: clamp(16px, min(1.297vw, 2.222vh), 24px);
   color: var(--white);
 }
 
@@ -209,7 +209,7 @@ option {
   align-items: center;
   color: var(--input-text);
   font-family: Roboto, sans-serif;
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -218,21 +218,21 @@ option {
 }
 
 .registrationCertificate {
-  height: 22px;
-  width: 35px;
+  height: clamp(14px, min(2.037vh, 1.189vw), 22px);
+  /* width: clamp(23px, min(3.241vh, 1.892vw), 35px); */
   object-fit: contain;
 }
 
 .textArea {
-  width: 288px;
-  height: 46px;
-  padding: 15px 0 15px 10px;
+  width: clamp(199px, min(15.568vw, 4.260vh * 6.261), 288px);
+  height: clamp(30px, min(4.260vh, 15.568vw / 6.261), 46px);
+  padding: clamp(11px, min(1.388vh, 0.81vw), 15px) 0 clamp(11px, min(1.388vh, 0.81vw), 15px) clamp(6px, min(0.926vh, 0.541vw), 10px);
   border-radius: 6px;
   border: 1px solid var(--input-stroke);
   background: var(--bg-input);
   resize: none;
   color: var(--light-gray);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -241,28 +241,32 @@ option {
 .textArea::placeholder {
   color: var(--input-text);
   font-family: Roboto, sans-serif;
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
+.calendar{
+  margin-top: -8px;
+}
+
 .timeWrapper {
-  width: 285px;
-  height: 129px;
+  width: clamp(199px, min(15.568vw, 11.944vh * 2.233), 288px);
+  height: clamp(86px, min(11.944vh, 15.568vw / 2.233), 129px);
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
-  row-gap: 6px;
-  column-gap: 3px;
+  margin-top: clamp(6px, min(0.926vh, 0.541vw), 10px);
+  row-gap: clamp(4px, min(0.555vh, 0.324vw), 6px);
+  column-gap: clamp(2px, min(0.277vh, 0.162vw), 3px);
 }
 
 .btnWrapper {
-  margin-top: 10px;
+  margin-top: clamp(6px, min(0.926vh, 0.541vw), 10px);
 }
 
 .customMenuList::-webkit-scrollbar {
-  width: 12px;
+  width: clamp(5px, min(0.432vw, 0.741vh), 8px);
 }
 
 .customMenuList::-webkit-scrollbar-track {

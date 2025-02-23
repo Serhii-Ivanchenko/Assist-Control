@@ -363,8 +363,6 @@
 }
 
 .clockContainer {
-  /* width: 24px;
-  height: 24px; */
   width: clamp(16px, min(1.297vw, 2.222vh), 24px);
   height: clamp(16px, min(1.297vw, 2.222vh), 24px);
   display: flex;

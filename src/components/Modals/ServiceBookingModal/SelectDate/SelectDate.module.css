@@ -1,16 +1,16 @@
 .datePickerWrapper {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
 }
 
 .datePaginationBtn {
   display: flex;
-  width: 30px;
-  height: 30px;
+  width: clamp(20px, min(2.777vh, 1.622vw), 30px);
+  height: clamp(20px, min(2.777vh, 1.622vw), 30px);
   justify-content: center;
   align-items: center;
-  border-radius: 32px;
+  border-radius: 50%;
   background-color: rgba(81, 85, 98, 0.25);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border: none;
@@ -27,32 +27,44 @@
 }
 
 .btnIcon {
-  width: 18px;
-  height: 18px;
+  width: clamp(12px, min(1.667vh, 0.973vw), 18px);
+  height: clamp(12px, min(1.667vh, 0.973vw), 18px);
   color: var(--light-gray);
 }
 
 .dateWrapper {
   display: flex;
-  gap: 8px;
-  margin-left: 60px;
-  margin-right: 60px;
+  align-items: center;
+  gap: clamp(5px, min(0.432vw, 0.741vh), 8px);
+  margin-left: clamp(41px, min(3.243vw, 5.555vh), 60px);
+  margin-right: clamp(41px, min(3.243vw, 5.555vh), 60px);
+}
+
+.dateWrapper p {
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
+  font-weight: 600;
+  line-height: clamp(12px, min(1.481vh, 0.864vw), 16px);
 }
 
 .customInput {
-  height: 24px;
+  width: clamp(16px, min(1.297vw, 2.222vh), 24px);
+  height: clamp(16px, min(1.297vw, 2.222vh), 24px);
   background-color: transparent;
   color: var(--white);
   outline: none;
   border: none;
   cursor: pointer;
   display: flex;
-  gap: 8px;
+}
+
+.customInput svg {
+  width: clamp(16px, min(1.297vw, 2.222vh), 24px);
+  height: clamp(16px, min(1.297vw, 2.222vh), 24px);
 }
 
 .chooseDate {
   color: var(--light-gray);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;

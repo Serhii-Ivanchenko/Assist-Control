@@ -1,11 +1,13 @@
 .timeBtn {
   width: 69px;
   height: 39px;
+  width: clamp(47px, min(3.730vw, 3.611vh * 1.769), 69px);
+  height: clamp(26px, min(3.611vh, 3.730vw / 1.769), 39px);
   border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-style: normal;
   font-weight: 500;
   line-height: 1.1875em;
