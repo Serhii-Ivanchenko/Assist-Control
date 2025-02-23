@@ -60,10 +60,11 @@ export default function ClientInfo({ clientInfo, car }) {
   };
 
   //Car
-  const carsArray = clientInfo.client_cars;
-  const particularCar = clientInfo.car;
-
-  const cars = carsArray.filter((car) => car.vin !== particularCar.vin);
+  const carsArray = clientInfo?.client_cars || []; // Якщо client_cars не визначено, то використовуємо порожній масив
+  const particularCar = clientInfo?.car;
+  
+  const cars = carsArray.filter((car) => car.vin !== particularCar?.vin); // Додати перевірку particularCar
+  
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);

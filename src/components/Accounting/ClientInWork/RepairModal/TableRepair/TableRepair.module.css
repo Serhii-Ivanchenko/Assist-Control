@@ -160,6 +160,7 @@
 .deleteIcon {
   color: var(-white);
   stroke-width: 2px;
+  padding-right: 1px;
 }
 
 

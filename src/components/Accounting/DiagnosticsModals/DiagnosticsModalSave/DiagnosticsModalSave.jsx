@@ -29,13 +29,12 @@ export default function DiagnosticsModalSave({
   const parts = diagnosticsData?.parts;
 
   const handleClose = () => {
-    if (diagId) {
-      console.log("diagId", diagId);
-      onClose();
-    } else if (isRepairModal) {
-      onClose(); // Повертає RepairModal
+    if (diagId && isRepairModal) {
+      onClose(); 
+    } else if (diagId) {
+      setOpenModalSave(!openModalSave); 
     } else {
-      setOpenModalSave(!openModalSave);
+      onClose();
     }
   };
 
@@ -98,7 +97,7 @@ export default function DiagnosticsModalSave({
               <button
                 type="button"
                 className={`${css.btn} ${css.cancel}`}
-                onClick={onClose}
+                onClick={handleClose}
               >
                 Закрити
               </button>
