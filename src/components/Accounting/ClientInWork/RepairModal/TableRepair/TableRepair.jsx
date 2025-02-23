@@ -6,7 +6,7 @@ import {
   BsCheckCircleFill,
   BsXCircleFill,
 } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ava1 from "../../../../../assets/images/avatar_default.png";
 import { HiMinus } from "react-icons/hi2";
 import DeleteModal from "../../../../sharedComponents/SwitchableBtns/DeleteModal/DeleteModal";
@@ -19,6 +19,34 @@ const TableRepair = ({ data, onDelete }) => {
   const [rowToDelete, setRowToDelete] = useState(null);
   const [openModalForRow, setOpenModalForRow] = useState({});
   const [selectedMechanics, setSelectedMechanics] = useState({});
+
+  const tableWrapperRef = useRef(null);
+  const popoverRef = useRef(null);
+
+// Реалізація  автоскролу
+useEffect(() => {
+  let scrollingInProgress = false;
+  if (popoverRef.current && openModalForRow && !scrollingInProgress) {
+    scrollingInProgress = true;
+    setTimeout(() => {
+      const popoverRect = popoverRef.current.getBoundingClientRect();
+      const tableWrapper = tableWrapperRef.current;
+
+      if (tableWrapper) {
+        const tableRect = tableWrapper.getBoundingClientRect();
+        const scrollOffset = popoverRect.bottom - tableRect.bottom;
+
+        if (scrollOffset > 0) {
+          tableWrapper.scrollBy({
+            top: scrollOffset + 200,
+            behavior: "smooth",
+          });
+        }
+      }
+      scrollingInProgress = false;
+    }, 100);
+  }
+}, [openModalForRow]);
 
   const staffs = [
     {
@@ -63,12 +91,15 @@ const TableRepair = ({ data, onDelete }) => {
 
   // Реалізація зміни механіка
   const handleArrowClick = (rowId) => {
-    setOpenModalForRow((prev) => ({
-      // ...prev,
-      [rowId]: !prev[rowId],
-      // [rowId]: prev?.[rowId] === undefined ? true : !prev[rowId]
-    }));
+    setOpenModalForRow((prev) => {
+      const isRowAlreadyOpen = prev[rowId];
+      if (isRowAlreadyOpen) {
+        return prev;
+      }
+      return { ...prev, [rowId]: !prev[rowId] };
+    });
   };
+  
 
   const handleMechanicSelect = (rowId, staff) => {
     setSelectedMechanics((prev) => ({
@@ -88,7 +119,7 @@ const TableRepair = ({ data, onDelete }) => {
   };
 
   return (
-    <div className={styles.customTableWrapper}>
+    <div className={styles.customTableWrapper} ref={tableWrapperRef}>
       {showDeleteModal && (
         <Modal
           isOpen={showDeleteModal}
@@ -101,7 +132,7 @@ const TableRepair = ({ data, onDelete }) => {
           />
         </Modal>
       )}
-      <table className={styles.customTable}>
+      <table className={styles.customTable} >
         <thead>
           <tr className={styles.headerTop}>
             <th className={styles.columnId}>№</th>
@@ -199,6 +230,7 @@ const TableRepair = ({ data, onDelete }) => {
                     onStaffSelect={(staff) =>
                       handleMechanicSelect(row.id, staff)
                     }
+                    popoverRef={popoverRef}
                   />
                 </td>
                 <td className={styles.columnPercentage}>

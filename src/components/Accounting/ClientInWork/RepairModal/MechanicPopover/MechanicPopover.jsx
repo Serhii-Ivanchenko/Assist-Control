@@ -1,9 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useTransition, animated } from "@react-spring/web";
 import css from "./MechanicPopover.module.css";
 
-const MechanicPopover = ({ isOpen, staffs, onStaffSelect, onClose }) => {
-  const popoverRef = useRef(null);
+const MechanicPopover = ({ isOpen, staffs, onStaffSelect, onClose,popoverRef }) => {
 
   const transitions = useTransition(isOpen, {
     from: { opacity: 0, transform: "translateY(-20px)"},
