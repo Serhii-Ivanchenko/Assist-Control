@@ -4,7 +4,10 @@ import styles from "./RatingStars.module.css";
 import { BsStarFill } from "react-icons/bs";
 
 export default function RatingStars({ rating, ratingGap, sizestar }) {
-  const iconSize = sizestar !== undefined ? sizestar : "14,5px";
+  const iconSize =
+    sizestar !== undefined
+      ? sizestar
+      : "clamp(9px, min(1.296vh, 0.756vw), 14px)";
 
   const getStarElements = (rating) => {
     const stars = [];

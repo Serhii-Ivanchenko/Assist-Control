@@ -1,7 +1,8 @@
 .crmBlockDayCarsItemContainer {
-  width: 365px;
   height: auto;
-  padding: 8px 18px;
+  width: clamp(252px, min(19.730vw, 33.796vh), 365px);
+  padding:
+    clamp(6px, min(0.926vh, 0.541vw), 10px) clamp(12px, min(1.667vh, 0.973vw), 18px);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -19,7 +20,7 @@
   cursor: grabbing;
 }
 
-.crmBlockDayCarsItemContainer.cursorComplete{
+.crmBlockDayCarsItemContainer.cursorComplete {
   cursor: default;
 }
 
@@ -38,19 +39,18 @@
 .userInfo {
   display: flex;
   flex-direction: column;
-  min-width: 185px;
+  min-width: clamp(128px, min(10vw, 17.130vh), 185px);
 }
 
 .title {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 7px;
-  width: 137px;
-  height: 24px;
-  padding-left: 8px;
-  margin-bottom: 8px;
-
+  gap: clamp(4px, min(0.648vh, 0.378vw), 7px);
+  width: clamp(94px, min(7.405vw, 2.222vh * 5.708), 137px);
+  height: clamp(16px, min(2.222vh, 7.405vw / 5.708), 24px);
+  padding-left: clamp(5px, min(0.432vw, 0.741vh), 8px);
+  margin-bottom: clamp(5px, min(0.432vw, 0.741vh), 8px);
   border-radius: 6px;
   position: relative;
   transition: background-color 0.3s ease, border-left 0.3s ease;
@@ -61,7 +61,7 @@
   position: absolute;
   left: -1px;
   top: 0;
-  width: 4px;
+  width: clamp(2px, min(0.216vw, 0.370vh), 4px);
   height: 100%;
   background-color: var(--glow-color);
   filter: blur(5px);
@@ -72,7 +72,7 @@
 .statusText {
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 500;
   line-height: 1.43em;
   font-variant: small-caps;
@@ -82,50 +82,49 @@
 }
 
 .icon {
-  width: 12px;
-  height: 12px;
+  width: clamp(8px, min(1.111vh, 0.649vw), 12px);
+  height: clamp(8px, min(1.111vh, 0.649vw), 12px);
   transition: width 0.3s, height 0.3s;
-  font-size: 16px;
 }
 
 .iconHuman {
-  width: 16px;
-  height: 16px;
+  width: clamp(12px, min(1.481vh, 0.864vw), 16px);
+  height: clamp(12px, min(1.481vh, 0.864vw), 16px);
 }
 
 .infoCard {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 11px;
+  gap: clamp(4px, min(0.555vh, 0.324vw), 6px);
+  margin-bottom: clamp(7px, min(1.019vh, 0.594vw), 11px);
 }
 
 .infoName,
 .infoTel,
 .infoCar {
   display: flex;
-  gap: 8px;
+  gap: clamp(5px, min(0.432vw, 0.741vh), 8px);
   align-items: center;
 }
 
 .vinContainer {
   display: flex;
-  padding: 3px 10px;
-  width: 185px;
-  height: 27px;
+  padding: clamp(2px, min(0.278vh, 0.162vw), 3px) clamp(6px, min(0.925vh, 0.54vw), 10px);
+  width: clamp(128px, min(10vw, 2.5vh * 6.852), 185px);
+  height: clamp(18px, min(2.5vh, 10vw / 6.852), 27px);
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
   border-radius: 6px;
-  margin-bottom: 12px;
+  margin-bottom: clamp(8px, min(0.649vw, 1.111vh), 12px);
   background: var(--main-gray);
 }
 
 .vinCode {
   color: var(--white);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
 
-  max-width: 134px;
+  max-width: clamp(92px, min(12.407vh, 7.243vw), 134px);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -135,8 +134,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 21px;
-  height: 21px;
+  width: clamp(14px, min(1.944vh, 1.135vw), 21px);
+  height: clamp(14px, min(1.944vh, 1.135vw), 21px);
   border-radius: 6px;
   color: var(--icon-gray);
   background: var(--main-gray);
@@ -149,37 +148,37 @@
 
 .textName {
   color: var(--white);
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 600;
   line-height: normal;
 }
 
 .textTel {
   color: var(--text-gray);
-  font-size: 14px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 600;
   line-height: normal;
 }
 
 .iconTel {
-  width: 12px;
-  height: 12px;
+  width: clamp(8px, min(1.111vh, 0.649vw), 12px);
+  height: clamp(8px, min(1.111vh, 0.649vw), 12px);
 }
 
 .nameCar {
   color: var(--white);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 134px;
+  max-width: clamp(92px, min(12.407vh, 7.243vw), 134px);
 }
 
 .btnContainer {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: clamp(2px, min(0.216vw, 0.370vh), 4px);
   margin-top: auto;
 }
 
@@ -187,9 +186,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 87px;
-  height: 61px;
-  margin-bottom: 12px;
+  width: clamp(60px, min(4.703vw, 5.648vh * 1.426), 87px);
+  height: clamp(40px, min(5.648vh, 4.703vw / 1.426), 61px);
+  margin-bottom: clamp(8px, min(1.111vh, 0.649vw), 12px);
 }
 
 .carPhoto img {
@@ -205,12 +204,13 @@
   justify-content: space-between;
   align-items: flex-end;
   width: 78px;
+  width: clamp(53px, min(7.22vh, 4.216vw), 78px);
 }
 
 .money {
   display: flex;
   color: var(--green);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 600;
   line-height: normal;
 }
@@ -220,28 +220,28 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
-  width: 96px;
+  width: clamp(55px, min(8.889vh, 5.189vw), 96px);
 }
 
 .carRegContainer {
   display: flex;
   align-items: center;
-  width: 96px;
-  height: 23px;
-  gap: 3px;
-  margin-bottom: 12px;
+  width: clamp(66px, min(5.189vw, 2.129vh * 4.174), 96px);
+  height: clamp(15px, min(2.129vh, 5.189vw / 4.174), 23px);
+  gap: clamp(2px, min(0.278vh, 0.162vw), 3px);
+  margin-bottom: clamp(8px, min(1.111vh, 0.649vw), 12px);
   border-radius: 5px;
   border: 2px solid var(--black);
   background: #d9d9d9;
 }
 
 .carRegFlag {
-  width: 5.4px;
-  height: 3.6px;
+  width: clamp(4px, min(0.324vw, 0.37vh * 1.5), 6px);
+  height: clamp(2px, min(0.37vh, 0.324vw / 1.5), 4px);
 }
 
 .carRegCountrys {
-  padding: 4px 1.5px;
+  padding: clamp(2px, min(0.37vh, 0.324vw), 4px) clamp(1px, min(0.139vh, 0.081vw), 1.5px);
   height: 100%;
   border-radius: 4px 0px 0px 4px;
   background: #00349a;
@@ -249,7 +249,7 @@
 
 .carRegCountry {
   color: var(--white);
-  font-size: 4px;
+  font-size: clamp(2px, min(0.216vw, 0.370vh), 4px);
   font-style: normal;
   font-weight: 600;
   text-transform: uppercase;
@@ -257,14 +257,14 @@
 
 .carNumber {
   color: var(--bg-secondary);
-  font-size: 15px;
+  font-size: clamp(10px, min(1.389vh, 0.811vw), 15px);
   font-weight: 600;
   line-height: normal;
   text-transform: uppercase;
 }
 
 .carRegFlag {
-  margin-bottom: 4px;
+  margin-bottom: clamp(2px, min(0.216vw, 0.370vh), 4px);
 }
 
 .mileInfo,
@@ -272,29 +272,30 @@
   display: flex;
   align-items: center;
 }
+
 .mileInfo {
-  margin-bottom: 6px;
-  gap: 7px;
+  margin-bottom: clamp(4px, min(0.555vh, 0.324vw), 6px);
+  gap: clamp(4px, min(0.648vh, 0.378vw), 7px);
 }
 
 .timeWork {
-  margin-bottom: 12px;
+  margin-bottom: clamp(8px, min(1.111vh, 0.649vw), 12px);
   margin-top: 1px;
-  gap: 5px;
+  gap: clamp(3px, min(0.27vw, 0.463vh), 5px);
   width: 101px;
 }
 
 .mileage {
   align-items: center;
   color: var(--mint);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 600;
   line-height: normal;
 }
 
 .time {
   color: var(--text-gray);
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 600;
   line-height: normal;
 }
@@ -302,7 +303,7 @@
 .total {
   margin-top: auto;
   color: var(--white);
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 600;
   line-height: normal;
 }
@@ -314,13 +315,14 @@
 .crmcarsInfo {
   position: relative;
   display: flex;
-  gap: 11px;
+  gap: clamp(7px, min(1.019vh, 0.594vw), 11px);
   margin-left: -35px;
+  margin-left: clamp(-35px, max(-3.241vh, -1.892vw), -24px);
 }
 
 .plus {
-  width: 24px;
-  height: 24px;
+  width: clamp(16px, min(1.297vw, 2.222vh), 24px);
+  height: clamp(16px, min(1.297vw, 2.222vh), 24px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -333,8 +335,8 @@
 
 .iconPlus {
   display: flex;
-  width: 14px;
-  height: 14px;
+  width: clamp(9px, min(1.296vh, 0.756vw), 14px);
+  height: clamp(9px, min(1.296vh, 0.756vw), 14px);
   justify-content: center;
   align-items: center;
   border-radius: 3px;
@@ -359,29 +361,9 @@
   border-radius: 3px;
   background: var(--CRM-modal-InputBG, #2d3038);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  width: 24px;
-  height: 24px;
-  padding: 4px;
-}
-
-.btnCopy {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 21px;
-  height: 21px;
-  background-color: transparent;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-.copyIcon {
-  height: 13px;
-  width: 13px;
-  fill: var(--white);
-  cursor: pointer;
+  width: clamp(16px, min(1.297vw, 2.222vh), 24px);
+  height: clamp(16px, min(1.297vw, 2.222vh), 24px);
+  padding: clamp(2px, min(0.216vw, 0.370vh), 4px);
 }
 
 .hidden {
@@ -396,9 +378,9 @@
   margin-top: auto;
 }
 
-.clockContainer{
-  width: 24px;
-  height: 24px;
+.clockContainer {
+  width: clamp(16px, min(1.297vw, 2.222vh), 24px);
+  height: clamp(16px, min(1.297vw, 2.222vh), 24px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -409,7 +391,7 @@
   background: var(--bg-input);
 }
 
-.iconClock{
+.iconClock {
   display: flex;
   justify-content: center;
   align-items: center;

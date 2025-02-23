@@ -1,6 +1,5 @@
 .btnDetail {
   display: flex;
-  /* padding: 5px 10px; */
   justify-content: center;
   align-items: center;
   width: clamp(41px, min(3.189vw, 2.222vh * 2.458), 59px);
@@ -21,7 +20,6 @@
 .btnDetailText {
   color: var(--white);
   font-family: "Roboto", sans-serif;
-  /* font-size: 12px; */
   font-size: clamp(10px, min(1.111vh, 0.648vw), 12px);
   font-weight: 600;
   line-height: 1.17em;

@@ -10,13 +10,14 @@
 .rating {
   display: flex;
   align-items: center;
+  gap: 1px;
   /* height: 100%; */
 }
 
 .fullStar svg,
 .emptyStar svg {
-  width: 14.5px;
-  height: 14.5px;
+  width: clamp(9px, min(1.296vh, 0.756vw), 14px);
+  height: clamp(9px, min(1.296vh, 0.756vw), 14px);
   transform: scale(1.1);
 }
 
@@ -42,15 +43,15 @@
 }
 
 .halfFilled svg {
-  width: 14.5px;
-  height: 14.5px;
+  width: clamp(9px, min(1.296vh, 0.756vw), 14px);
+  height: clamp(9px, min(1.296vh, 0.756vw), 14px);
   transform: scale(1.1);
   color: var(--star-orange);
 }
 
 .halfEmpty {
-  width: 14.5px;
-  height: 14.5px;
+  width: clamp(9px, min(1.296vh, 0.756vw), 14px);
+  height: clamp(9px, min(1.296vh, 0.756vw), 14px);
   transform: scale(1.1);
   color: var(--star-white);
 }
