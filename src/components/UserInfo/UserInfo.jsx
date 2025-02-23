@@ -13,6 +13,7 @@ export default function UserInfo() {
   const user = useSelector(selectUser);
   const [modalIsOpen, setIsOpen] = useState(false);
   const chatIsOpen = useSelector(selectIsChatOpen);
+console.log("user",user);
 
   const openModal = () => {
     setIsOpen(true);

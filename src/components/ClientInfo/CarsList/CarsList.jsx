@@ -29,7 +29,7 @@ export default function CarsList({ car }) {
   return (
     // <div className={css.carListAndAddBtn}>
     //   <ul className={css.carInfo}>
-    <li key={car.id || car.carId} className={css.carCard}>
+    <li key={car?.id || car?.carId} className={css.carCard}>
       <div className={css.mainContent}>
         <div className={css.photoAndMainCarInfo}>
           <img

@@ -11,17 +11,16 @@ import CommercialOfferModal from "../CommercialOfferModal/CommercialOfferModal.j
 import DiagnosticsModals from "../../DiagnosticsModals/DiagnosticsModals.jsx";
 import { useDispatch } from "react-redux";
 import { getCommercialOfferData } from "../../../../redux/accounting/operations.js";
+import Order from "../Order/Order.jsx";
 
-const RepairModal = ({
-  car,
-  onClose,
-  setModalContent,
-}) => {
+const RepairModal = ({ car, onClose, setModalContent }) => {
   const [data, setData] = useState(repairData);
   const [price, setPrice] = useState(0);
   const [remainingAmount, setRemainingAmount] = useState(0);
   useState(false);
   const dispatch = useDispatch();
+
+  const diagId = "67b85a5dd14e2f13c06d7704";
 
   // Функції для перемикання модалок у RepairModal
   const openRepairModal = () => {
@@ -35,15 +34,23 @@ const RepairModal = ({
   };
 
   const openCommercialOfferModal = () => {
-    dispatch(getCommercialOfferData("67b85a5dd14e2f13c06d7704"));
+    dispatch(getCommercialOfferData("diagId"));
     setModalContent(<CommercialOfferModal onClose={openRepairModal} />);
   };
   const openDiagnosticsModal = () => {
     setModalContent(
-      <DiagnosticsModals onClose={openRepairModal} isRepairModal={true} />
+      <DiagnosticsModals
+        onClose={openRepairModal}
+        isRepairModal={true}
+        diagId={diagId}
+      />
     );
   };
-// Прорахунок інпутів суми і боргу
+
+  const openOrderModal = () => {
+    setModalContent(<Order onClose={openRepairModal} />);
+  };
+  // Прорахунок інпутів суми і боргу
 
   useEffect(() => {
     const newPrice = data.reduce(
@@ -89,16 +96,10 @@ const RepairModal = ({
             >
               Звернення № 345
             </button>
-            <button
-              className={styles.link}
-              onClick={openDiagnosticsModal}
-            >
+            <button className={styles.link} onClick={openDiagnosticsModal}>
               Діагностика № 345
             </button>
-            <button
-              className={styles.link}
-              onClick={openCommercialOfferModal}
-            >
+            <button className={styles.link} onClick={openCommercialOfferModal}>
               КП № 345
             </button>
           </div>
@@ -117,9 +118,9 @@ const RepairModal = ({
       </div>
       <div className={styles.tableContainer}>
         <TableRepair data={data} onDelete={handleDelete} />
-        <div className={styles.iconContainer}>
-          <HiPlus className={styles.iconPlus} />
-        </div>
+        <button onClick={openOrderModal} className={styles.iconContainer}>
+          <HiPlus className={styles.iconPlus} size={16}/>
+        </button>
       </div>
       <div className={styles.bottomInfoContainer}>
         <div className={styles.leftContainer}>
