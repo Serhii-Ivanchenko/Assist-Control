@@ -22,9 +22,6 @@
   height: clamp(272px, min(37.870vh, 31.135vw / 1.408), 409px); */
 
   background: var(--bg-secondary);
-  /* min-height: 297px;
-  max-height: 381px; */
-  padding-right: 17px;
   padding-right: clamp(11px, min(0.91vw, 1.574vh), 17px);
 
   /*падінг для відступу скролбара*/

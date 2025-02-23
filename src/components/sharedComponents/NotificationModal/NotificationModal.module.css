@@ -1,9 +1,9 @@
 .notificationBox {
-  min-width: 388px;
-  padding: 18px 30px 30px 30px;
+  width: clamp(269px, min(21.027vw, 36.019vh), 389px);
+  padding: clamp(12px, min(1.667vh, 0.973vw), 18px) clamp(20px, min(2.777vh, 1.622vw), 30px) clamp(20px, min(2.777vh, 1.622vw), 30px) clamp(20px, min(2.777vh, 1.622vw), 30px);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: clamp(16px, min(1.297vw, 2.222vh), 24px);
 
   border-radius: 12px;
   background: var(--bg-secondary);
@@ -12,7 +12,7 @@
 .notifForm {
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: clamp(8.5px, min(1.204vh, 0.703vw), 13px);
 }
 
 .dateAndTimeBox {
@@ -24,22 +24,22 @@
 .inputBox {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: clamp(4px, min(0.555vh, 0.324vw), 6px);
 
   position: relative;
 }
 
 .crossBtn {
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: clamp(13px, min(1.851vh, 1.081vw), 20px);
+  top: clamp(13px, min(1.851vh, 1.081vw), 20px);
   fill: var(--input-stroke);
   cursor: pointer;
 }
 
 .title {
   color: var(--white);
-  font-size: 24px;
+  font-size: clamp(16px, min(1.297vw, 2.222vh), 24px);
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -69,7 +69,7 @@
 
 .input {
   display: flex;
-  padding: 6px 10px;
+  padding: clamp(4px, min(0.555vh, 0.324vw), 6px) clamp(6px, min(0.925vh, 0.54vw), 10px);
   justify-content: center;
   align-items: center;
   /* gap: 10px; */
@@ -102,7 +102,7 @@
   border: none;
 
   color: var(--white);
-  font-size: 20px;
+  font-size: clamp(13px, min(1.851vh, 1.081vw), 20px);
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -110,11 +110,11 @@
 }
 
 .dateDate {
-  width: 90px;
+  width: clamp(62px, min(8.333vh, 4.865vw), 90px);
 }
 
 .dateTime {
-  width: 60px;
+  width: clamp(41px, min(3.243vw, 5.555vh), 60px);
 }
 
 .date::-webkit-calendar-picker-indicator {
@@ -128,7 +128,7 @@
   border: none;
 
   display: flex;
-  padding: 6px;
+  padding: clamp(4px, min(0.555vh, 0.324vw), 6px);
   align-items: center;
   cursor: pointer;
   /* gap: 10px; */
@@ -145,10 +145,10 @@
   outline: none;
   border: none;
   resize: none;
-  padding: 12px;
+  padding: clamp(8px, min(1.111vh, 0.649vw), 12px);
 
   color: var(--white);
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -158,10 +158,10 @@
   border-radius: 6px;
   border: 1px solid var(--input-stroke);
   background-color: transparent;
-  padding: 10px;
+  padding: clamp(6px, min(0.925vh, 0.54vw), 10px);
 
   color: var(--white);
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -175,12 +175,12 @@
   border: none;
 
   display: flex;
-  padding: 10px;
+  padding: clamp(6px, min(0.925vh, 0.54vw), 10px);
   align-items: center;
-  gap: 10px;
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
 
   color: var(--white);
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -194,7 +194,7 @@
 .btnBox {
   display: flex;
   justify-content: space-between;
-  margin-top: 17px;
+  margin-top: clamp(11px, min(0.91vw, 1.574vh), 17px);
 }
 
 .selectBox {
@@ -203,7 +203,7 @@
 
 .arrowIcon {
   position: absolute;
-  right: 10px;
+  right: clamp(6px, min(0.925vh, 0.54vw), 10px);
   top: 50%;
   transform: translateY(-50%);
 
@@ -213,7 +213,7 @@
 
 .label {
   color: var(--white);
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -221,7 +221,7 @@
 
 .errorMessage {
   color: var(--red);
-  font-size: 10px;
+  font-size: clamp(6px, min(0.925vh, 0.54vw), 10px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -229,7 +229,7 @@
 
   cursor: default;
   position: absolute;
-  left: 20px;
+  left: clamp(13px, min(1.851vh, 1.081vw), 20px);
   top: 100%;
 }
 
@@ -247,10 +247,10 @@
 
 .speedBox {
   display: flex;
-  gap: 10px;
-  height: 38px;
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
+  height: clamp(26px, min(2.054vw, 3.519vh), 38px);
   width: fit-content;
-  padding: 10px 14px;
+  padding: clamp(6px, min(0.925vh, 0.54vw), 10px) clamp(9px, min(1.296vh, 0.757vw), 14px);
   align-items: center;
 
   border-radius: 24px;
@@ -261,14 +261,14 @@
 
 .speedIcon {
   fill: var(--current-mileage-text);
-  width: 13px;
-  height: 13px;
+  width: clamp(8.5px, min(1.204vh, 0.703vw), 13px);
+  height: clamp(8.5px, min(1.204vh, 0.703vw), 13px);
 }
 
 .speedValue {
   color: var(--current-mileage-text);
   text-align: center;
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -277,15 +277,15 @@
 .nextServiceBox {
   color: var(--last-service-mileage-text);
   background-color: var(--last-service-mileage-bg);
-  width: 80px;
-  height: 38px;
-
+  width: clamp(55px, min(4.324vw, 3.519vh * 2.105), 80px);
+  height: clamp(25px, min(3.519vh, 4.324vw / 2.105), 38px);
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 10px 10px;
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
+  padding: clamp(6px, min(0.925vh, 0.54vw), 10px);
   border-radius: 24px;
   box-shadow: 0 4px 4px #00000040;
   cursor: pointer;
@@ -300,12 +300,12 @@
 .nextServiceContainer {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: clamp(6px, min(0.925vh, 0.54vw), 10px);
 }
 
 .nextServiceContainer>p {
   line-height: 1.1875em;
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
 }
 
 .nextServiceInput {
