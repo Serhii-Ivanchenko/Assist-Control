@@ -1,17 +1,17 @@
 .wrapper {
   position: relative;
   display: flex;
-  width: 389px;
+  width: clamp(269px, min(21.027vw, 36.019vh), 389px);
   height: auto;
-  padding: 13px 19px 19px 19px;
+  padding: clamp(8.5px, min(1.204vh, 0.703vw), 13px) clamp(12px, min(1.759vh, 1.027vw), 19px) clamp(12px, min(1.759vh, 1.027vw), 19px) clamp(12px, min(1.759vh, 1.027vw), 19px);
   border-radius: 12px;
   background: var(--bg-secondary);
 }
 
 .exitBtn {
   position: absolute;
-  top: 13px;
-  right: 19px;
+  top: clamp(8.5px, min(1.204vh, 0.703vw), 13px);
+  right: clamp(12px, min(1.759vh, 1.027vw), 19px);
   background-color: transparent;
   border: none;
   color: var(--Button-grey, #4a4a4a);
@@ -30,17 +30,17 @@
 .form label {
   color: #fff;
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
+  font-size: clamp(9px, min(1.296vh, 0.756vw), 14px);
   font-weight: 400;
-  margin-bottom: 15px;
+  margin-bottom: clamp(11px, min(1.388vh, 0.81vw), 15px);
 }
 
 .textarea {
   display: flex;
-  width: 351px;
-  height: 89px;
-  padding: 10px;
-  margin-bottom: 21px;
+  width: clamp(242px, min(18.973vw, 8.241vh * 3.944), 351px);
+  height: clamp(59px, min(8.241vh, 18.973vw / 3.944), 89px);
+  padding: clamp(6px, min(0.925vh, 0.54vw), 10px);
+  margin-bottom: clamp(14px, min(1.944vh, 1.135vw), 21px);
   align-items: flex-start;
   outline: none;
   border-radius: 0px 12px 12px 12px;
@@ -49,12 +49,12 @@
   resize: none;
   color: #fff;
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 400;
 }
 
 .textarea::-webkit-scrollbar {
-  width: 8px;
+  width: clamp(5px, min(0.432vw, 0.741vh), 8px);
 }
 
 .textarea::-webkit-scrollbar-track {
@@ -70,14 +70,14 @@
 .btnsGroup {
   display: flex;
   justify-content: flex-end;
-  gap: 21px;
+  gap: clamp(14px, min(1.944vh, 1.135vw), 21px);
 }
 
 .closeBtn {
   display: inline-flex;
   width: fit-content;
-  height: 39px;
-  padding: 10px 20px;
+  width: clamp(66px, min(5.189vw, 3.333vh * 2.667), 96px);
+  height: clamp(24px, min(3.333vh, 5.189vw / 2.667), 36px);
   justify-content: center;
   align-items: center;
   border-radius: 6px;
@@ -86,13 +86,14 @@
   border: 1px solid var(--CRM-modal-LightGray, #d8e1ff);
   color: #fff;
   cursor: pointer;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
 }
 
 .submitBtn {
   display: inline-flex;
   width: fit-content;
-  height: 39px;
-  padding: 10px 20px;
+  width: clamp(100px, min(7.838vw, 3.333vh * 4.028), 145px);
+  height: clamp(24px, min(3.333vh, 7.838vw / 4.028), 36px);
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -101,6 +102,7 @@
   background: var(--Blue, #3956cc);
   color: #fff;
   cursor: pointer;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
 }
 
 .submitBtn:hover,
@@ -110,17 +112,17 @@
 
 .select {
   display: flex;
-  width: 351px;
-  height: 39px;
-  padding: 10px;
-  margin-bottom: 21px;
+  width: clamp(242px, min(18.973vw, 3.611vh * 9), 351px);
+  height: clamp(26px, min(3.611vh, 18.973vw / 9), 39px);
+  padding: clamp(6px, min(0.925vh, 0.54vw), 10px);
+  margin-bottom: clamp(14px, min(1.944vh, 1.135vw), 21px);
   align-items: center;
   border-radius: 0px 12px 12px 12px;
   background: var(--player-secondary-bg);
   outline: none;
   color: #fff;
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 400;
   cursor: pointer;
   color: var(--CRM-modal-InputText, #767b88);
@@ -130,7 +132,7 @@
   background: var(--bg-secondary);
   color: #fff;
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: clamp(12px, min(1.481vh, 0.864vw), 16px);
   font-weight: 400;
 }
 
